@@ -1,0 +1,115 @@
+# com.finbourne.sdk.services.lusid.model.FundJournalEntryLine
+classname FundJournalEntryLine
+A Journal Entry line entity specifically for fund valuation point lines.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**accountingDate** | [**OffsetDateTime**](OffsetDateTime.md) | The Journal Entry Line accounting date. | [default to OffsetDateTime]
+**activityDate** | [**OffsetDateTime**](OffsetDateTime.md) | The actual date of the activity. Differs from the accounting date when creating journals that would occur in a closed period. | [default to OffsetDateTime]
+**portfolioId** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
+**instrumentId** | **String** | To indicate the instrument of the transaction that the Journal Entry Line posted for, if applicable. | [default to String]
+**instrumentScope** | **String** | The scope in which the Journal Entry Line instrument is in. | [default to String]
+**subHoldingKeys** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | The sub-holding properties which are part of the AccountingKey. | [optional] [default to Map<String, PerpetualProperty>]
+**taxLotId** | **String** | If the holding type is &#39;B&#39; (settled cash balance), this is 1. Otherwise, this is the ID of a tax lot if applicable, or the source ID of the original transaction if not. | [optional] [default to String]
+**generalLedgerAccountCode** | **String** | The code of the account in the general ledger the Journal Entry was posted to. | [default to String]
+**local** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [default to CurrencyAndAmount]
+**base** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [default to CurrencyAndAmount]
+**units** | **java.math.BigDecimal** | Units held for the Journal Entry Line. | [default to java.math.BigDecimal]
+**postingModuleCode** | **String** | The code of the posting module where the posting rules derived the Journal Entry lines. | [optional] [default to String]
+**postingRule** | **String** | The rule generating the Journal Entry Line. | [default to String]
+**asAtDate** | [**OffsetDateTime**](OffsetDateTime.md) | The corresponding input date and time of the Transaction generating the Journal Entry Line. | [default to OffsetDateTime]
+**activitiesDescription** | **String** | This would be the description of the business activities this Journal Entry Line is for. | [optional] [default to String]
+**sourceType** | **String** | The type of source for the Journal Entry Line. Available values: LusidTransaction, LusidValuation, Manual, External. | [default to String]
+**sourceId** | **String** | For the Lusid Source Type this will be the txn Id. For the rest will be what the user populates. | [default to String]
+**properties** | [**Map&lt;String, Property&gt;**](Property.md) | A set of properties for the Abor. | [optional] [default to Map<String, Property>]
+**movementName** | **String** | If the JE Line is generated from a transaction, the name of the side in the transaction type&#39;s movement. If from a valuation, this is &#39;MarkToMarket&#39;. | [optional] [default to String]
+**holdingType** | **String** | One of the LUSID holding types such as &#39;P&#39; for position or &#39;B&#39; for settled cash balance. | [default to String]
+**economicBucket** | **String** | LUSID automatically categorises a JE Line into a broad economic bucket such as &#39;NA_Cost&#39; or &#39;PL_RealPriceGL&#39;. | [default to String]
+**economicBucketComponent** | **String** | Sub bucket of the economic bucket. Available values: Undefined, Premium, OID, MarketDiscount, AcquisitionPremium, CoreMarket, CrossGainLoss, TradedInterest, Income, Expense. | [optional] [default to String]
+**economicBucketVariant** | **String** | Further categorisation of a journal entry line. LongTerm/ShortTerm: based on whether the ActivityDate is more than a year after the purchase trade date. TradeDateToSettlementDate: FX gain/loss between trade date and settlement date. InLieuSubstitution: FX gain/loss from settling in a different currency when the original settlement currency is the portfolio base currency. Available values: Undefined, ShortTerm, LongTerm, Bought, Sold, TradeDateToSettlementDate, Rounding, InLieuSubstitution. | [optional] [default to String]
+**levels** | **List&lt;String&gt;** | Resolved data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body. | [optional] [default to List<String>]
+**sourceLevels** | **List&lt;String&gt;** | Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body. | [optional] [default to List<String>]
+**movementSign** | **String** | Indicates if the Journal Entry Line corresponds to a Long or Short movement. Available values: NA, Long, Short. | [optional] [default to String]
+**holdingSign** | **String** | Indicates if the Journal Entry Line is operating against a Long or Short holding. Available values: NA, Long, Short. | [optional] [default to String]
+**ledgerColumn** | **String** | Indicates if the Journal Entry Line is credit or debit. Available values: Debit, Credit. | [optional] [default to String]
+**journalEntryLineType** | **String** | Indicates the Journal Entry Line type. Available values: Default, Reversal, TrueUp. | [optional] [default to String]
+**shareClassBreakdowns** | [**List&lt;JournalEntryLineShareClassBreakdown&gt;**](JournalEntryLineShareClassBreakdown.md) | Share Class breakdown data for this Journal Entry Line. | [optional] [default to List<JournalEntryLineShareClassBreakdown>]
+**links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
+
+```java
+import com.finbourne.sdk.services.lusid.model.FundJournalEntryLine;
+import java.util.*;
+import java.lang.System;
+import java.net.URI;
+
+OffsetDateTime accountingDate = OffsetDateTime.now();
+OffsetDateTime activityDate = OffsetDateTime.now();
+ResourceId portfolioId = new ResourceId();
+String instrumentId = "example instrumentId";
+String instrumentScope = "example instrumentScope";
+@javax.annotation.Nullable Map<String, PerpetualProperty> subHoldingKeys = new Map<String, PerpetualProperty>();
+@javax.annotation.Nullable String taxLotId = "example taxLotId";
+String generalLedgerAccountCode = "example generalLedgerAccountCode";
+CurrencyAndAmount local = new CurrencyAndAmount();
+CurrencyAndAmount base = new CurrencyAndAmount();
+java.math.BigDecimal units = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable String postingModuleCode = "example postingModuleCode";
+String postingRule = "example postingRule";
+OffsetDateTime asAtDate = OffsetDateTime.now();
+@javax.annotation.Nullable String activitiesDescription = "example activitiesDescription";
+String sourceType = "example sourceType";
+String sourceId = "example sourceId";
+@javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
+@javax.annotation.Nullable String movementName = "example movementName";
+String holdingType = "example holdingType";
+String economicBucket = "example economicBucket";
+@javax.annotation.Nullable String economicBucketComponent = "example economicBucketComponent";
+@javax.annotation.Nullable String economicBucketVariant = "example economicBucketVariant";
+@javax.annotation.Nullable List<String> levels = new List<String>();
+@javax.annotation.Nullable List<String> sourceLevels = new List<String>();
+@javax.annotation.Nullable String movementSign = "example movementSign";
+@javax.annotation.Nullable String holdingSign = "example holdingSign";
+@javax.annotation.Nullable String ledgerColumn = "example ledgerColumn";
+@javax.annotation.Nullable String journalEntryLineType = "example journalEntryLineType";
+@javax.annotation.Nullable List<JournalEntryLineShareClassBreakdown> shareClassBreakdowns = new List<JournalEntryLineShareClassBreakdown>();
+@javax.annotation.Nullable List<Link> links = new List<Link>();
+
+
+FundJournalEntryLine fundJournalEntryLineInstance = new FundJournalEntryLine()
+    .accountingDate(accountingDate)
+    .activityDate(activityDate)
+    .portfolioId(portfolioId)
+    .instrumentId(instrumentId)
+    .instrumentScope(instrumentScope)
+    .subHoldingKeys(subHoldingKeys)
+    .taxLotId(taxLotId)
+    .generalLedgerAccountCode(generalLedgerAccountCode)
+    .local(local)
+    .base(base)
+    .units(units)
+    .postingModuleCode(postingModuleCode)
+    .postingRule(postingRule)
+    .asAtDate(asAtDate)
+    .activitiesDescription(activitiesDescription)
+    .sourceType(sourceType)
+    .sourceId(sourceId)
+    .properties(properties)
+    .movementName(movementName)
+    .holdingType(holdingType)
+    .economicBucket(economicBucket)
+    .economicBucketComponent(economicBucketComponent)
+    .economicBucketVariant(economicBucketVariant)
+    .levels(levels)
+    .sourceLevels(sourceLevels)
+    .movementSign(movementSign)
+    .holdingSign(holdingSign)
+    .ledgerColumn(ledgerColumn)
+    .journalEntryLineType(journalEntryLineType)
+    .shareClassBreakdowns(shareClassBreakdowns)
+    .links(links);
+```
+
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

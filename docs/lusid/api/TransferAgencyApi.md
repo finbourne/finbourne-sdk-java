@@ -1,0 +1,161 @@
+# TransferAgencyApi
+
+All URIs are relative to *http://localhost*
+
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**calculateOrderDates**](TransferAgencyApi.md#calculateOrderDates) | **POST** /api/api/transferagency/orderdates | [EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders |
+| [**upsertTransferAgencyOrders**](TransferAgencyApi.md#upsertTransferAgencyOrders) | **POST** /api/api/transferagency/orders | [EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders |
+
+
+
+## calculateOrderDates
+
+> CalculateOrderDatesResponse calculateOrderDates(requestBody)
+
+[EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders
+
+The response contains both the collection of successfully calculated dates and any failed calculations,  each in the form of a dictionary keyed by the request&#39;s keys.  For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.TransferAgencyApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TransferAgencyApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        TransferAgencyApi apiInstance = apiFactory.build(TransferAgencyApi.class);
+        Map<String, CalculateOrderDatesRequest> requestBody = new HashMap(); // Map<String, CalculateOrderDatesRequest> | The request containing the dates used for calculation
+        try {
+            // uncomment the below to set overrides at the request level
+            // CalculateOrderDatesResponse result = apiInstance.calculateOrderDates(requestBody).execute(opts);
+
+            CalculateOrderDatesResponse result = apiInstance.calculateOrderDates(requestBody).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TransferAgencyApi#calculateOrderDates");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **requestBody** | [**Map&lt;String, CalculateOrderDatesRequest&gt;**](CalculateOrderDatesRequest.md)| The request containing the dates used for calculation | |
+
+### Return type
+
+[**CalculateOrderDatesResponse**](CalculateOrderDatesResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successfully calculated dates and any failed calculations. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## upsertTransferAgencyOrders
+
+> TransferAgencyOrdersResponse upsertTransferAgencyOrders(requestBody)
+
+[EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders
+
+Creates a transaction and updates the relevant order for each order supplied.  The response contains both successfully processed orders and any failures, each in the form of a  dictionary keyed by the request&#39;s keys. For each failure, a reason is provided. It is important to  check the failed set for unsuccessful results.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.TransferAgencyApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TransferAgencyApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        TransferAgencyApi apiInstance = apiFactory.build(TransferAgencyApi.class);
+        Map<String, UpsertTransferAgencyOrderRequest> requestBody = new HashMap(); // Map<String, UpsertTransferAgencyOrderRequest> | The transfer agency orders to upsert, keyed by a unique request identifier.
+        try {
+            // uncomment the below to set overrides at the request level
+            // TransferAgencyOrdersResponse result = apiInstance.upsertTransferAgencyOrders(requestBody).execute(opts);
+
+            TransferAgencyOrdersResponse result = apiInstance.upsertTransferAgencyOrders(requestBody).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TransferAgencyApi#upsertTransferAgencyOrders");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **requestBody** | [**Map&lt;String, UpsertTransferAgencyOrderRequest&gt;**](UpsertTransferAgencyOrderRequest.md)| The transfer agency orders to upsert, keyed by a unique request identifier. | |
+
+### Return type
+
+[**TransferAgencyOrdersResponse**](TransferAgencyOrdersResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successfully processed orders and any failures. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

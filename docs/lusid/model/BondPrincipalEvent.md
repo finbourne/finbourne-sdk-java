@@ -1,0 +1,35 @@
+# com.finbourne.sdk.services.lusid.model.BondPrincipalEvent
+classname BondPrincipalEvent
+Definition of a Bond Principal Event  This is an event that describes the occurence of a cashflow due to the principal payment.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**instrumentEventType** | **String** | The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent. | [default to String]
+**currency** | **String** | Currency of the principal payment | [default to String]
+**exDate** | [**OffsetDateTime**](OffsetDateTime.md) | Ex-Dividend date of the principal payment | [optional] [default to OffsetDateTime]
+**paymentDate** | [**OffsetDateTime**](OffsetDateTime.md) | Payment date of the principal payment | [optional] [default to OffsetDateTime]
+**principalPerUnit** | **java.math.BigDecimal** | Principal per unit | [optional] [default to java.math.BigDecimal]
+
+```java
+import com.finbourne.sdk.services.lusid.model.BondPrincipalEvent;
+import java.util.*;
+import java.lang.System;
+import java.net.URI;
+
+String currency = "example currency";
+OffsetDateTime exDate = OffsetDateTime.now();
+OffsetDateTime paymentDate = OffsetDateTime.now();
+@javax.annotation.Nullable java.math.BigDecimal principalPerUnit = new java.math.BigDecimal("100.00");
+
+
+BondPrincipalEvent bondPrincipalEventInstance = new BondPrincipalEvent()
+    .currency(currency)
+    .exDate(exDate)
+    .paymentDate(paymentDate)
+    .principalPerUnit(principalPerUnit);
+```
+
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

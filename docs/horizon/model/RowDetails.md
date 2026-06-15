@@ -1,0 +1,34 @@
+# com.finbourne.sdk.services.horizon.model.RowDetails
+classname RowDetails
+Information about the nuber of rows processed.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**rowsTotal** | **Integer** | The number of rows processed. | [optional] [default to Integer]
+**rowsSucceeded** | **Integer** | The number of rows that were successfully processed. | [optional] [default to Integer]
+**rowsIgnored** | **Integer** | The number of rows that were not processed. | [optional] [default to Integer]
+**rowsFailed** | **Integer** | The number of rows that failed when being processed. | [optional] [default to Integer]
+
+```java
+import com.finbourne.sdk.services.horizon.model.RowDetails;
+import java.util.*;
+import java.lang.System;
+import java.net.URI;
+
+@javax.annotation.Nullable Integer rowsTotal = new Integer("100.00");
+@javax.annotation.Nullable Integer rowsSucceeded = new Integer("100.00");
+@javax.annotation.Nullable Integer rowsIgnored = new Integer("100.00");
+@javax.annotation.Nullable Integer rowsFailed = new Integer("100.00");
+
+
+RowDetails rowDetailsInstance = new RowDetails()
+    .rowsTotal(rowsTotal)
+    .rowsSucceeded(rowsSucceeded)
+    .rowsIgnored(rowsIgnored)
+    .rowsFailed(rowsFailed);
+```
+
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

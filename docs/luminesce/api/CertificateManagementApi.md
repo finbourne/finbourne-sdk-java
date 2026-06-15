@@ -1,0 +1,248 @@
+# CertificateManagementApi
+
+All URIs are relative to *http://localhost*
+
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**downloadCertificate**](CertificateManagementApi.md#downloadCertificate) | **GET** /honeycomb/api/Certificate/certificate | DownloadCertificate: Download domain or your personal certificates |
+| [**listCertificates**](CertificateManagementApi.md#listCertificates) | **GET** /honeycomb/api/Certificate/certificates | ListCertificates: List previously minted certificates |
+| [**manageCertificate**](CertificateManagementApi.md#manageCertificate) | **PUT** /honeycomb/api/Certificate/manage | ManageCertificate: Create / Renew / Revoke a certificate |
+
+
+
+## downloadCertificate
+
+> File downloadCertificate(type, fileType, mayAutoCreate)
+
+DownloadCertificate: Download domain or your personal certificates
+
+ Downloads your latest Domain or your User certificate&#39;s public or private key - if any.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - certificate is not available for some reason - 401 Unauthorized - 403 Forbidden 
+
+### Example
+
+```java
+import com.finbourne.sdk.services.luminesce.model.*;
+import com.finbourne.sdk.services.luminesce.api.CertificateManagementApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CertificateManagementApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CertificateManagementApi apiInstance = apiFactory.build(CertificateManagementApi.class);
+        CertificateType type = CertificateType.fromValue("Domain"); // CertificateType | User or Domain level cert (Domain level requires additional entitlements)
+        CertificateFileType fileType = CertificateFileType.fromValue("Public"); // CertificateFileType | Should the public key or private key be downloaded? (both must be in place to run providers)
+        Boolean mayAutoCreate = false; // Boolean | If no matching cert is available, should an attempt be made to Create/Renew it with default options?
+        try {
+            // uncomment the below to set overrides at the request level
+            // File result = apiInstance.downloadCertificate(type, fileType, mayAutoCreate).execute(opts);
+
+            File result = apiInstance.downloadCertificate(type, fileType, mayAutoCreate).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CertificateManagementApi#downloadCertificate");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **type** | [**CertificateType**](.md)| User or Domain level cert (Domain level requires additional entitlements) | [optional] [enum: Domain, User] |
+| **fileType** | [**CertificateFileType**](.md)| Should the public key or private key be downloaded? (both must be in place to run providers) | [optional] [enum: Public, Private] |
+| **mayAutoCreate** | **Boolean**| If no matching cert is available, should an attempt be made to Create/Renew it with default options? | [optional] [default to false] |
+
+### Return type
+
+[**File**](File.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listCertificates
+
+> List&lt;CertificateState&gt; listCertificates()
+
+ListCertificates: List previously minted certificates
+
+ Lists all the certificates previously minted to which you have access.  The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 403 Forbidden 
+
+### Example
+
+```java
+import com.finbourne.sdk.services.luminesce.model.*;
+import com.finbourne.sdk.services.luminesce.api.CertificateManagementApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CertificateManagementApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CertificateManagementApi apiInstance = apiFactory.build(CertificateManagementApi.class);
+        try {
+            // uncomment the below to set overrides at the request level
+            // List<CertificateState> result = apiInstance.listCertificates().execute(opts);
+
+            List<CertificateState> result = apiInstance.listCertificates().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CertificateManagementApi#listCertificates");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;CertificateState&gt;**](CertificateState.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## manageCertificate
+
+> CertificateState manageCertificate(action, type, version, validityStart, validityEnd, dryRun)
+
+ManageCertificate: Create / Renew / Revoke a certificate
+
+ Manages a certificate.  This could be creating a new one, renewing an old one or revoking one explicitly.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something about the request cannot be processed - 401 Unauthorized - 403 Forbidden 
+
+### Example
+
+```java
+import com.finbourne.sdk.services.luminesce.model.*;
+import com.finbourne.sdk.services.luminesce.api.CertificateManagementApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CertificateManagementApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CertificateManagementApi apiInstance = apiFactory.build(CertificateManagementApi.class);
+        CertificateAction action = CertificateAction.fromValue("Create"); // CertificateAction | The Action to perform, e.g. Create / Renew / Revoke
+        CertificateType type = CertificateType.fromValue("Domain"); // CertificateType | User or Domain level cert (Domain level requires additional entitlements)
+        Integer version = 1; // Integer | Version number of the cert, the request will fail to validate if incorrect
+        OffsetDateTime validityStart = OffsetDateTime.now(); // OffsetDateTime | When should the cert first be valid (defaults to the current time in UTC)
+        OffsetDateTime validityEnd = OffsetDateTime.now(); // OffsetDateTime | When should the cert no longer be valid (defaults to 13 months from now)
+        Boolean dryRun = true; // Boolean | True will just validate the request, but perform no changes to any system
+        try {
+            // uncomment the below to set overrides at the request level
+            // CertificateState result = apiInstance.manageCertificate(action, type, version, validityStart, validityEnd, dryRun).execute(opts);
+
+            CertificateState result = apiInstance.manageCertificate(action, type, version, validityStart, validityEnd, dryRun).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CertificateManagementApi#manageCertificate");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **action** | [**CertificateAction**](.md)| The Action to perform, e.g. Create / Renew / Revoke | [optional] [enum: Create, CreateAndAllowMultipleWhichAreValid, Renew, Revoke] |
+| **type** | [**CertificateType**](.md)| User or Domain level cert (Domain level requires additional entitlements) | [optional] [enum: Domain, User] |
+| **version** | **Integer**| Version number of the cert, the request will fail to validate if incorrect | [optional] [default to 1] |
+| **validityStart** | **OffsetDateTime**| When should the cert first be valid (defaults to the current time in UTC) | [optional] |
+| **validityEnd** | **OffsetDateTime**| When should the cert no longer be valid (defaults to 13 months from now) | [optional] |
+| **dryRun** | **Boolean**| True will just validate the request, but perform no changes to any system | [optional] [default to true] |
+
+### Return type
+
+[**CertificateState**](CertificateState.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

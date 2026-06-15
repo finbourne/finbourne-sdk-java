@@ -1,0 +1,315 @@
+# CandelaTracesApi
+
+All URIs are relative to *http://localhost*
+
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getTraceDiagram**](CandelaTracesApi.md#getTraceDiagram) | **GET** /insights/api/candelatraces/{traceId}/diagram | [EARLY ACCESS] GetTraceDiagram: Get the diagram representation for a specific trace. |
+| [**getTraceLog**](CandelaTracesApi.md#getTraceLog) | **GET** /insights/api/candelatraces/{traceId} | [EARLY ACCESS] GetTraceLog: Get the log for a specific trace. |
+| [**listTraceEventLogs**](CandelaTracesApi.md#listTraceEventLogs) | **GET** /insights/api/candelatraces/{traceId}/events | [EARLY ACCESS] ListTraceEventLogs: Get the trace event logs for a specific trace. |
+| [**listTraceLogs**](CandelaTracesApi.md#listTraceLogs) | **GET** /insights/api/candelatraces | [EARLY ACCESS] ListTraceLogs: Get the logs for traces. |
+
+
+
+## getTraceDiagram
+
+> TraceDiagramResponse getTraceDiagram(traceId)
+
+[EARLY ACCESS] GetTraceDiagram: Get the diagram representation for a specific trace.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.insights.model.*;
+import com.finbourne.sdk.services.insights.api.CandelaTracesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CandelaTracesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CandelaTracesApi apiInstance = apiFactory.build(CandelaTracesApi.class);
+        String traceId = "traceId_example"; // String | The identifier of the trace.
+        try {
+            // uncomment the below to set overrides at the request level
+            // TraceDiagramResponse result = apiInstance.getTraceDiagram(traceId).execute(opts);
+
+            TraceDiagramResponse result = apiInstance.getTraceDiagram(traceId).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CandelaTracesApi#getTraceDiagram");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **traceId** | **String**| The identifier of the trace. | |
+
+### Return type
+
+[**TraceDiagramResponse**](TraceDiagramResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getTraceLog
+
+> TraceLog getTraceLog(traceId)
+
+[EARLY ACCESS] GetTraceLog: Get the log for a specific trace.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.insights.model.*;
+import com.finbourne.sdk.services.insights.api.CandelaTracesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CandelaTracesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CandelaTracesApi apiInstance = apiFactory.build(CandelaTracesApi.class);
+        String traceId = "traceId_example"; // String | The identifier of the request to obtain the log for.
+        try {
+            // uncomment the below to set overrides at the request level
+            // TraceLog result = apiInstance.getTraceLog(traceId).execute(opts);
+
+            TraceLog result = apiInstance.getTraceLog(traceId).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CandelaTracesApi#getTraceLog");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **traceId** | **String**| The identifier of the request to obtain the log for. | |
+
+### Return type
+
+[**TraceLog**](TraceLog.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listTraceEventLogs
+
+> ResourceListOfTraceEventLog listTraceEventLogs(traceId, page)
+
+[EARLY ACCESS] ListTraceEventLogs: Get the trace event logs for a specific trace.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.insights.model.*;
+import com.finbourne.sdk.services.insights.api.CandelaTracesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CandelaTracesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CandelaTracesApi apiInstance = apiFactory.build(CandelaTracesApi.class);
+        String traceId = "traceId_example"; // String | The identifier of the request to obtain the log for.
+        String page = "page_example"; // String | 
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResourceListOfTraceEventLog result = apiInstance.listTraceEventLogs(traceId, page).execute(opts);
+
+            ResourceListOfTraceEventLog result = apiInstance.listTraceEventLogs(traceId, page).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CandelaTracesApi#listTraceEventLogs");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **traceId** | **String**| The identifier of the request to obtain the log for. | |
+| **page** | **String**|  | [optional] |
+
+### Return type
+
+[**ResourceListOfTraceEventLog**](ResourceListOfTraceEventLog.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listTraceLogs
+
+> ResourceListOfTraceLog listTraceLogs(filter, sortBy, limit, page)
+
+[EARLY ACCESS] ListTraceLogs: Get the logs for traces.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.insights.model.*;
+import com.finbourne.sdk.services.insights.api.CandelaTracesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CandelaTracesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CandelaTracesApi apiInstance = apiFactory.build(CandelaTracesApi.class);
+        String filter = "filter_example"; // String | Expression to filter the result set. Read more about [filtering results from LUSID](https://support.lusid.com/filtering-results-from-lusid).
+        String sortBy = "sortBy_example"; // String | Order the results by these fields. Use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName
+        Integer limit = 56; // Integer | When paginating, only return this number of records. The minimum value is 0 and the maximum is 10000.
+        String page = "page_example"; // String | Encoded pagwwwwe string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter and sortby fields should not be supplied.
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResourceListOfTraceLog result = apiInstance.listTraceLogs(filter, sortBy, limit, page).execute(opts);
+
+            ResourceListOfTraceLog result = apiInstance.listTraceLogs(filter, sortBy, limit, page).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CandelaTracesApi#listTraceLogs");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **filter** | **String**| Expression to filter the result set. Read more about [filtering results from LUSID](https://support.lusid.com/filtering-results-from-lusid). | [optional] |
+| **sortBy** | **String**| Order the results by these fields. Use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName | [optional] |
+| **limit** | **Integer**| When paginating, only return this number of records. The minimum value is 0 and the maximum is 10000. | [optional] |
+| **page** | **String**| Encoded pagwwwwe string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter and sortby fields should not be supplied. | [optional] |
+
+### Return type
+
+[**ResourceListOfTraceLog**](ResourceListOfTraceLog.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

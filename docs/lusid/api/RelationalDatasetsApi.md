@@ -1,0 +1,262 @@
+# RelationalDatasetsApi
+
+All URIs are relative to *http://localhost*
+
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**batchDeleteRelationalData**](RelationalDatasetsApi.md#batchDeleteRelationalData) | **POST** /api/api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$batchDelete | BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition. |
+| [**batchUpsertRelationalData**](RelationalDatasetsApi.md#batchUpsertRelationalData) | **POST** /api/api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$batchUpsert | BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition. |
+| [**queryRelationalData**](RelationalDatasetsApi.md#queryRelationalData) | **POST** /api/api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$query | QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition. |
+
+
+
+## batchDeleteRelationalData
+
+> BatchDeleteRelationalDataResponse batchDeleteRelationalData(relationalDatasetDefinitionScope, relationalDatasetDefinitionCode, requestBody, successMode)
+
+BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
+
+Batch Delete Relational Data Points for a given Relational Dataset Definition.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.RelationalDatasetsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RelationalDatasetsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RelationalDatasetsApi apiInstance = apiFactory.build(RelationalDatasetsApi.class);
+        String relationalDatasetDefinitionScope = "relationalDatasetDefinitionScope_example"; // String | The Scope of the relational dataset definition.
+        String relationalDatasetDefinitionCode = "relationalDatasetDefinitionCode_example"; // String | The Code of the relational dataset definition.
+        Map<String, DeleteRelationalDataPointRequest> requestBody = new HashMap(); // Map<String, DeleteRelationalDataPointRequest> | The Delete Request.
+        String successMode = "Partial"; // String | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code.
+        try {
+            // uncomment the below to set overrides at the request level
+            // BatchDeleteRelationalDataResponse result = apiInstance.batchDeleteRelationalData(relationalDatasetDefinitionScope, relationalDatasetDefinitionCode, requestBody, successMode).execute(opts);
+
+            BatchDeleteRelationalDataResponse result = apiInstance.batchDeleteRelationalData(relationalDatasetDefinitionScope, relationalDatasetDefinitionCode, requestBody, successMode).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RelationalDatasetsApi#batchDeleteRelationalData");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **relationalDatasetDefinitionScope** | **String**| The Scope of the relational dataset definition. | |
+| **relationalDatasetDefinitionCode** | **String**| The Code of the relational dataset definition. | |
+| **requestBody** | [**Map&lt;String, DeleteRelationalDataPointRequest&gt;**](DeleteRelationalDataPointRequest.md)| The Delete Request. | |
+| **successMode** | **String**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code. | [optional] [default to Partial] |
+
+### Return type
+
+[**BatchDeleteRelationalDataResponse**](BatchDeleteRelationalDataResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The deleted DataPoint metadata. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## batchUpsertRelationalData
+
+> BatchUpsertRelationalDatasetsResponse batchUpsertRelationalData(relationalDatasetDefinitionScope, relationalDatasetDefinitionCode, requestBody, successMode)
+
+BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.
+
+Batch Upsert Relational Data Points for a given Relational Dataset Definition.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.RelationalDatasetsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RelationalDatasetsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RelationalDatasetsApi apiInstance = apiFactory.build(RelationalDatasetsApi.class);
+        String relationalDatasetDefinitionScope = "relationalDatasetDefinitionScope_example"; // String | The Scope of the relational dataset definition.
+        String relationalDatasetDefinitionCode = "relationalDatasetDefinitionCode_example"; // String | The Code of the relational dataset definition.
+        Map<String, UpsertRelationalDataPointRequest> requestBody = new HashMap(); // Map<String, UpsertRelationalDataPointRequest> | The DataPoints to upsert.
+        String successMode = "Partial"; // String | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code.
+        try {
+            // uncomment the below to set overrides at the request level
+            // BatchUpsertRelationalDatasetsResponse result = apiInstance.batchUpsertRelationalData(relationalDatasetDefinitionScope, relationalDatasetDefinitionCode, requestBody, successMode).execute(opts);
+
+            BatchUpsertRelationalDatasetsResponse result = apiInstance.batchUpsertRelationalData(relationalDatasetDefinitionScope, relationalDatasetDefinitionCode, requestBody, successMode).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RelationalDatasetsApi#batchUpsertRelationalData");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **relationalDatasetDefinitionScope** | **String**| The Scope of the relational dataset definition. | |
+| **relationalDatasetDefinitionCode** | **String**| The Code of the relational dataset definition. | |
+| **requestBody** | [**Map&lt;String, UpsertRelationalDataPointRequest&gt;**](UpsertRelationalDataPointRequest.md)| The DataPoints to upsert. | |
+| **successMode** | **String**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code. | [optional] [default to Partial] |
+
+### Return type
+
+[**BatchUpsertRelationalDatasetsResponse**](BatchUpsertRelationalDatasetsResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The relational data points that were upserted. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## queryRelationalData
+
+> PagedResourceListOfRelationalDataPointResponse queryRelationalData(relationalDatasetDefinitionScope, relationalDatasetDefinitionCode, asAt, effectiveAt, page, limit, queryRelationalDatasetRequest)
+
+QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
+
+Query Relational Data Points for a given Relational Dataset Definition.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.RelationalDatasetsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RelationalDatasetsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RelationalDatasetsApi apiInstance = apiFactory.build(RelationalDatasetsApi.class);
+        String relationalDatasetDefinitionScope = "relationalDatasetDefinitionScope_example"; // String | The Scope of the relational dataset definition.
+        String relationalDatasetDefinitionCode = "relationalDatasetDefinitionCode_example"; // String | The Code of the relational dataset definition.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.
+        String page = "page_example"; // String | The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.
+        Integer limit = 56; // Integer | When paginating, limit the results to this number. Defaults to 100 if not specified.
+        QueryRelationalDatasetRequest queryRelationalDatasetRequest = new QueryRelationalDatasetRequest(); // QueryRelationalDatasetRequest | The query request.
+        try {
+            // uncomment the below to set overrides at the request level
+            // PagedResourceListOfRelationalDataPointResponse result = apiInstance.queryRelationalData(relationalDatasetDefinitionScope, relationalDatasetDefinitionCode, asAt, effectiveAt, page, limit, queryRelationalDatasetRequest).execute(opts);
+
+            PagedResourceListOfRelationalDataPointResponse result = apiInstance.queryRelationalData(relationalDatasetDefinitionScope, relationalDatasetDefinitionCode, asAt, effectiveAt, page, limit, queryRelationalDatasetRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RelationalDatasetsApi#queryRelationalData");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **relationalDatasetDefinitionScope** | **String**| The Scope of the relational dataset definition. | |
+| **relationalDatasetDefinitionCode** | **String**| The Code of the relational dataset definition. | |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified. | [optional] |
+| **effectiveAt** | **String**| The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **page** | **String**| The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request. | [optional] |
+| **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
+| **queryRelationalDatasetRequest** | [**QueryRelationalDatasetRequest**](QueryRelationalDatasetRequest.md)| The query request. | [optional] |
+
+### Return type
+
+[**PagedResourceListOfRelationalDataPointResponse**](PagedResourceListOfRelationalDataPointResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The relational data points that were queried. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

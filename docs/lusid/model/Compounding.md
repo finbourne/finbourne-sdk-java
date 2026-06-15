@@ -1,0 +1,43 @@
+# com.finbourne.sdk.services.lusid.model.Compounding
+classname Compounding
+The compounding settings used on interest rate.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**averagingMethod** | **String** | Defines whether a weighted or unweighted average is used when calculating the average rate.  It applies only when CompoundingMethod &#x3D; ‘Averaging‘.    Default value: None. Available values: None, Unweighted, Weighted, UnweightedIncludingWeekends. | [optional] [default to String]
+**calculationShiftMethod** | **String** | Defines which resets and day counts are used for the rate calculation    Default value: NoShift. Available values: Lookback, NoShift, ObservationPeriodShift, Lockout. | [optional] [default to String]
+**compoundingMethod** | **String** | If the interest rate is simple, compounded or using a pre-computed compounded index.    Supported string (enumeration) values are: [Averaging, Compounding, CompoundedIndex, NonCumulativeCompounding]. | [default to String]
+**resetFrequency** | **String** | The interest payment frequency.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097) | [default to String]
+**shift** | **Integer** | Defines the number of days to lockout or shift observation period by - should be a non-negative integer.  Defaults to 0 if not set. | [optional] [default to Integer]
+**spreadCompoundingMethod** | **String** | Defines how the computed leg spread is applied to compounded rate.  It applies only when CompoundingMethod &#x3D; ‘Compounding‘ or ‘CompoundedIndex‘.    Available compounding methods:    | Method | Description |  | ------ | ----------- |  | Straight | Compounding rate in each compound period includes the spread. |  | Flat | Compounding rate does not include the spread, and the spread is used for simple interest in each compound period. |  | SpreadExclusive | Compounding rate does not include the spread, and the spread is used for simple interest for whole accrual period. |    The values \&quot;IsdaCompounding\&quot;, \&quot;NoCompounding\&quot;, \&quot;IsdaFlatCompounding\&quot;, and \&quot;None\&quot; are accepted for compatibility  with existing instruments and their use is discouraged.    Supported string (enumeration) values are: [Straight, IsdaCompounding, NoCompounding, SpreadExclusive, IsdaFlatCompounding, Flat, None].  Defaults to \&quot;None\&quot; if not set. | [optional] [default to String]
+**roundingPrecision** | **Integer** | Defines the number of decimal places the compounded rate (expressed as a decimal) should be rounded to.  This is an optional field, leaving it blank will mean no rounding takes place in Compounding. | [optional] [default to Integer]
+
+```java
+import com.finbourne.sdk.services.lusid.model.Compounding;
+import java.util.*;
+import java.lang.System;
+import java.net.URI;
+
+@javax.annotation.Nullable String averagingMethod = "example averagingMethod";
+@javax.annotation.Nullable String calculationShiftMethod = "example calculationShiftMethod";
+String compoundingMethod = "example compoundingMethod";
+String resetFrequency = "example resetFrequency";
+Integer shift = new Integer("100.00");
+@javax.annotation.Nullable String spreadCompoundingMethod = "example spreadCompoundingMethod";
+@javax.annotation.Nullable Integer roundingPrecision = new Integer("100.00");
+
+
+Compounding compoundingInstance = new Compounding()
+    .averagingMethod(averagingMethod)
+    .calculationShiftMethod(calculationShiftMethod)
+    .compoundingMethod(compoundingMethod)
+    .resetFrequency(resetFrequency)
+    .shift(shift)
+    .spreadCompoundingMethod(spreadCompoundingMethod)
+    .roundingPrecision(roundingPrecision);
+```
+
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

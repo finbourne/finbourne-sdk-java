@@ -1,0 +1,706 @@
+# RolesApi
+
+All URIs are relative to *http://localhost*
+
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**addUserToRole**](RolesApi.md#addUserToRole) | **PUT** /identity/api/roles/{id}/users/{userId} | AddUserToRole: Add User to Role |
+| [**createRole**](RolesApi.md#createRole) | **POST** /identity/api/roles | CreateRole: Create Role |
+| [**deleteRole**](RolesApi.md#deleteRole) | **DELETE** /identity/api/roles/{id} | DeleteRole: Delete Role |
+| [**getRole**](RolesApi.md#getRole) | **GET** /identity/api/roles/{id} | GetRole: Get Role |
+| [**getRoleByCode**](RolesApi.md#getRoleByCode) | **GET** /identity/api/roles/byCode/{code} | GetRoleByCode: Get Role By Code |
+| [**listRoles**](RolesApi.md#listRoles) | **GET** /identity/api/roles | ListRoles: List Roles |
+| [**listUsersInRole**](RolesApi.md#listUsersInRole) | **GET** /identity/api/roles/{id}/users | ListUsersInRole: Get the users in the specified role. |
+| [**removeUserFromRole**](RolesApi.md#removeUserFromRole) | **DELETE** /identity/api/roles/{id}/users/{userId} | RemoveUserFromRole: Remove User from Role |
+| [**updateRole**](RolesApi.md#updateRole) | **PUT** /identity/api/roles/{id} | UpdateRole: Update Role |
+
+
+
+## addUserToRole
+
+> addUserToRole(id, userId)
+
+AddUserToRole: Add User to Role
+
+Adds the User to the specified Role
+
+### Example
+
+```java
+import com.finbourne.sdk.services.identity.model.*;
+import com.finbourne.sdk.services.identity.api.RolesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RolesApi apiInstance = apiFactory.build(RolesApi.class);
+        String id = "id_example"; // String | The unique identifier for the Role
+        String userId = "userId_example"; // String | The unique identifier for the User
+        try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.addUserToRole(id, userId).execute(opts);
+
+            apiInstance.addUserToRole(id, userId).execute();
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#addUserToRole");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| The unique identifier for the Role | |
+| **userId** | **String**| The unique identifier for the User | |
+
+### Return type
+
+null (empty response body)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | No Content |  -  |
+| **404** | Not Found |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## createRole
+
+> RoleResponse createRole(createRoleRequest)
+
+CreateRole: Create Role
+
+Creates a new Role
+
+### Example
+
+```java
+import com.finbourne.sdk.services.identity.model.*;
+import com.finbourne.sdk.services.identity.api.RolesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RolesApi apiInstance = apiFactory.build(RolesApi.class);
+        CreateRoleRequest createRoleRequest = new CreateRoleRequest(); // CreateRoleRequest | Details of the role to be created
+        try {
+            // uncomment the below to set overrides at the request level
+            // RoleResponse result = apiInstance.createRole(createRoleRequest).execute(opts);
+
+            RoleResponse result = apiInstance.createRole(createRoleRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#createRole");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createRoleRequest** | [**CreateRoleRequest**](CreateRoleRequest.md)| Details of the role to be created | |
+
+### Return type
+
+[**RoleResponse**](RoleResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Create a new role |  -  |
+| **409** | A role with the same Name already exists. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## deleteRole
+
+> deleteRole(id)
+
+DeleteRole: Delete Role
+
+Delete the specified role
+
+### Example
+
+```java
+import com.finbourne.sdk.services.identity.model.*;
+import com.finbourne.sdk.services.identity.api.RolesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RolesApi apiInstance = apiFactory.build(RolesApi.class);
+        String id = "id_example"; // String | The unique identifier for the role
+        try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.deleteRole(id).execute(opts);
+
+            apiInstance.deleteRole(id).execute();
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#deleteRole");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| The unique identifier for the role | |
+
+### Return type
+
+null (empty response body)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | No Content |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getRole
+
+> RoleResponse getRole(id)
+
+GetRole: Get Role
+
+Get the specified role
+
+### Example
+
+```java
+import com.finbourne.sdk.services.identity.model.*;
+import com.finbourne.sdk.services.identity.api.RolesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RolesApi apiInstance = apiFactory.build(RolesApi.class);
+        String id = "id_example"; // String | The unique identifier for the role
+        try {
+            // uncomment the below to set overrides at the request level
+            // RoleResponse result = apiInstance.getRole(id).execute(opts);
+
+            RoleResponse result = apiInstance.getRole(id).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#getRole");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| The unique identifier for the role | |
+
+### Return type
+
+[**RoleResponse**](RoleResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Get the specified role |  -  |
+| **404** | Not Found |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getRoleByCode
+
+> RoleResponse getRoleByCode(code, scope)
+
+GetRoleByCode: Get Role By Code
+
+Get the specified role by its code, optionally scoped. Scope defaults to \&quot;default\&quot;. The \&quot;code\&quot; is the same value supplied as \&quot;name\&quot; when the role was created via CreateRole.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.identity.model.*;
+import com.finbourne.sdk.services.identity.api.RolesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RolesApi apiInstance = apiFactory.build(RolesApi.class);
+        String code = "code_example"; // String | The role code (the value supplied as \"name\" when the role was created).
+        String scope = "default"; // String | The scope the role lives in. Defaults to \"default\".
+        try {
+            // uncomment the below to set overrides at the request level
+            // RoleResponse result = apiInstance.getRoleByCode(code, scope).execute(opts);
+
+            RoleResponse result = apiInstance.getRoleByCode(code, scope).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#getRoleByCode");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **code** | **String**| The role code (the value supplied as \&quot;name\&quot; when the role was created). | |
+| **scope** | **String**| The scope the role lives in. Defaults to \&quot;default\&quot;. | [optional] [default to default] |
+
+### Return type
+
+[**RoleResponse**](RoleResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Get the specified role |  -  |
+| **404** | Not Found |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listRoles
+
+> List&lt;RoleResponse&gt; listRoles()
+
+ListRoles: List Roles
+
+List the available Roles
+
+### Example
+
+```java
+import com.finbourne.sdk.services.identity.model.*;
+import com.finbourne.sdk.services.identity.api.RolesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RolesApi apiInstance = apiFactory.build(RolesApi.class);
+        try {
+            // uncomment the below to set overrides at the request level
+            // List<RoleResponse> result = apiInstance.listRoles().execute(opts);
+
+            List<RoleResponse> result = apiInstance.listRoles().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#listRoles");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;RoleResponse&gt;**](RoleResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List the available roles |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listUsersInRole
+
+> List&lt;UserResponse&gt; listUsersInRole(id)
+
+ListUsersInRole: Get the users in the specified role.
+
+List all Users in the specified Role
+
+### Example
+
+```java
+import com.finbourne.sdk.services.identity.model.*;
+import com.finbourne.sdk.services.identity.api.RolesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RolesApi apiInstance = apiFactory.build(RolesApi.class);
+        String id = "id_example"; // String | The unique identifier for the Role
+        try {
+            // uncomment the below to set overrides at the request level
+            // List<UserResponse> result = apiInstance.listUsersInRole(id).execute(opts);
+
+            List<UserResponse> result = apiInstance.listUsersInRole(id).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#listUsersInRole");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| The unique identifier for the Role | |
+
+### Return type
+
+[**List&lt;UserResponse&gt;**](UserResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The users in the role |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## removeUserFromRole
+
+> removeUserFromRole(id, userId)
+
+RemoveUserFromRole: Remove User from Role
+
+Removes the User from the specified Role
+
+### Example
+
+```java
+import com.finbourne.sdk.services.identity.model.*;
+import com.finbourne.sdk.services.identity.api.RolesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RolesApi apiInstance = apiFactory.build(RolesApi.class);
+        String id = "id_example"; // String | The unique identifier for the Role
+        String userId = "userId_example"; // String | The unique identifier for the User
+        try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.removeUserFromRole(id, userId).execute(opts);
+
+            apiInstance.removeUserFromRole(id, userId).execute();
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#removeUserFromRole");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| The unique identifier for the Role | |
+| **userId** | **String**| The unique identifier for the User | |
+
+### Return type
+
+null (empty response body)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | No Content |  -  |
+| **404** | Not Found |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## updateRole
+
+> RoleResponse updateRole(id, updateRoleRequest)
+
+UpdateRole: Update Role
+
+Update the specified Role
+
+### Example
+
+```java
+import com.finbourne.sdk.services.identity.model.*;
+import com.finbourne.sdk.services.identity.api.RolesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RolesApi apiInstance = apiFactory.build(RolesApi.class);
+        String id = "id_example"; // String | The unique identifier for the role to be updated
+        UpdateRoleRequest updateRoleRequest = new UpdateRoleRequest(); // UpdateRoleRequest | The new definition of the role
+        try {
+            // uncomment the below to set overrides at the request level
+            // RoleResponse result = apiInstance.updateRole(id, updateRoleRequest).execute(opts);
+
+            RoleResponse result = apiInstance.updateRole(id, updateRoleRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#updateRole");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| The unique identifier for the role to be updated | |
+| **updateRoleRequest** | [**UpdateRoleRequest**](UpdateRoleRequest.md)| The new definition of the role | [optional] |
+
+### Return type
+
+[**RoleResponse**](RoleResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Update a role |  -  |
+| **404** | Not Found |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
