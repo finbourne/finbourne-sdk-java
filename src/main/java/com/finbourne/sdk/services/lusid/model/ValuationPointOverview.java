@@ -431,8 +431,8 @@ public class ValuationPointOverview {
         Objects.equals(this.queryAsAt, valuationPointOverview.queryAsAt) &&
         Objects.equals(this.type, valuationPointOverview.type) &&
         Objects.equals(this.status, valuationPointOverview.status) &&
-        (this.gav.compareTo(valuationPointOverview.getGav()) == 0) &&
-        (this.nav.compareTo(valuationPointOverview.getNav()) == 0) &&
+        (this.gav == null ? valuationPointOverview.gav == null : (valuationPointOverview.gav != null && this.gav.compareTo(valuationPointOverview.getGav()) == 0)) &&
+        (this.nav == null ? valuationPointOverview.nav == null : (valuationPointOverview.nav != null && this.nav.compareTo(valuationPointOverview.getNav()) == 0)) &&
         Objects.equals(this.holdingsAsAtOverride, valuationPointOverview.holdingsAsAtOverride) &&
         Objects.equals(this.valuationsAsAtOverride, valuationPointOverview.valuationsAsAtOverride) &&
         Objects.equals(this.properties, valuationPointOverview.properties) &&

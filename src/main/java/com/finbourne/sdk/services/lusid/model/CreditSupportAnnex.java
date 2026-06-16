@@ -314,10 +314,10 @@ public class CreditSupportAnnex {
         Objects.equals(this.isdaAgreementVersion, creditSupportAnnex.isdaAgreementVersion) &&
         Objects.equals(this.marginCallFrequency, creditSupportAnnex.marginCallFrequency) &&
         Objects.equals(this.valuationAgent, creditSupportAnnex.valuationAgent) &&
-        (this.thresholdAmount.compareTo(creditSupportAnnex.getThresholdAmount()) == 0) &&
+        (this.thresholdAmount == null ? creditSupportAnnex.thresholdAmount == null : (creditSupportAnnex.thresholdAmount != null && this.thresholdAmount.compareTo(creditSupportAnnex.getThresholdAmount()) == 0)) &&
         Objects.equals(this.roundingDecimalPlaces, creditSupportAnnex.roundingDecimalPlaces) &&
-        (this.initialMarginAmount.compareTo(creditSupportAnnex.getInitialMarginAmount()) == 0) &&
-        (this.minimumTransferAmount.compareTo(creditSupportAnnex.getMinimumTransferAmount()) == 0) &&
+        (this.initialMarginAmount == null ? creditSupportAnnex.initialMarginAmount == null : (creditSupportAnnex.initialMarginAmount != null && this.initialMarginAmount.compareTo(creditSupportAnnex.getInitialMarginAmount()) == 0)) &&
+        (this.minimumTransferAmount == null ? creditSupportAnnex.minimumTransferAmount == null : (creditSupportAnnex.minimumTransferAmount != null && this.minimumTransferAmount.compareTo(creditSupportAnnex.getMinimumTransferAmount()) == 0)) &&
         Objects.equals(this.id, creditSupportAnnex.id);
   }
 

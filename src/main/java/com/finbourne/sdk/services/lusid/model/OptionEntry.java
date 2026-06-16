@@ -125,7 +125,7 @@ public class OptionEntry {
       return false;
     }
     OptionEntry optionEntry = (OptionEntry) o;
-    return (this.strike.compareTo(optionEntry.getStrike()) == 0) &&
+    return (this.strike == null ? optionEntry.strike == null : (optionEntry.strike != null && this.strike.compareTo(optionEntry.getStrike()) == 0)) &&
         Objects.equals(this.date, optionEntry.date) &&
         Objects.equals(this.endDate, optionEntry.endDate);
   }

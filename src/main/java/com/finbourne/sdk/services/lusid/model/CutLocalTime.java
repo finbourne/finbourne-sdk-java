@@ -125,7 +125,7 @@ public class CutLocalTime {
     CutLocalTime cutLocalTime = (CutLocalTime) o;
     return Objects.equals(this.hours, cutLocalTime.hours) &&
         Objects.equals(this.minutes, cutLocalTime.minutes) &&
-        (this.seconds.compareTo(cutLocalTime.getSeconds()) == 0);
+        (this.seconds == null ? cutLocalTime.seconds == null : (cutLocalTime.seconds != null && this.seconds.compareTo(cutLocalTime.getSeconds()) == 0));
   }
 
   @Override

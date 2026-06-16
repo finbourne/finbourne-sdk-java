@@ -73,7 +73,7 @@ public class FundPreviousNAV {
       return false;
     }
     FundPreviousNAV fundPreviousNAV = (FundPreviousNAV) o;
-    return (this.amount.compareTo(fundPreviousNAV.getAmount()) == 0);
+    return (this.amount == null ? fundPreviousNAV.amount == null : (fundPreviousNAV.amount != null && this.amount.compareTo(fundPreviousNAV.getAmount()) == 0));
   }
 
   @Override

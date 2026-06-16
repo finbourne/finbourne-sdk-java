@@ -132,7 +132,7 @@ public class ContractInitialisationEvent extends InstrumentEvent {
       return false;
     }
     ContractInitialisationEvent contractInitialisationEvent = (ContractInitialisationEvent) o;
-    return (this.limit.compareTo(contractInitialisationEvent.getLimit()) == 0) &&
+    return (this.limit == null ? contractInitialisationEvent.limit == null : (contractInitialisationEvent.limit != null && this.limit.compareTo(contractInitialisationEvent.getLimit()) == 0)) &&
         Objects.equals(this.date, contractInitialisationEvent.date) &&
         Objects.equals(this.contractDetails, contractInitialisationEvent.contractDetails) &&
         super.equals(o);

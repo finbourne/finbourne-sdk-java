@@ -152,7 +152,7 @@ public class AllocationGroupClass {
     AllocationGroupClass allocationGroupClass = (AllocationGroupClass) o;
     return Objects.equals(this.shareClassShortCode, allocationGroupClass.shareClassShortCode) &&
         Objects.equals(this.shareClassFundId, allocationGroupClass.shareClassFundId) &&
-        (this.apportionmentFactor.compareTo(allocationGroupClass.getApportionmentFactor()) == 0) &&
+        (this.apportionmentFactor == null ? allocationGroupClass.apportionmentFactor == null : (allocationGroupClass.apportionmentFactor != null && this.apportionmentFactor.compareTo(allocationGroupClass.getApportionmentFactor()) == 0)) &&
         Objects.equals(this.shareClassSeriesCode, allocationGroupClass.shareClassSeriesCode);
   }
 

@@ -168,7 +168,7 @@ public class ReconcileNumericRule extends ReconciliationRule {
     }
     ReconcileNumericRule reconcileNumericRule = (ReconcileNumericRule) o;
     return Objects.equals(this.comparisonType, reconcileNumericRule.comparisonType) &&
-        (this.tolerance.compareTo(reconcileNumericRule.getTolerance()) == 0) &&
+        (this.tolerance == null ? reconcileNumericRule.tolerance == null : (reconcileNumericRule.tolerance != null && this.tolerance.compareTo(reconcileNumericRule.getTolerance()) == 0)) &&
         Objects.equals(this.appliesTo, reconcileNumericRule.appliesTo) &&
         super.equals(o);
   }

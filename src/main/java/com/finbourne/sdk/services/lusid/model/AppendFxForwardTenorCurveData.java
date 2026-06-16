@@ -106,7 +106,7 @@ public class AppendFxForwardTenorCurveData extends AppendMarketData {
     }
     AppendFxForwardTenorCurveData appendFxForwardTenorCurveData = (AppendFxForwardTenorCurveData) o;
     return Objects.equals(this.tenor, appendFxForwardTenorCurveData.tenor) &&
-        (this.rate.compareTo(appendFxForwardTenorCurveData.getRate()) == 0) &&
+        (this.rate == null ? appendFxForwardTenorCurveData.rate == null : (appendFxForwardTenorCurveData.rate != null && this.rate.compareTo(appendFxForwardTenorCurveData.getRate()) == 0)) &&
         super.equals(o);
   }
 

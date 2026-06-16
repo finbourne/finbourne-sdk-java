@@ -158,7 +158,7 @@ public class EarlyRedemptionEvent extends InstrumentEvent {
   }
 
   /**
-   * Percentage of the original issue that is redeemed, where 0.5 implies 50%.  Defaults to 1 if not set.  Must be between 0 and 1.
+   * Percentage of the issued amount to be redeemed, value between 0 and 1, where 1 is a full redemption
    * @return redemptionPercentage
    */
   @javax.annotation.Nullable
@@ -221,9 +221,9 @@ public class EarlyRedemptionEvent extends InstrumentEvent {
     return Objects.equals(this.effectiveDate, earlyRedemptionEvent.effectiveDate) &&
         Objects.equals(this.currency, earlyRedemptionEvent.currency) &&
         Objects.equals(this.earlyRedemptionElections, earlyRedemptionEvent.earlyRedemptionElections) &&
-        (this.redemptionPercentage.compareTo(earlyRedemptionEvent.getRedemptionPercentage()) == 0) &&
-        (this.pricePerUnit.compareTo(earlyRedemptionEvent.getPricePerUnit()) == 0) &&
-        (this.accruedInterestPerUnit.compareTo(earlyRedemptionEvent.getAccruedInterestPerUnit()) == 0) &&
+        (this.redemptionPercentage == null ? earlyRedemptionEvent.redemptionPercentage == null : (earlyRedemptionEvent.redemptionPercentage != null && this.redemptionPercentage.compareTo(earlyRedemptionEvent.getRedemptionPercentage()) == 0)) &&
+        (this.pricePerUnit == null ? earlyRedemptionEvent.pricePerUnit == null : (earlyRedemptionEvent.pricePerUnit != null && this.pricePerUnit.compareTo(earlyRedemptionEvent.getPricePerUnit()) == 0)) &&
+        (this.accruedInterestPerUnit == null ? earlyRedemptionEvent.accruedInterestPerUnit == null : (earlyRedemptionEvent.accruedInterestPerUnit != null && this.accruedInterestPerUnit.compareTo(earlyRedemptionEvent.getAccruedInterestPerUnit()) == 0)) &&
         super.equals(o);
   }
 

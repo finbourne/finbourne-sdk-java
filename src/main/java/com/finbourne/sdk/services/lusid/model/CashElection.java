@@ -225,8 +225,8 @@ public class CashElection {
     }
     CashElection cashElection = (CashElection) o;
     return Objects.equals(this.electionKey, cashElection.electionKey) &&
-        (this.exchangeRate.compareTo(cashElection.getExchangeRate()) == 0) &&
-        (this.dividendRate.compareTo(cashElection.getDividendRate()) == 0) &&
+        (this.exchangeRate == null ? cashElection.exchangeRate == null : (cashElection.exchangeRate != null && this.exchangeRate.compareTo(cashElection.getExchangeRate()) == 0)) &&
+        (this.dividendRate == null ? cashElection.dividendRate == null : (cashElection.dividendRate != null && this.dividendRate.compareTo(cashElection.getDividendRate()) == 0)) &&
         Objects.equals(this.isChosen, cashElection.isChosen) &&
         Objects.equals(this.isDeclared, cashElection.isDeclared) &&
         Objects.equals(this.isDefault, cashElection.isDefault) &&

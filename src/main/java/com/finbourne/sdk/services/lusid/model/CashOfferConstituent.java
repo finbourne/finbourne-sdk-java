@@ -175,11 +175,11 @@ public class CashOfferConstituent {
       return false;
     }
     CashOfferConstituent cashOfferConstituent = (CashOfferConstituent) o;
-    return (this.offerPrice.compareTo(cashOfferConstituent.getOfferPrice()) == 0) &&
+    return (this.offerPrice == null ? cashOfferConstituent.offerPrice == null : (cashOfferConstituent.offerPrice != null && this.offerPrice.compareTo(cashOfferConstituent.getOfferPrice()) == 0)) &&
         Objects.equals(this.currency, cashOfferConstituent.currency) &&
         Objects.equals(this.settlementDate, cashOfferConstituent.settlementDate) &&
-        (this.minPieceSize.compareTo(cashOfferConstituent.getMinPieceSize()) == 0) &&
-        (this.minIncrement.compareTo(cashOfferConstituent.getMinIncrement()) == 0);
+        (this.minPieceSize == null ? cashOfferConstituent.minPieceSize == null : (cashOfferConstituent.minPieceSize != null && this.minPieceSize.compareTo(cashOfferConstituent.getMinPieceSize()) == 0)) &&
+        (this.minIncrement == null ? cashOfferConstituent.minIncrement == null : (cashOfferConstituent.minIncrement != null && this.minIncrement.compareTo(cashOfferConstituent.getMinIncrement()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

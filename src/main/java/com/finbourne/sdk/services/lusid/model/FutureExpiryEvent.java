@@ -134,7 +134,7 @@ public class FutureExpiryEvent extends InstrumentEvent {
     FutureExpiryEvent futureExpiryEvent = (FutureExpiryEvent) o;
     return Objects.equals(this.expiryDate, futureExpiryEvent.expiryDate) &&
         Objects.equals(this.settlementCurrency, futureExpiryEvent.settlementCurrency) &&
-        (this.notionalAmountPerUnit.compareTo(futureExpiryEvent.getNotionalAmountPerUnit()) == 0) &&
+        (this.notionalAmountPerUnit == null ? futureExpiryEvent.notionalAmountPerUnit == null : (futureExpiryEvent.notionalAmountPerUnit != null && this.notionalAmountPerUnit.compareTo(futureExpiryEvent.getNotionalAmountPerUnit()) == 0)) &&
         super.equals(o);
   }
 

@@ -186,7 +186,7 @@ public class CashFlowValue extends ResultValue {
     return Objects.equals(this.paymentDate, cashFlowValue.paymentDate) &&
         Objects.equals(this.diagnostics, cashFlowValue.diagnostics) &&
         Objects.equals(this.cashFlowLineage, cashFlowValue.cashFlowLineage) &&
-        (this.paymentAmount.compareTo(cashFlowValue.getPaymentAmount()) == 0) &&
+        (this.paymentAmount == null ? cashFlowValue.paymentAmount == null : (cashFlowValue.paymentAmount != null && this.paymentAmount.compareTo(cashFlowValue.getPaymentAmount()) == 0)) &&
         Objects.equals(this.paymentCcy, cashFlowValue.paymentCcy) &&
         super.equals(o);
   }

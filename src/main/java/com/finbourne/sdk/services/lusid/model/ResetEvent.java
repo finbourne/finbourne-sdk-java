@@ -157,7 +157,7 @@ public class ResetEvent extends InstrumentEvent {
       return false;
     }
     ResetEvent resetEvent = (ResetEvent) o;
-    return (this.value.compareTo(resetEvent.getValue()) == 0) &&
+    return (this.value == null ? resetEvent.value == null : (resetEvent.value != null && this.value.compareTo(resetEvent.getValue()) == 0)) &&
         Objects.equals(this.resetType, resetEvent.resetType) &&
         Objects.equals(this.fixingSource, resetEvent.fixingSource) &&
         Objects.equals(this.fixingDate, resetEvent.fixingDate) &&

@@ -252,12 +252,12 @@ public class SettlementSchedule {
     SettlementSchedule settlementSchedule = (SettlementSchedule) o;
     return Objects.equals(this.tradeId, settlementSchedule.tradeId) &&
         Objects.equals(this.settlementDate, settlementSchedule.settlementDate) &&
-        (this.units.compareTo(settlementSchedule.getUnits()) == 0) &&
-        (this.bondInterest.compareTo(settlementSchedule.getBondInterest()) == 0) &&
+        (this.units == null ? settlementSchedule.units == null : (settlementSchedule.units != null && this.units.compareTo(settlementSchedule.getUnits()) == 0)) &&
+        (this.bondInterest == null ? settlementSchedule.bondInterest == null : (settlementSchedule.bondInterest != null && this.bondInterest.compareTo(settlementSchedule.getBondInterest()) == 0)) &&
         Objects.equals(this.movementName, settlementSchedule.movementName) &&
         Objects.equals(this.movementType, settlementSchedule.movementType) &&
-        (this.unsettledUnits.compareTo(settlementSchedule.getUnsettledUnits()) == 0) &&
-        (this.overdueUnits.compareTo(settlementSchedule.getOverdueUnits()) == 0);
+        (this.unsettledUnits == null ? settlementSchedule.unsettledUnits == null : (settlementSchedule.unsettledUnits != null && this.unsettledUnits.compareTo(settlementSchedule.getUnsettledUnits()) == 0)) &&
+        (this.overdueUnits == null ? settlementSchedule.overdueUnits == null : (settlementSchedule.overdueUnits != null && this.overdueUnits.compareTo(settlementSchedule.getOverdueUnits()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

@@ -425,7 +425,7 @@ public class InstrumentPaymentDiaryRow {
       return false;
     }
     InstrumentPaymentDiaryRow instrumentPaymentDiaryRow = (InstrumentPaymentDiaryRow) o;
-    return (this.quantity.compareTo(instrumentPaymentDiaryRow.getQuantity()) == 0) &&
+    return (this.quantity == null ? instrumentPaymentDiaryRow.quantity == null : (instrumentPaymentDiaryRow.quantity != null && this.quantity.compareTo(instrumentPaymentDiaryRow.getQuantity()) == 0)) &&
         Objects.equals(this.currency, instrumentPaymentDiaryRow.currency) &&
         Objects.equals(this.paymentDate, instrumentPaymentDiaryRow.paymentDate) &&
         Objects.equals(this.payOrReceive, instrumentPaymentDiaryRow.payOrReceive) &&
@@ -434,12 +434,12 @@ public class InstrumentPaymentDiaryRow {
         Objects.equals(this.cashFlowType, instrumentPaymentDiaryRow.cashFlowType) &&
         Objects.equals(this.isCashFlowDetermined, instrumentPaymentDiaryRow.isCashFlowDetermined) &&
         Objects.equals(this.isCashFlowHistoric, instrumentPaymentDiaryRow.isCashFlowHistoric) &&
-        (this.discountFactor.compareTo(instrumentPaymentDiaryRow.getDiscountFactor()) == 0) &&
-        (this.discountedExpectedCashFlowAmount.compareTo(instrumentPaymentDiaryRow.getDiscountedExpectedCashFlowAmount()) == 0) &&
-        (this.dayCountFraction.compareTo(instrumentPaymentDiaryRow.getDayCountFraction()) == 0) &&
-        (this.forwardRate.compareTo(instrumentPaymentDiaryRow.getForwardRate()) == 0) &&
-        (this.resetRate.compareTo(instrumentPaymentDiaryRow.getResetRate()) == 0) &&
-        (this.spread.compareTo(instrumentPaymentDiaryRow.getSpread()) == 0);
+        (this.discountFactor == null ? instrumentPaymentDiaryRow.discountFactor == null : (instrumentPaymentDiaryRow.discountFactor != null && this.discountFactor.compareTo(instrumentPaymentDiaryRow.getDiscountFactor()) == 0)) &&
+        (this.discountedExpectedCashFlowAmount == null ? instrumentPaymentDiaryRow.discountedExpectedCashFlowAmount == null : (instrumentPaymentDiaryRow.discountedExpectedCashFlowAmount != null && this.discountedExpectedCashFlowAmount.compareTo(instrumentPaymentDiaryRow.getDiscountedExpectedCashFlowAmount()) == 0)) &&
+        (this.dayCountFraction == null ? instrumentPaymentDiaryRow.dayCountFraction == null : (instrumentPaymentDiaryRow.dayCountFraction != null && this.dayCountFraction.compareTo(instrumentPaymentDiaryRow.getDayCountFraction()) == 0)) &&
+        (this.forwardRate == null ? instrumentPaymentDiaryRow.forwardRate == null : (instrumentPaymentDiaryRow.forwardRate != null && this.forwardRate.compareTo(instrumentPaymentDiaryRow.getForwardRate()) == 0)) &&
+        (this.resetRate == null ? instrumentPaymentDiaryRow.resetRate == null : (instrumentPaymentDiaryRow.resetRate != null && this.resetRate.compareTo(instrumentPaymentDiaryRow.getResetRate()) == 0)) &&
+        (this.spread == null ? instrumentPaymentDiaryRow.spread == null : (instrumentPaymentDiaryRow.spread != null && this.spread.compareTo(instrumentPaymentDiaryRow.getSpread()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

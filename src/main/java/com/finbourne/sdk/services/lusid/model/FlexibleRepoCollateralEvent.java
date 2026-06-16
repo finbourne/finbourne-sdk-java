@@ -159,7 +159,7 @@ public class FlexibleRepoCollateralEvent extends InstrumentEvent {
     FlexibleRepoCollateralEvent flexibleRepoCollateralEvent = (FlexibleRepoCollateralEvent) o;
     return Objects.equals(this.settlementDate, flexibleRepoCollateralEvent.settlementDate) &&
         Objects.equals(this.entitlementDate, flexibleRepoCollateralEvent.entitlementDate) &&
-        (this.amount.compareTo(flexibleRepoCollateralEvent.getAmount()) == 0) &&
+        (this.amount == null ? flexibleRepoCollateralEvent.amount == null : (flexibleRepoCollateralEvent.amount != null && this.amount.compareTo(flexibleRepoCollateralEvent.getAmount()) == 0)) &&
         Objects.equals(this.collateralInstrument, flexibleRepoCollateralEvent.collateralInstrument) &&
         super.equals(o);
   }

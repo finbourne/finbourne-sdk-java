@@ -262,7 +262,7 @@ public class OrderGraphPlacement {
         Objects.equals(this.executed, orderGraphPlacement.executed) &&
         Objects.equals(this.allocated, orderGraphPlacement.allocated) &&
         Objects.equals(this.derivedState, orderGraphPlacement.derivedState) &&
-        (this.calculatedAveragePrice.compareTo(orderGraphPlacement.getCalculatedAveragePrice()) == 0);
+        (this.calculatedAveragePrice == null ? orderGraphPlacement.calculatedAveragePrice == null : (orderGraphPlacement.calculatedAveragePrice != null && this.calculatedAveragePrice.compareTo(orderGraphPlacement.getCalculatedAveragePrice()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

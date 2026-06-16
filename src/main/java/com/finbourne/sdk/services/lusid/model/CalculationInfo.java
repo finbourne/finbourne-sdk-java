@@ -125,7 +125,7 @@ public class CalculationInfo {
     CalculationInfo calculationInfo = (CalculationInfo) o;
     return Objects.equals(this.calculationMethod, calculationInfo.calculationMethod) &&
         Objects.equals(this.multiplier, calculationInfo.multiplier) &&
-        (this.calculationAmount.compareTo(calculationInfo.getCalculationAmount()) == 0);
+        (this.calculationAmount == null ? calculationInfo.calculationAmount == null : (calculationInfo.calculationAmount != null && this.calculationAmount.compareTo(calculationInfo.getCalculationAmount()) == 0));
   }
 
   @Override

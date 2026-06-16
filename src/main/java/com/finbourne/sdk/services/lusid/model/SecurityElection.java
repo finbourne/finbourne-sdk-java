@@ -203,7 +203,7 @@ public class SecurityElection {
     return Objects.equals(this.electionKey, securityElection.electionKey) &&
         Objects.equals(this.isChosen, securityElection.isChosen) &&
         Objects.equals(this.isDefault, securityElection.isDefault) &&
-        (this.price.compareTo(securityElection.getPrice()) == 0) &&
+        (this.price == null ? securityElection.price == null : (securityElection.price != null && this.price.compareTo(securityElection.getPrice()) == 0)) &&
         Objects.equals(this.unitsRatio, securityElection.unitsRatio) &&
         Objects.equals(this.securityElectionCurrency, securityElection.securityElectionCurrency);
   }

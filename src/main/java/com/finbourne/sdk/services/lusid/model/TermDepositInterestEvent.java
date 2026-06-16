@@ -133,7 +133,7 @@ public class TermDepositInterestEvent extends InstrumentEvent {
     }
     TermDepositInterestEvent termDepositInterestEvent = (TermDepositInterestEvent) o;
     return Objects.equals(this.currency, termDepositInterestEvent.currency) &&
-        (this.interestPerUnit.compareTo(termDepositInterestEvent.getInterestPerUnit()) == 0) &&
+        (this.interestPerUnit == null ? termDepositInterestEvent.interestPerUnit == null : (termDepositInterestEvent.interestPerUnit != null && this.interestPerUnit.compareTo(termDepositInterestEvent.getInterestPerUnit()) == 0)) &&
         Objects.equals(this.paymentDate, termDepositInterestEvent.paymentDate) &&
         super.equals(o);
   }

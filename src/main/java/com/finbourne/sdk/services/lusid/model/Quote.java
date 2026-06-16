@@ -268,7 +268,7 @@ public class Quote {
         Objects.equals(this.cutLabel, quote.cutLabel) &&
         Objects.equals(this.uploadedBy, quote.uploadedBy) &&
         Objects.equals(this.asAt, quote.asAt) &&
-        (this.scaleFactor.compareTo(quote.getScaleFactor()) == 0) &&
+        (this.scaleFactor == null ? quote.scaleFactor == null : (quote.scaleFactor != null && this.scaleFactor.compareTo(quote.getScaleFactor()) == 0)) &&
         Objects.equals(this.metadataFields, quote.metadataFields);
   }
 

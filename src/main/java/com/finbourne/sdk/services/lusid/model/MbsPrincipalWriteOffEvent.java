@@ -160,7 +160,7 @@ public class MbsPrincipalWriteOffEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, mbsPrincipalWriteOffEvent.exDate) &&
         Objects.equals(this.paymentDate, mbsPrincipalWriteOffEvent.paymentDate) &&
         Objects.equals(this.currency, mbsPrincipalWriteOffEvent.currency) &&
-        (this.principalPerUnit.compareTo(mbsPrincipalWriteOffEvent.getPrincipalPerUnit()) == 0) &&
+        (this.principalPerUnit == null ? mbsPrincipalWriteOffEvent.principalPerUnit == null : (mbsPrincipalWriteOffEvent.principalPerUnit != null && this.principalPerUnit.compareTo(mbsPrincipalWriteOffEvent.getPrincipalPerUnit()) == 0)) &&
         super.equals(o);
   }
 

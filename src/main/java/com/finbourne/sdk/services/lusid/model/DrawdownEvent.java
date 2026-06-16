@@ -157,10 +157,10 @@ public class DrawdownEvent extends InstrumentEvent {
       return false;
     }
     DrawdownEvent drawdownEvent = (DrawdownEvent) o;
-    return (this.amount.compareTo(drawdownEvent.getAmount()) == 0) &&
+    return (this.amount == null ? drawdownEvent.amount == null : (drawdownEvent.amount != null && this.amount.compareTo(drawdownEvent.getAmount()) == 0)) &&
         Objects.equals(this.date, drawdownEvent.date) &&
         Objects.equals(this.contractDetails, drawdownEvent.contractDetails) &&
-        (this.agencyFxRate.compareTo(drawdownEvent.getAgencyFxRate()) == 0) &&
+        (this.agencyFxRate == null ? drawdownEvent.agencyFxRate == null : (drawdownEvent.agencyFxRate != null && this.agencyFxRate.compareTo(drawdownEvent.getAgencyFxRate()) == 0)) &&
         super.equals(o);
   }
 

@@ -238,8 +238,8 @@ public class MappingRule {
     return Objects.equals(this.left, mappingRule.left) &&
         Objects.equals(this.right, mappingRule.right) &&
         Objects.equals(this.comparisonType, mappingRule.comparisonType) &&
-        (this.comparisonValue.compareTo(mappingRule.getComparisonValue()) == 0) &&
-        (this.weight.compareTo(mappingRule.getWeight()) == 0) &&
+        (this.comparisonValue == null ? mappingRule.comparisonValue == null : (mappingRule.comparisonValue != null && this.comparisonValue.compareTo(mappingRule.getComparisonValue()) == 0)) &&
+        (this.weight == null ? mappingRule.weight == null : (mappingRule.weight != null && this.weight.compareTo(mappingRule.getWeight()) == 0)) &&
         Objects.equals(this.mappedStrings, mappingRule.mappedStrings) &&
         Objects.equals(this.isCaseSensitive, mappingRule.isCaseSensitive);
   }

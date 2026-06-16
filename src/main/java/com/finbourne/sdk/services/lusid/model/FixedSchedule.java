@@ -313,10 +313,10 @@ public class FixedSchedule extends Schedule {
     return Objects.equals(this.startDate, fixedSchedule.startDate) &&
         Objects.equals(this.maturityDate, fixedSchedule.maturityDate) &&
         Objects.equals(this.flowConventions, fixedSchedule.flowConventions) &&
-        (this.couponRate.compareTo(fixedSchedule.getCouponRate()) == 0) &&
+        (this.couponRate == null ? fixedSchedule.couponRate == null : (fixedSchedule.couponRate != null && this.couponRate.compareTo(fixedSchedule.getCouponRate()) == 0)) &&
         Objects.equals(this.conventionName, fixedSchedule.conventionName) &&
         Objects.equals(this.exDividendDays, fixedSchedule.exDividendDays) &&
-        (this.notional.compareTo(fixedSchedule.getNotional()) == 0) &&
+        (this.notional == null ? fixedSchedule.notional == null : (fixedSchedule.notional != null && this.notional.compareTo(fixedSchedule.getNotional()) == 0)) &&
         Objects.equals(this.paymentCurrency, fixedSchedule.paymentCurrency) &&
         Objects.equals(this.stubType, fixedSchedule.stubType) &&
         Objects.equals(this.exDividendConfiguration, fixedSchedule.exDividendConfiguration) &&

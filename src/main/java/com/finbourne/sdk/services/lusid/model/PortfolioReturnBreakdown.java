@@ -376,18 +376,18 @@ public class PortfolioReturnBreakdown {
     }
     PortfolioReturnBreakdown portfolioReturnBreakdown = (PortfolioReturnBreakdown) o;
     return Objects.equals(this.portfolioId, portfolioReturnBreakdown.portfolioId) &&
-        (this.rateOfReturn.compareTo(portfolioReturnBreakdown.getRateOfReturn()) == 0) &&
-        (this.openingMarketValue.compareTo(portfolioReturnBreakdown.getOpeningMarketValue()) == 0) &&
-        (this.closingMarketValue.compareTo(portfolioReturnBreakdown.getClosingMarketValue()) == 0) &&
-        (this.weight.compareTo(portfolioReturnBreakdown.getWeight()) == 0) &&
+        (this.rateOfReturn == null ? portfolioReturnBreakdown.rateOfReturn == null : (portfolioReturnBreakdown.rateOfReturn != null && this.rateOfReturn.compareTo(portfolioReturnBreakdown.getRateOfReturn()) == 0)) &&
+        (this.openingMarketValue == null ? portfolioReturnBreakdown.openingMarketValue == null : (portfolioReturnBreakdown.openingMarketValue != null && this.openingMarketValue.compareTo(portfolioReturnBreakdown.getOpeningMarketValue()) == 0)) &&
+        (this.closingMarketValue == null ? portfolioReturnBreakdown.closingMarketValue == null : (portfolioReturnBreakdown.closingMarketValue != null && this.closingMarketValue.compareTo(portfolioReturnBreakdown.getClosingMarketValue()) == 0)) &&
+        (this.weight == null ? portfolioReturnBreakdown.weight == null : (portfolioReturnBreakdown.weight != null && this.weight.compareTo(portfolioReturnBreakdown.getWeight()) == 0)) &&
         Objects.equals(this.constituentsInTheComposite, portfolioReturnBreakdown.constituentsInTheComposite) &&
         Objects.equals(this.constituentsMissing, portfolioReturnBreakdown.constituentsMissing) &&
         Objects.equals(this.currency, portfolioReturnBreakdown.currency) &&
-        (this.openFxRate.compareTo(portfolioReturnBreakdown.getOpenFxRate()) == 0) &&
-        (this.closeFxRate.compareTo(portfolioReturnBreakdown.getCloseFxRate()) == 0) &&
-        (this.localRateOfReturn.compareTo(portfolioReturnBreakdown.getLocalRateOfReturn()) == 0) &&
-        (this.localOpeningMarketValue.compareTo(portfolioReturnBreakdown.getLocalOpeningMarketValue()) == 0) &&
-        (this.localClosingMarketValue.compareTo(portfolioReturnBreakdown.getLocalClosingMarketValue()) == 0);
+        (this.openFxRate == null ? portfolioReturnBreakdown.openFxRate == null : (portfolioReturnBreakdown.openFxRate != null && this.openFxRate.compareTo(portfolioReturnBreakdown.getOpenFxRate()) == 0)) &&
+        (this.closeFxRate == null ? portfolioReturnBreakdown.closeFxRate == null : (portfolioReturnBreakdown.closeFxRate != null && this.closeFxRate.compareTo(portfolioReturnBreakdown.getCloseFxRate()) == 0)) &&
+        (this.localRateOfReturn == null ? portfolioReturnBreakdown.localRateOfReturn == null : (portfolioReturnBreakdown.localRateOfReturn != null && this.localRateOfReturn.compareTo(portfolioReturnBreakdown.getLocalRateOfReturn()) == 0)) &&
+        (this.localOpeningMarketValue == null ? portfolioReturnBreakdown.localOpeningMarketValue == null : (portfolioReturnBreakdown.localOpeningMarketValue != null && this.localOpeningMarketValue.compareTo(portfolioReturnBreakdown.getLocalOpeningMarketValue()) == 0)) &&
+        (this.localClosingMarketValue == null ? portfolioReturnBreakdown.localClosingMarketValue == null : (portfolioReturnBreakdown.localClosingMarketValue != null && this.localClosingMarketValue.compareTo(portfolioReturnBreakdown.getLocalClosingMarketValue()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

@@ -174,7 +174,7 @@ public class TenderOfferElection {
     }
     TenderOfferElection tenderOfferElection = (TenderOfferElection) o;
     return Objects.equals(this.tenderOfferCurrency, tenderOfferElection.tenderOfferCurrency) &&
-        (this.tenderOfferPrice.compareTo(tenderOfferElection.getTenderOfferPrice()) == 0) &&
+        (this.tenderOfferPrice == null ? tenderOfferElection.tenderOfferPrice == null : (tenderOfferElection.tenderOfferPrice != null && this.tenderOfferPrice.compareTo(tenderOfferElection.getTenderOfferPrice()) == 0)) &&
         Objects.equals(this.electionKey, tenderOfferElection.electionKey) &&
         Objects.equals(this.isChosen, tenderOfferElection.isChosen) &&
         Objects.equals(this.isDefault, tenderOfferElection.isDefault);

@@ -306,8 +306,8 @@ public class AggregatedReturn {
     AggregatedReturn aggregatedReturn = (AggregatedReturn) o;
     return Objects.equals(this.effectiveAt, aggregatedReturn.effectiveAt) &&
         Objects.equals(this.endOfPeriod, aggregatedReturn.endOfPeriod) &&
-        (this.openingMarketValue.compareTo(aggregatedReturn.getOpeningMarketValue()) == 0) &&
-        (this.closingMarketValue.compareTo(aggregatedReturn.getClosingMarketValue()) == 0) &&
+        (this.openingMarketValue == null ? aggregatedReturn.openingMarketValue == null : (aggregatedReturn.openingMarketValue != null && this.openingMarketValue.compareTo(aggregatedReturn.getOpeningMarketValue()) == 0)) &&
+        (this.closingMarketValue == null ? aggregatedReturn.closingMarketValue == null : (aggregatedReturn.closingMarketValue != null && this.closingMarketValue.compareTo(aggregatedReturn.getClosingMarketValue()) == 0)) &&
         Objects.equals(this.metricsValue, aggregatedReturn.metricsValue) &&
         Objects.equals(this.frequency, aggregatedReturn.frequency) &&
         Objects.equals(this.compositeMembers, aggregatedReturn.compositeMembers) &&

@@ -506,10 +506,10 @@ public class FxOption extends LusidInstrument {
     FxOption fxOption = (FxOption) o;
     return Objects.equals(this.startDate, fxOption.startDate) &&
         Objects.equals(this.domCcy, fxOption.domCcy) &&
-        (this.domAmount.compareTo(fxOption.getDomAmount()) == 0) &&
+        (this.domAmount == null ? fxOption.domAmount == null : (fxOption.domAmount != null && this.domAmount.compareTo(fxOption.getDomAmount()) == 0)) &&
         Objects.equals(this.fgnCcy, fxOption.fgnCcy) &&
-        (this.fgnAmount.compareTo(fxOption.getFgnAmount()) == 0) &&
-        (this.strike.compareTo(fxOption.getStrike()) == 0) &&
+        (this.fgnAmount == null ? fxOption.fgnAmount == null : (fxOption.fgnAmount != null && this.fgnAmount.compareTo(fxOption.getFgnAmount()) == 0)) &&
+        (this.strike == null ? fxOption.strike == null : (fxOption.strike != null && this.strike.compareTo(fxOption.getStrike()) == 0)) &&
         Objects.equals(this.barriers, fxOption.barriers) &&
         Objects.equals(this.exerciseType, fxOption.exerciseType) &&
         Objects.equals(this.isCallNotPut, fxOption.isCallNotPut) &&

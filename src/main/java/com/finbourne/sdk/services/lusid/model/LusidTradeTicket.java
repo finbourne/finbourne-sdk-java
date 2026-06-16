@@ -521,7 +521,7 @@ public class LusidTradeTicket {
         Objects.equals(this.transactionDate, lusidTradeTicket.transactionDate) &&
         Objects.equals(this.settlementDate, lusidTradeTicket.settlementDate) &&
         Objects.equals(this.totalConsideration, lusidTradeTicket.totalConsideration) &&
-        (this.units.compareTo(lusidTradeTicket.getUnits()) == 0) &&
+        (this.units == null ? lusidTradeTicket.units == null : (lusidTradeTicket.units != null && this.units.compareTo(lusidTradeTicket.getUnits()) == 0)) &&
         Objects.equals(this.instrumentIdentifiers, lusidTradeTicket.instrumentIdentifiers) &&
         Objects.equals(this.instrumentScope, lusidTradeTicket.instrumentScope) &&
         Objects.equals(this.instrumentName, lusidTradeTicket.instrumentName) &&

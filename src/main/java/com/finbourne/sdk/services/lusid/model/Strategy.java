@@ -136,7 +136,7 @@ public class Strategy {
     Strategy strategy = (Strategy) o;
     return Objects.equals(this.keys, strategy.keys) &&
         Objects.equals(this.valueType, strategy.valueType) &&
-        (this.value.compareTo(strategy.getValue()) == 0);
+        (this.value == null ? strategy.value == null : (strategy.value != null && this.value.compareTo(strategy.getValue()) == 0));
   }
 
   @Override

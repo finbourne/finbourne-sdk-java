@@ -181,7 +181,7 @@ public class InstrumentResolutionDetail {
     return Objects.equals(this.instrumentIdentifiers, instrumentResolutionDetail.instrumentIdentifiers) &&
         Objects.equals(this.lusidInstrumentId, instrumentResolutionDetail.lusidInstrumentId) &&
         Objects.equals(this.instrumentScope, instrumentResolutionDetail.instrumentScope) &&
-        (this.launchPrice.compareTo(instrumentResolutionDetail.getLaunchPrice()) == 0) &&
+        (this.launchPrice == null ? instrumentResolutionDetail.launchPrice == null : (instrumentResolutionDetail.launchPrice != null && this.launchPrice.compareTo(instrumentResolutionDetail.getLaunchPrice()) == 0)) &&
         Objects.equals(this.launchDate, instrumentResolutionDetail.launchDate);
   }
 

@@ -238,7 +238,7 @@ public class StockSplitEvent extends InstrumentEvent {
         Objects.equals(this.unitsRatio, stockSplitEvent.unitsRatio) &&
         Objects.equals(this.recordDate, stockSplitEvent.recordDate) &&
         Objects.equals(this.announcementDate, stockSplitEvent.announcementDate) &&
-        (this.fractionalUnitsCashPrice.compareTo(stockSplitEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.fractionalUnitsCashPrice == null ? stockSplitEvent.fractionalUnitsCashPrice == null : (stockSplitEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(stockSplitEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, stockSplitEvent.fractionalUnitsCashCurrency) &&
         super.equals(o);
   }

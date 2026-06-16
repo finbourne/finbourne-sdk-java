@@ -107,7 +107,7 @@ public class UpdateDepositAmountEvent extends InstrumentEvent {
     }
     UpdateDepositAmountEvent updateDepositAmountEvent = (UpdateDepositAmountEvent) o;
     return Objects.equals(this.date, updateDepositAmountEvent.date) &&
-        (this.amount.compareTo(updateDepositAmountEvent.getAmount()) == 0) &&
+        (this.amount == null ? updateDepositAmountEvent.amount == null : (updateDepositAmountEvent.amount != null && this.amount.compareTo(updateDepositAmountEvent.getAmount()) == 0)) &&
         super.equals(o);
   }
 

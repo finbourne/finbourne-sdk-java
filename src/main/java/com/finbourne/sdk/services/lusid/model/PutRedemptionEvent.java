@@ -378,7 +378,7 @@ public class PutRedemptionEvent extends InstrumentEvent {
     }
     PutRedemptionEvent putRedemptionEvent = (PutRedemptionEvent) o;
     return Objects.equals(this.paymentDate, putRedemptionEvent.paymentDate) &&
-        (this.offerPrice.compareTo(putRedemptionEvent.getOfferPrice()) == 0) &&
+        (this.offerPrice == null ? putRedemptionEvent.offerPrice == null : (putRedemptionEvent.offerPrice != null && this.offerPrice.compareTo(putRedemptionEvent.getOfferPrice()) == 0)) &&
         Objects.equals(this.currency, putRedemptionEvent.currency) &&
         Objects.equals(this.cashOfferElections, putRedemptionEvent.cashOfferElections) &&
         Objects.equals(this.lapseElections, putRedemptionEvent.lapseElections) &&
@@ -387,8 +387,8 @@ public class PutRedemptionEvent extends InstrumentEvent {
         Objects.equals(this.earlyResponseDeadline, putRedemptionEvent.earlyResponseDeadline) &&
         Objects.equals(this.exDate, putRedemptionEvent.exDate) &&
         Objects.equals(this.announcementDate, putRedemptionEvent.announcementDate) &&
-        (this.accruedInterestPerUnit.compareTo(putRedemptionEvent.getAccruedInterestPerUnit()) == 0) &&
-        (this.prorationRate.compareTo(putRedemptionEvent.getProrationRate()) == 0) &&
+        (this.accruedInterestPerUnit == null ? putRedemptionEvent.accruedInterestPerUnit == null : (putRedemptionEvent.accruedInterestPerUnit != null && this.accruedInterestPerUnit.compareTo(putRedemptionEvent.getAccruedInterestPerUnit()) == 0)) &&
+        (this.prorationRate == null ? putRedemptionEvent.prorationRate == null : (putRedemptionEvent.prorationRate != null && this.prorationRate.compareTo(putRedemptionEvent.getProrationRate()) == 0)) &&
         super.equals(o);
   }
 

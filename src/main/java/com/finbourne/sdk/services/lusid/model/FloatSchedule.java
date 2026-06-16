@@ -494,16 +494,16 @@ public class FloatSchedule extends Schedule {
         Objects.equals(this.exDividendDays, floatSchedule.exDividendDays) &&
         Objects.equals(this.indexConventionName, floatSchedule.indexConventionName) &&
         Objects.equals(this.indexConventions, floatSchedule.indexConventions) &&
-        (this.notional.compareTo(floatSchedule.getNotional()) == 0) &&
+        (this.notional == null ? floatSchedule.notional == null : (floatSchedule.notional != null && this.notional.compareTo(floatSchedule.getNotional()) == 0)) &&
         Objects.equals(this.paymentCurrency, floatSchedule.paymentCurrency) &&
-        (this.spread.compareTo(floatSchedule.getSpread()) == 0) &&
+        (this.spread == null ? floatSchedule.spread == null : (floatSchedule.spread != null && this.spread.compareTo(floatSchedule.getSpread()) == 0)) &&
         Objects.equals(this.stubType, floatSchedule.stubType) &&
         Objects.equals(this.exDividendConfiguration, floatSchedule.exDividendConfiguration) &&
         Objects.equals(this.compounding, floatSchedule.compounding) &&
         Objects.equals(this.resetConvention, floatSchedule.resetConvention) &&
         Objects.equals(this.useAnnualisedDirectRates, floatSchedule.useAnnualisedDirectRates) &&
-        (this.capRate.compareTo(floatSchedule.getCapRate()) == 0) &&
-        (this.floorRate.compareTo(floatSchedule.getFloorRate()) == 0) &&
+        (this.capRate == null ? floatSchedule.capRate == null : (floatSchedule.capRate != null && this.capRate.compareTo(floatSchedule.getCapRate()) == 0)) &&
+        (this.floorRate == null ? floatSchedule.floorRate == null : (floatSchedule.floorRate != null && this.floorRate.compareTo(floatSchedule.getFloorRate()) == 0)) &&
         super.equals(o);
   }
 

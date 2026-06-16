@@ -73,7 +73,7 @@ public class Amount {
       return false;
     }
     Amount amount = (Amount) o;
-    return (this.value.compareTo(amount.getValue()) == 0);
+    return (this.value == null ? amount.value == null : (amount.value != null && this.value.compareTo(amount.getValue()) == 0));
   }
 
   @Override

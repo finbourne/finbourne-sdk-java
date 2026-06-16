@@ -179,7 +179,9 @@ public enum InstrumentEventType {
   
   PUT_REDEMPTION_EVENT("PutRedemptionEvent"),
   
-  LOAN_FACILITY_DELAYED_COMPENSATION_PAYMENT_EVENT("LoanFacilityDelayedCompensationPaymentEvent");
+  LOAN_FACILITY_DELAYED_COMPENSATION_PAYMENT_EVENT("LoanFacilityDelayedCompensationPaymentEvent"),
+  
+  INTEREST_PAYMENT_EVENT("InterestPaymentEvent");
 
   private String value;
 

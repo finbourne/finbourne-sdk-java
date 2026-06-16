@@ -237,7 +237,7 @@ public class StockDividendEvent extends InstrumentEvent {
         Objects.equals(this.exDate, stockDividendEvent.exDate) &&
         Objects.equals(this.paymentDate, stockDividendEvent.paymentDate) &&
         Objects.equals(this.recordDate, stockDividendEvent.recordDate) &&
-        (this.fractionalUnitsCashPrice.compareTo(stockDividendEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.fractionalUnitsCashPrice == null ? stockDividendEvent.fractionalUnitsCashPrice == null : (stockDividendEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(stockDividendEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, stockDividendEvent.fractionalUnitsCashCurrency) &&
         Objects.equals(this.unitsRatio, stockDividendEvent.unitsRatio) &&
         super.equals(o);

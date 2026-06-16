@@ -418,8 +418,8 @@ public class ComplianceRule {
         Objects.equals(this.propertyKey, complianceRule.propertyKey) &&
         Objects.equals(this.value, complianceRule.value) &&
         Objects.equals(this.addressKey, complianceRule.addressKey) &&
-        (this.lowerBound.compareTo(complianceRule.getLowerBound()) == 0) &&
-        (this.upperBound.compareTo(complianceRule.getUpperBound()) == 0) &&
+        (this.lowerBound == null ? complianceRule.lowerBound == null : (complianceRule.lowerBound != null && this.lowerBound.compareTo(complianceRule.getLowerBound()) == 0)) &&
+        (this.upperBound == null ? complianceRule.upperBound == null : (complianceRule.upperBound != null && this.upperBound.compareTo(complianceRule.getUpperBound()) == 0)) &&
         Objects.equals(this.schedule, complianceRule.schedule) &&
         Objects.equals(this.hardRequirement, complianceRule.hardRequirement) &&
         Objects.equals(this.targetPortfolioIds, complianceRule.targetPortfolioIds) &&

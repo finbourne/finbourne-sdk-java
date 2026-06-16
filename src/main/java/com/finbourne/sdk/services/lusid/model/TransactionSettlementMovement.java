@@ -176,7 +176,7 @@ public class TransactionSettlementMovement {
     TransactionSettlementMovement transactionSettlementMovement = (TransactionSettlementMovement) o;
     return Objects.equals(this.name, transactionSettlementMovement.name) &&
         Objects.equals(this.type, transactionSettlementMovement.type) &&
-        (this.units.compareTo(transactionSettlementMovement.getUnits()) == 0) &&
+        (this.units == null ? transactionSettlementMovement.units == null : (transactionSettlementMovement.units != null && this.units.compareTo(transactionSettlementMovement.getUnits()) == 0)) &&
         Objects.equals(this.direction, transactionSettlementMovement.direction) &&
         Objects.equals(this.settlementMode, transactionSettlementMovement.settlementMode);
   }

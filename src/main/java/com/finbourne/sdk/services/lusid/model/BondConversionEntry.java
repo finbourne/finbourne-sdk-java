@@ -150,9 +150,9 @@ public class BondConversionEntry {
     }
     BondConversionEntry bondConversionEntry = (BondConversionEntry) o;
     return Objects.equals(this.date, bondConversionEntry.date) &&
-        (this.denomination.compareTo(bondConversionEntry.getDenomination()) == 0) &&
-        (this.price.compareTo(bondConversionEntry.getPrice()) == 0) &&
-        (this.ratio.compareTo(bondConversionEntry.getRatio()) == 0);
+        (this.denomination == null ? bondConversionEntry.denomination == null : (bondConversionEntry.denomination != null && this.denomination.compareTo(bondConversionEntry.getDenomination()) == 0)) &&
+        (this.price == null ? bondConversionEntry.price == null : (bondConversionEntry.price != null && this.price.compareTo(bondConversionEntry.getPrice()) == 0)) &&
+        (this.ratio == null ? bondConversionEntry.ratio == null : (bondConversionEntry.ratio != null && this.ratio.compareTo(bondConversionEntry.getRatio()) == 0));
   }
 
   @Override

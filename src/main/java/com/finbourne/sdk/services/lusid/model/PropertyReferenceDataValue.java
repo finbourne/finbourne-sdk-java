@@ -100,7 +100,7 @@ public class PropertyReferenceDataValue {
     }
     PropertyReferenceDataValue propertyReferenceDataValue = (PropertyReferenceDataValue) o;
     return Objects.equals(this.stringValue, propertyReferenceDataValue.stringValue) &&
-        (this.numericValue.compareTo(propertyReferenceDataValue.getNumericValue()) == 0);
+        (this.numericValue == null ? propertyReferenceDataValue.numericValue == null : (propertyReferenceDataValue.numericValue != null && this.numericValue.compareTo(propertyReferenceDataValue.getNumericValue()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

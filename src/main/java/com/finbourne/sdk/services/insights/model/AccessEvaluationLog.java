@@ -653,7 +653,7 @@ public class AccessEvaluationLog {
         Objects.equals(this.sessionId, accessEvaluationLog.sessionId) &&
         Objects.equals(this.user, accessEvaluationLog.user) &&
         Objects.equals(this.userType, accessEvaluationLog.userType) &&
-        (this.duration.compareTo(accessEvaluationLog.getDuration()) == 0) &&
+        (this.duration == null ? accessEvaluationLog.duration == null : (accessEvaluationLog.duration != null && this.duration.compareTo(accessEvaluationLog.getDuration()) == 0)) &&
         Objects.equals(this.result, accessEvaluationLog.result) &&
         Objects.equals(this.authoritativeRoleId, accessEvaluationLog.authoritativeRoleId) &&
         Objects.equals(this.authoritativePolicyId, accessEvaluationLog.authoritativePolicyId) &&

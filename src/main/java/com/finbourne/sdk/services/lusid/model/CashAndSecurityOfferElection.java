@@ -226,8 +226,8 @@ public class CashAndSecurityOfferElection {
     }
     CashAndSecurityOfferElection cashAndSecurityOfferElection = (CashAndSecurityOfferElection) o;
     return Objects.equals(this.cashOfferCurrency, cashAndSecurityOfferElection.cashOfferCurrency) &&
-        (this.cashOfferPrice.compareTo(cashAndSecurityOfferElection.getCashOfferPrice()) == 0) &&
-        (this.costFactor.compareTo(cashAndSecurityOfferElection.getCostFactor()) == 0) &&
+        (this.cashOfferPrice == null ? cashAndSecurityOfferElection.cashOfferPrice == null : (cashAndSecurityOfferElection.cashOfferPrice != null && this.cashOfferPrice.compareTo(cashAndSecurityOfferElection.getCashOfferPrice()) == 0)) &&
+        (this.costFactor == null ? cashAndSecurityOfferElection.costFactor == null : (cashAndSecurityOfferElection.costFactor != null && this.costFactor.compareTo(cashAndSecurityOfferElection.getCostFactor()) == 0)) &&
         Objects.equals(this.electionKey, cashAndSecurityOfferElection.electionKey) &&
         Objects.equals(this.isChosen, cashAndSecurityOfferElection.isChosen) &&
         Objects.equals(this.isDefault, cashAndSecurityOfferElection.isDefault) &&

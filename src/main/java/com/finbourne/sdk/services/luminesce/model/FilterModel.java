@@ -239,7 +239,7 @@ public class FilterModel {
     return Objects.equals(this.filterType, filterModel.filterType) &&
         Objects.equals(this.type, filterModel.type) &&
         Objects.equals(this.filter, filterModel.filter) &&
-        (this.filterTo.compareTo(filterModel.getFilterTo()) == 0) &&
+        (this.filterTo == null ? filterModel.filterTo == null : (filterModel.filterTo != null && this.filterTo.compareTo(filterModel.getFilterTo()) == 0)) &&
         Objects.equals(this.values, filterModel.values) &&
         Objects.equals(this.dateFrom, filterModel.dateFrom) &&
         Objects.equals(this.dateTo, filterModel.dateTo);

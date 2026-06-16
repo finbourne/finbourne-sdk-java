@@ -263,10 +263,10 @@ public class FloatingLeg extends InstrumentLeg {
     return Objects.equals(this.startDate, floatingLeg.startDate) &&
         Objects.equals(this.maturityDate, floatingLeg.maturityDate) &&
         Objects.equals(this.legDefinition, floatingLeg.legDefinition) &&
-        (this.notional.compareTo(floatingLeg.getNotional()) == 0) &&
+        (this.notional == null ? floatingLeg.notional == null : (floatingLeg.notional != null && this.notional.compareTo(floatingLeg.getNotional()) == 0)) &&
         Objects.equals(this.overrides, floatingLeg.overrides) &&
-        (this.capRate.compareTo(floatingLeg.getCapRate()) == 0) &&
-        (this.floorRate.compareTo(floatingLeg.getFloorRate()) == 0) &&
+        (this.capRate == null ? floatingLeg.capRate == null : (floatingLeg.capRate != null && this.capRate.compareTo(floatingLeg.getCapRate()) == 0)) &&
+        (this.floorRate == null ? floatingLeg.floorRate == null : (floatingLeg.floorRate != null && this.floorRate.compareTo(floatingLeg.getFloorRate()) == 0)) &&
         Objects.equals(this.timeZoneConventions, floatingLeg.timeZoneConventions) &&
         super.equals(o);
   }

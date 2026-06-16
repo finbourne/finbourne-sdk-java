@@ -204,8 +204,8 @@ public class OutputTransition {
     }
     OutputTransition outputTransition = (OutputTransition) o;
     return Objects.equals(this.instrumentIdentifiers, outputTransition.instrumentIdentifiers) &&
-        (this.unitsFactor.compareTo(outputTransition.getUnitsFactor()) == 0) &&
-        (this.costFactor.compareTo(outputTransition.getCostFactor()) == 0) &&
+        (this.unitsFactor == null ? outputTransition.unitsFactor == null : (outputTransition.unitsFactor != null && this.unitsFactor.compareTo(outputTransition.getUnitsFactor()) == 0)) &&
+        (this.costFactor == null ? outputTransition.costFactor == null : (outputTransition.costFactor != null && this.costFactor.compareTo(outputTransition.getCostFactor()) == 0)) &&
         Objects.equals(this.lusidInstrumentId, outputTransition.lusidInstrumentId) &&
         Objects.equals(this.instrumentScope, outputTransition.instrumentScope) &&
         Objects.equals(this.rounding, outputTransition.rounding);

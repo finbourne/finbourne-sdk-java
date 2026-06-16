@@ -159,7 +159,7 @@ public class SwapCashFlowEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, swapCashFlowEvent.exDate) &&
         Objects.equals(this.paymentDate, swapCashFlowEvent.paymentDate) &&
         Objects.equals(this.currency, swapCashFlowEvent.currency) &&
-        (this.cashFlowPerUnit.compareTo(swapCashFlowEvent.getCashFlowPerUnit()) == 0) &&
+        (this.cashFlowPerUnit == null ? swapCashFlowEvent.cashFlowPerUnit == null : (swapCashFlowEvent.cashFlowPerUnit != null && this.cashFlowPerUnit.compareTo(swapCashFlowEvent.getCashFlowPerUnit()) == 0)) &&
         super.equals(o);
   }
 

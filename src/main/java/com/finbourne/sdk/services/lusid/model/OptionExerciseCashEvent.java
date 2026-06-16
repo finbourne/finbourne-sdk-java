@@ -368,7 +368,7 @@ public class OptionExerciseCashEvent extends InstrumentEvent {
       return false;
     }
     OptionExerciseCashEvent optionExerciseCashEvent = (OptionExerciseCashEvent) o;
-    return (this.cashFlowPerUnit.compareTo(optionExerciseCashEvent.getCashFlowPerUnit()) == 0) &&
+    return (this.cashFlowPerUnit == null ? optionExerciseCashEvent.cashFlowPerUnit == null : (optionExerciseCashEvent.cashFlowPerUnit != null && this.cashFlowPerUnit.compareTo(optionExerciseCashEvent.getCashFlowPerUnit()) == 0)) &&
         Objects.equals(this.exerciseDate, optionExerciseCashEvent.exerciseDate) &&
         Objects.equals(this.deliveryDate, optionExerciseCashEvent.deliveryDate) &&
         Objects.equals(this.exerciseType, optionExerciseCashEvent.exerciseType) &&
@@ -378,8 +378,8 @@ public class OptionExerciseCashEvent extends InstrumentEvent {
         Objects.equals(this.optionType, optionExerciseCashEvent.optionType) &&
         Objects.equals(this.startDate, optionExerciseCashEvent.startDate) &&
         Objects.equals(this.strikeCurrency, optionExerciseCashEvent.strikeCurrency) &&
-        (this.strikePerUnit.compareTo(optionExerciseCashEvent.getStrikePerUnit()) == 0) &&
-        (this.underlyingValuePerUnit.compareTo(optionExerciseCashEvent.getUnderlyingValuePerUnit()) == 0) &&
+        (this.strikePerUnit == null ? optionExerciseCashEvent.strikePerUnit == null : (optionExerciseCashEvent.strikePerUnit != null && this.strikePerUnit.compareTo(optionExerciseCashEvent.getStrikePerUnit()) == 0)) &&
+        (this.underlyingValuePerUnit == null ? optionExerciseCashEvent.underlyingValuePerUnit == null : (optionExerciseCashEvent.underlyingValuePerUnit != null && this.underlyingValuePerUnit.compareTo(optionExerciseCashEvent.getUnderlyingValuePerUnit()) == 0)) &&
         super.equals(o);
   }
 

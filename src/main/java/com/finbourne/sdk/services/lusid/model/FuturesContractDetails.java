@@ -439,14 +439,14 @@ public class FuturesContractDetails {
         Objects.equals(this.assetClass, futuresContractDetails.assetClass) &&
         Objects.equals(this.contractCode, futuresContractDetails.contractCode) &&
         Objects.equals(this.contractMonth, futuresContractDetails.contractMonth) &&
-        (this.contractSize.compareTo(futuresContractDetails.getContractSize()) == 0) &&
+        (this.contractSize == null ? futuresContractDetails.contractSize == null : (futuresContractDetails.contractSize != null && this.contractSize.compareTo(futuresContractDetails.getContractSize()) == 0)) &&
         Objects.equals(this.convention, futuresContractDetails.convention) &&
         Objects.equals(this.country, futuresContractDetails.country) &&
         Objects.equals(this.description, futuresContractDetails.description) &&
         Objects.equals(this.exchangeCode, futuresContractDetails.exchangeCode) &&
         Objects.equals(this.exchangeName, futuresContractDetails.exchangeName) &&
-        (this.tickerStep.compareTo(futuresContractDetails.getTickerStep()) == 0) &&
-        (this.unitValue.compareTo(futuresContractDetails.getUnitValue()) == 0) &&
+        (this.tickerStep == null ? futuresContractDetails.tickerStep == null : (futuresContractDetails.tickerStep != null && this.tickerStep.compareTo(futuresContractDetails.getTickerStep()) == 0)) &&
+        (this.unitValue == null ? futuresContractDetails.unitValue == null : (futuresContractDetails.unitValue != null && this.unitValue.compareTo(futuresContractDetails.getUnitValue()) == 0)) &&
         Objects.equals(this.calendars, futuresContractDetails.calendars) &&
         Objects.equals(this.deliveryType, futuresContractDetails.deliveryType);
   }

@@ -414,8 +414,8 @@ public class OrderInstruction {
         Objects.equals(this.properties, orderInstruction.properties) &&
         Objects.equals(this.portfolioId, orderInstruction.portfolioId) &&
         Objects.equals(this.instrumentIdentifiers, orderInstruction.instrumentIdentifiers) &&
-        (this.quantity.compareTo(orderInstruction.getQuantity()) == 0) &&
-        (this.weight.compareTo(orderInstruction.getWeight()) == 0) &&
+        (this.quantity == null ? orderInstruction.quantity == null : (orderInstruction.quantity != null && this.quantity.compareTo(orderInstruction.getQuantity()) == 0)) &&
+        (this.weight == null ? orderInstruction.weight == null : (orderInstruction.weight != null && this.weight.compareTo(orderInstruction.getWeight()) == 0)) &&
         Objects.equals(this.price, orderInstruction.price) &&
         Objects.equals(this.instrumentScope, orderInstruction.instrumentScope) &&
         Objects.equals(this.lusidInstrumentId, orderInstruction.lusidInstrumentId) &&

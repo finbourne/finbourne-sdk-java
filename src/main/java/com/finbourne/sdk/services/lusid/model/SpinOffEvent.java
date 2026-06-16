@@ -290,8 +290,8 @@ public class SpinOffEvent extends InstrumentEvent {
         Objects.equals(this.paymentDate, spinOffEvent.paymentDate) &&
         Objects.equals(this.newInstrument, spinOffEvent.newInstrument) &&
         Objects.equals(this.unitsRatio, spinOffEvent.unitsRatio) &&
-        (this.costFactor.compareTo(spinOffEvent.getCostFactor()) == 0) &&
-        (this.fractionalUnitsCashPrice.compareTo(spinOffEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.costFactor == null ? spinOffEvent.costFactor == null : (spinOffEvent.costFactor != null && this.costFactor.compareTo(spinOffEvent.getCostFactor()) == 0)) &&
+        (this.fractionalUnitsCashPrice == null ? spinOffEvent.fractionalUnitsCashPrice == null : (spinOffEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(spinOffEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, spinOffEvent.fractionalUnitsCashCurrency) &&
         super.equals(o);
   }

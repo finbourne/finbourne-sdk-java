@@ -145,7 +145,7 @@ public class OrderGraphBlockOrderSynopsis {
       return false;
     }
     OrderGraphBlockOrderSynopsis orderGraphBlockOrderSynopsis = (OrderGraphBlockOrderSynopsis) o;
-    return (this.quantity.compareTo(orderGraphBlockOrderSynopsis.getQuantity()) == 0) &&
+    return (this.quantity == null ? orderGraphBlockOrderSynopsis.quantity == null : (orderGraphBlockOrderSynopsis.quantity != null && this.quantity.compareTo(orderGraphBlockOrderSynopsis.getQuantity()) == 0)) &&
         Objects.equals(this.quantityByState, orderGraphBlockOrderSynopsis.quantityByState) &&
         Objects.equals(this.details, orderGraphBlockOrderSynopsis.details);
   }

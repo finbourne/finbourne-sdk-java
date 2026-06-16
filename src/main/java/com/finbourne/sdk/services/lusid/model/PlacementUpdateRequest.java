@@ -287,11 +287,11 @@ public class PlacementUpdateRequest {
     }
     PlacementUpdateRequest placementUpdateRequest = (PlacementUpdateRequest) o;
     return Objects.equals(this.id, placementUpdateRequest.id) &&
-        (this.quantity.compareTo(placementUpdateRequest.getQuantity()) == 0) &&
+        (this.quantity == null ? placementUpdateRequest.quantity == null : (placementUpdateRequest.quantity != null && this.quantity.compareTo(placementUpdateRequest.getQuantity()) == 0)) &&
         Objects.equals(this.properties, placementUpdateRequest.properties) &&
         Objects.equals(this.type, placementUpdateRequest.type) &&
-        (this.limitPrice.compareTo(placementUpdateRequest.getLimitPrice()) == 0) &&
-        (this.stopPrice.compareTo(placementUpdateRequest.getStopPrice()) == 0) &&
+        (this.limitPrice == null ? placementUpdateRequest.limitPrice == null : (placementUpdateRequest.limitPrice != null && this.limitPrice.compareTo(placementUpdateRequest.getLimitPrice()) == 0)) &&
+        (this.stopPrice == null ? placementUpdateRequest.stopPrice == null : (placementUpdateRequest.stopPrice != null && this.stopPrice.compareTo(placementUpdateRequest.getStopPrice()) == 0)) &&
         Objects.equals(this.counterparty, placementUpdateRequest.counterparty) &&
         Objects.equals(this.executionSystem, placementUpdateRequest.executionSystem) &&
         Objects.equals(this.entryType, placementUpdateRequest.entryType);

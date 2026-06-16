@@ -186,8 +186,8 @@ public class CorporateActionTransitionComponent {
     return Objects.equals(this.instrumentScope, corporateActionTransitionComponent.instrumentScope) &&
         Objects.equals(this.instrumentIdentifiers, corporateActionTransitionComponent.instrumentIdentifiers) &&
         Objects.equals(this.instrumentUid, corporateActionTransitionComponent.instrumentUid) &&
-        (this.unitsFactor.compareTo(corporateActionTransitionComponent.getUnitsFactor()) == 0) &&
-        (this.costFactor.compareTo(corporateActionTransitionComponent.getCostFactor()) == 0);
+        (this.unitsFactor == null ? corporateActionTransitionComponent.unitsFactor == null : (corporateActionTransitionComponent.unitsFactor != null && this.unitsFactor.compareTo(corporateActionTransitionComponent.getUnitsFactor()) == 0)) &&
+        (this.costFactor == null ? corporateActionTransitionComponent.costFactor == null : (corporateActionTransitionComponent.costFactor != null && this.costFactor.compareTo(corporateActionTransitionComponent.getCostFactor()) == 0));
   }
 
   @Override

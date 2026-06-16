@@ -106,7 +106,7 @@ public class AdjustGlobalCommitmentEvent extends InstrumentEvent {
       return false;
     }
     AdjustGlobalCommitmentEvent adjustGlobalCommitmentEvent = (AdjustGlobalCommitmentEvent) o;
-    return (this.amount.compareTo(adjustGlobalCommitmentEvent.getAmount()) == 0) &&
+    return (this.amount == null ? adjustGlobalCommitmentEvent.amount == null : (adjustGlobalCommitmentEvent.amount != null && this.amount.compareTo(adjustGlobalCommitmentEvent.getAmount()) == 0)) &&
         Objects.equals(this.date, adjustGlobalCommitmentEvent.date) &&
         super.equals(o);
   }

@@ -80,7 +80,7 @@ public class DecimalComplianceParameter extends ComplianceParameter {
       return false;
     }
     DecimalComplianceParameter decimalComplianceParameter = (DecimalComplianceParameter) o;
-    return (this.value.compareTo(decimalComplianceParameter.getValue()) == 0) &&
+    return (this.value == null ? decimalComplianceParameter.value == null : (decimalComplianceParameter.value != null && this.value.compareTo(decimalComplianceParameter.getValue()) == 0)) &&
         super.equals(o);
   }
 

@@ -838,10 +838,10 @@ public class Transaction {
         Objects.equals(this.instrumentUid, transaction.instrumentUid) &&
         Objects.equals(this.transactionDate, transaction.transactionDate) &&
         Objects.equals(this.settlementDate, transaction.settlementDate) &&
-        (this.units.compareTo(transaction.getUnits()) == 0) &&
+        (this.units == null ? transaction.units == null : (transaction.units != null && this.units.compareTo(transaction.getUnits()) == 0)) &&
         Objects.equals(this.transactionPrice, transaction.transactionPrice) &&
         Objects.equals(this.totalConsideration, transaction.totalConsideration) &&
-        (this.exchangeRate.compareTo(transaction.getExchangeRate()) == 0) &&
+        (this.exchangeRate == null ? transaction.exchangeRate == null : (transaction.exchangeRate != null && this.exchangeRate.compareTo(transaction.getExchangeRate()) == 0)) &&
         Objects.equals(this.transactionCurrency, transaction.transactionCurrency) &&
         Objects.equals(this.properties, transaction.properties) &&
         Objects.equals(this.counterpartyId, transaction.counterpartyId) &&

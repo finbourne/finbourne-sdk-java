@@ -350,9 +350,9 @@ public class Future extends LusidInstrument {
         Objects.equals(this.maturityDate, future.maturityDate) &&
         Objects.equals(this.identifiers, future.identifiers) &&
         Objects.equals(this.contractDetails, future.contractDetails) &&
-        (this.contracts.compareTo(future.getContracts()) == 0) &&
+        (this.contracts == null ? future.contracts == null : (future.contracts != null && this.contracts.compareTo(future.getContracts()) == 0)) &&
         Objects.equals(this.markToMarketConventions, future.markToMarketConventions) &&
-        (this.refSpotPrice.compareTo(future.getRefSpotPrice()) == 0) &&
+        (this.refSpotPrice == null ? future.refSpotPrice == null : (future.refSpotPrice != null && this.refSpotPrice.compareTo(future.getRefSpotPrice()) == 0)) &&
         Objects.equals(this.underlying, future.underlying) &&
         Objects.equals(this.calculationType, future.calculationType) &&
         Objects.equals(this.tradingConventions, future.tradingConventions) &&

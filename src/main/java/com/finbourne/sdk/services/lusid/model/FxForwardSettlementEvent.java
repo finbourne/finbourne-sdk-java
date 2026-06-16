@@ -357,17 +357,17 @@ public class FxForwardSettlementEvent extends InstrumentEvent {
     }
     FxForwardSettlementEvent fxForwardSettlementEvent = (FxForwardSettlementEvent) o;
     return Objects.equals(this.maturityDate, fxForwardSettlementEvent.maturityDate) &&
-        (this.domAmountPerUnit.compareTo(fxForwardSettlementEvent.getDomAmountPerUnit()) == 0) &&
+        (this.domAmountPerUnit == null ? fxForwardSettlementEvent.domAmountPerUnit == null : (fxForwardSettlementEvent.domAmountPerUnit != null && this.domAmountPerUnit.compareTo(fxForwardSettlementEvent.getDomAmountPerUnit()) == 0)) &&
         Objects.equals(this.domCcy, fxForwardSettlementEvent.domCcy) &&
-        (this.fgnAmountPerUnit.compareTo(fxForwardSettlementEvent.getFgnAmountPerUnit()) == 0) &&
+        (this.fgnAmountPerUnit == null ? fxForwardSettlementEvent.fgnAmountPerUnit == null : (fxForwardSettlementEvent.fgnAmountPerUnit != null && this.fgnAmountPerUnit.compareTo(fxForwardSettlementEvent.getFgnAmountPerUnit()) == 0)) &&
         Objects.equals(this.fgnCcy, fxForwardSettlementEvent.fgnCcy) &&
         Objects.equals(this.isNdf, fxForwardSettlementEvent.isNdf) &&
         Objects.equals(this.fixingDate, fxForwardSettlementEvent.fixingDate) &&
         Objects.equals(this.settlementCcy, fxForwardSettlementEvent.settlementCcy) &&
-        (this.cashFlowPerUnit.compareTo(fxForwardSettlementEvent.getCashFlowPerUnit()) == 0) &&
-        (this.domesticToForeignRate.compareTo(fxForwardSettlementEvent.getDomesticToForeignRate()) == 0) &&
-        (this.domesticToSettlementRate.compareTo(fxForwardSettlementEvent.getDomesticToSettlementRate()) == 0) &&
-        (this.foreignToSettlementRate.compareTo(fxForwardSettlementEvent.getForeignToSettlementRate()) == 0) &&
+        (this.cashFlowPerUnit == null ? fxForwardSettlementEvent.cashFlowPerUnit == null : (fxForwardSettlementEvent.cashFlowPerUnit != null && this.cashFlowPerUnit.compareTo(fxForwardSettlementEvent.getCashFlowPerUnit()) == 0)) &&
+        (this.domesticToForeignRate == null ? fxForwardSettlementEvent.domesticToForeignRate == null : (fxForwardSettlementEvent.domesticToForeignRate != null && this.domesticToForeignRate.compareTo(fxForwardSettlementEvent.getDomesticToForeignRate()) == 0)) &&
+        (this.domesticToSettlementRate == null ? fxForwardSettlementEvent.domesticToSettlementRate == null : (fxForwardSettlementEvent.domesticToSettlementRate != null && this.domesticToSettlementRate.compareTo(fxForwardSettlementEvent.getDomesticToSettlementRate()) == 0)) &&
+        (this.foreignToSettlementRate == null ? fxForwardSettlementEvent.foreignToSettlementRate == null : (fxForwardSettlementEvent.foreignToSettlementRate != null && this.foreignToSettlementRate.compareTo(fxForwardSettlementEvent.getForeignToSettlementRate()) == 0)) &&
         super.equals(o);
   }
 

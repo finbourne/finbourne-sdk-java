@@ -342,7 +342,7 @@ public class MergerEvent extends InstrumentEvent {
         Objects.equals(this.cashOfferElections, mergerEvent.cashOfferElections) &&
         Objects.equals(this.exDate, mergerEvent.exDate) &&
         Objects.equals(this.fractionalUnitsCashCurrency, mergerEvent.fractionalUnitsCashCurrency) &&
-        (this.fractionalUnitsCashPrice.compareTo(mergerEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.fractionalUnitsCashPrice == null ? mergerEvent.fractionalUnitsCashPrice == null : (mergerEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(mergerEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.newInstrument, mergerEvent.newInstrument) &&
         Objects.equals(this.paymentDate, mergerEvent.paymentDate) &&
         Objects.equals(this.recordDate, mergerEvent.recordDate) &&

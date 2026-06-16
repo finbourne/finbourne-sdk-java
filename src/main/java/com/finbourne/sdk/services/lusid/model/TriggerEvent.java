@@ -181,7 +181,7 @@ public class TriggerEvent extends InstrumentEvent {
       return false;
     }
     TriggerEvent triggerEvent = (TriggerEvent) o;
-    return (this.level.compareTo(triggerEvent.getLevel()) == 0) &&
+    return (this.level == null ? triggerEvent.level == null : (triggerEvent.level != null && this.level.compareTo(triggerEvent.getLevel()) == 0)) &&
         Objects.equals(this.triggerType, triggerEvent.triggerType) &&
         Objects.equals(this.triggerDirection, triggerEvent.triggerDirection) &&
         Objects.equals(this.triggerDate, triggerEvent.triggerDate) &&

@@ -189,7 +189,7 @@ public class UpsertQuoteRequest {
     return Objects.equals(this.quoteId, upsertQuoteRequest.quoteId) &&
         Objects.equals(this.metricValue, upsertQuoteRequest.metricValue) &&
         Objects.equals(this.lineage, upsertQuoteRequest.lineage) &&
-        (this.scaleFactor.compareTo(upsertQuoteRequest.getScaleFactor()) == 0) &&
+        (this.scaleFactor == null ? upsertQuoteRequest.scaleFactor == null : (upsertQuoteRequest.scaleFactor != null && this.scaleFactor.compareTo(upsertQuoteRequest.getScaleFactor()) == 0)) &&
         Objects.equals(this.metadataFields, upsertQuoteRequest.metadataFields);
   }
 

@@ -270,11 +270,11 @@ public class CompositeDispersion {
     }
     CompositeDispersion compositeDispersion = (CompositeDispersion) o;
     return Objects.equals(this.effectiveAt, compositeDispersion.effectiveAt) &&
-        (this.dispersionCalculation.compareTo(compositeDispersion.getDispersionCalculation()) == 0) &&
-        (this.variance.compareTo(compositeDispersion.getVariance()) == 0) &&
-        (this.firstQuartile.compareTo(compositeDispersion.getFirstQuartile()) == 0) &&
-        (this.thirdQuartile.compareTo(compositeDispersion.getThirdQuartile()) == 0) &&
-        (this.range.compareTo(compositeDispersion.getRange()) == 0) &&
+        (this.dispersionCalculation == null ? compositeDispersion.dispersionCalculation == null : (compositeDispersion.dispersionCalculation != null && this.dispersionCalculation.compareTo(compositeDispersion.getDispersionCalculation()) == 0)) &&
+        (this.variance == null ? compositeDispersion.variance == null : (compositeDispersion.variance != null && this.variance.compareTo(compositeDispersion.getVariance()) == 0)) &&
+        (this.firstQuartile == null ? compositeDispersion.firstQuartile == null : (compositeDispersion.firstQuartile != null && this.firstQuartile.compareTo(compositeDispersion.getFirstQuartile()) == 0)) &&
+        (this.thirdQuartile == null ? compositeDispersion.thirdQuartile == null : (compositeDispersion.thirdQuartile != null && this.thirdQuartile.compareTo(compositeDispersion.getThirdQuartile()) == 0)) &&
+        (this.range == null ? compositeDispersion.range == null : (compositeDispersion.range != null && this.range.compareTo(compositeDispersion.getRange()) == 0)) &&
         Objects.equals(this.constituentsInScope, compositeDispersion.constituentsInScope) &&
         Objects.equals(this.constituentsExcluded, compositeDispersion.constituentsExcluded);
   }

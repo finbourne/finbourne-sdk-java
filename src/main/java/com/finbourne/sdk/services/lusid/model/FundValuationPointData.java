@@ -290,9 +290,9 @@ public class FundValuationPointData {
     return Objects.equals(this.backOut, fundValuationPointData.backOut) &&
         Objects.equals(this.dealing, fundValuationPointData.dealing) &&
         Objects.equals(this.pnL, fundValuationPointData.pnL) &&
-        (this.gav.compareTo(fundValuationPointData.getGav()) == 0) &&
+        (this.gav == null ? fundValuationPointData.gav == null : (fundValuationPointData.gav != null && this.gav.compareTo(fundValuationPointData.getGav()) == 0)) &&
         Objects.equals(this.fees, fundValuationPointData.fees) &&
-        (this.nav.compareTo(fundValuationPointData.getNav()) == 0) &&
+        (this.nav == null ? fundValuationPointData.nav == null : (fundValuationPointData.nav != null && this.nav.compareTo(fundValuationPointData.getNav()) == 0)) &&
         Objects.equals(this.miscellaneous, fundValuationPointData.miscellaneous) &&
         Objects.equals(this.previousValuationPointData, fundValuationPointData.previousValuationPointData);
   }

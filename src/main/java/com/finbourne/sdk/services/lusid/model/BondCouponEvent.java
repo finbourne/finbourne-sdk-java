@@ -160,7 +160,7 @@ public class BondCouponEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, bondCouponEvent.exDate) &&
         Objects.equals(this.paymentDate, bondCouponEvent.paymentDate) &&
         Objects.equals(this.currency, bondCouponEvent.currency) &&
-        (this.couponPerUnit.compareTo(bondCouponEvent.getCouponPerUnit()) == 0) &&
+        (this.couponPerUnit == null ? bondCouponEvent.couponPerUnit == null : (bondCouponEvent.couponPerUnit != null && this.couponPerUnit.compareTo(bondCouponEvent.getCouponPerUnit()) == 0)) &&
         super.equals(o);
   }
 

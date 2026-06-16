@@ -298,7 +298,7 @@ public class InstrumentCashFlow {
     }
     InstrumentCashFlow instrumentCashFlow = (InstrumentCashFlow) o;
     return Objects.equals(this.paymentDate, instrumentCashFlow.paymentDate) &&
-        (this.amount.compareTo(instrumentCashFlow.getAmount()) == 0) &&
+        (this.amount == null ? instrumentCashFlow.amount == null : (instrumentCashFlow.amount != null && this.amount.compareTo(instrumentCashFlow.getAmount()) == 0)) &&
         Objects.equals(this.currency, instrumentCashFlow.currency) &&
         Objects.equals(this.sourcePortfolioId, instrumentCashFlow.sourcePortfolioId) &&
         Objects.equals(this.sourceTransactionId, instrumentCashFlow.sourceTransactionId) &&

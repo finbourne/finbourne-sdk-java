@@ -100,7 +100,7 @@ public class PortfolioWeight {
     }
     PortfolioWeight portfolioWeight = (PortfolioWeight) o;
     return Objects.equals(this.portfolioId, portfolioWeight.portfolioId) &&
-        (this.weight.compareTo(portfolioWeight.getWeight()) == 0);
+        (this.weight == null ? portfolioWeight.weight == null : (portfolioWeight.weight != null && this.weight.compareTo(portfolioWeight.getWeight()) == 0));
   }
 
   @Override

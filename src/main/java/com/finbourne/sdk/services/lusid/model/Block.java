@@ -497,7 +497,7 @@ public class Block {
         Objects.equals(this.properties, block.properties) &&
         Objects.equals(this.instrumentIdentifiers, block.instrumentIdentifiers) &&
         Objects.equals(this.lusidInstrumentId, block.lusidInstrumentId) &&
-        (this.quantity.compareTo(block.getQuantity()) == 0) &&
+        (this.quantity == null ? block.quantity == null : (block.quantity != null && this.quantity.compareTo(block.getQuantity()) == 0)) &&
         Objects.equals(this.side, block.side) &&
         Objects.equals(this.type, block.type) &&
         Objects.equals(this.timeInForce, block.timeInForce) &&

@@ -429,9 +429,9 @@ public class ExchangeOfferEvent extends InstrumentEvent {
         Objects.equals(this.securityOfferElections, exchangeOfferEvent.securityOfferElections) &&
         Objects.equals(this.mixedLotConstituentsElections, exchangeOfferEvent.mixedLotConstituentsElections) &&
         Objects.equals(this.lapseElections, exchangeOfferEvent.lapseElections) &&
-        (this.minPieceSize.compareTo(exchangeOfferEvent.getMinPieceSize()) == 0) &&
-        (this.minIncrement.compareTo(exchangeOfferEvent.getMinIncrement()) == 0) &&
-        (this.fractionalUnitsCashPrice.compareTo(exchangeOfferEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.minPieceSize == null ? exchangeOfferEvent.minPieceSize == null : (exchangeOfferEvent.minPieceSize != null && this.minPieceSize.compareTo(exchangeOfferEvent.getMinPieceSize()) == 0)) &&
+        (this.minIncrement == null ? exchangeOfferEvent.minIncrement == null : (exchangeOfferEvent.minIncrement != null && this.minIncrement.compareTo(exchangeOfferEvent.getMinIncrement()) == 0)) &&
+        (this.fractionalUnitsCashPrice == null ? exchangeOfferEvent.fractionalUnitsCashPrice == null : (exchangeOfferEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(exchangeOfferEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, exchangeOfferEvent.fractionalUnitsCashCurrency) &&
         Objects.equals(this.instructionReference, exchangeOfferEvent.instructionReference) &&
         super.equals(o);

@@ -1550,7 +1550,7 @@ public class JSchema {
         Objects.equals(this.extensionData, jschema.extensionData) &&
         Objects.equals(this.title, jschema.title) &&
         Objects.equals(this.description, jschema.description) &&
-        (this.multipleOf.compareTo(jschema.getMultipleOf()) == 0) &&
+        (this.multipleOf == null ? jschema.multipleOf == null : (jschema.multipleOf != null && this.multipleOf.compareTo(jschema.getMultipleOf()) == 0)) &&
         Objects.equals(this.pattern, jschema.pattern) &&
         Objects.equals(this.dependencies, jschema.dependencies) &&
         Objects.equals(this.dependentRequired, jschema.dependentRequired) &&

@@ -162,7 +162,7 @@ public class ReconciledTransaction {
     ReconciledTransaction reconciledTransaction = (ReconciledTransaction) o;
     return Objects.equals(this.left, reconciledTransaction.left) &&
         Objects.equals(this.right, reconciledTransaction.right) &&
-        (this.percentageMatch.compareTo(reconciledTransaction.getPercentageMatch()) == 0) &&
+        (this.percentageMatch == null ? reconciledTransaction.percentageMatch == null : (reconciledTransaction.percentageMatch != null && this.percentageMatch.compareTo(reconciledTransaction.getPercentageMatch()) == 0)) &&
         Objects.equals(this.mappingRuleSetResults, reconciledTransaction.mappingRuleSetResults);
   }
 

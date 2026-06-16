@@ -580,7 +580,7 @@ public class RequestLog {
         Objects.equals(this.userType, requestLog.userType) &&
         Objects.equals(this.operation, requestLog.operation) &&
         Objects.equals(this.outcome, requestLog.outcome) &&
-        (this.duration.compareTo(requestLog.getDuration()) == 0) &&
+        (this.duration == null ? requestLog.duration == null : (requestLog.duration != null && this.duration.compareTo(requestLog.getDuration()) == 0)) &&
         Objects.equals(this.httpStatusCode, requestLog.httpStatusCode) &&
         Objects.equals(this.errorCode, requestLog.errorCode) &&
         Objects.equals(this.sdkLanguage, requestLog.sdkLanguage) &&

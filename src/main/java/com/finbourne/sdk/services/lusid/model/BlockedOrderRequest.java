@@ -339,7 +339,7 @@ public class BlockedOrderRequest {
     }
     BlockedOrderRequest blockedOrderRequest = (BlockedOrderRequest) o;
     return Objects.equals(this.properties, blockedOrderRequest.properties) &&
-        (this.quantity.compareTo(blockedOrderRequest.getQuantity()) == 0) &&
+        (this.quantity == null ? blockedOrderRequest.quantity == null : (blockedOrderRequest.quantity != null && this.quantity.compareTo(blockedOrderRequest.getQuantity()) == 0)) &&
         Objects.equals(this.orderBookId, blockedOrderRequest.orderBookId) &&
         Objects.equals(this.portfolioId, blockedOrderRequest.portfolioId) &&
         Objects.equals(this.id, blockedOrderRequest.id) &&

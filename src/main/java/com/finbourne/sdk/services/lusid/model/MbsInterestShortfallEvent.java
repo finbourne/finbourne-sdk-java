@@ -160,7 +160,7 @@ public class MbsInterestShortfallEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, mbsInterestShortfallEvent.exDate) &&
         Objects.equals(this.paymentDate, mbsInterestShortfallEvent.paymentDate) &&
         Objects.equals(this.currency, mbsInterestShortfallEvent.currency) &&
-        (this.interestPerUnit.compareTo(mbsInterestShortfallEvent.getInterestPerUnit()) == 0) &&
+        (this.interestPerUnit == null ? mbsInterestShortfallEvent.interestPerUnit == null : (mbsInterestShortfallEvent.interestPerUnit != null && this.interestPerUnit.compareTo(mbsInterestShortfallEvent.getInterestPerUnit()) == 0)) &&
         super.equals(o);
   }
 

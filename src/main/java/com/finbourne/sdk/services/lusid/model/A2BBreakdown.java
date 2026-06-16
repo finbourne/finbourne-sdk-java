@@ -134,7 +134,7 @@ public class A2BBreakdown {
       return false;
     }
     A2BBreakdown a2BBreakdown = (A2BBreakdown) o;
-    return (this.total.compareTo(a2BBreakdown.getTotal()) == 0) &&
+    return (this.total == null ? a2BBreakdown.total == null : (a2BBreakdown.total != null && this.total.compareTo(a2BBreakdown.getTotal()) == 0)) &&
         Objects.equals(this.currency, a2BBreakdown.currency) &&
         Objects.equals(this.components, a2BBreakdown.components);
   }

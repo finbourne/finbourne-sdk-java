@@ -262,8 +262,8 @@ public class ForwardRateAgreement extends LusidInstrument {
         Objects.equals(this.maturityDate, forwardRateAgreement.maturityDate) &&
         Objects.equals(this.domCcy, forwardRateAgreement.domCcy) &&
         Objects.equals(this.fixingDate, forwardRateAgreement.fixingDate) &&
-        (this.fraRate.compareTo(forwardRateAgreement.getFraRate()) == 0) &&
-        (this.notional.compareTo(forwardRateAgreement.getNotional()) == 0) &&
+        (this.fraRate == null ? forwardRateAgreement.fraRate == null : (forwardRateAgreement.fraRate != null && this.fraRate.compareTo(forwardRateAgreement.getFraRate()) == 0)) &&
+        (this.notional == null ? forwardRateAgreement.notional == null : (forwardRateAgreement.notional != null && this.notional.compareTo(forwardRateAgreement.getNotional()) == 0)) &&
         Objects.equals(this.indexConvention, forwardRateAgreement.indexConvention) &&
         Objects.equals(this.timeZoneConventions, forwardRateAgreement.timeZoneConventions) &&
         super.equals(o);

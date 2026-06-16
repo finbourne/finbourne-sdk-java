@@ -335,11 +335,11 @@ public class CdsIndex extends LusidInstrument {
     return Objects.equals(this.startDate, cdsIndex.startDate) &&
         Objects.equals(this.maturityDate, cdsIndex.maturityDate) &&
         Objects.equals(this.flowConventions, cdsIndex.flowConventions) &&
-        (this.couponRate.compareTo(cdsIndex.getCouponRate()) == 0) &&
+        (this.couponRate == null ? cdsIndex.couponRate == null : (cdsIndex.couponRate != null && this.couponRate.compareTo(cdsIndex.getCouponRate()) == 0)) &&
         Objects.equals(this.identifiers, cdsIndex.identifiers) &&
         Objects.equals(this.basket, cdsIndex.basket) &&
         Objects.equals(this.conventionName, cdsIndex.conventionName) &&
-        (this.notional.compareTo(cdsIndex.getNotional()) == 0) &&
+        (this.notional == null ? cdsIndex.notional == null : (cdsIndex.notional != null && this.notional.compareTo(cdsIndex.getNotional()) == 0)) &&
         Objects.equals(this.additionalPayments, cdsIndex.additionalPayments) &&
         Objects.equals(this.timeZoneConventions, cdsIndex.timeZoneConventions) &&
         super.equals(o);

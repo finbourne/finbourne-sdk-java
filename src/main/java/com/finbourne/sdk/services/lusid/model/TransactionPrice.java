@@ -142,7 +142,7 @@ public class TransactionPrice {
       return false;
     }
     TransactionPrice transactionPrice = (TransactionPrice) o;
-    return (this.price.compareTo(transactionPrice.getPrice()) == 0) &&
+    return (this.price == null ? transactionPrice.price == null : (transactionPrice.price != null && this.price.compareTo(transactionPrice.getPrice()) == 0)) &&
         Objects.equals(this.type, transactionPrice.type);
   }
 

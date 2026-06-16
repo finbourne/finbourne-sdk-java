@@ -325,9 +325,9 @@ public class ReconciliationBreak {
     return Objects.equals(this.instrumentScope, reconciliationBreak.instrumentScope) &&
         Objects.equals(this.instrumentUid, reconciliationBreak.instrumentUid) &&
         Objects.equals(this.subHoldingKeys, reconciliationBreak.subHoldingKeys) &&
-        (this.leftUnits.compareTo(reconciliationBreak.getLeftUnits()) == 0) &&
-        (this.rightUnits.compareTo(reconciliationBreak.getRightUnits()) == 0) &&
-        (this.differenceUnits.compareTo(reconciliationBreak.getDifferenceUnits()) == 0) &&
+        (this.leftUnits == null ? reconciliationBreak.leftUnits == null : (reconciliationBreak.leftUnits != null && this.leftUnits.compareTo(reconciliationBreak.getLeftUnits()) == 0)) &&
+        (this.rightUnits == null ? reconciliationBreak.rightUnits == null : (reconciliationBreak.rightUnits != null && this.rightUnits.compareTo(reconciliationBreak.getRightUnits()) == 0)) &&
+        (this.differenceUnits == null ? reconciliationBreak.differenceUnits == null : (reconciliationBreak.differenceUnits != null && this.differenceUnits.compareTo(reconciliationBreak.getDifferenceUnits()) == 0)) &&
         Objects.equals(this.leftCost, reconciliationBreak.leftCost) &&
         Objects.equals(this.rightCost, reconciliationBreak.rightCost) &&
         Objects.equals(this.differenceCost, reconciliationBreak.differenceCost) &&

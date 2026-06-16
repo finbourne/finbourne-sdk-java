@@ -239,7 +239,7 @@ public class ReverseStockSplitEvent extends InstrumentEvent {
         Objects.equals(this.recordDate, reverseStockSplitEvent.recordDate) &&
         Objects.equals(this.announcementDate, reverseStockSplitEvent.announcementDate) &&
         Objects.equals(this.fractionalUnitsCashCurrency, reverseStockSplitEvent.fractionalUnitsCashCurrency) &&
-        (this.fractionalUnitsCashPrice.compareTo(reverseStockSplitEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.fractionalUnitsCashPrice == null ? reverseStockSplitEvent.fractionalUnitsCashPrice == null : (reverseStockSplitEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(reverseStockSplitEvent.getFractionalUnitsCashPrice()) == 0)) &&
         super.equals(o);
   }
 

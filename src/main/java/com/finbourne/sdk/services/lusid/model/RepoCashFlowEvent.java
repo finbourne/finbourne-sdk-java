@@ -158,7 +158,7 @@ public class RepoCashFlowEvent extends InstrumentEvent {
     RepoCashFlowEvent repoCashFlowEvent = (RepoCashFlowEvent) o;
     return Objects.equals(this.entitlementDate, repoCashFlowEvent.entitlementDate) &&
         Objects.equals(this.settlementDate, repoCashFlowEvent.settlementDate) &&
-        (this.cashFlowPerUnit.compareTo(repoCashFlowEvent.getCashFlowPerUnit()) == 0) &&
+        (this.cashFlowPerUnit == null ? repoCashFlowEvent.cashFlowPerUnit == null : (repoCashFlowEvent.cashFlowPerUnit != null && this.cashFlowPerUnit.compareTo(repoCashFlowEvent.getCashFlowPerUnit()) == 0)) &&
         Objects.equals(this.currency, repoCashFlowEvent.currency) &&
         super.equals(o);
   }

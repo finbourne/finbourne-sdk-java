@@ -184,7 +184,7 @@ public class AccumulationEvent extends InstrumentEvent {
     AccumulationEvent accumulationEvent = (AccumulationEvent) o;
     return Objects.equals(this.announcementDate, accumulationEvent.announcementDate) &&
         Objects.equals(this.dividendCurrency, accumulationEvent.dividendCurrency) &&
-        (this.dividendRate.compareTo(accumulationEvent.getDividendRate()) == 0) &&
+        (this.dividendRate == null ? accumulationEvent.dividendRate == null : (accumulationEvent.dividendRate != null && this.dividendRate.compareTo(accumulationEvent.getDividendRate()) == 0)) &&
         Objects.equals(this.exDate, accumulationEvent.exDate) &&
         Objects.equals(this.paymentDate, accumulationEvent.paymentDate) &&
         super.equals(o);

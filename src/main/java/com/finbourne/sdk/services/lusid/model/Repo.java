@@ -373,12 +373,12 @@ public class Repo extends LusidInstrument {
         Objects.equals(this.domCcy, repo.domCcy) &&
         Objects.equals(this.accrualBasis, repo.accrualBasis) &&
         Objects.equals(this.collateral, repo.collateral) &&
-        (this.collateralValue.compareTo(repo.getCollateralValue()) == 0) &&
-        (this.haircut.compareTo(repo.getHaircut()) == 0) &&
-        (this.margin.compareTo(repo.getMargin()) == 0) &&
-        (this.purchasePrice.compareTo(repo.getPurchasePrice()) == 0) &&
-        (this.repoRate.compareTo(repo.getRepoRate()) == 0) &&
-        (this.repurchasePrice.compareTo(repo.getRepurchasePrice()) == 0) &&
+        (this.collateralValue == null ? repo.collateralValue == null : (repo.collateralValue != null && this.collateralValue.compareTo(repo.getCollateralValue()) == 0)) &&
+        (this.haircut == null ? repo.haircut == null : (repo.haircut != null && this.haircut.compareTo(repo.getHaircut()) == 0)) &&
+        (this.margin == null ? repo.margin == null : (repo.margin != null && this.margin.compareTo(repo.getMargin()) == 0)) &&
+        (this.purchasePrice == null ? repo.purchasePrice == null : (repo.purchasePrice != null && this.purchasePrice.compareTo(repo.getPurchasePrice()) == 0)) &&
+        (this.repoRate == null ? repo.repoRate == null : (repo.repoRate != null && this.repoRate.compareTo(repo.getRepoRate()) == 0)) &&
+        (this.repurchasePrice == null ? repo.repurchasePrice == null : (repo.repurchasePrice != null && this.repurchasePrice.compareTo(repo.getRepurchasePrice()) == 0)) &&
         Objects.equals(this.timeZoneConventions, repo.timeZoneConventions) &&
         super.equals(o);
   }

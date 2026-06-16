@@ -598,7 +598,7 @@ public class Placement {
         Objects.equals(this.properties, placement.properties) &&
         Objects.equals(this.instrumentIdentifiers, placement.instrumentIdentifiers) &&
         Objects.equals(this.lusidInstrumentId, placement.lusidInstrumentId) &&
-        (this.quantity.compareTo(placement.getQuantity()) == 0) &&
+        (this.quantity == null ? placement.quantity == null : (placement.quantity != null && this.quantity.compareTo(placement.getQuantity()) == 0)) &&
         Objects.equals(this.state, placement.state) &&
         Objects.equals(this.side, placement.side) &&
         Objects.equals(this.timeInForce, placement.timeInForce) &&

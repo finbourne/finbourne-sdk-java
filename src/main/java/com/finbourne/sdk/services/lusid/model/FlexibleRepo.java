@@ -478,12 +478,12 @@ public class FlexibleRepo extends LusidInstrument {
         Objects.equals(this.repoType, flexibleRepo.repoType) &&
         Objects.equals(this.accrualBasis, flexibleRepo.accrualBasis) &&
         Objects.equals(this.collateral, flexibleRepo.collateral) &&
-        (this.haircut.compareTo(flexibleRepo.getHaircut()) == 0) &&
-        (this.margin.compareTo(flexibleRepo.getMargin()) == 0) &&
+        (this.haircut == null ? flexibleRepo.haircut == null : (flexibleRepo.haircut != null && this.haircut.compareTo(flexibleRepo.getHaircut()) == 0)) &&
+        (this.margin == null ? flexibleRepo.margin == null : (flexibleRepo.margin != null && this.margin.compareTo(flexibleRepo.getMargin()) == 0)) &&
         Objects.equals(this.openRepoRollingPeriod, flexibleRepo.openRepoRollingPeriod) &&
-        (this.purchasePrice.compareTo(flexibleRepo.getPurchasePrice()) == 0) &&
+        (this.purchasePrice == null ? flexibleRepo.purchasePrice == null : (flexibleRepo.purchasePrice != null && this.purchasePrice.compareTo(flexibleRepo.getPurchasePrice()) == 0)) &&
         Objects.equals(this.repoRateSchedules, flexibleRepo.repoRateSchedules) &&
-        (this.repurchasePrice.compareTo(flexibleRepo.getRepurchasePrice()) == 0) &&
+        (this.repurchasePrice == null ? flexibleRepo.repurchasePrice == null : (flexibleRepo.repurchasePrice != null && this.repurchasePrice.compareTo(flexibleRepo.getRepurchasePrice()) == 0)) &&
         Objects.equals(this.timeZoneConventions, flexibleRepo.timeZoneConventions) &&
         Objects.equals(this.tradingConventions, flexibleRepo.tradingConventions) &&
         Objects.equals(this.isCollateralTransferActivated, flexibleRepo.isCollateralTransferActivated) &&

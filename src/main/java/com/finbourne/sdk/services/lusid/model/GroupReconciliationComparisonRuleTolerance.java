@@ -99,7 +99,7 @@ public class GroupReconciliationComparisonRuleTolerance {
     }
     GroupReconciliationComparisonRuleTolerance groupReconciliationComparisonRuleTolerance = (GroupReconciliationComparisonRuleTolerance) o;
     return Objects.equals(this.type, groupReconciliationComparisonRuleTolerance.type) &&
-        (this.value.compareTo(groupReconciliationComparisonRuleTolerance.getValue()) == 0);
+        (this.value == null ? groupReconciliationComparisonRuleTolerance.value == null : (groupReconciliationComparisonRuleTolerance.value != null && this.value.compareTo(groupReconciliationComparisonRuleTolerance.getValue()) == 0));
   }
 
   @Override

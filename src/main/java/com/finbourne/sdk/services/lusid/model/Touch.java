@@ -150,7 +150,7 @@ public class Touch {
     }
     Touch touch = (Touch) o;
     return Objects.equals(this.direction, touch.direction) &&
-        (this.level.compareTo(touch.getLevel()) == 0) &&
+        (this.level == null ? touch.level == null : (touch.level != null && this.level.compareTo(touch.getLevel()) == 0)) &&
         Objects.equals(this.monitoring, touch.monitoring) &&
         Objects.equals(this.type, touch.type);
   }

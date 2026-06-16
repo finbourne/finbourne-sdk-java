@@ -124,7 +124,7 @@ public class Premium {
       return false;
     }
     Premium premium = (Premium) o;
-    return (this.amount.compareTo(premium.getAmount()) == 0) &&
+    return (this.amount == null ? premium.amount == null : (premium.amount != null && this.amount.compareTo(premium.getAmount()) == 0)) &&
         Objects.equals(this.currency, premium.currency) &&
         Objects.equals(this.date, premium.date);
   }

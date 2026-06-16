@@ -486,7 +486,7 @@ public class PlacementRequest {
         Objects.equals(this.blockIds, placementRequest.blockIds) &&
         Objects.equals(this.properties, placementRequest.properties) &&
         Objects.equals(this.instrumentIdentifiers, placementRequest.instrumentIdentifiers) &&
-        (this.quantity.compareTo(placementRequest.getQuantity()) == 0) &&
+        (this.quantity == null ? placementRequest.quantity == null : (placementRequest.quantity != null && this.quantity.compareTo(placementRequest.getQuantity()) == 0)) &&
         Objects.equals(this.state, placementRequest.state) &&
         Objects.equals(this.side, placementRequest.side) &&
         Objects.equals(this.timeInForce, placementRequest.timeInForce) &&

@@ -123,9 +123,9 @@ public class UnitisationData {
       return false;
     }
     UnitisationData unitisationData = (UnitisationData) o;
-    return (this.sharesInIssue.compareTo(unitisationData.getSharesInIssue()) == 0) &&
-        (this.unitPrice.compareTo(unitisationData.getUnitPrice()) == 0) &&
-        (this.netDealingUnits.compareTo(unitisationData.getNetDealingUnits()) == 0);
+    return (this.sharesInIssue == null ? unitisationData.sharesInIssue == null : (unitisationData.sharesInIssue != null && this.sharesInIssue.compareTo(unitisationData.getSharesInIssue()) == 0)) &&
+        (this.unitPrice == null ? unitisationData.unitPrice == null : (unitisationData.unitPrice != null && this.unitPrice.compareTo(unitisationData.getUnitPrice()) == 0)) &&
+        (this.netDealingUnits == null ? unitisationData.netDealingUnits == null : (unitisationData.netDealingUnits != null && this.netDealingUnits.compareTo(unitisationData.getNetDealingUnits()) == 0));
   }
 
   @Override

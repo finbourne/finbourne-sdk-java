@@ -176,9 +176,9 @@ public class PerformanceReturn {
     }
     PerformanceReturn performanceReturn = (PerformanceReturn) o;
     return Objects.equals(this.effectiveAt, performanceReturn.effectiveAt) &&
-        (this.rateOfReturn.compareTo(performanceReturn.getRateOfReturn()) == 0) &&
-        (this.openingMarketValue.compareTo(performanceReturn.getOpeningMarketValue()) == 0) &&
-        (this.closingMarketValue.compareTo(performanceReturn.getClosingMarketValue()) == 0) &&
+        (this.rateOfReturn == null ? performanceReturn.rateOfReturn == null : (performanceReturn.rateOfReturn != null && this.rateOfReturn.compareTo(performanceReturn.getRateOfReturn()) == 0)) &&
+        (this.openingMarketValue == null ? performanceReturn.openingMarketValue == null : (performanceReturn.openingMarketValue != null && this.openingMarketValue.compareTo(performanceReturn.getOpeningMarketValue()) == 0)) &&
+        (this.closingMarketValue == null ? performanceReturn.closingMarketValue == null : (performanceReturn.closingMarketValue != null && this.closingMarketValue.compareTo(performanceReturn.getClosingMarketValue()) == 0)) &&
         Objects.equals(this.period, performanceReturn.period);
   }
 

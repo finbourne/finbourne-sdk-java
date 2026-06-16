@@ -450,7 +450,7 @@ public class ExecutionRequest {
         Objects.equals(this.placementId, executionRequest.placementId) &&
         Objects.equals(this.properties, executionRequest.properties) &&
         Objects.equals(this.instrumentIdentifiers, executionRequest.instrumentIdentifiers) &&
-        (this.quantity.compareTo(executionRequest.getQuantity()) == 0) &&
+        (this.quantity == null ? executionRequest.quantity == null : (executionRequest.quantity != null && this.quantity.compareTo(executionRequest.getQuantity()) == 0)) &&
         Objects.equals(this.state, executionRequest.state) &&
         Objects.equals(this.side, executionRequest.side) &&
         Objects.equals(this.type, executionRequest.type) &&
@@ -458,9 +458,9 @@ public class ExecutionRequest {
         Objects.equals(this.settlementDate, executionRequest.settlementDate) &&
         Objects.equals(this.price, executionRequest.price) &&
         Objects.equals(this.settlementCurrency, executionRequest.settlementCurrency) &&
-        (this.settlementCurrencyFxRate.compareTo(executionRequest.getSettlementCurrencyFxRate()) == 0) &&
+        (this.settlementCurrencyFxRate == null ? executionRequest.settlementCurrencyFxRate == null : (executionRequest.settlementCurrencyFxRate != null && this.settlementCurrencyFxRate.compareTo(executionRequest.getSettlementCurrencyFxRate()) == 0)) &&
         Objects.equals(this.counterparty, executionRequest.counterparty) &&
-        (this.averagePrice.compareTo(executionRequest.getAveragePrice()) == 0);
+        (this.averagePrice == null ? executionRequest.averagePrice == null : (executionRequest.averagePrice != null && this.averagePrice.compareTo(executionRequest.getAveragePrice()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

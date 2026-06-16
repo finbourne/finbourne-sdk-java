@@ -237,7 +237,7 @@ public class ScripDividendEvent extends InstrumentEvent {
         Objects.equals(this.exDate, scripDividendEvent.exDate) &&
         Objects.equals(this.recordDate, scripDividendEvent.recordDate) &&
         Objects.equals(this.paymentDate, scripDividendEvent.paymentDate) &&
-        (this.fractionalUnitsCashPrice.compareTo(scripDividendEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.fractionalUnitsCashPrice == null ? scripDividendEvent.fractionalUnitsCashPrice == null : (scripDividendEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(scripDividendEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, scripDividendEvent.fractionalUnitsCashCurrency) &&
         Objects.equals(this.unitsRatio, scripDividendEvent.unitsRatio) &&
         super.equals(o);

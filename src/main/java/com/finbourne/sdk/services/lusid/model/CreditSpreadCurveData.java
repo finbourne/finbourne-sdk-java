@@ -339,7 +339,7 @@ public class CreditSpreadCurveData extends ComplexMarketData {
         Objects.equals(this.domCcy, creditSpreadCurveData.domCcy) &&
         Objects.equals(this.tenors, creditSpreadCurveData.tenors) &&
         Objects.equals(this.spreads, creditSpreadCurveData.spreads) &&
-        (this.recoveryRate.compareTo(creditSpreadCurveData.getRecoveryRate()) == 0) &&
+        (this.recoveryRate == null ? creditSpreadCurveData.recoveryRate == null : (creditSpreadCurveData.recoveryRate != null && this.recoveryRate.compareTo(creditSpreadCurveData.getRecoveryRate()) == 0)) &&
         Objects.equals(this.referenceDate, creditSpreadCurveData.referenceDate) &&
         Objects.equals(this.maturities, creditSpreadCurveData.maturities) &&
         Objects.equals(this.lineage, creditSpreadCurveData.lineage) &&

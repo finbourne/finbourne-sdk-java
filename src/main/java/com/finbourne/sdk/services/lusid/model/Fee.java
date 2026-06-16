@@ -643,8 +643,8 @@ public class Fee {
         Objects.equals(this.calculationBase, fee.calculationBase) &&
         Objects.equals(this.accrualCurrency, fee.accrualCurrency) &&
         Objects.equals(this.treatment, fee.treatment) &&
-        (this.totalAnnualAccrualAmount.compareTo(fee.getTotalAnnualAccrualAmount()) == 0) &&
-        (this.feeRatePercentage.compareTo(fee.getFeeRatePercentage()) == 0) &&
+        (this.totalAnnualAccrualAmount == null ? fee.totalAnnualAccrualAmount == null : (fee.totalAnnualAccrualAmount != null && this.totalAnnualAccrualAmount.compareTo(fee.getTotalAnnualAccrualAmount()) == 0)) &&
+        (this.feeRatePercentage == null ? fee.feeRatePercentage == null : (fee.feeRatePercentage != null && this.feeRatePercentage.compareTo(fee.getFeeRatePercentage()) == 0)) &&
         Objects.equals(this.payableFrequency, fee.payableFrequency) &&
         Objects.equals(this.businessDayConvention, fee.businessDayConvention) &&
         Objects.equals(this.startDate, fee.startDate) &&

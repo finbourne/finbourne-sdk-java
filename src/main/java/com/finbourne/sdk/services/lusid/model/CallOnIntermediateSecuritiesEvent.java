@@ -283,7 +283,7 @@ public class CallOnIntermediateSecuritiesEvent extends InstrumentEvent {
         Objects.equals(this.paymentDate, callOnIntermediateSecuritiesEvent.paymentDate) &&
         Objects.equals(this.newInstrument, callOnIntermediateSecuritiesEvent.newInstrument) &&
         Objects.equals(this.unitsRatio, callOnIntermediateSecuritiesEvent.unitsRatio) &&
-        (this.price.compareTo(callOnIntermediateSecuritiesEvent.getPrice()) == 0) &&
+        (this.price == null ? callOnIntermediateSecuritiesEvent.price == null : (callOnIntermediateSecuritiesEvent.price != null && this.price.compareTo(callOnIntermediateSecuritiesEvent.getPrice()) == 0)) &&
         Objects.equals(this.exerciseCurrency, callOnIntermediateSecuritiesEvent.exerciseCurrency) &&
         Objects.equals(this.optionExerciseElections, callOnIntermediateSecuritiesEvent.optionExerciseElections) &&
         Objects.equals(this.lapseElections, callOnIntermediateSecuritiesEvent.lapseElections) &&

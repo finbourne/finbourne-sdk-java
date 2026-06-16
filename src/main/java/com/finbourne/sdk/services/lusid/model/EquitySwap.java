@@ -402,9 +402,9 @@ public class EquitySwap extends LusidInstrument {
         Objects.equals(this.equityFlowConventions, equitySwap.equityFlowConventions) &&
         Objects.equals(this.fundingLeg, equitySwap.fundingLeg) &&
         Objects.equals(this.includeDividends, equitySwap.includeDividends) &&
-        (this.initialPrice.compareTo(equitySwap.getInitialPrice()) == 0) &&
+        (this.initialPrice == null ? equitySwap.initialPrice == null : (equitySwap.initialPrice != null && this.initialPrice.compareTo(equitySwap.getInitialPrice()) == 0)) &&
         Objects.equals(this.notionalReset, equitySwap.notionalReset) &&
-        (this.quantity.compareTo(equitySwap.getQuantity()) == 0) &&
+        (this.quantity == null ? equitySwap.quantity == null : (equitySwap.quantity != null && this.quantity.compareTo(equitySwap.getQuantity()) == 0)) &&
         Objects.equals(this.underlyingIdentifier, equitySwap.underlyingIdentifier) &&
         Objects.equals(this.equitySwapDividendPaymentTiming, equitySwap.equitySwapDividendPaymentTiming) &&
         Objects.equals(this.additionalPayments, equitySwap.additionalPayments) &&

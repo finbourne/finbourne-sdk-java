@@ -486,8 +486,8 @@ public class Bond extends LusidInstrument {
         Objects.equals(this.maturityDate, bond.maturityDate) &&
         Objects.equals(this.domCcy, bond.domCcy) &&
         Objects.equals(this.flowConventions, bond.flowConventions) &&
-        (this.principal.compareTo(bond.getPrincipal()) == 0) &&
-        (this.couponRate.compareTo(bond.getCouponRate()) == 0) &&
+        (this.principal == null ? bond.principal == null : (bond.principal != null && this.principal.compareTo(bond.getPrincipal()) == 0)) &&
+        (this.couponRate == null ? bond.couponRate == null : (bond.couponRate != null && this.couponRate.compareTo(bond.getCouponRate()) == 0)) &&
         Objects.equals(this.identifiers, bond.identifiers) &&
         Objects.equals(this.exDividendDays, bond.exDividendDays) &&
         Objects.equals(this.initialCouponDate, bond.initialCouponDate) &&
@@ -495,7 +495,7 @@ public class Bond extends LusidInstrument {
         Objects.equals(this.calculationType, bond.calculationType) &&
         Objects.equals(this.roundingConventions, bond.roundingConventions) &&
         Objects.equals(this.exDividendConfiguration, bond.exDividendConfiguration) &&
-        (this.originalIssuePrice.compareTo(bond.getOriginalIssuePrice()) == 0) &&
+        (this.originalIssuePrice == null ? bond.originalIssuePrice == null : (bond.originalIssuePrice != null && this.originalIssuePrice.compareTo(bond.getOriginalIssuePrice()) == 0)) &&
         Objects.equals(this.tradingConventions, bond.tradingConventions) &&
         Objects.equals(this.timeZoneConventions, bond.timeZoneConventions) &&
         super.equals(o);

@@ -160,7 +160,7 @@ public class CreditPremiumCashFlowEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, creditPremiumCashFlowEvent.exDate) &&
         Objects.equals(this.paymentDate, creditPremiumCashFlowEvent.paymentDate) &&
         Objects.equals(this.currency, creditPremiumCashFlowEvent.currency) &&
-        (this.cashFlowPerUnit.compareTo(creditPremiumCashFlowEvent.getCashFlowPerUnit()) == 0) &&
+        (this.cashFlowPerUnit == null ? creditPremiumCashFlowEvent.cashFlowPerUnit == null : (creditPremiumCashFlowEvent.cashFlowPerUnit != null && this.cashFlowPerUnit.compareTo(creditPremiumCashFlowEvent.getCashFlowPerUnit()) == 0)) &&
         super.equals(o);
   }
 

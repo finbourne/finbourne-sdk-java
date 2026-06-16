@@ -134,7 +134,7 @@ public class FutureMarkToMarketEvent extends InstrumentEvent {
     FutureMarkToMarketEvent futureMarkToMarketEvent = (FutureMarkToMarketEvent) o;
     return Objects.equals(this.effectiveDate, futureMarkToMarketEvent.effectiveDate) &&
         Objects.equals(this.settlementCurrency, futureMarkToMarketEvent.settlementCurrency) &&
-        (this.notionalAmountPerUnit.compareTo(futureMarkToMarketEvent.getNotionalAmountPerUnit()) == 0) &&
+        (this.notionalAmountPerUnit == null ? futureMarkToMarketEvent.notionalAmountPerUnit == null : (futureMarkToMarketEvent.notionalAmountPerUnit != null && this.notionalAmountPerUnit.compareTo(futureMarkToMarketEvent.getNotionalAmountPerUnit()) == 0)) &&
         super.equals(o);
   }
 

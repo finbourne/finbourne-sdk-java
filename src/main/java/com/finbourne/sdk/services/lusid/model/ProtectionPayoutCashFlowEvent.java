@@ -160,7 +160,7 @@ public class ProtectionPayoutCashFlowEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, protectionPayoutCashFlowEvent.exDate) &&
         Objects.equals(this.paymentDate, protectionPayoutCashFlowEvent.paymentDate) &&
         Objects.equals(this.currency, protectionPayoutCashFlowEvent.currency) &&
-        (this.cashFlowPerUnit.compareTo(protectionPayoutCashFlowEvent.getCashFlowPerUnit()) == 0) &&
+        (this.cashFlowPerUnit == null ? protectionPayoutCashFlowEvent.cashFlowPerUnit == null : (protectionPayoutCashFlowEvent.cashFlowPerUnit != null && this.cashFlowPerUnit.compareTo(protectionPayoutCashFlowEvent.getCashFlowPerUnit()) == 0)) &&
         super.equals(o);
   }
 

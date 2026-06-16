@@ -246,7 +246,7 @@ public class LoanFacility extends LusidInstrument {
     return Objects.equals(this.startDate, loanFacility.startDate) &&
         Objects.equals(this.maturityDate, loanFacility.maturityDate) &&
         Objects.equals(this.domCcy, loanFacility.domCcy) &&
-        (this.initialCommitment.compareTo(loanFacility.getInitialCommitment()) == 0) &&
+        (this.initialCommitment == null ? loanFacility.initialCommitment == null : (loanFacility.initialCommitment != null && this.initialCommitment.compareTo(loanFacility.getInitialCommitment()) == 0)) &&
         Objects.equals(this.loanType, loanFacility.loanType) &&
         Objects.equals(this.schedules, loanFacility.schedules) &&
         Objects.equals(this.timeZoneConventions, loanFacility.timeZoneConventions) &&

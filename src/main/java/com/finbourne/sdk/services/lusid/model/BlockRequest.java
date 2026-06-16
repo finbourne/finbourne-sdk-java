@@ -385,7 +385,7 @@ public class BlockRequest {
         Objects.equals(this.orderIds, blockRequest.orderIds) &&
         Objects.equals(this.properties, blockRequest.properties) &&
         Objects.equals(this.instrumentIdentifiers, blockRequest.instrumentIdentifiers) &&
-        (this.quantity.compareTo(blockRequest.getQuantity()) == 0) &&
+        (this.quantity == null ? blockRequest.quantity == null : (blockRequest.quantity != null && this.quantity.compareTo(blockRequest.getQuantity()) == 0)) &&
         Objects.equals(this.side, blockRequest.side) &&
         Objects.equals(this.type, blockRequest.type) &&
         Objects.equals(this.timeInForce, blockRequest.timeInForce) &&

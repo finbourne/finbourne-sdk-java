@@ -326,9 +326,9 @@ public class CreditDefaultSwap extends LusidInstrument {
         Objects.equals(this.startDate, creditDefaultSwap.startDate) &&
         Objects.equals(this.maturityDate, creditDefaultSwap.maturityDate) &&
         Objects.equals(this.flowConventions, creditDefaultSwap.flowConventions) &&
-        (this.couponRate.compareTo(creditDefaultSwap.getCouponRate()) == 0) &&
+        (this.couponRate == null ? creditDefaultSwap.couponRate == null : (creditDefaultSwap.couponRate != null && this.couponRate.compareTo(creditDefaultSwap.getCouponRate()) == 0)) &&
         Objects.equals(this.conventionName, creditDefaultSwap.conventionName) &&
-        (this.notional.compareTo(creditDefaultSwap.getNotional()) == 0) &&
+        (this.notional == null ? creditDefaultSwap.notional == null : (creditDefaultSwap.notional != null && this.notional.compareTo(creditDefaultSwap.getNotional()) == 0)) &&
         Objects.equals(this.protectionDetailSpecification, creditDefaultSwap.protectionDetailSpecification) &&
         Objects.equals(this.additionalPayments, creditDefaultSwap.additionalPayments) &&
         Objects.equals(this.timeZoneConventions, creditDefaultSwap.timeZoneConventions) &&

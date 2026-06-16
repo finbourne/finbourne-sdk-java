@@ -180,8 +180,8 @@ public class SecurityOfferConstituent {
     return Objects.equals(this.newInstrument, securityOfferConstituent.newInstrument) &&
         Objects.equals(this.unitsRatio, securityOfferConstituent.unitsRatio) &&
         Objects.equals(this.settlementDate, securityOfferConstituent.settlementDate) &&
-        (this.minPieceSize.compareTo(securityOfferConstituent.getMinPieceSize()) == 0) &&
-        (this.minIncrement.compareTo(securityOfferConstituent.getMinIncrement()) == 0);
+        (this.minPieceSize == null ? securityOfferConstituent.minPieceSize == null : (securityOfferConstituent.minPieceSize != null && this.minPieceSize.compareTo(securityOfferConstituent.getMinPieceSize()) == 0)) &&
+        (this.minIncrement == null ? securityOfferConstituent.minIncrement == null : (securityOfferConstituent.minIncrement != null && this.minIncrement.compareTo(securityOfferConstituent.getMinIncrement()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

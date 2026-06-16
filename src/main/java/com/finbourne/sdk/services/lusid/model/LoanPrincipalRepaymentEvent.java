@@ -221,8 +221,8 @@ public class LoanPrincipalRepaymentEvent extends InstrumentEvent {
     return Objects.equals(this.paymentDate, loanPrincipalRepaymentEvent.paymentDate) &&
         Objects.equals(this.currency, loanPrincipalRepaymentEvent.currency) &&
         Objects.equals(this.lapseElections, loanPrincipalRepaymentEvent.lapseElections) &&
-        (this.fraction.compareTo(loanPrincipalRepaymentEvent.getFraction()) == 0) &&
-        (this.amount.compareTo(loanPrincipalRepaymentEvent.getAmount()) == 0) &&
+        (this.fraction == null ? loanPrincipalRepaymentEvent.fraction == null : (loanPrincipalRepaymentEvent.fraction != null && this.fraction.compareTo(loanPrincipalRepaymentEvent.getFraction()) == 0)) &&
+        (this.amount == null ? loanPrincipalRepaymentEvent.amount == null : (loanPrincipalRepaymentEvent.amount != null && this.amount.compareTo(loanPrincipalRepaymentEvent.getAmount()) == 0)) &&
         Objects.equals(this.withInterest, loanPrincipalRepaymentEvent.withInterest) &&
         super.equals(o);
   }

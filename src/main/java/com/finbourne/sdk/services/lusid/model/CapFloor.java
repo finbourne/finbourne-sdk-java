@@ -245,8 +245,8 @@ public class CapFloor extends LusidInstrument {
     }
     CapFloor capFloor = (CapFloor) o;
     return Objects.equals(this.capFloorType, capFloor.capFloorType) &&
-        (this.capStrike.compareTo(capFloor.getCapStrike()) == 0) &&
-        (this.floorStrike.compareTo(capFloor.getFloorStrike()) == 0) &&
+        (this.capStrike == null ? capFloor.capStrike == null : (capFloor.capStrike != null && this.capStrike.compareTo(capFloor.getCapStrike()) == 0)) &&
+        (this.floorStrike == null ? capFloor.floorStrike == null : (capFloor.floorStrike != null && this.floorStrike.compareTo(capFloor.getFloorStrike()) == 0)) &&
         Objects.equals(this.includeFirstCaplet, capFloor.includeFirstCaplet) &&
         Objects.equals(this.underlyingFloatingLeg, capFloor.underlyingFloatingLeg) &&
         Objects.equals(this.additionalPayments, capFloor.additionalPayments) &&

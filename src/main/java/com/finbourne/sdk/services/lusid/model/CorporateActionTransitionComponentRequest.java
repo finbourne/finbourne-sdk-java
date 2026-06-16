@@ -134,8 +134,8 @@ public class CorporateActionTransitionComponentRequest {
     }
     CorporateActionTransitionComponentRequest corporateActionTransitionComponentRequest = (CorporateActionTransitionComponentRequest) o;
     return Objects.equals(this.instrumentIdentifiers, corporateActionTransitionComponentRequest.instrumentIdentifiers) &&
-        (this.unitsFactor.compareTo(corporateActionTransitionComponentRequest.getUnitsFactor()) == 0) &&
-        (this.costFactor.compareTo(corporateActionTransitionComponentRequest.getCostFactor()) == 0);
+        (this.unitsFactor == null ? corporateActionTransitionComponentRequest.unitsFactor == null : (corporateActionTransitionComponentRequest.unitsFactor != null && this.unitsFactor.compareTo(corporateActionTransitionComponentRequest.getUnitsFactor()) == 0)) &&
+        (this.costFactor == null ? corporateActionTransitionComponentRequest.costFactor == null : (corporateActionTransitionComponentRequest.costFactor != null && this.costFactor.compareTo(corporateActionTransitionComponentRequest.getCostFactor()) == 0));
   }
 
   @Override

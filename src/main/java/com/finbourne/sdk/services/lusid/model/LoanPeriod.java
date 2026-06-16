@@ -125,8 +125,8 @@ public class LoanPeriod {
     }
     LoanPeriod loanPeriod = (LoanPeriod) o;
     return Objects.equals(this.paymentDate, loanPeriod.paymentDate) &&
-        (this.notional.compareTo(loanPeriod.getNotional()) == 0) &&
-        (this.interestAmount.compareTo(loanPeriod.getInterestAmount()) == 0);
+        (this.notional == null ? loanPeriod.notional == null : (loanPeriod.notional != null && this.notional.compareTo(loanPeriod.getNotional()) == 0)) &&
+        (this.interestAmount == null ? loanPeriod.interestAmount == null : (loanPeriod.interestAmount != null && this.interestAmount.compareTo(loanPeriod.getInterestAmount()) == 0));
   }
 
   @Override

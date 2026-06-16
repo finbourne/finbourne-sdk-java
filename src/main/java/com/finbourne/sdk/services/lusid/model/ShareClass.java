@@ -630,9 +630,9 @@ public class ShareClass {
         Objects.equals(this.name, shareClass.name) &&
         Objects.equals(this.description, shareClass.description) &&
         Objects.equals(this.shareClassShortCode, shareClass.shareClassShortCode) &&
-        (this.launchPrice.compareTo(shareClass.getLaunchPrice()) == 0) &&
+        (this.launchPrice == null ? shareClass.launchPrice == null : (shareClass.launchPrice != null && this.launchPrice.compareTo(shareClass.getLaunchPrice()) == 0)) &&
         Objects.equals(this.launchDate, shareClass.launchDate) &&
-        (this.apportionmentFactor.compareTo(shareClass.getApportionmentFactor()) == 0) &&
+        (this.apportionmentFactor == null ? shareClass.apportionmentFactor == null : (shareClass.apportionmentFactor != null && this.apportionmentFactor.compareTo(shareClass.getApportionmentFactor()) == 0)) &&
         Objects.equals(this.properties, shareClass.properties) &&
         Objects.equals(this.fundShareClassType, shareClass.fundShareClassType) &&
         Objects.equals(this.distributionType, shareClass.distributionType) &&

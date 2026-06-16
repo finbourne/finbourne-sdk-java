@@ -73,7 +73,7 @@ public class FundAmount {
       return false;
     }
     FundAmount fundAmount = (FundAmount) o;
-    return (this.value.compareTo(fundAmount.getValue()) == 0);
+    return (this.value == null ? fundAmount.value == null : (fundAmount.value != null && this.value.compareTo(fundAmount.getValue()) == 0));
   }
 
   @Override

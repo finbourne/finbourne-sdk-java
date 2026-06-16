@@ -159,7 +159,7 @@ public class LoanFacilityDelayedCompensationPaymentEvent extends InstrumentEvent
     return Objects.equals(this.paymentDate, loanFacilityDelayedCompensationPaymentEvent.paymentDate) &&
         Objects.equals(this.exDate, loanFacilityDelayedCompensationPaymentEvent.exDate) &&
         Objects.equals(this.currency, loanFacilityDelayedCompensationPaymentEvent.currency) &&
-        (this.amount.compareTo(loanFacilityDelayedCompensationPaymentEvent.getAmount()) == 0) &&
+        (this.amount == null ? loanFacilityDelayedCompensationPaymentEvent.amount == null : (loanFacilityDelayedCompensationPaymentEvent.amount != null && this.amount.compareTo(loanFacilityDelayedCompensationPaymentEvent.getAmount()) == 0)) &&
         super.equals(o);
   }
 

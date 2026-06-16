@@ -160,9 +160,9 @@ public class CashLadderRecord {
     }
     CashLadderRecord cashLadderRecord = (CashLadderRecord) o;
     return Objects.equals(this.effectiveDate, cashLadderRecord.effectiveDate) &&
-        (this.open.compareTo(cashLadderRecord.getOpen()) == 0) &&
+        (this.open == null ? cashLadderRecord.open == null : (cashLadderRecord.open != null && this.open.compareTo(cashLadderRecord.getOpen()) == 0)) &&
         Objects.equals(this.activities, cashLadderRecord.activities) &&
-        (this.close.compareTo(cashLadderRecord.getClose()) == 0);
+        (this.close == null ? cashLadderRecord.close == null : (cashLadderRecord.close != null && this.close.compareTo(cashLadderRecord.getClose()) == 0));
   }
 
   @Override

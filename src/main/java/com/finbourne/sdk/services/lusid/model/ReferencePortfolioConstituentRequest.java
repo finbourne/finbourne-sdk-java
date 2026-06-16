@@ -170,7 +170,7 @@ public class ReferencePortfolioConstituentRequest {
     ReferencePortfolioConstituentRequest referencePortfolioConstituentRequest = (ReferencePortfolioConstituentRequest) o;
     return Objects.equals(this.instrumentIdentifiers, referencePortfolioConstituentRequest.instrumentIdentifiers) &&
         Objects.equals(this.properties, referencePortfolioConstituentRequest.properties) &&
-        (this.weight.compareTo(referencePortfolioConstituentRequest.getWeight()) == 0) &&
+        (this.weight == null ? referencePortfolioConstituentRequest.weight == null : (referencePortfolioConstituentRequest.weight != null && this.weight.compareTo(referencePortfolioConstituentRequest.getWeight()) == 0)) &&
         Objects.equals(this.currency, referencePortfolioConstituentRequest.currency);
   }
 

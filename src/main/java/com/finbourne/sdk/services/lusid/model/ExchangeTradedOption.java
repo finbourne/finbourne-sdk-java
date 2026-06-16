@@ -211,8 +211,8 @@ public class ExchangeTradedOption extends LusidInstrument {
     ExchangeTradedOption exchangeTradedOption = (ExchangeTradedOption) o;
     return Objects.equals(this.startDate, exchangeTradedOption.startDate) &&
         Objects.equals(this.contractDetails, exchangeTradedOption.contractDetails) &&
-        (this.contracts.compareTo(exchangeTradedOption.getContracts()) == 0) &&
-        (this.refSpotPrice.compareTo(exchangeTradedOption.getRefSpotPrice()) == 0) &&
+        (this.contracts == null ? exchangeTradedOption.contracts == null : (exchangeTradedOption.contracts != null && this.contracts.compareTo(exchangeTradedOption.getContracts()) == 0)) &&
+        (this.refSpotPrice == null ? exchangeTradedOption.refSpotPrice == null : (exchangeTradedOption.refSpotPrice != null && this.refSpotPrice.compareTo(exchangeTradedOption.getRefSpotPrice()) == 0)) &&
         Objects.equals(this.tradingConventions, exchangeTradedOption.tradingConventions) &&
         Objects.equals(this.timeZoneConventions, exchangeTradedOption.timeZoneConventions) &&
         super.equals(o);

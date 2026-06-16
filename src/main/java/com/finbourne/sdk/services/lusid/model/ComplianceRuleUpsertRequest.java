@@ -391,8 +391,8 @@ public class ComplianceRuleUpsertRequest {
         Objects.equals(this.type, complianceRuleUpsertRequest.type) &&
         Objects.equals(this.propertyKey, complianceRuleUpsertRequest.propertyKey) &&
         Objects.equals(this.value, complianceRuleUpsertRequest.value) &&
-        (this.lowerBound.compareTo(complianceRuleUpsertRequest.getLowerBound()) == 0) &&
-        (this.upperBound.compareTo(complianceRuleUpsertRequest.getUpperBound()) == 0) &&
+        (this.lowerBound == null ? complianceRuleUpsertRequest.lowerBound == null : (complianceRuleUpsertRequest.lowerBound != null && this.lowerBound.compareTo(complianceRuleUpsertRequest.getLowerBound()) == 0)) &&
+        (this.upperBound == null ? complianceRuleUpsertRequest.upperBound == null : (complianceRuleUpsertRequest.upperBound != null && this.upperBound.compareTo(complianceRuleUpsertRequest.getUpperBound()) == 0)) &&
         Objects.equals(this.schedule, complianceRuleUpsertRequest.schedule) &&
         Objects.equals(this.hardRequirement, complianceRuleUpsertRequest.hardRequirement) &&
         Objects.equals(this.targetPortfolioIds, complianceRuleUpsertRequest.targetPortfolioIds) &&

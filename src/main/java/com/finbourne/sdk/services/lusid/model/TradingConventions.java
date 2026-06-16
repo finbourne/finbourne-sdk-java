@@ -123,9 +123,9 @@ public class TradingConventions {
       return false;
     }
     TradingConventions tradingConventions = (TradingConventions) o;
-    return (this.priceScaleFactor.compareTo(tradingConventions.getPriceScaleFactor()) == 0) &&
-        (this.minimumOrderSize.compareTo(tradingConventions.getMinimumOrderSize()) == 0) &&
-        (this.minimumOrderIncrement.compareTo(tradingConventions.getMinimumOrderIncrement()) == 0);
+    return (this.priceScaleFactor == null ? tradingConventions.priceScaleFactor == null : (tradingConventions.priceScaleFactor != null && this.priceScaleFactor.compareTo(tradingConventions.getPriceScaleFactor()) == 0)) &&
+        (this.minimumOrderSize == null ? tradingConventions.minimumOrderSize == null : (tradingConventions.minimumOrderSize != null && this.minimumOrderSize.compareTo(tradingConventions.getMinimumOrderSize()) == 0)) &&
+        (this.minimumOrderIncrement == null ? tradingConventions.minimumOrderIncrement == null : (tradingConventions.minimumOrderIncrement != null && this.minimumOrderIncrement.compareTo(tradingConventions.getMinimumOrderIncrement()) == 0));
   }
 
   @Override

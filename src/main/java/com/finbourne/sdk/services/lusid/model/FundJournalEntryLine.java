@@ -893,7 +893,7 @@ public class FundJournalEntryLine {
         Objects.equals(this.generalLedgerAccountCode, fundJournalEntryLine.generalLedgerAccountCode) &&
         Objects.equals(this.local, fundJournalEntryLine.local) &&
         Objects.equals(this.base, fundJournalEntryLine.base) &&
-        (this.units.compareTo(fundJournalEntryLine.getUnits()) == 0) &&
+        (this.units == null ? fundJournalEntryLine.units == null : (fundJournalEntryLine.units != null && this.units.compareTo(fundJournalEntryLine.getUnits()) == 0)) &&
         Objects.equals(this.postingModuleCode, fundJournalEntryLine.postingModuleCode) &&
         Objects.equals(this.postingRule, fundJournalEntryLine.postingRule) &&
         Objects.equals(this.asAtDate, fundJournalEntryLine.asAtDate) &&

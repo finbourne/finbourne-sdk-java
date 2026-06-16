@@ -161,7 +161,7 @@ public class TaxRule {
     TaxRule taxRule = (TaxRule) o;
     return Objects.equals(this.name, taxRule.name) &&
         Objects.equals(this.description, taxRule.description) &&
-        (this.rate.compareTo(taxRule.getRate()) == 0) &&
+        (this.rate == null ? taxRule.rate == null : (taxRule.rate != null && this.rate.compareTo(taxRule.getRate()) == 0)) &&
         Objects.equals(this.matchCriteria, taxRule.matchCriteria);
   }
 

@@ -150,7 +150,7 @@ public class Barrier {
     }
     Barrier barrier = (Barrier) o;
     return Objects.equals(this.direction, barrier.direction) &&
-        (this.level.compareTo(barrier.getLevel()) == 0) &&
+        (this.level == null ? barrier.level == null : (barrier.level != null && this.level.compareTo(barrier.getLevel()) == 0)) &&
         Objects.equals(this.monitoring, barrier.monitoring) &&
         Objects.equals(this.type, barrier.type);
   }

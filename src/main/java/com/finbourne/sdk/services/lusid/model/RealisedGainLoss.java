@@ -421,10 +421,10 @@ public class RealisedGainLoss {
     RealisedGainLoss realisedGainLoss = (RealisedGainLoss) o;
     return Objects.equals(this.instrumentScope, realisedGainLoss.instrumentScope) &&
         Objects.equals(this.instrumentUid, realisedGainLoss.instrumentUid) &&
-        (this.units.compareTo(realisedGainLoss.getUnits()) == 0) &&
+        (this.units == null ? realisedGainLoss.units == null : (realisedGainLoss.units != null && this.units.compareTo(realisedGainLoss.getUnits()) == 0)) &&
         Objects.equals(this.purchaseTradeDate, realisedGainLoss.purchaseTradeDate) &&
         Objects.equals(this.purchaseSettlementDate, realisedGainLoss.purchaseSettlementDate) &&
-        (this.purchasePrice.compareTo(realisedGainLoss.getPurchasePrice()) == 0) &&
+        (this.purchasePrice == null ? realisedGainLoss.purchasePrice == null : (realisedGainLoss.purchasePrice != null && this.purchasePrice.compareTo(realisedGainLoss.getPurchasePrice()) == 0)) &&
         Objects.equals(this.costTradeCcy, realisedGainLoss.costTradeCcy) &&
         Objects.equals(this.costPortfolioCcy, realisedGainLoss.costPortfolioCcy) &&
         Objects.equals(this.realisedTradeCcy, realisedGainLoss.realisedTradeCcy) &&

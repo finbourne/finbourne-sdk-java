@@ -160,7 +160,7 @@ public class MbsInterestDeferralEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, mbsInterestDeferralEvent.exDate) &&
         Objects.equals(this.paymentDate, mbsInterestDeferralEvent.paymentDate) &&
         Objects.equals(this.currency, mbsInterestDeferralEvent.currency) &&
-        (this.interestPerUnit.compareTo(mbsInterestDeferralEvent.getInterestPerUnit()) == 0) &&
+        (this.interestPerUnit == null ? mbsInterestDeferralEvent.interestPerUnit == null : (mbsInterestDeferralEvent.interestPerUnit != null && this.interestPerUnit.compareTo(mbsInterestDeferralEvent.getInterestPerUnit()) == 0)) &&
         super.equals(o);
   }
 

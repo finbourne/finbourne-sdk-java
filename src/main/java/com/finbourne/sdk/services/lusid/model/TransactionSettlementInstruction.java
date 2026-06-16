@@ -508,7 +508,7 @@ public class TransactionSettlementInstruction {
     return Objects.equals(this.settlementInstructionId, transactionSettlementInstruction.settlementInstructionId) &&
         Objects.equals(this.instructionType, transactionSettlementInstruction.instructionType) &&
         Objects.equals(this.actualSettlementDate, transactionSettlementInstruction.actualSettlementDate) &&
-        (this.units.compareTo(transactionSettlementInstruction.getUnits()) == 0) &&
+        (this.units == null ? transactionSettlementInstruction.units == null : (transactionSettlementInstruction.units != null && this.units.compareTo(transactionSettlementInstruction.getUnits()) == 0)) &&
         Objects.equals(this.transactionId, transactionSettlementInstruction.transactionId) &&
         Objects.equals(this.settlementCategory, transactionSettlementInstruction.settlementCategory) &&
         Objects.equals(this.lusidInstrumentId, transactionSettlementInstruction.lusidInstrumentId) &&
@@ -517,7 +517,7 @@ public class TransactionSettlementInstruction {
         Objects.equals(this.custodianAccountOverride, transactionSettlementInstruction.custodianAccountOverride) &&
         Objects.equals(this.instrumentIdentifiers, transactionSettlementInstruction.instrumentIdentifiers) &&
         Objects.equals(this.status, transactionSettlementInstruction.status) &&
-        (this.instructionToPortfolioRate.compareTo(transactionSettlementInstruction.getInstructionToPortfolioRate()) == 0) &&
+        (this.instructionToPortfolioRate == null ? transactionSettlementInstruction.instructionToPortfolioRate == null : (transactionSettlementInstruction.instructionToPortfolioRate != null && this.instructionToPortfolioRate.compareTo(transactionSettlementInstruction.getInstructionToPortfolioRate()) == 0)) &&
         Objects.equals(this.settlementInLieu, transactionSettlementInstruction.settlementInLieu) &&
         Objects.equals(this.isActive, transactionSettlementInstruction.isActive) &&
         Objects.equals(this.properties, transactionSettlementInstruction.properties) &&

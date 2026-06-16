@@ -653,7 +653,7 @@ public class Allocation {
     return Objects.equals(this.id, allocation.id) &&
         Objects.equals(this.allocatedOrderId, allocation.allocatedOrderId) &&
         Objects.equals(this.portfolioId, allocation.portfolioId) &&
-        (this.quantity.compareTo(allocation.getQuantity()) == 0) &&
+        (this.quantity == null ? allocation.quantity == null : (allocation.quantity != null && this.quantity.compareTo(allocation.getQuantity()) == 0)) &&
         Objects.equals(this.instrumentIdentifiers, allocation.instrumentIdentifiers) &&
         Objects.equals(this.version, allocation.version) &&
         Objects.equals(this.properties, allocation.properties) &&
@@ -667,7 +667,7 @@ public class Allocation {
         Objects.equals(this.date, allocation.date) &&
         Objects.equals(this.price, allocation.price) &&
         Objects.equals(this.settlementCurrency, allocation.settlementCurrency) &&
-        (this.settlementCurrencyFxRate.compareTo(allocation.getSettlementCurrencyFxRate()) == 0) &&
+        (this.settlementCurrencyFxRate == null ? allocation.settlementCurrencyFxRate == null : (allocation.settlementCurrencyFxRate != null && this.settlementCurrencyFxRate.compareTo(allocation.getSettlementCurrencyFxRate()) == 0)) &&
         Objects.equals(this.counterparty, allocation.counterparty) &&
         Objects.equals(this.executionIds, allocation.executionIds) &&
         Objects.equals(this.dataModelMembership, allocation.dataModelMembership) &&

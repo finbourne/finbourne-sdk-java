@@ -159,8 +159,8 @@ public class RepoPartialClosureEvent extends InstrumentEvent {
     RepoPartialClosureEvent repoPartialClosureEvent = (RepoPartialClosureEvent) o;
     return Objects.equals(this.entitlementDate, repoPartialClosureEvent.entitlementDate) &&
         Objects.equals(this.settlementDate, repoPartialClosureEvent.settlementDate) &&
-        (this.cashAmount.compareTo(repoPartialClosureEvent.getCashAmount()) == 0) &&
-        (this.cashPercentage.compareTo(repoPartialClosureEvent.getCashPercentage()) == 0) &&
+        (this.cashAmount == null ? repoPartialClosureEvent.cashAmount == null : (repoPartialClosureEvent.cashAmount != null && this.cashAmount.compareTo(repoPartialClosureEvent.getCashAmount()) == 0)) &&
+        (this.cashPercentage == null ? repoPartialClosureEvent.cashPercentage == null : (repoPartialClosureEvent.cashPercentage != null && this.cashPercentage.compareTo(repoPartialClosureEvent.getCashPercentage()) == 0)) &&
         super.equals(o);
   }
 

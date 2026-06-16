@@ -99,7 +99,7 @@ public class MetricValue {
       return false;
     }
     MetricValue metricValue = (MetricValue) o;
-    return (this.value.compareTo(metricValue.getValue()) == 0) &&
+    return (this.value == null ? metricValue.value == null : (metricValue.value != null && this.value.compareTo(metricValue.getValue()) == 0)) &&
         Objects.equals(this.unit, metricValue.unit);
   }
 

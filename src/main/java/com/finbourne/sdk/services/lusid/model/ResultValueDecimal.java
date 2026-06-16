@@ -106,7 +106,7 @@ public class ResultValueDecimal extends ResultValue {
       return false;
     }
     ResultValueDecimal resultValueDecimal = (ResultValueDecimal) o;
-    return (this.value.compareTo(resultValueDecimal.getValue()) == 0) &&
+    return (this.value == null ? resultValueDecimal.value == null : (resultValueDecimal.value != null && this.value.compareTo(resultValueDecimal.getValue()) == 0)) &&
         Objects.equals(this.dimension, resultValueDecimal.dimension) &&
         super.equals(o);
   }

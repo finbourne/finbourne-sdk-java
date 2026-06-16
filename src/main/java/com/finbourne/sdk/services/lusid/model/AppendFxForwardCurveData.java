@@ -107,7 +107,7 @@ public class AppendFxForwardCurveData extends AppendMarketData {
     }
     AppendFxForwardCurveData appendFxForwardCurveData = (AppendFxForwardCurveData) o;
     return Objects.equals(this.date, appendFxForwardCurveData.date) &&
-        (this.rate.compareTo(appendFxForwardCurveData.getRate()) == 0) &&
+        (this.rate == null ? appendFxForwardCurveData.rate == null : (appendFxForwardCurveData.rate != null && this.rate.compareTo(appendFxForwardCurveData.getRate()) == 0)) &&
         super.equals(o);
   }
 

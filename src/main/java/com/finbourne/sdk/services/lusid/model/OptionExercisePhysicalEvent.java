@@ -405,8 +405,8 @@ public class OptionExercisePhysicalEvent extends InstrumentEvent {
         Objects.equals(this.optionType, optionExercisePhysicalEvent.optionType) &&
         Objects.equals(this.startDate, optionExercisePhysicalEvent.startDate) &&
         Objects.equals(this.strikeCurrency, optionExercisePhysicalEvent.strikeCurrency) &&
-        (this.strikePerUnit.compareTo(optionExercisePhysicalEvent.getStrikePerUnit()) == 0) &&
-        (this.underlyingValuePerUnit.compareTo(optionExercisePhysicalEvent.getUnderlyingValuePerUnit()) == 0) &&
+        (this.strikePerUnit == null ? optionExercisePhysicalEvent.strikePerUnit == null : (optionExercisePhysicalEvent.strikePerUnit != null && this.strikePerUnit.compareTo(optionExercisePhysicalEvent.getStrikePerUnit()) == 0)) &&
+        (this.underlyingValuePerUnit == null ? optionExercisePhysicalEvent.underlyingValuePerUnit == null : (optionExercisePhysicalEvent.underlyingValuePerUnit != null && this.underlyingValuePerUnit.compareTo(optionExercisePhysicalEvent.getUnderlyingValuePerUnit()) == 0)) &&
         Objects.equals(this.unitsRatio, optionExercisePhysicalEvent.unitsRatio) &&
         super.equals(o);
   }

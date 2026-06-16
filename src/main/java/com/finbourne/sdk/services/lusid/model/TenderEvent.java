@@ -342,7 +342,7 @@ public class TenderEvent extends InstrumentEvent {
         Objects.equals(this.recordDate, tenderEvent.recordDate) &&
         Objects.equals(this.paymentDate, tenderEvent.paymentDate) &&
         Objects.equals(this.newInstrument, tenderEvent.newInstrument) &&
-        (this.fractionalUnitsCashPrice.compareTo(tenderEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.fractionalUnitsCashPrice == null ? tenderEvent.fractionalUnitsCashPrice == null : (tenderEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(tenderEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, tenderEvent.fractionalUnitsCashCurrency) &&
         Objects.equals(this.securityOfferElections, tenderEvent.securityOfferElections) &&
         Objects.equals(this.cashAndSecurityOfferElections, tenderEvent.cashAndSecurityOfferElections) &&

@@ -176,7 +176,7 @@ public class WeightedInstrument {
       return false;
     }
     WeightedInstrument weightedInstrument = (WeightedInstrument) o;
-    return (this.quantity.compareTo(weightedInstrument.getQuantity()) == 0) &&
+    return (this.quantity == null ? weightedInstrument.quantity == null : (weightedInstrument.quantity != null && this.quantity.compareTo(weightedInstrument.getQuantity()) == 0)) &&
         Objects.equals(this.holdingIdentifier, weightedInstrument.holdingIdentifier) &&
         Objects.equals(this.instrument, weightedInstrument.instrument) &&
         Objects.equals(this.inLineLookupIdentifiers, weightedInstrument.inLineLookupIdentifiers) &&

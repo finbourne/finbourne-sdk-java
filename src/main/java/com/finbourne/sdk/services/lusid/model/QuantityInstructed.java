@@ -99,7 +99,7 @@ public class QuantityInstructed {
     }
     QuantityInstructed quantityInstructed = (QuantityInstructed) o;
     return Objects.equals(this.type, quantityInstructed.type) &&
-        (this.amount.compareTo(quantityInstructed.getAmount()) == 0);
+        (this.amount == null ? quantityInstructed.amount == null : (quantityInstructed.amount != null && this.amount.compareTo(quantityInstructed.getAmount()) == 0));
   }
 
   @Override

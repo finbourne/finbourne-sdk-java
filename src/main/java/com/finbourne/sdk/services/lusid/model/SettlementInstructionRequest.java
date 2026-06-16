@@ -413,10 +413,10 @@ public class SettlementInstructionRequest {
         Objects.equals(this.instrumentIdentifiers, settlementInstructionRequest.instrumentIdentifiers) &&
         Objects.equals(this.contractualSettlementDate, settlementInstructionRequest.contractualSettlementDate) &&
         Objects.equals(this.actualSettlementDate, settlementInstructionRequest.actualSettlementDate) &&
-        (this.units.compareTo(settlementInstructionRequest.getUnits()) == 0) &&
+        (this.units == null ? settlementInstructionRequest.units == null : (settlementInstructionRequest.units != null && this.units.compareTo(settlementInstructionRequest.getUnits()) == 0)) &&
         Objects.equals(this.subHoldingKeyOverrides, settlementInstructionRequest.subHoldingKeyOverrides) &&
         Objects.equals(this.custodianAccountOverride, settlementInstructionRequest.custodianAccountOverride) &&
-        (this.instructionToPortfolioRate.compareTo(settlementInstructionRequest.getInstructionToPortfolioRate()) == 0) &&
+        (this.instructionToPortfolioRate == null ? settlementInstructionRequest.instructionToPortfolioRate == null : (settlementInstructionRequest.instructionToPortfolioRate != null && this.instructionToPortfolioRate.compareTo(settlementInstructionRequest.getInstructionToPortfolioRate()) == 0)) &&
         Objects.equals(this.settlementInLieu, settlementInstructionRequest.settlementInLieu) &&
         Objects.equals(this.properties, settlementInstructionRequest.properties);
   }

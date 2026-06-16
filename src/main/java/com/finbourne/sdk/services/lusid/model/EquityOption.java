@@ -550,12 +550,12 @@ public class EquityOption extends LusidInstrument {
         Objects.equals(this.optionSettlementDate, equityOption.optionSettlementDate) &&
         Objects.equals(this.deliveryType, equityOption.deliveryType) &&
         Objects.equals(this.optionType, equityOption.optionType) &&
-        (this.strike.compareTo(equityOption.getStrike()) == 0) &&
+        (this.strike == null ? equityOption.strike == null : (equityOption.strike != null && this.strike.compareTo(equityOption.getStrike()) == 0)) &&
         Objects.equals(this.domCcy, equityOption.domCcy) &&
         Objects.equals(this.underlyingIdentifier, equityOption.underlyingIdentifier) &&
         Objects.equals(this.code, equityOption.code) &&
         Objects.equals(this.equityOptionType, equityOption.equityOptionType) &&
-        (this.numberOfShares.compareTo(equityOption.getNumberOfShares()) == 0) &&
+        (this.numberOfShares == null ? equityOption.numberOfShares == null : (equityOption.numberOfShares != null && this.numberOfShares.compareTo(equityOption.getNumberOfShares()) == 0)) &&
         Objects.equals(this.premium, equityOption.premium) &&
         Objects.equals(this.exerciseType, equityOption.exerciseType) &&
         Objects.equals(this.underlying, equityOption.underlying) &&

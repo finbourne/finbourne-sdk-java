@@ -188,7 +188,7 @@ public class Collateral {
     return Objects.equals(this.buyerReceivesCashflows, collateral.buyerReceivesCashflows) &&
         Objects.equals(this.buyerReceivesCorporateActionPayments, collateral.buyerReceivesCorporateActionPayments) &&
         Objects.equals(this.collateralInstruments, collateral.collateralInstruments) &&
-        (this.collateralValue.compareTo(collateral.getCollateralValue()) == 0) &&
+        (this.collateralValue == null ? collateral.collateralValue == null : (collateral.collateralValue != null && this.collateralValue.compareTo(collateral.getCollateralValue()) == 0)) &&
         Objects.equals(this.deferManufacturedPayments, collateral.deferManufacturedPayments);
   }
 

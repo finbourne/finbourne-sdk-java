@@ -305,10 +305,10 @@ public class MovementSettlementSummary {
         Objects.equals(this.instrumentScope, movementSettlementSummary.instrumentScope) &&
         Objects.equals(this.settlementMode, movementSettlementSummary.settlementMode) &&
         Objects.equals(this.contractualSettlementDate, movementSettlementSummary.contractualSettlementDate) &&
-        (this.units.compareTo(movementSettlementSummary.getUnits()) == 0) &&
-        (this.settledUnits.compareTo(movementSettlementSummary.getSettledUnits()) == 0) &&
-        (this.unsettledUnits.compareTo(movementSettlementSummary.getUnsettledUnits()) == 0) &&
-        (this.overdueUnits.compareTo(movementSettlementSummary.getOverdueUnits()) == 0);
+        (this.units == null ? movementSettlementSummary.units == null : (movementSettlementSummary.units != null && this.units.compareTo(movementSettlementSummary.getUnits()) == 0)) &&
+        (this.settledUnits == null ? movementSettlementSummary.settledUnits == null : (movementSettlementSummary.settledUnits != null && this.settledUnits.compareTo(movementSettlementSummary.getSettledUnits()) == 0)) &&
+        (this.unsettledUnits == null ? movementSettlementSummary.unsettledUnits == null : (movementSettlementSummary.unsettledUnits != null && this.unsettledUnits.compareTo(movementSettlementSummary.getUnsettledUnits()) == 0)) &&
+        (this.overdueUnits == null ? movementSettlementSummary.overdueUnits == null : (movementSettlementSummary.overdueUnits != null && this.overdueUnits.compareTo(movementSettlementSummary.getOverdueUnits()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

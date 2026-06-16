@@ -625,8 +625,8 @@ public class FundCashStatementRow {
         Objects.equals(this.cashflowBase, fundCashStatementRow.cashflowBase) &&
         Objects.equals(this.realisedFxPnl, fundCashStatementRow.realisedFxPnl) &&
         Objects.equals(this.costBasisBase, fundCashStatementRow.costBasisBase) &&
-        (this.avgRate.compareTo(fundCashStatementRow.getAvgRate()) == 0) &&
-        (this.fxRateMovement.compareTo(fundCashStatementRow.getFxRateMovement()) == 0) &&
+        (this.avgRate == null ? fundCashStatementRow.avgRate == null : (fundCashStatementRow.avgRate != null && this.avgRate.compareTo(fundCashStatementRow.getAvgRate()) == 0)) &&
+        (this.fxRateMovement == null ? fundCashStatementRow.fxRateMovement == null : (fundCashStatementRow.fxRateMovement != null && this.fxRateMovement.compareTo(fundCashStatementRow.getFxRateMovement()) == 0)) &&
         Objects.equals(this.properties, fundCashStatementRow.properties) &&
         Objects.equals(this.links, fundCashStatementRow.links);
   }

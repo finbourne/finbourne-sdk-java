@@ -262,9 +262,9 @@ public class TermDeposit extends LusidInstrument {
     TermDeposit termDeposit = (TermDeposit) o;
     return Objects.equals(this.startDate, termDeposit.startDate) &&
         Objects.equals(this.maturityDate, termDeposit.maturityDate) &&
-        (this.contractSize.compareTo(termDeposit.getContractSize()) == 0) &&
+        (this.contractSize == null ? termDeposit.contractSize == null : (termDeposit.contractSize != null && this.contractSize.compareTo(termDeposit.getContractSize()) == 0)) &&
         Objects.equals(this.flowConvention, termDeposit.flowConvention) &&
-        (this.rate.compareTo(termDeposit.getRate()) == 0) &&
+        (this.rate == null ? termDeposit.rate == null : (termDeposit.rate != null && this.rate.compareTo(termDeposit.getRate()) == 0)) &&
         Objects.equals(this.domCcy, termDeposit.domCcy) &&
         Objects.equals(this.tradingConventions, termDeposit.tradingConventions) &&
         Objects.equals(this.timeZoneConventions, termDeposit.timeZoneConventions) &&

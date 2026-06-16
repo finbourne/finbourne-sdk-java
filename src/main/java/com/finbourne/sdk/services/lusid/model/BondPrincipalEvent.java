@@ -160,7 +160,7 @@ public class BondPrincipalEvent extends InstrumentEvent {
     return Objects.equals(this.currency, bondPrincipalEvent.currency) &&
         Objects.equals(this.exDate, bondPrincipalEvent.exDate) &&
         Objects.equals(this.paymentDate, bondPrincipalEvent.paymentDate) &&
-        (this.principalPerUnit.compareTo(bondPrincipalEvent.getPrincipalPerUnit()) == 0) &&
+        (this.principalPerUnit == null ? bondPrincipalEvent.principalPerUnit == null : (bondPrincipalEvent.principalPerUnit != null && this.principalPerUnit.compareTo(bondPrincipalEvent.getPrincipalPerUnit()) == 0)) &&
         super.equals(o);
   }
 

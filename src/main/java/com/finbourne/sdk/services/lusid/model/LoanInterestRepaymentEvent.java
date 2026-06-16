@@ -196,7 +196,7 @@ public class LoanInterestRepaymentEvent extends InstrumentEvent {
     return Objects.equals(this.paymentDate, loanInterestRepaymentEvent.paymentDate) &&
         Objects.equals(this.exDate, loanInterestRepaymentEvent.exDate) &&
         Objects.equals(this.currency, loanInterestRepaymentEvent.currency) &&
-        (this.fraction.compareTo(loanInterestRepaymentEvent.getFraction()) == 0) &&
+        (this.fraction == null ? loanInterestRepaymentEvent.fraction == null : (loanInterestRepaymentEvent.fraction != null && this.fraction.compareTo(loanInterestRepaymentEvent.getFraction()) == 0)) &&
         Objects.equals(this.lapseElections, loanInterestRepaymentEvent.lapseElections) &&
         super.equals(o);
   }

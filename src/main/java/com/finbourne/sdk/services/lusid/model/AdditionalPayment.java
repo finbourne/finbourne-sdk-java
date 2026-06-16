@@ -149,7 +149,7 @@ public class AdditionalPayment {
       return false;
     }
     AdditionalPayment additionalPayment = (AdditionalPayment) o;
-    return (this.amount.compareTo(additionalPayment.getAmount()) == 0) &&
+    return (this.amount == null ? additionalPayment.amount == null : (additionalPayment.amount != null && this.amount.compareTo(additionalPayment.getAmount()) == 0)) &&
         Objects.equals(this.currency, additionalPayment.currency) &&
         Objects.equals(this.payDate, additionalPayment.payDate) &&
         Objects.equals(this.payReceive, additionalPayment.payReceive);

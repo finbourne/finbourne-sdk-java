@@ -374,10 +374,10 @@ public class TransactionSettlementBucket {
         Objects.equals(this.lusidInstrumentId, transactionSettlementBucket.lusidInstrumentId) &&
         Objects.equals(this.instrumentScope, transactionSettlementBucket.instrumentScope) &&
         Objects.equals(this.contractualSettlementDate, transactionSettlementBucket.contractualSettlementDate) &&
-        (this.contractedUnits.compareTo(transactionSettlementBucket.getContractedUnits()) == 0) &&
-        (this.settledUnits.compareTo(transactionSettlementBucket.getSettledUnits()) == 0) &&
-        (this.unsettledUnits.compareTo(transactionSettlementBucket.getUnsettledUnits()) == 0) &&
-        (this.overdueUnits.compareTo(transactionSettlementBucket.getOverdueUnits()) == 0) &&
+        (this.contractedUnits == null ? transactionSettlementBucket.contractedUnits == null : (transactionSettlementBucket.contractedUnits != null && this.contractedUnits.compareTo(transactionSettlementBucket.getContractedUnits()) == 0)) &&
+        (this.settledUnits == null ? transactionSettlementBucket.settledUnits == null : (transactionSettlementBucket.settledUnits != null && this.settledUnits.compareTo(transactionSettlementBucket.getSettledUnits()) == 0)) &&
+        (this.unsettledUnits == null ? transactionSettlementBucket.unsettledUnits == null : (transactionSettlementBucket.unsettledUnits != null && this.unsettledUnits.compareTo(transactionSettlementBucket.getUnsettledUnits()) == 0)) &&
+        (this.overdueUnits == null ? transactionSettlementBucket.overdueUnits == null : (transactionSettlementBucket.overdueUnits != null && this.overdueUnits.compareTo(transactionSettlementBucket.getOverdueUnits()) == 0)) &&
         Objects.equals(this.configuredSettlement, transactionSettlementBucket.configuredSettlement) &&
         Objects.equals(this.status, transactionSettlementBucket.status) &&
         Objects.equals(this.settlementInstructions, transactionSettlementBucket.settlementInstructions) &&

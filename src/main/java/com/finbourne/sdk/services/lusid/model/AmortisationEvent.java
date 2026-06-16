@@ -156,7 +156,7 @@ public class AmortisationEvent extends InstrumentEvent {
       return false;
     }
     AmortisationEvent amortisationEvent = (AmortisationEvent) o;
-    return (this.amountReduced.compareTo(amortisationEvent.getAmountReduced()) == 0) &&
+    return (this.amountReduced == null ? amortisationEvent.amountReduced == null : (amortisationEvent.amountReduced != null && this.amountReduced.compareTo(amortisationEvent.getAmountReduced()) == 0)) &&
         Objects.equals(this.domCcy, amortisationEvent.domCcy) &&
         Objects.equals(this.payReceive, amortisationEvent.payReceive) &&
         Objects.equals(this.paymentDate, amortisationEvent.paymentDate) &&

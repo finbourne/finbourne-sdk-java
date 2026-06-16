@@ -159,7 +159,7 @@ public class SwapPrincipalEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, swapPrincipalEvent.exDate) &&
         Objects.equals(this.paymentDate, swapPrincipalEvent.paymentDate) &&
         Objects.equals(this.currency, swapPrincipalEvent.currency) &&
-        (this.principalPerUnit.compareTo(swapPrincipalEvent.getPrincipalPerUnit()) == 0) &&
+        (this.principalPerUnit == null ? swapPrincipalEvent.principalPerUnit == null : (swapPrincipalEvent.principalPerUnit != null && this.principalPerUnit.compareTo(swapPrincipalEvent.getPrincipalPerUnit()) == 0)) &&
         super.equals(o);
   }
 

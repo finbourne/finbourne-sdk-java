@@ -487,7 +487,7 @@ public class LegDefinition {
         Objects.equals(this.indexConventionName, legDefinition.indexConventionName) &&
         Objects.equals(this.notionalExchangeType, legDefinition.notionalExchangeType) &&
         Objects.equals(this.payReceive, legDefinition.payReceive) &&
-        (this.rateOrSpread.compareTo(legDefinition.getRateOrSpread()) == 0) &&
+        (this.rateOrSpread == null ? legDefinition.rateOrSpread == null : (legDefinition.rateOrSpread != null && this.rateOrSpread.compareTo(legDefinition.getRateOrSpread()) == 0)) &&
         Objects.equals(this.resetConvention, legDefinition.resetConvention) &&
         Objects.equals(this.stubType, legDefinition.stubType) &&
         Objects.equals(this.compounding, legDefinition.compounding) &&

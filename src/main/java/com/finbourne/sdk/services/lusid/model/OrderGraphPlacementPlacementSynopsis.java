@@ -110,7 +110,7 @@ public class OrderGraphPlacementPlacementSynopsis {
     }
     OrderGraphPlacementPlacementSynopsis orderGraphPlacementPlacementSynopsis = (OrderGraphPlacementPlacementSynopsis) o;
     return Objects.equals(this.details, orderGraphPlacementPlacementSynopsis.details) &&
-        (this.quantity.compareTo(orderGraphPlacementPlacementSynopsis.getQuantity()) == 0);
+        (this.quantity == null ? orderGraphPlacementPlacementSynopsis.quantity == null : (orderGraphPlacementPlacementSynopsis.quantity != null && this.quantity.compareTo(orderGraphPlacementPlacementSynopsis.getQuantity()) == 0));
   }
 
   @Override

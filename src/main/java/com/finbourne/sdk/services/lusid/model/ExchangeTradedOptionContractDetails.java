@@ -462,8 +462,8 @@ public class ExchangeTradedOptionContractDetails {
     }
     ExchangeTradedOptionContractDetails exchangeTradedOptionContractDetails = (ExchangeTradedOptionContractDetails) o;
     return Objects.equals(this.domCcy, exchangeTradedOptionContractDetails.domCcy) &&
-        (this.strike.compareTo(exchangeTradedOptionContractDetails.getStrike()) == 0) &&
-        (this.contractSize.compareTo(exchangeTradedOptionContractDetails.getContractSize()) == 0) &&
+        (this.strike == null ? exchangeTradedOptionContractDetails.strike == null : (exchangeTradedOptionContractDetails.strike != null && this.strike.compareTo(exchangeTradedOptionContractDetails.getStrike()) == 0)) &&
+        (this.contractSize == null ? exchangeTradedOptionContractDetails.contractSize == null : (exchangeTradedOptionContractDetails.contractSize != null && this.contractSize.compareTo(exchangeTradedOptionContractDetails.getContractSize()) == 0)) &&
         Objects.equals(this.country, exchangeTradedOptionContractDetails.country) &&
         Objects.equals(this.deliveryType, exchangeTradedOptionContractDetails.deliveryType) &&
         Objects.equals(this.description, exchangeTradedOptionContractDetails.description) &&

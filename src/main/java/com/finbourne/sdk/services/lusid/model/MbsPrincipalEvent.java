@@ -160,7 +160,7 @@ public class MbsPrincipalEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, mbsPrincipalEvent.exDate) &&
         Objects.equals(this.paymentDate, mbsPrincipalEvent.paymentDate) &&
         Objects.equals(this.currency, mbsPrincipalEvent.currency) &&
-        (this.principalPerUnit.compareTo(mbsPrincipalEvent.getPrincipalPerUnit()) == 0) &&
+        (this.principalPerUnit == null ? mbsPrincipalEvent.principalPerUnit == null : (mbsPrincipalEvent.principalPerUnit != null && this.principalPerUnit.compareTo(mbsPrincipalEvent.getPrincipalPerUnit()) == 0)) &&
         super.equals(o);
   }
 

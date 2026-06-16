@@ -149,7 +149,7 @@ public class RoundingConvention {
       return false;
     }
     RoundingConvention roundingConvention = (RoundingConvention) o;
-    return (this.faceValue.compareTo(roundingConvention.getFaceValue()) == 0) &&
+    return (this.faceValue == null ? roundingConvention.faceValue == null : (roundingConvention.faceValue != null && this.faceValue.compareTo(roundingConvention.getFaceValue()) == 0)) &&
         Objects.equals(this.precision, roundingConvention.precision) &&
         Objects.equals(this.roundingTarget, roundingConvention.roundingTarget) &&
         Objects.equals(this.roundingType, roundingConvention.roundingType);

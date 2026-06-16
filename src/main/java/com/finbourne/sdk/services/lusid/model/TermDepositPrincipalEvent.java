@@ -134,7 +134,7 @@ public class TermDepositPrincipalEvent extends InstrumentEvent {
     TermDepositPrincipalEvent termDepositPrincipalEvent = (TermDepositPrincipalEvent) o;
     return Objects.equals(this.currency, termDepositPrincipalEvent.currency) &&
         Objects.equals(this.paymentDate, termDepositPrincipalEvent.paymentDate) &&
-        (this.principalPerUnit.compareTo(termDepositPrincipalEvent.getPrincipalPerUnit()) == 0) &&
+        (this.principalPerUnit == null ? termDepositPrincipalEvent.principalPerUnit == null : (termDepositPrincipalEvent.principalPerUnit != null && this.principalPerUnit.compareTo(termDepositPrincipalEvent.getPrincipalPerUnit()) == 0)) &&
         super.equals(o);
   }
 

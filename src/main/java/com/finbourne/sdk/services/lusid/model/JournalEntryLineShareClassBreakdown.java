@@ -150,9 +150,9 @@ public class JournalEntryLineShareClassBreakdown {
     }
     JournalEntryLineShareClassBreakdown journalEntryLineShareClassBreakdown = (JournalEntryLineShareClassBreakdown) o;
     return Objects.equals(this.shortCode, journalEntryLineShareClassBreakdown.shortCode) &&
-        (this.apportionmentFactor.compareTo(journalEntryLineShareClassBreakdown.getApportionmentFactor()) == 0) &&
-        (this.localValue.compareTo(journalEntryLineShareClassBreakdown.getLocalValue()) == 0) &&
-        (this.baseValue.compareTo(journalEntryLineShareClassBreakdown.getBaseValue()) == 0);
+        (this.apportionmentFactor == null ? journalEntryLineShareClassBreakdown.apportionmentFactor == null : (journalEntryLineShareClassBreakdown.apportionmentFactor != null && this.apportionmentFactor.compareTo(journalEntryLineShareClassBreakdown.getApportionmentFactor()) == 0)) &&
+        (this.localValue == null ? journalEntryLineShareClassBreakdown.localValue == null : (journalEntryLineShareClassBreakdown.localValue != null && this.localValue.compareTo(journalEntryLineShareClassBreakdown.getLocalValue()) == 0)) &&
+        (this.baseValue == null ? journalEntryLineShareClassBreakdown.baseValue == null : (journalEntryLineShareClassBreakdown.baseValue != null && this.baseValue.compareTo(journalEntryLineShareClassBreakdown.getBaseValue()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

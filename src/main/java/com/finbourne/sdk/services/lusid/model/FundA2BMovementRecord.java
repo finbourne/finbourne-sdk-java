@@ -617,15 +617,15 @@ public class FundA2BMovementRecord {
         Objects.equals(this.transactionId, fundA2BMovementRecord.transactionId) &&
         Objects.equals(this.movementName, fundA2BMovementRecord.movementName) &&
         Objects.equals(this.effectiveDate, fundA2BMovementRecord.effectiveDate) &&
-        (this.units.compareTo(fundA2BMovementRecord.getUnits()) == 0) &&
+        (this.units == null ? fundA2BMovementRecord.units == null : (fundA2BMovementRecord.units != null && this.units.compareTo(fundA2BMovementRecord.getUnits()) == 0)) &&
         Objects.equals(this.start, fundA2BMovementRecord.start) &&
         Objects.equals(this.flows, fundA2BMovementRecord.flows) &&
         Objects.equals(this.gains, fundA2BMovementRecord.gains) &&
         Objects.equals(this.carry, fundA2BMovementRecord.carry) &&
         Objects.equals(this.end, fundA2BMovementRecord.end) &&
-        (this.runningUnits.compareTo(fundA2BMovementRecord.getRunningUnits()) == 0) &&
+        (this.runningUnits == null ? fundA2BMovementRecord.runningUnits == null : (fundA2BMovementRecord.runningUnits != null && this.runningUnits.compareTo(fundA2BMovementRecord.getRunningUnits()) == 0)) &&
         Objects.equals(this.runningBalance, fundA2BMovementRecord.runningBalance) &&
-        (this.runningCost.compareTo(fundA2BMovementRecord.getRunningCost()) == 0) &&
+        (this.runningCost == null ? fundA2BMovementRecord.runningCost == null : (fundA2BMovementRecord.runningCost != null && this.runningCost.compareTo(fundA2BMovementRecord.getRunningCost()) == 0)) &&
         Objects.equals(this.properties, fundA2BMovementRecord.properties) &&
         Objects.equals(this.groupId, fundA2BMovementRecord.groupId) &&
         Objects.equals(this.errors, fundA2BMovementRecord.errors);

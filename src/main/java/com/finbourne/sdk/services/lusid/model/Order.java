@@ -662,7 +662,7 @@ public class Order {
     return Objects.equals(this.properties, order.properties) &&
         Objects.equals(this.version, order.version) &&
         Objects.equals(this.instrumentIdentifiers, order.instrumentIdentifiers) &&
-        (this.quantity.compareTo(order.getQuantity()) == 0) &&
+        (this.quantity == null ? order.quantity == null : (order.quantity != null && this.quantity.compareTo(order.getQuantity()) == 0)) &&
         Objects.equals(this.side, order.side) &&
         Objects.equals(this.orderBookId, order.orderBookId) &&
         Objects.equals(this.portfolioId, order.portfolioId) &&
@@ -678,7 +678,7 @@ public class Order {
         Objects.equals(this.stopPrice, order.stopPrice) &&
         Objects.equals(this.orderInstructionId, order.orderInstructionId) &&
         Objects.equals(this.packageId, order.packageId) &&
-        (this.weight.compareTo(order.getWeight()) == 0) &&
+        (this.weight == null ? order.weight == null : (order.weight != null && this.weight.compareTo(order.getWeight()) == 0)) &&
         Objects.equals(this.amount, order.amount) &&
         Objects.equals(this.dataModelMembership, order.dataModelMembership) &&
         Objects.equals(this.links, order.links);

@@ -98,8 +98,8 @@ public class InputTransition {
       return false;
     }
     InputTransition inputTransition = (InputTransition) o;
-    return (this.unitsFactor.compareTo(inputTransition.getUnitsFactor()) == 0) &&
-        (this.costFactor.compareTo(inputTransition.getCostFactor()) == 0);
+    return (this.unitsFactor == null ? inputTransition.unitsFactor == null : (inputTransition.unitsFactor != null && this.unitsFactor.compareTo(inputTransition.getUnitsFactor()) == 0)) &&
+        (this.costFactor == null ? inputTransition.costFactor == null : (inputTransition.costFactor != null && this.costFactor.compareTo(inputTransition.getCostFactor()) == 0));
   }
 
   @Override

@@ -109,7 +109,7 @@ public class OrderGraphPlacementExecutionSynopsis {
       return false;
     }
     OrderGraphPlacementExecutionSynopsis orderGraphPlacementExecutionSynopsis = (OrderGraphPlacementExecutionSynopsis) o;
-    return (this.quantity.compareTo(orderGraphPlacementExecutionSynopsis.getQuantity()) == 0) &&
+    return (this.quantity == null ? orderGraphPlacementExecutionSynopsis.quantity == null : (orderGraphPlacementExecutionSynopsis.quantity != null && this.quantity.compareTo(orderGraphPlacementExecutionSynopsis.getQuantity()) == 0)) &&
         Objects.equals(this.details, orderGraphPlacementExecutionSynopsis.details);
   }
 

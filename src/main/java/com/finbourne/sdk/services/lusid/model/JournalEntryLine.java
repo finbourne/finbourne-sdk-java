@@ -859,7 +859,7 @@ public class JournalEntryLine {
         Objects.equals(this.generalLedgerAccountCode, journalEntryLine.generalLedgerAccountCode) &&
         Objects.equals(this.local, journalEntryLine.local) &&
         Objects.equals(this.base, journalEntryLine.base) &&
-        (this.units.compareTo(journalEntryLine.getUnits()) == 0) &&
+        (this.units == null ? journalEntryLine.units == null : (journalEntryLine.units != null && this.units.compareTo(journalEntryLine.getUnits()) == 0)) &&
         Objects.equals(this.postingModuleCode, journalEntryLine.postingModuleCode) &&
         Objects.equals(this.postingRule, journalEntryLine.postingRule) &&
         Objects.equals(this.asAtDate, journalEntryLine.asAtDate) &&

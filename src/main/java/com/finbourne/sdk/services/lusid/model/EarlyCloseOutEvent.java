@@ -257,13 +257,13 @@ public class EarlyCloseOutEvent extends InstrumentEvent {
       return false;
     }
     EarlyCloseOutEvent earlyCloseOutEvent = (EarlyCloseOutEvent) o;
-    return (this.closeOutAmount.compareTo(earlyCloseOutEvent.getCloseOutAmount()) == 0) &&
+    return (this.closeOutAmount == null ? earlyCloseOutEvent.closeOutAmount == null : (earlyCloseOutEvent.closeOutAmount != null && this.closeOutAmount.compareTo(earlyCloseOutEvent.getCloseOutAmount()) == 0)) &&
         Objects.equals(this.closeOutCcy, earlyCloseOutEvent.closeOutCcy) &&
-        (this.closeOutToOtherRate.compareTo(earlyCloseOutEvent.getCloseOutToOtherRate()) == 0) &&
+        (this.closeOutToOtherRate == null ? earlyCloseOutEvent.closeOutToOtherRate == null : (earlyCloseOutEvent.closeOutToOtherRate != null && this.closeOutToOtherRate.compareTo(earlyCloseOutEvent.getCloseOutToOtherRate()) == 0)) &&
         Objects.equals(this.effectiveDate, earlyCloseOutEvent.effectiveDate) &&
-        (this.otherAmount.compareTo(earlyCloseOutEvent.getOtherAmount()) == 0) &&
+        (this.otherAmount == null ? earlyCloseOutEvent.otherAmount == null : (earlyCloseOutEvent.otherAmount != null && this.otherAmount.compareTo(earlyCloseOutEvent.getOtherAmount()) == 0)) &&
         Objects.equals(this.otherCcy, earlyCloseOutEvent.otherCcy) &&
-        (this.otherToCloseOutRate.compareTo(earlyCloseOutEvent.getOtherToCloseOutRate()) == 0) &&
+        (this.otherToCloseOutRate == null ? earlyCloseOutEvent.otherToCloseOutRate == null : (earlyCloseOutEvent.otherToCloseOutRate != null && this.otherToCloseOutRate.compareTo(earlyCloseOutEvent.getOtherToCloseOutRate()) == 0)) &&
         Objects.equals(this.settlementCcy, earlyCloseOutEvent.settlementCcy) &&
         super.equals(o);
   }

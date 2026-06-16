@@ -617,10 +617,10 @@ public class A2BMovementRecord {
         Objects.equals(this.transactionId, a2BMovementRecord.transactionId) &&
         Objects.equals(this.movementName, a2BMovementRecord.movementName) &&
         Objects.equals(this.effectiveDate, a2BMovementRecord.effectiveDate) &&
-        (this.units.compareTo(a2BMovementRecord.getUnits()) == 0) &&
-        (this.runningUnits.compareTo(a2BMovementRecord.getRunningUnits()) == 0) &&
+        (this.units == null ? a2BMovementRecord.units == null : (a2BMovementRecord.units != null && this.units.compareTo(a2BMovementRecord.getUnits()) == 0)) &&
+        (this.runningUnits == null ? a2BMovementRecord.runningUnits == null : (a2BMovementRecord.runningUnits != null && this.runningUnits.compareTo(a2BMovementRecord.getRunningUnits()) == 0)) &&
         Objects.equals(this.runningBalance, a2BMovementRecord.runningBalance) &&
-        (this.runningCost.compareTo(a2BMovementRecord.getRunningCost()) == 0) &&
+        (this.runningCost == null ? a2BMovementRecord.runningCost == null : (a2BMovementRecord.runningCost != null && this.runningCost.compareTo(a2BMovementRecord.getRunningCost()) == 0)) &&
         Objects.equals(this.start, a2BMovementRecord.start) &&
         Objects.equals(this.flows, a2BMovementRecord.flows) &&
         Objects.equals(this.gains, a2BMovementRecord.gains) &&

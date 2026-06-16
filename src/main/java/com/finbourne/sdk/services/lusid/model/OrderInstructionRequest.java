@@ -275,8 +275,8 @@ public class OrderInstructionRequest {
         Objects.equals(this.createdDate, orderInstructionRequest.createdDate) &&
         Objects.equals(this.portfolioId, orderInstructionRequest.portfolioId) &&
         Objects.equals(this.instrumentIdentifiers, orderInstructionRequest.instrumentIdentifiers) &&
-        (this.quantity.compareTo(orderInstructionRequest.getQuantity()) == 0) &&
-        (this.weight.compareTo(orderInstructionRequest.getWeight()) == 0) &&
+        (this.quantity == null ? orderInstructionRequest.quantity == null : (orderInstructionRequest.quantity != null && this.quantity.compareTo(orderInstructionRequest.getQuantity()) == 0)) &&
+        (this.weight == null ? orderInstructionRequest.weight == null : (orderInstructionRequest.weight != null && this.weight.compareTo(orderInstructionRequest.getWeight()) == 0)) &&
         Objects.equals(this.price, orderInstructionRequest.price) &&
         Objects.equals(this.properties, orderInstructionRequest.properties);
   }

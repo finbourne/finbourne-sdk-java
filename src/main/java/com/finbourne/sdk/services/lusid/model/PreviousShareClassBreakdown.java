@@ -127,7 +127,7 @@ public class PreviousShareClassBreakdown {
     PreviousShareClassBreakdown previousShareClassBreakdown = (PreviousShareClassBreakdown) o;
     return Objects.equals(this.nav, previousShareClassBreakdown.nav) &&
         Objects.equals(this.unitisation, previousShareClassBreakdown.unitisation) &&
-        (this.shareClassToFundFxRate.compareTo(previousShareClassBreakdown.getShareClassToFundFxRate()) == 0);
+        (this.shareClassToFundFxRate == null ? previousShareClassBreakdown.shareClassToFundFxRate == null : (previousShareClassBreakdown.shareClassToFundFxRate != null && this.shareClassToFundFxRate.compareTo(previousShareClassBreakdown.getShareClassToFundFxRate()) == 0));
   }
 
   @Override

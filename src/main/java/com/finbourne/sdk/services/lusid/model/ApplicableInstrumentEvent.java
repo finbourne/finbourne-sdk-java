@@ -454,7 +454,7 @@ public class ApplicableInstrumentEvent {
         Objects.equals(this.transactions, applicableInstrumentEvent.transactions) &&
         Objects.equals(this.transactionDiagnostics, applicableInstrumentEvent.transactionDiagnostics) &&
         Objects.equals(this.appliedInstrumentEventInstruction, applicableInstrumentEvent.appliedInstrumentEventInstruction) &&
-        (this.eligibleBalance.compareTo(applicableInstrumentEvent.getEligibleBalance()) == 0);
+        (this.eligibleBalance == null ? applicableInstrumentEvent.eligibleBalance == null : (applicableInstrumentEvent.eligibleBalance != null && this.eligibleBalance.compareTo(applicableInstrumentEvent.getEligibleBalance()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

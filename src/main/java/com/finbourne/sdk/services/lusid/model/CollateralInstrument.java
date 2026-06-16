@@ -99,7 +99,7 @@ public class CollateralInstrument {
       return false;
     }
     CollateralInstrument collateralInstrument = (CollateralInstrument) o;
-    return (this.units.compareTo(collateralInstrument.getUnits()) == 0) &&
+    return (this.units == null ? collateralInstrument.units == null : (collateralInstrument.units != null && this.units.compareTo(collateralInstrument.getUnits()) == 0)) &&
         Objects.equals(this.instrument, collateralInstrument.instrument);
   }
 

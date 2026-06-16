@@ -165,7 +165,7 @@ public class MarketQuote {
     }
     MarketQuote marketQuote = (MarketQuote) o;
     return Objects.equals(this.quoteType, marketQuote.quoteType) &&
-        (this.value.compareTo(marketQuote.getValue()) == 0);
+        (this.value == null ? marketQuote.value == null : (marketQuote.value != null && this.value.compareTo(marketQuote.getValue()) == 0));
   }
 
   @Override

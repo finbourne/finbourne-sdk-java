@@ -368,7 +368,7 @@ public class VendorLog {
         Objects.equals(this.destinationUrl, vendorLog.destinationUrl) &&
         Objects.equals(this.operation, vendorLog.operation) &&
         Objects.equals(this.outcome, vendorLog.outcome) &&
-        (this.duration.compareTo(vendorLog.getDuration()) == 0) &&
+        (this.duration == null ? vendorLog.duration == null : (vendorLog.duration != null && this.duration.compareTo(vendorLog.getDuration()) == 0)) &&
         Objects.equals(this.httpStatusCode, vendorLog.httpStatusCode) &&
         Objects.equals(this.userId, vendorLog.userId) &&
         Objects.equals(this.requestId, vendorLog.requestId) &&

@@ -564,7 +564,7 @@ public class Execution {
         Objects.equals(this.properties, execution.properties) &&
         Objects.equals(this.instrumentIdentifiers, execution.instrumentIdentifiers) &&
         Objects.equals(this.lusidInstrumentId, execution.lusidInstrumentId) &&
-        (this.quantity.compareTo(execution.getQuantity()) == 0) &&
+        (this.quantity == null ? execution.quantity == null : (execution.quantity != null && this.quantity.compareTo(execution.getQuantity()) == 0)) &&
         Objects.equals(this.state, execution.state) &&
         Objects.equals(this.side, execution.side) &&
         Objects.equals(this.type, execution.type) &&
@@ -572,9 +572,9 @@ public class Execution {
         Objects.equals(this.settlementDate, execution.settlementDate) &&
         Objects.equals(this.price, execution.price) &&
         Objects.equals(this.settlementCurrency, execution.settlementCurrency) &&
-        (this.settlementCurrencyFxRate.compareTo(execution.getSettlementCurrencyFxRate()) == 0) &&
+        (this.settlementCurrencyFxRate == null ? execution.settlementCurrencyFxRate == null : (execution.settlementCurrencyFxRate != null && this.settlementCurrencyFxRate.compareTo(execution.getSettlementCurrencyFxRate()) == 0)) &&
         Objects.equals(this.counterparty, execution.counterparty) &&
-        (this.averagePrice.compareTo(execution.getAveragePrice()) == 0) &&
+        (this.averagePrice == null ? execution.averagePrice == null : (execution.averagePrice != null && this.averagePrice.compareTo(execution.getAveragePrice()) == 0)) &&
         Objects.equals(this.version, execution.version) &&
         Objects.equals(this.dataModelMembership, execution.dataModelMembership) &&
         Objects.equals(this.links, execution.links);

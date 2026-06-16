@@ -149,10 +149,10 @@ public class RollPrincipalUpdates {
       return false;
     }
     RollPrincipalUpdates rollPrincipalUpdates = (RollPrincipalUpdates) o;
-    return (this.withdrawPrincipalAmount.compareTo(rollPrincipalUpdates.getWithdrawPrincipalAmount()) == 0) &&
-        (this.withdrawPrincipalPercentage.compareTo(rollPrincipalUpdates.getWithdrawPrincipalPercentage()) == 0) &&
-        (this.increasePrincipalAmount.compareTo(rollPrincipalUpdates.getIncreasePrincipalAmount()) == 0) &&
-        (this.increasePrincipalPercentage.compareTo(rollPrincipalUpdates.getIncreasePrincipalPercentage()) == 0);
+    return (this.withdrawPrincipalAmount == null ? rollPrincipalUpdates.withdrawPrincipalAmount == null : (rollPrincipalUpdates.withdrawPrincipalAmount != null && this.withdrawPrincipalAmount.compareTo(rollPrincipalUpdates.getWithdrawPrincipalAmount()) == 0)) &&
+        (this.withdrawPrincipalPercentage == null ? rollPrincipalUpdates.withdrawPrincipalPercentage == null : (rollPrincipalUpdates.withdrawPrincipalPercentage != null && this.withdrawPrincipalPercentage.compareTo(rollPrincipalUpdates.getWithdrawPrincipalPercentage()) == 0)) &&
+        (this.increasePrincipalAmount == null ? rollPrincipalUpdates.increasePrincipalAmount == null : (rollPrincipalUpdates.increasePrincipalAmount != null && this.increasePrincipalAmount.compareTo(rollPrincipalUpdates.getIncreasePrincipalAmount()) == 0)) &&
+        (this.increasePrincipalPercentage == null ? rollPrincipalUpdates.increasePrincipalPercentage == null : (rollPrincipalUpdates.increasePrincipalPercentage != null && this.increasePrincipalPercentage.compareTo(rollPrincipalUpdates.getIncreasePrincipalPercentage()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

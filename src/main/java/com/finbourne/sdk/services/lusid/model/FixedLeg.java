@@ -213,7 +213,7 @@ public class FixedLeg extends InstrumentLeg {
     return Objects.equals(this.startDate, fixedLeg.startDate) &&
         Objects.equals(this.maturityDate, fixedLeg.maturityDate) &&
         Objects.equals(this.legDefinition, fixedLeg.legDefinition) &&
-        (this.notional.compareTo(fixedLeg.getNotional()) == 0) &&
+        (this.notional == null ? fixedLeg.notional == null : (fixedLeg.notional != null && this.notional.compareTo(fixedLeg.getNotional()) == 0)) &&
         Objects.equals(this.overrides, fixedLeg.overrides) &&
         Objects.equals(this.timeZoneConventions, fixedLeg.timeZoneConventions) &&
         super.equals(o);

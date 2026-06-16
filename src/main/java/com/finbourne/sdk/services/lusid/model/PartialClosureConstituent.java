@@ -124,7 +124,7 @@ public class PartialClosureConstituent {
       return false;
     }
     PartialClosureConstituent partialClosureConstituent = (PartialClosureConstituent) o;
-    return (this.amount.compareTo(partialClosureConstituent.getAmount()) == 0) &&
+    return (this.amount == null ? partialClosureConstituent.amount == null : (partialClosureConstituent.amount != null && this.amount.compareTo(partialClosureConstituent.getAmount()) == 0)) &&
         Objects.equals(this.amountType, partialClosureConstituent.amountType) &&
         Objects.equals(this.instrument, partialClosureConstituent.instrument);
   }

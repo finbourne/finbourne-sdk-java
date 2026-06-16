@@ -224,7 +224,7 @@ public class MixedLotConstituentsElection {
         Objects.equals(this.isChosen, mixedLotConstituentsElection.isChosen) &&
         Objects.equals(this.securitiesConstituents, mixedLotConstituentsElection.securitiesConstituents) &&
         Objects.equals(this.cashConstituents, mixedLotConstituentsElection.cashConstituents) &&
-        (this.costFactor.compareTo(mixedLotConstituentsElection.getCostFactor()) == 0);
+        (this.costFactor == null ? mixedLotConstituentsElection.costFactor == null : (mixedLotConstituentsElection.costFactor != null && this.costFactor.compareTo(mixedLotConstituentsElection.getCostFactor()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

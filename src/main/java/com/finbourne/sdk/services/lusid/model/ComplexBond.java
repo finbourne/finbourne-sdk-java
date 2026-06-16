@@ -316,7 +316,7 @@ public class ComplexBond extends LusidInstrument {
     return Objects.equals(this.identifiers, complexBond.identifiers) &&
         Objects.equals(this.calculationType, complexBond.calculationType) &&
         Objects.equals(this.schedules, complexBond.schedules) &&
-        (this.originalIssuePrice.compareTo(complexBond.getOriginalIssuePrice()) == 0) &&
+        (this.originalIssuePrice == null ? complexBond.originalIssuePrice == null : (complexBond.originalIssuePrice != null && this.originalIssuePrice.compareTo(complexBond.getOriginalIssuePrice()) == 0)) &&
         Objects.equals(this.roundingConventions, complexBond.roundingConventions) &&
         Objects.equals(this.assetBacked, complexBond.assetBacked) &&
         Objects.equals(this.assetPoolIdentifier, complexBond.assetPoolIdentifier) &&

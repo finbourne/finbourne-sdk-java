@@ -558,12 +558,12 @@ public class DutchAuctionEvent extends InstrumentEvent {
         Objects.equals(this.exDate, dutchAuctionEvent.exDate) &&
         Objects.equals(this.recordDate, dutchAuctionEvent.recordDate) &&
         Objects.equals(this.announcementDate, dutchAuctionEvent.announcementDate) &&
-        (this.targetQuantity.compareTo(dutchAuctionEvent.getTargetQuantity()) == 0) &&
-        (this.prorationRate.compareTo(dutchAuctionEvent.getProrationRate()) == 0) &&
+        (this.targetQuantity == null ? dutchAuctionEvent.targetQuantity == null : (dutchAuctionEvent.targetQuantity != null && this.targetQuantity.compareTo(dutchAuctionEvent.getTargetQuantity()) == 0)) &&
+        (this.prorationRate == null ? dutchAuctionEvent.prorationRate == null : (dutchAuctionEvent.prorationRate != null && this.prorationRate.compareTo(dutchAuctionEvent.getProrationRate()) == 0)) &&
         Objects.equals(this.newInstrument, dutchAuctionEvent.newInstrument) &&
-        (this.fractionalUnitsCashPrice.compareTo(dutchAuctionEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.fractionalUnitsCashPrice == null ? dutchAuctionEvent.fractionalUnitsCashPrice == null : (dutchAuctionEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(dutchAuctionEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, dutchAuctionEvent.fractionalUnitsCashCurrency) &&
-        (this.bidPrice.compareTo(dutchAuctionEvent.getBidPrice()) == 0) &&
+        (this.bidPrice == null ? dutchAuctionEvent.bidPrice == null : (dutchAuctionEvent.bidPrice != null && this.bidPrice.compareTo(dutchAuctionEvent.getBidPrice()) == 0)) &&
         super.equals(o);
   }
 

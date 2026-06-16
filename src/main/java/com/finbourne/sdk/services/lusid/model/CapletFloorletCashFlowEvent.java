@@ -159,7 +159,7 @@ public class CapletFloorletCashFlowEvent extends InstrumentEvent {
     return Objects.equals(this.entitlementDate, capletFloorletCashFlowEvent.entitlementDate) &&
         Objects.equals(this.paymentDate, capletFloorletCashFlowEvent.paymentDate) &&
         Objects.equals(this.currency, capletFloorletCashFlowEvent.currency) &&
-        (this.cashFlowPerUnit.compareTo(capletFloorletCashFlowEvent.getCashFlowPerUnit()) == 0) &&
+        (this.cashFlowPerUnit == null ? capletFloorletCashFlowEvent.cashFlowPerUnit == null : (capletFloorletCashFlowEvent.cashFlowPerUnit != null && this.cashFlowPerUnit.compareTo(capletFloorletCashFlowEvent.getCashFlowPerUnit()) == 0)) &&
         super.equals(o);
   }
 

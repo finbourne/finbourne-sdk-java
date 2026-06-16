@@ -360,11 +360,11 @@ public class FxForward extends LusidInstrument {
     FxForward fxForward = (FxForward) o;
     return Objects.equals(this.startDate, fxForward.startDate) &&
         Objects.equals(this.maturityDate, fxForward.maturityDate) &&
-        (this.domAmount.compareTo(fxForward.getDomAmount()) == 0) &&
+        (this.domAmount == null ? fxForward.domAmount == null : (fxForward.domAmount != null && this.domAmount.compareTo(fxForward.getDomAmount()) == 0)) &&
         Objects.equals(this.domCcy, fxForward.domCcy) &&
-        (this.fgnAmount.compareTo(fxForward.getFgnAmount()) == 0) &&
+        (this.fgnAmount == null ? fxForward.fgnAmount == null : (fxForward.fgnAmount != null && this.fgnAmount.compareTo(fxForward.getFgnAmount()) == 0)) &&
         Objects.equals(this.fgnCcy, fxForward.fgnCcy) &&
-        (this.refSpotRate.compareTo(fxForward.getRefSpotRate()) == 0) &&
+        (this.refSpotRate == null ? fxForward.refSpotRate == null : (fxForward.refSpotRate != null && this.refSpotRate.compareTo(fxForward.getRefSpotRate()) == 0)) &&
         Objects.equals(this.isNdf, fxForward.isNdf) &&
         Objects.equals(this.fixingDate, fxForward.fixingDate) &&
         Objects.equals(this.settlementCcy, fxForward.settlementCcy) &&

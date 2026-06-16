@@ -338,12 +338,12 @@ public class InflationLeg extends LusidInstrument {
     return Objects.equals(this.startDate, inflationLeg.startDate) &&
         Objects.equals(this.maturityDate, inflationLeg.maturityDate) &&
         Objects.equals(this.flowConventions, inflationLeg.flowConventions) &&
-        (this.baseCPI.compareTo(inflationLeg.getBaseCPI()) == 0) &&
+        (this.baseCPI == null ? inflationLeg.baseCPI == null : (inflationLeg.baseCPI != null && this.baseCPI.compareTo(inflationLeg.getBaseCPI()) == 0)) &&
         Objects.equals(this.calculationType, inflationLeg.calculationType) &&
-        (this.capRate.compareTo(inflationLeg.getCapRate()) == 0) &&
-        (this.floorRate.compareTo(inflationLeg.getFloorRate()) == 0) &&
+        (this.capRate == null ? inflationLeg.capRate == null : (inflationLeg.capRate != null && this.capRate.compareTo(inflationLeg.getCapRate()) == 0)) &&
+        (this.floorRate == null ? inflationLeg.floorRate == null : (inflationLeg.floorRate != null && this.floorRate.compareTo(inflationLeg.getFloorRate()) == 0)) &&
         Objects.equals(this.inflationIndexConventions, inflationLeg.inflationIndexConventions) &&
-        (this.notional.compareTo(inflationLeg.getNotional()) == 0) &&
+        (this.notional == null ? inflationLeg.notional == null : (inflationLeg.notional != null && this.notional.compareTo(inflationLeg.getNotional()) == 0)) &&
         Objects.equals(this.payReceive, inflationLeg.payReceive) &&
         Objects.equals(this.timeZoneConventions, inflationLeg.timeZoneConventions) &&
         super.equals(o);

@@ -99,8 +99,8 @@ public class LogGeolocation {
       return false;
     }
     LogGeolocation logGeolocation = (LogGeolocation) o;
-    return (this.latitude.compareTo(logGeolocation.getLatitude()) == 0) &&
-        (this.longitude.compareTo(logGeolocation.getLongitude()) == 0);
+    return (this.latitude == null ? logGeolocation.latitude == null : (logGeolocation.latitude != null && this.latitude.compareTo(logGeolocation.getLatitude()) == 0)) &&
+        (this.longitude == null ? logGeolocation.longitude == null : (logGeolocation.longitude != null && this.longitude.compareTo(logGeolocation.getLongitude()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

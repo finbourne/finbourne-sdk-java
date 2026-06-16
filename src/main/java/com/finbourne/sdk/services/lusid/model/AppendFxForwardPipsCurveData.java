@@ -107,7 +107,7 @@ public class AppendFxForwardPipsCurveData extends AppendMarketData {
     }
     AppendFxForwardPipsCurveData appendFxForwardPipsCurveData = (AppendFxForwardPipsCurveData) o;
     return Objects.equals(this.date, appendFxForwardPipsCurveData.date) &&
-        (this.pipRate.compareTo(appendFxForwardPipsCurveData.getPipRate()) == 0) &&
+        (this.pipRate == null ? appendFxForwardPipsCurveData.pipRate == null : (appendFxForwardPipsCurveData.pipRate != null && this.pipRate.compareTo(appendFxForwardPipsCurveData.getPipRate()) == 0)) &&
         super.equals(o);
   }
 

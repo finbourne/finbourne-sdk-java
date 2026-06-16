@@ -209,8 +209,8 @@ public class CdxCreditEvent extends InstrumentEvent {
     CdxCreditEvent cdxCreditEvent = (CdxCreditEvent) o;
     return Objects.equals(this.effectiveDate, cdxCreditEvent.effectiveDate) &&
         Objects.equals(this.auctionDate, cdxCreditEvent.auctionDate) &&
-        (this.recoveryRate.compareTo(cdxCreditEvent.getRecoveryRate()) == 0) &&
-        (this.constituentWeight.compareTo(cdxCreditEvent.getConstituentWeight()) == 0) &&
+        (this.recoveryRate == null ? cdxCreditEvent.recoveryRate == null : (cdxCreditEvent.recoveryRate != null && this.recoveryRate.compareTo(cdxCreditEvent.getRecoveryRate()) == 0)) &&
+        (this.constituentWeight == null ? cdxCreditEvent.constituentWeight == null : (cdxCreditEvent.constituentWeight != null && this.constituentWeight.compareTo(cdxCreditEvent.getConstituentWeight()) == 0)) &&
         Objects.equals(this.constituentReference, cdxCreditEvent.constituentReference) &&
         Objects.equals(this.paymentDate, cdxCreditEvent.paymentDate) &&
         super.equals(o);

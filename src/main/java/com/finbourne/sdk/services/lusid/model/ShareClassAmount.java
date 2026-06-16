@@ -98,8 +98,8 @@ public class ShareClassAmount {
       return false;
     }
     ShareClassAmount shareClassAmount = (ShareClassAmount) o;
-    return (this.fundCurrencyAmount.compareTo(shareClassAmount.getFundCurrencyAmount()) == 0) &&
-        (this.shareClassCurrencyAmount.compareTo(shareClassAmount.getShareClassCurrencyAmount()) == 0);
+    return (this.fundCurrencyAmount == null ? shareClassAmount.fundCurrencyAmount == null : (shareClassAmount.fundCurrencyAmount != null && this.fundCurrencyAmount.compareTo(shareClassAmount.getFundCurrencyAmount()) == 0)) &&
+        (this.shareClassCurrencyAmount == null ? shareClassAmount.shareClassCurrencyAmount == null : (shareClassAmount.shareClassCurrencyAmount != null && this.shareClassCurrencyAmount.compareTo(shareClassAmount.getShareClassCurrencyAmount()) == 0));
   }
 
   @Override

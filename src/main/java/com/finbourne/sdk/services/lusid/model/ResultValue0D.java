@@ -132,7 +132,7 @@ public class ResultValue0D extends ResultValue {
     }
     ResultValue0D resultValue0D = (ResultValue0D) o;
     return Objects.equals(this.units, resultValue0D.units) &&
-        (this.value.compareTo(resultValue0D.getValue()) == 0) &&
+        (this.value == null ? resultValue0D.value == null : (resultValue0D.value != null && this.value.compareTo(resultValue0D.getValue()) == 0)) &&
         Objects.equals(this.dimension, resultValue0D.dimension) &&
         super.equals(o);
   }

@@ -563,10 +563,10 @@ public class TransactionRequest {
         Objects.equals(this.instrumentIdentifiers, transactionRequest.instrumentIdentifiers) &&
         Objects.equals(this.transactionDate, transactionRequest.transactionDate) &&
         Objects.equals(this.settlementDate, transactionRequest.settlementDate) &&
-        (this.units.compareTo(transactionRequest.getUnits()) == 0) &&
+        (this.units == null ? transactionRequest.units == null : (transactionRequest.units != null && this.units.compareTo(transactionRequest.getUnits()) == 0)) &&
         Objects.equals(this.transactionPrice, transactionRequest.transactionPrice) &&
         Objects.equals(this.totalConsideration, transactionRequest.totalConsideration) &&
-        (this.exchangeRate.compareTo(transactionRequest.getExchangeRate()) == 0) &&
+        (this.exchangeRate == null ? transactionRequest.exchangeRate == null : (transactionRequest.exchangeRate != null && this.exchangeRate.compareTo(transactionRequest.getExchangeRate()) == 0)) &&
         Objects.equals(this.transactionCurrency, transactionRequest.transactionCurrency) &&
         Objects.equals(this.properties, transactionRequest.properties) &&
         Objects.equals(this.counterpartyId, transactionRequest.counterpartyId) &&

@@ -276,15 +276,15 @@ public class TargetTaxLotRequest {
       return false;
     }
     TargetTaxLotRequest targetTaxLotRequest = (TargetTaxLotRequest) o;
-    return (this.units.compareTo(targetTaxLotRequest.getUnits()) == 0) &&
+    return (this.units == null ? targetTaxLotRequest.units == null : (targetTaxLotRequest.units != null && this.units.compareTo(targetTaxLotRequest.getUnits()) == 0)) &&
         Objects.equals(this.cost, targetTaxLotRequest.cost) &&
-        (this.portfolioCost.compareTo(targetTaxLotRequest.getPortfolioCost()) == 0) &&
-        (this.price.compareTo(targetTaxLotRequest.getPrice()) == 0) &&
+        (this.portfolioCost == null ? targetTaxLotRequest.portfolioCost == null : (targetTaxLotRequest.portfolioCost != null && this.portfolioCost.compareTo(targetTaxLotRequest.getPortfolioCost()) == 0)) &&
+        (this.price == null ? targetTaxLotRequest.price == null : (targetTaxLotRequest.price != null && this.price.compareTo(targetTaxLotRequest.getPrice()) == 0)) &&
         Objects.equals(this.purchaseDate, targetTaxLotRequest.purchaseDate) &&
         Objects.equals(this.settlementDate, targetTaxLotRequest.settlementDate) &&
-        (this.notionalCost.compareTo(targetTaxLotRequest.getNotionalCost()) == 0) &&
-        (this.variationMargin.compareTo(targetTaxLotRequest.getVariationMargin()) == 0) &&
-        (this.variationMarginPortfolioCcy.compareTo(targetTaxLotRequest.getVariationMarginPortfolioCcy()) == 0);
+        (this.notionalCost == null ? targetTaxLotRequest.notionalCost == null : (targetTaxLotRequest.notionalCost != null && this.notionalCost.compareTo(targetTaxLotRequest.getNotionalCost()) == 0)) &&
+        (this.variationMargin == null ? targetTaxLotRequest.variationMargin == null : (targetTaxLotRequest.variationMargin != null && this.variationMargin.compareTo(targetTaxLotRequest.getVariationMargin()) == 0)) &&
+        (this.variationMarginPortfolioCcy == null ? targetTaxLotRequest.variationMarginPortfolioCcy == null : (targetTaxLotRequest.variationMarginPortfolioCcy != null && this.variationMarginPortfolioCcy.compareTo(targetTaxLotRequest.getVariationMarginPortfolioCcy()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

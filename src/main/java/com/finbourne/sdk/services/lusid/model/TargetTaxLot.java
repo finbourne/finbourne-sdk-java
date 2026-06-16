@@ -276,15 +276,15 @@ public class TargetTaxLot {
       return false;
     }
     TargetTaxLot targetTaxLot = (TargetTaxLot) o;
-    return (this.units.compareTo(targetTaxLot.getUnits()) == 0) &&
+    return (this.units == null ? targetTaxLot.units == null : (targetTaxLot.units != null && this.units.compareTo(targetTaxLot.getUnits()) == 0)) &&
         Objects.equals(this.cost, targetTaxLot.cost) &&
-        (this.portfolioCost.compareTo(targetTaxLot.getPortfolioCost()) == 0) &&
-        (this.price.compareTo(targetTaxLot.getPrice()) == 0) &&
+        (this.portfolioCost == null ? targetTaxLot.portfolioCost == null : (targetTaxLot.portfolioCost != null && this.portfolioCost.compareTo(targetTaxLot.getPortfolioCost()) == 0)) &&
+        (this.price == null ? targetTaxLot.price == null : (targetTaxLot.price != null && this.price.compareTo(targetTaxLot.getPrice()) == 0)) &&
         Objects.equals(this.purchaseDate, targetTaxLot.purchaseDate) &&
         Objects.equals(this.settlementDate, targetTaxLot.settlementDate) &&
-        (this.notionalCost.compareTo(targetTaxLot.getNotionalCost()) == 0) &&
-        (this.variationMargin.compareTo(targetTaxLot.getVariationMargin()) == 0) &&
-        (this.variationMarginPortfolioCcy.compareTo(targetTaxLot.getVariationMarginPortfolioCcy()) == 0);
+        (this.notionalCost == null ? targetTaxLot.notionalCost == null : (targetTaxLot.notionalCost != null && this.notionalCost.compareTo(targetTaxLot.getNotionalCost()) == 0)) &&
+        (this.variationMargin == null ? targetTaxLot.variationMargin == null : (targetTaxLot.variationMargin != null && this.variationMargin.compareTo(targetTaxLot.getVariationMargin()) == 0)) &&
+        (this.variationMarginPortfolioCcy == null ? targetTaxLot.variationMarginPortfolioCcy == null : (targetTaxLot.variationMarginPortfolioCcy != null && this.variationMarginPortfolioCcy.compareTo(targetTaxLot.getVariationMarginPortfolioCcy()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

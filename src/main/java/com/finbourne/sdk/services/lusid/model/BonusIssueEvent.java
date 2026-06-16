@@ -315,7 +315,7 @@ public class BonusIssueEvent extends InstrumentEvent {
         Objects.equals(this.exDate, bonusIssueEvent.exDate) &&
         Objects.equals(this.recordDate, bonusIssueEvent.recordDate) &&
         Objects.equals(this.paymentDate, bonusIssueEvent.paymentDate) &&
-        (this.fractionalUnitsCashPrice.compareTo(bonusIssueEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.fractionalUnitsCashPrice == null ? bonusIssueEvent.fractionalUnitsCashPrice == null : (bonusIssueEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(bonusIssueEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, bonusIssueEvent.fractionalUnitsCashCurrency) &&
         Objects.equals(this.securityOfferElections, bonusIssueEvent.securityOfferElections) &&
         Objects.equals(this.cashOfferElections, bonusIssueEvent.cashOfferElections) &&

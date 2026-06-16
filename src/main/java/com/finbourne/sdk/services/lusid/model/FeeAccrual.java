@@ -289,11 +289,11 @@ public class FeeAccrual {
     return Objects.equals(this.effectiveAt, feeAccrual.effectiveAt) &&
         Objects.equals(this.code, feeAccrual.code) &&
         Objects.equals(this.name, feeAccrual.name) &&
-        (this.calculationBase.compareTo(feeAccrual.getCalculationBase()) == 0) &&
-        (this.amount.compareTo(feeAccrual.getAmount()) == 0) &&
-        (this.previousAccrual.compareTo(feeAccrual.getPreviousAccrual()) == 0) &&
-        (this.previousTotalAccrual.compareTo(feeAccrual.getPreviousTotalAccrual()) == 0) &&
-        (this.totalAccrual.compareTo(feeAccrual.getTotalAccrual()) == 0) &&
+        (this.calculationBase == null ? feeAccrual.calculationBase == null : (feeAccrual.calculationBase != null && this.calculationBase.compareTo(feeAccrual.getCalculationBase()) == 0)) &&
+        (this.amount == null ? feeAccrual.amount == null : (feeAccrual.amount != null && this.amount.compareTo(feeAccrual.getAmount()) == 0)) &&
+        (this.previousAccrual == null ? feeAccrual.previousAccrual == null : (feeAccrual.previousAccrual != null && this.previousAccrual.compareTo(feeAccrual.getPreviousAccrual()) == 0)) &&
+        (this.previousTotalAccrual == null ? feeAccrual.previousTotalAccrual == null : (feeAccrual.previousTotalAccrual != null && this.previousTotalAccrual.compareTo(feeAccrual.getPreviousTotalAccrual()) == 0)) &&
+        (this.totalAccrual == null ? feeAccrual.totalAccrual == null : (feeAccrual.totalAccrual != null && this.totalAccrual.compareTo(feeAccrual.getTotalAccrual()) == 0)) &&
         Objects.equals(this.links, feeAccrual.links);
   }
 

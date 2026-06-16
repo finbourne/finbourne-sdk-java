@@ -174,7 +174,7 @@ public class CashOfferElection {
     }
     CashOfferElection cashOfferElection = (CashOfferElection) o;
     return Objects.equals(this.cashOfferCurrency, cashOfferElection.cashOfferCurrency) &&
-        (this.cashOfferPrice.compareTo(cashOfferElection.getCashOfferPrice()) == 0) &&
+        (this.cashOfferPrice == null ? cashOfferElection.cashOfferPrice == null : (cashOfferElection.cashOfferPrice != null && this.cashOfferPrice.compareTo(cashOfferElection.getCashOfferPrice()) == 0)) &&
         Objects.equals(this.electionKey, cashOfferElection.electionKey) &&
         Objects.equals(this.isChosen, cashOfferElection.isChosen) &&
         Objects.equals(this.isDefault, cashOfferElection.isDefault);

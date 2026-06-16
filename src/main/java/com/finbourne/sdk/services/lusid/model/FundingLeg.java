@@ -187,7 +187,7 @@ public class FundingLeg extends InstrumentLeg {
     return Objects.equals(this.startDate, fundingLeg.startDate) &&
         Objects.equals(this.maturityDate, fundingLeg.maturityDate) &&
         Objects.equals(this.legDefinition, fundingLeg.legDefinition) &&
-        (this.notional.compareTo(fundingLeg.getNotional()) == 0) &&
+        (this.notional == null ? fundingLeg.notional == null : (fundingLeg.notional != null && this.notional.compareTo(fundingLeg.getNotional()) == 0)) &&
         Objects.equals(this.timeZoneConventions, fundingLeg.timeZoneConventions) &&
         super.equals(o);
   }

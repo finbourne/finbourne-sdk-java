@@ -388,16 +388,16 @@ public class RepurchaseOfferEvent extends InstrumentEvent {
     RepurchaseOfferEvent repurchaseOfferEvent = (RepurchaseOfferEvent) o;
     return Objects.equals(this.paymentDate, repurchaseOfferEvent.paymentDate) &&
         Objects.equals(this.marketDeadlineDate, repurchaseOfferEvent.marketDeadlineDate) &&
-        (this.repurchaseQuantity.compareTo(repurchaseOfferEvent.getRepurchaseQuantity()) == 0) &&
+        (this.repurchaseQuantity == null ? repurchaseOfferEvent.repurchaseQuantity == null : (repurchaseOfferEvent.repurchaseQuantity != null && this.repurchaseQuantity.compareTo(repurchaseOfferEvent.getRepurchaseQuantity()) == 0)) &&
         Objects.equals(this.cashOfferElections, repurchaseOfferEvent.cashOfferElections) &&
         Objects.equals(this.lapseElections, repurchaseOfferEvent.lapseElections) &&
         Objects.equals(this.tenderOfferElections, repurchaseOfferEvent.tenderOfferElections) &&
-        (this.prorationRate.compareTo(repurchaseOfferEvent.getProrationRate()) == 0) &&
+        (this.prorationRate == null ? repurchaseOfferEvent.prorationRate == null : (repurchaseOfferEvent.prorationRate != null && this.prorationRate.compareTo(repurchaseOfferEvent.getProrationRate()) == 0)) &&
         Objects.equals(this.responseDeadlineDate, repurchaseOfferEvent.responseDeadlineDate) &&
         Objects.equals(this.earlyResponseDeadline, repurchaseOfferEvent.earlyResponseDeadline) &&
-        (this.minPieceSize.compareTo(repurchaseOfferEvent.getMinPieceSize()) == 0) &&
-        (this.minIncrement.compareTo(repurchaseOfferEvent.getMinIncrement()) == 0) &&
-        (this.accruedInterestPerUnit.compareTo(repurchaseOfferEvent.getAccruedInterestPerUnit()) == 0) &&
+        (this.minPieceSize == null ? repurchaseOfferEvent.minPieceSize == null : (repurchaseOfferEvent.minPieceSize != null && this.minPieceSize.compareTo(repurchaseOfferEvent.getMinPieceSize()) == 0)) &&
+        (this.minIncrement == null ? repurchaseOfferEvent.minIncrement == null : (repurchaseOfferEvent.minIncrement != null && this.minIncrement.compareTo(repurchaseOfferEvent.getMinIncrement()) == 0)) &&
+        (this.accruedInterestPerUnit == null ? repurchaseOfferEvent.accruedInterestPerUnit == null : (repurchaseOfferEvent.accruedInterestPerUnit != null && this.accruedInterestPerUnit.compareTo(repurchaseOfferEvent.getAccruedInterestPerUnit()) == 0)) &&
         super.equals(o);
   }
 

@@ -361,9 +361,9 @@ public class ContractForDifference extends LusidInstrument {
     return Objects.equals(this.startDate, contractForDifference.startDate) &&
         Objects.equals(this.maturityDate, contractForDifference.maturityDate) &&
         Objects.equals(this.code, contractForDifference.code) &&
-        (this.contractSize.compareTo(contractForDifference.getContractSize()) == 0) &&
+        (this.contractSize == null ? contractForDifference.contractSize == null : (contractForDifference.contractSize != null && this.contractSize.compareTo(contractForDifference.getContractSize()) == 0)) &&
         Objects.equals(this.payCcy, contractForDifference.payCcy) &&
-        (this.referenceRate.compareTo(contractForDifference.getReferenceRate()) == 0) &&
+        (this.referenceRate == null ? contractForDifference.referenceRate == null : (contractForDifference.referenceRate != null && this.referenceRate.compareTo(contractForDifference.getReferenceRate()) == 0)) &&
         Objects.equals(this.type, contractForDifference.type) &&
         Objects.equals(this.underlyingCcy, contractForDifference.underlyingCcy) &&
         Objects.equals(this.underlyingIdentifier, contractForDifference.underlyingIdentifier) &&

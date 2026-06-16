@@ -166,7 +166,7 @@ public class ReconcileDateTimeRule extends ReconciliationRule {
     }
     ReconcileDateTimeRule reconcileDateTimeRule = (ReconcileDateTimeRule) o;
     return Objects.equals(this.comparisonType, reconcileDateTimeRule.comparisonType) &&
-        (this.tolerance.compareTo(reconcileDateTimeRule.getTolerance()) == 0) &&
+        (this.tolerance == null ? reconcileDateTimeRule.tolerance == null : (reconcileDateTimeRule.tolerance != null && this.tolerance.compareTo(reconcileDateTimeRule.getTolerance()) == 0)) &&
         Objects.equals(this.appliesTo, reconcileDateTimeRule.appliesTo) &&
         super.equals(o);
   }

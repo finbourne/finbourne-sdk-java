@@ -98,8 +98,8 @@ public class UnitsRatio {
       return false;
     }
     UnitsRatio unitsRatio = (UnitsRatio) o;
-    return (this.input.compareTo(unitsRatio.getInput()) == 0) &&
-        (this.output.compareTo(unitsRatio.getOutput()) == 0);
+    return (this.input == null ? unitsRatio.input == null : (unitsRatio.input != null && this.input.compareTo(unitsRatio.getInput()) == 0)) &&
+        (this.output == null ? unitsRatio.output == null : (unitsRatio.output != null && this.output.compareTo(unitsRatio.getOutput()) == 0));
   }
 
   @Override

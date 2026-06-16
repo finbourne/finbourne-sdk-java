@@ -516,7 +516,7 @@ public class AllocationRequest {
     AllocationRequest allocationRequest = (AllocationRequest) o;
     return Objects.equals(this.properties, allocationRequest.properties) &&
         Objects.equals(this.instrumentIdentifiers, allocationRequest.instrumentIdentifiers) &&
-        (this.quantity.compareTo(allocationRequest.getQuantity()) == 0) &&
+        (this.quantity == null ? allocationRequest.quantity == null : (allocationRequest.quantity != null && this.quantity.compareTo(allocationRequest.getQuantity()) == 0)) &&
         Objects.equals(this.portfolioId, allocationRequest.portfolioId) &&
         Objects.equals(this.allocatedOrderId, allocationRequest.allocatedOrderId) &&
         Objects.equals(this.id, allocationRequest.id) &&
@@ -528,7 +528,7 @@ public class AllocationRequest {
         Objects.equals(this.date, allocationRequest.date) &&
         Objects.equals(this.price, allocationRequest.price) &&
         Objects.equals(this.settlementCurrency, allocationRequest.settlementCurrency) &&
-        (this.settlementCurrencyFxRate.compareTo(allocationRequest.getSettlementCurrencyFxRate()) == 0) &&
+        (this.settlementCurrencyFxRate == null ? allocationRequest.settlementCurrencyFxRate == null : (allocationRequest.settlementCurrencyFxRate != null && this.settlementCurrencyFxRate.compareTo(allocationRequest.getSettlementCurrencyFxRate()) == 0)) &&
         Objects.equals(this.counterparty, allocationRequest.counterparty) &&
         Objects.equals(this.executionIds, allocationRequest.executionIds);
   }

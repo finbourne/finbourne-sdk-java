@@ -98,8 +98,8 @@ public class MultiCurrencyAmounts {
       return false;
     }
     MultiCurrencyAmounts multiCurrencyAmounts = (MultiCurrencyAmounts) o;
-    return (this.localAmount.compareTo(multiCurrencyAmounts.getLocalAmount()) == 0) &&
-        (this.baseAmount.compareTo(multiCurrencyAmounts.getBaseAmount()) == 0);
+    return (this.localAmount == null ? multiCurrencyAmounts.localAmount == null : (multiCurrencyAmounts.localAmount != null && this.localAmount.compareTo(multiCurrencyAmounts.getLocalAmount()) == 0)) &&
+        (this.baseAmount == null ? multiCurrencyAmounts.baseAmount == null : (multiCurrencyAmounts.baseAmount != null && this.baseAmount.compareTo(multiCurrencyAmounts.getBaseAmount()) == 0));
   }
 
   @Override

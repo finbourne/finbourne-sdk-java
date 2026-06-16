@@ -194,7 +194,7 @@ public class FlexibleRepoPartialClosureEvent extends InstrumentEvent {
     FlexibleRepoPartialClosureEvent flexibleRepoPartialClosureEvent = (FlexibleRepoPartialClosureEvent) o;
     return Objects.equals(this.entitlementDate, flexibleRepoPartialClosureEvent.entitlementDate) &&
         Objects.equals(this.settlementDate, flexibleRepoPartialClosureEvent.settlementDate) &&
-        (this.amount.compareTo(flexibleRepoPartialClosureEvent.getAmount()) == 0) &&
+        (this.amount == null ? flexibleRepoPartialClosureEvent.amount == null : (flexibleRepoPartialClosureEvent.amount != null && this.amount.compareTo(flexibleRepoPartialClosureEvent.getAmount()) == 0)) &&
         Objects.equals(this.amountType, flexibleRepoPartialClosureEvent.amountType) &&
         Objects.equals(this.partialClosureConstituents, flexibleRepoPartialClosureEvent.partialClosureConstituents) &&
         super.equals(o);

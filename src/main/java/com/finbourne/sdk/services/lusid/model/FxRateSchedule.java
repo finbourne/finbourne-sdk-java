@@ -169,7 +169,7 @@ public class FxRateSchedule extends Schedule {
     FxRateSchedule fxRateSchedule = (FxRateSchedule) o;
     return Objects.equals(this.flowConventions, fxRateSchedule.flowConventions) &&
         Objects.equals(this.fxConversionTypes, fxRateSchedule.fxConversionTypes) &&
-        (this.rate.compareTo(fxRateSchedule.getRate()) == 0) &&
+        (this.rate == null ? fxRateSchedule.rate == null : (fxRateSchedule.rate != null && this.rate.compareTo(fxRateSchedule.getRate()) == 0)) &&
         Objects.equals(this.toCurrency, fxRateSchedule.toCurrency) &&
         super.equals(o);
   }

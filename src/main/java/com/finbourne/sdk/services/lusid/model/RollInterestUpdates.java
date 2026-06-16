@@ -149,10 +149,10 @@ public class RollInterestUpdates {
       return false;
     }
     RollInterestUpdates rollInterestUpdates = (RollInterestUpdates) o;
-    return (this.withdrawInterestAmount.compareTo(rollInterestUpdates.getWithdrawInterestAmount()) == 0) &&
-        (this.withdrawInterestPercentage.compareTo(rollInterestUpdates.getWithdrawInterestPercentage()) == 0) &&
-        (this.reinvestInterestAmount.compareTo(rollInterestUpdates.getReinvestInterestAmount()) == 0) &&
-        (this.reinvestInterestPercentage.compareTo(rollInterestUpdates.getReinvestInterestPercentage()) == 0);
+    return (this.withdrawInterestAmount == null ? rollInterestUpdates.withdrawInterestAmount == null : (rollInterestUpdates.withdrawInterestAmount != null && this.withdrawInterestAmount.compareTo(rollInterestUpdates.getWithdrawInterestAmount()) == 0)) &&
+        (this.withdrawInterestPercentage == null ? rollInterestUpdates.withdrawInterestPercentage == null : (rollInterestUpdates.withdrawInterestPercentage != null && this.withdrawInterestPercentage.compareTo(rollInterestUpdates.getWithdrawInterestPercentage()) == 0)) &&
+        (this.reinvestInterestAmount == null ? rollInterestUpdates.reinvestInterestAmount == null : (rollInterestUpdates.reinvestInterestAmount != null && this.reinvestInterestAmount.compareTo(rollInterestUpdates.getReinvestInterestAmount()) == 0)) &&
+        (this.reinvestInterestPercentage == null ? rollInterestUpdates.reinvestInterestPercentage == null : (rollInterestUpdates.reinvestInterestPercentage != null && this.reinvestInterestPercentage.compareTo(rollInterestUpdates.getReinvestInterestPercentage()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

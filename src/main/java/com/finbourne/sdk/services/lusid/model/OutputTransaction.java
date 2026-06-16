@@ -1157,12 +1157,12 @@ public class OutputTransaction {
         Objects.equals(this.instrumentUid, outputTransaction.instrumentUid) &&
         Objects.equals(this.transactionDate, outputTransaction.transactionDate) &&
         Objects.equals(this.settlementDate, outputTransaction.settlementDate) &&
-        (this.units.compareTo(outputTransaction.getUnits()) == 0) &&
-        (this.transactionAmount.compareTo(outputTransaction.getTransactionAmount()) == 0) &&
+        (this.units == null ? outputTransaction.units == null : (outputTransaction.units != null && this.units.compareTo(outputTransaction.getUnits()) == 0)) &&
+        (this.transactionAmount == null ? outputTransaction.transactionAmount == null : (outputTransaction.transactionAmount != null && this.transactionAmount.compareTo(outputTransaction.getTransactionAmount()) == 0)) &&
         Objects.equals(this.transactionPrice, outputTransaction.transactionPrice) &&
         Objects.equals(this.totalConsideration, outputTransaction.totalConsideration) &&
-        (this.exchangeRate.compareTo(outputTransaction.getExchangeRate()) == 0) &&
-        (this.transactionToPortfolioRate.compareTo(outputTransaction.getTransactionToPortfolioRate()) == 0) &&
+        (this.exchangeRate == null ? outputTransaction.exchangeRate == null : (outputTransaction.exchangeRate != null && this.exchangeRate.compareTo(outputTransaction.getExchangeRate()) == 0)) &&
+        (this.transactionToPortfolioRate == null ? outputTransaction.transactionToPortfolioRate == null : (outputTransaction.transactionToPortfolioRate != null && this.transactionToPortfolioRate.compareTo(outputTransaction.getTransactionToPortfolioRate()) == 0)) &&
         Objects.equals(this.transactionCurrency, outputTransaction.transactionCurrency) &&
         Objects.equals(this.properties, outputTransaction.properties) &&
         Objects.equals(this.counterpartyId, outputTransaction.counterpartyId) &&
@@ -1177,7 +1177,7 @@ public class OutputTransaction {
         Objects.equals(this.custodianAccount, outputTransaction.custodianAccount) &&
         Objects.equals(this.transactionGroupId, outputTransaction.transactionGroupId) &&
         Objects.equals(this.resolvedTransactionTypeDetails, outputTransaction.resolvedTransactionTypeDetails) &&
-        (this.grossTransactionAmount.compareTo(outputTransaction.getGrossTransactionAmount()) == 0) &&
+        (this.grossTransactionAmount == null ? outputTransaction.grossTransactionAmount == null : (outputTransaction.grossTransactionAmount != null && this.grossTransactionAmount.compareTo(outputTransaction.getGrossTransactionAmount()) == 0)) &&
         Objects.equals(this.otcConfirmation, outputTransaction.otcConfirmation) &&
         Objects.equals(this.orderId, outputTransaction.orderId) &&
         Objects.equals(this.allocationId, outputTransaction.allocationId) &&

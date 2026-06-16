@@ -100,7 +100,7 @@ public class SettlementInLieu {
     }
     SettlementInLieu settlementInLieu = (SettlementInLieu) o;
     return Objects.equals(this.originalSettlementCurrency, settlementInLieu.originalSettlementCurrency) &&
-        (this.amount.compareTo(settlementInLieu.getAmount()) == 0);
+        (this.amount == null ? settlementInLieu.amount == null : (settlementInLieu.amount != null && this.amount.compareTo(settlementInLieu.getAmount()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

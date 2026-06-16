@@ -100,7 +100,7 @@ public class RolloverConstituent {
     }
     RolloverConstituent rolloverConstituent = (RolloverConstituent) o;
     return Objects.equals(this.contractDetails, rolloverConstituent.contractDetails) &&
-        (this.balanceChange.compareTo(rolloverConstituent.getBalanceChange()) == 0);
+        (this.balanceChange == null ? rolloverConstituent.balanceChange == null : (rolloverConstituent.balanceChange != null && this.balanceChange.compareTo(rolloverConstituent.getBalanceChange()) == 0));
   }
 
   @Override

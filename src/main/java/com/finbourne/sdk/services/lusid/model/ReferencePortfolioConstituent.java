@@ -247,8 +247,8 @@ public class ReferencePortfolioConstituent {
         Objects.equals(this.instrumentUid, referencePortfolioConstituent.instrumentUid) &&
         Objects.equals(this.currency, referencePortfolioConstituent.currency) &&
         Objects.equals(this.properties, referencePortfolioConstituent.properties) &&
-        (this.weight.compareTo(referencePortfolioConstituent.getWeight()) == 0) &&
-        (this.floatingWeight.compareTo(referencePortfolioConstituent.getFloatingWeight()) == 0) &&
+        (this.weight == null ? referencePortfolioConstituent.weight == null : (referencePortfolioConstituent.weight != null && this.weight.compareTo(referencePortfolioConstituent.getWeight()) == 0)) &&
+        (this.floatingWeight == null ? referencePortfolioConstituent.floatingWeight == null : (referencePortfolioConstituent.floatingWeight != null && this.floatingWeight.compareTo(referencePortfolioConstituent.getFloatingWeight()) == 0)) &&
         Objects.equals(this.instrumentScope, referencePortfolioConstituent.instrumentScope);
   }
 

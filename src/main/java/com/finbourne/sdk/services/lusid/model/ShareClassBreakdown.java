@@ -364,8 +364,8 @@ public class ShareClassBreakdown {
         Objects.equals(this.nav, shareClassBreakdown.nav) &&
         Objects.equals(this.unitisation, shareClassBreakdown.unitisation) &&
         Objects.equals(this.miscellaneous, shareClassBreakdown.miscellaneous) &&
-        (this.shareClassToFundFxRate.compareTo(shareClassBreakdown.getShareClassToFundFxRate()) == 0) &&
-        (this.capitalRatio.compareTo(shareClassBreakdown.getCapitalRatio()) == 0) &&
+        (this.shareClassToFundFxRate == null ? shareClassBreakdown.shareClassToFundFxRate == null : (shareClassBreakdown.shareClassToFundFxRate != null && this.shareClassToFundFxRate.compareTo(shareClassBreakdown.getShareClassToFundFxRate()) == 0)) &&
+        (this.capitalRatio == null ? shareClassBreakdown.capitalRatio == null : (shareClassBreakdown.capitalRatio != null && this.capitalRatio.compareTo(shareClassBreakdown.getCapitalRatio()) == 0)) &&
         Objects.equals(this.previousShareClassBreakdown, shareClassBreakdown.previousShareClassBreakdown);
   }
 

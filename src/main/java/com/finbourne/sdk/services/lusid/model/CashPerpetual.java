@@ -133,7 +133,7 @@ public class CashPerpetual extends LusidInstrument {
     CashPerpetual cashPerpetual = (CashPerpetual) o;
     return Objects.equals(this.startDate, cashPerpetual.startDate) &&
         Objects.equals(this.domCcy, cashPerpetual.domCcy) &&
-        (this.principal.compareTo(cashPerpetual.getPrincipal()) == 0) &&
+        (this.principal == null ? cashPerpetual.principal == null : (cashPerpetual.principal != null && this.principal.compareTo(cashPerpetual.getPrincipal()) == 0)) &&
         super.equals(o);
   }
 

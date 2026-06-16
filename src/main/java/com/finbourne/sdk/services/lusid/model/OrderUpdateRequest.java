@@ -289,7 +289,7 @@ public class OrderUpdateRequest {
     }
     OrderUpdateRequest orderUpdateRequest = (OrderUpdateRequest) o;
     return Objects.equals(this.id, orderUpdateRequest.id) &&
-        (this.quantity.compareTo(orderUpdateRequest.getQuantity()) == 0) &&
+        (this.quantity == null ? orderUpdateRequest.quantity == null : (orderUpdateRequest.quantity != null && this.quantity.compareTo(orderUpdateRequest.getQuantity()) == 0)) &&
         Objects.equals(this.portfolioId, orderUpdateRequest.portfolioId) &&
         Objects.equals(this.properties, orderUpdateRequest.properties) &&
         Objects.equals(this.price, orderUpdateRequest.price) &&

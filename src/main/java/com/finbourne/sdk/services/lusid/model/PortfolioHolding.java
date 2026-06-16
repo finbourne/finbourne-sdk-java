@@ -663,8 +663,8 @@ public class PortfolioHolding {
         Objects.equals(this.subHoldingKeys, portfolioHolding.subHoldingKeys) &&
         Objects.equals(this.properties, portfolioHolding.properties) &&
         Objects.equals(this.holdingType, portfolioHolding.holdingType) &&
-        (this.units.compareTo(portfolioHolding.getUnits()) == 0) &&
-        (this.settledUnits.compareTo(portfolioHolding.getSettledUnits()) == 0) &&
+        (this.units == null ? portfolioHolding.units == null : (portfolioHolding.units != null && this.units.compareTo(portfolioHolding.getUnits()) == 0)) &&
+        (this.settledUnits == null ? portfolioHolding.settledUnits == null : (portfolioHolding.settledUnits != null && this.settledUnits.compareTo(portfolioHolding.getSettledUnits()) == 0)) &&
         Objects.equals(this.cost, portfolioHolding.cost) &&
         Objects.equals(this.costPortfolioCcy, portfolioHolding.costPortfolioCcy) &&
         Objects.equals(this.transaction, portfolioHolding.transaction) &&
@@ -677,10 +677,10 @@ public class PortfolioHolding {
         Objects.equals(this.variationMargin, portfolioHolding.variationMargin) &&
         Objects.equals(this.variationMarginPortfolioCcy, portfolioHolding.variationMarginPortfolioCcy) &&
         Objects.equals(this.settlementSchedule, portfolioHolding.settlementSchedule) &&
-        (this.currentFace.compareTo(portfolioHolding.getCurrentFace()) == 0) &&
+        (this.currentFace == null ? portfolioHolding.currentFace == null : (portfolioHolding.currentFace != null && this.currentFace.compareTo(portfolioHolding.getCurrentFace()) == 0)) &&
         Objects.equals(this.custodianAccountId, portfolioHolding.custodianAccountId) &&
-        (this.unsettledUnits.compareTo(portfolioHolding.getUnsettledUnits()) == 0) &&
-        (this.overdueUnits.compareTo(portfolioHolding.getOverdueUnits()) == 0);
+        (this.unsettledUnits == null ? portfolioHolding.unsettledUnits == null : (portfolioHolding.unsettledUnits != null && this.unsettledUnits.compareTo(portfolioHolding.getUnsettledUnits()) == 0)) &&
+        (this.overdueUnits == null ? portfolioHolding.overdueUnits == null : (portfolioHolding.overdueUnits != null && this.overdueUnits.compareTo(portfolioHolding.getOverdueUnits()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

@@ -335,7 +335,7 @@ public class Bucket {
         Objects.equals(this.holdingSign, bucket.holdingSign) &&
         Objects.equals(this.local, bucket.local) &&
         Objects.equals(this.base, bucket.base) &&
-        (this.units.compareTo(bucket.getUnits()) == 0) &&
+        (this.units == null ? bucket.units == null : (bucket.units != null && this.units.compareTo(bucket.getUnits()) == 0)) &&
         Objects.equals(this.activityDate, bucket.activityDate);
   }
 

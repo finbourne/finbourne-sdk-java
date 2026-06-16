@@ -482,7 +482,7 @@ public class PortfolioCashFlow {
         Objects.equals(this.movementName, portfolioCashFlow.movementName) &&
         Objects.equals(this.cashflow, portfolioCashFlow.cashflow) &&
         Objects.equals(this.balance, portfolioCashFlow.balance) &&
-        (this.fxRate.compareTo(portfolioCashFlow.getFxRate()) == 0) &&
+        (this.fxRate == null ? portfolioCashFlow.fxRate == null : (portfolioCashFlow.fxRate != null && this.fxRate.compareTo(portfolioCashFlow.getFxRate()) == 0)) &&
         Objects.equals(this.cashflowReportingCurrency, portfolioCashFlow.cashflowReportingCurrency) &&
         Objects.equals(this.balanceReportingCurrency, portfolioCashFlow.balanceReportingCurrency) &&
         Objects.equals(this.translationGainLoss, portfolioCashFlow.translationGainLoss) &&

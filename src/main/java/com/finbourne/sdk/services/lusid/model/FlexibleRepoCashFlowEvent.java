@@ -160,7 +160,7 @@ public class FlexibleRepoCashFlowEvent extends InstrumentEvent {
     return Objects.equals(this.settlementDate, flexibleRepoCashFlowEvent.settlementDate) &&
         Objects.equals(this.entitlementDate, flexibleRepoCashFlowEvent.entitlementDate) &&
         Objects.equals(this.currency, flexibleRepoCashFlowEvent.currency) &&
-        (this.cashFlowPerUnit.compareTo(flexibleRepoCashFlowEvent.getCashFlowPerUnit()) == 0) &&
+        (this.cashFlowPerUnit == null ? flexibleRepoCashFlowEvent.cashFlowPerUnit == null : (flexibleRepoCashFlowEvent.cashFlowPerUnit != null && this.cashFlowPerUnit.compareTo(flexibleRepoCashFlowEvent.getCashFlowPerUnit()) == 0)) &&
         super.equals(o);
   }
 

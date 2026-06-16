@@ -454,7 +454,7 @@ public class ConversionEvent extends InstrumentEvent {
         Objects.equals(this.marketDeadlineDate, conversionEvent.marketDeadlineDate) &&
         Objects.equals(this.effectiveDate, conversionEvent.effectiveDate) &&
         Objects.equals(this.periodOfAction, conversionEvent.periodOfAction) &&
-        (this.fractionalUnitsCashPrice.compareTo(conversionEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.fractionalUnitsCashPrice == null ? conversionEvent.fractionalUnitsCashPrice == null : (conversionEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(conversionEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, conversionEvent.fractionalUnitsCashCurrency) &&
         Objects.equals(this.securityOfferElections, conversionEvent.securityOfferElections) &&
         Objects.equals(this.cashAndSecurityOfferElections, conversionEvent.cashAndSecurityOfferElections) &&

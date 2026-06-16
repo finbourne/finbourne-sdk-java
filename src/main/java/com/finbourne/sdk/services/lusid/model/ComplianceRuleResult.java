@@ -304,11 +304,11 @@ public class ComplianceRuleResult {
         Objects.equals(this.ruleDescription, complianceRuleResult.ruleDescription) &&
         Objects.equals(this.portfolio, complianceRuleResult.portfolio) &&
         Objects.equals(this.passed, complianceRuleResult.passed) &&
-        (this.resultValue.compareTo(complianceRuleResult.getResultValue()) == 0) &&
+        (this.resultValue == null ? complianceRuleResult.resultValue == null : (complianceRuleResult.resultValue != null && this.resultValue.compareTo(complianceRuleResult.getResultValue()) == 0)) &&
         Objects.equals(this.ruleInformationMatch, complianceRuleResult.ruleInformationMatch) &&
         Objects.equals(this.ruleInformationKey, complianceRuleResult.ruleInformationKey) &&
-        (this.ruleLowerLimit.compareTo(complianceRuleResult.getRuleLowerLimit()) == 0) &&
-        (this.ruleUpperLimit.compareTo(complianceRuleResult.getRuleUpperLimit()) == 0);
+        (this.ruleLowerLimit == null ? complianceRuleResult.ruleLowerLimit == null : (complianceRuleResult.ruleLowerLimit != null && this.ruleLowerLimit.compareTo(complianceRuleResult.getRuleLowerLimit()) == 0)) &&
+        (this.ruleUpperLimit == null ? complianceRuleResult.ruleUpperLimit == null : (complianceRuleResult.ruleUpperLimit != null && this.ruleUpperLimit.compareTo(complianceRuleResult.getRuleUpperLimit()) == 0));
   }
 
   @Override

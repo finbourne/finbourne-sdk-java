@@ -536,19 +536,19 @@ public class InflationLinkedBond extends LusidInstrument {
         Objects.equals(this.maturityDate, inflationLinkedBond.maturityDate) &&
         Objects.equals(this.flowConventions, inflationLinkedBond.flowConventions) &&
         Objects.equals(this.inflationIndexConventions, inflationLinkedBond.inflationIndexConventions) &&
-        (this.couponRate.compareTo(inflationLinkedBond.getCouponRate()) == 0) &&
+        (this.couponRate == null ? inflationLinkedBond.couponRate == null : (inflationLinkedBond.couponRate != null && this.couponRate.compareTo(inflationLinkedBond.getCouponRate()) == 0)) &&
         Objects.equals(this.identifiers, inflationLinkedBond.identifiers) &&
-        (this.baseCPI.compareTo(inflationLinkedBond.getBaseCPI()) == 0) &&
+        (this.baseCPI == null ? inflationLinkedBond.baseCPI == null : (inflationLinkedBond.baseCPI != null && this.baseCPI.compareTo(inflationLinkedBond.getBaseCPI()) == 0)) &&
         Objects.equals(this.baseCPIDate, inflationLinkedBond.baseCPIDate) &&
         Objects.equals(this.calculationType, inflationLinkedBond.calculationType) &&
         Objects.equals(this.exDividendDays, inflationLinkedBond.exDividendDays) &&
         Objects.equals(this.indexPrecision, inflationLinkedBond.indexPrecision) &&
-        (this.principal.compareTo(inflationLinkedBond.getPrincipal()) == 0) &&
+        (this.principal == null ? inflationLinkedBond.principal == null : (inflationLinkedBond.principal != null && this.principal.compareTo(inflationLinkedBond.getPrincipal()) == 0)) &&
         Objects.equals(this.principalProtection, inflationLinkedBond.principalProtection) &&
         Objects.equals(this.stubType, inflationLinkedBond.stubType) &&
         Objects.equals(this.roundingConventions, inflationLinkedBond.roundingConventions) &&
         Objects.equals(this.tradingConventions, inflationLinkedBond.tradingConventions) &&
-        (this.originalIssuePrice.compareTo(inflationLinkedBond.getOriginalIssuePrice()) == 0) &&
+        (this.originalIssuePrice == null ? inflationLinkedBond.originalIssuePrice == null : (inflationLinkedBond.originalIssuePrice != null && this.originalIssuePrice.compareTo(inflationLinkedBond.getOriginalIssuePrice()) == 0)) &&
         Objects.equals(this.timeZoneConventions, inflationLinkedBond.timeZoneConventions) &&
         super.equals(o);
   }

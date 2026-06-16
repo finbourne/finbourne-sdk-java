@@ -98,7 +98,7 @@ public class CurrencyAndAmount {
       return false;
     }
     CurrencyAndAmount currencyAndAmount = (CurrencyAndAmount) o;
-    return (this.amount.compareTo(currencyAndAmount.getAmount()) == 0) &&
+    return (this.amount == null ? currencyAndAmount.amount == null : (currencyAndAmount.amount != null && this.amount.compareTo(currencyAndAmount.getAmount()) == 0)) &&
         Objects.equals(this.currency, currencyAndAmount.currency);
   }
 

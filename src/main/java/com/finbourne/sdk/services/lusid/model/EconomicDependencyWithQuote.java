@@ -128,7 +128,7 @@ public class EconomicDependencyWithQuote {
     EconomicDependencyWithQuote economicDependencyWithQuote = (EconomicDependencyWithQuote) o;
     return Objects.equals(this.economicDependency, economicDependencyWithQuote.economicDependency) &&
         Objects.equals(this.metricValue, economicDependencyWithQuote.metricValue) &&
-        (this.scaleFactor.compareTo(economicDependencyWithQuote.getScaleFactor()) == 0);
+        (this.scaleFactor == null ? economicDependencyWithQuote.scaleFactor == null : (economicDependencyWithQuote.scaleFactor != null && this.scaleFactor.compareTo(economicDependencyWithQuote.getScaleFactor()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {

@@ -186,7 +186,7 @@ public class ConstantVolatilitySurface extends ComplexMarketData {
     return Objects.equals(this.baseDate, constantVolatilitySurface.baseDate) &&
         Objects.equals(this.assetType, constantVolatilitySurface.assetType) &&
         Objects.equals(this.lineage, constantVolatilitySurface.lineage) &&
-        (this.volatility.compareTo(constantVolatilitySurface.getVolatility()) == 0) &&
+        (this.volatility == null ? constantVolatilitySurface.volatility == null : (constantVolatilitySurface.volatility != null && this.volatility.compareTo(constantVolatilitySurface.getVolatility()) == 0)) &&
         Objects.equals(this.version, constantVolatilitySurface.version) &&
         super.equals(o);
   }

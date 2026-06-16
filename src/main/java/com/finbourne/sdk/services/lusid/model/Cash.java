@@ -106,7 +106,7 @@ public class Cash extends LusidInstrument {
     }
     Cash cash = (Cash) o;
     return Objects.equals(this.domCcy, cash.domCcy) &&
-        (this.amount.compareTo(cash.getAmount()) == 0) &&
+        (this.amount == null ? cash.amount == null : (cash.amount != null && this.amount.compareTo(cash.getAmount()) == 0)) &&
         super.equals(o);
   }
 

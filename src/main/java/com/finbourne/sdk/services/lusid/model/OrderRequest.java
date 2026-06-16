@@ -523,7 +523,7 @@ public class OrderRequest {
     OrderRequest orderRequest = (OrderRequest) o;
     return Objects.equals(this.properties, orderRequest.properties) &&
         Objects.equals(this.instrumentIdentifiers, orderRequest.instrumentIdentifiers) &&
-        (this.quantity.compareTo(orderRequest.getQuantity()) == 0) &&
+        (this.quantity == null ? orderRequest.quantity == null : (orderRequest.quantity != null && this.quantity.compareTo(orderRequest.getQuantity()) == 0)) &&
         Objects.equals(this.side, orderRequest.side) &&
         Objects.equals(this.orderBookId, orderRequest.orderBookId) &&
         Objects.equals(this.portfolioId, orderRequest.portfolioId) &&
@@ -537,7 +537,7 @@ public class OrderRequest {
         Objects.equals(this.stopPrice, orderRequest.stopPrice) &&
         Objects.equals(this.orderInstruction, orderRequest.orderInstruction) &&
         Objects.equals(this._package, orderRequest._package) &&
-        (this.weight.compareTo(orderRequest.getWeight()) == 0) &&
+        (this.weight == null ? orderRequest.weight == null : (orderRequest.weight != null && this.weight.compareTo(orderRequest.getWeight()) == 0)) &&
         Objects.equals(this.amount, orderRequest.amount);
   }
 

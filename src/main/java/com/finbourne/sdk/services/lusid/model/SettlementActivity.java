@@ -578,9 +578,9 @@ public class SettlementActivity {
         Objects.equals(this.custodianAccountId, settlementActivity.custodianAccountId) &&
         Objects.equals(this.custodianAccountNumber, settlementActivity.custodianAccountNumber) &&
         Objects.equals(this.custodianAccountName, settlementActivity.custodianAccountName) &&
-        (this.units.compareTo(settlementActivity.getUnits()) == 0) &&
+        (this.units == null ? settlementActivity.units == null : (settlementActivity.units != null && this.units.compareTo(settlementActivity.getUnits()) == 0)) &&
         Objects.equals(this.direction, settlementActivity.direction) &&
-        (this.daysOverdue.compareTo(settlementActivity.getDaysOverdue()) == 0) &&
+        (this.daysOverdue == null ? settlementActivity.daysOverdue == null : (settlementActivity.daysOverdue != null && this.daysOverdue.compareTo(settlementActivity.getDaysOverdue()) == 0)) &&
         Objects.equals(this.transaction, settlementActivity.transaction) &&
         Objects.equals(this.settlementInstruction, settlementActivity.settlementInstruction);
   }

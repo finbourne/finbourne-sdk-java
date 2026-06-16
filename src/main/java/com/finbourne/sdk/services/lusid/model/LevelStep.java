@@ -100,7 +100,7 @@ public class LevelStep {
     }
     LevelStep levelStep = (LevelStep) o;
     return Objects.equals(this.date, levelStep.date) &&
-        (this.quantity.compareTo(levelStep.getQuantity()) == 0);
+        (this.quantity == null ? levelStep.quantity == null : (levelStep.quantity != null && this.quantity.compareTo(levelStep.getQuantity()) == 0));
   }
 
   @Override

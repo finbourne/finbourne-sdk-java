@@ -160,7 +160,7 @@ public class FlexibleRepoInterestPaymentEvent extends InstrumentEvent {
     return Objects.equals(this.settlementDate, flexibleRepoInterestPaymentEvent.settlementDate) &&
         Objects.equals(this.entitlementDate, flexibleRepoInterestPaymentEvent.entitlementDate) &&
         Objects.equals(this.currency, flexibleRepoInterestPaymentEvent.currency) &&
-        (this.interestPerUnit.compareTo(flexibleRepoInterestPaymentEvent.getInterestPerUnit()) == 0) &&
+        (this.interestPerUnit == null ? flexibleRepoInterestPaymentEvent.interestPerUnit == null : (flexibleRepoInterestPaymentEvent.interestPerUnit != null && this.interestPerUnit.compareTo(flexibleRepoInterestPaymentEvent.getInterestPerUnit()) == 0)) &&
         super.equals(o);
   }
 

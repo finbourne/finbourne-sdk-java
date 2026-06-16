@@ -126,7 +126,7 @@ public class OrderGraphBlockAllocationDetail {
     OrderGraphBlockAllocationDetail orderGraphBlockAllocationDetail = (OrderGraphBlockAllocationDetail) o;
     return Objects.equals(this.id, orderGraphBlockAllocationDetail.id) &&
         Objects.equals(this.allocatedOrderId, orderGraphBlockAllocationDetail.allocatedOrderId) &&
-        (this.quantity.compareTo(orderGraphBlockAllocationDetail.getQuantity()) == 0);
+        (this.quantity == null ? orderGraphBlockAllocationDetail.quantity == null : (orderGraphBlockAllocationDetail.quantity != null && this.quantity.compareTo(orderGraphBlockAllocationDetail.getQuantity()) == 0));
   }
 
   @Override

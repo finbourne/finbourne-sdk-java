@@ -134,7 +134,7 @@ public class CdsCreditEvent extends InstrumentEvent {
     CdsCreditEvent cdsCreditEvent = (CdsCreditEvent) o;
     return Objects.equals(this.effectiveDate, cdsCreditEvent.effectiveDate) &&
         Objects.equals(this.auctionDate, cdsCreditEvent.auctionDate) &&
-        (this.recoveryRate.compareTo(cdsCreditEvent.getRecoveryRate()) == 0) &&
+        (this.recoveryRate == null ? cdsCreditEvent.recoveryRate == null : (cdsCreditEvent.recoveryRate != null && this.recoveryRate.compareTo(cdsCreditEvent.getRecoveryRate()) == 0)) &&
         super.equals(o);
   }
 

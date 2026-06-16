@@ -290,8 +290,8 @@ public class IntermediateSecuritiesDistributionEvent extends InstrumentEvent {
         Objects.equals(this.paymentDate, intermediateSecuritiesDistributionEvent.paymentDate) &&
         Objects.equals(this.newInstrument, intermediateSecuritiesDistributionEvent.newInstrument) &&
         Objects.equals(this.unitsRatio, intermediateSecuritiesDistributionEvent.unitsRatio) &&
-        (this.costFactor.compareTo(intermediateSecuritiesDistributionEvent.getCostFactor()) == 0) &&
-        (this.fractionalUnitsCashPrice.compareTo(intermediateSecuritiesDistributionEvent.getFractionalUnitsCashPrice()) == 0) &&
+        (this.costFactor == null ? intermediateSecuritiesDistributionEvent.costFactor == null : (intermediateSecuritiesDistributionEvent.costFactor != null && this.costFactor.compareTo(intermediateSecuritiesDistributionEvent.getCostFactor()) == 0)) &&
+        (this.fractionalUnitsCashPrice == null ? intermediateSecuritiesDistributionEvent.fractionalUnitsCashPrice == null : (intermediateSecuritiesDistributionEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(intermediateSecuritiesDistributionEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, intermediateSecuritiesDistributionEvent.fractionalUnitsCashCurrency) &&
         super.equals(o);
   }

@@ -184,8 +184,8 @@ public class DrawingEvent extends InstrumentEvent {
     DrawingEvent drawingEvent = (DrawingEvent) o;
     return Objects.equals(this.paymentDate, drawingEvent.paymentDate) &&
         Objects.equals(this.effectiveDate, drawingEvent.effectiveDate) &&
-        (this.affectedAmount.compareTo(drawingEvent.getAffectedAmount()) == 0) &&
-        (this.pricePerUnit.compareTo(drawingEvent.getPricePerUnit()) == 0) &&
+        (this.affectedAmount == null ? drawingEvent.affectedAmount == null : (drawingEvent.affectedAmount != null && this.affectedAmount.compareTo(drawingEvent.getAffectedAmount()) == 0)) &&
+        (this.pricePerUnit == null ? drawingEvent.pricePerUnit == null : (drawingEvent.pricePerUnit != null && this.pricePerUnit.compareTo(drawingEvent.getPricePerUnit()) == 0)) &&
         Objects.equals(this.currency, drawingEvent.currency) &&
         super.equals(o);
   }

@@ -160,7 +160,7 @@ public class MbsCouponEvent extends InstrumentEvent {
     return Objects.equals(this.exDate, mbsCouponEvent.exDate) &&
         Objects.equals(this.paymentDate, mbsCouponEvent.paymentDate) &&
         Objects.equals(this.currency, mbsCouponEvent.currency) &&
-        (this.couponPerUnit.compareTo(mbsCouponEvent.getCouponPerUnit()) == 0) &&
+        (this.couponPerUnit == null ? mbsCouponEvent.couponPerUnit == null : (mbsCouponEvent.couponPerUnit != null && this.couponPerUnit.compareTo(mbsCouponEvent.getCouponPerUnit()) == 0)) &&
         super.equals(o);
   }
 
