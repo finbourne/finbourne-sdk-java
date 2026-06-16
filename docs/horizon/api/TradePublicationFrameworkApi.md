@@ -4,15 +4,104 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**getTpfFileDeliveries**](TradePublicationFrameworkApi.md#getTpfFileDeliveries) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/deliveries | [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance |
 | [**getTpfTransactionHistorySearch**](TradePublicationFrameworkApi.md#getTpfTransactionHistorySearch) | **GET** /horizon/api/trade-publication-framework/transactions/search | [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range |
 | [**getTransactionPayload**](TradePublicationFrameworkApi.md#getTransactionPayload) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/{transactionId}/payload | [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail |
+| [**listFailedDeliveries**](TradePublicationFrameworkApi.md#listFailedDeliveries) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/failed | [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support. |
 | [**listInstanceRunHistory**](TradePublicationFrameworkApi.md#listInstanceRunHistory) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs | [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support. |
 | [**listInstancesWithStatus**](TradePublicationFrameworkApi.md#listInstancesWithStatus) | **GET** /horizon/api/trade-publication-framework/instances | [EXPERIMENTAL] ListInstancesWithStatus: Lists all instances of the Trade Publication Framework (TPF). |
 | [**listRunFiles**](TradePublicationFrameworkApi.md#listRunFiles) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/files | [EXPERIMENTAL] ListRunFiles: List Files in a run |
 | [**listRunTransactions**](TradePublicationFrameworkApi.md#listRunTransactions) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions | [EXPERIMENTAL] ListRunTransactions: List Transactions in a run. |
 | [**replayTransactions**](TradePublicationFrameworkApi.md#replayTransactions) | **POST** /horizon/api/trade-publication-framework/instances/{instanceId}/replay | [EXPERIMENTAL] ReplayTransactions: Replay one or more transactions through a TPF instance |
+| [**resolveFailedDelivery**](TradePublicationFrameworkApi.md#resolveFailedDelivery) | **PUT** /horizon/api/trade-publication-framework/instances/{instanceId}/failed/{batchReferenceId}/resolve | [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry |
 | [**retryTpfSftpDelivery**](TradePublicationFrameworkApi.md#retryTpfSftpDelivery) | **POST** /horizon/api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file |
 
+
+
+## getTpfFileDeliveries
+
+> PagedResourceListOfTpfFileDeliveryResponse getTpfFileDeliveries(instanceId, status, dateFrom, dateTo, limit, page)
+
+[EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
+
+Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.horizon.model.*;
+import com.finbourne.sdk.services.horizon.api.TradePublicationFrameworkApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TradePublicationFrameworkApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        TradePublicationFrameworkApi apiInstance = apiFactory.build(TradePublicationFrameworkApi.class);
+        String instanceId = "instanceId_example"; // String | Integration instance ID
+        FileDeliveryStatus status = FileDeliveryStatus.fromValue("Completed"); // FileDeliveryStatus | Filter by delivery status (Completed, Error, Pending)
+        OffsetDateTime dateFrom = OffsetDateTime.now(); // OffsetDateTime | Filter deliveries from this time (inclusive)
+        OffsetDateTime dateTo = OffsetDateTime.now(); // OffsetDateTime | Filter deliveries to this time (inclusive)
+        Integer limit = 50; // Integer | Page size for pagination (default 50, max 500)
+        String page = ""; // String | Pagination token from previous response
+        try {
+            // uncomment the below to set overrides at the request level
+            // PagedResourceListOfTpfFileDeliveryResponse result = apiInstance.getTpfFileDeliveries(instanceId, status, dateFrom, dateTo, limit, page).execute(opts);
+
+            PagedResourceListOfTpfFileDeliveryResponse result = apiInstance.getTpfFileDeliveries(instanceId, status, dateFrom, dateTo, limit, page).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TradePublicationFrameworkApi#getTpfFileDeliveries");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **instanceId** | **String**| Integration instance ID | |
+| **status** | [**FileDeliveryStatus**](.md)| Filter by delivery status (Completed, Error, Pending) | [optional] [enum: Completed, Pending, Error] |
+| **dateFrom** | **OffsetDateTime**| Filter deliveries from this time (inclusive) | [optional] |
+| **dateTo** | **OffsetDateTime**| Filter deliveries to this time (inclusive) | [optional] |
+| **limit** | **Integer**| Page size for pagination (default 50, max 500) | [optional] [default to 50] |
+| **page** | **String**| Pagination token from previous response | [optional] [default to ] |
+
+### Return type
+
+[**PagedResourceListOfTpfFileDeliveryResponse**](PagedResourceListOfTpfFileDeliveryResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
 ## getTpfTransactionHistorySearch
@@ -177,6 +266,87 @@ public class TradePublicationFrameworkApiExample {
 | **200** | OK |  -  |
 | **400** | The details of the input related failure |  -  |
 | **404** | The requested TPF instance, run, or transaction payload does not exist. |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listFailedDeliveries
+
+> PagedResourceListOfFailedDeliveryResponse listFailedDeliveries(instanceId, resolved, page, pageSize)
+
+[EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.horizon.model.*;
+import com.finbourne.sdk.services.horizon.api.TradePublicationFrameworkApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TradePublicationFrameworkApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        TradePublicationFrameworkApi apiInstance = apiFactory.build(TradePublicationFrameworkApi.class);
+        String instanceId = "instanceId_example"; // String | 
+        Boolean resolved = false; // Boolean | 
+        String page = ""; // String | 
+        Integer pageSize = 100; // Integer | 
+        try {
+            // uncomment the below to set overrides at the request level
+            // PagedResourceListOfFailedDeliveryResponse result = apiInstance.listFailedDeliveries(instanceId, resolved, page, pageSize).execute(opts);
+
+            PagedResourceListOfFailedDeliveryResponse result = apiInstance.listFailedDeliveries(instanceId, resolved, page, pageSize).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TradePublicationFrameworkApi#listFailedDeliveries");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **instanceId** | **String**|  | |
+| **resolved** | **Boolean**|  | [optional] [default to false] |
+| **page** | **String**|  | [optional] [default to ] |
+| **pageSize** | **Integer**|  | [optional] [default to 100] |
+
+### Return type
+
+[**PagedResourceListOfFailedDeliveryResponse**](PagedResourceListOfFailedDeliveryResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **404** | The requested TPF instance does not exist. |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
@@ -565,6 +735,86 @@ public class TradePublicationFrameworkApiExample {
 | **200** | OK |  -  |
 | **400** | The details of the input related failure |  -  |
 | **404** | The requested TPF instance does not exist. |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## resolveFailedDelivery
+
+> ResolveFailedDeliveryResponse resolveFailedDelivery(instanceId, batchReferenceId, resolveFailedDeliveryRequest)
+
+[EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
+
+### Example
+
+```java
+import com.finbourne.sdk.services.horizon.model.*;
+import com.finbourne.sdk.services.horizon.api.TradePublicationFrameworkApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TradePublicationFrameworkApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        TradePublicationFrameworkApi apiInstance = apiFactory.build(TradePublicationFrameworkApi.class);
+        String instanceId = "instanceId_example"; // String | 
+        String batchReferenceId = "batchReferenceId_example"; // String | 
+        ResolveFailedDeliveryRequest resolveFailedDeliveryRequest = new ResolveFailedDeliveryRequest(); // ResolveFailedDeliveryRequest | 
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResolveFailedDeliveryResponse result = apiInstance.resolveFailedDelivery(instanceId, batchReferenceId, resolveFailedDeliveryRequest).execute(opts);
+
+            ResolveFailedDeliveryResponse result = apiInstance.resolveFailedDelivery(instanceId, batchReferenceId, resolveFailedDeliveryRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TradePublicationFrameworkApi#resolveFailedDelivery");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **instanceId** | **String**|  | |
+| **batchReferenceId** | **String**|  | |
+| **resolveFailedDeliveryRequest** | [**ResolveFailedDeliveryRequest**](ResolveFailedDeliveryRequest.md)|  | |
+
+### Return type
+
+[**ResolveFailedDeliveryResponse**](ResolveFailedDeliveryResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **404** | No failed delivery was found for the batch. |  -  |
+| **409** | The failed deliveries for the batch have already been resolved. |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

@@ -74,9 +74,6 @@ public class ApiClient {
     private Map<String, Authentication> authentications;
 
     private DateFormat dateFormat;
-    private DateFormat datetimeFormat;
-    private boolean lenientDatetimeFormat;
-    private int dateLength;
 
     private HttpClient httpClient;
     private JSON json;
@@ -114,7 +111,7 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("OpenAPI-Generator/0.0.4/java");
+        setUserAgent("OpenAPI-Generator/0.0.5/java");
 
         authentications = new HashMap<String, Authentication>();
     }
@@ -224,6 +221,7 @@ public class ApiClient {
      * @return a {@link com.finbourne.sdk.ApiClient} object
      */
     public ApiClient setDateFormat(DateFormat dateFormat) {
+        this.dateFormat = dateFormat;
         JSON.setDateFormat(dateFormat);
         return this;
     }
@@ -867,6 +865,7 @@ public class ApiClient {
      */
     @SuppressWarnings("unchecked")
     public <T> void executeAsync(HttpRequest request, final Type returnType, final ApiCallback<T> callback) {
+        boolean isFileDownload = returnType != null && returnType.equals(File.class);
         httpClient.sendAsync(request, new HttpResponseCallback() {
             @Override
             public void onSuccess(HttpResponse response) {
@@ -887,7 +886,7 @@ public class ApiClient {
             public void onFailure(IOException e) {
                 callback.onFailure(new ApiException(e), 0, null);
             }
-        });
+        }, isFileDownload);
     }
 
     /**
@@ -1038,7 +1037,9 @@ public class ApiClient {
         // Build headers
         HttpHeaders headers = new HttpHeaders();
 
-        // Add explicit header params (filtering SDK metadata headers)
+        // Add explicit header params, but never let a per-request header override the SDK
+        // metadata headers: X-LUSID-Sdk-Version/-Language must always reflect this SDK build,
+        // so they are skipped here and applied from defaultHeaderMap below.
         for (Entry<String, String> param : headerParams.entrySet()) {
             if (!"X-LUSID-Sdk-Version".equals(param.getKey()) && !"X-LUSID-Sdk-Language".equals(param.getKey())) {
                 headers = headers.set(param.getKey(), parameterToString(param.getValue()));

@@ -16,9 +16,9 @@ package com.finbourne.sdk.auth;
 import com.finbourne.sdk.Pair;
 import com.finbourne.sdk.ApiException;
 
-import okhttp3.Credentials;
-
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Map;
 import java.util.List;
 
@@ -48,8 +48,9 @@ public class HttpBasicAuth implements Authentication {
         if (username == null && password == null) {
             return;
         }
-        headerParams.put("Authorization", Credentials.basic(
-            username == null ? "" : username,
-            password == null ? "" : password));
+        String credentials = (username == null ? "" : username) + ":" + (password == null ? "" : password);
+        // Basic auth header: Base64 of the ISO-8859-1 encoded "user:password".
+        String encoded = Base64.getEncoder().encodeToString(credentials.getBytes(StandardCharsets.ISO_8859_1));
+        headerParams.put("Authorization", "Basic " + encoded);
     }
 }

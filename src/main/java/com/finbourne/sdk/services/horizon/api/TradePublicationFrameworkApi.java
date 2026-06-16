@@ -27,15 +27,21 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
+import com.finbourne.sdk.services.horizon.model.FileDeliveryStatus;
 import com.finbourne.sdk.services.horizon.model.InstancesResponse;
 import com.finbourne.sdk.services.horizon.model.LusidProblemDetails;
 import com.finbourne.sdk.services.horizon.model.LusidValidationProblemDetails;
+import java.time.OffsetDateTime;
+import com.finbourne.sdk.services.horizon.model.PagedResourceListOfFailedDeliveryResponse;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfInstanceRunResponse;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfRunFileResponse;
+import com.finbourne.sdk.services.horizon.model.PagedResourceListOfTpfFileDeliveryResponse;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfTpfTransactionSearchResponse;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfTransactionResponse;
 import com.finbourne.sdk.services.horizon.model.ReplayTransactionsRequest;
 import com.finbourne.sdk.services.horizon.model.ReplayTransactionsResponse;
+import com.finbourne.sdk.services.horizon.model.ResolveFailedDeliveryRequest;
+import com.finbourne.sdk.services.horizon.model.ResolveFailedDeliveryResponse;
 import com.finbourne.sdk.services.horizon.model.TpfRetrySftpResponse;
 import com.finbourne.sdk.services.horizon.model.TransactionPayloadResponse;
 
@@ -82,6 +88,420 @@ public class TradePublicationFrameworkApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    /**
+     * Build call for getTpfFileDeliveries
+     * @param instanceId Integration instance ID (required)
+     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
+     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
+     * @param page Pagination token from previous response (optional, default to )
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTpfFileDeliveriesCall(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback) throws ApiException {
+        return getTpfFileDeliveriesCall(instanceId, status, dateFrom, dateTo, limit, page,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTpfFileDeliveries. Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceId Integration instance ID (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param status Filter by delivery status (Completed, Error, Pending) (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param dateFrom Filter deliveries from this time (inclusive) (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param dateTo Filter deliveries to this time (inclusive) (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit Page size for pagination (default 50, max 500) (optional, default to 50). Use any specified configuration options to override any other configuration for this request only.
+     * @param page Pagination token from previous response (optional, default to )
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTpfFileDeliveriesCall(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/horizon/api/trade-publication-framework/instances/{instanceId}/deliveries"
+            .replace("{" + "instanceId" + "}", localVarApiClient.escapeString(instanceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (status != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
+        }
+
+        if (dateFrom != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dateFrom", dateFrom));
+        }
+
+        if (dateTo != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dateTo", dateTo));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTpfFileDeliveriesValidateBeforeCall(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'instanceId' is set
+        if (instanceId == null) {
+            throw new ApiException("Missing the required parameter 'instanceId' when calling getTpfFileDeliveries(Async)");
+        }
+
+        return getTpfFileDeliveriesCall(instanceId, status, dateFrom, dateTo, limit, page, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
+     * @param instanceId Integration instance ID (required)
+     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
+     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
+     * @param page Pagination token from previous response (optional, default to )
+     * @return ApiResponse&lt;PagedResourceListOfTpfFileDeliveryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page) throws ApiException {
+        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceId Integration instance ID (required)
+     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
+     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
+     * @param page Pagination token from previous response (optional, default to )
+     * @return ApiResponse&lt;PagedResourceListOfTpfFileDeliveryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance (asynchronously)
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
+     * @param instanceId Integration instance ID (required)
+     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
+     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
+     * @param page Pagination token from previous response (optional, default to )
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTpfFileDeliveriesAsync(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance (asynchronously)
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceId Integration instance ID (required)
+     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
+     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
+     * @param page Pagination token from previous response (optional, default to )
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTpfFileDeliveriesAsync(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTpfFileDeliveriesRequest {
+        private final String instanceId;
+        private FileDeliveryStatus status;
+        private OffsetDateTime dateFrom;
+        private OffsetDateTime dateTo;
+        private Integer limit;
+        private String page;
+
+        private APIgetTpfFileDeliveriesRequest(String instanceId) {
+            this.instanceId = instanceId;
+        }
+
+        /**
+         * Set status
+         * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+         * @return APIgetTpfFileDeliveriesRequest
+         */
+        public APIgetTpfFileDeliveriesRequest status(FileDeliveryStatus status) {
+            this.status = status;
+            return this;
+        }
+
+        /**
+         * Set dateFrom
+         * @param dateFrom Filter deliveries from this time (inclusive) (optional)
+         * @return APIgetTpfFileDeliveriesRequest
+         */
+        public APIgetTpfFileDeliveriesRequest dateFrom(OffsetDateTime dateFrom) {
+            this.dateFrom = dateFrom;
+            return this;
+        }
+
+        /**
+         * Set dateTo
+         * @param dateTo Filter deliveries to this time (inclusive) (optional)
+         * @return APIgetTpfFileDeliveriesRequest
+         */
+        public APIgetTpfFileDeliveriesRequest dateTo(OffsetDateTime dateTo) {
+            this.dateTo = dateTo;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
+         * @return APIgetTpfFileDeliveriesRequest
+         */
+        public APIgetTpfFileDeliveriesRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page Pagination token from previous response (optional, default to )
+         * @return APIgetTpfFileDeliveriesRequest
+         */
+        public APIgetTpfFileDeliveriesRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Build call for getTpfFileDeliveries
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTpfFileDeliveriesCall(instanceId, status, dateFrom, dateTo, limit, page, _callback);
+        }
+
+        /**
+         * Execute getTpfFileDeliveries request
+         * @return PagedResourceListOfTpfFileDeliveryResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfTpfFileDeliveryResponse execute() throws ApiException {
+            ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> localVarResp = getTpfFileDeliveriesWithHttpInfo(instanceId, status, dateFrom, dateTo, limit, page);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTpfFileDeliveries request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfTpfFileDeliveryResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfTpfFileDeliveryResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> localVarResp = getTpfFileDeliveriesWithHttpInfo(instanceId, status, dateFrom, dateTo, limit, page, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTpfFileDeliveries request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfTpfFileDeliveryResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> executeWithHttpInfo() throws ApiException {
+            return getTpfFileDeliveriesWithHttpInfo(instanceId, status, dateFrom, dateTo, limit, page);
+        }
+
+        /**
+         * Execute getTpfFileDeliveries request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfTpfFileDeliveryResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTpfFileDeliveriesWithHttpInfo(instanceId, status, dateFrom, dateTo, limit, page, opts);
+        }
+
+        /**
+         * Execute getTpfFileDeliveries request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback) throws ApiException {
+            getTpfFileDeliveriesAsync(instanceId, status, dateFrom, dateTo, limit, page, _callback);
+        }
+
+        /**
+         * Execute getTpfFileDeliveries request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            getTpfFileDeliveriesAsync(instanceId, status, dateFrom, dateTo, limit, page, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
+     * @param instanceId Integration instance ID (required)
+     * @return APIgetTpfFileDeliveriesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTpfFileDeliveriesRequest getTpfFileDeliveries(String instanceId) {
+        return new APIgetTpfFileDeliveriesRequest(instanceId);
+    }
     /**
      * Build call for getTpfTransactionHistorySearch
      * @param transactionId  (optional)
@@ -896,6 +1316,392 @@ public class TradePublicationFrameworkApi {
      */
     public APIgetTransactionPayloadRequest getTransactionPayload(String instanceId, String runId, String transactionId) {
         return new APIgetTransactionPayloadRequest(instanceId, runId, transactionId);
+    }
+    /**
+     * Build call for listFailedDeliveries
+     * @param instanceId  (required)
+     * @param resolved  (optional, default to false)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listFailedDeliveriesCall(String instanceId, Boolean resolved, String page, Integer pageSize, final ApiCallback _callback) throws ApiException {
+        return listFailedDeliveriesCall(instanceId, resolved, page, pageSize,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listFailedDeliveries. Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceId  (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param resolved  (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
+     * @param page  (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
+     * @param pageSize  (optional, default to 100)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listFailedDeliveriesCall(String instanceId, Boolean resolved, String page, Integer pageSize, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/horizon/api/trade-publication-framework/instances/{instanceId}/failed"
+            .replace("{" + "instanceId" + "}", localVarApiClient.escapeString(instanceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (resolved != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("resolved", resolved));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (pageSize != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("pageSize", pageSize));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listFailedDeliveriesValidateBeforeCall(String instanceId, Boolean resolved, String page, Integer pageSize, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'instanceId' is set
+        if (instanceId == null) {
+            throw new ApiException("Missing the required parameter 'instanceId' when calling listFailedDeliveries(Async)");
+        }
+
+        return listFailedDeliveriesCall(instanceId, resolved, page, pageSize, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
+     * 
+     * @param instanceId  (required)
+     * @param resolved  (optional, default to false)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
+     * @return ApiResponse&lt;PagedResourceListOfFailedDeliveryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfFailedDeliveryResponse> listFailedDeliveriesWithHttpInfo(String instanceId, Boolean resolved, String page, Integer pageSize) throws ApiException {
+        HttpRequest localVarCall = listFailedDeliveriesValidateBeforeCall(instanceId, resolved, page, pageSize, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfFailedDeliveryResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
+     * Use any specified configuration options to override any other configuration for this request only
+     * @param instanceId  (required)
+     * @param resolved  (optional, default to false)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
+     * @return ApiResponse&lt;PagedResourceListOfFailedDeliveryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfFailedDeliveryResponse> listFailedDeliveriesWithHttpInfo(String instanceId, Boolean resolved, String page, Integer pageSize, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listFailedDeliveriesValidateBeforeCall(instanceId, resolved, page, pageSize, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfFailedDeliveryResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support. (asynchronously)
+     * 
+     * @param instanceId  (required)
+     * @param resolved  (optional, default to false)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listFailedDeliveriesAsync(String instanceId, Boolean resolved, String page, Integer pageSize, final ApiCallback<PagedResourceListOfFailedDeliveryResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listFailedDeliveriesValidateBeforeCall(instanceId, resolved, page, pageSize, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfFailedDeliveryResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support. (asynchronously)
+     * Use any specified configuration options to override any other configuration for this request only
+     * @param instanceId  (required)
+     * @param resolved  (optional, default to false)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listFailedDeliveriesAsync(String instanceId, Boolean resolved, String page, Integer pageSize, final ApiCallback<PagedResourceListOfFailedDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listFailedDeliveriesValidateBeforeCall(instanceId, resolved, page, pageSize, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfFailedDeliveryResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistFailedDeliveriesRequest {
+        private final String instanceId;
+        private Boolean resolved;
+        private String page;
+        private Integer pageSize;
+
+        private APIlistFailedDeliveriesRequest(String instanceId) {
+            this.instanceId = instanceId;
+        }
+
+        /**
+         * Set resolved
+         * @param resolved  (optional, default to false)
+         * @return APIlistFailedDeliveriesRequest
+         */
+        public APIlistFailedDeliveriesRequest resolved(Boolean resolved) {
+            this.resolved = resolved;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page  (optional, default to )
+         * @return APIlistFailedDeliveriesRequest
+         */
+        public APIlistFailedDeliveriesRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set pageSize
+         * @param pageSize  (optional, default to 100)
+         * @return APIlistFailedDeliveriesRequest
+         */
+        public APIlistFailedDeliveriesRequest pageSize(Integer pageSize) {
+            this.pageSize = pageSize;
+            return this;
+        }
+
+        /**
+         * Build call for listFailedDeliveries
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listFailedDeliveriesCall(instanceId, resolved, page, pageSize, _callback);
+        }
+
+        /**
+         * Execute listFailedDeliveries request
+         * @return PagedResourceListOfFailedDeliveryResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfFailedDeliveryResponse execute() throws ApiException {
+            ApiResponse<PagedResourceListOfFailedDeliveryResponse> localVarResp = listFailedDeliveriesWithHttpInfo(instanceId, resolved, page, pageSize);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listFailedDeliveries request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfFailedDeliveryResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfFailedDeliveryResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfFailedDeliveryResponse> localVarResp = listFailedDeliveriesWithHttpInfo(instanceId, resolved, page, pageSize, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listFailedDeliveries request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfFailedDeliveryResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfFailedDeliveryResponse> executeWithHttpInfo() throws ApiException {
+            return listFailedDeliveriesWithHttpInfo(instanceId, resolved, page, pageSize);
+        }
+
+        /**
+         * Execute listFailedDeliveries request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfFailedDeliveryResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfFailedDeliveryResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listFailedDeliveriesWithHttpInfo(instanceId, resolved, page, pageSize, opts);
+        }
+
+        /**
+         * Execute listFailedDeliveries request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfFailedDeliveryResponse> _callback) throws ApiException {
+            listFailedDeliveriesAsync(instanceId, resolved, page, pageSize, _callback);
+        }
+
+        /**
+         * Execute listFailedDeliveries request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfFailedDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            listFailedDeliveriesAsync(instanceId, resolved, page, pageSize, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
+     * 
+     * @param instanceId  (required)
+     * @return APIlistFailedDeliveriesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance does not exist. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistFailedDeliveriesRequest listFailedDeliveries(String instanceId) {
+        return new APIlistFailedDeliveriesRequest(instanceId);
     }
     /**
      * Build call for listInstanceRunHistory
@@ -2649,6 +3455,376 @@ public class TradePublicationFrameworkApi {
      */
     public APIreplayTransactionsRequest replayTransactions(String instanceId, ReplayTransactionsRequest replayTransactionsRequest) {
         return new APIreplayTransactionsRequest(instanceId, replayTransactionsRequest);
+    }
+    /**
+     * Build call for resolveFailedDelivery
+     * @param instanceId  (required)
+     * @param batchReferenceId  (required)
+     * @param resolveFailedDeliveryRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest resolveFailedDeliveryCall(String instanceId, String batchReferenceId, ResolveFailedDeliveryRequest resolveFailedDeliveryRequest, final ApiCallback _callback) throws ApiException {
+        return resolveFailedDeliveryCall(instanceId, batchReferenceId, resolveFailedDeliveryRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for resolveFailedDelivery. Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceId  (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param batchReferenceId  (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param resolveFailedDeliveryRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest resolveFailedDeliveryCall(String instanceId, String batchReferenceId, ResolveFailedDeliveryRequest resolveFailedDeliveryRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = resolveFailedDeliveryRequest;
+
+        // create path and map variables
+        String localVarPath = "/horizon/api/trade-publication-framework/instances/{instanceId}/failed/{batchReferenceId}/resolve"
+            .replace("{" + "instanceId" + "}", localVarApiClient.escapeString(instanceId.toString()))
+            .replace("{" + "batchReferenceId" + "}", localVarApiClient.escapeString(batchReferenceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest resolveFailedDeliveryValidateBeforeCall(String instanceId, String batchReferenceId, ResolveFailedDeliveryRequest resolveFailedDeliveryRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'instanceId' is set
+        if (instanceId == null) {
+            throw new ApiException("Missing the required parameter 'instanceId' when calling resolveFailedDelivery(Async)");
+        }
+
+        // verify the required parameter 'batchReferenceId' is set
+        if (batchReferenceId == null) {
+            throw new ApiException("Missing the required parameter 'batchReferenceId' when calling resolveFailedDelivery(Async)");
+        }
+
+        // verify the required parameter 'resolveFailedDeliveryRequest' is set
+        if (resolveFailedDeliveryRequest == null) {
+            throw new ApiException("Missing the required parameter 'resolveFailedDeliveryRequest' when calling resolveFailedDelivery(Async)");
+        }
+
+        return resolveFailedDeliveryCall(instanceId, batchReferenceId, resolveFailedDeliveryRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
+     * 
+     * @param instanceId  (required)
+     * @param batchReferenceId  (required)
+     * @param resolveFailedDeliveryRequest  (required)
+     * @return ApiResponse&lt;ResolveFailedDeliveryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResolveFailedDeliveryResponse> resolveFailedDeliveryWithHttpInfo(String instanceId, String batchReferenceId, ResolveFailedDeliveryRequest resolveFailedDeliveryRequest) throws ApiException {
+        HttpRequest localVarCall = resolveFailedDeliveryValidateBeforeCall(instanceId, batchReferenceId, resolveFailedDeliveryRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResolveFailedDeliveryResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
+     * Use any specified configuration options to override any other configuration for this request only
+     * @param instanceId  (required)
+     * @param batchReferenceId  (required)
+     * @param resolveFailedDeliveryRequest  (required)
+     * @return ApiResponse&lt;ResolveFailedDeliveryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResolveFailedDeliveryResponse> resolveFailedDeliveryWithHttpInfo(String instanceId, String batchReferenceId, ResolveFailedDeliveryRequest resolveFailedDeliveryRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = resolveFailedDeliveryValidateBeforeCall(instanceId, batchReferenceId, resolveFailedDeliveryRequest, null, opts);
+        Type localVarReturnType = new TypeReference<ResolveFailedDeliveryResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry (asynchronously)
+     * 
+     * @param instanceId  (required)
+     * @param batchReferenceId  (required)
+     * @param resolveFailedDeliveryRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void resolveFailedDeliveryAsync(String instanceId, String batchReferenceId, ResolveFailedDeliveryRequest resolveFailedDeliveryRequest, final ApiCallback<ResolveFailedDeliveryResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = resolveFailedDeliveryValidateBeforeCall(instanceId, batchReferenceId, resolveFailedDeliveryRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResolveFailedDeliveryResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry (asynchronously)
+     * Use any specified configuration options to override any other configuration for this request only
+     * @param instanceId  (required)
+     * @param batchReferenceId  (required)
+     * @param resolveFailedDeliveryRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void resolveFailedDeliveryAsync(String instanceId, String batchReferenceId, ResolveFailedDeliveryRequest resolveFailedDeliveryRequest, final ApiCallback<ResolveFailedDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = resolveFailedDeliveryValidateBeforeCall(instanceId, batchReferenceId, resolveFailedDeliveryRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<ResolveFailedDeliveryResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIresolveFailedDeliveryRequest {
+        private final String instanceId;
+        private final String batchReferenceId;
+        private final ResolveFailedDeliveryRequest resolveFailedDeliveryRequest;
+
+        private APIresolveFailedDeliveryRequest(String instanceId, String batchReferenceId, ResolveFailedDeliveryRequest resolveFailedDeliveryRequest) {
+            this.instanceId = instanceId;
+            this.batchReferenceId = batchReferenceId;
+            this.resolveFailedDeliveryRequest = resolveFailedDeliveryRequest;
+        }
+
+        /**
+         * Build call for resolveFailedDelivery
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return resolveFailedDeliveryCall(instanceId, batchReferenceId, resolveFailedDeliveryRequest, _callback);
+        }
+
+        /**
+         * Execute resolveFailedDelivery request
+         * @return ResolveFailedDeliveryResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResolveFailedDeliveryResponse execute() throws ApiException {
+            ApiResponse<ResolveFailedDeliveryResponse> localVarResp = resolveFailedDeliveryWithHttpInfo(instanceId, batchReferenceId, resolveFailedDeliveryRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute resolveFailedDelivery request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ResolveFailedDeliveryResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResolveFailedDeliveryResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ResolveFailedDeliveryResponse> localVarResp = resolveFailedDeliveryWithHttpInfo(instanceId, batchReferenceId, resolveFailedDeliveryRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute resolveFailedDelivery request with HTTP info returned
+         * @return ApiResponse&lt;ResolveFailedDeliveryResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResolveFailedDeliveryResponse> executeWithHttpInfo() throws ApiException {
+            return resolveFailedDeliveryWithHttpInfo(instanceId, batchReferenceId, resolveFailedDeliveryRequest);
+        }
+
+        /**
+         * Execute resolveFailedDelivery request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ResolveFailedDeliveryResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResolveFailedDeliveryResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return resolveFailedDeliveryWithHttpInfo(instanceId, batchReferenceId, resolveFailedDeliveryRequest, opts);
+        }
+
+        /**
+         * Execute resolveFailedDelivery request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResolveFailedDeliveryResponse> _callback) throws ApiException {
+            resolveFailedDeliveryAsync(instanceId, batchReferenceId, resolveFailedDeliveryRequest, _callback);
+        }
+
+        /**
+         * Execute resolveFailedDelivery request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResolveFailedDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            resolveFailedDeliveryAsync(instanceId, batchReferenceId, resolveFailedDeliveryRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
+     * 
+     * @param instanceId  (required)
+     * @param batchReferenceId  (required)
+     * @param resolveFailedDeliveryRequest  (required)
+     * @return APIresolveFailedDeliveryRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No failed delivery was found for the batch. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The failed deliveries for the batch have already been resolved. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIresolveFailedDeliveryRequest resolveFailedDelivery(String instanceId, String batchReferenceId, ResolveFailedDeliveryRequest resolveFailedDeliveryRequest) {
+        return new APIresolveFailedDeliveryRequest(instanceId, batchReferenceId, resolveFailedDeliveryRequest);
     }
     /**
      * Build call for retryTpfSftpDelivery
