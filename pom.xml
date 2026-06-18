@@ -5,7 +5,7 @@
     <artifactId>finbourne.sdk</artifactId>
     <packaging>jar</packaging>
     <name>finbourne.sdk</name>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
     <url>https://github.com/finbourne/finbourne-sdk-java</url>
     <description>Finbourne SDK</description>
     <scm>

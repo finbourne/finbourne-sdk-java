@@ -93,7 +93,7 @@ public class CustodianAccount {
 
   public static final String JSON_PROPERTY_ACCOUNT_TYPE = "accountType";
   @JsonProperty(JSON_PROPERTY_ACCOUNT_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String accountType;
 
   public CustodianAccount() {
@@ -265,10 +265,10 @@ public class CustodianAccount {
   }
 
   /**
-   * The Type of the Custodian Account. Default value: Margin. Available values: Margin, Cash, Swap.
+   * The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default.
    * @return accountType
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getAccountType() {
     return accountType;
   }
