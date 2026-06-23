@@ -2096,7 +2096,7 @@ public class TransactionPortfoliosApiExample {
 
 ## getHoldings
 
-> VersionedResourceListOfPortfolioHolding getHoldings(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, includeSettlementEventsAfterDays, timelineScope, timelineCode, closedPeriodId)
+> VersionedResourceListOfPortfolioHolding getHoldings(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, includeSettlementEventsAfterDays, timelineScope, timelineCode, closedPeriodId, aggregateCashCommitments)
 
 GetHoldings: Get holdings
 
@@ -2138,11 +2138,12 @@ public class TransactionPortfoliosApiExample {
         String timelineScope = "timelineScope_example"; // String | The scope of the Timeline.
         String timelineCode = "timelineCode_example"; // String | The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods.
         String closedPeriodId = "closedPeriodId_example"; // String | The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. Either closedPeriodId or effectiveAt can be used with a Timeline.
+        Boolean aggregateCashCommitments = true; // Boolean | When true, collapses cash-commitment rows that share a sub-holding key              into a single aggregated row per portfolio with summed units/cost and the per-leg breakdown retained on the              settlement schedule. Ignored when byTaxlots is true. Defaults to False.
         try {
             // uncomment the below to set overrides at the request level
-            // VersionedResourceListOfPortfolioHolding result = apiInstance.getHoldings(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, includeSettlementEventsAfterDays, timelineScope, timelineCode, closedPeriodId).execute(opts);
+            // VersionedResourceListOfPortfolioHolding result = apiInstance.getHoldings(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, includeSettlementEventsAfterDays, timelineScope, timelineCode, closedPeriodId, aggregateCashCommitments).execute(opts);
 
-            VersionedResourceListOfPortfolioHolding result = apiInstance.getHoldings(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, includeSettlementEventsAfterDays, timelineScope, timelineCode, closedPeriodId).execute();
+            VersionedResourceListOfPortfolioHolding result = apiInstance.getHoldings(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, includeSettlementEventsAfterDays, timelineScope, timelineCode, closedPeriodId, aggregateCashCommitments).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling TransactionPortfoliosApi#getHoldings");
@@ -2169,6 +2170,7 @@ public class TransactionPortfoliosApiExample {
 | **timelineScope** | **String**| The scope of the Timeline. | [optional] |
 | **timelineCode** | **String**| The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] |
 | **closedPeriodId** | **String**| The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. Either closedPeriodId or effectiveAt can be used with a Timeline. | [optional] |
+| **aggregateCashCommitments** | **Boolean**| When true, collapses cash-commitment rows that share a sub-holding key              into a single aggregated row per portfolio with summed units/cost and the per-leg breakdown retained on the              settlement schedule. Ignored when byTaxlots is true. Defaults to False. | [optional] |
 
 ### Return type
 
@@ -2278,7 +2280,7 @@ public class TransactionPortfoliosApiExample {
 
 ## getHoldingsWithOrders
 
-> VersionedResourceListWithWarningsOfPortfolioHolding getHoldingsWithOrders(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, recipeIdScope, recipeIdCode, includeSettlementEventsAfterDays)
+> VersionedResourceListWithWarningsOfPortfolioHolding getHoldingsWithOrders(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, recipeIdScope, recipeIdCode, includeSettlementEventsAfterDays, aggregateCashCommitments)
 
 GetHoldingsWithOrders: Get holdings with orders
 
@@ -2319,11 +2321,12 @@ public class TransactionPortfoliosApiExample {
         String recipeIdScope = "recipeIdScope_example"; // String | The scope of the given recipeId
         String recipeIdCode = "recipeIdCode_example"; // String | The code of the given recipeId
         Integer includeSettlementEventsAfterDays = 56; // Integer | Number of days ahead to bring back settlements from, in relation to the specified effectiveAt
+        Boolean aggregateCashCommitments = true; // Boolean | When true, collapses cash-commitment rows that share a sub-holding key              into a single aggregated row per portfolio with summed units/cost and the per-leg breakdown retained on the              settlement schedule. Ignored when byTaxlots is true. Defaults to False.
         try {
             // uncomment the below to set overrides at the request level
-            // VersionedResourceListWithWarningsOfPortfolioHolding result = apiInstance.getHoldingsWithOrders(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, recipeIdScope, recipeIdCode, includeSettlementEventsAfterDays).execute(opts);
+            // VersionedResourceListWithWarningsOfPortfolioHolding result = apiInstance.getHoldingsWithOrders(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, recipeIdScope, recipeIdCode, includeSettlementEventsAfterDays, aggregateCashCommitments).execute(opts);
 
-            VersionedResourceListWithWarningsOfPortfolioHolding result = apiInstance.getHoldingsWithOrders(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, recipeIdScope, recipeIdCode, includeSettlementEventsAfterDays).execute();
+            VersionedResourceListWithWarningsOfPortfolioHolding result = apiInstance.getHoldingsWithOrders(scope, code, effectiveAt, asAt, filter, propertyKeys, byTaxlots, recipeIdScope, recipeIdCode, includeSettlementEventsAfterDays, aggregateCashCommitments).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling TransactionPortfoliosApi#getHoldingsWithOrders");
@@ -2349,6 +2352,7 @@ public class TransactionPortfoliosApiExample {
 | **recipeIdScope** | **String**| The scope of the given recipeId | [optional] |
 | **recipeIdCode** | **String**| The code of the given recipeId | [optional] |
 | **includeSettlementEventsAfterDays** | **Integer**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt | [optional] |
+| **aggregateCashCommitments** | **Boolean**| When true, collapses cash-commitment rows that share a sub-holding key              into a single aggregated row per portfolio with summed units/cost and the per-leg breakdown retained on the              settlement schedule. Ignored when byTaxlots is true. Defaults to False. | [optional] |
 
 ### Return type
 

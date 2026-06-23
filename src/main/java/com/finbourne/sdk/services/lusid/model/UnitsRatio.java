@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -34,7 +35,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   UnitsRatio.JSON_PROPERTY_INPUT,
-  UnitsRatio.JSON_PROPERTY_OUTPUT
+  UnitsRatio.JSON_PROPERTY_OUTPUT,
+  UnitsRatio.JSON_PROPERTY_UNIT_SCALE_TYPE
 })
 
 public class UnitsRatio {
@@ -47,6 +49,11 @@ public class UnitsRatio {
   @JsonProperty(JSON_PROPERTY_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal output;
+
+  public static final String JSON_PROPERTY_UNIT_SCALE_TYPE = "unitScaleType";
+  @JsonProperty(JSON_PROPERTY_UNIT_SCALE_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String unitScaleType;
 
   public UnitsRatio() {
   }
@@ -89,6 +96,25 @@ public class UnitsRatio {
   }
 
 
+  public UnitsRatio unitScaleType(String unitScaleType) {
+    this.unitScaleType = unitScaleType;
+    return this;
+  }
+
+  /**
+   * Determines how units are scaled when processing the event.  Supported values: [NEWO, ADEX]. Available values: NEWO, ADEX.
+   * @return unitScaleType
+   */
+  @javax.annotation.Nullable
+  public String getUnitScaleType() {
+    return unitScaleType;
+  }
+
+  public void setUnitScaleType(String unitScaleType) {
+    this.unitScaleType = unitScaleType;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -99,12 +125,24 @@ public class UnitsRatio {
     }
     UnitsRatio unitsRatio = (UnitsRatio) o;
     return (this.input == null ? unitsRatio.input == null : (unitsRatio.input != null && this.input.compareTo(unitsRatio.getInput()) == 0)) &&
-        (this.output == null ? unitsRatio.output == null : (unitsRatio.output != null && this.output.compareTo(unitsRatio.getOutput()) == 0));
+        (this.output == null ? unitsRatio.output == null : (unitsRatio.output != null && this.output.compareTo(unitsRatio.getOutput()) == 0)) &&
+        Objects.equals(this.unitScaleType, unitsRatio.unitScaleType);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(input, output);
+    return Objects.hash(input, output, unitScaleType);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -113,6 +151,7 @@ public class UnitsRatio {
     sb.append("class UnitsRatio {\n");
     sb.append("    input: ").append(toIndentedString(input)).append("\n");
     sb.append("    output: ").append(toIndentedString(output)).append("\n");
+    sb.append("    unitScaleType: ").append(toIndentedString(unitScaleType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

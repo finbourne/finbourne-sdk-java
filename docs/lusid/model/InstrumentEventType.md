@@ -95,6 +95,7 @@ InstrumentEventType method = InstrumentEventType.WORTHLESS_EVENT;
 InstrumentEventType method = InstrumentEventType.PUT_REDEMPTION_EVENT;
 InstrumentEventType method = InstrumentEventType.LOAN_FACILITY_DELAYED_COMPENSATION_PAYMENT_EVENT;
 InstrumentEventType method = InstrumentEventType.INTEREST_PAYMENT_EVENT;
+InstrumentEventType method = InstrumentEventType.PRIORITY_ISSUE_EVENT;
 ```
 
 

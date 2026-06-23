@@ -33,8 +33,7 @@ import com.finbourne.sdk.JSON;
  * Holding context node.  Contains settings that control how LUSID handles holdings within portfolios.
  */
 @JsonPropertyOrder({
-  HoldingContext.JSON_PROPERTY_TAX_LOT_LEVEL_HOLDINGS,
-  HoldingContext.JSON_PROPERTY_AGGREGATE_CASH_COMMITMENTS
+  HoldingContext.JSON_PROPERTY_TAX_LOT_LEVEL_HOLDINGS
 })
 
 public class HoldingContext {
@@ -42,11 +41,6 @@ public class HoldingContext {
   @JsonProperty(JSON_PROPERTY_TAX_LOT_LEVEL_HOLDINGS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean taxLotLevelHoldings;
-
-  public static final String JSON_PROPERTY_AGGREGATE_CASH_COMMITMENTS = "aggregateCashCommitments";
-  @JsonProperty(JSON_PROPERTY_AGGREGATE_CASH_COMMITMENTS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private Boolean aggregateCashCommitments;
 
   public HoldingContext() {
   }
@@ -70,25 +64,6 @@ public class HoldingContext {
   }
 
 
-  public HoldingContext aggregateCashCommitments(Boolean aggregateCashCommitments) {
-    this.aggregateCashCommitments = aggregateCashCommitments;
-    return this;
-  }
-
-  /**
-   * When true, cash commitment holdings sharing a SubHoldingKey are folded into a single aggregated  row per portfolio, mirroring how cash balances are already aggregated. Defaults to false to  preserve existing behaviour. Ignored when TaxLotLevelHoldings is true — tax-lot granularity  takes precedence. Aggregation is per-portfolio: cross-portfolio rows in portfolio-group / fund  responses stay separate, matching the behaviour of positions and cash balances.
-   * @return aggregateCashCommitments
-   */
-  @javax.annotation.Nullable
-  public Boolean getAggregateCashCommitments() {
-    return aggregateCashCommitments;
-  }
-
-  public void setAggregateCashCommitments(Boolean aggregateCashCommitments) {
-    this.aggregateCashCommitments = aggregateCashCommitments;
-  }
-
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -98,13 +73,12 @@ public class HoldingContext {
       return false;
     }
     HoldingContext holdingContext = (HoldingContext) o;
-    return Objects.equals(this.taxLotLevelHoldings, holdingContext.taxLotLevelHoldings) &&
-        Objects.equals(this.aggregateCashCommitments, holdingContext.aggregateCashCommitments);
+    return Objects.equals(this.taxLotLevelHoldings, holdingContext.taxLotLevelHoldings);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(taxLotLevelHoldings, aggregateCashCommitments);
+    return Objects.hash(taxLotLevelHoldings);
   }
 
   @Override
@@ -112,7 +86,6 @@ public class HoldingContext {
     StringBuilder sb = new StringBuilder();
     sb.append("class HoldingContext {\n");
     sb.append("    taxLotLevelHoldings: ").append(toIndentedString(taxLotLevelHoldings)).append("\n");
-    sb.append("    aggregateCashCommitments: ").append(toIndentedString(aggregateCashCommitments)).append("\n");
     sb.append("}");
     return sb.toString();
   }
