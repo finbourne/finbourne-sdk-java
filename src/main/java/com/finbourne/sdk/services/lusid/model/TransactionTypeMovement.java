@@ -50,7 +50,9 @@ import com.finbourne.sdk.JSON;
   TransactionTypeMovement.JSON_PROPERTY_SETTLEMENT_DATE_OVERRIDE,
   TransactionTypeMovement.JSON_PROPERTY_CONDITION,
   TransactionTypeMovement.JSON_PROPERTY_SETTLEMENT_MODE,
-  TransactionTypeMovement.JSON_PROPERTY_CALCULATE_TRADE_DATE_TO_SETTLEMENT_FX_PN_L
+  TransactionTypeMovement.JSON_PROPERTY_CALCULATE_TRADE_DATE_TO_SETTLEMENT_FX_PN_L,
+  TransactionTypeMovement.JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE,
+  TransactionTypeMovement.JSON_PROPERTY_ACCOUNT_SELECTOR
 })
 
 public class TransactionTypeMovement {
@@ -108,6 +110,16 @@ public class TransactionTypeMovement {
   @JsonProperty(JSON_PROPERTY_CALCULATE_TRADE_DATE_TO_SETTLEMENT_FX_PN_L)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean calculateTradeDateToSettlementFxPnL;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE = "custodianAccountType";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String custodianAccountType;
+
+  public static final String JSON_PROPERTY_ACCOUNT_SELECTOR = "accountSelector";
+  @JsonProperty(JSON_PROPERTY_ACCOUNT_SELECTOR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String accountSelector;
 
   public TransactionTypeMovement() {
   }
@@ -345,6 +357,44 @@ public class TransactionTypeMovement {
   }
 
 
+  public TransactionTypeMovement custodianAccountType(String custodianAccountType) {
+    this.custodianAccountType = custodianAccountType;
+    return this;
+  }
+
+  /**
+   * The type of custodian account this movement targets, e.g. Cash or Margin. Free text, optional.
+   * @return custodianAccountType
+   */
+  @javax.annotation.Nullable
+  public String getCustodianAccountType() {
+    return custodianAccountType;
+  }
+
+  public void setCustodianAccountType(String custodianAccountType) {
+    this.custodianAccountType = custodianAccountType;
+  }
+
+
+  public TransactionTypeMovement accountSelector(String accountSelector) {
+    this.accountSelector = accountSelector;
+    return this;
+  }
+
+  /**
+   * An optional selector expression used to identify the specific account this movement targets. E.g. From/To.
+   * @return accountSelector
+   */
+  @javax.annotation.Nullable
+  public String getAccountSelector() {
+    return accountSelector;
+  }
+
+  public void setAccountSelector(String accountSelector) {
+    this.accountSelector = accountSelector;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -364,7 +414,9 @@ public class TransactionTypeMovement {
         Objects.equals(this.settlementDateOverride, transactionTypeMovement.settlementDateOverride) &&
         Objects.equals(this.condition, transactionTypeMovement.condition) &&
         Objects.equals(this.settlementMode, transactionTypeMovement.settlementMode) &&
-        Objects.equals(this.calculateTradeDateToSettlementFxPnL, transactionTypeMovement.calculateTradeDateToSettlementFxPnL);
+        Objects.equals(this.calculateTradeDateToSettlementFxPnL, transactionTypeMovement.calculateTradeDateToSettlementFxPnL) &&
+        Objects.equals(this.custodianAccountType, transactionTypeMovement.custodianAccountType) &&
+        Objects.equals(this.accountSelector, transactionTypeMovement.accountSelector);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -373,7 +425,7 @@ public class TransactionTypeMovement {
 
   @Override
  public int hashCode() {
-    return Objects.hash(movementTypes, side, direction, properties, mappings, name, movementOptions, settlementDateOverride, condition, settlementMode, calculateTradeDateToSettlementFxPnL);
+    return Objects.hash(movementTypes, side, direction, properties, mappings, name, movementOptions, settlementDateOverride, condition, settlementMode, calculateTradeDateToSettlementFxPnL, custodianAccountType, accountSelector);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -398,6 +450,8 @@ public class TransactionTypeMovement {
     sb.append("    condition: ").append(toIndentedString(condition)).append("\n");
     sb.append("    settlementMode: ").append(toIndentedString(settlementMode)).append("\n");
     sb.append("    calculateTradeDateToSettlementFxPnL: ").append(toIndentedString(calculateTradeDateToSettlementFxPnL)).append("\n");
+    sb.append("    custodianAccountType: ").append(toIndentedString(custodianAccountType)).append("\n");
+    sb.append("    accountSelector: ").append(toIndentedString(accountSelector)).append("\n");
     sb.append("}");
     return sb.toString();
   }
