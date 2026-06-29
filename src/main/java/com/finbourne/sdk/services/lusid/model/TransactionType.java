@@ -47,6 +47,7 @@ import com.finbourne.sdk.JSON;
   TransactionType.JSON_PROPERTY_MOVEMENTS,
   TransactionType.JSON_PROPERTY_PROPERTIES,
   TransactionType.JSON_PROPERTY_CALCULATIONS,
+  TransactionType.JSON_PROPERTY_SCOPE,
   TransactionType.JSON_PROPERTY_LINKS
 })
 
@@ -70,6 +71,11 @@ public class TransactionType {
   @JsonProperty(JSON_PROPERTY_CALCULATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<TransactionTypeCalculation> calculations;
+
+  public static final String JSON_PROPERTY_SCOPE = "scope";
+  @JsonProperty(JSON_PROPERTY_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String scope;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -187,6 +193,25 @@ public class TransactionType {
   }
 
 
+  public TransactionType scope(String scope) {
+    this.scope = scope;
+    return this;
+  }
+
+  /**
+   * The scope in which the transaction type exists.
+   * @return scope
+   */
+  @javax.annotation.Nullable
+  public String getScope() {
+    return scope;
+  }
+
+  public void setScope(String scope) {
+    this.scope = scope;
+  }
+
+
   public TransactionType links(List<Link> links) {
     this.links = links;
     return this;
@@ -227,6 +252,7 @@ public class TransactionType {
         Objects.equals(this.movements, transactionType.movements) &&
         Objects.equals(this.properties, transactionType.properties) &&
         Objects.equals(this.calculations, transactionType.calculations) &&
+        Objects.equals(this.scope, transactionType.scope) &&
         Objects.equals(this.links, transactionType.links);
   }
 
@@ -236,7 +262,7 @@ public class TransactionType {
 
   @Override
  public int hashCode() {
-    return Objects.hash(aliases, movements, properties, calculations, links);
+    return Objects.hash(aliases, movements, properties, calculations, scope, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -254,6 +280,7 @@ public class TransactionType {
     sb.append("    movements: ").append(toIndentedString(movements)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    calculations: ").append(toIndentedString(calculations)).append("\n");
+    sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

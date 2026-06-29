@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   SideDefinition.JSON_PROPERTY_AMOUNT,
   SideDefinition.JSON_PROPERTY_NOTIONAL_AMOUNT,
   SideDefinition.JSON_PROPERTY_CURRENT_FACE,
+  SideDefinition.JSON_PROPERTY_SCOPE,
   SideDefinition.JSON_PROPERTY_LINKS
 })
 
@@ -88,6 +89,11 @@ public class SideDefinition {
   @JsonProperty(JSON_PROPERTY_CURRENT_FACE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String currentFace;
+
+  public static final String JSON_PROPERTY_SCOPE = "scope";
+  @JsonProperty(JSON_PROPERTY_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String scope;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -249,6 +255,25 @@ public class SideDefinition {
   }
 
 
+  public SideDefinition scope(String scope) {
+    this.scope = scope;
+    return this;
+  }
+
+  /**
+   * The scope in which the side definition exists.
+   * @return scope
+   */
+  @javax.annotation.Nullable
+  public String getScope() {
+    return scope;
+  }
+
+  public void setScope(String scope) {
+    this.scope = scope;
+  }
+
+
   public SideDefinition links(List<Link> links) {
     this.links = links;
     return this;
@@ -293,6 +318,7 @@ public class SideDefinition {
         Objects.equals(this.amount, sideDefinition.amount) &&
         Objects.equals(this.notionalAmount, sideDefinition.notionalAmount) &&
         Objects.equals(this.currentFace, sideDefinition.currentFace) &&
+        Objects.equals(this.scope, sideDefinition.scope) &&
         Objects.equals(this.links, sideDefinition.links);
   }
 
@@ -302,7 +328,7 @@ public class SideDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(side, security, currency, rate, units, amount, notionalAmount, currentFace, links);
+    return Objects.hash(side, security, currency, rate, units, amount, notionalAmount, currentFace, scope, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -324,6 +350,7 @@ public class SideDefinition {
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    notionalAmount: ").append(toIndentedString(notionalAmount)).append("\n");
     sb.append("    currentFace: ").append(toIndentedString(currentFace)).append("\n");
+    sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

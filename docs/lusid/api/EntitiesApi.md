@@ -11,6 +11,7 @@ All URIs are relative to *http://localhost*
 | [**getPortfolioByEntityUniqueId**](EntitiesApi.md#getPortfolioByEntityUniqueId) | **GET** /api/api/entities/portfolios/{entityUniqueId} | GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId |
 | [**getPortfolioChanges**](EntitiesApi.md#getPortfolioChanges) | **GET** /api/api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope. |
 | [**getPropertyDefinitionByEntityUniqueId**](EntitiesApi.md#getPropertyDefinitionByEntityUniqueId) | **GET** /api/api/entities/propertydefinitions/{entityUniqueId} | GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId |
+| [**getTransactionByEntityUniqueId**](EntitiesApi.md#getTransactionByEntityUniqueId) | **GET** /api/api/entities/transactions/{entityUniqueId} | GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId |
 
 
 
@@ -588,6 +589,90 @@ public class EntitiesApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The requested property definition entity |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getTransactionByEntityUniqueId
+
+> TransactionEntity getTransactionByEntityUniqueId(entityUniqueId, asAt, previews, dataModelScope, dataModelCode)
+
+GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId
+
+Retrieve a transaction by its entity unique identifier.    If the transaction&#39;s portfolio is deleted, this will return the state of the transaction immediately prior to portfolio deletion.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.EntitiesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class EntitiesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        EntitiesApi apiInstance = apiFactory.build(EntitiesApi.class);
+        String entityUniqueId = "entityUniqueId_example"; // String | The entity unique identifier of the transaction. The expected format is '{portfolioEntityUniqueId}_{transactionId}'.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified.
+        List<String> previews = Arrays.asList(); // List<String> | The ids of the staged modifications to be previewed in the response.
+        String dataModelScope = "dataModelScope_example"; // String | The optional scope of a Custom Data Model to use.
+        String dataModelCode = "dataModelCode_example"; // String | The optional code of a Custom Data Model to use.
+        try {
+            // uncomment the below to set overrides at the request level
+            // TransactionEntity result = apiInstance.getTransactionByEntityUniqueId(entityUniqueId, asAt, previews, dataModelScope, dataModelCode).execute(opts);
+
+            TransactionEntity result = apiInstance.getTransactionByEntityUniqueId(entityUniqueId, asAt, previews, dataModelScope, dataModelCode).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling EntitiesApi#getTransactionByEntityUniqueId");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **entityUniqueId** | **String**| The entity unique identifier of the transaction. The expected format is &#39;{portfolioEntityUniqueId}_{transactionId}&#39;. | |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. | [optional] |
+| **previews** | [**List&lt;String&gt;**](String.md)| The ids of the staged modifications to be previewed in the response. | [optional] |
+| **dataModelScope** | **String**| The optional scope of a Custom Data Model to use. | [optional] |
+| **dataModelCode** | **String**| The optional code of a Custom Data Model to use. | [optional] |
+
+### Return type
+
+[**TransactionEntity**](TransactionEntity.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The requested transaction entity |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

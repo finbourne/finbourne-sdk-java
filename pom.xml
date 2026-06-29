@@ -5,7 +5,7 @@
     <artifactId>finbourne.sdk</artifactId>
     <packaging>jar</packaging>
     <name>finbourne.sdk</name>
-    <version>0.0.10</version>
+    <version>0.0.12</version>
     <url>https://github.com/finbourne/finbourne-sdk-java</url>
     <description>Finbourne SDK</description>
     <scm>
@@ -266,6 +266,18 @@
         </profile>
     </profiles>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>com.finbourne</groupId>
@@ -280,22 +292,18 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>${jackson-version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
@@ -325,8 +333,8 @@
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <sdk-core-version>0.0.8</sdk-core-version>
-        <jackson-version>2.18.6</jackson-version>
+        <sdk-core-version>0.0.9</sdk-core-version>
+        <jackson-version>2.22.0</jackson-version>
         <swagger-annotations-version>2.2.15</swagger-annotations-version>
         <jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
         <jsr305-version>3.0.2</jsr305-version>

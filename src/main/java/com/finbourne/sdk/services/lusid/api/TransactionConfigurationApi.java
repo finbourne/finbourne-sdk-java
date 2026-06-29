@@ -1817,7 +1817,7 @@ public class TransactionConfigurationApi {
     /**
      * Build call for listSideDefinitions
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1836,7 +1836,7 @@ public class TransactionConfigurationApi {
     /**
      * Build call for listSideDefinitions. Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1910,9 +1910,9 @@ public class TransactionConfigurationApi {
 
     /**
      * ListSideDefinitions: List the side definitions
-     * List all the side definitions in the given scope
+     * List all the side definitions in the given scope, or across all scopes when scope is &#39;*&#39;.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @return ApiResponse&lt;ResourceListOfSideDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1931,9 +1931,9 @@ public class TransactionConfigurationApi {
 
     /**
      * ListSideDefinitions: List the side definitions
-     * List all the side definitions in the given scopeUse any specified configuration options to override any other configuration for this request only
+     * List all the side definitions in the given scope, or across all scopes when scope is &#39;*&#39;.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @return ApiResponse&lt;ResourceListOfSideDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1952,9 +1952,9 @@ public class TransactionConfigurationApi {
 
     /**
      * ListSideDefinitions: List the side definitions (asynchronously)
-     * List all the side definitions in the given scope
+     * List all the side definitions in the given scope, or across all scopes when scope is &#39;*&#39;.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1974,9 +1974,9 @@ public class TransactionConfigurationApi {
 
     /**
      * ListSideDefinitions: List the side definitions (asynchronously)
-     * List all the side definitions in the given scopeUse any specified configuration options to override any other configuration for this request only
+     * List all the side definitions in the given scope, or across all scopes when scope is &#39;*&#39;.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2013,7 +2013,7 @@ public class TransactionConfigurationApi {
 
         /**
          * Set scope
-         * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+         * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
          * @return APIlistSideDefinitionsRequest
          */
         public APIlistSideDefinitionsRequest scope(String scope) {
@@ -2139,7 +2139,7 @@ public class TransactionConfigurationApi {
 
     /**
      * ListSideDefinitions: List the side definitions
-     * List all the side definitions in the given scope
+     * List all the side definitions in the given scope, or across all scopes when scope is &#39;*&#39;.
      * @return APIlistSideDefinitionsRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -2155,7 +2155,7 @@ public class TransactionConfigurationApi {
     /**
      * Build call for listTransactionTypes
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2174,7 +2174,7 @@ public class TransactionConfigurationApi {
     /**
      * Build call for listTransactionTypes. Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2250,7 +2250,7 @@ public class TransactionConfigurationApi {
      * ListTransactionTypes: List transaction types
      * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @return ApiResponse&lt;Map&lt;String, List&lt;TransactionType&gt;&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2271,7 +2271,7 @@ public class TransactionConfigurationApi {
      * ListTransactionTypes: List transaction types
      * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @return ApiResponse&lt;Map&lt;String, List&lt;TransactionType&gt;&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2292,7 +2292,7 @@ public class TransactionConfigurationApi {
      * ListTransactionTypes: List transaction types (asynchronously)
      * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2314,7 +2314,7 @@ public class TransactionConfigurationApi {
      * ListTransactionTypes: List transaction types (asynchronously)
      * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2351,7 +2351,7 @@ public class TransactionConfigurationApi {
 
         /**
          * Set scope
-         * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+         * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
          * @return APIlistTransactionTypesRequest
          */
         public APIlistTransactionTypesRequest scope(String scope) {

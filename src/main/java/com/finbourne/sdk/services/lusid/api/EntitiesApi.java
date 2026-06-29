@@ -37,6 +37,7 @@ import com.finbourne.sdk.services.lusid.model.PortfolioEntity;
 import com.finbourne.sdk.services.lusid.model.PropertyDefinitionEntity;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfChange;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfChangeInterval;
+import com.finbourne.sdk.services.lusid.model.TransactionEntity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -2755,5 +2756,400 @@ public class EntitiesApi {
      */
     public APIgetPropertyDefinitionByEntityUniqueIdRequest getPropertyDefinitionByEntityUniqueId(String entityUniqueId) {
         return new APIgetPropertyDefinitionByEntityUniqueIdRequest(entityUniqueId);
+    }
+    /**
+     * Build call for getTransactionByEntityUniqueId
+     * @param entityUniqueId The entity unique identifier of the transaction. The expected format is &#39;{portfolioEntityUniqueId}_{transactionId}&#39;. (required)
+     * @param asAt The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param dataModelScope The optional scope of a Custom Data Model to use. (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTransactionByEntityUniqueIdCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, String dataModelScope, String dataModelCode, final ApiCallback _callback) throws ApiException {
+        return getTransactionByEntityUniqueIdCall(entityUniqueId, asAt, previews, dataModelScope, dataModelCode,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTransactionByEntityUniqueId. Use any specified configuration options to override any other configuration for this request only.
+     * @param entityUniqueId The entity unique identifier of the transaction. The expected format is &#39;{portfolioEntityUniqueId}_{transactionId}&#39;. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param dataModelScope The optional scope of a Custom Data Model to use. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param dataModelCode The optional code of a Custom Data Model to use. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTransactionByEntityUniqueIdCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, String dataModelScope, String dataModelCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/entities/transactions/{entityUniqueId}"
+            .replace("{" + "entityUniqueId" + "}", localVarApiClient.escapeString(entityUniqueId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (previews != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "previews", previews));
+        }
+
+        if (dataModelScope != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dataModelScope", dataModelScope));
+        }
+
+        if (dataModelCode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dataModelCode", dataModelCode));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTransactionByEntityUniqueIdValidateBeforeCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, String dataModelScope, String dataModelCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'entityUniqueId' is set
+        if (entityUniqueId == null) {
+            throw new ApiException("Missing the required parameter 'entityUniqueId' when calling getTransactionByEntityUniqueId(Async)");
+        }
+
+        return getTransactionByEntityUniqueIdCall(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, _callback, opts);
+
+    }
+
+    /**
+     * GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId
+     * Retrieve a transaction by its entity unique identifier.    If the transaction&#39;s portfolio is deleted, this will return the state of the transaction immediately prior to portfolio deletion.
+     * @param entityUniqueId The entity unique identifier of the transaction. The expected format is &#39;{portfolioEntityUniqueId}_{transactionId}&#39;. (required)
+     * @param asAt The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param dataModelScope The optional scope of a Custom Data Model to use. (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use. (optional)
+     * @return ApiResponse&lt;TransactionEntity&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TransactionEntity> getTransactionByEntityUniqueIdWithHttpInfo(String entityUniqueId, OffsetDateTime asAt, List<String> previews, String dataModelScope, String dataModelCode) throws ApiException {
+        HttpRequest localVarCall = getTransactionByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TransactionEntity>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId
+     * Retrieve a transaction by its entity unique identifier.    If the transaction&#39;s portfolio is deleted, this will return the state of the transaction immediately prior to portfolio deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param entityUniqueId The entity unique identifier of the transaction. The expected format is &#39;{portfolioEntityUniqueId}_{transactionId}&#39;. (required)
+     * @param asAt The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param dataModelScope The optional scope of a Custom Data Model to use. (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use. (optional)
+     * @return ApiResponse&lt;TransactionEntity&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TransactionEntity> getTransactionByEntityUniqueIdWithHttpInfo(String entityUniqueId, OffsetDateTime asAt, List<String> previews, String dataModelScope, String dataModelCode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTransactionByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, null, opts);
+        Type localVarReturnType = new TypeReference<TransactionEntity>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId (asynchronously)
+     * Retrieve a transaction by its entity unique identifier.    If the transaction&#39;s portfolio is deleted, this will return the state of the transaction immediately prior to portfolio deletion.
+     * @param entityUniqueId The entity unique identifier of the transaction. The expected format is &#39;{portfolioEntityUniqueId}_{transactionId}&#39;. (required)
+     * @param asAt The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param dataModelScope The optional scope of a Custom Data Model to use. (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTransactionByEntityUniqueIdAsync(String entityUniqueId, OffsetDateTime asAt, List<String> previews, String dataModelScope, String dataModelCode, final ApiCallback<TransactionEntity> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTransactionByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TransactionEntity>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId (asynchronously)
+     * Retrieve a transaction by its entity unique identifier.    If the transaction&#39;s portfolio is deleted, this will return the state of the transaction immediately prior to portfolio deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param entityUniqueId The entity unique identifier of the transaction. The expected format is &#39;{portfolioEntityUniqueId}_{transactionId}&#39;. (required)
+     * @param asAt The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param dataModelScope The optional scope of a Custom Data Model to use. (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTransactionByEntityUniqueIdAsync(String entityUniqueId, OffsetDateTime asAt, List<String> previews, String dataModelScope, String dataModelCode, final ApiCallback<TransactionEntity> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTransactionByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, _callback, opts);
+        Type localVarReturnType = new TypeReference<TransactionEntity>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTransactionByEntityUniqueIdRequest {
+        private final String entityUniqueId;
+        private OffsetDateTime asAt;
+        private List<String> previews;
+        private String dataModelScope;
+        private String dataModelCode;
+
+        private APIgetTransactionByEntityUniqueIdRequest(String entityUniqueId) {
+            this.entityUniqueId = entityUniqueId;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. (optional)
+         * @return APIgetTransactionByEntityUniqueIdRequest
+         */
+        public APIgetTransactionByEntityUniqueIdRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set previews
+         * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+         * @return APIgetTransactionByEntityUniqueIdRequest
+         */
+        public APIgetTransactionByEntityUniqueIdRequest previews(List<String> previews) {
+            this.previews = previews;
+            return this;
+        }
+
+        /**
+         * Set dataModelScope
+         * @param dataModelScope The optional scope of a Custom Data Model to use. (optional)
+         * @return APIgetTransactionByEntityUniqueIdRequest
+         */
+        public APIgetTransactionByEntityUniqueIdRequest dataModelScope(String dataModelScope) {
+            this.dataModelScope = dataModelScope;
+            return this;
+        }
+
+        /**
+         * Set dataModelCode
+         * @param dataModelCode The optional code of a Custom Data Model to use. (optional)
+         * @return APIgetTransactionByEntityUniqueIdRequest
+         */
+        public APIgetTransactionByEntityUniqueIdRequest dataModelCode(String dataModelCode) {
+            this.dataModelCode = dataModelCode;
+            return this;
+        }
+
+        /**
+         * Build call for getTransactionByEntityUniqueId
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTransactionByEntityUniqueIdCall(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, _callback);
+        }
+
+        /**
+         * Execute getTransactionByEntityUniqueId request
+         * @return TransactionEntity
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TransactionEntity execute() throws ApiException {
+            ApiResponse<TransactionEntity> localVarResp = getTransactionByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, dataModelScope, dataModelCode);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTransactionByEntityUniqueId request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TransactionEntity
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TransactionEntity execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TransactionEntity> localVarResp = getTransactionByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTransactionByEntityUniqueId request with HTTP info returned
+         * @return ApiResponse&lt;TransactionEntity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TransactionEntity> executeWithHttpInfo() throws ApiException {
+            return getTransactionByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, dataModelScope, dataModelCode);
+        }
+
+        /**
+         * Execute getTransactionByEntityUniqueId request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TransactionEntity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TransactionEntity> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTransactionByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, opts);
+        }
+
+        /**
+         * Execute getTransactionByEntityUniqueId request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TransactionEntity> _callback) throws ApiException {
+            getTransactionByEntityUniqueIdAsync(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, _callback);
+        }
+
+        /**
+         * Execute getTransactionByEntityUniqueId request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TransactionEntity> _callback, ConfigurationOptions opts) throws ApiException {
+            getTransactionByEntityUniqueIdAsync(entityUniqueId, asAt, previews, dataModelScope, dataModelCode, _callback, opts);
+        }
+    }
+
+    /**
+     * GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId
+     * Retrieve a transaction by its entity unique identifier.    If the transaction&#39;s portfolio is deleted, this will return the state of the transaction immediately prior to portfolio deletion.
+     * @param entityUniqueId The entity unique identifier of the transaction. The expected format is &#39;{portfolioEntityUniqueId}_{transactionId}&#39;. (required)
+     * @return APIgetTransactionByEntityUniqueIdRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested transaction entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTransactionByEntityUniqueIdRequest getTransactionByEntityUniqueId(String entityUniqueId) {
+        return new APIgetTransactionByEntityUniqueIdRequest(entityUniqueId);
     }
 }

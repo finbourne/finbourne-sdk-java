@@ -784,6 +784,7 @@ public class OrdersApi {
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param getDerivedComplianceStatuses If true, derives and decorates ComplianceState and ApprovalState onto each order using the V2 compliance engine. Defaults to false. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -795,8 +796,8 @@ public class OrdersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listOrdersCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, final ApiCallback _callback) throws ApiException {
-        return listOrdersCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType,  _callback, new ConfigurationOptions());
+    private HttpRequest listOrdersCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, Boolean getDerivedComplianceStatuses, final ApiCallback _callback) throws ApiException {
+        return listOrdersCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -809,7 +810,8 @@ public class OrdersApi {
      * @param propertyKeys A list of property keys from the \&quot;Orders\&quot; domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \&quot;Orders/system/Name\&quot;.                  All properties, except derived properties, are returned by default, without specifying here. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param dataModelCode The optional code of a Custom Data Model to use (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param getDerivedComplianceStatuses If true, derives and decorates ComplianceState and ApprovalState onto each order using the V2 compliance engine. Defaults to false. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -821,7 +823,7 @@ public class OrdersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listOrdersCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listOrdersCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, Boolean getDerivedComplianceStatuses, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -882,6 +884,10 @@ public class OrdersApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("membershipType", membershipType));
         }
 
+        if (getDerivedComplianceStatuses != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("getDerivedComplianceStatuses", getDerivedComplianceStatuses));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -904,8 +910,8 @@ public class OrdersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listOrdersValidateBeforeCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listOrdersCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, _callback, opts);
+    private HttpRequest listOrdersValidateBeforeCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, Boolean getDerivedComplianceStatuses, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listOrdersCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, _callback, opts);
 
     }
 
@@ -921,6 +927,7 @@ public class OrdersApi {
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param getDerivedComplianceStatuses If true, derives and decorates ComplianceState and ApprovalState onto each order using the V2 compliance engine. Defaults to false. (optional, default to false)
      * @return ApiResponse&lt;PagedResourceListOfOrder&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -931,8 +938,8 @@ public class OrdersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfOrder> listOrdersWithHttpInfo(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType) throws ApiException {
-        HttpRequest localVarCall = listOrdersValidateBeforeCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfOrder> listOrdersWithHttpInfo(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, Boolean getDerivedComplianceStatuses) throws ApiException {
+        HttpRequest localVarCall = listOrdersValidateBeforeCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfOrder>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -949,6 +956,7 @@ public class OrdersApi {
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param getDerivedComplianceStatuses If true, derives and decorates ComplianceState and ApprovalState onto each order using the V2 compliance engine. Defaults to false. (optional, default to false)
      * @return ApiResponse&lt;PagedResourceListOfOrder&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -959,8 +967,8 @@ public class OrdersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfOrder> listOrdersWithHttpInfo(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listOrdersValidateBeforeCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, null, opts);
+    private ApiResponse<PagedResourceListOfOrder> listOrdersWithHttpInfo(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, Boolean getDerivedComplianceStatuses, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listOrdersValidateBeforeCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfOrder>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -977,6 +985,7 @@ public class OrdersApi {
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param getDerivedComplianceStatuses If true, derives and decorates ComplianceState and ApprovalState onto each order using the V2 compliance engine. Defaults to false. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -987,9 +996,9 @@ public class OrdersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listOrdersAsync(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, final ApiCallback<PagedResourceListOfOrder> _callback) throws ApiException {
+    private void listOrdersAsync(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, Boolean getDerivedComplianceStatuses, final ApiCallback<PagedResourceListOfOrder> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listOrdersValidateBeforeCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listOrdersValidateBeforeCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfOrder>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1006,6 +1015,7 @@ public class OrdersApi {
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param getDerivedComplianceStatuses If true, derives and decorates ComplianceState and ApprovalState onto each order using the V2 compliance engine. Defaults to false. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1016,9 +1026,9 @@ public class OrdersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listOrdersAsync(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, final ApiCallback<PagedResourceListOfOrder> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listOrdersAsync(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, String dataModelScope, String dataModelCode, String membershipType, Boolean getDerivedComplianceStatuses, final ApiCallback<PagedResourceListOfOrder> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listOrdersValidateBeforeCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, _callback, opts);
+        HttpRequest localVarCall = listOrdersValidateBeforeCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfOrder>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1033,6 +1043,7 @@ public class OrdersApi {
         private String dataModelScope;
         private String dataModelCode;
         private String membershipType;
+        private Boolean getDerivedComplianceStatuses;
 
         private APIlistOrdersRequest() {
         }
@@ -1128,6 +1139,16 @@ public class OrdersApi {
         }
 
         /**
+         * Set getDerivedComplianceStatuses
+         * @param getDerivedComplianceStatuses If true, derives and decorates ComplianceState and ApprovalState onto each order using the V2 compliance engine. Defaults to false. (optional, default to false)
+         * @return APIlistOrdersRequest
+         */
+        public APIlistOrdersRequest getDerivedComplianceStatuses(Boolean getDerivedComplianceStatuses) {
+            this.getDerivedComplianceStatuses = getDerivedComplianceStatuses;
+            return this;
+        }
+
+        /**
          * Build call for listOrders
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -1141,7 +1162,7 @@ public class OrdersApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listOrdersCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, _callback);
+            return listOrdersCall(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, _callback);
         }
 
         /**
@@ -1157,7 +1178,7 @@ public class OrdersApi {
          </table>
          */
         public PagedResourceListOfOrder execute() throws ApiException {
-            ApiResponse<PagedResourceListOfOrder> localVarResp = listOrdersWithHttpInfo(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType);
+            ApiResponse<PagedResourceListOfOrder> localVarResp = listOrdersWithHttpInfo(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses);
             return localVarResp.getData();
         }
 
@@ -1174,7 +1195,7 @@ public class OrdersApi {
          </table>
          */
         public PagedResourceListOfOrder execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfOrder> localVarResp = listOrdersWithHttpInfo(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, opts);
+            ApiResponse<PagedResourceListOfOrder> localVarResp = listOrdersWithHttpInfo(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, opts);
             return localVarResp.getData();
         }
 
@@ -1191,7 +1212,7 @@ public class OrdersApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfOrder> executeWithHttpInfo() throws ApiException {
-            return listOrdersWithHttpInfo(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType);
+            return listOrdersWithHttpInfo(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses);
         }
 
         /**
@@ -1207,7 +1228,7 @@ public class OrdersApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfOrder> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listOrdersWithHttpInfo(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, opts);
+            return listOrdersWithHttpInfo(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, opts);
         }
 
         /**
@@ -1223,7 +1244,7 @@ public class OrdersApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfOrder> _callback) throws ApiException {
-            listOrdersAsync(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, _callback);
+            listOrdersAsync(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, _callback);
         }
 
         /**
@@ -1239,7 +1260,7 @@ public class OrdersApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfOrder> _callback, ConfigurationOptions opts) throws ApiException {
-            listOrdersAsync(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, _callback, opts);
+            listOrdersAsync(asAt, page, sortBy, limit, filter, propertyKeys, dataModelScope, dataModelCode, membershipType, getDerivedComplianceStatuses, _callback, opts);
         }
     }
 

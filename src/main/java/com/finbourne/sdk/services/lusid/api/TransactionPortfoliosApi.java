@@ -16298,7 +16298,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
-     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.
+     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be used to return instructions for an individual transaction.
      * @param scope The scope of the portfolio to retrieve settlement instructions for. (required)
      * @param code The code of the portfolio to retrieve settlement instructions for. (required)
      * @param fromDate The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified. (optional)
@@ -16329,7 +16329,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
-     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.Use any specified configuration options to override any other configuration for this request only
+     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be used to return instructions for an individual transaction.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the portfolio to retrieve settlement instructions for. (required)
      * @param code The code of the portfolio to retrieve settlement instructions for. (required)
      * @param fromDate The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified. (optional)
@@ -16360,7 +16360,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions. (asynchronously)
-     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.
+     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be used to return instructions for an individual transaction.
      * @param scope The scope of the portfolio to retrieve settlement instructions for. (required)
      * @param code The code of the portfolio to retrieve settlement instructions for. (required)
      * @param fromDate The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified. (optional)
@@ -16392,7 +16392,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions. (asynchronously)
-     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.Use any specified configuration options to override any other configuration for this request only
+     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be used to return instructions for an individual transaction.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the portfolio to retrieve settlement instructions for. (required)
      * @param code The code of the portfolio to retrieve settlement instructions for. (required)
      * @param fromDate The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified. (optional)
@@ -16659,7 +16659,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
-     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.
+     * Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be used to return instructions for an individual transaction.
      * @param scope The scope of the portfolio to retrieve settlement instructions for. (required)
      * @param code The code of the portfolio to retrieve settlement instructions for. (required)
      * @return APIlistSettlementInstructionsRequest

@@ -67,6 +67,8 @@ import com.finbourne.sdk.JSON;
   Order.JSON_PROPERTY_WEIGHT,
   Order.JSON_PROPERTY_AMOUNT,
   Order.JSON_PROPERTY_DATA_MODEL_MEMBERSHIP,
+  Order.JSON_PROPERTY_DERIVED_COMPLIANCE_STATE,
+  Order.JSON_PROPERTY_DERIVED_APPROVAL_STATE,
   Order.JSON_PROPERTY_LINKS
 })
 
@@ -180,6 +182,16 @@ public class Order {
   @JsonProperty(JSON_PROPERTY_DATA_MODEL_MEMBERSHIP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private DataModelMembership dataModelMembership;
+
+  public static final String JSON_PROPERTY_DERIVED_COMPLIANCE_STATE = "derivedComplianceState";
+  @JsonProperty(JSON_PROPERTY_DERIVED_COMPLIANCE_STATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String derivedComplianceState;
+
+  public static final String JSON_PROPERTY_DERIVED_APPROVAL_STATE = "derivedApprovalState";
+  @JsonProperty(JSON_PROPERTY_DERIVED_APPROVAL_STATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String derivedApprovalState;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -623,6 +635,44 @@ public class Order {
   }
 
 
+  public Order derivedComplianceState(String derivedComplianceState) {
+    this.derivedComplianceState = derivedComplianceState;
+    return this;
+  }
+
+  /**
+   * The compliance state of the order, derived from pre-trade compliance runs.
+   * @return derivedComplianceState
+   */
+  @javax.annotation.Nullable
+  public String getDerivedComplianceState() {
+    return derivedComplianceState;
+  }
+
+  public void setDerivedComplianceState(String derivedComplianceState) {
+    this.derivedComplianceState = derivedComplianceState;
+  }
+
+
+  public Order derivedApprovalState(String derivedApprovalState) {
+    this.derivedApprovalState = derivedApprovalState;
+    return this;
+  }
+
+  /**
+   * The approval state of the order.
+   * @return derivedApprovalState
+   */
+  @javax.annotation.Nullable
+  public String getDerivedApprovalState() {
+    return derivedApprovalState;
+  }
+
+  public void setDerivedApprovalState(String derivedApprovalState) {
+    this.derivedApprovalState = derivedApprovalState;
+  }
+
+
   public Order links(List<Link> links) {
     this.links = links;
     return this;
@@ -681,6 +731,8 @@ public class Order {
         (this.weight == null ? order.weight == null : (order.weight != null && this.weight.compareTo(order.getWeight()) == 0)) &&
         Objects.equals(this.amount, order.amount) &&
         Objects.equals(this.dataModelMembership, order.dataModelMembership) &&
+        Objects.equals(this.derivedComplianceState, order.derivedComplianceState) &&
+        Objects.equals(this.derivedApprovalState, order.derivedApprovalState) &&
         Objects.equals(this.links, order.links);
   }
 
@@ -690,7 +742,7 @@ public class Order {
 
   @Override
  public int hashCode() {
-    return Objects.hash(properties, version, instrumentIdentifiers, quantity, side, orderBookId, portfolioId, id, instrumentScope, lusidInstrumentId, state, type, timeInForce, date, price, limitPrice, stopPrice, orderInstructionId, packageId, weight, amount, dataModelMembership, links);
+    return Objects.hash(properties, version, instrumentIdentifiers, quantity, side, orderBookId, portfolioId, id, instrumentScope, lusidInstrumentId, state, type, timeInForce, date, price, limitPrice, stopPrice, orderInstructionId, packageId, weight, amount, dataModelMembership, derivedComplianceState, derivedApprovalState, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -726,6 +778,8 @@ public class Order {
     sb.append("    weight: ").append(toIndentedString(weight)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    dataModelMembership: ").append(toIndentedString(dataModelMembership)).append("\n");
+    sb.append("    derivedComplianceState: ").append(toIndentedString(derivedComplianceState)).append("\n");
+    sb.append("    derivedApprovalState: ").append(toIndentedString(derivedApprovalState)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

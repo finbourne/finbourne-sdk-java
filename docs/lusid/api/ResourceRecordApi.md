@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**deleteResourceRecord**](ResourceRecordApi.md#deleteResourceRecord) | **DELETE** /api/api/resourcerecords/{scope}/{code}/{resourceId} | [EARLY ACCESS] DeleteResourceRecord: Delete a Resource Record |
-| [**getResourceRecord**](ResourceRecordApi.md#getResourceRecord) | **GET** /api/api/resourcerecords/{scope}/{code}/{resourceId} | [EARLY ACCESS] GetResourceRecord: Get a Resource Record |
-| [**listResourceRecordCodes**](ResourceRecordApi.md#listResourceRecordCodes) | **GET** /api/api/resourcerecords/{scope} | [EARLY ACCESS] ListResourceRecordCodes: List Resource Records Codes for Scope |
-| [**listResourceRecordScopes**](ResourceRecordApi.md#listResourceRecordScopes) | **GET** /api/api/resourcerecords | [EARLY ACCESS] ListResourceRecordScopes: List Resource Record Scopes |
-| [**listResourceRecords**](ResourceRecordApi.md#listResourceRecords) | **GET** /api/api/resourcerecords/{scope}/{code} | [EARLY ACCESS] ListResourceRecords: List Resource Records |
-| [**upsertResourceRecord**](ResourceRecordApi.md#upsertResourceRecord) | **POST** /api/api/resourcerecords | [EARLY ACCESS] UpsertResourceRecord: Upsert a Resource Record |
+| [**deleteResourceRecord**](ResourceRecordApi.md#deleteResourceRecord) | **DELETE** /api/api/resourcerecords/{scope}/{code}/{resourceId} | DeleteResourceRecord: Delete a Resource Record |
+| [**getResourceRecord**](ResourceRecordApi.md#getResourceRecord) | **GET** /api/api/resourcerecords/{scope}/{code}/{resourceId} | GetResourceRecord: Get a Resource Record |
+| [**listResourceRecordCodes**](ResourceRecordApi.md#listResourceRecordCodes) | **GET** /api/api/resourcerecords/{scope} | ListResourceRecordCodes: List Resource Records Codes for Scope |
+| [**listResourceRecordScopes**](ResourceRecordApi.md#listResourceRecordScopes) | **GET** /api/api/resourcerecords | ListResourceRecordScopes: List Resource Record Scopes |
+| [**listResourceRecords**](ResourceRecordApi.md#listResourceRecords) | **GET** /api/api/resourcerecords/{scope}/{code} | ListResourceRecords: List Resource Records |
+| [**upsertResourceRecord**](ResourceRecordApi.md#upsertResourceRecord) | **POST** /api/api/resourcerecords | UpsertResourceRecord: Upsert a Resource Record |
 
 
 
@@ -17,7 +17,7 @@ All URIs are relative to *http://localhost*
 
 > DeletedEntityResponse deleteResourceRecord(scope, code, resourceId)
 
-[EARLY ACCESS] DeleteResourceRecord: Delete a Resource Record
+DeleteResourceRecord: Delete a Resource Record
 
 Delete a resource record.
 
@@ -97,7 +97,7 @@ public class ResourceRecordApiExample {
 
 > ResourceRecord getResourceRecord(scope, code, resourceId, asAt)
 
-[EARLY ACCESS] GetResourceRecord: Get a Resource Record
+GetResourceRecord: Get a Resource Record
 
 Retrieve a resource record by its identifier.
 
@@ -179,7 +179,7 @@ public class ResourceRecordApiExample {
 
 > ResourceListOfString listResourceRecordCodes(scope, asAt, sortOrder)
 
-[EARLY ACCESS] ListResourceRecordCodes: List Resource Records Codes for Scope
+ListResourceRecordCodes: List Resource Records Codes for Scope
 
 List all resource records matching particular criteria.
 
@@ -259,7 +259,7 @@ public class ResourceRecordApiExample {
 
 > ResourceListOfScopeDefinition listResourceRecordScopes(asAt, page, limit)
 
-[EARLY ACCESS] ListResourceRecordScopes: List Resource Record Scopes
+ListResourceRecordScopes: List Resource Record Scopes
 
 List all resource records matching particular criteria.
 
@@ -339,7 +339,7 @@ public class ResourceRecordApiExample {
 
 > PagedResourceListOfResourceRecord listResourceRecords(scope, code, asAt, page, sortBy, limit, filter)
 
-[EARLY ACCESS] ListResourceRecords: List Resource Records
+ListResourceRecords: List Resource Records
 
 List all resource records matching particular criteria.
 
@@ -427,7 +427,7 @@ public class ResourceRecordApiExample {
 
 > ResourceRecord upsertResourceRecord(upsertResourceRecordRequest)
 
-[EARLY ACCESS] UpsertResourceRecord: Upsert a Resource Record
+UpsertResourceRecord: Upsert a Resource Record
 
 Create or update a resource record.
 

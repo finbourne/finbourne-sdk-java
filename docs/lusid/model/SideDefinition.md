@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **amount** | **String** | The value, field or property key defining the side&#39;s amount | [default to String]
 **notionalAmount** | **String** | The value, field or property key defining the side&#39;s notional amount | [optional] [default to String]
 **currentFace** | **String** | The value, field or property key defining the side&#39;s current face / outstanding notional. | [optional] [default to String]
+**scope** | **String** | The scope in which the side definition exists. | [optional] [default to String]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -29,6 +30,7 @@ String units = "example units";
 String amount = "example amount";
 @javax.annotation.Nullable String notionalAmount = "example notionalAmount";
 @javax.annotation.Nullable String currentFace = "example currentFace";
+@javax.annotation.Nullable String scope = "example scope";
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -41,6 +43,7 @@ SideDefinition sideDefinitionInstance = new SideDefinition()
     .amount(amount)
     .notionalAmount(notionalAmount)
     .currentFace(currentFace)
+    .scope(scope)
     .links(links);
 ```
 

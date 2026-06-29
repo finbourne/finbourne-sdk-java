@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **movements** | [**List&lt;TransactionTypeMovement&gt;**](TransactionTypeMovement.md) | Movement data for the transaction type | [default to List<TransactionTypeMovement>]
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Properties attached to the transaction type | [optional] [default to Map<String, PerpetualProperty>]
 **calculations** | [**List&lt;TransactionTypeCalculation&gt;**](TransactionTypeCalculation.md) | Calculations to be performed for the transaction type | [optional] [default to List<TransactionTypeCalculation>]
+**scope** | **String** | The scope in which the transaction type exists. | [optional] [default to String]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -21,6 +22,7 @@ List<TransactionTypeAlias> aliases = new List<TransactionTypeAlias>();
 List<TransactionTypeMovement> movements = new List<TransactionTypeMovement>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable List<TransactionTypeCalculation> calculations = new List<TransactionTypeCalculation>();
+@javax.annotation.Nullable String scope = "example scope";
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -29,6 +31,7 @@ TransactionType transactionTypeInstance = new TransactionType()
     .movements(movements)
     .properties(properties)
     .calculations(calculations)
+    .scope(scope)
     .links(links);
 ```
 
