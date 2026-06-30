@@ -14,6 +14,7 @@ All URIs are relative to *http://localhost*
 | [**listRunTransactions**](TradePublicationFrameworkApi.md#listRunTransactions) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions | [EXPERIMENTAL] ListRunTransactions: List Transactions in a run. |
 | [**replayTransactions**](TradePublicationFrameworkApi.md#replayTransactions) | **POST** /horizon/api/trade-publication-framework/instances/{instanceId}/replay | [EXPERIMENTAL] ReplayTransactions: Replay one or more transactions through a TPF instance |
 | [**resolveFailedDelivery**](TradePublicationFrameworkApi.md#resolveFailedDelivery) | **PUT** /horizon/api/trade-publication-framework/instances/{instanceId}/failed/{batchReferenceId}/resolve | [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry |
+| [**retryFailedDelivery**](TradePublicationFrameworkApi.md#retryFailedDelivery) | **POST** /horizon/api/trade-publication-framework/instances/{instanceId}/failed/retry | [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework |
 | [**retryTpfSftpDelivery**](TradePublicationFrameworkApi.md#retryTpfSftpDelivery) | **POST** /horizon/api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file |
 
 
@@ -815,6 +816,85 @@ public class TradePublicationFrameworkApiExample {
 | **400** | The details of the input related failure |  -  |
 | **404** | No failed delivery was found for the batch. |  -  |
 | **409** | The failed deliveries for the batch have already been resolved. |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## retryFailedDelivery
+
+> TpfFailedDeliveryResponse retryFailedDelivery(instanceId, tpfRetryFailedDeliveryRequest)
+
+[EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework
+
+Re-runs the delivery task only (payload already built - skips build task). Always committed - no preview mode. Increments attempt count on failure, sets resolved to true on success. Uses existing ReplayBatchElement on ITradeTrackingRepository. Requires entitlement to execute integrations.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.horizon.model.*;
+import com.finbourne.sdk.services.horizon.api.TradePublicationFrameworkApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TradePublicationFrameworkApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        TradePublicationFrameworkApi apiInstance = apiFactory.build(TradePublicationFrameworkApi.class);
+        String instanceId = "instanceId_example"; // String | Integration instance identifier
+        TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest = new TpfRetryFailedDeliveryRequest(); // TpfRetryFailedDeliveryRequest | Request containing batch element reference identifiers to retry
+        try {
+            // uncomment the below to set overrides at the request level
+            // TpfFailedDeliveryResponse result = apiInstance.retryFailedDelivery(instanceId, tpfRetryFailedDeliveryRequest).execute(opts);
+
+            TpfFailedDeliveryResponse result = apiInstance.retryFailedDelivery(instanceId, tpfRetryFailedDeliveryRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TradePublicationFrameworkApi#retryFailedDelivery");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **instanceId** | **String**| Integration instance identifier | |
+| **tpfRetryFailedDeliveryRequest** | [**TpfRetryFailedDeliveryRequest**](TpfRetryFailedDeliveryRequest.md)| Request containing batch element reference identifiers to retry | |
+
+### Return type
+
+[**TpfFailedDeliveryResponse**](TpfFailedDeliveryResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **404** | The requested instance does not exist. |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

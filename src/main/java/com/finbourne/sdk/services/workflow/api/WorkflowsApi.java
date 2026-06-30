@@ -27,12 +27,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
+import com.finbourne.sdk.services.workflow.model.BatchUpsertWorkflowPropertiesResponse;
 import com.finbourne.sdk.services.workflow.model.CreateWorkflowRequest;
 import com.finbourne.sdk.services.workflow.model.DeletedEntityResponse;
 import com.finbourne.sdk.services.workflow.model.LusidProblemDetails;
 import com.finbourne.sdk.services.workflow.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.workflow.model.PagedResourceListOfWorkflowResponse;
+import com.finbourne.sdk.services.workflow.model.PerpetualProperty;
 import com.finbourne.sdk.services.workflow.model.UpdateWorkflowRequest;
 import com.finbourne.sdk.services.workflow.model.WorkflowResponse;
 
@@ -1870,5 +1872,382 @@ public class WorkflowsApi {
      */
     public APIupdateWorkflowRequest updateWorkflow(String scope, String code, UpdateWorkflowRequest updateWorkflowRequest) {
         return new APIupdateWorkflowRequest(scope, code, updateWorkflowRequest);
+    }
+    /**
+     * Build call for upsertWorkflowProperties
+     * @param scope The scope that identifies a Workflow (required)
+     * @param code The code that identifies a Workflow (required)
+     * @param requestBody The properties to upsert, keyed by property key. A null value deletes the property. (required)
+     * @param successMode Whether the batch should fail Atomically or Partially. Defaults to Partial. (optional, default to Partial)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertWorkflowPropertiesCall(String scope, String code, Map<String, PerpetualProperty> requestBody, String successMode, final ApiCallback _callback) throws ApiException {
+        return upsertWorkflowPropertiesCall(scope, code, requestBody, successMode,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for upsertWorkflowProperties. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope that identifies a Workflow (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code that identifies a Workflow (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param requestBody The properties to upsert, keyed by property key. A null value deletes the property. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param successMode Whether the batch should fail Atomically or Partially. Defaults to Partial. (optional, default to Partial)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertWorkflowPropertiesCall(String scope, String code, Map<String, PerpetualProperty> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = requestBody;
+
+        // create path and map variables
+        String localVarPath = "/workflow/api/workflows/{scope}/{code}/properties"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (successMode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("successMode", successMode));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest upsertWorkflowPropertiesValidateBeforeCall(String scope, String code, Map<String, PerpetualProperty> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling upsertWorkflowProperties(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling upsertWorkflowProperties(Async)");
+        }
+
+        // verify the required parameter 'requestBody' is set
+        if (requestBody == null) {
+            throw new ApiException("Missing the required parameter 'requestBody' when calling upsertWorkflowProperties(Async)");
+        }
+
+        return upsertWorkflowPropertiesCall(scope, code, requestBody, successMode, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertWorkflowProperties: Add, update and remove properties on an existing Workflow in bulk.
+     * 
+     * @param scope The scope that identifies a Workflow (required)
+     * @param code The code that identifies a Workflow (required)
+     * @param requestBody The properties to upsert, keyed by property key. A null value deletes the property. (required)
+     * @param successMode Whether the batch should fail Atomically or Partially. Defaults to Partial. (optional, default to Partial)
+     * @return ApiResponse&lt;BatchUpsertWorkflowPropertiesResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchUpsertWorkflowPropertiesResponse> upsertWorkflowPropertiesWithHttpInfo(String scope, String code, Map<String, PerpetualProperty> requestBody, String successMode) throws ApiException {
+        HttpRequest localVarCall = upsertWorkflowPropertiesValidateBeforeCall(scope, code, requestBody, successMode, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchUpsertWorkflowPropertiesResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertWorkflowProperties: Add, update and remove properties on an existing Workflow in bulk.
+     * Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope that identifies a Workflow (required)
+     * @param code The code that identifies a Workflow (required)
+     * @param requestBody The properties to upsert, keyed by property key. A null value deletes the property. (required)
+     * @param successMode Whether the batch should fail Atomically or Partially. Defaults to Partial. (optional, default to Partial)
+     * @return ApiResponse&lt;BatchUpsertWorkflowPropertiesResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchUpsertWorkflowPropertiesResponse> upsertWorkflowPropertiesWithHttpInfo(String scope, String code, Map<String, PerpetualProperty> requestBody, String successMode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = upsertWorkflowPropertiesValidateBeforeCall(scope, code, requestBody, successMode, null, opts);
+        Type localVarReturnType = new TypeReference<BatchUpsertWorkflowPropertiesResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertWorkflowProperties: Add, update and remove properties on an existing Workflow in bulk. (asynchronously)
+     * 
+     * @param scope The scope that identifies a Workflow (required)
+     * @param code The code that identifies a Workflow (required)
+     * @param requestBody The properties to upsert, keyed by property key. A null value deletes the property. (required)
+     * @param successMode Whether the batch should fail Atomically or Partially. Defaults to Partial. (optional, default to Partial)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertWorkflowPropertiesAsync(String scope, String code, Map<String, PerpetualProperty> requestBody, String successMode, final ApiCallback<BatchUpsertWorkflowPropertiesResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = upsertWorkflowPropertiesValidateBeforeCall(scope, code, requestBody, successMode, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchUpsertWorkflowPropertiesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertWorkflowProperties: Add, update and remove properties on an existing Workflow in bulk. (asynchronously)
+     * Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope that identifies a Workflow (required)
+     * @param code The code that identifies a Workflow (required)
+     * @param requestBody The properties to upsert, keyed by property key. A null value deletes the property. (required)
+     * @param successMode Whether the batch should fail Atomically or Partially. Defaults to Partial. (optional, default to Partial)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertWorkflowPropertiesAsync(String scope, String code, Map<String, PerpetualProperty> requestBody, String successMode, final ApiCallback<BatchUpsertWorkflowPropertiesResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = upsertWorkflowPropertiesValidateBeforeCall(scope, code, requestBody, successMode, _callback, opts);
+        Type localVarReturnType = new TypeReference<BatchUpsertWorkflowPropertiesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIupsertWorkflowPropertiesRequest {
+        private final String scope;
+        private final String code;
+        private final Map<String, PerpetualProperty> requestBody;
+        private String successMode;
+
+        private APIupsertWorkflowPropertiesRequest(String scope, String code, Map<String, PerpetualProperty> requestBody) {
+            this.scope = scope;
+            this.code = code;
+            this.requestBody = requestBody;
+        }
+
+        /**
+         * Set successMode
+         * @param successMode Whether the batch should fail Atomically or Partially. Defaults to Partial. (optional, default to Partial)
+         * @return APIupsertWorkflowPropertiesRequest
+         */
+        public APIupsertWorkflowPropertiesRequest successMode(String successMode) {
+            this.successMode = successMode;
+            return this;
+        }
+
+        /**
+         * Build call for upsertWorkflowProperties
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return upsertWorkflowPropertiesCall(scope, code, requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute upsertWorkflowProperties request
+         * @return BatchUpsertWorkflowPropertiesResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchUpsertWorkflowPropertiesResponse execute() throws ApiException {
+            ApiResponse<BatchUpsertWorkflowPropertiesResponse> localVarResp = upsertWorkflowPropertiesWithHttpInfo(scope, code, requestBody, successMode);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertWorkflowProperties request. Use any specified configuration options to override any other configuration for this request only.
+         * @return BatchUpsertWorkflowPropertiesResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchUpsertWorkflowPropertiesResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<BatchUpsertWorkflowPropertiesResponse> localVarResp = upsertWorkflowPropertiesWithHttpInfo(scope, code, requestBody, successMode, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertWorkflowProperties request with HTTP info returned
+         * @return ApiResponse&lt;BatchUpsertWorkflowPropertiesResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchUpsertWorkflowPropertiesResponse> executeWithHttpInfo() throws ApiException {
+            return upsertWorkflowPropertiesWithHttpInfo(scope, code, requestBody, successMode);
+        }
+
+        /**
+         * Execute upsertWorkflowProperties request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;BatchUpsertWorkflowPropertiesResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchUpsertWorkflowPropertiesResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return upsertWorkflowPropertiesWithHttpInfo(scope, code, requestBody, successMode, opts);
+        }
+
+        /**
+         * Execute upsertWorkflowProperties request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchUpsertWorkflowPropertiesResponse> _callback) throws ApiException {
+            upsertWorkflowPropertiesAsync(scope, code, requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute upsertWorkflowProperties request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchUpsertWorkflowPropertiesResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            upsertWorkflowPropertiesAsync(scope, code, requestBody, successMode, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertWorkflowProperties: Add, update and remove properties on an existing Workflow in bulk.
+     * 
+     * @param scope The scope that identifies a Workflow (required)
+     * @param code The code that identifies a Workflow (required)
+     * @param requestBody The properties to upsert, keyed by property key. A null value deletes the property. (required)
+     * @return APIupsertWorkflowPropertiesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Workflow not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIupsertWorkflowPropertiesRequest upsertWorkflowProperties(String scope, String code, Map<String, PerpetualProperty> requestBody) {
+        return new APIupsertWorkflowPropertiesRequest(scope, code, requestBody);
     }
 }
