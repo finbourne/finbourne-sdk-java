@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
+import com.finbourne.sdk.services.lusid.model.ResponseMetaData;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
 import java.net.URI;
@@ -45,6 +46,7 @@ import com.finbourne.sdk.JSON;
   UpsertTransactionPropertiesResponse.JSON_PROPERTY_HREF,
   UpsertTransactionPropertiesResponse.JSON_PROPERTY_VERSION,
   UpsertTransactionPropertiesResponse.JSON_PROPERTY_PROPERTIES,
+  UpsertTransactionPropertiesResponse.JSON_PROPERTY_METADATA,
   UpsertTransactionPropertiesResponse.JSON_PROPERTY_LINKS
 })
 
@@ -63,6 +65,11 @@ public class UpsertTransactionPropertiesResponse {
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, PerpetualProperty> properties;
+
+  public static final String JSON_PROPERTY_METADATA = "metadata";
+  @JsonProperty(JSON_PROPERTY_METADATA)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, List<ResponseMetaData>> metadata;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -124,7 +131,7 @@ public class UpsertTransactionPropertiesResponse {
   }
 
   /**
-   * Get properties
+   * The properties that were upserted on the transaction.
    * @return properties
    */
   @javax.annotation.Nullable
@@ -134,6 +141,33 @@ public class UpsertTransactionPropertiesResponse {
 
   public void setProperties(Map<String, PerpetualProperty> properties) {
     this.properties = properties;
+  }
+
+
+  public UpsertTransactionPropertiesResponse metadata(Map<String, List<ResponseMetaData>> metadata) {
+    this.metadata = metadata;
+    return this;
+  }
+
+  public UpsertTransactionPropertiesResponse putMetadataItem(String key, List<ResponseMetaData> metadataItem) {
+    if (this.metadata == null) {
+      this.metadata = new HashMap<>();
+    }
+    this.metadata.put(key, metadataItem);
+    return this;
+  }
+
+  /**
+   * Contains warnings related to the upsert event.
+   * @return metadata
+   */
+  @javax.annotation.Nullable
+  public Map<String, List<ResponseMetaData>> getMetadata() {
+    return metadata;
+  }
+
+  public void setMetadata(Map<String, List<ResponseMetaData>> metadata) {
+    this.metadata = metadata;
   }
 
 
@@ -176,6 +210,7 @@ public class UpsertTransactionPropertiesResponse {
     return Objects.equals(this.href, upsertTransactionPropertiesResponse.href) &&
         Objects.equals(this.version, upsertTransactionPropertiesResponse.version) &&
         Objects.equals(this.properties, upsertTransactionPropertiesResponse.properties) &&
+        Objects.equals(this.metadata, upsertTransactionPropertiesResponse.metadata) &&
         Objects.equals(this.links, upsertTransactionPropertiesResponse.links);
   }
 
@@ -185,7 +220,7 @@ public class UpsertTransactionPropertiesResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, version, properties, links);
+    return Objects.hash(href, version, properties, metadata, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -202,6 +237,7 @@ public class UpsertTransactionPropertiesResponse {
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
+    sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -140,7 +140,7 @@ public class NavTypeDefinition {
 
   public static final String JSON_PROPERTY_TRANSACTION_TEMPLATE_SCOPE = "transactionTemplateScope";
   @JsonProperty(JSON_PROPERTY_TRANSACTION_TEMPLATE_SCOPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String transactionTemplateScope;
 
   public NavTypeDefinition() {
@@ -480,10 +480,10 @@ public class NavTypeDefinition {
   }
 
   /**
-   * The Transaction Template Scope used by the NavType. Will default to the scope set on the parent portfolio. If the fund has multiple parent portfolios, then the Transaction Template Scope must be provided.
+   * The Transaction Template Scope used by the NavType.
    * @return transactionTemplateScope
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public String getTransactionTemplateScope() {
     return transactionTemplateScope;
   }

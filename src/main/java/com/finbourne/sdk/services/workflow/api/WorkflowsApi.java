@@ -750,6 +750,7 @@ public class WorkflowsApi {
      * @param scope The scope that identifies a Workflow (required)
      * @param code The code that identifies a Workflow (required)
      * @param asAt The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -762,15 +763,16 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getWorkflowCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
-        return getWorkflowCall(scope, code, asAt,  _callback, new ConfigurationOptions());
+    private HttpRequest getWorkflowCall(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return getWorkflowCall(scope, code, asAt, propertyKeys,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getWorkflow. Use any specified configuration options to override any other configuration for this request only.
      * @param scope The scope that identifies a Workflow (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The code that identifies a Workflow (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -783,7 +785,7 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getWorkflowCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getWorkflowCall(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -814,6 +816,10 @@ public class WorkflowsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
         }
 
+        if (propertyKeys != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "propertyKeys", propertyKeys));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -834,7 +840,7 @@ public class WorkflowsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getWorkflowValidateBeforeCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getWorkflowValidateBeforeCall(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling getWorkflow(Async)");
@@ -845,7 +851,7 @@ public class WorkflowsApi {
             throw new ApiException("Missing the required parameter 'code' when calling getWorkflow(Async)");
         }
 
-        return getWorkflowCall(scope, code, asAt, _callback, opts);
+        return getWorkflowCall(scope, code, asAt, propertyKeys, _callback, opts);
 
     }
 
@@ -855,6 +861,7 @@ public class WorkflowsApi {
      * @param scope The scope that identifies a Workflow (required)
      * @param code The code that identifies a Workflow (required)
      * @param asAt The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. (optional)
      * @return ApiResponse&lt;WorkflowResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -866,8 +873,8 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<WorkflowResponse> getWorkflowWithHttpInfo(String scope, String code, OffsetDateTime asAt) throws ApiException {
-        HttpRequest localVarCall = getWorkflowValidateBeforeCall(scope, code, asAt, null, new ConfigurationOptions());
+    private ApiResponse<WorkflowResponse> getWorkflowWithHttpInfo(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = getWorkflowValidateBeforeCall(scope, code, asAt, propertyKeys, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<WorkflowResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -878,6 +885,7 @@ public class WorkflowsApi {
      * @param scope The scope that identifies a Workflow (required)
      * @param code The code that identifies a Workflow (required)
      * @param asAt The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. (optional)
      * @return ApiResponse&lt;WorkflowResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -889,8 +897,8 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<WorkflowResponse> getWorkflowWithHttpInfo(String scope, String code, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getWorkflowValidateBeforeCall(scope, code, asAt, null, opts);
+    private ApiResponse<WorkflowResponse> getWorkflowWithHttpInfo(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getWorkflowValidateBeforeCall(scope, code, asAt, propertyKeys, null, opts);
         Type localVarReturnType = new TypeReference<WorkflowResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -901,6 +909,7 @@ public class WorkflowsApi {
      * @param scope The scope that identifies a Workflow (required)
      * @param code The code that identifies a Workflow (required)
      * @param asAt The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -912,9 +921,9 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getWorkflowAsync(String scope, String code, OffsetDateTime asAt, final ApiCallback<WorkflowResponse> _callback) throws ApiException {
+    private void getWorkflowAsync(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<WorkflowResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getWorkflowValidateBeforeCall(scope, code, asAt, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getWorkflowValidateBeforeCall(scope, code, asAt, propertyKeys, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<WorkflowResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -925,6 +934,7 @@ public class WorkflowsApi {
      * @param scope The scope that identifies a Workflow (required)
      * @param code The code that identifies a Workflow (required)
      * @param asAt The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -936,9 +946,9 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getWorkflowAsync(String scope, String code, OffsetDateTime asAt, final ApiCallback<WorkflowResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getWorkflowAsync(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<WorkflowResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getWorkflowValidateBeforeCall(scope, code, asAt, _callback, opts);
+        HttpRequest localVarCall = getWorkflowValidateBeforeCall(scope, code, asAt, propertyKeys, _callback, opts);
         Type localVarReturnType = new TypeReference<WorkflowResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -947,6 +957,7 @@ public class WorkflowsApi {
         private final String scope;
         private final String code;
         private OffsetDateTime asAt;
+        private List<String> propertyKeys;
 
         private APIgetWorkflowRequest(String scope, String code) {
             this.scope = scope;
@@ -960,6 +971,16 @@ public class WorkflowsApi {
          */
         public APIgetWorkflowRequest asAt(OffsetDateTime asAt) {
             this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set propertyKeys
+         * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. (optional)
+         * @return APIgetWorkflowRequest
+         */
+        public APIgetWorkflowRequest propertyKeys(List<String> propertyKeys) {
+            this.propertyKeys = propertyKeys;
             return this;
         }
 
@@ -978,7 +999,7 @@ public class WorkflowsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getWorkflowCall(scope, code, asAt, _callback);
+            return getWorkflowCall(scope, code, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -995,7 +1016,7 @@ public class WorkflowsApi {
          </table>
          */
         public WorkflowResponse execute() throws ApiException {
-            ApiResponse<WorkflowResponse> localVarResp = getWorkflowWithHttpInfo(scope, code, asAt);
+            ApiResponse<WorkflowResponse> localVarResp = getWorkflowWithHttpInfo(scope, code, asAt, propertyKeys);
             return localVarResp.getData();
         }
 
@@ -1013,7 +1034,7 @@ public class WorkflowsApi {
          </table>
          */
         public WorkflowResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<WorkflowResponse> localVarResp = getWorkflowWithHttpInfo(scope, code, asAt, opts);
+            ApiResponse<WorkflowResponse> localVarResp = getWorkflowWithHttpInfo(scope, code, asAt, propertyKeys, opts);
             return localVarResp.getData();
         }
 
@@ -1031,7 +1052,7 @@ public class WorkflowsApi {
          </table>
          */
         public ApiResponse<WorkflowResponse> executeWithHttpInfo() throws ApiException {
-            return getWorkflowWithHttpInfo(scope, code, asAt);
+            return getWorkflowWithHttpInfo(scope, code, asAt, propertyKeys);
         }
 
         /**
@@ -1048,7 +1069,7 @@ public class WorkflowsApi {
          </table>
          */
         public ApiResponse<WorkflowResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getWorkflowWithHttpInfo(scope, code, asAt, opts);
+            return getWorkflowWithHttpInfo(scope, code, asAt, propertyKeys, opts);
         }
 
         /**
@@ -1065,7 +1086,7 @@ public class WorkflowsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<WorkflowResponse> _callback) throws ApiException {
-            getWorkflowAsync(scope, code, asAt, _callback);
+            getWorkflowAsync(scope, code, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -1082,7 +1103,7 @@ public class WorkflowsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<WorkflowResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            getWorkflowAsync(scope, code, asAt, _callback, opts);
+            getWorkflowAsync(scope, code, asAt, propertyKeys, _callback, opts);
         }
     }
 

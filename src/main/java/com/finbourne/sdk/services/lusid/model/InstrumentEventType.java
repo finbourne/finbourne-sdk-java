@@ -189,7 +189,9 @@ public enum InstrumentEventType {
   
   BANKRUPTCY_EVENT("BankruptcyEvent"),
   
-  LIQUIDATION_PAYMENT_EVENT("LiquidationPaymentEvent");
+  LIQUIDATION_PAYMENT_EVENT("LiquidationPaymentEvent"),
+  
+  PARTIAL_DEFEASANCE_EVENT("PartialDefeasanceEvent");
 
   private String value;
 

@@ -12,11 +12,14 @@
 
 package com.finbourne.sdk.services.workflow.model;
 
+import com.finbourne.sdk.services.workflow.model.PerpetualProperty;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.VersionInfo;
 import com.finbourne.sdk.services.workflow.model.WorkflowStructure;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -42,7 +45,8 @@ import com.finbourne.sdk.JSON;
   WorkflowResponse.JSON_PROPERTY_DISPLAY_NAME,
   WorkflowResponse.JSON_PROPERTY_DESCRIPTION,
   WorkflowResponse.JSON_PROPERTY_ROOT_TASK_DEFINITION_ID,
-  WorkflowResponse.JSON_PROPERTY_WORKFLOW_STRUCTURE
+  WorkflowResponse.JSON_PROPERTY_WORKFLOW_STRUCTURE,
+  WorkflowResponse.JSON_PROPERTY_PROPERTIES
 })
 
 public class WorkflowResponse {
@@ -75,6 +79,11 @@ public class WorkflowResponse {
   @JsonProperty(JSON_PROPERTY_WORKFLOW_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private WorkflowStructure workflowStructure;
+
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, PerpetualProperty> properties;
 
   public WorkflowResponse() {
   }
@@ -193,6 +202,33 @@ public class WorkflowResponse {
   }
 
 
+  public WorkflowResponse properties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public WorkflowResponse putPropertiesItem(String key, PerpetualProperty propertiesItem) {
+    if (this.properties == null) {
+      this.properties = new HashMap<>();
+    }
+    this.properties.put(key, propertiesItem);
+    return this;
+  }
+
+  /**
+   * The properties of the Workflow, keyed by property key.
+   * @return properties
+   */
+  @javax.annotation.Nullable
+  public Map<String, PerpetualProperty> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -207,7 +243,8 @@ public class WorkflowResponse {
         Objects.equals(this.displayName, workflowResponse.displayName) &&
         Objects.equals(this.description, workflowResponse.description) &&
         Objects.equals(this.rootTaskDefinitionId, workflowResponse.rootTaskDefinitionId) &&
-        Objects.equals(this.workflowStructure, workflowResponse.workflowStructure);
+        Objects.equals(this.workflowStructure, workflowResponse.workflowStructure) &&
+        Objects.equals(this.properties, workflowResponse.properties);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -216,7 +253,7 @@ public class WorkflowResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, version, displayName, description, rootTaskDefinitionId, workflowStructure);
+    return Objects.hash(id, version, displayName, description, rootTaskDefinitionId, workflowStructure, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -236,6 +273,7 @@ public class WorkflowResponse {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    rootTaskDefinitionId: ").append(toIndentedString(rootTaskDefinitionId)).append("\n");
     sb.append("    workflowStructure: ").append(toIndentedString(workflowStructure)).append("\n");
+    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -12,9 +12,12 @@
 
 package com.finbourne.sdk.services.workflow.model;
 
+import com.finbourne.sdk.services.workflow.model.PerpetualProperty;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -37,7 +40,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   UpdateWorkflowRequest.JSON_PROPERTY_DISPLAY_NAME,
   UpdateWorkflowRequest.JSON_PROPERTY_DESCRIPTION,
-  UpdateWorkflowRequest.JSON_PROPERTY_ROOT_TASK_DEFINITION_ID
+  UpdateWorkflowRequest.JSON_PROPERTY_ROOT_TASK_DEFINITION_ID,
+  UpdateWorkflowRequest.JSON_PROPERTY_PROPERTIES
 })
 
 public class UpdateWorkflowRequest {
@@ -55,6 +59,11 @@ public class UpdateWorkflowRequest {
   @JsonProperty(JSON_PROPERTY_ROOT_TASK_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private ResourceId rootTaskDefinitionId;
+
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, PerpetualProperty> properties;
 
   public UpdateWorkflowRequest() {
   }
@@ -116,6 +125,33 @@ public class UpdateWorkflowRequest {
   }
 
 
+  public UpdateWorkflowRequest properties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public UpdateWorkflowRequest putPropertiesItem(String key, PerpetualProperty propertiesItem) {
+    if (this.properties == null) {
+      this.properties = new HashMap<>();
+    }
+    this.properties.put(key, propertiesItem);
+    return this;
+  }
+
+  /**
+   * The properties to set on the Workflow, keyed by property key. Optional. A null property value deletes the property.
+   * @return properties
+   */
+  @javax.annotation.Nullable
+  public Map<String, PerpetualProperty> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -127,7 +163,8 @@ public class UpdateWorkflowRequest {
     UpdateWorkflowRequest updateWorkflowRequest = (UpdateWorkflowRequest) o;
     return Objects.equals(this.displayName, updateWorkflowRequest.displayName) &&
         Objects.equals(this.description, updateWorkflowRequest.description) &&
-        Objects.equals(this.rootTaskDefinitionId, updateWorkflowRequest.rootTaskDefinitionId);
+        Objects.equals(this.rootTaskDefinitionId, updateWorkflowRequest.rootTaskDefinitionId) &&
+        Objects.equals(this.properties, updateWorkflowRequest.properties);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -136,7 +173,7 @@ public class UpdateWorkflowRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, rootTaskDefinitionId);
+    return Objects.hash(displayName, description, rootTaskDefinitionId, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -153,6 +190,7 @@ public class UpdateWorkflowRequest {
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    rootTaskDefinitionId: ").append(toIndentedString(rootTaskDefinitionId)).append("\n");
+    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();
   }

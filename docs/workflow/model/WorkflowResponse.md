@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **description** | **String** | Human readable description | [optional] [default to String]
 **rootTaskDefinitionId** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
 **workflowStructure** | [**WorkflowStructure**](WorkflowStructure.md) |  | [optional] [default to WorkflowStructure]
+**properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | The properties of the Workflow, keyed by property key. | [optional] [default to Map<String, PerpetualProperty>]
 
 ```java
 import com.finbourne.sdk.services.workflow.model.WorkflowResponse;
@@ -25,6 +26,7 @@ String displayName = "example displayName";
 @javax.annotation.Nullable String description = "example description";
 ResourceId rootTaskDefinitionId = new ResourceId();
 WorkflowStructure workflowStructure = new WorkflowStructure();
+@javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 
 
 WorkflowResponse workflowResponseInstance = new WorkflowResponse()
@@ -33,7 +35,8 @@ WorkflowResponse workflowResponseInstance = new WorkflowResponse()
     .displayName(displayName)
     .description(description)
     .rootTaskDefinitionId(rootTaskDefinitionId)
-    .workflowStructure(workflowStructure);
+    .workflowStructure(workflowStructure)
+    .properties(properties);
 ```
 
 
