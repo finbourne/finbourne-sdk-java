@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **values** | [**Map&lt;String, Transaction&gt;**](Transaction.md) | The transactions which have been successfully upserted. | [optional] [default to Map<String, Transaction>]
 **failed** | [**Map&lt;String, ErrorDetail&gt;**](ErrorDetail.md) | The transactions that could not be upserted along with a reason for their failure. | [optional] [default to Map<String, ErrorDetail>]
 **metadata** | [**Map&lt;String, List&lt;ResponseMetaData&gt;&gt;**](List.md) | Contains warnings related to unresolved instruments or non-existent transaction types for the upserted trades | [optional] [default to Map<String, List<ResponseMetaData>>]
+**staged** | [**Map&lt;String, Transaction&gt;**](Transaction.md) | The transactions that have been staged pending approval. | [optional] [default to Map<String, Transaction>]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -19,6 +20,7 @@ import java.net.URI;
 @javax.annotation.Nullable Map<String, Transaction> values = new Map<String, Transaction>();
 @javax.annotation.Nullable Map<String, ErrorDetail> failed = new Map<String, ErrorDetail>();
 @javax.annotation.Nullable Map<String, List<ResponseMetaData>> metadata = new Map<String, List<ResponseMetaData>>();
+@javax.annotation.Nullable Map<String, Transaction> staged = new Map<String, Transaction>();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -26,6 +28,7 @@ BatchUpsertPortfolioTransactionsResponse batchUpsertPortfolioTransactionsRespons
     .values(values)
     .failed(failed)
     .metadata(metadata)
+    .staged(staged)
     .links(links);
 ```
 

@@ -95,6 +95,7 @@ PropertyDomain method = PropertyDomain.TRANSLATION_SCRIPT;
 PropertyDomain method = PropertyDomain.TASK_DEFINITION;
 PropertyDomain method = PropertyDomain.TASK_INSTANCE;
 PropertyDomain method = PropertyDomain.WORKER;
+PropertyDomain method = PropertyDomain.WORKFLOW;
 PropertyDomain method = PropertyDomain.STAGING_RULE_SET;
 PropertyDomain method = PropertyDomain.IDENTIFIER_DEFINITION;
 PropertyDomain method = PropertyDomain.SETTLEMENT_INSTRUCTION;

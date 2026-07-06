@@ -821,6 +821,7 @@ public class VersionedConfigurationsApi {
      * @param name The logical name of the configuration. (required)
      * @param majorVersion The major version to retrieve. Must be supplied together with minorVersion, or both omitted. (optional)
      * @param minorVersion The minor version to retrieve. Must be supplied together with majorVersion, or both omitted. (optional)
+     * @param includeDrafts When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -833,8 +834,8 @@ public class VersionedConfigurationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getVersionedConfigurationCall(String configType, String name, Integer majorVersion, Integer minorVersion, final ApiCallback _callback) throws ApiException {
-        return getVersionedConfigurationCall(configType, name, majorVersion, minorVersion,  _callback, new ConfigurationOptions());
+    private HttpRequest getVersionedConfigurationCall(String configType, String name, Integer majorVersion, Integer minorVersion, Boolean includeDrafts, final ApiCallback _callback) throws ApiException {
+        return getVersionedConfigurationCall(configType, name, majorVersion, minorVersion, includeDrafts,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -842,7 +843,8 @@ public class VersionedConfigurationsApi {
      * @param configType The category of configuration. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param name The logical name of the configuration. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param majorVersion The major version to retrieve. Must be supplied together with minorVersion, or both omitted. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param minorVersion The minor version to retrieve. Must be supplied together with majorVersion, or both omitted. (optional)
+     * @param minorVersion The minor version to retrieve. Must be supplied together with majorVersion, or both omitted. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param includeDrafts When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -855,7 +857,7 @@ public class VersionedConfigurationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getVersionedConfigurationCall(String configType, String name, Integer majorVersion, Integer minorVersion, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getVersionedConfigurationCall(String configType, String name, Integer majorVersion, Integer minorVersion, Boolean includeDrafts, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -890,6 +892,10 @@ public class VersionedConfigurationsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("minorVersion", minorVersion));
         }
 
+        if (includeDrafts != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("includeDrafts", includeDrafts));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -910,7 +916,7 @@ public class VersionedConfigurationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getVersionedConfigurationValidateBeforeCall(String configType, String name, Integer majorVersion, Integer minorVersion, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getVersionedConfigurationValidateBeforeCall(String configType, String name, Integer majorVersion, Integer minorVersion, Boolean includeDrafts, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'configType' is set
         if (configType == null) {
             throw new ApiException("Missing the required parameter 'configType' when calling getVersionedConfiguration(Async)");
@@ -921,17 +927,18 @@ public class VersionedConfigurationsApi {
             throw new ApiException("Missing the required parameter 'name' when calling getVersionedConfiguration(Async)");
         }
 
-        return getVersionedConfigurationCall(configType, name, majorVersion, minorVersion, _callback, opts);
+        return getVersionedConfigurationCall(configType, name, majorVersion, minorVersion, includeDrafts, _callback, opts);
 
     }
 
     /**
      * [EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration.
-     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available version is returned. Both must be supplied together or both omitted. The user must be authenticated and entitled to call this method.
+     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available locked version is returned. Both must be supplied together or both omitted. When includeDrafts is true and no version is specified, the highest available version regardless of draft state is returned. When an explicit version is supplied via majorVersion and minorVersion, includeDrafts is ignored and the exact version is returned regardless of its draft state. The user must be authenticated and entitled to call this method.
      * @param configType The category of configuration. (required)
      * @param name The logical name of the configuration. (required)
      * @param majorVersion The major version to retrieve. Must be supplied together with minorVersion, or both omitted. (optional)
      * @param minorVersion The minor version to retrieve. Must be supplied together with majorVersion, or both omitted. (optional)
+     * @param includeDrafts When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false. (optional, default to false)
      * @return ApiResponse&lt;VersionedConfigurationResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -943,19 +950,20 @@ public class VersionedConfigurationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<VersionedConfigurationResponse> getVersionedConfigurationWithHttpInfo(String configType, String name, Integer majorVersion, Integer minorVersion) throws ApiException {
-        HttpRequest localVarCall = getVersionedConfigurationValidateBeforeCall(configType, name, majorVersion, minorVersion, null, new ConfigurationOptions());
+    private ApiResponse<VersionedConfigurationResponse> getVersionedConfigurationWithHttpInfo(String configType, String name, Integer majorVersion, Integer minorVersion, Boolean includeDrafts) throws ApiException {
+        HttpRequest localVarCall = getVersionedConfigurationValidateBeforeCall(configType, name, majorVersion, minorVersion, includeDrafts, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<VersionedConfigurationResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration.
-     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available version is returned. Both must be supplied together or both omitted. The user must be authenticated and entitled to call this method.Use any specified configuration options to override any other configuration for this request only
+     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available locked version is returned. Both must be supplied together or both omitted. When includeDrafts is true and no version is specified, the highest available version regardless of draft state is returned. When an explicit version is supplied via majorVersion and minorVersion, includeDrafts is ignored and the exact version is returned regardless of its draft state. The user must be authenticated and entitled to call this method.Use any specified configuration options to override any other configuration for this request only
      * @param configType The category of configuration. (required)
      * @param name The logical name of the configuration. (required)
      * @param majorVersion The major version to retrieve. Must be supplied together with minorVersion, or both omitted. (optional)
      * @param minorVersion The minor version to retrieve. Must be supplied together with majorVersion, or both omitted. (optional)
+     * @param includeDrafts When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false. (optional, default to false)
      * @return ApiResponse&lt;VersionedConfigurationResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -967,19 +975,20 @@ public class VersionedConfigurationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<VersionedConfigurationResponse> getVersionedConfigurationWithHttpInfo(String configType, String name, Integer majorVersion, Integer minorVersion, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getVersionedConfigurationValidateBeforeCall(configType, name, majorVersion, minorVersion, null, opts);
+    private ApiResponse<VersionedConfigurationResponse> getVersionedConfigurationWithHttpInfo(String configType, String name, Integer majorVersion, Integer minorVersion, Boolean includeDrafts, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getVersionedConfigurationValidateBeforeCall(configType, name, majorVersion, minorVersion, includeDrafts, null, opts);
         Type localVarReturnType = new TypeReference<VersionedConfigurationResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration. (asynchronously)
-     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available version is returned. Both must be supplied together or both omitted. The user must be authenticated and entitled to call this method.
+     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available locked version is returned. Both must be supplied together or both omitted. When includeDrafts is true and no version is specified, the highest available version regardless of draft state is returned. When an explicit version is supplied via majorVersion and minorVersion, includeDrafts is ignored and the exact version is returned regardless of its draft state. The user must be authenticated and entitled to call this method.
      * @param configType The category of configuration. (required)
      * @param name The logical name of the configuration. (required)
      * @param majorVersion The major version to retrieve. Must be supplied together with minorVersion, or both omitted. (optional)
      * @param minorVersion The minor version to retrieve. Must be supplied together with majorVersion, or both omitted. (optional)
+     * @param includeDrafts When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -991,20 +1000,21 @@ public class VersionedConfigurationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getVersionedConfigurationAsync(String configType, String name, Integer majorVersion, Integer minorVersion, final ApiCallback<VersionedConfigurationResponse> _callback) throws ApiException {
+    private void getVersionedConfigurationAsync(String configType, String name, Integer majorVersion, Integer minorVersion, Boolean includeDrafts, final ApiCallback<VersionedConfigurationResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getVersionedConfigurationValidateBeforeCall(configType, name, majorVersion, minorVersion, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getVersionedConfigurationValidateBeforeCall(configType, name, majorVersion, minorVersion, includeDrafts, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<VersionedConfigurationResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration. (asynchronously)
-     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available version is returned. Both must be supplied together or both omitted. The user must be authenticated and entitled to call this method.Use any specified configuration options to override any other configuration for this request only
+     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available locked version is returned. Both must be supplied together or both omitted. When includeDrafts is true and no version is specified, the highest available version regardless of draft state is returned. When an explicit version is supplied via majorVersion and minorVersion, includeDrafts is ignored and the exact version is returned regardless of its draft state. The user must be authenticated and entitled to call this method.Use any specified configuration options to override any other configuration for this request only
      * @param configType The category of configuration. (required)
      * @param name The logical name of the configuration. (required)
      * @param majorVersion The major version to retrieve. Must be supplied together with minorVersion, or both omitted. (optional)
      * @param minorVersion The minor version to retrieve. Must be supplied together with majorVersion, or both omitted. (optional)
+     * @param includeDrafts When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1016,9 +1026,9 @@ public class VersionedConfigurationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getVersionedConfigurationAsync(String configType, String name, Integer majorVersion, Integer minorVersion, final ApiCallback<VersionedConfigurationResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getVersionedConfigurationAsync(String configType, String name, Integer majorVersion, Integer minorVersion, Boolean includeDrafts, final ApiCallback<VersionedConfigurationResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getVersionedConfigurationValidateBeforeCall(configType, name, majorVersion, minorVersion, _callback, opts);
+        HttpRequest localVarCall = getVersionedConfigurationValidateBeforeCall(configType, name, majorVersion, minorVersion, includeDrafts, _callback, opts);
         Type localVarReturnType = new TypeReference<VersionedConfigurationResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1028,6 +1038,7 @@ public class VersionedConfigurationsApi {
         private final String name;
         private Integer majorVersion;
         private Integer minorVersion;
+        private Boolean includeDrafts;
 
         private APIgetVersionedConfigurationRequest(String configType, String name) {
             this.configType = configType;
@@ -1055,6 +1066,16 @@ public class VersionedConfigurationsApi {
         }
 
         /**
+         * Set includeDrafts
+         * @param includeDrafts When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false. (optional, default to false)
+         * @return APIgetVersionedConfigurationRequest
+         */
+        public APIgetVersionedConfigurationRequest includeDrafts(Boolean includeDrafts) {
+            this.includeDrafts = includeDrafts;
+            return this;
+        }
+
+        /**
          * Build call for getVersionedConfiguration
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -1069,7 +1090,7 @@ public class VersionedConfigurationsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getVersionedConfigurationCall(configType, name, majorVersion, minorVersion, _callback);
+            return getVersionedConfigurationCall(configType, name, majorVersion, minorVersion, includeDrafts, _callback);
         }
 
         /**
@@ -1086,7 +1107,7 @@ public class VersionedConfigurationsApi {
          </table>
          */
         public VersionedConfigurationResponse execute() throws ApiException {
-            ApiResponse<VersionedConfigurationResponse> localVarResp = getVersionedConfigurationWithHttpInfo(configType, name, majorVersion, minorVersion);
+            ApiResponse<VersionedConfigurationResponse> localVarResp = getVersionedConfigurationWithHttpInfo(configType, name, majorVersion, minorVersion, includeDrafts);
             return localVarResp.getData();
         }
 
@@ -1104,7 +1125,7 @@ public class VersionedConfigurationsApi {
          </table>
          */
         public VersionedConfigurationResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<VersionedConfigurationResponse> localVarResp = getVersionedConfigurationWithHttpInfo(configType, name, majorVersion, minorVersion, opts);
+            ApiResponse<VersionedConfigurationResponse> localVarResp = getVersionedConfigurationWithHttpInfo(configType, name, majorVersion, minorVersion, includeDrafts, opts);
             return localVarResp.getData();
         }
 
@@ -1122,7 +1143,7 @@ public class VersionedConfigurationsApi {
          </table>
          */
         public ApiResponse<VersionedConfigurationResponse> executeWithHttpInfo() throws ApiException {
-            return getVersionedConfigurationWithHttpInfo(configType, name, majorVersion, minorVersion);
+            return getVersionedConfigurationWithHttpInfo(configType, name, majorVersion, minorVersion, includeDrafts);
         }
 
         /**
@@ -1139,7 +1160,7 @@ public class VersionedConfigurationsApi {
          </table>
          */
         public ApiResponse<VersionedConfigurationResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getVersionedConfigurationWithHttpInfo(configType, name, majorVersion, minorVersion, opts);
+            return getVersionedConfigurationWithHttpInfo(configType, name, majorVersion, minorVersion, includeDrafts, opts);
         }
 
         /**
@@ -1156,7 +1177,7 @@ public class VersionedConfigurationsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<VersionedConfigurationResponse> _callback) throws ApiException {
-            getVersionedConfigurationAsync(configType, name, majorVersion, minorVersion, _callback);
+            getVersionedConfigurationAsync(configType, name, majorVersion, minorVersion, includeDrafts, _callback);
         }
 
         /**
@@ -1173,13 +1194,13 @@ public class VersionedConfigurationsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<VersionedConfigurationResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            getVersionedConfigurationAsync(configType, name, majorVersion, minorVersion, _callback, opts);
+            getVersionedConfigurationAsync(configType, name, majorVersion, minorVersion, includeDrafts, _callback, opts);
         }
     }
 
     /**
      * [EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration.
-     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available version is returned. Both must be supplied together or both omitted. The user must be authenticated and entitled to call this method.
+     * Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available locked version is returned. Both must be supplied together or both omitted. When includeDrafts is true and no version is specified, the highest available version regardless of draft state is returned. When an explicit version is supplied via majorVersion and minorVersion, includeDrafts is ignored and the exact version is returned regardless of its draft state. The user must be authenticated and entitled to call this method.
      * @param configType The category of configuration. (required)
      * @param name The logical name of the configuration. (required)
      * @return APIgetVersionedConfigurationRequest

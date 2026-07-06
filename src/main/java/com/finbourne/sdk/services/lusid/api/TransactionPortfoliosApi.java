@@ -2401,6 +2401,8 @@ public class TransactionPortfoliosApi {
      * @param successMode Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (required)
      * @param requestBody The payload describing the transactions to be created or updated. (required)
      * @param preserveProperties If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. (optional, default to true)
+     * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2412,8 +2414,8 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest batchUpsertTransactionsCall(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, final ApiCallback _callback) throws ApiException {
-        return batchUpsertTransactionsCall(scope, code, successMode, requestBody, preserveProperties,  _callback, new ConfigurationOptions());
+    private HttpRequest batchUpsertTransactionsCall(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, String dataModelScope, String dataModelCode, final ApiCallback _callback) throws ApiException {
+        return batchUpsertTransactionsCall(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -2422,7 +2424,9 @@ public class TransactionPortfoliosApi {
      * @param code The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param successMode Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param requestBody The payload describing the transactions to be created or updated. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param preserveProperties If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. (optional, default to true)
+     * @param preserveProperties If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
+     * @param dataModelScope The optional scope of a Custom Data Model to use (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2434,7 +2438,7 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest batchUpsertTransactionsCall(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest batchUpsertTransactionsCall(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, String dataModelScope, String dataModelCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2469,6 +2473,14 @@ public class TransactionPortfoliosApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("preserveProperties", preserveProperties));
         }
 
+        if (dataModelScope != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dataModelScope", dataModelScope));
+        }
+
+        if (dataModelCode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dataModelCode", dataModelCode));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -2495,7 +2507,7 @@ public class TransactionPortfoliosApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest batchUpsertTransactionsValidateBeforeCall(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest batchUpsertTransactionsValidateBeforeCall(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, String dataModelScope, String dataModelCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling batchUpsertTransactions(Async)");
@@ -2516,7 +2528,7 @@ public class TransactionPortfoliosApi {
             throw new ApiException("Missing the required parameter 'requestBody' when calling batchUpsertTransactions(Async)");
         }
 
-        return batchUpsertTransactionsCall(scope, code, successMode, requestBody, preserveProperties, _callback, opts);
+        return batchUpsertTransactionsCall(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, _callback, opts);
 
     }
 
@@ -2528,6 +2540,8 @@ public class TransactionPortfoliosApi {
      * @param successMode Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (required)
      * @param requestBody The payload describing the transactions to be created or updated. (required)
      * @param preserveProperties If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. (optional, default to true)
+     * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @return ApiResponse&lt;BatchUpsertPortfolioTransactionsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2538,8 +2552,8 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<BatchUpsertPortfolioTransactionsResponse> batchUpsertTransactionsWithHttpInfo(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties) throws ApiException {
-        HttpRequest localVarCall = batchUpsertTransactionsValidateBeforeCall(scope, code, successMode, requestBody, preserveProperties, null, new ConfigurationOptions());
+    private ApiResponse<BatchUpsertPortfolioTransactionsResponse> batchUpsertTransactionsWithHttpInfo(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, String dataModelScope, String dataModelCode) throws ApiException {
+        HttpRequest localVarCall = batchUpsertTransactionsValidateBeforeCall(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<BatchUpsertPortfolioTransactionsResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2552,6 +2566,8 @@ public class TransactionPortfoliosApi {
      * @param successMode Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (required)
      * @param requestBody The payload describing the transactions to be created or updated. (required)
      * @param preserveProperties If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. (optional, default to true)
+     * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @return ApiResponse&lt;BatchUpsertPortfolioTransactionsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2562,8 +2578,8 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<BatchUpsertPortfolioTransactionsResponse> batchUpsertTransactionsWithHttpInfo(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = batchUpsertTransactionsValidateBeforeCall(scope, code, successMode, requestBody, preserveProperties, null, opts);
+    private ApiResponse<BatchUpsertPortfolioTransactionsResponse> batchUpsertTransactionsWithHttpInfo(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, String dataModelScope, String dataModelCode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = batchUpsertTransactionsValidateBeforeCall(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, null, opts);
         Type localVarReturnType = new TypeReference<BatchUpsertPortfolioTransactionsResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2576,6 +2592,8 @@ public class TransactionPortfoliosApi {
      * @param successMode Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (required)
      * @param requestBody The payload describing the transactions to be created or updated. (required)
      * @param preserveProperties If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. (optional, default to true)
+     * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2586,9 +2604,9 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void batchUpsertTransactionsAsync(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, final ApiCallback<BatchUpsertPortfolioTransactionsResponse> _callback) throws ApiException {
+    private void batchUpsertTransactionsAsync(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, String dataModelScope, String dataModelCode, final ApiCallback<BatchUpsertPortfolioTransactionsResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = batchUpsertTransactionsValidateBeforeCall(scope, code, successMode, requestBody, preserveProperties, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = batchUpsertTransactionsValidateBeforeCall(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<BatchUpsertPortfolioTransactionsResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2601,6 +2619,8 @@ public class TransactionPortfoliosApi {
      * @param successMode Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (required)
      * @param requestBody The payload describing the transactions to be created or updated. (required)
      * @param preserveProperties If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. (optional, default to true)
+     * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
+     * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2611,9 +2631,9 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void batchUpsertTransactionsAsync(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, final ApiCallback<BatchUpsertPortfolioTransactionsResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void batchUpsertTransactionsAsync(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody, Boolean preserveProperties, String dataModelScope, String dataModelCode, final ApiCallback<BatchUpsertPortfolioTransactionsResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = batchUpsertTransactionsValidateBeforeCall(scope, code, successMode, requestBody, preserveProperties, _callback, opts);
+        HttpRequest localVarCall = batchUpsertTransactionsValidateBeforeCall(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, _callback, opts);
         Type localVarReturnType = new TypeReference<BatchUpsertPortfolioTransactionsResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2624,6 +2644,8 @@ public class TransactionPortfoliosApi {
         private final String successMode;
         private final Map<String, TransactionRequest> requestBody;
         private Boolean preserveProperties;
+        private String dataModelScope;
+        private String dataModelCode;
 
         private APIbatchUpsertTransactionsRequest(String scope, String code, String successMode, Map<String, TransactionRequest> requestBody) {
             this.scope = scope;
@@ -2643,6 +2665,26 @@ public class TransactionPortfoliosApi {
         }
 
         /**
+         * Set dataModelScope
+         * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
+         * @return APIbatchUpsertTransactionsRequest
+         */
+        public APIbatchUpsertTransactionsRequest dataModelScope(String dataModelScope) {
+            this.dataModelScope = dataModelScope;
+            return this;
+        }
+
+        /**
+         * Set dataModelCode
+         * @param dataModelCode The optional code of a Custom Data Model to use (optional)
+         * @return APIbatchUpsertTransactionsRequest
+         */
+        public APIbatchUpsertTransactionsRequest dataModelCode(String dataModelCode) {
+            this.dataModelCode = dataModelCode;
+            return this;
+        }
+
+        /**
          * Build call for batchUpsertTransactions
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -2656,7 +2698,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return batchUpsertTransactionsCall(scope, code, successMode, requestBody, preserveProperties, _callback);
+            return batchUpsertTransactionsCall(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, _callback);
         }
 
         /**
@@ -2672,7 +2714,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public BatchUpsertPortfolioTransactionsResponse execute() throws ApiException {
-            ApiResponse<BatchUpsertPortfolioTransactionsResponse> localVarResp = batchUpsertTransactionsWithHttpInfo(scope, code, successMode, requestBody, preserveProperties);
+            ApiResponse<BatchUpsertPortfolioTransactionsResponse> localVarResp = batchUpsertTransactionsWithHttpInfo(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode);
             return localVarResp.getData();
         }
 
@@ -2689,7 +2731,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public BatchUpsertPortfolioTransactionsResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<BatchUpsertPortfolioTransactionsResponse> localVarResp = batchUpsertTransactionsWithHttpInfo(scope, code, successMode, requestBody, preserveProperties, opts);
+            ApiResponse<BatchUpsertPortfolioTransactionsResponse> localVarResp = batchUpsertTransactionsWithHttpInfo(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, opts);
             return localVarResp.getData();
         }
 
@@ -2706,7 +2748,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public ApiResponse<BatchUpsertPortfolioTransactionsResponse> executeWithHttpInfo() throws ApiException {
-            return batchUpsertTransactionsWithHttpInfo(scope, code, successMode, requestBody, preserveProperties);
+            return batchUpsertTransactionsWithHttpInfo(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode);
         }
 
         /**
@@ -2722,7 +2764,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public ApiResponse<BatchUpsertPortfolioTransactionsResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return batchUpsertTransactionsWithHttpInfo(scope, code, successMode, requestBody, preserveProperties, opts);
+            return batchUpsertTransactionsWithHttpInfo(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, opts);
         }
 
         /**
@@ -2738,7 +2780,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public void executeAsync(final ApiCallback<BatchUpsertPortfolioTransactionsResponse> _callback) throws ApiException {
-            batchUpsertTransactionsAsync(scope, code, successMode, requestBody, preserveProperties, _callback);
+            batchUpsertTransactionsAsync(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, _callback);
         }
 
         /**
@@ -2754,7 +2796,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public void executeAsync(final ApiCallback<BatchUpsertPortfolioTransactionsResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            batchUpsertTransactionsAsync(scope, code, successMode, requestBody, preserveProperties, _callback, opts);
+            batchUpsertTransactionsAsync(scope, code, successMode, requestBody, preserveProperties, dataModelScope, dataModelCode, _callback, opts);
         }
     }
 

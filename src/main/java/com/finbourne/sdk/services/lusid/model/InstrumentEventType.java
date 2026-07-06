@@ -191,7 +191,9 @@ public enum InstrumentEventType {
   
   LIQUIDATION_PAYMENT_EVENT("LiquidationPaymentEvent"),
   
-  PARTIAL_DEFEASANCE_EVENT("PartialDefeasanceEvent");
+  PARTIAL_DEFEASANCE_EVENT("PartialDefeasanceEvent"),
+  
+  SECURITY_WRITE_OFF_EVENT("SecurityWriteOffEvent");
 
   private String value;
 
