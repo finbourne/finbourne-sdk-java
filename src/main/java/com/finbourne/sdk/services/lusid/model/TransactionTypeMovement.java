@@ -382,7 +382,7 @@ public class TransactionTypeMovement {
   }
 
   /**
-   * An optional selector expression used to identify the specific account this movement targets. E.g. From/To.
+   * An optional selector expression used to identify the specific account this movement targets. E.g. From/To. Available values: From, To.
    * @return accountSelector
    */
   @javax.annotation.Nullable

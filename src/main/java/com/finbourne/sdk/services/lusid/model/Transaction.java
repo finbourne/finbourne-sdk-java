@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.CustodianAccount;
+import com.finbourne.sdk.services.lusid.model.CustodianEntry;
 import com.finbourne.sdk.services.lusid.model.DataModelMembership;
 import com.finbourne.sdk.services.lusid.model.OtcConfirmation;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
@@ -77,7 +78,8 @@ import com.finbourne.sdk.JSON;
   Transaction.JSON_PROPERTY_RESOLVED_TRANSACTION_TYPE_DETAILS,
   Transaction.JSON_PROPERTY_DATA_MODEL_MEMBERSHIP,
   Transaction.JSON_PROPERTY_VERSION,
-  Transaction.JSON_PROPERTY_STAGED_MODIFICATIONS
+  Transaction.JSON_PROPERTY_STAGED_MODIFICATIONS,
+  Transaction.JSON_PROPERTY_CUSTODIAN_ENTRIES
 })
 
 public class Transaction {
@@ -262,6 +264,11 @@ public class Transaction {
   @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private StagedModificationsInfo stagedModifications;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ENTRIES = "custodianEntries";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ENTRIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<CustodianEntry> custodianEntries;
 
   public Transaction() {
   }
@@ -822,6 +829,33 @@ public class Transaction {
   }
 
 
+  public Transaction custodianEntries(List<CustodianEntry> custodianEntries) {
+    this.custodianEntries = custodianEntries;
+    return this;
+  }
+
+  public Transaction addCustodianEntriesItem(CustodianEntry custodianEntriesItem) {
+    if (this.custodianEntries == null) {
+      this.custodianEntries = new ArrayList<>();
+    }
+    this.custodianEntries.add(custodianEntriesItem);
+    return this;
+  }
+
+  /**
+   * A list of Custodian Entries associated with the transaction.
+   * @return custodianEntries
+   */
+  @javax.annotation.Nullable
+  public List<CustodianEntry> getCustodianEntries() {
+    return custodianEntries;
+  }
+
+  public void setCustodianEntries(List<CustodianEntry> custodianEntries) {
+    this.custodianEntries = custodianEntries;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -858,7 +892,8 @@ public class Transaction {
         Objects.equals(this.resolvedTransactionTypeDetails, transaction.resolvedTransactionTypeDetails) &&
         Objects.equals(this.dataModelMembership, transaction.dataModelMembership) &&
         Objects.equals(this.version, transaction.version) &&
-        Objects.equals(this.stagedModifications, transaction.stagedModifications);
+        Objects.equals(this.stagedModifications, transaction.stagedModifications) &&
+        Objects.equals(this.custodianEntries, transaction.custodianEntries);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -867,7 +902,7 @@ public class Transaction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, type, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionPrice, totalConsideration, exchangeRate, transactionCurrency, properties, counterpartyId, source, entryDateTime, otcConfirmation, transactionStatus, cancelDateTime, orderId, allocationId, custodianAccount, transactionGroupId, strategyTag, resolvedTransactionTypeDetails, dataModelMembership, version, stagedModifications);
+    return Objects.hash(transactionId, type, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionPrice, totalConsideration, exchangeRate, transactionCurrency, properties, counterpartyId, source, entryDateTime, otcConfirmation, transactionStatus, cancelDateTime, orderId, allocationId, custodianAccount, transactionGroupId, strategyTag, resolvedTransactionTypeDetails, dataModelMembership, version, stagedModifications, custodianEntries);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -909,6 +944,7 @@ public class Transaction {
     sb.append("    dataModelMembership: ").append(toIndentedString(dataModelMembership)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
+    sb.append("    custodianEntries: ").append(toIndentedString(custodianEntries)).append("\n");
     sb.append("}");
     return sb.toString();
   }

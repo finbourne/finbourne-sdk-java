@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
+import com.finbourne.sdk.services.lusid.model.CustodianEntry;
 import com.finbourne.sdk.services.lusid.model.OtcConfirmation;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
@@ -62,7 +63,8 @@ import com.finbourne.sdk.JSON;
   TransactionRequest.JSON_PROPERTY_ALLOCATION_ID,
   TransactionRequest.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID,
   TransactionRequest.JSON_PROPERTY_TRANSACTION_GROUP_ID,
-  TransactionRequest.JSON_PROPERTY_STRATEGY_TAG
+  TransactionRequest.JSON_PROPERTY_STRATEGY_TAG,
+  TransactionRequest.JSON_PROPERTY_CUSTODIAN_ENTRIES
 })
 
 public class TransactionRequest {
@@ -160,6 +162,11 @@ public class TransactionRequest {
   @JsonProperty(JSON_PROPERTY_STRATEGY_TAG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<Strategy> strategyTag;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ENTRIES = "custodianEntries";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ENTRIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<CustodianEntry> custodianEntries;
 
   public TransactionRequest() {
   }
@@ -549,6 +556,33 @@ public class TransactionRequest {
   }
 
 
+  public TransactionRequest custodianEntries(List<CustodianEntry> custodianEntries) {
+    this.custodianEntries = custodianEntries;
+    return this;
+  }
+
+  public TransactionRequest addCustodianEntriesItem(CustodianEntry custodianEntriesItem) {
+    if (this.custodianEntries == null) {
+      this.custodianEntries = new ArrayList<>();
+    }
+    this.custodianEntries.add(custodianEntriesItem);
+    return this;
+  }
+
+  /**
+   * A list of Custodian Entries associated with the transaction.
+   * @return custodianEntries
+   */
+  @javax.annotation.Nullable
+  public List<CustodianEntry> getCustodianEntries() {
+    return custodianEntries;
+  }
+
+  public void setCustodianEntries(List<CustodianEntry> custodianEntries) {
+    this.custodianEntries = custodianEntries;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -576,7 +610,8 @@ public class TransactionRequest {
         Objects.equals(this.allocationId, transactionRequest.allocationId) &&
         Objects.equals(this.custodianAccountId, transactionRequest.custodianAccountId) &&
         Objects.equals(this.transactionGroupId, transactionRequest.transactionGroupId) &&
-        Objects.equals(this.strategyTag, transactionRequest.strategyTag);
+        Objects.equals(this.strategyTag, transactionRequest.strategyTag) &&
+        Objects.equals(this.custodianEntries, transactionRequest.custodianEntries);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -585,7 +620,7 @@ public class TransactionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, type, instrumentIdentifiers, transactionDate, settlementDate, units, transactionPrice, totalConsideration, exchangeRate, transactionCurrency, properties, counterpartyId, source, otcConfirmation, orderId, allocationId, custodianAccountId, transactionGroupId, strategyTag);
+    return Objects.hash(transactionId, type, instrumentIdentifiers, transactionDate, settlementDate, units, transactionPrice, totalConsideration, exchangeRate, transactionCurrency, properties, counterpartyId, source, otcConfirmation, orderId, allocationId, custodianAccountId, transactionGroupId, strategyTag, custodianEntries);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -618,6 +653,7 @@ public class TransactionRequest {
     sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("    transactionGroupId: ").append(toIndentedString(transactionGroupId)).append("\n");
     sb.append("    strategyTag: ").append(toIndentedString(strategyTag)).append("\n");
+    sb.append("    custodianEntries: ").append(toIndentedString(custodianEntries)).append("\n");
     sb.append("}");
     return sb.toString();
   }

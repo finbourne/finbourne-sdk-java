@@ -101,6 +101,7 @@ InstrumentEventType method = InstrumentEventType.BANKRUPTCY_EVENT;
 InstrumentEventType method = InstrumentEventType.LIQUIDATION_PAYMENT_EVENT;
 InstrumentEventType method = InstrumentEventType.PARTIAL_DEFEASANCE_EVENT;
 InstrumentEventType method = InstrumentEventType.SECURITY_WRITE_OFF_EVENT;
+InstrumentEventType method = InstrumentEventType.WARRANTS_EXERCISE_EVENT;
 ```
 
 

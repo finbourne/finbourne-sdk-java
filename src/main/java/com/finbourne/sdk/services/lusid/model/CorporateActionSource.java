@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.EventInheritance;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.Version;
@@ -46,6 +47,7 @@ import com.finbourne.sdk.JSON;
   CorporateActionSource.JSON_PROPERTY_DISPLAY_NAME,
   CorporateActionSource.JSON_PROPERTY_DESCRIPTION,
   CorporateActionSource.JSON_PROPERTY_INSTRUMENT_SCOPES,
+  CorporateActionSource.JSON_PROPERTY_EVENT_INHERITANCE,
   CorporateActionSource.JSON_PROPERTY_LINKS
 })
 
@@ -79,6 +81,11 @@ public class CorporateActionSource {
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_SCOPES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<String> instrumentScopes;
+
+  public static final String JSON_PROPERTY_EVENT_INHERITANCE = "eventInheritance";
+  @JsonProperty(JSON_PROPERTY_EVENT_INHERITANCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private EventInheritance eventInheritance;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -210,6 +217,25 @@ public class CorporateActionSource {
   }
 
 
+  public CorporateActionSource eventInheritance(EventInheritance eventInheritance) {
+    this.eventInheritance = eventInheritance;
+    return this;
+  }
+
+  /**
+   * Get eventInheritance
+   * @return eventInheritance
+   */
+  @javax.annotation.Nullable
+  public EventInheritance getEventInheritance() {
+    return eventInheritance;
+  }
+
+  public void setEventInheritance(EventInheritance eventInheritance) {
+    this.eventInheritance = eventInheritance;
+  }
+
+
   public CorporateActionSource links(List<Link> links) {
     this.links = links;
     return this;
@@ -252,6 +278,7 @@ public class CorporateActionSource {
         Objects.equals(this.displayName, corporateActionSource.displayName) &&
         Objects.equals(this.description, corporateActionSource.description) &&
         Objects.equals(this.instrumentScopes, corporateActionSource.instrumentScopes) &&
+        Objects.equals(this.eventInheritance, corporateActionSource.eventInheritance) &&
         Objects.equals(this.links, corporateActionSource.links);
   }
 
@@ -261,7 +288,7 @@ public class CorporateActionSource {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, version, displayName, description, instrumentScopes, links);
+    return Objects.hash(href, id, version, displayName, description, instrumentScopes, eventInheritance, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -281,6 +308,7 @@ public class CorporateActionSource {
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    instrumentScopes: ").append(toIndentedString(instrumentScopes)).append("\n");
+    sb.append("    eventInheritance: ").append(toIndentedString(eventInheritance)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

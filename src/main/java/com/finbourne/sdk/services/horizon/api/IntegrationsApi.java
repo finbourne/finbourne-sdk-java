@@ -2144,7 +2144,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration.
+     * [EXPERIMENTAL] GetInstance: Get a specified instance for a given integration.
      * The user must be authenticated to call this method.
      * @param instanceId  (required)
      * @return ApiResponse&lt;IntegrationInstanceResponse&gt;
@@ -2165,7 +2165,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration.
+     * [EXPERIMENTAL] GetInstance: Get a specified instance for a given integration.
      * The user must be authenticated to call this method.Use any specified configuration options to override any other configuration for this request only
      * @param instanceId  (required)
      * @return ApiResponse&lt;IntegrationInstanceResponse&gt;
@@ -2186,7 +2186,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration. (asynchronously)
+     * [EXPERIMENTAL] GetInstance: Get a specified instance for a given integration. (asynchronously)
      * The user must be authenticated to call this method.
      * @param instanceId  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -2208,7 +2208,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration. (asynchronously)
+     * [EXPERIMENTAL] GetInstance: Get a specified instance for a given integration. (asynchronously)
      * The user must be authenticated to call this method.Use any specified configuration options to override any other configuration for this request only
      * @param instanceId  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -2360,7 +2360,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration.
+     * [EXPERIMENTAL] GetInstance: Get a specified instance for a given integration.
      * The user must be authenticated to call this method.
      * @param instanceId  (required)
      * @return APIgetInstanceRequest
@@ -2475,7 +2475,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
+     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance
      * Will return the full list of optional properties configured for this integration instance and any naming overrides
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
      * @param instanceId Identifier of the instance (required)
@@ -2497,7 +2497,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
+     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance
      * Will return the full list of optional properties configured for this integration instance and any naming overridesUse any specified configuration options to override any other configuration for this request only
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
      * @param instanceId Identifier of the instance (required)
@@ -2519,7 +2519,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance (asynchronously)
+     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance (asynchronously)
      * Will return the full list of optional properties configured for this integration instance and any naming overrides
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
      * @param instanceId Identifier of the instance (required)
@@ -2542,7 +2542,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance (asynchronously)
+     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance (asynchronously)
      * Will return the full list of optional properties configured for this integration instance and any naming overridesUse any specified configuration options to override any other configuration for this request only
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
      * @param instanceId Identifier of the instance (required)
@@ -2697,7 +2697,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
+     * [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance
      * Will return the full list of optional properties configured for this integration instance and any naming overrides
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
      * @param instanceId Identifier of the instance (required)
@@ -5144,7 +5144,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
+     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an integration instance
      * The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instance
      * @param instanceId Identifier of the instance (required)
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
@@ -5167,7 +5167,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
+     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an integration instance
      * The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instanceUse any specified configuration options to override any other configuration for this request only
      * @param instanceId Identifier of the instance (required)
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
@@ -5190,7 +5190,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance (asynchronously)
+     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an integration instance (asynchronously)
      * The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instance
      * @param instanceId Identifier of the instance (required)
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
@@ -5214,7 +5214,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance (asynchronously)
+     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an integration instance (asynchronously)
      * The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instanceUse any specified configuration options to override any other configuration for this request only
      * @param instanceId Identifier of the instance (required)
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
@@ -5381,7 +5381,7 @@ public class IntegrationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
+     * [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an integration instance
      * The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instance
      * @param instanceId Identifier of the instance (required)
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)

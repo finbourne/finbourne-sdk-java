@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.EventInheritance;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +41,8 @@ import com.finbourne.sdk.JSON;
   CreateCorporateActionSourceRequest.JSON_PROPERTY_CODE,
   CreateCorporateActionSourceRequest.JSON_PROPERTY_DISPLAY_NAME,
   CreateCorporateActionSourceRequest.JSON_PROPERTY_DESCRIPTION,
-  CreateCorporateActionSourceRequest.JSON_PROPERTY_INSTRUMENT_SCOPES
+  CreateCorporateActionSourceRequest.JSON_PROPERTY_INSTRUMENT_SCOPES,
+  CreateCorporateActionSourceRequest.JSON_PROPERTY_EVENT_INHERITANCE
 })
 
 public class CreateCorporateActionSourceRequest {
@@ -68,6 +70,11 @@ public class CreateCorporateActionSourceRequest {
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_SCOPES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<String> instrumentScopes;
+
+  public static final String JSON_PROPERTY_EVENT_INHERITANCE = "eventInheritance";
+  @JsonProperty(JSON_PROPERTY_EVENT_INHERITANCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private EventInheritance eventInheritance;
 
   public CreateCorporateActionSourceRequest() {
   }
@@ -175,6 +182,25 @@ public class CreateCorporateActionSourceRequest {
   }
 
 
+  public CreateCorporateActionSourceRequest eventInheritance(EventInheritance eventInheritance) {
+    this.eventInheritance = eventInheritance;
+    return this;
+  }
+
+  /**
+   * Get eventInheritance
+   * @return eventInheritance
+   */
+  @javax.annotation.Nullable
+  public EventInheritance getEventInheritance() {
+    return eventInheritance;
+  }
+
+  public void setEventInheritance(EventInheritance eventInheritance) {
+    this.eventInheritance = eventInheritance;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -188,7 +214,8 @@ public class CreateCorporateActionSourceRequest {
         Objects.equals(this.code, createCorporateActionSourceRequest.code) &&
         Objects.equals(this.displayName, createCorporateActionSourceRequest.displayName) &&
         Objects.equals(this.description, createCorporateActionSourceRequest.description) &&
-        Objects.equals(this.instrumentScopes, createCorporateActionSourceRequest.instrumentScopes);
+        Objects.equals(this.instrumentScopes, createCorporateActionSourceRequest.instrumentScopes) &&
+        Objects.equals(this.eventInheritance, createCorporateActionSourceRequest.eventInheritance);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -197,7 +224,7 @@ public class CreateCorporateActionSourceRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(scope, code, displayName, description, instrumentScopes);
+    return Objects.hash(scope, code, displayName, description, instrumentScopes, eventInheritance);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -216,6 +243,7 @@ public class CreateCorporateActionSourceRequest {
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    instrumentScopes: ").append(toIndentedString(instrumentScopes)).append("\n");
+    sb.append("    eventInheritance: ").append(toIndentedString(eventInheritance)).append("\n");
     sb.append("}");
     return sb.toString();
   }

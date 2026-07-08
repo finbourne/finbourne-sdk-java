@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **dataModelMembership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] [default to DataModelMembership]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
+**custodianEntries** | [**List&lt;CustodianEntry&gt;**](CustodianEntry.md) | A list of Custodian Entries associated with the transaction. | [optional] [default to List<CustodianEntry>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.Transaction;
@@ -69,6 +70,7 @@ TransactionTypeDetails resolvedTransactionTypeDetails = new TransactionTypeDetai
 DataModelMembership dataModelMembership = new DataModelMembership();
 Version version = new Version();
 StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
+@javax.annotation.Nullable List<CustodianEntry> custodianEntries = new List<CustodianEntry>();
 
 
 Transaction transactionInstance = new Transaction()
@@ -99,7 +101,8 @@ Transaction transactionInstance = new Transaction()
     .resolvedTransactionTypeDetails(resolvedTransactionTypeDetails)
     .dataModelMembership(dataModelMembership)
     .version(version)
-    .stagedModifications(stagedModifications);
+    .stagedModifications(stagedModifications)
+    .custodianEntries(custodianEntries);
 ```
 
 

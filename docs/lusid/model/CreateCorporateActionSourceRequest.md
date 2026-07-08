@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **displayName** | **String** | The name of the corporate action source | [default to String]
 **description** | **String** | The description of the corporate action source | [optional] [default to String]
 **instrumentScopes** | **List&lt;String&gt;** | The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions. | [optional] [default to List<String>]
+**eventInheritance** | [**EventInheritance**](EventInheritance.md) |  | [optional] [default to EventInheritance]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CreateCorporateActionSourceRequest;
@@ -22,6 +23,7 @@ String code = "example code";
 String displayName = "example displayName";
 @javax.annotation.Nullable String description = "example description";
 @javax.annotation.Nullable List<String> instrumentScopes = new List<String>();
+EventInheritance eventInheritance = new EventInheritance();
 
 
 CreateCorporateActionSourceRequest createCorporateActionSourceRequestInstance = new CreateCorporateActionSourceRequest()
@@ -29,7 +31,8 @@ CreateCorporateActionSourceRequest createCorporateActionSourceRequestInstance = 
     .code(code)
     .displayName(displayName)
     .description(description)
-    .instrumentScopes(instrumentScopes);
+    .instrumentScopes(instrumentScopes)
+    .eventInheritance(eventInheritance);
 ```
 
 
