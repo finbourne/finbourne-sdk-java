@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.workflow.model;
 
 import com.finbourne.sdk.services.workflow.model.ActionDefinitionResponse;
 import com.finbourne.sdk.services.workflow.model.InitialState;
+import com.finbourne.sdk.services.workflow.model.PerpetualProperty;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.TaskFieldDefinition;
 import com.finbourne.sdk.services.workflow.model.TaskStateDefinition;
@@ -23,7 +24,9 @@ import com.finbourne.sdk.services.workflow.model.VersionInfo;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -53,7 +56,8 @@ import com.finbourne.sdk.JSON;
   TaskDefinition.JSON_PROPERTY_INITIAL_STATE,
   TaskDefinition.JSON_PROPERTY_TRIGGERS,
   TaskDefinition.JSON_PROPERTY_ACTIONS,
-  TaskDefinition.JSON_PROPERTY_TRANSITIONS
+  TaskDefinition.JSON_PROPERTY_TRANSITIONS,
+  TaskDefinition.JSON_PROPERTY_PROPERTIES
 })
 
 public class TaskDefinition {
@@ -106,6 +110,11 @@ public class TaskDefinition {
   @JsonProperty(JSON_PROPERTY_TRANSITIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<TaskTransitionDefinition> transitions;
+
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, PerpetualProperty> properties;
 
   public TaskDefinition() {
   }
@@ -340,6 +349,33 @@ public class TaskDefinition {
   }
 
 
+  public TaskDefinition properties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public TaskDefinition putPropertiesItem(String key, PerpetualProperty propertiesItem) {
+    if (this.properties == null) {
+      this.properties = new HashMap<>();
+    }
+    this.properties.put(key, propertiesItem);
+    return this;
+  }
+
+  /**
+   * The properties of the Task Definition, keyed by property key. Only populated when set on the request (Create/Update) or when property keys are requested (Get/List).
+   * @return properties
+   */
+  @javax.annotation.Nullable
+  public Map<String, PerpetualProperty> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -358,7 +394,8 @@ public class TaskDefinition {
         Objects.equals(this.initialState, taskDefinition.initialState) &&
         Objects.equals(this.triggers, taskDefinition.triggers) &&
         Objects.equals(this.actions, taskDefinition.actions) &&
-        Objects.equals(this.transitions, taskDefinition.transitions);
+        Objects.equals(this.transitions, taskDefinition.transitions) &&
+        Objects.equals(this.properties, taskDefinition.properties);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -367,7 +404,7 @@ public class TaskDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, version, displayName, description, states, fieldSchema, initialState, triggers, actions, transitions);
+    return Objects.hash(id, version, displayName, description, states, fieldSchema, initialState, triggers, actions, transitions, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -391,6 +428,7 @@ public class TaskDefinition {
     sb.append("    triggers: ").append(toIndentedString(triggers)).append("\n");
     sb.append("    actions: ").append(toIndentedString(actions)).append("\n");
     sb.append("    transitions: ").append(toIndentedString(transitions)).append("\n");
+    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
