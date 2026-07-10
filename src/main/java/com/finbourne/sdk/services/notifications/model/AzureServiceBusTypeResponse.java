@@ -14,6 +14,8 @@ package com.finbourne.sdk.services.notifications.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -40,7 +42,8 @@ import com.finbourne.sdk.JSON;
   AzureServiceBusTypeResponse.JSON_PROPERTY_BODY,
   AzureServiceBusTypeResponse.JSON_PROPERTY_TENANT_ID_REF,
   AzureServiceBusTypeResponse.JSON_PROPERTY_CLIENT_ID_REF,
-  AzureServiceBusTypeResponse.JSON_PROPERTY_CLIENT_SECRET_REF
+  AzureServiceBusTypeResponse.JSON_PROPERTY_CLIENT_SECRET_REF,
+  AzureServiceBusTypeResponse.JSON_PROPERTY_APPLICATION_PROPERTIES
 })
 
 public class AzureServiceBusTypeResponse {
@@ -110,6 +113,11 @@ public class AzureServiceBusTypeResponse {
   @JsonProperty(JSON_PROPERTY_CLIENT_SECRET_REF)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String clientSecretRef;
+
+  public static final String JSON_PROPERTY_APPLICATION_PROPERTIES = "applicationProperties";
+  @JsonProperty(JSON_PROPERTY_APPLICATION_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, String> applicationProperties;
 
   public AzureServiceBusTypeResponse() {
   }
@@ -247,6 +255,33 @@ public class AzureServiceBusTypeResponse {
   }
 
 
+  public AzureServiceBusTypeResponse applicationProperties(Map<String, String> applicationProperties) {
+    this.applicationProperties = applicationProperties;
+    return this;
+  }
+
+  public AzureServiceBusTypeResponse putApplicationPropertiesItem(String key, String applicationPropertiesItem) {
+    if (this.applicationProperties == null) {
+      this.applicationProperties = new HashMap<>();
+    }
+    this.applicationProperties.put(key, applicationPropertiesItem);
+    return this;
+  }
+
+  /**
+   * Optional key-value pairs attached to the Azure Service Bus message envelope.
+   * @return applicationProperties
+   */
+  @javax.annotation.Nullable
+  public Map<String, String> getApplicationProperties() {
+    return applicationProperties;
+  }
+
+  public void setApplicationProperties(Map<String, String> applicationProperties) {
+    this.applicationProperties = applicationProperties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -262,7 +297,8 @@ public class AzureServiceBusTypeResponse {
         Objects.equals(this.body, azureServiceBusTypeResponse.body) &&
         Objects.equals(this.tenantIdRef, azureServiceBusTypeResponse.tenantIdRef) &&
         Objects.equals(this.clientIdRef, azureServiceBusTypeResponse.clientIdRef) &&
-        Objects.equals(this.clientSecretRef, azureServiceBusTypeResponse.clientSecretRef);
+        Objects.equals(this.clientSecretRef, azureServiceBusTypeResponse.clientSecretRef) &&
+        Objects.equals(this.applicationProperties, azureServiceBusTypeResponse.applicationProperties);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -271,7 +307,7 @@ public class AzureServiceBusTypeResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(type, namespaceRef, queueNameRef, body, tenantIdRef, clientIdRef, clientSecretRef);
+    return Objects.hash(type, namespaceRef, queueNameRef, body, tenantIdRef, clientIdRef, clientSecretRef, applicationProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -292,6 +328,7 @@ public class AzureServiceBusTypeResponse {
     sb.append("    tenantIdRef: ").append(toIndentedString(tenantIdRef)).append("\n");
     sb.append("    clientIdRef: ").append(toIndentedString(clientIdRef)).append("\n");
     sb.append("    clientSecretRef: ").append(toIndentedString(clientSecretRef)).append("\n");
+    sb.append("    applicationProperties: ").append(toIndentedString(applicationProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }

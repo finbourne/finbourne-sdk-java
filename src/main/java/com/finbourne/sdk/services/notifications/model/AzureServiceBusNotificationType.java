@@ -14,6 +14,9 @@ package com.finbourne.sdk.services.notifications.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -39,7 +42,8 @@ import com.finbourne.sdk.JSON;
   AzureServiceBusNotificationType.JSON_PROPERTY_BODY,
   AzureServiceBusNotificationType.JSON_PROPERTY_TENANT_ID,
   AzureServiceBusNotificationType.JSON_PROPERTY_CLIENT_ID,
-  AzureServiceBusNotificationType.JSON_PROPERTY_CLIENT_SECRET
+  AzureServiceBusNotificationType.JSON_PROPERTY_CLIENT_SECRET,
+  AzureServiceBusNotificationType.JSON_PROPERTY_APPLICATION_PROPERTIES
 })
 
 public class AzureServiceBusNotificationType {
@@ -109,6 +113,11 @@ public class AzureServiceBusNotificationType {
   @JsonProperty(JSON_PROPERTY_CLIENT_SECRET)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String clientSecret;
+
+  public static final String JSON_PROPERTY_APPLICATION_PROPERTIES = "applicationProperties";
+  @JsonProperty(JSON_PROPERTY_APPLICATION_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, String> applicationProperties;
 
   public AzureServiceBusNotificationType() {
   }
@@ -246,6 +255,33 @@ public class AzureServiceBusNotificationType {
   }
 
 
+  public AzureServiceBusNotificationType applicationProperties(Map<String, String> applicationProperties) {
+    this.applicationProperties = applicationProperties;
+    return this;
+  }
+
+  public AzureServiceBusNotificationType putApplicationPropertiesItem(String key, String applicationPropertiesItem) {
+    if (this.applicationProperties == null) {
+      this.applicationProperties = new HashMap<>();
+    }
+    this.applicationProperties.put(key, applicationPropertiesItem);
+    return this;
+  }
+
+  /**
+   * Optional key-value pairs to attach to the Azure Service Bus message envelope.
+   * @return applicationProperties
+   */
+  @javax.annotation.Nullable
+  public Map<String, String> getApplicationProperties() {
+    return applicationProperties;
+  }
+
+  public void setApplicationProperties(Map<String, String> applicationProperties) {
+    this.applicationProperties = applicationProperties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -261,12 +297,24 @@ public class AzureServiceBusNotificationType {
         Objects.equals(this.body, azureServiceBusNotificationType.body) &&
         Objects.equals(this.tenantId, azureServiceBusNotificationType.tenantId) &&
         Objects.equals(this.clientId, azureServiceBusNotificationType.clientId) &&
-        Objects.equals(this.clientSecret, azureServiceBusNotificationType.clientSecret);
+        Objects.equals(this.clientSecret, azureServiceBusNotificationType.clientSecret) &&
+        Objects.equals(this.applicationProperties, azureServiceBusNotificationType.applicationProperties);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(type, namespace, queueName, body, tenantId, clientId, clientSecret);
+    return Objects.hash(type, namespace, queueName, body, tenantId, clientId, clientSecret, applicationProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -280,6 +328,7 @@ public class AzureServiceBusNotificationType {
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    clientId: ").append(toIndentedString(clientId)).append("\n");
     sb.append("    clientSecret: ").append(toIndentedString(clientSecret)).append("\n");
+    sb.append("    applicationProperties: ").append(toIndentedString(applicationProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
