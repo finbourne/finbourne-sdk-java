@@ -22,7 +22,6 @@ Name | Type | Description | Notes
 **additionalNavTypes** | [**List&lt;NavTypeDefinition&gt;**](NavTypeDefinition.md) | The definitions for any additional NAVs on the Fund. | [optional] [default to List<NavTypeDefinition>]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | A set of properties for the Fund. | [optional] [default to Map<String, Property>]
 **createInstrument** | **Boolean** | Whether to create instruments for the Fund&#39;s share classes, series, or partner classes upon creation. Defaults to false. | [optional] [default to Boolean]
-**apportionmentMethodProperty** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] [default to ApportionmentMethodProperty]
 **shareClasses** | [**List&lt;ShareClassDefinition&gt;**](ShareClassDefinition.md) | An optional list of Share Class definitions for the Fund. | [optional] [default to List<ShareClassDefinition>]
 
 ```java
@@ -47,7 +46,6 @@ NavTypeDefinition primaryNavType = new NavTypeDefinition();
 @javax.annotation.Nullable List<NavTypeDefinition> additionalNavTypes = new List<NavTypeDefinition>();
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
 Boolean createInstrument = true;
-ApportionmentMethodProperty apportionmentMethodProperty = new ApportionmentMethodProperty();
 @javax.annotation.Nullable List<ShareClassDefinition> shareClasses = new List<ShareClassDefinition>();
 
 
@@ -68,7 +66,6 @@ FundDefinitionRequest fundDefinitionRequestInstance = new FundDefinitionRequest(
     .additionalNavTypes(additionalNavTypes)
     .properties(properties)
     .createInstrument(createInstrument)
-    .apportionmentMethodProperty(apportionmentMethodProperty)
     .shareClasses(shareClasses);
 ```
 

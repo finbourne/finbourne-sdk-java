@@ -12,7 +12,6 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
-import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -36,9 +35,7 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   AllocationGroupClassDefinition.JSON_PROPERTY_SHARE_CLASS_SHORT_CODE,
-  AllocationGroupClassDefinition.JSON_PROPERTY_SHARE_CLASS_FUND_ID,
-  AllocationGroupClassDefinition.JSON_PROPERTY_APPORTIONMENT_FACTOR,
-  AllocationGroupClassDefinition.JSON_PROPERTY_SHARE_CLASS_SERIES_CODE
+  AllocationGroupClassDefinition.JSON_PROPERTY_APPORTIONMENT_FACTOR
 })
 
 public class AllocationGroupClassDefinition {
@@ -47,20 +44,10 @@ public class AllocationGroupClassDefinition {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String shareClassShortCode;
 
-  public static final String JSON_PROPERTY_SHARE_CLASS_FUND_ID = "shareClassFundId";
-  @JsonProperty(JSON_PROPERTY_SHARE_CLASS_FUND_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private ResourceId shareClassFundId;
-
   public static final String JSON_PROPERTY_APPORTIONMENT_FACTOR = "apportionmentFactor";
   @JsonProperty(JSON_PROPERTY_APPORTIONMENT_FACTOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal apportionmentFactor;
-
-  public static final String JSON_PROPERTY_SHARE_CLASS_SERIES_CODE = "shareClassSeriesCode";
-  @JsonProperty(JSON_PROPERTY_SHARE_CLASS_SERIES_CODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private String shareClassSeriesCode;
 
   public AllocationGroupClassDefinition() {
   }
@@ -84,25 +71,6 @@ public class AllocationGroupClassDefinition {
   }
 
 
-  public AllocationGroupClassDefinition shareClassFundId(ResourceId shareClassFundId) {
-    this.shareClassFundId = shareClassFundId;
-    return this;
-  }
-
-  /**
-   * Get shareClassFundId
-   * @return shareClassFundId
-   */
-  @javax.annotation.Nullable
-  public ResourceId getShareClassFundId() {
-    return shareClassFundId;
-  }
-
-  public void setShareClassFundId(ResourceId shareClassFundId) {
-    this.shareClassFundId = shareClassFundId;
-  }
-
-
   public AllocationGroupClassDefinition apportionmentFactor(java.math.BigDecimal apportionmentFactor) {
     this.apportionmentFactor = apportionmentFactor;
     return this;
@@ -122,25 +90,6 @@ public class AllocationGroupClassDefinition {
   }
 
 
-  public AllocationGroupClassDefinition shareClassSeriesCode(String shareClassSeriesCode) {
-    this.shareClassSeriesCode = shareClassSeriesCode;
-    return this;
-  }
-
-  /**
-   * An optional series identifier for the share class. If not provided, the share class will include all series.
-   * @return shareClassSeriesCode
-   */
-  @javax.annotation.Nullable
-  public String getShareClassSeriesCode() {
-    return shareClassSeriesCode;
-  }
-
-  public void setShareClassSeriesCode(String shareClassSeriesCode) {
-    this.shareClassSeriesCode = shareClassSeriesCode;
-  }
-
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -151,9 +100,7 @@ public class AllocationGroupClassDefinition {
     }
     AllocationGroupClassDefinition allocationGroupClassDefinition = (AllocationGroupClassDefinition) o;
     return Objects.equals(this.shareClassShortCode, allocationGroupClassDefinition.shareClassShortCode) &&
-        Objects.equals(this.shareClassFundId, allocationGroupClassDefinition.shareClassFundId) &&
-        (this.apportionmentFactor == null ? allocationGroupClassDefinition.apportionmentFactor == null : (allocationGroupClassDefinition.apportionmentFactor != null && this.apportionmentFactor.compareTo(allocationGroupClassDefinition.getApportionmentFactor()) == 0)) &&
-        Objects.equals(this.shareClassSeriesCode, allocationGroupClassDefinition.shareClassSeriesCode);
+        (this.apportionmentFactor == null ? allocationGroupClassDefinition.apportionmentFactor == null : (allocationGroupClassDefinition.apportionmentFactor != null && this.apportionmentFactor.compareTo(allocationGroupClassDefinition.getApportionmentFactor()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -162,7 +109,7 @@ public class AllocationGroupClassDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(shareClassShortCode, shareClassFundId, apportionmentFactor, shareClassSeriesCode);
+    return Objects.hash(shareClassShortCode, apportionmentFactor);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -177,9 +124,7 @@ public class AllocationGroupClassDefinition {
     StringBuilder sb = new StringBuilder();
     sb.append("class AllocationGroupClassDefinition {\n");
     sb.append("    shareClassShortCode: ").append(toIndentedString(shareClassShortCode)).append("\n");
-    sb.append("    shareClassFundId: ").append(toIndentedString(shareClassFundId)).append("\n");
     sb.append("    apportionmentFactor: ").append(toIndentedString(apportionmentFactor)).append("\n");
-    sb.append("    shareClassSeriesCode: ").append(toIndentedString(shareClassSeriesCode)).append("\n");
     sb.append("}");
     return sb.toString();
   }

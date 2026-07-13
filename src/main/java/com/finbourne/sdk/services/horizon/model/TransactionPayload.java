@@ -34,15 +34,21 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * record containing details of a transaction payload.
+ * record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result.
  */
 @JsonPropertyOrder({
-  TransactionPayloadResponse.JSON_PROPERTY_COLUMNS,
-  TransactionPayloadResponse.JSON_PROPERTY_VALUES,
-  TransactionPayloadResponse.JSON_PROPERTY_RAW_CSV_ROW
+  TransactionPayload.JSON_PROPERTY_TRANSACTION_ID,
+  TransactionPayload.JSON_PROPERTY_COLUMNS,
+  TransactionPayload.JSON_PROPERTY_VALUES,
+  TransactionPayload.JSON_PROPERTY_RAW_CSV_ROW
 })
 
-public class TransactionPayloadResponse {
+public class TransactionPayload {
+  public static final String JSON_PROPERTY_TRANSACTION_ID = "transactionId";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String transactionId;
+
   public static final String JSON_PROPERTY_COLUMNS = "columns";
   @JsonProperty(JSON_PROPERTY_COLUMNS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -58,15 +64,34 @@ public class TransactionPayloadResponse {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String rawCsvRow;
 
-  public TransactionPayloadResponse() {
+  public TransactionPayload() {
   }
 
-  public TransactionPayloadResponse columns(List<String> columns) {
+  public TransactionPayload transactionId(String transactionId) {
+    this.transactionId = transactionId;
+    return this;
+  }
+
+  /**
+   * Get transactionId
+   * @return transactionId
+   */
+  @javax.annotation.Nonnull
+  public String getTransactionId() {
+    return transactionId;
+  }
+
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
+
+
+  public TransactionPayload columns(List<String> columns) {
     this.columns = columns;
     return this;
   }
 
-  public TransactionPayloadResponse addColumnsItem(String columnsItem) {
+  public TransactionPayload addColumnsItem(String columnsItem) {
     if (this.columns == null) {
       this.columns = new ArrayList<>();
     }
@@ -88,12 +113,12 @@ public class TransactionPayloadResponse {
   }
 
 
-  public TransactionPayloadResponse values(Map<String, String> values) {
+  public TransactionPayload values(Map<String, String> values) {
     this.values = values;
     return this;
   }
 
-  public TransactionPayloadResponse putValuesItem(String key, String valuesItem) {
+  public TransactionPayload putValuesItem(String key, String valuesItem) {
     if (this.values == null) {
       this.values = new HashMap<>();
     }
@@ -115,7 +140,7 @@ public class TransactionPayloadResponse {
   }
 
 
-  public TransactionPayloadResponse rawCsvRow(String rawCsvRow) {
+  public TransactionPayload rawCsvRow(String rawCsvRow) {
     this.rawCsvRow = rawCsvRow;
     return this;
   }
@@ -142,21 +167,23 @@ public class TransactionPayloadResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TransactionPayloadResponse transactionPayloadResponse = (TransactionPayloadResponse) o;
-    return Objects.equals(this.columns, transactionPayloadResponse.columns) &&
-        Objects.equals(this.values, transactionPayloadResponse.values) &&
-        Objects.equals(this.rawCsvRow, transactionPayloadResponse.rawCsvRow);
+    TransactionPayload transactionPayload = (TransactionPayload) o;
+    return Objects.equals(this.transactionId, transactionPayload.transactionId) &&
+        Objects.equals(this.columns, transactionPayload.columns) &&
+        Objects.equals(this.values, transactionPayload.values) &&
+        Objects.equals(this.rawCsvRow, transactionPayload.rawCsvRow);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(columns, values, rawCsvRow);
+    return Objects.hash(transactionId, columns, values, rawCsvRow);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class TransactionPayloadResponse {\n");
+    sb.append("class TransactionPayload {\n");
+    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("    columns: ").append(toIndentedString(columns)).append("\n");
     sb.append("    values: ").append(toIndentedString(values)).append("\n");
     sb.append("    rawCsvRow: ").append(toIndentedString(rawCsvRow)).append("\n");
@@ -177,18 +204,18 @@ public class TransactionPayloadResponse {
 
 
   /**
-   * Create an instance of TransactionPayloadResponse given an JSON string
+   * Create an instance of TransactionPayload given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of TransactionPayloadResponse
-   * @throws java.io.IOException if the JSON string is invalid with respect to TransactionPayloadResponse
+   * @return An instance of TransactionPayload
+   * @throws java.io.IOException if the JSON string is invalid with respect to TransactionPayload
    */
-  public static TransactionPayloadResponse fromJson(String jsonString) throws java.io.IOException {
-    return JSON.getMapper().readValue(jsonString, TransactionPayloadResponse.class);
+  public static TransactionPayload fromJson(String jsonString) throws java.io.IOException {
+    return JSON.getMapper().readValue(jsonString, TransactionPayload.class);
   }
 
   /**
-   * Convert an instance of TransactionPayloadResponse to an JSON string
+   * Convert an instance of TransactionPayload to an JSON string
    *
    * @return JSON string
    */

@@ -5,7 +5,7 @@ classname ShareClassDefinition
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **String** | The unique code for the Share Class. Must be unique within the Fund. | [default to String]
+**instrumentIdentifiers** | **Map&lt;String, String&gt;** | Unique instrument identifiers | [default to Map<String, String>]
 **name** | **String** | The display name of the Share Class. | [default to String]
 **description** | **String** | An optional description for the Share Class. | [optional] [default to String]
 **shareClassShortCode** | **String** | A short code that uniquely identifies the share class within the Fund. | [default to String]
@@ -31,7 +31,7 @@ import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
-String code = "example code";
+Map<String, String> instrumentIdentifiers = new Map<String, String>();
 String name = "example name";
 @javax.annotation.Nullable String description = "example description";
 String shareClassShortCode = "example shareClassShortCode";
@@ -53,7 +53,7 @@ String hedging = "example hedging";
 
 
 ShareClassDefinition shareClassDefinitionInstance = new ShareClassDefinition()
-    .code(code)
+    .instrumentIdentifiers(instrumentIdentifiers)
     .name(name)
     .description(description)
     .shareClassShortCode(shareClassShortCode)

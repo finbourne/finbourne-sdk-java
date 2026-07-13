@@ -6,7 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 | [**getTpfFileDeliveries**](TradePublicationFrameworkApi.md#getTpfFileDeliveries) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/deliveries | [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance |
 | [**getTpfTransactionHistorySearch**](TradePublicationFrameworkApi.md#getTpfTransactionHistorySearch) | **GET** /horizon/api/trade-publication-framework/transactions/search | [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range |
-| [**getTransactionPayload**](TradePublicationFrameworkApi.md#getTransactionPayload) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/{transactionId}/payload | [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail |
+| [**getTransactionPayload**](TradePublicationFrameworkApi.md#getTransactionPayload) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/payload | [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned. |
 | [**listFailedDeliveries**](TradePublicationFrameworkApi.md#listFailedDeliveries) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/failed | [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support. |
 | [**listInstanceRunHistory**](TradePublicationFrameworkApi.md#listInstanceRunHistory) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs | [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support. |
 | [**listInstancesWithStatus**](TradePublicationFrameworkApi.md#listInstancesWithStatus) | **GET** /horizon/api/trade-publication-framework/instances | [EXPERIMENTAL] ListInstancesWithStatus: Lists all instances of the Trade Publication Framework (TPF). |
@@ -195,9 +195,9 @@ public class TradePublicationFrameworkApiExample {
 
 ## getTransactionPayload
 
-> TransactionPayloadResponse getTransactionPayload(instanceId, runId, transactionId)
+> PagedResourceListOfTransactionPayload getTransactionPayload(instanceId, runId, transactionId, page, pageSize)
 
-[EXPERIMENTAL] GetTransactionPayload: Transaction payload detail
+[EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
 
 ### Example
 
@@ -227,11 +227,13 @@ public class TradePublicationFrameworkApiExample {
         String instanceId = "instanceId_example"; // String | 
         String runId = "runId_example"; // String | 
         String transactionId = "transactionId_example"; // String | 
+        String page = ""; // String | 
+        Integer pageSize = 100; // Integer | 
         try {
             // uncomment the below to set overrides at the request level
-            // TransactionPayloadResponse result = apiInstance.getTransactionPayload(instanceId, runId, transactionId).execute(opts);
+            // PagedResourceListOfTransactionPayload result = apiInstance.getTransactionPayload(instanceId, runId, transactionId, page, pageSize).execute(opts);
 
-            TransactionPayloadResponse result = apiInstance.getTransactionPayload(instanceId, runId, transactionId).execute();
+            PagedResourceListOfTransactionPayload result = apiInstance.getTransactionPayload(instanceId, runId, transactionId, page, pageSize).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling TradePublicationFrameworkApi#getTransactionPayload");
@@ -249,11 +251,13 @@ public class TradePublicationFrameworkApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**|  | |
 | **runId** | **String**|  | |
-| **transactionId** | **String**|  | |
+| **transactionId** | **String**|  | [optional] |
+| **page** | **String**|  | [optional] [default to ] |
+| **pageSize** | **Integer**|  | [optional] [default to 100] |
 
 ### Return type
 
-[**TransactionPayloadResponse**](TransactionPayloadResponse.md)
+[**PagedResourceListOfTransactionPayload**](PagedResourceListOfTransactionPayload.md)
 
 ### HTTP request headers
 
@@ -266,7 +270,7 @@ public class TradePublicationFrameworkApiExample {
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **400** | The details of the input related failure |  -  |
-| **404** | The requested TPF instance, run, or transaction payload does not exist. |  -  |
+| **404** | The requested TPF instance or run does not exist. |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

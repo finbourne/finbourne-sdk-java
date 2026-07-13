@@ -5,7 +5,7 @@ classname InstrumentActivity
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**navActivityAdjustmentType** | **String** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity. | [default to String]
+**navActivityAdjustmentType** | **String** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity. | [default to String]
 **asAt** | [**OffsetDateTime**](OffsetDateTime.md) | The asAt time for which the adjustment is being applied. | [default to OffsetDateTime]
 **scope** | **String** | The Scope of the given entity | [default to String]
 **lusidInstrumentId** | **String** | The LusidInstrumentId of the given entity | [default to String]

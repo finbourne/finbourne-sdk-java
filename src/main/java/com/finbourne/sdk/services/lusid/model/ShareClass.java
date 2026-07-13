@@ -13,7 +13,6 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.Property;
-import com.finbourne.sdk.services.lusid.model.Series;
 import com.finbourne.sdk.services.lusid.model.SimpleRoundingConvention;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
 import com.finbourne.sdk.services.lusid.model.TradingConventions;
@@ -45,8 +44,6 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   ShareClass.JSON_PROPERTY_INSTRUMENT_IDENTIFIERS,
-  ShareClass.JSON_PROPERTY_SERIES,
-  ShareClass.JSON_PROPERTY_CODE,
   ShareClass.JSON_PROPERTY_NAME,
   ShareClass.JSON_PROPERTY_DESCRIPTION,
   ShareClass.JSON_PROPERTY_SHARE_CLASS_SHORT_CODE,
@@ -72,16 +69,6 @@ public class ShareClass {
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_IDENTIFIERS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Map<String, String> instrumentIdentifiers = new HashMap<>();
-
-  public static final String JSON_PROPERTY_SERIES = "series";
-  @JsonProperty(JSON_PROPERTY_SERIES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private List<Series> series;
-
-  public static final String JSON_PROPERTY_CODE = "code";
-  @JsonProperty(JSON_PROPERTY_CODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String code;
 
   public static final String JSON_PROPERTY_NAME = "name";
   @JsonProperty(JSON_PROPERTY_NAME)
@@ -200,52 +187,6 @@ public class ShareClass {
 
   public void setInstrumentIdentifiers(Map<String, String> instrumentIdentifiers) {
     this.instrumentIdentifiers = instrumentIdentifiers;
-  }
-
-
-  public ShareClass series(List<Series> series) {
-    this.series = series;
-    return this;
-  }
-
-  public ShareClass addSeriesItem(Series seriesItem) {
-    if (this.series == null) {
-      this.series = new ArrayList<>();
-    }
-    this.series.add(seriesItem);
-    return this;
-  }
-
-  /**
-   * The series that belong to this Share Class.
-   * @return series
-   */
-  @javax.annotation.Nullable
-  public List<Series> getSeries() {
-    return series;
-  }
-
-  public void setSeries(List<Series> series) {
-    this.series = series;
-  }
-
-
-  public ShareClass code(String code) {
-    this.code = code;
-    return this;
-  }
-
-  /**
-   * The unique code for the Share Class. Must be unique within the Fund.
-   * @return code
-   */
-  @javax.annotation.Nonnull
-  public String getCode() {
-    return code;
-  }
-
-  public void setCode(String code) {
-    this.code = code;
   }
 
 
@@ -625,8 +566,6 @@ public class ShareClass {
     }
     ShareClass shareClass = (ShareClass) o;
     return Objects.equals(this.instrumentIdentifiers, shareClass.instrumentIdentifiers) &&
-        Objects.equals(this.series, shareClass.series) &&
-        Objects.equals(this.code, shareClass.code) &&
         Objects.equals(this.name, shareClass.name) &&
         Objects.equals(this.description, shareClass.description) &&
         Objects.equals(this.shareClassShortCode, shareClass.shareClassShortCode) &&
@@ -653,7 +592,7 @@ public class ShareClass {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentIdentifiers, series, code, name, description, shareClassShortCode, launchPrice, launchDate, apportionmentFactor, properties, fundShareClassType, distributionType, domCcy, tradingConventions, unitsPrecision, pricePrecision, roundingConventions, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
+    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, apportionmentFactor, properties, fundShareClassType, distributionType, domCcy, tradingConventions, unitsPrecision, pricePrecision, roundingConventions, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -668,8 +607,6 @@ public class ShareClass {
     StringBuilder sb = new StringBuilder();
     sb.append("class ShareClass {\n");
     sb.append("    instrumentIdentifiers: ").append(toIndentedString(instrumentIdentifiers)).append("\n");
-    sb.append("    series: ").append(toIndentedString(series)).append("\n");
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    shareClassShortCode: ").append(toIndentedString(shareClassShortCode)).append("\n");

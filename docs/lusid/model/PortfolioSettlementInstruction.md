@@ -5,7 +5,7 @@ classname PortfolioSettlementInstruction
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**navActivityAdjustmentType** | **String** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity. | [default to String]
+**navActivityAdjustmentType** | **String** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity. | [default to String]
 **asAt** | [**OffsetDateTime**](OffsetDateTime.md) | The asAt time for which the adjustment is being applied. | [default to OffsetDateTime]
 **portfolioScope** | **String** | The portfolio scope of the given entity | [default to String]
 **portfolioCode** | **String** | The portfolio code of the given entity | [default to String]

@@ -102,6 +102,8 @@ PropertyDomain method = PropertyDomain.SETTLEMENT_INSTRUCTION;
 PropertyDomain method = PropertyDomain.TRANSACTION_FEE_TYPE;
 PropertyDomain method = PropertyDomain.ALLOCATION_METHOD;
 PropertyDomain method = PropertyDomain.TRANSACTION_FEE;
+PropertyDomain method = PropertyDomain.SUBSCRIPTION;
+PropertyDomain method = PropertyDomain.SCENARIO_DEFINITION;
 ```
 
 

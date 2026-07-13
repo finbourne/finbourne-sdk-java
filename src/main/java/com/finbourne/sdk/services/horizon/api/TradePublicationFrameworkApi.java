@@ -37,6 +37,7 @@ import com.finbourne.sdk.services.horizon.model.PagedResourceListOfInstanceRunRe
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfRunFileResponse;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfTpfFileDeliveryResponse;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfTpfTransactionSearchResponse;
+import com.finbourne.sdk.services.horizon.model.PagedResourceListOfTransactionPayload;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfTransactionResponse;
 import com.finbourne.sdk.services.horizon.model.ReplayTransactionsRequest;
 import com.finbourne.sdk.services.horizon.model.ReplayTransactionsResponse;
@@ -45,7 +46,6 @@ import com.finbourne.sdk.services.horizon.model.ResolveFailedDeliveryResponse;
 import com.finbourne.sdk.services.horizon.model.TpfFailedDeliveryResponse;
 import com.finbourne.sdk.services.horizon.model.TpfRetryFailedDeliveryRequest;
 import com.finbourne.sdk.services.horizon.model.TpfRetrySftpResponse;
-import com.finbourne.sdk.services.horizon.model.TransactionPayloadResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -970,7 +970,9 @@ public class TradePublicationFrameworkApi {
      * Build call for getTransactionPayload
      * @param instanceId  (required)
      * @param runId  (required)
-     * @param transactionId  (required)
+     * @param transactionId  (optional)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -979,19 +981,21 @@ public class TradePublicationFrameworkApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTransactionPayloadCall(String instanceId, String runId, String transactionId, final ApiCallback _callback) throws ApiException {
-        return getTransactionPayloadCall(instanceId, runId, transactionId,  _callback, new ConfigurationOptions());
+    private HttpRequest getTransactionPayloadCall(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback _callback) throws ApiException {
+        return getTransactionPayloadCall(instanceId, runId, transactionId, page, pageSize,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getTransactionPayload. Use any specified configuration options to override any other configuration for this request only.
      * @param instanceId  (required). Use any specified configuration options to override any other configuration for this request only.
      * @param runId  (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param transactionId  (required)
+     * @param transactionId  (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page  (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
+     * @param pageSize  (optional, default to 100)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1000,11 +1004,11 @@ public class TradePublicationFrameworkApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTransactionPayloadCall(String instanceId, String runId, String transactionId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTransactionPayloadCall(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1021,16 +1025,27 @@ public class TradePublicationFrameworkApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/{transactionId}/payload"
+        String localVarPath = "/horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/payload"
             .replace("{" + "instanceId" + "}", localVarApiClient.escapeString(instanceId.toString()))
-            .replace("{" + "runId" + "}", localVarApiClient.escapeString(runId.toString()))
-            .replace("{" + "transactionId" + "}", localVarApiClient.escapeString(transactionId.toString()));
+            .replace("{" + "runId" + "}", localVarApiClient.escapeString(runId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (transactionId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("transactionId", transactionId));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (pageSize != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("pageSize", pageSize));
+        }
 
         final String[] localVarAccepts = {
             "application/json"
@@ -1052,7 +1067,7 @@ public class TradePublicationFrameworkApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getTransactionPayloadValidateBeforeCall(String instanceId, String runId, String transactionId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTransactionPayloadValidateBeforeCall(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'instanceId' is set
         if (instanceId == null) {
             throw new ApiException("Missing the required parameter 'instanceId' when calling getTransactionPayload(Async)");
@@ -1063,67 +1078,68 @@ public class TradePublicationFrameworkApi {
             throw new ApiException("Missing the required parameter 'runId' when calling getTransactionPayload(Async)");
         }
 
-        // verify the required parameter 'transactionId' is set
-        if (transactionId == null) {
-            throw new ApiException("Missing the required parameter 'transactionId' when calling getTransactionPayload(Async)");
-        }
-
-        return getTransactionPayloadCall(instanceId, runId, transactionId, _callback, opts);
+        return getTransactionPayloadCall(instanceId, runId, transactionId, page, pageSize, _callback, opts);
 
     }
 
     /**
-     * [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail
+     * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
      * 
      * @param instanceId  (required)
      * @param runId  (required)
-     * @param transactionId  (required)
-     * @return ApiResponse&lt;TransactionPayloadResponse&gt;
+     * @param transactionId  (optional)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
+     * @return ApiResponse&lt;PagedResourceListOfTransactionPayload&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<TransactionPayloadResponse> getTransactionPayloadWithHttpInfo(String instanceId, String runId, String transactionId) throws ApiException {
-        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, null, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<TransactionPayloadResponse>(){}.getType();
+    private ApiResponse<PagedResourceListOfTransactionPayload> getTransactionPayloadWithHttpInfo(String instanceId, String runId, String transactionId, String page, Integer pageSize) throws ApiException {
+        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfTransactionPayload>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail
+     * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId  (required)
      * @param runId  (required)
-     * @param transactionId  (required)
-     * @return ApiResponse&lt;TransactionPayloadResponse&gt;
+     * @param transactionId  (optional)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
+     * @return ApiResponse&lt;PagedResourceListOfTransactionPayload&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<TransactionPayloadResponse> getTransactionPayloadWithHttpInfo(String instanceId, String runId, String transactionId, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, null, opts);
-        Type localVarReturnType = new TypeReference<TransactionPayloadResponse>(){}.getType();
+    private ApiResponse<PagedResourceListOfTransactionPayload> getTransactionPayloadWithHttpInfo(String instanceId, String runId, String transactionId, String page, Integer pageSize, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfTransactionPayload>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail (asynchronously)
+     * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned. (asynchronously)
      * 
      * @param instanceId  (required)
      * @param runId  (required)
-     * @param transactionId  (required)
+     * @param transactionId  (optional)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1131,23 +1147,25 @@ public class TradePublicationFrameworkApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTransactionPayloadAsync(String instanceId, String runId, String transactionId, final ApiCallback<TransactionPayloadResponse> _callback) throws ApiException {
+    private void getTransactionPayloadAsync(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback<PagedResourceListOfTransactionPayload> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, _callback, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<TransactionPayloadResponse>(){}.getType();
+        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfTransactionPayload>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
-     * [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail (asynchronously)
+     * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned. (asynchronously)
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId  (required)
      * @param runId  (required)
-     * @param transactionId  (required)
+     * @param transactionId  (optional)
+     * @param page  (optional, default to )
+     * @param pageSize  (optional, default to 100)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1155,26 +1173,57 @@ public class TradePublicationFrameworkApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTransactionPayloadAsync(String instanceId, String runId, String transactionId, final ApiCallback<TransactionPayloadResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getTransactionPayloadAsync(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback<PagedResourceListOfTransactionPayload> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, _callback, opts);
-        Type localVarReturnType = new TypeReference<TransactionPayloadResponse>(){}.getType();
+        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfTransactionPayload>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     public class APIgetTransactionPayloadRequest {
         private final String instanceId;
         private final String runId;
-        private final String transactionId;
+        private String transactionId;
+        private String page;
+        private Integer pageSize;
 
-        private APIgetTransactionPayloadRequest(String instanceId, String runId, String transactionId) {
+        private APIgetTransactionPayloadRequest(String instanceId, String runId) {
             this.instanceId = instanceId;
             this.runId = runId;
+        }
+
+        /**
+         * Set transactionId
+         * @param transactionId  (optional)
+         * @return APIgetTransactionPayloadRequest
+         */
+        public APIgetTransactionPayloadRequest transactionId(String transactionId) {
             this.transactionId = transactionId;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page  (optional, default to )
+         * @return APIgetTransactionPayloadRequest
+         */
+        public APIgetTransactionPayloadRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set pageSize
+         * @param pageSize  (optional, default to 100)
+         * @return APIgetTransactionPayloadRequest
+         */
+        public APIgetTransactionPayloadRequest pageSize(Integer pageSize) {
+            this.pageSize = pageSize;
+            return this;
         }
 
         /**
@@ -1187,82 +1236,82 @@ public class TradePublicationFrameworkApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getTransactionPayloadCall(instanceId, runId, transactionId, _callback);
+            return getTransactionPayloadCall(instanceId, runId, transactionId, page, pageSize, _callback);
         }
 
         /**
          * Execute getTransactionPayload request
-         * @return TransactionPayloadResponse
+         * @return PagedResourceListOfTransactionPayload
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public TransactionPayloadResponse execute() throws ApiException {
-            ApiResponse<TransactionPayloadResponse> localVarResp = getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId);
+        public PagedResourceListOfTransactionPayload execute() throws ApiException {
+            ApiResponse<PagedResourceListOfTransactionPayload> localVarResp = getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize);
             return localVarResp.getData();
         }
 
         /**
          * Execute getTransactionPayload request. Use any specified configuration options to override any other configuration for this request only.
-         * @return TransactionPayloadResponse
+         * @return PagedResourceListOfTransactionPayload
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public TransactionPayloadResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<TransactionPayloadResponse> localVarResp = getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, opts);
+        public PagedResourceListOfTransactionPayload execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfTransactionPayload> localVarResp = getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize, opts);
             return localVarResp.getData();
         }
 
         /**
          * Execute getTransactionPayload request with HTTP info returned
-         * @return ApiResponse&lt;TransactionPayloadResponse&gt;
+         * @return ApiResponse&lt;PagedResourceListOfTransactionPayload&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<TransactionPayloadResponse> executeWithHttpInfo() throws ApiException {
-            return getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId);
+        public ApiResponse<PagedResourceListOfTransactionPayload> executeWithHttpInfo() throws ApiException {
+            return getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize);
         }
 
         /**
          * Execute getTransactionPayload request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
-         * @return ApiResponse&lt;TransactionPayloadResponse&gt;
+         * @return ApiResponse&lt;PagedResourceListOfTransactionPayload&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<TransactionPayloadResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, opts);
+        public ApiResponse<PagedResourceListOfTransactionPayload> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize, opts);
         }
 
         /**
@@ -1274,12 +1323,12 @@ public class TradePublicationFrameworkApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<TransactionPayloadResponse> _callback) throws ApiException {
-            getTransactionPayloadAsync(instanceId, runId, transactionId, _callback);
+        public void executeAsync(final ApiCallback<PagedResourceListOfTransactionPayload> _callback) throws ApiException {
+            getTransactionPayloadAsync(instanceId, runId, transactionId, page, pageSize, _callback);
         }
 
         /**
@@ -1291,33 +1340,32 @@ public class TradePublicationFrameworkApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<TransactionPayloadResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            getTransactionPayloadAsync(instanceId, runId, transactionId, _callback, opts);
+        public void executeAsync(final ApiCallback<PagedResourceListOfTransactionPayload> _callback, ConfigurationOptions opts) throws ApiException {
+            getTransactionPayloadAsync(instanceId, runId, transactionId, page, pageSize, _callback, opts);
         }
     }
 
     /**
-     * [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail
+     * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
      * 
      * @param instanceId  (required)
      * @param runId  (required)
-     * @param transactionId  (required)
      * @return APIgetTransactionPayloadRequest
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested TPF instance, run, or transaction payload does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance or run does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    public APIgetTransactionPayloadRequest getTransactionPayload(String instanceId, String runId, String transactionId) {
-        return new APIgetTransactionPayloadRequest(instanceId, runId, transactionId);
+    public APIgetTransactionPayloadRequest getTransactionPayload(String instanceId, String runId) {
+        return new APIgetTransactionPayloadRequest(instanceId, runId);
     }
     /**
      * Build call for listFailedDeliveries

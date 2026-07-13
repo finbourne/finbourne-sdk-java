@@ -6,8 +6,6 @@ classname ShareClass
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrumentIdentifiers** | **Map&lt;String, String&gt;** | Unique instrument identifiers | [default to Map<String, String>]
-**series** | [**List&lt;Series&gt;**](Series.md) | The series that belong to this Share Class. | [optional] [default to List<Series>]
-**code** | **String** | The unique code for the Share Class. Must be unique within the Fund. | [default to String]
 **name** | **String** | The display name of the Share Class. | [default to String]
 **description** | **String** | An optional description for the Share Class. | [optional] [default to String]
 **shareClassShortCode** | **String** | A short code that uniquely identifies the share class within the Fund. | [default to String]
@@ -34,8 +32,6 @@ import java.lang.System;
 import java.net.URI;
 
 Map<String, String> instrumentIdentifiers = new Map<String, String>();
-@javax.annotation.Nullable List<Series> series = new List<Series>();
-String code = "example code";
 String name = "example name";
 @javax.annotation.Nullable String description = "example description";
 String shareClassShortCode = "example shareClassShortCode";
@@ -58,8 +54,6 @@ String hedging = "example hedging";
 
 ShareClass shareClassInstance = new ShareClass()
     .instrumentIdentifiers(instrumentIdentifiers)
-    .series(series)
-    .code(code)
     .name(name)
     .description(description)
     .shareClassShortCode(shareClassShortCode)

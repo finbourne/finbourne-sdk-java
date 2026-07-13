@@ -195,7 +195,9 @@ public enum InstrumentEventType {
   
   SECURITY_WRITE_OFF_EVENT("SecurityWriteOffEvent"),
   
-  WARRANTS_EXERCISE_EVENT("WarrantsExerciseEvent");
+  WARRANTS_EXERCISE_EVENT("WarrantsExerciseEvent"),
+  
+  PARI_PASSU_EVENT("PariPassuEvent");
 
   private String value;
 

@@ -42,6 +42,7 @@ import com.finbourne.sdk.JSON;
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = "navActivityAdjustmentType", visible = true)
 @com.fasterxml.jackson.annotation.JsonSubTypes({
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComplexMarketDataActivityAdjustment.class, name = "ComplexMarketDataActivityAdjustment"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InstrumentActivityAdjustment.class, name = "InstrumentActivityAdjustment"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = PortfolioSettlementInstructionAdjustment.class, name = "PortfolioSettlementInstructionAdjustment"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = PortfolioTransactionAdjustment.class, name = "PortfolioTransactionAdjustment"),
@@ -50,7 +51,7 @@ import com.finbourne.sdk.JSON;
 
 public class NavActivityAdjustmentResponse {
   /**
-   * The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment.
+   * The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment.
    */
   public enum NavActivityAdjustmentTypeEnum {
     PORTFOLIO_TRANSACTION_ADJUSTMENT("PortfolioTransactionAdjustment"),
@@ -59,7 +60,9 @@ public class NavActivityAdjustmentResponse {
     
     INSTRUMENT_ACTIVITY_ADJUSTMENT("InstrumentActivityAdjustment"),
     
-    QUOTE_ACTIVITY_ADJUSTMENT("QuoteActivityAdjustment");
+    QUOTE_ACTIVITY_ADJUSTMENT("QuoteActivityAdjustment"),
+    
+    COMPLEX_MARKET_DATA_ACTIVITY_ADJUSTMENT("ComplexMarketDataActivityAdjustment");
 
     private String value;
 
@@ -101,7 +104,7 @@ public class NavActivityAdjustmentResponse {
   }
 
   /**
-   * The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment.
+   * The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment.
    * @return navActivityAdjustmentType
    */
   @javax.annotation.Nonnull

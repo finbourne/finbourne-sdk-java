@@ -13,7 +13,6 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AllocationGroup;
-import com.finbourne.sdk.services.lusid.model.ApportionmentMethodProperty;
 import com.finbourne.sdk.services.lusid.model.DayMonth;
 import com.finbourne.sdk.services.lusid.model.InstrumentResolutionDetail;
 import com.finbourne.sdk.services.lusid.model.Link;
@@ -69,7 +68,6 @@ import com.finbourne.sdk.JSON;
   Fund.JSON_PROPERTY_ADDITIONAL_NAV_TYPES,
   Fund.JSON_PROPERTY_PROPERTIES,
   Fund.JSON_PROPERTY_CREATE_INSTRUMENT,
-  Fund.JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY,
   Fund.JSON_PROPERTY_ALLOCATION_GROUPS,
   Fund.JSON_PROPERTY_SHARE_CLASSES,
   Fund.JSON_PROPERTY_VERSION,
@@ -166,11 +164,6 @@ public class Fund {
   @JsonProperty(JSON_PROPERTY_CREATE_INSTRUMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean createInstrument;
-
-  public static final String JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY = "apportionmentMethodProperty";
-  @JsonProperty(JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private ApportionmentMethodProperty apportionmentMethodProperty;
 
   public static final String JSON_PROPERTY_ALLOCATION_GROUPS = "allocationGroups";
   @JsonProperty(JSON_PROPERTY_ALLOCATION_GROUPS)
@@ -569,25 +562,6 @@ public class Fund {
   }
 
 
-  public Fund apportionmentMethodProperty(ApportionmentMethodProperty apportionmentMethodProperty) {
-    this.apportionmentMethodProperty = apportionmentMethodProperty;
-    return this;
-  }
-
-  /**
-   * Get apportionmentMethodProperty
-   * @return apportionmentMethodProperty
-   */
-  @javax.annotation.Nullable
-  public ApportionmentMethodProperty getApportionmentMethodProperty() {
-    return apportionmentMethodProperty;
-  }
-
-  public void setApportionmentMethodProperty(ApportionmentMethodProperty apportionmentMethodProperty) {
-    this.apportionmentMethodProperty = apportionmentMethodProperty;
-  }
-
-
   public Fund allocationGroups(List<AllocationGroup> allocationGroups) {
     this.allocationGroups = allocationGroups;
     return this;
@@ -715,7 +689,6 @@ public class Fund {
         Objects.equals(this.additionalNavTypes, fund.additionalNavTypes) &&
         Objects.equals(this.properties, fund.properties) &&
         Objects.equals(this.createInstrument, fund.createInstrument) &&
-        Objects.equals(this.apportionmentMethodProperty, fund.apportionmentMethodProperty) &&
         Objects.equals(this.allocationGroups, fund.allocationGroups) &&
         Objects.equals(this.shareClasses, fund.shareClasses) &&
         Objects.equals(this.version, fund.version) &&
@@ -728,7 +701,7 @@ public class Fund {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, aborId, shareClassInstruments, type, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, apportionmentMethodProperty, allocationGroups, shareClasses, version, links);
+    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, aborId, shareClassInstruments, type, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -760,7 +733,6 @@ public class Fund {
     sb.append("    additionalNavTypes: ").append(toIndentedString(additionalNavTypes)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    createInstrument: ").append(toIndentedString(createInstrument)).append("\n");
-    sb.append("    apportionmentMethodProperty: ").append(toIndentedString(apportionmentMethodProperty)).append("\n");
     sb.append("    allocationGroups: ").append(toIndentedString(allocationGroups)).append("\n");
     sb.append("    shareClasses: ").append(toIndentedString(shareClasses)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");

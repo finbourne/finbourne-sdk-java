@@ -43,7 +43,7 @@ import com.finbourne.sdk.JSON;
  * ShareClassDefinition
  */
 @JsonPropertyOrder({
-  ShareClassDefinition.JSON_PROPERTY_CODE,
+  ShareClassDefinition.JSON_PROPERTY_INSTRUMENT_IDENTIFIERS,
   ShareClassDefinition.JSON_PROPERTY_NAME,
   ShareClassDefinition.JSON_PROPERTY_DESCRIPTION,
   ShareClassDefinition.JSON_PROPERTY_SHARE_CLASS_SHORT_CODE,
@@ -65,10 +65,10 @@ import com.finbourne.sdk.JSON;
 })
 
 public class ShareClassDefinition {
-  public static final String JSON_PROPERTY_CODE = "code";
-  @JsonProperty(JSON_PROPERTY_CODE)
+  public static final String JSON_PROPERTY_INSTRUMENT_IDENTIFIERS = "instrumentIdentifiers";
+  @JsonProperty(JSON_PROPERTY_INSTRUMENT_IDENTIFIERS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String code;
+  private Map<String, String> instrumentIdentifiers = new HashMap<>();
 
   public static final String JSON_PROPERTY_NAME = "name";
   @JsonProperty(JSON_PROPERTY_NAME)
@@ -163,22 +163,30 @@ public class ShareClassDefinition {
   public ShareClassDefinition() {
   }
 
-  public ShareClassDefinition code(String code) {
-    this.code = code;
+  public ShareClassDefinition instrumentIdentifiers(Map<String, String> instrumentIdentifiers) {
+    this.instrumentIdentifiers = instrumentIdentifiers;
+    return this;
+  }
+
+  public ShareClassDefinition putInstrumentIdentifiersItem(String key, String instrumentIdentifiersItem) {
+    if (this.instrumentIdentifiers == null) {
+      this.instrumentIdentifiers = new HashMap<>();
+    }
+    this.instrumentIdentifiers.put(key, instrumentIdentifiersItem);
     return this;
   }
 
   /**
-   * The unique code for the Share Class. Must be unique within the Fund.
-   * @return code
+   * Unique instrument identifiers
+   * @return instrumentIdentifiers
    */
   @javax.annotation.Nonnull
-  public String getCode() {
-    return code;
+  public Map<String, String> getInstrumentIdentifiers() {
+    return instrumentIdentifiers;
   }
 
-  public void setCode(String code) {
-    this.code = code;
+  public void setInstrumentIdentifiers(Map<String, String> instrumentIdentifiers) {
+    this.instrumentIdentifiers = instrumentIdentifiers;
   }
 
 
@@ -557,7 +565,7 @@ public class ShareClassDefinition {
       return false;
     }
     ShareClassDefinition shareClassDefinition = (ShareClassDefinition) o;
-    return Objects.equals(this.code, shareClassDefinition.code) &&
+    return Objects.equals(this.instrumentIdentifiers, shareClassDefinition.instrumentIdentifiers) &&
         Objects.equals(this.name, shareClassDefinition.name) &&
         Objects.equals(this.description, shareClassDefinition.description) &&
         Objects.equals(this.shareClassShortCode, shareClassDefinition.shareClassShortCode) &&
@@ -584,7 +592,7 @@ public class ShareClassDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, name, description, shareClassShortCode, launchPrice, launchDate, apportionmentFactor, properties, fundShareClassType, distributionType, domCcy, tradingConventions, unitsPrecision, pricePrecision, roundingConventions, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
+    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, apportionmentFactor, properties, fundShareClassType, distributionType, domCcy, tradingConventions, unitsPrecision, pricePrecision, roundingConventions, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -598,7 +606,7 @@ public class ShareClassDefinition {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ShareClassDefinition {\n");
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
+    sb.append("    instrumentIdentifiers: ").append(toIndentedString(instrumentIdentifiers)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    shareClassShortCode: ").append(toIndentedString(shareClassShortCode)).append("\n");

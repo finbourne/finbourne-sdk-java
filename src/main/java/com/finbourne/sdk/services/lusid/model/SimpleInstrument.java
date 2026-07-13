@@ -67,7 +67,7 @@ public class SimpleInstrument extends LusidInstrument {
   private String domCcy;
 
   /**
-   * Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown.
+   * Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate.
    */
   public enum AssetClassEnum {
     INTEREST_RATES("InterestRates"),
@@ -84,7 +84,9 @@ public class SimpleInstrument extends LusidInstrument {
     
     MONEY("Money"),
     
-    UNKNOWN("Unknown");
+    UNKNOWN("Unknown"),
+    
+    REAL_ESTATE("RealEstate");
 
     private String value;
 
@@ -184,7 +186,7 @@ public class SimpleInstrument extends LusidInstrument {
   }
 
   /**
-   * Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown.
+   * Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate.
    * @return assetClass
    */
   @javax.annotation.Nonnull

@@ -29,7 +29,9 @@ public enum NavActivityAdjustmentResponseType {
   
   INSTRUMENT_ACTIVITY_ADJUSTMENT("InstrumentActivityAdjustment"),
   
-  QUOTE_ACTIVITY_ADJUSTMENT("QuoteActivityAdjustment");
+  QUOTE_ACTIVITY_ADJUSTMENT("QuoteActivityAdjustment"),
+  
+  COMPLEX_MARKET_DATA_ACTIVITY_ADJUSTMENT("ComplexMarketDataActivityAdjustment");
 
   private String value;
 

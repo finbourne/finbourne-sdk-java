@@ -5,7 +5,7 @@ classname NavActivityAdjustmentResponse
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**navActivityAdjustmentType** | **String** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment. | [default to String]
+**navActivityAdjustmentType** | **String** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment. | [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.NavActivityAdjustmentResponse;

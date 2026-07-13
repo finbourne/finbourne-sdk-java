@@ -12,7 +12,6 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
-import com.finbourne.sdk.services.lusid.model.ApportionmentMethodProperty;
 import com.finbourne.sdk.services.lusid.model.InstrumentResolutionDetail;
 import com.finbourne.sdk.services.lusid.model.NavTypeDefinition;
 import com.finbourne.sdk.services.lusid.model.PortfolioEntityId;
@@ -62,7 +61,6 @@ import com.finbourne.sdk.JSON;
   FundDefinitionRequest.JSON_PROPERTY_ADDITIONAL_NAV_TYPES,
   FundDefinitionRequest.JSON_PROPERTY_PROPERTIES,
   FundDefinitionRequest.JSON_PROPERTY_CREATE_INSTRUMENT,
-  FundDefinitionRequest.JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY,
   FundDefinitionRequest.JSON_PROPERTY_SHARE_CLASSES
 })
 
@@ -146,11 +144,6 @@ public class FundDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_CREATE_INSTRUMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean createInstrument;
-
-  public static final String JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY = "apportionmentMethodProperty";
-  @JsonProperty(JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private ApportionmentMethodProperty apportionmentMethodProperty;
 
   public static final String JSON_PROPERTY_SHARE_CLASSES = "shareClasses";
   @JsonProperty(JSON_PROPERTY_SHARE_CLASSES)
@@ -504,25 +497,6 @@ public class FundDefinitionRequest {
   }
 
 
-  public FundDefinitionRequest apportionmentMethodProperty(ApportionmentMethodProperty apportionmentMethodProperty) {
-    this.apportionmentMethodProperty = apportionmentMethodProperty;
-    return this;
-  }
-
-  /**
-   * Get apportionmentMethodProperty
-   * @return apportionmentMethodProperty
-   */
-  @javax.annotation.Nullable
-  public ApportionmentMethodProperty getApportionmentMethodProperty() {
-    return apportionmentMethodProperty;
-  }
-
-  public void setApportionmentMethodProperty(ApportionmentMethodProperty apportionmentMethodProperty) {
-    this.apportionmentMethodProperty = apportionmentMethodProperty;
-  }
-
-
   public FundDefinitionRequest shareClasses(List<ShareClassDefinition> shareClasses) {
     this.shareClasses = shareClasses;
     return this;
@@ -575,7 +549,6 @@ public class FundDefinitionRequest {
         Objects.equals(this.additionalNavTypes, fundDefinitionRequest.additionalNavTypes) &&
         Objects.equals(this.properties, fundDefinitionRequest.properties) &&
         Objects.equals(this.createInstrument, fundDefinitionRequest.createInstrument) &&
-        Objects.equals(this.apportionmentMethodProperty, fundDefinitionRequest.apportionmentMethodProperty) &&
         Objects.equals(this.shareClasses, fundDefinitionRequest.shareClasses);
   }
 
@@ -585,7 +558,7 @@ public class FundDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, apportionmentMethodProperty, shareClasses);
+    return Objects.hash(code, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, shareClasses);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -615,7 +588,6 @@ public class FundDefinitionRequest {
     sb.append("    additionalNavTypes: ").append(toIndentedString(additionalNavTypes)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    createInstrument: ").append(toIndentedString(createInstrument)).append("\n");
-    sb.append("    apportionmentMethodProperty: ").append(toIndentedString(apportionmentMethodProperty)).append("\n");
     sb.append("    shareClasses: ").append(toIndentedString(shareClasses)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -39,7 +39,6 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   AllocationGroupDefinition.JSON_PROPERTY_CLASSES,
-  AllocationGroupDefinition.JSON_PROPERTY_CODE,
   AllocationGroupDefinition.JSON_PROPERTY_NAME,
   AllocationGroupDefinition.JSON_PROPERTY_DESCRIPTION,
   AllocationGroupDefinition.JSON_PROPERTY_SHARE_CLASS_SHORT_CODE,
@@ -52,11 +51,6 @@ public class AllocationGroupDefinition {
   @JsonProperty(JSON_PROPERTY_CLASSES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<AllocationGroupClassDefinition> classes;
-
-  public static final String JSON_PROPERTY_CODE = "code";
-  @JsonProperty(JSON_PROPERTY_CODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String code;
 
   public static final String JSON_PROPERTY_NAME = "name";
   @JsonProperty(JSON_PROPERTY_NAME)
@@ -110,25 +104,6 @@ public class AllocationGroupDefinition {
 
   public void setClasses(List<AllocationGroupClassDefinition> classes) {
     this.classes = classes;
-  }
-
-
-  public AllocationGroupDefinition code(String code) {
-    this.code = code;
-    return this;
-  }
-
-  /**
-   * The unique code for the Allocation Group. Must be unique within the Fund.
-   * @return code
-   */
-  @javax.annotation.Nonnull
-  public String getCode() {
-    return code;
-  }
-
-  public void setCode(String code) {
-    this.code = code;
   }
 
 
@@ -237,7 +212,6 @@ public class AllocationGroupDefinition {
     }
     AllocationGroupDefinition allocationGroupDefinition = (AllocationGroupDefinition) o;
     return Objects.equals(this.classes, allocationGroupDefinition.classes) &&
-        Objects.equals(this.code, allocationGroupDefinition.code) &&
         Objects.equals(this.name, allocationGroupDefinition.name) &&
         Objects.equals(this.description, allocationGroupDefinition.description) &&
         Objects.equals(this.shareClassShortCode, allocationGroupDefinition.shareClassShortCode) &&
@@ -251,7 +225,7 @@ public class AllocationGroupDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(classes, code, name, description, shareClassShortCode, apportionmentMethodProperty, formula);
+    return Objects.hash(classes, name, description, shareClassShortCode, apportionmentMethodProperty, formula);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -266,7 +240,6 @@ public class AllocationGroupDefinition {
     StringBuilder sb = new StringBuilder();
     sb.append("class AllocationGroupDefinition {\n");
     sb.append("    classes: ").append(toIndentedString(classes)).append("\n");
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    shareClassShortCode: ").append(toIndentedString(shareClassShortCode)).append("\n");

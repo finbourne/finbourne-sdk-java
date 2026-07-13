@@ -42,6 +42,7 @@ import com.finbourne.sdk.JSON;
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = "navActivityAdjustmentType", visible = true)
 @com.fasterxml.jackson.annotation.JsonSubTypes({
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComplexMarketDataActivity.class, name = "ComplexMarketDataActivity"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InstrumentActivity.class, name = "InstrumentActivity"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = PortfolioSettlementInstruction.class, name = "PortfolioSettlementInstruction"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = PortfolioTransaction.class, name = "PortfolioTransaction"),
@@ -50,7 +51,7 @@ import com.finbourne.sdk.JSON;
 
 public class NavActivityAdjustment {
   /**
-   * The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity.
+   * The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity.
    */
   public enum NavActivityAdjustmentTypeEnum {
     PORTFOLIO_TRANSACTION("PortfolioTransaction"),
@@ -59,7 +60,9 @@ public class NavActivityAdjustment {
     
     INSTRUMENT_ACTIVITY("InstrumentActivity"),
     
-    QUOTE_ACTIVITY("QuoteActivity");
+    QUOTE_ACTIVITY("QuoteActivity"),
+    
+    COMPLEX_MARKET_DATA_ACTIVITY("ComplexMarketDataActivity");
 
     private String value;
 
@@ -101,7 +104,7 @@ public class NavActivityAdjustment {
   }
 
   /**
-   * The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity.
+   * The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity.
    * @return navActivityAdjustmentType
    */
   @javax.annotation.Nonnull

@@ -121,7 +121,7 @@ public class QuoteActivityAdjustment extends NavActivityAdjustmentResponse {
   }
 
   /**
-   * The EffectiveAt time of the quote event that need to be added to the closed period.
+   * The EffectiveAt time of the entity event that need to be added to the closed period.
    * @return effectiveAt
    */
   @javax.annotation.Nonnull
@@ -140,7 +140,7 @@ public class QuoteActivityAdjustment extends NavActivityAdjustmentResponse {
   }
 
   /**
-   * The EntityUniqueId from the quote which needs to be added as a post close activity.
+   * The EntityUniqueId from the entity which needs to be added as a post close activity.
    * @return entityUniqueId
    */
   @javax.annotation.Nonnull
