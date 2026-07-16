@@ -15,8 +15,11 @@ package com.finbourne.sdk.services.workflow.model;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.TaskDefinitionVersion;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -40,7 +43,9 @@ import com.finbourne.sdk.JSON;
   TaskSummary.JSON_PROPERTY_TASK_DEFINITION_ID,
   TaskSummary.JSON_PROPERTY_TASK_DEFINITION_VERSION,
   TaskSummary.JSON_PROPERTY_TASK_DEFINITION_DISPLAY_NAME,
-  TaskSummary.JSON_PROPERTY_STATE
+  TaskSummary.JSON_PROPERTY_STATE,
+  TaskSummary.JSON_PROPERTY_STATE_DISPLAY_NAME,
+  TaskSummary.JSON_PROPERTY_CORRELATION_IDS
 })
 
 public class TaskSummary {
@@ -68,6 +73,16 @@ public class TaskSummary {
   @JsonProperty(JSON_PROPERTY_STATE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String state;
+
+  public static final String JSON_PROPERTY_STATE_DISPLAY_NAME = "stateDisplayName";
+  @JsonProperty(JSON_PROPERTY_STATE_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String stateDisplayName;
+
+  public static final String JSON_PROPERTY_CORRELATION_IDS = "correlationIds";
+  @JsonProperty(JSON_PROPERTY_CORRELATION_IDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> correlationIds;
 
   public TaskSummary() {
   }
@@ -167,6 +182,52 @@ public class TaskSummary {
   }
 
 
+  public TaskSummary stateDisplayName(String stateDisplayName) {
+    this.stateDisplayName = stateDisplayName;
+    return this;
+  }
+
+  /**
+   * The display name of the current State, from the Task Definition, if one is provided
+   * @return stateDisplayName
+   */
+  @javax.annotation.Nullable
+  public String getStateDisplayName() {
+    return stateDisplayName;
+  }
+
+  public void setStateDisplayName(String stateDisplayName) {
+    this.stateDisplayName = stateDisplayName;
+  }
+
+
+  public TaskSummary correlationIds(List<String> correlationIds) {
+    this.correlationIds = correlationIds;
+    return this;
+  }
+
+  public TaskSummary addCorrelationIdsItem(String correlationIdsItem) {
+    if (this.correlationIds == null) {
+      this.correlationIds = new ArrayList<>();
+    }
+    this.correlationIds.add(correlationIdsItem);
+    return this;
+  }
+
+  /**
+   * User-provided ID used to link entities and tasks
+   * @return correlationIds
+   */
+  @javax.annotation.Nullable
+  public List<String> getCorrelationIds() {
+    return correlationIds;
+  }
+
+  public void setCorrelationIds(List<String> correlationIds) {
+    this.correlationIds = correlationIds;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -180,12 +241,25 @@ public class TaskSummary {
         Objects.equals(this.taskDefinitionId, taskSummary.taskDefinitionId) &&
         Objects.equals(this.taskDefinitionVersion, taskSummary.taskDefinitionVersion) &&
         Objects.equals(this.taskDefinitionDisplayName, taskSummary.taskDefinitionDisplayName) &&
-        Objects.equals(this.state, taskSummary.state);
+        Objects.equals(this.state, taskSummary.state) &&
+        Objects.equals(this.stateDisplayName, taskSummary.stateDisplayName) &&
+        Objects.equals(this.correlationIds, taskSummary.correlationIds);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, taskDefinitionId, taskDefinitionVersion, taskDefinitionDisplayName, state);
+    return Objects.hash(id, taskDefinitionId, taskDefinitionVersion, taskDefinitionDisplayName, state, stateDisplayName, correlationIds);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -197,6 +271,8 @@ public class TaskSummary {
     sb.append("    taskDefinitionVersion: ").append(toIndentedString(taskDefinitionVersion)).append("\n");
     sb.append("    taskDefinitionDisplayName: ").append(toIndentedString(taskDefinitionDisplayName)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
+    sb.append("    stateDisplayName: ").append(toIndentedString(stateDisplayName)).append("\n");
+    sb.append("    correlationIds: ").append(toIndentedString(correlationIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

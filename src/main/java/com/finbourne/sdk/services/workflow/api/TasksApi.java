@@ -1387,6 +1387,7 @@ public class TasksApi {
      * Build call for getTask
      * @param id Id of the Task to retrieve (required)
      * @param asAt The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1399,14 +1400,15 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTaskCall(String id, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
-        return getTaskCall(id, asAt,  _callback, new ConfigurationOptions());
+    private HttpRequest getTaskCall(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return getTaskCall(id, asAt, propertyKeys,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getTask. Use any specified configuration options to override any other configuration for this request only.
      * @param id Id of the Task to retrieve (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1419,7 +1421,7 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTaskCall(String id, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTaskCall(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1449,6 +1451,10 @@ public class TasksApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
         }
 
+        if (propertyKeys != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "propertyKeys", propertyKeys));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1469,13 +1475,13 @@ public class TasksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getTaskValidateBeforeCall(String id, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTaskValidateBeforeCall(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getTask(Async)");
         }
 
-        return getTaskCall(id, asAt, _callback, opts);
+        return getTaskCall(id, asAt, propertyKeys, _callback, opts);
 
     }
 
@@ -1484,6 +1490,7 @@ public class TasksApi {
      * 
      * @param id Id of the Task to retrieve (required)
      * @param asAt The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. (optional)
      * @return ApiResponse&lt;Task&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1495,8 +1502,8 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Task> getTaskWithHttpInfo(String id, OffsetDateTime asAt) throws ApiException {
-        HttpRequest localVarCall = getTaskValidateBeforeCall(id, asAt, null, new ConfigurationOptions());
+    private ApiResponse<Task> getTaskWithHttpInfo(String id, OffsetDateTime asAt, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = getTaskValidateBeforeCall(id, asAt, propertyKeys, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<Task>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1506,6 +1513,7 @@ public class TasksApi {
      * Use any specified configuration options to override any other configuration for this request only
      * @param id Id of the Task to retrieve (required)
      * @param asAt The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. (optional)
      * @return ApiResponse&lt;Task&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1517,8 +1525,8 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Task> getTaskWithHttpInfo(String id, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getTaskValidateBeforeCall(id, asAt, null, opts);
+    private ApiResponse<Task> getTaskWithHttpInfo(String id, OffsetDateTime asAt, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTaskValidateBeforeCall(id, asAt, propertyKeys, null, opts);
         Type localVarReturnType = new TypeReference<Task>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1528,6 +1536,7 @@ public class TasksApi {
      * 
      * @param id Id of the Task to retrieve (required)
      * @param asAt The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1539,9 +1548,9 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTaskAsync(String id, OffsetDateTime asAt, final ApiCallback<Task> _callback) throws ApiException {
+    private void getTaskAsync(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<Task> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getTaskValidateBeforeCall(id, asAt, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getTaskValidateBeforeCall(id, asAt, propertyKeys, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<Task>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1551,6 +1560,7 @@ public class TasksApi {
      * Use any specified configuration options to override any other configuration for this request only
      * @param id Id of the Task to retrieve (required)
      * @param asAt The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1562,9 +1572,9 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTaskAsync(String id, OffsetDateTime asAt, final ApiCallback<Task> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getTaskAsync(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<Task> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getTaskValidateBeforeCall(id, asAt, _callback, opts);
+        HttpRequest localVarCall = getTaskValidateBeforeCall(id, asAt, propertyKeys, _callback, opts);
         Type localVarReturnType = new TypeReference<Task>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1572,6 +1582,7 @@ public class TasksApi {
     public class APIgetTaskRequest {
         private final String id;
         private OffsetDateTime asAt;
+        private List<String> propertyKeys;
 
         private APIgetTaskRequest(String id) {
             this.id = id;
@@ -1584,6 +1595,16 @@ public class TasksApi {
          */
         public APIgetTaskRequest asAt(OffsetDateTime asAt) {
             this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set propertyKeys
+         * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. (optional)
+         * @return APIgetTaskRequest
+         */
+        public APIgetTaskRequest propertyKeys(List<String> propertyKeys) {
+            this.propertyKeys = propertyKeys;
             return this;
         }
 
@@ -1602,7 +1623,7 @@ public class TasksApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getTaskCall(id, asAt, _callback);
+            return getTaskCall(id, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -1619,7 +1640,7 @@ public class TasksApi {
          </table>
          */
         public Task execute() throws ApiException {
-            ApiResponse<Task> localVarResp = getTaskWithHttpInfo(id, asAt);
+            ApiResponse<Task> localVarResp = getTaskWithHttpInfo(id, asAt, propertyKeys);
             return localVarResp.getData();
         }
 
@@ -1637,7 +1658,7 @@ public class TasksApi {
          </table>
          */
         public Task execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<Task> localVarResp = getTaskWithHttpInfo(id, asAt, opts);
+            ApiResponse<Task> localVarResp = getTaskWithHttpInfo(id, asAt, propertyKeys, opts);
             return localVarResp.getData();
         }
 
@@ -1655,7 +1676,7 @@ public class TasksApi {
          </table>
          */
         public ApiResponse<Task> executeWithHttpInfo() throws ApiException {
-            return getTaskWithHttpInfo(id, asAt);
+            return getTaskWithHttpInfo(id, asAt, propertyKeys);
         }
 
         /**
@@ -1672,7 +1693,7 @@ public class TasksApi {
          </table>
          */
         public ApiResponse<Task> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getTaskWithHttpInfo(id, asAt, opts);
+            return getTaskWithHttpInfo(id, asAt, propertyKeys, opts);
         }
 
         /**
@@ -1689,7 +1710,7 @@ public class TasksApi {
          </table>
          */
         public void executeAsync(final ApiCallback<Task> _callback) throws ApiException {
-            getTaskAsync(id, asAt, _callback);
+            getTaskAsync(id, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -1706,7 +1727,7 @@ public class TasksApi {
          </table>
          */
         public void executeAsync(final ApiCallback<Task> _callback, ConfigurationOptions opts) throws ApiException {
-            getTaskAsync(id, asAt, _callback, opts);
+            getTaskAsync(id, asAt, propertyKeys, _callback, opts);
         }
     }
 
@@ -2076,6 +2097,7 @@ public class TasksApi {
      * @param asAt The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names or properties to sort by, each optionally suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
      * @param _callback Callback for upload/download progress
@@ -2090,8 +2112,8 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listTasksCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback) throws ApiException {
-        return listTasksCall(asAt, filter, sortBy, limit, page,  _callback, new ConfigurationOptions());
+    private HttpRequest listTasksCall(OffsetDateTime asAt, String filter, List<String> sortBy, List<String> propertyKeys, Integer limit, String page, final ApiCallback _callback) throws ApiException {
+        return listTasksCall(asAt, filter, sortBy, propertyKeys, limit, page,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -2099,6 +2121,7 @@ public class TasksApi {
      * @param asAt The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy A list of field names or properties to sort by, each optionally suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
      * @param _callback Callback for upload/download progress
@@ -2113,7 +2136,7 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listTasksCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listTasksCall(OffsetDateTime asAt, String filter, List<String> sortBy, List<String> propertyKeys, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2150,6 +2173,10 @@ public class TasksApi {
             localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
         }
 
+        if (propertyKeys != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "propertyKeys", propertyKeys));
+        }
+
         if (limit != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
         }
@@ -2178,8 +2205,8 @@ public class TasksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listTasksValidateBeforeCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listTasksCall(asAt, filter, sortBy, limit, page, _callback, opts);
+    private HttpRequest listTasksValidateBeforeCall(OffsetDateTime asAt, String filter, List<String> sortBy, List<String> propertyKeys, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listTasksCall(asAt, filter, sortBy, propertyKeys, limit, page, _callback, opts);
 
     }
 
@@ -2189,6 +2216,7 @@ public class TasksApi {
      * @param asAt The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names or properties to sort by, each optionally suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTask&gt;
@@ -2202,8 +2230,8 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTask> listTasksWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page) throws ApiException {
-        HttpRequest localVarCall = listTasksValidateBeforeCall(asAt, filter, sortBy, limit, page, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfTask> listTasksWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, List<String> propertyKeys, Integer limit, String page) throws ApiException {
+        HttpRequest localVarCall = listTasksValidateBeforeCall(asAt, filter, sortBy, propertyKeys, limit, page, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTask>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2214,6 +2242,7 @@ public class TasksApi {
      * @param asAt The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names or properties to sort by, each optionally suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTask&gt;
@@ -2227,8 +2256,8 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTask> listTasksWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listTasksValidateBeforeCall(asAt, filter, sortBy, limit, page, null, opts);
+    private ApiResponse<PagedResourceListOfTask> listTasksWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, List<String> propertyKeys, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listTasksValidateBeforeCall(asAt, filter, sortBy, propertyKeys, limit, page, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTask>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2239,6 +2268,7 @@ public class TasksApi {
      * @param asAt The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names or properties to sort by, each optionally suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -2252,9 +2282,9 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listTasksAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback<PagedResourceListOfTask> _callback) throws ApiException {
+    private void listTasksAsync(OffsetDateTime asAt, String filter, List<String> sortBy, List<String> propertyKeys, Integer limit, String page, final ApiCallback<PagedResourceListOfTask> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listTasksValidateBeforeCall(asAt, filter, sortBy, limit, page, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listTasksValidateBeforeCall(asAt, filter, sortBy, propertyKeys, limit, page, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTask>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2265,6 +2295,7 @@ public class TasksApi {
      * @param asAt The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names or properties to sort by, each optionally suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
+     * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -2278,9 +2309,9 @@ public class TasksApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listTasksAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback<PagedResourceListOfTask> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listTasksAsync(OffsetDateTime asAt, String filter, List<String> sortBy, List<String> propertyKeys, Integer limit, String page, final ApiCallback<PagedResourceListOfTask> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listTasksValidateBeforeCall(asAt, filter, sortBy, limit, page, _callback, opts);
+        HttpRequest localVarCall = listTasksValidateBeforeCall(asAt, filter, sortBy, propertyKeys, limit, page, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTask>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2289,6 +2320,7 @@ public class TasksApi {
         private OffsetDateTime asAt;
         private String filter;
         private List<String> sortBy;
+        private List<String> propertyKeys;
         private Integer limit;
         private String page;
 
@@ -2322,6 +2354,16 @@ public class TasksApi {
          */
         public APIlistTasksRequest sortBy(List<String> sortBy) {
             this.sortBy = sortBy;
+            return this;
+        }
+
+        /**
+         * Set propertyKeys
+         * @param propertyKeys The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. (optional)
+         * @return APIlistTasksRequest
+         */
+        public APIlistTasksRequest propertyKeys(List<String> propertyKeys) {
+            this.propertyKeys = propertyKeys;
             return this;
         }
 
@@ -2360,7 +2402,7 @@ public class TasksApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listTasksCall(asAt, filter, sortBy, limit, page, _callback);
+            return listTasksCall(asAt, filter, sortBy, propertyKeys, limit, page, _callback);
         }
 
         /**
@@ -2377,7 +2419,7 @@ public class TasksApi {
          </table>
          */
         public PagedResourceListOfTask execute() throws ApiException {
-            ApiResponse<PagedResourceListOfTask> localVarResp = listTasksWithHttpInfo(asAt, filter, sortBy, limit, page);
+            ApiResponse<PagedResourceListOfTask> localVarResp = listTasksWithHttpInfo(asAt, filter, sortBy, propertyKeys, limit, page);
             return localVarResp.getData();
         }
 
@@ -2395,7 +2437,7 @@ public class TasksApi {
          </table>
          */
         public PagedResourceListOfTask execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfTask> localVarResp = listTasksWithHttpInfo(asAt, filter, sortBy, limit, page, opts);
+            ApiResponse<PagedResourceListOfTask> localVarResp = listTasksWithHttpInfo(asAt, filter, sortBy, propertyKeys, limit, page, opts);
             return localVarResp.getData();
         }
 
@@ -2413,7 +2455,7 @@ public class TasksApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTask> executeWithHttpInfo() throws ApiException {
-            return listTasksWithHttpInfo(asAt, filter, sortBy, limit, page);
+            return listTasksWithHttpInfo(asAt, filter, sortBy, propertyKeys, limit, page);
         }
 
         /**
@@ -2430,7 +2472,7 @@ public class TasksApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTask> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listTasksWithHttpInfo(asAt, filter, sortBy, limit, page, opts);
+            return listTasksWithHttpInfo(asAt, filter, sortBy, propertyKeys, limit, page, opts);
         }
 
         /**
@@ -2447,7 +2489,7 @@ public class TasksApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTask> _callback) throws ApiException {
-            listTasksAsync(asAt, filter, sortBy, limit, page, _callback);
+            listTasksAsync(asAt, filter, sortBy, propertyKeys, limit, page, _callback);
         }
 
         /**
@@ -2464,7 +2506,7 @@ public class TasksApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTask> _callback, ConfigurationOptions opts) throws ApiException {
-            listTasksAsync(asAt, filter, sortBy, limit, page, _callback, opts);
+            listTasksAsync(asAt, filter, sortBy, propertyKeys, limit, page, _callback, opts);
         }
     }
 
