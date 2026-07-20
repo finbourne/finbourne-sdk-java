@@ -291,7 +291,7 @@ public class ShareClass {
   }
 
   /**
-   * The weighting factor used for apportionment across this share class.
+   * Only used for fixed percentage method or be zero, must equal 1 or 0 across all classes in the fund.
    * @return apportionmentFactor
    */
   @javax.annotation.Nullable

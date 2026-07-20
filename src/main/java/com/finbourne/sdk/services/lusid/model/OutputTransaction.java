@@ -14,11 +14,13 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.CustodianAccount;
+import com.finbourne.sdk.services.lusid.model.CustodianEntry;
 import com.finbourne.sdk.services.lusid.model.DataModelMembership;
 import com.finbourne.sdk.services.lusid.model.Economics;
 import com.finbourne.sdk.services.lusid.model.OtcConfirmation;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.RealisedGainLoss;
+import com.finbourne.sdk.services.lusid.model.ResolvedCustodianAccount;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.TransactionPrice;
@@ -91,7 +93,9 @@ import com.finbourne.sdk.JSON;
   OutputTransaction.JSON_PROPERTY_SEQUENCE_PRIORITY,
   OutputTransaction.JSON_PROPERTY_SETTLEMENT_SUMMARY,
   OutputTransaction.JSON_PROPERTY_VERSION,
-  OutputTransaction.JSON_PROPERTY_STAGED_MODIFICATIONS
+  OutputTransaction.JSON_PROPERTY_STAGED_MODIFICATIONS,
+  OutputTransaction.JSON_PROPERTY_CUSTODIAN_ENTRIES,
+  OutputTransaction.JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNTS
 })
 
 public class OutputTransaction {
@@ -336,6 +340,16 @@ public class OutputTransaction {
   @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private StagedModificationsInfo stagedModifications;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ENTRIES = "custodianEntries";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ENTRIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<CustodianEntry> custodianEntries;
+
+  public static final String JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNTS = "resolvedCustodianAccounts";
+  @JsonProperty(JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ResolvedCustodianAccount> resolvedCustodianAccounts;
 
   public OutputTransaction() {
   }
@@ -1140,6 +1154,60 @@ public class OutputTransaction {
   }
 
 
+  public OutputTransaction custodianEntries(List<CustodianEntry> custodianEntries) {
+    this.custodianEntries = custodianEntries;
+    return this;
+  }
+
+  public OutputTransaction addCustodianEntriesItem(CustodianEntry custodianEntriesItem) {
+    if (this.custodianEntries == null) {
+      this.custodianEntries = new ArrayList<>();
+    }
+    this.custodianEntries.add(custodianEntriesItem);
+    return this;
+  }
+
+  /**
+   * Set of of Custodian Entries associated with the transaction.
+   * @return custodianEntries
+   */
+  @javax.annotation.Nullable
+  public List<CustodianEntry> getCustodianEntries() {
+    return custodianEntries;
+  }
+
+  public void setCustodianEntries(List<CustodianEntry> custodianEntries) {
+    this.custodianEntries = custodianEntries;
+  }
+
+
+  public OutputTransaction resolvedCustodianAccounts(List<ResolvedCustodianAccount> resolvedCustodianAccounts) {
+    this.resolvedCustodianAccounts = resolvedCustodianAccounts;
+    return this;
+  }
+
+  public OutputTransaction addResolvedCustodianAccountsItem(ResolvedCustodianAccount resolvedCustodianAccountsItem) {
+    if (this.resolvedCustodianAccounts == null) {
+      this.resolvedCustodianAccounts = new ArrayList<>();
+    }
+    this.resolvedCustodianAccounts.add(resolvedCustodianAccountsItem);
+    return this;
+  }
+
+  /**
+   * Set of Custodian Accounts resolved from each movement on the Transaction.
+   * @return resolvedCustodianAccounts
+   */
+  @javax.annotation.Nullable
+  public List<ResolvedCustodianAccount> getResolvedCustodianAccounts() {
+    return resolvedCustodianAccounts;
+  }
+
+  public void setResolvedCustodianAccounts(List<ResolvedCustodianAccount> resolvedCustodianAccounts) {
+    this.resolvedCustodianAccounts = resolvedCustodianAccounts;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1188,7 +1256,9 @@ public class OutputTransaction {
         Objects.equals(this.sequencePriority, outputTransaction.sequencePriority) &&
         Objects.equals(this.settlementSummary, outputTransaction.settlementSummary) &&
         Objects.equals(this.version, outputTransaction.version) &&
-        Objects.equals(this.stagedModifications, outputTransaction.stagedModifications);
+        Objects.equals(this.stagedModifications, outputTransaction.stagedModifications) &&
+        Objects.equals(this.custodianEntries, outputTransaction.custodianEntries) &&
+        Objects.equals(this.resolvedCustodianAccounts, outputTransaction.resolvedCustodianAccounts);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -1197,7 +1267,7 @@ public class OutputTransaction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, type, description, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionAmount, transactionPrice, totalConsideration, exchangeRate, transactionToPortfolioRate, transactionCurrency, properties, counterpartyId, source, transactionStatus, entryDateTime, cancelDateTime, realisedGainLoss, holdingIds, sourceType, sourceInstrumentEventId, custodianAccount, transactionGroupId, resolvedTransactionTypeDetails, grossTransactionAmount, otcConfirmation, orderId, allocationId, accountingDate, economics, dataModelMembership, sequence, sequencePriority, settlementSummary, version, stagedModifications);
+    return Objects.hash(transactionId, type, description, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionAmount, transactionPrice, totalConsideration, exchangeRate, transactionToPortfolioRate, transactionCurrency, properties, counterpartyId, source, transactionStatus, entryDateTime, cancelDateTime, realisedGainLoss, holdingIds, sourceType, sourceInstrumentEventId, custodianAccount, transactionGroupId, resolvedTransactionTypeDetails, grossTransactionAmount, otcConfirmation, orderId, allocationId, accountingDate, economics, dataModelMembership, sequence, sequencePriority, settlementSummary, version, stagedModifications, custodianEntries, resolvedCustodianAccounts);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1251,6 +1321,8 @@ public class OutputTransaction {
     sb.append("    settlementSummary: ").append(toIndentedString(settlementSummary)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
+    sb.append("    custodianEntries: ").append(toIndentedString(custodianEntries)).append("\n");
+    sb.append("    resolvedCustodianAccounts: ").append(toIndentedString(resolvedCustodianAccounts)).append("\n");
     sb.append("}");
     return sb.toString();
   }

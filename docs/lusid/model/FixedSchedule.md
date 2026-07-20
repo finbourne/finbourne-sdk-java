@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **paymentCurrency** | **String** | Payment currency. This does not have to be the same as the nominal bond or observation/reset currency. | [default to String]
 **stubType** | **String** | When a payment schedule doesn&#39;t have regular payment intervals just because of the  first and/or last coupons of the schedule, we call those irregular coupons stubs.  This configuration specifies what type of stub is used when building the schedule  Supported values are:  None &#x3D; this is a regular payment schedule with no stubs. DO NOT use it with irregular schedules or you will get incorrect and unexpected behaviour.  ShortFront &#x3D; this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is shorter than the regular payment period.  ShortBack &#x3D; this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is shorter than the regular payment period.  LongFront &#x3D; this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is longer than the regular payment period.  LongBack &#x3D; this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is longer than the regular payment period.  Both &#x3D; this is an irregular payment schedule where both the first and the last coupons are irregular, and the length of these periods is calculated based on the first coupon payment date that should have been explicitly set. | [optional] [default to String]
 **exDividendConfiguration** | [**ExDividendConfiguration**](ExDividendConfiguration.md) |  | [optional] [default to ExDividendConfiguration]
+**scheduleId** | **String** | Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FixedSchedule;
@@ -34,6 +35,7 @@ java.math.BigDecimal notional = new java.math.BigDecimal("100.00");
 String paymentCurrency = "example paymentCurrency";
 @javax.annotation.Nullable String stubType = "example stubType";
 ExDividendConfiguration exDividendConfiguration = new ExDividendConfiguration();
+@javax.annotation.Nullable String scheduleId = "example scheduleId";
 
 
 FixedSchedule fixedScheduleInstance = new FixedSchedule()
@@ -46,7 +48,8 @@ FixedSchedule fixedScheduleInstance = new FixedSchedule()
     .notional(notional)
     .paymentCurrency(paymentCurrency)
     .stubType(stubType)
-    .exDividendConfiguration(exDividendConfiguration);
+    .exDividendConfiguration(exDividendConfiguration)
+    .scheduleId(scheduleId);
 ```
 
 

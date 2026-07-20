@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **useAnnualisedDirectRates** | **Boolean** | Flag indicating whether to use daily updated annualised interest  rates for calculating the accrued interest. Defaults to false. | [optional] [default to Boolean]
 **capRate** | **java.math.BigDecimal** | The maximum floating rate which a cashflow can accrue. | [optional] [default to java.math.BigDecimal]
 **floorRate** | **java.math.BigDecimal** | The minimum floating rate which a cashflow can accrue. | [optional] [default to java.math.BigDecimal]
+**scheduleId** | **String** | Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FloatSchedule;
@@ -48,6 +49,7 @@ Compounding compounding = new Compounding();
 Boolean useAnnualisedDirectRates = true;
 @javax.annotation.Nullable java.math.BigDecimal capRate = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal floorRate = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable String scheduleId = "example scheduleId";
 
 
 FloatSchedule floatScheduleInstance = new FloatSchedule()
@@ -67,7 +69,8 @@ FloatSchedule floatScheduleInstance = new FloatSchedule()
     .resetConvention(resetConvention)
     .useAnnualisedDirectRates(useAnnualisedDirectRates)
     .capRate(capRate)
-    .floorRate(floorRate);
+    .floorRate(floorRate)
+    .scheduleId(scheduleId);
 ```
 
 

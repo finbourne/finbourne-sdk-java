@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **shareClassShortCode** | **String** | A short code that uniquely identifies the share class within the Fund. | [default to String]
 **launchPrice** | **java.math.BigDecimal** | The launch price set when a shareclass is added to the fund. Defaults to 1. | [optional] [default to java.math.BigDecimal]
 **launchDate** | [**OffsetDateTime**](OffsetDateTime.md) | The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date. | [optional] [default to OffsetDateTime]
-**apportionmentFactor** | **java.math.BigDecimal** | The weighting factor used for apportionment across this share class. | [optional] [default to java.math.BigDecimal]
+**apportionmentFactor** | **java.math.BigDecimal** | Only used for fixed percentage method or be zero, must equal 1 or 0 across all classes in the fund. | [optional] [default to java.math.BigDecimal]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true. | [optional] [default to Map<String, Property>]
 **fundShareClassType** | **String** | The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership. | [default to String]
 **distributionType** | **String** | The type of distribution the ShareClass will calculate. Available values: Income, Accumulation. | [default to String]

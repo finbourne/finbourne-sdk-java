@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**listLogs**](IdentityLogsApi.md#listLogs) | **GET** /identity/api/logs | [BETA] ListLogs: Lists system logs for a domain |
+| [**listLogs**](IdentityLogsApi.md#listLogs) | **GET** /identity/api/logs | ListLogs: Lists system logs for a domain |
 | [**listUserLogs**](IdentityLogsApi.md#listUserLogs) | **GET** /identity/api/logs/me | ListUserLogs: Lists user logs |
 
 
@@ -13,7 +13,7 @@ All URIs are relative to *http://localhost*
 
 > ResourceListOfSystemLog listLogs(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter)
 
-[BETA] ListLogs: Lists system logs for a domain
+ListLogs: Lists system logs for a domain
 
 Lists system logs for a domain
 

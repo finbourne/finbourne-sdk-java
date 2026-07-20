@@ -48,7 +48,8 @@ import com.finbourne.sdk.JSON;
   FixedSchedule.JSON_PROPERTY_NOTIONAL,
   FixedSchedule.JSON_PROPERTY_PAYMENT_CURRENCY,
   FixedSchedule.JSON_PROPERTY_STUB_TYPE,
-  FixedSchedule.JSON_PROPERTY_EX_DIVIDEND_CONFIGURATION
+  FixedSchedule.JSON_PROPERTY_EX_DIVIDEND_CONFIGURATION,
+  FixedSchedule.JSON_PROPERTY_SCHEDULE_ID
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -107,6 +108,11 @@ public class FixedSchedule extends Schedule {
   @JsonProperty(JSON_PROPERTY_EX_DIVIDEND_CONFIGURATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ExDividendConfiguration exDividendConfiguration;
+
+  public static final String JSON_PROPERTY_SCHEDULE_ID = "scheduleId";
+  @JsonProperty(JSON_PROPERTY_SCHEDULE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String scheduleId;
 
   public FixedSchedule() {
   }
@@ -301,6 +307,25 @@ public class FixedSchedule extends Schedule {
   }
 
 
+  public FixedSchedule scheduleId(String scheduleId) {
+    this.scheduleId = scheduleId;
+    return this;
+  }
+
+  /**
+   * Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent.
+   * @return scheduleId
+   */
+  @javax.annotation.Nullable
+  public String getScheduleId() {
+    return scheduleId;
+  }
+
+  public void setScheduleId(String scheduleId) {
+    this.scheduleId = scheduleId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -320,6 +345,7 @@ public class FixedSchedule extends Schedule {
         Objects.equals(this.paymentCurrency, fixedSchedule.paymentCurrency) &&
         Objects.equals(this.stubType, fixedSchedule.stubType) &&
         Objects.equals(this.exDividendConfiguration, fixedSchedule.exDividendConfiguration) &&
+        Objects.equals(this.scheduleId, fixedSchedule.scheduleId) &&
         super.equals(o);
   }
 
@@ -329,7 +355,7 @@ public class FixedSchedule extends Schedule {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, flowConventions, couponRate, conventionName, exDividendDays, notional, paymentCurrency, stubType, exDividendConfiguration, super.hashCode());
+    return Objects.hash(startDate, maturityDate, flowConventions, couponRate, conventionName, exDividendDays, notional, paymentCurrency, stubType, exDividendConfiguration, scheduleId, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -354,6 +380,7 @@ public class FixedSchedule extends Schedule {
     sb.append("    paymentCurrency: ").append(toIndentedString(paymentCurrency)).append("\n");
     sb.append("    stubType: ").append(toIndentedString(stubType)).append("\n");
     sb.append("    exDividendConfiguration: ").append(toIndentedString(exDividendConfiguration)).append("\n");
+    sb.append("    scheduleId: ").append(toIndentedString(scheduleId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

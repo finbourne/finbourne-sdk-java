@@ -198,7 +198,7 @@ public class IdentityLogsApi {
     }
 
     /**
-     * [BETA] ListLogs: Lists system logs for a domain
+     * ListLogs: Lists system logs for a domain
      * Lists system logs for a domain
      * @param oktaSince Lower bound of log events published property (optional)
      * @param oktaUntil Upper bound of log events published property (optional)
@@ -224,7 +224,7 @@ public class IdentityLogsApi {
     }
 
     /**
-     * [BETA] ListLogs: Lists system logs for a domain
+     * ListLogs: Lists system logs for a domain
      * Lists system logs for a domainUse any specified configuration options to override any other configuration for this request only
      * @param oktaSince Lower bound of log events published property (optional)
      * @param oktaUntil Upper bound of log events published property (optional)
@@ -250,7 +250,7 @@ public class IdentityLogsApi {
     }
 
     /**
-     * [BETA] ListLogs: Lists system logs for a domain (asynchronously)
+     * ListLogs: Lists system logs for a domain (asynchronously)
      * Lists system logs for a domain
      * @param oktaSince Lower bound of log events published property (optional)
      * @param oktaUntil Upper bound of log events published property (optional)
@@ -277,7 +277,7 @@ public class IdentityLogsApi {
     }
 
     /**
-     * [BETA] ListLogs: Lists system logs for a domain (asynchronously)
+     * ListLogs: Lists system logs for a domain (asynchronously)
      * Lists system logs for a domainUse any specified configuration options to override any other configuration for this request only
      * @param oktaSince Lower bound of log events published property (optional)
      * @param oktaUntil Upper bound of log events published property (optional)
@@ -502,7 +502,7 @@ public class IdentityLogsApi {
     }
 
     /**
-     * [BETA] ListLogs: Lists system logs for a domain
+     * ListLogs: Lists system logs for a domain
      * Lists system logs for a domain
      * @return APIlistLogsRequest
      * @http.response.details

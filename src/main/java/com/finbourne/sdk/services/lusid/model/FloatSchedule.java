@@ -57,7 +57,8 @@ import com.finbourne.sdk.JSON;
   FloatSchedule.JSON_PROPERTY_RESET_CONVENTION,
   FloatSchedule.JSON_PROPERTY_USE_ANNUALISED_DIRECT_RATES,
   FloatSchedule.JSON_PROPERTY_CAP_RATE,
-  FloatSchedule.JSON_PROPERTY_FLOOR_RATE
+  FloatSchedule.JSON_PROPERTY_FLOOR_RATE,
+  FloatSchedule.JSON_PROPERTY_SCHEDULE_ID
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -151,6 +152,11 @@ public class FloatSchedule extends Schedule {
   @JsonProperty(JSON_PROPERTY_FLOOR_RATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal floorRate;
+
+  public static final String JSON_PROPERTY_SCHEDULE_ID = "scheduleId";
+  @JsonProperty(JSON_PROPERTY_SCHEDULE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String scheduleId;
 
   public FloatSchedule() {
   }
@@ -478,6 +484,25 @@ public class FloatSchedule extends Schedule {
   }
 
 
+  public FloatSchedule scheduleId(String scheduleId) {
+    this.scheduleId = scheduleId;
+    return this;
+  }
+
+  /**
+   * Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent.
+   * @return scheduleId
+   */
+  @javax.annotation.Nullable
+  public String getScheduleId() {
+    return scheduleId;
+  }
+
+  public void setScheduleId(String scheduleId) {
+    this.scheduleId = scheduleId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -504,6 +529,7 @@ public class FloatSchedule extends Schedule {
         Objects.equals(this.useAnnualisedDirectRates, floatSchedule.useAnnualisedDirectRates) &&
         (this.capRate == null ? floatSchedule.capRate == null : (floatSchedule.capRate != null && this.capRate.compareTo(floatSchedule.getCapRate()) == 0)) &&
         (this.floorRate == null ? floatSchedule.floorRate == null : (floatSchedule.floorRate != null && this.floorRate.compareTo(floatSchedule.getFloorRate()) == 0)) &&
+        Objects.equals(this.scheduleId, floatSchedule.scheduleId) &&
         super.equals(o);
   }
 
@@ -513,7 +539,7 @@ public class FloatSchedule extends Schedule {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, flowConventions, conventionName, exDividendDays, indexConventionName, indexConventions, notional, paymentCurrency, spread, stubType, exDividendConfiguration, compounding, resetConvention, useAnnualisedDirectRates, capRate, floorRate, super.hashCode());
+    return Objects.hash(startDate, maturityDate, flowConventions, conventionName, exDividendDays, indexConventionName, indexConventions, notional, paymentCurrency, spread, stubType, exDividendConfiguration, compounding, resetConvention, useAnnualisedDirectRates, capRate, floorRate, scheduleId, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -545,6 +571,7 @@ public class FloatSchedule extends Schedule {
     sb.append("    useAnnualisedDirectRates: ").append(toIndentedString(useAnnualisedDirectRates)).append("\n");
     sb.append("    capRate: ").append(toIndentedString(capRate)).append("\n");
     sb.append("    floorRate: ").append(toIndentedString(floorRate)).append("\n");
+    sb.append("    scheduleId: ").append(toIndentedString(scheduleId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
