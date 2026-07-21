@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.workflow.model;
 
 import com.finbourne.sdk.services.workflow.model.ActionDefinition;
 import com.finbourne.sdk.services.workflow.model.InitialState;
+import com.finbourne.sdk.services.workflow.model.PerpetualProperty;
 import com.finbourne.sdk.services.workflow.model.TaskFieldDefinition;
 import com.finbourne.sdk.services.workflow.model.TaskStateDefinition;
 import com.finbourne.sdk.services.workflow.model.TaskTransitionDefinition;
@@ -21,7 +22,9 @@ import com.finbourne.sdk.services.workflow.model.TransitionTriggerDefinition;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -49,7 +52,8 @@ import com.finbourne.sdk.JSON;
   UpdateTaskDefinitionRequest.JSON_PROPERTY_INITIAL_STATE,
   UpdateTaskDefinitionRequest.JSON_PROPERTY_TRIGGERS,
   UpdateTaskDefinitionRequest.JSON_PROPERTY_TRANSITIONS,
-  UpdateTaskDefinitionRequest.JSON_PROPERTY_ACTIONS
+  UpdateTaskDefinitionRequest.JSON_PROPERTY_ACTIONS,
+  UpdateTaskDefinitionRequest.JSON_PROPERTY_PROPERTIES
 })
 
 public class UpdateTaskDefinitionRequest {
@@ -92,6 +96,11 @@ public class UpdateTaskDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_ACTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ActionDefinition> actions;
+
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, PerpetualProperty> properties;
 
   public UpdateTaskDefinitionRequest() {
   }
@@ -288,6 +297,33 @@ public class UpdateTaskDefinitionRequest {
   }
 
 
+  public UpdateTaskDefinitionRequest properties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public UpdateTaskDefinitionRequest putPropertiesItem(String key, PerpetualProperty propertiesItem) {
+    if (this.properties == null) {
+      this.properties = new HashMap<>();
+    }
+    this.properties.put(key, propertiesItem);
+    return this;
+  }
+
+  /**
+   * The properties to set on the Task Definition, keyed by property key. Optional. A null property value deletes the property.
+   * @return properties
+   */
+  @javax.annotation.Nullable
+  public Map<String, PerpetualProperty> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -304,7 +340,8 @@ public class UpdateTaskDefinitionRequest {
         Objects.equals(this.initialState, updateTaskDefinitionRequest.initialState) &&
         Objects.equals(this.triggers, updateTaskDefinitionRequest.triggers) &&
         Objects.equals(this.transitions, updateTaskDefinitionRequest.transitions) &&
-        Objects.equals(this.actions, updateTaskDefinitionRequest.actions);
+        Objects.equals(this.actions, updateTaskDefinitionRequest.actions) &&
+        Objects.equals(this.properties, updateTaskDefinitionRequest.properties);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -313,7 +350,7 @@ public class UpdateTaskDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, states, fieldSchema, initialState, triggers, transitions, actions);
+    return Objects.hash(displayName, description, states, fieldSchema, initialState, triggers, transitions, actions, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -335,6 +372,7 @@ public class UpdateTaskDefinitionRequest {
     sb.append("    triggers: ").append(toIndentedString(triggers)).append("\n");
     sb.append("    transitions: ").append(toIndentedString(transitions)).append("\n");
     sb.append("    actions: ").append(toIndentedString(actions)).append("\n");
+    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();
   }

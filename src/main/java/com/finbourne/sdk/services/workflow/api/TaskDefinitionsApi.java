@@ -1119,6 +1119,7 @@ public class TaskDefinitionsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys whose values to return on each Task Definition. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1131,8 +1132,8 @@ public class TaskDefinitionsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listTaskDefinitionsCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback) throws ApiException {
-        return listTaskDefinitionsCall(asAt, filter, sortBy, limit, page,  _callback, new ConfigurationOptions());
+    private HttpRequest listTaskDefinitionsCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return listTaskDefinitionsCall(asAt, filter, sortBy, limit, page, propertyKeys,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -1141,7 +1142,8 @@ public class TaskDefinitionsApi {
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10). Use any specified configuration options to override any other configuration for this request only.
-     * @param page The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param page The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys The property keys whose values to return on each Task Definition. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1154,7 +1156,7 @@ public class TaskDefinitionsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listTaskDefinitionsCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listTaskDefinitionsCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1199,6 +1201,10 @@ public class TaskDefinitionsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
         }
 
+        if (propertyKeys != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "propertyKeys", propertyKeys));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1219,8 +1225,8 @@ public class TaskDefinitionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listTaskDefinitionsValidateBeforeCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listTaskDefinitionsCall(asAt, filter, sortBy, limit, page, _callback, opts);
+    private HttpRequest listTaskDefinitionsValidateBeforeCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listTaskDefinitionsCall(asAt, filter, sortBy, limit, page, propertyKeys, _callback, opts);
 
     }
 
@@ -1232,6 +1238,7 @@ public class TaskDefinitionsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys whose values to return on each Task Definition. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTaskDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1243,8 +1250,8 @@ public class TaskDefinitionsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTaskDefinition> listTaskDefinitionsWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page) throws ApiException {
-        HttpRequest localVarCall = listTaskDefinitionsValidateBeforeCall(asAt, filter, sortBy, limit, page, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfTaskDefinition> listTaskDefinitionsWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = listTaskDefinitionsValidateBeforeCall(asAt, filter, sortBy, limit, page, propertyKeys, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTaskDefinition>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1257,6 +1264,7 @@ public class TaskDefinitionsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys whose values to return on each Task Definition. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTaskDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1268,8 +1276,8 @@ public class TaskDefinitionsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTaskDefinition> listTaskDefinitionsWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listTaskDefinitionsValidateBeforeCall(asAt, filter, sortBy, limit, page, null, opts);
+    private ApiResponse<PagedResourceListOfTaskDefinition> listTaskDefinitionsWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listTaskDefinitionsValidateBeforeCall(asAt, filter, sortBy, limit, page, propertyKeys, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTaskDefinition>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1282,6 +1290,7 @@ public class TaskDefinitionsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys whose values to return on each Task Definition. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1293,9 +1302,9 @@ public class TaskDefinitionsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listTaskDefinitionsAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback<PagedResourceListOfTaskDefinition> _callback) throws ApiException {
+    private void listTaskDefinitionsAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback<PagedResourceListOfTaskDefinition> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listTaskDefinitionsValidateBeforeCall(asAt, filter, sortBy, limit, page, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listTaskDefinitionsValidateBeforeCall(asAt, filter, sortBy, limit, page, propertyKeys, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTaskDefinition>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1308,6 +1317,7 @@ public class TaskDefinitionsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys whose values to return on each Task Definition. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1319,9 +1329,9 @@ public class TaskDefinitionsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listTaskDefinitionsAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback<PagedResourceListOfTaskDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listTaskDefinitionsAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback<PagedResourceListOfTaskDefinition> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listTaskDefinitionsValidateBeforeCall(asAt, filter, sortBy, limit, page, _callback, opts);
+        HttpRequest localVarCall = listTaskDefinitionsValidateBeforeCall(asAt, filter, sortBy, limit, page, propertyKeys, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTaskDefinition>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1332,6 +1342,7 @@ public class TaskDefinitionsApi {
         private List<String> sortBy;
         private Integer limit;
         private String page;
+        private List<String> propertyKeys;
 
         private APIlistTaskDefinitionsRequest() {
         }
@@ -1387,6 +1398,16 @@ public class TaskDefinitionsApi {
         }
 
         /**
+         * Set propertyKeys
+         * @param propertyKeys The property keys whose values to return on each Task Definition. (optional)
+         * @return APIlistTaskDefinitionsRequest
+         */
+        public APIlistTaskDefinitionsRequest propertyKeys(List<String> propertyKeys) {
+            this.propertyKeys = propertyKeys;
+            return this;
+        }
+
+        /**
          * Build call for listTaskDefinitions
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -1401,7 +1422,7 @@ public class TaskDefinitionsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listTaskDefinitionsCall(asAt, filter, sortBy, limit, page, _callback);
+            return listTaskDefinitionsCall(asAt, filter, sortBy, limit, page, propertyKeys, _callback);
         }
 
         /**
@@ -1418,7 +1439,7 @@ public class TaskDefinitionsApi {
          </table>
          */
         public PagedResourceListOfTaskDefinition execute() throws ApiException {
-            ApiResponse<PagedResourceListOfTaskDefinition> localVarResp = listTaskDefinitionsWithHttpInfo(asAt, filter, sortBy, limit, page);
+            ApiResponse<PagedResourceListOfTaskDefinition> localVarResp = listTaskDefinitionsWithHttpInfo(asAt, filter, sortBy, limit, page, propertyKeys);
             return localVarResp.getData();
         }
 
@@ -1436,7 +1457,7 @@ public class TaskDefinitionsApi {
          </table>
          */
         public PagedResourceListOfTaskDefinition execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfTaskDefinition> localVarResp = listTaskDefinitionsWithHttpInfo(asAt, filter, sortBy, limit, page, opts);
+            ApiResponse<PagedResourceListOfTaskDefinition> localVarResp = listTaskDefinitionsWithHttpInfo(asAt, filter, sortBy, limit, page, propertyKeys, opts);
             return localVarResp.getData();
         }
 
@@ -1454,7 +1475,7 @@ public class TaskDefinitionsApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTaskDefinition> executeWithHttpInfo() throws ApiException {
-            return listTaskDefinitionsWithHttpInfo(asAt, filter, sortBy, limit, page);
+            return listTaskDefinitionsWithHttpInfo(asAt, filter, sortBy, limit, page, propertyKeys);
         }
 
         /**
@@ -1471,7 +1492,7 @@ public class TaskDefinitionsApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTaskDefinition> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listTaskDefinitionsWithHttpInfo(asAt, filter, sortBy, limit, page, opts);
+            return listTaskDefinitionsWithHttpInfo(asAt, filter, sortBy, limit, page, propertyKeys, opts);
         }
 
         /**
@@ -1488,7 +1509,7 @@ public class TaskDefinitionsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTaskDefinition> _callback) throws ApiException {
-            listTaskDefinitionsAsync(asAt, filter, sortBy, limit, page, _callback);
+            listTaskDefinitionsAsync(asAt, filter, sortBy, limit, page, propertyKeys, _callback);
         }
 
         /**
@@ -1505,7 +1526,7 @@ public class TaskDefinitionsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTaskDefinition> _callback, ConfigurationOptions opts) throws ApiException {
-            listTaskDefinitionsAsync(asAt, filter, sortBy, limit, page, _callback, opts);
+            listTaskDefinitionsAsync(asAt, filter, sortBy, limit, page, propertyKeys, _callback, opts);
         }
     }
 

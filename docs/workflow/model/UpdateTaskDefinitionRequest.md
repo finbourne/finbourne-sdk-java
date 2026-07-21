@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **triggers** | [**List&lt;TransitionTriggerDefinition&gt;**](TransitionTriggerDefinition.md) | Triggers | [optional] [default to List<TransitionTriggerDefinition>]
 **transitions** | [**List&lt;TaskTransitionDefinition&gt;**](TaskTransitionDefinition.md) | Transitions | [optional] [default to List<TaskTransitionDefinition>]
 **actions** | [**List&lt;ActionDefinition&gt;**](ActionDefinition.md) | Actions | [optional] [default to List<ActionDefinition>]
+**properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | The properties to set on the Task Definition, keyed by property key. Optional. A null property value deletes the property. | [optional] [default to Map<String, PerpetualProperty>]
 
 ```java
 import com.finbourne.sdk.services.workflow.model.UpdateTaskDefinitionRequest;
@@ -29,6 +30,7 @@ InitialState initialState = new InitialState();
 @javax.annotation.Nullable List<TransitionTriggerDefinition> triggers = new List<TransitionTriggerDefinition>();
 @javax.annotation.Nullable List<TaskTransitionDefinition> transitions = new List<TaskTransitionDefinition>();
 @javax.annotation.Nullable List<ActionDefinition> actions = new List<ActionDefinition>();
+@javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 
 
 UpdateTaskDefinitionRequest updateTaskDefinitionRequestInstance = new UpdateTaskDefinitionRequest()
@@ -39,7 +41,8 @@ UpdateTaskDefinitionRequest updateTaskDefinitionRequestInstance = new UpdateTask
     .initialState(initialState)
     .triggers(triggers)
     .transitions(transitions)
-    .actions(actions);
+    .actions(actions)
+    .properties(properties);
 ```
 
 

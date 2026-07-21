@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ApportionmentBreakdown;
 import com.finbourne.sdk.services.lusid.model.FundDetails;
 import com.finbourne.sdk.services.lusid.model.FundValuationPointData;
 import com.finbourne.sdk.services.lusid.model.Link;
@@ -49,6 +50,7 @@ import com.finbourne.sdk.JSON;
   ValuationPointDataResponse.JSON_PROPERTY_SHARE_CLASS_DATA,
   ValuationPointDataResponse.JSON_PROPERTY_VALUATION_POINT_CODE,
   ValuationPointDataResponse.JSON_PROPERTY_PREVIOUS_VALUATION_POINT_CODE,
+  ValuationPointDataResponse.JSON_PROPERTY_APPORTIONMENT_RESULTS,
   ValuationPointDataResponse.JSON_PROPERTY_LINKS
 })
 
@@ -92,6 +94,11 @@ public class ValuationPointDataResponse {
   @JsonProperty(JSON_PROPERTY_PREVIOUS_VALUATION_POINT_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String previousValuationPointCode;
+
+  public static final String JSON_PROPERTY_APPORTIONMENT_RESULTS = "apportionmentResults";
+  @JsonProperty(JSON_PROPERTY_APPORTIONMENT_RESULTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ApportionmentBreakdown> apportionmentResults;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -261,6 +268,33 @@ public class ValuationPointDataResponse {
   }
 
 
+  public ValuationPointDataResponse apportionmentResults(List<ApportionmentBreakdown> apportionmentResults) {
+    this.apportionmentResults = apportionmentResults;
+    return this;
+  }
+
+  public ValuationPointDataResponse addApportionmentResultsItem(ApportionmentBreakdown apportionmentResultsItem) {
+    if (this.apportionmentResults == null) {
+      this.apportionmentResults = new ArrayList<>();
+    }
+    this.apportionmentResults.add(apportionmentResultsItem);
+    return this;
+  }
+
+  /**
+   * The apportionment results for the valuation point: one fund-level entry plus one entry per allocation group.
+   * @return apportionmentResults
+   */
+  @javax.annotation.Nullable
+  public List<ApportionmentBreakdown> getApportionmentResults() {
+    return apportionmentResults;
+  }
+
+  public void setApportionmentResults(List<ApportionmentBreakdown> apportionmentResults) {
+    this.apportionmentResults = apportionmentResults;
+  }
+
+
   public ValuationPointDataResponse links(List<Link> links) {
     this.links = links;
     return this;
@@ -305,6 +339,7 @@ public class ValuationPointDataResponse {
         Objects.equals(this.shareClassData, valuationPointDataResponse.shareClassData) &&
         Objects.equals(this.valuationPointCode, valuationPointDataResponse.valuationPointCode) &&
         Objects.equals(this.previousValuationPointCode, valuationPointDataResponse.previousValuationPointCode) &&
+        Objects.equals(this.apportionmentResults, valuationPointDataResponse.apportionmentResults) &&
         Objects.equals(this.links, valuationPointDataResponse.links);
   }
 
@@ -314,7 +349,7 @@ public class ValuationPointDataResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, type, status, fundDetails, fundValuationPointData, shareClassData, valuationPointCode, previousValuationPointCode, links);
+    return Objects.hash(href, type, status, fundDetails, fundValuationPointData, shareClassData, valuationPointCode, previousValuationPointCode, apportionmentResults, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -336,6 +371,7 @@ public class ValuationPointDataResponse {
     sb.append("    shareClassData: ").append(toIndentedString(shareClassData)).append("\n");
     sb.append("    valuationPointCode: ").append(toIndentedString(valuationPointCode)).append("\n");
     sb.append("    previousValuationPointCode: ").append(toIndentedString(previousValuationPointCode)).append("\n");
+    sb.append("    apportionmentResults: ").append(toIndentedString(apportionmentResults)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();
