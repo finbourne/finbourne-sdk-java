@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ApportionmentBreakdown;
+import com.finbourne.sdk.services.lusid.model.BucketSetResult;
 import com.finbourne.sdk.services.lusid.model.FundDetails;
 import com.finbourne.sdk.services.lusid.model.FundValuationPointData;
 import com.finbourne.sdk.services.lusid.model.Link;
@@ -51,6 +52,7 @@ import com.finbourne.sdk.JSON;
   ValuationPointDataResponse.JSON_PROPERTY_VALUATION_POINT_CODE,
   ValuationPointDataResponse.JSON_PROPERTY_PREVIOUS_VALUATION_POINT_CODE,
   ValuationPointDataResponse.JSON_PROPERTY_APPORTIONMENT_RESULTS,
+  ValuationPointDataResponse.JSON_PROPERTY_BUCKET_SET_RESULTS,
   ValuationPointDataResponse.JSON_PROPERTY_LINKS
 })
 
@@ -99,6 +101,11 @@ public class ValuationPointDataResponse {
   @JsonProperty(JSON_PROPERTY_APPORTIONMENT_RESULTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ApportionmentBreakdown> apportionmentResults;
+
+  public static final String JSON_PROPERTY_BUCKET_SET_RESULTS = "bucketSetResults";
+  @JsonProperty(JSON_PROPERTY_BUCKET_SET_RESULTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<BucketSetResult> bucketSetResults;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -295,6 +302,33 @@ public class ValuationPointDataResponse {
   }
 
 
+  public ValuationPointDataResponse bucketSetResults(List<BucketSetResult> bucketSetResults) {
+    this.bucketSetResults = bucketSetResults;
+    return this;
+  }
+
+  public ValuationPointDataResponse addBucketSetResultsItem(BucketSetResult bucketSetResultsItem) {
+    if (this.bucketSetResults == null) {
+      this.bucketSetResults = new ArrayList<>();
+    }
+    this.bucketSetResults.add(bucketSetResultsItem);
+    return this;
+  }
+
+  /**
+   * The bucket set results for the valuation point: for each bucket set, the per-node (fund and share class) buckets and NAV.
+   * @return bucketSetResults
+   */
+  @javax.annotation.Nullable
+  public List<BucketSetResult> getBucketSetResults() {
+    return bucketSetResults;
+  }
+
+  public void setBucketSetResults(List<BucketSetResult> bucketSetResults) {
+    this.bucketSetResults = bucketSetResults;
+  }
+
+
   public ValuationPointDataResponse links(List<Link> links) {
     this.links = links;
     return this;
@@ -340,6 +374,7 @@ public class ValuationPointDataResponse {
         Objects.equals(this.valuationPointCode, valuationPointDataResponse.valuationPointCode) &&
         Objects.equals(this.previousValuationPointCode, valuationPointDataResponse.previousValuationPointCode) &&
         Objects.equals(this.apportionmentResults, valuationPointDataResponse.apportionmentResults) &&
+        Objects.equals(this.bucketSetResults, valuationPointDataResponse.bucketSetResults) &&
         Objects.equals(this.links, valuationPointDataResponse.links);
   }
 
@@ -349,7 +384,7 @@ public class ValuationPointDataResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, type, status, fundDetails, fundValuationPointData, shareClassData, valuationPointCode, previousValuationPointCode, apportionmentResults, links);
+    return Objects.hash(href, type, status, fundDetails, fundValuationPointData, shareClassData, valuationPointCode, previousValuationPointCode, apportionmentResults, bucketSetResults, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -372,6 +407,7 @@ public class ValuationPointDataResponse {
     sb.append("    valuationPointCode: ").append(toIndentedString(valuationPointCode)).append("\n");
     sb.append("    previousValuationPointCode: ").append(toIndentedString(previousValuationPointCode)).append("\n");
     sb.append("    apportionmentResults: ").append(toIndentedString(apportionmentResults)).append("\n");
+    sb.append("    bucketSetResults: ").append(toIndentedString(bucketSetResults)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -103,6 +103,11 @@ InstrumentEventType method = InstrumentEventType.PARTIAL_DEFEASANCE_EVENT;
 InstrumentEventType method = InstrumentEventType.SECURITY_WRITE_OFF_EVENT;
 InstrumentEventType method = InstrumentEventType.WARRANTS_EXERCISE_EVENT;
 InstrumentEventType method = InstrumentEventType.PARI_PASSU_EVENT;
+InstrumentEventType method = InstrumentEventType.CHANGE_EVENT;
+InstrumentEventType method = InstrumentEventType.PIK_BOND_COUPON_EVENT;
+InstrumentEventType method = InstrumentEventType.PIK_BOND_CASH_COUPON_EVENT;
+InstrumentEventType method = InstrumentEventType.PIK_BOND_INTEREST_CAPITALISATION_EVENT;
+InstrumentEventType method = InstrumentEventType.PIK_BOND_PRINCIPAL_EVENT;
 ```
 
 

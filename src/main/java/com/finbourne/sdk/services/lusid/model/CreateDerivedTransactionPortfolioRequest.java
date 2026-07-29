@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_CODE,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_PARENT_PORTFOLIO_ID,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_CREATED,
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_ENABLEMENT_DATE,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_ACCOUNTING_METHOD,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_SUB_HOLDING_KEYS,
@@ -54,7 +55,8 @@ import com.finbourne.sdk.JSON;
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_CASH_GAIN_LOSS_CALCULATION_DATE,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_AMORTISATION_RULE_SET_ID,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_INSTRUMENT_EVENT_CONFIGURATION,
-  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_SETTLEMENT_CONFIGURATION
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_SETTLEMENT_CONFIGURATION,
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER
 })
 
 public class CreateDerivedTransactionPortfolioRequest {
@@ -82,6 +84,11 @@ public class CreateDerivedTransactionPortfolioRequest {
   @JsonProperty(JSON_PROPERTY_CREATED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime created;
+
+  public static final String JSON_PROPERTY_ENABLEMENT_DATE = "enablementDate";
+  @JsonProperty(JSON_PROPERTY_ENABLEMENT_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime enablementDate;
 
   public static final String JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID = "corporateActionSourceId";
   @JsonProperty(JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID)
@@ -195,6 +202,11 @@ public class CreateDerivedTransactionPortfolioRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private PortfolioSettlementConfiguration settlementConfiguration;
 
+  public static final String JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER = "transactionExclusionFilter";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionExclusionFilter;
+
   public CreateDerivedTransactionPortfolioRequest() {
   }
 
@@ -290,6 +302,25 @@ public class CreateDerivedTransactionPortfolioRequest {
 
   public void setCreated(OffsetDateTime created) {
     this.created = created;
+  }
+
+
+  public CreateDerivedTransactionPortfolioRequest enablementDate(OffsetDateTime enablementDate) {
+    this.enablementDate = enablementDate;
+    return this;
+  }
+
+  /**
+   * The effective datetime from which transactions booked to the derived transaction portfolio begin contributing to holdings, valuations and other computed results. Transactions with an earlier effective date are still accepted and stored, but do not affect any computed results until this date. Defaults to the portfolio&#39;s creation date if not specified.
+   * @return enablementDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getEnablementDate() {
+    return enablementDate;
+  }
+
+  public void setEnablementDate(OffsetDateTime enablementDate) {
+    this.enablementDate = enablementDate;
   }
 
 
@@ -499,6 +530,25 @@ public class CreateDerivedTransactionPortfolioRequest {
   }
 
 
+  public CreateDerivedTransactionPortfolioRequest transactionExclusionFilter(String transactionExclusionFilter) {
+    this.transactionExclusionFilter = transactionExclusionFilter;
+    return this;
+  }
+
+  /**
+   * A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded.
+   * @return transactionExclusionFilter
+   */
+  @javax.annotation.Nullable
+  public String getTransactionExclusionFilter() {
+    return transactionExclusionFilter;
+  }
+
+  public void setTransactionExclusionFilter(String transactionExclusionFilter) {
+    this.transactionExclusionFilter = transactionExclusionFilter;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -513,6 +563,7 @@ public class CreateDerivedTransactionPortfolioRequest {
         Objects.equals(this.code, createDerivedTransactionPortfolioRequest.code) &&
         Objects.equals(this.parentPortfolioId, createDerivedTransactionPortfolioRequest.parentPortfolioId) &&
         Objects.equals(this.created, createDerivedTransactionPortfolioRequest.created) &&
+        Objects.equals(this.enablementDate, createDerivedTransactionPortfolioRequest.enablementDate) &&
         Objects.equals(this.corporateActionSourceId, createDerivedTransactionPortfolioRequest.corporateActionSourceId) &&
         Objects.equals(this.accountingMethod, createDerivedTransactionPortfolioRequest.accountingMethod) &&
         Objects.equals(this.subHoldingKeys, createDerivedTransactionPortfolioRequest.subHoldingKeys) &&
@@ -522,7 +573,8 @@ public class CreateDerivedTransactionPortfolioRequest {
         Objects.equals(this.cashGainLossCalculationDate, createDerivedTransactionPortfolioRequest.cashGainLossCalculationDate) &&
         Objects.equals(this.amortisationRuleSetId, createDerivedTransactionPortfolioRequest.amortisationRuleSetId) &&
         Objects.equals(this.instrumentEventConfiguration, createDerivedTransactionPortfolioRequest.instrumentEventConfiguration) &&
-        Objects.equals(this.settlementConfiguration, createDerivedTransactionPortfolioRequest.settlementConfiguration);
+        Objects.equals(this.settlementConfiguration, createDerivedTransactionPortfolioRequest.settlementConfiguration) &&
+        Objects.equals(this.transactionExclusionFilter, createDerivedTransactionPortfolioRequest.transactionExclusionFilter);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -531,7 +583,7 @@ public class CreateDerivedTransactionPortfolioRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, code, parentPortfolioId, created, corporateActionSourceId, accountingMethod, subHoldingKeys, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, instrumentEventConfiguration, settlementConfiguration);
+    return Objects.hash(displayName, description, code, parentPortfolioId, created, enablementDate, corporateActionSourceId, accountingMethod, subHoldingKeys, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, instrumentEventConfiguration, settlementConfiguration, transactionExclusionFilter);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -550,6 +602,7 @@ public class CreateDerivedTransactionPortfolioRequest {
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    parentPortfolioId: ").append(toIndentedString(parentPortfolioId)).append("\n");
     sb.append("    created: ").append(toIndentedString(created)).append("\n");
+    sb.append("    enablementDate: ").append(toIndentedString(enablementDate)).append("\n");
     sb.append("    corporateActionSourceId: ").append(toIndentedString(corporateActionSourceId)).append("\n");
     sb.append("    accountingMethod: ").append(toIndentedString(accountingMethod)).append("\n");
     sb.append("    subHoldingKeys: ").append(toIndentedString(subHoldingKeys)).append("\n");
@@ -560,6 +613,7 @@ public class CreateDerivedTransactionPortfolioRequest {
     sb.append("    amortisationRuleSetId: ").append(toIndentedString(amortisationRuleSetId)).append("\n");
     sb.append("    instrumentEventConfiguration: ").append(toIndentedString(instrumentEventConfiguration)).append("\n");
     sb.append("    settlementConfiguration: ").append(toIndentedString(settlementConfiguration)).append("\n");
+    sb.append("    transactionExclusionFilter: ").append(toIndentedString(transactionExclusionFilter)).append("\n");
     sb.append("}");
     return sb.toString();
   }

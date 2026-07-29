@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CdsModelOptions.class, name = "CdsModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EmptyModelOptions.class, name = "EmptyModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EquityModelOptions.class, name = "EquityModelOptions"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FlexibleLoanPricerOptions.class, name = "FlexibleLoanPricerOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FundingLegOptions.class, name = "FundingLegOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxForwardModelOptions.class, name = "FxForwardModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = IndexModelOptions.class, name = "IndexModelOptions"),
@@ -53,7 +54,7 @@ import com.finbourne.sdk.JSON;
 
 public class ModelOptions {
   /**
-   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions.
+   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions.
    */
   public enum ModelOptionsTypeEnum {
     INVALID("Invalid"),
@@ -70,7 +71,9 @@ public class ModelOptions {
     
     EQUITY_MODEL_OPTIONS("EquityModelOptions"),
     
-    CDS_MODEL_OPTIONS("CdsModelOptions");
+    CDS_MODEL_OPTIONS("CdsModelOptions"),
+    
+    FLEXIBLE_LOAN_PRICER_OPTIONS("FlexibleLoanPricerOptions");
 
     private String value;
 
@@ -112,7 +115,7 @@ public class ModelOptions {
   }
 
   /**
-   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions.
+   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions.
    * @return modelOptionsType
    */
   @javax.annotation.Nonnull

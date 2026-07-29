@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **description** | **String** |  | [default to String]
 **category** | **String** |  | [default to String]
 **isActive** | **Boolean** |  | [default to Boolean]
+**isConnectionRequired** | **Boolean** |  | [default to Boolean]
+**relationships** | **List&lt;String&gt;** |  | [default to List<String>]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.ProcessorDescription;
@@ -23,6 +25,8 @@ String displayName = "example displayName";
 String description = "example description";
 String category = "example category";
 Boolean isActive = true;
+Boolean isConnectionRequired = true;
+List<String> relationships = new List<String>();
 
 
 ProcessorDescription processorDescriptionInstance = new ProcessorDescription()
@@ -30,7 +34,9 @@ ProcessorDescription processorDescriptionInstance = new ProcessorDescription()
     .displayName(displayName)
     .description(description)
     .category(category)
-    .isActive(isActive);
+    .isActive(isActive)
+    .isConnectionRequired(isConnectionRequired)
+    .relationships(relationships);
 ```
 
 

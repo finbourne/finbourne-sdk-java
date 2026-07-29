@@ -46,6 +46,7 @@ import com.finbourne.sdk.JSON;
   CreateSimplePositionPortfolioRequest.JSON_PROPERTY_DESCRIPTION,
   CreateSimplePositionPortfolioRequest.JSON_PROPERTY_CODE,
   CreateSimplePositionPortfolioRequest.JSON_PROPERTY_CREATED,
+  CreateSimplePositionPortfolioRequest.JSON_PROPERTY_ENABLEMENT_DATE,
   CreateSimplePositionPortfolioRequest.JSON_PROPERTY_BASE_CURRENCY,
   CreateSimplePositionPortfolioRequest.JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID,
   CreateSimplePositionPortfolioRequest.JSON_PROPERTY_ACCOUNTING_METHOD,
@@ -79,6 +80,11 @@ public class CreateSimplePositionPortfolioRequest {
   @JsonProperty(JSON_PROPERTY_CREATED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime created;
+
+  public static final String JSON_PROPERTY_ENABLEMENT_DATE = "enablementDate";
+  @JsonProperty(JSON_PROPERTY_ENABLEMENT_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime enablementDate;
 
   public static final String JSON_PROPERTY_BASE_CURRENCY = "baseCurrency";
   @JsonProperty(JSON_PROPERTY_BASE_CURRENCY)
@@ -273,6 +279,25 @@ public class CreateSimplePositionPortfolioRequest {
 
   public void setCreated(OffsetDateTime created) {
     this.created = created;
+  }
+
+
+  public CreateSimplePositionPortfolioRequest enablementDate(OffsetDateTime enablementDate) {
+    this.enablementDate = enablementDate;
+    return this;
+  }
+
+  /**
+   * The effective datetime from which holdings set on the simple position portfolio begin contributing to valuations and other computed results. Holdings with an earlier effective date are still accepted and stored, but do not affect any computed results until this date. Defaults to the portfolio&#39;s creation date if not specified.
+   * @return enablementDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getEnablementDate() {
+    return enablementDate;
+  }
+
+  public void setEnablementDate(OffsetDateTime enablementDate) {
+    this.enablementDate = enablementDate;
   }
 
 
@@ -522,6 +547,7 @@ public class CreateSimplePositionPortfolioRequest {
         Objects.equals(this.description, createSimplePositionPortfolioRequest.description) &&
         Objects.equals(this.code, createSimplePositionPortfolioRequest.code) &&
         Objects.equals(this.created, createSimplePositionPortfolioRequest.created) &&
+        Objects.equals(this.enablementDate, createSimplePositionPortfolioRequest.enablementDate) &&
         Objects.equals(this.baseCurrency, createSimplePositionPortfolioRequest.baseCurrency) &&
         Objects.equals(this.corporateActionSourceId, createSimplePositionPortfolioRequest.corporateActionSourceId) &&
         Objects.equals(this.accountingMethod, createSimplePositionPortfolioRequest.accountingMethod) &&
@@ -541,7 +567,7 @@ public class CreateSimplePositionPortfolioRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, code, created, baseCurrency, corporateActionSourceId, accountingMethod, subHoldingKeys, properties, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId);
+    return Objects.hash(displayName, description, code, created, enablementDate, baseCurrency, corporateActionSourceId, accountingMethod, subHoldingKeys, properties, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -559,6 +585,7 @@ public class CreateSimplePositionPortfolioRequest {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    created: ").append(toIndentedString(created)).append("\n");
+    sb.append("    enablementDate: ").append(toIndentedString(enablementDate)).append("\n");
     sb.append("    baseCurrency: ").append(toIndentedString(baseCurrency)).append("\n");
     sb.append("    corporateActionSourceId: ").append(toIndentedString(corporateActionSourceId)).append("\n");
     sb.append("    accountingMethod: ").append(toIndentedString(accountingMethod)).append("\n");

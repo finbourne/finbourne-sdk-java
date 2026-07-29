@@ -59,6 +59,7 @@ import com.finbourne.sdk.JSON;
   PortfolioDetails.JSON_PROPERTY_TAX_RULE_SET_SCOPE,
   PortfolioDetails.JSON_PROPERTY_SETTLEMENT_CONFIGURATION,
   PortfolioDetails.JSON_PROPERTY_STAGED_MODIFICATIONS,
+  PortfolioDetails.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
   PortfolioDetails.JSON_PROPERTY_LINKS
 })
 
@@ -204,6 +205,11 @@ public class PortfolioDetails {
   @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private StagedModificationsInfo stagedModifications;
+
+  public static final String JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER = "transactionExclusionFilter";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionExclusionFilter;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -533,6 +539,25 @@ public class PortfolioDetails {
   }
 
 
+  public PortfolioDetails transactionExclusionFilter(String transactionExclusionFilter) {
+    this.transactionExclusionFilter = transactionExclusionFilter;
+    return this;
+  }
+
+  /**
+   * A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded.
+   * @return transactionExclusionFilter
+   */
+  @javax.annotation.Nullable
+  public String getTransactionExclusionFilter() {
+    return transactionExclusionFilter;
+  }
+
+  public void setTransactionExclusionFilter(String transactionExclusionFilter) {
+    this.transactionExclusionFilter = transactionExclusionFilter;
+  }
+
+
   public PortfolioDetails links(List<Link> links) {
     this.links = links;
     return this;
@@ -585,6 +610,7 @@ public class PortfolioDetails {
         Objects.equals(this.taxRuleSetScope, portfolioDetails.taxRuleSetScope) &&
         Objects.equals(this.settlementConfiguration, portfolioDetails.settlementConfiguration) &&
         Objects.equals(this.stagedModifications, portfolioDetails.stagedModifications) &&
+        Objects.equals(this.transactionExclusionFilter, portfolioDetails.transactionExclusionFilter) &&
         Objects.equals(this.links, portfolioDetails.links);
   }
 
@@ -594,7 +620,7 @@ public class PortfolioDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, originPortfolioId, version, baseCurrency, corporateActionSourceId, subHoldingKeys, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, stagedModifications, links);
+    return Objects.hash(href, originPortfolioId, version, baseCurrency, corporateActionSourceId, subHoldingKeys, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, stagedModifications, transactionExclusionFilter, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -624,6 +650,7 @@ public class PortfolioDetails {
     sb.append("    taxRuleSetScope: ").append(toIndentedString(taxRuleSetScope)).append("\n");
     sb.append("    settlementConfiguration: ").append(toIndentedString(settlementConfiguration)).append("\n");
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
+    sb.append("    transactionExclusionFilter: ").append(toIndentedString(transactionExclusionFilter)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

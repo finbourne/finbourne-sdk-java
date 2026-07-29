@@ -41,7 +41,9 @@ import com.finbourne.sdk.JSON;
   ScalarParameter.JSON_PROPERTY_TYPE,
   ScalarParameter.JSON_PROPERTY_VALUE,
   ScalarParameter.JSON_PROPERTY_VALUE_OPTIONS,
-  ScalarParameter.JSON_PROPERTY_VALUE_MUST_BE_FROM_OPTIONS
+  ScalarParameter.JSON_PROPERTY_VALUE_MUST_BE_FROM_OPTIONS,
+  ScalarParameter.JSON_PROPERTY_PARAMETER_VALUE_OPTIONS_QUERY,
+  ScalarParameter.JSON_PROPERTY_PARAMETER_VALUE_OPTIONS_QUERY_ERROR
 })
 
 public class ScalarParameter {
@@ -69,6 +71,16 @@ public class ScalarParameter {
   @JsonProperty(JSON_PROPERTY_VALUE_MUST_BE_FROM_OPTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean valueMustBeFromOptions;
+
+  public static final String JSON_PROPERTY_PARAMETER_VALUE_OPTIONS_QUERY = "parameterValueOptionsQuery";
+  @JsonProperty(JSON_PROPERTY_PARAMETER_VALUE_OPTIONS_QUERY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String parameterValueOptionsQuery;
+
+  public static final String JSON_PROPERTY_PARAMETER_VALUE_OPTIONS_QUERY_ERROR = "parameterValueOptionsQueryError";
+  @JsonProperty(JSON_PROPERTY_PARAMETER_VALUE_OPTIONS_QUERY_ERROR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String parameterValueOptionsQueryError;
 
   public ScalarParameter() {
   }
@@ -176,6 +188,44 @@ public class ScalarParameter {
   }
 
 
+  public ScalarParameter parameterValueOptionsQuery(String parameterValueOptionsQuery) {
+    this.parameterValueOptionsQuery = parameterValueOptionsQuery;
+    return this;
+  }
+
+  /**
+   * SQL that might have been used for generating the options list
+   * @return parameterValueOptionsQuery
+   */
+  @javax.annotation.Nullable
+  public String getParameterValueOptionsQuery() {
+    return parameterValueOptionsQuery;
+  }
+
+  public void setParameterValueOptionsQuery(String parameterValueOptionsQuery) {
+    this.parameterValueOptionsQuery = parameterValueOptionsQuery;
+  }
+
+
+  public ScalarParameter parameterValueOptionsQueryError(String parameterValueOptionsQueryError) {
+    this.parameterValueOptionsQueryError = parameterValueOptionsQueryError;
+    return this;
+  }
+
+  /**
+   * Error generated but executing ParameterValueOptionsQuery, if any
+   * @return parameterValueOptionsQueryError
+   */
+  @javax.annotation.Nullable
+  public String getParameterValueOptionsQueryError() {
+    return parameterValueOptionsQueryError;
+  }
+
+  public void setParameterValueOptionsQueryError(String parameterValueOptionsQueryError) {
+    this.parameterValueOptionsQueryError = parameterValueOptionsQueryError;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -189,7 +239,9 @@ public class ScalarParameter {
         Objects.equals(this.type, scalarParameter.type) &&
         Objects.equals(this.value, scalarParameter.value) &&
         Objects.equals(this.valueOptions, scalarParameter.valueOptions) &&
-        Objects.equals(this.valueMustBeFromOptions, scalarParameter.valueMustBeFromOptions);
+        Objects.equals(this.valueMustBeFromOptions, scalarParameter.valueMustBeFromOptions) &&
+        Objects.equals(this.parameterValueOptionsQuery, scalarParameter.parameterValueOptionsQuery) &&
+        Objects.equals(this.parameterValueOptionsQueryError, scalarParameter.parameterValueOptionsQueryError);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -198,7 +250,7 @@ public class ScalarParameter {
 
   @Override
  public int hashCode() {
-    return Objects.hash(name, type, value, valueOptions, valueMustBeFromOptions);
+    return Objects.hash(name, type, value, valueOptions, valueMustBeFromOptions, parameterValueOptionsQuery, parameterValueOptionsQueryError);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -217,6 +269,8 @@ public class ScalarParameter {
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("    valueOptions: ").append(toIndentedString(valueOptions)).append("\n");
     sb.append("    valueMustBeFromOptions: ").append(toIndentedString(valueMustBeFromOptions)).append("\n");
+    sb.append("    parameterValueOptionsQuery: ").append(toIndentedString(parameterValueOptionsQuery)).append("\n");
+    sb.append("    parameterValueOptionsQueryError: ").append(toIndentedString(parameterValueOptionsQueryError)).append("\n");
     sb.append("}");
     return sb.toString();
   }

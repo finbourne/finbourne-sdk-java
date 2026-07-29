@@ -43,7 +43,9 @@ import com.finbourne.sdk.JSON;
   ReverseStockSplitEvent.JSON_PROPERTY_RECORD_DATE,
   ReverseStockSplitEvent.JSON_PROPERTY_ANNOUNCEMENT_DATE,
   ReverseStockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY,
-  ReverseStockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE
+  ReverseStockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE,
+  ReverseStockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION,
+  ReverseStockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -87,6 +89,16 @@ public class ReverseStockSplitEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal fractionalUnitsCashPrice;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION = "fractionalUnitsRoundingConvention";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String fractionalUnitsRoundingConvention;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES = "fractionalUnitsDecimalPlaces";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer fractionalUnitsDecimalPlaces;
 
   public ReverseStockSplitEvent() {
   }
@@ -224,6 +236,44 @@ public class ReverseStockSplitEvent extends InstrumentEvent {
   }
 
 
+  public ReverseStockSplitEvent fractionalUnitsRoundingConvention(String fractionalUnitsRoundingConvention) {
+    this.fractionalUnitsRoundingConvention = fractionalUnitsRoundingConvention;
+    return this;
+  }
+
+  /**
+   * The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.
+   * @return fractionalUnitsRoundingConvention
+   */
+  @javax.annotation.Nullable
+  public String getFractionalUnitsRoundingConvention() {
+    return fractionalUnitsRoundingConvention;
+  }
+
+  public void setFractionalUnitsRoundingConvention(String fractionalUnitsRoundingConvention) {
+    this.fractionalUnitsRoundingConvention = fractionalUnitsRoundingConvention;
+  }
+
+
+  public ReverseStockSplitEvent fractionalUnitsDecimalPlaces(Integer fractionalUnitsDecimalPlaces) {
+    this.fractionalUnitsDecimalPlaces = fractionalUnitsDecimalPlaces;
+    return this;
+  }
+
+  /**
+   * The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces.
+   * @return fractionalUnitsDecimalPlaces
+   */
+  @javax.annotation.Nullable
+  public Integer getFractionalUnitsDecimalPlaces() {
+    return fractionalUnitsDecimalPlaces;
+  }
+
+  public void setFractionalUnitsDecimalPlaces(Integer fractionalUnitsDecimalPlaces) {
+    this.fractionalUnitsDecimalPlaces = fractionalUnitsDecimalPlaces;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -240,6 +290,8 @@ public class ReverseStockSplitEvent extends InstrumentEvent {
         Objects.equals(this.announcementDate, reverseStockSplitEvent.announcementDate) &&
         Objects.equals(this.fractionalUnitsCashCurrency, reverseStockSplitEvent.fractionalUnitsCashCurrency) &&
         (this.fractionalUnitsCashPrice == null ? reverseStockSplitEvent.fractionalUnitsCashPrice == null : (reverseStockSplitEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(reverseStockSplitEvent.getFractionalUnitsCashPrice()) == 0)) &&
+        Objects.equals(this.fractionalUnitsRoundingConvention, reverseStockSplitEvent.fractionalUnitsRoundingConvention) &&
+        Objects.equals(this.fractionalUnitsDecimalPlaces, reverseStockSplitEvent.fractionalUnitsDecimalPlaces) &&
         super.equals(o);
   }
 
@@ -249,7 +301,7 @@ public class ReverseStockSplitEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, exDate, unitsRatio, recordDate, announcementDate, fractionalUnitsCashCurrency, fractionalUnitsCashPrice, super.hashCode());
+    return Objects.hash(paymentDate, exDate, unitsRatio, recordDate, announcementDate, fractionalUnitsCashCurrency, fractionalUnitsCashPrice, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -271,6 +323,8 @@ public class ReverseStockSplitEvent extends InstrumentEvent {
     sb.append("    announcementDate: ").append(toIndentedString(announcementDate)).append("\n");
     sb.append("    fractionalUnitsCashCurrency: ").append(toIndentedString(fractionalUnitsCashCurrency)).append("\n");
     sb.append("    fractionalUnitsCashPrice: ").append(toIndentedString(fractionalUnitsCashPrice)).append("\n");
+    sb.append("    fractionalUnitsRoundingConvention: ").append(toIndentedString(fractionalUnitsRoundingConvention)).append("\n");
+    sb.append("    fractionalUnitsDecimalPlaces: ").append(toIndentedString(fractionalUnitsDecimalPlaces)).append("\n");
     sb.append("}");
     return sb.toString();
   }

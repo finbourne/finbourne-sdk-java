@@ -53,6 +53,8 @@ import com.finbourne.sdk.JSON;
   ConversionEvent.JSON_PROPERTY_PERIOD_OF_ACTION,
   ConversionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE,
   ConversionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY,
+  ConversionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION,
+  ConversionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES,
   ConversionEvent.JSON_PROPERTY_SECURITY_OFFER_ELECTIONS,
   ConversionEvent.JSON_PROPERTY_CASH_AND_SECURITY_OFFER_ELECTIONS,
   ConversionEvent.JSON_PROPERTY_CASH_OFFER_ELECTIONS,
@@ -111,6 +113,16 @@ public class ConversionEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String fractionalUnitsCashCurrency;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION = "fractionalUnitsRoundingConvention";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String fractionalUnitsRoundingConvention;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES = "fractionalUnitsDecimalPlaces";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer fractionalUnitsDecimalPlaces;
 
   public static final String JSON_PROPERTY_SECURITY_OFFER_ELECTIONS = "securityOfferElections";
   @JsonProperty(JSON_PROPERTY_SECURITY_OFFER_ELECTIONS)
@@ -311,6 +323,44 @@ public class ConversionEvent extends InstrumentEvent {
   }
 
 
+  public ConversionEvent fractionalUnitsRoundingConvention(String fractionalUnitsRoundingConvention) {
+    this.fractionalUnitsRoundingConvention = fractionalUnitsRoundingConvention;
+    return this;
+  }
+
+  /**
+   * The convention used to round the fractional units entitlement. Defaults to Floor.  Not permitted when ConversionType is Exchange144A. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.
+   * @return fractionalUnitsRoundingConvention
+   */
+  @javax.annotation.Nullable
+  public String getFractionalUnitsRoundingConvention() {
+    return fractionalUnitsRoundingConvention;
+  }
+
+  public void setFractionalUnitsRoundingConvention(String fractionalUnitsRoundingConvention) {
+    this.fractionalUnitsRoundingConvention = fractionalUnitsRoundingConvention;
+  }
+
+
+  public ConversionEvent fractionalUnitsDecimalPlaces(Integer fractionalUnitsDecimalPlaces) {
+    this.fractionalUnitsDecimalPlaces = fractionalUnitsDecimalPlaces;
+    return this;
+  }
+
+  /**
+   * The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces.
+   * @return fractionalUnitsDecimalPlaces
+   */
+  @javax.annotation.Nullable
+  public Integer getFractionalUnitsDecimalPlaces() {
+    return fractionalUnitsDecimalPlaces;
+  }
+
+  public void setFractionalUnitsDecimalPlaces(Integer fractionalUnitsDecimalPlaces) {
+    this.fractionalUnitsDecimalPlaces = fractionalUnitsDecimalPlaces;
+  }
+
+
   public ConversionEvent securityOfferElections(List<SecurityOfferElection> securityOfferElections) {
     this.securityOfferElections = securityOfferElections;
     return this;
@@ -456,6 +506,8 @@ public class ConversionEvent extends InstrumentEvent {
         Objects.equals(this.periodOfAction, conversionEvent.periodOfAction) &&
         (this.fractionalUnitsCashPrice == null ? conversionEvent.fractionalUnitsCashPrice == null : (conversionEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(conversionEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, conversionEvent.fractionalUnitsCashCurrency) &&
+        Objects.equals(this.fractionalUnitsRoundingConvention, conversionEvent.fractionalUnitsRoundingConvention) &&
+        Objects.equals(this.fractionalUnitsDecimalPlaces, conversionEvent.fractionalUnitsDecimalPlaces) &&
         Objects.equals(this.securityOfferElections, conversionEvent.securityOfferElections) &&
         Objects.equals(this.cashAndSecurityOfferElections, conversionEvent.cashAndSecurityOfferElections) &&
         Objects.equals(this.cashOfferElections, conversionEvent.cashOfferElections) &&
@@ -470,7 +522,7 @@ public class ConversionEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(recordDate, paymentDate, newInstrument, responseDeadlineDate, marketDeadlineDate, effectiveDate, periodOfAction, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, securityOfferElections, cashAndSecurityOfferElections, cashOfferElections, lapseElections, conversionType, super.hashCode());
+    return Objects.hash(recordDate, paymentDate, newInstrument, responseDeadlineDate, marketDeadlineDate, effectiveDate, periodOfAction, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, securityOfferElections, cashAndSecurityOfferElections, cashOfferElections, lapseElections, conversionType, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -494,6 +546,8 @@ public class ConversionEvent extends InstrumentEvent {
     sb.append("    periodOfAction: ").append(toIndentedString(periodOfAction)).append("\n");
     sb.append("    fractionalUnitsCashPrice: ").append(toIndentedString(fractionalUnitsCashPrice)).append("\n");
     sb.append("    fractionalUnitsCashCurrency: ").append(toIndentedString(fractionalUnitsCashCurrency)).append("\n");
+    sb.append("    fractionalUnitsRoundingConvention: ").append(toIndentedString(fractionalUnitsRoundingConvention)).append("\n");
+    sb.append("    fractionalUnitsDecimalPlaces: ").append(toIndentedString(fractionalUnitsDecimalPlaces)).append("\n");
     sb.append("    securityOfferElections: ").append(toIndentedString(securityOfferElections)).append("\n");
     sb.append("    cashAndSecurityOfferElections: ").append(toIndentedString(cashAndSecurityOfferElections)).append("\n");
     sb.append("    cashOfferElections: ").append(toIndentedString(cashOfferElections)).append("\n");

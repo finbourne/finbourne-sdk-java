@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **taxRuleSetScope** | **String** | The scope of the tax rule sets for this portfolio. | [optional] [default to String]
 **settlementConfiguration** | [**PortfolioSettlementConfiguration**](PortfolioSettlementConfiguration.md) |  | [optional] [default to PortfolioSettlementConfiguration]
 **stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
+**transactionExclusionFilter** | **String** | A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded. | [optional] [default to String]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -45,6 +46,7 @@ ResourceId amortisationRuleSetId = new ResourceId();
 @javax.annotation.Nullable String taxRuleSetScope = "example taxRuleSetScope";
 PortfolioSettlementConfiguration settlementConfiguration = new PortfolioSettlementConfiguration();
 StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
+@javax.annotation.Nullable String transactionExclusionFilter = "example transactionExclusionFilter";
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -65,6 +67,7 @@ PortfolioDetails portfolioDetailsInstance = new PortfolioDetails()
     .taxRuleSetScope(taxRuleSetScope)
     .settlementConfiguration(settlementConfiguration)
     .stagedModifications(stagedModifications)
+    .transactionExclusionFilter(transactionExclusionFilter)
     .links(links);
 ```
 

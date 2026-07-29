@@ -197,7 +197,17 @@ public enum InstrumentEventType {
   
   WARRANTS_EXERCISE_EVENT("WarrantsExerciseEvent"),
   
-  PARI_PASSU_EVENT("PariPassuEvent");
+  PARI_PASSU_EVENT("PariPassuEvent"),
+  
+  CHANGE_EVENT("ChangeEvent"),
+  
+  PIK_BOND_COUPON_EVENT("PikBondCouponEvent"),
+  
+  PIK_BOND_CASH_COUPON_EVENT("PikBondCashCouponEvent"),
+  
+  PIK_BOND_INTEREST_CAPITALISATION_EVENT("PikBondInterestCapitalisationEvent"),
+  
+  PIK_BOND_PRINCIPAL_EVENT("PikBondPrincipalEvent");
 
   private String value;
 

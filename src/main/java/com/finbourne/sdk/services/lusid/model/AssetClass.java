@@ -39,7 +39,9 @@ public enum AssetClass {
   
   UNKNOWN("Unknown"),
   
-  REAL_ESTATE("RealEstate");
+  REAL_ESTATE("RealEstate"),
+  
+  EXOTIC("Exotic");
 
   private String value;
 

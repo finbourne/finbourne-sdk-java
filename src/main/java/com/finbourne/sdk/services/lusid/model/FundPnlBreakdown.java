@@ -38,6 +38,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   FundPnlBreakdown.JSON_PROPERTY_NON_CLASS_SPECIFIC_PNL,
   FundPnlBreakdown.JSON_PROPERTY_AGGREGATED_CLASS_PNL,
+  FundPnlBreakdown.JSON_PROPERTY_AGGREGATED_GROUP_PNL,
   FundPnlBreakdown.JSON_PROPERTY_TOTAL_PNL
 })
 
@@ -51,6 +52,11 @@ public class FundPnlBreakdown {
   @JsonProperty(JSON_PROPERTY_AGGREGATED_CLASS_PNL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Map<String, FundAmount> aggregatedClassPnl = new HashMap<>();
+
+  public static final String JSON_PROPERTY_AGGREGATED_GROUP_PNL = "aggregatedGroupPnl";
+  @JsonProperty(JSON_PROPERTY_AGGREGATED_GROUP_PNL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Map<String, FundAmount> aggregatedGroupPnl = new HashMap<>();
 
   public static final String JSON_PROPERTY_TOTAL_PNL = "totalPnl";
   @JsonProperty(JSON_PROPERTY_TOTAL_PNL)
@@ -114,6 +120,33 @@ public class FundPnlBreakdown {
   }
 
 
+  public FundPnlBreakdown aggregatedGroupPnl(Map<String, FundAmount> aggregatedGroupPnl) {
+    this.aggregatedGroupPnl = aggregatedGroupPnl;
+    return this;
+  }
+
+  public FundPnlBreakdown putAggregatedGroupPnlItem(String key, FundAmount aggregatedGroupPnlItem) {
+    if (this.aggregatedGroupPnl == null) {
+      this.aggregatedGroupPnl = new HashMap<>();
+    }
+    this.aggregatedGroupPnl.put(key, aggregatedGroupPnlItem);
+    return this;
+  }
+
+  /**
+   * Bucket of detail for the sum, across all share classes, of PnL allocated to allocation groups and apportioned to their member share classes, within the queried period.
+   * @return aggregatedGroupPnl
+   */
+  @javax.annotation.Nonnull
+  public Map<String, FundAmount> getAggregatedGroupPnl() {
+    return aggregatedGroupPnl;
+  }
+
+  public void setAggregatedGroupPnl(Map<String, FundAmount> aggregatedGroupPnl) {
+    this.aggregatedGroupPnl = aggregatedGroupPnl;
+  }
+
+
   public FundPnlBreakdown totalPnl(Map<String, FundAmount> totalPnl) {
     this.totalPnl = totalPnl;
     return this;
@@ -128,7 +161,7 @@ public class FundPnlBreakdown {
   }
 
   /**
-   * Bucket of detail for the sum of class PnL and PnL not specific to a class within the queried period.
+   * Bucket of detail for the total PnL within the queried period: the sum of the class-specific, apportioned non-class-specific and allocation-group-apportioned PnL.
    * @return totalPnl
    */
   @javax.annotation.Nonnull
@@ -152,12 +185,13 @@ public class FundPnlBreakdown {
     FundPnlBreakdown fundPnlBreakdown = (FundPnlBreakdown) o;
     return Objects.equals(this.nonClassSpecificPnl, fundPnlBreakdown.nonClassSpecificPnl) &&
         Objects.equals(this.aggregatedClassPnl, fundPnlBreakdown.aggregatedClassPnl) &&
+        Objects.equals(this.aggregatedGroupPnl, fundPnlBreakdown.aggregatedGroupPnl) &&
         Objects.equals(this.totalPnl, fundPnlBreakdown.totalPnl);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(nonClassSpecificPnl, aggregatedClassPnl, totalPnl);
+    return Objects.hash(nonClassSpecificPnl, aggregatedClassPnl, aggregatedGroupPnl, totalPnl);
   }
 
   @Override
@@ -166,6 +200,7 @@ public class FundPnlBreakdown {
     sb.append("class FundPnlBreakdown {\n");
     sb.append("    nonClassSpecificPnl: ").append(toIndentedString(nonClassSpecificPnl)).append("\n");
     sb.append("    aggregatedClassPnl: ").append(toIndentedString(aggregatedClassPnl)).append("\n");
+    sb.append("    aggregatedGroupPnl: ").append(toIndentedString(aggregatedGroupPnl)).append("\n");
     sb.append("    totalPnl: ").append(toIndentedString(totalPnl)).append("\n");
     sb.append("}");
     return sb.toString();

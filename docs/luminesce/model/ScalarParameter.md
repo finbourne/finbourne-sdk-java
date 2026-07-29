@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **value** | **Object** | the default value of the parameter | [optional] [default to Object]
 **valueOptions** | **List&lt;Object&gt;** | Values of the parameter listed as being available for choosing from. | [optional] [default to List<Object>]
 **valueMustBeFromOptions** | **Boolean** | Must Value be one of ValueOptions (if any)? | [optional] [default to Boolean]
+**parameterValueOptionsQuery** | **String** | SQL that might have been used for generating the options list | [optional] [default to String]
+**parameterValueOptionsQueryError** | **String** | Error generated but executing ParameterValueOptionsQuery, if any | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.luminesce.model.ScalarParameter;
@@ -21,6 +23,8 @@ import java.net.URI;
 String name = "example name";
 DataType @javax.annotation.Nullable Object @javax.annotation.Nullable List<Object> valueOptions = new List<Object>();
 Boolean valueMustBeFromOptions = true;
+@javax.annotation.Nullable String parameterValueOptionsQuery = "example parameterValueOptionsQuery";
+@javax.annotation.Nullable String parameterValueOptionsQueryError = "example parameterValueOptionsQueryError";
 
 
 ScalarParameter scalarParameterInstance = new ScalarParameter()
@@ -28,7 +32,9 @@ ScalarParameter scalarParameterInstance = new ScalarParameter()
     .type(type)
     .value(value)
     .valueOptions(valueOptions)
-    .valueMustBeFromOptions(valueMustBeFromOptions);
+    .valueMustBeFromOptions(valueMustBeFromOptions)
+    .parameterValueOptionsQuery(parameterValueOptionsQuery)
+    .parameterValueOptionsQueryError(parameterValueOptionsQueryError);
 ```
 
 

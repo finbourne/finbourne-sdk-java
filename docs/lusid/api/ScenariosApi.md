@@ -4,11 +4,90 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**createScenarioFromTemplate**](ScenariosApi.md#createScenarioFromTemplate) | **POST** /api/api/scenarios/{scope}/$fromTemplate | [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template. |
 | [**deleteScenario**](ScenariosApi.md#deleteScenario) | **DELETE** /api/api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present. |
 | [**getScenario**](ScenariosApi.md#getScenario) | **GET** /api/api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario |
 | [**listScenarios**](ScenariosApi.md#listScenarios) | **GET** /api/api/scenarios/{scope} | [EARLY ACCESS] ListScenarios: List the set of Scenario definitions |
 | [**upsertScenario**](ScenariosApi.md#upsertScenario) | **POST** /api/api/scenarios | [EARLY ACCESS] UpsertScenario: Upsert a Scenario. This creates or updates the scenario definition in LUSID. |
 
+
+
+## createScenarioFromTemplate
+
+> UpsertSingleStructuredDataResponse createScenarioFromTemplate(scope, createScenarioFromTemplateRequest)
+
+[EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
+
+Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.ScenariosApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class ScenariosApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        ScenariosApi apiInstance = apiFactory.build(ScenariosApi.class);
+        String scope = "scope_example"; // String | The scope in which to create the scenario
+        CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest = new CreateScenarioFromTemplateRequest(); // CreateScenarioFromTemplateRequest | The template, code and parameters to create the scenario from
+        try {
+            // uncomment the below to set overrides at the request level
+            // UpsertSingleStructuredDataResponse result = apiInstance.createScenarioFromTemplate(scope, createScenarioFromTemplateRequest).execute(opts);
+
+            UpsertSingleStructuredDataResponse result = apiInstance.createScenarioFromTemplate(scope, createScenarioFromTemplateRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ScenariosApi#createScenarioFromTemplate");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope in which to create the scenario | |
+| **createScenarioFromTemplateRequest** | [**CreateScenarioFromTemplateRequest**](CreateScenarioFromTemplateRequest.md)| The template, code and parameters to create the scenario from | |
+
+### Return type
+
+[**UpsertSingleStructuredDataResponse**](UpsertSingleStructuredDataResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The successfully created scenario or any failure |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
 ## deleteScenario

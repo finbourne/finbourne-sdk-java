@@ -52,6 +52,7 @@ import com.finbourne.sdk.JSON;
   PortfolioWithoutHref.JSON_PROPERTY_DISPLAY_NAME,
   PortfolioWithoutHref.JSON_PROPERTY_DESCRIPTION,
   PortfolioWithoutHref.JSON_PROPERTY_CREATED,
+  PortfolioWithoutHref.JSON_PROPERTY_ENABLEMENT_DATE,
   PortfolioWithoutHref.JSON_PROPERTY_PARENT_PORTFOLIO_ID,
   PortfolioWithoutHref.JSON_PROPERTY_VERSION,
   PortfolioWithoutHref.JSON_PROPERTY_STAGED_MODIFICATIONS,
@@ -68,6 +69,7 @@ import com.finbourne.sdk.JSON;
   PortfolioWithoutHref.JSON_PROPERTY_AMORTISATION_RULE_SET_ID,
   PortfolioWithoutHref.JSON_PROPERTY_TAX_RULE_SET_SCOPE,
   PortfolioWithoutHref.JSON_PROPERTY_SETTLEMENT_CONFIGURATION,
+  PortfolioWithoutHref.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
   PortfolioWithoutHref.JSON_PROPERTY_LINKS
 })
 
@@ -134,6 +136,11 @@ public class PortfolioWithoutHref {
   @JsonProperty(JSON_PROPERTY_CREATED)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private OffsetDateTime created;
+
+  public static final String JSON_PROPERTY_ENABLEMENT_DATE = "enablementDate";
+  @JsonProperty(JSON_PROPERTY_ENABLEMENT_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime enablementDate;
 
   public static final String JSON_PROPERTY_PARENT_PORTFOLIO_ID = "parentPortfolioId";
   @JsonProperty(JSON_PROPERTY_PARENT_PORTFOLIO_ID)
@@ -277,6 +284,11 @@ public class PortfolioWithoutHref {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private PortfolioSettlementConfiguration settlementConfiguration;
 
+  public static final String JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER = "transactionExclusionFilter";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionExclusionFilter;
+
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -377,6 +389,25 @@ public class PortfolioWithoutHref {
 
   public void setCreated(OffsetDateTime created) {
     this.created = created;
+  }
+
+
+  public PortfolioWithoutHref enablementDate(OffsetDateTime enablementDate) {
+    this.enablementDate = enablementDate;
+    return this;
+  }
+
+  /**
+   * The effective datetime from which transactions or holdings booked to the portfolio begin contributing to holdings, valuations and other computed results. Data with an earlier effective date is still accepted and stored, but does not affect any computed results until this date. Defaults to the portfolio&#39;s creation date when not explicitly set.
+   * @return enablementDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getEnablementDate() {
+    return enablementDate;
+  }
+
+  public void setEnablementDate(OffsetDateTime enablementDate) {
+    this.enablementDate = enablementDate;
   }
 
 
@@ -708,6 +739,25 @@ public class PortfolioWithoutHref {
   }
 
 
+  public PortfolioWithoutHref transactionExclusionFilter(String transactionExclusionFilter) {
+    this.transactionExclusionFilter = transactionExclusionFilter;
+    return this;
+  }
+
+  /**
+   * A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded.
+   * @return transactionExclusionFilter
+   */
+  @javax.annotation.Nullable
+  public String getTransactionExclusionFilter() {
+    return transactionExclusionFilter;
+  }
+
+  public void setTransactionExclusionFilter(String transactionExclusionFilter) {
+    this.transactionExclusionFilter = transactionExclusionFilter;
+  }
+
+
   public PortfolioWithoutHref links(List<Link> links) {
     this.links = links;
     return this;
@@ -749,6 +799,7 @@ public class PortfolioWithoutHref {
         Objects.equals(this.displayName, portfolioWithoutHref.displayName) &&
         Objects.equals(this.description, portfolioWithoutHref.description) &&
         Objects.equals(this.created, portfolioWithoutHref.created) &&
+        Objects.equals(this.enablementDate, portfolioWithoutHref.enablementDate) &&
         Objects.equals(this.parentPortfolioId, portfolioWithoutHref.parentPortfolioId) &&
         Objects.equals(this.version, portfolioWithoutHref.version) &&
         Objects.equals(this.stagedModifications, portfolioWithoutHref.stagedModifications) &&
@@ -765,6 +816,7 @@ public class PortfolioWithoutHref {
         Objects.equals(this.amortisationRuleSetId, portfolioWithoutHref.amortisationRuleSetId) &&
         Objects.equals(this.taxRuleSetScope, portfolioWithoutHref.taxRuleSetScope) &&
         Objects.equals(this.settlementConfiguration, portfolioWithoutHref.settlementConfiguration) &&
+        Objects.equals(this.transactionExclusionFilter, portfolioWithoutHref.transactionExclusionFilter) &&
         Objects.equals(this.links, portfolioWithoutHref.links);
   }
 
@@ -774,7 +826,7 @@ public class PortfolioWithoutHref {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, type, displayName, description, created, parentPortfolioId, version, stagedModifications, isDerived, baseCurrency, properties, relationships, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, links);
+    return Objects.hash(id, type, displayName, description, created, enablementDate, parentPortfolioId, version, stagedModifications, isDerived, baseCurrency, properties, relationships, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, transactionExclusionFilter, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -793,6 +845,7 @@ public class PortfolioWithoutHref {
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    created: ").append(toIndentedString(created)).append("\n");
+    sb.append("    enablementDate: ").append(toIndentedString(enablementDate)).append("\n");
     sb.append("    parentPortfolioId: ").append(toIndentedString(parentPortfolioId)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
@@ -809,6 +862,7 @@ public class PortfolioWithoutHref {
     sb.append("    amortisationRuleSetId: ").append(toIndentedString(amortisationRuleSetId)).append("\n");
     sb.append("    taxRuleSetScope: ").append(toIndentedString(taxRuleSetScope)).append("\n");
     sb.append("    settlementConfiguration: ").append(toIndentedString(settlementConfiguration)).append("\n");
+    sb.append("    transactionExclusionFilter: ").append(toIndentedString(transactionExclusionFilter)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

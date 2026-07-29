@@ -5,7 +5,7 @@
     <artifactId>finbourne.sdk</artifactId>
     <packaging>jar</packaging>
     <name>finbourne.sdk</name>
-    <version>0.0.28</version>
+    <version>0.0.33</version>
     <url>https://github.com/finbourne/finbourne-sdk-java</url>
     <description>Finbourne SDK</description>
     <scm>
@@ -333,8 +333,8 @@
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <sdk-core-version>0.0.9</sdk-core-version>
-        <jackson-version>2.22.0</jackson-version>
+        <sdk-core-version>0.0.10</sdk-core-version>
+        <jackson-version>2.22.1</jackson-version>
         <swagger-annotations-version>2.2.15</swagger-annotations-version>
         <jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
         <jsr305-version>3.0.2</jsr305-version>

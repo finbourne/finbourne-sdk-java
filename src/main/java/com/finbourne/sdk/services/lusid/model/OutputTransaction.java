@@ -95,7 +95,8 @@ import com.finbourne.sdk.JSON;
   OutputTransaction.JSON_PROPERTY_VERSION,
   OutputTransaction.JSON_PROPERTY_STAGED_MODIFICATIONS,
   OutputTransaction.JSON_PROPERTY_CUSTODIAN_ENTRIES,
-  OutputTransaction.JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNTS
+  OutputTransaction.JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNTS,
+  OutputTransaction.JSON_PROPERTY_IS_EXCLUDED
 })
 
 public class OutputTransaction {
@@ -350,6 +351,11 @@ public class OutputTransaction {
   @JsonProperty(JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ResolvedCustodianAccount> resolvedCustodianAccounts;
+
+  public static final String JSON_PROPERTY_IS_EXCLUDED = "isExcluded";
+  @JsonProperty(JSON_PROPERTY_IS_EXCLUDED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean isExcluded;
 
   public OutputTransaction() {
   }
@@ -1208,6 +1214,25 @@ public class OutputTransaction {
   }
 
 
+  public OutputTransaction isExcluded(Boolean isExcluded) {
+    this.isExcluded = isExcluded;
+    return this;
+  }
+
+  /**
+   * Whether the transaction was excluded from the portfolio&#39;s holdings by the portfolio&#39;s transaction exclusion filter.
+   * @return isExcluded
+   */
+  @javax.annotation.Nullable
+  public Boolean getIsExcluded() {
+    return isExcluded;
+  }
+
+  public void setIsExcluded(Boolean isExcluded) {
+    this.isExcluded = isExcluded;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1258,7 +1283,8 @@ public class OutputTransaction {
         Objects.equals(this.version, outputTransaction.version) &&
         Objects.equals(this.stagedModifications, outputTransaction.stagedModifications) &&
         Objects.equals(this.custodianEntries, outputTransaction.custodianEntries) &&
-        Objects.equals(this.resolvedCustodianAccounts, outputTransaction.resolvedCustodianAccounts);
+        Objects.equals(this.resolvedCustodianAccounts, outputTransaction.resolvedCustodianAccounts) &&
+        Objects.equals(this.isExcluded, outputTransaction.isExcluded);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -1267,7 +1293,7 @@ public class OutputTransaction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, type, description, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionAmount, transactionPrice, totalConsideration, exchangeRate, transactionToPortfolioRate, transactionCurrency, properties, counterpartyId, source, transactionStatus, entryDateTime, cancelDateTime, realisedGainLoss, holdingIds, sourceType, sourceInstrumentEventId, custodianAccount, transactionGroupId, resolvedTransactionTypeDetails, grossTransactionAmount, otcConfirmation, orderId, allocationId, accountingDate, economics, dataModelMembership, sequence, sequencePriority, settlementSummary, version, stagedModifications, custodianEntries, resolvedCustodianAccounts);
+    return Objects.hash(transactionId, type, description, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionAmount, transactionPrice, totalConsideration, exchangeRate, transactionToPortfolioRate, transactionCurrency, properties, counterpartyId, source, transactionStatus, entryDateTime, cancelDateTime, realisedGainLoss, holdingIds, sourceType, sourceInstrumentEventId, custodianAccount, transactionGroupId, resolvedTransactionTypeDetails, grossTransactionAmount, otcConfirmation, orderId, allocationId, accountingDate, economics, dataModelMembership, sequence, sequencePriority, settlementSummary, version, stagedModifications, custodianEntries, resolvedCustodianAccounts, isExcluded);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1323,6 +1349,7 @@ public class OutputTransaction {
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("    custodianEntries: ").append(toIndentedString(custodianEntries)).append("\n");
     sb.append("    resolvedCustodianAccounts: ").append(toIndentedString(resolvedCustodianAccounts)).append("\n");
+    sb.append("    isExcluded: ").append(toIndentedString(isExcluded)).append("\n");
     sb.append("}");
     return sb.toString();
   }

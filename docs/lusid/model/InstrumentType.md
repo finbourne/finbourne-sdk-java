@@ -58,6 +58,8 @@ InstrumentType method = InstrumentType.MASTERED_INSTRUMENT;
 InstrumentType method = InstrumentType.LOAN_FACILITY;
 InstrumentType method = InstrumentType.FLEXIBLE_DEPOSIT;
 InstrumentType method = InstrumentType.FLEXIBLE_REPO;
+InstrumentType method = InstrumentType.TO_BE_ANNOUNCED;
+InstrumentType method = InstrumentType.VOLATILITY_SWAP;
 ```
 
 

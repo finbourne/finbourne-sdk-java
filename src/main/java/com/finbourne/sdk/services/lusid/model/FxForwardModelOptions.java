@@ -36,7 +36,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   FxForwardModelOptions.JSON_PROPERTY_FORWARD_RATE_OBSERVABLE_TYPE,
   FxForwardModelOptions.JSON_PROPERTY_DISCOUNTING_METHOD,
-  FxForwardModelOptions.JSON_PROPERTY_CONVERT_TO_REPORT_CCY
+  FxForwardModelOptions.JSON_PROPERTY_CONVERT_TO_REPORT_CCY,
+  FxForwardModelOptions.JSON_PROPERTY_ALLOW_SPOT_FALLBACK_FOR_REPORT_CCY
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -137,6 +138,11 @@ public class FxForwardModelOptions extends ModelOptions {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Boolean convertToReportCcy;
 
+  public static final String JSON_PROPERTY_ALLOW_SPOT_FALLBACK_FOR_REPORT_CCY = "allowSpotFallbackForReportCcy";
+  @JsonProperty(JSON_PROPERTY_ALLOW_SPOT_FALLBACK_FOR_REPORT_CCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean allowSpotFallbackForReportCcy;
+
   public FxForwardModelOptions() {
   }
 
@@ -197,6 +203,25 @@ public class FxForwardModelOptions extends ModelOptions {
   }
 
 
+  public FxForwardModelOptions allowSpotFallbackForReportCcy(Boolean allowSpotFallbackForReportCcy) {
+    this.allowSpotFallbackForReportCcy = allowSpotFallbackForReportCcy;
+    return this;
+  }
+
+  /**
+   * When converting to the report currency, allow falling back to pricing off the natural-pair forward  and converting to the report currency at spot when the report-currency cross forward curves are not  available. Defaults to false, in which case the report-currency cross forwards are required.
+   * @return allowSpotFallbackForReportCcy
+   */
+  @javax.annotation.Nullable
+  public Boolean getAllowSpotFallbackForReportCcy() {
+    return allowSpotFallbackForReportCcy;
+  }
+
+  public void setAllowSpotFallbackForReportCcy(Boolean allowSpotFallbackForReportCcy) {
+    this.allowSpotFallbackForReportCcy = allowSpotFallbackForReportCcy;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -209,12 +234,13 @@ public class FxForwardModelOptions extends ModelOptions {
     return Objects.equals(this.forwardRateObservableType, fxForwardModelOptions.forwardRateObservableType) &&
         Objects.equals(this.discountingMethod, fxForwardModelOptions.discountingMethod) &&
         Objects.equals(this.convertToReportCcy, fxForwardModelOptions.convertToReportCcy) &&
+        Objects.equals(this.allowSpotFallbackForReportCcy, fxForwardModelOptions.allowSpotFallbackForReportCcy) &&
         super.equals(o);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(forwardRateObservableType, discountingMethod, convertToReportCcy, super.hashCode());
+    return Objects.hash(forwardRateObservableType, discountingMethod, convertToReportCcy, allowSpotFallbackForReportCcy, super.hashCode());
   }
 
   @Override
@@ -225,6 +251,7 @@ public class FxForwardModelOptions extends ModelOptions {
     sb.append("    forwardRateObservableType: ").append(toIndentedString(forwardRateObservableType)).append("\n");
     sb.append("    discountingMethod: ").append(toIndentedString(discountingMethod)).append("\n");
     sb.append("    convertToReportCcy: ").append(toIndentedString(convertToReportCcy)).append("\n");
+    sb.append("    allowSpotFallbackForReportCcy: ").append(toIndentedString(allowSpotFallbackForReportCcy)).append("\n");
     sb.append("}");
     return sb.toString();
   }

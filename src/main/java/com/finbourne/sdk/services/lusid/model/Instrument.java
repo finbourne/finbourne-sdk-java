@@ -160,7 +160,7 @@ public class Instrument {
   private StateEnum state;
 
   /**
-   * The nominal asset class of the instrument. Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate.
+   * The nominal asset class of the instrument. Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate, Exotic.
    */
   public enum AssetClassEnum {
     INTEREST_RATES("InterestRates"),
@@ -179,7 +179,9 @@ public class Instrument {
     
     UNKNOWN("Unknown"),
     
-    REAL_ESTATE("RealEstate");
+    REAL_ESTATE("RealEstate"),
+    
+    EXOTIC("Exotic");
 
     private String value;
 
@@ -471,7 +473,7 @@ public class Instrument {
   }
 
   /**
-   * The nominal asset class of the instrument. Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate.
+   * The nominal asset class of the instrument. Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate, Exotic.
    * @return assetClass
    */
   @javax.annotation.Nullable

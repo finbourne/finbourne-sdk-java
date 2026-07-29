@@ -48,6 +48,8 @@ import com.finbourne.sdk.JSON;
   MergerEvent.JSON_PROPERTY_EX_DATE,
   MergerEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY,
   MergerEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE,
+  MergerEvent.JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION,
+  MergerEvent.JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES,
   MergerEvent.JSON_PROPERTY_NEW_INSTRUMENT,
   MergerEvent.JSON_PROPERTY_PAYMENT_DATE,
   MergerEvent.JSON_PROPERTY_RECORD_DATE,
@@ -90,6 +92,16 @@ public class MergerEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal fractionalUnitsCashPrice;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION = "fractionalUnitsRoundingConvention";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String fractionalUnitsRoundingConvention;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES = "fractionalUnitsDecimalPlaces";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer fractionalUnitsDecimalPlaces;
 
   public static final String JSON_PROPERTY_NEW_INSTRUMENT = "newInstrument";
   @JsonProperty(JSON_PROPERTY_NEW_INSTRUMENT)
@@ -244,6 +256,44 @@ public class MergerEvent extends InstrumentEvent {
   }
 
 
+  public MergerEvent fractionalUnitsRoundingConvention(String fractionalUnitsRoundingConvention) {
+    this.fractionalUnitsRoundingConvention = fractionalUnitsRoundingConvention;
+    return this;
+  }
+
+  /**
+   * The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.
+   * @return fractionalUnitsRoundingConvention
+   */
+  @javax.annotation.Nullable
+  public String getFractionalUnitsRoundingConvention() {
+    return fractionalUnitsRoundingConvention;
+  }
+
+  public void setFractionalUnitsRoundingConvention(String fractionalUnitsRoundingConvention) {
+    this.fractionalUnitsRoundingConvention = fractionalUnitsRoundingConvention;
+  }
+
+
+  public MergerEvent fractionalUnitsDecimalPlaces(Integer fractionalUnitsDecimalPlaces) {
+    this.fractionalUnitsDecimalPlaces = fractionalUnitsDecimalPlaces;
+    return this;
+  }
+
+  /**
+   * The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces.
+   * @return fractionalUnitsDecimalPlaces
+   */
+  @javax.annotation.Nullable
+  public Integer getFractionalUnitsDecimalPlaces() {
+    return fractionalUnitsDecimalPlaces;
+  }
+
+  public void setFractionalUnitsDecimalPlaces(Integer fractionalUnitsDecimalPlaces) {
+    this.fractionalUnitsDecimalPlaces = fractionalUnitsDecimalPlaces;
+  }
+
+
   public MergerEvent newInstrument(NewInstrument newInstrument) {
     this.newInstrument = newInstrument;
     return this;
@@ -343,6 +393,8 @@ public class MergerEvent extends InstrumentEvent {
         Objects.equals(this.exDate, mergerEvent.exDate) &&
         Objects.equals(this.fractionalUnitsCashCurrency, mergerEvent.fractionalUnitsCashCurrency) &&
         (this.fractionalUnitsCashPrice == null ? mergerEvent.fractionalUnitsCashPrice == null : (mergerEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(mergerEvent.getFractionalUnitsCashPrice()) == 0)) &&
+        Objects.equals(this.fractionalUnitsRoundingConvention, mergerEvent.fractionalUnitsRoundingConvention) &&
+        Objects.equals(this.fractionalUnitsDecimalPlaces, mergerEvent.fractionalUnitsDecimalPlaces) &&
         Objects.equals(this.newInstrument, mergerEvent.newInstrument) &&
         Objects.equals(this.paymentDate, mergerEvent.paymentDate) &&
         Objects.equals(this.recordDate, mergerEvent.recordDate) &&
@@ -356,7 +408,7 @@ public class MergerEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(announcementDate, cashAndSecurityOfferElections, cashOfferElections, exDate, fractionalUnitsCashCurrency, fractionalUnitsCashPrice, newInstrument, paymentDate, recordDate, securityOfferElections, super.hashCode());
+    return Objects.hash(announcementDate, cashAndSecurityOfferElections, cashOfferElections, exDate, fractionalUnitsCashCurrency, fractionalUnitsCashPrice, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, newInstrument, paymentDate, recordDate, securityOfferElections, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -377,6 +429,8 @@ public class MergerEvent extends InstrumentEvent {
     sb.append("    exDate: ").append(toIndentedString(exDate)).append("\n");
     sb.append("    fractionalUnitsCashCurrency: ").append(toIndentedString(fractionalUnitsCashCurrency)).append("\n");
     sb.append("    fractionalUnitsCashPrice: ").append(toIndentedString(fractionalUnitsCashPrice)).append("\n");
+    sb.append("    fractionalUnitsRoundingConvention: ").append(toIndentedString(fractionalUnitsRoundingConvention)).append("\n");
+    sb.append("    fractionalUnitsDecimalPlaces: ").append(toIndentedString(fractionalUnitsDecimalPlaces)).append("\n");
     sb.append("    newInstrument: ").append(toIndentedString(newInstrument)).append("\n");
     sb.append("    paymentDate: ").append(toIndentedString(paymentDate)).append("\n");
     sb.append("    recordDate: ").append(toIndentedString(recordDate)).append("\n");

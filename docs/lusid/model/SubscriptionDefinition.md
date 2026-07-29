@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **timelineId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **addressKeys** | **List&lt;String&gt;** | The set of addresses the subscriber wishes to receive. | [optional] [default to List<String>]
 **byTaxLots** | **Boolean** |  | [optional] [default to Boolean]
+**subscriptionType** | **String** | The kind of data the subscription streams (holdings or transactions), defaulting to holdings.  Address keys and byTaxLots are not valid for a transactions subscription. Available values: Holdings, Transactions. | [optional] [default to String]
 **startEffectiveAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
 **endEffectiveAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
 **startAsAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
@@ -31,6 +32,7 @@ ResourceId portfolioId = new ResourceId();
 ResourceId timelineId = new ResourceId();
 @javax.annotation.Nullable List<String> addressKeys = new List<String>();
 Boolean byTaxLots = true;
+@javax.annotation.Nullable String subscriptionType = "example subscriptionType";
 @javax.annotation.Nullable OffsetDateTime startEffectiveAt = OffsetDateTime.now();
 @javax.annotation.Nullable OffsetDateTime endEffectiveAt = OffsetDateTime.now();
 @javax.annotation.Nullable OffsetDateTime startAsAt = OffsetDateTime.now();
@@ -45,6 +47,7 @@ SubscriptionDefinition subscriptionDefinitionInstance = new SubscriptionDefiniti
     .timelineId(timelineId)
     .addressKeys(addressKeys)
     .byTaxLots(byTaxLots)
+    .subscriptionType(subscriptionType)
     .startEffectiveAt(startEffectiveAt)
     .endEffectiveAt(endEffectiveAt)
     .startAsAt(startAsAt);

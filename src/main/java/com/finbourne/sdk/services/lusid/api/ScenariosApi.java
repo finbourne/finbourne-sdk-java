@@ -28,6 +28,7 @@ import java.io.IOException;
 
 
 import com.finbourne.sdk.services.lusid.model.AnnulSingleStructuredDataResponse;
+import com.finbourne.sdk.services.lusid.model.CreateScenarioFromTemplateRequest;
 import com.finbourne.sdk.services.lusid.model.GetScenarioResponse;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
@@ -79,6 +80,335 @@ public class ScenariosApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    /**
+     * Build call for createScenarioFromTemplate
+     * @param scope The scope in which to create the scenario (required)
+     * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest createScenarioFromTemplateCall(String scope, CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest, final ApiCallback _callback) throws ApiException {
+        return createScenarioFromTemplateCall(scope, createScenarioFromTemplateRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for createScenarioFromTemplate. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope in which to create the scenario (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest createScenarioFromTemplateCall(String scope, CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createScenarioFromTemplateRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/scenarios/{scope}/$fromTemplate"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest createScenarioFromTemplateValidateBeforeCall(String scope, CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling createScenarioFromTemplate(Async)");
+        }
+
+        // verify the required parameter 'createScenarioFromTemplateRequest' is set
+        if (createScenarioFromTemplateRequest == null) {
+            throw new ApiException("Missing the required parameter 'createScenarioFromTemplateRequest' when calling createScenarioFromTemplate(Async)");
+        }
+
+        return createScenarioFromTemplateCall(scope, createScenarioFromTemplateRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+     * @param scope The scope in which to create the scenario (required)
+     * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
+     * @return ApiResponse&lt;UpsertSingleStructuredDataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<UpsertSingleStructuredDataResponse> createScenarioFromTemplateWithHttpInfo(String scope, CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest) throws ApiException {
+        HttpRequest localVarCall = createScenarioFromTemplateValidateBeforeCall(scope, createScenarioFromTemplateRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<UpsertSingleStructuredDataResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope in which to create the scenario (required)
+     * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
+     * @return ApiResponse&lt;UpsertSingleStructuredDataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<UpsertSingleStructuredDataResponse> createScenarioFromTemplateWithHttpInfo(String scope, CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = createScenarioFromTemplateValidateBeforeCall(scope, createScenarioFromTemplateRequest, null, opts);
+        Type localVarReturnType = new TypeReference<UpsertSingleStructuredDataResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template. (asynchronously)
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+     * @param scope The scope in which to create the scenario (required)
+     * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void createScenarioFromTemplateAsync(String scope, CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest, final ApiCallback<UpsertSingleStructuredDataResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = createScenarioFromTemplateValidateBeforeCall(scope, createScenarioFromTemplateRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<UpsertSingleStructuredDataResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template. (asynchronously)
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope in which to create the scenario (required)
+     * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void createScenarioFromTemplateAsync(String scope, CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest, final ApiCallback<UpsertSingleStructuredDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = createScenarioFromTemplateValidateBeforeCall(scope, createScenarioFromTemplateRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<UpsertSingleStructuredDataResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIcreateScenarioFromTemplateRequest {
+        private final String scope;
+        private final CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest;
+
+        private APIcreateScenarioFromTemplateRequest(String scope, CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest) {
+            this.scope = scope;
+            this.createScenarioFromTemplateRequest = createScenarioFromTemplateRequest;
+        }
+
+        /**
+         * Build call for createScenarioFromTemplate
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return createScenarioFromTemplateCall(scope, createScenarioFromTemplateRequest, _callback);
+        }
+
+        /**
+         * Execute createScenarioFromTemplate request
+         * @return UpsertSingleStructuredDataResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UpsertSingleStructuredDataResponse execute() throws ApiException {
+            ApiResponse<UpsertSingleStructuredDataResponse> localVarResp = createScenarioFromTemplateWithHttpInfo(scope, createScenarioFromTemplateRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute createScenarioFromTemplate request. Use any specified configuration options to override any other configuration for this request only.
+         * @return UpsertSingleStructuredDataResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UpsertSingleStructuredDataResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<UpsertSingleStructuredDataResponse> localVarResp = createScenarioFromTemplateWithHttpInfo(scope, createScenarioFromTemplateRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute createScenarioFromTemplate request with HTTP info returned
+         * @return ApiResponse&lt;UpsertSingleStructuredDataResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UpsertSingleStructuredDataResponse> executeWithHttpInfo() throws ApiException {
+            return createScenarioFromTemplateWithHttpInfo(scope, createScenarioFromTemplateRequest);
+        }
+
+        /**
+         * Execute createScenarioFromTemplate request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;UpsertSingleStructuredDataResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UpsertSingleStructuredDataResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return createScenarioFromTemplateWithHttpInfo(scope, createScenarioFromTemplateRequest, opts);
+        }
+
+        /**
+         * Execute createScenarioFromTemplate request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<UpsertSingleStructuredDataResponse> _callback) throws ApiException {
+            createScenarioFromTemplateAsync(scope, createScenarioFromTemplateRequest, _callback);
+        }
+
+        /**
+         * Execute createScenarioFromTemplate request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<UpsertSingleStructuredDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            createScenarioFromTemplateAsync(scope, createScenarioFromTemplateRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+     * @param scope The scope in which to create the scenario (required)
+     * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
+     * @return APIcreateScenarioFromTemplateRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The successfully created scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIcreateScenarioFromTemplateRequest createScenarioFromTemplate(String scope, CreateScenarioFromTemplateRequest createScenarioFromTemplateRequest) {
+        return new APIcreateScenarioFromTemplateRequest(scope, createScenarioFromTemplateRequest);
+    }
     /**
      * Build call for deleteScenario
      * @param scope The scope of the Scenario to delete. (required)

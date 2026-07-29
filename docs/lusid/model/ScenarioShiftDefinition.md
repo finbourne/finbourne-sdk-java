@@ -5,7 +5,7 @@ classname ScenarioShiftDefinition
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**shiftType** | **String** |  | [default to String]
+**scenarioShiftType** | **String** | Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition. | [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.ScenarioShiftDefinition;
@@ -13,11 +13,11 @@ import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
-String shiftType = "example shiftType";
+String scenarioShiftType = "example scenarioShiftType";
 
 
 ScenarioShiftDefinition scenarioShiftDefinitionInstance = new ScenarioShiftDefinition()
-    .shiftType(shiftType);
+    .scenarioShiftType(scenarioShiftType);
 ```
 
 

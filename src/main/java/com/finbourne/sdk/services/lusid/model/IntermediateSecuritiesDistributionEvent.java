@@ -46,7 +46,9 @@ import com.finbourne.sdk.JSON;
   IntermediateSecuritiesDistributionEvent.JSON_PROPERTY_UNITS_RATIO,
   IntermediateSecuritiesDistributionEvent.JSON_PROPERTY_COST_FACTOR,
   IntermediateSecuritiesDistributionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE,
-  IntermediateSecuritiesDistributionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY
+  IntermediateSecuritiesDistributionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY,
+  IntermediateSecuritiesDistributionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION,
+  IntermediateSecuritiesDistributionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -100,6 +102,16 @@ public class IntermediateSecuritiesDistributionEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String fractionalUnitsCashCurrency;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION = "fractionalUnitsRoundingConvention";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String fractionalUnitsRoundingConvention;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES = "fractionalUnitsDecimalPlaces";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer fractionalUnitsDecimalPlaces;
 
   public IntermediateSecuritiesDistributionEvent() {
   }
@@ -275,6 +287,44 @@ public class IntermediateSecuritiesDistributionEvent extends InstrumentEvent {
   }
 
 
+  public IntermediateSecuritiesDistributionEvent fractionalUnitsRoundingConvention(String fractionalUnitsRoundingConvention) {
+    this.fractionalUnitsRoundingConvention = fractionalUnitsRoundingConvention;
+    return this;
+  }
+
+  /**
+   * The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.
+   * @return fractionalUnitsRoundingConvention
+   */
+  @javax.annotation.Nullable
+  public String getFractionalUnitsRoundingConvention() {
+    return fractionalUnitsRoundingConvention;
+  }
+
+  public void setFractionalUnitsRoundingConvention(String fractionalUnitsRoundingConvention) {
+    this.fractionalUnitsRoundingConvention = fractionalUnitsRoundingConvention;
+  }
+
+
+  public IntermediateSecuritiesDistributionEvent fractionalUnitsDecimalPlaces(Integer fractionalUnitsDecimalPlaces) {
+    this.fractionalUnitsDecimalPlaces = fractionalUnitsDecimalPlaces;
+    return this;
+  }
+
+  /**
+   * The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces.
+   * @return fractionalUnitsDecimalPlaces
+   */
+  @javax.annotation.Nullable
+  public Integer getFractionalUnitsDecimalPlaces() {
+    return fractionalUnitsDecimalPlaces;
+  }
+
+  public void setFractionalUnitsDecimalPlaces(Integer fractionalUnitsDecimalPlaces) {
+    this.fractionalUnitsDecimalPlaces = fractionalUnitsDecimalPlaces;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -293,6 +343,8 @@ public class IntermediateSecuritiesDistributionEvent extends InstrumentEvent {
         (this.costFactor == null ? intermediateSecuritiesDistributionEvent.costFactor == null : (intermediateSecuritiesDistributionEvent.costFactor != null && this.costFactor.compareTo(intermediateSecuritiesDistributionEvent.getCostFactor()) == 0)) &&
         (this.fractionalUnitsCashPrice == null ? intermediateSecuritiesDistributionEvent.fractionalUnitsCashPrice == null : (intermediateSecuritiesDistributionEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(intermediateSecuritiesDistributionEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, intermediateSecuritiesDistributionEvent.fractionalUnitsCashCurrency) &&
+        Objects.equals(this.fractionalUnitsRoundingConvention, intermediateSecuritiesDistributionEvent.fractionalUnitsRoundingConvention) &&
+        Objects.equals(this.fractionalUnitsDecimalPlaces, intermediateSecuritiesDistributionEvent.fractionalUnitsDecimalPlaces) &&
         super.equals(o);
   }
 
@@ -302,7 +354,7 @@ public class IntermediateSecuritiesDistributionEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(announcementDate, exDate, recordDate, paymentDate, newInstrument, unitsRatio, costFactor, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, super.hashCode());
+    return Objects.hash(announcementDate, exDate, recordDate, paymentDate, newInstrument, unitsRatio, costFactor, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -326,6 +378,8 @@ public class IntermediateSecuritiesDistributionEvent extends InstrumentEvent {
     sb.append("    costFactor: ").append(toIndentedString(costFactor)).append("\n");
     sb.append("    fractionalUnitsCashPrice: ").append(toIndentedString(fractionalUnitsCashPrice)).append("\n");
     sb.append("    fractionalUnitsCashCurrency: ").append(toIndentedString(fractionalUnitsCashCurrency)).append("\n");
+    sb.append("    fractionalUnitsRoundingConvention: ").append(toIndentedString(fractionalUnitsRoundingConvention)).append("\n");
+    sb.append("    fractionalUnitsDecimalPlaces: ").append(toIndentedString(fractionalUnitsDecimalPlaces)).append("\n");
     sb.append("}");
     return sb.toString();
   }

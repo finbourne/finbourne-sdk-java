@@ -109,7 +109,11 @@ public enum InstrumentType {
   
   FLEXIBLE_DEPOSIT("FlexibleDeposit"),
   
-  FLEXIBLE_REPO("FlexibleRepo");
+  FLEXIBLE_REPO("FlexibleRepo"),
+  
+  TO_BE_ANNOUNCED("ToBeAnnounced"),
+  
+  VOLATILITY_SWAP("VolatilitySwap");
 
   private String value;
 

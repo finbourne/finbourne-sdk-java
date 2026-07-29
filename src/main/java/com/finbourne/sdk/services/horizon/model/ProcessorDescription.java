@@ -13,7 +13,9 @@
 package com.finbourne.sdk.services.horizon.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -37,7 +39,9 @@ import com.finbourne.sdk.JSON;
   ProcessorDescription.JSON_PROPERTY_DISPLAY_NAME,
   ProcessorDescription.JSON_PROPERTY_DESCRIPTION,
   ProcessorDescription.JSON_PROPERTY_CATEGORY,
-  ProcessorDescription.JSON_PROPERTY_IS_ACTIVE
+  ProcessorDescription.JSON_PROPERTY_IS_ACTIVE,
+  ProcessorDescription.JSON_PROPERTY_IS_CONNECTION_REQUIRED,
+  ProcessorDescription.JSON_PROPERTY_RELATIONSHIPS
 })
 
 public class ProcessorDescription {
@@ -65,6 +69,16 @@ public class ProcessorDescription {
   @JsonProperty(JSON_PROPERTY_IS_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Boolean isActive;
+
+  public static final String JSON_PROPERTY_IS_CONNECTION_REQUIRED = "isConnectionRequired";
+  @JsonProperty(JSON_PROPERTY_IS_CONNECTION_REQUIRED)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Boolean isConnectionRequired;
+
+  public static final String JSON_PROPERTY_RELATIONSHIPS = "relationships";
+  @JsonProperty(JSON_PROPERTY_RELATIONSHIPS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<String> relationships = new ArrayList<>();
 
   public ProcessorDescription() {
   }
@@ -164,6 +178,52 @@ public class ProcessorDescription {
   }
 
 
+  public ProcessorDescription isConnectionRequired(Boolean isConnectionRequired) {
+    this.isConnectionRequired = isConnectionRequired;
+    return this;
+  }
+
+  /**
+   * Get isConnectionRequired
+   * @return isConnectionRequired
+   */
+  @javax.annotation.Nonnull
+  public Boolean getIsConnectionRequired() {
+    return isConnectionRequired;
+  }
+
+  public void setIsConnectionRequired(Boolean isConnectionRequired) {
+    this.isConnectionRequired = isConnectionRequired;
+  }
+
+
+  public ProcessorDescription relationships(List<String> relationships) {
+    this.relationships = relationships;
+    return this;
+  }
+
+  public ProcessorDescription addRelationshipsItem(String relationshipsItem) {
+    if (this.relationships == null) {
+      this.relationships = new ArrayList<>();
+    }
+    this.relationships.add(relationshipsItem);
+    return this;
+  }
+
+  /**
+   * Get relationships
+   * @return relationships
+   */
+  @javax.annotation.Nonnull
+  public List<String> getRelationships() {
+    return relationships;
+  }
+
+  public void setRelationships(List<String> relationships) {
+    this.relationships = relationships;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -177,12 +237,14 @@ public class ProcessorDescription {
         Objects.equals(this.displayName, processorDescription.displayName) &&
         Objects.equals(this.description, processorDescription.description) &&
         Objects.equals(this.category, processorDescription.category) &&
-        Objects.equals(this.isActive, processorDescription.isActive);
+        Objects.equals(this.isActive, processorDescription.isActive) &&
+        Objects.equals(this.isConnectionRequired, processorDescription.isConnectionRequired) &&
+        Objects.equals(this.relationships, processorDescription.relationships);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(name, displayName, description, category, isActive);
+    return Objects.hash(name, displayName, description, category, isActive, isConnectionRequired, relationships);
   }
 
   @Override
@@ -194,6 +256,8 @@ public class ProcessorDescription {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("    isActive: ").append(toIndentedString(isActive)).append("\n");
+    sb.append("    isConnectionRequired: ").append(toIndentedString(isConnectionRequired)).append("\n");
+    sb.append("    relationships: ").append(toIndentedString(relationships)).append("\n");
     sb.append("}");
     return sb.toString();
   }

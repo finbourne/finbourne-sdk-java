@@ -126,7 +126,7 @@ public class Compounding {
   }
 
   /**
-   * If the interest rate is simple, compounded or using a pre-computed compounded index.    Supported string (enumeration) values are: [Averaging, Compounding, CompoundedIndex, NonCumulativeCompounding].
+   * If the interest rate is simple, compounded or using a pre-computed compounded index.    Supported string (enumeration) values are: [Averaging, Compounding, CompoundedIndex, NonCumulativeCompounding, NonCumulativeCompoundingBalanceAware].
    * @return compoundingMethod
    */
   @javax.annotation.Nonnull

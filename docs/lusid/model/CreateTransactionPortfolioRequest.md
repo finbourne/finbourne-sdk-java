@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **description** | **String** | A description for the transaction portfolio. | [optional] [default to String]
 **code** | **String** | The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio. | [default to String]
 **created** | [**OffsetDateTime**](OffsetDateTime.md) | The effective datetime at which to create the transaction portfolio. No transactions can be added to the transaction portfolio before this date. Defaults to the current LUSID system datetime if not specified. | [optional] [default to OffsetDateTime]
+**enablementDate** | [**OffsetDateTime**](OffsetDateTime.md) | The effective datetime from which transactions booked to the transaction portfolio begin contributing to holdings, valuations and other computed results. Transactions with an earlier effective date are still accepted and stored, but do not affect any computed results until this date. Defaults to the portfolio&#39;s creation date if not specified. | [optional] [default to OffsetDateTime]
 **baseCurrency** | **String** | The base currency of the transaction portfolio in ISO 4217 currency code format. | [default to String]
 **corporateActionSourceId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **accountingMethod** | **String** | Determines the accounting treatment given to the transaction portfolio&#39;s tax lots. Default value: AverageCost. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | [optional] [default to String]
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 **amortisationRuleSetId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **taxRuleSetScope** | **String** | The scope of the tax rule sets for this portfolio. | [optional] [default to String]
 **settlementConfiguration** | [**PortfolioSettlementConfiguration**](PortfolioSettlementConfiguration.md) |  | [optional] [default to PortfolioSettlementConfiguration]
+**transactionExclusionFilter** | **String** | A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CreateTransactionPortfolioRequest;
@@ -33,6 +35,7 @@ String displayName = "example displayName";
 @javax.annotation.Nullable String description = "example description";
 String code = "example code";
 @javax.annotation.Nullable OffsetDateTime created = OffsetDateTime.now();
+@javax.annotation.Nullable OffsetDateTime enablementDate = OffsetDateTime.now();
 String baseCurrency = "example baseCurrency";
 ResourceId corporateActionSourceId = new ResourceId();
 String accountingMethod = "example accountingMethod";
@@ -46,6 +49,7 @@ InstrumentEventConfiguration instrumentEventConfiguration = new InstrumentEventC
 ResourceId amortisationRuleSetId = new ResourceId();
 @javax.annotation.Nullable String taxRuleSetScope = "example taxRuleSetScope";
 PortfolioSettlementConfiguration settlementConfiguration = new PortfolioSettlementConfiguration();
+@javax.annotation.Nullable String transactionExclusionFilter = "example transactionExclusionFilter";
 
 
 CreateTransactionPortfolioRequest createTransactionPortfolioRequestInstance = new CreateTransactionPortfolioRequest()
@@ -53,6 +57,7 @@ CreateTransactionPortfolioRequest createTransactionPortfolioRequestInstance = ne
     .description(description)
     .code(code)
     .created(created)
+    .enablementDate(enablementDate)
     .baseCurrency(baseCurrency)
     .corporateActionSourceId(corporateActionSourceId)
     .accountingMethod(accountingMethod)
@@ -65,7 +70,8 @@ CreateTransactionPortfolioRequest createTransactionPortfolioRequestInstance = ne
     .instrumentEventConfiguration(instrumentEventConfiguration)
     .amortisationRuleSetId(amortisationRuleSetId)
     .taxRuleSetScope(taxRuleSetScope)
-    .settlementConfiguration(settlementConfiguration);
+    .settlementConfiguration(settlementConfiguration)
+    .transactionExclusionFilter(transactionExclusionFilter);
 ```
 
 
