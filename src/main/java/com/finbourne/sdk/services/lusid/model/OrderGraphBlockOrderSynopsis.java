@@ -41,19 +41,31 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   OrderGraphBlockOrderSynopsis.JSON_PROPERTY_QUANTITY,
   OrderGraphBlockOrderSynopsis.JSON_PROPERTY_QUANTITY_BY_STATE,
+  OrderGraphBlockOrderSynopsis.JSON_PROPERTY_AMOUNT,
+  OrderGraphBlockOrderSynopsis.JSON_PROPERTY_AMOUNT_BY_STATE,
   OrderGraphBlockOrderSynopsis.JSON_PROPERTY_DETAILS
 })
 
 public class OrderGraphBlockOrderSynopsis {
   public static final String JSON_PROPERTY_QUANTITY = "quantity";
   @JsonProperty(JSON_PROPERTY_QUANTITY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal quantity;
 
   public static final String JSON_PROPERTY_QUANTITY_BY_STATE = "quantityByState";
   @JsonProperty(JSON_PROPERTY_QUANTITY_BY_STATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, java.math.BigDecimal> quantityByState;
+
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal amount;
+
+  public static final String JSON_PROPERTY_AMOUNT_BY_STATE = "amountByState";
+  @JsonProperty(JSON_PROPERTY_AMOUNT_BY_STATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, java.math.BigDecimal> amountByState;
 
   public static final String JSON_PROPERTY_DETAILS = "details";
   @JsonProperty(JSON_PROPERTY_DETAILS)
@@ -72,7 +84,7 @@ public class OrderGraphBlockOrderSynopsis {
    * Total number of units ordered.
    * @return quantity
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getQuantity() {
     return quantity;
   }
@@ -106,6 +118,52 @@ public class OrderGraphBlockOrderSynopsis {
 
   public void setQuantityByState(Map<String, java.math.BigDecimal> quantityByState) {
     this.quantityByState = quantityByState;
+  }
+
+
+  public OrderGraphBlockOrderSynopsis amount(java.math.BigDecimal amount) {
+    this.amount = amount;
+    return this;
+  }
+
+  /**
+   * Total monetary value ordered, in the block currency.
+   * @return amount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getAmount() {
+    return amount;
+  }
+
+  public void setAmount(java.math.BigDecimal amount) {
+    this.amount = amount;
+  }
+
+
+  public OrderGraphBlockOrderSynopsis amountByState(Map<String, java.math.BigDecimal> amountByState) {
+    this.amountByState = amountByState;
+    return this;
+  }
+
+  public OrderGraphBlockOrderSynopsis putAmountByStateItem(String key, java.math.BigDecimal amountByStateItem) {
+    if (this.amountByState == null) {
+      this.amountByState = new HashMap<>();
+    }
+    this.amountByState.put(key, amountByStateItem);
+    return this;
+  }
+
+  /**
+   * Total monetary value ordered, broken down by order state.
+   * @return amountByState
+   */
+  @javax.annotation.Nullable
+  public Map<String, java.math.BigDecimal> getAmountByState() {
+    return amountByState;
+  }
+
+  public void setAmountByState(Map<String, java.math.BigDecimal> amountByState) {
+    this.amountByState = amountByState;
   }
 
 
@@ -147,6 +205,8 @@ public class OrderGraphBlockOrderSynopsis {
     OrderGraphBlockOrderSynopsis orderGraphBlockOrderSynopsis = (OrderGraphBlockOrderSynopsis) o;
     return (this.quantity == null ? orderGraphBlockOrderSynopsis.quantity == null : (orderGraphBlockOrderSynopsis.quantity != null && this.quantity.compareTo(orderGraphBlockOrderSynopsis.getQuantity()) == 0)) &&
         Objects.equals(this.quantityByState, orderGraphBlockOrderSynopsis.quantityByState) &&
+        (this.amount == null ? orderGraphBlockOrderSynopsis.amount == null : (orderGraphBlockOrderSynopsis.amount != null && this.amount.compareTo(orderGraphBlockOrderSynopsis.getAmount()) == 0)) &&
+        Objects.equals(this.amountByState, orderGraphBlockOrderSynopsis.amountByState) &&
         Objects.equals(this.details, orderGraphBlockOrderSynopsis.details);
   }
 
@@ -156,7 +216,7 @@ public class OrderGraphBlockOrderSynopsis {
 
   @Override
  public int hashCode() {
-    return Objects.hash(quantity, quantityByState, details);
+    return Objects.hash(quantity, quantityByState, amount, amountByState, details);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -172,6 +232,8 @@ public class OrderGraphBlockOrderSynopsis {
     sb.append("class OrderGraphBlockOrderSynopsis {\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    quantityByState: ").append(toIndentedString(quantityByState)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    amountByState: ").append(toIndentedString(amountByState)).append("\n");
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("}");
     return sb.toString();

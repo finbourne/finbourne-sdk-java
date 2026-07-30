@@ -42,6 +42,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   BlockedOrderRequest.JSON_PROPERTY_PROPERTIES,
   BlockedOrderRequest.JSON_PROPERTY_QUANTITY,
+  BlockedOrderRequest.JSON_PROPERTY_AMOUNT,
   BlockedOrderRequest.JSON_PROPERTY_ORDER_BOOK_ID,
   BlockedOrderRequest.JSON_PROPERTY_PORTFOLIO_ID,
   BlockedOrderRequest.JSON_PROPERTY_ID,
@@ -61,8 +62,13 @@ public class BlockedOrderRequest {
 
   public static final String JSON_PROPERTY_QUANTITY = "quantity";
   @JsonProperty(JSON_PROPERTY_QUANTITY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal quantity;
+
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CurrencyAndAmount amount;
 
   public static final String JSON_PROPERTY_ORDER_BOOK_ID = "orderBookId";
   @JsonProperty(JSON_PROPERTY_ORDER_BOOK_ID)
@@ -148,13 +154,32 @@ public class BlockedOrderRequest {
    * The quantity of the given instrument ordered.
    * @return quantity
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getQuantity() {
     return quantity;
   }
 
   public void setQuantity(java.math.BigDecimal quantity) {
     this.quantity = quantity;
+  }
+
+
+  public BlockedOrderRequest amount(CurrencyAndAmount amount) {
+    this.amount = amount;
+    return this;
+  }
+
+  /**
+   * Get amount
+   * @return amount
+   */
+  @javax.annotation.Nullable
+  public CurrencyAndAmount getAmount() {
+    return amount;
+  }
+
+  public void setAmount(CurrencyAndAmount amount) {
+    this.amount = amount;
   }
 
 
@@ -340,6 +365,7 @@ public class BlockedOrderRequest {
     BlockedOrderRequest blockedOrderRequest = (BlockedOrderRequest) o;
     return Objects.equals(this.properties, blockedOrderRequest.properties) &&
         (this.quantity == null ? blockedOrderRequest.quantity == null : (blockedOrderRequest.quantity != null && this.quantity.compareTo(blockedOrderRequest.getQuantity()) == 0)) &&
+        Objects.equals(this.amount, blockedOrderRequest.amount) &&
         Objects.equals(this.orderBookId, blockedOrderRequest.orderBookId) &&
         Objects.equals(this.portfolioId, blockedOrderRequest.portfolioId) &&
         Objects.equals(this.id, blockedOrderRequest.id) &&
@@ -357,7 +383,7 @@ public class BlockedOrderRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(properties, quantity, orderBookId, portfolioId, id, state, date, price, orderInstruction, _package, side);
+    return Objects.hash(properties, quantity, amount, orderBookId, portfolioId, id, state, date, price, orderInstruction, _package, side);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -373,6 +399,7 @@ public class BlockedOrderRequest {
     sb.append("class BlockedOrderRequest {\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
     sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");

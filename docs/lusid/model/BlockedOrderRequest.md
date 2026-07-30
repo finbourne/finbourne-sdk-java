@@ -6,7 +6,8 @@ classname BlockedOrderRequest
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] [default to Map<String, PerpetualProperty>]
-**quantity** | **java.math.BigDecimal** | The quantity of the given instrument ordered. | [default to java.math.BigDecimal]
+**quantity** | **java.math.BigDecimal** | The quantity of the given instrument ordered. | [optional] [default to java.math.BigDecimal]
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
 **orderBookId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **portfolioId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **id** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
@@ -24,7 +25,8 @@ import java.lang.System;
 import java.net.URI;
 
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
-java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+CurrencyAndAmount amount = new CurrencyAndAmount();
 ResourceId orderBookId = new ResourceId();
 ResourceId portfolioId = new ResourceId();
 ResourceId id = new ResourceId();
@@ -39,6 +41,7 @@ ResourceId package = new ResourceId();
 BlockedOrderRequest blockedOrderRequestInstance = new BlockedOrderRequest()
     .properties(properties)
     .quantity(quantity)
+    .amount(amount)
     .orderBookId(orderBookId)
     .portfolioId(portfolioId)
     .id(id)

@@ -11,7 +11,8 @@ Name | Type | Description | Notes
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Client-defined properties associated with this block. | [optional] [default to Map<String, PerpetualProperty>]
 **instrumentIdentifiers** | **Map&lt;String, String&gt;** | The instrument ordered. | [default to Map<String, String>]
 **lusidInstrumentId** | **String** | The LUSID instrument id for the instrument ordered. | [default to String]
-**quantity** | **java.math.BigDecimal** | The total quantity of given instrument ordered. | [default to java.math.BigDecimal]
+**quantity** | **java.math.BigDecimal** | The total quantity of given instrument ordered. | [optional] [default to java.math.BigDecimal]
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
 **side** | **String** | The client&#39;s representation of the block&#39;s side (buy, sell, short, etc) | [default to String]
 **type** | **String** | The block order&#39;s type (examples: Limit, Market, ...) | [optional] [default to String]
 **timeInForce** | **String** | The block orders&#39; time in force (examples: Day, GoodTilCancel, ...) | [optional] [default to String]
@@ -34,7 +35,8 @@ List<ResourceId> orderIds = new List<ResourceId>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 Map<String, String> instrumentIdentifiers = new Map<String, String>();
 String lusidInstrumentId = "example lusidInstrumentId";
-java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+CurrencyAndAmount amount = new CurrencyAndAmount();
 String side = "example side";
 @javax.annotation.Nullable String type = "example type";
 @javax.annotation.Nullable String timeInForce = "example timeInForce";
@@ -54,6 +56,7 @@ Block blockInstance = new Block()
     .instrumentIdentifiers(instrumentIdentifiers)
     .lusidInstrumentId(lusidInstrumentId)
     .quantity(quantity)
+    .amount(amount)
     .side(side)
     .type(type)
     .timeInForce(timeInForce)

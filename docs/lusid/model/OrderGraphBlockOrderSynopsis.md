@@ -5,8 +5,10 @@ classname OrderGraphBlockOrderSynopsis
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quantity** | **java.math.BigDecimal** | Total number of units ordered. | [default to java.math.BigDecimal]
+**quantity** | **java.math.BigDecimal** | Total number of units ordered. | [optional] [default to java.math.BigDecimal]
 **quantityByState** | **Map&lt;String, java.math.BigDecimal&gt;** | Total number of units placed. | [optional] [default to Map<String, java.math.BigDecimal>]
+**amount** | **java.math.BigDecimal** | Total monetary value ordered, in the block currency. | [optional] [default to java.math.BigDecimal]
+**amountByState** | **Map&lt;String, java.math.BigDecimal&gt;** | Total monetary value ordered, broken down by order state. | [optional] [default to Map<String, java.math.BigDecimal>]
 **details** | [**List&lt;OrderGraphBlockOrderDetail&gt;**](OrderGraphBlockOrderDetail.md) | Identifiers and other info for each order in this block. | [default to List<OrderGraphBlockOrderDetail>]
 
 ```java
@@ -15,14 +17,18 @@ import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
-java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable Map<String, java.math.BigDecimal> quantityByState = new Map<String, java.math.BigDecimal>();
+@javax.annotation.Nullable java.math.BigDecimal amount = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable Map<String, java.math.BigDecimal> amountByState = new Map<String, java.math.BigDecimal>();
 List<OrderGraphBlockOrderDetail> details = new List<OrderGraphBlockOrderDetail>();
 
 
 OrderGraphBlockOrderSynopsis orderGraphBlockOrderSynopsisInstance = new OrderGraphBlockOrderSynopsis()
     .quantity(quantity)
     .quantityByState(quantityByState)
+    .amount(amount)
+    .amountByState(amountByState)
     .details(details);
 ```
 

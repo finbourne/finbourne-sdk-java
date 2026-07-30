@@ -47,6 +47,7 @@ import com.finbourne.sdk.JSON;
   BlockRequest.JSON_PROPERTY_PROPERTIES,
   BlockRequest.JSON_PROPERTY_INSTRUMENT_IDENTIFIERS,
   BlockRequest.JSON_PROPERTY_QUANTITY,
+  BlockRequest.JSON_PROPERTY_AMOUNT,
   BlockRequest.JSON_PROPERTY_SIDE,
   BlockRequest.JSON_PROPERTY_TYPE,
   BlockRequest.JSON_PROPERTY_TIME_IN_FORCE,
@@ -79,8 +80,13 @@ public class BlockRequest {
 
   public static final String JSON_PROPERTY_QUANTITY = "quantity";
   @JsonProperty(JSON_PROPERTY_QUANTITY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal quantity;
+
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CurrencyAndAmount amount;
 
   public static final String JSON_PROPERTY_SIDE = "side";
   @JsonProperty(JSON_PROPERTY_SIDE)
@@ -229,13 +235,32 @@ public class BlockRequest {
    * The total quantity of given instrument ordered.
    * @return quantity
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getQuantity() {
     return quantity;
   }
 
   public void setQuantity(java.math.BigDecimal quantity) {
     this.quantity = quantity;
+  }
+
+
+  public BlockRequest amount(CurrencyAndAmount amount) {
+    this.amount = amount;
+    return this;
+  }
+
+  /**
+   * Get amount
+   * @return amount
+   */
+  @javax.annotation.Nullable
+  public CurrencyAndAmount getAmount() {
+    return amount;
+  }
+
+  public void setAmount(CurrencyAndAmount amount) {
+    this.amount = amount;
   }
 
 
@@ -386,6 +411,7 @@ public class BlockRequest {
         Objects.equals(this.properties, blockRequest.properties) &&
         Objects.equals(this.instrumentIdentifiers, blockRequest.instrumentIdentifiers) &&
         (this.quantity == null ? blockRequest.quantity == null : (blockRequest.quantity != null && this.quantity.compareTo(blockRequest.getQuantity()) == 0)) &&
+        Objects.equals(this.amount, blockRequest.amount) &&
         Objects.equals(this.side, blockRequest.side) &&
         Objects.equals(this.type, blockRequest.type) &&
         Objects.equals(this.timeInForce, blockRequest.timeInForce) &&
@@ -401,7 +427,7 @@ public class BlockRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, orderIds, properties, instrumentIdentifiers, quantity, side, type, timeInForce, createdDate, limitPrice, stopPrice, isSwept);
+    return Objects.hash(id, orderIds, properties, instrumentIdentifiers, quantity, amount, side, type, timeInForce, createdDate, limitPrice, stopPrice, isSwept);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -420,6 +446,7 @@ public class BlockRequest {
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    instrumentIdentifiers: ").append(toIndentedString(instrumentIdentifiers)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");

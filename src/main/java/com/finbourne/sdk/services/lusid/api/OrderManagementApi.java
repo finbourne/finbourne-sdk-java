@@ -1488,7 +1488,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * CreateOrders: Upsert a Block and associated orders
+     * CreateOrders: Create Orders and create/update Block
      * Create orders, and blocks if they don&#39;t already exist.  This will fail if the block exists and already references orders with differing blocking fields.
      * @param blockAndOrdersCreateRequest The collection of block and orders requests. (required)
      * @return ApiResponse&lt;ResourceListOfBlockAndOrders&gt;
@@ -1508,7 +1508,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * CreateOrders: Upsert a Block and associated orders
+     * CreateOrders: Create Orders and create/update Block
      * Create orders, and blocks if they don&#39;t already exist.  This will fail if the block exists and already references orders with differing blocking fields.Use any specified configuration options to override any other configuration for this request only
      * @param blockAndOrdersCreateRequest The collection of block and orders requests. (required)
      * @return ApiResponse&lt;ResourceListOfBlockAndOrders&gt;
@@ -1528,7 +1528,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * CreateOrders: Upsert a Block and associated orders (asynchronously)
+     * CreateOrders: Create Orders and create/update Block (asynchronously)
      * Create orders, and blocks if they don&#39;t already exist.  This will fail if the block exists and already references orders with differing blocking fields.
      * @param blockAndOrdersCreateRequest The collection of block and orders requests. (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1549,7 +1549,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * CreateOrders: Upsert a Block and associated orders (asynchronously)
+     * CreateOrders: Create Orders and create/update Block (asynchronously)
      * Create orders, and blocks if they don&#39;t already exist.  This will fail if the block exists and already references orders with differing blocking fields.Use any specified configuration options to override any other configuration for this request only
      * @param blockAndOrdersCreateRequest The collection of block and orders requests. (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1693,7 +1693,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * CreateOrders: Upsert a Block and associated orders
+     * CreateOrders: Create Orders and create/update Block
      * Create orders, and blocks if they don&#39;t already exist.  This will fail if the block exists and already references orders with differing blocking fields.
      * @param blockAndOrdersCreateRequest The collection of block and orders requests. (required)
      * @return APIcreateOrdersRequest
