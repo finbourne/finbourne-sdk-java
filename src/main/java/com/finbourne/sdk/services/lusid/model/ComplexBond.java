@@ -18,6 +18,7 @@ import com.finbourne.sdk.services.lusid.model.Schedule;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
 import com.finbourne.sdk.services.lusid.model.TradingConventions;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,6 +48,7 @@ import com.finbourne.sdk.JSON;
   ComplexBond.JSON_PROPERTY_CALCULATION_TYPE,
   ComplexBond.JSON_PROPERTY_SCHEDULES,
   ComplexBond.JSON_PROPERTY_ORIGINAL_ISSUE_PRICE,
+  ComplexBond.JSON_PROPERTY_ISSUE_DATE,
   ComplexBond.JSON_PROPERTY_ROUNDING_CONVENTIONS,
   ComplexBond.JSON_PROPERTY_ASSET_BACKED,
   ComplexBond.JSON_PROPERTY_ASSET_POOL_IDENTIFIER,
@@ -80,6 +82,11 @@ public class ComplexBond extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_ORIGINAL_ISSUE_PRICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal originalIssuePrice;
+
+  public static final String JSON_PROPERTY_ISSUE_DATE = "issueDate";
+  @JsonProperty(JSON_PROPERTY_ISSUE_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime issueDate;
 
   public static final String JSON_PROPERTY_ROUNDING_CONVENTIONS = "roundingConventions";
   @JsonProperty(JSON_PROPERTY_ROUNDING_CONVENTIONS)
@@ -201,6 +208,25 @@ public class ComplexBond extends LusidInstrument {
   }
 
 
+  public ComplexBond issueDate(OffsetDateTime issueDate) {
+    this.issueDate = issueDate;
+    return this;
+  }
+
+  /**
+   * The date the bond was issued to the market. This may be after the StartDate (dated date) from which interest accrues, for example for agency mortgage-backed securities. The payment schedule is unchanged, but no coupon entitlement (ex-dividend) date can fall before this date: a buyer settling on the issue date is entitled to the first coupon, and accrued interest includes completed-but-unpaid coupons until their entitlement passes.
+   * @return issueDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getIssueDate() {
+    return issueDate;
+  }
+
+  public void setIssueDate(OffsetDateTime issueDate) {
+    this.issueDate = issueDate;
+  }
+
+
   public ComplexBond roundingConventions(List<RoundingConvention> roundingConventions) {
     this.roundingConventions = roundingConventions;
     return this;
@@ -317,6 +343,7 @@ public class ComplexBond extends LusidInstrument {
         Objects.equals(this.calculationType, complexBond.calculationType) &&
         Objects.equals(this.schedules, complexBond.schedules) &&
         (this.originalIssuePrice == null ? complexBond.originalIssuePrice == null : (complexBond.originalIssuePrice != null && this.originalIssuePrice.compareTo(complexBond.getOriginalIssuePrice()) == 0)) &&
+        Objects.equals(this.issueDate, complexBond.issueDate) &&
         Objects.equals(this.roundingConventions, complexBond.roundingConventions) &&
         Objects.equals(this.assetBacked, complexBond.assetBacked) &&
         Objects.equals(this.assetPoolIdentifier, complexBond.assetPoolIdentifier) &&
@@ -331,7 +358,7 @@ public class ComplexBond extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(identifiers, calculationType, schedules, originalIssuePrice, roundingConventions, assetBacked, assetPoolIdentifier, tradingConventions, timeZoneConventions, super.hashCode());
+    return Objects.hash(identifiers, calculationType, schedules, originalIssuePrice, issueDate, roundingConventions, assetBacked, assetPoolIdentifier, tradingConventions, timeZoneConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -350,6 +377,7 @@ public class ComplexBond extends LusidInstrument {
     sb.append("    calculationType: ").append(toIndentedString(calculationType)).append("\n");
     sb.append("    schedules: ").append(toIndentedString(schedules)).append("\n");
     sb.append("    originalIssuePrice: ").append(toIndentedString(originalIssuePrice)).append("\n");
+    sb.append("    issueDate: ").append(toIndentedString(issueDate)).append("\n");
     sb.append("    roundingConventions: ").append(toIndentedString(roundingConventions)).append("\n");
     sb.append("    assetBacked: ").append(toIndentedString(assetBacked)).append("\n");
     sb.append("    assetPoolIdentifier: ").append(toIndentedString(assetPoolIdentifier)).append("\n");

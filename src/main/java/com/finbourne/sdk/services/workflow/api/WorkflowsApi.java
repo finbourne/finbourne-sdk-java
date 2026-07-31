@@ -1132,6 +1132,7 @@ public class WorkflowsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1144,8 +1145,8 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listWorkflowsCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback) throws ApiException {
-        return listWorkflowsCall(asAt, filter, sortBy, limit, page,  _callback, new ConfigurationOptions());
+    private HttpRequest listWorkflowsCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return listWorkflowsCall(asAt, filter, sortBy, limit, page, propertyKeys,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -1154,7 +1155,8 @@ public class WorkflowsApi {
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10). Use any specified configuration options to override any other configuration for this request only.
-     * @param page The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param page The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1167,7 +1169,7 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listWorkflowsCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listWorkflowsCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1212,6 +1214,10 @@ public class WorkflowsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
         }
 
+        if (propertyKeys != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "propertyKeys", propertyKeys));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1232,8 +1238,8 @@ public class WorkflowsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listWorkflowsValidateBeforeCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listWorkflowsCall(asAt, filter, sortBy, limit, page, _callback, opts);
+    private HttpRequest listWorkflowsValidateBeforeCall(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listWorkflowsCall(asAt, filter, sortBy, limit, page, propertyKeys, _callback, opts);
 
     }
 
@@ -1245,6 +1251,7 @@ public class WorkflowsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. (optional)
      * @return ApiResponse&lt;PagedResourceListOfWorkflowResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1256,8 +1263,8 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfWorkflowResponse> listWorkflowsWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page) throws ApiException {
-        HttpRequest localVarCall = listWorkflowsValidateBeforeCall(asAt, filter, sortBy, limit, page, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfWorkflowResponse> listWorkflowsWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = listWorkflowsValidateBeforeCall(asAt, filter, sortBy, limit, page, propertyKeys, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfWorkflowResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1270,6 +1277,7 @@ public class WorkflowsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. (optional)
      * @return ApiResponse&lt;PagedResourceListOfWorkflowResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1281,8 +1289,8 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfWorkflowResponse> listWorkflowsWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listWorkflowsValidateBeforeCall(asAt, filter, sortBy, limit, page, null, opts);
+    private ApiResponse<PagedResourceListOfWorkflowResponse> listWorkflowsWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listWorkflowsValidateBeforeCall(asAt, filter, sortBy, limit, page, propertyKeys, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfWorkflowResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1295,6 +1303,7 @@ public class WorkflowsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1306,9 +1315,9 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listWorkflowsAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback<PagedResourceListOfWorkflowResponse> _callback) throws ApiException {
+    private void listWorkflowsAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback<PagedResourceListOfWorkflowResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listWorkflowsValidateBeforeCall(asAt, filter, sortBy, limit, page, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listWorkflowsValidateBeforeCall(asAt, filter, sortBy, limit, page, propertyKeys, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfWorkflowResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1321,6 +1330,7 @@ public class WorkflowsApi {
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. (optional, default to 10)
      * @param page The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+     * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1332,9 +1342,9 @@ public class WorkflowsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listWorkflowsAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback<PagedResourceListOfWorkflowResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listWorkflowsAsync(OffsetDateTime asAt, String filter, List<String> sortBy, Integer limit, String page, List<String> propertyKeys, final ApiCallback<PagedResourceListOfWorkflowResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listWorkflowsValidateBeforeCall(asAt, filter, sortBy, limit, page, _callback, opts);
+        HttpRequest localVarCall = listWorkflowsValidateBeforeCall(asAt, filter, sortBy, limit, page, propertyKeys, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfWorkflowResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1345,6 +1355,7 @@ public class WorkflowsApi {
         private List<String> sortBy;
         private Integer limit;
         private String page;
+        private List<String> propertyKeys;
 
         private APIlistWorkflowsRequest() {
         }
@@ -1400,6 +1411,16 @@ public class WorkflowsApi {
         }
 
         /**
+         * Set propertyKeys
+         * @param propertyKeys The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. (optional)
+         * @return APIlistWorkflowsRequest
+         */
+        public APIlistWorkflowsRequest propertyKeys(List<String> propertyKeys) {
+            this.propertyKeys = propertyKeys;
+            return this;
+        }
+
+        /**
          * Build call for listWorkflows
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -1414,7 +1435,7 @@ public class WorkflowsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listWorkflowsCall(asAt, filter, sortBy, limit, page, _callback);
+            return listWorkflowsCall(asAt, filter, sortBy, limit, page, propertyKeys, _callback);
         }
 
         /**
@@ -1431,7 +1452,7 @@ public class WorkflowsApi {
          </table>
          */
         public PagedResourceListOfWorkflowResponse execute() throws ApiException {
-            ApiResponse<PagedResourceListOfWorkflowResponse> localVarResp = listWorkflowsWithHttpInfo(asAt, filter, sortBy, limit, page);
+            ApiResponse<PagedResourceListOfWorkflowResponse> localVarResp = listWorkflowsWithHttpInfo(asAt, filter, sortBy, limit, page, propertyKeys);
             return localVarResp.getData();
         }
 
@@ -1449,7 +1470,7 @@ public class WorkflowsApi {
          </table>
          */
         public PagedResourceListOfWorkflowResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfWorkflowResponse> localVarResp = listWorkflowsWithHttpInfo(asAt, filter, sortBy, limit, page, opts);
+            ApiResponse<PagedResourceListOfWorkflowResponse> localVarResp = listWorkflowsWithHttpInfo(asAt, filter, sortBy, limit, page, propertyKeys, opts);
             return localVarResp.getData();
         }
 
@@ -1467,7 +1488,7 @@ public class WorkflowsApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfWorkflowResponse> executeWithHttpInfo() throws ApiException {
-            return listWorkflowsWithHttpInfo(asAt, filter, sortBy, limit, page);
+            return listWorkflowsWithHttpInfo(asAt, filter, sortBy, limit, page, propertyKeys);
         }
 
         /**
@@ -1484,7 +1505,7 @@ public class WorkflowsApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfWorkflowResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listWorkflowsWithHttpInfo(asAt, filter, sortBy, limit, page, opts);
+            return listWorkflowsWithHttpInfo(asAt, filter, sortBy, limit, page, propertyKeys, opts);
         }
 
         /**
@@ -1501,7 +1522,7 @@ public class WorkflowsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfWorkflowResponse> _callback) throws ApiException {
-            listWorkflowsAsync(asAt, filter, sortBy, limit, page, _callback);
+            listWorkflowsAsync(asAt, filter, sortBy, limit, page, propertyKeys, _callback);
         }
 
         /**
@@ -1518,7 +1539,7 @@ public class WorkflowsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfWorkflowResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            listWorkflowsAsync(asAt, filter, sortBy, limit, page, _callback, opts);
+            listWorkflowsAsync(asAt, filter, sortBy, limit, page, propertyKeys, _callback, opts);
         }
     }
 

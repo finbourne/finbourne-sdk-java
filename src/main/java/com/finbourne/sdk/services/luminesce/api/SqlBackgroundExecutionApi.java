@@ -366,7 +366,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -386,8 +387,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultCsvCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
-        return fetchQueryResultCsvCall(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    private HttpRequest fetchQueryResultCsvCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return fetchQueryResultCsvCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -395,7 +396,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0). Use any specified configuration options to override any other configuration for this request only.
@@ -415,7 +417,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultCsvCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultCsvCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -451,6 +453,10 @@ public class SqlBackgroundExecutionApi {
 
         if (filter != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
         }
 
         if (select != null) {
@@ -507,13 +513,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest fetchQueryResultCsvValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultCsvValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'executionId' is set
         if (executionId == null) {
             throw new ApiException("Missing the required parameter 'executionId' when calling fetchQueryResultCsv(Async)");
         }
 
-        return fetchQueryResultCsvCall(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+        return fetchQueryResultCsvCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
 
     }
 
@@ -523,7 +529,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -542,8 +549,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultCsvWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultCsvValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, null, new ConfigurationOptions());
+    private ApiResponse<String> fetchQueryResultCsvWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultCsvValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -554,7 +561,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -573,8 +581,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultCsvWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultCsvValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, null, opts);
+    private ApiResponse<String> fetchQueryResultCsvWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultCsvValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, null, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -585,7 +593,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -604,9 +613,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultCsvAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
+    private void fetchQueryResultCsvAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultCsvValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = fetchQueryResultCsvValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -617,7 +626,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -636,9 +646,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultCsvAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
+    private void fetchQueryResultCsvAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String delimiter, String escape, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultCsvValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+        HttpRequest localVarCall = fetchQueryResultCsvValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -648,6 +658,7 @@ public class SqlBackgroundExecutionApi {
         private Boolean download;
         private String sortBy;
         private String filter;
+        private String sqlFilter;
         private String select;
         private String groupBy;
         private Integer limit;
@@ -683,11 +694,21 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
          * @return APIfetchQueryResultCsvRequest
          */
         public APIfetchQueryResultCsvRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIfetchQueryResultCsvRequest
+         */
+        public APIfetchQueryResultCsvRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
             return this;
         }
 
@@ -785,7 +806,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return fetchQueryResultCsvCall(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback);
+            return fetchQueryResultCsvCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -801,7 +822,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute() throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultCsvWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds);
+            ApiResponse<String> localVarResp = fetchQueryResultCsvWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds);
             return localVarResp.getData();
         }
 
@@ -818,7 +839,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultCsvWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, opts);
+            ApiResponse<String> localVarResp = fetchQueryResultCsvWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, opts);
             return localVarResp.getData();
         }
 
@@ -835,7 +856,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo() throws ApiException {
-            return fetchQueryResultCsvWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds);
+            return fetchQueryResultCsvWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds);
         }
 
         /**
@@ -851,7 +872,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return fetchQueryResultCsvWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, opts);
+            return fetchQueryResultCsvWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, opts);
         }
 
         /**
@@ -867,7 +888,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback) throws ApiException {
-            fetchQueryResultCsvAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback);
+            fetchQueryResultCsvAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -883,7 +904,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
-            fetchQueryResultCsvAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+            fetchQueryResultCsvAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, delimiter, escape, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
         }
     }
 
@@ -907,7 +928,8 @@ public class SqlBackgroundExecutionApi {
      * Build call for fetchQueryResultExcel
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
@@ -923,15 +945,16 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultExcelCall(String executionId, String sortBy, String filter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
-        return fetchQueryResultExcelCall(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    private HttpRequest fetchQueryResultExcelCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return fetchQueryResultExcelCall(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for fetchQueryResultExcel. Use any specified configuration options to override any other configuration for this request only.
      * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional). Use any specified configuration options to override any other configuration for this request only.
@@ -947,7 +970,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultExcelCall(String executionId, String sortBy, String filter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultExcelCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -979,6 +1002,10 @@ public class SqlBackgroundExecutionApi {
 
         if (filter != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
         }
 
         if (select != null) {
@@ -1019,13 +1046,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest fetchQueryResultExcelValidateBeforeCall(String executionId, String sortBy, String filter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultExcelValidateBeforeCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'executionId' is set
         if (executionId == null) {
             throw new ApiException("Missing the required parameter 'executionId' when calling fetchQueryResultExcel(Async)");
         }
 
-        return fetchQueryResultExcelCall(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+        return fetchQueryResultExcelCall(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
 
     }
 
@@ -1034,7 +1061,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
@@ -1049,8 +1077,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<File> fetchQueryResultExcelWithHttpInfo(String executionId, String sortBy, String filter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultExcelValidateBeforeCall(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, null, new ConfigurationOptions());
+    private ApiResponse<File> fetchQueryResultExcelWithHttpInfo(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultExcelValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1060,7 +1088,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
@@ -1075,8 +1104,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<File> fetchQueryResultExcelWithHttpInfo(String executionId, String sortBy, String filter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultExcelValidateBeforeCall(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, null, opts);
+    private ApiResponse<File> fetchQueryResultExcelWithHttpInfo(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultExcelValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, null, opts);
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1086,7 +1115,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
@@ -1101,9 +1131,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultExcelAsync(String executionId, String sortBy, String filter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<File> _callback) throws ApiException {
+    private void fetchQueryResultExcelAsync(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<File> _callback) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultExcelValidateBeforeCall(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = fetchQueryResultExcelValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1113,7 +1143,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
@@ -1128,9 +1159,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultExcelAsync(String executionId, String sortBy, String filter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
+    private void fetchQueryResultExcelAsync(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultExcelValidateBeforeCall(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+        HttpRequest localVarCall = fetchQueryResultExcelValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1139,6 +1170,7 @@ public class SqlBackgroundExecutionApi {
         private final String executionId;
         private String sortBy;
         private String filter;
+        private String sqlFilter;
         private String select;
         private String groupBy;
         private String dateTimeFormat;
@@ -1160,11 +1192,21 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
          * @return APIfetchQueryResultExcelRequest
          */
         public APIfetchQueryResultExcelRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIfetchQueryResultExcelRequest
+         */
+        public APIfetchQueryResultExcelRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
             return this;
         }
 
@@ -1222,7 +1264,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return fetchQueryResultExcelCall(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback);
+            return fetchQueryResultExcelCall(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -1238,7 +1280,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public File execute() throws ApiException {
-            ApiResponse<File> localVarResp = fetchQueryResultExcelWithHttpInfo(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds);
+            ApiResponse<File> localVarResp = fetchQueryResultExcelWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds);
             return localVarResp.getData();
         }
 
@@ -1255,7 +1297,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public File execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<File> localVarResp = fetchQueryResultExcelWithHttpInfo(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, opts);
+            ApiResponse<File> localVarResp = fetchQueryResultExcelWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, opts);
             return localVarResp.getData();
         }
 
@@ -1272,7 +1314,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<File> executeWithHttpInfo() throws ApiException {
-            return fetchQueryResultExcelWithHttpInfo(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds);
+            return fetchQueryResultExcelWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds);
         }
 
         /**
@@ -1288,7 +1330,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<File> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return fetchQueryResultExcelWithHttpInfo(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, opts);
+            return fetchQueryResultExcelWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, opts);
         }
 
         /**
@@ -1304,7 +1346,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<File> _callback) throws ApiException {
-            fetchQueryResultExcelAsync(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback);
+            fetchQueryResultExcelAsync(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -1320,7 +1362,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
-            fetchQueryResultExcelAsync(executionId, sortBy, filter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+            fetchQueryResultExcelAsync(executionId, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
         }
     }
 
@@ -1347,7 +1389,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -1371,7 +1413,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -1479,7 +1521,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1505,7 +1547,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1531,7 +1573,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1558,7 +1600,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1623,7 +1665,7 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
          * @return APIfetchQueryResultHistogramRequest
          */
         public APIfetchQueryResultHistogramRequest filter(String filter) {
@@ -1778,7 +1820,8 @@ public class SqlBackgroundExecutionApi {
      * Build call for fetchQueryResultJson
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -1795,15 +1838,16 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultJsonCall(String executionId, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
-        return fetchQueryResultJsonCall(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    private HttpRequest fetchQueryResultJsonCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return fetchQueryResultJsonCall(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for fetchQueryResultJson. Use any specified configuration options to override any other configuration for this request only.
      * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0). Use any specified configuration options to override any other configuration for this request only.
@@ -1820,7 +1864,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultJsonCall(String executionId, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultJsonCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1852,6 +1896,10 @@ public class SqlBackgroundExecutionApi {
 
         if (filter != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
         }
 
         if (select != null) {
@@ -1896,13 +1944,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest fetchQueryResultJsonValidateBeforeCall(String executionId, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultJsonValidateBeforeCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'executionId' is set
         if (executionId == null) {
             throw new ApiException("Missing the required parameter 'executionId' when calling fetchQueryResultJson(Async)");
         }
 
-        return fetchQueryResultJsonCall(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+        return fetchQueryResultJsonCall(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
 
     }
 
@@ -1911,7 +1959,8 @@ public class SqlBackgroundExecutionApi {
      *  *Please move to &#39;/jsonProper&#39; instead.  This may be marked as Deprecated in the future.*  Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -1927,8 +1976,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultJsonWithHttpInfo(String executionId, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultJsonValidateBeforeCall(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, null, new ConfigurationOptions());
+    private ApiResponse<String> fetchQueryResultJsonWithHttpInfo(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultJsonValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1938,7 +1987,8 @@ public class SqlBackgroundExecutionApi {
      *  *Please move to &#39;/jsonProper&#39; instead.  This may be marked as Deprecated in the future.*  Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -1954,8 +2004,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultJsonWithHttpInfo(String executionId, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultJsonValidateBeforeCall(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, null, opts);
+    private ApiResponse<String> fetchQueryResultJsonWithHttpInfo(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultJsonValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, null, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1965,7 +2015,8 @@ public class SqlBackgroundExecutionApi {
      *  *Please move to &#39;/jsonProper&#39; instead.  This may be marked as Deprecated in the future.*  Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -1981,9 +2032,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultJsonAsync(String executionId, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
+    private void fetchQueryResultJsonAsync(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultJsonValidateBeforeCall(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = fetchQueryResultJsonValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1993,7 +2044,8 @@ public class SqlBackgroundExecutionApi {
      *  *Please move to &#39;/jsonProper&#39; instead.  This may be marked as Deprecated in the future.*  Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2009,9 +2061,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultJsonAsync(String executionId, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
+    private void fetchQueryResultJsonAsync(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultJsonValidateBeforeCall(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+        HttpRequest localVarCall = fetchQueryResultJsonValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2020,6 +2072,7 @@ public class SqlBackgroundExecutionApi {
         private final String executionId;
         private String sortBy;
         private String filter;
+        private String sqlFilter;
         private String select;
         private String groupBy;
         private Integer limit;
@@ -2042,11 +2095,21 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
          * @return APIfetchQueryResultJsonRequest
          */
         public APIfetchQueryResultJsonRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIfetchQueryResultJsonRequest
+         */
+        public APIfetchQueryResultJsonRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
             return this;
         }
 
@@ -2114,7 +2177,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return fetchQueryResultJsonCall(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
+            return fetchQueryResultJsonCall(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -2130,7 +2193,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute() throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultJsonWithHttpInfo(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds);
+            ApiResponse<String> localVarResp = fetchQueryResultJsonWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds);
             return localVarResp.getData();
         }
 
@@ -2147,7 +2210,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultJsonWithHttpInfo(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
+            ApiResponse<String> localVarResp = fetchQueryResultJsonWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
             return localVarResp.getData();
         }
 
@@ -2164,7 +2227,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo() throws ApiException {
-            return fetchQueryResultJsonWithHttpInfo(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds);
+            return fetchQueryResultJsonWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds);
         }
 
         /**
@@ -2180,7 +2243,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return fetchQueryResultJsonWithHttpInfo(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
+            return fetchQueryResultJsonWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
         }
 
         /**
@@ -2196,7 +2259,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback) throws ApiException {
-            fetchQueryResultJsonAsync(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
+            fetchQueryResultJsonAsync(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -2212,7 +2275,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
-            fetchQueryResultJsonAsync(executionId, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+            fetchQueryResultJsonAsync(executionId, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
         }
     }
 
@@ -2237,7 +2300,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2254,8 +2318,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultJsonProperCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
-        return fetchQueryResultJsonProperCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    private HttpRequest fetchQueryResultJsonProperCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return fetchQueryResultJsonProperCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -2263,7 +2327,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0). Use any specified configuration options to override any other configuration for this request only.
@@ -2280,7 +2345,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultJsonProperCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultJsonProperCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2316,6 +2381,10 @@ public class SqlBackgroundExecutionApi {
 
         if (filter != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
         }
 
         if (select != null) {
@@ -2360,13 +2429,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest fetchQueryResultJsonProperValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultJsonProperValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'executionId' is set
         if (executionId == null) {
             throw new ApiException("Missing the required parameter 'executionId' when calling fetchQueryResultJsonProper(Async)");
         }
 
-        return fetchQueryResultJsonProperCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+        return fetchQueryResultJsonProperCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
 
     }
 
@@ -2376,7 +2445,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2392,8 +2462,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultJsonProperWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultJsonProperValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, null, new ConfigurationOptions());
+    private ApiResponse<String> fetchQueryResultJsonProperWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultJsonProperValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2404,7 +2474,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2420,8 +2491,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultJsonProperWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultJsonProperValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, null, opts);
+    private ApiResponse<String> fetchQueryResultJsonProperWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultJsonProperValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, null, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2432,7 +2503,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2448,9 +2520,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultJsonProperAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
+    private void fetchQueryResultJsonProperAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultJsonProperValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = fetchQueryResultJsonProperValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2461,7 +2533,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2477,9 +2550,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultJsonProperAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
+    private void fetchQueryResultJsonProperAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultJsonProperValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+        HttpRequest localVarCall = fetchQueryResultJsonProperValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2489,6 +2562,7 @@ public class SqlBackgroundExecutionApi {
         private Boolean download;
         private String sortBy;
         private String filter;
+        private String sqlFilter;
         private String select;
         private String groupBy;
         private Integer limit;
@@ -2521,11 +2595,21 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
          * @return APIfetchQueryResultJsonProperRequest
          */
         public APIfetchQueryResultJsonProperRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIfetchQueryResultJsonProperRequest
+         */
+        public APIfetchQueryResultJsonProperRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
             return this;
         }
 
@@ -2593,7 +2677,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return fetchQueryResultJsonProperCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
+            return fetchQueryResultJsonProperCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -2609,7 +2693,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute() throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultJsonProperWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds);
+            ApiResponse<String> localVarResp = fetchQueryResultJsonProperWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds);
             return localVarResp.getData();
         }
 
@@ -2626,7 +2710,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultJsonProperWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
+            ApiResponse<String> localVarResp = fetchQueryResultJsonProperWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
             return localVarResp.getData();
         }
 
@@ -2643,7 +2727,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo() throws ApiException {
-            return fetchQueryResultJsonProperWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds);
+            return fetchQueryResultJsonProperWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds);
         }
 
         /**
@@ -2659,7 +2743,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return fetchQueryResultJsonProperWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
+            return fetchQueryResultJsonProperWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
         }
 
         /**
@@ -2675,7 +2759,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback) throws ApiException {
-            fetchQueryResultJsonProperAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
+            fetchQueryResultJsonProperAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -2691,7 +2775,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
-            fetchQueryResultJsonProperAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+            fetchQueryResultJsonProperAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
         }
     }
 
@@ -2716,7 +2800,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2733,8 +2818,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultJsonProperWithLineageCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
-        return fetchQueryResultJsonProperWithLineageCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    private HttpRequest fetchQueryResultJsonProperWithLineageCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return fetchQueryResultJsonProperWithLineageCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -2742,7 +2827,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0). Use any specified configuration options to override any other configuration for this request only.
@@ -2759,7 +2845,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultJsonProperWithLineageCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultJsonProperWithLineageCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2795,6 +2881,10 @@ public class SqlBackgroundExecutionApi {
 
         if (filter != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
         }
 
         if (select != null) {
@@ -2839,13 +2929,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest fetchQueryResultJsonProperWithLineageValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultJsonProperWithLineageValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'executionId' is set
         if (executionId == null) {
             throw new ApiException("Missing the required parameter 'executionId' when calling fetchQueryResultJsonProperWithLineage(Async)");
         }
 
-        return fetchQueryResultJsonProperWithLineageCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+        return fetchQueryResultJsonProperWithLineageCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
 
     }
 
@@ -2855,7 +2945,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2871,8 +2962,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultJsonProperWithLineageWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultJsonProperWithLineageValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, null, new ConfigurationOptions());
+    private ApiResponse<String> fetchQueryResultJsonProperWithLineageWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultJsonProperWithLineageValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2883,7 +2974,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2899,8 +2991,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultJsonProperWithLineageWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultJsonProperWithLineageValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, null, opts);
+    private ApiResponse<String> fetchQueryResultJsonProperWithLineageWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultJsonProperWithLineageValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, null, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2911,7 +3003,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2927,9 +3020,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultJsonProperWithLineageAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
+    private void fetchQueryResultJsonProperWithLineageAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultJsonProperWithLineageValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = fetchQueryResultJsonProperWithLineageValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2940,7 +3033,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -2956,9 +3050,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultJsonProperWithLineageAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
+    private void fetchQueryResultJsonProperWithLineageAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultJsonProperWithLineageValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+        HttpRequest localVarCall = fetchQueryResultJsonProperWithLineageValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2968,6 +3062,7 @@ public class SqlBackgroundExecutionApi {
         private Boolean download;
         private String sortBy;
         private String filter;
+        private String sqlFilter;
         private String select;
         private String groupBy;
         private Integer limit;
@@ -3000,11 +3095,21 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
          * @return APIfetchQueryResultJsonProperWithLineageRequest
          */
         public APIfetchQueryResultJsonProperWithLineageRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIfetchQueryResultJsonProperWithLineageRequest
+         */
+        public APIfetchQueryResultJsonProperWithLineageRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
             return this;
         }
 
@@ -3072,7 +3177,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return fetchQueryResultJsonProperWithLineageCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
+            return fetchQueryResultJsonProperWithLineageCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -3088,7 +3193,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute() throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultJsonProperWithLineageWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds);
+            ApiResponse<String> localVarResp = fetchQueryResultJsonProperWithLineageWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds);
             return localVarResp.getData();
         }
 
@@ -3105,7 +3210,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultJsonProperWithLineageWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
+            ApiResponse<String> localVarResp = fetchQueryResultJsonProperWithLineageWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
             return localVarResp.getData();
         }
 
@@ -3122,7 +3227,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo() throws ApiException {
-            return fetchQueryResultJsonProperWithLineageWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds);
+            return fetchQueryResultJsonProperWithLineageWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds);
         }
 
         /**
@@ -3138,7 +3243,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return fetchQueryResultJsonProperWithLineageWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
+            return fetchQueryResultJsonProperWithLineageWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
         }
 
         /**
@@ -3154,7 +3259,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback) throws ApiException {
-            fetchQueryResultJsonProperWithLineageAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
+            fetchQueryResultJsonProperWithLineageAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -3170,7 +3275,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
-            fetchQueryResultJsonProperWithLineageAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+            fetchQueryResultJsonProperWithLineageAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
         }
     }
 
@@ -3194,7 +3299,8 @@ public class SqlBackgroundExecutionApi {
      * Build call for fetchQueryResultParquet
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -3209,15 +3315,16 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultParquetCall(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
-        return fetchQueryResultParquetCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    private HttpRequest fetchQueryResultParquetCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return fetchQueryResultParquetCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for fetchQueryResultParquet. Use any specified configuration options to override any other configuration for this request only.
      * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -3232,7 +3339,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultParquetCall(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultParquetCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3264,6 +3371,10 @@ public class SqlBackgroundExecutionApi {
 
         if (filter != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
         }
 
         if (select != null) {
@@ -3300,13 +3411,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest fetchQueryResultParquetValidateBeforeCall(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultParquetValidateBeforeCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'executionId' is set
         if (executionId == null) {
             throw new ApiException("Missing the required parameter 'executionId' when calling fetchQueryResultParquet(Async)");
         }
 
-        return fetchQueryResultParquetCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback, opts);
+        return fetchQueryResultParquetCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback, opts);
 
     }
 
@@ -3315,7 +3426,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -3329,8 +3441,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<File> fetchQueryResultParquetWithHttpInfo(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultParquetValidateBeforeCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, null, new ConfigurationOptions());
+    private ApiResponse<File> fetchQueryResultParquetWithHttpInfo(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultParquetValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3340,7 +3452,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -3354,8 +3467,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<File> fetchQueryResultParquetWithHttpInfo(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultParquetValidateBeforeCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, null, opts);
+    private ApiResponse<File> fetchQueryResultParquetWithHttpInfo(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultParquetValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, null, opts);
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3365,7 +3478,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -3379,9 +3493,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultParquetAsync(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback<File> _callback) throws ApiException {
+    private void fetchQueryResultParquetAsync(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback<File> _callback) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultParquetValidateBeforeCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = fetchQueryResultParquetValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -3391,7 +3505,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -3405,9 +3520,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultParquetAsync(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
+    private void fetchQueryResultParquetAsync(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultParquetValidateBeforeCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback, opts);
+        HttpRequest localVarCall = fetchQueryResultParquetValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback, opts);
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -3416,6 +3531,7 @@ public class SqlBackgroundExecutionApi {
         private final String executionId;
         private String sortBy;
         private String filter;
+        private String sqlFilter;
         private String select;
         private String groupBy;
         private Integer loadWaitMilliseconds;
@@ -3436,11 +3552,21 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
          * @return APIfetchQueryResultParquetRequest
          */
         public APIfetchQueryResultParquetRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIfetchQueryResultParquetRequest
+         */
+        public APIfetchQueryResultParquetRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
             return this;
         }
 
@@ -3488,7 +3614,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return fetchQueryResultParquetCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback);
+            return fetchQueryResultParquetCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -3504,7 +3630,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public File execute() throws ApiException {
-            ApiResponse<File> localVarResp = fetchQueryResultParquetWithHttpInfo(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds);
+            ApiResponse<File> localVarResp = fetchQueryResultParquetWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds);
             return localVarResp.getData();
         }
 
@@ -3521,7 +3647,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public File execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<File> localVarResp = fetchQueryResultParquetWithHttpInfo(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, opts);
+            ApiResponse<File> localVarResp = fetchQueryResultParquetWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, opts);
             return localVarResp.getData();
         }
 
@@ -3538,7 +3664,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<File> executeWithHttpInfo() throws ApiException {
-            return fetchQueryResultParquetWithHttpInfo(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds);
+            return fetchQueryResultParquetWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds);
         }
 
         /**
@@ -3554,7 +3680,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<File> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return fetchQueryResultParquetWithHttpInfo(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, opts);
+            return fetchQueryResultParquetWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, opts);
         }
 
         /**
@@ -3570,7 +3696,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<File> _callback) throws ApiException {
-            fetchQueryResultParquetAsync(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback);
+            fetchQueryResultParquetAsync(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -3586,7 +3712,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
-            fetchQueryResultParquetAsync(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback, opts);
+            fetchQueryResultParquetAsync(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback, opts);
         }
     }
 
@@ -3611,7 +3737,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -3629,8 +3756,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultPipeCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
-        return fetchQueryResultPipeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    private HttpRequest fetchQueryResultPipeCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return fetchQueryResultPipeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -3638,7 +3765,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0). Use any specified configuration options to override any other configuration for this request only.
@@ -3656,7 +3784,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultPipeCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultPipeCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3692,6 +3820,10 @@ public class SqlBackgroundExecutionApi {
 
         if (filter != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
         }
 
         if (select != null) {
@@ -3740,13 +3872,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest fetchQueryResultPipeValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultPipeValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'executionId' is set
         if (executionId == null) {
             throw new ApiException("Missing the required parameter 'executionId' when calling fetchQueryResultPipe(Async)");
         }
 
-        return fetchQueryResultPipeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+        return fetchQueryResultPipeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
 
     }
 
@@ -3756,7 +3888,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -3773,8 +3906,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultPipeWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultPipeValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, null, new ConfigurationOptions());
+    private ApiResponse<String> fetchQueryResultPipeWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultPipeValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3785,7 +3918,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -3802,8 +3936,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultPipeWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultPipeValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, null, opts);
+    private ApiResponse<String> fetchQueryResultPipeWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultPipeValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, null, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3814,7 +3948,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -3831,9 +3966,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultPipeAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
+    private void fetchQueryResultPipeAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultPipeValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = fetchQueryResultPipeValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -3844,7 +3979,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -3861,9 +3997,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultPipeAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
+    private void fetchQueryResultPipeAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultPipeValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+        HttpRequest localVarCall = fetchQueryResultPipeValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -3873,6 +4009,7 @@ public class SqlBackgroundExecutionApi {
         private Boolean download;
         private String sortBy;
         private String filter;
+        private String sqlFilter;
         private String select;
         private String groupBy;
         private Integer limit;
@@ -3906,11 +4043,21 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
          * @return APIfetchQueryResultPipeRequest
          */
         public APIfetchQueryResultPipeRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIfetchQueryResultPipeRequest
+         */
+        public APIfetchQueryResultPipeRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
             return this;
         }
 
@@ -3988,7 +4135,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return fetchQueryResultPipeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback);
+            return fetchQueryResultPipeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -4004,7 +4151,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute() throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultPipeWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds);
+            ApiResponse<String> localVarResp = fetchQueryResultPipeWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds);
             return localVarResp.getData();
         }
 
@@ -4021,7 +4168,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultPipeWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, opts);
+            ApiResponse<String> localVarResp = fetchQueryResultPipeWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, opts);
             return localVarResp.getData();
         }
 
@@ -4038,7 +4185,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo() throws ApiException {
-            return fetchQueryResultPipeWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds);
+            return fetchQueryResultPipeWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds);
         }
 
         /**
@@ -4054,7 +4201,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return fetchQueryResultPipeWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, opts);
+            return fetchQueryResultPipeWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, opts);
         }
 
         /**
@@ -4070,7 +4217,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback) throws ApiException {
-            fetchQueryResultPipeAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback);
+            fetchQueryResultPipeAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -4086,7 +4233,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
-            fetchQueryResultPipeAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+            fetchQueryResultPipeAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
         }
     }
 
@@ -4110,7 +4257,8 @@ public class SqlBackgroundExecutionApi {
      * Build call for fetchQueryResultSqlite
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -4125,15 +4273,16 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultSqliteCall(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
-        return fetchQueryResultSqliteCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    private HttpRequest fetchQueryResultSqliteCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return fetchQueryResultSqliteCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for fetchQueryResultSqlite. Use any specified configuration options to override any other configuration for this request only.
      * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -4148,7 +4297,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultSqliteCall(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultSqliteCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4180,6 +4329,10 @@ public class SqlBackgroundExecutionApi {
 
         if (filter != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
         }
 
         if (select != null) {
@@ -4216,13 +4369,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest fetchQueryResultSqliteValidateBeforeCall(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultSqliteValidateBeforeCall(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'executionId' is set
         if (executionId == null) {
             throw new ApiException("Missing the required parameter 'executionId' when calling fetchQueryResultSqlite(Async)");
         }
 
-        return fetchQueryResultSqliteCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback, opts);
+        return fetchQueryResultSqliteCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback, opts);
 
     }
 
@@ -4231,7 +4384,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -4245,8 +4399,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<File> fetchQueryResultSqliteWithHttpInfo(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultSqliteValidateBeforeCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, null, new ConfigurationOptions());
+    private ApiResponse<File> fetchQueryResultSqliteWithHttpInfo(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultSqliteValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4256,7 +4410,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -4270,8 +4425,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<File> fetchQueryResultSqliteWithHttpInfo(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultSqliteValidateBeforeCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, null, opts);
+    private ApiResponse<File> fetchQueryResultSqliteWithHttpInfo(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultSqliteValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, null, opts);
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4281,7 +4436,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -4295,9 +4451,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultSqliteAsync(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback<File> _callback) throws ApiException {
+    private void fetchQueryResultSqliteAsync(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback<File> _callback) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultSqliteValidateBeforeCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = fetchQueryResultSqliteValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -4307,7 +4463,8 @@ public class SqlBackgroundExecutionApi {
      * Fetch the data in the format of the method&#39;s name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
      * @param executionId ExecutionId returned when starting the query (required)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
@@ -4321,9 +4478,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultSqliteAsync(String executionId, String sortBy, String filter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
+    private void fetchQueryResultSqliteAsync(String executionId, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer loadWaitMilliseconds, final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultSqliteValidateBeforeCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback, opts);
+        HttpRequest localVarCall = fetchQueryResultSqliteValidateBeforeCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback, opts);
         Type localVarReturnType = new TypeReference<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -4332,6 +4489,7 @@ public class SqlBackgroundExecutionApi {
         private final String executionId;
         private String sortBy;
         private String filter;
+        private String sqlFilter;
         private String select;
         private String groupBy;
         private Integer loadWaitMilliseconds;
@@ -4352,11 +4510,21 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
          * @return APIfetchQueryResultSqliteRequest
          */
         public APIfetchQueryResultSqliteRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIfetchQueryResultSqliteRequest
+         */
+        public APIfetchQueryResultSqliteRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
             return this;
         }
 
@@ -4404,7 +4572,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return fetchQueryResultSqliteCall(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback);
+            return fetchQueryResultSqliteCall(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -4420,7 +4588,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public File execute() throws ApiException {
-            ApiResponse<File> localVarResp = fetchQueryResultSqliteWithHttpInfo(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds);
+            ApiResponse<File> localVarResp = fetchQueryResultSqliteWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds);
             return localVarResp.getData();
         }
 
@@ -4437,7 +4605,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public File execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<File> localVarResp = fetchQueryResultSqliteWithHttpInfo(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, opts);
+            ApiResponse<File> localVarResp = fetchQueryResultSqliteWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, opts);
             return localVarResp.getData();
         }
 
@@ -4454,7 +4622,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<File> executeWithHttpInfo() throws ApiException {
-            return fetchQueryResultSqliteWithHttpInfo(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds);
+            return fetchQueryResultSqliteWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds);
         }
 
         /**
@@ -4470,7 +4638,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<File> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return fetchQueryResultSqliteWithHttpInfo(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, opts);
+            return fetchQueryResultSqliteWithHttpInfo(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, opts);
         }
 
         /**
@@ -4486,7 +4654,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<File> _callback) throws ApiException {
-            fetchQueryResultSqliteAsync(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback);
+            fetchQueryResultSqliteAsync(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -4502,7 +4670,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
-            fetchQueryResultSqliteAsync(executionId, sortBy, filter, select, groupBy, loadWaitMilliseconds, _callback, opts);
+            fetchQueryResultSqliteAsync(executionId, sortBy, filter, sqlFilter, select, groupBy, loadWaitMilliseconds, _callback, opts);
         }
     }
 
@@ -4527,7 +4695,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -4544,8 +4713,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultXmlCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
-        return fetchQueryResultXmlCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    private HttpRequest fetchQueryResultXmlCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return fetchQueryResultXmlCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -4553,7 +4722,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0). Use any specified configuration options to override any other configuration for this request only.
@@ -4570,7 +4740,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest fetchQueryResultXmlCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultXmlCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4606,6 +4776,10 @@ public class SqlBackgroundExecutionApi {
 
         if (filter != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
         }
 
         if (select != null) {
@@ -4650,13 +4824,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest fetchQueryResultXmlValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest fetchQueryResultXmlValidateBeforeCall(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'executionId' is set
         if (executionId == null) {
             throw new ApiException("Missing the required parameter 'executionId' when calling fetchQueryResultXml(Async)");
         }
 
-        return fetchQueryResultXmlCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+        return fetchQueryResultXmlCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
 
     }
 
@@ -4666,7 +4840,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -4682,8 +4857,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultXmlWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultXmlValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, null, new ConfigurationOptions());
+    private ApiResponse<String> fetchQueryResultXmlWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultXmlValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4694,7 +4869,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -4710,8 +4886,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<String> fetchQueryResultXmlWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = fetchQueryResultXmlValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, null, opts);
+    private ApiResponse<String> fetchQueryResultXmlWithHttpInfo(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = fetchQueryResultXmlValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, null, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4722,7 +4898,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -4738,9 +4915,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultXmlAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
+    private void fetchQueryResultXmlAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultXmlValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = fetchQueryResultXmlValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -4751,7 +4928,8 @@ public class SqlBackgroundExecutionApi {
      * @param executionId ExecutionId returned when starting the query (required)
      * @param download Makes this a file-download request (as opposed to returning the data in the response-body) (optional, default to false)
      * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
-     * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
      * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
      * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
      * @param limit When paginating, only return this number of records, page should also be specified. (optional, default to 0)
@@ -4767,9 +4945,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void fetchQueryResultXmlAsync(String executionId, Boolean download, String sortBy, String filter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
+    private void fetchQueryResultXmlAsync(String executionId, Boolean download, String sortBy, String filter, String sqlFilter, String select, String groupBy, Integer limit, Integer page, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = fetchQueryResultXmlValidateBeforeCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+        HttpRequest localVarCall = fetchQueryResultXmlValidateBeforeCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
         Type localVarReturnType = new TypeReference<String>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -4779,6 +4957,7 @@ public class SqlBackgroundExecutionApi {
         private Boolean download;
         private String sortBy;
         private String filter;
+        private String sqlFilter;
         private String select;
         private String groupBy;
         private Integer limit;
@@ -4811,11 +4990,21 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter An ODATA filter per Finbourne.Filtering syntax. (optional)
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
          * @return APIfetchQueryResultXmlRequest
          */
         public APIfetchQueryResultXmlRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIfetchQueryResultXmlRequest
+         */
+        public APIfetchQueryResultXmlRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
             return this;
         }
 
@@ -4883,7 +5072,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return fetchQueryResultXmlCall(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
+            return fetchQueryResultXmlCall(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -4899,7 +5088,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute() throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultXmlWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds);
+            ApiResponse<String> localVarResp = fetchQueryResultXmlWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds);
             return localVarResp.getData();
         }
 
@@ -4916,7 +5105,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public String execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<String> localVarResp = fetchQueryResultXmlWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
+            ApiResponse<String> localVarResp = fetchQueryResultXmlWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
             return localVarResp.getData();
         }
 
@@ -4933,7 +5122,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo() throws ApiException {
-            return fetchQueryResultXmlWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds);
+            return fetchQueryResultXmlWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds);
         }
 
         /**
@@ -4949,7 +5138,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<String> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return fetchQueryResultXmlWithHttpInfo(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
+            return fetchQueryResultXmlWithHttpInfo(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, opts);
         }
 
         /**
@@ -4965,7 +5154,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback) throws ApiException {
-            fetchQueryResultXmlAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
+            fetchQueryResultXmlAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback);
         }
 
         /**
@@ -4981,7 +5170,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
-            fetchQueryResultXmlAsync(executionId, download, sortBy, filter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
+            fetchQueryResultXmlAsync(executionId, download, sortBy, filter, sqlFilter, select, groupBy, limit, page, loadWaitMilliseconds, _callback, opts);
         }
     }
 

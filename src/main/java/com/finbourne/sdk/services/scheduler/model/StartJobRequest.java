@@ -41,7 +41,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   StartJobRequest.JSON_PROPERTY_ARGUMENTS,
   StartJobRequest.JSON_PROPERTY_NOTIFICATIONS,
-  StartJobRequest.JSON_PROPERTY_USE_AS_AUTH
+  StartJobRequest.JSON_PROPERTY_USE_AS_AUTH,
+  StartJobRequest.JSON_PROPERTY_RUN_ID
 })
 
 public class StartJobRequest {
@@ -59,6 +60,11 @@ public class StartJobRequest {
   @JsonProperty(JSON_PROPERTY_USE_AS_AUTH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String useAsAuth;
+
+  public static final String JSON_PROPERTY_RUN_ID = "runId";
+  @JsonProperty(JSON_PROPERTY_RUN_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String runId;
 
   public StartJobRequest() {
   }
@@ -123,7 +129,7 @@ public class StartJobRequest {
   }
 
   /**
-   * Id of user associated with schedule. All calls to FINBOURNE services as part of execution of this schedule will be authenticated as this  user. Can be null, in which case we&#39;ll default to that of the user  making this request
+   * Id of user associated with schedule. All calls to FINBOURNE services as part of execution of this schedule will be authenticated as this user. Can be null, in which case we&#39;ll default to that of the user making this request
    * @return useAsAuth
    */
   @javax.annotation.Nullable
@@ -133,6 +139,25 @@ public class StartJobRequest {
 
   public void setUseAsAuth(String useAsAuth) {
     this.useAsAuth = useAsAuth;
+  }
+
+
+  public StartJobRequest runId(String runId) {
+    this.runId = runId;
+    return this;
+  }
+
+  /**
+   * Optional pre-generated RunId (Guid format) for this job run. When provided, this is used as the RunId instead of generating a new one, allowing the caller to pre-generate and track the run before it starts.
+   * @return runId
+   */
+  @javax.annotation.Nullable
+  public String getRunId() {
+    return runId;
+  }
+
+  public void setRunId(String runId) {
+    this.runId = runId;
   }
 
 
@@ -147,7 +172,8 @@ public class StartJobRequest {
     StartJobRequest startJobRequest = (StartJobRequest) o;
     return Objects.equals(this.arguments, startJobRequest.arguments) &&
         Objects.equals(this.notifications, startJobRequest.notifications) &&
-        Objects.equals(this.useAsAuth, startJobRequest.useAsAuth);
+        Objects.equals(this.useAsAuth, startJobRequest.useAsAuth) &&
+        Objects.equals(this.runId, startJobRequest.runId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -156,7 +182,7 @@ public class StartJobRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(arguments, notifications, useAsAuth);
+    return Objects.hash(arguments, notifications, useAsAuth, runId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -173,6 +199,7 @@ public class StartJobRequest {
     sb.append("    arguments: ").append(toIndentedString(arguments)).append("\n");
     sb.append("    notifications: ").append(toIndentedString(notifications)).append("\n");
     sb.append("    useAsAuth: ").append(toIndentedString(useAsAuth)).append("\n");
+    sb.append("    runId: ").append(toIndentedString(runId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

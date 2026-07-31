@@ -8,6 +8,7 @@ All URIs are relative to *http://localhost*
 | [**getRequestLog**](RequestsApi.md#getRequestLog) | **GET** /insights/api/requests/{id} | GetRequestLog: Get the log for a specific API request. |
 | [**getResponse**](RequestsApi.md#getResponse) | **GET** /insights/api/requests/{id}/response | GetResponse: Get the response for a specific API request. |
 | [**listRequestLogs**](RequestsApi.md#listRequestLogs) | **GET** /insights/api/requests | ListRequestLogs: Get the logs for API requests. |
+| [**queryRequestLogs**](RequestsApi.md#queryRequestLogs) | **POST** /insights/api/requests/$query | QueryRequestLogs: Query the logs for API requests, returning only the caller-specified fields in addition to the always-required fields (Timestamp, Id, Application, Operation). The server fetches only the requested columns from the underlying data source to minimise payload and query time. |
 
 
 
@@ -302,6 +303,80 @@ public class RequestsApiExample {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## queryRequestLogs
+
+> ResourceListOfQueriedRequestLog queryRequestLogs(queryRequestLogsRequest)
+
+QueryRequestLogs: Query the logs for API requests, returning only the caller-specified fields in addition to the always-required fields (Timestamp, Id, Application, Operation). The server fetches only the requested columns from the underlying data source to minimise payload and query time.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.insights.model.*;
+import com.finbourne.sdk.services.insights.api.RequestsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RequestsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RequestsApi apiInstance = apiFactory.build(RequestsApi.class);
+        QueryRequestLogsRequest queryRequestLogsRequest = new QueryRequestLogsRequest(); // QueryRequestLogsRequest | The query parameters in the request body.
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResourceListOfQueriedRequestLog result = apiInstance.queryRequestLogs(queryRequestLogsRequest).execute(opts);
+
+            ResourceListOfQueriedRequestLog result = apiInstance.queryRequestLogs(queryRequestLogsRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RequestsApi#queryRequestLogs");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **queryRequestLogsRequest** | [**QueryRequestLogsRequest**](QueryRequestLogsRequest.md)| The query parameters in the request body. | |
+
+### Return type
+
+[**ResourceListOfQueriedRequestLog**](ResourceListOfQueriedRequestLog.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
 - **Accept**: text/plain, application/json, text/json
 
 
