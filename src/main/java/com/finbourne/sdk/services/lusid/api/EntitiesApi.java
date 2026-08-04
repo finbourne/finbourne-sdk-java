@@ -39,6 +39,7 @@ import com.finbourne.sdk.services.lusid.model.PropertyDefinitionEntity;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfChange;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfChangeInterval;
 import com.finbourne.sdk.services.lusid.model.TransactionEntity;
+import com.finbourne.sdk.services.lusid.model.ValuationPointEntity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -3505,5 +3506,358 @@ public class EntitiesApi {
      */
     public APIgetTransactionByEntityUniqueIdRequest getTransactionByEntityUniqueId(String entityUniqueId) {
         return new APIgetTransactionByEntityUniqueIdRequest(entityUniqueId);
+    }
+    /**
+     * Build call for getValuationPointByEntityUniqueId
+     * @param entityUniqueId The universally unique identifier of the valuation point. (required)
+     * @param asAt The asAt datetime at which to retrieve the valuation point. Defaults to returning the latest version of the valuation point if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getValuationPointByEntityUniqueIdCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback _callback) throws ApiException {
+        return getValuationPointByEntityUniqueIdCall(entityUniqueId, asAt, previews,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getValuationPointByEntityUniqueId. Use any specified configuration options to override any other configuration for this request only.
+     * @param entityUniqueId The universally unique identifier of the valuation point. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the valuation point. Defaults to returning the latest version of the valuation point if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getValuationPointByEntityUniqueIdCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/entities/valuationpoints/{entityUniqueId}"
+            .replace("{" + "entityUniqueId" + "}", localVarApiClient.escapeString(entityUniqueId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (previews != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "previews", previews));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getValuationPointByEntityUniqueIdValidateBeforeCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'entityUniqueId' is set
+        if (entityUniqueId == null) {
+            throw new ApiException("Missing the required parameter 'entityUniqueId' when calling getValuationPointByEntityUniqueId(Async)");
+        }
+
+        return getValuationPointByEntityUniqueIdCall(entityUniqueId, asAt, previews, _callback, opts);
+
+    }
+
+    /**
+     * GetValuationPointByEntityUniqueId: Get valuation point by EntityUniqueId
+     * Retrieve the definition of a particular valuation point.    If the valuation point is deleted, this will return the state of the valuation point immediately prior to deletion.
+     * @param entityUniqueId The universally unique identifier of the valuation point. (required)
+     * @param asAt The asAt datetime at which to retrieve the valuation point. Defaults to returning the latest version of the valuation point if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @return ApiResponse&lt;ValuationPointEntity&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ValuationPointEntity> getValuationPointByEntityUniqueIdWithHttpInfo(String entityUniqueId, OffsetDateTime asAt, List<String> previews) throws ApiException {
+        HttpRequest localVarCall = getValuationPointByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ValuationPointEntity>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * GetValuationPointByEntityUniqueId: Get valuation point by EntityUniqueId
+     * Retrieve the definition of a particular valuation point.    If the valuation point is deleted, this will return the state of the valuation point immediately prior to deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param entityUniqueId The universally unique identifier of the valuation point. (required)
+     * @param asAt The asAt datetime at which to retrieve the valuation point. Defaults to returning the latest version of the valuation point if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @return ApiResponse&lt;ValuationPointEntity&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ValuationPointEntity> getValuationPointByEntityUniqueIdWithHttpInfo(String entityUniqueId, OffsetDateTime asAt, List<String> previews, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getValuationPointByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, null, opts);
+        Type localVarReturnType = new TypeReference<ValuationPointEntity>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * GetValuationPointByEntityUniqueId: Get valuation point by EntityUniqueId (asynchronously)
+     * Retrieve the definition of a particular valuation point.    If the valuation point is deleted, this will return the state of the valuation point immediately prior to deletion.
+     * @param entityUniqueId The universally unique identifier of the valuation point. (required)
+     * @param asAt The asAt datetime at which to retrieve the valuation point. Defaults to returning the latest version of the valuation point if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getValuationPointByEntityUniqueIdAsync(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback<ValuationPointEntity> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getValuationPointByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ValuationPointEntity>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * GetValuationPointByEntityUniqueId: Get valuation point by EntityUniqueId (asynchronously)
+     * Retrieve the definition of a particular valuation point.    If the valuation point is deleted, this will return the state of the valuation point immediately prior to deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param entityUniqueId The universally unique identifier of the valuation point. (required)
+     * @param asAt The asAt datetime at which to retrieve the valuation point. Defaults to returning the latest version of the valuation point if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getValuationPointByEntityUniqueIdAsync(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback<ValuationPointEntity> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getValuationPointByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, _callback, opts);
+        Type localVarReturnType = new TypeReference<ValuationPointEntity>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetValuationPointByEntityUniqueIdRequest {
+        private final String entityUniqueId;
+        private OffsetDateTime asAt;
+        private List<String> previews;
+
+        private APIgetValuationPointByEntityUniqueIdRequest(String entityUniqueId) {
+            this.entityUniqueId = entityUniqueId;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the valuation point. Defaults to returning the latest version of the valuation point if not specified. (optional)
+         * @return APIgetValuationPointByEntityUniqueIdRequest
+         */
+        public APIgetValuationPointByEntityUniqueIdRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set previews
+         * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+         * @return APIgetValuationPointByEntityUniqueIdRequest
+         */
+        public APIgetValuationPointByEntityUniqueIdRequest previews(List<String> previews) {
+            this.previews = previews;
+            return this;
+        }
+
+        /**
+         * Build call for getValuationPointByEntityUniqueId
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getValuationPointByEntityUniqueIdCall(entityUniqueId, asAt, previews, _callback);
+        }
+
+        /**
+         * Execute getValuationPointByEntityUniqueId request
+         * @return ValuationPointEntity
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ValuationPointEntity execute() throws ApiException {
+            ApiResponse<ValuationPointEntity> localVarResp = getValuationPointByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getValuationPointByEntityUniqueId request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ValuationPointEntity
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ValuationPointEntity execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ValuationPointEntity> localVarResp = getValuationPointByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getValuationPointByEntityUniqueId request with HTTP info returned
+         * @return ApiResponse&lt;ValuationPointEntity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ValuationPointEntity> executeWithHttpInfo() throws ApiException {
+            return getValuationPointByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews);
+        }
+
+        /**
+         * Execute getValuationPointByEntityUniqueId request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ValuationPointEntity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ValuationPointEntity> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getValuationPointByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, opts);
+        }
+
+        /**
+         * Execute getValuationPointByEntityUniqueId request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ValuationPointEntity> _callback) throws ApiException {
+            getValuationPointByEntityUniqueIdAsync(entityUniqueId, asAt, previews, _callback);
+        }
+
+        /**
+         * Execute getValuationPointByEntityUniqueId request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ValuationPointEntity> _callback, ConfigurationOptions opts) throws ApiException {
+            getValuationPointByEntityUniqueIdAsync(entityUniqueId, asAt, previews, _callback, opts);
+        }
+    }
+
+    /**
+     * GetValuationPointByEntityUniqueId: Get valuation point by EntityUniqueId
+     * Retrieve the definition of a particular valuation point.    If the valuation point is deleted, this will return the state of the valuation point immediately prior to deletion.
+     * @param entityUniqueId The universally unique identifier of the valuation point. (required)
+     * @return APIgetValuationPointByEntityUniqueIdRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested valuation point entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetValuationPointByEntityUniqueIdRequest getValuationPointByEntityUniqueId(String entityUniqueId) {
+        return new APIgetValuationPointByEntityUniqueIdRequest(entityUniqueId);
     }
 }

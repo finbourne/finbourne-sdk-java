@@ -48,6 +48,7 @@ import com.finbourne.sdk.JSON;
   PlacementRequest.JSON_PROPERTY_PROPERTIES,
   PlacementRequest.JSON_PROPERTY_INSTRUMENT_IDENTIFIERS,
   PlacementRequest.JSON_PROPERTY_QUANTITY,
+  PlacementRequest.JSON_PROPERTY_AMOUNT,
   PlacementRequest.JSON_PROPERTY_STATE,
   PlacementRequest.JSON_PROPERTY_SIDE,
   PlacementRequest.JSON_PROPERTY_TIME_IN_FORCE,
@@ -88,8 +89,13 @@ public class PlacementRequest {
 
   public static final String JSON_PROPERTY_QUANTITY = "quantity";
   @JsonProperty(JSON_PROPERTY_QUANTITY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal quantity;
+
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CurrencyAndAmount amount;
 
   public static final String JSON_PROPERTY_STATE = "state";
   @JsonProperty(JSON_PROPERTY_STATE)
@@ -272,13 +278,32 @@ public class PlacementRequest {
    * The quantity of given instrument ordered.
    * @return quantity
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getQuantity() {
     return quantity;
   }
 
   public void setQuantity(java.math.BigDecimal quantity) {
     this.quantity = quantity;
+  }
+
+
+  public PlacementRequest amount(CurrencyAndAmount amount) {
+    this.amount = amount;
+    return this;
+  }
+
+  /**
+   * Get amount
+   * @return amount
+   */
+  @javax.annotation.Nullable
+  public CurrencyAndAmount getAmount() {
+    return amount;
+  }
+
+  public void setAmount(CurrencyAndAmount amount) {
+    this.amount = amount;
   }
 
 
@@ -487,6 +512,7 @@ public class PlacementRequest {
         Objects.equals(this.properties, placementRequest.properties) &&
         Objects.equals(this.instrumentIdentifiers, placementRequest.instrumentIdentifiers) &&
         (this.quantity == null ? placementRequest.quantity == null : (placementRequest.quantity != null && this.quantity.compareTo(placementRequest.getQuantity()) == 0)) &&
+        Objects.equals(this.amount, placementRequest.amount) &&
         Objects.equals(this.state, placementRequest.state) &&
         Objects.equals(this.side, placementRequest.side) &&
         Objects.equals(this.timeInForce, placementRequest.timeInForce) &&
@@ -505,7 +531,7 @@ public class PlacementRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, parentPlacementId, blockIds, properties, instrumentIdentifiers, quantity, state, side, timeInForce, type, createdDate, limitPrice, stopPrice, counterparty, executionSystem, entryType);
+    return Objects.hash(id, parentPlacementId, blockIds, properties, instrumentIdentifiers, quantity, amount, state, side, timeInForce, type, createdDate, limitPrice, stopPrice, counterparty, executionSystem, entryType);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -525,6 +551,7 @@ public class PlacementRequest {
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    instrumentIdentifiers: ").append(toIndentedString(instrumentIdentifiers)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");

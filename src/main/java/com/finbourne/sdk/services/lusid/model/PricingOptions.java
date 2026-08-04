@@ -52,7 +52,8 @@ import com.finbourne.sdk.JSON;
   PricingOptions.JSON_PROPERTY_CONSERVED_QUANTITY_FOR_LOOKTHROUGH_EXPANSION,
   PricingOptions.JSON_PROPERTY_RETURN_ZERO_PV,
   PricingOptions.JSON_PROPERTY_ENABLE_LEG_LEVEL_INFERENCE_FOR_CUSTOM_SRS_COLUMNS,
-  PricingOptions.JSON_PROPERTY_USE_INSTRUMENT_SCALE_FACTOR_AS_DEFAULT
+  PricingOptions.JSON_PROPERTY_USE_INSTRUMENT_SCALE_FACTOR_AS_DEFAULT,
+  PricingOptions.JSON_PROPERTY_SCALE_INSTRUMENT_ACCRUED_OVERRIDE_BY_CONTRACT_SIZE
 })
 
 public class PricingOptions {
@@ -140,6 +141,11 @@ public class PricingOptions {
   @JsonProperty(JSON_PROPERTY_USE_INSTRUMENT_SCALE_FACTOR_AS_DEFAULT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean useInstrumentScaleFactorAsDefault;
+
+  public static final String JSON_PROPERTY_SCALE_INSTRUMENT_ACCRUED_OVERRIDE_BY_CONTRACT_SIZE = "scaleInstrumentAccruedOverrideByContractSize";
+  @JsonProperty(JSON_PROPERTY_SCALE_INSTRUMENT_ACCRUED_OVERRIDE_BY_CONTRACT_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean scaleInstrumentAccruedOverrideByContractSize;
 
   public PricingOptions() {
   }
@@ -467,6 +473,25 @@ public class PricingOptions {
   }
 
 
+  public PricingOptions scaleInstrumentAccruedOverrideByContractSize(Boolean scaleInstrumentAccruedOverrideByContractSize) {
+    this.scaleInstrumentAccruedOverrideByContractSize = scaleInstrumentAccruedOverrideByContractSize;
+    return this;
+  }
+
+  /**
+   * When enabled, an SRS InstrumentAccrued override is multiplied by the instrument contractSize (legacy behaviour).  By default this is disabled, and the override is treated as the accrued for a single unit, keeping the  holding-level identity PV &#x3D; CleanPv + Accrued consistent.
+   * @return scaleInstrumentAccruedOverrideByContractSize
+   */
+  @javax.annotation.Nullable
+  public Boolean getScaleInstrumentAccruedOverrideByContractSize() {
+    return scaleInstrumentAccruedOverrideByContractSize;
+  }
+
+  public void setScaleInstrumentAccruedOverrideByContractSize(Boolean scaleInstrumentAccruedOverrideByContractSize) {
+    this.scaleInstrumentAccruedOverrideByContractSize = scaleInstrumentAccruedOverrideByContractSize;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -492,7 +517,8 @@ public class PricingOptions {
         Objects.equals(this.conservedQuantityForLookthroughExpansion, pricingOptions.conservedQuantityForLookthroughExpansion) &&
         Objects.equals(this.returnZeroPv, pricingOptions.returnZeroPv) &&
         Objects.equals(this.enableLegLevelInferenceForCustomSrsColumns, pricingOptions.enableLegLevelInferenceForCustomSrsColumns) &&
-        Objects.equals(this.useInstrumentScaleFactorAsDefault, pricingOptions.useInstrumentScaleFactorAsDefault);
+        Objects.equals(this.useInstrumentScaleFactorAsDefault, pricingOptions.useInstrumentScaleFactorAsDefault) &&
+        Objects.equals(this.scaleInstrumentAccruedOverrideByContractSize, pricingOptions.scaleInstrumentAccruedOverrideByContractSize);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -501,7 +527,7 @@ public class PricingOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault);
+    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -532,6 +558,7 @@ public class PricingOptions {
     sb.append("    returnZeroPv: ").append(toIndentedString(returnZeroPv)).append("\n");
     sb.append("    enableLegLevelInferenceForCustomSrsColumns: ").append(toIndentedString(enableLegLevelInferenceForCustomSrsColumns)).append("\n");
     sb.append("    useInstrumentScaleFactorAsDefault: ").append(toIndentedString(useInstrumentScaleFactorAsDefault)).append("\n");
+    sb.append("    scaleInstrumentAccruedOverrideByContractSize: ").append(toIndentedString(scaleInstrumentAccruedOverrideByContractSize)).append("\n");
     sb.append("}");
     return sb.toString();
   }

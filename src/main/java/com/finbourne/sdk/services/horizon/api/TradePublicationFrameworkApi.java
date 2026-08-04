@@ -46,6 +46,7 @@ import com.finbourne.sdk.services.horizon.model.ResolveFailedDeliveryResponse;
 import com.finbourne.sdk.services.horizon.model.TpfFailedDeliveryResponse;
 import com.finbourne.sdk.services.horizon.model.TpfRetryFailedDeliveryRequest;
 import com.finbourne.sdk.services.horizon.model.TpfRetrySftpResponse;
+import com.finbourne.sdk.services.horizon.model.TpfTransactionSearchRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -506,14 +507,7 @@ public class TradePublicationFrameworkApi {
     }
     /**
      * Build call for getTpfTransactionHistorySearch
-     * @param transactionId  (optional)
-     * @param instrumentId  (optional)
-     * @param dateFrom  (optional)
-     * @param dateTo  (optional)
-     * @param status  (optional)
-     * @param instanceId  (optional)
-     * @param pageSize  (optional, default to 400)
-     * @param pageToken  (optional, default to )
+     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -525,20 +519,13 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTpfTransactionHistorySearchCall(String transactionId, String instrumentId, String dateFrom, String dateTo, String status, String instanceId, Integer pageSize, String pageToken, final ApiCallback _callback) throws ApiException {
-        return getTpfTransactionHistorySearchCall(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken,  _callback, new ConfigurationOptions());
+    private HttpRequest getTpfTransactionHistorySearchCall(TpfTransactionSearchRequest tpfTransactionSearchRequest, final ApiCallback _callback) throws ApiException {
+        return getTpfTransactionHistorySearchCall(tpfTransactionSearchRequest,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getTpfTransactionHistorySearch. Use any specified configuration options to override any other configuration for this request only.
-     * @param transactionId  (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param instrumentId  (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param dateFrom  (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param dateTo  (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param status  (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param instanceId  (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param pageSize  (optional, default to 400). Use any specified configuration options to override any other configuration for this request only.
-     * @param pageToken  (optional, default to )
+     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -550,7 +537,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTpfTransactionHistorySearchCall(String transactionId, String instrumentId, String dateFrom, String dateTo, String status, String instanceId, Integer pageSize, String pageToken, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTpfTransactionHistorySearchCall(TpfTransactionSearchRequest tpfTransactionSearchRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -564,7 +551,7 @@ public class TradePublicationFrameworkApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = tpfTransactionSearchRequest;
 
         // create path and map variables
         String localVarPath = "/horizon/api/trade-publication-framework/transactions/search";
@@ -575,38 +562,6 @@ public class TradePublicationFrameworkApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (transactionId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("transactionId", transactionId));
-        }
-
-        if (instrumentId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("instrumentId", instrumentId));
-        }
-
-        if (dateFrom != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dateFrom", dateFrom));
-        }
-
-        if (dateTo != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dateTo", dateTo));
-        }
-
-        if (status != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
-        }
-
-        if (instanceId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("instanceId", instanceId));
-        }
-
-        if (pageSize != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("pageSize", pageSize));
-        }
-
-        if (pageToken != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("pageToken", pageToken));
-        }
-
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -616,6 +571,10 @@ public class TradePublicationFrameworkApi {
         }
 
         final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -623,26 +582,19 @@ public class TradePublicationFrameworkApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getTpfTransactionHistorySearchValidateBeforeCall(String transactionId, String instrumentId, String dateFrom, String dateTo, String status, String instanceId, Integer pageSize, String pageToken, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return getTpfTransactionHistorySearchCall(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, _callback, opts);
+    private HttpRequest getTpfTransactionHistorySearchValidateBeforeCall(TpfTransactionSearchRequest tpfTransactionSearchRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return getTpfTransactionHistorySearchCall(tpfTransactionSearchRequest, _callback, opts);
 
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters).
      * 
-     * @param transactionId  (optional)
-     * @param instrumentId  (optional)
-     * @param dateFrom  (optional)
-     * @param dateTo  (optional)
-     * @param status  (optional)
-     * @param instanceId  (optional)
-     * @param pageSize  (optional, default to 400)
-     * @param pageToken  (optional, default to )
+     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTpfTransactionSearchResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -653,23 +605,16 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> getTpfTransactionHistorySearchWithHttpInfo(String transactionId, String instrumentId, String dateFrom, String dateTo, String status, String instanceId, Integer pageSize, String pageToken) throws ApiException {
-        HttpRequest localVarCall = getTpfTransactionHistorySearchValidateBeforeCall(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> getTpfTransactionHistorySearchWithHttpInfo(TpfTransactionSearchRequest tpfTransactionSearchRequest) throws ApiException {
+        HttpRequest localVarCall = getTpfTransactionHistorySearchValidateBeforeCall(tpfTransactionSearchRequest, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfTransactionSearchResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters).
      * Use any specified configuration options to override any other configuration for this request only
-     * @param transactionId  (optional)
-     * @param instrumentId  (optional)
-     * @param dateFrom  (optional)
-     * @param dateTo  (optional)
-     * @param status  (optional)
-     * @param instanceId  (optional)
-     * @param pageSize  (optional, default to 400)
-     * @param pageToken  (optional, default to )
+     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTpfTransactionSearchResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -680,23 +625,16 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> getTpfTransactionHistorySearchWithHttpInfo(String transactionId, String instrumentId, String dateFrom, String dateTo, String status, String instanceId, Integer pageSize, String pageToken, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getTpfTransactionHistorySearchValidateBeforeCall(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, null, opts);
+    private ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> getTpfTransactionHistorySearchWithHttpInfo(TpfTransactionSearchRequest tpfTransactionSearchRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTpfTransactionHistorySearchValidateBeforeCall(tpfTransactionSearchRequest, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfTransactionSearchResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range (asynchronously)
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). (asynchronously)
      * 
-     * @param transactionId  (optional)
-     * @param instrumentId  (optional)
-     * @param dateFrom  (optional)
-     * @param dateTo  (optional)
-     * @param status  (optional)
-     * @param instanceId  (optional)
-     * @param pageSize  (optional, default to 400)
-     * @param pageToken  (optional, default to )
+     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -707,24 +645,17 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTpfTransactionHistorySearchAsync(String transactionId, String instrumentId, String dateFrom, String dateTo, String status, String instanceId, Integer pageSize, String pageToken, final ApiCallback<PagedResourceListOfTpfTransactionSearchResponse> _callback) throws ApiException {
+    private void getTpfTransactionHistorySearchAsync(TpfTransactionSearchRequest tpfTransactionSearchRequest, final ApiCallback<PagedResourceListOfTpfTransactionSearchResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getTpfTransactionHistorySearchValidateBeforeCall(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getTpfTransactionHistorySearchValidateBeforeCall(tpfTransactionSearchRequest, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfTransactionSearchResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range (asynchronously)
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). (asynchronously)
      * Use any specified configuration options to override any other configuration for this request only
-     * @param transactionId  (optional)
-     * @param instrumentId  (optional)
-     * @param dateFrom  (optional)
-     * @param dateTo  (optional)
-     * @param status  (optional)
-     * @param instanceId  (optional)
-     * @param pageSize  (optional, default to 400)
-     * @param pageToken  (optional, default to )
+     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -735,103 +666,26 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTpfTransactionHistorySearchAsync(String transactionId, String instrumentId, String dateFrom, String dateTo, String status, String instanceId, Integer pageSize, String pageToken, final ApiCallback<PagedResourceListOfTpfTransactionSearchResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getTpfTransactionHistorySearchAsync(TpfTransactionSearchRequest tpfTransactionSearchRequest, final ApiCallback<PagedResourceListOfTpfTransactionSearchResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getTpfTransactionHistorySearchValidateBeforeCall(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, _callback, opts);
+        HttpRequest localVarCall = getTpfTransactionHistorySearchValidateBeforeCall(tpfTransactionSearchRequest, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfTransactionSearchResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     public class APIgetTpfTransactionHistorySearchRequest {
-        private String transactionId;
-        private String instrumentId;
-        private String dateFrom;
-        private String dateTo;
-        private String status;
-        private String instanceId;
-        private Integer pageSize;
-        private String pageToken;
+        private TpfTransactionSearchRequest tpfTransactionSearchRequest;
 
         private APIgetTpfTransactionHistorySearchRequest() {
         }
 
         /**
-         * Set transactionId
-         * @param transactionId  (optional)
+         * Set tpfTransactionSearchRequest
+         * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
          * @return APIgetTpfTransactionHistorySearchRequest
          */
-        public APIgetTpfTransactionHistorySearchRequest transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        /**
-         * Set instrumentId
-         * @param instrumentId  (optional)
-         * @return APIgetTpfTransactionHistorySearchRequest
-         */
-        public APIgetTpfTransactionHistorySearchRequest instrumentId(String instrumentId) {
-            this.instrumentId = instrumentId;
-            return this;
-        }
-
-        /**
-         * Set dateFrom
-         * @param dateFrom  (optional)
-         * @return APIgetTpfTransactionHistorySearchRequest
-         */
-        public APIgetTpfTransactionHistorySearchRequest dateFrom(String dateFrom) {
-            this.dateFrom = dateFrom;
-            return this;
-        }
-
-        /**
-         * Set dateTo
-         * @param dateTo  (optional)
-         * @return APIgetTpfTransactionHistorySearchRequest
-         */
-        public APIgetTpfTransactionHistorySearchRequest dateTo(String dateTo) {
-            this.dateTo = dateTo;
-            return this;
-        }
-
-        /**
-         * Set status
-         * @param status  (optional)
-         * @return APIgetTpfTransactionHistorySearchRequest
-         */
-        public APIgetTpfTransactionHistorySearchRequest status(String status) {
-            this.status = status;
-            return this;
-        }
-
-        /**
-         * Set instanceId
-         * @param instanceId  (optional)
-         * @return APIgetTpfTransactionHistorySearchRequest
-         */
-        public APIgetTpfTransactionHistorySearchRequest instanceId(String instanceId) {
-            this.instanceId = instanceId;
-            return this;
-        }
-
-        /**
-         * Set pageSize
-         * @param pageSize  (optional, default to 400)
-         * @return APIgetTpfTransactionHistorySearchRequest
-         */
-        public APIgetTpfTransactionHistorySearchRequest pageSize(Integer pageSize) {
-            this.pageSize = pageSize;
-            return this;
-        }
-
-        /**
-         * Set pageToken
-         * @param pageToken  (optional, default to )
-         * @return APIgetTpfTransactionHistorySearchRequest
-         */
-        public APIgetTpfTransactionHistorySearchRequest pageToken(String pageToken) {
-            this.pageToken = pageToken;
+        public APIgetTpfTransactionHistorySearchRequest tpfTransactionSearchRequest(TpfTransactionSearchRequest tpfTransactionSearchRequest) {
+            this.tpfTransactionSearchRequest = tpfTransactionSearchRequest;
             return this;
         }
 
@@ -849,7 +703,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getTpfTransactionHistorySearchCall(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, _callback);
+            return getTpfTransactionHistorySearchCall(tpfTransactionSearchRequest, _callback);
         }
 
         /**
@@ -865,7 +719,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public PagedResourceListOfTpfTransactionSearchResponse execute() throws ApiException {
-            ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> localVarResp = getTpfTransactionHistorySearchWithHttpInfo(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken);
+            ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> localVarResp = getTpfTransactionHistorySearchWithHttpInfo(tpfTransactionSearchRequest);
             return localVarResp.getData();
         }
 
@@ -882,7 +736,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public PagedResourceListOfTpfTransactionSearchResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> localVarResp = getTpfTransactionHistorySearchWithHttpInfo(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, opts);
+            ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> localVarResp = getTpfTransactionHistorySearchWithHttpInfo(tpfTransactionSearchRequest, opts);
             return localVarResp.getData();
         }
 
@@ -899,7 +753,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> executeWithHttpInfo() throws ApiException {
-            return getTpfTransactionHistorySearchWithHttpInfo(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken);
+            return getTpfTransactionHistorySearchWithHttpInfo(tpfTransactionSearchRequest);
         }
 
         /**
@@ -915,7 +769,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTpfTransactionSearchResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getTpfTransactionHistorySearchWithHttpInfo(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, opts);
+            return getTpfTransactionHistorySearchWithHttpInfo(tpfTransactionSearchRequest, opts);
         }
 
         /**
@@ -931,7 +785,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTpfTransactionSearchResponse> _callback) throws ApiException {
-            getTpfTransactionHistorySearchAsync(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, _callback);
+            getTpfTransactionHistorySearchAsync(tpfTransactionSearchRequest, _callback);
         }
 
         /**
@@ -947,12 +801,12 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTpfTransactionSearchResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            getTpfTransactionHistorySearchAsync(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken, _callback, opts);
+            getTpfTransactionHistorySearchAsync(tpfTransactionSearchRequest, _callback, opts);
         }
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters).
      * 
      * @return APIgetTpfTransactionHistorySearchRequest
      * @http.response.details

@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **returnZeroPv** | [**ReturnZeroPvOptions**](ReturnZeroPvOptions.md) |  | [optional] [default to ReturnZeroPvOptions]
 **enableLegLevelInferenceForCustomSrsColumns** | **Boolean** | When enabled, allows inference between leg-level and  instrument-level data during portfolio valuation. If  data is missing at one level, it may be inferred from  the other level. For example, missing leg-level data   may be inferred from existing leg-level and instrument-  level data when ProduceSeparateResultForLinearOtcLegs  is enabled, and vice versa. Explicitly provided data  always takes precedence. | [optional] [default to Boolean]
 **useInstrumentScaleFactorAsDefault** | **Boolean** | When enabled, priceScaleFactor defined at the instrument level will  be used in the absence of quote scaleFactor when resolving quotes. | [optional] [default to Boolean]
+**scaleInstrumentAccruedOverrideByContractSize** | **Boolean** | When enabled, an SRS InstrumentAccrued override is multiplied by the instrument contractSize (legacy behaviour).  By default this is disabled, and the override is treated as the accrued for a single unit, keeping the  holding-level identity PV &#x3D; CleanPv + Accrued consistent. | [optional] [default to Boolean]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.PricingOptions;
@@ -47,6 +48,7 @@ Boolean convertSrsCashFlowsToPortfolioCurrency = true;
 ReturnZeroPvOptions returnZeroPv = new ReturnZeroPvOptions();
 Boolean enableLegLevelInferenceForCustomSrsColumns = true;
 Boolean useInstrumentScaleFactorAsDefault = true;
+Boolean scaleInstrumentAccruedOverrideByContractSize = true;
 
 
 PricingOptions pricingOptionsInstance = new PricingOptions()
@@ -66,7 +68,8 @@ PricingOptions pricingOptionsInstance = new PricingOptions()
     .conservedQuantityForLookthroughExpansion(conservedQuantityForLookthroughExpansion)
     .returnZeroPv(returnZeroPv)
     .enableLegLevelInferenceForCustomSrsColumns(enableLegLevelInferenceForCustomSrsColumns)
-    .useInstrumentScaleFactorAsDefault(useInstrumentScaleFactorAsDefault);
+    .useInstrumentScaleFactorAsDefault(useInstrumentScaleFactorAsDefault)
+    .scaleInstrumentAccruedOverrideByContractSize(scaleInstrumentAccruedOverrideByContractSize);
 ```
 
 

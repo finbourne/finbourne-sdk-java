@@ -5,7 +5,7 @@ classname RateCurveShiftDefinition
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scenarioShiftType** | **String** | Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition. | [default to String]
+**scenarioShiftType** | **String** | Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition. | [default to String]
 **ccy** | **String** |  | [default to String]
 **amount** | **java.math.BigDecimal** | The size of the shift, in the units given by Scale: basis points by default (50 means +50bps),  or a percentage of each rate when Scale is Percentage (1 means rates scaled by 1.01). | [default to java.math.BigDecimal]
 **startTenor** | **String** |  | [optional] [default to String]

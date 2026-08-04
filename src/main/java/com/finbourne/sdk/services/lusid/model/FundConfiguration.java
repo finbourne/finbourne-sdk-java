@@ -12,6 +12,8 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ApportionmentMethodProperty;
+import com.finbourne.sdk.services.lusid.model.BucketSetDefinition;
 import com.finbourne.sdk.services.lusid.model.ComponentFilter;
 import com.finbourne.sdk.services.lusid.model.ExternalFeeComponentFilter;
 import com.finbourne.sdk.services.lusid.model.Link;
@@ -55,6 +57,9 @@ import com.finbourne.sdk.JSON;
   FundConfiguration.JSON_PROPERTY_EXTERNAL_FEE_FILTERS,
   FundConfiguration.JSON_PROPERTY_PROPERTIES,
   FundConfiguration.JSON_PROPERTY_VERSION,
+  FundConfiguration.JSON_PROPERTY_BUCKET_SETS,
+  FundConfiguration.JSON_PROPERTY_APPORTIONMENT_BUCKET_SET,
+  FundConfiguration.JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY,
   FundConfiguration.JSON_PROPERTY_LINKS
 })
 
@@ -108,6 +113,21 @@ public class FundConfiguration {
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Version version;
+
+  public static final String JSON_PROPERTY_BUCKET_SETS = "bucketSets";
+  @JsonProperty(JSON_PROPERTY_BUCKET_SETS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<BucketSetDefinition> bucketSets;
+
+  public static final String JSON_PROPERTY_APPORTIONMENT_BUCKET_SET = "apportionmentBucketSet";
+  @JsonProperty(JSON_PROPERTY_APPORTIONMENT_BUCKET_SET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String apportionmentBucketSet;
+
+  public static final String JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY = "apportionmentMethodProperty";
+  @JsonProperty(JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ApportionmentMethodProperty apportionmentMethodProperty;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -347,6 +367,71 @@ public class FundConfiguration {
   }
 
 
+  public FundConfiguration bucketSets(List<BucketSetDefinition> bucketSets) {
+    this.bucketSets = bucketSets;
+    return this;
+  }
+
+  public FundConfiguration addBucketSetsItem(BucketSetDefinition bucketSetsItem) {
+    if (this.bucketSets == null) {
+      this.bucketSets = new ArrayList<>();
+    }
+    this.bucketSets.add(bucketSetsItem);
+    return this;
+  }
+
+  /**
+   * The ordered set of component bucket set definitions for this fund configuration. Each bucket set defines how JE lines are grouped into buckets at VP finalisation.
+   * @return bucketSets
+   */
+  @javax.annotation.Nullable
+  public List<BucketSetDefinition> getBucketSets() {
+    return bucketSets;
+  }
+
+  public void setBucketSets(List<BucketSetDefinition> bucketSets) {
+    this.bucketSets = bucketSets;
+  }
+
+
+  public FundConfiguration apportionmentBucketSet(String apportionmentBucketSet) {
+    this.apportionmentBucketSet = apportionmentBucketSet;
+    return this;
+  }
+
+  /**
+   * The code of the bucket set definition within this fund configuration that is designated as the apportionment bucket set. Must reference a BucketSetDefinition code within the BucketSets collection.
+   * @return apportionmentBucketSet
+   */
+  @javax.annotation.Nullable
+  public String getApportionmentBucketSet() {
+    return apportionmentBucketSet;
+  }
+
+  public void setApportionmentBucketSet(String apportionmentBucketSet) {
+    this.apportionmentBucketSet = apportionmentBucketSet;
+  }
+
+
+  public FundConfiguration apportionmentMethodProperty(ApportionmentMethodProperty apportionmentMethodProperty) {
+    this.apportionmentMethodProperty = apportionmentMethodProperty;
+    return this;
+  }
+
+  /**
+   * Get apportionmentMethodProperty
+   * @return apportionmentMethodProperty
+   */
+  @javax.annotation.Nullable
+  public ApportionmentMethodProperty getApportionmentMethodProperty() {
+    return apportionmentMethodProperty;
+  }
+
+  public void setApportionmentMethodProperty(ApportionmentMethodProperty apportionmentMethodProperty) {
+    this.apportionmentMethodProperty = apportionmentMethodProperty;
+  }
+
+
   public FundConfiguration links(List<Link> links) {
     this.links = links;
     return this;
@@ -393,6 +478,9 @@ public class FundConfiguration {
         Objects.equals(this.externalFeeFilters, fundConfiguration.externalFeeFilters) &&
         Objects.equals(this.properties, fundConfiguration.properties) &&
         Objects.equals(this.version, fundConfiguration.version) &&
+        Objects.equals(this.bucketSets, fundConfiguration.bucketSets) &&
+        Objects.equals(this.apportionmentBucketSet, fundConfiguration.apportionmentBucketSet) &&
+        Objects.equals(this.apportionmentMethodProperty, fundConfiguration.apportionmentMethodProperty) &&
         Objects.equals(this.links, fundConfiguration.links);
   }
 
@@ -402,7 +490,7 @@ public class FundConfiguration {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, displayName, description, dealingFilters, pnlFilters, backOutFilters, externalFeeFilters, properties, version, links);
+    return Objects.hash(href, id, displayName, description, dealingFilters, pnlFilters, backOutFilters, externalFeeFilters, properties, version, bucketSets, apportionmentBucketSet, apportionmentMethodProperty, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -426,6 +514,9 @@ public class FundConfiguration {
     sb.append("    externalFeeFilters: ").append(toIndentedString(externalFeeFilters)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    bucketSets: ").append(toIndentedString(bucketSets)).append("\n");
+    sb.append("    apportionmentBucketSet: ").append(toIndentedString(apportionmentBucketSet)).append("\n");
+    sb.append("    apportionmentMethodProperty: ").append(toIndentedString(apportionmentMethodProperty)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

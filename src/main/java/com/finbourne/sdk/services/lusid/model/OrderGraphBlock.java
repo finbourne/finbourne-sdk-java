@@ -257,7 +257,7 @@ public class OrderGraphBlock {
   }
 
   /**
-   * The overall approval state of a block, derived from approval of the block&#39;s orders. Available values: Pending, Rejected, Approved.
+   * The overall approval state of a block, derived from approval of the block&#39;s orders. Available values: Pending, Rejected, Approved, Placed.
    * @return derivedApprovalState
    */
   @javax.annotation.Nonnull

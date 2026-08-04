@@ -18,6 +18,7 @@ ScenarioShiftType method = ScenarioShiftType.RATE_CURVE_SHIFT_DEFINITION;
 ScenarioShiftType method = ScenarioShiftType.FX_SHIFT_DEFINITION;
 ScenarioShiftType method = ScenarioShiftType.EQUITY_SHIFT_DEFINITION;
 ScenarioShiftType method = ScenarioShiftType.VOL_SURFACE_SHIFT_DEFINITION;
+ScenarioShiftType method = ScenarioShiftType.MDKR_GROUP_SHIFT_DEFINITION;
 ```
 
 

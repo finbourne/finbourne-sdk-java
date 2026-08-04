@@ -15,6 +15,9 @@ Name | Type | Description | Notes
 **externalFeeFilters** | [**List&lt;ExternalFeeComponentFilter&gt;**](ExternalFeeComponentFilter.md) | The set of filters used to decide which JE lines are used for inputting fees from an external source. | [optional] [default to List<ExternalFeeComponentFilter>]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | A set of properties for the Fund Configuration. | [optional] [default to Map<String, Property>]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
+**bucketSets** | [**List&lt;BucketSetDefinition&gt;**](BucketSetDefinition.md) | The ordered set of component bucket set definitions for this fund configuration. Each bucket set defines how JE lines are grouped into buckets at VP finalisation. | [optional] [default to List<BucketSetDefinition>]
+**apportionmentBucketSet** | **String** | The code of the bucket set definition within this fund configuration that is designated as the apportionment bucket set. Must reference a BucketSetDefinition code within the BucketSets collection. | [optional] [default to String]
+**apportionmentMethodProperty** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] [default to ApportionmentMethodProperty]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -33,6 +36,9 @@ ResourceId id = new ResourceId();
 @javax.annotation.Nullable List<ExternalFeeComponentFilter> externalFeeFilters = new List<ExternalFeeComponentFilter>();
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
 Version version = new Version();
+@javax.annotation.Nullable List<BucketSetDefinition> bucketSets = new List<BucketSetDefinition>();
+@javax.annotation.Nullable String apportionmentBucketSet = "example apportionmentBucketSet";
+ApportionmentMethodProperty apportionmentMethodProperty = new ApportionmentMethodProperty();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -47,6 +53,9 @@ FundConfiguration fundConfigurationInstance = new FundConfiguration()
     .externalFeeFilters(externalFeeFilters)
     .properties(properties)
     .version(version)
+    .bucketSets(bucketSets)
+    .apportionmentBucketSet(apportionmentBucketSet)
+    .apportionmentMethodProperty(apportionmentMethodProperty)
     .links(links);
 ```
 

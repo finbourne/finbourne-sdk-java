@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**getTpfFileDeliveries**](TradePublicationFrameworkApi.md#getTpfFileDeliveries) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/deliveries | [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance |
-| [**getTpfTransactionHistorySearch**](TradePublicationFrameworkApi.md#getTpfTransactionHistorySearch) | **GET** /horizon/api/trade-publication-framework/transactions/search | [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range |
+| [**getTpfTransactionHistorySearch**](TradePublicationFrameworkApi.md#getTpfTransactionHistorySearch) | **POST** /horizon/api/trade-publication-framework/transactions/search | [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). |
 | [**getTransactionPayload**](TradePublicationFrameworkApi.md#getTransactionPayload) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/payload | [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned. |
 | [**listFailedDeliveries**](TradePublicationFrameworkApi.md#listFailedDeliveries) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/failed | [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support. |
 | [**listInstanceRunHistory**](TradePublicationFrameworkApi.md#listInstanceRunHistory) | **GET** /horizon/api/trade-publication-framework/instances/{instanceId}/runs | [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support. |
@@ -107,9 +107,9 @@ public class TradePublicationFrameworkApiExample {
 
 ## getTpfTransactionHistorySearch
 
-> PagedResourceListOfTpfTransactionSearchResponse getTpfTransactionHistorySearch(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken)
+> PagedResourceListOfTpfTransactionSearchResponse getTpfTransactionHistorySearch(tpfTransactionSearchRequest)
 
-[EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
+[EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters).
 
 ### Example
 
@@ -136,19 +136,12 @@ public class TradePublicationFrameworkApiExample {
         ApiFactory apiFactory = new ApiFactoryBuilder().build();
         
         TradePublicationFrameworkApi apiInstance = apiFactory.build(TradePublicationFrameworkApi.class);
-        String transactionId = "transactionId_example"; // String | 
-        String instrumentId = "instrumentId_example"; // String | 
-        String dateFrom = "dateFrom_example"; // String | 
-        String dateTo = "dateTo_example"; // String | 
-        String status = "status_example"; // String | 
-        String instanceId = "instanceId_example"; // String | 
-        Integer pageSize = 400; // Integer | 
-        String pageToken = ""; // String | 
+        TpfTransactionSearchRequest tpfTransactionSearchRequest = new TpfTransactionSearchRequest(); // TpfTransactionSearchRequest | Search filters and pagination options.
         try {
             // uncomment the below to set overrides at the request level
-            // PagedResourceListOfTpfTransactionSearchResponse result = apiInstance.getTpfTransactionHistorySearch(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken).execute(opts);
+            // PagedResourceListOfTpfTransactionSearchResponse result = apiInstance.getTpfTransactionHistorySearch(tpfTransactionSearchRequest).execute(opts);
 
-            PagedResourceListOfTpfTransactionSearchResponse result = apiInstance.getTpfTransactionHistorySearch(transactionId, instrumentId, dateFrom, dateTo, status, instanceId, pageSize, pageToken).execute();
+            PagedResourceListOfTpfTransactionSearchResponse result = apiInstance.getTpfTransactionHistorySearch(tpfTransactionSearchRequest).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling TradePublicationFrameworkApi#getTpfTransactionHistorySearch");
@@ -164,14 +157,7 @@ public class TradePublicationFrameworkApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionId** | **String**|  | [optional] |
-| **instrumentId** | **String**|  | [optional] |
-| **dateFrom** | **String**|  | [optional] |
-| **dateTo** | **String**|  | [optional] |
-| **status** | **String**|  | [optional] |
-| **instanceId** | **String**|  | [optional] |
-| **pageSize** | **Integer**|  | [optional] [default to 400] |
-| **pageToken** | **String**|  | [optional] [default to ] |
+| **tpfTransactionSearchRequest** | [**TpfTransactionSearchRequest**](TpfTransactionSearchRequest.md)| Search filters and pagination options. | [optional] |
 
 ### Return type
 
@@ -179,7 +165,7 @@ public class TradePublicationFrameworkApiExample {
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
 - **Accept**: application/json
 
 

@@ -8,6 +8,7 @@ All URIs are relative to *http://localhost*
 | [**deleteScenario**](ScenariosApi.md#deleteScenario) | **DELETE** /api/api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present. |
 | [**getScenario**](ScenariosApi.md#getScenario) | **GET** /api/api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario |
 | [**listScenarios**](ScenariosApi.md#listScenarios) | **GET** /api/api/scenarios/{scope} | [EARLY ACCESS] ListScenarios: List the set of Scenario definitions |
+| [**previewScenario**](ScenariosApi.md#previewScenario) | **POST** /api/api/scenarios/$preview | [EARLY ACCESS] PreviewScenario: Preview a Scenario |
 | [**upsertScenario**](ScenariosApi.md#upsertScenario) | **POST** /api/api/scenarios | [EARLY ACCESS] UpsertScenario: Upsert a Scenario. This creates or updates the scenario definition in LUSID. |
 
 
@@ -326,6 +327,82 @@ public class ScenariosApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The requested scenarios |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## previewScenario
+
+> ScenarioPreviewResponse previewScenario(scenarioPreviewRequest)
+
+[EARLY ACCESS] PreviewScenario: Preview a Scenario
+
+Preview what a scenario would do to a portfolio&#39;s market data, without running a valuation.                The portfolio&#39;s market data dependencies are resolved through the given recipe and the scenario&#39;s  shifts are applied; the response lists every market data target the shifts changed, with values  before and after, plus any market data that matched a shift but could not honour it. Supply  either a reference to a stored scenario, or inline shift definitions to test a definition before  saving it.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.ScenariosApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class ScenariosApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        ScenariosApi apiInstance = apiFactory.build(ScenariosApi.class);
+        ScenarioPreviewRequest scenarioPreviewRequest = new ScenarioPreviewRequest(); // ScenarioPreviewRequest | The recipe, portfolios, effective date and scenario (stored reference or inline shifts) to preview
+        try {
+            // uncomment the below to set overrides at the request level
+            // ScenarioPreviewResponse result = apiInstance.previewScenario(scenarioPreviewRequest).execute(opts);
+
+            ScenarioPreviewResponse result = apiInstance.previewScenario(scenarioPreviewRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ScenariosApi#previewScenario");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scenarioPreviewRequest** | [**ScenarioPreviewRequest**](ScenarioPreviewRequest.md)| The recipe, portfolios, effective date and scenario (stored reference or inline shifts) to preview | |
+
+### Return type
+
+[**ScenarioPreviewResponse**](ScenarioPreviewResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The preview of the scenario&#39;s effect on the portfolio&#39;s market data, or any failure |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

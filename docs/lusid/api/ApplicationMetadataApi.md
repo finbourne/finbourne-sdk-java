@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**getExcelAddin**](ApplicationMetadataApi.md#getExcelAddin) | **GET** /api/api/metadata/downloads/exceladdin | GetExcelAddin: Download Excel Addin |
+| [**getLatestAsAt**](ApplicationMetadataApi.md#getLatestAsAt) | **GET** /api/api/metadata/asat | [EXPERIMENTAL] GetLatestAsAt: Get latest AsAt |
 | [**getLusidVersions**](ApplicationMetadataApi.md#getLusidVersions) | **GET** /api/api/metadata/versions | GetLusidVersions: Get LUSID versions |
 | [**listAccessControlledResources**](ApplicationMetadataApi.md#listAccessControlledResources) | **GET** /api/api/metadata/access/resources | ListAccessControlledResources: Get resources available for access control |
 
@@ -81,6 +82,77 @@ public class ApplicationMetadataApiExample {
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getLatestAsAt
+
+> LatestAsAt getLatestAsAt()
+
+[EXPERIMENTAL] GetLatestAsAt: Get latest AsAt
+
+Get the latest asAt datetime of the system, i.e. the asAt datetime of the most recent write.  This is the asAt datetime that a request made without an explicit asAt resolves to.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.ApplicationMetadataApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class ApplicationMetadataApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        ApplicationMetadataApi apiInstance = apiFactory.build(ApplicationMetadataApi.class);
+        try {
+            // uncomment the below to set overrides at the request level
+            // LatestAsAt result = apiInstance.getLatestAsAt().execute(opts);
+
+            LatestAsAt result = apiInstance.getLatestAsAt().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ApplicationMetadataApi#getLatestAsAt");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**LatestAsAt**](LatestAsAt.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The latest asAt datetime of the system |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

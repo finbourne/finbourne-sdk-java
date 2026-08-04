@@ -11,7 +11,8 @@ Name | Type | Description | Notes
 **blockIds** | [**List&lt;ResourceId&gt;**](ResourceId.md) | The IDs of the Blocks associated with this placement. | [default to List<ResourceId>]
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] [default to Map<String, PerpetualProperty>]
 **instrumentIdentifiers** | **Map&lt;String, String&gt;** | The instrument ordered. | [default to Map<String, String>]
-**quantity** | **java.math.BigDecimal** | The quantity of given instrument ordered. | [default to java.math.BigDecimal]
+**quantity** | **java.math.BigDecimal** | The quantity of given instrument ordered. | [optional] [default to java.math.BigDecimal]
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
 **state** | **String** | The state of this placement (typically a FIX state; Open, Filled, etc). | [optional] [default to String]
 **side** | **String** | The side (Buy, Sell, ...) of this placement. | [default to String]
 **timeInForce** | **String** | The time in force applicable to this placement (GTC, FOK, Day, etc) | [default to String]
@@ -34,7 +35,8 @@ ResourceId parentPlacementId = new ResourceId();
 List<ResourceId> blockIds = new List<ResourceId>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 Map<String, String> instrumentIdentifiers = new Map<String, String>();
-java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+CurrencyAndAmount amount = new CurrencyAndAmount();
 @javax.annotation.Nullable String state = "example state";
 String side = "example side";
 String timeInForce = "example timeInForce";
@@ -54,6 +56,7 @@ PlacementRequest placementRequestInstance = new PlacementRequest()
     .properties(properties)
     .instrumentIdentifiers(instrumentIdentifiers)
     .quantity(quantity)
+    .amount(amount)
     .state(state)
     .side(side)
     .timeInForce(timeInForce)

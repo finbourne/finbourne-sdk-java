@@ -44,13 +44,14 @@ import com.finbourne.sdk.JSON;
 @com.fasterxml.jackson.annotation.JsonSubTypes({
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EquityShiftDefinition.class, name = "EquityShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxShiftDefinition.class, name = "FxShiftDefinition"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MdkrGroupShiftDefinition.class, name = "MdkrGroupShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RateCurveShiftDefinition.class, name = "RateCurveShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VolSurfaceShiftDefinition.class, name = "VolSurfaceShiftDefinition"),
 })
 
 public class ScenarioShiftDefinition {
   /**
-   * Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition.
+   * Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.
    */
   public enum ScenarioShiftTypeEnum {
     RATE_CURVE_SHIFT_DEFINITION("RateCurveShiftDefinition"),
@@ -59,7 +60,9 @@ public class ScenarioShiftDefinition {
     
     EQUITY_SHIFT_DEFINITION("EquityShiftDefinition"),
     
-    VOL_SURFACE_SHIFT_DEFINITION("VolSurfaceShiftDefinition");
+    VOL_SURFACE_SHIFT_DEFINITION("VolSurfaceShiftDefinition"),
+    
+    MDKR_GROUP_SHIFT_DEFINITION("MdkrGroupShiftDefinition");
 
     private String value;
 
@@ -101,7 +104,7 @@ public class ScenarioShiftDefinition {
   }
 
   /**
-   * Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition.
+   * Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.
    * @return scenarioShiftType
    */
   @javax.annotation.Nonnull

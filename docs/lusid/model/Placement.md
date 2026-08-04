@@ -12,7 +12,8 @@ Name | Type | Description | Notes
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Client-defined properties associated with this placement. | [optional] [default to Map<String, PerpetualProperty>]
 **instrumentIdentifiers** | **Map&lt;String, String&gt;** | The instrument ordered. | [default to Map<String, String>]
 **lusidInstrumentId** | **String** | The LUSID instrument id for the instrument placement. | [default to String]
-**quantity** | **java.math.BigDecimal** | The quantity of given instrument ordered. | [default to java.math.BigDecimal]
+**quantity** | **java.math.BigDecimal** | The quantity of given instrument ordered. | [optional] [default to java.math.BigDecimal]
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
 **state** | **String** | The state of this placement (typically a FIX state; Open, Filled, etc). | [default to String]
 **side** | **String** | The side (Buy, Sell, ...) of this placement. | [default to String]
 **timeInForce** | **String** | The time in force applicable to this placement (GTC, FOK, Day, etc) | [default to String]
@@ -39,7 +40,8 @@ List<ResourceId> blockIds = new List<ResourceId>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 Map<String, String> instrumentIdentifiers = new Map<String, String>();
 String lusidInstrumentId = "example lusidInstrumentId";
-java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+CurrencyAndAmount amount = new CurrencyAndAmount();
 String state = "example state";
 String side = "example side";
 String timeInForce = "example timeInForce";
@@ -63,6 +65,7 @@ Placement placementInstance = new Placement()
     .instrumentIdentifiers(instrumentIdentifiers)
     .lusidInstrumentId(lusidInstrumentId)
     .quantity(quantity)
+    .amount(amount)
     .state(state)
     .side(side)
     .timeInForce(timeInForce)

@@ -12,6 +12,8 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ApportionmentMethodProperty;
+import com.finbourne.sdk.services.lusid.model.BucketSetDefinition;
 import com.finbourne.sdk.services.lusid.model.ComponentFilter;
 import com.finbourne.sdk.services.lusid.model.ExternalFeeComponentFilter;
 import com.finbourne.sdk.services.lusid.model.Property;
@@ -48,7 +50,10 @@ import com.finbourne.sdk.JSON;
   FundConfigurationRequest.JSON_PROPERTY_PNL_FILTERS,
   FundConfigurationRequest.JSON_PROPERTY_BACK_OUT_FILTERS,
   FundConfigurationRequest.JSON_PROPERTY_EXTERNAL_FEE_FILTERS,
-  FundConfigurationRequest.JSON_PROPERTY_PROPERTIES
+  FundConfigurationRequest.JSON_PROPERTY_BUCKET_SETS,
+  FundConfigurationRequest.JSON_PROPERTY_PROPERTIES,
+  FundConfigurationRequest.JSON_PROPERTY_APPORTIONMENT_BUCKET_SET,
+  FundConfigurationRequest.JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY
 })
 
 public class FundConfigurationRequest {
@@ -69,28 +74,43 @@ public class FundConfigurationRequest {
 
   public static final String JSON_PROPERTY_DEALING_FILTERS = "dealingFilters";
   @JsonProperty(JSON_PROPERTY_DEALING_FILTERS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<ComponentFilter> dealingFilters = new ArrayList<>();
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ComponentFilter> dealingFilters;
 
   public static final String JSON_PROPERTY_PNL_FILTERS = "pnlFilters";
   @JsonProperty(JSON_PROPERTY_PNL_FILTERS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<ComponentFilter> pnlFilters = new ArrayList<>();
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ComponentFilter> pnlFilters;
 
   public static final String JSON_PROPERTY_BACK_OUT_FILTERS = "backOutFilters";
   @JsonProperty(JSON_PROPERTY_BACK_OUT_FILTERS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<ComponentFilter> backOutFilters = new ArrayList<>();
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ComponentFilter> backOutFilters;
 
   public static final String JSON_PROPERTY_EXTERNAL_FEE_FILTERS = "externalFeeFilters";
   @JsonProperty(JSON_PROPERTY_EXTERNAL_FEE_FILTERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ExternalFeeComponentFilter> externalFeeFilters;
 
+  public static final String JSON_PROPERTY_BUCKET_SETS = "bucketSets";
+  @JsonProperty(JSON_PROPERTY_BUCKET_SETS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<BucketSetDefinition> bucketSets;
+
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, Property> properties;
+
+  public static final String JSON_PROPERTY_APPORTIONMENT_BUCKET_SET = "apportionmentBucketSet";
+  @JsonProperty(JSON_PROPERTY_APPORTIONMENT_BUCKET_SET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String apportionmentBucketSet;
+
+  public static final String JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY = "apportionmentMethodProperty";
+  @JsonProperty(JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ApportionmentMethodProperty apportionmentMethodProperty;
 
   public FundConfigurationRequest() {
   }
@@ -169,7 +189,7 @@ public class FundConfigurationRequest {
    * The set of filters used to decide which JE lines are included in the dealing.
    * @return dealingFilters
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<ComponentFilter> getDealingFilters() {
     return dealingFilters;
   }
@@ -196,7 +216,7 @@ public class FundConfigurationRequest {
    * The set of filters used to decide which JE lines are included in the PnL.
    * @return pnlFilters
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<ComponentFilter> getPnlFilters() {
     return pnlFilters;
   }
@@ -223,7 +243,7 @@ public class FundConfigurationRequest {
    * The set of filters used to decide which JE lines are included in the back outs.
    * @return backOutFilters
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<ComponentFilter> getBackOutFilters() {
     return backOutFilters;
   }
@@ -260,6 +280,33 @@ public class FundConfigurationRequest {
   }
 
 
+  public FundConfigurationRequest bucketSets(List<BucketSetDefinition> bucketSets) {
+    this.bucketSets = bucketSets;
+    return this;
+  }
+
+  public FundConfigurationRequest addBucketSetsItem(BucketSetDefinition bucketSetsItem) {
+    if (this.bucketSets == null) {
+      this.bucketSets = new ArrayList<>();
+    }
+    this.bucketSets.add(bucketSetsItem);
+    return this;
+  }
+
+  /**
+   * The ordered set of component bucket set definitions for this fund configuration. Each bucket set defines how JE lines are grouped into buckets at VP finalisation.
+   * @return bucketSets
+   */
+  @javax.annotation.Nullable
+  public List<BucketSetDefinition> getBucketSets() {
+    return bucketSets;
+  }
+
+  public void setBucketSets(List<BucketSetDefinition> bucketSets) {
+    this.bucketSets = bucketSets;
+  }
+
+
   public FundConfigurationRequest properties(Map<String, Property> properties) {
     this.properties = properties;
     return this;
@@ -287,6 +334,44 @@ public class FundConfigurationRequest {
   }
 
 
+  public FundConfigurationRequest apportionmentBucketSet(String apportionmentBucketSet) {
+    this.apportionmentBucketSet = apportionmentBucketSet;
+    return this;
+  }
+
+  /**
+   * The code of the bucket set definition within this fund configuration that is designated as the apportionment bucket set. Must reference a BucketSetDefinition code within the BucketSets collection.
+   * @return apportionmentBucketSet
+   */
+  @javax.annotation.Nullable
+  public String getApportionmentBucketSet() {
+    return apportionmentBucketSet;
+  }
+
+  public void setApportionmentBucketSet(String apportionmentBucketSet) {
+    this.apportionmentBucketSet = apportionmentBucketSet;
+  }
+
+
+  public FundConfigurationRequest apportionmentMethodProperty(ApportionmentMethodProperty apportionmentMethodProperty) {
+    this.apportionmentMethodProperty = apportionmentMethodProperty;
+    return this;
+  }
+
+  /**
+   * Get apportionmentMethodProperty
+   * @return apportionmentMethodProperty
+   */
+  @javax.annotation.Nullable
+  public ApportionmentMethodProperty getApportionmentMethodProperty() {
+    return apportionmentMethodProperty;
+  }
+
+  public void setApportionmentMethodProperty(ApportionmentMethodProperty apportionmentMethodProperty) {
+    this.apportionmentMethodProperty = apportionmentMethodProperty;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -303,7 +388,10 @@ public class FundConfigurationRequest {
         Objects.equals(this.pnlFilters, fundConfigurationRequest.pnlFilters) &&
         Objects.equals(this.backOutFilters, fundConfigurationRequest.backOutFilters) &&
         Objects.equals(this.externalFeeFilters, fundConfigurationRequest.externalFeeFilters) &&
-        Objects.equals(this.properties, fundConfigurationRequest.properties);
+        Objects.equals(this.bucketSets, fundConfigurationRequest.bucketSets) &&
+        Objects.equals(this.properties, fundConfigurationRequest.properties) &&
+        Objects.equals(this.apportionmentBucketSet, fundConfigurationRequest.apportionmentBucketSet) &&
+        Objects.equals(this.apportionmentMethodProperty, fundConfigurationRequest.apportionmentMethodProperty);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -312,7 +400,7 @@ public class FundConfigurationRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, displayName, description, dealingFilters, pnlFilters, backOutFilters, externalFeeFilters, properties);
+    return Objects.hash(code, displayName, description, dealingFilters, pnlFilters, backOutFilters, externalFeeFilters, bucketSets, properties, apportionmentBucketSet, apportionmentMethodProperty);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -333,7 +421,10 @@ public class FundConfigurationRequest {
     sb.append("    pnlFilters: ").append(toIndentedString(pnlFilters)).append("\n");
     sb.append("    backOutFilters: ").append(toIndentedString(backOutFilters)).append("\n");
     sb.append("    externalFeeFilters: ").append(toIndentedString(externalFeeFilters)).append("\n");
+    sb.append("    bucketSets: ").append(toIndentedString(bucketSets)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
+    sb.append("    apportionmentBucketSet: ").append(toIndentedString(apportionmentBucketSet)).append("\n");
+    sb.append("    apportionmentMethodProperty: ").append(toIndentedString(apportionmentMethodProperty)).append("\n");
     sb.append("}");
     return sb.toString();
   }

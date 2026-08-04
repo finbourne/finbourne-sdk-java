@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
@@ -40,6 +41,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   PlacementUpdateRequest.JSON_PROPERTY_ID,
   PlacementUpdateRequest.JSON_PROPERTY_QUANTITY,
+  PlacementUpdateRequest.JSON_PROPERTY_AMOUNT,
   PlacementUpdateRequest.JSON_PROPERTY_PROPERTIES,
   PlacementUpdateRequest.JSON_PROPERTY_TYPE,
   PlacementUpdateRequest.JSON_PROPERTY_LIMIT_PRICE,
@@ -59,6 +61,11 @@ public class PlacementUpdateRequest {
   @JsonProperty(JSON_PROPERTY_QUANTITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal quantity;
+
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CurrencyAndAmount amount;
 
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
@@ -133,6 +140,25 @@ public class PlacementUpdateRequest {
 
   public void setQuantity(java.math.BigDecimal quantity) {
     this.quantity = quantity;
+  }
+
+
+  public PlacementUpdateRequest amount(CurrencyAndAmount amount) {
+    this.amount = amount;
+    return this;
+  }
+
+  /**
+   * Get amount
+   * @return amount
+   */
+  @javax.annotation.Nullable
+  public CurrencyAndAmount getAmount() {
+    return amount;
+  }
+
+  public void setAmount(CurrencyAndAmount amount) {
+    this.amount = amount;
   }
 
 
@@ -288,6 +314,7 @@ public class PlacementUpdateRequest {
     PlacementUpdateRequest placementUpdateRequest = (PlacementUpdateRequest) o;
     return Objects.equals(this.id, placementUpdateRequest.id) &&
         (this.quantity == null ? placementUpdateRequest.quantity == null : (placementUpdateRequest.quantity != null && this.quantity.compareTo(placementUpdateRequest.getQuantity()) == 0)) &&
+        Objects.equals(this.amount, placementUpdateRequest.amount) &&
         Objects.equals(this.properties, placementUpdateRequest.properties) &&
         Objects.equals(this.type, placementUpdateRequest.type) &&
         (this.limitPrice == null ? placementUpdateRequest.limitPrice == null : (placementUpdateRequest.limitPrice != null && this.limitPrice.compareTo(placementUpdateRequest.getLimitPrice()) == 0)) &&
@@ -303,7 +330,7 @@ public class PlacementUpdateRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, quantity, properties, type, limitPrice, stopPrice, counterparty, executionSystem, entryType);
+    return Objects.hash(id, quantity, amount, properties, type, limitPrice, stopPrice, counterparty, executionSystem, entryType);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -319,6 +346,7 @@ public class PlacementUpdateRequest {
     sb.append("class PlacementUpdateRequest {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    limitPrice: ").append(toIndentedString(limitPrice)).append("\n");

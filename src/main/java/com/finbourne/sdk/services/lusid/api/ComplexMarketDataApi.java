@@ -869,12 +869,14 @@ public class ComplexMarketDataApi {
     /**
      * Build call for listComplexMarketData
      * @param asAt The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
-     * @param effectiveAt The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional)
-     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional)
+     * @param effectiveAt The effectiveAt datetime or cut label at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the filter, scope, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional)
      * @param timelineScope The scope of the Timeline. (optional)
      * @param timelineCode The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
      * @param closedPeriodId The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
+     * @param filter Expression to filter the result set. The following fields are supported:              &#39;Scope&#39;, &#39;MarketDataId.MarketAsset&#39;, &#39;MarketDataId.Provider&#39;, &#39;MarketDataId.PriceSource&#39;,              &#39;MarketDataId.Lineage&#39; (the lineage of the stored market data) and &#39;MarketData.MarketDataType&#39;.              The market data document contents are not filterable.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param scope Optionally restrict the results to ComplexMarketData in a single scope. If not              specified, ComplexMarketData from all scopes will be returned. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -886,19 +888,21 @@ public class ComplexMarketDataApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listComplexMarketDataCall(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback _callback) throws ApiException {
-        return listComplexMarketDataCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId,  _callback, new ConfigurationOptions());
+    private HttpRequest listComplexMarketDataCall(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, String filter, String scope, final ApiCallback _callback) throws ApiException {
+        return listComplexMarketDataCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for listComplexMarketData. Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param effectiveAt The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effectiveAt datetime or cut label at which to list the ComplexMarketData. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the filter, scope, effectiveAt              and asAt fields must not have changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param timelineScope The scope of the Timeline. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param timelineCode The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param closedPeriodId The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
+     * @param closedPeriodId The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the result set. The following fields are supported:              &#39;Scope&#39;, &#39;MarketDataId.MarketAsset&#39;, &#39;MarketDataId.Provider&#39;, &#39;MarketDataId.PriceSource&#39;,              &#39;MarketDataId.Lineage&#39; (the lineage of the stored market data) and &#39;MarketData.MarketDataType&#39;.              The market data document contents are not filterable.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param scope Optionally restrict the results to ComplexMarketData in a single scope. If not              specified, ComplexMarketData from all scopes will be returned. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -910,7 +914,7 @@ public class ComplexMarketDataApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listComplexMarketDataCall(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listComplexMarketDataCall(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, String filter, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -963,6 +967,14 @@ public class ComplexMarketDataApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("closedPeriodId", closedPeriodId));
         }
 
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (scope != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("scope", scope));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -985,8 +997,8 @@ public class ComplexMarketDataApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listComplexMarketDataValidateBeforeCall(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listComplexMarketDataCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, _callback, opts);
+    private HttpRequest listComplexMarketDataValidateBeforeCall(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, String filter, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listComplexMarketDataCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, _callback, opts);
 
     }
 
@@ -994,12 +1006,14 @@ public class ComplexMarketDataApi {
      * ListComplexMarketData: List the set of ComplexMarketData
      * List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.
      * @param asAt The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
-     * @param effectiveAt The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional)
-     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional)
+     * @param effectiveAt The effectiveAt datetime or cut label at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the filter, scope, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional)
      * @param timelineScope The scope of the Timeline. (optional)
      * @param timelineCode The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
      * @param closedPeriodId The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
+     * @param filter Expression to filter the result set. The following fields are supported:              &#39;Scope&#39;, &#39;MarketDataId.MarketAsset&#39;, &#39;MarketDataId.Provider&#39;, &#39;MarketDataId.PriceSource&#39;,              &#39;MarketDataId.Lineage&#39; (the lineage of the stored market data) and &#39;MarketData.MarketDataType&#39;.              The market data document contents are not filterable.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param scope Optionally restrict the results to ComplexMarketData in a single scope. If not              specified, ComplexMarketData from all scopes will be returned. (optional)
      * @return ApiResponse&lt;ResourceListOfListComplexMarketDataWithMetaDataResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1010,8 +1024,8 @@ public class ComplexMarketDataApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> listComplexMarketDataWithHttpInfo(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId) throws ApiException {
-        HttpRequest localVarCall = listComplexMarketDataValidateBeforeCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, null, new ConfigurationOptions());
+    private ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> listComplexMarketDataWithHttpInfo(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, String filter, String scope) throws ApiException {
+        HttpRequest localVarCall = listComplexMarketDataValidateBeforeCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ResourceListOfListComplexMarketDataWithMetaDataResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1020,12 +1034,14 @@ public class ComplexMarketDataApi {
      * ListComplexMarketData: List the set of ComplexMarketData
      * List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
-     * @param effectiveAt The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional)
-     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional)
+     * @param effectiveAt The effectiveAt datetime or cut label at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the filter, scope, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional)
      * @param timelineScope The scope of the Timeline. (optional)
      * @param timelineCode The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
      * @param closedPeriodId The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
+     * @param filter Expression to filter the result set. The following fields are supported:              &#39;Scope&#39;, &#39;MarketDataId.MarketAsset&#39;, &#39;MarketDataId.Provider&#39;, &#39;MarketDataId.PriceSource&#39;,              &#39;MarketDataId.Lineage&#39; (the lineage of the stored market data) and &#39;MarketData.MarketDataType&#39;.              The market data document contents are not filterable.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param scope Optionally restrict the results to ComplexMarketData in a single scope. If not              specified, ComplexMarketData from all scopes will be returned. (optional)
      * @return ApiResponse&lt;ResourceListOfListComplexMarketDataWithMetaDataResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1036,8 +1052,8 @@ public class ComplexMarketDataApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> listComplexMarketDataWithHttpInfo(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listComplexMarketDataValidateBeforeCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, null, opts);
+    private ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> listComplexMarketDataWithHttpInfo(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, String filter, String scope, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listComplexMarketDataValidateBeforeCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, null, opts);
         Type localVarReturnType = new TypeReference<ResourceListOfListComplexMarketDataWithMetaDataResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1046,12 +1062,14 @@ public class ComplexMarketDataApi {
      * ListComplexMarketData: List the set of ComplexMarketData (asynchronously)
      * List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.
      * @param asAt The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
-     * @param effectiveAt The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional)
-     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional)
+     * @param effectiveAt The effectiveAt datetime or cut label at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the filter, scope, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional)
      * @param timelineScope The scope of the Timeline. (optional)
      * @param timelineCode The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
      * @param closedPeriodId The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
+     * @param filter Expression to filter the result set. The following fields are supported:              &#39;Scope&#39;, &#39;MarketDataId.MarketAsset&#39;, &#39;MarketDataId.Provider&#39;, &#39;MarketDataId.PriceSource&#39;,              &#39;MarketDataId.Lineage&#39; (the lineage of the stored market data) and &#39;MarketData.MarketDataType&#39;.              The market data document contents are not filterable.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param scope Optionally restrict the results to ComplexMarketData in a single scope. If not              specified, ComplexMarketData from all scopes will be returned. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1062,9 +1080,9 @@ public class ComplexMarketDataApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listComplexMarketDataAsync(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback<ResourceListOfListComplexMarketDataWithMetaDataResponse> _callback) throws ApiException {
+    private void listComplexMarketDataAsync(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, String filter, String scope, final ApiCallback<ResourceListOfListComplexMarketDataWithMetaDataResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listComplexMarketDataValidateBeforeCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listComplexMarketDataValidateBeforeCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ResourceListOfListComplexMarketDataWithMetaDataResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1073,12 +1091,14 @@ public class ComplexMarketDataApi {
      * ListComplexMarketData: List the set of ComplexMarketData (asynchronously)
      * List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
-     * @param effectiveAt The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional)
-     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional)
+     * @param effectiveAt The effectiveAt datetime or cut label at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the filter, scope, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional)
      * @param timelineScope The scope of the Timeline. (optional)
      * @param timelineCode The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
      * @param closedPeriodId The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
+     * @param filter Expression to filter the result set. The following fields are supported:              &#39;Scope&#39;, &#39;MarketDataId.MarketAsset&#39;, &#39;MarketDataId.Provider&#39;, &#39;MarketDataId.PriceSource&#39;,              &#39;MarketDataId.Lineage&#39; (the lineage of the stored market data) and &#39;MarketData.MarketDataType&#39;.              The market data document contents are not filterable.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param scope Optionally restrict the results to ComplexMarketData in a single scope. If not              specified, ComplexMarketData from all scopes will be returned. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1089,9 +1109,9 @@ public class ComplexMarketDataApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listComplexMarketDataAsync(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback<ResourceListOfListComplexMarketDataWithMetaDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listComplexMarketDataAsync(OffsetDateTime asAt, String effectiveAt, String page, Integer limit, String timelineScope, String timelineCode, String closedPeriodId, String filter, String scope, final ApiCallback<ResourceListOfListComplexMarketDataWithMetaDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listComplexMarketDataValidateBeforeCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, _callback, opts);
+        HttpRequest localVarCall = listComplexMarketDataValidateBeforeCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, _callback, opts);
         Type localVarReturnType = new TypeReference<ResourceListOfListComplexMarketDataWithMetaDataResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1104,6 +1124,8 @@ public class ComplexMarketDataApi {
         private String timelineScope;
         private String timelineCode;
         private String closedPeriodId;
+        private String filter;
+        private String scope;
 
         private APIlistComplexMarketDataRequest() {
         }
@@ -1120,7 +1142,7 @@ public class ComplexMarketDataApi {
 
         /**
          * Set effectiveAt
-         * @param effectiveAt The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional)
+         * @param effectiveAt The effectiveAt datetime or cut label at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
          * @return APIlistComplexMarketDataRequest
          */
         public APIlistComplexMarketDataRequest effectiveAt(String effectiveAt) {
@@ -1130,7 +1152,7 @@ public class ComplexMarketDataApi {
 
         /**
          * Set page
-         * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional)
+         * @param page The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the filter, scope, effectiveAt              and asAt fields must not have changed since the original request. (optional)
          * @return APIlistComplexMarketDataRequest
          */
         public APIlistComplexMarketDataRequest page(String page) {
@@ -1179,6 +1201,26 @@ public class ComplexMarketDataApi {
         }
 
         /**
+         * Set filter
+         * @param filter Expression to filter the result set. The following fields are supported:              &#39;Scope&#39;, &#39;MarketDataId.MarketAsset&#39;, &#39;MarketDataId.Provider&#39;, &#39;MarketDataId.PriceSource&#39;,              &#39;MarketDataId.Lineage&#39; (the lineage of the stored market data) and &#39;MarketData.MarketDataType&#39;.              The market data document contents are not filterable.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+         * @return APIlistComplexMarketDataRequest
+         */
+        public APIlistComplexMarketDataRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set scope
+         * @param scope Optionally restrict the results to ComplexMarketData in a single scope. If not              specified, ComplexMarketData from all scopes will be returned. (optional)
+         * @return APIlistComplexMarketDataRequest
+         */
+        public APIlistComplexMarketDataRequest scope(String scope) {
+            this.scope = scope;
+            return this;
+        }
+
+        /**
          * Build call for listComplexMarketData
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -1192,7 +1234,7 @@ public class ComplexMarketDataApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listComplexMarketDataCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, _callback);
+            return listComplexMarketDataCall(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, _callback);
         }
 
         /**
@@ -1208,7 +1250,7 @@ public class ComplexMarketDataApi {
          </table>
          */
         public ResourceListOfListComplexMarketDataWithMetaDataResponse execute() throws ApiException {
-            ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> localVarResp = listComplexMarketDataWithHttpInfo(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId);
+            ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> localVarResp = listComplexMarketDataWithHttpInfo(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope);
             return localVarResp.getData();
         }
 
@@ -1225,7 +1267,7 @@ public class ComplexMarketDataApi {
          </table>
          */
         public ResourceListOfListComplexMarketDataWithMetaDataResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> localVarResp = listComplexMarketDataWithHttpInfo(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, opts);
+            ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> localVarResp = listComplexMarketDataWithHttpInfo(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, opts);
             return localVarResp.getData();
         }
 
@@ -1242,7 +1284,7 @@ public class ComplexMarketDataApi {
          </table>
          */
         public ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> executeWithHttpInfo() throws ApiException {
-            return listComplexMarketDataWithHttpInfo(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId);
+            return listComplexMarketDataWithHttpInfo(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope);
         }
 
         /**
@@ -1258,7 +1300,7 @@ public class ComplexMarketDataApi {
          </table>
          */
         public ApiResponse<ResourceListOfListComplexMarketDataWithMetaDataResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listComplexMarketDataWithHttpInfo(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, opts);
+            return listComplexMarketDataWithHttpInfo(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, opts);
         }
 
         /**
@@ -1274,7 +1316,7 @@ public class ComplexMarketDataApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ResourceListOfListComplexMarketDataWithMetaDataResponse> _callback) throws ApiException {
-            listComplexMarketDataAsync(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, _callback);
+            listComplexMarketDataAsync(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, _callback);
         }
 
         /**
@@ -1290,7 +1332,7 @@ public class ComplexMarketDataApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ResourceListOfListComplexMarketDataWithMetaDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            listComplexMarketDataAsync(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, _callback, opts);
+            listComplexMarketDataAsync(asAt, effectiveAt, page, limit, timelineScope, timelineCode, closedPeriodId, filter, scope, _callback, opts);
         }
     }
 
