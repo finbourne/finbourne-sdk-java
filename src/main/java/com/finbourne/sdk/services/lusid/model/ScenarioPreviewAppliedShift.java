@@ -96,7 +96,7 @@ public class ScenarioPreviewAppliedShift {
   }
 
   /**
-   * Description of the shift, e.g. \&quot;EquityShift on &#39;SCENARIO_EQUITY&#39;\&quot;.
+   * Description of the shift, e.g. \&quot;PriceShift on &#39;SCENARIO_EQUITY&#39;\&quot;.
    * @return shift
    */
   @javax.annotation.Nullable

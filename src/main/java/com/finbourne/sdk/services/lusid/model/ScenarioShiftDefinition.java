@@ -42,23 +42,23 @@ import com.finbourne.sdk.JSON;
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = "scenarioShiftType", visible = true)
 @com.fasterxml.jackson.annotation.JsonSubTypes({
-  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EquityShiftDefinition.class, name = "EquityShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxShiftDefinition.class, name = "FxShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MdkrGroupShiftDefinition.class, name = "MdkrGroupShiftDefinition"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = PriceShiftDefinition.class, name = "PriceShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RateCurveShiftDefinition.class, name = "RateCurveShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VolSurfaceShiftDefinition.class, name = "VolSurfaceShiftDefinition"),
 })
 
 public class ScenarioShiftDefinition {
   /**
-   * Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.
+   * Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.
    */
   public enum ScenarioShiftTypeEnum {
     RATE_CURVE_SHIFT_DEFINITION("RateCurveShiftDefinition"),
     
     FX_SHIFT_DEFINITION("FxShiftDefinition"),
     
-    EQUITY_SHIFT_DEFINITION("EquityShiftDefinition"),
+    PRICE_SHIFT_DEFINITION("PriceShiftDefinition"),
     
     VOL_SURFACE_SHIFT_DEFINITION("VolSurfaceShiftDefinition"),
     
@@ -104,7 +104,7 @@ public class ScenarioShiftDefinition {
   }
 
   /**
-   * Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.
+   * Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.
    * @return scenarioShiftType
    */
   @javax.annotation.Nonnull

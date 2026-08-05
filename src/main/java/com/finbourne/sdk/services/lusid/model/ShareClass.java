@@ -49,7 +49,6 @@ import com.finbourne.sdk.JSON;
   ShareClass.JSON_PROPERTY_SHARE_CLASS_SHORT_CODE,
   ShareClass.JSON_PROPERTY_LAUNCH_PRICE,
   ShareClass.JSON_PROPERTY_LAUNCH_DATE,
-  ShareClass.JSON_PROPERTY_APPORTIONMENT_FACTOR,
   ShareClass.JSON_PROPERTY_PROPERTIES,
   ShareClass.JSON_PROPERTY_FUND_SHARE_CLASS_TYPE,
   ShareClass.JSON_PROPERTY_DISTRIBUTION_TYPE,
@@ -67,8 +66,8 @@ import com.finbourne.sdk.JSON;
 public class ShareClass {
   public static final String JSON_PROPERTY_INSTRUMENT_IDENTIFIERS = "instrumentIdentifiers";
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_IDENTIFIERS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Map<String, String> instrumentIdentifiers = new HashMap<>();
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, String> instrumentIdentifiers;
 
   public static final String JSON_PROPERTY_NAME = "name";
   @JsonProperty(JSON_PROPERTY_NAME)
@@ -94,11 +93,6 @@ public class ShareClass {
   @JsonProperty(JSON_PROPERTY_LAUNCH_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime launchDate;
-
-  public static final String JSON_PROPERTY_APPORTIONMENT_FACTOR = "apportionmentFactor";
-  @JsonProperty(JSON_PROPERTY_APPORTIONMENT_FACTOR)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private java.math.BigDecimal apportionmentFactor;
 
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
@@ -180,7 +174,7 @@ public class ShareClass {
    * Unique instrument identifiers
    * @return instrumentIdentifiers
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Map<String, String> getInstrumentIdentifiers() {
     return instrumentIdentifiers;
   }
@@ -282,25 +276,6 @@ public class ShareClass {
 
   public void setLaunchDate(OffsetDateTime launchDate) {
     this.launchDate = launchDate;
-  }
-
-
-  public ShareClass apportionmentFactor(java.math.BigDecimal apportionmentFactor) {
-    this.apportionmentFactor = apportionmentFactor;
-    return this;
-  }
-
-  /**
-   * Only used for fixed percentage method or be zero, must equal 1 or 0 across all classes in the fund.
-   * @return apportionmentFactor
-   */
-  @javax.annotation.Nullable
-  public java.math.BigDecimal getApportionmentFactor() {
-    return apportionmentFactor;
-  }
-
-  public void setApportionmentFactor(java.math.BigDecimal apportionmentFactor) {
-    this.apportionmentFactor = apportionmentFactor;
   }
 
 
@@ -571,7 +546,6 @@ public class ShareClass {
         Objects.equals(this.shareClassShortCode, shareClass.shareClassShortCode) &&
         (this.launchPrice == null ? shareClass.launchPrice == null : (shareClass.launchPrice != null && this.launchPrice.compareTo(shareClass.getLaunchPrice()) == 0)) &&
         Objects.equals(this.launchDate, shareClass.launchDate) &&
-        (this.apportionmentFactor == null ? shareClass.apportionmentFactor == null : (shareClass.apportionmentFactor != null && this.apportionmentFactor.compareTo(shareClass.getApportionmentFactor()) == 0)) &&
         Objects.equals(this.properties, shareClass.properties) &&
         Objects.equals(this.fundShareClassType, shareClass.fundShareClassType) &&
         Objects.equals(this.distributionType, shareClass.distributionType) &&
@@ -592,7 +566,7 @@ public class ShareClass {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, apportionmentFactor, properties, fundShareClassType, distributionType, domCcy, tradingConventions, unitsPrecision, pricePrecision, roundingConventions, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
+    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, properties, fundShareClassType, distributionType, domCcy, tradingConventions, unitsPrecision, pricePrecision, roundingConventions, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -612,7 +586,6 @@ public class ShareClass {
     sb.append("    shareClassShortCode: ").append(toIndentedString(shareClassShortCode)).append("\n");
     sb.append("    launchPrice: ").append(toIndentedString(launchPrice)).append("\n");
     sb.append("    launchDate: ").append(toIndentedString(launchDate)).append("\n");
-    sb.append("    apportionmentFactor: ").append(toIndentedString(apportionmentFactor)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    fundShareClassType: ").append(toIndentedString(fundShareClassType)).append("\n");
     sb.append("    distributionType: ").append(toIndentedString(distributionType)).append("\n");

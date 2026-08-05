@@ -27,7 +27,7 @@ public enum ScenarioShiftType {
   
   FX_SHIFT_DEFINITION("FxShiftDefinition"),
   
-  EQUITY_SHIFT_DEFINITION("EquityShiftDefinition"),
+  PRICE_SHIFT_DEFINITION("PriceShiftDefinition"),
   
   VOL_SURFACE_SHIFT_DEFINITION("VolSurfaceShiftDefinition"),
   

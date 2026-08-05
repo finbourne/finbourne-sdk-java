@@ -5,7 +5,7 @@ classname VolSurfaceShiftDefinition
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scenarioShiftType** | **String** | Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition. | [default to String]
+**scenarioShiftType** | **String** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition. | [default to String]
 **instrument** | **String** |  | [default to String]
 **amount** | **java.math.BigDecimal** |  | [default to java.math.BigDecimal]
 **strike** | **java.math.BigDecimal** |  | [optional] [default to java.math.BigDecimal]

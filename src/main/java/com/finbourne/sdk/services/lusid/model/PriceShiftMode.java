@@ -19,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets EquityShiftMode
+ * Gets or Sets PriceShiftMode
  */
-public enum EquityShiftMode {
+public enum PriceShiftMode {
   
   ABSOLUTE("absolute"),
   
@@ -31,7 +31,7 @@ public enum EquityShiftMode {
 
   private String value;
 
-  EquityShiftMode(String value) {
+  PriceShiftMode(String value) {
     this.value = value;
   }
 
@@ -46,8 +46,8 @@ public enum EquityShiftMode {
   }
 
   @JsonCreator
-  public static EquityShiftMode fromValue(String value) {
-    for (EquityShiftMode b : EquityShiftMode.values()) {
+  public static PriceShiftMode fromValue(String value) {
+    for (PriceShiftMode b : PriceShiftMode.values()) {
       if (b.value.equals(value)) {
         return b;
       }

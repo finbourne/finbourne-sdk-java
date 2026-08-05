@@ -49,7 +49,6 @@ import com.finbourne.sdk.JSON;
   ShareClassDefinition.JSON_PROPERTY_SHARE_CLASS_SHORT_CODE,
   ShareClassDefinition.JSON_PROPERTY_LAUNCH_PRICE,
   ShareClassDefinition.JSON_PROPERTY_LAUNCH_DATE,
-  ShareClassDefinition.JSON_PROPERTY_APPORTIONMENT_FACTOR,
   ShareClassDefinition.JSON_PROPERTY_PROPERTIES,
   ShareClassDefinition.JSON_PROPERTY_FUND_SHARE_CLASS_TYPE,
   ShareClassDefinition.JSON_PROPERTY_DISTRIBUTION_TYPE,
@@ -94,11 +93,6 @@ public class ShareClassDefinition {
   @JsonProperty(JSON_PROPERTY_LAUNCH_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime launchDate;
-
-  public static final String JSON_PROPERTY_APPORTIONMENT_FACTOR = "apportionmentFactor";
-  @JsonProperty(JSON_PROPERTY_APPORTIONMENT_FACTOR)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private java.math.BigDecimal apportionmentFactor;
 
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
@@ -282,25 +276,6 @@ public class ShareClassDefinition {
 
   public void setLaunchDate(OffsetDateTime launchDate) {
     this.launchDate = launchDate;
-  }
-
-
-  public ShareClassDefinition apportionmentFactor(java.math.BigDecimal apportionmentFactor) {
-    this.apportionmentFactor = apportionmentFactor;
-    return this;
-  }
-
-  /**
-   * Only used for fixed percentage method or be zero, must equal 1 or 0 across all classes in the fund.
-   * @return apportionmentFactor
-   */
-  @javax.annotation.Nullable
-  public java.math.BigDecimal getApportionmentFactor() {
-    return apportionmentFactor;
-  }
-
-  public void setApportionmentFactor(java.math.BigDecimal apportionmentFactor) {
-    this.apportionmentFactor = apportionmentFactor;
   }
 
 
@@ -571,7 +546,6 @@ public class ShareClassDefinition {
         Objects.equals(this.shareClassShortCode, shareClassDefinition.shareClassShortCode) &&
         (this.launchPrice == null ? shareClassDefinition.launchPrice == null : (shareClassDefinition.launchPrice != null && this.launchPrice.compareTo(shareClassDefinition.getLaunchPrice()) == 0)) &&
         Objects.equals(this.launchDate, shareClassDefinition.launchDate) &&
-        (this.apportionmentFactor == null ? shareClassDefinition.apportionmentFactor == null : (shareClassDefinition.apportionmentFactor != null && this.apportionmentFactor.compareTo(shareClassDefinition.getApportionmentFactor()) == 0)) &&
         Objects.equals(this.properties, shareClassDefinition.properties) &&
         Objects.equals(this.fundShareClassType, shareClassDefinition.fundShareClassType) &&
         Objects.equals(this.distributionType, shareClassDefinition.distributionType) &&
@@ -592,7 +566,7 @@ public class ShareClassDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, apportionmentFactor, properties, fundShareClassType, distributionType, domCcy, tradingConventions, unitsPrecision, pricePrecision, roundingConventions, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
+    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, properties, fundShareClassType, distributionType, domCcy, tradingConventions, unitsPrecision, pricePrecision, roundingConventions, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -612,7 +586,6 @@ public class ShareClassDefinition {
     sb.append("    shareClassShortCode: ").append(toIndentedString(shareClassShortCode)).append("\n");
     sb.append("    launchPrice: ").append(toIndentedString(launchPrice)).append("\n");
     sb.append("    launchDate: ").append(toIndentedString(launchDate)).append("\n");
-    sb.append("    apportionmentFactor: ").append(toIndentedString(apportionmentFactor)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    fundShareClassType: ").append(toIndentedString(fundShareClassType)).append("\n");
     sb.append("    distributionType: ").append(toIndentedString(distributionType)).append("\n");

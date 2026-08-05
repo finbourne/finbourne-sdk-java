@@ -27,13 +27,17 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
+import com.finbourne.sdk.services.lusid.model.InstantiateRecRequest;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
+import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecInstance;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecResultSet;
+import com.finbourne.sdk.services.lusid.model.RecInstance;
 import com.finbourne.sdk.services.lusid.model.RecResultSet;
 import com.finbourne.sdk.services.lusid.model.RecResultSetApprovalDecisionRequest;
 import com.finbourne.sdk.services.lusid.model.SubmitRecResultSetReviewRequest;
+import com.finbourne.sdk.services.lusid.model.TransitionRecInstanceRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -41,16 +45,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecResultSetsApi {
+public class RecsApi {
     private ApiClient localVarApiClient;
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public RecResultSetsApi() {
+    public RecsApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public RecResultSetsApi(ApiClient apiClient) {
+    public RecsApi(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
     }
 
@@ -408,6 +412,353 @@ public class RecResultSetsApi {
         return new APIaddRecResultSetApprovalDecisionRequest(entityUniqueId, recResultSetApprovalDecisionRequest);
     }
     /**
+     * Build call for getRecInstance
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param asAt The asAt datetime at which to retrieve the instance. Defaults to latest if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getRecInstanceCall(String instanceIdType, String instanceIdValue, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
+        return getRecInstanceCall(instanceIdType, instanceIdValue, asAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getRecInstance. Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceIdValue The instance identifier value (a GUID). (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the instance. Defaults to latest if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getRecInstanceCall(String instanceIdType, String instanceIdValue, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/instances/{instanceIdType}/{instanceIdValue}"
+            .replace("{" + "instanceIdType" + "}", localVarApiClient.escapeString(instanceIdType.toString()))
+            .replace("{" + "instanceIdValue" + "}", localVarApiClient.escapeString(instanceIdValue.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getRecInstanceValidateBeforeCall(String instanceIdType, String instanceIdValue, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'instanceIdType' is set
+        if (instanceIdType == null) {
+            throw new ApiException("Missing the required parameter 'instanceIdType' when calling getRecInstance(Async)");
+        }
+
+        // verify the required parameter 'instanceIdValue' is set
+        if (instanceIdValue == null) {
+            throw new ApiException("Missing the required parameter 'instanceIdValue' when calling getRecInstance(Async)");
+        }
+
+        return getRecInstanceCall(instanceIdType, instanceIdValue, asAt, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecInstance: GetRecInstance
+     * Retrieve a single rec instance by its identifier.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param asAt The asAt datetime at which to retrieve the instance. Defaults to latest if not specified. (optional)
+     * @return ApiResponse&lt;RecInstance&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecInstance> getRecInstanceWithHttpInfo(String instanceIdType, String instanceIdValue, OffsetDateTime asAt) throws ApiException {
+        HttpRequest localVarCall = getRecInstanceValidateBeforeCall(instanceIdType, instanceIdValue, asAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecInstance: GetRecInstance
+     * Retrieve a single rec instance by its identifier.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param asAt The asAt datetime at which to retrieve the instance. Defaults to latest if not specified. (optional)
+     * @return ApiResponse&lt;RecInstance&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecInstance> getRecInstanceWithHttpInfo(String instanceIdType, String instanceIdValue, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getRecInstanceValidateBeforeCall(instanceIdType, instanceIdValue, asAt, null, opts);
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecInstance: GetRecInstance (asynchronously)
+     * Retrieve a single rec instance by its identifier.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param asAt The asAt datetime at which to retrieve the instance. Defaults to latest if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getRecInstanceAsync(String instanceIdType, String instanceIdValue, OffsetDateTime asAt, final ApiCallback<RecInstance> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getRecInstanceValidateBeforeCall(instanceIdType, instanceIdValue, asAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecInstance: GetRecInstance (asynchronously)
+     * Retrieve a single rec instance by its identifier.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param asAt The asAt datetime at which to retrieve the instance. Defaults to latest if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getRecInstanceAsync(String instanceIdType, String instanceIdValue, OffsetDateTime asAt, final ApiCallback<RecInstance> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getRecInstanceValidateBeforeCall(instanceIdType, instanceIdValue, asAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetRecInstanceRequest {
+        private final String instanceIdType;
+        private final String instanceIdValue;
+        private OffsetDateTime asAt;
+
+        private APIgetRecInstanceRequest(String instanceIdType, String instanceIdValue) {
+            this.instanceIdType = instanceIdType;
+            this.instanceIdValue = instanceIdValue;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the instance. Defaults to latest if not specified. (optional)
+         * @return APIgetRecInstanceRequest
+         */
+        public APIgetRecInstanceRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Build call for getRecInstance
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getRecInstanceCall(instanceIdType, instanceIdValue, asAt, _callback);
+        }
+
+        /**
+         * Execute getRecInstance request
+         * @return RecInstance
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecInstance execute() throws ApiException {
+            ApiResponse<RecInstance> localVarResp = getRecInstanceWithHttpInfo(instanceIdType, instanceIdValue, asAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRecInstance request. Use any specified configuration options to override any other configuration for this request only.
+         * @return RecInstance
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecInstance execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<RecInstance> localVarResp = getRecInstanceWithHttpInfo(instanceIdType, instanceIdValue, asAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRecInstance request with HTTP info returned
+         * @return ApiResponse&lt;RecInstance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecInstance> executeWithHttpInfo() throws ApiException {
+            return getRecInstanceWithHttpInfo(instanceIdType, instanceIdValue, asAt);
+        }
+
+        /**
+         * Execute getRecInstance request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;RecInstance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecInstance> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getRecInstanceWithHttpInfo(instanceIdType, instanceIdValue, asAt, opts);
+        }
+
+        /**
+         * Execute getRecInstance request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecInstance> _callback) throws ApiException {
+            getRecInstanceAsync(instanceIdType, instanceIdValue, asAt, _callback);
+        }
+
+        /**
+         * Execute getRecInstance request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecInstance> _callback, ConfigurationOptions opts) throws ApiException {
+            getRecInstanceAsync(instanceIdType, instanceIdValue, asAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecInstance: GetRecInstance
+     * Retrieve a single rec instance by its identifier.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @return APIgetRecInstanceRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec instance. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetRecInstanceRequest getRecInstance(String instanceIdType, String instanceIdValue) {
+        return new APIgetRecInstanceRequest(instanceIdType, instanceIdValue);
+    }
+    /**
      * Build call for getRecResultSet
      * @param entityUniqueId The entity unique id of the rec result set (its version.entityUniqueId). (required)
      * @param asAt The asAt datetime at which to retrieve the result set. Defaults to latest if not specified. (optional)
@@ -759,6 +1110,721 @@ public class RecResultSetsApi {
      */
     public APIgetRecResultSetRequest getRecResultSet(String entityUniqueId) {
         return new APIgetRecResultSetRequest(entityUniqueId);
+    }
+    /**
+     * Build call for instantiateRec
+     * @param instantiateRecRequest The instantiation request. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest instantiateRecCall(InstantiateRecRequest instantiateRecRequest, final ApiCallback _callback) throws ApiException {
+        return instantiateRecCall(instantiateRecRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for instantiateRec. Use any specified configuration options to override any other configuration for this request only.
+     * @param instantiateRecRequest The instantiation request. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest instantiateRecCall(InstantiateRecRequest instantiateRecRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = instantiateRecRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/instances";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest instantiateRecValidateBeforeCall(InstantiateRecRequest instantiateRecRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'instantiateRecRequest' is set
+        if (instantiateRecRequest == null) {
+            throw new ApiException("Missing the required parameter 'instantiateRecRequest' when calling instantiateRec(Async)");
+        }
+
+        return instantiateRecCall(instantiateRecRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] InstantiateRec: InstantiateRec
+     * Instantiate a new rec instance from a rec definition and start its first run. The run              executes asynchronously; the response returns once the run has started, with the instance Running.
+     * @param instantiateRecRequest The instantiation request. (required)
+     * @return ApiResponse&lt;RecInstance&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecInstance> instantiateRecWithHttpInfo(InstantiateRecRequest instantiateRecRequest) throws ApiException {
+        HttpRequest localVarCall = instantiateRecValidateBeforeCall(instantiateRecRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] InstantiateRec: InstantiateRec
+     * Instantiate a new rec instance from a rec definition and start its first run. The run              executes asynchronously; the response returns once the run has started, with the instance Running.Use any specified configuration options to override any other configuration for this request only
+     * @param instantiateRecRequest The instantiation request. (required)
+     * @return ApiResponse&lt;RecInstance&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecInstance> instantiateRecWithHttpInfo(InstantiateRecRequest instantiateRecRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = instantiateRecValidateBeforeCall(instantiateRecRequest, null, opts);
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] InstantiateRec: InstantiateRec (asynchronously)
+     * Instantiate a new rec instance from a rec definition and start its first run. The run              executes asynchronously; the response returns once the run has started, with the instance Running.
+     * @param instantiateRecRequest The instantiation request. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void instantiateRecAsync(InstantiateRecRequest instantiateRecRequest, final ApiCallback<RecInstance> _callback) throws ApiException {
+
+        HttpRequest localVarCall = instantiateRecValidateBeforeCall(instantiateRecRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] InstantiateRec: InstantiateRec (asynchronously)
+     * Instantiate a new rec instance from a rec definition and start its first run. The run              executes asynchronously; the response returns once the run has started, with the instance Running.Use any specified configuration options to override any other configuration for this request only
+     * @param instantiateRecRequest The instantiation request. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void instantiateRecAsync(InstantiateRecRequest instantiateRecRequest, final ApiCallback<RecInstance> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = instantiateRecValidateBeforeCall(instantiateRecRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIinstantiateRecRequest {
+        private final InstantiateRecRequest instantiateRecRequest;
+
+        private APIinstantiateRecRequest(InstantiateRecRequest instantiateRecRequest) {
+            this.instantiateRecRequest = instantiateRecRequest;
+        }
+
+        /**
+         * Build call for instantiateRec
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return instantiateRecCall(instantiateRecRequest, _callback);
+        }
+
+        /**
+         * Execute instantiateRec request
+         * @return RecInstance
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecInstance execute() throws ApiException {
+            ApiResponse<RecInstance> localVarResp = instantiateRecWithHttpInfo(instantiateRecRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute instantiateRec request. Use any specified configuration options to override any other configuration for this request only.
+         * @return RecInstance
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecInstance execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<RecInstance> localVarResp = instantiateRecWithHttpInfo(instantiateRecRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute instantiateRec request with HTTP info returned
+         * @return ApiResponse&lt;RecInstance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecInstance> executeWithHttpInfo() throws ApiException {
+            return instantiateRecWithHttpInfo(instantiateRecRequest);
+        }
+
+        /**
+         * Execute instantiateRec request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;RecInstance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecInstance> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return instantiateRecWithHttpInfo(instantiateRecRequest, opts);
+        }
+
+        /**
+         * Execute instantiateRec request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecInstance> _callback) throws ApiException {
+            instantiateRecAsync(instantiateRecRequest, _callback);
+        }
+
+        /**
+         * Execute instantiateRec request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecInstance> _callback, ConfigurationOptions opts) throws ApiException {
+            instantiateRecAsync(instantiateRecRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] InstantiateRec: InstantiateRec
+     * Instantiate a new rec instance from a rec definition and start its first run. The run              executes asynchronously; the response returns once the run has started, with the instance Running.
+     * @param instantiateRecRequest The instantiation request. (required)
+     * @return APIinstantiateRecRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The instantiated rec instance, in a Running state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIinstantiateRecRequest instantiateRec(InstantiateRecRequest instantiateRecRequest) {
+        return new APIinstantiateRecRequest(instantiateRecRequest);
+    }
+    /**
+     * Build call for listRecInstances
+     * @param asAt The asAt datetime at which to list instances. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing instances from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listRecInstancesCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback _callback) throws ApiException {
+        return listRecInstancesCall(asAt, page, limit, filter, sortBy,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listRecInstances. Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to list instances. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing instances from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listRecInstancesCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/instances";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listRecInstancesValidateBeforeCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listRecInstancesCall(asAt, page, limit, filter, sortBy, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecInstances: ListRecInstances
+     * List rec instances.
+     * @param asAt The asAt datetime at which to list instances. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing instances from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfRecInstance&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfRecInstance> listRecInstancesWithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy) throws ApiException {
+        HttpRequest localVarCall = listRecInstancesValidateBeforeCall(asAt, page, limit, filter, sortBy, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecInstance>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecInstances: ListRecInstances
+     * List rec instances.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list instances. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing instances from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfRecInstance&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfRecInstance> listRecInstancesWithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listRecInstancesValidateBeforeCall(asAt, page, limit, filter, sortBy, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecInstance>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecInstances: ListRecInstances (asynchronously)
+     * List rec instances.
+     * @param asAt The asAt datetime at which to list instances. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing instances from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listRecInstancesAsync(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback<PagedResourceListOfRecInstance> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listRecInstancesValidateBeforeCall(asAt, page, limit, filter, sortBy, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecInstance>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecInstances: ListRecInstances (asynchronously)
+     * List rec instances.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list instances. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing instances from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listRecInstancesAsync(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback<PagedResourceListOfRecInstance> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listRecInstancesValidateBeforeCall(asAt, page, limit, filter, sortBy, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecInstance>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistRecInstancesRequest {
+        private OffsetDateTime asAt;
+        private String page;
+        private Integer limit;
+        private String filter;
+        private List<String> sortBy;
+
+        private APIlistRecInstancesRequest() {
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to list instances. Defaults to latest if not specified. (optional)
+         * @return APIlistRecInstancesRequest
+         */
+        public APIlistRecInstancesRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page The pagination token to use to continue listing instances from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+         * @return APIlistRecInstancesRequest
+         */
+        public APIlistRecInstancesRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+         * @return APIlistRecInstancesRequest
+         */
+        public APIlistRecInstancesRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+         * @return APIlistRecInstancesRequest
+         */
+        public APIlistRecInstancesRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+         * @return APIlistRecInstancesRequest
+         */
+        public APIlistRecInstancesRequest sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
+            return this;
+        }
+
+        /**
+         * Build call for listRecInstances
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listRecInstancesCall(asAt, page, limit, filter, sortBy, _callback);
+        }
+
+        /**
+         * Execute listRecInstances request
+         * @return PagedResourceListOfRecInstance
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfRecInstance execute() throws ApiException {
+            ApiResponse<PagedResourceListOfRecInstance> localVarResp = listRecInstancesWithHttpInfo(asAt, page, limit, filter, sortBy);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listRecInstances request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfRecInstance
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfRecInstance execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfRecInstance> localVarResp = listRecInstancesWithHttpInfo(asAt, page, limit, filter, sortBy, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listRecInstances request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfRecInstance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfRecInstance> executeWithHttpInfo() throws ApiException {
+            return listRecInstancesWithHttpInfo(asAt, page, limit, filter, sortBy);
+        }
+
+        /**
+         * Execute listRecInstances request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfRecInstance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfRecInstance> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listRecInstancesWithHttpInfo(asAt, page, limit, filter, sortBy, opts);
+        }
+
+        /**
+         * Execute listRecInstances request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfRecInstance> _callback) throws ApiException {
+            listRecInstancesAsync(asAt, page, limit, filter, sortBy, _callback);
+        }
+
+        /**
+         * Execute listRecInstances request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfRecInstance> _callback, ConfigurationOptions opts) throws ApiException {
+            listRecInstancesAsync(asAt, page, limit, filter, sortBy, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecInstances: ListRecInstances
+     * List rec instances.
+     * @return APIlistRecInstancesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instances. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistRecInstancesRequest listRecInstances() {
+        return new APIlistRecInstancesRequest();
     }
     /**
      * Build call for listRecResultSets
@@ -1510,5 +2576,349 @@ public class RecResultSetsApi {
      */
     public APIsubmitRecResultSetReviewRequest submitRecResultSetReview(String entityUniqueId, SubmitRecResultSetReviewRequest submitRecResultSetReviewRequest) {
         return new APIsubmitRecResultSetReviewRequest(entityUniqueId, submitRecResultSetReviewRequest);
+    }
+    /**
+     * Build call for transitionRecInstance
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param transitionRecInstanceRequest The transition request. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest transitionRecInstanceCall(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest, final ApiCallback _callback) throws ApiException {
+        return transitionRecInstanceCall(instanceIdType, instanceIdValue, transitionRecInstanceRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for transitionRecInstance. Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceIdValue The instance identifier value (a GUID). (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param transitionRecInstanceRequest The transition request. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest transitionRecInstanceCall(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = transitionRecInstanceRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/instances/{instanceIdType}/{instanceIdValue}/$transition"
+            .replace("{" + "instanceIdType" + "}", localVarApiClient.escapeString(instanceIdType.toString()))
+            .replace("{" + "instanceIdValue" + "}", localVarApiClient.escapeString(instanceIdValue.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest transitionRecInstanceValidateBeforeCall(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'instanceIdType' is set
+        if (instanceIdType == null) {
+            throw new ApiException("Missing the required parameter 'instanceIdType' when calling transitionRecInstance(Async)");
+        }
+
+        // verify the required parameter 'instanceIdValue' is set
+        if (instanceIdValue == null) {
+            throw new ApiException("Missing the required parameter 'instanceIdValue' when calling transitionRecInstance(Async)");
+        }
+
+        // verify the required parameter 'transitionRecInstanceRequest' is set
+        if (transitionRecInstanceRequest == null) {
+            throw new ApiException("Missing the required parameter 'transitionRecInstanceRequest' when calling transitionRecInstance(Async)");
+        }
+
+        return transitionRecInstanceCall(instanceIdType, instanceIdValue, transitionRecInstanceRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance
+     * Apply a lifecycle transition (re-run, lock or unlock) to a rec instance.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param transitionRecInstanceRequest The transition request. (required)
+     * @return ApiResponse&lt;RecInstance&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecInstance> transitionRecInstanceWithHttpInfo(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest) throws ApiException {
+        HttpRequest localVarCall = transitionRecInstanceValidateBeforeCall(instanceIdType, instanceIdValue, transitionRecInstanceRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance
+     * Apply a lifecycle transition (re-run, lock or unlock) to a rec instance.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param transitionRecInstanceRequest The transition request. (required)
+     * @return ApiResponse&lt;RecInstance&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecInstance> transitionRecInstanceWithHttpInfo(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = transitionRecInstanceValidateBeforeCall(instanceIdType, instanceIdValue, transitionRecInstanceRequest, null, opts);
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance (asynchronously)
+     * Apply a lifecycle transition (re-run, lock or unlock) to a rec instance.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param transitionRecInstanceRequest The transition request. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void transitionRecInstanceAsync(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest, final ApiCallback<RecInstance> _callback) throws ApiException {
+
+        HttpRequest localVarCall = transitionRecInstanceValidateBeforeCall(instanceIdType, instanceIdValue, transitionRecInstanceRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance (asynchronously)
+     * Apply a lifecycle transition (re-run, lock or unlock) to a rec instance.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param transitionRecInstanceRequest The transition request. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void transitionRecInstanceAsync(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest, final ApiCallback<RecInstance> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = transitionRecInstanceValidateBeforeCall(instanceIdType, instanceIdValue, transitionRecInstanceRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<RecInstance>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APItransitionRecInstanceRequest {
+        private final String instanceIdType;
+        private final String instanceIdValue;
+        private final TransitionRecInstanceRequest transitionRecInstanceRequest;
+
+        private APItransitionRecInstanceRequest(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest) {
+            this.instanceIdType = instanceIdType;
+            this.instanceIdValue = instanceIdValue;
+            this.transitionRecInstanceRequest = transitionRecInstanceRequest;
+        }
+
+        /**
+         * Build call for transitionRecInstance
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return transitionRecInstanceCall(instanceIdType, instanceIdValue, transitionRecInstanceRequest, _callback);
+        }
+
+        /**
+         * Execute transitionRecInstance request
+         * @return RecInstance
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecInstance execute() throws ApiException {
+            ApiResponse<RecInstance> localVarResp = transitionRecInstanceWithHttpInfo(instanceIdType, instanceIdValue, transitionRecInstanceRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute transitionRecInstance request. Use any specified configuration options to override any other configuration for this request only.
+         * @return RecInstance
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecInstance execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<RecInstance> localVarResp = transitionRecInstanceWithHttpInfo(instanceIdType, instanceIdValue, transitionRecInstanceRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute transitionRecInstance request with HTTP info returned
+         * @return ApiResponse&lt;RecInstance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecInstance> executeWithHttpInfo() throws ApiException {
+            return transitionRecInstanceWithHttpInfo(instanceIdType, instanceIdValue, transitionRecInstanceRequest);
+        }
+
+        /**
+         * Execute transitionRecInstance request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;RecInstance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecInstance> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return transitionRecInstanceWithHttpInfo(instanceIdType, instanceIdValue, transitionRecInstanceRequest, opts);
+        }
+
+        /**
+         * Execute transitionRecInstance request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecInstance> _callback) throws ApiException {
+            transitionRecInstanceAsync(instanceIdType, instanceIdValue, transitionRecInstanceRequest, _callback);
+        }
+
+        /**
+         * Execute transitionRecInstance request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecInstance> _callback, ConfigurationOptions opts) throws ApiException {
+            transitionRecInstanceAsync(instanceIdType, instanceIdValue, transitionRecInstanceRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance
+     * Apply a lifecycle transition (re-run, lock or unlock) to a rec instance.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The instance identifier value (a GUID). (required)
+     * @param transitionRecInstanceRequest The transition request. (required)
+     * @return APItransitionRecInstanceRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec instance in its post-transition state. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APItransitionRecInstanceRequest transitionRecInstance(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest) {
+        return new APItransitionRecInstanceRequest(instanceIdType, instanceIdValue, transitionRecInstanceRequest);
     }
 }

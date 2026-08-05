@@ -115,7 +115,9 @@ public enum InstrumentType {
   
   VOLATILITY_SWAP("VolatilitySwap"),
   
-  TO_BE_ANNOUNCED_OPTION("ToBeAnnouncedOption");
+  TO_BE_ANNOUNCED_OPTION("ToBeAnnouncedOption"),
+  
+  COMMODITY_FORWARD("CommodityForward");
 
   private String value;
 
