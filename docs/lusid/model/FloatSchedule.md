@@ -6,7 +6,7 @@ Schedule for floating rate coupon payments.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scheduleType** | **String** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid. | [default to String]
+**scheduleType** | **String** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid. | [default to String]
 **startDate** | [**OffsetDateTime**](OffsetDateTime.md) | Date from which LUSID starts generating the payment schedule. | [optional] [default to OffsetDateTime]
 **maturityDate** | [**OffsetDateTime**](OffsetDateTime.md) | Last date of the payment generation schedule. May not necessarily be the maturity date  of the underlying instrument (e.g. in case the instrument has multiple payment schedules). | [optional] [default to OffsetDateTime]
 **flowConventions** | [**FlowConventions**](FlowConventions.md) |  | [optional] [default to FlowConventions]

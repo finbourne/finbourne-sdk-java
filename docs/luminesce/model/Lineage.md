@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **explainTooltip** | **String** |  | [optional] [default to String]
 **arrowToParentTooltip** | **String** |  | [optional] [default to String]
 **fullFormula** | **String** |  | [optional] [default to String]
+**actionTemplate** | **String** |  | [optional] [default to String]
 **documentationAsHtml** | **String** |  | [optional] [default to String]
 **documentationAsMarkDown** | **String** |  | [optional] [default to String]
 **children** | [**List&lt;Lineage&gt;**](Lineage.md) |  | [optional] [default to List<Lineage>]
@@ -34,6 +35,7 @@ LineageColumnIcon @javax.annotation.Nullable String explainTitle = "example expl
 @javax.annotation.Nullable String explainTooltip = "example explainTooltip";
 @javax.annotation.Nullable String arrowToParentTooltip = "example arrowToParentTooltip";
 @javax.annotation.Nullable String fullFormula = "example fullFormula";
+@javax.annotation.Nullable String actionTemplate = "example actionTemplate";
 @javax.annotation.Nullable String documentationAsHtml = "example documentationAsHtml";
 @javax.annotation.Nullable String documentationAsMarkDown = "example documentationAsMarkDown";
 @javax.annotation.Nullable List<Lineage> children = new List<Lineage>();
@@ -50,6 +52,7 @@ Lineage lineageInstance = new Lineage()
     .explainTooltip(explainTooltip)
     .arrowToParentTooltip(arrowToParentTooltip)
     .fullFormula(fullFormula)
+    .actionTemplate(actionTemplate)
     .documentationAsHtml(documentationAsHtml)
     .documentationAsMarkDown(documentationAsMarkDown)
     .children(children);

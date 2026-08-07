@@ -209,7 +209,9 @@ public enum InstrumentEventType {
   
   PIK_BOND_PRINCIPAL_EVENT("PikBondPrincipalEvent"),
   
-  DELISTING_EVENT("DelistingEvent");
+  DELISTING_EVENT("DelistingEvent"),
+  
+  PIK_BOND_INTEREST_EVENT("PikBondInterestEvent");
 
   private String value;
 

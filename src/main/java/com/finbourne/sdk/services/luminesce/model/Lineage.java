@@ -47,6 +47,7 @@ import com.finbourne.sdk.JSON;
   Lineage.JSON_PROPERTY_EXPLAIN_TOOLTIP,
   Lineage.JSON_PROPERTY_ARROW_TO_PARENT_TOOLTIP,
   Lineage.JSON_PROPERTY_FULL_FORMULA,
+  Lineage.JSON_PROPERTY_ACTION_TEMPLATE,
   Lineage.JSON_PROPERTY_DOCUMENTATION_AS_HTML,
   Lineage.JSON_PROPERTY_DOCUMENTATION_AS_MARK_DOWN,
   Lineage.JSON_PROPERTY_CHILDREN
@@ -102,6 +103,11 @@ public class Lineage {
   @JsonProperty(JSON_PROPERTY_FULL_FORMULA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String fullFormula;
+
+  public static final String JSON_PROPERTY_ACTION_TEMPLATE = "actionTemplate";
+  @JsonProperty(JSON_PROPERTY_ACTION_TEMPLATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String actionTemplate;
 
   public static final String JSON_PROPERTY_DOCUMENTATION_AS_HTML = "documentationAsHtml";
   @JsonProperty(JSON_PROPERTY_DOCUMENTATION_AS_HTML)
@@ -311,6 +317,25 @@ public class Lineage {
   }
 
 
+  public Lineage actionTemplate(String actionTemplate) {
+    this.actionTemplate = actionTemplate;
+    return this;
+  }
+
+  /**
+   * Get actionTemplate
+   * @return actionTemplate
+   */
+  @javax.annotation.Nullable
+  public String getActionTemplate() {
+    return actionTemplate;
+  }
+
+  public void setActionTemplate(String actionTemplate) {
+    this.actionTemplate = actionTemplate;
+  }
+
+
   public Lineage documentationAsHtml(String documentationAsHtml) {
     this.documentationAsHtml = documentationAsHtml;
     return this;
@@ -395,6 +420,7 @@ public class Lineage {
         Objects.equals(this.explainTooltip, lineage.explainTooltip) &&
         Objects.equals(this.arrowToParentTooltip, lineage.arrowToParentTooltip) &&
         Objects.equals(this.fullFormula, lineage.fullFormula) &&
+        Objects.equals(this.actionTemplate, lineage.actionTemplate) &&
         Objects.equals(this.documentationAsHtml, lineage.documentationAsHtml) &&
         Objects.equals(this.documentationAsMarkDown, lineage.documentationAsMarkDown) &&
         Objects.equals(this.children, lineage.children);
@@ -406,7 +432,7 @@ public class Lineage {
 
   @Override
  public int hashCode() {
-    return Objects.hash(type, subtype, legendText, alias, columnTitleTooltip, columnTitleIcon, explainTitle, explainTooltip, arrowToParentTooltip, fullFormula, documentationAsHtml, documentationAsMarkDown, children);
+    return Objects.hash(type, subtype, legendText, alias, columnTitleTooltip, columnTitleIcon, explainTitle, explainTooltip, arrowToParentTooltip, fullFormula, actionTemplate, documentationAsHtml, documentationAsMarkDown, children);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -430,6 +456,7 @@ public class Lineage {
     sb.append("    explainTooltip: ").append(toIndentedString(explainTooltip)).append("\n");
     sb.append("    arrowToParentTooltip: ").append(toIndentedString(arrowToParentTooltip)).append("\n");
     sb.append("    fullFormula: ").append(toIndentedString(fullFormula)).append("\n");
+    sb.append("    actionTemplate: ").append(toIndentedString(actionTemplate)).append("\n");
     sb.append("    documentationAsHtml: ").append(toIndentedString(documentationAsHtml)).append("\n");
     sb.append("    documentationAsMarkDown: ").append(toIndentedString(documentationAsMarkDown)).append("\n");
     sb.append("    children: ").append(toIndentedString(children)).append("\n");

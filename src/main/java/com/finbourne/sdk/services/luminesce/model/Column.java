@@ -41,6 +41,7 @@ import com.finbourne.sdk.JSON;
   Column.JSON_PROPERTY_IS_MAIN,
   Column.JSON_PROPERTY_IS_REQUIRED_BY_PROVIDER,
   Column.JSON_PROPERTY_MANDATORY_FOR_ACTIONS,
+  Column.JSON_PROPERTY_ACTION_TEMPLATE,
   Column.JSON_PROPERTY_LINEAGE,
   Column.JSON_PROPERTY_NAME,
   Column.JSON_PROPERTY_TYPE,
@@ -71,6 +72,11 @@ public class Column {
   @JsonProperty(JSON_PROPERTY_MANDATORY_FOR_ACTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String mandatoryForActions;
+
+  public static final String JSON_PROPERTY_ACTION_TEMPLATE = "actionTemplate";
+  @JsonProperty(JSON_PROPERTY_ACTION_TEMPLATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String actionTemplate;
 
   public static final String JSON_PROPERTY_LINEAGE = "lineage";
   @JsonProperty(JSON_PROPERTY_LINEAGE)
@@ -188,6 +194,25 @@ public class Column {
 
   public void setMandatoryForActions(String mandatoryForActions) {
     this.mandatoryForActions = mandatoryForActions;
+  }
+
+
+  public Column actionTemplate(String actionTemplate) {
+    this.actionTemplate = actionTemplate;
+    return this;
+  }
+
+  /**
+   * Get actionTemplate
+   * @return actionTemplate
+   */
+  @javax.annotation.Nullable
+  public String getActionTemplate() {
+    return actionTemplate;
+  }
+
+  public void setActionTemplate(String actionTemplate) {
+    this.actionTemplate = actionTemplate;
   }
 
 
@@ -356,6 +381,7 @@ public class Column {
         Objects.equals(this.isMain, column.isMain) &&
         Objects.equals(this.isRequiredByProvider, column.isRequiredByProvider) &&
         Objects.equals(this.mandatoryForActions, column.mandatoryForActions) &&
+        Objects.equals(this.actionTemplate, column.actionTemplate) &&
         Objects.equals(this.lineage, column.lineage) &&
         Objects.equals(this.name, column.name) &&
         Objects.equals(this.type, column.type) &&
@@ -372,7 +398,7 @@ public class Column {
 
   @Override
  public int hashCode() {
-    return Objects.hash(isPrimaryKey, isMain, isRequiredByProvider, mandatoryForActions, lineage, name, type, description, displayName, conditionUsage, sampleValues, allowedValues);
+    return Objects.hash(isPrimaryKey, isMain, isRequiredByProvider, mandatoryForActions, actionTemplate, lineage, name, type, description, displayName, conditionUsage, sampleValues, allowedValues);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -390,6 +416,7 @@ public class Column {
     sb.append("    isMain: ").append(toIndentedString(isMain)).append("\n");
     sb.append("    isRequiredByProvider: ").append(toIndentedString(isRequiredByProvider)).append("\n");
     sb.append("    mandatoryForActions: ").append(toIndentedString(mandatoryForActions)).append("\n");
+    sb.append("    actionTemplate: ").append(toIndentedString(actionTemplate)).append("\n");
     sb.append("    lineage: ").append(toIndentedString(lineage)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");

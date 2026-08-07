@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Configuration {
-    public static final String VERSION = "0.0.37";
+    public static final String VERSION = "0.0.38";
 
     private static Map<String, String> defaultHeaders = new HashMap<>(Map.of(
         "X-LUSID-Sdk-Language", "Java-V3",

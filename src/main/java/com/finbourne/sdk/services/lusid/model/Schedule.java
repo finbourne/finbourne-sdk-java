@@ -48,12 +48,13 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxLinkedNotionalSchedule.class, name = "FxLinkedNotionalSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxRateSchedule.class, name = "FxRateSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OptionalitySchedule.class, name = "OptionalitySchedule"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = PikSchedule.class, name = "PikSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = StepSchedule.class, name = "StepSchedule"),
 })
 
 public class Schedule {
   /**
-   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid.
+   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid.
    */
   public enum ScheduleTypeEnum {
     FIXED_SCHEDULE("FixedSchedule"),
@@ -71,6 +72,8 @@ public class Schedule {
     FX_LINKED_NOTIONAL_SCHEDULE("FxLinkedNotionalSchedule"),
     
     BOND_CONVERSION_SCHEDULE("BondConversionSchedule"),
+    
+    PIK_SCHEDULE("PikSchedule"),
     
     INVALID("Invalid");
 
@@ -114,7 +117,7 @@ public class Schedule {
   }
 
   /**
-   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid.
+   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid.
    * @return scheduleType
    */
   @javax.annotation.Nonnull

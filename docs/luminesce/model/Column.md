@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **isMain** | **Boolean** |  | [optional] [default to Boolean]
 **isRequiredByProvider** | **Boolean** |  | [optional] [default to Boolean]
 **mandatoryForActions** | **String** |  | [optional] [default to String]
+**actionTemplate** | **String** |  | [optional] [default to String]
 **lineage** | [**Lineage**](Lineage.md) |  | [optional] [default to Lineage]
 **name** | **String** |  | [optional] [default to String]
 **type** | [**DataType**](DataType.md) |  | [optional] [default to DataType]
@@ -28,6 +29,7 @@ Boolean isPrimaryKey = true;
 Boolean isMain = true;
 Boolean isRequiredByProvider = true;
 @javax.annotation.Nullable String mandatoryForActions = "example mandatoryForActions";
+@javax.annotation.Nullable String actionTemplate = "example actionTemplate";
 Lineage lineage = new Lineage();
 @javax.annotation.Nullable String name = "example name";
 DataType @javax.annotation.Nullable String description = "example description";
@@ -41,6 +43,7 @@ Column columnInstance = new Column()
     .isMain(isMain)
     .isRequiredByProvider(isRequiredByProvider)
     .mandatoryForActions(mandatoryForActions)
+    .actionTemplate(actionTemplate)
     .lineage(lineage)
     .name(name)
     .type(type)
