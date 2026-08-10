@@ -56,7 +56,7 @@ public class VolSurfaceShiftDefinition extends ScenarioShiftDefinition {
 
   public static final String JSON_PROPERTY_AMOUNT = "amount";
   @JsonProperty(JSON_PROPERTY_AMOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal amount;
 
   public static final String JSON_PROPERTY_STRIKE = "strike";
@@ -139,7 +139,7 @@ public class VolSurfaceShiftDefinition extends ScenarioShiftDefinition {
    * Get amount
    * @return amount
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getAmount() {
     return amount;
   }

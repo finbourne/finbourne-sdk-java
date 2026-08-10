@@ -58,7 +58,7 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
 
   public static final String JSON_PROPERTY_AMOUNT = "amount";
   @JsonProperty(JSON_PROPERTY_AMOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal amount;
 
   public static final String JSON_PROPERTY_START_TENOR = "startTenor";
@@ -189,7 +189,7 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
    * The size of the shift, in the units given by Scale: basis points by default (50 means +50bps),  or a percentage of each rate when Scale is Percentage (1 means rates scaled by 1.01).
    * @return amount
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getAmount() {
     return amount;
   }

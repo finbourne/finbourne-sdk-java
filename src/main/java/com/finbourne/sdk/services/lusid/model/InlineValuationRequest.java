@@ -17,6 +17,7 @@ import com.finbourne.sdk.services.lusid.model.MarketDataOverrides;
 import com.finbourne.sdk.services.lusid.model.OrderBySpec;
 import com.finbourne.sdk.services.lusid.model.PropertyFilter;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.ScenarioReference;
 import com.finbourne.sdk.services.lusid.model.ValuationSchedule;
 import com.finbourne.sdk.services.lusid.model.WeightedInstrument;
 import java.io.IOException;
@@ -56,7 +57,8 @@ import com.finbourne.sdk.JSON;
   InlineValuationRequest.JSON_PROPERTY_VALUATION_SCHEDULE,
   InlineValuationRequest.JSON_PROPERTY_INSTRUMENTS,
   InlineValuationRequest.JSON_PROPERTY_MARKET_DATA_OVERRIDES,
-  InlineValuationRequest.JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID
+  InlineValuationRequest.JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID,
+  InlineValuationRequest.JSON_PROPERTY_SCENARIO
 })
 
 public class InlineValuationRequest {
@@ -124,6 +126,11 @@ public class InlineValuationRequest {
   @JsonProperty(JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId corporateActionSourceId;
+
+  public static final String JSON_PROPERTY_SCENARIO = "scenario";
+  @JsonProperty(JSON_PROPERTY_SCENARIO)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ScenarioReference scenario;
 
   public InlineValuationRequest() {
   }
@@ -415,6 +422,25 @@ public class InlineValuationRequest {
   }
 
 
+  public InlineValuationRequest scenario(ScenarioReference scenario) {
+    this.scenario = scenario;
+    return this;
+  }
+
+  /**
+   * Get scenario
+   * @return scenario
+   */
+  @javax.annotation.Nullable
+  public ScenarioReference getScenario() {
+    return scenario;
+  }
+
+  public void setScenario(ScenarioReference scenario) {
+    this.scenario = scenario;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -436,7 +462,8 @@ public class InlineValuationRequest {
         Objects.equals(this.valuationSchedule, inlineValuationRequest.valuationSchedule) &&
         Objects.equals(this.instruments, inlineValuationRequest.instruments) &&
         Objects.equals(this.marketDataOverrides, inlineValuationRequest.marketDataOverrides) &&
-        Objects.equals(this.corporateActionSourceId, inlineValuationRequest.corporateActionSourceId);
+        Objects.equals(this.corporateActionSourceId, inlineValuationRequest.corporateActionSourceId) &&
+        Objects.equals(this.scenario, inlineValuationRequest.scenario);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -445,7 +472,7 @@ public class InlineValuationRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(recipeId, asAt, metrics, groupBy, filters, sort, reportCurrency, equipWithSubtotals, returnResultAsExpandedTypes, valuationSchedule, instruments, marketDataOverrides, corporateActionSourceId);
+    return Objects.hash(recipeId, asAt, metrics, groupBy, filters, sort, reportCurrency, equipWithSubtotals, returnResultAsExpandedTypes, valuationSchedule, instruments, marketDataOverrides, corporateActionSourceId, scenario);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -472,6 +499,7 @@ public class InlineValuationRequest {
     sb.append("    instruments: ").append(toIndentedString(instruments)).append("\n");
     sb.append("    marketDataOverrides: ").append(toIndentedString(marketDataOverrides)).append("\n");
     sb.append("    corporateActionSourceId: ").append(toIndentedString(corporateActionSourceId)).append("\n");
+    sb.append("    scenario: ").append(toIndentedString(scenario)).append("\n");
     sb.append("}");
     return sb.toString();
   }

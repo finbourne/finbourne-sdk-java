@@ -54,7 +54,8 @@ import com.finbourne.sdk.JSON;
   BucketedCashFlowRequest.JSON_PROPERTY_EXCLUDE_UNSETTLED_TRADES,
   BucketedCashFlowRequest.JSON_PROPERTY_CASH_FLOW_TYPE,
   BucketedCashFlowRequest.JSON_PROPERTY_BUCKETING_SCHEDULE,
-  BucketedCashFlowRequest.JSON_PROPERTY_FILTER
+  BucketedCashFlowRequest.JSON_PROPERTY_FILTER,
+  BucketedCashFlowRequest.JSON_PROPERTY_CASH_FLOW_CALCULATION_VERSION
 })
 
 public class BucketedCashFlowRequest {
@@ -137,6 +138,11 @@ public class BucketedCashFlowRequest {
   @JsonProperty(JSON_PROPERTY_FILTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String filter;
+
+  public static final String JSON_PROPERTY_CASH_FLOW_CALCULATION_VERSION = "cashFlowCalculationVersion";
+  @JsonProperty(JSON_PROPERTY_CASH_FLOW_CALCULATION_VERSION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String cashFlowCalculationVersion;
 
   public BucketedCashFlowRequest() {
   }
@@ -477,6 +483,25 @@ public class BucketedCashFlowRequest {
   }
 
 
+  public BucketedCashFlowRequest cashFlowCalculationVersion(String cashFlowCalculationVersion) {
+    this.cashFlowCalculationVersion = cashFlowCalculationVersion;
+    return this;
+  }
+
+  /**
+   * The version of the cash flow calculation logic to use. Defaults to &#39;1&#39; if not specified. Valid values are &#39;1&#39; and &#39;2&#39;.  &#39;1&#39; is the current production behaviour: cash flows booked as transactions are de-duplicated against the  instrument cash flows by identifier, and movements are treated as factual when they settle on or before the effective date.  &#39;2&#39; resolves cash flows via a deterministic source waterfall (structured result store &gt; transaction &gt; instrument),  classifies cash flows as factual by the transaction trade date (so trades dealt on or before the effective date  that settle afterwards are factual), and applies corporate action date filtering.
+   * @return cashFlowCalculationVersion
+   */
+  @javax.annotation.Nullable
+  public String getCashFlowCalculationVersion() {
+    return cashFlowCalculationVersion;
+  }
+
+  public void setCashFlowCalculationVersion(String cashFlowCalculationVersion) {
+    this.cashFlowCalculationVersion = cashFlowCalculationVersion;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -501,7 +526,8 @@ public class BucketedCashFlowRequest {
         Objects.equals(this.excludeUnsettledTrades, bucketedCashFlowRequest.excludeUnsettledTrades) &&
         Objects.equals(this.cashFlowType, bucketedCashFlowRequest.cashFlowType) &&
         Objects.equals(this.bucketingSchedule, bucketedCashFlowRequest.bucketingSchedule) &&
-        Objects.equals(this.filter, bucketedCashFlowRequest.filter);
+        Objects.equals(this.filter, bucketedCashFlowRequest.filter) &&
+        Objects.equals(this.cashFlowCalculationVersion, bucketedCashFlowRequest.cashFlowCalculationVersion);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -510,7 +536,7 @@ public class BucketedCashFlowRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(roundingMethod, bucketingDates, bucketTenors, effectiveAt, windowStart, windowEnd, recipeId, reportCurrency, groupBy, addresses, equipWithSubtotals, asAt, excludeUnsettledTrades, cashFlowType, bucketingSchedule, filter);
+    return Objects.hash(roundingMethod, bucketingDates, bucketTenors, effectiveAt, windowStart, windowEnd, recipeId, reportCurrency, groupBy, addresses, equipWithSubtotals, asAt, excludeUnsettledTrades, cashFlowType, bucketingSchedule, filter, cashFlowCalculationVersion);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -540,6 +566,7 @@ public class BucketedCashFlowRequest {
     sb.append("    cashFlowType: ").append(toIndentedString(cashFlowType)).append("\n");
     sb.append("    bucketingSchedule: ").append(toIndentedString(bucketingSchedule)).append("\n");
     sb.append("    filter: ").append(toIndentedString(filter)).append("\n");
+    sb.append("    cashFlowCalculationVersion: ").append(toIndentedString(cashFlowCalculationVersion)).append("\n");
     sb.append("}");
     return sb.toString();
   }

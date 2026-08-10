@@ -12,8 +12,12 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.RateBreakdownComponent;
 import java.io.IOException;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -40,7 +44,9 @@ import com.finbourne.sdk.JSON;
   CashElection.JSON_PROPERTY_IS_CHOSEN,
   CashElection.JSON_PROPERTY_IS_DECLARED,
   CashElection.JSON_PROPERTY_IS_DEFAULT,
-  CashElection.JSON_PROPERTY_DIVIDEND_CURRENCY
+  CashElection.JSON_PROPERTY_DIVIDEND_CURRENCY,
+  CashElection.JSON_PROPERTY_PAYMENT_DATE,
+  CashElection.JSON_PROPERTY_RATE_BREAKDOWN
 })
 
 public class CashElection {
@@ -78,6 +84,16 @@ public class CashElection {
   @JsonProperty(JSON_PROPERTY_DIVIDEND_CURRENCY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String dividendCurrency;
+
+  public static final String JSON_PROPERTY_PAYMENT_DATE = "paymentDate";
+  @JsonProperty(JSON_PROPERTY_PAYMENT_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime paymentDate;
+
+  public static final String JSON_PROPERTY_RATE_BREAKDOWN = "rateBreakdown";
+  @JsonProperty(JSON_PROPERTY_RATE_BREAKDOWN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<RateBreakdownComponent> rateBreakdown;
 
   public CashElection() {
   }
@@ -215,6 +231,52 @@ public class CashElection {
   }
 
 
+  public CashElection paymentDate(OffsetDateTime paymentDate) {
+    this.paymentDate = paymentDate;
+    return this;
+  }
+
+  /**
+   * Optional option-level payment date. When set, it takes precedence over the event-level payment date; when omitted, the event-level payment date applies.
+   * @return paymentDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getPaymentDate() {
+    return paymentDate;
+  }
+
+  public void setPaymentDate(OffsetDateTime paymentDate) {
+    this.paymentDate = paymentDate;
+  }
+
+
+  public CashElection rateBreakdown(List<RateBreakdownComponent> rateBreakdown) {
+    this.rateBreakdown = rateBreakdown;
+    return this;
+  }
+
+  public CashElection addRateBreakdownItem(RateBreakdownComponent rateBreakdownItem) {
+    if (this.rateBreakdown == null) {
+      this.rateBreakdown = new ArrayList<>();
+    }
+    this.rateBreakdown.add(rateBreakdownItem);
+    return this;
+  }
+
+  /**
+   * Optional tax-characterised payout lines for this election (CashDividendEvent only). When absent or empty, the election produces a single standard payment.
+   * @return rateBreakdown
+   */
+  @javax.annotation.Nullable
+  public List<RateBreakdownComponent> getRateBreakdown() {
+    return rateBreakdown;
+  }
+
+  public void setRateBreakdown(List<RateBreakdownComponent> rateBreakdown) {
+    this.rateBreakdown = rateBreakdown;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -230,7 +292,9 @@ public class CashElection {
         Objects.equals(this.isChosen, cashElection.isChosen) &&
         Objects.equals(this.isDeclared, cashElection.isDeclared) &&
         Objects.equals(this.isDefault, cashElection.isDefault) &&
-        Objects.equals(this.dividendCurrency, cashElection.dividendCurrency);
+        Objects.equals(this.dividendCurrency, cashElection.dividendCurrency) &&
+        Objects.equals(this.paymentDate, cashElection.paymentDate) &&
+        Objects.equals(this.rateBreakdown, cashElection.rateBreakdown);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -239,7 +303,7 @@ public class CashElection {
 
   @Override
  public int hashCode() {
-    return Objects.hash(electionKey, exchangeRate, dividendRate, isChosen, isDeclared, isDefault, dividendCurrency);
+    return Objects.hash(electionKey, exchangeRate, dividendRate, isChosen, isDeclared, isDefault, dividendCurrency, paymentDate, rateBreakdown);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -260,6 +324,8 @@ public class CashElection {
     sb.append("    isDeclared: ").append(toIndentedString(isDeclared)).append("\n");
     sb.append("    isDefault: ").append(toIndentedString(isDefault)).append("\n");
     sb.append("    dividendCurrency: ").append(toIndentedString(dividendCurrency)).append("\n");
+    sb.append("    paymentDate: ").append(toIndentedString(paymentDate)).append("\n");
+    sb.append("    rateBreakdown: ").append(toIndentedString(rateBreakdown)).append("\n");
     sb.append("}");
     return sb.toString();
   }

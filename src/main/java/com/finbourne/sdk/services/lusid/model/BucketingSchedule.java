@@ -34,7 +34,9 @@ import com.finbourne.sdk.JSON;
  * A schedule for dates
  */
 @JsonPropertyOrder({
-  BucketingSchedule.JSON_PROPERTY_TENOR
+  BucketingSchedule.JSON_PROPERTY_TENOR,
+  BucketingSchedule.JSON_PROPERTY_ROLL_DIRECTION,
+  BucketingSchedule.JSON_PROPERTY_STUB_TYPE
 })
 
 public class BucketingSchedule {
@@ -42,6 +44,16 @@ public class BucketingSchedule {
   @JsonProperty(JSON_PROPERTY_TENOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String tenor;
+
+  public static final String JSON_PROPERTY_ROLL_DIRECTION = "rollDirection";
+  @JsonProperty(JSON_PROPERTY_ROLL_DIRECTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String rollDirection;
+
+  public static final String JSON_PROPERTY_STUB_TYPE = "stubType";
+  @JsonProperty(JSON_PROPERTY_STUB_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String stubType;
 
   public BucketingSchedule() {
   }
@@ -65,6 +77,44 @@ public class BucketingSchedule {
   }
 
 
+  public BucketingSchedule rollDirection(String rollDirection) {
+    this.rollDirection = rollDirection;
+    return this;
+  }
+
+  /**
+   * Optional direction in which the bucketing dates are rolled out from the schedule tenor.  Supported string (enumeration) values are: [ForwardFromStart, BackwardFromEnd].  If absent (and StubType is also absent), the pre-existing date generation behaviour is used. Available values: ForwardFromStart, BackwardFromEnd.
+   * @return rollDirection
+   */
+  @javax.annotation.Nullable
+  public String getRollDirection() {
+    return rollDirection;
+  }
+
+  public void setRollDirection(String rollDirection) {
+    this.rollDirection = rollDirection;
+  }
+
+
+  public BucketingSchedule stubType(String stubType) {
+    this.stubType = stubType;
+    return this;
+  }
+
+  /**
+   * Optional treatment of the irregular (stub) period when the window length is not an exact multiple of the tenor.  Supported string (enumeration) values are: [ShortStub, LongStub].  If absent (and RollDirection is also absent), the pre-existing date generation behaviour is used. Available values: ShortStub, LongStub.
+   * @return stubType
+   */
+  @javax.annotation.Nullable
+  public String getStubType() {
+    return stubType;
+  }
+
+  public void setStubType(String stubType) {
+    this.stubType = stubType;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -74,7 +124,9 @@ public class BucketingSchedule {
       return false;
     }
     BucketingSchedule bucketingSchedule = (BucketingSchedule) o;
-    return Objects.equals(this.tenor, bucketingSchedule.tenor);
+    return Objects.equals(this.tenor, bucketingSchedule.tenor) &&
+        Objects.equals(this.rollDirection, bucketingSchedule.rollDirection) &&
+        Objects.equals(this.stubType, bucketingSchedule.stubType);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -83,7 +135,7 @@ public class BucketingSchedule {
 
   @Override
  public int hashCode() {
-    return Objects.hash(tenor);
+    return Objects.hash(tenor, rollDirection, stubType);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -98,6 +150,8 @@ public class BucketingSchedule {
     StringBuilder sb = new StringBuilder();
     sb.append("class BucketingSchedule {\n");
     sb.append("    tenor: ").append(toIndentedString(tenor)).append("\n");
+    sb.append("    rollDirection: ").append(toIndentedString(rollDirection)).append("\n");
+    sb.append("    stubType: ").append(toIndentedString(stubType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

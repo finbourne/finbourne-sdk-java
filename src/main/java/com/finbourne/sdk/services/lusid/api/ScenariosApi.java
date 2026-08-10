@@ -34,6 +34,7 @@ import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfGetScenarioResponse;
+import com.finbourne.sdk.services.lusid.model.PagedResourceListOfVersion;
 import com.finbourne.sdk.services.lusid.model.ScenarioPreviewRequest;
 import com.finbourne.sdk.services.lusid.model.ScenarioPreviewResponse;
 import com.finbourne.sdk.services.lusid.model.UpsertScenarioRequest;
@@ -1083,6 +1084,395 @@ public class ScenariosApi {
      */
     public APIgetScenarioRequest getScenario(String scope, String code) {
         return new APIgetScenarioRequest(scope, code);
+    }
+    /**
+     * Build call for listScenarioVersions
+     * @param scope The scope of the Scenario to list versions for. (required)
+     * @param code The code of the Scenario to list versions for. (required)
+     * @param asAt The asAt datetime to cap the version history at. Defaults to all versions up to now. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listScenarioVersionsCall(String scope, String code, OffsetDateTime asAt, Integer limit, String page, final ApiCallback _callback) throws ApiException {
+        return listScenarioVersionsCall(scope, code, asAt, limit, page,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listScenarioVersions. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Scenario to list versions for. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Scenario to list versions for. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime to cap the version history at. Defaults to all versions up to now. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit Maximum number of results to return. Defaults to 100. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listScenarioVersionsCall(String scope, String code, OffsetDateTime asAt, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/scenarios/{scope}/{code}/versions"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listScenarioVersionsValidateBeforeCall(String scope, String code, OffsetDateTime asAt, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling listScenarioVersions(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling listScenarioVersions(Async)");
+        }
+
+        return listScenarioVersionsCall(scope, code, asAt, limit, page, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioVersions: List the versions of a Scenario
+     * List the AsAt versions of a single Scenario definition, newest first: one entry per change,  with the version number, the AsAt datetime it was written, and the user that wrote it.                Scenarios are perpetual (AsAt-only), so a version&#39;s AsAt datetime identifies it completely:  pass it as the asAt on GetScenario to view that version, or as the scenario reference&#39;s  asAt on a valuation to price under it.
+     * @param scope The scope of the Scenario to list versions for. (required)
+     * @param code The code of the Scenario to list versions for. (required)
+     * @param asAt The asAt datetime to cap the version history at. Defaults to all versions up to now. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfVersion&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfVersion> listScenarioVersionsWithHttpInfo(String scope, String code, OffsetDateTime asAt, Integer limit, String page) throws ApiException {
+        HttpRequest localVarCall = listScenarioVersionsValidateBeforeCall(scope, code, asAt, limit, page, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfVersion>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioVersions: List the versions of a Scenario
+     * List the AsAt versions of a single Scenario definition, newest first: one entry per change,  with the version number, the AsAt datetime it was written, and the user that wrote it.                Scenarios are perpetual (AsAt-only), so a version&#39;s AsAt datetime identifies it completely:  pass it as the asAt on GetScenario to view that version, or as the scenario reference&#39;s  asAt on a valuation to price under it.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Scenario to list versions for. (required)
+     * @param code The code of the Scenario to list versions for. (required)
+     * @param asAt The asAt datetime to cap the version history at. Defaults to all versions up to now. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfVersion&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfVersion> listScenarioVersionsWithHttpInfo(String scope, String code, OffsetDateTime asAt, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listScenarioVersionsValidateBeforeCall(scope, code, asAt, limit, page, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfVersion>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioVersions: List the versions of a Scenario (asynchronously)
+     * List the AsAt versions of a single Scenario definition, newest first: one entry per change,  with the version number, the AsAt datetime it was written, and the user that wrote it.                Scenarios are perpetual (AsAt-only), so a version&#39;s AsAt datetime identifies it completely:  pass it as the asAt on GetScenario to view that version, or as the scenario reference&#39;s  asAt on a valuation to price under it.
+     * @param scope The scope of the Scenario to list versions for. (required)
+     * @param code The code of the Scenario to list versions for. (required)
+     * @param asAt The asAt datetime to cap the version history at. Defaults to all versions up to now. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listScenarioVersionsAsync(String scope, String code, OffsetDateTime asAt, Integer limit, String page, final ApiCallback<PagedResourceListOfVersion> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listScenarioVersionsValidateBeforeCall(scope, code, asAt, limit, page, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfVersion>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioVersions: List the versions of a Scenario (asynchronously)
+     * List the AsAt versions of a single Scenario definition, newest first: one entry per change,  with the version number, the AsAt datetime it was written, and the user that wrote it.                Scenarios are perpetual (AsAt-only), so a version&#39;s AsAt datetime identifies it completely:  pass it as the asAt on GetScenario to view that version, or as the scenario reference&#39;s  asAt on a valuation to price under it.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Scenario to list versions for. (required)
+     * @param code The code of the Scenario to list versions for. (required)
+     * @param asAt The asAt datetime to cap the version history at. Defaults to all versions up to now. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listScenarioVersionsAsync(String scope, String code, OffsetDateTime asAt, Integer limit, String page, final ApiCallback<PagedResourceListOfVersion> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listScenarioVersionsValidateBeforeCall(scope, code, asAt, limit, page, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfVersion>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistScenarioVersionsRequest {
+        private final String scope;
+        private final String code;
+        private OffsetDateTime asAt;
+        private Integer limit;
+        private String page;
+
+        private APIlistScenarioVersionsRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime to cap the version history at. Defaults to all versions up to now. (optional)
+         * @return APIlistScenarioVersionsRequest
+         */
+        public APIlistScenarioVersionsRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit Maximum number of results to return. Defaults to 100. (optional)
+         * @return APIlistScenarioVersionsRequest
+         */
+        public APIlistScenarioVersionsRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page Pagination token from a previous result to fetch the next page. (optional)
+         * @return APIlistScenarioVersionsRequest
+         */
+        public APIlistScenarioVersionsRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Build call for listScenarioVersions
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listScenarioVersionsCall(scope, code, asAt, limit, page, _callback);
+        }
+
+        /**
+         * Execute listScenarioVersions request
+         * @return PagedResourceListOfVersion
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfVersion execute() throws ApiException {
+            ApiResponse<PagedResourceListOfVersion> localVarResp = listScenarioVersionsWithHttpInfo(scope, code, asAt, limit, page);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listScenarioVersions request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfVersion
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfVersion execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfVersion> localVarResp = listScenarioVersionsWithHttpInfo(scope, code, asAt, limit, page, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listScenarioVersions request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfVersion&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfVersion> executeWithHttpInfo() throws ApiException {
+            return listScenarioVersionsWithHttpInfo(scope, code, asAt, limit, page);
+        }
+
+        /**
+         * Execute listScenarioVersions request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfVersion&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfVersion> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listScenarioVersionsWithHttpInfo(scope, code, asAt, limit, page, opts);
+        }
+
+        /**
+         * Execute listScenarioVersions request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfVersion> _callback) throws ApiException {
+            listScenarioVersionsAsync(scope, code, asAt, limit, page, _callback);
+        }
+
+        /**
+         * Execute listScenarioVersions request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfVersion> _callback, ConfigurationOptions opts) throws ApiException {
+            listScenarioVersionsAsync(scope, code, asAt, limit, page, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioVersions: List the versions of a Scenario
+     * List the AsAt versions of a single Scenario definition, newest first: one entry per change,  with the version number, the AsAt datetime it was written, and the user that wrote it.                Scenarios are perpetual (AsAt-only), so a version&#39;s AsAt datetime identifies it completely:  pass it as the asAt on GetScenario to view that version, or as the scenario reference&#39;s  asAt on a valuation to price under it.
+     * @param scope The scope of the Scenario to list versions for. (required)
+     * @param code The code of the Scenario to list versions for. (required)
+     * @return APIlistScenarioVersionsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The versions of the scenario, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistScenarioVersionsRequest listScenarioVersions(String scope, String code) {
+        return new APIlistScenarioVersionsRequest(scope, code);
     }
     /**
      * Build call for listScenarios

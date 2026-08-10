@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   SimpleInstrument.JSON_PROPERTY_ASSET_CLASS,
   SimpleInstrument.JSON_PROPERTY_FGN_CCYS,
   SimpleInstrument.JSON_PROPERTY_SIMPLE_INSTRUMENT_TYPE,
+  SimpleInstrument.JSON_PROPERTY_CONTRACT_SIZE,
   SimpleInstrument.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
   SimpleInstrument.JSON_PROPERTY_TRADING_CONVENTIONS
 })
@@ -130,6 +131,11 @@ public class SimpleInstrument extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_SIMPLE_INSTRUMENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String simpleInstrumentType;
+
+  public static final String JSON_PROPERTY_CONTRACT_SIZE = "contractSize";
+  @JsonProperty(JSON_PROPERTY_CONTRACT_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal contractSize = java.math.BigDecimal.valueOf(1d);
 
   public static final String JSON_PROPERTY_TIME_ZONE_CONVENTIONS = "timeZoneConventions";
   @JsonProperty(JSON_PROPERTY_TIME_ZONE_CONVENTIONS)
@@ -247,6 +253,25 @@ public class SimpleInstrument extends LusidInstrument {
   }
 
 
+  public SimpleInstrument contractSize(java.math.BigDecimal contractSize) {
+    this.contractSize = contractSize;
+    return this;
+  }
+
+  /**
+   * The size of the contract of the simple instrument
+   * @return contractSize
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getContractSize() {
+    return contractSize;
+  }
+
+  public void setContractSize(java.math.BigDecimal contractSize) {
+    this.contractSize = contractSize;
+  }
+
+
   public SimpleInstrument timeZoneConventions(TimeZoneConventions timeZoneConventions) {
     this.timeZoneConventions = timeZoneConventions;
     return this;
@@ -299,6 +324,7 @@ public class SimpleInstrument extends LusidInstrument {
         Objects.equals(this.assetClass, simpleInstrument.assetClass) &&
         Objects.equals(this.fgnCcys, simpleInstrument.fgnCcys) &&
         Objects.equals(this.simpleInstrumentType, simpleInstrument.simpleInstrumentType) &&
+        (this.contractSize == null ? simpleInstrument.contractSize == null : (simpleInstrument.contractSize != null && this.contractSize.compareTo(simpleInstrument.getContractSize()) == 0)) &&
         Objects.equals(this.timeZoneConventions, simpleInstrument.timeZoneConventions) &&
         Objects.equals(this.tradingConventions, simpleInstrument.tradingConventions) &&
         super.equals(o);
@@ -310,7 +336,7 @@ public class SimpleInstrument extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(maturityDate, domCcy, assetClass, fgnCcys, simpleInstrumentType, timeZoneConventions, tradingConventions, super.hashCode());
+    return Objects.hash(maturityDate, domCcy, assetClass, fgnCcys, simpleInstrumentType, contractSize, timeZoneConventions, tradingConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -330,6 +356,7 @@ public class SimpleInstrument extends LusidInstrument {
     sb.append("    assetClass: ").append(toIndentedString(assetClass)).append("\n");
     sb.append("    fgnCcys: ").append(toIndentedString(fgnCcys)).append("\n");
     sb.append("    simpleInstrumentType: ").append(toIndentedString(simpleInstrumentType)).append("\n");
+    sb.append("    contractSize: ").append(toIndentedString(contractSize)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
     sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
     sb.append("}");

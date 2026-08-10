@@ -23,6 +23,10 @@ Name | Type | Description | Notes
 **cashFlowType** | **String** | Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this). Available values: InstrumentCashFlow, PortfolioCashFlow, TransactionCashFlow. | [optional] [default to String]
 **bucketingSchedule** | [**BucketingSchedule**](BucketingSchedule.md) |  | [optional] [default to BucketingSchedule]
 **filter** | **String** |  | [optional] [default to String]
+**cashFlowCalculationVersion** | **String** | The version of the cash flow calculation logic to use. Defaults to &#39;1&#39; if not specified. Valid values are &#39;1&#39; and &#39;2&#39;.  &#39;1&#39; is the current production behaviour: cash flows booked as transactions are de-duplicated against the  instrument cash flows by identifier, and movements are treated as factual when they settle on or before the effective date.  &#39;2&#39; resolves cash flows via a deterministic source waterfall (structured result store &gt; transaction &gt; instrument),  classifies cash flows as factual by the transaction trade date (so trades dealt on or before the effective date  that settle afterwards are factual), and applies corporate action date filtering. | [optional] [default to String]
+**haircutRules** | [**List&lt;CashFlowHaircutRule&gt;**](CashFlowHaircutRule.md) | Optional ordered haircut rules applied to cashflow inflows; the first matching rule wins and a rule with no criteria acts as a catch-all. When supplied, the additional per-bucket columns &#39;Valuation/Bucket/HaircutAmount&#39; and &#39;Valuation/Bucket/NetOfHaircutAmount&#39; are produced; with no rules the results are unchanged. Only supported for the InstrumentCashFlow CashFlowType. | [optional] [default to List<CashFlowHaircutRule>]
+**borderConfiguration** | [**BucketBorderConfiguration**](BucketBorderConfiguration.md) |  | [optional] [default to BucketBorderConfiguration]
+**startingBalance** | **String** | The balance to use at the start of the bucketing window when computing open/close balances.  Supported string (enumeration) values are: [PortfolioCashBalance, Zero]. Defaults to &#39;PortfolioCashBalance&#39;. Available values: PortfolioCashBalance, Zero. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.QueryBucketedCashFlowsRequest;
@@ -47,6 +51,10 @@ Boolean excludeUnsettledTrades = true;
 @javax.annotation.Nullable String cashFlowType = "example cashFlowType";
 BucketingSchedule bucketingSchedule = new BucketingSchedule();
 @javax.annotation.Nullable String filter = "example filter";
+@javax.annotation.Nullable String cashFlowCalculationVersion = "example cashFlowCalculationVersion";
+@javax.annotation.Nullable List<CashFlowHaircutRule> haircutRules = new List<CashFlowHaircutRule>();
+BucketBorderConfiguration borderConfiguration = new BucketBorderConfiguration();
+@javax.annotation.Nullable String startingBalance = "example startingBalance";
 
 
 QueryBucketedCashFlowsRequest queryBucketedCashFlowsRequestInstance = new QueryBucketedCashFlowsRequest()
@@ -66,7 +74,11 @@ QueryBucketedCashFlowsRequest queryBucketedCashFlowsRequestInstance = new QueryB
     .excludeUnsettledTrades(excludeUnsettledTrades)
     .cashFlowType(cashFlowType)
     .bucketingSchedule(bucketingSchedule)
-    .filter(filter);
+    .filter(filter)
+    .cashFlowCalculationVersion(cashFlowCalculationVersion)
+    .haircutRules(haircutRules)
+    .borderConfiguration(borderConfiguration)
+    .startingBalance(startingBalance);
 ```
 
 

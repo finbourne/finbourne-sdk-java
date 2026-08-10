@@ -44,7 +44,8 @@ import com.finbourne.sdk.JSON;
   QueryCashFlowsRequest.JSON_PROPERTY_WINDOW_END,
   QueryCashFlowsRequest.JSON_PROPERTY_PORTFOLIO_ENTITY_IDS,
   QueryCashFlowsRequest.JSON_PROPERTY_RECIPE_ID,
-  QueryCashFlowsRequest.JSON_PROPERTY_EFFECTIVE_AT
+  QueryCashFlowsRequest.JSON_PROPERTY_EFFECTIVE_AT,
+  QueryCashFlowsRequest.JSON_PROPERTY_CASH_FLOW_CALCULATION_VERSION
 })
 
 public class QueryCashFlowsRequest {
@@ -77,6 +78,11 @@ public class QueryCashFlowsRequest {
   @JsonProperty(JSON_PROPERTY_EFFECTIVE_AT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private OffsetDateTime effectiveAt;
+
+  public static final String JSON_PROPERTY_CASH_FLOW_CALCULATION_VERSION = "cashFlowCalculationVersion";
+  @JsonProperty(JSON_PROPERTY_CASH_FLOW_CALCULATION_VERSION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String cashFlowCalculationVersion;
 
   public QueryCashFlowsRequest() {
   }
@@ -203,6 +209,25 @@ public class QueryCashFlowsRequest {
   }
 
 
+  public QueryCashFlowsRequest cashFlowCalculationVersion(String cashFlowCalculationVersion) {
+    this.cashFlowCalculationVersion = cashFlowCalculationVersion;
+    return this;
+  }
+
+  /**
+   * The version of the cash flow calculation logic to use. Defaults to &#39;1&#39; if not specified. Valid values are &#39;1&#39; and &#39;2&#39;.  &#39;1&#39; is the current production behaviour: cash flows booked as transactions are de-duplicated against the  instrument cash flows by identifier, and movements are treated as factual when they settle on or before the effective date.  &#39;2&#39; resolves cash flows via a deterministic source waterfall (structured result store &gt; transaction &gt; instrument),  classifies cash flows as factual by the transaction trade date (so trades dealt on or before the effective date  that settle afterwards are factual), and applies corporate action date filtering.
+   * @return cashFlowCalculationVersion
+   */
+  @javax.annotation.Nullable
+  public String getCashFlowCalculationVersion() {
+    return cashFlowCalculationVersion;
+  }
+
+  public void setCashFlowCalculationVersion(String cashFlowCalculationVersion) {
+    this.cashFlowCalculationVersion = cashFlowCalculationVersion;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -217,7 +242,8 @@ public class QueryCashFlowsRequest {
         Objects.equals(this.windowEnd, queryCashFlowsRequest.windowEnd) &&
         Objects.equals(this.portfolioEntityIds, queryCashFlowsRequest.portfolioEntityIds) &&
         Objects.equals(this.recipeId, queryCashFlowsRequest.recipeId) &&
-        Objects.equals(this.effectiveAt, queryCashFlowsRequest.effectiveAt);
+        Objects.equals(this.effectiveAt, queryCashFlowsRequest.effectiveAt) &&
+        Objects.equals(this.cashFlowCalculationVersion, queryCashFlowsRequest.cashFlowCalculationVersion);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -226,7 +252,7 @@ public class QueryCashFlowsRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(asAt, windowStart, windowEnd, portfolioEntityIds, recipeId, effectiveAt);
+    return Objects.hash(asAt, windowStart, windowEnd, portfolioEntityIds, recipeId, effectiveAt, cashFlowCalculationVersion);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -246,6 +272,7 @@ public class QueryCashFlowsRequest {
     sb.append("    portfolioEntityIds: ").append(toIndentedString(portfolioEntityIds)).append("\n");
     sb.append("    recipeId: ").append(toIndentedString(recipeId)).append("\n");
     sb.append("    effectiveAt: ").append(toIndentedString(effectiveAt)).append("\n");
+    sb.append("    cashFlowCalculationVersion: ").append(toIndentedString(cashFlowCalculationVersion)).append("\n");
     sb.append("}");
     return sb.toString();
   }

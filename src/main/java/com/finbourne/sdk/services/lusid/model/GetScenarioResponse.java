@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.ErrorDetail;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.ScenarioDefinition;
+import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   GetScenarioResponse.JSON_PROPERTY_HREF,
   GetScenarioResponse.JSON_PROPERTY_VALUE,
+  GetScenarioResponse.JSON_PROPERTY_VERSION,
   GetScenarioResponse.JSON_PROPERTY_FAILED,
   GetScenarioResponse.JSON_PROPERTY_LINKS
 })
@@ -56,6 +58,11 @@ public class GetScenarioResponse {
   @JsonProperty(JSON_PROPERTY_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ScenarioDefinition value;
+
+  public static final String JSON_PROPERTY_VERSION = "version";
+  @JsonProperty(JSON_PROPERTY_VERSION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Version version;
 
   public static final String JSON_PROPERTY_FAILED = "failed";
   @JsonProperty(JSON_PROPERTY_FAILED)
@@ -105,6 +112,25 @@ public class GetScenarioResponse {
 
   public void setValue(ScenarioDefinition value) {
     this.value = value;
+  }
+
+
+  public GetScenarioResponse version(Version version) {
+    this.version = version;
+    return this;
+  }
+
+  /**
+   * Get version
+   * @return version
+   */
+  @javax.annotation.Nullable
+  public Version getVersion() {
+    return version;
+  }
+
+  public void setVersion(Version version) {
+    this.version = version;
   }
 
 
@@ -165,6 +191,7 @@ public class GetScenarioResponse {
     GetScenarioResponse getScenarioResponse = (GetScenarioResponse) o;
     return Objects.equals(this.href, getScenarioResponse.href) &&
         Objects.equals(this.value, getScenarioResponse.value) &&
+        Objects.equals(this.version, getScenarioResponse.version) &&
         Objects.equals(this.failed, getScenarioResponse.failed) &&
         Objects.equals(this.links, getScenarioResponse.links);
   }
@@ -175,7 +202,7 @@ public class GetScenarioResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, value, failed, links);
+    return Objects.hash(href, value, version, failed, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -191,6 +218,7 @@ public class GetScenarioResponse {
     sb.append("class GetScenarioResponse {\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    failed: ").append(toIndentedString(failed)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **scenarioShiftType** | **String** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition. | [default to String]
 **currencyPair** | **String** |  | [default to String]
-**amount** | **java.math.BigDecimal** |  | [default to java.math.BigDecimal]
+**amount** | **java.math.BigDecimal** |  | [optional] [default to java.math.BigDecimal]
 **shiftType** | **String** | Available values: Absolute, Relative, Percentage. | [default to String]
 
 ```java
@@ -17,7 +17,7 @@ import java.lang.System;
 import java.net.URI;
 
 String currencyPair = "example currencyPair";
-java.math.BigDecimal amount = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal amount = new java.math.BigDecimal("100.00");
 String shiftType = "example shiftType";
 
 

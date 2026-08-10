@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **assetClass** | **String** | Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate, Exotic. | [default to String]
 **fgnCcys** | **List&lt;String&gt;** | The set of foreign currencies, if any (optional). | [optional] [default to List<String>]
 **simpleInstrumentType** | **String** | The Instrument type of the simple instrument. | [default to String]
+**contractSize** | **java.math.BigDecimal** | The size of the contract of the simple instrument | [optional] [default to java.math.BigDecimal]
 **timeZoneConventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] [default to TimeZoneConventions]
 **tradingConventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] [default to TradingConventions]
 
@@ -26,6 +27,7 @@ String domCcy = "example domCcy";
 String assetClass = "example assetClass";
 @javax.annotation.Nullable List<String> fgnCcys = new List<String>();
 String simpleInstrumentType = "example simpleInstrumentType";
+java.math.BigDecimal contractSize = new java.math.BigDecimal("100.00");
 TimeZoneConventions timeZoneConventions = new TimeZoneConventions();
 TradingConventions tradingConventions = new TradingConventions();
 
@@ -36,6 +38,7 @@ SimpleInstrument simpleInstrumentInstance = new SimpleInstrument()
     .assetClass(assetClass)
     .fgnCcys(fgnCcys)
     .simpleInstrumentType(simpleInstrumentType)
+    .contractSize(contractSize)
     .timeZoneConventions(timeZoneConventions)
     .tradingConventions(tradingConventions);
 ```

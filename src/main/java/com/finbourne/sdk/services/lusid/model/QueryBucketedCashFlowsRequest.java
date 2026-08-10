@@ -12,7 +12,9 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.BucketBorderConfiguration;
 import com.finbourne.sdk.services.lusid.model.BucketingSchedule;
+import com.finbourne.sdk.services.lusid.model.CashFlowHaircutRule;
 import com.finbourne.sdk.services.lusid.model.PortfolioEntityId;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
@@ -56,7 +58,11 @@ import com.finbourne.sdk.JSON;
   QueryBucketedCashFlowsRequest.JSON_PROPERTY_EXCLUDE_UNSETTLED_TRADES,
   QueryBucketedCashFlowsRequest.JSON_PROPERTY_CASH_FLOW_TYPE,
   QueryBucketedCashFlowsRequest.JSON_PROPERTY_BUCKETING_SCHEDULE,
-  QueryBucketedCashFlowsRequest.JSON_PROPERTY_FILTER
+  QueryBucketedCashFlowsRequest.JSON_PROPERTY_FILTER,
+  QueryBucketedCashFlowsRequest.JSON_PROPERTY_CASH_FLOW_CALCULATION_VERSION,
+  QueryBucketedCashFlowsRequest.JSON_PROPERTY_HAIRCUT_RULES,
+  QueryBucketedCashFlowsRequest.JSON_PROPERTY_BORDER_CONFIGURATION,
+  QueryBucketedCashFlowsRequest.JSON_PROPERTY_STARTING_BALANCE
 })
 
 public class QueryBucketedCashFlowsRequest {
@@ -144,6 +150,26 @@ public class QueryBucketedCashFlowsRequest {
   @JsonProperty(JSON_PROPERTY_FILTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String filter;
+
+  public static final String JSON_PROPERTY_CASH_FLOW_CALCULATION_VERSION = "cashFlowCalculationVersion";
+  @JsonProperty(JSON_PROPERTY_CASH_FLOW_CALCULATION_VERSION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String cashFlowCalculationVersion;
+
+  public static final String JSON_PROPERTY_HAIRCUT_RULES = "haircutRules";
+  @JsonProperty(JSON_PROPERTY_HAIRCUT_RULES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<CashFlowHaircutRule> haircutRules;
+
+  public static final String JSON_PROPERTY_BORDER_CONFIGURATION = "borderConfiguration";
+  @JsonProperty(JSON_PROPERTY_BORDER_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private BucketBorderConfiguration borderConfiguration;
+
+  public static final String JSON_PROPERTY_STARTING_BALANCE = "startingBalance";
+  @JsonProperty(JSON_PROPERTY_STARTING_BALANCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String startingBalance;
 
   public QueryBucketedCashFlowsRequest() {
   }
@@ -511,6 +537,90 @@ public class QueryBucketedCashFlowsRequest {
   }
 
 
+  public QueryBucketedCashFlowsRequest cashFlowCalculationVersion(String cashFlowCalculationVersion) {
+    this.cashFlowCalculationVersion = cashFlowCalculationVersion;
+    return this;
+  }
+
+  /**
+   * The version of the cash flow calculation logic to use. Defaults to &#39;1&#39; if not specified. Valid values are &#39;1&#39; and &#39;2&#39;.  &#39;1&#39; is the current production behaviour: cash flows booked as transactions are de-duplicated against the  instrument cash flows by identifier, and movements are treated as factual when they settle on or before the effective date.  &#39;2&#39; resolves cash flows via a deterministic source waterfall (structured result store &gt; transaction &gt; instrument),  classifies cash flows as factual by the transaction trade date (so trades dealt on or before the effective date  that settle afterwards are factual), and applies corporate action date filtering.
+   * @return cashFlowCalculationVersion
+   */
+  @javax.annotation.Nullable
+  public String getCashFlowCalculationVersion() {
+    return cashFlowCalculationVersion;
+  }
+
+  public void setCashFlowCalculationVersion(String cashFlowCalculationVersion) {
+    this.cashFlowCalculationVersion = cashFlowCalculationVersion;
+  }
+
+
+  public QueryBucketedCashFlowsRequest haircutRules(List<CashFlowHaircutRule> haircutRules) {
+    this.haircutRules = haircutRules;
+    return this;
+  }
+
+  public QueryBucketedCashFlowsRequest addHaircutRulesItem(CashFlowHaircutRule haircutRulesItem) {
+    if (this.haircutRules == null) {
+      this.haircutRules = new ArrayList<>();
+    }
+    this.haircutRules.add(haircutRulesItem);
+    return this;
+  }
+
+  /**
+   * Optional ordered haircut rules applied to cashflow inflows; the first matching rule wins and a rule with no criteria acts as a catch-all. When supplied, the additional per-bucket columns &#39;Valuation/Bucket/HaircutAmount&#39; and &#39;Valuation/Bucket/NetOfHaircutAmount&#39; are produced; with no rules the results are unchanged. Only supported for the InstrumentCashFlow CashFlowType.
+   * @return haircutRules
+   */
+  @javax.annotation.Nullable
+  public List<CashFlowHaircutRule> getHaircutRules() {
+    return haircutRules;
+  }
+
+  public void setHaircutRules(List<CashFlowHaircutRule> haircutRules) {
+    this.haircutRules = haircutRules;
+  }
+
+
+  public QueryBucketedCashFlowsRequest borderConfiguration(BucketBorderConfiguration borderConfiguration) {
+    this.borderConfiguration = borderConfiguration;
+    return this;
+  }
+
+  /**
+   * Get borderConfiguration
+   * @return borderConfiguration
+   */
+  @javax.annotation.Nullable
+  public BucketBorderConfiguration getBorderConfiguration() {
+    return borderConfiguration;
+  }
+
+  public void setBorderConfiguration(BucketBorderConfiguration borderConfiguration) {
+    this.borderConfiguration = borderConfiguration;
+  }
+
+
+  public QueryBucketedCashFlowsRequest startingBalance(String startingBalance) {
+    this.startingBalance = startingBalance;
+    return this;
+  }
+
+  /**
+   * The balance to use at the start of the bucketing window when computing open/close balances.  Supported string (enumeration) values are: [PortfolioCashBalance, Zero]. Defaults to &#39;PortfolioCashBalance&#39;. Available values: PortfolioCashBalance, Zero.
+   * @return startingBalance
+   */
+  @javax.annotation.Nullable
+  public String getStartingBalance() {
+    return startingBalance;
+  }
+
+  public void setStartingBalance(String startingBalance) {
+    this.startingBalance = startingBalance;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -536,7 +646,11 @@ public class QueryBucketedCashFlowsRequest {
         Objects.equals(this.excludeUnsettledTrades, queryBucketedCashFlowsRequest.excludeUnsettledTrades) &&
         Objects.equals(this.cashFlowType, queryBucketedCashFlowsRequest.cashFlowType) &&
         Objects.equals(this.bucketingSchedule, queryBucketedCashFlowsRequest.bucketingSchedule) &&
-        Objects.equals(this.filter, queryBucketedCashFlowsRequest.filter);
+        Objects.equals(this.filter, queryBucketedCashFlowsRequest.filter) &&
+        Objects.equals(this.cashFlowCalculationVersion, queryBucketedCashFlowsRequest.cashFlowCalculationVersion) &&
+        Objects.equals(this.haircutRules, queryBucketedCashFlowsRequest.haircutRules) &&
+        Objects.equals(this.borderConfiguration, queryBucketedCashFlowsRequest.borderConfiguration) &&
+        Objects.equals(this.startingBalance, queryBucketedCashFlowsRequest.startingBalance);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -545,7 +659,7 @@ public class QueryBucketedCashFlowsRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(asAt, windowStart, windowEnd, portfolioEntityIds, effectiveAt, recipeId, roundingMethod, bucketingDates, bucketingTenors, reportCurrency, groupBy, addresses, equipWithSubtotals, excludeUnsettledTrades, cashFlowType, bucketingSchedule, filter);
+    return Objects.hash(asAt, windowStart, windowEnd, portfolioEntityIds, effectiveAt, recipeId, roundingMethod, bucketingDates, bucketingTenors, reportCurrency, groupBy, addresses, equipWithSubtotals, excludeUnsettledTrades, cashFlowType, bucketingSchedule, filter, cashFlowCalculationVersion, haircutRules, borderConfiguration, startingBalance);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -576,6 +690,10 @@ public class QueryBucketedCashFlowsRequest {
     sb.append("    cashFlowType: ").append(toIndentedString(cashFlowType)).append("\n");
     sb.append("    bucketingSchedule: ").append(toIndentedString(bucketingSchedule)).append("\n");
     sb.append("    filter: ").append(toIndentedString(filter)).append("\n");
+    sb.append("    cashFlowCalculationVersion: ").append(toIndentedString(cashFlowCalculationVersion)).append("\n");
+    sb.append("    haircutRules: ").append(toIndentedString(haircutRules)).append("\n");
+    sb.append("    borderConfiguration: ").append(toIndentedString(borderConfiguration)).append("\n");
+    sb.append("    startingBalance: ").append(toIndentedString(startingBalance)).append("\n");
     sb.append("}");
     return sb.toString();
   }
