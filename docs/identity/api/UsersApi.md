@@ -78,12 +78,13 @@ public class UsersApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createUserRequest** | [**CreateUserRequest**](CreateUserRequest.md)| Details of the User to be created | |
+| **createUserRequest** | [**CreateUserRequest**](../model/CreateUserRequest.md)| Details of the User to be created | |
 | **waitForReindex** | **Boolean**| Should the request wait until the newly created User is indexed (available in List) before returning | [optional] [default to false] |
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**UserResponse**](../model/UserResponse.md)
+
 
 ### HTTP request headers
 
@@ -162,6 +163,7 @@ public class UsersApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -236,7 +238,8 @@ public class UsersApiExample {
 
 ### Return type
 
-[**TemporaryPassword**](TemporaryPassword.md)
+[**TemporaryPassword**](../model/TemporaryPassword.md)
+
 
 ### HTTP request headers
 
@@ -308,11 +311,12 @@ public class UsersApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**List&lt;String&gt;**](String.md)| A list of unique identifiers for the users | |
+| **id** | [**List&lt;String&gt;**](../model/String.md)| A list of unique identifiers for the users | |
 
 ### Return type
 
-[**ListUsersResponse**](ListUsersResponse.md)
+[**ListUsersResponse**](../model/ListUsersResponse.md)
+
 
 ### HTTP request headers
 
@@ -390,7 +394,8 @@ public class UsersApiExample {
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**UserResponse**](../model/UserResponse.md)
+
 
 ### HTTP request headers
 
@@ -466,7 +471,8 @@ public class UsersApiExample {
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**UserResponse**](../model/UserResponse.md)
+
 
 ### HTTP request headers
 
@@ -538,7 +544,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserSchemaResponse**](UserSchemaResponse.md)
+[**UserSchemaResponse**](../model/UserSchemaResponse.md)
+
 
 ### HTTP request headers
 
@@ -609,7 +616,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;UserResponse&gt;**](UserResponse.md)
+[**List&lt;UserResponse&gt;**](../model/UserResponse.md)
+
 
 ### HTTP request headers
 
@@ -684,7 +692,8 @@ public class UsersApiExample {
 
 ### Return type
 
-[**List&lt;UserResponse&gt;**](UserResponse.md)
+[**List&lt;UserResponse&gt;**](../model/UserResponse.md)
+
 
 ### HTTP request headers
 
@@ -761,6 +770,7 @@ public class UsersApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -835,6 +845,7 @@ public class UsersApiExample {
 ### Return type
 
 null (empty response body)
+
 
 ### HTTP request headers
 
@@ -911,6 +922,7 @@ public class UsersApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -985,6 +997,7 @@ public class UsersApiExample {
 ### Return type
 
 null (empty response body)
+
 
 ### HTTP request headers
 
@@ -1061,6 +1074,7 @@ public class UsersApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -1133,11 +1147,12 @@ public class UsersApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**| The unique identifier for the User to be updated | |
-| **updateUserRequest** | [**UpdateUserRequest**](UpdateUserRequest.md)| The new definition of the User | |
+| **updateUserRequest** | [**UpdateUserRequest**](../model/UpdateUserRequest.md)| The new definition of the User | |
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**UserResponse**](../model/UserResponse.md)
+
 
 ### HTTP request headers
 
@@ -1209,11 +1224,12 @@ public class UsersApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **updateUserSchemaRequest** | [**UpdateUserSchemaRequest**](UpdateUserSchemaRequest.md)| The new User Schema | |
+| **updateUserSchemaRequest** | [**UpdateUserSchemaRequest**](../model/UpdateUserSchemaRequest.md)| The new User Schema | |
 
 ### Return type
 
-[**UserSchemaResponse**](UserSchemaResponse.md)
+[**UserSchemaResponse**](../model/UserSchemaResponse.md)
+
 
 ### HTTP request headers
 

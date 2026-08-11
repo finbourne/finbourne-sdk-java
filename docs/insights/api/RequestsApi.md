@@ -68,7 +68,8 @@ public class RequestsApiExample {
 
 ### Return type
 
-[**Request**](Request.md)
+[**Request**](../model/Request.md)
+
 
 ### HTTP request headers
 
@@ -142,7 +143,8 @@ public class RequestsApiExample {
 
 ### Return type
 
-[**RequestLog**](RequestLog.md)
+[**RequestLog**](../model/RequestLog.md)
+
 
 ### HTTP request headers
 
@@ -216,7 +218,8 @@ public class RequestsApiExample {
 
 ### Return type
 
-[**Response**](Response.md)
+[**Response**](../model/Response.md)
+
 
 ### HTTP request headers
 
@@ -298,7 +301,8 @@ public class RequestsApiExample {
 
 ### Return type
 
-[**ResourceListWithHistogramOfRequestLog**](ResourceListWithHistogramOfRequestLog.md)
+[**ResourceListWithHistogramOfRequestLog**](../model/ResourceListWithHistogramOfRequestLog.md)
+
 
 ### HTTP request headers
 
@@ -368,11 +372,12 @@ public class RequestsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **queryRequestLogsRequest** | [**QueryRequestLogsRequest**](QueryRequestLogsRequest.md)| The query parameters in the request body. | |
+| **queryRequestLogsRequest** | [**QueryRequestLogsRequest**](../model/QueryRequestLogsRequest.md)| The query parameters in the request body. | |
 
 ### Return type
 
-[**ResourceListOfQueriedRequestLog**](ResourceListOfQueriedRequestLog.md)
+[**ResourceListOfQueriedRequestLog**](../model/ResourceListOfQueriedRequestLog.md)
+
 
 ### HTTP request headers
 

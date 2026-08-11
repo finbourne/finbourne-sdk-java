@@ -63,6 +63,7 @@ This endpoint does not need any parameter.
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined

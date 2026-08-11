@@ -79,11 +79,12 @@ public class ComplianceApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Compliance Rule Template. | |
-| **createComplianceTemplateRequest** | [**CreateComplianceTemplateRequest**](CreateComplianceTemplateRequest.md)| Request to create a compliance rule template. | |
+| **createComplianceTemplateRequest** | [**CreateComplianceTemplateRequest**](../model/CreateComplianceTemplateRequest.md)| Request to create a compliance rule template. | |
 
 ### Return type
 
-[**ComplianceRuleTemplate**](ComplianceRuleTemplate.md)
+[**ComplianceRuleTemplate**](../model/ComplianceRuleTemplate.md)
+
 
 ### HTTP request headers
 
@@ -161,7 +162,8 @@ public class ComplianceApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -239,7 +241,8 @@ public class ComplianceApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -317,11 +320,12 @@ public class ComplianceApiExample {
 | **scope** | **String**| The compliance rule&#39;s scope. | |
 | **code** | **String**| The compliance rule&#39;s code. | |
 | **asAt** | **OffsetDateTime**| Optional. Asat time for query. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto the rule.              These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto the rule.              These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. | [optional] |
 
 ### Return type
 
-[**ComplianceRuleResponse**](ComplianceRuleResponse.md)
+[**ComplianceRuleResponse**](../model/ComplianceRuleResponse.md)
+
 
 ### HTTP request headers
 
@@ -403,7 +407,8 @@ public class ComplianceApiExample {
 
 ### Return type
 
-[**ComplianceRuleResultV2**](ComplianceRuleResultV2.md)
+[**ComplianceRuleResultV2**](../model/ComplianceRuleResultV2.md)
+
 
 ### HTTP request headers
 
@@ -483,7 +488,8 @@ public class ComplianceApiExample {
 
 ### Return type
 
-[**ComplianceTemplate**](ComplianceTemplate.md)
+[**ComplianceTemplate**](../model/ComplianceTemplate.md)
+
 
 ### HTTP request headers
 
@@ -561,7 +567,8 @@ public class ComplianceApiExample {
 
 ### Return type
 
-[**DecoratedComplianceRunSummary**](DecoratedComplianceRunSummary.md)
+[**DecoratedComplianceRunSummary**](../model/DecoratedComplianceRunSummary.md)
+
 
 ### HTTP request headers
 
@@ -641,11 +648,12 @@ public class ComplianceApiExample {
 | **page** | **String**| Optional. Pagination token. | [optional] |
 | **limit** | **Integer**| Optional. Entries per page. | [optional] |
 | **filter** | **String**| Optional. Filter. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto each rule.              These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. If not provided will return all the entitled properties for each rule. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto each rule.              These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. If not provided will return all the entitled properties for each rule. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfComplianceRuleResponse**](PagedResourceListOfComplianceRuleResponse.md)
+[**PagedResourceListOfComplianceRuleResponse**](../model/PagedResourceListOfComplianceRuleResponse.md)
+
 
 ### HTTP request headers
 
@@ -725,11 +733,12 @@ public class ComplianceApiExample {
 | **page** | **String**| Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot; | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfComplianceRunInfoV2**](PagedResourceListOfComplianceRunInfoV2.md)
+[**PagedResourceListOfComplianceRunInfoV2**](../model/PagedResourceListOfComplianceRunInfoV2.md)
+
 
 ### HTTP request headers
 
@@ -811,7 +820,8 @@ public class ComplianceApiExample {
 
 ### Return type
 
-[**PagedResourceListOfComplianceTemplate**](PagedResourceListOfComplianceTemplate.md)
+[**PagedResourceListOfComplianceTemplate**](../model/PagedResourceListOfComplianceTemplate.md)
+
 
 ### HTTP request headers
 
@@ -891,11 +901,12 @@ public class ComplianceApiExample {
 | **page** | **String**| Optional. The pagination token to use to continue listing historical order breaches from a previous call to list historical order breaches.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot; | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfOrderBreachHistory**](PagedResourceListOfOrderBreachHistory.md)
+[**PagedResourceListOfOrderBreachHistory**](../model/PagedResourceListOfOrderBreachHistory.md)
+
 
 ### HTTP request headers
 
@@ -979,7 +990,8 @@ public class ComplianceApiExample {
 
 ### Return type
 
-[**ComplianceRunInfoV2**](ComplianceRunInfoV2.md)
+[**ComplianceRunInfoV2**](../model/ComplianceRunInfoV2.md)
+
 
 ### HTTP request headers
 
@@ -1059,11 +1071,12 @@ public class ComplianceApiExample {
 | **ruleScope** | **String**| Required: Scope from which to select rules to be run. | |
 | **recipeIdScope** | **String**| Required: the scope of the recipe to be used | |
 | **recipeIdCode** | **String**| Required: The code of the recipe to be used. If left blank, the default recipe will be used. | |
-| **complianceRunConfiguration** | [**ComplianceRunConfiguration**](ComplianceRunConfiguration.md)| Configuration options for the compliance run. | [optional] |
+| **complianceRunConfiguration** | [**ComplianceRunConfiguration**](../model/ComplianceRunConfiguration.md)| Configuration options for the compliance run. | [optional] |
 
 ### Return type
 
-[**ComplianceRunInfoV2**](ComplianceRunInfoV2.md)
+[**ComplianceRunInfoV2**](../model/ComplianceRunInfoV2.md)
+
 
 ### HTTP request headers
 
@@ -1139,11 +1152,12 @@ public class ComplianceApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Compliance Rule Template. | |
 | **code** | **String**| The code of the Compliance Rule Template. | |
-| **updateComplianceTemplateRequest** | [**UpdateComplianceTemplateRequest**](UpdateComplianceTemplateRequest.md)| Request to update a compliance rule template. | |
+| **updateComplianceTemplateRequest** | [**UpdateComplianceTemplateRequest**](../model/UpdateComplianceTemplateRequest.md)| Request to update a compliance rule template. | |
 
 ### Return type
 
-[**ComplianceRuleTemplate**](ComplianceRuleTemplate.md)
+[**ComplianceRuleTemplate**](../model/ComplianceRuleTemplate.md)
+
 
 ### HTTP request headers
 
@@ -1215,11 +1229,12 @@ public class ComplianceApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **upsertComplianceRuleRequest** | [**UpsertComplianceRuleRequest**](UpsertComplianceRuleRequest.md)|  | [optional] |
+| **upsertComplianceRuleRequest** | [**UpsertComplianceRuleRequest**](../model/UpsertComplianceRuleRequest.md)|  | [optional] |
 
 ### Return type
 
-[**ComplianceRuleResponse**](ComplianceRuleResponse.md)
+[**ComplianceRuleResponse**](../model/ComplianceRuleResponse.md)
+
 
 ### HTTP request headers
 
@@ -1291,11 +1306,12 @@ public class ComplianceApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **upsertComplianceRunSummaryRequest** | [**UpsertComplianceRunSummaryRequest**](UpsertComplianceRunSummaryRequest.md)|  | [optional] |
+| **upsertComplianceRunSummaryRequest** | [**UpsertComplianceRunSummaryRequest**](../model/UpsertComplianceRunSummaryRequest.md)|  | [optional] |
 
 ### Return type
 
-[**UpsertComplianceRunSummaryResult**](UpsertComplianceRunSummaryResult.md)
+[**UpsertComplianceRunSummaryResult**](../model/UpsertComplianceRunSummaryResult.md)
+
 
 ### HTTP request headers
 

@@ -69,11 +69,12 @@ public class FeeTypesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the FeeType. | |
-| **feeTypeRequest** | [**FeeTypeRequest**](FeeTypeRequest.md)| The contents of the FeeType. | |
+| **feeTypeRequest** | [**FeeTypeRequest**](../model/FeeTypeRequest.md)| The contents of the FeeType. | |
 
 ### Return type
 
-[**FeeType**](FeeType.md)
+[**FeeType**](../model/FeeType.md)
+
 
 ### HTTP request headers
 
@@ -151,7 +152,8 @@ public class FeeTypesApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -223,7 +225,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**FeeTransactionTemplateSpecification**](FeeTransactionTemplateSpecification.md)
+[**FeeTransactionTemplateSpecification**](../model/FeeTransactionTemplateSpecification.md)
+
 
 ### HTTP request headers
 
@@ -302,7 +305,8 @@ public class FeeTypesApiExample {
 
 ### Return type
 
-[**FeeType**](FeeType.md)
+[**FeeType**](../model/FeeType.md)
+
 
 ### HTTP request headers
 
@@ -382,11 +386,12 @@ public class FeeTypesApiExample {
 | **page** | **String**| The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \&quot;id.Code eq &#39;FeeType1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfFeeType**](PagedResourceListOfFeeType.md)
+[**PagedResourceListOfFeeType**](../model/PagedResourceListOfFeeType.md)
+
 
 ### HTTP request headers
 
@@ -462,11 +467,12 @@ public class FeeTypesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the FeeType. | |
 | **code** | **String**| The code of the fee type | |
-| **updateFeeTypeRequest** | [**UpdateFeeTypeRequest**](UpdateFeeTypeRequest.md)| The contents of the FeeType. | |
+| **updateFeeTypeRequest** | [**UpdateFeeTypeRequest**](../model/UpdateFeeTypeRequest.md)| The contents of the FeeType. | |
 
 ### Return type
 
-[**FeeType**](FeeType.md)
+[**FeeType**](../model/FeeType.md)
+
 
 ### HTTP request headers
 

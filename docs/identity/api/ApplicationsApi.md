@@ -66,11 +66,12 @@ public class ApplicationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createApplicationRequest** | [**CreateApplicationRequest**](CreateApplicationRequest.md)| Details of the application to be created | [optional] |
+| **createApplicationRequest** | [**CreateApplicationRequest**](../model/CreateApplicationRequest.md)| Details of the application to be created | [optional] |
 
 ### Return type
 
-[**OAuthApplication**](OAuthApplication.md)
+[**OAuthApplication**](../model/OAuthApplication.md)
+
 
 ### HTTP request headers
 
@@ -146,6 +147,7 @@ public class ApplicationsApiExample {
 ### Return type
 
 null (empty response body)
+
 
 ### HTTP request headers
 
@@ -223,7 +225,8 @@ public class ApplicationsApiExample {
 
 ### Return type
 
-[**OAuthApplication**](OAuthApplication.md)
+[**OAuthApplication**](../model/OAuthApplication.md)
+
 
 ### HTTP request headers
 
@@ -296,7 +299,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;OAuthApplication&gt;**](OAuthApplication.md)
+[**List&lt;OAuthApplication&gt;**](../model/OAuthApplication.md)
+
 
 ### HTTP request headers
 
@@ -371,7 +375,8 @@ public class ApplicationsApiExample {
 
 ### Return type
 
-[**OAuthApplication**](OAuthApplication.md)
+[**OAuthApplication**](../model/OAuthApplication.md)
+
 
 ### HTTP request headers
 

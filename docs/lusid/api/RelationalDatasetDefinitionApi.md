@@ -68,11 +68,12 @@ public class RelationalDatasetDefinitionApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createRelationalDatasetDefinitionRequest** | [**CreateRelationalDatasetDefinitionRequest**](CreateRelationalDatasetDefinitionRequest.md)| The relational dataset definition to create. | |
+| **createRelationalDatasetDefinitionRequest** | [**CreateRelationalDatasetDefinitionRequest**](../model/CreateRelationalDatasetDefinitionRequest.md)| The relational dataset definition to create. | |
 
 ### Return type
 
-[**RelationalDatasetDefinition**](RelationalDatasetDefinition.md)
+[**RelationalDatasetDefinition**](../model/RelationalDatasetDefinition.md)
+
 
 ### HTTP request headers
 
@@ -150,7 +151,8 @@ public class RelationalDatasetDefinitionApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -230,7 +232,8 @@ public class RelationalDatasetDefinitionApiExample {
 
 ### Return type
 
-[**RelationalDatasetDefinition**](RelationalDatasetDefinition.md)
+[**RelationalDatasetDefinition**](../model/RelationalDatasetDefinition.md)
+
 
 ### HTTP request headers
 
@@ -308,13 +311,14 @@ public class RelationalDatasetDefinitionApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfRelationalDatasetDefinition**](PagedResourceListOfRelationalDatasetDefinition.md)
+[**PagedResourceListOfRelationalDatasetDefinition**](../model/PagedResourceListOfRelationalDatasetDefinition.md)
+
 
 ### HTTP request headers
 
@@ -390,11 +394,12 @@ public class RelationalDatasetDefinitionApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the relational dataset definition. | |
 | **code** | **String**| The code of the relational dataset definition. | |
-| **updateRelationalDatasetDefinitionRequest** | [**UpdateRelationalDatasetDefinitionRequest**](UpdateRelationalDatasetDefinitionRequest.md)| The updated relational dataset definition. | [optional] |
+| **updateRelationalDatasetDefinitionRequest** | [**UpdateRelationalDatasetDefinitionRequest**](../model/UpdateRelationalDatasetDefinitionRequest.md)| The updated relational dataset definition. | [optional] |
 
 ### Return type
 
-[**RelationalDatasetDefinition**](RelationalDatasetDefinition.md)
+[**RelationalDatasetDefinition**](../model/RelationalDatasetDefinition.md)
+
 
 ### HTTP request headers
 
@@ -470,11 +475,12 @@ public class RelationalDatasetDefinitionApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the relational dataset definition. | |
 | **code** | **String**| The code of the relational dataset definition. | |
-| **updateRelationalDatasetDetails** | [**UpdateRelationalDatasetDetails**](UpdateRelationalDatasetDetails.md)| The updated details of the relational dataset. | [optional] |
+| **updateRelationalDatasetDetails** | [**UpdateRelationalDatasetDetails**](../model/UpdateRelationalDatasetDetails.md)| The updated details of the relational dataset. | [optional] |
 
 ### Return type
 
-[**RelationalDatasetDefinition**](RelationalDatasetDefinition.md)
+[**RelationalDatasetDefinition**](../model/RelationalDatasetDefinition.md)
+
 
 ### HTTP request headers
 
@@ -550,11 +556,12 @@ public class RelationalDatasetDefinitionApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the relational dataset definition. | |
 | **code** | **String**| The code of the relational dataset definition. | |
-| **updateRelationalDatasetFieldSchema** | [**UpdateRelationalDatasetFieldSchema**](UpdateRelationalDatasetFieldSchema.md)| Relational dataset fields to add, update or remove. | [optional] |
+| **updateRelationalDatasetFieldSchema** | [**UpdateRelationalDatasetFieldSchema**](../model/UpdateRelationalDatasetFieldSchema.md)| Relational dataset fields to add, update or remove. | [optional] |
 
 ### Return type
 
-[**RelationalDatasetDefinition**](RelationalDatasetDefinition.md)
+[**RelationalDatasetDefinition**](../model/RelationalDatasetDefinition.md)
+
 
 ### HTTP request headers
 

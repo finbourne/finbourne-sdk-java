@@ -71,6 +71,7 @@ public class ViewManagementApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -141,11 +142,12 @@ public class ViewManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **viewItem** | [**ViewItem**](ViewItem.md)| View to fetch the create SQL for. Only the LastUpdatedAt and LastUpdatedExecutionId properties are required. | [optional] |
+| **viewItem** | [**ViewItem**](../model/ViewItem.md)| View to fetch the create SQL for. Only the LastUpdatedAt and LastUpdatedExecutionId properties are required. | [optional] |
 
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -225,7 +227,8 @@ public class ViewManagementApiExample {
 
 ### Return type
 
-[**List&lt;ViewItem&gt;**](ViewItem.md)
+[**List&lt;ViewItem&gt;**](../model/ViewItem.md)
+
 
 ### HTTP request headers
 
@@ -301,11 +304,12 @@ public class ViewManagementApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **allowWarnings** | **Boolean**| May views with *warnings* be upserted?  Regardless of this views with *errors* may not be. Warnings includes things like: - not using macros properly so that filters or aggregations cannot be passed down - using things like &#x60;select *&#x60; that can lead to results changing over time Errors includes things like: - uses a provider or view that simply doesn&#39;t exists (so perhaps a view this depends on needs creating first?) - The SQL or Metadata of the view was manually edited, not setup correctly by &#x60;Sys.Admin.SetupView&#x60; | [optional] [default to false] |
 | **mayUpdateExisting** | **Boolean**| May an existing view be overwritten?  Defaults to false to prevent accidental overwrites. Set to true when intentionally deploying an updated view definition to a domain. | [optional] [default to false] |
-| **viewItem** | [**ViewItem**](ViewItem.md)| View to create / change the definition of. | [optional] |
+| **viewItem** | [**ViewItem**](../model/ViewItem.md)| View to create / change the definition of. | [optional] |
 
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 

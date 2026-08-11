@@ -69,11 +69,12 @@ public class FundConfigurationApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the FundConfiguration. | |
-| **fundConfigurationRequest** | [**FundConfigurationRequest**](FundConfigurationRequest.md)| The definition of the FundConfiguration. | |
+| **fundConfigurationRequest** | [**FundConfigurationRequest**](../model/FundConfigurationRequest.md)| The definition of the FundConfiguration. | |
 
 ### Return type
 
-[**FundConfiguration**](FundConfiguration.md)
+[**FundConfiguration**](../model/FundConfiguration.md)
+
 
 ### HTTP request headers
 
@@ -151,7 +152,8 @@ public class FundConfigurationApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -231,11 +233,12 @@ public class FundConfigurationApiExample {
 | **code** | **String**| The code of the FundConfiguration. Together with the scope this uniquely identifies the FundConfiguration. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the FundConfiguration properties. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the FundConfiguration definition. Defaults to returning the latest version of the FundConfiguration definition if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;FundConfiguration&#39; domain to decorate onto the FundConfiguration.              These must take the format {domain}/{scope}/{code}, for example &#39;FundConfiguration/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;FundConfiguration&#39; domain to decorate onto the FundConfiguration.              These must take the format {domain}/{scope}/{code}, for example &#39;FundConfiguration/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] |
 
 ### Return type
 
-[**FundConfiguration**](FundConfiguration.md)
+[**FundConfiguration**](../model/FundConfiguration.md)
+
 
 ### HTTP request headers
 
@@ -318,12 +321,13 @@ public class FundConfigurationApiExample {
 | **page** | **String**| The pagination token to use to continue listing FundConfiguration; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the FundConfiguration type, specify \&quot;id.Code eq &#39;FundConfiguration1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;FundConfiguration&#39; domain to decorate onto each FundConfiguration.              These must take the format {domain}/{scope}/{code}, for example &#39;FundConfiguration/Manager/Id&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;FundConfiguration&#39; domain to decorate onto each FundConfiguration.              These must take the format {domain}/{scope}/{code}, for example &#39;FundConfiguration/Manager/Id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfFundConfiguration**](PagedResourceListOfFundConfiguration.md)
+[**PagedResourceListOfFundConfiguration**](../model/PagedResourceListOfFundConfiguration.md)
+
 
 ### HTTP request headers
 
@@ -399,11 +403,12 @@ public class FundConfigurationApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the FundConfiguration. | |
 | **code** | **String**| The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration. | |
-| **operation** | [**List&lt;Operation&gt;**](Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | |
+| **operation** | [**List&lt;Operation&gt;**](../model/Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | |
 
 ### Return type
 
-[**FundConfiguration**](FundConfiguration.md)
+[**FundConfiguration**](../model/FundConfiguration.md)
+
 
 ### HTTP request headers
 
@@ -479,11 +484,12 @@ public class FundConfigurationApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the FundConfiguration to update or insert the properties onto. | |
 | **code** | **String**| The code of the FundConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the FundConfiguration. | |
-| **requestBody** | [**Map&lt;String, Property&gt;**](Property.md)| The properties to be updated or inserted onto the Fund Configuration. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;FundConfiguration/Manager/Id\&quot;. | [optional] |
+| **requestBody** | [**Map&lt;String, Property&gt;**](../model/Property.md)| The properties to be updated or inserted onto the Fund Configuration. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;FundConfiguration/Manager/Id\&quot;. | [optional] |
 
 ### Return type
 
-[**FundConfigurationProperties**](FundConfigurationProperties.md)
+[**FundConfigurationProperties**](../model/FundConfigurationProperties.md)
+
 
 ### HTTP request headers
 

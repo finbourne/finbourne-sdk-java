@@ -80,11 +80,12 @@ public class AborApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Abor. | |
 | **code** | **String**| The code of the Abor. | |
-| **diaryEntryRequest** | [**DiaryEntryRequest**](DiaryEntryRequest.md)| The diary entry to add. | |
+| **diaryEntryRequest** | [**DiaryEntryRequest**](../model/DiaryEntryRequest.md)| The diary entry to add. | |
 
 ### Return type
 
-[**DiaryEntry**](DiaryEntry.md)
+[**DiaryEntry**](../model/DiaryEntry.md)
+
 
 ### HTTP request headers
 
@@ -160,11 +161,12 @@ public class AborApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Abor. | |
 | **code** | **String**| The code of the Abor. | |
-| **closePeriodDiaryEntryRequest** | [**ClosePeriodDiaryEntryRequest**](ClosePeriodDiaryEntryRequest.md)| The request body, containing details to apply to the closing/locking period. | |
+| **closePeriodDiaryEntryRequest** | [**ClosePeriodDiaryEntryRequest**](../model/ClosePeriodDiaryEntryRequest.md)| The request body, containing details to apply to the closing/locking period. | |
 
 ### Return type
 
-[**DiaryEntry**](DiaryEntry.md)
+[**DiaryEntry**](../model/DiaryEntry.md)
+
 
 ### HTTP request headers
 
@@ -238,11 +240,12 @@ public class AborApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Abor. | |
-| **aborRequest** | [**AborRequest**](AborRequest.md)| The definition of the Abor. | |
+| **aborRequest** | [**AborRequest**](../model/AborRequest.md)| The definition of the Abor. | |
 
 ### Return type
 
-[**Abor**](Abor.md)
+[**Abor**](../model/Abor.md)
+
 
 ### HTTP request headers
 
@@ -320,7 +323,8 @@ public class AborApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -400,7 +404,8 @@ public class AborApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -480,11 +485,12 @@ public class AborApiExample {
 | **code** | **String**| The code of the Abor. Together with the scope this uniquely identifies the Abor. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the Abor properties. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Abor definition. Defaults to returning the latest version of the Abor definition if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Abor&#39; domain to decorate onto the Abor.              These must take the format {domain}/{scope}/{code}, for example &#39;Abor/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Abor&#39; domain to decorate onto the Abor.              These must take the format {domain}/{scope}/{code}, for example &#39;Abor/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] |
 
 ### Return type
 
-[**Abor**](Abor.md)
+[**Abor**](../model/Abor.md)
+
 
 ### HTTP request headers
 
@@ -566,7 +572,8 @@ public class AborApiExample {
 
 ### Return type
 
-[**AborProperties**](AborProperties.md)
+[**AborProperties**](../model/AborProperties.md)
+
 
 ### HTTP request headers
 
@@ -646,7 +653,7 @@ public class AborApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Abor. | |
 | **code** | **String**| The code of the Abor. Together with the scope is creating the unique identifier for the given Abor. | |
-| **journalEntryLinesQueryParameters** | [**JournalEntryLinesQueryParameters**](JournalEntryLinesQueryParameters.md)| The query parameters used in running the generation of the Journal Entry lines. | |
+| **journalEntryLinesQueryParameters** | [**JournalEntryLinesQueryParameters**](../model/JournalEntryLinesQueryParameters.md)| The query parameters used in running the generation of the Journal Entry lines. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified. | [optional] |
 | **filter** | **String**| \&quot;Expression to filter the result set.\&quot; | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
@@ -654,7 +661,8 @@ public class AborApiExample {
 
 ### Return type
 
-[**VersionedResourceListOfJournalEntryLine**](VersionedResourceListOfJournalEntryLine.md)
+[**VersionedResourceListOfJournalEntryLine**](../model/VersionedResourceListOfJournalEntryLine.md)
+
 
 ### HTTP request headers
 
@@ -734,7 +742,7 @@ public class AborApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Abor. | |
 | **code** | **String**| The code of the Abor. Together with the scope this uniquely identifies the Abor. | |
-| **trialBalanceQueryParameters** | [**TrialBalanceQueryParameters**](TrialBalanceQueryParameters.md)| The query parameters used in running the generation of the Trial Balance. | |
+| **trialBalanceQueryParameters** | [**TrialBalanceQueryParameters**](../model/TrialBalanceQueryParameters.md)| The query parameters used in running the generation of the Trial Balance. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. | [optional] |
@@ -742,7 +750,8 @@ public class AborApiExample {
 
 ### Return type
 
-[**VersionedResourceListOfTrialBalance**](VersionedResourceListOfTrialBalance.md)
+[**VersionedResourceListOfTrialBalance**](../model/VersionedResourceListOfTrialBalance.md)
+
 
 ### HTTP request headers
 
@@ -825,12 +834,13 @@ public class AborApiExample {
 | **page** | **String**| The pagination token to use to continue listing Abor; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the Abor type, specify \&quot;id.Code eq &#39;Abor1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Abor&#39; domain to decorate onto each Abor.              These must take the format {domain}/{scope}/{code}, for example &#39;Abor/Manager/Id&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Abor&#39; domain to decorate onto each Abor.              These must take the format {domain}/{scope}/{code}, for example &#39;Abor/Manager/Id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfAbor**](PagedResourceListOfAbor.md)
+[**PagedResourceListOfAbor**](../model/PagedResourceListOfAbor.md)
+
 
 ### HTTP request headers
 
@@ -917,12 +927,13 @@ public class AborApiExample {
 | **page** | **String**| The pagination token to use to continue listing diary entries; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the DiaryEntry type, specify \&quot;type eq &#39;PeriodBoundary&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each DiaryEntry.              These must take the format {domain}/{scope}/{code}, for example &#39;DiaryEntry/Report/Id&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each DiaryEntry.              These must take the format {domain}/{scope}/{code}, for example &#39;DiaryEntry/Report/Id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfDiaryEntry**](PagedResourceListOfDiaryEntry.md)
+[**PagedResourceListOfDiaryEntry**](../model/PagedResourceListOfDiaryEntry.md)
+
 
 ### HTTP request headers
 
@@ -998,11 +1009,12 @@ public class AborApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Abor. | |
 | **code** | **String**| The code of the Abor. | |
-| **lockPeriodDiaryEntryRequest** | [**LockPeriodDiaryEntryRequest**](LockPeriodDiaryEntryRequest.md)| The request body, detailing lock details | [optional] |
+| **lockPeriodDiaryEntryRequest** | [**LockPeriodDiaryEntryRequest**](../model/LockPeriodDiaryEntryRequest.md)| The request body, detailing lock details | [optional] |
 
 ### Return type
 
-[**DiaryEntry**](DiaryEntry.md)
+[**DiaryEntry**](../model/DiaryEntry.md)
+
 
 ### HTTP request headers
 
@@ -1078,11 +1090,12 @@ public class AborApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Abor. | |
 | **code** | **String**| The code of the Abor. Together with the              scope this uniquely identifies the Abor. | |
-| **operation** | [**List&lt;Operation&gt;**](Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | |
+| **operation** | [**List&lt;Operation&gt;**](../model/Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | |
 
 ### Return type
 
-[**Abor**](Abor.md)
+[**Abor**](../model/Abor.md)
+
 
 ### HTTP request headers
 
@@ -1158,11 +1171,12 @@ public class AborApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Abor. | |
 | **code** | **String**| The code of the Abor. Together with the scope this uniquely identifies the Abor. | |
-| **reOpenPeriodDiaryEntryRequest** | [**ReOpenPeriodDiaryEntryRequest**](ReOpenPeriodDiaryEntryRequest.md)| The request body, containing details about the period to be re-opened. | [optional] |
+| **reOpenPeriodDiaryEntryRequest** | [**ReOpenPeriodDiaryEntryRequest**](../model/ReOpenPeriodDiaryEntryRequest.md)| The request body, containing details about the period to be re-opened. | [optional] |
 
 ### Return type
 
-[**PeriodDiaryEntriesReopenedResponse**](PeriodDiaryEntriesReopenedResponse.md)
+[**PeriodDiaryEntriesReopenedResponse**](../model/PeriodDiaryEntriesReopenedResponse.md)
+
 
 ### HTTP request headers
 
@@ -1238,11 +1252,12 @@ public class AborApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Abor to update or insert the properties onto. | |
 | **code** | **String**| The code of the Abor to update or insert the properties onto. Together with the scope this uniquely identifies the Abor. | |
-| **requestBody** | [**Map&lt;String, Property&gt;**](Property.md)| The properties to be updated or inserted onto the Abor. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Abor/Manager/Id\&quot;. | [optional] |
+| **requestBody** | [**Map&lt;String, Property&gt;**](../model/Property.md)| The properties to be updated or inserted onto the Abor. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Abor/Manager/Id\&quot;. | [optional] |
 
 ### Return type
 
-[**AborProperties**](AborProperties.md)
+[**AborProperties**](../model/AborProperties.md)
+
 
 ### HTTP request headers
 

@@ -69,11 +69,12 @@ public class AmortisationRuleSetsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the rule set. | |
-| **createAmortisationRuleSetRequest** | [**CreateAmortisationRuleSetRequest**](CreateAmortisationRuleSetRequest.md)| The contents of the rule set. | |
+| **createAmortisationRuleSetRequest** | [**CreateAmortisationRuleSetRequest**](../model/CreateAmortisationRuleSetRequest.md)| The contents of the rule set. | |
 
 ### Return type
 
-[**AmortisationRuleSet**](AmortisationRuleSet.md)
+[**AmortisationRuleSet**](../model/AmortisationRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -151,7 +152,8 @@ public class AmortisationRuleSetsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -233,7 +235,8 @@ public class AmortisationRuleSetsApiExample {
 
 ### Return type
 
-[**AmortisationRuleSet**](AmortisationRuleSet.md)
+[**AmortisationRuleSet**](../model/AmortisationRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -315,11 +318,12 @@ public class AmortisationRuleSetsApiExample {
 | **page** | **String**| The pagination token to use to continue listing AmortisationRuleSets; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfAmortisationRuleSet**](PagedResourceListOfAmortisationRuleSet.md)
+[**PagedResourceListOfAmortisationRuleSet**](../model/PagedResourceListOfAmortisationRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -395,11 +399,12 @@ public class AmortisationRuleSetsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The rule set scope. | |
 | **code** | **String**| The rule set code. | |
-| **setAmortisationRulesRequest** | [**SetAmortisationRulesRequest**](SetAmortisationRulesRequest.md)| The contents of the rules. | |
+| **setAmortisationRulesRequest** | [**SetAmortisationRulesRequest**](../model/SetAmortisationRulesRequest.md)| The contents of the rules. | |
 
 ### Return type
 
-[**AmortisationRuleSet**](AmortisationRuleSet.md)
+[**AmortisationRuleSet**](../model/AmortisationRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -475,11 +480,12 @@ public class AmortisationRuleSetsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The rule set scope. | |
 | **code** | **String**| The rule set code. | |
-| **updateAmortisationRuleSetDetailsRequest** | [**UpdateAmortisationRuleSetDetailsRequest**](UpdateAmortisationRuleSetDetailsRequest.md)| The contents of the rule set. | |
+| **updateAmortisationRuleSetDetailsRequest** | [**UpdateAmortisationRuleSetDetailsRequest**](../model/UpdateAmortisationRuleSetDetailsRequest.md)| The contents of the rule set. | |
 
 ### Return type
 
-[**AmortisationRuleSet**](AmortisationRuleSet.md)
+[**AmortisationRuleSet**](../model/AmortisationRuleSet.md)
+
 
 ### HTTP request headers
 

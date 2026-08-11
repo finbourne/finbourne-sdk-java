@@ -64,11 +64,12 @@ public class PersonalAuthenticationTokensApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createApiKey** | [**CreateApiKey**](CreateApiKey.md)| The request to create a new Personal Access Token | |
+| **createApiKey** | [**CreateApiKey**](../model/CreateApiKey.md)| The request to create a new Personal Access Token | |
 
 ### Return type
 
-[**CreatedApiKey**](CreatedApiKey.md)
+[**CreatedApiKey**](../model/CreatedApiKey.md)
+
 
 ### HTTP request headers
 
@@ -144,7 +145,8 @@ public class PersonalAuthenticationTokensApiExample {
 
 ### Return type
 
-[**ApiKey**](ApiKey.md)
+[**ApiKey**](../model/ApiKey.md)
+
 
 ### HTTP request headers
 
@@ -216,7 +218,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;ApiKey&gt;**](ApiKey.md)
+[**List&lt;ApiKey&gt;**](../model/ApiKey.md)
+
 
 ### HTTP request headers
 

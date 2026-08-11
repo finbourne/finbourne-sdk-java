@@ -66,11 +66,12 @@ public class CustomEntityTypesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createCustomEntityTypeRequest** | [**CreateCustomEntityTypeRequest**](CreateCustomEntityTypeRequest.md)| The payload containing the description of the Custom Entity Type. | |
+| **createCustomEntityTypeRequest** | [**CreateCustomEntityTypeRequest**](../model/CreateCustomEntityTypeRequest.md)| The payload containing the description of the Custom Entity Type. | |
 
 ### Return type
 
-[**CustomEntityType**](CustomEntityType.md)
+[**CustomEntityType**](../model/CustomEntityType.md)
+
 
 ### HTTP request headers
 
@@ -146,7 +147,8 @@ public class CustomEntityTypesApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -224,7 +226,8 @@ public class CustomEntityTypesApiExample {
 
 ### Return type
 
-[**CustomEntityType**](CustomEntityType.md)
+[**CustomEntityType**](../model/CustomEntityType.md)
+
 
 ### HTTP request headers
 
@@ -303,12 +306,13 @@ public class CustomEntityTypesApiExample {
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 | **page** | **String**| The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfCustomEntityType**](PagedResourceListOfCustomEntityType.md)
+[**PagedResourceListOfCustomEntityType**](../model/PagedResourceListOfCustomEntityType.md)
+
 
 ### HTTP request headers
 
@@ -382,11 +386,12 @@ public class CustomEntityTypesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **entityType** | **String**| The identifier for the Custom Entity Type, derived from the \&quot;entityTypeName\&quot; provided on creation. | |
-| **updateCustomEntityTypeRequest** | [**UpdateCustomEntityTypeRequest**](UpdateCustomEntityTypeRequest.md)| The payload containing the description of the Custom Entity Type. | |
+| **updateCustomEntityTypeRequest** | [**UpdateCustomEntityTypeRequest**](../model/UpdateCustomEntityTypeRequest.md)| The payload containing the description of the Custom Entity Type. | |
 
 ### Return type
 
-[**CustomEntityType**](CustomEntityType.md)
+[**CustomEntityType**](../model/CustomEntityType.md)
+
 
 ### HTTP request headers
 

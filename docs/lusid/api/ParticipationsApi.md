@@ -71,7 +71,8 @@ public class ParticipationsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -149,11 +150,12 @@ public class ParticipationsApiExample {
 | **scope** | **String**| The scope to which the participation belongs. | |
 | **code** | **String**| The participation&#39;s unique identifier. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the participation. Defaults to return the latest version of the participation if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Participation\&quot; domain to decorate onto the participation.              These take the format {domain}/{scope}/{code} e.g. \&quot;Participation/system/Name\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Participation\&quot; domain to decorate onto the participation.              These take the format {domain}/{scope}/{code} e.g. \&quot;Participation/system/Name\&quot;. | [optional] |
 
 ### Return type
 
-[**Participation**](Participation.md)
+[**Participation**](../model/Participation.md)
+
 
 ### HTTP request headers
 
@@ -232,14 +234,15 @@ public class ParticipationsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the participation. Defaults to return the latest version of the participation if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing participations from a previous call to list participations.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Participation\&quot; domain to decorate onto each participation.                  These take the format {domain}/{scope}/{code} e.g. \&quot;Participation/system/Name\&quot;.                  All properties, except derived properties, are returned by default, without specifying here. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Participation\&quot; domain to decorate onto each participation.                  These take the format {domain}/{scope}/{code} e.g. \&quot;Participation/system/Name\&quot;.                  All properties, except derived properties, are returned by default, without specifying here. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfParticipation**](PagedResourceListOfParticipation.md)
+[**PagedResourceListOfParticipation**](../model/PagedResourceListOfParticipation.md)
+
 
 ### HTTP request headers
 
@@ -311,11 +314,12 @@ public class ParticipationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **participationSetRequest** | [**ParticipationSetRequest**](ParticipationSetRequest.md)| The collection of participation requests. | [optional] |
+| **participationSetRequest** | [**ParticipationSetRequest**](../model/ParticipationSetRequest.md)| The collection of participation requests. | [optional] |
 
 ### Return type
 
-[**ResourceListOfParticipation**](ResourceListOfParticipation.md)
+[**ResourceListOfParticipation**](../model/ResourceListOfParticipation.md)
+
 
 ### HTTP request headers
 

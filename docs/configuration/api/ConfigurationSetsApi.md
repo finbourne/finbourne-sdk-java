@@ -80,12 +80,13 @@ public class ConfigurationSetsApiExample {
 | **type** | **String**| Whether the configuration set is Personal or Shared | |
 | **scope** | **String**| The scope that identifies a configuration set | |
 | **code** | **String**| The code that identifies a configuration set | |
-| **createConfigurationItem** | [**CreateConfigurationItem**](CreateConfigurationItem.md)| The data to create a configuration item | |
+| **createConfigurationItem** | [**CreateConfigurationItem**](../model/CreateConfigurationItem.md)| The data to create a configuration item | |
 | **userId** | **String**| Feature that allows Administrators to administer personal settings  (but never reveal the value of secrets) of a specific user. | [optional] |
 
 ### Return type
 
-[**ConfigurationSet**](ConfigurationSet.md)
+[**ConfigurationSet**](../model/ConfigurationSet.md)
+
 
 ### HTTP request headers
 
@@ -157,6 +158,7 @@ This endpoint does not need any parameter.
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -226,12 +228,13 @@ public class ConfigurationSetsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createConfigurationSet** | [**CreateConfigurationSet**](CreateConfigurationSet.md)| The data to create a configuration set | |
+| **createConfigurationSet** | [**CreateConfigurationSet**](../model/CreateConfigurationSet.md)| The data to create a configuration set | |
 | **userId** | **String**| Feature that allows Administrators to administer personal settings  (but never reveal the value of secrets) of a specific user. | [optional] |
 
 ### Return type
 
-[**ConfigurationSet**](ConfigurationSet.md)
+[**ConfigurationSet**](../model/ConfigurationSet.md)
+
 
 ### HTTP request headers
 
@@ -301,6 +304,7 @@ This endpoint does not need any parameter.
 ### Return type
 
 null (empty response body)
+
 
 ### HTTP request headers
 
@@ -382,6 +386,7 @@ public class ConfigurationSetsApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -462,6 +467,7 @@ public class ConfigurationSetsApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -535,7 +541,8 @@ public class ConfigurationSetsApiExample {
 
 ### Return type
 
-[**PersonalAccessToken**](PersonalAccessToken.md)
+[**PersonalAccessToken**](../model/PersonalAccessToken.md)
+
 
 ### HTTP request headers
 
@@ -619,7 +626,8 @@ public class ConfigurationSetsApiExample {
 
 ### Return type
 
-[**ConfigurationItem**](ConfigurationItem.md)
+[**ConfigurationItem**](../model/ConfigurationItem.md)
+
 
 ### HTTP request headers
 
@@ -702,7 +710,8 @@ public class ConfigurationSetsApiExample {
 
 ### Return type
 
-[**ConfigurationSet**](ConfigurationSet.md)
+[**ConfigurationSet**](../model/ConfigurationSet.md)
+
 
 ### HTTP request headers
 
@@ -781,7 +790,8 @@ public class ConfigurationSetsApiExample {
 
 ### Return type
 
-[**ResourceListOfConfigurationItem**](ResourceListOfConfigurationItem.md)
+[**ResourceListOfConfigurationItem**](../model/ResourceListOfConfigurationItem.md)
+
 
 ### HTTP request headers
 
@@ -858,7 +868,8 @@ public class ConfigurationSetsApiExample {
 
 ### Return type
 
-[**ResourceListOfConfigurationSet**](ResourceListOfConfigurationSet.md)
+[**ResourceListOfConfigurationSet**](../model/ResourceListOfConfigurationSet.md)
+
 
 ### HTTP request headers
 
@@ -935,7 +946,8 @@ public class ConfigurationSetsApiExample {
 
 ### Return type
 
-[**ResourceListOfConfigurationSetSummary**](ResourceListOfConfigurationSetSummary.md)
+[**ResourceListOfConfigurationSetSummary**](../model/ResourceListOfConfigurationSetSummary.md)
+
 
 ### HTTP request headers
 
@@ -1014,12 +1026,13 @@ public class ConfigurationSetsApiExample {
 | **scope** | **String**| The scope that identifies a configuration set | |
 | **code** | **String**| The code that identifies a configuration set | |
 | **key** | **String**| The key that identifies a configuration item | |
-| **updateConfigurationItem** | [**UpdateConfigurationItem**](UpdateConfigurationItem.md)| The data to update a configuration item | |
+| **updateConfigurationItem** | [**UpdateConfigurationItem**](../model/UpdateConfigurationItem.md)| The data to update a configuration item | |
 | **userId** | **String**| Feature that allows Administrators to administer personal settings  (but never reveal the value of secrets) of a specific user. | [optional] |
 
 ### Return type
 
-[**ConfigurationItem**](ConfigurationItem.md)
+[**ConfigurationItem**](../model/ConfigurationItem.md)
+
 
 ### HTTP request headers
 
@@ -1097,12 +1110,13 @@ public class ConfigurationSetsApiExample {
 | **type** | **String**| Whether the configuration set is Personal or Shared | |
 | **scope** | **String**| The scope that identifies a configuration set | |
 | **code** | **String**| The code that identifies a configuration set | |
-| **updateConfigurationSet** | [**UpdateConfigurationSet**](UpdateConfigurationSet.md)| The data to update a configuration set | |
+| **updateConfigurationSet** | [**UpdateConfigurationSet**](../model/UpdateConfigurationSet.md)| The data to update a configuration set | |
 | **userId** | **String**| Feature that allows Administrators to administer personal settings  (but never reveal the value of secrets) of a specific user. | [optional] |
 
 ### Return type
 
-[**ConfigurationSet**](ConfigurationSet.md)
+[**ConfigurationSet**](../model/ConfigurationSet.md)
+
 
 ### HTTP request headers
 

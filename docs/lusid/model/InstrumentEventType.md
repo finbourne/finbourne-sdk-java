@@ -110,6 +110,7 @@ InstrumentEventType method = InstrumentEventType.PIK_BOND_INTEREST_CAPITALISATIO
 InstrumentEventType method = InstrumentEventType.PIK_BOND_PRINCIPAL_EVENT;
 InstrumentEventType method = InstrumentEventType.DELISTING_EVENT;
 InstrumentEventType method = InstrumentEventType.PIK_BOND_INTEREST_EVENT;
+InstrumentEventType method = InstrumentEventType.COMMODITY_FORWARD_CASH_SETTLEMENT_EVENT;
 ```
 
 

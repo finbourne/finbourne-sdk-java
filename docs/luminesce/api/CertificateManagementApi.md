@@ -66,13 +66,14 @@ public class CertificateManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **type** | [**CertificateType**](.md)| User or Domain level cert (Domain level requires additional entitlements) | [optional] [enum: Domain, User] |
-| **fileType** | [**CertificateFileType**](.md)| Should the public key or private key be downloaded? (both must be in place to run providers) | [optional] [enum: Public, Private] |
+| **type** | [**CertificateType**](../model/.md)| User or Domain level cert (Domain level requires additional entitlements) | [optional] [enum: Domain, User] |
+| **fileType** | [**CertificateFileType**](../model/.md)| Should the public key or private key be downloaded? (both must be in place to run providers) | [optional] [enum: Public, Private] |
 | **mayAutoCreate** | **Boolean**| If no matching cert is available, should an attempt be made to Create/Renew it with default options? | [optional] [default to false] |
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -144,7 +145,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;CertificateState&gt;**](CertificateState.md)
+[**List&lt;CertificateState&gt;**](../model/CertificateState.md)
+
 
 ### HTTP request headers
 
@@ -221,8 +223,8 @@ public class CertificateManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **action** | [**CertificateAction**](.md)| The Action to perform, e.g. Create / Renew / Revoke | [optional] [enum: Create, CreateAndAllowMultipleWhichAreValid, Renew, Revoke] |
-| **type** | [**CertificateType**](.md)| User or Domain level cert (Domain level requires additional entitlements) | [optional] [enum: Domain, User] |
+| **action** | [**CertificateAction**](../model/.md)| The Action to perform, e.g. Create / Renew / Revoke | [optional] [enum: Create, CreateAndAllowMultipleWhichAreValid, Renew, Revoke] |
+| **type** | [**CertificateType**](../model/.md)| User or Domain level cert (Domain level requires additional entitlements) | [optional] [enum: Domain, User] |
 | **version** | **Integer**| Version number of the cert, the request will fail to validate if incorrect | [optional] [default to 1] |
 | **validityStart** | **OffsetDateTime**| When should the cert first be valid (defaults to the current time in UTC) | [optional] |
 | **validityEnd** | **OffsetDateTime**| When should the cert no longer be valid (defaults to 13 months from now) | [optional] |
@@ -230,7 +232,8 @@ public class CertificateManagementApiExample {
 
 ### Return type
 
-[**CertificateState**](CertificateState.md)
+[**CertificateState**](../model/CertificateState.md)
+
 
 ### HTTP request headers
 

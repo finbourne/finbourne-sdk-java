@@ -72,11 +72,12 @@ public class StructuredResultDataApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope in which to create or update data maps. | |
-| **requestBody** | [**Map&lt;String, CreateDataMapRequest&gt;**](CreateDataMapRequest.md)| Individual data map creation requests. | |
+| **requestBody** | [**Map&lt;String, CreateDataMapRequest&gt;**](../model/CreateDataMapRequest.md)| Individual data map creation requests. | |
 
 ### Return type
 
-[**UpsertStructuredDataResponse**](UpsertStructuredDataResponse.md)
+[**UpsertStructuredDataResponse**](../model/UpsertStructuredDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -150,11 +151,12 @@ public class StructuredResultDataApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope from which to delete data items. | |
-| **requestBody** | [**Map&lt;String, StructuredResultDataId&gt;**](StructuredResultDataId.md)| The data IDs to delete, each keyed by a unique, ephemeral correlation ID. | |
+| **requestBody** | [**Map&lt;String, StructuredResultDataId&gt;**](../model/StructuredResultDataId.md)| The data IDs to delete, each keyed by a unique, ephemeral correlation ID. | |
 
 ### Return type
 
-[**AnnulStructuredDataResponse**](AnnulStructuredDataResponse.md)
+[**AnnulStructuredDataResponse**](../model/AnnulStructuredDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -240,7 +242,8 @@ public class StructuredResultDataApiExample {
 
 ### Return type
 
-[**ResourceListOfAddressKeyDefinition**](ResourceListOfAddressKeyDefinition.md)
+[**ResourceListOfAddressKeyDefinition**](../model/ResourceListOfAddressKeyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -314,11 +317,12 @@ public class StructuredResultDataApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope from which to retrieve data maps. | |
-| **requestBody** | [**Map&lt;String, DataMapKey&gt;**](DataMapKey.md)| The data map keys to look up, each keyed by a unique, ephemeral correlation ID. | |
+| **requestBody** | [**Map&lt;String, DataMapKey&gt;**](../model/DataMapKey.md)| The data map keys to look up, each keyed by a unique, ephemeral correlation ID. | |
 
 ### Return type
 
-[**GetDataMapResponse**](GetDataMapResponse.md)
+[**GetDataMapResponse**](../model/GetDataMapResponse.md)
+
 
 ### HTTP request headers
 
@@ -394,13 +398,14 @@ public class StructuredResultDataApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope from which to retrieve data items. | |
-| **requestBody** | [**Map&lt;String, StructuredResultDataId&gt;**](StructuredResultDataId.md)| The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID. | |
+| **requestBody** | [**Map&lt;String, StructuredResultDataId&gt;**](../model/StructuredResultDataId.md)| The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the structured result data. Defaults to returning the latest version if not specified. | [optional] |
 | **maxAge** | **String**| The duration of the look-back window in ISO8601 time interval format, for example &#39;P1Y2M3DT4H30M&#39; (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a data item must exist to be retrieved. | [optional] |
 
 ### Return type
 
-[**GetStructuredResultDataResponse**](GetStructuredResultDataResponse.md)
+[**GetStructuredResultDataResponse**](../model/GetStructuredResultDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -475,12 +480,13 @@ public class StructuredResultDataApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope in which to construct the virtual documents. | |
-| **requestBody** | [**Map&lt;String, StructuredResultDataId&gt;**](StructuredResultDataId.md)| The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID. | |
+| **requestBody** | [**Map&lt;String, StructuredResultDataId&gt;**](../model/StructuredResultDataId.md)| The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the structured result data. Defaults to returning the latest version if not specified. | [optional] |
 
 ### Return type
 
-[**GetVirtualDocumentResponse**](GetVirtualDocumentResponse.md)
+[**GetVirtualDocumentResponse**](../model/GetVirtualDocumentResponse.md)
+
 
 ### HTTP request headers
 
@@ -572,7 +578,8 @@ public class StructuredResultDataApiExample {
 
 ### Return type
 
-[**PagedResourceListOfVirtualRow**](PagedResourceListOfVirtualRow.md)
+[**PagedResourceListOfVirtualRow**](../model/PagedResourceListOfVirtualRow.md)
+
 
 ### HTTP request headers
 
@@ -646,11 +653,12 @@ public class StructuredResultDataApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope in which to construct the virtual documents. | |
-| **requestBody** | [**Map&lt;String, UpsertResultValuesDataRequest&gt;**](UpsertResultValuesDataRequest.md)| The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID. | |
+| **requestBody** | [**Map&lt;String, UpsertResultValuesDataRequest&gt;**](../model/UpsertResultValuesDataRequest.md)| The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID. | |
 
 ### Return type
 
-[**UpsertStructuredDataResponse**](UpsertStructuredDataResponse.md)
+[**UpsertStructuredDataResponse**](../model/UpsertStructuredDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -724,11 +732,12 @@ public class StructuredResultDataApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope in which to create or update data items. | |
-| **requestBody** | [**Map&lt;String, UpsertStructuredResultDataRequest&gt;**](UpsertStructuredResultDataRequest.md)| The set of data items to create or update, keyed by a unique, ephemeral correlation ID. | |
+| **requestBody** | [**Map&lt;String, UpsertStructuredResultDataRequest&gt;**](../model/UpsertStructuredResultDataRequest.md)| The set of data items to create or update, keyed by a unique, ephemeral correlation ID. | |
 
 ### Return type
 
-[**UpsertStructuredDataResponse**](UpsertStructuredDataResponse.md)
+[**UpsertStructuredDataResponse**](../model/UpsertStructuredDataResponse.md)
+
 
 ### HTTP request headers
 

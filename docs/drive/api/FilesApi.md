@@ -75,7 +75,8 @@ public class FilesApiExample {
 
 ### Return type
 
-[**StorageObject**](StorageObject.md)
+[**StorageObject**](../model/StorageObject.md)
+
 
 ### HTTP request headers
 
@@ -150,6 +151,7 @@ public class FilesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -222,7 +224,8 @@ public class FilesApiExample {
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -298,7 +301,8 @@ public class FilesApiExample {
 
 ### Return type
 
-[**StorageObject**](StorageObject.md)
+[**StorageObject**](../model/StorageObject.md)
+
 
 ### HTTP request headers
 
@@ -376,7 +380,8 @@ public class FilesApiExample {
 
 ### Return type
 
-[**StorageObject**](StorageObject.md)
+[**StorageObject**](../model/StorageObject.md)
+
 
 ### HTTP request headers
 
@@ -448,11 +453,12 @@ public class FilesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**| Identifier of the file to be updated | |
-| **updateFile** | [**UpdateFile**](UpdateFile.md)| Update to be applied to file | |
+| **updateFile** | [**UpdateFile**](../model/UpdateFile.md)| Update to be applied to file | |
 
 ### Return type
 
-[**StorageObject**](StorageObject.md)
+[**StorageObject**](../model/StorageObject.md)
+
 
 ### HTTP request headers
 

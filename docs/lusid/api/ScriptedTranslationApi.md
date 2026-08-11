@@ -85,7 +85,8 @@ public class ScriptedTranslationApiExample {
 
 ### Return type
 
-[**Dialect**](Dialect.md)
+[**Dialect**](../model/Dialect.md)
+
 
 ### HTTP request headers
 
@@ -167,7 +168,8 @@ public class ScriptedTranslationApiExample {
 
 ### Return type
 
-[**TranslationScript**](TranslationScript.md)
+[**TranslationScript**](../model/TranslationScript.md)
+
 
 ### HTTP request headers
 
@@ -249,7 +251,8 @@ public class ScriptedTranslationApiExample {
 
 ### Return type
 
-[**PagedResourceListOfDialectId**](PagedResourceListOfDialectId.md)
+[**PagedResourceListOfDialectId**](../model/PagedResourceListOfDialectId.md)
+
 
 ### HTTP request headers
 
@@ -331,7 +334,8 @@ public class ScriptedTranslationApiExample {
 
 ### Return type
 
-[**PagedResourceListOfTranslationScriptId**](PagedResourceListOfTranslationScriptId.md)
+[**PagedResourceListOfTranslationScriptId**](../model/PagedResourceListOfTranslationScriptId.md)
+
 
 ### HTTP request headers
 
@@ -403,11 +407,12 @@ public class ScriptedTranslationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **translateEntitiesRequest** | [**TranslateEntitiesRequest**](TranslateEntitiesRequest.md)| The entities to translate, along with identifiers for the script and (optional) dialect to use. | |
+| **translateEntitiesRequest** | [**TranslateEntitiesRequest**](../model/TranslateEntitiesRequest.md)| The entities to translate, along with identifiers for the script and (optional) dialect to use. | |
 
 ### Return type
 
-[**TranslateEntitiesResponse**](TranslateEntitiesResponse.md)
+[**TranslateEntitiesResponse**](../model/TranslateEntitiesResponse.md)
+
 
 ### HTTP request headers
 
@@ -479,11 +484,12 @@ public class ScriptedTranslationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **translateEntitiesInlinedRequest** | [**TranslateEntitiesInlinedRequest**](TranslateEntitiesInlinedRequest.md)| The entities to translate, along with the script to use and an optional schema for validation. | |
+| **translateEntitiesInlinedRequest** | [**TranslateEntitiesInlinedRequest**](../model/TranslateEntitiesInlinedRequest.md)| The entities to translate, along with the script to use and an optional schema for validation. | |
 
 ### Return type
 
-[**TranslateEntitiesResponse**](TranslateEntitiesResponse.md)
+[**TranslateEntitiesResponse**](../model/TranslateEntitiesResponse.md)
+
 
 ### HTTP request headers
 
@@ -555,11 +561,12 @@ public class ScriptedTranslationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **upsertDialectRequest** | [**UpsertDialectRequest**](UpsertDialectRequest.md)| The dialect to upsert. | |
+| **upsertDialectRequest** | [**UpsertDialectRequest**](../model/UpsertDialectRequest.md)| The dialect to upsert. | |
 
 ### Return type
 
-[**Dialect**](Dialect.md)
+[**Dialect**](../model/Dialect.md)
+
 
 ### HTTP request headers
 
@@ -631,11 +638,12 @@ public class ScriptedTranslationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **upsertTranslationScriptRequest** | [**UpsertTranslationScriptRequest**](UpsertTranslationScriptRequest.md)| The translation script to be upserted. | |
+| **upsertTranslationScriptRequest** | [**UpsertTranslationScriptRequest**](../model/UpsertTranslationScriptRequest.md)| The translation script to be upserted. | |
 
 ### Return type
 
-[**TranslationScript**](TranslationScript.md)
+[**TranslationScript**](../model/TranslationScript.md)
+
 
 ### HTTP request headers
 

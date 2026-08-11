@@ -73,7 +73,8 @@ public class ScopesApiExample {
 
 ### Return type
 
-[**ResourceListOfScopeDefinition**](ResourceListOfScopeDefinition.md)
+[**ResourceListOfScopeDefinition**](../model/ResourceListOfScopeDefinition.md)
+
 
 ### HTTP request headers
 
@@ -149,7 +150,8 @@ public class ScopesApiExample {
 
 ### Return type
 
-[**ResourceListOfScopeDefinition**](ResourceListOfScopeDefinition.md)
+[**ResourceListOfScopeDefinition**](../model/ResourceListOfScopeDefinition.md)
+
 
 ### HTTP request headers
 

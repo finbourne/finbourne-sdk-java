@@ -73,11 +73,12 @@ public class PropertyDefinitionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createDerivedPropertyDefinitionRequest** | [**CreateDerivedPropertyDefinitionRequest**](CreateDerivedPropertyDefinitionRequest.md)| The definition of the new derived property. | |
+| **createDerivedPropertyDefinitionRequest** | [**CreateDerivedPropertyDefinitionRequest**](../model/CreateDerivedPropertyDefinitionRequest.md)| The definition of the new derived property. | |
 
 ### Return type
 
-[**PropertyDefinition**](PropertyDefinition.md)
+[**PropertyDefinition**](../model/PropertyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -149,11 +150,12 @@ public class PropertyDefinitionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createPropertyDefinitionRequest** | [**CreatePropertyDefinitionRequest**](CreatePropertyDefinitionRequest.md)| The definition of the new property. | |
+| **createPropertyDefinitionRequest** | [**CreatePropertyDefinitionRequest**](../model/CreatePropertyDefinitionRequest.md)| The definition of the new property. | |
 
 ### Return type
 
-[**PropertyDefinition**](PropertyDefinition.md)
+[**PropertyDefinition**](../model/PropertyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -233,7 +235,8 @@ public class PropertyDefinitionsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -312,12 +315,13 @@ public class PropertyDefinitionsApiExample {
 | **domain** | **String**| The domain of the property definition to delete properties from. Available values: Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, PortfolioGroup, Person, Order, Allocation, Calendar, LegalEntity, InvestorRecord, InvestmentAccount, Placement, Execution, Block, Participation, Package, OrderInstruction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, CheckDefinition, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, TaskDefinition, Workflow, IdentifierDefinition, SettlementInstruction, TransactionFeeType, PaymentInstruction. | [enum: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, InvestorRecord, InvestmentAccount, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, CheckDefinition, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, Workflow, StagingRuleSet, IdentifierDefinition, SettlementInstruction, TransactionFeeType, AllocationMethod, TransactionFee, Subscription, ScenarioDefinition, PaymentInstruction] |
 | **scope** | **String**| The scope of the property definition to delete properties from. | |
 | **code** | **String**| The code of the property definition to delete properties from. | |
-| **requestBody** | [**List&lt;String&gt;**](String.md)| The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | |
+| **requestBody** | [**List&lt;String&gt;**](../model/String.md)| The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is before              the time-variant property exists then a failure is returned. Do not specify this parameter if an of the properties to delete are perpetual. | [optional] |
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -391,13 +395,14 @@ public class PropertyDefinitionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **derivationFormulaExplainRequest** | [**DerivationFormulaExplainRequest**](DerivationFormulaExplainRequest.md)| Information about the derivation formula to explain, and optionally, the entity to resolve the formula against. | |
+| **derivationFormulaExplainRequest** | [**DerivationFormulaExplainRequest**](../model/DerivationFormulaExplainRequest.md)| Information about the derivation formula to explain, and optionally, the entity to resolve the formula against. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to resolve the entity. Defaults to returning the latest asAt in LUSID              if not specified. | [optional] |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to resolve the entity. Defaults to the current LUSID              system datetime if not specified. | [optional] |
 
 ### Return type
 
-[**DerivedPropertyComponent**](DerivedPropertyComponent.md)
+[**DerivedPropertyComponent**](../model/DerivedPropertyComponent.md)
+
 
 ### HTTP request headers
 
@@ -472,14 +477,15 @@ public class PropertyDefinitionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. | |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set.               For example, to filter on the Lifetime, use \&quot;lifeTime eq &#39;Perpetual&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. | [optional] |
 
 ### Return type
 
-[**ResourceListOfPropertyDefinition**](ResourceListOfPropertyDefinition.md)
+[**ResourceListOfPropertyDefinition**](../model/ResourceListOfPropertyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -563,7 +569,8 @@ public class PropertyDefinitionsApiExample {
 
 ### Return type
 
-[**PropertyDefinition**](PropertyDefinition.md)
+[**PropertyDefinition**](../model/PropertyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -653,7 +660,8 @@ public class PropertyDefinitionsApiExample {
 
 ### Return type
 
-[**ResourceListOfPropertyInterval**](ResourceListOfPropertyInterval.md)
+[**ResourceListOfPropertyInterval**](../model/ResourceListOfPropertyInterval.md)
+
 
 ### HTTP request headers
 
@@ -733,15 +741,16 @@ public class PropertyDefinitionsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **effectiveAt** | **String**| The effective datetime or cut label at which to list the property definitions. Defaults to the current LUSID              system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to list the property definitions. Defaults to returning the latest version              of each property definition if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Property Definition&#39; domain to decorate onto              property definitions. These must take the format              {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Property Definition&#39; domain to decorate onto              property definitions. These must take the format              {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing property definitions; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the display name, specify \&quot;DisplayName eq &#39;DisplayName&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfPropertyDefinition**](PagedResourceListOfPropertyDefinition.md)
+[**PagedResourceListOfPropertyDefinition**](../model/PagedResourceListOfPropertyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -819,11 +828,12 @@ public class PropertyDefinitionsApiExample {
 | **domain** | **String**| Domain of the property definition. Available values: Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, PortfolioGroup, Person, Order, Allocation, Calendar, LegalEntity, InvestorRecord, InvestmentAccount, Placement, Execution, Block, Participation, Package, OrderInstruction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, CheckDefinition, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, TaskDefinition, Workflow, IdentifierDefinition, SettlementInstruction, TransactionFeeType, PaymentInstruction. | [enum: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, InvestorRecord, InvestmentAccount, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, CheckDefinition, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, Workflow, StagingRuleSet, IdentifierDefinition, SettlementInstruction, TransactionFeeType, AllocationMethod, TransactionFee, Subscription, ScenarioDefinition, PaymentInstruction] |
 | **scope** | **String**| Scope of the property definition | |
 | **code** | **String**| Code of the property definition | |
-| **updateDerivedPropertyDefinitionRequest** | [**UpdateDerivedPropertyDefinitionRequest**](UpdateDerivedPropertyDefinitionRequest.md)| Information about the derived property definition being updated | |
+| **updateDerivedPropertyDefinitionRequest** | [**UpdateDerivedPropertyDefinitionRequest**](../model/UpdateDerivedPropertyDefinitionRequest.md)| Information about the derived property definition being updated | |
 
 ### Return type
 
-[**PropertyDefinition**](PropertyDefinition.md)
+[**PropertyDefinition**](../model/PropertyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -901,11 +911,12 @@ public class PropertyDefinitionsApiExample {
 | **domain** | **String**| The domain of the property being updated. Available values: Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, PortfolioGroup, Person, Order, Allocation, Calendar, LegalEntity, InvestorRecord, InvestmentAccount, Placement, Execution, Block, Participation, Package, OrderInstruction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, CheckDefinition, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, TaskDefinition, Workflow, IdentifierDefinition, SettlementInstruction, TransactionFeeType, PaymentInstruction. | [enum: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, InvestorRecord, InvestmentAccount, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, CheckDefinition, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, Workflow, StagingRuleSet, IdentifierDefinition, SettlementInstruction, TransactionFeeType, AllocationMethod, TransactionFee, Subscription, ScenarioDefinition, PaymentInstruction] |
 | **scope** | **String**| The scope of the property being updated. | |
 | **code** | **String**| The code of the property being updated. Together with the domain and scope this uniquely              identifies the property. | |
-| **updatePropertyDefinitionRequest** | [**UpdatePropertyDefinitionRequest**](UpdatePropertyDefinitionRequest.md)| The updated definition of the property. | |
+| **updatePropertyDefinitionRequest** | [**UpdatePropertyDefinitionRequest**](../model/UpdatePropertyDefinitionRequest.md)| The updated definition of the property. | |
 
 ### Return type
 
-[**PropertyDefinition**](PropertyDefinition.md)
+[**PropertyDefinition**](../model/PropertyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -984,12 +995,13 @@ public class PropertyDefinitionsApiExample {
 | **domain** | **String**| The domain of the specified property. Available values: Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, PortfolioGroup, Person, Order, Allocation, Calendar, LegalEntity, InvestorRecord, InvestmentAccount, Placement, Execution, Block, Participation, Package, OrderInstruction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, CheckDefinition, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, TaskDefinition, Workflow, IdentifierDefinition, SettlementInstruction, TransactionFeeType, PaymentInstruction. | [enum: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, InvestorRecord, InvestmentAccount, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, CheckDefinition, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, Workflow, StagingRuleSet, IdentifierDefinition, SettlementInstruction, TransactionFeeType, AllocationMethod, TransactionFee, Subscription, ScenarioDefinition, PaymentInstruction] |
 | **scope** | **String**| The scope of the specified property. | |
 | **code** | **String**| The code of the specified property. Together with the domain and scope this uniquely | |
-| **requestBody** | [**Map&lt;String, Property&gt;**](Property.md)| The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              &#39;PropertyDefinition/Manager/Id&#39;. | |
+| **requestBody** | [**Map&lt;String, Property&gt;**](../model/Property.md)| The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              &#39;PropertyDefinition/Manager/Id&#39;. | |
 | **successMode** | **String**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [optional] [default to Partial] |
 
 ### Return type
 
-[**BatchUpsertPropertyDefinitionPropertiesResponse**](BatchUpsertPropertyDefinitionPropertiesResponse.md)
+[**BatchUpsertPropertyDefinitionPropertiesResponse**](../model/BatchUpsertPropertyDefinitionPropertiesResponse.md)
+
 
 ### HTTP request headers
 

@@ -73,11 +73,12 @@ public class VersionedConfigurationsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **configType** | **String**| The category of configuration. | |
 | **name** | **String**| The logical name of the configuration. | |
-| **createVersionedConfigurationDraftRequest** | [**CreateVersionedConfigurationDraftRequest**](CreateVersionedConfigurationDraftRequest.md)| Options for the new draft, including optional explicit version and source version. | [optional] |
+| **createVersionedConfigurationDraftRequest** | [**CreateVersionedConfigurationDraftRequest**](../model/CreateVersionedConfigurationDraftRequest.md)| Options for the new draft, including optional explicit version and source version. | [optional] |
 
 ### Return type
 
-[**VersionedConfigurationResponse**](VersionedConfigurationResponse.md)
+[**VersionedConfigurationResponse**](../model/VersionedConfigurationResponse.md)
+
 
 ### HTTP request headers
 
@@ -161,7 +162,8 @@ public class VersionedConfigurationsApiExample {
 
 ### Return type
 
-[**VersionedConfigurationResponse**](VersionedConfigurationResponse.md)
+[**VersionedConfigurationResponse**](../model/VersionedConfigurationResponse.md)
+
 
 ### HTTP request headers
 
@@ -246,7 +248,8 @@ public class VersionedConfigurationsApiExample {
 
 ### Return type
 
-[**VersionedConfigurationResponse**](VersionedConfigurationResponse.md)
+[**VersionedConfigurationResponse**](../model/VersionedConfigurationResponse.md)
+
 
 ### HTTP request headers
 
@@ -319,7 +322,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;VersionedConfigurationTypeResponse&gt;**](VersionedConfigurationTypeResponse.md)
+[**List&lt;VersionedConfigurationTypeResponse&gt;**](../model/VersionedConfigurationTypeResponse.md)
+
 
 ### HTTP request headers
 
@@ -391,7 +395,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;VersionedConfigurationResponse&gt;**](VersionedConfigurationResponse.md)
+[**List&lt;VersionedConfigurationResponse&gt;**](../model/VersionedConfigurationResponse.md)
+
 
 ### HTTP request headers
 
@@ -467,7 +472,8 @@ public class VersionedConfigurationsApiExample {
 
 ### Return type
 
-[**List&lt;VersionedConfigurationResponse&gt;**](VersionedConfigurationResponse.md)
+[**List&lt;VersionedConfigurationResponse&gt;**](../model/VersionedConfigurationResponse.md)
+
 
 ### HTTP request headers
 
@@ -550,7 +556,8 @@ public class VersionedConfigurationsApiExample {
 
 ### Return type
 
-[**VersionedConfigurationResponse**](VersionedConfigurationResponse.md)
+[**VersionedConfigurationResponse**](../model/VersionedConfigurationResponse.md)
+
 
 ### HTTP request headers
 
@@ -631,11 +638,12 @@ public class VersionedConfigurationsApiExample {
 | **name** | **String**| The logical name of the configuration. | |
 | **majorVersion** | **Integer**| The major version of the draft to update. | |
 | **minorVersion** | **Integer**| The minor version of the draft to update. | |
-| **updateVersionedConfigurationDraftRequest** | [**UpdateVersionedConfigurationDraftRequest**](UpdateVersionedConfigurationDraftRequest.md)| The updated value. | [optional] |
+| **updateVersionedConfigurationDraftRequest** | [**UpdateVersionedConfigurationDraftRequest**](../model/UpdateVersionedConfigurationDraftRequest.md)| The updated value. | [optional] |
 
 ### Return type
 
-[**VersionedConfigurationResponse**](VersionedConfigurationResponse.md)
+[**VersionedConfigurationResponse**](../model/VersionedConfigurationResponse.md)
+
 
 ### HTTP request headers
 

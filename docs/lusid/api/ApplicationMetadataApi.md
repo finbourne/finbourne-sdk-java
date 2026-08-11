@@ -69,7 +69,8 @@ public class ApplicationMetadataApiExample {
 
 ### Return type
 
-[**FileResponse**](FileResponse.md)
+[**FileResponse**](../model/FileResponse.md)
+
 
 ### HTTP request headers
 
@@ -141,7 +142,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**LatestAsAt**](LatestAsAt.md)
+[**LatestAsAt**](../model/LatestAsAt.md)
+
 
 ### HTTP request headers
 
@@ -212,7 +214,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**VersionSummaryDto**](VersionSummaryDto.md)
+[**VersionSummaryDto**](../model/VersionSummaryDto.md)
+
 
 ### HTTP request headers
 
@@ -287,7 +290,8 @@ public class ApplicationMetadataApiExample {
 
 ### Return type
 
-[**ResourceListOfAccessControlledResource**](ResourceListOfAccessControlledResource.md)
+[**ResourceListOfAccessControlledResource**](../model/ResourceListOfAccessControlledResource.md)
+
 
 ### HTTP request headers
 

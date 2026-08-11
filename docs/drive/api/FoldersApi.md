@@ -66,11 +66,12 @@ public class FoldersApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createFolder** | [**CreateFolder**](CreateFolder.md)| A CreateFolder object that defines the name and path of the new folder | |
+| **createFolder** | [**CreateFolder**](../model/CreateFolder.md)| A CreateFolder object that defines the name and path of the new folder | |
 
 ### Return type
 
-[**StorageObject**](StorageObject.md)
+[**StorageObject**](../model/StorageObject.md)
+
 
 ### HTTP request headers
 
@@ -145,6 +146,7 @@ public class FoldersApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -218,7 +220,8 @@ public class FoldersApiExample {
 
 ### Return type
 
-[**StorageObject**](StorageObject.md)
+[**StorageObject**](../model/StorageObject.md)
+
 
 ### HTTP request headers
 
@@ -296,14 +299,15 @@ public class FoldersApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**| Unique ID of the folder | |
 | **page** | **String**| The pagination token to use to continue listing contents from a previous call to list contents.             This value is returned from the previous call. If a pagination token is provided the sortBy and filter fields             must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order. | [optional] |
 | **start** | **Integer**| When paginating, skip this number of results. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] [default to ] |
 
 ### Return type
 
-[**PagedResourceListOfStorageObject**](PagedResourceListOfStorageObject.md)
+[**PagedResourceListOfStorageObject**](../model/PagedResourceListOfStorageObject.md)
+
 
 ### HTTP request headers
 
@@ -379,14 +383,15 @@ public class FoldersApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **page** | **String**| The pagination token to use to continue listing contents from a previous call to list contents.             This value is returned from the previous call. If a pagination token is provided the sortBy and filter fields             must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order. | [optional] |
 | **start** | **Integer**| When paginating, skip this number of results. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] [default to true] |
 
 ### Return type
 
-[**PagedResourceListOfStorageObject**](PagedResourceListOfStorageObject.md)
+[**PagedResourceListOfStorageObject**](../model/PagedResourceListOfStorageObject.md)
+
 
 ### HTTP request headers
 
@@ -460,13 +465,14 @@ public class FoldersApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**| Unique ID of the folder where the files should be moved | |
-| **requestBody** | [**List&lt;String&gt;**](String.md)| Enumerable of unique IDs of files that should be moved | |
+| **requestBody** | [**List&lt;String&gt;**](../model/String.md)| Enumerable of unique IDs of files that should be moved | |
 | **overwrite** | **Boolean**| True if the destination has file with same name if should be overwritten | [optional] [default to false] |
 | **deleteSource** | **Boolean**| If true after moving the original file is deleted | [optional] [default to false] |
 
 ### Return type
 
-[**PagedResourceListOfStorageObject**](PagedResourceListOfStorageObject.md)
+[**PagedResourceListOfStorageObject**](../model/PagedResourceListOfStorageObject.md)
+
 
 ### HTTP request headers
 
@@ -540,11 +546,12 @@ public class FoldersApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**| Unique ID of the folder | |
-| **updateFolder** | [**UpdateFolder**](UpdateFolder.md)| An UpdateFolder object that defines the new name or path of the folder | |
+| **updateFolder** | [**UpdateFolder**](../model/UpdateFolder.md)| An UpdateFolder object that defines the new name or path of the folder | |
 
 ### Return type
 
-[**StorageObject**](StorageObject.md)
+[**StorageObject**](../model/StorageObject.md)
+
 
 ### HTTP request headers
 

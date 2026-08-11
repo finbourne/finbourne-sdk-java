@@ -1,40 +1,37 @@
-# com.finbourne.sdk.services.lusid.model.TransitionEvent
-classname TransitionEvent
-A 'transition' within a corporate action, representing a set of output movements paired to a single input position
+# com.finbourne.sdk.services.lusid.model.CommodityForwardCashSettlementEvent
+classname CommodityForwardCashSettlementEvent
+Cash settlement of a cash-delivery CommodityForward at maturity. The cash flow per unit is the  pre-netted settlement price (forward price minus strike) supplied externally via the quote store;  LUSID does not compute the difference itself. A negative cash flow per unit is valid and means the  position was out of the money at settlement.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrumentEventType** | **String** | The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent. | [default to String]
-**announcementDate** | [**OffsetDateTime**](OffsetDateTime.md) | The announcement date of the corporate action | [optional] [default to OffsetDateTime]
-**exDate** | [**OffsetDateTime**](OffsetDateTime.md) | The ex date of the corporate action | [optional] [default to OffsetDateTime]
-**recordDate** | [**OffsetDateTime**](OffsetDateTime.md) | The record date of the corporate action | [optional] [default to OffsetDateTime]
-**paymentDate** | [**OffsetDateTime**](OffsetDateTime.md) | The payment date of the corporate action | [optional] [default to OffsetDateTime]
-**inputTransition** | [**InputTransition**](InputTransition.md) |  | [optional] [default to InputTransition]
-**outputTransitions** | [**List&lt;OutputTransition&gt;**](OutputTransition.md) | The resulting transitions from this event | [optional] [default to List<OutputTransition>]
+**maturityDate** | [**OffsetDateTime**](OffsetDateTime.md) | The single settlement / maturity date of the forward. Required. | [optional] [default to OffsetDateTime]
+**domCcy** | **String** | Settlement currency of the forward. Required. | [default to String]
+**cashFlowPerUnit** | **java.math.BigDecimal** | The pre-netted settlement amount per unit (current forward price minus strike), supplied  externally via the quote store. Optional — absent until the settlement price has been loaded.  Negative when the position is out of the money. | [optional] [default to java.math.BigDecimal]
+**cashFlowAmount** | **java.math.BigDecimal** | The realised cash amount, calculated as CashFlowPerUnit multiplied by the eligible balance.  Optional — it needs holdings-level data so it is never populated by the instrument layer.  Carries the sign of CashFlowPerUnit. | [optional] [default to java.math.BigDecimal]
+**strike** | **java.math.BigDecimal** | Agreed forward price at trade inception. Optional, and reference only — it is not used in the  settlement calculation; it is carried for auditability. | [optional] [default to java.math.BigDecimal]
 
 ```java
-import com.finbourne.sdk.services.lusid.model.TransitionEvent;
+import com.finbourne.sdk.services.lusid.model.CommodityForwardCashSettlementEvent;
 import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
-OffsetDateTime announcementDate = OffsetDateTime.now();
-OffsetDateTime exDate = OffsetDateTime.now();
-OffsetDateTime recordDate = OffsetDateTime.now();
-OffsetDateTime paymentDate = OffsetDateTime.now();
-InputTransition inputTransition = new InputTransition();
-@javax.annotation.Nullable List<OutputTransition> outputTransitions = new List<OutputTransition>();
+OffsetDateTime maturityDate = OffsetDateTime.now();
+String domCcy = "example domCcy";
+@javax.annotation.Nullable java.math.BigDecimal cashFlowPerUnit = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal cashFlowAmount = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal strike = new java.math.BigDecimal("100.00");
 
 
-TransitionEvent transitionEventInstance = new TransitionEvent()
-    .announcementDate(announcementDate)
-    .exDate(exDate)
-    .recordDate(recordDate)
-    .paymentDate(paymentDate)
-    .inputTransition(inputTransition)
-    .outputTransitions(outputTransitions);
+CommodityForwardCashSettlementEvent commodityForwardCashSettlementEventInstance = new CommodityForwardCashSettlementEvent()
+    .maturityDate(maturityDate)
+    .domCcy(domCcy)
+    .cashFlowPerUnit(cashFlowPerUnit)
+    .cashFlowAmount(cashFlowAmount)
+    .strike(strike);
 ```
 
 

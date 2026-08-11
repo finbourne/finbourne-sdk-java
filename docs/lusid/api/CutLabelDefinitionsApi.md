@@ -66,11 +66,12 @@ public class CutLabelDefinitionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createCutLabelDefinitionRequest** | [**CreateCutLabelDefinitionRequest**](CreateCutLabelDefinitionRequest.md)| The cut label definition | [optional] |
+| **createCutLabelDefinitionRequest** | [**CreateCutLabelDefinitionRequest**](../model/CreateCutLabelDefinitionRequest.md)| The cut label definition | [optional] |
 
 ### Return type
 
-[**CutLabelDefinition**](CutLabelDefinition.md)
+[**CutLabelDefinition**](../model/CutLabelDefinition.md)
+
 
 ### HTTP request headers
 
@@ -146,7 +147,8 @@ public class CutLabelDefinitionsApiExample {
 
 ### Return type
 
-[**OffsetDateTime**](OffsetDateTime.md)
+[**OffsetDateTime**](../model/OffsetDateTime.md)
+
 
 ### HTTP request headers
 
@@ -224,7 +226,8 @@ public class CutLabelDefinitionsApiExample {
 
 ### Return type
 
-[**CutLabelDefinition**](CutLabelDefinition.md)
+[**CutLabelDefinition**](../model/CutLabelDefinition.md)
+
 
 ### HTTP request headers
 
@@ -301,14 +304,15 @@ public class CutLabelDefinitionsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| Optional. The As At time at which listed Cut Labels are valid | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Optional. Expression to filter the result set.              For example, to filter on code, use \&quot;code eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfCutLabelDefinition**](PagedResourceListOfCutLabelDefinition.md)
+[**PagedResourceListOfCutLabelDefinition**](../model/PagedResourceListOfCutLabelDefinition.md)
+
 
 ### HTTP request headers
 
@@ -382,11 +386,12 @@ public class CutLabelDefinitionsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **code** | **String**| The Code of the Cut Label that is being updated | |
-| **updateCutLabelDefinitionRequest** | [**UpdateCutLabelDefinitionRequest**](UpdateCutLabelDefinitionRequest.md)| The cut label update definition | [optional] |
+| **updateCutLabelDefinitionRequest** | [**UpdateCutLabelDefinitionRequest**](../model/UpdateCutLabelDefinitionRequest.md)| The cut label update definition | [optional] |
 
 ### Return type
 
-[**CutLabelDefinition**](CutLabelDefinition.md)
+[**CutLabelDefinition**](../model/CutLabelDefinition.md)
+
 
 ### HTTP request headers
 

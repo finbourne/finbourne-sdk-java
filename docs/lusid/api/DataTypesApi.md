@@ -70,11 +70,12 @@ public class DataTypesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createDataTypeRequest** | [**CreateDataTypeRequest**](CreateDataTypeRequest.md)| The definition of the new data type | [optional] |
+| **createDataTypeRequest** | [**CreateDataTypeRequest**](../model/CreateDataTypeRequest.md)| The definition of the new data type | [optional] |
 
 ### Return type
 
-[**DataType**](DataType.md)
+[**DataType**](../model/DataType.md)
+
 
 ### HTTP request headers
 
@@ -152,7 +153,8 @@ public class DataTypesApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -232,7 +234,8 @@ public class DataTypesApiExample {
 
 ### Return type
 
-[**DataType**](DataType.md)
+[**DataType**](../model/DataType.md)
+
 
 ### HTTP request headers
 
@@ -310,13 +313,14 @@ public class DataTypesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the data type | |
 | **code** | **String**| The code of the data type | |
-| **units** | [**List&lt;String&gt;**](String.md)| One or more unit identifiers for which the definition is being requested | [optional] |
+| **units** | [**List&lt;String&gt;**](../model/String.md)| One or more unit identifiers for which the definition is being requested | [optional] |
 | **filter** | **String**| Optional. Expression to filter the result set.               For example, to filter on the Schema, use \&quot;schema eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 | **asAt** | **OffsetDateTime**| Optional. The as at of the requested data type | [optional] |
 
 ### Return type
 
-[**ResourceListOfIUnitDefinitionDto**](ResourceListOfIUnitDefinitionDto.md)
+[**ResourceListOfIUnitDefinitionDto**](../model/ResourceListOfIUnitDefinitionDto.md)
+
 
 ### HTTP request headers
 
@@ -396,11 +400,12 @@ public class DataTypesApiExample {
 | **page** | **String**| The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Optional. Expression to filter the result set.                For example, to filter on the Scope, use \&quot;id.scope eq &#39;myscope&#39;\&quot;, to filter on Schema, use \&quot;schema eq &#39;string&#39;\&quot;,               to filter on AcceptableValues use \&quot;acceptableValues any (~ eq &#39;value&#39;)\&quot;               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfDataTypeSummary**](PagedResourceListOfDataTypeSummary.md)
+[**PagedResourceListOfDataTypeSummary**](../model/PagedResourceListOfDataTypeSummary.md)
+
 
 ### HTTP request headers
 
@@ -480,13 +485,14 @@ public class DataTypesApiExample {
 | **scope** | **String**| The requested scope of the data types | |
 | **asAt** | **OffsetDateTime**| The as at of the requested data types | [optional] |
 | **includeSystem** | **Boolean**| Whether to additionally include those data types in the \&quot;system\&quot; scope | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 
 ### Return type
 
-[**ResourceListOfDataType**](ResourceListOfDataType.md)
+[**ResourceListOfDataType**](../model/ResourceListOfDataType.md)
+
 
 ### HTTP request headers
 
@@ -562,11 +568,12 @@ public class DataTypesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the data type | |
 | **code** | **String**| The code of the data type | |
-| **updateDataTypeRequest** | [**UpdateDataTypeRequest**](UpdateDataTypeRequest.md)| The updated definition of the data type | |
+| **updateDataTypeRequest** | [**UpdateDataTypeRequest**](../model/UpdateDataTypeRequest.md)| The updated definition of the data type | |
 
 ### Return type
 
-[**DataType**](DataType.md)
+[**DataType**](../model/DataType.md)
+
 
 ### HTTP request headers
 
@@ -642,11 +649,12 @@ public class DataTypesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the data type | |
 | **code** | **String**| The code of the data type | |
-| **updateReferenceDataRequest** | [**UpdateReferenceDataRequest**](UpdateReferenceDataRequest.md)| The updated reference data | |
+| **updateReferenceDataRequest** | [**UpdateReferenceDataRequest**](../model/UpdateReferenceDataRequest.md)| The updated reference data | |
 
 ### Return type
 
-[**DataType**](DataType.md)
+[**DataType**](../model/DataType.md)
+
 
 ### HTTP request headers
 
@@ -722,11 +730,12 @@ public class DataTypesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the data type | |
 | **code** | **String**| The code of the data type | |
-| **fieldValue** | [**List&lt;FieldValue&gt;**](FieldValue.md)| The updated reference values | |
+| **fieldValue** | [**List&lt;FieldValue&gt;**](../model/FieldValue.md)| The updated reference values | |
 
 ### Return type
 
-[**DataType**](DataType.md)
+[**DataType**](../model/DataType.md)
+
 
 ### HTTP request headers
 

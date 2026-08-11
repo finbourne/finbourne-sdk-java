@@ -65,11 +65,12 @@ public class RunsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **cancelRunRequest** | [**CancelRunRequest**](CancelRunRequest.md)| Contains the run identifiers and a message to be set e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | |
+| **cancelRunRequest** | [**CancelRunRequest**](../model/CancelRunRequest.md)| Contains the run identifiers and a message to be set e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | |
 
 ### Return type
 
-[**IntegrationCancellationResponse**](IntegrationCancellationResponse.md)
+[**IntegrationCancellationResponse**](../model/IntegrationCancellationResponse.md)
+
 
 ### HTTP request headers
 
@@ -146,13 +147,14 @@ public class RunsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **filter** | **String**| Expression to filter the result set. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. | [optional] [default to 100] |
 | **pageToken** | **String**| The pagination token to use to continue listing integration runs; this value is returned from             the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt; and &lt;i&gt;filter&lt;/i&gt; fields must not have changed since the original request. | [optional] [default to ] |
 
 ### Return type
 
-[**PagedResourceListOfIntegrationRunResponse**](PagedResourceListOfIntegrationRunResponse.md)
+[**PagedResourceListOfIntegrationRunResponse**](../model/PagedResourceListOfIntegrationRunResponse.md)
+
 
 ### HTTP request headers
 
@@ -229,7 +231,8 @@ public class RunsApiExample {
 
 ### Return type
 
-[**IntegrationRerunResponse**](IntegrationRerunResponse.md)
+[**IntegrationRerunResponse**](../model/IntegrationRerunResponse.md)
+
 
 ### HTTP request headers
 
@@ -309,6 +312,7 @@ public class RunsApiExample {
 ### Return type
 
 **Object**
+
 
 ### HTTP request headers
 

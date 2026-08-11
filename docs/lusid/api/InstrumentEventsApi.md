@@ -73,11 +73,12 @@ public class InstrumentEventsApiExample {
 | **asAt** | **OffsetDateTime**| The as at time to use. | [optional] |
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used. | [optional] [default to 100] |
 | **page** | **String**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this | [optional] |
-| **queryApplicableInstrumentEventsRequest** | [**QueryApplicableInstrumentEventsRequest**](QueryApplicableInstrumentEventsRequest.md)| The filter parameters used to retrieve applicable instrument events. | [optional] |
+| **queryApplicableInstrumentEventsRequest** | [**QueryApplicableInstrumentEventsRequest**](../model/QueryApplicableInstrumentEventsRequest.md)| The filter parameters used to retrieve applicable instrument events. | [optional] |
 
 ### Return type
 
-[**ResourceListOfApplicableInstrumentEvent**](ResourceListOfApplicableInstrumentEvent.md)
+[**ResourceListOfApplicableInstrumentEvent**](../model/ResourceListOfApplicableInstrumentEvent.md)
+
 
 ### HTTP request headers
 
@@ -149,11 +150,12 @@ public class InstrumentEventsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **queryBucketCashFlowDrillDownRequest** | [**QueryBucketCashFlowDrillDownRequest**](QueryBucketCashFlowDrillDownRequest.md)| The Query Information. | [optional] |
+| **queryBucketCashFlowDrillDownRequest** | [**QueryBucketCashFlowDrillDownRequest**](../model/QueryBucketCashFlowDrillDownRequest.md)| The Query Information. | [optional] |
 
 ### Return type
 
-[**ResourceListOfCashFlowDetail**](ResourceListOfCashFlowDetail.md)
+[**ResourceListOfCashFlowDetail**](../model/ResourceListOfCashFlowDetail.md)
+
 
 ### HTTP request headers
 
@@ -225,11 +227,12 @@ public class InstrumentEventsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **queryBucketedCashFlowsRequest** | [**QueryBucketedCashFlowsRequest**](QueryBucketedCashFlowsRequest.md)| The Query Information. | [optional] |
+| **queryBucketedCashFlowsRequest** | [**QueryBucketedCashFlowsRequest**](../model/QueryBucketedCashFlowsRequest.md)| The Query Information. | [optional] |
 
 ### Return type
 
-[**BucketedCashFlowResponse**](BucketedCashFlowResponse.md)
+[**BucketedCashFlowResponse**](../model/BucketedCashFlowResponse.md)
+
 
 ### HTTP request headers
 
@@ -240,7 +243,7 @@ public class InstrumentEventsApiExample {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Query bucketed cashflows across portfolios. |  -  |
+| **200** | Query bucketed cashflows across portfolios. |  * Deprecation - Only present when the request resolved to cashFlowCalculationVersion&#x3D;1 (explicitly or by default): an RFC 9745 structured-field date marking when version 1 was deprecated. Set cashFlowCalculationVersion&#x3D;2, its successor. <br>  * Link - Only present when the request resolved to cashFlowCalculationVersion&#x3D;1: an RFC 8288 link with rel&#x3D;\&quot;deprecation\&quot; pointing at the version 1 to version 2 migration documentation. <br>  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
@@ -305,11 +308,12 @@ public class InstrumentEventsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. | [optional] [default to 1000] |
 | **page** | **String**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified. | [optional] |
-| **queryCashFlowsRequest** | [**QueryCashFlowsRequest**](QueryCashFlowsRequest.md)| The filter parameters used to retrieve instrument events. | [optional] |
+| **queryCashFlowsRequest** | [**QueryCashFlowsRequest**](../model/QueryCashFlowsRequest.md)| The filter parameters used to retrieve instrument events. | [optional] |
 
 ### Return type
 
-[**ResourceListOfInstrumentCashFlow**](ResourceListOfInstrumentCashFlow.md)
+[**ResourceListOfInstrumentCashFlow**](../model/ResourceListOfInstrumentCashFlow.md)
+
 
 ### HTTP request headers
 
@@ -320,7 +324,7 @@ public class InstrumentEventsApiExample {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Instrument Events as Cashflows. |  -  |
+| **200** | Instrument Events as Cashflows. |  * Deprecation - Only present when the request resolved to cashFlowCalculationVersion&#x3D;1 (explicitly or by default): an RFC 9745 structured-field date marking when version 1 was deprecated. Set cashFlowCalculationVersion&#x3D;2, its successor. <br>  * Link - Only present when the request resolved to cashFlowCalculationVersion&#x3D;1: an RFC 8288 link with rel&#x3D;\&quot;deprecation\&quot; pointing at the version 1 to version 2 migration documentation. <br>  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
@@ -385,11 +389,12 @@ public class InstrumentEventsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. | [optional] [default to 1000] |
 | **page** | **String**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified. | [optional] |
-| **queryInstrumentEventsRequest** | [**QueryInstrumentEventsRequest**](QueryInstrumentEventsRequest.md)| The filter parameters used to retrieve instrument events. | [optional] |
+| **queryInstrumentEventsRequest** | [**QueryInstrumentEventsRequest**](../model/QueryInstrumentEventsRequest.md)| The filter parameters used to retrieve instrument events. | [optional] |
 
 ### Return type
 
-[**ResourceListOfInstrumentEventHolder**](ResourceListOfInstrumentEventHolder.md)
+[**ResourceListOfInstrumentEventHolder**](../model/ResourceListOfInstrumentEventHolder.md)
+
 
 ### HTTP request headers
 
@@ -465,11 +470,12 @@ public class InstrumentEventsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. | [optional] [default to 1000] |
 | **page** | **String**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified. | [optional] |
-| **queryTradeTicketsRequest** | [**QueryTradeTicketsRequest**](QueryTradeTicketsRequest.md)| The filter parameters used to retrieve instrument events. | [optional] |
+| **queryTradeTicketsRequest** | [**QueryTradeTicketsRequest**](../model/QueryTradeTicketsRequest.md)| The filter parameters used to retrieve instrument events. | [optional] |
 
 ### Return type
 
-[**ResourceListOfPortfolioTradeTicket**](ResourceListOfPortfolioTradeTicket.md)
+[**ResourceListOfPortfolioTradeTicket**](../model/ResourceListOfPortfolioTradeTicket.md)
+
 
 ### HTTP request headers
 

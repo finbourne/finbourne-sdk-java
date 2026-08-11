@@ -78,11 +78,12 @@ public class IntegrationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createInstanceRequest** | [**CreateInstanceRequest**](CreateInstanceRequest.md)| The new integration instance. | |
+| **createInstanceRequest** | [**CreateInstanceRequest**](../model/CreateInstanceRequest.md)| The new integration instance. | |
 
 ### Return type
 
-[**InstanceIdentifier**](InstanceIdentifier.md)
+[**InstanceIdentifier**](../model/InstanceIdentifier.md)
+
 
 ### HTTP request headers
 
@@ -160,6 +161,7 @@ public class IntegrationsApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -235,7 +237,8 @@ public class IntegrationsApiExample {
 
 ### Return type
 
-[**ExecuteInstanceResponse**](ExecuteInstanceResponse.md)
+[**ExecuteInstanceResponse**](../model/ExecuteInstanceResponse.md)
+
 
 ### HTTP request headers
 
@@ -310,11 +313,12 @@ public class IntegrationsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**| Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | |
-| **requestBody** | [**Map&lt;String, String&gt;**](String.md)| Dictionary(string,string) of runtime parameters passed to the integration instance | |
+| **requestBody** | [**Map&lt;String, String&gt;**](../model/String.md)| Dictionary(string,string) of runtime parameters passed to the integration instance | |
 
 ### Return type
 
-[**ExecuteInstanceResponse**](ExecuteInstanceResponse.md)
+[**ExecuteInstanceResponse**](../model/ExecuteInstanceResponse.md)
+
 
 ### HTTP request headers
 
@@ -389,7 +393,8 @@ public class IntegrationsApiExample {
 
 ### Return type
 
-[**ProcessorSchemaResponse**](ProcessorSchemaResponse.md)
+[**ProcessorSchemaResponse**](../model/ProcessorSchemaResponse.md)
+
 
 ### HTTP request headers
 
@@ -470,6 +475,7 @@ public class IntegrationsApiExample {
 
 **List&lt;String&gt;**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -545,7 +551,8 @@ public class IntegrationsApiExample {
 
 ### Return type
 
-[**IntegrationInstanceResponse**](IntegrationInstanceResponse.md)
+[**IntegrationInstanceResponse**](../model/IntegrationInstanceResponse.md)
+
 
 ### HTTP request headers
 
@@ -624,7 +631,8 @@ public class IntegrationsApiExample {
 
 ### Return type
 
-[**Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;**](LusidPropertyDefinitionOverridesByType.md)
+[**Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;**](../model/LusidPropertyDefinitionOverridesByType.md)
+
 
 ### HTTP request headers
 
@@ -701,7 +709,8 @@ public class IntegrationsApiExample {
 
 ### Return type
 
-[**IntegrationPropertyConfiguration**](IntegrationPropertyConfiguration.md)
+[**IntegrationPropertyConfiguration**](../model/IntegrationPropertyConfiguration.md)
+
 
 ### HTTP request headers
 
@@ -780,13 +789,14 @@ public class IntegrationsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **integration** | **String**|  | |
 | **filter** | **String**|  | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)|  | [optional] |
 | **limit** | **Integer**|  | [optional] [default to 100] |
 | **pageToken** | **String**|  | [optional] [default to ] |
 
 ### Return type
 
-[**PagedResourceListOfIFieldMapping**](PagedResourceListOfIFieldMapping.md)
+[**PagedResourceListOfIFieldMapping**](../model/PagedResourceListOfIFieldMapping.md)
+
 
 ### HTTP request headers
 
@@ -865,13 +875,14 @@ public class IntegrationsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **integration** | **String**|  | |
 | **filter** | **String**|  | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)|  | [optional] |
 | **limit** | **Integer**|  | [optional] [default to 100] |
 | **pageToken** | **String**|  | [optional] [default to ] |
 
 ### Return type
 
-[**PagedResourceListOfIPropertyMapping**](PagedResourceListOfIPropertyMapping.md)
+[**PagedResourceListOfIPropertyMapping**](../model/PagedResourceListOfIPropertyMapping.md)
+
 
 ### HTTP request headers
 
@@ -948,7 +959,8 @@ public class IntegrationsApiExample {
 
 ### Return type
 
-[**JSchema**](JSchema.md)
+[**JSchema**](../model/JSchema.md)
+
 
 ### HTTP request headers
 
@@ -1021,7 +1033,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;ProcessorDescription&gt;**](ProcessorDescription.md)
+[**List&lt;ProcessorDescription&gt;**](../model/ProcessorDescription.md)
+
 
 ### HTTP request headers
 
@@ -1093,7 +1106,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;IntegrationInstance&gt;**](IntegrationInstance.md)
+[**List&lt;IntegrationInstance&gt;**](../model/IntegrationInstance.md)
+
 
 ### HTTP request headers
 
@@ -1165,7 +1179,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;IntegrationDescription&gt;**](IntegrationDescription.md)
+[**List&lt;IntegrationDescription&gt;**](../model/IntegrationDescription.md)
+
 
 ### HTTP request headers
 
@@ -1240,11 +1255,12 @@ public class IntegrationsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**| Identifier of the instance | |
 | **integration** | **String**| The type of the integration e.g. \&quot;copp-clark\&quot;. | |
-| **requestBody** | [**Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;**](LusidPropertyDefinitionOverridesByType.md)| Properties to be included and any overrides | [optional] |
+| **requestBody** | [**Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;**](../model/LusidPropertyDefinitionOverridesByType.md)| Properties to be included and any overrides | [optional] |
 
 ### Return type
 
-[**Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;**](LusidPropertyDefinitionOverridesByType.md)
+[**Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;**](../model/LusidPropertyDefinitionOverridesByType.md)
+
 
 ### HTTP request headers
 
@@ -1318,11 +1334,12 @@ public class IntegrationsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**| Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | |
-| **updateInstanceRequest** | [**UpdateInstanceRequest**](UpdateInstanceRequest.md)| The new integration instance. | |
+| **updateInstanceRequest** | [**UpdateInstanceRequest**](../model/UpdateInstanceRequest.md)| The new integration instance. | |
 
 ### Return type
 
 null (empty response body)
+
 
 ### HTTP request headers
 

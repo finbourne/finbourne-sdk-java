@@ -67,7 +67,8 @@ public class CandelaTracesApiExample {
 
 ### Return type
 
-[**TraceDiagramResponse**](TraceDiagramResponse.md)
+[**TraceDiagramResponse**](../model/TraceDiagramResponse.md)
+
 
 ### HTTP request headers
 
@@ -141,7 +142,8 @@ public class CandelaTracesApiExample {
 
 ### Return type
 
-[**TraceLog**](TraceLog.md)
+[**TraceLog**](../model/TraceLog.md)
+
 
 ### HTTP request headers
 
@@ -217,7 +219,8 @@ public class CandelaTracesApiExample {
 
 ### Return type
 
-[**ResourceListOfTraceEventLog**](ResourceListOfTraceEventLog.md)
+[**ResourceListOfTraceEventLog**](../model/ResourceListOfTraceEventLog.md)
+
 
 ### HTTP request headers
 
@@ -297,7 +300,8 @@ public class CandelaTracesApiExample {
 
 ### Return type
 
-[**ResourceListOfTraceLog**](ResourceListOfTraceLog.md)
+[**ResourceListOfTraceLog**](../model/ResourceListOfTraceLog.md)
+
 
 ### HTTP request headers
 

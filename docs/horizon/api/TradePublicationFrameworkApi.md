@@ -79,7 +79,7 @@ public class TradePublicationFrameworkApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**| Integration instance ID | |
-| **status** | [**FileDeliveryStatus**](.md)| Filter by delivery status (Completed, Error, Pending) | [optional] [enum: Completed, Pending, Error] |
+| **status** | [**FileDeliveryStatus**](../model/.md)| Filter by delivery status (Completed, Error, Pending) | [optional] [enum: Completed, Pending, Error] |
 | **dateFrom** | **OffsetDateTime**| Filter deliveries from this time (inclusive) | [optional] |
 | **dateTo** | **OffsetDateTime**| Filter deliveries to this time (inclusive) | [optional] |
 | **limit** | **Integer**| Page size for pagination (default 50, max 500) | [optional] [default to 50] |
@@ -87,7 +87,8 @@ public class TradePublicationFrameworkApiExample {
 
 ### Return type
 
-[**PagedResourceListOfTpfFileDeliveryResponse**](PagedResourceListOfTpfFileDeliveryResponse.md)
+[**PagedResourceListOfTpfFileDeliveryResponse**](../model/PagedResourceListOfTpfFileDeliveryResponse.md)
+
 
 ### HTTP request headers
 
@@ -157,11 +158,12 @@ public class TradePublicationFrameworkApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **tpfTransactionSearchRequest** | [**TpfTransactionSearchRequest**](TpfTransactionSearchRequest.md)| Search filters and pagination options. | [optional] |
+| **tpfTransactionSearchRequest** | [**TpfTransactionSearchRequest**](../model/TpfTransactionSearchRequest.md)| Search filters and pagination options. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfTpfTransactionSearchResponse**](PagedResourceListOfTpfTransactionSearchResponse.md)
+[**PagedResourceListOfTpfTransactionSearchResponse**](../model/PagedResourceListOfTpfTransactionSearchResponse.md)
+
 
 ### HTTP request headers
 
@@ -243,7 +245,8 @@ public class TradePublicationFrameworkApiExample {
 
 ### Return type
 
-[**PagedResourceListOfTransactionPayload**](PagedResourceListOfTransactionPayload.md)
+[**PagedResourceListOfTransactionPayload**](../model/PagedResourceListOfTransactionPayload.md)
+
 
 ### HTTP request headers
 
@@ -324,7 +327,8 @@ public class TradePublicationFrameworkApiExample {
 
 ### Return type
 
-[**PagedResourceListOfFailedDeliveryResponse**](PagedResourceListOfFailedDeliveryResponse.md)
+[**PagedResourceListOfFailedDeliveryResponse**](../model/PagedResourceListOfFailedDeliveryResponse.md)
+
 
 ### HTTP request headers
 
@@ -403,7 +407,8 @@ public class TradePublicationFrameworkApiExample {
 
 ### Return type
 
-[**PagedResourceListOfInstanceRunResponse**](PagedResourceListOfInstanceRunResponse.md)
+[**PagedResourceListOfInstanceRunResponse**](../model/PagedResourceListOfInstanceRunResponse.md)
+
 
 ### HTTP request headers
 
@@ -473,7 +478,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InstancesResponse**](InstancesResponse.md)
+[**InstancesResponse**](../model/InstancesResponse.md)
+
 
 ### HTTP request headers
 
@@ -552,7 +558,8 @@ public class TradePublicationFrameworkApiExample {
 
 ### Return type
 
-[**PagedResourceListOfRunFileResponse**](PagedResourceListOfRunFileResponse.md)
+[**PagedResourceListOfRunFileResponse**](../model/PagedResourceListOfRunFileResponse.md)
+
 
 ### HTTP request headers
 
@@ -635,7 +642,8 @@ public class TradePublicationFrameworkApiExample {
 
 ### Return type
 
-[**PagedResourceListOfTransactionResponse**](PagedResourceListOfTransactionResponse.md)
+[**PagedResourceListOfTransactionResponse**](../model/PagedResourceListOfTransactionResponse.md)
+
 
 ### HTTP request headers
 
@@ -708,11 +716,12 @@ public class TradePublicationFrameworkApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**|  | |
-| **replayTransactionsRequest** | [**ReplayTransactionsRequest**](ReplayTransactionsRequest.md)|  | |
+| **replayTransactionsRequest** | [**ReplayTransactionsRequest**](../model/ReplayTransactionsRequest.md)|  | |
 
 ### Return type
 
-[**ReplayTransactionsResponse**](ReplayTransactionsResponse.md)
+[**ReplayTransactionsResponse**](../model/ReplayTransactionsResponse.md)
+
 
 ### HTTP request headers
 
@@ -787,11 +796,12 @@ public class TradePublicationFrameworkApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**|  | |
 | **batchReferenceId** | **String**|  | |
-| **resolveFailedDeliveryRequest** | [**ResolveFailedDeliveryRequest**](ResolveFailedDeliveryRequest.md)|  | |
+| **resolveFailedDeliveryRequest** | [**ResolveFailedDeliveryRequest**](../model/ResolveFailedDeliveryRequest.md)|  | |
 
 ### Return type
 
-[**ResolveFailedDeliveryResponse**](ResolveFailedDeliveryResponse.md)
+[**ResolveFailedDeliveryResponse**](../model/ResolveFailedDeliveryResponse.md)
+
 
 ### HTTP request headers
 
@@ -867,11 +877,12 @@ public class TradePublicationFrameworkApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**| Integration instance identifier | |
-| **tpfRetryFailedDeliveryRequest** | [**TpfRetryFailedDeliveryRequest**](TpfRetryFailedDeliveryRequest.md)| Request containing batch element reference identifiers to retry | |
+| **tpfRetryFailedDeliveryRequest** | [**TpfRetryFailedDeliveryRequest**](../model/TpfRetryFailedDeliveryRequest.md)| Request containing batch element reference identifiers to retry | |
 
 ### Return type
 
-[**TpfFailedDeliveryResponse**](TpfFailedDeliveryResponse.md)
+[**TpfFailedDeliveryResponse**](../model/TpfFailedDeliveryResponse.md)
+
 
 ### HTTP request headers
 
@@ -948,7 +959,8 @@ public class TradePublicationFrameworkApiExample {
 
 ### Return type
 
-[**TpfRetrySftpResponse**](TpfRetrySftpResponse.md)
+[**TpfRetrySftpResponse**](../model/TpfRetrySftpResponse.md)
+
 
 ### HTTP request headers
 

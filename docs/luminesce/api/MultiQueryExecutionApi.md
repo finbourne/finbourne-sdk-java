@@ -68,7 +68,8 @@ public class MultiQueryExecutionApiExample {
 
 ### Return type
 
-[**BackgroundQueryCancelResponse**](BackgroundQueryCancelResponse.md)
+[**BackgroundQueryCancelResponse**](../model/BackgroundQueryCancelResponse.md)
+
 
 ### HTTP request headers
 
@@ -142,7 +143,8 @@ public class MultiQueryExecutionApiExample {
 
 ### Return type
 
-[**BackgroundMultiQueryProgressResponse**](BackgroundMultiQueryProgressResponse.md)
+[**BackgroundMultiQueryProgressResponse**](../model/BackgroundMultiQueryProgressResponse.md)
+
 
 ### HTTP request headers
 
@@ -222,7 +224,7 @@ public class MultiQueryExecutionApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **type** | [**MultiQueryDefinitionType**](.md)| An enum value defining the set of statements being executed | [enum: Instrument, Expiry, CorporateActions, EdiInstrument, EdiInstrumentWriter, Testing, MarketplaceClientLoadHistory, InsightsMetricsEntitlement, InstrumentDiscovery, InstrumentUpsert, InsightsApplicationRequestLogs, InsightsVendorLogs, CandelaTraceLogs, CandelaTraceEventLogs] |
+| **type** | [**MultiQueryDefinitionType**](../model/.md)| An enum value defining the set of statements being executed | [enum: Instrument, Expiry, CorporateActions, EdiInstrument, EdiInstrumentWriter, Testing, MarketplaceClientLoadHistory, InsightsMetricsEntitlement, InstrumentDiscovery, InstrumentUpsert, InsightsApplicationRequestLogs, InsightsVendorLogs, CandelaTraceLogs, CandelaTraceEventLogs] |
 | **body** | **String**| A \&quot;search\&quot; value (e.g. &#39;Apple&#39; on an instrument search, a &#x60;Finbourne.Filtering&#x60; expression of Insights, etc.) In the cases where \&quot;Nothing\&quot; is valid for a &#x60;Finbourne.Filtering&#x60; expression, pass &#x60;True&#x60;. | |
 | **asAt** | **OffsetDateTime**| The AsAt time used by any bitemporal provider in the queries. | [optional] |
 | **effectiveAt** | **OffsetDateTime**| The EffectiveAt time used by any bitemporal provider in the queries. | [optional] |
@@ -236,7 +238,8 @@ public class MultiQueryExecutionApiExample {
 
 ### Return type
 
-[**BackgroundMultiQueryResponse**](BackgroundMultiQueryResponse.md)
+[**BackgroundMultiQueryResponse**](../model/BackgroundMultiQueryResponse.md)
+
 
 ### HTTP request headers
 

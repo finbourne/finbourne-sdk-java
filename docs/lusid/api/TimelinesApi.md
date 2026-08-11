@@ -83,7 +83,8 @@ public class TimelinesApiExample {
 
 ### Return type
 
-[**ClosedPeriod**](ClosedPeriod.md)
+[**ClosedPeriod**](../model/ClosedPeriod.md)
+
 
 ### HTTP request headers
 
@@ -159,11 +160,12 @@ public class TimelinesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the specified Timeline. | |
 | **code** | **String**| The code of the specified Timeline. Together with the domain and scope this uniquely identifies the Timeline. | |
-| **createClosedPeriodRequest** | [**CreateClosedPeriodRequest**](CreateClosedPeriodRequest.md)| The request containing the details of the Closed Period | [optional] |
+| **createClosedPeriodRequest** | [**CreateClosedPeriodRequest**](../model/CreateClosedPeriodRequest.md)| The request containing the details of the Closed Period | [optional] |
 
 ### Return type
 
-[**ClosedPeriod**](ClosedPeriod.md)
+[**ClosedPeriod**](../model/ClosedPeriod.md)
+
 
 ### HTTP request headers
 
@@ -239,11 +241,12 @@ public class TimelinesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the specified Timeline. | |
 | **code** | **String**| The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. | |
-| **createClosedPeriodRequest** | [**CreateClosedPeriodRequest**](CreateClosedPeriodRequest.md)| The request containing the details of the Closed Period | [optional] |
+| **createClosedPeriodRequest** | [**CreateClosedPeriodRequest**](../model/CreateClosedPeriodRequest.md)| The request containing the details of the Closed Period | [optional] |
 
 ### Return type
 
-[**ClosedPeriod**](ClosedPeriod.md)
+[**ClosedPeriod**](../model/ClosedPeriod.md)
+
 
 ### HTTP request headers
 
@@ -315,11 +318,12 @@ public class TimelinesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createTimelineRequest** | [**CreateTimelineRequest**](CreateTimelineRequest.md)| The request containing the details of the Timeline | [optional] |
+| **createTimelineRequest** | [**CreateTimelineRequest**](../model/CreateTimelineRequest.md)| The request containing the details of the Timeline | [optional] |
 
 ### Return type
 
-[**Timeline**](Timeline.md)
+[**Timeline**](../model/Timeline.md)
+
 
 ### HTTP request headers
 
@@ -397,7 +401,8 @@ public class TimelinesApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -477,11 +482,12 @@ public class TimelinesApiExample {
 | **code** | **String**| The code of the Timeline. Together with the scope this uniquely              identifies the Timeline. | |
 | **closedPeriodId** | **String**| The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the ClosedPeriod definition. Defaults to return              the latest version of the definition if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto              the ClosedPeriod.              These must have the format {domain}/{scope}/{code}, for example &#39;ClosedPeriod/system/Name&#39;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto              the ClosedPeriod.              These must have the format {domain}/{scope}/{code}, for example &#39;ClosedPeriod/system/Name&#39;. | [optional] |
 
 ### Return type
 
-[**ClosedPeriod**](ClosedPeriod.md)
+[**ClosedPeriod**](../model/ClosedPeriod.md)
+
 
 ### HTTP request headers
 
@@ -561,11 +567,12 @@ public class TimelinesApiExample {
 | **code** | **String**| The code of the specified Timeline. Together with the scope this uniquely              identifies the Timeline. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Timeline definition. Defaults to return              the latest version of the definition if not specified. | [optional] |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the timeline properties.              Defaults to the current LUSID system datetime if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Timeline&#39; domain to decorate onto              the Timeline.              These must have the format {domain}/{scope}/{code}, for example &#39;Timeline/system/Name&#39;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Timeline&#39; domain to decorate onto              the Timeline.              These must have the format {domain}/{scope}/{code}, for example &#39;Timeline/system/Name&#39;. | [optional] |
 
 ### Return type
 
-[**Timeline**](Timeline.md)
+[**Timeline**](../model/Timeline.md)
+
 
 ### HTTP request headers
 
@@ -650,12 +657,13 @@ public class TimelinesApiExample {
 | **page** | **String**| The pagination token to use to continue listing ClosedPeriods; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the effectiveEnd, specify \&quot;effectiveEnd gt 2019-01-15T10:00:00\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto each ClosedPeriod.              These must take the format {domain}/{scope}/{code}, for example &#39;ClosedPeriod/Account/id&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto each ClosedPeriod.              These must take the format {domain}/{scope}/{code}, for example &#39;ClosedPeriod/Account/id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfClosedPeriod**](PagedResourceListOfClosedPeriod.md)
+[**PagedResourceListOfClosedPeriod**](../model/PagedResourceListOfClosedPeriod.md)
+
 
 ### HTTP request headers
 
@@ -738,12 +746,13 @@ public class TimelinesApiExample {
 | **page** | **String**| The pagination token to use to continue listing Timelines; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the displayName, specify \&quot;displayName eq &#39;AccountingTimeline&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Timeline&#39; domain to decorate onto each Timeline.              These must take the format {domain}/{scope}/{code}, for example &#39;Timeline/Account/id&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Timeline&#39; domain to decorate onto each Timeline.              These must take the format {domain}/{scope}/{code}, for example &#39;Timeline/Account/id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfTimeline**](PagedResourceListOfTimeline.md)
+[**PagedResourceListOfTimeline**](../model/PagedResourceListOfTimeline.md)
+
 
 ### HTTP request headers
 
@@ -821,11 +830,12 @@ public class TimelinesApiExample {
 | **scope** | **String**| The scope of the Timeline. | |
 | **code** | **String**| The code of the Timeline. | |
 | **closedPeriodId** | **String**| The ID of the Closed Period.               This ID together with the scope and code of the Timeline uniquely defines the Closed Period. | |
-| **postCloseActivitiesRequest** | [**PostCloseActivitiesRequest**](PostCloseActivitiesRequest.md)| This specifies a collection of post-close activities. | [optional] |
+| **postCloseActivitiesRequest** | [**PostCloseActivitiesRequest**](../model/PostCloseActivitiesRequest.md)| This specifies a collection of post-close activities. | [optional] |
 
 ### Return type
 
-[**ClosedPeriod**](ClosedPeriod.md)
+[**ClosedPeriod**](../model/ClosedPeriod.md)
+
 
 ### HTTP request headers
 
@@ -907,7 +917,8 @@ public class TimelinesApiExample {
 
 ### Return type
 
-[**ClosedPeriod**](ClosedPeriod.md)
+[**ClosedPeriod**](../model/ClosedPeriod.md)
+
 
 ### HTTP request headers
 
@@ -983,11 +994,12 @@ public class TimelinesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the specified Timeline. | |
 | **code** | **String**| The code of the specified Timeline. Together with the domain and scope this uniquely identifies the Timeline. | |
-| **updateTimelineRequest** | [**UpdateTimelineRequest**](UpdateTimelineRequest.md)| The request containing the updated details of the Timeline | [optional] |
+| **updateTimelineRequest** | [**UpdateTimelineRequest**](../model/UpdateTimelineRequest.md)| The request containing the updated details of the Timeline | [optional] |
 
 ### Return type
 
-[**Timeline**](Timeline.md)
+[**Timeline**](../model/Timeline.md)
+
 
 ### HTTP request headers
 

@@ -68,11 +68,12 @@ public class SystemConfigurationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionConfigurationDataRequest** | [**TransactionConfigurationDataRequest**](TransactionConfigurationDataRequest.md)| A transaction type definition. | [optional] |
+| **transactionConfigurationDataRequest** | [**TransactionConfigurationDataRequest**](../model/TransactionConfigurationDataRequest.md)| A transaction type definition. | [optional] |
 
 ### Return type
 
-[**TransactionSetConfigurationData**](TransactionSetConfigurationData.md)
+[**TransactionSetConfigurationData**](../model/TransactionSetConfigurationData.md)
+
 
 ### HTTP request headers
 
@@ -144,11 +145,12 @@ public class SystemConfigurationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **sideConfigurationDataRequest** | [**SideConfigurationDataRequest**](SideConfigurationDataRequest.md)| The definition of the side. | [optional] |
+| **sideConfigurationDataRequest** | [**SideConfigurationDataRequest**](../model/SideConfigurationDataRequest.md)| The definition of the side. | [optional] |
 
 ### Return type
 
-[**TransactionSetConfigurationData**](TransactionSetConfigurationData.md)
+[**TransactionSetConfigurationData**](../model/TransactionSetConfigurationData.md)
+
 
 ### HTTP request headers
 
@@ -224,7 +226,8 @@ public class SystemConfigurationApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -302,7 +305,8 @@ public class SystemConfigurationApiExample {
 
 ### Return type
 
-[**TransactionSetConfigurationData**](TransactionSetConfigurationData.md)
+[**TransactionSetConfigurationData**](../model/TransactionSetConfigurationData.md)
+
 
 ### HTTP request headers
 
@@ -378,7 +382,8 @@ public class SystemConfigurationApiExample {
 
 ### Return type
 
-[**TransactionSetConfigurationData**](TransactionSetConfigurationData.md)
+[**TransactionSetConfigurationData**](../model/TransactionSetConfigurationData.md)
+
 
 ### HTTP request headers
 
@@ -450,11 +455,12 @@ public class SystemConfigurationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionSetConfigurationDataRequest** | [**TransactionSetConfigurationDataRequest**](TransactionSetConfigurationDataRequest.md)| The complete set of transaction type definitions. | [optional] |
+| **transactionSetConfigurationDataRequest** | [**TransactionSetConfigurationDataRequest**](../model/TransactionSetConfigurationDataRequest.md)| The complete set of transaction type definitions. | [optional] |
 
 ### Return type
 
-[**TransactionSetConfigurationData**](TransactionSetConfigurationData.md)
+[**TransactionSetConfigurationData**](../model/TransactionSetConfigurationData.md)
+
 
 ### HTTP request headers
 
@@ -528,11 +534,12 @@ public class SystemConfigurationApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **source** | **String**| The source to set the transaction configurations for | |
-| **setTransactionConfigurationSourceRequest** | [**List&lt;SetTransactionConfigurationSourceRequest&gt;**](SetTransactionConfigurationSourceRequest.md)| The set of transaction configurations | |
+| **setTransactionConfigurationSourceRequest** | [**List&lt;SetTransactionConfigurationSourceRequest&gt;**](../model/SetTransactionConfigurationSourceRequest.md)| The set of transaction configurations | |
 
 ### Return type
 
-[**TransactionSetConfigurationData**](TransactionSetConfigurationData.md)
+[**TransactionSetConfigurationData**](../model/TransactionSetConfigurationData.md)
+
 
 ### HTTP request headers
 

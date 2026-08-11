@@ -64,11 +64,12 @@ public class RelationDefinitionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createRelationDefinitionRequest** | [**CreateRelationDefinitionRequest**](CreateRelationDefinitionRequest.md)| The definition of the new relation. | |
+| **createRelationDefinitionRequest** | [**CreateRelationDefinitionRequest**](../model/CreateRelationDefinitionRequest.md)| The definition of the new relation. | |
 
 ### Return type
 
-[**RelationDefinition**](RelationDefinition.md)
+[**RelationDefinition**](../model/RelationDefinition.md)
+
 
 ### HTTP request headers
 
@@ -146,7 +147,8 @@ public class RelationDefinitionsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -226,7 +228,8 @@ public class RelationDefinitionsApiExample {
 
 ### Return type
 
-[**RelationDefinition**](RelationDefinition.md)
+[**RelationDefinition**](../model/RelationDefinition.md)
+
 
 ### HTTP request headers
 

@@ -90,7 +90,7 @@ public class NavTypeDefinition {
 
   public static final String JSON_PROPERTY_SETTLEMENT_CONFIGURATION = "settlementConfiguration";
   @JsonProperty(JSON_PROPERTY_SETTLEMENT_CONFIGURATION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private NavSettlementConfiguration settlementConfiguration;
 
   public static final String JSON_PROPERTY_VALUATION_RECIPE_ID = "valuationRecipeId";
@@ -285,7 +285,7 @@ public class NavTypeDefinition {
    * Get settlementConfiguration
    * @return settlementConfiguration
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public NavSettlementConfiguration getSettlementConfiguration() {
     return settlementConfiguration;
   }

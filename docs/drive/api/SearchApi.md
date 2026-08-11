@@ -64,15 +64,16 @@ public class SearchApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **searchBody** | [**SearchBody**](SearchBody.md)| Search parameters | |
+| **searchBody** | [**SearchBody**](../model/SearchBody.md)| Search parameters | |
 | **page** | **String**|  | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)|  | [optional] |
 | **limit** | **Integer**|  | [optional] |
 | **filter** | **String**|  | [optional] [default to ] |
 
 ### Return type
 
-[**PagedResourceListOfStorageObject**](PagedResourceListOfStorageObject.md)
+[**PagedResourceListOfStorageObject**](../model/PagedResourceListOfStorageObject.md)
+
 
 ### HTTP request headers
 

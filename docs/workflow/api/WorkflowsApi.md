@@ -65,11 +65,12 @@ public class WorkflowsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createWorkflowRequest** | [**CreateWorkflowRequest**](CreateWorkflowRequest.md)| The data to create a Workflow | |
+| **createWorkflowRequest** | [**CreateWorkflowRequest**](../model/CreateWorkflowRequest.md)| The data to create a Workflow | |
 
 ### Return type
 
-[**WorkflowResponse**](WorkflowResponse.md)
+[**WorkflowResponse**](../model/WorkflowResponse.md)
+
 
 ### HTTP request headers
 
@@ -146,7 +147,8 @@ public class WorkflowsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -223,11 +225,12 @@ public class WorkflowsApiExample {
 | **scope** | **String**| The scope that identifies a Workflow | |
 | **code** | **String**| The code that identifies a Workflow | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. | [optional] |
 
 ### Return type
 
-[**WorkflowResponse**](WorkflowResponse.md)
+[**WorkflowResponse**](../model/WorkflowResponse.md)
+
 
 ### HTTP request headers
 
@@ -305,14 +308,15 @@ public class WorkflowsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to list the Workflows. Defaults to return the latest version of each Workflow if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] [default to 10] |
 | **page** | **String**| The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfWorkflowResponse**](PagedResourceListOfWorkflowResponse.md)
+[**PagedResourceListOfWorkflowResponse**](../model/PagedResourceListOfWorkflowResponse.md)
+
 
 ### HTTP request headers
 
@@ -387,11 +391,12 @@ public class WorkflowsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope that identifies a Workflow | |
 | **code** | **String**| The code that identifies a Workflow | |
-| **updateWorkflowRequest** | [**UpdateWorkflowRequest**](UpdateWorkflowRequest.md)| The data to update a Workflow | |
+| **updateWorkflowRequest** | [**UpdateWorkflowRequest**](../model/UpdateWorkflowRequest.md)| The data to update a Workflow | |
 
 ### Return type
 
-[**WorkflowResponse**](WorkflowResponse.md)
+[**WorkflowResponse**](../model/WorkflowResponse.md)
+
 
 ### HTTP request headers
 
@@ -467,12 +472,13 @@ public class WorkflowsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope that identifies a Workflow | |
 | **code** | **String**| The code that identifies a Workflow | |
-| **requestBody** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md)| The properties to upsert, keyed by property key. A null value deletes the property. | |
+| **requestBody** | [**Map&lt;String, PerpetualProperty&gt;**](../model/PerpetualProperty.md)| The properties to upsert, keyed by property key. A null value deletes the property. | |
 | **successMode** | **String**| Whether the batch should fail Atomically or Partially. Defaults to Partial. | [optional] [default to Partial] |
 
 ### Return type
 
-[**BatchUpsertWorkflowPropertiesResponse**](BatchUpsertWorkflowPropertiesResponse.md)
+[**BatchUpsertWorkflowPropertiesResponse**](../model/BatchUpsertWorkflowPropertiesResponse.md)
+
 
 ### HTTP request headers
 

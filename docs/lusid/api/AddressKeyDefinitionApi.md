@@ -64,11 +64,12 @@ public class AddressKeyDefinitionApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createAddressKeyDefinitionRequest** | [**CreateAddressKeyDefinitionRequest**](CreateAddressKeyDefinitionRequest.md)| The request used to create the address key definition. | |
+| **createAddressKeyDefinitionRequest** | [**CreateAddressKeyDefinitionRequest**](../model/CreateAddressKeyDefinitionRequest.md)| The request used to create the address key definition. | |
 
 ### Return type
 
-[**AddressKeyDefinition**](AddressKeyDefinition.md)
+[**AddressKeyDefinition**](../model/AddressKeyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -146,7 +147,8 @@ public class AddressKeyDefinitionApiExample {
 
 ### Return type
 
-[**AddressKeyDefinition**](AddressKeyDefinition.md)
+[**AddressKeyDefinition**](../model/AddressKeyDefinition.md)
+
 
 ### HTTP request headers
 
@@ -228,7 +230,8 @@ public class AddressKeyDefinitionApiExample {
 
 ### Return type
 
-[**PagedResourceListOfAddressKeyDefinition**](PagedResourceListOfAddressKeyDefinition.md)
+[**PagedResourceListOfAddressKeyDefinition**](../model/PagedResourceListOfAddressKeyDefinition.md)
+
 
 ### HTTP request headers
 

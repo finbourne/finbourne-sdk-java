@@ -71,7 +71,8 @@ public class SubscriptionsApiExample {
 
 ### Return type
 
-[**AnnulSingleStructuredDataResponse**](AnnulSingleStructuredDataResponse.md)
+[**AnnulSingleStructuredDataResponse**](../model/AnnulSingleStructuredDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -151,7 +152,8 @@ public class SubscriptionsApiExample {
 
 ### Return type
 
-[**GetSubscriptionResponse**](GetSubscriptionResponse.md)
+[**GetSubscriptionResponse**](../model/GetSubscriptionResponse.md)
+
 
 ### HTTP request headers
 
@@ -235,7 +237,8 @@ public class SubscriptionsApiExample {
 
 ### Return type
 
-[**PagedResourceListOfGetSubscriptionResponse**](PagedResourceListOfGetSubscriptionResponse.md)
+[**PagedResourceListOfGetSubscriptionResponse**](../model/PagedResourceListOfGetSubscriptionResponse.md)
+
 
 ### HTTP request headers
 
@@ -307,11 +310,12 @@ public class SubscriptionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **upsertSubscriptionRequest** | [**UpsertSubscriptionRequest**](UpsertSubscriptionRequest.md)| The Subscription to update or insert | |
+| **upsertSubscriptionRequest** | [**UpsertSubscriptionRequest**](../model/UpsertSubscriptionRequest.md)| The Subscription to update or insert | |
 
 ### Return type
 
-[**UpsertSingleStructuredDataResponse**](UpsertSingleStructuredDataResponse.md)
+[**UpsertSingleStructuredDataResponse**](../model/UpsertSingleStructuredDataResponse.md)
+
 
 ### HTTP request headers
 

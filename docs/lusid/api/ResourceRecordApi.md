@@ -75,7 +75,8 @@ public class ResourceRecordApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -157,7 +158,8 @@ public class ResourceRecordApiExample {
 
 ### Return type
 
-[**ResourceRecord**](ResourceRecord.md)
+[**ResourceRecord**](../model/ResourceRecord.md)
+
 
 ### HTTP request headers
 
@@ -237,7 +239,8 @@ public class ResourceRecordApiExample {
 
 ### Return type
 
-[**ResourceListOfString**](ResourceListOfString.md)
+[**ResourceListOfString**](../model/ResourceListOfString.md)
+
 
 ### HTTP request headers
 
@@ -317,7 +320,8 @@ public class ResourceRecordApiExample {
 
 ### Return type
 
-[**ResourceListOfScopeDefinition**](ResourceListOfScopeDefinition.md)
+[**ResourceListOfScopeDefinition**](../model/ResourceListOfScopeDefinition.md)
+
 
 ### HTTP request headers
 
@@ -399,13 +403,14 @@ public class ResourceRecordApiExample {
 | **code** | **String**| The code of the resource record. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to list the resource record. Defaults to return the latest version if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing resource records from a previous call. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfResourceRecord**](PagedResourceListOfResourceRecord.md)
+[**PagedResourceListOfResourceRecord**](../model/PagedResourceListOfResourceRecord.md)
+
 
 ### HTTP request headers
 
@@ -477,11 +482,12 @@ public class ResourceRecordApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **upsertResourceRecordRequest** | [**UpsertResourceRecordRequest**](UpsertResourceRecordRequest.md)| The resource record to upsert. | |
+| **upsertResourceRecordRequest** | [**UpsertResourceRecordRequest**](../model/UpsertResourceRecordRequest.md)| The resource record to upsert. | |
 
 ### Return type
 
-[**ResourceRecord**](ResourceRecord.md)
+[**ResourceRecord**](../model/ResourceRecord.md)
+
 
 ### HTTP request headers
 

@@ -77,6 +77,7 @@ public class RolesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -148,11 +149,12 @@ public class RolesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createRoleRequest** | [**CreateRoleRequest**](CreateRoleRequest.md)| Details of the role to be created | |
+| **createRoleRequest** | [**CreateRoleRequest**](../model/CreateRoleRequest.md)| Details of the role to be created | |
 
 ### Return type
 
-[**RoleResponse**](RoleResponse.md)
+[**RoleResponse**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -230,6 +232,7 @@ public class RolesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -304,7 +307,8 @@ public class RolesApiExample {
 
 ### Return type
 
-[**RoleResponse**](RoleResponse.md)
+[**RoleResponse**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -383,7 +387,8 @@ public class RolesApiExample {
 
 ### Return type
 
-[**RoleResponse**](RoleResponse.md)
+[**RoleResponse**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -456,7 +461,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;RoleResponse&gt;**](RoleResponse.md)
+[**List&lt;RoleResponse&gt;**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -531,7 +537,8 @@ public class RolesApiExample {
 
 ### Return type
 
-[**List&lt;UserResponse&gt;**](UserResponse.md)
+[**List&lt;UserResponse&gt;**](../model/UserResponse.md)
+
 
 ### HTTP request headers
 
@@ -610,6 +617,7 @@ public class RolesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -683,11 +691,12 @@ public class RolesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**| The unique identifier for the role to be updated | |
-| **updateRoleRequest** | [**UpdateRoleRequest**](UpdateRoleRequest.md)| The new definition of the role | [optional] |
+| **updateRoleRequest** | [**UpdateRoleRequest**](../model/UpdateRoleRequest.md)| The new definition of the role | [optional] |
 
 ### Return type
 
-[**RoleResponse**](RoleResponse.md)
+[**RoleResponse**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 

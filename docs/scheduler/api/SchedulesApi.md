@@ -67,11 +67,12 @@ public class SchedulesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createScheduleRequest** | [**CreateScheduleRequest**](CreateScheduleRequest.md)|  | |
+| **createScheduleRequest** | [**CreateScheduleRequest**](../model/CreateScheduleRequest.md)|  | |
 
 ### Return type
 
-[**ScheduleDefinition**](ScheduleDefinition.md)
+[**ScheduleDefinition**](../model/ScheduleDefinition.md)
+
 
 ### HTTP request headers
 
@@ -147,6 +148,7 @@ public class SchedulesApiExample {
 ### Return type
 
 null (empty response body)
+
 
 ### HTTP request headers
 
@@ -224,7 +226,8 @@ public class SchedulesApiExample {
 
 ### Return type
 
-[**ScheduleDefinition**](ScheduleDefinition.md)
+[**ScheduleDefinition**](../model/ScheduleDefinition.md)
+
 
 ### HTTP request headers
 
@@ -300,7 +303,8 @@ public class SchedulesApiExample {
 
 ### Return type
 
-[**ScheduleDefinition**](ScheduleDefinition.md)
+[**ScheduleDefinition**](../model/ScheduleDefinition.md)
+
 
 ### HTTP request headers
 
@@ -370,7 +374,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ResourceListOfString**](ResourceListOfString.md)
+[**ResourceListOfString**](../model/ResourceListOfString.md)
+
 
 ### HTTP request headers
 
@@ -444,14 +449,15 @@ public class SchedulesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **page** | **String**| The pagination token to use to continue listing instruments from a previous call to list instruments.             This value is returned from the previous call. If a pagination token is provided the sortBy and filter fields             must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
 | **start** | **Integer**| When paginating, skip this number of results. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 2000 if not specified. Maximum is 5000. | [optional] [default to 2000] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 
 ### Return type
 
-[**ResourceListOfScheduleDefinition**](ResourceListOfScheduleDefinition.md)
+[**ResourceListOfScheduleDefinition**](../model/ResourceListOfScheduleDefinition.md)
+
 
 ### HTTP request headers
 
@@ -527,7 +533,8 @@ public class SchedulesApiExample {
 
 ### Return type
 
-[**StartScheduleResponse**](StartScheduleResponse.md)
+[**StartScheduleResponse**](../model/StartScheduleResponse.md)
+
 
 ### HTTP request headers
 
@@ -601,11 +608,12 @@ public class SchedulesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| Scope of the schedule to be updated | |
 | **code** | **String**| Code of the schedule to be updated | |
-| **updateScheduleRequest** | [**UpdateScheduleRequest**](UpdateScheduleRequest.md)| The updated schedule | |
+| **updateScheduleRequest** | [**UpdateScheduleRequest**](../model/UpdateScheduleRequest.md)| The updated schedule | |
 
 ### Return type
 
-[**ScheduleDefinition**](ScheduleDefinition.md)
+[**ScheduleDefinition**](../model/ScheduleDefinition.md)
+
 
 ### HTTP request headers
 

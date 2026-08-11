@@ -67,7 +67,8 @@ public class ImagesApiExample {
 
 ### Return type
 
-[**Image**](Image.md)
+[**Image**](../model/Image.md)
+
 
 ### HTTP request headers
 
@@ -144,14 +145,15 @@ public class ImagesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **name** | **String**| The name of the Repository | |
 | **page** | **String**| The pagination token to use to continue listing images from a previous call to list images.             This value is returned from the previous call. If a pagination token is provided the sortBy and filter fields             must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
 | **start** | **Integer**| When paginating, skip this number of results. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 2000 if not specified. Maximum is 5000. | [optional] [default to 2000] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 
 ### Return type
 
-[**ResourceListOfImageSummary**](ResourceListOfImageSummary.md)
+[**ResourceListOfImageSummary**](../model/ResourceListOfImageSummary.md)
+
 
 ### HTTP request headers
 
@@ -226,14 +228,15 @@ public class ImagesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **page** | **String**| The pagination token to use to continue listing images from a previous call to list images.             This value is returned from the previous call. If a pagination token is provided the sortBy and filter fields             must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
 | **start** | **Integer**| When paginating, skip this number of results. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 2000 if not specified. Maximum is 5000. | [optional] [default to 2000] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 
 ### Return type
 
-[**ResourceListOfRepository**](ResourceListOfRepository.md)
+[**ResourceListOfRepository**](../model/ResourceListOfRepository.md)
+
 
 ### HTTP request headers
 
@@ -305,11 +308,12 @@ public class ImagesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **uploadImageRequest** | [**UploadImageRequest**](UploadImageRequest.md)| Request to upload image | |
+| **uploadImageRequest** | [**UploadImageRequest**](../model/UploadImageRequest.md)| Request to upload image | |
 
 ### Return type
 
-[**UploadImageInstructions**](UploadImageInstructions.md)
+[**UploadImageInstructions**](../model/UploadImageInstructions.md)
+
 
 ### HTTP request headers
 

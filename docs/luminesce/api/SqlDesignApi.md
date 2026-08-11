@@ -85,7 +85,8 @@ public class SqlDesignApiExample {
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -161,7 +162,8 @@ public class SqlDesignApiExample {
 
 ### Return type
 
-[**CaseStatementDesign**](CaseStatementDesign.md)
+[**CaseStatementDesign**](../model/CaseStatementDesign.md)
+
 
 ### HTTP request headers
 
@@ -233,11 +235,12 @@ public class SqlDesignApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **caseStatementDesign** | [**CaseStatementDesign**](CaseStatementDesign.md)| CaseStatementDesign object to try and create a SQL query from | |
+| **caseStatementDesign** | [**CaseStatementDesign**](../model/CaseStatementDesign.md)| CaseStatementDesign object to try and create a SQL query from | |
 
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -310,12 +313,13 @@ public class SqlDesignApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **fileReaderBuilderDef** | [**FileReaderBuilderDef**](FileReaderBuilderDef.md)| Structured file read design object to generate SQL from | |
+| **fileReaderBuilderDef** | [**FileReaderBuilderDef**](../model/FileReaderBuilderDef.md)| Structured file read design object to generate SQL from | |
 | **executeQuery** | **Boolean**| Should the generated query be executed to build preview data or determine errors.&gt; | [optional] [default to true] |
 
 ### Return type
 
-[**FileReaderBuilderResponse**](FileReaderBuilderResponse.md)
+[**FileReaderBuilderResponse**](../model/FileReaderBuilderResponse.md)
+
 
 ### HTTP request headers
 
@@ -391,7 +395,8 @@ public class SqlDesignApiExample {
 
 ### Return type
 
-[**InlinedPropertyDesign**](InlinedPropertyDesign.md)
+[**InlinedPropertyDesign**](../model/InlinedPropertyDesign.md)
+
 
 ### HTTP request headers
 
@@ -463,11 +468,12 @@ public class SqlDesignApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **inlinedPropertyDesign** | [**InlinedPropertyDesign**](InlinedPropertyDesign.md)| Inlined properties Designer specification to generate SQL from | |
+| **inlinedPropertyDesign** | [**InlinedPropertyDesign**](../model/InlinedPropertyDesign.md)| Inlined properties Designer specification to generate SQL from | |
 
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -539,11 +545,12 @@ public class SqlDesignApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **intellisenseRequest** | [**IntellisenseRequest**](IntellisenseRequest.md)| SQL and a row/colum position within it from which to determine intellisense options for the user to potentially choose from. | |
+| **intellisenseRequest** | [**IntellisenseRequest**](../model/IntellisenseRequest.md)| SQL and a row/colum position within it from which to determine intellisense options for the user to potentially choose from. | |
 
 ### Return type
 
-[**IntellisenseResponse**](IntellisenseResponse.md)
+[**IntellisenseResponse**](../model/IntellisenseResponse.md)
+
 
 ### HTTP request headers
 
@@ -615,11 +622,12 @@ public class SqlDesignApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **errorHighlightRequest** | [**ErrorHighlightRequest**](ErrorHighlightRequest.md)| SQL (by line) to syntax check and return error ranges from within, if any. | |
+| **errorHighlightRequest** | [**ErrorHighlightRequest**](../model/ErrorHighlightRequest.md)| SQL (by line) to syntax check and return error ranges from within, if any. | |
 
 ### Return type
 
-[**ErrorHighlightResponse**](ErrorHighlightResponse.md)
+[**ErrorHighlightResponse**](../model/ErrorHighlightResponse.md)
+
 
 ### HTTP request headers
 
@@ -691,11 +699,12 @@ public class SqlDesignApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **lusidGridData** | [**LusidGridData**](LusidGridData.md)|  | |
+| **lusidGridData** | [**LusidGridData**](../model/LusidGridData.md)|  | |
 
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -767,11 +776,12 @@ public class SqlDesignApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **queryDesign** | [**QueryDesign**](QueryDesign.md)| Structured Query design object to generate SQL from | |
+| **queryDesign** | [**QueryDesign**](../model/QueryDesign.md)| Structured Query design object to generate SQL from | |
 
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -875,6 +885,7 @@ public class SqlDesignApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: text/plain
@@ -949,7 +960,8 @@ public class SqlDesignApiExample {
 
 ### Return type
 
-[**List&lt;ScalarParameter&gt;**](ScalarParameter.md)
+[**List&lt;ScalarParameter&gt;**](../model/ScalarParameter.md)
+
 
 ### HTTP request headers
 
@@ -1027,7 +1039,8 @@ public class SqlDesignApiExample {
 
 ### Return type
 
-[**FileReaderBuilderDef**](FileReaderBuilderDef.md)
+[**FileReaderBuilderDef**](../model/FileReaderBuilderDef.md)
+
 
 ### HTTP request headers
 
@@ -1103,11 +1116,12 @@ public class SqlDesignApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **body** | **String**| SQL query to generate the design object from | |
 | **validateWithMetadata** | **Boolean**| Should the table be validated against the users&#39; view of Sys.Field to fill in DataTypes, etc.? | [optional] [default to true] |
-| **version** | [**QueryDesignerVersion**](.md)| Designer version number used to support multiple web user interface versions. Only some values will be allowed and this will change over time (as mentioned this whole method is largely internal to the Finbourne web user interfaces and evolves over time). | [optional] [enum: Original, JoinsAndIsNull] |
+| **version** | [**QueryDesignerVersion**](../model/.md)| Designer version number used to support multiple web user interface versions. Only some values will be allowed and this will change over time (as mentioned this whole method is largely internal to the Finbourne web user interfaces and evolves over time). | [optional] [enum: Original, JoinsAndIsNull] |
 
 ### Return type
 
-[**QueryDesign**](QueryDesign.md)
+[**QueryDesign**](../model/QueryDesign.md)
+
 
 ### HTTP request headers
 
@@ -1183,7 +1197,8 @@ public class SqlDesignApiExample {
 
 ### Return type
 
-[**ConvertToViewData**](ConvertToViewData.md)
+[**ConvertToViewData**](../model/ConvertToViewData.md)
+
 
 ### HTTP request headers
 
@@ -1261,7 +1276,8 @@ public class SqlDesignApiExample {
 
 ### Return type
 
-[**WriterDesign**](WriterDesign.md)
+[**WriterDesign**](../model/WriterDesign.md)
+
 
 ### HTTP request headers
 
@@ -1333,11 +1349,12 @@ public class SqlDesignApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **convertToViewData** | [**ConvertToViewData**](ConvertToViewData.md)| Structured Query design object to generate SQL from | |
+| **convertToViewData** | [**ConvertToViewData**](../model/ConvertToViewData.md)| Structured Query design object to generate SQL from | |
 
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -1409,11 +1426,12 @@ public class SqlDesignApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **writerDesign** | [**WriterDesign**](WriterDesign.md)| Structured Writer Design design object to generate Writer SQL from | |
+| **writerDesign** | [**WriterDesign**](../model/WriterDesign.md)| Structured Writer Design design object to generate Writer SQL from | |
 
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 

@@ -75,7 +75,8 @@ public class LegacyComplianceApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -157,7 +158,8 @@ public class LegacyComplianceApiExample {
 
 ### Return type
 
-[**ResourceListOfComplianceBreachedOrderInfo**](ResourceListOfComplianceBreachedOrderInfo.md)
+[**ResourceListOfComplianceBreachedOrderInfo**](../model/ResourceListOfComplianceBreachedOrderInfo.md)
+
 
 ### HTTP request headers
 
@@ -239,7 +241,8 @@ public class LegacyComplianceApiExample {
 
 ### Return type
 
-[**ComplianceRule**](ComplianceRule.md)
+[**ComplianceRule**](../model/ComplianceRule.md)
+
 
 ### HTTP request headers
 
@@ -321,7 +324,8 @@ public class LegacyComplianceApiExample {
 
 ### Return type
 
-[**ResourceListOfComplianceRuleResult**](ResourceListOfComplianceRuleResult.md)
+[**ResourceListOfComplianceRuleResult**](../model/ResourceListOfComplianceRuleResult.md)
+
 
 ### HTTP request headers
 
@@ -405,7 +409,8 @@ public class LegacyComplianceApiExample {
 
 ### Return type
 
-[**ResourceListOfComplianceRule**](ResourceListOfComplianceRule.md)
+[**ResourceListOfComplianceRule**](../model/ResourceListOfComplianceRule.md)
+
 
 ### HTTP request headers
 
@@ -487,7 +492,8 @@ public class LegacyComplianceApiExample {
 
 ### Return type
 
-[**ResourceListOfComplianceRunInfo**](ResourceListOfComplianceRunInfo.md)
+[**ResourceListOfComplianceRunInfo**](../model/ResourceListOfComplianceRunInfo.md)
+
 
 ### HTTP request headers
 
@@ -569,7 +575,8 @@ public class LegacyComplianceApiExample {
 
 ### Return type
 
-[**ComplianceRunInfo**](ComplianceRunInfo.md)
+[**ComplianceRunInfo**](../model/ComplianceRunInfo.md)
+
 
 ### HTTP request headers
 
@@ -642,12 +649,13 @@ public class LegacyComplianceApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, ComplianceRuleUpsertRequest&gt;**](ComplianceRuleUpsertRequest.md)| A dictionary of upsert request identifiers to rule upsert requests. The request               identifiers are valid for the request only and can be used to link the upserted compliance rule to the code               of a created compliance rule. | |
+| **requestBody** | [**Map&lt;String, ComplianceRuleUpsertRequest&gt;**](../model/ComplianceRuleUpsertRequest.md)| A dictionary of upsert request identifiers to rule upsert requests. The request               identifiers are valid for the request only and can be used to link the upserted compliance rule to the code               of a created compliance rule. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which the rule will take effect. Defaults to the current LUSID  system datetime if not specified. In the case of an update, the changes will take place from this effective  time until the next effective time that the rule as been upserted at. For example, consider a rule that  already exists, and has previously had an update applied so that the definition will change on the first day  of the coming month. An upsert effective from the current day will only change the definition until the  first day of the coming month. An additional upsert at the same time (first day of the month) is required  if the newly-updated definition is to supersede the future definition. | [optional] |
 
 ### Return type
 
-[**ComplianceRuleUpsertResponse**](ComplianceRuleUpsertResponse.md)
+[**ComplianceRuleUpsertResponse**](../model/ComplianceRuleUpsertResponse.md)
+
 
 ### HTTP request headers
 

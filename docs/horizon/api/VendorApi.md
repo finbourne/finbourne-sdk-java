@@ -74,7 +74,8 @@ public class VendorApiExample {
 
 ### Return type
 
-[**List&lt;LusidField&gt;**](LusidField.md)
+[**List&lt;LusidField&gt;**](../model/LusidField.md)
+
 
 ### HTTP request headers
 
@@ -154,7 +155,8 @@ public class VendorApiExample {
 
 ### Return type
 
-[**Map&lt;String, LusidPropertyDefinitionOverrides&gt;**](LusidPropertyDefinitionOverrides.md)
+[**Map&lt;String, LusidPropertyDefinitionOverrides&gt;**](../model/LusidPropertyDefinitionOverrides.md)
+
 
 ### HTTP request headers
 
@@ -234,7 +236,8 @@ public class VendorApiExample {
 
 ### Return type
 
-[**List&lt;LusidPropertyToVendorFieldMapping&gt;**](LusidPropertyToVendorFieldMapping.md)
+[**List&lt;LusidPropertyToVendorFieldMapping&gt;**](../model/LusidPropertyToVendorFieldMapping.md)
+
 
 ### HTTP request headers
 
@@ -304,11 +307,12 @@ public class VendorApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **queryRequest** | [**QueryRequest**](QueryRequest.md)|  | |
+| **queryRequest** | [**QueryRequest**](../model/QueryRequest.md)|  | |
 
 ### Return type
 
-[**PagedResourceListOfVendorProduct**](PagedResourceListOfVendorProduct.md)
+[**PagedResourceListOfVendorProduct**](../model/PagedResourceListOfVendorProduct.md)
+
 
 ### HTTP request headers
 
@@ -385,12 +389,13 @@ public class VendorApiExample {
 | **vendorName** | **String**|  | |
 | **productName** | **String**|  | |
 | **lusidEntityType** | **String**|  | |
-| **requestBody** | [**Map&lt;String, LusidPropertyDefinitionOverrides&gt;**](LusidPropertyDefinitionOverrides.md)|  | |
+| **requestBody** | [**Map&lt;String, LusidPropertyDefinitionOverrides&gt;**](../model/LusidPropertyDefinitionOverrides.md)|  | |
 | **lusidEntitySubType** | **String**|  | [optional] |
 
 ### Return type
 
-[**Map&lt;String, LusidPropertyDefinitionOverridesResponse&gt;**](LusidPropertyDefinitionOverridesResponse.md)
+[**Map&lt;String, LusidPropertyDefinitionOverridesResponse&gt;**](../model/LusidPropertyDefinitionOverridesResponse.md)
+
 
 ### HTTP request headers
 

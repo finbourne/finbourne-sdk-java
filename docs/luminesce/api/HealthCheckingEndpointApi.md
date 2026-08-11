@@ -68,6 +68,7 @@ public class HealthCheckingEndpointApiExample {
 
 **Object**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined

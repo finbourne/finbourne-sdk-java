@@ -63,7 +63,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CurrentUserResponse**](CurrentUserResponse.md)
+[**CurrentUserResponse**](../model/CurrentUserResponse.md)
+
 
 ### HTTP request headers
 
@@ -134,11 +135,12 @@ public class MeApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **setPassword** | [**SetPassword**](SetPassword.md)| The request containing the new password value | |
+| **setPassword** | [**SetPassword**](../model/SetPassword.md)| The request containing the new password value | |
 
 ### Return type
 
-[**SetPasswordResponse**](SetPasswordResponse.md)
+[**SetPasswordResponse**](../model/SetPasswordResponse.md)
+
 
 ### HTTP request headers
 

@@ -74,11 +74,12 @@ public class CorporateActionSourcesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of corporate action source | |
 | **code** | **String**| The code of the corporate action source | |
-| **upsertCorporateActionRequest** | [**List&lt;UpsertCorporateActionRequest&gt;**](UpsertCorporateActionRequest.md)| The corporate action definitions | [optional] |
+| **upsertCorporateActionRequest** | [**List&lt;UpsertCorporateActionRequest&gt;**](../model/UpsertCorporateActionRequest.md)| The corporate action definitions | [optional] |
 
 ### Return type
 
-[**UpsertCorporateActionsResponse**](UpsertCorporateActionsResponse.md)
+[**UpsertCorporateActionsResponse**](../model/UpsertCorporateActionsResponse.md)
+
 
 ### HTTP request headers
 
@@ -150,11 +151,12 @@ public class CorporateActionSourcesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createCorporateActionSourceRequest** | [**CreateCorporateActionSourceRequest**](CreateCorporateActionSourceRequest.md)| The corporate action source definition | |
+| **createCorporateActionSourceRequest** | [**CreateCorporateActionSourceRequest**](../model/CreateCorporateActionSourceRequest.md)| The corporate action source definition | |
 
 ### Return type
 
-[**CorporateActionSource**](CorporateActionSource.md)
+[**CorporateActionSource**](../model/CorporateActionSource.md)
+
 
 ### HTTP request headers
 
@@ -232,7 +234,8 @@ public class CorporateActionSourcesApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -308,11 +311,12 @@ public class CorporateActionSourcesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the corporate action source | |
 | **code** | **String**| The code of the corporate action source | |
-| **corporateActionIds** | [**List&lt;String&gt;**](String.md)| The IDs of the corporate actions to delete | |
+| **corporateActionIds** | [**List&lt;String&gt;**](../model/String.md)| The IDs of the corporate actions to delete | |
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -388,11 +392,12 @@ public class CorporateActionSourcesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the corporate action source | |
 | **code** | **String**| The code of the corporate action source | |
-| **instrumentEventIds** | [**List&lt;String&gt;**](String.md)| The IDs of the instrument events to delete | |
+| **instrumentEventIds** | [**List&lt;String&gt;**](../model/String.md)| The IDs of the instrument events to delete | |
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -476,13 +481,14 @@ public class CorporateActionSourcesApiExample {
 | **fromEffectiveAt** | **String**| Optional. The start effective date of the data range. | [optional] |
 | **toEffectiveAt** | **String**| Optional. The end effective date of the data range. | [optional] |
 | **asAt** | **OffsetDateTime**| Optional. The AsAt date of the data. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
 | **limit** | **Integer**| Optional. When paginating, limit the results to this number. | [optional] |
 | **filter** | **String**| Optional. Expression to filter the result set.              For example, to filter on the Announcement Date, use \&quot;announcementDate eq &#39;2020-03-06&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 
 ### Return type
 
-[**ResourceListOfCorporateAction**](ResourceListOfCorporateAction.md)
+[**ResourceListOfCorporateAction**](../model/ResourceListOfCorporateAction.md)
+
 
 ### HTTP request headers
 
@@ -574,7 +580,8 @@ public class CorporateActionSourcesApiExample {
 
 ### Return type
 
-[**PagedResourceListOfInstrumentEventHolder**](PagedResourceListOfInstrumentEventHolder.md)
+[**PagedResourceListOfInstrumentEventHolder**](../model/PagedResourceListOfInstrumentEventHolder.md)
+
 
 ### HTTP request headers
 
@@ -651,14 +658,15 @@ public class CorporateActionSourcesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| Optional. The AsAt date of the data | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used. | [optional] [default to 100] |
 | **filter** | **String**| Optional. Expression to filter the result set. For example, to  filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 | **page** | **String**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, the filter, asAt, and limit must not  be modified. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfCorporateActionSource**](PagedResourceListOfCorporateActionSource.md)
+[**PagedResourceListOfCorporateActionSource**](../model/PagedResourceListOfCorporateActionSource.md)
+
 
 ### HTTP request headers
 
@@ -734,11 +742,12 @@ public class CorporateActionSourcesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the corporate action source. | |
 | **code** | **String**| The code of the corporate action source. | |
-| **upsertInstrumentEventRequest** | [**List&lt;UpsertInstrumentEventRequest&gt;**](UpsertInstrumentEventRequest.md)| The instrument event definitions. | [optional] |
+| **upsertInstrumentEventRequest** | [**List&lt;UpsertInstrumentEventRequest&gt;**](../model/UpsertInstrumentEventRequest.md)| The instrument event definitions. | [optional] |
 
 ### Return type
 
-[**UpsertInstrumentEventsResponse**](UpsertInstrumentEventsResponse.md)
+[**UpsertInstrumentEventsResponse**](../model/UpsertInstrumentEventsResponse.md)
+
 
 ### HTTP request headers
 

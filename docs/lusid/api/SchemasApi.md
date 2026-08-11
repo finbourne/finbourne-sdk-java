@@ -69,7 +69,8 @@ public class SchemasApiExample {
 
 ### Return type
 
-[**Schema**](Schema.md)
+[**Schema**](../model/Schema.md)
+
 
 ### HTTP request headers
 
@@ -142,12 +143,13 @@ public class SchemasApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| One or more property keys for which the schema is requested | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| One or more property keys for which the schema is requested | [optional] |
 | **asAt** | **OffsetDateTime**| Optional. The AsAt date of the data | [optional] |
 
 ### Return type
 
-[**PropertySchema**](PropertySchema.md)
+[**PropertySchema**](../model/PropertySchema.md)
+
 
 ### HTTP request headers
 
@@ -220,12 +222,13 @@ public class SchemasApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. | [optional] |
 
 ### Return type
 
-[**ResourceListOfValueType**](ResourceListOfValueType.md)
+[**ResourceListOfValueType**](../model/ResourceListOfValueType.md)
+
 
 ### HTTP request headers
 
@@ -297,7 +300,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ResourceListOfString**](ResourceListOfString.md)
+[**ResourceListOfString**](../model/ResourceListOfString.md)
+
 
 ### HTTP request headers
 

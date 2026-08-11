@@ -70,7 +70,8 @@ public class TransactionFeesApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -154,11 +155,12 @@ public class TransactionFeesApiExample {
 | **instrumentIdentifier** | **String**| Optional. The Instrument Identifier to get properties for. | [optional] |
 | **portfolioScope** | **String**| Optional. The scope of the portfolio to fetch properties from. | [optional] |
 | **portfolioCode** | **String**| Optional. The code of the portfolio to fetch properties from. | [optional] |
-| **requestBody** | [**Map&lt;String, String&gt;**](String.md)| Any other property keys or fields, including the top-level fields of the              fee rule (e.g. \&quot;ExecutionBroker\&quot; and \&quot;SettlementCurrency\&quot; ) and those defined in AdditionalKeys, along with              their corresponding values that should be matched for fees. Eg. \&quot;Instrument/default/Name&#x3D;exampleValue\&quot; or              \&quot;AdditionalKey2&#x3D;Value2\&quot;. | [optional] |
+| **requestBody** | [**Map&lt;String, String&gt;**](../model/String.md)| Any other property keys or fields, including the top-level fields of the              fee rule (e.g. \&quot;ExecutionBroker\&quot; and \&quot;SettlementCurrency\&quot; ) and those defined in AdditionalKeys, along with              their corresponding values that should be matched for fees. Eg. \&quot;Instrument/default/Name&#x3D;exampleValue\&quot; or              \&quot;AdditionalKey2&#x3D;Value2\&quot;. | [optional] |
 
 ### Return type
 
-[**ResourceListOfFeeRule**](ResourceListOfFeeRule.md)
+[**ResourceListOfFeeRule**](../model/ResourceListOfFeeRule.md)
+
 
 ### HTTP request headers
 
@@ -238,7 +240,8 @@ public class TransactionFeesApiExample {
 
 ### Return type
 
-[**FeeRule**](FeeRule.md)
+[**FeeRule**](../model/FeeRule.md)
+
 
 ### HTTP request headers
 
@@ -322,7 +325,8 @@ public class TransactionFeesApiExample {
 
 ### Return type
 
-[**ResourceListOfFeeRule**](ResourceListOfFeeRule.md)
+[**ResourceListOfFeeRule**](../model/ResourceListOfFeeRule.md)
+
 
 ### HTTP request headers
 
@@ -395,12 +399,13 @@ public class TransactionFeesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, FeeRuleUpsertRequest&gt;**](FeeRuleUpsertRequest.md)| A dictionary of upsert request identifiers to rule upsert requests. The request              identifiers are valid for the request only and can be used to link the upserted fee rule to the code of a              created fee rule. | |
+| **requestBody** | [**Map&lt;String, FeeRuleUpsertRequest&gt;**](../model/FeeRuleUpsertRequest.md)| A dictionary of upsert request identifiers to rule upsert requests. The request              identifiers are valid for the request only and can be used to link the upserted fee rule to the code of a              created fee rule. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which the rule will take effect. Defaults to the current LUSID  system datetime if not specified. In the case of an update, the changes will take place from this effective  time until the next effective time that the rule as been upserted at. For example, consider a rule that  already exists, and has previously had an update applied so that the definition will change on the first day  of the coming month. An upsert effective from the current day will only change the definition until the  first day of the coming month. An additional upsert at the same time (first day of the month) is required  if the newly-updated definition is to supersede the future definition. | [optional] |
 
 ### Return type
 
-[**FeeRuleUpsertResponse**](FeeRuleUpsertResponse.md)
+[**FeeRuleUpsertResponse**](../model/FeeRuleUpsertResponse.md)
+
 
 ### HTTP request headers
 

@@ -70,7 +70,8 @@ public class HistoricallyExecutedQueriesApiExample {
 
 ### Return type
 
-[**BackgroundQueryCancelResponse**](BackgroundQueryCancelResponse.md)
+[**BackgroundQueryCancelResponse**](../model/BackgroundQueryCancelResponse.md)
+
 
 ### HTTP request headers
 
@@ -151,6 +152,7 @@ public class HistoricallyExecutedQueriesApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -242,6 +244,7 @@ public class HistoricallyExecutedQueriesApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -322,7 +325,8 @@ public class HistoricallyExecutedQueriesApiExample {
 
 ### Return type
 
-[**BackgroundQueryResponse**](BackgroundQueryResponse.md)
+[**BackgroundQueryResponse**](../model/BackgroundQueryResponse.md)
+
 
 ### HTTP request headers
 
@@ -396,7 +400,8 @@ public class HistoricallyExecutedQueriesApiExample {
 
 ### Return type
 
-[**BackgroundQueryProgressResponse**](BackgroundQueryProgressResponse.md)
+[**BackgroundQueryProgressResponse**](../model/BackgroundQueryProgressResponse.md)
+
 
 ### HTTP request headers
 

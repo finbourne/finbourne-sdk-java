@@ -72,11 +72,12 @@ public class UserRolesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **userid** | **String**| Id of the User Role to get | |
-| **addPolicyCollectionToRoleRequest** | [**AddPolicyCollectionToRoleRequest**](AddPolicyCollectionToRoleRequest.md)| Dto of the policy collection to be added. | |
+| **addPolicyCollectionToRoleRequest** | [**AddPolicyCollectionToRoleRequest**](../model/AddPolicyCollectionToRoleRequest.md)| Dto of the policy collection to be added. | |
 
 ### Return type
 
-[**UserRoleResponse**](UserRoleResponse.md)
+[**UserRoleResponse**](../model/UserRoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -150,11 +151,12 @@ public class UserRolesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **userid** | **String**| Id of the User Role to get | |
-| **addPolicyToRoleRequest** | [**AddPolicyToRoleRequest**](AddPolicyToRoleRequest.md)| Dto of the policy to be added. | |
+| **addPolicyToRoleRequest** | [**AddPolicyToRoleRequest**](../model/AddPolicyToRoleRequest.md)| Dto of the policy to be added. | |
 
 ### Return type
 
-[**UserRoleResponse**](UserRoleResponse.md)
+[**UserRoleResponse**](../model/UserRoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -226,11 +228,12 @@ public class UserRolesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **userRoleCreationRequest** | [**UserRoleCreationRequest**](UserRoleCreationRequest.md)| Definition of the user-role to create. | |
+| **userRoleCreationRequest** | [**UserRoleCreationRequest**](../model/UserRoleCreationRequest.md)| Definition of the user-role to create. | |
 
 ### Return type
 
-[**UserRoleResponse**](UserRoleResponse.md)
+[**UserRoleResponse**](../model/UserRoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -307,6 +310,7 @@ public class UserRolesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -381,7 +385,8 @@ public class UserRolesApiExample {
 
 ### Return type
 
-[**UserRoleResponse**](UserRoleResponse.md)
+[**UserRoleResponse**](../model/UserRoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -463,7 +468,8 @@ public class UserRolesApiExample {
 
 ### Return type
 
-[**ResourceListOfUserRoleResponse**](ResourceListOfUserRoleResponse.md)
+[**ResourceListOfUserRoleResponse**](../model/ResourceListOfUserRoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -544,6 +550,7 @@ public class UserRolesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -623,6 +630,7 @@ public class UserRolesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -695,11 +703,12 @@ public class UserRolesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **userid** | **String**| Id of the user-role to be updated. | |
-| **userRoleUpdateRequest** | [**UserRoleUpdateRequest**](UserRoleUpdateRequest.md)| Definition of the update to apply to the user-role. | |
+| **userRoleUpdateRequest** | [**UserRoleUpdateRequest**](../model/UserRoleUpdateRequest.md)| Definition of the update to apply to the user-role. | |
 
 ### Return type
 
-[**UserRoleResponse**](UserRoleResponse.md)
+[**UserRoleResponse**](../model/UserRoleResponse.md)
+
 
 ### HTTP request headers
 

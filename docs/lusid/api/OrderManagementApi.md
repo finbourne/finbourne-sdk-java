@@ -76,13 +76,14 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **bookTransactionsRequest** | [**BookTransactionsRequest**](BookTransactionsRequest.md)| The allocations to create transactions for | |
+| **bookTransactionsRequest** | [**BookTransactionsRequest**](../model/BookTransactionsRequest.md)| The allocations to create transactions for | |
 | **applyFeesAndCommission** | **Boolean**| Whether to apply fees and commissions to transactions (default: true) | [optional] [default to true] |
 | **markOrdersAndAllocationsAsBooked** | **Boolean**| Whether to mark allocations and fully-booked orders with state Booked | [optional] [default to false] |
 
 ### Return type
 
-[**BookTransactionsResponse**](BookTransactionsResponse.md)
+[**BookTransactionsResponse**](../model/BookTransactionsResponse.md)
+
 
 ### HTTP request headers
 
@@ -154,11 +155,12 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, ResourceId&gt;**](ResourceId.md)| The request containing the ids of the orders to be cancelled. | |
+| **requestBody** | [**Map&lt;String, ResourceId&gt;**](../model/ResourceId.md)| The request containing the ids of the orders to be cancelled. | |
 
 ### Return type
 
-[**CancelOrdersResponse**](CancelOrdersResponse.md)
+[**CancelOrdersResponse**](../model/CancelOrdersResponse.md)
+
 
 ### HTTP request headers
 
@@ -230,11 +232,12 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, CancelOrdersAndMoveRemainingRequest&gt;**](CancelOrdersAndMoveRemainingRequest.md)| The request containing the orders to be cancelled, and the destinations of remaining quantities. | |
+| **requestBody** | [**Map&lt;String, CancelOrdersAndMoveRemainingRequest&gt;**](../model/CancelOrdersAndMoveRemainingRequest.md)| The request containing the orders to be cancelled, and the destinations of remaining quantities. | |
 
 ### Return type
 
-[**CancelOrdersAndMoveRemainingResponse**](CancelOrdersAndMoveRemainingResponse.md)
+[**CancelOrdersAndMoveRemainingResponse**](../model/CancelOrdersAndMoveRemainingResponse.md)
+
 
 ### HTTP request headers
 
@@ -306,11 +309,12 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, ResourceId&gt;**](ResourceId.md)| The request containing the ids of the placements to be cancelled. | |
+| **requestBody** | [**Map&lt;String, ResourceId&gt;**](../model/ResourceId.md)| The request containing the ids of the placements to be cancelled. | |
 
 ### Return type
 
-[**CancelPlacementsResponse**](CancelPlacementsResponse.md)
+[**CancelPlacementsResponse**](../model/CancelPlacementsResponse.md)
+
 
 ### HTTP request headers
 
@@ -382,11 +386,12 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **blockAndOrdersCreateRequest** | [**BlockAndOrdersCreateRequest**](BlockAndOrdersCreateRequest.md)| The collection of block and orders requests. | |
+| **blockAndOrdersCreateRequest** | [**BlockAndOrdersCreateRequest**](../model/BlockAndOrdersCreateRequest.md)| The collection of block and orders requests. | |
 
 ### Return type
 
-[**ResourceListOfBlockAndOrders**](ResourceListOfBlockAndOrders.md)
+[**ResourceListOfBlockAndOrders**](../model/ResourceListOfBlockAndOrders.md)
+
 
 ### HTTP request headers
 
@@ -466,7 +471,8 @@ public class OrderManagementApiExample {
 
 ### Return type
 
-[**ResourceListOfChangeIntervalWithOrderManagementDetail**](ResourceListOfChangeIntervalWithOrderManagementDetail.md)
+[**ResourceListOfChangeIntervalWithOrderManagementDetail**](../model/ResourceListOfChangeIntervalWithOrderManagementDetail.md)
+
 
 ### HTTP request headers
 
@@ -539,11 +545,12 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **moveOrdersToDifferentBlocksRequest** | [**MoveOrdersToDifferentBlocksRequest**](MoveOrdersToDifferentBlocksRequest.md)| The collection of order and destination block ids. | |
+| **moveOrdersToDifferentBlocksRequest** | [**MoveOrdersToDifferentBlocksRequest**](../model/MoveOrdersToDifferentBlocksRequest.md)| The collection of order and destination block ids. | |
 
 ### Return type
 
-[**ResourceListOfMovedOrderToDifferentBlockResponse**](ResourceListOfMovedOrderToDifferentBlockResponse.md)
+[**ResourceListOfMovedOrderToDifferentBlockResponse**](../model/ResourceListOfMovedOrderToDifferentBlockResponse.md)
+
 
 ### HTTP request headers
 
@@ -615,11 +622,12 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **placeBlocksRequest** | [**PlaceBlocksRequest**](PlaceBlocksRequest.md)| The request containing the blocks to the placed. | [optional] |
+| **placeBlocksRequest** | [**PlaceBlocksRequest**](../model/PlaceBlocksRequest.md)| The request containing the blocks to the placed. | [optional] |
 
 ### Return type
 
-[**ResourceListOfPlacement**](ResourceListOfPlacement.md)
+[**ResourceListOfPlacement**](../model/ResourceListOfPlacement.md)
+
 
 ### HTTP request headers
 
@@ -692,12 +700,13 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **resourceId** | [**List&lt;ResourceId&gt;**](ResourceId.md)| The List of Placement IDs for which you wish to allocate Executions. | |
+| **resourceId** | [**List&lt;ResourceId&gt;**](../model/ResourceId.md)| The List of Placement IDs for which you wish to allocate Executions. | |
 | **allocationAlgorithm** | **String**| A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. | [optional] |
 
 ### Return type
 
-[**AllocationServiceRunResponse**](AllocationServiceRunResponse.md)
+[**AllocationServiceRunResponse**](../model/AllocationServiceRunResponse.md)
+
 
 ### HTTP request headers
 
@@ -770,12 +779,13 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **weightedAllocationServiceRunRequest** | [**WeightedAllocationServiceRunRequest**](WeightedAllocationServiceRunRequest.md)| The placement IDs to allocate against, and the portfolio weights to use for the allocation split. | |
+| **weightedAllocationServiceRunRequest** | [**WeightedAllocationServiceRunRequest**](../model/WeightedAllocationServiceRunRequest.md)| The placement IDs to allocate against, and the portfolio weights to use for the allocation split. | |
 | **allocationAlgorithm** | **String**| A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. | [optional] |
 
 ### Return type
 
-[**AllocationServiceRunResponse**](AllocationServiceRunResponse.md)
+[**AllocationServiceRunResponse**](../model/AllocationServiceRunResponse.md)
+
 
 ### HTTP request headers
 
@@ -847,11 +857,12 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **sweepBlocksRequest** | [**SweepBlocksRequest**](SweepBlocksRequest.md)|  | |
+| **sweepBlocksRequest** | [**SweepBlocksRequest**](../model/SweepBlocksRequest.md)|  | |
 
 ### Return type
 
-[**SweepBlocksResponse**](SweepBlocksResponse.md)
+[**SweepBlocksResponse**](../model/SweepBlocksResponse.md)
+
 
 ### HTTP request headers
 
@@ -923,11 +934,12 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, OrderUpdateRequest&gt;**](OrderUpdateRequest.md)| The request containing the orders to be updated. | |
+| **requestBody** | [**Map&lt;String, OrderUpdateRequest&gt;**](../model/OrderUpdateRequest.md)| The request containing the orders to be updated. | |
 
 ### Return type
 
-[**UpdateOrdersResponse**](UpdateOrdersResponse.md)
+[**UpdateOrdersResponse**](../model/UpdateOrdersResponse.md)
+
 
 ### HTTP request headers
 
@@ -999,11 +1011,12 @@ public class OrderManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, PlacementUpdateRequest&gt;**](PlacementUpdateRequest.md)| The request containing the placements to be updated. | |
+| **requestBody** | [**Map&lt;String, PlacementUpdateRequest&gt;**](../model/PlacementUpdateRequest.md)| The request containing the placements to be updated. | |
 
 ### Return type
 
-[**UpdatePlacementsResponse**](UpdatePlacementsResponse.md)
+[**UpdatePlacementsResponse**](../model/UpdatePlacementsResponse.md)
+
 
 ### HTTP request headers
 

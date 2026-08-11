@@ -80,12 +80,13 @@ public class PoliciesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **code** | **String**| The code of the PolicyCollection | |
-| **addToPolicyCollectionRequest** | [**AddToPolicyCollectionRequest**](AddToPolicyCollectionRequest.md)| Ids of the PolicyCollections and/or Policies to add to the PolicyCollection | |
+| **addToPolicyCollectionRequest** | [**AddToPolicyCollectionRequest**](../model/AddToPolicyCollectionRequest.md)| Ids of the PolicyCollections and/or Policies to add to the PolicyCollection | |
 | **scope** | **String**| Optional. Will use the default scope if not provided. The scope of the PolicyCollection | [optional] |
 
 ### Return type
 
-[**PolicyCollectionResponse**](PolicyCollectionResponse.md)
+[**PolicyCollectionResponse**](../model/PolicyCollectionResponse.md)
+
 
 ### HTTP request headers
 
@@ -157,11 +158,12 @@ public class PoliciesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **policyCreationRequest** | [**PolicyCreationRequest**](PolicyCreationRequest.md)| The definition of the Policy | |
+| **policyCreationRequest** | [**PolicyCreationRequest**](../model/PolicyCreationRequest.md)| The definition of the Policy | |
 
 ### Return type
 
-[**PolicyResponse**](PolicyResponse.md)
+[**PolicyResponse**](../model/PolicyResponse.md)
+
 
 ### HTTP request headers
 
@@ -233,11 +235,12 @@ public class PoliciesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **policyCollectionCreationRequest** | [**PolicyCollectionCreationRequest**](PolicyCollectionCreationRequest.md)| The definition of the PolicyCollection | |
+| **policyCollectionCreationRequest** | [**PolicyCollectionCreationRequest**](../model/PolicyCollectionCreationRequest.md)| The definition of the PolicyCollection | |
 
 ### Return type
 
-[**PolicyCollectionResponse**](PolicyCollectionResponse.md)
+[**PolicyCollectionResponse**](../model/PolicyCollectionResponse.md)
+
 
 ### HTTP request headers
 
@@ -316,6 +319,7 @@ public class PoliciesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -393,6 +397,7 @@ public class PoliciesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -464,12 +469,13 @@ public class PoliciesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, EvaluationRequest&gt;**](EvaluationRequest.md)| A dictionary of evaluations, keyed using any arbitrary correlation id (it will be returned with the response for that evaluation). | |
-| **applications** | [**List&lt;String&gt;**](String.md)| Optional. The application type of the roles and policies to use when evaluating. | [optional] |
+| **requestBody** | [**Map&lt;String, EvaluationRequest&gt;**](../model/EvaluationRequest.md)| A dictionary of evaluations, keyed using any arbitrary correlation id (it will be returned with the response for that evaluation). | |
+| **applications** | [**List&lt;String&gt;**](../model/String.md)| Optional. The application type of the roles and policies to use when evaluating. | [optional] |
 
 ### Return type
 
-[**Map&lt;String, EvaluationResponse&gt;**](EvaluationResponse.md)
+[**Map&lt;String, EvaluationResponse&gt;**](../model/EvaluationResponse.md)
+
 
 ### HTTP request headers
 
@@ -541,11 +547,12 @@ public class PoliciesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **applications** | [**List&lt;String&gt;**](String.md)| Optional. Filter on the applications that the policies apply to | [optional] |
+| **applications** | [**List&lt;String&gt;**](../model/String.md)| Optional. Filter on the applications that the policies apply to | [optional] |
 
 ### Return type
 
-[**List&lt;AttachedPolicyDefinitionResponse&gt;**](AttachedPolicyDefinitionResponse.md)
+[**List&lt;AttachedPolicyDefinitionResponse&gt;**](../model/AttachedPolicyDefinitionResponse.md)
+
 
 ### HTTP request headers
 
@@ -625,7 +632,8 @@ public class PoliciesApiExample {
 
 ### Return type
 
-[**PolicyResponse**](PolicyResponse.md)
+[**PolicyResponse**](../model/PolicyResponse.md)
+
 
 ### HTTP request headers
 
@@ -703,7 +711,8 @@ public class PoliciesApiExample {
 
 ### Return type
 
-[**PolicyCollectionResponse**](PolicyCollectionResponse.md)
+[**PolicyCollectionResponse**](../model/PolicyCollectionResponse.md)
+
 
 ### HTTP request headers
 
@@ -779,7 +788,8 @@ public class PoliciesApiExample {
 
 ### Return type
 
-[**List&lt;PolicyResponse&gt;**](PolicyResponse.md)
+[**List&lt;PolicyResponse&gt;**](../model/PolicyResponse.md)
+
 
 ### HTTP request headers
 
@@ -855,7 +865,8 @@ public class PoliciesApiExample {
 
 ### Return type
 
-[**List&lt;PolicyCollectionResponse&gt;**](PolicyCollectionResponse.md)
+[**List&lt;PolicyCollectionResponse&gt;**](../model/PolicyCollectionResponse.md)
+
 
 ### HTTP request headers
 
@@ -937,7 +948,8 @@ public class PoliciesApiExample {
 
 ### Return type
 
-[**ResourceListOfPolicyResponse**](ResourceListOfPolicyResponse.md)
+[**ResourceListOfPolicyResponse**](../model/ResourceListOfPolicyResponse.md)
+
 
 ### HTTP request headers
 
@@ -1019,7 +1031,8 @@ public class PoliciesApiExample {
 
 ### Return type
 
-[**ResourceListOfPolicyCollectionResponse**](ResourceListOfPolicyCollectionResponse.md)
+[**ResourceListOfPolicyCollectionResponse**](../model/ResourceListOfPolicyCollectionResponse.md)
+
 
 ### HTTP request headers
 
@@ -1094,12 +1107,13 @@ public class PoliciesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **code** | **String**| The code of the PolicyCollection | |
-| **removeFromPolicyCollectionRequest** | [**RemoveFromPolicyCollectionRequest**](RemoveFromPolicyCollectionRequest.md)| Ids of the PolicyCollections and/or Policies to remove from the PolicyCollection | |
+| **removeFromPolicyCollectionRequest** | [**RemoveFromPolicyCollectionRequest**](../model/RemoveFromPolicyCollectionRequest.md)| Ids of the PolicyCollections and/or Policies to remove from the PolicyCollection | |
 | **scope** | **String**| Optional. Will use the default scope if not provided. The scope of the PolicyCollection | [optional] |
 
 ### Return type
 
-[**PolicyCollectionResponse**](PolicyCollectionResponse.md)
+[**PolicyCollectionResponse**](../model/PolicyCollectionResponse.md)
+
 
 ### HTTP request headers
 
@@ -1174,12 +1188,13 @@ public class PoliciesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **code** | **String**| The code of the Policy | |
-| **policyUpdateRequest** | [**PolicyUpdateRequest**](PolicyUpdateRequest.md)| The updated definition of the Policy | |
+| **policyUpdateRequest** | [**PolicyUpdateRequest**](../model/PolicyUpdateRequest.md)| The updated definition of the Policy | |
 | **scope** | **String**| Optional. Will use the default scope if not provided. The scope of the Policy | [optional] |
 
 ### Return type
 
-[**PolicyResponse**](PolicyResponse.md)
+[**PolicyResponse**](../model/PolicyResponse.md)
+
 
 ### HTTP request headers
 
@@ -1254,12 +1269,13 @@ public class PoliciesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **code** | **String**| The code of the PolicyCollection | |
-| **policyCollectionUpdateRequest** | [**PolicyCollectionUpdateRequest**](PolicyCollectionUpdateRequest.md)| The updated definition of the PolicyCollection | |
+| **policyCollectionUpdateRequest** | [**PolicyCollectionUpdateRequest**](../model/PolicyCollectionUpdateRequest.md)| The updated definition of the PolicyCollection | |
 | **scope** | **String**| Optional. Will use the default scope if not provided. The scope of the PolicyCollection | [optional] |
 
 ### Return type
 
-[**PolicyCollectionResponse**](PolicyCollectionResponse.md)
+[**PolicyCollectionResponse**](../model/PolicyCollectionResponse.md)
+
 
 ### HTTP request headers
 

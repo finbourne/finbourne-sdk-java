@@ -68,11 +68,12 @@ public class StagingRuleSetApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **entityType** | **String**| The entity type for which to create the staging rule set. | |
-| **createStagingRuleSetRequest** | [**CreateStagingRuleSetRequest**](CreateStagingRuleSetRequest.md)| Request to create a staging rule set. | |
+| **createStagingRuleSetRequest** | [**CreateStagingRuleSetRequest**](../model/CreateStagingRuleSetRequest.md)| Request to create a staging rule set. | |
 
 ### Return type
 
-[**StagingRuleSet**](StagingRuleSet.md)
+[**StagingRuleSet**](../model/StagingRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -148,7 +149,8 @@ public class StagingRuleSetApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -226,7 +228,8 @@ public class StagingRuleSetApiExample {
 
 ### Return type
 
-[**StagingRuleSet**](StagingRuleSet.md)
+[**StagingRuleSet**](../model/StagingRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -304,13 +307,14 @@ public class StagingRuleSetApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfStagingRuleSet**](PagedResourceListOfStagingRuleSet.md)
+[**PagedResourceListOfStagingRuleSet**](../model/PagedResourceListOfStagingRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -384,11 +388,12 @@ public class StagingRuleSetApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **entityType** | **String**| The entity type for which to update the staging rule set. | |
-| **updateStagingRuleSetRequest** | [**UpdateStagingRuleSetRequest**](UpdateStagingRuleSetRequest.md)| Request to update a staging rule set. | |
+| **updateStagingRuleSetRequest** | [**UpdateStagingRuleSetRequest**](../model/UpdateStagingRuleSetRequest.md)| Request to update a staging rule set. | |
 
 ### Return type
 
-[**StagingRuleSet**](StagingRuleSet.md)
+[**StagingRuleSet**](../model/StagingRuleSet.md)
+
 
 ### HTTP request headers
 

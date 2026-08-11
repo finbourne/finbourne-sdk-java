@@ -69,13 +69,14 @@ public class PaymentInstructionsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the payment instruction. | |
 | **code** | **String**| The code of the payment instruction. | |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto the              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto the              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. | [optional] |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the payment instruction.              Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the payment instruction. Defaults to return the latest              version of the payment instruction if not specified. | [optional] |
 
 ### Return type
 
-[**PaymentInstruction**](PaymentInstruction.md)
+[**PaymentInstruction**](../model/PaymentInstruction.md)
+
 
 ### HTTP request headers
 
@@ -147,11 +148,12 @@ public class PaymentInstructionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, PaymentInstructionRequest&gt;**](PaymentInstructionRequest.md)| A collection of requests to create or update Payment Instructions. | |
+| **requestBody** | [**Map&lt;String, PaymentInstructionRequest&gt;**](../model/PaymentInstructionRequest.md)| A collection of requests to create or update Payment Instructions. | |
 
 ### Return type
 
-[**PaymentInstructionsResponse**](PaymentInstructionsResponse.md)
+[**PaymentInstructionsResponse**](../model/PaymentInstructionsResponse.md)
+
 
 ### HTTP request headers
 

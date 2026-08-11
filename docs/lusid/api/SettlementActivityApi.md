@@ -62,11 +62,12 @@ public class SettlementActivityApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **settlementActivityQuery** | [**SettlementActivityQuery**](SettlementActivityQuery.md)| The query parameters controlling which settlement activity is returned. | |
+| **settlementActivityQuery** | [**SettlementActivityQuery**](../model/SettlementActivityQuery.md)| The query parameters controlling which settlement activity is returned. | |
 
 ### Return type
 
-[**ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery**](ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery.md)
+[**ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery**](../model/ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery.md)
+
 
 ### HTTP request headers
 

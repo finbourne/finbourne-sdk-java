@@ -65,7 +65,8 @@ public class AccessEvaluationsApiExample {
 
 ### Return type
 
-[**AccessEvaluationLog**](AccessEvaluationLog.md)
+[**AccessEvaluationLog**](../model/AccessEvaluationLog.md)
+
 
 ### HTTP request headers
 
@@ -151,7 +152,8 @@ public class AccessEvaluationsApiExample {
 
 ### Return type
 
-[**ResourceListWithHistogramOfAccessEvaluationLog**](ResourceListWithHistogramOfAccessEvaluationLog.md)
+[**ResourceListWithHistogramOfAccessEvaluationLog**](../model/ResourceListWithHistogramOfAccessEvaluationLog.md)
+
 
 ### HTTP request headers
 

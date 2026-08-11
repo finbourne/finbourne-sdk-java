@@ -66,11 +66,12 @@ public class TaskDefinitionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createTaskDefinitionRequest** | [**CreateTaskDefinitionRequest**](CreateTaskDefinitionRequest.md)| The data to create a Task Definition | |
+| **createTaskDefinitionRequest** | [**CreateTaskDefinitionRequest**](../model/CreateTaskDefinitionRequest.md)| The data to create a Task Definition | |
 
 ### Return type
 
-[**TaskDefinition**](TaskDefinition.md)
+[**TaskDefinition**](../model/TaskDefinition.md)
+
 
 ### HTTP request headers
 
@@ -146,7 +147,8 @@ public class TaskDefinitionsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -223,11 +225,12 @@ public class TaskDefinitionsApiExample {
 | **scope** | **String**| The scope that identifies a Task Definition | |
 | **code** | **String**| The code that identifies a Task Definition | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| The property keys whose values to return on the Task Definition. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| The property keys whose values to return on the Task Definition. | [optional] |
 
 ### Return type
 
-[**TaskDefinition**](TaskDefinition.md)
+[**TaskDefinition**](../model/TaskDefinition.md)
+
 
 ### HTTP request headers
 
@@ -305,14 +308,15 @@ public class TaskDefinitionsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] [default to 10] |
 | **page** | **String**| The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| The property keys whose values to return on each Task Definition. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| The property keys whose values to return on each Task Definition. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfTaskDefinition**](PagedResourceListOfTaskDefinition.md)
+[**PagedResourceListOfTaskDefinition**](../model/PagedResourceListOfTaskDefinition.md)
+
 
 ### HTTP request headers
 
@@ -389,11 +393,12 @@ public class TaskDefinitionsApiExample {
 | **scope** | **String**| The scope that identifies a Task Definition | |
 | **code** | **String**| The code that identifies a Task Definition | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. | [optional] |
 
 ### Return type
 
-[**ResourceListOfTask**](ResourceListOfTask.md)
+[**ResourceListOfTask**](../model/ResourceListOfTask.md)
+
 
 ### HTTP request headers
 
@@ -468,11 +473,12 @@ public class TaskDefinitionsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope that identifies a Task Definition | |
 | **code** | **String**| The code that identifies a Task Definition | |
-| **updateTaskDefinitionRequest** | [**UpdateTaskDefinitionRequest**](UpdateTaskDefinitionRequest.md)| The data to update a Task Definition | |
+| **updateTaskDefinitionRequest** | [**UpdateTaskDefinitionRequest**](../model/UpdateTaskDefinitionRequest.md)| The data to update a Task Definition | |
 
 ### Return type
 
-[**TaskDefinition**](TaskDefinition.md)
+[**TaskDefinition**](../model/TaskDefinition.md)
+
 
 ### HTTP request headers
 
@@ -548,12 +554,13 @@ public class TaskDefinitionsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope that identifies a Task Definition | |
 | **code** | **String**| The code that identifies a Task Definition | |
-| **requestBody** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md)| The properties to upsert, keyed by property key. A null value deletes the property. | |
+| **requestBody** | [**Map&lt;String, PerpetualProperty&gt;**](../model/PerpetualProperty.md)| The properties to upsert, keyed by property key. A null value deletes the property. | |
 | **successMode** | **String**| Whether the batch should fail Atomically or Partially. Defaults to Partial. | [optional] [default to Partial] |
 
 ### Return type
 
-[**BatchUpsertTaskDefinitionPropertiesResponse**](BatchUpsertTaskDefinitionPropertiesResponse.md)
+[**BatchUpsertTaskDefinitionPropertiesResponse**](../model/BatchUpsertTaskDefinitionPropertiesResponse.md)
+
 
 ### HTTP request headers
 

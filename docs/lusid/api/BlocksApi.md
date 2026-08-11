@@ -71,7 +71,8 @@ public class BlocksApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -149,11 +150,12 @@ public class BlocksApiExample {
 | **scope** | **String**| The scope to which the block belongs. | |
 | **code** | **String**| The block&#39;s unique identifier. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the block. Defaults to return the latest version of the block if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Block\&quot; domain to decorate onto the block.              These take the format {domain}/{scope}/{code} e.g. \&quot;Block/system/Name\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Block\&quot; domain to decorate onto the block.              These take the format {domain}/{scope}/{code} e.g. \&quot;Block/system/Name\&quot;. | [optional] |
 
 ### Return type
 
-[**Block**](Block.md)
+[**Block**](../model/Block.md)
+
 
 ### HTTP request headers
 
@@ -232,14 +234,15 @@ public class BlocksApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the block. Defaults to return the latest version of the block if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing blocks from a previous call to list blocks.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Block\&quot; domain to decorate onto each block.                  These take the format {domain}/{scope}/{code} e.g. \&quot;Block/system/Name\&quot;.                  All properties, except derived properties, are returned by default, without specifying here. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Block\&quot; domain to decorate onto each block.                  These take the format {domain}/{scope}/{code} e.g. \&quot;Block/system/Name\&quot;.                  All properties, except derived properties, are returned by default, without specifying here. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfBlock**](PagedResourceListOfBlock.md)
+[**PagedResourceListOfBlock**](../model/PagedResourceListOfBlock.md)
+
 
 ### HTTP request headers
 
@@ -311,11 +314,12 @@ public class BlocksApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **blockSetRequest** | [**BlockSetRequest**](BlockSetRequest.md)| The collection of block requests. | [optional] |
+| **blockSetRequest** | [**BlockSetRequest**](../model/BlockSetRequest.md)| The collection of block requests. | [optional] |
 
 ### Return type
 
-[**ResourceListOfBlock**](ResourceListOfBlock.md)
+[**ResourceListOfBlock**](../model/ResourceListOfBlock.md)
+
 
 ### HTTP request headers
 

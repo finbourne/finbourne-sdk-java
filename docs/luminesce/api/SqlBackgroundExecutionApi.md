@@ -79,7 +79,8 @@ public class SqlBackgroundExecutionApiExample {
 
 ### Return type
 
-[**BackgroundQueryCancelResponse**](BackgroundQueryCancelResponse.md)
+[**BackgroundQueryCancelResponse**](../model/BackgroundQueryCancelResponse.md)
+
 
 ### HTTP request headers
 
@@ -179,6 +180,7 @@ public class SqlBackgroundExecutionApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -267,7 +269,8 @@ public class SqlBackgroundExecutionApiExample {
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -356,6 +359,7 @@ public class SqlBackgroundExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -448,6 +452,7 @@ public class SqlBackgroundExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -543,6 +548,7 @@ public class SqlBackgroundExecutionApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -637,6 +643,7 @@ public class SqlBackgroundExecutionApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -723,7 +730,8 @@ public class SqlBackgroundExecutionApiExample {
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -821,6 +829,7 @@ public class SqlBackgroundExecutionApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -907,7 +916,8 @@ public class SqlBackgroundExecutionApiExample {
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -1003,6 +1013,7 @@ public class SqlBackgroundExecutionApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -1081,7 +1092,8 @@ public class SqlBackgroundExecutionApiExample {
 
 ### Return type
 
-[**BackgroundQueryProgressResponse**](BackgroundQueryProgressResponse.md)
+[**BackgroundQueryProgressResponse**](../model/BackgroundQueryProgressResponse.md)
+
 
 ### HTTP request headers
 
@@ -1159,7 +1171,8 @@ public class SqlBackgroundExecutionApiExample {
 
 ### Return type
 
-[**BackgroundQueryProgressResponse**](BackgroundQueryProgressResponse.md)
+[**BackgroundQueryProgressResponse**](../model/BackgroundQueryProgressResponse.md)
+
 
 ### HTTP request headers
 
@@ -1237,15 +1250,16 @@ public class SqlBackgroundExecutionApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **body** | **String**| The LuminesceSql query to kick off. | |
 | **executionId** | **String**| An explicit ExecutionId to use.  This must be blank OR assigned to a valid GUID-as-a-string. It might be ignored / replaced, for example if using the query cache and a cached query is found. | [optional] |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| A name for this query.  This goes into logs and is available in &#x60;Sys.Logs.HcQueryStart&#x60;. | [optional] |
 | **timeoutSeconds** | **Integer**| Maximum time the query may run for, in seconds: &lt;0 → ∞, 0 → 7200 (2h) | [optional] [default to 0] |
 | **keepForSeconds** | **Integer**| Maximum time the result may be kept for, in seconds: &lt;0 → 1200 (20m), 0 → 28800 (8h), max &#x3D; 2,678,400 (31d) | [optional] [default to 0] |
-| **executionFlags** | [**SqlExecutionFlags**](.md)| Optional request flags for the execution.  Currently limited by may grow in time: - ProvideLineage : Should Lineage be requested when running the query?  This must be set in order to later retrieve Lineage. | [optional] [enum: None, ProvideLineage] |
+| **executionFlags** | [**SqlExecutionFlags**](../model/.md)| Optional request flags for the execution.  Currently limited by may grow in time: - ProvideLineage : Should Lineage be requested when running the query?  This must be set in order to later retrieve Lineage. | [optional] [enum: None, ProvideLineage] |
 
 ### Return type
 
-[**BackgroundQueryResponse**](BackgroundQueryResponse.md)
+[**BackgroundQueryResponse**](../model/BackgroundQueryResponse.md)
+
 
 ### HTTP request headers
 

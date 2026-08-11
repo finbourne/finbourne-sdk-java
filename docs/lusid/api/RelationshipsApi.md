@@ -67,11 +67,12 @@ public class RelationshipsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the relationship | |
 | **code** | **String**| The code of the relationship | |
-| **createRelationshipRequest** | [**CreateRelationshipRequest**](CreateRelationshipRequest.md)| The details of the relationship to create. | |
+| **createRelationshipRequest** | [**CreateRelationshipRequest**](../model/CreateRelationshipRequest.md)| The details of the relationship to create. | |
 
 ### Return type
 
-[**CompleteRelationship**](CompleteRelationship.md)
+[**CompleteRelationship**](../model/CompleteRelationship.md)
+
 
 ### HTTP request headers
 
@@ -147,11 +148,12 @@ public class RelationshipsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the relationship | |
 | **code** | **String**| The code of the relationship | |
-| **deleteRelationshipRequest** | [**DeleteRelationshipRequest**](DeleteRelationshipRequest.md)| The details of the relationship to delete. | |
+| **deleteRelationshipRequest** | [**DeleteRelationshipRequest**](../model/DeleteRelationshipRequest.md)| The details of the relationship to delete. | |
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 

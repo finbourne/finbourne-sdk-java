@@ -71,7 +71,8 @@ public class AddressKeyAliasApiExample {
 
 ### Return type
 
-[**AnnulSingleStructuredDataResponse**](AnnulSingleStructuredDataResponse.md)
+[**AnnulSingleStructuredDataResponse**](../model/AnnulSingleStructuredDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -151,7 +152,8 @@ public class AddressKeyAliasApiExample {
 
 ### Return type
 
-[**GetAddressKeyAliasResponse**](GetAddressKeyAliasResponse.md)
+[**GetAddressKeyAliasResponse**](../model/GetAddressKeyAliasResponse.md)
+
 
 ### HTTP request headers
 
@@ -235,7 +237,8 @@ public class AddressKeyAliasApiExample {
 
 ### Return type
 
-[**PagedResourceListOfGetAddressKeyAliasResponse**](PagedResourceListOfGetAddressKeyAliasResponse.md)
+[**PagedResourceListOfGetAddressKeyAliasResponse**](../model/PagedResourceListOfGetAddressKeyAliasResponse.md)
+
 
 ### HTTP request headers
 
@@ -307,11 +310,12 @@ public class AddressKeyAliasApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **upsertAddressKeyAliasRequest** | [**UpsertAddressKeyAliasRequest**](UpsertAddressKeyAliasRequest.md)| The Address Key Alias to update or insert | |
+| **upsertAddressKeyAliasRequest** | [**UpsertAddressKeyAliasRequest**](../model/UpsertAddressKeyAliasRequest.md)| The Address Key Alias to update or insert | |
 
 ### Return type
 
-[**UpsertSingleStructuredDataResponse**](UpsertSingleStructuredDataResponse.md)
+[**UpsertSingleStructuredDataResponse**](../model/UpsertSingleStructuredDataResponse.md)
+
 
 ### HTTP request headers
 

@@ -70,11 +70,12 @@ public class McpToolsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the MCP tool | |
 | **code** | **String**| The code of the MCP tool | |
-| **upsertMcpToolRequest** | [**UpsertMcpToolRequest**](UpsertMcpToolRequest.md)| The MCP tool definition | |
+| **upsertMcpToolRequest** | [**UpsertMcpToolRequest**](../model/UpsertMcpToolRequest.md)| The MCP tool definition | |
 
 ### Return type
 
-[**McpToolResponse**](McpToolResponse.md)
+[**McpToolResponse**](../model/McpToolResponse.md)
+
 
 ### HTTP request headers
 
@@ -154,6 +155,7 @@ public class McpToolsApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -232,7 +234,8 @@ public class McpToolsApiExample {
 
 ### Return type
 
-[**McpToolResponse**](McpToolResponse.md)
+[**McpToolResponse**](../model/McpToolResponse.md)
+
 
 ### HTTP request headers
 
@@ -304,7 +307,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;McpToolResponse&gt;**](McpToolResponse.md)
+[**List&lt;McpToolResponse&gt;**](../model/McpToolResponse.md)
+
 
 ### HTTP request headers
 
@@ -379,11 +383,12 @@ public class McpToolsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the MCP tool | |
 | **code** | **String**| The code of the MCP tool | |
-| **upsertMcpToolRequest** | [**UpsertMcpToolRequest**](UpsertMcpToolRequest.md)| The updated MCP tool definition | |
+| **upsertMcpToolRequest** | [**UpsertMcpToolRequest**](../model/UpsertMcpToolRequest.md)| The updated MCP tool definition | |
 
 ### Return type
 
-[**McpToolResponse**](McpToolResponse.md)
+[**McpToolResponse**](../model/McpToolResponse.md)
+
 
 ### HTTP request headers
 

@@ -78,7 +78,8 @@ public class TransactionConfigurationApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -158,7 +159,8 @@ public class TransactionConfigurationApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -236,7 +238,8 @@ public class TransactionConfigurationApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -316,7 +319,8 @@ public class TransactionConfigurationApiExample {
 
 ### Return type
 
-[**SideDefinition**](SideDefinition.md)
+[**SideDefinition**](../model/SideDefinition.md)
+
 
 ### HTTP request headers
 
@@ -398,7 +402,8 @@ public class TransactionConfigurationApiExample {
 
 ### Return type
 
-[**TransactionType**](TransactionType.md)
+[**TransactionType**](../model/TransactionType.md)
+
 
 ### HTTP request headers
 
@@ -476,7 +481,8 @@ public class TransactionConfigurationApiExample {
 
 ### Return type
 
-[**ResourceListOfSideDefinition**](ResourceListOfSideDefinition.md)
+[**ResourceListOfSideDefinition**](../model/ResourceListOfSideDefinition.md)
+
 
 ### HTTP request headers
 
@@ -554,7 +560,8 @@ public class TransactionConfigurationApiExample {
 
 ### Return type
 
-[**Map&lt;String, List&lt;TransactionType&gt;&gt;**](List.md)
+[**Map&lt;String, List&lt;TransactionType&gt;&gt;**](../model/List.md)
+
 
 ### HTTP request headers
 
@@ -629,12 +636,13 @@ public class TransactionConfigurationApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **side** | **String**| The label to uniquely identify the side. | |
-| **sideDefinitionRequest** | [**SideDefinitionRequest**](SideDefinitionRequest.md)| The side definition to create or replace. | |
+| **sideDefinitionRequest** | [**SideDefinitionRequest**](../model/SideDefinitionRequest.md)| The side definition to create or replace. | |
 | **scope** | **String**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to default] |
 
 ### Return type
 
-[**SideDefinition**](SideDefinition.md)
+[**SideDefinition**](../model/SideDefinition.md)
+
 
 ### HTTP request headers
 
@@ -707,12 +715,13 @@ public class TransactionConfigurationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **sidesDefinitionRequest** | [**List&lt;SidesDefinitionRequest&gt;**](SidesDefinitionRequest.md)| The list of side definitions to create, or replace. | |
+| **sidesDefinitionRequest** | [**List&lt;SidesDefinitionRequest&gt;**](../model/SidesDefinitionRequest.md)| The list of side definitions to create, or replace. | |
 | **scope** | **String**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to default] |
 
 ### Return type
 
-[**ResourceListOfSideDefinition**](ResourceListOfSideDefinition.md)
+[**ResourceListOfSideDefinition**](../model/ResourceListOfSideDefinition.md)
+
 
 ### HTTP request headers
 
@@ -789,12 +798,13 @@ public class TransactionConfigurationApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **source** | **String**| The source to set the transaction configuration for | |
 | **type** | **String**| One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type | |
-| **transactionTypeRequest** | [**TransactionTypeRequest**](TransactionTypeRequest.md)| The transaction configuration to set | |
+| **transactionTypeRequest** | [**TransactionTypeRequest**](../model/TransactionTypeRequest.md)| The transaction configuration to set | |
 | **scope** | **String**| The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to default] |
 
 ### Return type
 
-[**TransactionType**](TransactionType.md)
+[**TransactionType**](../model/TransactionType.md)
+
 
 ### HTTP request headers
 
@@ -869,12 +879,13 @@ public class TransactionConfigurationApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **source** | **String**| The source to set the transaction types for. | |
-| **transactionTypeRequest** | [**List&lt;TransactionTypeRequest&gt;**](TransactionTypeRequest.md)| The set of transaction types. | |
+| **transactionTypeRequest** | [**List&lt;TransactionTypeRequest&gt;**](../model/TransactionTypeRequest.md)| The set of transaction types. | |
 | **scope** | **String**| The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to default] |
 
 ### Return type
 
-[**ResourceListOfTransactionType**](ResourceListOfTransactionType.md)
+[**ResourceListOfTransactionType**](../model/ResourceListOfTransactionType.md)
+
 
 ### HTTP request headers
 

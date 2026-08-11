@@ -68,11 +68,12 @@ public class NotificationsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope that identifies a subscription | |
 | **code** | **String**| The code that identifies a subscription | |
-| **createNotificationRequest** | [**CreateNotificationRequest**](CreateNotificationRequest.md)| The data to create a notification | |
+| **createNotificationRequest** | [**CreateNotificationRequest**](../model/CreateNotificationRequest.md)| The data to create a notification | |
 
 ### Return type
 
-[**Notification**](Notification.md)
+[**Notification**](../model/Notification.md)
+
 
 ### HTTP request headers
 
@@ -151,6 +152,7 @@ public class NotificationsApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -228,7 +230,8 @@ public class NotificationsApiExample {
 
 ### Return type
 
-[**Notification**](Notification.md)
+[**Notification**](../model/Notification.md)
+
 
 ### HTTP request headers
 
@@ -305,7 +308,8 @@ public class NotificationsApiExample {
 
 ### Return type
 
-[**ResourceListOfNotification**](ResourceListOfNotification.md)
+[**ResourceListOfNotification**](../model/ResourceListOfNotification.md)
+
 
 ### HTTP request headers
 
@@ -382,11 +386,12 @@ public class NotificationsApiExample {
 | **scope** | **String**| The scope that identifies a subscription | |
 | **code** | **String**| The code that identifies a subscription | |
 | **id** | **String**| The unique identifier of the notification | |
-| **updateNotificationRequest** | [**UpdateNotificationRequest**](UpdateNotificationRequest.md)| The data to update a notification | |
+| **updateNotificationRequest** | [**UpdateNotificationRequest**](../model/UpdateNotificationRequest.md)| The data to update a notification | |
 
 ### Return type
 
-[**Notification**](Notification.md)
+[**Notification**](../model/Notification.md)
+
 
 ### HTTP request headers
 

@@ -63,11 +63,12 @@ public class TransferAgencyApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, CalculateOrderDatesRequest&gt;**](CalculateOrderDatesRequest.md)| The request containing the dates used for calculation | |
+| **requestBody** | [**Map&lt;String, CalculateOrderDatesRequest&gt;**](../model/CalculateOrderDatesRequest.md)| The request containing the dates used for calculation | |
 
 ### Return type
 
-[**CalculateOrderDatesResponse**](CalculateOrderDatesResponse.md)
+[**CalculateOrderDatesResponse**](../model/CalculateOrderDatesResponse.md)
+
 
 ### HTTP request headers
 
@@ -139,11 +140,12 @@ public class TransferAgencyApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | [**Map&lt;String, UpsertTransferAgencyOrderRequest&gt;**](UpsertTransferAgencyOrderRequest.md)| The transfer agency orders to upsert, keyed by a unique request identifier. | |
+| **requestBody** | [**Map&lt;String, UpsertTransferAgencyOrderRequest&gt;**](../model/UpsertTransferAgencyOrderRequest.md)| The transfer agency orders to upsert, keyed by a unique request identifier. | |
 
 ### Return type
 
-[**TransferAgencyOrdersResponse**](TransferAgencyOrdersResponse.md)
+[**TransferAgencyOrdersResponse**](../model/TransferAgencyOrdersResponse.md)
+
 
 ### HTTP request headers
 

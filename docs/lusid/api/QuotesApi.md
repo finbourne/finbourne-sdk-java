@@ -88,7 +88,8 @@ public class QuotesApiExample {
 
 ### Return type
 
-[**QuoteAccessMetadataRule**](QuoteAccessMetadataRule.md)
+[**QuoteAccessMetadataRule**](../model/QuoteAccessMetadataRule.md)
+
 
 ### HTTP request headers
 
@@ -162,11 +163,12 @@ public class QuotesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the quotes to delete. | |
-| **requestBody** | [**Map&lt;String, QuoteId&gt;**](QuoteId.md)| The quotes to delete keyed by a unique correlation id. | [optional] |
+| **requestBody** | [**Map&lt;String, QuoteId&gt;**](../model/QuoteId.md)| The quotes to delete keyed by a unique correlation id. | [optional] |
 
 ### Return type
 
-[**AnnulQuotesResponse**](AnnulQuotesResponse.md)
+[**AnnulQuotesResponse**](../model/AnnulQuotesResponse.md)
+
 
 ### HTTP request headers
 
@@ -246,11 +248,12 @@ public class QuotesApiExample {
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the quotes. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the quotes. Defaults to return the latest version of each quote if not specified. | [optional] |
 | **maxAge** | **String**| The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime or cut label to generate a effective datetime window inside which a quote must exist to be retrieved. | [optional] |
-| **requestBody** | [**Map&lt;String, QuoteSeriesId&gt;**](QuoteSeriesId.md)| The time invariant quote series ids of the quotes to retrieve. These need to be               keyed by a unique correlation id allowing the retrieved quote to be identified in the response. | [optional] |
+| **requestBody** | [**Map&lt;String, QuoteSeriesId&gt;**](../model/QuoteSeriesId.md)| The time invariant quote series ids of the quotes to retrieve. These need to be               keyed by a unique correlation id allowing the retrieved quote to be identified in the response. | [optional] |
 
 ### Return type
 
-[**GetQuotesResponse**](GetQuotesResponse.md)
+[**GetQuotesResponse**](../model/GetQuotesResponse.md)
+
 
 ### HTTP request headers
 
@@ -342,7 +345,8 @@ public class QuotesApiExample {
 
 ### Return type
 
-[**QuoteAccessMetadataRule**](QuoteAccessMetadataRule.md)
+[**QuoteAccessMetadataRule**](../model/QuoteAccessMetadataRule.md)
+
 
 ### HTTP request headers
 
@@ -426,7 +430,8 @@ public class QuotesApiExample {
 
 ### Return type
 
-[**ResourceListOfQuote**](ResourceListOfQuote.md)
+[**ResourceListOfQuote**](../model/ResourceListOfQuote.md)
+
 
 ### HTTP request headers
 
@@ -504,7 +509,8 @@ public class QuotesApiExample {
 
 ### Return type
 
-[**ResourceListOfQuoteAccessMetadataRule**](ResourceListOfQuoteAccessMetadataRule.md)
+[**ResourceListOfQuoteAccessMetadataRule**](../model/ResourceListOfQuoteAccessMetadataRule.md)
+
 
 ### HTTP request headers
 
@@ -588,7 +594,8 @@ public class QuotesApiExample {
 
 ### Return type
 
-[**ResourceListOfQuote**](ResourceListOfQuote.md)
+[**ResourceListOfQuote**](../model/ResourceListOfQuote.md)
+
 
 ### HTTP request headers
 
@@ -664,13 +671,14 @@ public class QuotesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope to use when updating or inserting the Quote Access Metadata Rule. | |
-| **upsertQuoteAccessMetadataRuleRequest** | [**UpsertQuoteAccessMetadataRuleRequest**](UpsertQuoteAccessMetadataRuleRequest.md)| The Quote Access Metadata Rule to update or insert | |
+| **upsertQuoteAccessMetadataRuleRequest** | [**UpsertQuoteAccessMetadataRuleRequest**](../model/UpsertQuoteAccessMetadataRuleRequest.md)| The Quote Access Metadata Rule to update or insert | |
 | **effectiveAt** | **String**| The date this rule will effective from | [optional] |
 | **effectiveUntil** | **OffsetDateTime**| The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next &#39;effectiveAt&#39; date of the Access Metadata | [optional] |
 
 ### Return type
 
-[**QuoteAccessMetadataRule**](QuoteAccessMetadataRule.md)
+[**QuoteAccessMetadataRule**](../model/QuoteAccessMetadataRule.md)
+
 
 ### HTTP request headers
 
@@ -744,11 +752,12 @@ public class QuotesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope to use when updating or inserting the quotes. | |
-| **requestBody** | [**Map&lt;String, UpsertQuoteRequest&gt;**](UpsertQuoteRequest.md)| The quotes to update or insert keyed by a unique correlation id. | [optional] |
+| **requestBody** | [**Map&lt;String, UpsertQuoteRequest&gt;**](../model/UpsertQuoteRequest.md)| The quotes to update or insert keyed by a unique correlation id. | [optional] |
 
 ### Return type
 
-[**UpsertQuotesResponse**](UpsertQuotesResponse.md)
+[**UpsertQuotesResponse**](../model/UpsertQuotesResponse.md)
+
 
 ### HTTP request headers
 

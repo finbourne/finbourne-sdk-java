@@ -72,15 +72,16 @@ public class OrderGraphApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| See https://support.lusid.com/knowledgebase/article/KA-01832/ | [optional] |
 | **paginationToken** | **String**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 | **limit** | **Integer**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] |
 | **filter** | **String**| See https://support.lusid.com/knowledgebase/article/KA-01914/ | [optional] [default to ] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ | [optional] |
 | **useComplianceV2** | **Boolean**| Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) | [optional] [default to false] |
 
 ### Return type
 
-[**PagedResourceListOfOrderGraphBlock**](PagedResourceListOfOrderGraphBlock.md)
+[**PagedResourceListOfOrderGraphBlock**](../model/PagedResourceListOfOrderGraphBlock.md)
+
 
 ### HTTP request headers
 
@@ -162,13 +163,14 @@ public class OrderGraphApiExample {
 | **code** | **String**| The parent placement&#39;s code | |
 | **asAt** | **OffsetDateTime**| See https://support.lusid.com/knowledgebase/article/KA-01832/ | [optional] |
 | **paginationToken** | **String**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
 | **limit** | **Integer**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfOrderGraphPlacement**](PagedResourceListOfOrderGraphPlacement.md)
+[**PagedResourceListOfOrderGraphPlacement**](../model/PagedResourceListOfOrderGraphPlacement.md)
+
 
 ### HTTP request headers
 
@@ -247,14 +249,15 @@ public class OrderGraphApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| See https://support.lusid.com/knowledgebase/article/KA-01832/ | [optional] |
 | **paginationToken** | **String**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 | **limit** | **Integer**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] |
 | **filter** | **String**| See https://support.lusid.com/knowledgebase/article/KA-01914/ | [optional] [default to ] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfOrderGraphPlacement**](PagedResourceListOfOrderGraphPlacement.md)
+[**PagedResourceListOfOrderGraphPlacement**](../model/PagedResourceListOfOrderGraphPlacement.md)
+
 
 ### HTTP request headers
 

@@ -66,11 +66,12 @@ public class NetworkZonesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createNetworkZoneRequest** | [**CreateNetworkZoneRequest**](CreateNetworkZoneRequest.md)| The details of the network zone to define | |
+| **createNetworkZoneRequest** | [**CreateNetworkZoneRequest**](../model/CreateNetworkZoneRequest.md)| The details of the network zone to define | |
 
 ### Return type
 
-[**NetworkZoneDefinitionResponse**](NetworkZoneDefinitionResponse.md)
+[**NetworkZoneDefinitionResponse**](../model/NetworkZoneDefinitionResponse.md)
+
 
 ### HTTP request headers
 
@@ -147,6 +148,7 @@ public class NetworkZonesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -221,7 +223,8 @@ public class NetworkZonesApiExample {
 
 ### Return type
 
-[**NetworkZoneDefinitionResponse**](NetworkZoneDefinitionResponse.md)
+[**NetworkZoneDefinitionResponse**](../model/NetworkZoneDefinitionResponse.md)
+
 
 ### HTTP request headers
 
@@ -293,7 +296,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;NetworkZoneDefinitionResponse&gt;**](NetworkZoneDefinitionResponse.md)
+[**List&lt;NetworkZoneDefinitionResponse&gt;**](../model/NetworkZoneDefinitionResponse.md)
+
 
 ### HTTP request headers
 
@@ -366,11 +370,12 @@ public class NetworkZonesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **code** | **String**| The unique identifier of the network zone | |
-| **updateNetworkZoneRequest** | [**UpdateNetworkZoneRequest**](UpdateNetworkZoneRequest.md)| The updated definition of the network zone | |
+| **updateNetworkZoneRequest** | [**UpdateNetworkZoneRequest**](../model/UpdateNetworkZoneRequest.md)| The updated definition of the network zone | |
 
 ### Return type
 
-[**NetworkZoneDefinitionResponse**](NetworkZoneDefinitionResponse.md)
+[**NetworkZoneDefinitionResponse**](../model/NetworkZoneDefinitionResponse.md)
+
 
 ### HTTP request headers
 

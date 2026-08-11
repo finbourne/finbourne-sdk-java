@@ -64,7 +64,8 @@ public class ActionLogsApiExample {
 
 ### Return type
 
-[**ActionLog**](ActionLog.md)
+[**ActionLog**](../model/ActionLog.md)
+
 
 ### HTTP request headers
 

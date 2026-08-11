@@ -68,11 +68,12 @@ public class SequencesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| Scope of the sequence. | |
-| **createSequenceRequest** | [**CreateSequenceRequest**](CreateSequenceRequest.md)| Request to create sequence | |
+| **createSequenceRequest** | [**CreateSequenceRequest**](../model/CreateSequenceRequest.md)| Request to create sequence | |
 
 ### Return type
 
-[**SequenceDefinition**](SequenceDefinition.md)
+[**SequenceDefinition**](../model/SequenceDefinition.md)
+
 
 ### HTTP request headers
 
@@ -150,7 +151,8 @@ public class SequencesApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -228,7 +230,8 @@ public class SequencesApiExample {
 
 ### Return type
 
-[**SequenceDefinition**](SequenceDefinition.md)
+[**SequenceDefinition**](../model/SequenceDefinition.md)
+
 
 ### HTTP request headers
 
@@ -308,7 +311,8 @@ public class SequencesApiExample {
 
 ### Return type
 
-[**PagedResourceListOfSequenceDefinition**](PagedResourceListOfSequenceDefinition.md)
+[**PagedResourceListOfSequenceDefinition**](../model/PagedResourceListOfSequenceDefinition.md)
+
 
 ### HTTP request headers
 
@@ -388,7 +392,8 @@ public class SequencesApiExample {
 
 ### Return type
 
-[**NextValueInSequenceResponse**](NextValueInSequenceResponse.md)
+[**NextValueInSequenceResponse**](../model/NextValueInSequenceResponse.md)
+
 
 ### HTTP request headers
 

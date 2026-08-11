@@ -69,7 +69,8 @@ public class IdentityProviderApiExample {
 
 ### Return type
 
-[**AddScimResponse**](AddScimResponse.md)
+[**AddScimResponse**](../model/AddScimResponse.md)
+
 
 ### HTTP request headers
 
@@ -141,6 +142,7 @@ This endpoint does not need any parameter.
 ### Return type
 
 null (empty response body)
+
 
 ### HTTP request headers
 

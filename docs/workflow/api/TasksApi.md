@@ -67,11 +67,12 @@ public class TasksApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **batchUpdateTasksRequest** | [**BatchUpdateTasksRequest**](BatchUpdateTasksRequest.md)| The details of the request | [optional] |
+| **batchUpdateTasksRequest** | [**BatchUpdateTasksRequest**](../model/BatchUpdateTasksRequest.md)| The details of the request | [optional] |
 
 ### Return type
 
-[**BatchUpdateTasksResponse**](BatchUpdateTasksResponse.md)
+[**BatchUpdateTasksResponse**](../model/BatchUpdateTasksResponse.md)
+
 
 ### HTTP request headers
 
@@ -142,12 +143,13 @@ public class TasksApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createTaskRequest** | [**CreateTaskRequest**](CreateTaskRequest.md)| Request to create Task | |
+| **createTaskRequest** | [**CreateTaskRequest**](../model/CreateTaskRequest.md)| Request to create Task | |
 | **trigger** | **String**| The name of the Trigger to invoke | [optional] |
 
 ### Return type
 
-[**Task**](Task.md)
+[**Task**](../model/Task.md)
+
 
 ### HTTP request headers
 
@@ -221,7 +223,8 @@ public class TasksApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -292,11 +295,12 @@ public class TasksApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **deleteTasksRequest** | [**DeleteTasksRequest**](DeleteTasksRequest.md)| Request with the task instance ids to delete. | [optional] |
+| **deleteTasksRequest** | [**DeleteTasksRequest**](../model/DeleteTasksRequest.md)| Request with the task instance ids to delete. | [optional] |
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -371,11 +375,12 @@ public class TasksApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**| Id of the Task to retrieve | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. These values are a snapshot copied from the TaskDefinition and Workflow when the Task was created, so they reflect the state at creation time and are not affected by subsequent changes to the TaskDefinition or Workflow. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. These values are a snapshot copied from the TaskDefinition and Workflow when the Task was created, so they reflect the state at creation time and are not affected by subsequent changes to the TaskDefinition or Workflow. | [optional] |
 
 ### Return type
 
-[**Task**](Task.md)
+[**Task**](../model/Task.md)
+
 
 ### HTTP request headers
 
@@ -452,7 +457,8 @@ public class TasksApiExample {
 
 ### Return type
 
-[**ResourceListOfChangeItem**](ResourceListOfChangeItem.md)
+[**ResourceListOfChangeItem**](../model/ResourceListOfChangeItem.md)
+
 
 ### HTTP request headers
 
@@ -530,14 +536,15 @@ public class TasksApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each optionally suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. These values are a snapshot copied from the TaskDefinition and Workflow when each Task was created, so they reflect the state at creation time and are not affected by subsequent changes to the TaskDefinition or Workflow. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each optionally suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. These values are a snapshot copied from the TaskDefinition and Workflow when each Task was created, so they reflect the state at creation time and are not affected by subsequent changes to the TaskDefinition or Workflow. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] [default to 10] |
 | **page** | **String**| The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfTask**](PagedResourceListOfTask.md)
+[**PagedResourceListOfTask**](../model/PagedResourceListOfTask.md)
+
 
 ### HTTP request headers
 
@@ -612,11 +619,12 @@ public class TasksApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**| Id of the Task to act upon | |
 | **trigger** | **String**|  | [optional] |
-| **updateTaskRequest** | [**UpdateTaskRequest**](UpdateTaskRequest.md)| The details of the request | [optional] |
+| **updateTaskRequest** | [**UpdateTaskRequest**](../model/UpdateTaskRequest.md)| The details of the request | [optional] |
 
 ### Return type
 
-[**Task**](Task.md)
+[**Task**](../model/Task.md)
+
 
 ### HTTP request headers
 

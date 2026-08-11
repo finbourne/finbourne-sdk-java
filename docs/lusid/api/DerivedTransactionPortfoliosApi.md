@@ -65,11 +65,12 @@ public class DerivedTransactionPortfoliosApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope in which to create the derived transaction portfolio. | |
-| **createDerivedTransactionPortfolioRequest** | [**CreateDerivedTransactionPortfolioRequest**](CreateDerivedTransactionPortfolioRequest.md)| The definition of the derived transaction portfolio. | [optional] |
+| **createDerivedTransactionPortfolioRequest** | [**CreateDerivedTransactionPortfolioRequest**](../model/CreateDerivedTransactionPortfolioRequest.md)| The definition of the derived transaction portfolio. | [optional] |
 
 ### Return type
 
-[**Portfolio**](Portfolio.md)
+[**Portfolio**](../model/Portfolio.md)
+
 
 ### HTTP request headers
 
@@ -149,7 +150,8 @@ public class DerivedTransactionPortfoliosApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 

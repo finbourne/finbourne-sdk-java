@@ -68,11 +68,12 @@ public class ReferencePortfolioApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope in which to create the reference portfolio. | |
-| **createReferencePortfolioRequest** | [**CreateReferencePortfolioRequest**](CreateReferencePortfolioRequest.md)| The definition of the reference portfolio. | |
+| **createReferencePortfolioRequest** | [**CreateReferencePortfolioRequest**](../model/CreateReferencePortfolioRequest.md)| The definition of the reference portfolio. | |
 
 ### Return type
 
-[**Portfolio**](Portfolio.md)
+[**Portfolio**](../model/Portfolio.md)
+
 
 ### HTTP request headers
 
@@ -152,11 +153,12 @@ public class ReferencePortfolioApiExample {
 | **code** | **String**| The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. | |
 | **effectiveAt** | **String**| The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Instrument&#39; or &#39;ReferenceHolding&#39; domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. &#39;Instrument/system/Name&#39; or              &#39;ReferenceHolding/strategy/quantsignal&#39;. Defaults to return all available instrument and reference holding properties if not specified. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Instrument&#39; or &#39;ReferenceHolding&#39; domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. &#39;Instrument/system/Name&#39; or              &#39;ReferenceHolding/strategy/quantsignal&#39;. Defaults to return all available instrument and reference holding properties if not specified. | [optional] |
 
 ### Return type
 
-[**GetReferencePortfolioConstituentsResponse**](GetReferencePortfolioConstituentsResponse.md)
+[**GetReferencePortfolioConstituentsResponse**](../model/GetReferencePortfolioConstituentsResponse.md)
+
 
 ### HTTP request headers
 
@@ -240,7 +242,8 @@ public class ReferencePortfolioApiExample {
 
 ### Return type
 
-[**ResourceListOfConstituentsAdjustmentHeader**](ResourceListOfConstituentsAdjustmentHeader.md)
+[**ResourceListOfConstituentsAdjustmentHeader**](../model/ResourceListOfConstituentsAdjustmentHeader.md)
+
 
 ### HTTP request headers
 
@@ -316,11 +319,12 @@ public class ReferencePortfolioApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the reference portfolio. | |
 | **code** | **String**| The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. | |
-| **upsertReferencePortfolioConstituentPropertiesRequest** | [**UpsertReferencePortfolioConstituentPropertiesRequest**](UpsertReferencePortfolioConstituentPropertiesRequest.md)| The request to modify properties for the constituent. | |
+| **upsertReferencePortfolioConstituentPropertiesRequest** | [**UpsertReferencePortfolioConstituentPropertiesRequest**](../model/UpsertReferencePortfolioConstituentPropertiesRequest.md)| The request to modify properties for the constituent. | |
 
 ### Return type
 
-[**UpsertReferencePortfolioConstituentPropertiesResponse**](UpsertReferencePortfolioConstituentPropertiesResponse.md)
+[**UpsertReferencePortfolioConstituentPropertiesResponse**](../model/UpsertReferencePortfolioConstituentPropertiesResponse.md)
+
 
 ### HTTP request headers
 
@@ -396,11 +400,12 @@ public class ReferencePortfolioApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the reference portfolio. | |
 | **code** | **String**| The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. | |
-| **upsertReferencePortfolioConstituentsRequest** | [**UpsertReferencePortfolioConstituentsRequest**](UpsertReferencePortfolioConstituentsRequest.md)| The constituents to upload to the reference portfolio. | |
+| **upsertReferencePortfolioConstituentsRequest** | [**UpsertReferencePortfolioConstituentsRequest**](../model/UpsertReferencePortfolioConstituentsRequest.md)| The constituents to upload to the reference portfolio. | |
 
 ### Return type
 
-[**UpsertReferencePortfolioConstituentsResponse**](UpsertReferencePortfolioConstituentsResponse.md)
+[**UpsertReferencePortfolioConstituentsResponse**](../model/UpsertReferencePortfolioConstituentsResponse.md)
+
 
 ### HTTP request headers
 

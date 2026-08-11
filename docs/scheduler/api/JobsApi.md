@@ -68,11 +68,12 @@ public class JobsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createJobRequest** | [**CreateJobRequest**](CreateJobRequest.md)| The request to create a new job | |
+| **createJobRequest** | [**CreateJobRequest**](../model/CreateJobRequest.md)| The request to create a new job | |
 
 ### Return type
 
-[**JobDefinition**](JobDefinition.md)
+[**JobDefinition**](../model/JobDefinition.md)
+
 
 ### HTTP request headers
 
@@ -148,7 +149,8 @@ public class JobsApiExample {
 
 ### Return type
 
-[**ResourceListOfScheduleDefinition**](ResourceListOfScheduleDefinition.md)
+[**ResourceListOfScheduleDefinition**](../model/ResourceListOfScheduleDefinition.md)
+
 
 ### HTTP request headers
 
@@ -223,14 +225,15 @@ public class JobsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **page** | **String**| The pagination token to use to continue listing instruments from a previous call to list instruments.             This value is returned from the previous call. If a pagination token is provided the sortBy and filter fields             must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
 | **start** | **Integer**| This field is obsolete, the value of this field would not be considered. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 2000 if not specified. Maximum is 5000. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 
 ### Return type
 
-[**ResourceListOfJobHistory**](ResourceListOfJobHistory.md)
+[**ResourceListOfJobHistory**](../model/ResourceListOfJobHistory.md)
+
 
 ### HTTP request headers
 
@@ -306,6 +309,7 @@ public class JobsApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -378,7 +382,8 @@ public class JobsApiExample {
 
 ### Return type
 
-[**JobRunResult**](JobRunResult.md)
+[**JobRunResult**](../model/JobRunResult.md)
+
 
 ### HTTP request headers
 
@@ -454,7 +459,8 @@ public class JobsApiExample {
 
 ### Return type
 
-[**ResourceListOfScheduleDefinition**](ResourceListOfScheduleDefinition.md)
+[**ResourceListOfScheduleDefinition**](../model/ResourceListOfScheduleDefinition.md)
+
 
 ### HTTP request headers
 
@@ -529,14 +535,15 @@ public class JobsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **page** | **String**| The pagination token to use to continue listing instruments from a previous call to list instruments.             This value is returned from the previous call. If a pagination token is provided the sortBy and filter fields             must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] |
 | **start** | **Integer**| When paginating, skip this number of results. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 2000 if not specified. Maximum is 5000. | [optional] [default to 2000] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 
 ### Return type
 
-[**ResourceListOfJobDefinition**](ResourceListOfJobDefinition.md)
+[**ResourceListOfJobDefinition**](../model/ResourceListOfJobDefinition.md)
+
 
 ### HTTP request headers
 
@@ -610,11 +617,12 @@ public class JobsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the job | |
 | **code** | **String**| The code of the job | |
-| **startJobRequest** | [**StartJobRequest**](StartJobRequest.md)| The request for starting job | |
+| **startJobRequest** | [**StartJobRequest**](../model/StartJobRequest.md)| The request for starting job | |
 
 ### Return type
 
-[**StartJobResponse**](StartJobResponse.md)
+[**StartJobResponse**](../model/StartJobResponse.md)
+
 
 ### HTTP request headers
 
@@ -688,11 +696,12 @@ public class JobsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**|  | |
 | **code** | **String**|  | |
-| **updateJobRequest** | [**UpdateJobRequest**](UpdateJobRequest.md)|  | |
+| **updateJobRequest** | [**UpdateJobRequest**](../model/UpdateJobRequest.md)|  | |
 
 ### Return type
 
-[**JobDefinition**](JobDefinition.md)
+[**JobDefinition**](../model/JobDefinition.md)
+
 
 ### HTTP request headers
 

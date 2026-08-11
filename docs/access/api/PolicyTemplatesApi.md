@@ -67,11 +67,12 @@ public class PolicyTemplatesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **policyTemplateCreationRequest** | [**PolicyTemplateCreationRequest**](PolicyTemplateCreationRequest.md)| The definition of the policy template | |
+| **policyTemplateCreationRequest** | [**PolicyTemplateCreationRequest**](../model/PolicyTemplateCreationRequest.md)| The definition of the policy template | |
 
 ### Return type
 
-[**PolicyTemplateResponse**](PolicyTemplateResponse.md)
+[**PolicyTemplateResponse**](../model/PolicyTemplateResponse.md)
+
 
 ### HTTP request headers
 
@@ -150,6 +151,7 @@ public class PolicyTemplatesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -221,12 +223,13 @@ public class PolicyTemplatesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **generatePolicyFromTemplateRequest** | [**GeneratePolicyFromTemplateRequest**](GeneratePolicyFromTemplateRequest.md)| Definition of the generate request | |
+| **generatePolicyFromTemplateRequest** | [**GeneratePolicyFromTemplateRequest**](../model/GeneratePolicyFromTemplateRequest.md)| Definition of the generate request | |
 | **asAt** | **OffsetDateTime**| Optional. The AsAt date time of the data | [optional] |
 
 ### Return type
 
-[**GeneratedPolicyComponents**](GeneratedPolicyComponents.md)
+[**GeneratedPolicyComponents**](../model/GeneratedPolicyComponents.md)
+
 
 ### HTTP request headers
 
@@ -306,7 +309,8 @@ public class PolicyTemplatesApiExample {
 
 ### Return type
 
-[**PolicyTemplateResponse**](PolicyTemplateResponse.md)
+[**PolicyTemplateResponse**](../model/PolicyTemplateResponse.md)
+
 
 ### HTTP request headers
 
@@ -390,7 +394,8 @@ public class PolicyTemplatesApiExample {
 
 ### Return type
 
-[**ResourceListOfPolicyTemplateResponse**](ResourceListOfPolicyTemplateResponse.md)
+[**ResourceListOfPolicyTemplateResponse**](../model/ResourceListOfPolicyTemplateResponse.md)
+
 
 ### HTTP request headers
 
@@ -464,11 +469,12 @@ public class PolicyTemplatesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **code** | **String**| Code of the policy template to update | |
-| **policyTemplateUpdateRequest** | [**PolicyTemplateUpdateRequest**](PolicyTemplateUpdateRequest.md)| Definition of the updated policy template | [optional] |
+| **policyTemplateUpdateRequest** | [**PolicyTemplateUpdateRequest**](../model/PolicyTemplateUpdateRequest.md)| Definition of the updated policy template | [optional] |
 
 ### Return type
 
-[**PolicyTemplateResponse**](PolicyTemplateResponse.md)
+[**PolicyTemplateResponse**](../model/PolicyTemplateResponse.md)
+
 
 ### HTTP request headers
 

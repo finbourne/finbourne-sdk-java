@@ -70,7 +70,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AuthenticationInformation**](AuthenticationInformation.md)
+[**AuthenticationInformation**](../model/AuthenticationInformation.md)
+
 
 ### HTTP request headers
 
@@ -145,7 +146,8 @@ public class AuthenticationApiExample {
 
 ### Return type
 
-[**PasswordPolicyResponse**](PasswordPolicyResponse.md)
+[**PasswordPolicyResponse**](../model/PasswordPolicyResponse.md)
+
 
 ### HTTP request headers
 
@@ -217,7 +219,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SessionPolicyResponse**](SessionPolicyResponse.md)
+[**SessionPolicyResponse**](../model/SessionPolicyResponse.md)
+
 
 ### HTTP request headers
 
@@ -294,7 +297,8 @@ public class AuthenticationApiExample {
 
 ### Return type
 
-[**List&lt;SupportAccessResponse&gt;**](SupportAccessResponse.md)
+[**List&lt;SupportAccessResponse&gt;**](../model/SupportAccessResponse.md)
+
 
 ### HTTP request headers
 
@@ -366,7 +370,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SupportRolesResponse**](SupportRolesResponse.md)
+[**SupportRolesResponse**](../model/SupportRolesResponse.md)
+
 
 ### HTTP request headers
 
@@ -437,11 +442,12 @@ public class AuthenticationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **supportAccessRequest** | [**SupportAccessRequest**](SupportAccessRequest.md)| Request detailing the duration and reasons for supplying support access | |
+| **supportAccessRequest** | [**SupportAccessRequest**](../model/SupportAccessRequest.md)| Request detailing the duration and reasons for supplying support access | |
 
 ### Return type
 
-[**SupportAccessResponse**](SupportAccessResponse.md)
+[**SupportAccessResponse**](../model/SupportAccessResponse.md)
+
 
 ### HTTP request headers
 
@@ -513,7 +519,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;SupportAccessResponse&gt;**](SupportAccessResponse.md)
+[**List&lt;SupportAccessResponse&gt;**](../model/SupportAccessResponse.md)
+
 
 ### HTTP request headers
 
@@ -586,11 +593,12 @@ public class AuthenticationApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **userType** | **String**| The type of user (should only be personal or service) | |
-| **updatePasswordPolicyRequest** | [**UpdatePasswordPolicyRequest**](UpdatePasswordPolicyRequest.md)| The password policy for the given user type | [optional] |
+| **updatePasswordPolicyRequest** | [**UpdatePasswordPolicyRequest**](../model/UpdatePasswordPolicyRequest.md)| The password policy for the given user type | [optional] |
 
 ### Return type
 
-[**PasswordPolicyResponse**](PasswordPolicyResponse.md)
+[**PasswordPolicyResponse**](../model/PasswordPolicyResponse.md)
+
 
 ### HTTP request headers
 
@@ -662,11 +670,12 @@ public class AuthenticationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **updateSessionPolicyRequest** | [**UpdateSessionPolicyRequest**](UpdateSessionPolicyRequest.md)| The desired session timing settings | |
+| **updateSessionPolicyRequest** | [**UpdateSessionPolicyRequest**](../model/UpdateSessionPolicyRequest.md)| The desired session timing settings | |
 
 ### Return type
 
-[**SessionPolicyResponse**](SessionPolicyResponse.md)
+[**SessionPolicyResponse**](../model/SessionPolicyResponse.md)
+
 
 ### HTTP request headers
 

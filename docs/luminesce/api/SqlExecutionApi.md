@@ -83,7 +83,7 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **query** | **String**| LuminesceSql to Execute (must be one line only) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **download** | **Boolean**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to false] |
 | **timeout** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
@@ -94,6 +94,7 @@ public class SqlExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -170,14 +171,15 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **query** | **String**| LuminesceSql to Execute (must be one line only) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **dateTimeFormat** | **String**| Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.000&#x60; (Excel support for this is limited) | [optional] |
 | **timeout** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -255,7 +257,7 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **query** | **String**| LuminesceSql to Execute (must be one line only) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **timeout** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
 | **jsonProper** | **Boolean**| Should this be text/json (not json-encoded-as-a-string) | [optional] [default to false] |
@@ -264,6 +266,7 @@ public class SqlExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -339,13 +342,14 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **query** | **String**| LuminesceSql to Execute (must be one line only) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **timeout** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -423,7 +427,7 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **query** | **String**| LuminesceSql to Execute (must be one line only) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **download** | **Boolean**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to false] |
 | **dateTimeFormat** | **String**| Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; | [optional] |
@@ -432,6 +436,7 @@ public class SqlExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -507,13 +512,14 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **query** | **String**| LuminesceSql to Execute (must be one line only) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **timeout** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -590,7 +596,7 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **query** | **String**| LuminesceSql to Execute (must be one line only) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **download** | **Boolean**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to false] |
 | **timeout** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
@@ -598,6 +604,7 @@ public class SqlExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -677,7 +684,7 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **body** | **String**| LuminesceSql to Execute (may be multi-line) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **download** | **Boolean**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to false] |
 | **timeoutSeconds** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
@@ -688,6 +695,7 @@ public class SqlExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -764,14 +772,15 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **body** | **String**| LuminesceSql to Execute (may be multi-line) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **dateTimeFormat** | **String**| Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.000&#x60; (Excel support for this is limited) | [optional] |
 | **timeoutSeconds** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -849,7 +858,7 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **body** | **String**| LuminesceSql to Execute (may be multi-line) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **timeoutSeconds** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
 | **jsonProper** | **Boolean**| Should this be text/json (not json-encoded-as-a-string) | [optional] [default to false] |
@@ -858,6 +867,7 @@ public class SqlExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -933,13 +943,14 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **body** | **String**| LuminesceSql to Execute (may be multi-line) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **timeoutSeconds** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -1017,7 +1028,7 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **body** | **String**| LuminesceSql to Execute (may be multi-line) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **download** | **Boolean**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to false] |
 | **dateTimeFormat** | **String**| Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; | [optional] |
@@ -1026,6 +1037,7 @@ public class SqlExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -1101,13 +1113,14 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **body** | **String**| LuminesceSql to Execute (may be multi-line) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **timeoutSeconds** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
 
 ### Return type
 
-[**File**](File.md)
+[**File**](../model/File.md)
+
 
 ### HTTP request headers
 
@@ -1184,7 +1197,7 @@ public class SqlExecutionApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **body** | **String**| LuminesceSql to Execute (may be multi-line) | |
-| **scalarParameters** | [**Map&lt;String, String&gt;**](String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
+| **scalarParameters** | [**Map&lt;String, String&gt;**](../model/String.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] |
 | **queryName** | **String**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] |
 | **download** | **Boolean**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to false] |
 | **timeoutSeconds** | **Integer**| In seconds: &lt;0 or &gt; 175 → 175s (Maximum allowed), 0 → 120s | [optional] [default to 0] |
@@ -1192,6 +1205,7 @@ public class SqlExecutionApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 

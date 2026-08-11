@@ -71,11 +71,12 @@ public class RecsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **entityUniqueId** | **String**| The entity unique id of the rec result set (its version.entityUniqueId). | |
-| **recResultSetApprovalDecisionRequest** | [**RecResultSetApprovalDecisionRequest**](RecResultSetApprovalDecisionRequest.md)| The approval decision request. | |
+| **recResultSetApprovalDecisionRequest** | [**RecResultSetApprovalDecisionRequest**](../model/RecResultSetApprovalDecisionRequest.md)| The approval decision request. | |
 
 ### Return type
 
-[**RecResultSet**](RecResultSet.md)
+[**RecResultSet**](../model/RecResultSet.md)
+
 
 ### HTTP request headers
 
@@ -155,7 +156,8 @@ public class RecsApiExample {
 
 ### Return type
 
-[**RecInstance**](RecInstance.md)
+[**RecInstance**](../model/RecInstance.md)
+
 
 ### HTTP request headers
 
@@ -235,7 +237,8 @@ public class RecsApiExample {
 
 ### Return type
 
-[**RecResultSet**](RecResultSet.md)
+[**RecResultSet**](../model/RecResultSet.md)
+
 
 ### HTTP request headers
 
@@ -307,11 +310,12 @@ public class RecsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **instantiateRecRequest** | [**InstantiateRecRequest**](InstantiateRecRequest.md)| The instantiation request. | |
+| **instantiateRecRequest** | [**InstantiateRecRequest**](../model/InstantiateRecRequest.md)| The instantiation request. | |
 
 ### Return type
 
-[**RecInstance**](RecInstance.md)
+[**RecInstance**](../model/RecInstance.md)
+
 
 ### HTTP request headers
 
@@ -391,11 +395,12 @@ public class RecsApiExample {
 | **page** | **String**| The pagination token to use to continue listing instances from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfRecInstance**](PagedResourceListOfRecInstance.md)
+[**PagedResourceListOfRecInstance**](../model/PagedResourceListOfRecInstance.md)
+
 
 ### HTTP request headers
 
@@ -477,11 +482,12 @@ public class RecsApiExample {
 | **page** | **String**| The pagination token to use to continue listing result sets from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfRecResultSet**](PagedResourceListOfRecResultSet.md)
+[**PagedResourceListOfRecResultSet**](../model/PagedResourceListOfRecResultSet.md)
+
 
 ### HTTP request headers
 
@@ -555,11 +561,12 @@ public class RecsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **entityUniqueId** | **String**| The entity unique id of the rec result set (its version.entityUniqueId). | |
-| **submitRecResultSetReviewRequest** | [**SubmitRecResultSetReviewRequest**](SubmitRecResultSetReviewRequest.md)| The submission request. | |
+| **submitRecResultSetReviewRequest** | [**SubmitRecResultSetReviewRequest**](../model/SubmitRecResultSetReviewRequest.md)| The submission request. | |
 
 ### Return type
 
-[**RecResultSet**](RecResultSet.md)
+[**RecResultSet**](../model/RecResultSet.md)
+
 
 ### HTTP request headers
 
@@ -635,11 +642,12 @@ public class RecsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **instanceIdType** | **String**| How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. | |
 | **instanceIdValue** | **String**| The instance identifier value (a GUID). | |
-| **transitionRecInstanceRequest** | [**TransitionRecInstanceRequest**](TransitionRecInstanceRequest.md)| The transition request. | |
+| **transitionRecInstanceRequest** | [**TransitionRecInstanceRequest**](../model/TransitionRecInstanceRequest.md)| The transition request. | |
 
 ### Return type
 
-[**RecInstance**](RecInstance.md)
+[**RecInstance**](../model/RecInstance.md)
+
 
 ### HTTP request headers
 

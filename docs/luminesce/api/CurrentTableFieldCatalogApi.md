@@ -75,6 +75,7 @@ public class CurrentTableFieldCatalogApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -152,6 +153,7 @@ public class CurrentTableFieldCatalogApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -231,6 +233,7 @@ public class CurrentTableFieldCatalogApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -304,6 +307,7 @@ public class CurrentTableFieldCatalogApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 
@@ -385,6 +389,7 @@ public class CurrentTableFieldCatalogApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -460,6 +465,7 @@ public class CurrentTableFieldCatalogApiExample {
 ### Return type
 
 **String**
+
 
 ### HTTP request headers
 

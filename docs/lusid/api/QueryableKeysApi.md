@@ -68,7 +68,8 @@ public class QueryableKeysApiExample {
 
 ### Return type
 
-[**ResourceListOfQueryableKey**](ResourceListOfQueryableKey.md)
+[**ResourceListOfQueryableKey**](../model/ResourceListOfQueryableKey.md)
+
 
 ### HTTP request headers
 

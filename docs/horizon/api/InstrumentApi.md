@@ -65,11 +65,12 @@ public class InstrumentApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **onboardInstrumentRequest** | [**OnboardInstrumentRequest**](OnboardInstrumentRequest.md)|  | |
+| **onboardInstrumentRequest** | [**OnboardInstrumentRequest**](../model/OnboardInstrumentRequest.md)|  | |
 
 ### Return type
 
-[**OnboardInstrumentResponse**](OnboardInstrumentResponse.md)
+[**OnboardInstrumentResponse**](../model/OnboardInstrumentResponse.md)
+
 
 ### HTTP request headers
 
@@ -141,11 +142,12 @@ public class InstrumentApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **vendorProductKey** | **String**|  | |
-| **identifiers** | [**Identifiers**](Identifiers.md)|  | |
+| **identifiers** | [**Identifiers**](../model/Identifiers.md)|  | |
 
 ### Return type
 
-[**EnrichmentResponse**](EnrichmentResponse.md)
+[**EnrichmentResponse**](../model/EnrichmentResponse.md)
+
 
 ### HTTP request headers
 
@@ -215,11 +217,12 @@ public class InstrumentApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **parameterName** | [**OpenFigiParameterOptionName**](.md)| OpenFigi API Parameters that have a restricted / permitted range of values. | [enum: IdType, ExchangeCode, MicCode, Currency, MarketSector, SecurityType, GeneralSecurityType, StateCode] |
+| **parameterName** | [**OpenFigiParameterOptionName**](../model/.md)| OpenFigi API Parameters that have a restricted / permitted range of values. | [enum: IdType, ExchangeCode, MicCode, Currency, MarketSector, SecurityType, GeneralSecurityType, StateCode] |
 
 ### Return type
 
-[**List&lt;AllowedParameterValue&gt;**](AllowedParameterValue.md)
+[**List&lt;AllowedParameterValue&gt;**](../model/AllowedParameterValue.md)
+
 
 ### HTTP request headers
 
@@ -293,7 +296,8 @@ public class InstrumentApiExample {
 
 ### Return type
 
-[**List&lt;PermIdData&gt;**](PermIdData.md)
+[**List&lt;PermIdData&gt;**](../model/PermIdData.md)
+
 
 ### HTTP request headers
 
@@ -373,7 +377,8 @@ public class InstrumentApiExample {
 
 ### Return type
 
-[**OpenFigiSearchResult**](OpenFigiSearchResult.md)
+[**OpenFigiSearchResult**](../model/OpenFigiSearchResult.md)
+
 
 ### HTTP request headers
 
@@ -451,7 +456,8 @@ public class InstrumentApiExample {
 
 ### Return type
 
-[**List&lt;VendorProduct&gt;**](VendorProduct.md)
+[**List&lt;VendorProduct&gt;**](../model/VendorProduct.md)
+
 
 ### HTTP request headers
 

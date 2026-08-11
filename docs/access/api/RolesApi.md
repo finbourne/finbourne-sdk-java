@@ -72,11 +72,12 @@ public class RolesApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Role | |
 | **code** | **String**| The code of the Role | |
-| **addPolicyCollectionToRoleRequest** | [**AddPolicyCollectionToRoleRequest**](AddPolicyCollectionToRoleRequest.md)| The policy collections to add | |
+| **addPolicyCollectionToRoleRequest** | [**AddPolicyCollectionToRoleRequest**](../model/AddPolicyCollectionToRoleRequest.md)| The policy collections to add | |
 
 ### Return type
 
-[**RoleResponse**](RoleResponse.md)
+[**RoleResponse**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -148,11 +149,12 @@ public class RolesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **roleCreationRequest** | [**RoleCreationRequest**](RoleCreationRequest.md)| The definition of the Role | |
+| **roleCreationRequest** | [**RoleCreationRequest**](../model/RoleCreationRequest.md)| The definition of the Role | |
 
 ### Return type
 
-[**RoleResponse**](RoleResponse.md)
+[**RoleResponse**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -231,6 +233,7 @@ public class RolesApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -307,7 +310,8 @@ public class RolesApiExample {
 
 ### Return type
 
-[**RoleResponse**](RoleResponse.md)
+[**RoleResponse**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -383,7 +387,8 @@ public class RolesApiExample {
 
 ### Return type
 
-[**List&lt;RoleResponse&gt;**](RoleResponse.md)
+[**List&lt;RoleResponse&gt;**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -465,7 +470,8 @@ public class RolesApiExample {
 
 ### Return type
 
-[**RoleResponse**](RoleResponse.md)
+[**RoleResponse**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 
@@ -544,7 +550,7 @@ public class RolesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **code** | **String**| The code of the Role | |
-| **roleUpdateRequest** | [**RoleUpdateRequest**](RoleUpdateRequest.md)| The updated definition of the Role | |
+| **roleUpdateRequest** | [**RoleUpdateRequest**](../model/RoleUpdateRequest.md)| The updated definition of the Role | |
 | **scope** | **String**| &gt;Optional. Will use default scope if not supplied. The scope of the Role | [optional] |
 | **beforeScope** | **String**| Optional. The scope of the Role. Will use default scope if not supplied. | [optional] |
 | **beforeCode** | **String**| Optional. The code of the Role | [optional] |
@@ -553,7 +559,8 @@ public class RolesApiExample {
 
 ### Return type
 
-[**RoleResponse**](RoleResponse.md)
+[**RoleResponse**](../model/RoleResponse.md)
+
 
 ### HTTP request headers
 

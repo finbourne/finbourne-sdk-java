@@ -78,11 +78,12 @@ public class ReconciliationsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the reconciliation | |
-| **createReconciliationRequest** | [**CreateReconciliationRequest**](CreateReconciliationRequest.md)| The definition of the reconciliation | [optional] |
+| **createReconciliationRequest** | [**CreateReconciliationRequest**](../model/CreateReconciliationRequest.md)| The definition of the reconciliation | [optional] |
 
 ### Return type
 
-[**Reconciliation**](Reconciliation.md)
+[**Reconciliation**](../model/Reconciliation.md)
+
 
 ### HTTP request headers
 
@@ -160,7 +161,8 @@ public class ReconciliationsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -240,6 +242,7 @@ public class ReconciliationsApiExample {
 
 **String**
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -318,11 +321,12 @@ public class ReconciliationsApiExample {
 | **code** | **String**| The code of the scheduled reconciliation | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Reconciliation&#39; property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example &#39;Reconciliation/Broker/Id&#39;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Reconciliation&#39; property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example &#39;Reconciliation/Broker/Id&#39;. | [optional] |
 
 ### Return type
 
-[**Reconciliation**](Reconciliation.md)
+[**Reconciliation**](../model/Reconciliation.md)
+
 
 ### HTTP request headers
 
@@ -400,7 +404,8 @@ public class ReconciliationsApiExample {
 
 ### Return type
 
-[**Mapping**](Mapping.md)
+[**Mapping**](../model/Mapping.md)
+
 
 ### HTTP request headers
 
@@ -476,7 +481,8 @@ public class ReconciliationsApiExample {
 
 ### Return type
 
-[**ResourceListOfMapping**](ResourceListOfMapping.md)
+[**ResourceListOfMapping**](../model/ResourceListOfMapping.md)
+
 
 ### HTTP request headers
 
@@ -558,11 +564,12 @@ public class ReconciliationsApiExample {
 | **page** | **String**| The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the reconciliation type, specify \&quot;id.Code eq &#39;001&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Reconciliation&#39; domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example &#39;Reconciliation/Broker/Id&#39;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Reconciliation&#39; domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example &#39;Reconciliation/Broker/Id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfReconciliation**](PagedResourceListOfReconciliation.md)
+[**PagedResourceListOfReconciliation**](../model/PagedResourceListOfReconciliation.md)
+
 
 ### HTTP request headers
 
@@ -634,11 +641,12 @@ public class ReconciliationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **reconciliationRequest** | [**ReconciliationRequest**](ReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] |
+| **reconciliationRequest** | [**ReconciliationRequest**](../model/ReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] |
 
 ### Return type
 
-[**ReconciliationResponse**](ReconciliationResponse.md)
+[**ReconciliationResponse**](../model/ReconciliationResponse.md)
+
 
 ### HTTP request headers
 
@@ -713,14 +721,15 @@ public class ReconciliationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **sortBy** | [**List&lt;String&gt;**](String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] |
 | **limit** | **Integer**| Optional. When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \&quot;left.portfolioId.code eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **portfoliosReconciliationRequest** | [**PortfoliosReconciliationRequest**](PortfoliosReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] |
+| **portfoliosReconciliationRequest** | [**PortfoliosReconciliationRequest**](../model/PortfoliosReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] |
 
 ### Return type
 
-[**ResourceListOfReconciliationBreak**](ResourceListOfReconciliationBreak.md)
+[**ResourceListOfReconciliationBreak**](../model/ResourceListOfReconciliationBreak.md)
+
 
 ### HTTP request headers
 
@@ -792,11 +801,12 @@ public class ReconciliationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **inlineValuationsReconciliationRequest** | [**InlineValuationsReconciliationRequest**](InlineValuationsReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] |
+| **inlineValuationsReconciliationRequest** | [**InlineValuationsReconciliationRequest**](../model/InlineValuationsReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] |
 
 ### Return type
 
-[**ListAggregationReconciliation**](ListAggregationReconciliation.md)
+[**ListAggregationReconciliation**](../model/ListAggregationReconciliation.md)
+
 
 ### HTTP request headers
 
@@ -868,11 +878,12 @@ public class ReconciliationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionReconciliationRequest** | [**TransactionReconciliationRequest**](TransactionReconciliationRequest.md)|  | [optional] |
+| **transactionReconciliationRequest** | [**TransactionReconciliationRequest**](../model/TransactionReconciliationRequest.md)|  | [optional] |
 
 ### Return type
 
-[**TransactionsReconciliationsResponse**](TransactionsReconciliationsResponse.md)
+[**TransactionsReconciliationsResponse**](../model/TransactionsReconciliationsResponse.md)
+
 
 ### HTTP request headers
 
@@ -944,11 +955,12 @@ public class ReconciliationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionReconciliationRequestV2** | [**TransactionReconciliationRequestV2**](TransactionReconciliationRequestV2.md)|  | [optional] |
+| **transactionReconciliationRequestV2** | [**TransactionReconciliationRequestV2**](../model/TransactionReconciliationRequestV2.md)|  | [optional] |
 
 ### Return type
 
-[**ReconciliationResponse**](ReconciliationResponse.md)
+[**ReconciliationResponse**](../model/ReconciliationResponse.md)
+
 
 ### HTTP request headers
 
@@ -1020,11 +1032,12 @@ public class ReconciliationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **valuationsReconciliationRequest** | [**ValuationsReconciliationRequest**](ValuationsReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] |
+| **valuationsReconciliationRequest** | [**ValuationsReconciliationRequest**](../model/ValuationsReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] |
 
 ### Return type
 
-[**ListAggregationReconciliation**](ListAggregationReconciliation.md)
+[**ListAggregationReconciliation**](../model/ListAggregationReconciliation.md)
+
 
 ### HTTP request headers
 
@@ -1100,11 +1113,12 @@ public class ReconciliationsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the reconciliation to be updated | |
 | **code** | **String**| The code of the reconciliation to be updated | |
-| **updateReconciliationRequest** | [**UpdateReconciliationRequest**](UpdateReconciliationRequest.md)| The updated definition of the reconciliation | [optional] |
+| **updateReconciliationRequest** | [**UpdateReconciliationRequest**](../model/UpdateReconciliationRequest.md)| The updated definition of the reconciliation | [optional] |
 
 ### Return type
 
-[**Reconciliation**](Reconciliation.md)
+[**Reconciliation**](../model/Reconciliation.md)
+
 
 ### HTTP request headers
 
@@ -1176,11 +1190,12 @@ public class ReconciliationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **mapping** | [**Mapping**](Mapping.md)| The mapping to be created / updated. | [optional] |
+| **mapping** | [**Mapping**](../model/Mapping.md)| The mapping to be created / updated. | [optional] |
 
 ### Return type
 
-[**Mapping**](Mapping.md)
+[**Mapping**](../model/Mapping.md)
+
 
 ### HTTP request headers
 

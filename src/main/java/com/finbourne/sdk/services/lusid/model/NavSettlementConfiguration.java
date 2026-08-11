@@ -41,12 +41,12 @@ import com.finbourne.sdk.JSON;
 public class NavSettlementConfiguration {
   public static final String JSON_PROPERTY_CASH_SETTLEMENT = "cashSettlement";
   @JsonProperty(JSON_PROPERTY_CASH_SETTLEMENT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private NavSettlementConfigurationCategory cashSettlement;
 
   public static final String JSON_PROPERTY_DEFERRED_CASH_RECEIPT = "deferredCashReceipt";
   @JsonProperty(JSON_PROPERTY_DEFERRED_CASH_RECEIPT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private NavSettlementConfigurationCategory deferredCashReceipt;
 
   public NavSettlementConfiguration() {
@@ -61,7 +61,7 @@ public class NavSettlementConfiguration {
    * Get cashSettlement
    * @return cashSettlement
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public NavSettlementConfigurationCategory getCashSettlement() {
     return cashSettlement;
   }
@@ -80,7 +80,7 @@ public class NavSettlementConfiguration {
    * Get deferredCashReceipt
    * @return deferredCashReceipt
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public NavSettlementConfigurationCategory getDeferredCashReceipt() {
     return deferredCashReceipt;
   }

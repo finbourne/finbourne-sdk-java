@@ -63,11 +63,12 @@ public class TranslationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **translateInstrumentDefinitionsRequest** | [**TranslateInstrumentDefinitionsRequest**](TranslateInstrumentDefinitionsRequest.md)| The definitions of the instruments to translate along with the target dialect. | |
+| **translateInstrumentDefinitionsRequest** | [**TranslateInstrumentDefinitionsRequest**](../model/TranslateInstrumentDefinitionsRequest.md)| The definitions of the instruments to translate along with the target dialect. | |
 
 ### Return type
 
-[**TranslateInstrumentDefinitionsResponse**](TranslateInstrumentDefinitionsResponse.md)
+[**TranslateInstrumentDefinitionsResponse**](../model/TranslateInstrumentDefinitionsResponse.md)
+
 
 ### HTTP request headers
 
@@ -139,11 +140,12 @@ public class TranslationApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **translateTradeTicketRequest** | [**TranslateTradeTicketRequest**](TranslateTradeTicketRequest.md)| The definitions of the trade ticket to translate along with the target dialect. | |
+| **translateTradeTicketRequest** | [**TranslateTradeTicketRequest**](../model/TranslateTradeTicketRequest.md)| The definitions of the trade ticket to translate along with the target dialect. | |
 
 ### Return type
 
-[**TranslateTradeTicketsResponse**](TranslateTradeTicketsResponse.md)
+[**TranslateTradeTicketsResponse**](../model/TranslateTradeTicketsResponse.md)
+
 
 ### HTTP request headers
 

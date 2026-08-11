@@ -64,11 +64,12 @@ public class EventHandlersApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createEventHandlerRequest** | [**CreateEventHandlerRequest**](CreateEventHandlerRequest.md)| The data to create an Event Handler | |
+| **createEventHandlerRequest** | [**CreateEventHandlerRequest**](../model/CreateEventHandlerRequest.md)| The data to create an Event Handler | |
 
 ### Return type
 
-[**EventHandler**](EventHandler.md)
+[**EventHandler**](../model/EventHandler.md)
+
 
 ### HTTP request headers
 
@@ -146,7 +147,8 @@ public class EventHandlersApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -227,7 +229,8 @@ public class EventHandlersApiExample {
 
 ### Return type
 
-[**EventHandler**](EventHandler.md)
+[**EventHandler**](../model/EventHandler.md)
+
 
 ### HTTP request headers
 
@@ -307,7 +310,8 @@ public class EventHandlersApiExample {
 
 ### Return type
 
-[**PagedResourceListOfEventHandler**](PagedResourceListOfEventHandler.md)
+[**PagedResourceListOfEventHandler**](../model/PagedResourceListOfEventHandler.md)
+
 
 ### HTTP request headers
 
@@ -381,11 +385,12 @@ public class EventHandlersApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope that identifies an Event Handler | |
 | **code** | **String**| The code that identifies an Event Handler | |
-| **updateEventHandlerRequest** | [**UpdateEventHandlerRequest**](UpdateEventHandlerRequest.md)| The data to update an Event Handler | |
+| **updateEventHandlerRequest** | [**UpdateEventHandlerRequest**](../model/UpdateEventHandlerRequest.md)| The data to update an Event Handler | |
 
 ### Return type
 
-[**EventHandler**](EventHandler.md)
+[**EventHandler**](../model/EventHandler.md)
+
 
 ### HTTP request headers
 

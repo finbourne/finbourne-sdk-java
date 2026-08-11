@@ -69,12 +69,13 @@ public class RelationalDatasetsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **relationalDatasetDefinitionScope** | **String**| The Scope of the relational dataset definition. | |
 | **relationalDatasetDefinitionCode** | **String**| The Code of the relational dataset definition. | |
-| **requestBody** | [**Map&lt;String, DeleteRelationalDataPointRequest&gt;**](DeleteRelationalDataPointRequest.md)| The Delete Request. | |
+| **requestBody** | [**Map&lt;String, DeleteRelationalDataPointRequest&gt;**](../model/DeleteRelationalDataPointRequest.md)| The Delete Request. | |
 | **successMode** | **String**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code. | [optional] [default to Partial] |
 
 ### Return type
 
-[**BatchDeleteRelationalDataResponse**](BatchDeleteRelationalDataResponse.md)
+[**BatchDeleteRelationalDataResponse**](../model/BatchDeleteRelationalDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -151,12 +152,13 @@ public class RelationalDatasetsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **relationalDatasetDefinitionScope** | **String**| The Scope of the relational dataset definition. | |
 | **relationalDatasetDefinitionCode** | **String**| The Code of the relational dataset definition. | |
-| **requestBody** | [**Map&lt;String, UpsertRelationalDataPointRequest&gt;**](UpsertRelationalDataPointRequest.md)| The DataPoints to upsert. | |
+| **requestBody** | [**Map&lt;String, UpsertRelationalDataPointRequest&gt;**](../model/UpsertRelationalDataPointRequest.md)| The DataPoints to upsert. | |
 | **successMode** | **String**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code. | [optional] [default to Partial] |
 
 ### Return type
 
-[**BatchUpsertRelationalDatasetsResponse**](BatchUpsertRelationalDatasetsResponse.md)
+[**BatchUpsertRelationalDatasetsResponse**](../model/BatchUpsertRelationalDatasetsResponse.md)
+
 
 ### HTTP request headers
 
@@ -240,11 +242,12 @@ public class RelationalDatasetsApiExample {
 | **effectiveAt** | **String**| The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
-| **queryRelationalDatasetRequest** | [**QueryRelationalDatasetRequest**](QueryRelationalDatasetRequest.md)| The query request. | [optional] |
+| **queryRelationalDatasetRequest** | [**QueryRelationalDatasetRequest**](../model/QueryRelationalDatasetRequest.md)| The query request. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfRelationalDataPointResponse**](PagedResourceListOfRelationalDataPointResponse.md)
+[**PagedResourceListOfRelationalDataPointResponse**](../model/PagedResourceListOfRelationalDataPointResponse.md)
+
 
 ### HTTP request headers
 

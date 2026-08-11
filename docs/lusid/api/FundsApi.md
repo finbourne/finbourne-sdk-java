@@ -116,12 +116,13 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataRequest** | [**ValuationPointDataRequest**](ValuationPointDataRequest.md)| The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state. | |
+| **valuationPointDataRequest** | [**ValuationPointDataRequest**](../model/ValuationPointDataRequest.md)| The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state. | |
 | **navTypeCode** | **String**| When provided, accepts the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**AcceptEstimateValuationPointResponse**](AcceptEstimateValuationPointResponse.md)
+[**AcceptEstimateValuationPointResponse**](../model/AcceptEstimateValuationPointResponse.md)
+
 
 ### HTTP request headers
 
@@ -197,11 +198,12 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **allocationGroupDefinition** | [**List&lt;AllocationGroupDefinition&gt;**](AllocationGroupDefinition.md)| The definitions of the Allocation Groups to add to the Fund. | |
+| **allocationGroupDefinition** | [**List&lt;AllocationGroupDefinition&gt;**](../model/AllocationGroupDefinition.md)| The definitions of the Allocation Groups to add to the Fund. | |
 
 ### Return type
 
-[**Fund**](Fund.md)
+[**Fund**](../model/Fund.md)
+
 
 ### HTTP request headers
 
@@ -277,11 +279,12 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **seriesDefinitionRequest** | [**List&lt;SeriesDefinitionRequest&gt;**](SeriesDefinitionRequest.md)| The definitions of the Series to add. | |
+| **seriesDefinitionRequest** | [**List&lt;SeriesDefinitionRequest&gt;**](../model/SeriesDefinitionRequest.md)| The definitions of the Series to add. | |
 
 ### Return type
 
-[**Fund**](Fund.md)
+[**Fund**](../model/Fund.md)
+
 
 ### HTTP request headers
 
@@ -358,12 +361,13 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **feeRequest** | [**FeeRequest**](FeeRequest.md)| The Fee to create. | |
+| **feeRequest** | [**FeeRequest**](../model/FeeRequest.md)| The Fee to create. | |
 | **navTypeCode** | **String**| When provided, creates the Fee against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**Fee**](Fee.md)
+[**Fee**](../model/Fee.md)
+
 
 ### HTTP request headers
 
@@ -437,11 +441,12 @@ public class FundsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
-| **fundRequest** | [**FundRequest**](FundRequest.md)| The definition of the Fund. | |
+| **fundRequest** | [**FundRequest**](../model/FundRequest.md)| The definition of the Fund. | |
 
 ### Return type
 
-[**Fund**](Fund.md)
+[**Fund**](../model/Fund.md)
+
 
 ### HTTP request headers
 
@@ -515,11 +520,12 @@ public class FundsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
-| **fundDefinitionRequest** | [**FundDefinitionRequest**](FundDefinitionRequest.md)| The definition of the Fund. | |
+| **fundDefinitionRequest** | [**FundDefinitionRequest**](../model/FundDefinitionRequest.md)| The definition of the Fund. | |
 
 ### Return type
 
-[**Fund**](Fund.md)
+[**Fund**](../model/Fund.md)
+
 
 ### HTTP request headers
 
@@ -596,12 +602,13 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **createValuationPointRequest** | [**CreateValuationPointRequest**](CreateValuationPointRequest.md)| The Valuation Point Estimate definition to create. | |
+| **createValuationPointRequest** | [**CreateValuationPointRequest**](../model/CreateValuationPointRequest.md)| The Valuation Point Estimate definition to create. | |
 | **navTypeCode** | **String**| When provided, creates the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**ValuationPoint**](ValuationPoint.md)
+[**ValuationPoint**](../model/ValuationPoint.md)
+
 
 ### HTTP request headers
 
@@ -678,12 +685,13 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **requestBody** | [**List&lt;String&gt;**](String.md)| The codes of the nav types to be deactivated. | |
+| **requestBody** | [**List&lt;String&gt;**](../model/String.md)| The codes of the nav types to be deactivated. | |
 | **deleteMode** | **String**| The delete mode to use. Default value: Soft. Available values: Soft, Hard. | [optional] [enum: Soft, Hard] |
 
 ### Return type
 
-[**Fund**](Fund.md)
+[**Fund**](../model/Fund.md)
+
 
 ### HTTP request headers
 
@@ -765,7 +773,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -845,7 +854,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -923,7 +933,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -1003,13 +1014,14 @@ public class FundsApiExample {
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope is the unique identifier for the given Fund. | |
 | **valuationPointCode** | **String**| The valuation point Code to delete the adjustment from | |
-| **navActivityAdjustmentResponse** | [**List&lt;NavActivityAdjustmentResponse&gt;**](NavActivityAdjustmentResponse.md)| The request describing the Nav activity adjustments to delete from a specific valuation point and nav type | |
+| **navActivityAdjustmentResponse** | [**List&lt;NavActivityAdjustmentResponse&gt;**](../model/NavActivityAdjustmentResponse.md)| The request describing the Nav activity adjustments to delete from a specific valuation point and nav type | |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 | **valuationPointCodeVariant** | **String**| The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. | [optional] |
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -1093,7 +1105,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -1170,12 +1183,13 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataRequest** | [**ValuationPointDataRequest**](ValuationPointDataRequest.md)| The details of the Valuation Point to mark as final. | |
+| **valuationPointDataRequest** | [**ValuationPointDataRequest**](../model/ValuationPointDataRequest.md)| The details of the Valuation Point to mark as final. | |
 | **navTypeCode** | **String**| When provided, finalises the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**ValuationPointDataResponse**](ValuationPointDataResponse.md)
+[**ValuationPointDataResponse**](../model/ValuationPointDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -1255,15 +1269,16 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the A2B data. This includes start and end dates. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for querying the A2B data. This includes start and end dates. | |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to resolve the fund and the timeline. Defaults              to return the latest version if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the A2B data. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the A2B data. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] |
 
 ### Return type
 
-[**VersionedResourceListOfFundA2BDataRecord**](VersionedResourceListOfFundA2BDataRecord.md)
+[**VersionedResourceListOfFundA2BDataRecord**](../model/VersionedResourceListOfFundA2BDataRecord.md)
+
 
 ### HTTP request headers
 
@@ -1343,15 +1358,16 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the A2B movements. This includes start and end dates. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for querying the A2B movements. This includes start and end dates. | |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to resolve the fund and the timeline. Defaults              to return the latest version if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the A2B movements. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the A2B movements. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] |
 
 ### Return type
 
-[**VersionedResourceListOfFundA2BMovementRecord**](VersionedResourceListOfFundA2BMovementRecord.md)
+[**VersionedResourceListOfFundA2BMovementRecord**](../model/VersionedResourceListOfFundA2BMovementRecord.md)
+
 
 ### HTTP request headers
 
@@ -1433,11 +1449,12 @@ public class FundsApiExample {
 | **feeCode** | **String**| The code of the Fee. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Fee&#39; domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example &#39;Fee/Account/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Fee&#39; domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example &#39;Fee/Account/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] |
 
 ### Return type
 
-[**Fee**](Fee.md)
+[**Fee**](../model/Fee.md)
+
 
 ### HTTP request headers
 
@@ -1521,7 +1538,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**FeeProperties**](FeeProperties.md)
+[**FeeProperties**](../model/FeeProperties.md)
+
 
 ### HTTP request headers
 
@@ -1601,11 +1619,12 @@ public class FundsApiExample {
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the Fund properties. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Fund&#39; domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example &#39;Fund/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Fund&#39; domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example &#39;Fund/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] |
 
 ### Return type
 
-[**Fund**](Fund.md)
+[**Fund**](../model/Fund.md)
+
 
 ### HTTP request headers
 
@@ -1687,7 +1706,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**FundProperties**](FundProperties.md)
+[**FundProperties**](../model/FundProperties.md)
+
 
 ### HTTP request headers
 
@@ -1772,7 +1792,7 @@ public class FundsApiExample {
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
 | **holdingId** | **Long**| The unique holding identifier | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark. | |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 | **includeHistoric** | **Boolean**| If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. | [optional] [default to false] |
 | **taxLotId** | **String**| Constrains the Holding Contributors to those which contributed to the specified tax lot. | [optional] |
@@ -1783,7 +1803,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**VersionedResourceListOfHoldingContributor**](VersionedResourceListOfHoldingContributor.md)
+[**VersionedResourceListOfHoldingContributor**](../model/VersionedResourceListOfHoldingContributor.md)
+
 
 ### HTTP request headers
 
@@ -1865,17 +1886,18 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **singleValuationPointQueryParameters** | [**SingleValuationPointQueryParameters**](SingleValuationPointQueryParameters.md)| The arguments to use for querying the holdings. | |
+| **singleValuationPointQueryParameters** | [**SingleValuationPointQueryParameters**](../model/SingleValuationPointQueryParameters.md)| The arguments to use for querying the holdings. | |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot;,\&quot;CustodianAccount\&quot; or \&quot;LegalEntity\&quot; domain to decorate onto domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot;,\&quot;CustodianAccount\&quot; or \&quot;LegalEntity\&quot; domain to decorate onto domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] |
 | **byTaxlots** | **Boolean**| Whether to expand the holdings to return the underlying tax-lots. Defaults to False. | [optional] |
 | **includeSettlementEventsAfterDays** | **Integer**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt. | [optional] |
 
 ### Return type
 
-[**VersionedResourceListOfPortfolioHolding**](VersionedResourceListOfPortfolioHolding.md)
+[**VersionedResourceListOfPortfolioHolding**](../model/VersionedResourceListOfPortfolioHolding.md)
+
 
 ### HTTP request headers
 
@@ -1953,11 +1975,12 @@ public class FundsApiExample {
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
-| **fundValuationRequest** | [**FundValuationRequest**](FundValuationRequest.md)| The request specifying the dates (or DiaryEntry) on which to calculate a set of valuation metrics. | [optional] |
+| **fundValuationRequest** | [**FundValuationRequest**](../model/FundValuationRequest.md)| The request specifying the dates (or DiaryEntry) on which to calculate a set of valuation metrics. | [optional] |
 
 ### Return type
 
-[**ListAggregationResponse**](ListAggregationResponse.md)
+[**ListAggregationResponse**](../model/ListAggregationResponse.md)
+
 
 ### HTTP request headers
 
@@ -2035,13 +2058,14 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the Valuation Point data. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for querying the Valuation Point data. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. | [optional] |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**ValuationPointDataResponse**](ValuationPointDataResponse.md)
+[**ValuationPointDataResponse**](../model/ValuationPointDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -2124,18 +2148,19 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the Journal Entry Lines. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for querying the Journal Entry Lines. | |
 | **generalLedgerProfileCode** | **String**| The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve Journal Entry Lines. Defaults to returning the latest version if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing Journal Entry Lines from a previous call to GetValuationPointJournalEntryLines. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the Journal Entry Lines. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the Journal Entry Lines. | [optional] |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**ValuationPointResourceListOfFundJournalEntryLine**](ValuationPointResourceListOfFundJournalEntryLine.md)
+[**ValuationPointResourceListOfFundJournalEntryLine**](../model/ValuationPointResourceListOfFundJournalEntryLine.md)
+
 
 ### HTTP request headers
 
@@ -2217,7 +2242,7 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for generating the PnL summary. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for generating the PnL summary. | |
 | **generalLedgerProfileCode** | **String**| The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. | [optional] |
 | **filter** | **String**| \&quot;Expression to filter the result set.\&quot; | [optional] |
@@ -2227,7 +2252,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**ValuationPointResourceListOfPnlJournalEntryLine**](ValuationPointResourceListOfPnlJournalEntryLine.md)
+[**ValuationPointResourceListOfPnlJournalEntryLine**](../model/ValuationPointResourceListOfPnlJournalEntryLine.md)
+
 
 ### HTTP request headers
 
@@ -2307,7 +2333,7 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the quotes. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for querying the quotes. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve quotes. Defaults to returning the latest version              of each quote if not specified. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing quotes from a previous call to GetValuationPointQuotes. | [optional] |
@@ -2315,7 +2341,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**ValuationPointResourceListOfAccountedQuote**](ValuationPointResourceListOfAccountedQuote.md)
+[**ValuationPointResourceListOfAccountedQuote**](../model/ValuationPointResourceListOfAccountedQuote.md)
+
 
 ### HTTP request headers
 
@@ -2401,12 +2428,12 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the transactions. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for querying the transactions. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. | [optional] |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 | **dataModelScope** | **String**| The optional scope of a Custom Data Model to use | [optional] |
 | **dataModelCode** | **String**| The optional code of a Custom Data Model to use | [optional] |
@@ -2415,7 +2442,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**ValuationPointResourceListOfAccountedTransaction**](ValuationPointResourceListOfAccountedTransaction.md)
+[**ValuationPointResourceListOfAccountedTransaction**](../model/ValuationPointResourceListOfAccountedTransaction.md)
+
 
 ### HTTP request headers
 
@@ -2499,19 +2527,20 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for generating the Trial Balance. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for generating the Trial Balance. | |
 | **generalLedgerProfileCode** | **String**| The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the TrialBalance. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the TrialBalance. | [optional] |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 | **excludeCleardownModule** | **Boolean**| If this is set to true, no Cleardown Module will be applied to the Trial Balance. Defaults to false. | [optional] [default to false] |
 
 ### Return type
 
-[**ValuationPointResourceListOfTrialBalance**](ValuationPointResourceListOfTrialBalance.md)
+[**ValuationPointResourceListOfTrialBalance**](../model/ValuationPointResourceListOfTrialBalance.md)
+
 
 ### HTTP request headers
 
@@ -2592,16 +2621,17 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the unsettled transactions. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for querying the unsettled transactions. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the report. Defaults to latest. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing from a previous call. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. | [optional] |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**ValuationPointResourceListOfUnsettledTransaction**](ValuationPointResourceListOfUnsettledTransaction.md)
+[**ValuationPointResourceListOfUnsettledTransaction**](../model/ValuationPointResourceListOfUnsettledTransaction.md)
+
 
 ### HTTP request headers
 
@@ -2688,12 +2718,13 @@ public class FundsApiExample {
 | **page** | **String**| The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the treatment, specify \&quot;treatment eq &#39;Monthly&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Fee&#39; domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example &#39;Fee/Account/Id&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Fee&#39; domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example &#39;Fee/Account/Id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfFee**](PagedResourceListOfFee.md)
+[**PagedResourceListOfFee**](../model/PagedResourceListOfFee.md)
+
 
 ### HTTP request headers
 
@@ -2778,12 +2809,13 @@ public class FundsApiExample {
 | **page** | **String**| The pagination token to use to continue listing Calendar Entries; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto each item. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto each item. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfFundCalendarEntry**](PagedResourceListOfFundCalendarEntry.md)
+[**PagedResourceListOfFundCalendarEntry**](../model/PagedResourceListOfFundCalendarEntry.md)
+
 
 ### HTTP request headers
 
@@ -2868,12 +2900,13 @@ public class FundsApiExample {
 | **page** | **String**| The pagination token to use to continue listing Calendar Entries; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each item. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each item. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfFundCalendarEntries**](PagedResourceListOfFundCalendarEntries.md)
+[**PagedResourceListOfFundCalendarEntries**](../model/PagedResourceListOfFundCalendarEntries.md)
+
 
 ### HTTP request headers
 
@@ -2956,12 +2989,13 @@ public class FundsApiExample {
 | **page** | **String**| The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results.              For example, to filter on the Fund code, specify \&quot;id.Code eq &#39;Fund1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Fund&#39; domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example &#39;Fund/Manager/Id&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Fund&#39; domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example &#39;Fund/Manager/Id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfFund**](PagedResourceListOfFund.md)
+[**PagedResourceListOfFund**](../model/PagedResourceListOfFund.md)
+
 
 ### HTTP request headers
 
@@ -3053,7 +3087,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**ResourceListOfNavActivityAdjustmentResponse**](ResourceListOfNavActivityAdjustmentResponse.md)
+[**ResourceListOfNavActivityAdjustmentResponse**](../model/ResourceListOfNavActivityAdjustmentResponse.md)
+
 
 ### HTTP request headers
 
@@ -3133,7 +3168,7 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the complex market data. | |
+| **valuationPointDataQueryParameters** | [**ValuationPointDataQueryParameters**](../model/ValuationPointDataQueryParameters.md)| The arguments to use for querying the complex market data. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve complex market data. Defaults to returning the latest version              of each item if not specified. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing complex market data from a previous call to ListValuationPointComplexMarketData. | [optional] |
@@ -3141,7 +3176,8 @@ public class FundsApiExample {
 
 ### Return type
 
-[**ValuationPointResourceListOfAccountedComplexMarketData**](ValuationPointResourceListOfAccountedComplexMarketData.md)
+[**ValuationPointResourceListOfAccountedComplexMarketData**](../model/ValuationPointResourceListOfAccountedComplexMarketData.md)
+
 
 ### HTTP request headers
 
@@ -3231,13 +3267,14 @@ public class FundsApiExample {
 | **page** | **String**| The pagination token to use to continue listing instruments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
-| **instrumentPropertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto              instruments, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **instrumentPropertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto              instruments, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] |
 | **valuationPointCodeVariant** | **String**| The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfValuationPointInstrument**](PagedResourceListOfValuationPointInstrument.md)
+[**PagedResourceListOfValuationPointInstrument**](../model/PagedResourceListOfValuationPointInstrument.md)
+
 
 ### HTTP request headers
 
@@ -3324,12 +3361,13 @@ public class FundsApiExample {
 | **page** | **String**| The pagination token to use to continue listing Valuation Points; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results by.              For example, to filter on the NAV, specify \&quot;NAV gt 300\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example &#39;DiaryEntry/ValuationPoint/Id&#39;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example &#39;DiaryEntry/ValuationPoint/Id&#39;. | [optional] |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfValuationPointOverview**](PagedResourceListOfValuationPointOverview.md)
+[**PagedResourceListOfValuationPointOverview**](../model/PagedResourceListOfValuationPointOverview.md)
+
 
 ### HTTP request headers
 
@@ -3407,11 +3445,12 @@ public class FundsApiExample {
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
 | **feeCode** | **String**| The code of the Fee. | |
-| **operation** | [**List&lt;Operation&gt;**](Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | |
+| **operation** | [**List&lt;Operation&gt;**](../model/Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | |
 
 ### Return type
 
-[**Fee**](Fee.md)
+[**Fee**](../model/Fee.md)
+
 
 ### HTTP request headers
 
@@ -3487,11 +3526,12 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **operation** | [**List&lt;Operation&gt;**](Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | |
+| **operation** | [**List&lt;Operation&gt;**](../model/Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | |
 
 ### Return type
 
-[**Fund**](Fund.md)
+[**Fund**](../model/Fund.md)
+
 
 ### HTTP request headers
 
@@ -3573,17 +3613,18 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **queryFundCashStatementParameters** | [**QueryFundCashStatementParameters**](QueryFundCashStatementParameters.md)| The query parameters specifying the diary entry period and display mode. | |
+| **queryFundCashStatementParameters** | [**QueryFundCashStatementParameters**](../model/QueryFundCashStatementParameters.md)| The query parameters specifying the diary entry period and display mode. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the cash statement. Defaults to the latest version if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to get the next page of results. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys to decorate onto the cash statement rows. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys to decorate onto the cash statement rows. | [optional] |
 | **navTypeCode** | **String**| The code of the NAV type to use. Defaults to the primary NAV type if not specified. | [optional] |
 
 ### Return type
 
-[**ValuationPointResourceListOfFundCashStatementRow**](ValuationPointResourceListOfFundCashStatementRow.md)
+[**ValuationPointResourceListOfFundCashStatementRow**](../model/ValuationPointResourceListOfFundCashStatementRow.md)
+
 
 ### HTTP request headers
 
@@ -3665,17 +3706,18 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **queryFundCashStatementParameters** | [**QueryFundCashStatementParameters**](QueryFundCashStatementParameters.md)| The query parameters specifying the diary entry period and display mode. | |
+| **queryFundCashStatementParameters** | [**QueryFundCashStatementParameters**](../model/QueryFundCashStatementParameters.md)| The query parameters specifying the diary entry period and display mode. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the cash statement. Defaults to the latest version if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to get the next page of results. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys to decorate onto the cash statement rows. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys to decorate onto the cash statement rows. | [optional] |
 | **navTypeCode** | **String**| The code of the NAV type to use. Defaults to the primary NAV type if not specified. | [optional] |
 
 ### Return type
 
-[**ValuationPointResourceListOfFundCashStatementLocalCurrency**](ValuationPointResourceListOfFundCashStatementLocalCurrency.md)
+[**ValuationPointResourceListOfFundCashStatementLocalCurrency**](../model/ValuationPointResourceListOfFundCashStatementLocalCurrency.md)
+
 
 ### HTTP request headers
 
@@ -3752,12 +3794,13 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **revertValuationPointDataRequest** | [**RevertValuationPointDataRequest**](RevertValuationPointDataRequest.md)| The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status. | |
+| **revertValuationPointDataRequest** | [**RevertValuationPointDataRequest**](../model/RevertValuationPointDataRequest.md)| The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status. | |
 | **navTypeCode** | **String**| When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**ValuationPointDataResponse**](ValuationPointDataResponse.md)
+[**ValuationPointDataResponse**](../model/ValuationPointDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -3833,11 +3876,12 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **setShareClassInstrumentsRequest** | [**SetShareClassInstrumentsRequest**](SetShareClassInstrumentsRequest.md)| The scopes and instrument identifiers for the instruments to be set. | |
+| **setShareClassInstrumentsRequest** | [**SetShareClassInstrumentsRequest**](../model/SetShareClassInstrumentsRequest.md)| The scopes and instrument identifiers for the instruments to be set. | |
 
 ### Return type
 
-[**Fund**](Fund.md)
+[**Fund**](../model/Fund.md)
+
 
 ### HTTP request headers
 
@@ -3914,12 +3958,13 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **updateValuationPointRequest** | [**UpdateValuationPointRequest**](UpdateValuationPointRequest.md)| The Valuation Point Estimate definition to upsert. | |
+| **updateValuationPointRequest** | [**UpdateValuationPointRequest**](../model/UpdateValuationPointRequest.md)| The Valuation Point Estimate definition to upsert. | |
 | **navTypeCode** | **String**| When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**ValuationPoint**](ValuationPoint.md)
+[**ValuationPoint**](../model/ValuationPoint.md)
+
 
 ### HTTP request headers
 
@@ -3997,12 +4042,13 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **upsertFundBookmarkRequest** | [**UpsertFundBookmarkRequest**](UpsertFundBookmarkRequest.md)| The bookmark definition to upsert. | |
+| **upsertFundBookmarkRequest** | [**UpsertFundBookmarkRequest**](../model/UpsertFundBookmarkRequest.md)| The bookmark definition to upsert. | |
 | **navTypeCode** | **String**| When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**FundCalendarEntry**](FundCalendarEntry.md)
+[**FundCalendarEntry**](../model/FundCalendarEntry.md)
+
 
 ### HTTP request headers
 
@@ -4079,12 +4125,13 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **upsertValuationPointRequest** | [**UpsertValuationPointRequest**](UpsertValuationPointRequest.md)| The Valuation Point Estimate definition to upsert. | |
+| **upsertValuationPointRequest** | [**UpsertValuationPointRequest**](../model/UpsertValuationPointRequest.md)| The Valuation Point Estimate definition to upsert. | |
 | **navTypeCode** | **String**| When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 
 ### Return type
 
-[**DiaryEntry**](DiaryEntry.md)
+[**DiaryEntry**](../model/DiaryEntry.md)
+
 
 ### HTTP request headers
 
@@ -4162,11 +4209,12 @@ public class FundsApiExample {
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
 | **feeCode** | **String**| The code of the Fee to update or insert the properties onto. | |
-| **requestBody** | [**Map&lt;String, Property&gt;**](Property.md)| The properties to be updated or inserted onto the Fee. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Fee/Manager/Id\&quot;. | [optional] |
+| **requestBody** | [**Map&lt;String, Property&gt;**](../model/Property.md)| The properties to be updated or inserted onto the Fee. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Fee/Manager/Id\&quot;. | [optional] |
 
 ### Return type
 
-[**FeeProperties**](FeeProperties.md)
+[**FeeProperties**](../model/FeeProperties.md)
+
 
 ### HTTP request headers
 
@@ -4242,11 +4290,12 @@ public class FundsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
-| **requestBody** | [**Map&lt;String, Property&gt;**](Property.md)| The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Fund/Manager/Id\&quot;. | [optional] |
+| **requestBody** | [**Map&lt;String, Property&gt;**](../model/Property.md)| The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Fund/Manager/Id\&quot;. | [optional] |
 
 ### Return type
 
-[**FundProperties**](FundProperties.md)
+[**FundProperties**](../model/FundProperties.md)
+
 
 ### HTTP request headers
 
@@ -4326,13 +4375,14 @@ public class FundsApiExample {
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope is the unique identifier for the given Fund. | |
 | **valuationPointCode** | **String**| The valuation point Code to apply the adjustment to | |
-| **navActivityAdjustment** | [**List&lt;NavActivityAdjustment&gt;**](NavActivityAdjustment.md)| The request describing the Nav activity adjustments to apply to a specific valuation point and nav type | |
+| **navActivityAdjustment** | [**List&lt;NavActivityAdjustment&gt;**](../model/NavActivityAdjustment.md)| The request describing the Nav activity adjustments to apply to a specific valuation point and nav type | |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 | **valuationPointCodeVariant** | **String**| The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. | [optional] |
 
 ### Return type
 
-[**OffsetDateTime**](OffsetDateTime.md)
+[**OffsetDateTime**](../model/OffsetDateTime.md)
+
 
 ### HTTP request headers
 

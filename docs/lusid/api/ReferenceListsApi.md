@@ -71,7 +71,8 @@ public class ReferenceListsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -151,7 +152,8 @@ public class ReferenceListsApiExample {
 
 ### Return type
 
-[**ReferenceListResponse**](ReferenceListResponse.md)
+[**ReferenceListResponse**](../model/ReferenceListResponse.md)
+
 
 ### HTTP request headers
 
@@ -233,7 +235,8 @@ public class ReferenceListsApiExample {
 
 ### Return type
 
-[**PagedResourceListOfReferenceListResponse**](PagedResourceListOfReferenceListResponse.md)
+[**PagedResourceListOfReferenceListResponse**](../model/PagedResourceListOfReferenceListResponse.md)
+
 
 ### HTTP request headers
 
@@ -305,11 +308,12 @@ public class ReferenceListsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **referenceListRequest** | [**ReferenceListRequest**](ReferenceListRequest.md)| The payload describing the Reference List instance. | [optional] |
+| **referenceListRequest** | [**ReferenceListRequest**](../model/ReferenceListRequest.md)| The payload describing the Reference List instance. | [optional] |
 
 ### Return type
 
-[**ReferenceListResponse**](ReferenceListResponse.md)
+[**ReferenceListResponse**](../model/ReferenceListResponse.md)
+
 
 ### HTTP request headers
 

@@ -64,11 +64,12 @@ public class SimplePositionPortfoliosApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope in which to create the simple position portfolio. | |
-| **createSimplePositionPortfolioRequest** | [**CreateSimplePositionPortfolioRequest**](CreateSimplePositionPortfolioRequest.md)| The definition of the simple position portfolio. | |
+| **createSimplePositionPortfolioRequest** | [**CreateSimplePositionPortfolioRequest**](../model/CreateSimplePositionPortfolioRequest.md)| The definition of the simple position portfolio. | |
 
 ### Return type
 
-[**Portfolio**](Portfolio.md)
+[**Portfolio**](../model/Portfolio.md)
+
 
 ### HTTP request headers
 

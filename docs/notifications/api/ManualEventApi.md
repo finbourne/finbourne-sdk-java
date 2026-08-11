@@ -60,11 +60,12 @@ public class ManualEventApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **manualEventRequest** | [**ManualEventRequest**](ManualEventRequest.md)| The data required to trigger a manual event. | |
+| **manualEventRequest** | [**ManualEventRequest**](../model/ManualEventRequest.md)| The data required to trigger a manual event. | |
 
 ### Return type
 
-[**ManualEvent**](ManualEvent.md)
+[**ManualEvent**](../model/ManualEvent.md)
+
 
 ### HTTP request headers
 

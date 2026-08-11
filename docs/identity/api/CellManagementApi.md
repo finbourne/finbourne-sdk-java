@@ -71,7 +71,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 
@@ -142,11 +143,12 @@ public class CellManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **detachParentCellRequest** | [**DetachParentCellRequest**](DetachParentCellRequest.md)|  | |
+| **detachParentCellRequest** | [**DetachParentCellRequest**](../model/DetachParentCellRequest.md)|  | |
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 
@@ -218,7 +220,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 
@@ -289,7 +292,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 
@@ -360,7 +364,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 
@@ -431,11 +436,12 @@ public class CellManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **rotateAttachingKeyRequest** | [**RotateAttachingKeyRequest**](RotateAttachingKeyRequest.md)|  | |
+| **rotateAttachingKeyRequest** | [**RotateAttachingKeyRequest**](../model/RotateAttachingKeyRequest.md)|  | |
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 
@@ -507,7 +513,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 
@@ -578,11 +585,12 @@ public class CellManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **setAttachingKeyRequest** | [**SetAttachingKeyRequest**](SetAttachingKeyRequest.md)|  | |
+| **setAttachingKeyRequest** | [**SetAttachingKeyRequest**](../model/SetAttachingKeyRequest.md)|  | |
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 
@@ -654,11 +662,12 @@ public class CellManagementApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **setParentCellRequest** | [**SetParentCellRequest**](SetParentCellRequest.md)|  | |
+| **setParentCellRequest** | [**SetParentCellRequest**](../model/SetParentCellRequest.md)|  | |
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 
@@ -730,7 +739,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CellParentStatusResponse**](CellParentStatusResponse.md)
+[**CellParentStatusResponse**](../model/CellParentStatusResponse.md)
+
 
 ### HTTP request headers
 

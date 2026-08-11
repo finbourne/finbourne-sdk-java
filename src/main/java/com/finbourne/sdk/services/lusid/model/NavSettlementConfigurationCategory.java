@@ -14,7 +14,6 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -41,12 +40,12 @@ import com.finbourne.sdk.JSON;
 public class NavSettlementConfigurationCategory {
   public static final String JSON_PROPERTY_CALCULATE_INSTRUCTION_TO_PORTFOLIO_RATE = "calculateInstructionToPortfolioRate";
   @JsonProperty(JSON_PROPERTY_CALCULATE_INSTRUCTION_TO_PORTFOLIO_RATE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Boolean calculateInstructionToPortfolioRate;
 
   public static final String JSON_PROPERTY_CALCULATE_TRADE_DATE_TO_SETTLEMENT_FX_PN_L = "calculateTradeDateToSettlementFxPnL";
   @JsonProperty(JSON_PROPERTY_CALCULATE_TRADE_DATE_TO_SETTLEMENT_FX_PN_L)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Boolean calculateTradeDateToSettlementFxPnL;
 
   public NavSettlementConfigurationCategory() {
@@ -61,7 +60,7 @@ public class NavSettlementConfigurationCategory {
    * An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction.
    * @return calculateInstructionToPortfolioRate
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public Boolean getCalculateInstructionToPortfolioRate() {
     return calculateInstructionToPortfolioRate;
   }
@@ -80,7 +79,7 @@ public class NavSettlementConfigurationCategory {
    * An optional flag that allows for the calculation of FxPnL between Trade and Settlement Date.
    * @return calculateTradeDateToSettlementFxPnL
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public Boolean getCalculateTradeDateToSettlementFxPnL() {
     return calculateTradeDateToSettlementFxPnL;
   }
@@ -103,20 +102,9 @@ public class NavSettlementConfigurationCategory {
         Objects.equals(this.calculateTradeDateToSettlementFxPnL, navSettlementConfigurationCategory.calculateTradeDateToSettlementFxPnL);
   }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
   @Override
  public int hashCode() {
     return Objects.hash(calculateInstructionToPortfolioRate, calculateTradeDateToSettlementFxPnL);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

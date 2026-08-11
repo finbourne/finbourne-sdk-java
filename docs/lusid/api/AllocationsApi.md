@@ -71,7 +71,8 @@ public class AllocationsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -149,11 +150,12 @@ public class AllocationsApiExample {
 | **scope** | **String**| The scope to which the allocation belongs. | |
 | **code** | **String**| The allocation&#39;s unique identifier. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the allocation. Defaults to return the latest version of the allocation if not specified. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Allocations\&quot; domain to decorate onto the allocation.              These take the format {domain}/{scope}/{code} e.g. \&quot;Allocations/system/Name\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Allocations\&quot; domain to decorate onto the allocation.              These take the format {domain}/{scope}/{code} e.g. \&quot;Allocations/system/Name\&quot;. | [optional] |
 
 ### Return type
 
-[**Allocation**](Allocation.md)
+[**Allocation**](../model/Allocation.md)
+
 
 ### HTTP request headers
 
@@ -232,14 +234,15 @@ public class AllocationsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the allocation. Defaults to return the latest version of the allocation if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing allocations from a previous call to list allocations.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Allocations\&quot; domain to decorate onto each allocation.                  These take the format {domain}/{scope}/{code} e.g. \&quot;Allocations/system/Name\&quot;.                  All properties, except derived properties, are returned by default, without specifying here. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Allocations\&quot; domain to decorate onto each allocation.                  These take the format {domain}/{scope}/{code} e.g. \&quot;Allocations/system/Name\&quot;.                  All properties, except derived properties, are returned by default, without specifying here. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfAllocation**](PagedResourceListOfAllocation.md)
+[**PagedResourceListOfAllocation**](../model/PagedResourceListOfAllocation.md)
+
 
 ### HTTP request headers
 
@@ -313,13 +316,14 @@ public class AllocationsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **allocationSetRequest** | [**AllocationSetRequest**](AllocationSetRequest.md)| The collection of allocation requests. | |
+| **allocationSetRequest** | [**AllocationSetRequest**](../model/AllocationSetRequest.md)| The collection of allocation requests. | |
 | **verificationAsAt** | **OffsetDateTime**| An optional verification asAt; individual upserts will fail if an existing entity has been updated between the verification asAt and time of upsert. | [optional] |
 | **retryWithoutChangedEntities** | **Boolean**| Optionally choose to keep retrying upsert for remaining entities if some are being updated concurrently. If set to true, any entities that have              changed since the verificationAsAt will be dropped from the set of allocations to upsert and the upsert will be retried. The response will only contain the allocations in the original request              that have been successfully upserted. | [optional] [default to false] |
 
 ### Return type
 
-[**ResourceListOfAllocation**](ResourceListOfAllocation.md)
+[**ResourceListOfAllocation**](../model/ResourceListOfAllocation.md)
+
 
 ### HTTP request headers
 

@@ -68,14 +68,15 @@ public class SearchApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **instrumentSearchProperty** | [**List&lt;InstrumentSearchProperty&gt;**](InstrumentSearchProperty.md)| A collection of instrument properties to search for. LUSID will return instruments for any matched              properties. | |
+| **instrumentSearchProperty** | [**List&lt;InstrumentSearchProperty&gt;**](../model/InstrumentSearchProperty.md)| A collection of instrument properties to search for. LUSID will return instruments for any matched              properties. | |
 | **masteredEffectiveAt** | **String**| The effective datetime or cut label to use when searching mastered instruments. This parameter has no effect on instruments that  have not been mastered within LUSID. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **masteredOnly** | **Boolean**| If set to true, only search over instruments that have been mastered within LUSID. Defaults to false. | [optional] [default to false] |
 | **scope** | **String**| The scope in which the instrument lies. | [optional] |
 
 ### Return type
 
-[**List&lt;InstrumentMatch&gt;**](InstrumentMatch.md)
+[**List&lt;InstrumentMatch&gt;**](../model/InstrumentMatch.md)
+
 
 ### HTTP request headers
 
@@ -159,7 +160,8 @@ public class SearchApiExample {
 
 ### Return type
 
-[**PagedResourceListOfPortfolioGroupSearchResult**](PagedResourceListOfPortfolioGroupSearchResult.md)
+[**PagedResourceListOfPortfolioGroupSearchResult**](../model/PagedResourceListOfPortfolioGroupSearchResult.md)
+
 
 ### HTTP request headers
 
@@ -243,7 +245,8 @@ public class SearchApiExample {
 
 ### Return type
 
-[**PagedResourceListOfPortfolioSearchResult**](PagedResourceListOfPortfolioSearchResult.md)
+[**PagedResourceListOfPortfolioSearchResult**](../model/PagedResourceListOfPortfolioSearchResult.md)
+
 
 ### HTTP request headers
 
@@ -327,7 +330,8 @@ public class SearchApiExample {
 
 ### Return type
 
-[**PagedResourceListOfPropertyDefinitionSearchResult**](PagedResourceListOfPropertyDefinitionSearchResult.md)
+[**PagedResourceListOfPropertyDefinitionSearchResult**](../model/PagedResourceListOfPropertyDefinitionSearchResult.md)
+
 
 ### HTTP request headers
 

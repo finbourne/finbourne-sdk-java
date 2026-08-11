@@ -70,11 +70,12 @@ public class CustomDataModelsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **successMode** | **String**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [default to Partial] |
-| **requestBody** | [**Map&lt;String, MembershipAmendmentRequest&gt;**](MembershipAmendmentRequest.md)| The payload describing the amendments to make for the given Custom Data Model. | |
+| **requestBody** | [**Map&lt;String, MembershipAmendmentRequest&gt;**](../model/MembershipAmendmentRequest.md)| The payload describing the amendments to make for the given Custom Data Model. | |
 
 ### Return type
 
-[**BatchAmendCustomDataModelMembershipResponse**](BatchAmendCustomDataModelMembershipResponse.md)
+[**BatchAmendCustomDataModelMembershipResponse**](../model/BatchAmendCustomDataModelMembershipResponse.md)
+
 
 ### HTTP request headers
 
@@ -148,11 +149,12 @@ public class CustomDataModelsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **entityType** | **String**| The entity type of the Data Model. | |
-| **createCustomDataModelRequest** | [**CreateCustomDataModelRequest**](CreateCustomDataModelRequest.md)| The request containing the details of the Data Model. | [optional] |
+| **createCustomDataModelRequest** | [**CreateCustomDataModelRequest**](../model/CreateCustomDataModelRequest.md)| The request containing the details of the Data Model. | [optional] |
 
 ### Return type
 
-[**CustomDataModel**](CustomDataModel.md)
+[**CustomDataModel**](../model/CustomDataModel.md)
+
 
 ### HTTP request headers
 
@@ -232,7 +234,8 @@ public class CustomDataModelsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -314,7 +317,8 @@ public class CustomDataModelsApiExample {
 
 ### Return type
 
-[**CustomDataModel**](CustomDataModel.md)
+[**CustomDataModel**](../model/CustomDataModel.md)
+
 
 ### HTTP request headers
 
@@ -390,11 +394,12 @@ public class CustomDataModelsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 
 ### Return type
 
-[**ResourceListOfDataModelSummary**](ResourceListOfDataModelSummary.md)
+[**ResourceListOfDataModelSummary**](../model/ResourceListOfDataModelSummary.md)
+
 
 ### HTTP request headers
 
@@ -466,7 +471,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ResourceListOfString**](ResourceListOfString.md)
+[**ResourceListOfString**](../model/ResourceListOfString.md)
+
 
 ### HTTP request headers
 
@@ -543,11 +549,12 @@ public class CustomDataModelsApiExample {
 | **entityType** | **String**| The entity type of the Data Model. | |
 | **scope** | **String**| The scope of the specified Data Model. | |
 | **code** | **String**| The code of the specified Data Model. | |
-| **updateCustomDataModelRequest** | [**UpdateCustomDataModelRequest**](UpdateCustomDataModelRequest.md)| The request containing the details of the Data Model. | [optional] |
+| **updateCustomDataModelRequest** | [**UpdateCustomDataModelRequest**](../model/UpdateCustomDataModelRequest.md)| The request containing the details of the Data Model. | [optional] |
 
 ### Return type
 
-[**CustomDataModel**](CustomDataModel.md)
+[**CustomDataModel**](../model/CustomDataModel.md)
+
 
 ### HTTP request headers
 

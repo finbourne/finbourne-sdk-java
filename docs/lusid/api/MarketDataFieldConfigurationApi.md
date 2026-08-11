@@ -69,7 +69,8 @@ public class MarketDataFieldConfigurationApiExample {
 
 ### Return type
 
-[**MarketDataFieldConfiguration**](MarketDataFieldConfiguration.md)
+[**MarketDataFieldConfiguration**](../model/MarketDataFieldConfiguration.md)
+
 
 ### HTTP request headers
 
@@ -143,11 +144,12 @@ public class MarketDataFieldConfigurationApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **marketDataCategory** | **String**| The market data category. | |
-| **updateMarketDataFieldConfigurationRequest** | [**UpdateMarketDataFieldConfigurationRequest**](UpdateMarketDataFieldConfigurationRequest.md)| The metadata fields to add, update, or remove. | |
+| **updateMarketDataFieldConfigurationRequest** | [**UpdateMarketDataFieldConfigurationRequest**](../model/UpdateMarketDataFieldConfigurationRequest.md)| The metadata fields to add, update, or remove. | |
 
 ### Return type
 
-[**MarketDataFieldConfiguration**](MarketDataFieldConfiguration.md)
+[**MarketDataFieldConfiguration**](../model/MarketDataFieldConfiguration.md)
+
 
 ### HTTP request headers
 

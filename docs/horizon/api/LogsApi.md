@@ -67,13 +67,14 @@ public class LogsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **filter** | **String**| Expression to filter the result set. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. | [optional] [default to 100] |
 | **pageToken** | **String**| The pagination token to use to continue listing integration logs; this value is returned from             the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt; and &lt;i&gt;filter&lt;/i&gt; fields must not have changed since the original request.             For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] [default to ] |
 
 ### Return type
 
-[**PagedResourceListOfIIntegrationLogResponse**](PagedResourceListOfIIntegrationLogResponse.md)
+[**PagedResourceListOfIIntegrationLogResponse**](../model/PagedResourceListOfIIntegrationLogResponse.md)
+
 
 ### HTTP request headers
 
@@ -148,11 +149,12 @@ public class LogsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **instanceid** | **String**|  | |
 | **runid** | **String**|  | |
-| **externalLogInsertionRequest** | [**ExternalLogInsertionRequest**](ExternalLogInsertionRequest.md)|  | |
+| **externalLogInsertionRequest** | [**ExternalLogInsertionRequest**](../model/ExternalLogInsertionRequest.md)|  | |
 
 ### Return type
 
 **Object**
+
 
 ### HTTP request headers
 

@@ -64,11 +64,12 @@ public class SubscriptionsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createSubscription** | [**CreateSubscription**](CreateSubscription.md)| The data to create a subscription | |
+| **createSubscription** | [**CreateSubscription**](../model/CreateSubscription.md)| The data to create a subscription | |
 
 ### Return type
 
-[**Subscription**](Subscription.md)
+[**Subscription**](../model/Subscription.md)
+
 
 ### HTTP request headers
 
@@ -145,6 +146,7 @@ public class SubscriptionsApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -220,7 +222,8 @@ public class SubscriptionsApiExample {
 
 ### Return type
 
-[**Subscription**](Subscription.md)
+[**Subscription**](../model/Subscription.md)
+
 
 ### HTTP request headers
 
@@ -301,7 +304,8 @@ public class SubscriptionsApiExample {
 
 ### Return type
 
-[**ResourceListOfSubscription**](ResourceListOfSubscription.md)
+[**ResourceListOfSubscription**](../model/ResourceListOfSubscription.md)
+
 
 ### HTTP request headers
 
@@ -375,11 +379,12 @@ public class SubscriptionsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope that identifies a subscription | |
 | **code** | **String**| The code that identifies a subscription | |
-| **updateSubscription** | [**UpdateSubscription**](UpdateSubscription.md)| The data to update a subscription | |
+| **updateSubscription** | [**UpdateSubscription**](../model/UpdateSubscription.md)| The data to update a subscription | |
 
 ### Return type
 
-[**Subscription**](Subscription.md)
+[**Subscription**](../model/Subscription.md)
+
 
 ### HTTP request headers
 

@@ -67,12 +67,13 @@ public class TaxRuleSetsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createTaxRuleSetRequest** | [**CreateTaxRuleSetRequest**](CreateTaxRuleSetRequest.md)| The contents of the rule set. | |
+| **createTaxRuleSetRequest** | [**CreateTaxRuleSetRequest**](../model/CreateTaxRuleSetRequest.md)| The contents of the rule set. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. | [optional] |
 
 ### Return type
 
-[**TaxRuleSet**](TaxRuleSet.md)
+[**TaxRuleSet**](../model/TaxRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -150,7 +151,8 @@ public class TaxRuleSetsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -232,7 +234,8 @@ public class TaxRuleSetsApiExample {
 
 ### Return type
 
-[**TaxRuleSet**](TaxRuleSet.md)
+[**TaxRuleSet**](../model/TaxRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -310,7 +313,8 @@ public class TaxRuleSetsApiExample {
 
 ### Return type
 
-[**ResourceListOfTaxRuleSet**](ResourceListOfTaxRuleSet.md)
+[**ResourceListOfTaxRuleSet**](../model/ResourceListOfTaxRuleSet.md)
+
 
 ### HTTP request headers
 
@@ -387,12 +391,13 @@ public class TaxRuleSetsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The rule set scope. | |
 | **code** | **String**| The rule set code. | |
-| **updateTaxRuleSetRequest** | [**UpdateTaxRuleSetRequest**](UpdateTaxRuleSetRequest.md)| The contents of the rule set. | |
+| **updateTaxRuleSetRequest** | [**UpdateTaxRuleSetRequest**](../model/UpdateTaxRuleSetRequest.md)| The contents of the rule set. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. | [optional] |
 
 ### Return type
 
-[**TaxRuleSet**](TaxRuleSet.md)
+[**TaxRuleSet**](../model/TaxRuleSet.md)
+
 
 ### HTTP request headers
 

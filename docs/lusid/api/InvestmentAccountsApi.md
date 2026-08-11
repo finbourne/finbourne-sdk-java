@@ -79,7 +79,8 @@ public class InvestmentAccountsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -167,7 +168,8 @@ public class InvestmentAccountsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -253,7 +255,8 @@ public class InvestmentAccountsApiExample {
 
 ### Return type
 
-[**Map&lt;String, List&lt;AccessMetadataValue&gt;&gt;**](List.md)
+[**Map&lt;String, List&lt;AccessMetadataValue&gt;&gt;**](../model/List.md)
+
 
 ### HTTP request headers
 
@@ -336,14 +339,15 @@ public class InvestmentAccountsApiExample {
 | **identifierValue** | **String**| Code of the investment account under specified identifier type&#39;s scope and code. | |
 | **scope** | **String**| The scope of the investment account entity. | |
 | **identifierScope** | **String**| Scope of the investment account identifier type. | |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestmentAccount\&quot; domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;InvestmentAccount/ContactDetails/Address\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestmentAccount\&quot; domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;InvestmentAccount/ContactDetails/Address\&quot;. | [optional] |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified. | [optional] |
-| **relationshipDefinitionIds** | [**List&lt;String&gt;**](String.md)| A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
+| **relationshipDefinitionIds** | [**List&lt;String&gt;**](../model/String.md)| A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
 
 ### Return type
 
-[**InvestmentAccount**](InvestmentAccount.md)
+[**InvestmentAccount**](../model/InvestmentAccount.md)
+
 
 ### HTTP request headers
 
@@ -429,11 +433,12 @@ public class InvestmentAccountsApiExample {
 | **effectiveAt** | **String**| The effective datetime or cut label at which to get relationships. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified. | [optional] |
 | **filter** | **String**| Expression to filter relationships. Users should provide null or empty string for this field until further notice. | [optional] |
-| **identifierTypes** | [**List&lt;String&gt;**](String.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example              &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] |
+| **identifierTypes** | [**List&lt;String&gt;**](../model/String.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example              &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] |
 
 ### Return type
 
-[**ResourceListOfRelationship**](ResourceListOfRelationship.md)
+[**ResourceListOfRelationship**](../model/ResourceListOfRelationship.md)
+
 
 ### HTTP request headers
 
@@ -517,13 +522,14 @@ public class InvestmentAccountsApiExample {
 | **page** | **String**| The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestmentAccount\&quot; domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;InvestmentAccount/ContactDetails/Address\&quot;. | [optional] |
-| **relationshipDefinitionIds** | [**List&lt;String&gt;**](String.md)| A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestmentAccount\&quot; domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;InvestmentAccount/ContactDetails/Address\&quot;. | [optional] |
+| **relationshipDefinitionIds** | [**List&lt;String&gt;**](../model/String.md)| A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
 
 ### Return type
 
-[**ResourceListOfInvestmentAccount**](ResourceListOfInvestmentAccount.md)
+[**ResourceListOfInvestmentAccount**](../model/ResourceListOfInvestmentAccount.md)
+
 
 ### HTTP request headers
 
@@ -605,13 +611,14 @@ public class InvestmentAccountsApiExample {
 | **identifierValue** | **String**| Code of the investment account under specified identifier type&#39;s scope and code. | |
 | **scope** | **String**| The scope of the investment account entity. | |
 | **identifierScope** | **String**| Scope of the investment account identifier type. | |
-| **accessMetadataOperation** | [**List&lt;AccessMetadataOperation&gt;**](AccessMetadataOperation.md)| The Json Patch document | |
+| **accessMetadataOperation** | [**List&lt;AccessMetadataOperation&gt;**](../model/AccessMetadataOperation.md)| The Json Patch document | |
 | **effectiveAt** | **String**| The effectiveAt datetime at which to upsert the Access Metadata | [optional] |
 | **effectiveUntil** | **OffsetDateTime**| The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next &#39;effectiveAt&#39; datetime of the Access Metadata | [optional] |
 
 ### Return type
 
-[**Map&lt;String, List&lt;AccessMetadataValue&gt;&gt;**](List.md)
+[**Map&lt;String, List&lt;AccessMetadataValue&gt;&gt;**](../model/List.md)
+
 
 ### HTTP request headers
 
@@ -685,11 +692,12 @@ public class InvestmentAccountsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **successMode** | **String**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial | |
-| **requestBody** | [**Map&lt;String, UpsertInvestmentAccountRequest&gt;**](UpsertInvestmentAccountRequest.md)| A collection of requests to create or update Investment Accounts. | |
+| **requestBody** | [**Map&lt;String, UpsertInvestmentAccountRequest&gt;**](../model/UpsertInvestmentAccountRequest.md)| A collection of requests to create or update Investment Accounts. | |
 
 ### Return type
 
-[**UpsertInvestmentAccountsResponse**](UpsertInvestmentAccountsResponse.md)
+[**UpsertInvestmentAccountsResponse**](../model/UpsertInvestmentAccountsResponse.md)
+
 
 ### HTTP request headers
 

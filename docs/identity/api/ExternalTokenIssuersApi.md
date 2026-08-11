@@ -66,11 +66,12 @@ public class ExternalTokenIssuersApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createExternalTokenIssuerRequest** | [**CreateExternalTokenIssuerRequest**](CreateExternalTokenIssuerRequest.md)|  | |
+| **createExternalTokenIssuerRequest** | [**CreateExternalTokenIssuerRequest**](../model/CreateExternalTokenIssuerRequest.md)|  | |
 
 ### Return type
 
-[**ExternalTokenIssuerResponse**](ExternalTokenIssuerResponse.md)
+[**ExternalTokenIssuerResponse**](../model/ExternalTokenIssuerResponse.md)
+
 
 ### HTTP request headers
 
@@ -147,6 +148,7 @@ public class ExternalTokenIssuersApiExample {
 
 null (empty response body)
 
+
 ### HTTP request headers
 
 - **Content-Type**: Not defined
@@ -221,7 +223,8 @@ public class ExternalTokenIssuersApiExample {
 
 ### Return type
 
-[**ExternalTokenIssuerResponse**](ExternalTokenIssuerResponse.md)
+[**ExternalTokenIssuerResponse**](../model/ExternalTokenIssuerResponse.md)
+
 
 ### HTTP request headers
 
@@ -293,7 +296,8 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;ExternalTokenIssuerResponse&gt;**](ExternalTokenIssuerResponse.md)
+[**List&lt;ExternalTokenIssuerResponse&gt;**](../model/ExternalTokenIssuerResponse.md)
+
 
 ### HTTP request headers
 
@@ -366,11 +370,12 @@ public class ExternalTokenIssuersApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **code** | **String**| Identifier of the External Token Issuer to update | |
-| **updateExternalTokenIssuerRequest** | [**UpdateExternalTokenIssuerRequest**](UpdateExternalTokenIssuerRequest.md)|  | |
+| **updateExternalTokenIssuerRequest** | [**UpdateExternalTokenIssuerRequest**](../model/UpdateExternalTokenIssuerRequest.md)|  | |
 
 ### Return type
 
-[**ExternalTokenIssuerResponse**](ExternalTokenIssuerResponse.md)
+[**ExternalTokenIssuerResponse**](../model/ExternalTokenIssuerResponse.md)
+
 
 ### HTTP request headers
 

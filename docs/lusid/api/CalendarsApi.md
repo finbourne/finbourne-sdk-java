@@ -78,11 +78,12 @@ public class CalendarsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| Scope within which to search for the calendars | |
-| **addBusinessDaysToDateRequest** | [**AddBusinessDaysToDateRequest**](AddBusinessDaysToDateRequest.md)| Request Details: start date, number of days to add (which can be negative, but not zero), calendar codes and optionally an AsAt date for searching the calendar store | |
+| **addBusinessDaysToDateRequest** | [**AddBusinessDaysToDateRequest**](../model/AddBusinessDaysToDateRequest.md)| Request Details: start date, number of days to add (which can be negative, but not zero), calendar codes and optionally an AsAt date for searching the calendar store | |
 
 ### Return type
 
-[**AddBusinessDaysToDateResponse**](AddBusinessDaysToDateResponse.md)
+[**AddBusinessDaysToDateResponse**](../model/AddBusinessDaysToDateResponse.md)
+
 
 ### HTTP request headers
 
@@ -158,11 +159,12 @@ public class CalendarsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| Scope of the calendar | |
 | **code** | **String**| Code of the calendar | |
-| **createDateRequest** | [**CreateDateRequest**](CreateDateRequest.md)| Add date to calendar request | |
+| **createDateRequest** | [**CreateDateRequest**](../model/CreateDateRequest.md)| Add date to calendar request | |
 
 ### Return type
 
-[**CalendarDate**](CalendarDate.md)
+[**CalendarDate**](../model/CalendarDate.md)
+
 
 ### HTTP request headers
 
@@ -240,11 +242,12 @@ public class CalendarsApiExample {
 | **scope** | **String**| Scope of the calendar | |
 | **code** | **String**| Code of the calendar | |
 | **successMode** | **String**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [default to Partial] |
-| **requestBody** | [**Map&lt;String, CreateDateRequest&gt;**](CreateDateRequest.md)| Create Date Requests of dates to upsert | |
+| **requestBody** | [**Map&lt;String, CreateDateRequest&gt;**](../model/CreateDateRequest.md)| Create Date Requests of dates to upsert | |
 
 ### Return type
 
-[**BatchUpsertDatesForCalendarResponse**](BatchUpsertDatesForCalendarResponse.md)
+[**BatchUpsertDatesForCalendarResponse**](../model/BatchUpsertDatesForCalendarResponse.md)
+
 
 ### HTTP request headers
 
@@ -316,11 +319,12 @@ public class CalendarsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createCalendarRequest** | [**CreateCalendarRequest**](CreateCalendarRequest.md)| A request to create the calendar | |
+| **createCalendarRequest** | [**CreateCalendarRequest**](../model/CreateCalendarRequest.md)| A request to create the calendar | |
 
 ### Return type
 
-[**Calendar**](Calendar.md)
+[**Calendar**](../model/Calendar.md)
+
 
 ### HTTP request headers
 
@@ -398,7 +402,8 @@ public class CalendarsApiExample {
 
 ### Return type
 
-[**Calendar**](Calendar.md)
+[**Calendar**](../model/Calendar.md)
+
 
 ### HTTP request headers
 
@@ -478,7 +483,8 @@ public class CalendarsApiExample {
 
 ### Return type
 
-[**CalendarDate**](CalendarDate.md)
+[**CalendarDate**](../model/CalendarDate.md)
+
 
 ### HTTP request headers
 
@@ -554,11 +560,12 @@ public class CalendarsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| Scope of the calendar | |
 | **code** | **String**| Code of the calendar | |
-| **requestBody** | [**List&lt;String&gt;**](String.md)| Identifiers of the dates to be removed | |
+| **requestBody** | [**List&lt;String&gt;**](../model/String.md)| Identifiers of the dates to be removed | |
 
 ### Return type
 
-[**Map&lt;String, CalendarDate&gt;**](CalendarDate.md)
+[**Map&lt;String, CalendarDate&gt;**](../model/CalendarDate.md)
+
 
 ### HTTP request headers
 
@@ -633,12 +640,13 @@ public class CalendarsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| Scope of the calendars to use | |
-| **valuationSchedule** | [**ValuationSchedule**](ValuationSchedule.md)| The ValuationSchedule to generate schedule dates from | |
+| **valuationSchedule** | [**ValuationSchedule**](../model/ValuationSchedule.md)| The ValuationSchedule to generate schedule dates from | |
 | **asAt** | **OffsetDateTime**| Optional AsAt for searching the calendar store. Defaults to Latest. | [optional] |
 
 ### Return type
 
-[**List&lt;OffsetDateTime&gt;**](OffsetDateTime.md)
+[**List&lt;OffsetDateTime&gt;**](../model/OffsetDateTime.md)
+
 
 ### HTTP request headers
 
@@ -715,12 +723,13 @@ public class CalendarsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| Scope of the calendar identifier | |
 | **code** | **String**| Code of the calendar identifier | |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Calendar\&quot; domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \&quot;Calendar/System/Name\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Calendar\&quot; domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \&quot;Calendar/System/Name\&quot;. | [optional] |
 | **asAt** | **OffsetDateTime**| The AsAt datetime at which to retrieve the calendar | [optional] |
 
 ### Return type
 
-[**Calendar**](Calendar.md)
+[**Calendar**](../model/Calendar.md)
+
 
 ### HTTP request headers
 
@@ -802,11 +811,12 @@ public class CalendarsApiExample {
 | **fromEffectiveAt** | **String**| Where the effective window of dates should begin from | [optional] |
 | **toEffectiveAt** | **String**| Where the effective window of dates should end | [optional] |
 | **asAt** | **OffsetDateTime**| AsAt the dates should be retrieved at | [optional] |
-| **idFilter** | [**List&lt;String&gt;**](String.md)| An additional filter that will filter dates based on their identifer | [optional] |
+| **idFilter** | [**List&lt;String&gt;**](../model/String.md)| An additional filter that will filter dates based on their identifer | [optional] |
 
 ### Return type
 
-[**ResourceListOfCalendarDate**](ResourceListOfCalendarDate.md)
+[**ResourceListOfCalendarDate**](../model/ResourceListOfCalendarDate.md)
+
 
 ### HTTP request headers
 
@@ -888,7 +898,8 @@ public class CalendarsApiExample {
 
 ### Return type
 
-[**IsBusinessDayResponse**](IsBusinessDayResponse.md)
+[**IsBusinessDayResponse**](../model/IsBusinessDayResponse.md)
+
 
 ### HTTP request headers
 
@@ -967,12 +978,13 @@ public class CalendarsApiExample {
 | **asAt** | **OffsetDateTime**| The AsAt datetime at which to retrieve the calendars | [optional] |
 | **page** | **String**| The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Calendar\&quot; domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \&quot;Calendar/System/Name\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Calendar\&quot; domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \&quot;Calendar/System/Name\&quot;. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfCalendar**](PagedResourceListOfCalendar.md)
+[**PagedResourceListOfCalendar**](../model/PagedResourceListOfCalendar.md)
+
 
 ### HTTP request headers
 
@@ -1053,12 +1065,13 @@ public class CalendarsApiExample {
 | **asAt** | **OffsetDateTime**| The AsAt datetime at which to retrieve the calendars | [optional] |
 | **page** | **String**| The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Calendar\&quot; domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \&quot;Calendar/System/Name\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Calendar\&quot; domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \&quot;Calendar/System/Name\&quot;. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfCalendar**](PagedResourceListOfCalendar.md)
+[**PagedResourceListOfCalendar**](../model/PagedResourceListOfCalendar.md)
+
 
 ### HTTP request headers
 
@@ -1130,11 +1143,12 @@ public class CalendarsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **resolveTenorsRequest** | [**ResolveTenorsRequest**](ResolveTenorsRequest.md)| Request containing start date, calendars, spot days, tenors, and optional conventions | |
+| **resolveTenorsRequest** | [**ResolveTenorsRequest**](../model/ResolveTenorsRequest.md)| Request containing start date, calendars, spot days, tenors, and optional conventions | |
 
 ### Return type
 
-[**ResolveTenorsResponse**](ResolveTenorsResponse.md)
+[**ResolveTenorsResponse**](../model/ResolveTenorsResponse.md)
+
 
 ### HTTP request headers
 
@@ -1210,11 +1224,12 @@ public class CalendarsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| Scope of the request | |
 | **code** | **String**| Code of the request | |
-| **updateCalendarRequest** | [**UpdateCalendarRequest**](UpdateCalendarRequest.md)| The new state of the calendar | |
+| **updateCalendarRequest** | [**UpdateCalendarRequest**](../model/UpdateCalendarRequest.md)| The new state of the calendar | |
 
 ### Return type
 
-[**Calendar**](Calendar.md)
+[**Calendar**](../model/Calendar.md)
+
 
 ### HTTP request headers
 

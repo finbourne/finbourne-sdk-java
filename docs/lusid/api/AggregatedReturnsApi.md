@@ -72,7 +72,8 @@ public class AggregatedReturnsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -144,11 +145,12 @@ public class AggregatedReturnsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **aggregatedReturnsEntityRequest** | [**AggregatedReturnsEntityRequest**](AggregatedReturnsEntityRequest.md)| The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. | |
+| **aggregatedReturnsEntityRequest** | [**AggregatedReturnsEntityRequest**](../model/AggregatedReturnsEntityRequest.md)| The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. | |
 
 ### Return type
 
-[**AggregatedReturnsResponse**](AggregatedReturnsResponse.md)
+[**AggregatedReturnsResponse**](../model/AggregatedReturnsResponse.md)
+
 
 ### HTTP request headers
 
@@ -228,7 +230,8 @@ public class AggregatedReturnsApiExample {
 
 ### Return type
 
-[**ReturnsEntity**](ReturnsEntity.md)
+[**ReturnsEntity**](../model/ReturnsEntity.md)
+
 
 ### HTTP request headers
 
@@ -304,7 +307,8 @@ public class AggregatedReturnsApiExample {
 
 ### Return type
 
-[**ResourceListOfReturnsEntity**](ResourceListOfReturnsEntity.md)
+[**ResourceListOfReturnsEntity**](../model/ResourceListOfReturnsEntity.md)
+
 
 ### HTTP request headers
 
@@ -376,11 +380,12 @@ public class AggregatedReturnsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **returnsEntity** | [**ReturnsEntity**](ReturnsEntity.md)| Definition of the returns entity. | |
+| **returnsEntity** | [**ReturnsEntity**](../model/ReturnsEntity.md)| Definition of the returns entity. | |
 
 ### Return type
 
-[**ReturnsEntity**](ReturnsEntity.md)
+[**ReturnsEntity**](../model/ReturnsEntity.md)
+
 
 ### HTTP request headers
 

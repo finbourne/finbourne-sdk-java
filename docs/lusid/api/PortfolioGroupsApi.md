@@ -94,11 +94,12 @@ public class PortfolioGroupsApiExample {
 | **scope** | **String**| The scope of the portfolio group to add a portfolio to. | |
 | **code** | **String**| The code of the portfolio group to add a portfolio to. Together with the scope this uniquely identifies the portfolio group. | |
 | **effectiveAt** | **String**| The effective datetime or cut label from which the portfolio will be added to the group. | [optional] |
-| **resourceId** | [**ResourceId**](ResourceId.md)| The resource identifier of the portfolio to add to the portfolio group. | [optional] |
+| **resourceId** | [**ResourceId**](../model/ResourceId.md)| The resource identifier of the portfolio to add to the portfolio group. | [optional] |
 
 ### Return type
 
-[**PortfolioGroup**](PortfolioGroup.md)
+[**PortfolioGroup**](../model/PortfolioGroup.md)
+
 
 ### HTTP request headers
 
@@ -176,11 +177,12 @@ public class PortfolioGroupsApiExample {
 | **scope** | **String**| The scope of the portfolio group to add a portfolio group to. | |
 | **code** | **String**| The code of the portfolio group to add a portfolio group to. Together with the scope this uniquely identifies the portfolio group. | |
 | **effectiveAt** | **String**| The effective datetime or cut label from which the sub group will be added to the group. | [optional] |
-| **resourceId** | [**ResourceId**](ResourceId.md)| The resource identifier of the portfolio group to add to the portfolio group as a sub group. | [optional] |
+| **resourceId** | [**ResourceId**](../model/ResourceId.md)| The resource identifier of the portfolio group to add to the portfolio group as a sub group. | [optional] |
 
 ### Return type
 
-[**PortfolioGroup**](PortfolioGroup.md)
+[**PortfolioGroup**](../model/PortfolioGroup.md)
+
 
 ### HTTP request headers
 
@@ -265,10 +267,10 @@ public class PortfolioGroupsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the portfolio group. | |
 | **code** | **String**| The code of the portfolio group. Together with the scope this uniquely identifies               the portfolio group. | |
-| **transactionQueryParameters** | [**TransactionQueryParameters**](TransactionQueryParameters.md)| The query queryParameters which control how the output transactions are built. | |
+| **transactionQueryParameters** | [**TransactionQueryParameters**](../model/TransactionQueryParameters.md)| The query queryParameters which control how the output transactions are built. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to build the transactions. Defaults to return the latest               version of each transaction if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set.               For example, to filter on the Transaction Type, use \&quot;type eq &#39;Buy&#39;\&quot;               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto               the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or               \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto               the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or               \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing transactions from a previous call to BuildTransactions. | [optional] |
 | **dataModelScope** | **String**| The optional scope of a Custom Data Model to use | [optional] |
@@ -278,7 +280,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**VersionedResourceListOfOutputTransaction**](VersionedResourceListOfOutputTransaction.md)
+[**VersionedResourceListOfOutputTransaction**](../model/VersionedResourceListOfOutputTransaction.md)
+
 
 ### HTTP request headers
 
@@ -352,11 +355,12 @@ public class PortfolioGroupsApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope that the portfolio group will be created in. | |
-| **createPortfolioGroupRequest** | [**CreatePortfolioGroupRequest**](CreatePortfolioGroupRequest.md)| The definition and details of the portfolio group. | [optional] |
+| **createPortfolioGroupRequest** | [**CreatePortfolioGroupRequest**](../model/CreatePortfolioGroupRequest.md)| The definition and details of the portfolio group. | [optional] |
 
 ### Return type
 
-[**PortfolioGroup**](PortfolioGroup.md)
+[**PortfolioGroup**](../model/PortfolioGroup.md)
+
 
 ### HTTP request headers
 
@@ -433,12 +437,13 @@ public class PortfolioGroupsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the group to delete properties from. | |
 | **code** | **String**| The code of the group to delete properties from. Together with the scope this uniquely identifies the group. | |
-| **requestBody** | [**List&lt;String&gt;**](String.md)| The property keys of the properties to delete. These take the format              {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;. Each property must be from the \&quot;PortfolioGroup\&quot; domain. | |
+| **requestBody** | [**List&lt;String&gt;**](../model/String.md)| The property keys of the properties to delete. These take the format              {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;. Each property must be from the \&quot;PortfolioGroup\&quot; domain. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. | [optional] |
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -522,7 +527,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -606,7 +612,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**PortfolioGroup**](PortfolioGroup.md)
+[**PortfolioGroup**](../model/PortfolioGroup.md)
+
 
 ### HTTP request headers
 
@@ -684,7 +691,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
 
 ### HTTP request headers
 
@@ -768,7 +776,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**PortfolioGroup**](PortfolioGroup.md)
+[**PortfolioGroup**](../model/PortfolioGroup.md)
+
 
 ### HTTP request headers
 
@@ -855,12 +864,13 @@ public class PortfolioGroupsApiExample {
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version              of each transaction if not specified. | [optional] |
 | **recipeIdScope** | **String**| The scope of the given recipeId | [optional] |
 | **recipeIdCode** | **String**| The code of the given recipeId | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] |
 | **filter** | **String**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
 
 ### Return type
 
-[**VersionedResourceListOfA2BDataRecord**](VersionedResourceListOfA2BDataRecord.md)
+[**VersionedResourceListOfA2BDataRecord**](../model/VersionedResourceListOfA2BDataRecord.md)
+
 
 ### HTTP request headers
 
@@ -942,7 +952,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**PortfolioGroupProperties**](PortfolioGroupProperties.md)
+[**PortfolioGroupProperties**](../model/PortfolioGroupProperties.md)
+
 
 ### HTTP request headers
 
@@ -1026,13 +1037,14 @@ public class PortfolioGroupsApiExample {
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the holdings of transaction              portfolios in the portfolio group. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the holdings of transaction portfolios in the portfolio group. Defaults              to return the latest version of the holdings if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot; domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot; domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] |
 | **byTaxlots** | **Boolean**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. | [optional] |
 | **includeSettlementEventsAfterDays** | **Integer**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt | [optional] |
 
 ### Return type
 
-[**VersionedResourceListOfPortfolioHolding**](VersionedResourceListOfPortfolioHolding.md)
+[**VersionedResourceListOfPortfolioHolding**](../model/VersionedResourceListOfPortfolioHolding.md)
+
 
 ### HTTP request headers
 
@@ -1114,13 +1126,14 @@ public class PortfolioGroupsApiExample {
 | **code** | **String**| The code of the portfolio group to retrieve the definition for. Together with the scope              this uniquely identifies the portfolio group. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve the portfolio group definition. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the portfolio group definition. Defaults to return              the latest version of the portfolio group definition if not specified. | [optional] |
-| **relatedEntityPropertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] |
-| **relationshipDefinitionIds** | [**List&lt;String&gt;**](String.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio group in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;PortfolioGroup&#39; domain to decorate onto the portfolio group. These must take the format {domain}/{scope}/{code}, e.g. &#39;PortfolioGroup/Manager/Id&#39;. | [optional] |
+| **relatedEntityPropertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] |
+| **relationshipDefinitionIds** | [**List&lt;String&gt;**](../model/String.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio group in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;PortfolioGroup&#39; domain to decorate onto the portfolio group. These must take the format {domain}/{scope}/{code}, e.g. &#39;PortfolioGroup/Manager/Id&#39;. | [optional] |
 
 ### Return type
 
-[**PortfolioGroup**](PortfolioGroup.md)
+[**PortfolioGroup**](../model/PortfolioGroup.md)
+
 
 ### HTTP request headers
 
@@ -1204,7 +1217,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**List&lt;AccessMetadataValue&gt;**](AccessMetadataValue.md)
+[**List&lt;AccessMetadataValue&gt;**](../model/AccessMetadataValue.md)
+
 
 ### HTTP request headers
 
@@ -1288,7 +1302,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**ResourceListOfProcessedCommand**](ResourceListOfProcessedCommand.md)
+[**ResourceListOfProcessedCommand**](../model/ResourceListOfProcessedCommand.md)
+
 
 ### HTTP request headers
 
@@ -1368,11 +1383,12 @@ public class PortfolioGroupsApiExample {
 | **code** | **String**| The code of the portfolio group to expand. Together with the scope this uniquely identifies the portfolio              group to expand. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to expand the portfolio group. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to expand the portfolio group. Defaults to return the latest version of each portfolio in the group if not specified. | [optional] |
-| **propertyFilter** | [**List&lt;String&gt;**](String.md)| The restricted list of property keys from the \&quot;Portfolio\&quot; domain which will be decorated onto each portfolio. These take the format {domain}/{scope}/{code} e.g. \&quot;Portfolio/Manager/Id\&quot;. | [optional] |
+| **propertyFilter** | [**List&lt;String&gt;**](../model/String.md)| The restricted list of property keys from the \&quot;Portfolio\&quot; domain which will be decorated onto each portfolio. These take the format {domain}/{scope}/{code} e.g. \&quot;Portfolio/Manager/Id\&quot;. | [optional] |
 
 ### Return type
 
-[**ExpandedGroup**](ExpandedGroup.md)
+[**ExpandedGroup**](../model/ExpandedGroup.md)
+
 
 ### HTTP request headers
 
@@ -1454,7 +1470,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**Map&lt;String, List&lt;AccessMetadataValue&gt;&gt;**](List.md)
+[**Map&lt;String, List&lt;AccessMetadataValue&gt;&gt;**](../model/List.md)
+
 
 ### HTTP request headers
 
@@ -1544,7 +1561,8 @@ public class PortfolioGroupsApiExample {
 
 ### Return type
 
-[**ResourceListOfPropertyInterval**](ResourceListOfPropertyInterval.md)
+[**ResourceListOfPropertyInterval**](../model/ResourceListOfPropertyInterval.md)
+
 
 ### HTTP request headers
 
@@ -1626,11 +1644,12 @@ public class PortfolioGroupsApiExample {
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve relations. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve relations. Defaults to return the latest LUSID AsAt time if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the relations. Users should provide null or empty string for this field until further notice. | [optional] |
-| **identifierTypes** | [**List&lt;String&gt;**](String.md)| Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format              {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. They must be from the \&quot;Person\&quot; or \&quot;LegalEntity\&quot; domain.              Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. | [optional] |
+| **identifierTypes** | [**List&lt;String&gt;**](../model/String.md)| Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format              {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. They must be from the \&quot;Person\&quot; or \&quot;LegalEntity\&quot; domain.              Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. | [optional] |
 
 ### Return type
 
-[**ResourceListOfRelation**](ResourceListOfRelation.md)
+[**ResourceListOfRelation**](../model/ResourceListOfRelation.md)
+
 
 ### HTTP request headers
 
@@ -1712,11 +1731,12 @@ public class PortfolioGroupsApiExample {
 | **effectiveAt** | **String**| The effective datetime or cut label at which to retrieve relationship. Defaults to the current LUSID system datetime if not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified. | [optional] |
 | **filter** | **String**| Expression to filter relationships. Users should provide null or empty string for this field until further notice. | [optional] |
-| **identifierTypes** | [**List&lt;String&gt;**](String.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example              &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] |
+| **identifierTypes** | [**List&lt;String&gt;**](../model/String.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example              &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] |
 
 ### Return type
 
-[**ResourceListOfRelationship**](ResourceListOfRelationship.md)
+[**ResourceListOfRelationship**](../model/ResourceListOfRelationship.md)
+
 
 ### HTTP request headers
 
@@ -1807,18 +1827,19 @@ public class PortfolioGroupsApiExample {
 | **toTransactionDate** | **String**| The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.               There is no upper bound if this is not specified. | [optional] |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the transactions. Defaults to return the latest version               of each transaction if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set.               For example, to filter on the Transaction Type, use \&quot;type eq &#39;Buy&#39;\&quot;               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Transaction\&quot;, \&quot;LegalEntity\&quot; or \&quot;CustodianAccount\&quot; domain to decorate onto               the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or               \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Transaction\&quot;, \&quot;LegalEntity\&quot; or \&quot;CustodianAccount\&quot; domain to decorate onto               the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or               \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing transactions from a previous call to GetTransactions. | [optional] |
 | **showCancelledTransactions** | **Boolean**| Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
 | **dataModelScope** | **String**| The optional scope of a Custom Data Model to use | [optional] |
 | **dataModelCode** | **String**| The optional code of a Custom Data Model to use | [optional] |
 | **membershipType** | **String**| The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. | [optional] |
 
 ### Return type
 
-[**VersionedResourceListOfTransaction**](VersionedResourceListOfTransaction.md)
+[**VersionedResourceListOfTransaction**](../model/VersionedResourceListOfTransaction.md)
+
 
 ### HTTP request headers
 
@@ -1903,14 +1924,15 @@ public class PortfolioGroupsApiExample {
 | **page** | **String**| The pagination token to use to continue listing portfolio groups from a previous call to list portfolio groups. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to no limit if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set.              For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
-| **relatedEntityPropertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] |
-| **relationshipDefinitionIds** | [**List&lt;String&gt;**](String.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;PortfolioGroup&#39; domain to decorate onto the portfolio groups. These must take the format {domain}/{scope}/{code}, e.g. &#39;PortfolioGroup/Manager/Id&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **relatedEntityPropertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] |
+| **relationshipDefinitionIds** | [**List&lt;String&gt;**](../model/String.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;PortfolioGroup&#39; domain to decorate onto the portfolio groups. These must take the format {domain}/{scope}/{code}, e.g. &#39;PortfolioGroup/Manager/Id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfPortfolioGroup**](PagedResourceListOfPortfolioGroup.md)
+[**PagedResourceListOfPortfolioGroup**](../model/PagedResourceListOfPortfolioGroup.md)
+
 
 ### HTTP request headers
 
@@ -1997,14 +2019,15 @@ public class PortfolioGroupsApiExample {
 | **page** | **String**| The pagination token to use to continue listing portfolio groups from a previous call to list portfolio groups. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to no limit if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the result set.              For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] |
-| **sortBy** | [**List&lt;String&gt;**](String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
-| **relatedEntityPropertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] |
-| **relationshipDefinitionIds** | [**List&lt;String&gt;**](String.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](String.md)| A list of property keys from the &#39;PortfolioGroup&#39; domain to decorate onto the portfolio groups. These must take the format {domain}/{scope}/{code}, e.g. &#39;PortfolioGroup/Manager/Id&#39;. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+| **relatedEntityPropertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] |
+| **relationshipDefinitionIds** | [**List&lt;String&gt;**](../model/String.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;PortfolioGroup&#39; domain to decorate onto the portfolio groups. These must take the format {domain}/{scope}/{code}, e.g. &#39;PortfolioGroup/Manager/Id&#39;. | [optional] |
 
 ### Return type
 
-[**PagedResourceListOfPortfolioGroup**](PagedResourceListOfPortfolioGroup.md)
+[**PagedResourceListOfPortfolioGroup**](../model/PagedResourceListOfPortfolioGroup.md)
+
 
 ### HTTP request headers
 
@@ -2082,13 +2105,14 @@ public class PortfolioGroupsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Portfolio Group | |
 | **code** | **String**| The Portfolio Group code | |
-| **accessMetadataOperation** | [**List&lt;AccessMetadataOperation&gt;**](AccessMetadataOperation.md)| The Json patch document | |
+| **accessMetadataOperation** | [**List&lt;AccessMetadataOperation&gt;**](../model/AccessMetadataOperation.md)| The Json patch document | |
 | **effectiveAt** | **String**| The date this rule will be effective from | [optional] |
 | **effectiveUntil** | **OffsetDateTime**| The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next &#39;effectiveAt&#39; date of the Access Metadata | [optional] |
 
 ### Return type
 
-[**Map&lt;String, List&lt;AccessMetadataValue&gt;&gt;**](List.md)
+[**Map&lt;String, List&lt;AccessMetadataValue&gt;&gt;**](../model/List.md)
+
 
 ### HTTP request headers
 
@@ -2166,11 +2190,12 @@ public class PortfolioGroupsApiExample {
 | **scope** | **String**| The scope of the portfolio group to update the definition for. | |
 | **code** | **String**| The code of the portfolio group to update the definition for. Together with the scope this uniquely identifies the portfolio group. | |
 | **effectiveAt** | **String**| The effective datetime or cut label at which to update the definition. | [optional] |
-| **updatePortfolioGroupRequest** | [**UpdatePortfolioGroupRequest**](UpdatePortfolioGroupRequest.md)| The updated portfolio group definition. | [optional] |
+| **updatePortfolioGroupRequest** | [**UpdatePortfolioGroupRequest**](../model/UpdatePortfolioGroupRequest.md)| The updated portfolio group definition. | [optional] |
 
 ### Return type
 
-[**PortfolioGroup**](PortfolioGroup.md)
+[**PortfolioGroup**](../model/PortfolioGroup.md)
+
 
 ### HTTP request headers
 
@@ -2246,11 +2271,12 @@ public class PortfolioGroupsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the group to update or insert the properties onto. | |
 | **code** | **String**| The code of the group to update or insert the properties onto. Together with the scope this uniquely identifies the group. | |
-| **requestBody** | [**Map&lt;String, Property&gt;**](Property.md)| The properties to be updated or inserted onto the group. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;. | [optional] |
+| **requestBody** | [**Map&lt;String, Property&gt;**](../model/Property.md)| The properties to be updated or inserted onto the group. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;. | [optional] |
 
 ### Return type
 
-[**PortfolioGroupProperties**](PortfolioGroupProperties.md)
+[**PortfolioGroupProperties**](../model/PortfolioGroupProperties.md)
+
 
 ### HTTP request headers
 
@@ -2330,13 +2356,14 @@ public class PortfolioGroupsApiExample {
 | **scope** | **String**| The scope of the Portfolio Group | |
 | **code** | **String**| The Portfolio Group code | |
 | **metadataKey** | **String**| Key of the access metadata entry to upsert | |
-| **upsertPortfolioGroupAccessMetadataRequest** | [**UpsertPortfolioGroupAccessMetadataRequest**](UpsertPortfolioGroupAccessMetadataRequest.md)| The Portfolio Group Access Metadata rule to upsert | |
+| **upsertPortfolioGroupAccessMetadataRequest** | [**UpsertPortfolioGroupAccessMetadataRequest**](../model/UpsertPortfolioGroupAccessMetadataRequest.md)| The Portfolio Group Access Metadata rule to upsert | |
 | **effectiveAt** | **String**| The date this rule will be effective from | [optional] |
 | **effectiveUntil** | **OffsetDateTime**| The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next &#39;effectiveAt&#39; date of the Access Metadata | [optional] |
 
 ### Return type
 
-[**ResourceListOfAccessMetadataValueOf**](ResourceListOfAccessMetadataValueOf.md)
+[**ResourceListOfAccessMetadataValueOf**](../model/ResourceListOfAccessMetadataValueOf.md)
+
 
 ### HTTP request headers
 

@@ -79,7 +79,8 @@ public class IdentityLogsApiExample {
 
 ### Return type
 
-[**ResourceListOfSystemLog**](ResourceListOfSystemLog.md)
+[**ResourceListOfSystemLog**](../model/ResourceListOfSystemLog.md)
+
 
 ### HTTP request headers
 
@@ -163,7 +164,8 @@ public class IdentityLogsApiExample {
 
 ### Return type
 
-[**ResourceListOfSystemLog**](ResourceListOfSystemLog.md)
+[**ResourceListOfSystemLog**](../model/ResourceListOfSystemLog.md)
+
 
 ### HTTP request headers
 

@@ -75,7 +75,8 @@ public class CounterpartiesApiExample {
 
 ### Return type
 
-[**AnnulSingleStructuredDataResponse**](AnnulSingleStructuredDataResponse.md)
+[**AnnulSingleStructuredDataResponse**](../model/AnnulSingleStructuredDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -153,7 +154,8 @@ public class CounterpartiesApiExample {
 
 ### Return type
 
-[**AnnulSingleStructuredDataResponse**](AnnulSingleStructuredDataResponse.md)
+[**AnnulSingleStructuredDataResponse**](../model/AnnulSingleStructuredDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -233,7 +235,8 @@ public class CounterpartiesApiExample {
 
 ### Return type
 
-[**GetCounterpartyAgreementResponse**](GetCounterpartyAgreementResponse.md)
+[**GetCounterpartyAgreementResponse**](../model/GetCounterpartyAgreementResponse.md)
+
 
 ### HTTP request headers
 
@@ -313,7 +316,8 @@ public class CounterpartiesApiExample {
 
 ### Return type
 
-[**GetCreditSupportAnnexResponse**](GetCreditSupportAnnexResponse.md)
+[**GetCreditSupportAnnexResponse**](../model/GetCreditSupportAnnexResponse.md)
+
 
 ### HTTP request headers
 
@@ -389,7 +393,8 @@ public class CounterpartiesApiExample {
 
 ### Return type
 
-[**ResourceListOfGetCounterpartyAgreementResponse**](ResourceListOfGetCounterpartyAgreementResponse.md)
+[**ResourceListOfGetCounterpartyAgreementResponse**](../model/ResourceListOfGetCounterpartyAgreementResponse.md)
+
 
 ### HTTP request headers
 
@@ -465,7 +470,8 @@ public class CounterpartiesApiExample {
 
 ### Return type
 
-[**ResourceListOfGetCreditSupportAnnexResponse**](ResourceListOfGetCreditSupportAnnexResponse.md)
+[**ResourceListOfGetCreditSupportAnnexResponse**](../model/ResourceListOfGetCreditSupportAnnexResponse.md)
+
 
 ### HTTP request headers
 
@@ -537,11 +543,12 @@ public class CounterpartiesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **upsertCounterpartyAgreementRequest** | [**UpsertCounterpartyAgreementRequest**](UpsertCounterpartyAgreementRequest.md)| The Counterparty Agreement to update or insert | |
+| **upsertCounterpartyAgreementRequest** | [**UpsertCounterpartyAgreementRequest**](../model/UpsertCounterpartyAgreementRequest.md)| The Counterparty Agreement to update or insert | |
 
 ### Return type
 
-[**UpsertSingleStructuredDataResponse**](UpsertSingleStructuredDataResponse.md)
+[**UpsertSingleStructuredDataResponse**](../model/UpsertSingleStructuredDataResponse.md)
+
 
 ### HTTP request headers
 
@@ -613,11 +620,12 @@ public class CounterpartiesApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **upsertCreditSupportAnnexRequest** | [**UpsertCreditSupportAnnexRequest**](UpsertCreditSupportAnnexRequest.md)| The Credit Support Annex to update or insert | |
+| **upsertCreditSupportAnnexRequest** | [**UpsertCreditSupportAnnexRequest**](../model/UpsertCreditSupportAnnexRequest.md)| The Credit Support Annex to update or insert | |
 
 ### Return type
 
-[**UpsertSingleStructuredDataResponse**](UpsertSingleStructuredDataResponse.md)
+[**UpsertSingleStructuredDataResponse**](../model/UpsertSingleStructuredDataResponse.md)
+
 
 ### HTTP request headers
 
