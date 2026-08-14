@@ -43,6 +43,7 @@ import com.finbourne.sdk.JSON;
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = "scheduleType", visible = true)
 @com.fasterxml.jackson.annotation.JsonSubTypes({
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BondConversionSchedule.class, name = "BondConversionSchedule"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CancelSchedule.class, name = "CancelSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FixedSchedule.class, name = "FixedSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FloatSchedule.class, name = "FloatSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxLinkedNotionalSchedule.class, name = "FxLinkedNotionalSchedule"),
@@ -54,7 +55,7 @@ import com.finbourne.sdk.JSON;
 
 public class Schedule {
   /**
-   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid.
+   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule.
    */
   public enum ScheduleTypeEnum {
     FIXED_SCHEDULE("FixedSchedule"),
@@ -75,7 +76,9 @@ public class Schedule {
     
     PIK_SCHEDULE("PikSchedule"),
     
-    INVALID("Invalid");
+    INVALID("Invalid"),
+    
+    CANCEL_SCHEDULE("CancelSchedule");
 
     private String value;
 
@@ -117,7 +120,7 @@ public class Schedule {
   }
 
   /**
-   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid.
+   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule.
    * @return scheduleType
    */
   @javax.annotation.Nonnull

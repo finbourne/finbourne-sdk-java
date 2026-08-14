@@ -556,7 +556,7 @@ public class InstrumentEventsApi {
 
     /**
      * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.
+     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
      * @param queryBucketCashFlowDrillDownRequest The Query Information. (optional)
      * @return ApiResponse&lt;ResourceListOfCashFlowDetail&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -576,7 +576,7 @@ public class InstrumentEventsApi {
 
     /**
      * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.Use any specified configuration options to override any other configuration for this request only
+     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.Use any specified configuration options to override any other configuration for this request only
      * @param queryBucketCashFlowDrillDownRequest The Query Information. (optional)
      * @return ApiResponse&lt;ResourceListOfCashFlowDetail&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -596,7 +596,7 @@ public class InstrumentEventsApi {
 
     /**
      * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage. (asynchronously)
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.
+     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
      * @param queryBucketCashFlowDrillDownRequest The Query Information. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -617,7 +617,7 @@ public class InstrumentEventsApi {
 
     /**
      * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage. (asynchronously)
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.Use any specified configuration options to override any other configuration for this request only
+     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.Use any specified configuration options to override any other configuration for this request only
      * @param queryBucketCashFlowDrillDownRequest The Query Information. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -770,7 +770,7 @@ public class InstrumentEventsApi {
 
     /**
      * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.
+     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
      * @return APIqueryBucketCashFlowDrillDownRequest
      * @http.response.details
      <table summary="Response Details" border="1">

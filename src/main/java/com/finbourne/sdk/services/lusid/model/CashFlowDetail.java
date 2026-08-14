@@ -52,6 +52,7 @@ import com.finbourne.sdk.JSON;
   CashFlowDetail.JSON_PROPERTY_HAIRCUT_FRACTION,
   CashFlowDetail.JSON_PROPERTY_NET_AMOUNT,
   CashFlowDetail.JSON_PROPERTY_HAIRCUT_RULE_APPLIED,
+  CashFlowDetail.JSON_PROPERTY_ERROR,
   CashFlowDetail.JSON_PROPERTY_LINKS
 })
 
@@ -120,6 +121,11 @@ public class CashFlowDetail {
   @JsonProperty(JSON_PROPERTY_HAIRCUT_RULE_APPLIED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String haircutRuleApplied;
+
+  public static final String JSON_PROPERTY_ERROR = "error";
+  @JsonProperty(JSON_PROPERTY_ERROR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String error;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -376,6 +382,25 @@ public class CashFlowDetail {
   }
 
 
+  public CashFlowDetail error(String error) {
+    this.error = error;
+    return this;
+  }
+
+  /**
+   * Only present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. When set, the amount is null rather than zero.
+   * @return error
+   */
+  @javax.annotation.Nullable
+  public String getError() {
+    return error;
+  }
+
+  public void setError(String error) {
+    this.error = error;
+  }
+
+
   public CashFlowDetail links(List<Link> links) {
     this.links = links;
     return this;
@@ -425,6 +450,7 @@ public class CashFlowDetail {
         (this.haircutFraction == null ? cashFlowDetail.haircutFraction == null : (cashFlowDetail.haircutFraction != null && this.haircutFraction.compareTo(cashFlowDetail.getHaircutFraction()) == 0)) &&
         (this.netAmount == null ? cashFlowDetail.netAmount == null : (cashFlowDetail.netAmount != null && this.netAmount.compareTo(cashFlowDetail.getNetAmount()) == 0)) &&
         Objects.equals(this.haircutRuleApplied, cashFlowDetail.haircutRuleApplied) &&
+        Objects.equals(this.error, cashFlowDetail.error) &&
         Objects.equals(this.links, cashFlowDetail.links);
   }
 
@@ -434,7 +460,7 @@ public class CashFlowDetail {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, amount, currency, sourceType, instrumentId, transactionId, portfolioId, flowType, payReceive, grossAmount, haircutFraction, netAmount, haircutRuleApplied, links);
+    return Objects.hash(paymentDate, amount, currency, sourceType, instrumentId, transactionId, portfolioId, flowType, payReceive, grossAmount, haircutFraction, netAmount, haircutRuleApplied, error, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -461,6 +487,7 @@ public class CashFlowDetail {
     sb.append("    haircutFraction: ").append(toIndentedString(haircutFraction)).append("\n");
     sb.append("    netAmount: ").append(toIndentedString(netAmount)).append("\n");
     sb.append("    haircutRuleApplied: ").append(toIndentedString(haircutRuleApplied)).append("\n");
+    sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

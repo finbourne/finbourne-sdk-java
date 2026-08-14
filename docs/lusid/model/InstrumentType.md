@@ -62,6 +62,7 @@ InstrumentType method = InstrumentType.TO_BE_ANNOUNCED;
 InstrumentType method = InstrumentType.VOLATILITY_SWAP;
 InstrumentType method = InstrumentType.TO_BE_ANNOUNCED_OPTION;
 InstrumentType method = InstrumentType.COMMODITY_FORWARD;
+InstrumentType method = InstrumentType.BOND_OPTION;
 ```
 
 

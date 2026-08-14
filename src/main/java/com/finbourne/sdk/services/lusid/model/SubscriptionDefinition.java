@@ -48,8 +48,7 @@ import com.finbourne.sdk.JSON;
   SubscriptionDefinition.JSON_PROPERTY_BY_TAX_LOTS,
   SubscriptionDefinition.JSON_PROPERTY_SUBSCRIPTION_TYPE,
   SubscriptionDefinition.JSON_PROPERTY_START_EFFECTIVE_AT,
-  SubscriptionDefinition.JSON_PROPERTY_END_EFFECTIVE_AT,
-  SubscriptionDefinition.JSON_PROPERTY_START_AS_AT
+  SubscriptionDefinition.JSON_PROPERTY_END_EFFECTIVE_AT
 })
 
 public class SubscriptionDefinition {
@@ -107,11 +106,6 @@ public class SubscriptionDefinition {
   @JsonProperty(JSON_PROPERTY_END_EFFECTIVE_AT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime endEffectiveAt;
-
-  public static final String JSON_PROPERTY_START_AS_AT = "startAsAt";
-  @JsonProperty(JSON_PROPERTY_START_AS_AT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private OffsetDateTime startAsAt;
 
   public SubscriptionDefinition() {
   }
@@ -333,25 +327,6 @@ public class SubscriptionDefinition {
   }
 
 
-  public SubscriptionDefinition startAsAt(OffsetDateTime startAsAt) {
-    this.startAsAt = startAsAt;
-    return this;
-  }
-
-  /**
-   * Get startAsAt
-   * @return startAsAt
-   */
-  @javax.annotation.Nullable
-  public OffsetDateTime getStartAsAt() {
-    return startAsAt;
-  }
-
-  public void setStartAsAt(OffsetDateTime startAsAt) {
-    this.startAsAt = startAsAt;
-  }
-
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -371,8 +346,7 @@ public class SubscriptionDefinition {
         Objects.equals(this.byTaxLots, subscriptionDefinition.byTaxLots) &&
         Objects.equals(this.subscriptionType, subscriptionDefinition.subscriptionType) &&
         Objects.equals(this.startEffectiveAt, subscriptionDefinition.startEffectiveAt) &&
-        Objects.equals(this.endEffectiveAt, subscriptionDefinition.endEffectiveAt) &&
-        Objects.equals(this.startAsAt, subscriptionDefinition.startAsAt);
+        Objects.equals(this.endEffectiveAt, subscriptionDefinition.endEffectiveAt);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -381,7 +355,7 @@ public class SubscriptionDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt, startAsAt);
+    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -406,7 +380,6 @@ public class SubscriptionDefinition {
     sb.append("    subscriptionType: ").append(toIndentedString(subscriptionType)).append("\n");
     sb.append("    startEffectiveAt: ").append(toIndentedString(startEffectiveAt)).append("\n");
     sb.append("    endEffectiveAt: ").append(toIndentedString(endEffectiveAt)).append("\n");
-    sb.append("    startAsAt: ").append(toIndentedString(startAsAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

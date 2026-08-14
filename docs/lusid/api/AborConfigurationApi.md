@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createAborConfiguration**](AborConfigurationApi.md#createAborConfiguration) | **POST** /api/api/aborconfiguration/{scope} | [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration. |
-| [**deleteAborConfiguration**](AborConfigurationApi.md#deleteAborConfiguration) | **DELETE** /api/api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration. |
-| [**getAborConfiguration**](AborConfigurationApi.md#getAborConfiguration) | **GET** /api/api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration. |
-| [**getAborConfigurationProperties**](AborConfigurationApi.md#getAborConfigurationProperties) | **GET** /api/api/aborconfiguration/{scope}/{code}/properties | [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties |
-| [**listAborConfigurations**](AborConfigurationApi.md#listAborConfigurations) | **GET** /api/api/aborconfiguration | [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration. |
-| [**patchAborConfiguration**](AborConfigurationApi.md#patchAborConfiguration) | **PATCH** /api/api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration. |
-| [**upsertAborConfigurationProperties**](AborConfigurationApi.md#upsertAborConfigurationProperties) | **POST** /api/api/aborconfiguration/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties |
+| [**createAborConfiguration**](AborConfigurationApi.md#createAborConfiguration) | **POST** /api/api/aborconfiguration/{scope} | [EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration. |
+| [**deleteAborConfiguration**](AborConfigurationApi.md#deleteAborConfiguration) | **DELETE** /api/api/aborconfiguration/{scope}/{code} | [EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration. |
+| [**getAborConfiguration**](AborConfigurationApi.md#getAborConfiguration) | **GET** /api/api/aborconfiguration/{scope}/{code} | [EARLY ACCESS] GetAborConfiguration: Get AborConfiguration. |
+| [**getAborConfigurationProperties**](AborConfigurationApi.md#getAborConfigurationProperties) | **GET** /api/api/aborconfiguration/{scope}/{code}/properties | [EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties |
+| [**listAborConfigurations**](AborConfigurationApi.md#listAborConfigurations) | **GET** /api/api/aborconfiguration | [EARLY ACCESS] ListAborConfigurations: List AborConfiguration. |
+| [**patchAborConfiguration**](AborConfigurationApi.md#patchAborConfiguration) | **PATCH** /api/api/aborconfiguration/{scope}/{code} | [EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration. |
+| [**upsertAborConfigurationProperties**](AborConfigurationApi.md#upsertAborConfigurationProperties) | **POST** /api/api/aborconfiguration/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties |
 
 
 
@@ -18,7 +18,7 @@ All URIs are relative to *http://localhost*
 
 > AborConfiguration createAborConfiguration(scope, aborConfigurationRequest)
 
-[EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
+[EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.
 
 Create the given AborConfiguration.
 
@@ -97,7 +97,7 @@ public class AborConfigurationApiExample {
 
 > DeletedEntityResponse deleteAborConfiguration(scope, code)
 
-[EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
+[EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.
 
 Delete the given AborConfiguration.
 
@@ -176,7 +176,7 @@ public class AborConfigurationApiExample {
 
 > AborConfiguration getAborConfiguration(scope, code, effectiveAt, asAt, propertyKeys)
 
-[EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
+[EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.
 
 Retrieve the definition of a particular AborConfiguration.
 
@@ -261,7 +261,7 @@ public class AborConfigurationApiExample {
 
 > AborConfigurationProperties getAborConfigurationProperties(scope, code, effectiveAt, asAt)
 
-[EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
+[EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties
 
 Get all the properties of a single abor Configuration.
 
@@ -344,7 +344,7 @@ public class AborConfigurationApiExample {
 
 > PagedResourceListOfAborConfiguration listAborConfigurations(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys)
 
-[EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
+[EARLY ACCESS] ListAborConfigurations: List AborConfiguration.
 
 List all the AborConfiguration matching particular criteria.
 
@@ -433,7 +433,7 @@ public class AborConfigurationApiExample {
 
 > AborConfiguration patchAborConfiguration(scope, code, operation)
 
-[EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
+[EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.
 
 Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.
 
@@ -514,7 +514,7 @@ public class AborConfigurationApiExample {
 
 > AborConfigurationProperties upsertAborConfigurationProperties(scope, code, requestBody)
 
-[EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
+[EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
 
 Update or insert one or more properties onto a single AborConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;AborConfiguration&#39;.                Upserting a property that exists for an AborConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.
 

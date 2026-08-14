@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.PreviousFundCalendarEntry;
 import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
 import java.net.URI;
@@ -59,7 +60,8 @@ import com.finbourne.sdk.JSON;
   FundCalendarEntry.JSON_PROPERTY_PROPERTIES,
   FundCalendarEntry.JSON_PROPERTY_VERSION,
   FundCalendarEntry.JSON_PROPERTY_HREF,
-  FundCalendarEntry.JSON_PROPERTY_LEADER_NAV_TYPE_CODE
+  FundCalendarEntry.JSON_PROPERTY_LEADER_NAV_TYPE_CODE,
+  FundCalendarEntry.JSON_PROPERTY_STAGED_MODIFICATIONS
 })
 
 public class FundCalendarEntry {
@@ -186,6 +188,11 @@ public class FundCalendarEntry {
   @JsonProperty(JSON_PROPERTY_LEADER_NAV_TYPE_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String leaderNavTypeCode;
+
+  public static final String JSON_PROPERTY_STAGED_MODIFICATIONS = "stagedModifications";
+  @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StagedModificationsInfo stagedModifications;
 
   public FundCalendarEntry() {
   }
@@ -540,6 +547,25 @@ public class FundCalendarEntry {
   }
 
 
+  public FundCalendarEntry stagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+    return this;
+  }
+
+  /**
+   * Get stagedModifications
+   * @return stagedModifications
+   */
+  @javax.annotation.Nullable
+  public StagedModificationsInfo getStagedModifications() {
+    return stagedModifications;
+  }
+
+  public void setStagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -566,7 +592,8 @@ public class FundCalendarEntry {
         Objects.equals(this.properties, fundCalendarEntry.properties) &&
         Objects.equals(this.version, fundCalendarEntry.version) &&
         Objects.equals(this.href, fundCalendarEntry.href) &&
-        Objects.equals(this.leaderNavTypeCode, fundCalendarEntry.leaderNavTypeCode);
+        Objects.equals(this.leaderNavTypeCode, fundCalendarEntry.leaderNavTypeCode) &&
+        Objects.equals(this.stagedModifications, fundCalendarEntry.stagedModifications);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -575,7 +602,7 @@ public class FundCalendarEntry {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, variant, displayName, description, navTypeCode, timelineId, previousEntry, effectiveAt, asAt, entryType, status, applyClearDown, holdingsAsAtOverride, valuationsAsAtOverride, properties, version, href, leaderNavTypeCode);
+    return Objects.hash(code, variant, displayName, description, navTypeCode, timelineId, previousEntry, effectiveAt, asAt, entryType, status, applyClearDown, holdingsAsAtOverride, valuationsAsAtOverride, properties, version, href, leaderNavTypeCode, stagedModifications);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -607,6 +634,7 @@ public class FundCalendarEntry {
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    leaderNavTypeCode: ").append(toIndentedString(leaderNavTypeCode)).append("\n");
+    sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("}");
     return sb.toString();
   }

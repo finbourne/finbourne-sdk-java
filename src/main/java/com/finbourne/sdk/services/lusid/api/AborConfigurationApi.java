@@ -183,7 +183,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
+     * [EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.
      * Create the given AborConfiguration.
      * @param scope The scope of the AborConfiguration. (required)
      * @param aborConfigurationRequest The definition of the AborConfiguration. (required)
@@ -204,7 +204,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
+     * [EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.
      * Create the given AborConfiguration.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration. (required)
      * @param aborConfigurationRequest The definition of the AborConfiguration. (required)
@@ -225,7 +225,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration. (asynchronously)
+     * [EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration. (asynchronously)
      * Create the given AborConfiguration.
      * @param scope The scope of the AborConfiguration. (required)
      * @param aborConfigurationRequest The definition of the AborConfiguration. (required)
@@ -247,7 +247,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration. (asynchronously)
+     * [EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration. (asynchronously)
      * Create the given AborConfiguration.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration. (required)
      * @param aborConfigurationRequest The definition of the AborConfiguration. (required)
@@ -394,7 +394,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
+     * [EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.
      * Create the given AborConfiguration.
      * @param scope The scope of the AborConfiguration. (required)
      * @param aborConfigurationRequest The definition of the AborConfiguration. (required)
@@ -509,7 +509,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
+     * [EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.
      * Delete the given AborConfiguration.
      * @param scope The scope of the AborConfiguration to be deleted. (required)
      * @param code The code of the AborConfiguration to be deleted. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -530,7 +530,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
+     * [EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.
      * Delete the given AborConfiguration.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration to be deleted. (required)
      * @param code The code of the AborConfiguration to be deleted. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -551,7 +551,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration. (asynchronously)
+     * [EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration. (asynchronously)
      * Delete the given AborConfiguration.
      * @param scope The scope of the AborConfiguration to be deleted. (required)
      * @param code The code of the AborConfiguration to be deleted. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -573,7 +573,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration. (asynchronously)
+     * [EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration. (asynchronously)
      * Delete the given AborConfiguration.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration to be deleted. (required)
      * @param code The code of the AborConfiguration to be deleted. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -720,7 +720,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
+     * [EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.
      * Delete the given AborConfiguration.
      * @param scope The scope of the AborConfiguration to be deleted. (required)
      * @param code The code of the AborConfiguration to be deleted. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -853,7 +853,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
+     * [EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.
      * Retrieve the definition of a particular AborConfiguration.
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -877,7 +877,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
+     * [EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.
      * Retrieve the definition of a particular AborConfiguration.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -901,7 +901,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration. (asynchronously)
+     * [EARLY ACCESS] GetAborConfiguration: Get AborConfiguration. (asynchronously)
      * Retrieve the definition of a particular AborConfiguration.
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -926,7 +926,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration. (asynchronously)
+     * [EARLY ACCESS] GetAborConfiguration: Get AborConfiguration. (asynchronously)
      * Retrieve the definition of a particular AborConfiguration.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -1109,7 +1109,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
+     * [EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.
      * Retrieve the definition of a particular AborConfiguration.
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -1236,7 +1236,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
+     * [EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties
      * Get all the properties of a single abor Configuration.
      * @param scope The scope of the Abor Configuration to list the properties for. (required)
      * @param code The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration. (required)
@@ -1259,7 +1259,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
+     * [EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties
      * Get all the properties of a single abor Configuration.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor Configuration to list the properties for. (required)
      * @param code The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration. (required)
@@ -1282,7 +1282,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties (asynchronously)
+     * [EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties (asynchronously)
      * Get all the properties of a single abor Configuration.
      * @param scope The scope of the Abor Configuration to list the properties for. (required)
      * @param code The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration. (required)
@@ -1306,7 +1306,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties (asynchronously)
+     * [EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties (asynchronously)
      * Get all the properties of a single abor Configuration.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor Configuration to list the properties for. (required)
      * @param code The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration. (required)
@@ -1477,7 +1477,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
+     * [EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties
      * Get all the properties of a single abor Configuration.
      * @param scope The scope of the Abor Configuration to list the properties for. (required)
      * @param code The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration. (required)
@@ -1618,7 +1618,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
+     * [EARLY ACCESS] ListAborConfigurations: List AborConfiguration.
      * List all the AborConfiguration matching particular criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the TimeVariant properties for the AborConfiguration. Defaults to the current LUSID              system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the AborConfiguration. Defaults to returning the latest version of each AborConfiguration if not specified. (optional)
@@ -1644,7 +1644,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
+     * [EARLY ACCESS] ListAborConfigurations: List AborConfiguration.
      * List all the AborConfiguration matching particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the TimeVariant properties for the AborConfiguration. Defaults to the current LUSID              system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the AborConfiguration. Defaults to returning the latest version of each AborConfiguration if not specified. (optional)
@@ -1670,7 +1670,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration. (asynchronously)
+     * [EARLY ACCESS] ListAborConfigurations: List AborConfiguration. (asynchronously)
      * List all the AborConfiguration matching particular criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the TimeVariant properties for the AborConfiguration. Defaults to the current LUSID              system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the AborConfiguration. Defaults to returning the latest version of each AborConfiguration if not specified. (optional)
@@ -1697,7 +1697,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration. (asynchronously)
+     * [EARLY ACCESS] ListAborConfigurations: List AborConfiguration. (asynchronously)
      * List all the AborConfiguration matching particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the TimeVariant properties for the AborConfiguration. Defaults to the current LUSID              system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the AborConfiguration. Defaults to returning the latest version of each AborConfiguration if not specified. (optional)
@@ -1922,7 +1922,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
+     * [EARLY ACCESS] ListAborConfigurations: List AborConfiguration.
      * List all the AborConfiguration matching particular criteria.
      * @return APIlistAborConfigurationsRequest
      * @http.response.details
@@ -2046,7 +2046,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
+     * [EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.
      * Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -2068,7 +2068,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
+     * [EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.
      * Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -2090,7 +2090,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration. (asynchronously)
+     * [EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration. (asynchronously)
      * Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -2113,7 +2113,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration. (asynchronously)
+     * [EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration. (asynchronously)
      * Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -2263,7 +2263,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
+     * [EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.
      * Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.
      * @param scope The scope of the AborConfiguration. (required)
      * @param code The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -2385,7 +2385,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
+     * [EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
      * Update or insert one or more properties onto a single AborConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;AborConfiguration&#39;.                Upserting a property that exists for an AborConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.
      * @param scope The scope of the AborConfiguration to update or insert the properties onto. (required)
      * @param code The code of the AborConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -2407,7 +2407,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
+     * [EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
      * Update or insert one or more properties onto a single AborConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;AborConfiguration&#39;.                Upserting a property that exists for an AborConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration to update or insert the properties onto. (required)
      * @param code The code of the AborConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -2429,7 +2429,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties (asynchronously)
+     * [EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties (asynchronously)
      * Update or insert one or more properties onto a single AborConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;AborConfiguration&#39;.                Upserting a property that exists for an AborConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.
      * @param scope The scope of the AborConfiguration to update or insert the properties onto. (required)
      * @param code The code of the AborConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -2452,7 +2452,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties (asynchronously)
+     * [EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties (asynchronously)
      * Update or insert one or more properties onto a single AborConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;AborConfiguration&#39;.                Upserting a property that exists for an AborConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the AborConfiguration to update or insert the properties onto. (required)
      * @param code The code of the AborConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the AborConfiguration. (required)
@@ -2611,7 +2611,7 @@ public class AborConfigurationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
+     * [EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
      * Update or insert one or more properties onto a single AborConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;AborConfiguration&#39;.                Upserting a property that exists for an AborConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.
      * @param scope The scope of the AborConfiguration to update or insert the properties onto. (required)
      * @param code The code of the AborConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the AborConfiguration. (required)

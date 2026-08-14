@@ -27,13 +27,19 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
+import com.finbourne.sdk.services.lusid.model.BatchManageCommentRequest;
+import com.finbourne.sdk.services.lusid.model.BatchManageCommentResponse;
+import com.finbourne.sdk.services.lusid.model.BatchReviewRecResultRequest;
+import com.finbourne.sdk.services.lusid.model.BatchReviewRecResultResponse;
 import com.finbourne.sdk.services.lusid.model.InstantiateRecRequest;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecInstance;
+import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecResult;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecResultSet;
 import com.finbourne.sdk.services.lusid.model.RecInstance;
+import com.finbourne.sdk.services.lusid.model.RecResult;
 import com.finbourne.sdk.services.lusid.model.RecResultSet;
 import com.finbourne.sdk.services.lusid.model.RecResultSetApprovalDecisionRequest;
 import com.finbourne.sdk.services.lusid.model.SubmitRecResultSetReviewRequest;
@@ -412,6 +418,676 @@ public class RecsApi {
         return new APIaddRecResultSetApprovalDecisionRequest(entityUniqueId, recResultSetApprovalDecisionRequest);
     }
     /**
+     * Build call for batchManageRecResultComments
+     * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest batchManageRecResultCommentsCall(Map<String, BatchManageCommentRequest> requestBody, String successMode, final ApiCallback _callback) throws ApiException {
+        return batchManageRecResultCommentsCall(requestBody, successMode,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for batchManageRecResultComments. Use any specified configuration options to override any other configuration for this request only.
+     * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest batchManageRecResultCommentsCall(Map<String, BatchManageCommentRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = requestBody;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/results/$batchManageComments";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (successMode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("successMode", successMode));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest batchManageRecResultCommentsValidateBeforeCall(Map<String, BatchManageCommentRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'requestBody' is set
+        if (requestBody == null) {
+            throw new ApiException("Missing the required parameter 'requestBody' when calling batchManageRecResultComments(Async)");
+        }
+
+        return batchManageRecResultCommentsCall(requestBody, successMode, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
+     * Add, edit or delete comments on rec results in a batch.
+     * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @return ApiResponse&lt;BatchManageCommentResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchManageCommentResponse> batchManageRecResultCommentsWithHttpInfo(Map<String, BatchManageCommentRequest> requestBody, String successMode) throws ApiException {
+        HttpRequest localVarCall = batchManageRecResultCommentsValidateBeforeCall(requestBody, successMode, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchManageCommentResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
+     * Add, edit or delete comments on rec results in a batch.Use any specified configuration options to override any other configuration for this request only
+     * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @return ApiResponse&lt;BatchManageCommentResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchManageCommentResponse> batchManageRecResultCommentsWithHttpInfo(Map<String, BatchManageCommentRequest> requestBody, String successMode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = batchManageRecResultCommentsValidateBeforeCall(requestBody, successMode, null, opts);
+        Type localVarReturnType = new TypeReference<BatchManageCommentResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments (asynchronously)
+     * Add, edit or delete comments on rec results in a batch.
+     * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void batchManageRecResultCommentsAsync(Map<String, BatchManageCommentRequest> requestBody, String successMode, final ApiCallback<BatchManageCommentResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = batchManageRecResultCommentsValidateBeforeCall(requestBody, successMode, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchManageCommentResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments (asynchronously)
+     * Add, edit or delete comments on rec results in a batch.Use any specified configuration options to override any other configuration for this request only
+     * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void batchManageRecResultCommentsAsync(Map<String, BatchManageCommentRequest> requestBody, String successMode, final ApiCallback<BatchManageCommentResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = batchManageRecResultCommentsValidateBeforeCall(requestBody, successMode, _callback, opts);
+        Type localVarReturnType = new TypeReference<BatchManageCommentResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIbatchManageRecResultCommentsRequest {
+        private final Map<String, BatchManageCommentRequest> requestBody;
+        private String successMode;
+
+        private APIbatchManageRecResultCommentsRequest(Map<String, BatchManageCommentRequest> requestBody) {
+            this.requestBody = requestBody;
+        }
+
+        /**
+         * Set successMode
+         * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+         * @return APIbatchManageRecResultCommentsRequest
+         */
+        public APIbatchManageRecResultCommentsRequest successMode(String successMode) {
+            this.successMode = successMode;
+            return this;
+        }
+
+        /**
+         * Build call for batchManageRecResultComments
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return batchManageRecResultCommentsCall(requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute batchManageRecResultComments request
+         * @return BatchManageCommentResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchManageCommentResponse execute() throws ApiException {
+            ApiResponse<BatchManageCommentResponse> localVarResp = batchManageRecResultCommentsWithHttpInfo(requestBody, successMode);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute batchManageRecResultComments request. Use any specified configuration options to override any other configuration for this request only.
+         * @return BatchManageCommentResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchManageCommentResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<BatchManageCommentResponse> localVarResp = batchManageRecResultCommentsWithHttpInfo(requestBody, successMode, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute batchManageRecResultComments request with HTTP info returned
+         * @return ApiResponse&lt;BatchManageCommentResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchManageCommentResponse> executeWithHttpInfo() throws ApiException {
+            return batchManageRecResultCommentsWithHttpInfo(requestBody, successMode);
+        }
+
+        /**
+         * Execute batchManageRecResultComments request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;BatchManageCommentResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchManageCommentResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return batchManageRecResultCommentsWithHttpInfo(requestBody, successMode, opts);
+        }
+
+        /**
+         * Execute batchManageRecResultComments request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchManageCommentResponse> _callback) throws ApiException {
+            batchManageRecResultCommentsAsync(requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute batchManageRecResultComments request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchManageCommentResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            batchManageRecResultCommentsAsync(requestBody, successMode, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
+     * Add, edit or delete comments on rec results in a batch.
+     * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
+     * @return APIbatchManageRecResultCommentsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec results, keyed by batch item key. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIbatchManageRecResultCommentsRequest batchManageRecResultComments(Map<String, BatchManageCommentRequest> requestBody) {
+        return new APIbatchManageRecResultCommentsRequest(requestBody);
+    }
+    /**
+     * Build call for batchReviewRecResults
+     * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest batchReviewRecResultsCall(Map<String, BatchReviewRecResultRequest> requestBody, String successMode, final ApiCallback _callback) throws ApiException {
+        return batchReviewRecResultsCall(requestBody, successMode,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for batchReviewRecResults. Use any specified configuration options to override any other configuration for this request only.
+     * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest batchReviewRecResultsCall(Map<String, BatchReviewRecResultRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = requestBody;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/results/$batchReview";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (successMode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("successMode", successMode));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest batchReviewRecResultsValidateBeforeCall(Map<String, BatchReviewRecResultRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'requestBody' is set
+        if (requestBody == null) {
+            throw new ApiException("Missing the required parameter 'requestBody' when calling batchReviewRecResults(Async)");
+        }
+
+        return batchReviewRecResultsCall(requestBody, successMode, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.
+     * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @return ApiResponse&lt;BatchReviewRecResultResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchReviewRecResultResponse> batchReviewRecResultsWithHttpInfo(Map<String, BatchReviewRecResultRequest> requestBody, String successMode) throws ApiException {
+        HttpRequest localVarCall = batchReviewRecResultsValidateBeforeCall(requestBody, successMode, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchReviewRecResultResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.Use any specified configuration options to override any other configuration for this request only
+     * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @return ApiResponse&lt;BatchReviewRecResultResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchReviewRecResultResponse> batchReviewRecResultsWithHttpInfo(Map<String, BatchReviewRecResultRequest> requestBody, String successMode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = batchReviewRecResultsValidateBeforeCall(requestBody, successMode, null, opts);
+        Type localVarReturnType = new TypeReference<BatchReviewRecResultResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults (asynchronously)
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.
+     * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void batchReviewRecResultsAsync(Map<String, BatchReviewRecResultRequest> requestBody, String successMode, final ApiCallback<BatchReviewRecResultResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = batchReviewRecResultsValidateBeforeCall(requestBody, successMode, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchReviewRecResultResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults (asynchronously)
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.Use any specified configuration options to override any other configuration for this request only
+     * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
+     * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void batchReviewRecResultsAsync(Map<String, BatchReviewRecResultRequest> requestBody, String successMode, final ApiCallback<BatchReviewRecResultResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = batchReviewRecResultsValidateBeforeCall(requestBody, successMode, _callback, opts);
+        Type localVarReturnType = new TypeReference<BatchReviewRecResultResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIbatchReviewRecResultsRequest {
+        private final Map<String, BatchReviewRecResultRequest> requestBody;
+        private String successMode;
+
+        private APIbatchReviewRecResultsRequest(Map<String, BatchReviewRecResultRequest> requestBody) {
+            this.requestBody = requestBody;
+        }
+
+        /**
+         * Set successMode
+         * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
+         * @return APIbatchReviewRecResultsRequest
+         */
+        public APIbatchReviewRecResultsRequest successMode(String successMode) {
+            this.successMode = successMode;
+            return this;
+        }
+
+        /**
+         * Build call for batchReviewRecResults
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return batchReviewRecResultsCall(requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute batchReviewRecResults request
+         * @return BatchReviewRecResultResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchReviewRecResultResponse execute() throws ApiException {
+            ApiResponse<BatchReviewRecResultResponse> localVarResp = batchReviewRecResultsWithHttpInfo(requestBody, successMode);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute batchReviewRecResults request. Use any specified configuration options to override any other configuration for this request only.
+         * @return BatchReviewRecResultResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchReviewRecResultResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<BatchReviewRecResultResponse> localVarResp = batchReviewRecResultsWithHttpInfo(requestBody, successMode, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute batchReviewRecResults request with HTTP info returned
+         * @return ApiResponse&lt;BatchReviewRecResultResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchReviewRecResultResponse> executeWithHttpInfo() throws ApiException {
+            return batchReviewRecResultsWithHttpInfo(requestBody, successMode);
+        }
+
+        /**
+         * Execute batchReviewRecResults request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;BatchReviewRecResultResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchReviewRecResultResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return batchReviewRecResultsWithHttpInfo(requestBody, successMode, opts);
+        }
+
+        /**
+         * Execute batchReviewRecResults request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchReviewRecResultResponse> _callback) throws ApiException {
+            batchReviewRecResultsAsync(requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute batchReviewRecResults request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchReviewRecResultResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            batchReviewRecResultsAsync(requestBody, successMode, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.
+     * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
+     * @return APIbatchReviewRecResultsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The results affected by each batch item. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIbatchReviewRecResultsRequest batchReviewRecResults(Map<String, BatchReviewRecResultRequest> requestBody) {
+        return new APIbatchReviewRecResultsRequest(requestBody);
+    }
+    /**
      * Build call for getRecInstance
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The instance identifier value (a GUID). (required)
@@ -757,6 +1433,359 @@ public class RecsApi {
      */
     public APIgetRecInstanceRequest getRecInstance(String instanceIdType, String instanceIdValue) {
         return new APIgetRecInstanceRequest(instanceIdType, instanceIdValue);
+    }
+    /**
+     * Build call for getRecResult
+     * @param id The system-generated id of the rec result. (required)
+     * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getRecResultCall(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return getRecResultCall(id, asAt, propertyKeys,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getRecResult. Use any specified configuration options to override any other configuration for this request only.
+     * @param id The system-generated id of the rec result. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getRecResultCall(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/results/{id}"
+            .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (propertyKeys != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "propertyKeys", propertyKeys));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getRecResultValidateBeforeCall(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'id' is set
+        if (id == null) {
+            throw new ApiException("Missing the required parameter 'id' when calling getRecResult(Async)");
+        }
+
+        return getRecResultCall(id, asAt, propertyKeys, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecResult: GetRecResult
+     * Retrieve a single rec result by its id.
+     * @param id The system-generated id of the rec result. (required)
+     * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @return ApiResponse&lt;RecResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecResult> getRecResultWithHttpInfo(String id, OffsetDateTime asAt, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(id, asAt, propertyKeys, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecResult: GetRecResult
+     * Retrieve a single rec result by its id.Use any specified configuration options to override any other configuration for this request only
+     * @param id The system-generated id of the rec result. (required)
+     * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @return ApiResponse&lt;RecResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecResult> getRecResultWithHttpInfo(String id, OffsetDateTime asAt, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(id, asAt, propertyKeys, null, opts);
+        Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecResult: GetRecResult (asynchronously)
+     * Retrieve a single rec result by its id.
+     * @param id The system-generated id of the rec result. (required)
+     * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getRecResultAsync(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(id, asAt, propertyKeys, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecResult: GetRecResult (asynchronously)
+     * Retrieve a single rec result by its id.Use any specified configuration options to override any other configuration for this request only
+     * @param id The system-generated id of the rec result. (required)
+     * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getRecResultAsync(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(id, asAt, propertyKeys, _callback, opts);
+        Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetRecResultRequest {
+        private final String id;
+        private OffsetDateTime asAt;
+        private List<String> propertyKeys;
+
+        private APIgetRecResultRequest(String id) {
+            this.id = id;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
+         * @return APIgetRecResultRequest
+         */
+        public APIgetRecResultRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set propertyKeys
+         * @param propertyKeys The property keys to decorate onto the result. (optional)
+         * @return APIgetRecResultRequest
+         */
+        public APIgetRecResultRequest propertyKeys(List<String> propertyKeys) {
+            this.propertyKeys = propertyKeys;
+            return this;
+        }
+
+        /**
+         * Build call for getRecResult
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getRecResultCall(id, asAt, propertyKeys, _callback);
+        }
+
+        /**
+         * Execute getRecResult request
+         * @return RecResult
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecResult execute() throws ApiException {
+            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(id, asAt, propertyKeys);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRecResult request. Use any specified configuration options to override any other configuration for this request only.
+         * @return RecResult
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecResult execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(id, asAt, propertyKeys, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRecResult request with HTTP info returned
+         * @return ApiResponse&lt;RecResult&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecResult> executeWithHttpInfo() throws ApiException {
+            return getRecResultWithHttpInfo(id, asAt, propertyKeys);
+        }
+
+        /**
+         * Execute getRecResult request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;RecResult&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecResult> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getRecResultWithHttpInfo(id, asAt, propertyKeys, opts);
+        }
+
+        /**
+         * Execute getRecResult request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecResult> _callback) throws ApiException {
+            getRecResultAsync(id, asAt, propertyKeys, _callback);
+        }
+
+        /**
+         * Execute getRecResult request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecResult> _callback, ConfigurationOptions opts) throws ApiException {
+            getRecResultAsync(id, asAt, propertyKeys, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecResult: GetRecResult
+     * Retrieve a single rec result by its id.
+     * @param id The system-generated id of the rec result. (required)
+     * @return APIgetRecResultRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec result. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetRecResultRequest getRecResult(String id) {
+        return new APIgetRecResultRequest(id);
     }
     /**
      * Build call for getRecResultSet
@@ -2247,6 +3276,428 @@ public class RecsApi {
      */
     public APIlistRecResultSetsRequest listRecResultSets() {
         return new APIlistRecResultSetsRequest();
+    }
+    /**
+     * Build call for listRecResults
+     * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listRecResultsCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return listRecResultsCall(asAt, page, limit, filter, sortBy, propertyKeys,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listRecResults. Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listRecResultsCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/results";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
+        }
+
+        if (propertyKeys != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "propertyKeys", propertyKeys));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listRecResultsValidateBeforeCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listRecResultsCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecResults: ListRecResults
+     * List rec results.
+     * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfRecResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfRecResult> listRecResultsWithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = listRecResultsValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecResults: ListRecResults
+     * List rec results.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfRecResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfRecResult> listRecResultsWithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listRecResultsValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecResults: ListRecResults (asynchronously)
+     * List rec results.
+     * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listRecResultsAsync(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback<PagedResourceListOfRecResult> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listRecResultsValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecResults: ListRecResults (asynchronously)
+     * List rec results.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listRecResultsAsync(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback<PagedResourceListOfRecResult> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listRecResultsValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistRecResultsRequest {
+        private OffsetDateTime asAt;
+        private String page;
+        private Integer limit;
+        private String filter;
+        private List<String> sortBy;
+        private List<String> propertyKeys;
+
+        private APIlistRecResultsRequest() {
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
+         * @return APIlistRecResultsRequest
+         */
+        public APIlistRecResultsRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+         * @return APIlistRecResultsRequest
+         */
+        public APIlistRecResultsRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+         * @return APIlistRecResultsRequest
+         */
+        public APIlistRecResultsRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+         * @return APIlistRecResultsRequest
+         */
+        public APIlistRecResultsRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+         * @return APIlistRecResultsRequest
+         */
+        public APIlistRecResultsRequest sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
+            return this;
+        }
+
+        /**
+         * Set propertyKeys
+         * @param propertyKeys The property keys to decorate onto each result. (optional)
+         * @return APIlistRecResultsRequest
+         */
+        public APIlistRecResultsRequest propertyKeys(List<String> propertyKeys) {
+            this.propertyKeys = propertyKeys;
+            return this;
+        }
+
+        /**
+         * Build call for listRecResults
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listRecResultsCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback);
+        }
+
+        /**
+         * Execute listRecResults request
+         * @return PagedResourceListOfRecResult
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfRecResult execute() throws ApiException {
+            ApiResponse<PagedResourceListOfRecResult> localVarResp = listRecResultsWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listRecResults request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfRecResult
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfRecResult execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfRecResult> localVarResp = listRecResultsWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listRecResults request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfRecResult&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfRecResult> executeWithHttpInfo() throws ApiException {
+            return listRecResultsWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys);
+        }
+
+        /**
+         * Execute listRecResults request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfRecResult&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfRecResult> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listRecResultsWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys, opts);
+        }
+
+        /**
+         * Execute listRecResults request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfRecResult> _callback) throws ApiException {
+            listRecResultsAsync(asAt, page, limit, filter, sortBy, propertyKeys, _callback);
+        }
+
+        /**
+         * Execute listRecResults request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfRecResult> _callback, ConfigurationOptions opts) throws ApiException {
+            listRecResultsAsync(asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecResults: ListRecResults
+     * List rec results.
+     * @return APIlistRecResultsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The rec results. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistRecResultsRequest listRecResults() {
+        return new APIlistRecResultsRequest();
     }
     /**
      * Build call for submitRecResultSetReview

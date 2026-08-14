@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.workflow.model;
 import com.finbourne.sdk.services.workflow.model.Fail;
 import com.finbourne.sdk.services.workflow.model.GroupReconciliation;
 import com.finbourne.sdk.services.workflow.model.HealthCheck;
+import com.finbourne.sdk.services.workflow.model.HorizonIntegration;
 import com.finbourne.sdk.services.workflow.model.LuminesceView;
 import com.finbourne.sdk.services.workflow.model.LusidEntityDataQualityCheck;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
@@ -94,6 +95,16 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for HealthCheck failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'HealthCheck'", e);
             }
+            // deserialize HorizonIntegration
+            try {
+                deserialized = JSON.getMapper().treeToValue(node, HorizonIntegration.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'HorizonIntegration'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for HorizonIntegration failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'HorizonIntegration'", e);
+            }
             // deserialize LuminesceView
             try {
                 deserialized = JSON.getMapper().treeToValue(node, LuminesceView.class);
@@ -159,6 +170,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
         schemas.put("Fail", Fail.class);
         schemas.put("GroupReconciliation", GroupReconciliation.class);
         schemas.put("HealthCheck", HealthCheck.class);
+        schemas.put("HorizonIntegration", HorizonIntegration.class);
         schemas.put("LuminesceView", LuminesceView.class);
         schemas.put("LusidEntityDataQualityCheck", LusidEntityDataQualityCheck.class);
         schemas.put("SchedulerJob", SchedulerJob.class);
@@ -173,7 +185,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * Fail, GroupReconciliation, HealthCheck, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -190,6 +202,11 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
         }
 
         if (instance instanceof HealthCheck) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof HorizonIntegration) {
             super.setActualInstance(instance);
             return;
         }
@@ -214,14 +231,14 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep");
+        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * Fail, GroupReconciliation, HealthCheck, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep
      *
-     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep)
+     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -258,6 +275,16 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
      */
     public HealthCheck getHealthCheck() throws ClassCastException {
         return (HealthCheck)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `HorizonIntegration`. If the actual instance is not `HorizonIntegration`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `HorizonIntegration`
+     * @throws ClassCastException if the instance is not `HorizonIntegration`
+     */
+    public HorizonIntegration getHorizonIntegration() throws ClassCastException {
+        return (HorizonIntegration)super.getActualInstance();
     }
     /**
      * Get the actual instance of `LuminesceView`. If the actual instance is not `LuminesceView`,

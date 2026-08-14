@@ -6,7 +6,7 @@ Schedule to define fx conversion of cashflows on complex bonds. If an fx schedul
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scheduleType** | **String** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid. | [default to String]
+**scheduleType** | **String** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule. | [default to String]
 **flowConventions** | [**FlowConventions**](FlowConventions.md) |  | [optional] [default to FlowConventions]
 **fxConversionTypes** | **List&lt;String&gt;** | List of flags to indicate if coupon payments, principal payments or both are converted | [optional] [default to List<String>]
 **rate** | **java.math.BigDecimal** | FxRate used to convert payments. Assumed to be in units of the ToCurrency so conversion is paymentAmount x fxRate | [optional] [default to java.math.BigDecimal]

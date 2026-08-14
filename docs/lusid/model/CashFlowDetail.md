@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **haircutFraction** | **java.math.BigDecimal** | The fraction of the gross amount removed by the haircut, in the range [0, 1]. Zero for outflows and for cashflows no rule matched. Only populated when haircut rules were supplied on the request. | [optional] [default to java.math.BigDecimal]
 **netAmount** | **java.math.BigDecimal** | The signed amount of the cashflow net of the haircut. Only populated when haircut rules were supplied on the request. | [optional] [default to java.math.BigDecimal]
 **haircutRuleApplied** | **String** | The identifier of the haircut rule that was applied to the cashflow, or not present when no rule matched or no haircut rules were supplied on the request. | [optional] [default to String]
+**error** | **String** | Only present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. When set, the amount is null rather than zero. | [optional] [default to String]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -40,6 +41,7 @@ ResourceId portfolioId = new ResourceId();
 @javax.annotation.Nullable java.math.BigDecimal haircutFraction = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal netAmount = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable String haircutRuleApplied = "example haircutRuleApplied";
+@javax.annotation.Nullable String error = "example error";
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -57,6 +59,7 @@ CashFlowDetail cashFlowDetailInstance = new CashFlowDetail()
     .haircutFraction(haircutFraction)
     .netAmount(netAmount)
     .haircutRuleApplied(haircutRuleApplied)
+    .error(error)
     .links(links);
 ```
 

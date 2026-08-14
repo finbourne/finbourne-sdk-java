@@ -40,6 +40,7 @@ import com.finbourne.sdk.JSON;
   PricingOptions.JSON_PROPERTY_USE_INSTRUMENT_TYPE_TO_DETERMINE_PRICER,
   PricingOptions.JSON_PROPERTY_ALLOW_ANY_INSTRUMENTS_WITH_SEC_UID_TO_PRICE_OFF_LOOKUP,
   PricingOptions.JSON_PROPERTY_ALLOW_PARTIALLY_SUCCESSFUL_EVALUATION,
+  PricingOptions.JSON_PROPERTY_RISK_ENGINE,
   PricingOptions.JSON_PROPERTY_PRODUCE_SEPARATE_RESULT_FOR_LINEAR_OTC_LEGS,
   PricingOptions.JSON_PROPERTY_FX_FORWARD_CONTRACTS_AS_UNITS_IN_BOTH_LEGS,
   PricingOptions.JSON_PROPERTY_ENABLE_USE_OF_CACHED_UNIT_RESULTS,
@@ -76,6 +77,11 @@ public class PricingOptions {
   @JsonProperty(JSON_PROPERTY_ALLOW_PARTIALLY_SUCCESSFUL_EVALUATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean allowPartiallySuccessfulEvaluation;
+
+  public static final String JSON_PROPERTY_RISK_ENGINE = "riskEngine";
+  @JsonProperty(JSON_PROPERTY_RISK_ENGINE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String riskEngine;
 
   public static final String JSON_PROPERTY_PRODUCE_SEPARATE_RESULT_FOR_LINEAR_OTC_LEGS = "produceSeparateResultForLinearOtcLegs";
   @JsonProperty(JSON_PROPERTY_PRODUCE_SEPARATE_RESULT_FOR_LINEAR_OTC_LEGS)
@@ -223,6 +229,25 @@ public class PricingOptions {
 
   public void setAllowPartiallySuccessfulEvaluation(Boolean allowPartiallySuccessfulEvaluation) {
     this.allowPartiallySuccessfulEvaluation = allowPartiallySuccessfulEvaluation;
+  }
+
+
+  public PricingOptions riskEngine(String riskEngine) {
+    this.riskEngine = riskEngine;
+    return this;
+  }
+
+  /**
+   * Which engine computes first-order Risk/_* measures. One of \&quot;Bump\&quot; (default: central  finite differences by bump-and-revalue - the historical behaviour, used when this is  absent), \&quot;Parity\&quot; (bump computes and is reported, the adjoint engine independently checks  every calculator and any disagreement fails the measure loudly - the recommended  enablement gate), or \&quot;Adjoint\&quot; (algorithmic differentiation where an evaluator exists,  with silent fallback to Bump elsewhere - selecting it can never reduce coverage). Available values: Bump, Adjoint, Parity.
+   * @return riskEngine
+   */
+  @javax.annotation.Nullable
+  public String getRiskEngine() {
+    return riskEngine;
+  }
+
+  public void setRiskEngine(String riskEngine) {
+    this.riskEngine = riskEngine;
   }
 
 
@@ -505,6 +530,7 @@ public class PricingOptions {
         Objects.equals(this.useInstrumentTypeToDeterminePricer, pricingOptions.useInstrumentTypeToDeterminePricer) &&
         Objects.equals(this.allowAnyInstrumentsWithSecUidToPriceOffLookup, pricingOptions.allowAnyInstrumentsWithSecUidToPriceOffLookup) &&
         Objects.equals(this.allowPartiallySuccessfulEvaluation, pricingOptions.allowPartiallySuccessfulEvaluation) &&
+        Objects.equals(this.riskEngine, pricingOptions.riskEngine) &&
         Objects.equals(this.produceSeparateResultForLinearOtcLegs, pricingOptions.produceSeparateResultForLinearOtcLegs) &&
         Objects.equals(this.fxForwardContractsAsUnitsInBothLegs, pricingOptions.fxForwardContractsAsUnitsInBothLegs) &&
         Objects.equals(this.enableUseOfCachedUnitResults, pricingOptions.enableUseOfCachedUnitResults) &&
@@ -527,7 +553,7 @@ public class PricingOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize);
+    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -545,6 +571,7 @@ public class PricingOptions {
     sb.append("    useInstrumentTypeToDeterminePricer: ").append(toIndentedString(useInstrumentTypeToDeterminePricer)).append("\n");
     sb.append("    allowAnyInstrumentsWithSecUidToPriceOffLookup: ").append(toIndentedString(allowAnyInstrumentsWithSecUidToPriceOffLookup)).append("\n");
     sb.append("    allowPartiallySuccessfulEvaluation: ").append(toIndentedString(allowPartiallySuccessfulEvaluation)).append("\n");
+    sb.append("    riskEngine: ").append(toIndentedString(riskEngine)).append("\n");
     sb.append("    produceSeparateResultForLinearOtcLegs: ").append(toIndentedString(produceSeparateResultForLinearOtcLegs)).append("\n");
     sb.append("    fxForwardContractsAsUnitsInBothLegs: ").append(toIndentedString(fxForwardContractsAsUnitsInBothLegs)).append("\n");
     sb.append("    enableUseOfCachedUnitResults: ").append(toIndentedString(enableUseOfCachedUnitResults)).append("\n");

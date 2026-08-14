@@ -30,6 +30,8 @@ WorkerConfigurationResponse config = new WorkerConfigurationResponse(workerConfi
 
 * [HealthCheckResponse](./HealthCheckResponse.md)
 
+* [HorizonIntegrationResponse](./HorizonIntegrationResponse.md)
+
 * [LibraryResponse](./LibraryResponse.md)
 
 * [LuminesceViewResponse](./LuminesceViewResponse.md)

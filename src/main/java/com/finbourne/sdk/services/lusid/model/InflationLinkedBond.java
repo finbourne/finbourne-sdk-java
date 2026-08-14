@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.FlowConventions;
 import com.finbourne.sdk.services.lusid.model.InflationIndexConventions;
 import com.finbourne.sdk.services.lusid.model.LusidInstrument;
 import com.finbourne.sdk.services.lusid.model.RoundingConvention;
+import com.finbourne.sdk.services.lusid.model.StepSchedule;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
 import com.finbourne.sdk.services.lusid.model.TradingConventions;
 import java.io.IOException;
@@ -62,7 +63,8 @@ import com.finbourne.sdk.JSON;
   InflationLinkedBond.JSON_PROPERTY_ROUNDING_CONVENTIONS,
   InflationLinkedBond.JSON_PROPERTY_TRADING_CONVENTIONS,
   InflationLinkedBond.JSON_PROPERTY_ORIGINAL_ISSUE_PRICE,
-  InflationLinkedBond.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
+  InflationLinkedBond.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
+  InflationLinkedBond.JSON_PROPERTY_AMORTISATION_SCHEDULE
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -161,6 +163,11 @@ public class InflationLinkedBond extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_TIME_ZONE_CONVENTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private TimeZoneConventions timeZoneConventions;
+
+  public static final String JSON_PROPERTY_AMORTISATION_SCHEDULE = "amortisationSchedule";
+  @JsonProperty(JSON_PROPERTY_AMORTISATION_SCHEDULE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StepSchedule amortisationSchedule;
 
   public InflationLinkedBond() {
   }
@@ -523,6 +530,25 @@ public class InflationLinkedBond extends LusidInstrument {
   }
 
 
+  public InflationLinkedBond amortisationSchedule(StepSchedule amortisationSchedule) {
+    this.amortisationSchedule = amortisationSchedule;
+    return this;
+  }
+
+  /**
+   * Get amortisationSchedule
+   * @return amortisationSchedule
+   */
+  @javax.annotation.Nullable
+  public StepSchedule getAmortisationSchedule() {
+    return amortisationSchedule;
+  }
+
+  public void setAmortisationSchedule(StepSchedule amortisationSchedule) {
+    this.amortisationSchedule = amortisationSchedule;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -550,6 +576,7 @@ public class InflationLinkedBond extends LusidInstrument {
         Objects.equals(this.tradingConventions, inflationLinkedBond.tradingConventions) &&
         (this.originalIssuePrice == null ? inflationLinkedBond.originalIssuePrice == null : (inflationLinkedBond.originalIssuePrice != null && this.originalIssuePrice.compareTo(inflationLinkedBond.getOriginalIssuePrice()) == 0)) &&
         Objects.equals(this.timeZoneConventions, inflationLinkedBond.timeZoneConventions) &&
+        Objects.equals(this.amortisationSchedule, inflationLinkedBond.amortisationSchedule) &&
         super.equals(o);
   }
 
@@ -559,7 +586,7 @@ public class InflationLinkedBond extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, flowConventions, inflationIndexConventions, couponRate, identifiers, baseCPI, baseCPIDate, calculationType, exDividendDays, indexPrecision, principal, principalProtection, stubType, roundingConventions, tradingConventions, originalIssuePrice, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, flowConventions, inflationIndexConventions, couponRate, identifiers, baseCPI, baseCPIDate, calculationType, exDividendDays, indexPrecision, principal, principalProtection, stubType, roundingConventions, tradingConventions, originalIssuePrice, timeZoneConventions, amortisationSchedule, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -592,6 +619,7 @@ public class InflationLinkedBond extends LusidInstrument {
     sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
     sb.append("    originalIssuePrice: ").append(toIndentedString(originalIssuePrice)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
+    sb.append("    amortisationSchedule: ").append(toIndentedString(amortisationSchedule)).append("\n");
     sb.append("}");
     return sb.toString();
   }

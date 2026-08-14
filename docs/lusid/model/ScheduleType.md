@@ -24,6 +24,7 @@ ScheduleType method = ScheduleType.FX_LINKED_NOTIONAL_SCHEDULE;
 ScheduleType method = ScheduleType.BOND_CONVERSION_SCHEDULE;
 ScheduleType method = ScheduleType.PIK_SCHEDULE;
 ScheduleType method = ScheduleType.INVALID;
+ScheduleType method = ScheduleType.CANCEL_SCHEDULE;
 ```
 
 

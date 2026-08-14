@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **subscriptionType** | **String** | The kind of data the subscription streams (holdings or transactions), defaulting to holdings.  Address keys and byTaxLots are not valid for a transactions subscription. Available values: Holdings, Transactions. | [optional] [default to String]
 **startEffectiveAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
 **endEffectiveAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
-**startAsAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.SubscriptionDefinition;
@@ -35,7 +34,6 @@ Boolean byTaxLots = true;
 @javax.annotation.Nullable String subscriptionType = "example subscriptionType";
 @javax.annotation.Nullable OffsetDateTime startEffectiveAt = OffsetDateTime.now();
 @javax.annotation.Nullable OffsetDateTime endEffectiveAt = OffsetDateTime.now();
-@javax.annotation.Nullable OffsetDateTime startAsAt = OffsetDateTime.now();
 
 
 SubscriptionDefinition subscriptionDefinitionInstance = new SubscriptionDefinition()
@@ -49,8 +47,7 @@ SubscriptionDefinition subscriptionDefinitionInstance = new SubscriptionDefiniti
     .byTaxLots(byTaxLots)
     .subscriptionType(subscriptionType)
     .startEffectiveAt(startEffectiveAt)
-    .endEffectiveAt(endEffectiveAt)
-    .startAsAt(startAsAt);
+    .endEffectiveAt(endEffectiveAt);
 ```
 
 

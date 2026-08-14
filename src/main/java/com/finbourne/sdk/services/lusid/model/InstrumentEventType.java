@@ -213,7 +213,9 @@ public enum InstrumentEventType {
   
   PIK_BOND_INTEREST_EVENT("PikBondInterestEvent"),
   
-  COMMODITY_FORWARD_CASH_SETTLEMENT_EVENT("CommodityForwardCashSettlementEvent");
+  COMMODITY_FORWARD_CASH_SETTLEMENT_EVENT("CommodityForwardCashSettlementEvent"),
+  
+  PAYMENT_IN_KIND_EVENT("PaymentInKindEvent");
 
   private String value;
 

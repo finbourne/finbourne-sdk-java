@@ -6,7 +6,7 @@ Schedule for notional changes based on the change in FX rate.  Used in the repre
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scheduleType** | **String** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid. | [default to String]
+**scheduleType** | **String** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule. | [default to String]
 **fxConventions** | [**FxConventions**](FxConventions.md) |  | [default to FxConventions]
 **varyingNotionalCurrency** | **String** | The currency of the varying notional amount. | [default to String]
 **varyingNotionalFixingDates** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [default to RelativeDateOffset]

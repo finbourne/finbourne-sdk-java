@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AdditionalPayment;
+import com.finbourne.sdk.services.lusid.model.CancelSchedule;
 import com.finbourne.sdk.services.lusid.model.InstrumentLeg;
 import com.finbourne.sdk.services.lusid.model.LusidInstrument;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
@@ -47,7 +48,8 @@ import com.finbourne.sdk.JSON;
   InterestRateSwap.JSON_PROPERTY_LEGS,
   InterestRateSwap.JSON_PROPERTY_SETTLEMENT_CCY,
   InterestRateSwap.JSON_PROPERTY_ADDITIONAL_PAYMENTS,
-  InterestRateSwap.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
+  InterestRateSwap.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
+  InterestRateSwap.JSON_PROPERTY_CANCEL_SCHEDULE
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -91,6 +93,11 @@ public class InterestRateSwap extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_TIME_ZONE_CONVENTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private TimeZoneConventions timeZoneConventions;
+
+  public static final String JSON_PROPERTY_CANCEL_SCHEDULE = "cancelSchedule";
+  @JsonProperty(JSON_PROPERTY_CANCEL_SCHEDULE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CancelSchedule cancelSchedule;
 
   public InterestRateSwap() {
   }
@@ -244,6 +251,25 @@ public class InterestRateSwap extends LusidInstrument {
   }
 
 
+  public InterestRateSwap cancelSchedule(CancelSchedule cancelSchedule) {
+    this.cancelSchedule = cancelSchedule;
+    return this;
+  }
+
+  /**
+   * Get cancelSchedule
+   * @return cancelSchedule
+   */
+  @javax.annotation.Nullable
+  public CancelSchedule getCancelSchedule() {
+    return cancelSchedule;
+  }
+
+  public void setCancelSchedule(CancelSchedule cancelSchedule) {
+    this.cancelSchedule = cancelSchedule;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -260,6 +286,7 @@ public class InterestRateSwap extends LusidInstrument {
         Objects.equals(this.settlementCcy, interestRateSwap.settlementCcy) &&
         Objects.equals(this.additionalPayments, interestRateSwap.additionalPayments) &&
         Objects.equals(this.timeZoneConventions, interestRateSwap.timeZoneConventions) &&
+        Objects.equals(this.cancelSchedule, interestRateSwap.cancelSchedule) &&
         super.equals(o);
   }
 
@@ -269,7 +296,7 @@ public class InterestRateSwap extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, isNonDeliverable, legs, settlementCcy, additionalPayments, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, isNonDeliverable, legs, settlementCcy, additionalPayments, timeZoneConventions, cancelSchedule, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -291,6 +318,7 @@ public class InterestRateSwap extends LusidInstrument {
     sb.append("    settlementCcy: ").append(toIndentedString(settlementCcy)).append("\n");
     sb.append("    additionalPayments: ").append(toIndentedString(additionalPayments)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
+    sb.append("    cancelSchedule: ").append(toIndentedString(cancelSchedule)).append("\n");
     sb.append("}");
     return sb.toString();
   }

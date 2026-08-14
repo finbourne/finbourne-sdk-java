@@ -202,7 +202,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;.
+     * [EARLY ACCESS] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;.
      * Adds a new diary entry to the specified Abor
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -224,7 +224,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;.
+     * [EARLY ACCESS] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;.
      * Adds a new diary entry to the specified AborUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -246,7 +246,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;. (asynchronously)
+     * [EARLY ACCESS] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;. (asynchronously)
      * Adds a new diary entry to the specified Abor
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -269,7 +269,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;. (asynchronously)
+     * [EARLY ACCESS] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;. (asynchronously)
      * Adds a new diary entry to the specified AborUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -419,7 +419,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;.
+     * [EARLY ACCESS] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;.
      * Adds a new diary entry to the specified Abor
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -546,7 +546,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
+     * [EARLY ACCESS] ClosePeriod: Closes or locks the current period for the given Abor.
      * Closes or Locks the current open period for the given Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -568,7 +568,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
+     * [EARLY ACCESS] ClosePeriod: Closes or locks the current period for the given Abor.
      * Closes or Locks the current open period for the given Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -590,7 +590,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor. (asynchronously)
+     * [EARLY ACCESS] ClosePeriod: Closes or locks the current period for the given Abor. (asynchronously)
      * Closes or Locks the current open period for the given Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -613,7 +613,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor. (asynchronously)
+     * [EARLY ACCESS] ClosePeriod: Closes or locks the current period for the given Abor. (asynchronously)
      * Closes or Locks the current open period for the given Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -763,7 +763,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
+     * [EARLY ACCESS] ClosePeriod: Closes or locks the current period for the given Abor.
      * Closes or Locks the current open period for the given Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -882,7 +882,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAbor: Create an Abor.
+     * [EARLY ACCESS] CreateAbor: Create an Abor.
      * Create the given Abor.
      * @param scope The scope of the Abor. (required)
      * @param aborRequest The definition of the Abor. (required)
@@ -903,7 +903,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAbor: Create an Abor.
+     * [EARLY ACCESS] CreateAbor: Create an Abor.
      * Create the given Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param aborRequest The definition of the Abor. (required)
@@ -924,7 +924,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAbor: Create an Abor. (asynchronously)
+     * [EARLY ACCESS] CreateAbor: Create an Abor. (asynchronously)
      * Create the given Abor.
      * @param scope The scope of the Abor. (required)
      * @param aborRequest The definition of the Abor. (required)
@@ -946,7 +946,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAbor: Create an Abor. (asynchronously)
+     * [EARLY ACCESS] CreateAbor: Create an Abor. (asynchronously)
      * Create the given Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param aborRequest The definition of the Abor. (required)
@@ -1093,7 +1093,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAbor: Create an Abor.
+     * [EARLY ACCESS] CreateAbor: Create an Abor.
      * Create the given Abor.
      * @param scope The scope of the Abor. (required)
      * @param aborRequest The definition of the Abor. (required)
@@ -1208,7 +1208,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAbor: Delete an Abor.
+     * [EARLY ACCESS] DeleteAbor: Delete an Abor.
      * Delete the given Abor.
      * @param scope The scope of the Abor to be deleted. (required)
      * @param code The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor. (required)
@@ -1229,7 +1229,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAbor: Delete an Abor.
+     * [EARLY ACCESS] DeleteAbor: Delete an Abor.
      * Delete the given Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor to be deleted. (required)
      * @param code The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor. (required)
@@ -1250,7 +1250,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAbor: Delete an Abor. (asynchronously)
+     * [EARLY ACCESS] DeleteAbor: Delete an Abor. (asynchronously)
      * Delete the given Abor.
      * @param scope The scope of the Abor to be deleted. (required)
      * @param code The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor. (required)
@@ -1272,7 +1272,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAbor: Delete an Abor. (asynchronously)
+     * [EARLY ACCESS] DeleteAbor: Delete an Abor. (asynchronously)
      * Delete the given Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor to be deleted. (required)
      * @param code The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor. (required)
@@ -1419,7 +1419,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAbor: Delete an Abor.
+     * [EARLY ACCESS] DeleteAbor: Delete an Abor.
      * Delete the given Abor.
      * @param scope The scope of the Abor to be deleted. (required)
      * @param code The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor. (required)
@@ -1542,7 +1542,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor.
+     * [EARLY ACCESS] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor.
      * Delete a diary entry type &#39;Other&#39; from the specified Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -1564,7 +1564,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor.
+     * [EARLY ACCESS] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor.
      * Delete a diary entry type &#39;Other&#39; from the specified Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -1586,7 +1586,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor. (asynchronously)
+     * [EARLY ACCESS] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor. (asynchronously)
      * Delete a diary entry type &#39;Other&#39; from the specified Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -1609,7 +1609,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor. (asynchronously)
+     * [EARLY ACCESS] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor. (asynchronously)
      * Delete a diary entry type &#39;Other&#39; from the specified Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -1759,7 +1759,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor.
+     * [EARLY ACCESS] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor.
      * Delete a diary entry type &#39;Other&#39; from the specified Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -1893,7 +1893,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAbor: Get Abor.
+     * [EARLY ACCESS] GetAbor: Get Abor.
      * Retrieve the definition of a particular Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -1917,7 +1917,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAbor: Get Abor.
+     * [EARLY ACCESS] GetAbor: Get Abor.
      * Retrieve the definition of a particular Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -1941,7 +1941,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAbor: Get Abor. (asynchronously)
+     * [EARLY ACCESS] GetAbor: Get Abor. (asynchronously)
      * Retrieve the definition of a particular Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -1966,7 +1966,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAbor: Get Abor. (asynchronously)
+     * [EARLY ACCESS] GetAbor: Get Abor. (asynchronously)
      * Retrieve the definition of a particular Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -2149,7 +2149,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAbor: Get Abor.
+     * [EARLY ACCESS] GetAbor: Get Abor.
      * Retrieve the definition of a particular Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -2276,7 +2276,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborProperties: Get Abor properties
+     * [EARLY ACCESS] GetAborProperties: Get Abor properties
      * Get all the properties of a single abor.
      * @param scope The scope of the Abor to list the properties for. (required)
      * @param code The code of the Abor to list the properties for. Together with the scope this uniquely identifies the Abor. (required)
@@ -2299,7 +2299,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborProperties: Get Abor properties
+     * [EARLY ACCESS] GetAborProperties: Get Abor properties
      * Get all the properties of a single abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor to list the properties for. (required)
      * @param code The code of the Abor to list the properties for. Together with the scope this uniquely identifies the Abor. (required)
@@ -2322,7 +2322,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborProperties: Get Abor properties (asynchronously)
+     * [EARLY ACCESS] GetAborProperties: Get Abor properties (asynchronously)
      * Get all the properties of a single abor.
      * @param scope The scope of the Abor to list the properties for. (required)
      * @param code The code of the Abor to list the properties for. Together with the scope this uniquely identifies the Abor. (required)
@@ -2346,7 +2346,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborProperties: Get Abor properties (asynchronously)
+     * [EARLY ACCESS] GetAborProperties: Get Abor properties (asynchronously)
      * Get all the properties of a single abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor to list the properties for. (required)
      * @param code The code of the Abor to list the properties for. Together with the scope this uniquely identifies the Abor. (required)
@@ -2517,7 +2517,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAborProperties: Get Abor properties
+     * [EARLY ACCESS] GetAborProperties: Get Abor properties
      * Get all the properties of a single abor.
      * @param scope The scope of the Abor to list the properties for. (required)
      * @param code The code of the Abor to list the properties for. Together with the scope this uniquely identifies the Abor. (required)
@@ -2667,7 +2667,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
+     * [EARLY ACCESS] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
      * Gets the Journal Entry lines for the given Abor                The Journal Entry lines have been generated from transactions and translated via posting rules
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope is creating the unique identifier for the given Abor. (required)
@@ -2693,7 +2693,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
+     * [EARLY ACCESS] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
      * Gets the Journal Entry lines for the given Abor                The Journal Entry lines have been generated from transactions and translated via posting rulesUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope is creating the unique identifier for the given Abor. (required)
@@ -2719,7 +2719,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor. (asynchronously)
+     * [EARLY ACCESS] GetJournalEntryLines: Get the Journal Entry lines for the given Abor. (asynchronously)
      * Gets the Journal Entry lines for the given Abor                The Journal Entry lines have been generated from transactions and translated via posting rules
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope is creating the unique identifier for the given Abor. (required)
@@ -2746,7 +2746,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor. (asynchronously)
+     * [EARLY ACCESS] GetJournalEntryLines: Get the Journal Entry lines for the given Abor. (asynchronously)
      * Gets the Journal Entry lines for the given Abor                The Journal Entry lines have been generated from transactions and translated via posting rulesUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope is creating the unique identifier for the given Abor. (required)
@@ -2944,7 +2944,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
+     * [EARLY ACCESS] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
      * Gets the Journal Entry lines for the given Abor                The Journal Entry lines have been generated from transactions and translated via posting rules
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope is creating the unique identifier for the given Abor. (required)
@@ -2966,10 +2966,10 @@ public class AborApi {
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
-     * @param asAt The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional)
-     * @param filter Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-     * @param limit When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. (optional)
-     * @param page The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional)
+     * @param filter Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param limit When paginating, limit the number of returned results to this many.               Defaults to 100 if not specified. (optional)
+     * @param page The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2990,10 +2990,10 @@ public class AborApi {
      * @param scope The scope of the Abor. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param limit When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param page The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit When paginating, limit the number of returned results to this many.               Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3095,15 +3095,15 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).
+     * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
-     * @param asAt The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional)
-     * @param filter Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-     * @param limit When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. (optional)
-     * @param page The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional)
+     * @param filter Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param limit When paginating, limit the number of returned results to this many.               Defaults to 100 if not specified. (optional)
+     * @param page The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
      * @return ApiResponse&lt;VersionedResourceListOfTrialBalance&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3121,15 +3121,15 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).Use any specified configuration options to override any other configuration for this request only
+     * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
-     * @param asAt The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional)
-     * @param filter Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-     * @param limit When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. (optional)
-     * @param page The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional)
+     * @param filter Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param limit When paginating, limit the number of returned results to this many.               Defaults to 100 if not specified. (optional)
+     * @param page The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
      * @return ApiResponse&lt;VersionedResourceListOfTrialBalance&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3147,15 +3147,15 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor. (asynchronously)
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).
+     * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor. (asynchronously)
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
-     * @param asAt The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional)
-     * @param filter Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-     * @param limit When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. (optional)
-     * @param page The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional)
+     * @param filter Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param limit When paginating, limit the number of returned results to this many.               Defaults to 100 if not specified. (optional)
+     * @param page The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3174,15 +3174,15 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor. (asynchronously)
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).Use any specified configuration options to override any other configuration for this request only
+     * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor. (asynchronously)
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
-     * @param asAt The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional)
-     * @param filter Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-     * @param limit When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. (optional)
-     * @param page The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional)
+     * @param filter Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param limit When paginating, limit the number of returned results to this many.               Defaults to 100 if not specified. (optional)
+     * @param page The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3217,7 +3217,7 @@ public class AborApi {
 
         /**
          * Set asAt
-         * @param asAt The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional)
+         * @param asAt The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional)
          * @return APIgetTrialBalanceRequest
          */
         public APIgetTrialBalanceRequest asAt(OffsetDateTime asAt) {
@@ -3227,7 +3227,7 @@ public class AborApi {
 
         /**
          * Set filter
-         * @param filter Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+         * @param filter Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
          * @return APIgetTrialBalanceRequest
          */
         public APIgetTrialBalanceRequest filter(String filter) {
@@ -3237,7 +3237,7 @@ public class AborApi {
 
         /**
          * Set limit
-         * @param limit When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. (optional)
+         * @param limit When paginating, limit the number of returned results to this many.               Defaults to 100 if not specified. (optional)
          * @return APIgetTrialBalanceRequest
          */
         public APIgetTrialBalanceRequest limit(Integer limit) {
@@ -3247,7 +3247,7 @@ public class AborApi {
 
         /**
          * Set page
-         * @param page The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
+         * @param page The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
          * @return APIgetTrialBalanceRequest
          */
         public APIgetTrialBalanceRequest page(String page) {
@@ -3372,8 +3372,8 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).
+     * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
@@ -3514,7 +3514,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAbors: List Abors.
+     * [EARLY ACCESS] ListAbors: List Abors.
      * List all the Abors matching particular criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the TimeVariant properties for the Abor. Defaults to the current LUSID              system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Abor. Defaults to returning the latest version of each Abor if not specified. (optional)
@@ -3540,7 +3540,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAbors: List Abors.
+     * [EARLY ACCESS] ListAbors: List Abors.
      * List all the Abors matching particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the TimeVariant properties for the Abor. Defaults to the current LUSID              system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Abor. Defaults to returning the latest version of each Abor if not specified. (optional)
@@ -3566,7 +3566,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAbors: List Abors. (asynchronously)
+     * [EARLY ACCESS] ListAbors: List Abors. (asynchronously)
      * List all the Abors matching particular criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the TimeVariant properties for the Abor. Defaults to the current LUSID              system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Abor. Defaults to returning the latest version of each Abor if not specified. (optional)
@@ -3593,7 +3593,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAbors: List Abors. (asynchronously)
+     * [EARLY ACCESS] ListAbors: List Abors. (asynchronously)
      * List all the Abors matching particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the TimeVariant properties for the Abor. Defaults to the current LUSID              system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Abor. Defaults to returning the latest version of each Abor if not specified. (optional)
@@ -3818,7 +3818,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAbors: List Abors.
+     * [EARLY ACCESS] ListAbors: List Abors.
      * List all the Abors matching particular criteria.
      * @return APIlistAborsRequest
      * @http.response.details
@@ -3973,7 +3973,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListDiaryEntries: List diary entries.
+     * [EARLY ACCESS] ListDiaryEntries: List diary entries.
      * List all the diary entries matching particular criteria.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4001,7 +4001,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListDiaryEntries: List diary entries.
+     * [EARLY ACCESS] ListDiaryEntries: List diary entries.
      * List all the diary entries matching particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4029,7 +4029,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListDiaryEntries: List diary entries. (asynchronously)
+     * [EARLY ACCESS] ListDiaryEntries: List diary entries. (asynchronously)
      * List all the diary entries matching particular criteria.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4058,7 +4058,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListDiaryEntries: List diary entries. (asynchronously)
+     * [EARLY ACCESS] ListDiaryEntries: List diary entries. (asynchronously)
      * List all the diary entries matching particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4289,7 +4289,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListDiaryEntries: List diary entries.
+     * [EARLY ACCESS] ListDiaryEntries: List diary entries.
      * List all the diary entries matching particular criteria.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4410,7 +4410,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
+     * [EARLY ACCESS] LockPeriod: Locks the last Closed or given Closed Period.
      * Locks the specified or last locked period for the given Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4432,7 +4432,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
+     * [EARLY ACCESS] LockPeriod: Locks the last Closed or given Closed Period.
      * Locks the specified or last locked period for the given Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4454,7 +4454,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period. (asynchronously)
+     * [EARLY ACCESS] LockPeriod: Locks the last Closed or given Closed Period. (asynchronously)
      * Locks the specified or last locked period for the given Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4477,7 +4477,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period. (asynchronously)
+     * [EARLY ACCESS] LockPeriod: Locks the last Closed or given Closed Period. (asynchronously)
      * Locks the specified or last locked period for the given Abor.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4636,7 +4636,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
+     * [EARLY ACCESS] LockPeriod: Locks the last Closed or given Closed Period.
      * Locks the specified or last locked period for the given Abor.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. (required)
@@ -4762,7 +4762,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAbor: Patch Abor.
+     * [EARLY ACCESS] PatchAbor: Patch Abor.
      * Create or update certain fields for a particular Abor.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: PortfolioIds.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the              scope this uniquely identifies the Abor. (required)
@@ -4784,7 +4784,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAbor: Patch Abor.
+     * [EARLY ACCESS] PatchAbor: Patch Abor.
      * Create or update certain fields for a particular Abor.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: PortfolioIds.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the              scope this uniquely identifies the Abor. (required)
@@ -4806,7 +4806,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAbor: Patch Abor. (asynchronously)
+     * [EARLY ACCESS] PatchAbor: Patch Abor. (asynchronously)
      * Create or update certain fields for a particular Abor.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: PortfolioIds.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the              scope this uniquely identifies the Abor. (required)
@@ -4829,7 +4829,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAbor: Patch Abor. (asynchronously)
+     * [EARLY ACCESS] PatchAbor: Patch Abor. (asynchronously)
      * Create or update certain fields for a particular Abor.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: PortfolioIds.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the              scope this uniquely identifies the Abor. (required)
@@ -4979,7 +4979,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] PatchAbor: Patch Abor.
+     * [EARLY ACCESS] PatchAbor: Patch Abor.
      * Create or update certain fields for a particular Abor.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: PortfolioIds.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the              scope this uniquely identifies the Abor. (required)
@@ -5101,7 +5101,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
+     * [EARLY ACCESS] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
      * Reopens one or more periods.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -5123,7 +5123,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
+     * [EARLY ACCESS] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
      * Reopens one or more periods.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -5145,7 +5145,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor. (asynchronously)
+     * [EARLY ACCESS] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor. (asynchronously)
      * Reopens one or more periods.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -5168,7 +5168,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor. (asynchronously)
+     * [EARLY ACCESS] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor. (asynchronously)
      * Reopens one or more periods.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -5327,7 +5327,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
+     * [EARLY ACCESS] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
      * Reopens one or more periods.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
@@ -5448,7 +5448,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties
+     * [EARLY ACCESS] UpsertAborProperties: Upsert Abor properties
      * Update or insert one or more properties onto a single Abor. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;Abor&#39;.                Upserting a property that exists for an Abor, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.
      * @param scope The scope of the Abor to update or insert the properties onto. (required)
      * @param code The code of the Abor to update or insert the properties onto. Together with the scope this uniquely identifies the Abor. (required)
@@ -5470,7 +5470,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties
+     * [EARLY ACCESS] UpsertAborProperties: Upsert Abor properties
      * Update or insert one or more properties onto a single Abor. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;Abor&#39;.                Upserting a property that exists for an Abor, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor to update or insert the properties onto. (required)
      * @param code The code of the Abor to update or insert the properties onto. Together with the scope this uniquely identifies the Abor. (required)
@@ -5492,7 +5492,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties (asynchronously)
+     * [EARLY ACCESS] UpsertAborProperties: Upsert Abor properties (asynchronously)
      * Update or insert one or more properties onto a single Abor. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;Abor&#39;.                Upserting a property that exists for an Abor, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.
      * @param scope The scope of the Abor to update or insert the properties onto. (required)
      * @param code The code of the Abor to update or insert the properties onto. Together with the scope this uniquely identifies the Abor. (required)
@@ -5515,7 +5515,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties (asynchronously)
+     * [EARLY ACCESS] UpsertAborProperties: Upsert Abor properties (asynchronously)
      * Update or insert one or more properties onto a single Abor. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;Abor&#39;.                Upserting a property that exists for an Abor, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor to update or insert the properties onto. (required)
      * @param code The code of the Abor to update or insert the properties onto. Together with the scope this uniquely identifies the Abor. (required)
@@ -5674,7 +5674,7 @@ public class AborApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties
+     * [EARLY ACCESS] UpsertAborProperties: Upsert Abor properties
      * Update or insert one or more properties onto a single Abor. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain &#39;Abor&#39;.                Upserting a property that exists for an Abor, with a null value, will delete the instance of the property for that group.                Properties have an &lt;i&gt;effectiveFrom&lt;/i&gt; datetime for which the property is valid, and an &lt;i&gt;effectiveUntil&lt;/i&gt;  datetime until which the property is valid. Not supplying an &lt;i&gt;effectiveUntil&lt;/i&gt; datetime results in the property being  valid indefinitely, or until the next &lt;i&gt;effectiveFrom&lt;/i&gt; datetime of the property.
      * @param scope The scope of the Abor to update or insert the properties onto. (required)
      * @param code The code of the Abor to update or insert the properties onto. Together with the scope this uniquely identifies the Abor. (required)

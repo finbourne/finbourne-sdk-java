@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
 **quantity** | **java.math.BigDecimal** | The quantity of the given instrument ordered. | [optional] [default to java.math.BigDecimal]
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
 **portfolioId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] [default to Map<String, PerpetualProperty>]
 **price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
@@ -24,6 +25,7 @@ import java.net.URI;
 
 ResourceId id = new ResourceId();
 @javax.annotation.Nullable java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+CurrencyAndAmount amount = new CurrencyAndAmount();
 ResourceId portfolioId = new ResourceId();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 CurrencyAndAmount price = new CurrencyAndAmount();
@@ -36,6 +38,7 @@ CurrencyAndAmount stopPrice = new CurrencyAndAmount();
 OrderUpdateRequest orderUpdateRequestInstance = new OrderUpdateRequest()
     .id(id)
     .quantity(quantity)
+    .amount(amount)
     .portfolioId(portfolioId)
     .properties(properties)
     .price(price)

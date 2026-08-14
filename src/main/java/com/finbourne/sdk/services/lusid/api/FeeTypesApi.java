@@ -182,7 +182,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFeeType: Create a FeeType.
+     * [EARLY ACCESS] CreateFeeType: Create a FeeType.
      * Create a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType. (required)
      * @param feeTypeRequest The contents of the FeeType. (required)
@@ -203,7 +203,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFeeType: Create a FeeType.
+     * [EARLY ACCESS] CreateFeeType: Create a FeeType.
      * Create a FeeType that contains templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the FeeType. (required)
      * @param feeTypeRequest The contents of the FeeType. (required)
@@ -224,7 +224,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFeeType: Create a FeeType. (asynchronously)
+     * [EARLY ACCESS] CreateFeeType: Create a FeeType. (asynchronously)
      * Create a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType. (required)
      * @param feeTypeRequest The contents of the FeeType. (required)
@@ -246,7 +246,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFeeType: Create a FeeType. (asynchronously)
+     * [EARLY ACCESS] CreateFeeType: Create a FeeType. (asynchronously)
      * Create a FeeType that contains templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the FeeType. (required)
      * @param feeTypeRequest The contents of the FeeType. (required)
@@ -393,7 +393,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFeeType: Create a FeeType.
+     * [EARLY ACCESS] CreateFeeType: Create a FeeType.
      * Create a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType. (required)
      * @param feeTypeRequest The contents of the FeeType. (required)
@@ -508,7 +508,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFeeType: Delete a FeeType.
+     * [EARLY ACCESS] DeleteFeeType: Delete a FeeType.
      * Delete a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
@@ -529,7 +529,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFeeType: Delete a FeeType.
+     * [EARLY ACCESS] DeleteFeeType: Delete a FeeType.
      * Delete a FeeType that contains templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
@@ -550,7 +550,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFeeType: Delete a FeeType. (asynchronously)
+     * [EARLY ACCESS] DeleteFeeType: Delete a FeeType. (asynchronously)
      * Delete a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
@@ -572,7 +572,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFeeType: Delete a FeeType. (asynchronously)
+     * [EARLY ACCESS] DeleteFeeType: Delete a FeeType. (asynchronously)
      * Delete a FeeType that contains templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
@@ -719,7 +719,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFeeType: Delete a FeeType.
+     * [EARLY ACCESS] DeleteFeeType: Delete a FeeType.
      * Delete a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
@@ -816,7 +816,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
+     * [EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
      * Get FeeTemplateSpecifications used in the FeeType.
      * @return ApiResponse&lt;FeeTransactionTemplateSpecification&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -834,7 +834,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
+     * [EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
      * Get FeeTemplateSpecifications used in the FeeType.Use any specified configuration options to override any other configuration for this request only
      * @return ApiResponse&lt;FeeTransactionTemplateSpecification&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -852,7 +852,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType. (asynchronously)
+     * [EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType. (asynchronously)
      * Get FeeTemplateSpecifications used in the FeeType.
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -871,7 +871,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType. (asynchronously)
+     * [EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType. (asynchronously)
      * Get FeeTemplateSpecifications used in the FeeType.Use any specified configuration options to override any other configuration for this request only
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1004,7 +1004,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
+     * [EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
      * Get FeeTemplateSpecifications used in the FeeType.
      * @return APIgetFeeTemplateSpecificationsRequest
      * @http.response.details
@@ -1122,7 +1122,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeType: Get a FeeType
+     * [EARLY ACCESS] GetFeeType: Get a FeeType
      * Get a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType (required)
      * @param code The code of the FeeType (required)
@@ -1144,7 +1144,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeType: Get a FeeType
+     * [EARLY ACCESS] GetFeeType: Get a FeeType
      * Get a FeeType that contains templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the FeeType (required)
      * @param code The code of the FeeType (required)
@@ -1166,7 +1166,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeType: Get a FeeType (asynchronously)
+     * [EARLY ACCESS] GetFeeType: Get a FeeType (asynchronously)
      * Get a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType (required)
      * @param code The code of the FeeType (required)
@@ -1189,7 +1189,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeType: Get a FeeType (asynchronously)
+     * [EARLY ACCESS] GetFeeType: Get a FeeType (asynchronously)
      * Get a FeeType that contains templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the FeeType (required)
      * @param code The code of the FeeType (required)
@@ -1348,7 +1348,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFeeType: Get a FeeType
+     * [EARLY ACCESS] GetFeeType: Get a FeeType
      * Get a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType (required)
      * @param code The code of the FeeType (required)
@@ -1477,7 +1477,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFeeTypes: List FeeTypes
+     * [EARLY ACCESS] ListFeeTypes: List FeeTypes
      * List FeeTypes that contain templates used to create fee transactions.
      * @param asAt The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified. (optional)
      * @param page The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
@@ -1501,7 +1501,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFeeTypes: List FeeTypes
+     * [EARLY ACCESS] ListFeeTypes: List FeeTypes
      * List FeeTypes that contain templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified. (optional)
      * @param page The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
@@ -1525,7 +1525,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFeeTypes: List FeeTypes (asynchronously)
+     * [EARLY ACCESS] ListFeeTypes: List FeeTypes (asynchronously)
      * List FeeTypes that contain templates used to create fee transactions.
      * @param asAt The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified. (optional)
      * @param page The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
@@ -1550,7 +1550,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFeeTypes: List FeeTypes (asynchronously)
+     * [EARLY ACCESS] ListFeeTypes: List FeeTypes (asynchronously)
      * List FeeTypes that contain templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified. (optional)
      * @param page The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
@@ -1751,7 +1751,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFeeTypes: List FeeTypes
+     * [EARLY ACCESS] ListFeeTypes: List FeeTypes
      * List FeeTypes that contain templates used to create fee transactions.
      * @return APIlistFeeTypesRequest
      * @http.response.details
@@ -1875,7 +1875,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateFeeType: Update a FeeType.
+     * [EARLY ACCESS] UpdateFeeType: Update a FeeType.
      * Update a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
@@ -1897,7 +1897,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateFeeType: Update a FeeType.
+     * [EARLY ACCESS] UpdateFeeType: Update a FeeType.
      * Update a FeeType that contains templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
@@ -1919,7 +1919,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateFeeType: Update a FeeType. (asynchronously)
+     * [EARLY ACCESS] UpdateFeeType: Update a FeeType. (asynchronously)
      * Update a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
@@ -1942,7 +1942,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateFeeType: Update a FeeType. (asynchronously)
+     * [EARLY ACCESS] UpdateFeeType: Update a FeeType. (asynchronously)
      * Update a FeeType that contains templates used to create fee transactions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
@@ -2092,7 +2092,7 @@ public class FeeTypesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateFeeType: Update a FeeType.
+     * [EARLY ACCESS] UpdateFeeType: Update a FeeType.
      * Update a FeeType that contains templates used to create fee transactions.
      * @param scope The scope of the FeeType. (required)
      * @param code The code of the fee type (required)
