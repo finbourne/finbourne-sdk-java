@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
+import com.finbourne.sdk.services.lusid.model.NewInstrument;
 import com.finbourne.sdk.services.lusid.model.UnitsRatio;
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -45,7 +46,8 @@ import com.finbourne.sdk.JSON;
   StockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE,
   StockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY,
   StockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION,
-  StockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES
+  StockSplitEvent.JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES,
+  StockSplitEvent.JSON_PROPERTY_NEW_INSTRUMENT
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -99,6 +101,11 @@ public class StockSplitEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Integer fractionalUnitsDecimalPlaces;
+
+  public static final String JSON_PROPERTY_NEW_INSTRUMENT = "newInstrument";
+  @JsonProperty(JSON_PROPERTY_NEW_INSTRUMENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private NewInstrument newInstrument;
 
   public StockSplitEvent() {
   }
@@ -274,6 +281,25 @@ public class StockSplitEvent extends InstrumentEvent {
   }
 
 
+  public StockSplitEvent newInstrument(NewInstrument newInstrument) {
+    this.newInstrument = newInstrument;
+    return this;
+  }
+
+  /**
+   * Get newInstrument
+   * @return newInstrument
+   */
+  @javax.annotation.Nullable
+  public NewInstrument getNewInstrument() {
+    return newInstrument;
+  }
+
+  public void setNewInstrument(NewInstrument newInstrument) {
+    this.newInstrument = newInstrument;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -292,6 +318,7 @@ public class StockSplitEvent extends InstrumentEvent {
         Objects.equals(this.fractionalUnitsCashCurrency, stockSplitEvent.fractionalUnitsCashCurrency) &&
         Objects.equals(this.fractionalUnitsRoundingConvention, stockSplitEvent.fractionalUnitsRoundingConvention) &&
         Objects.equals(this.fractionalUnitsDecimalPlaces, stockSplitEvent.fractionalUnitsDecimalPlaces) &&
+        Objects.equals(this.newInstrument, stockSplitEvent.newInstrument) &&
         super.equals(o);
   }
 
@@ -301,7 +328,7 @@ public class StockSplitEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, exDate, unitsRatio, recordDate, announcementDate, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, super.hashCode());
+    return Objects.hash(paymentDate, exDate, unitsRatio, recordDate, announcementDate, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, newInstrument, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -325,6 +352,7 @@ public class StockSplitEvent extends InstrumentEvent {
     sb.append("    fractionalUnitsCashCurrency: ").append(toIndentedString(fractionalUnitsCashCurrency)).append("\n");
     sb.append("    fractionalUnitsRoundingConvention: ").append(toIndentedString(fractionalUnitsRoundingConvention)).append("\n");
     sb.append("    fractionalUnitsDecimalPlaces: ").append(toIndentedString(fractionalUnitsDecimalPlaces)).append("\n");
+    sb.append("    newInstrument: ").append(toIndentedString(newInstrument)).append("\n");
     sb.append("}");
     return sb.toString();
   }

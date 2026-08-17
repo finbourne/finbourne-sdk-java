@@ -6,7 +6,7 @@ Cancel schedule represents the embedded option on a cancellable swap, allowing o
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scheduleType** | **String** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule. | [default to String]
+**scheduleType** | **String** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule. | [default to String]
 **cancelDates** | [**List&lt;OffsetDateTime&gt;**](OffsetDateTime.md) | The dates on which cancellation may be elected. | [default to List<OffsetDateTime>]
 **cancelType** | **String** | The type of cancellation option: European (single cancel date) or Bermudan (two or more).                Supported string (enumeration) values are: [European, Bermudan]. Available values: European, Bermudan. | [default to String]
 **noticeConvention** | [**NoticeConvention**](NoticeConvention.md) |  | [default to NoticeConvention]

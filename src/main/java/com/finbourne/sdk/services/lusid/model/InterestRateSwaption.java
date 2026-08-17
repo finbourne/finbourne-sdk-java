@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.InterestRateSwap;
 import com.finbourne.sdk.services.lusid.model.LusidInstrument;
 import com.finbourne.sdk.services.lusid.model.Premium;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
+import com.finbourne.sdk.services.lusid.model.TradingConventions;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -50,7 +51,12 @@ import com.finbourne.sdk.JSON;
   InterestRateSwaption.JSON_PROPERTY_UNDERLYING,
   InterestRateSwaption.JSON_PROPERTY_DELIVERY_DAYS,
   InterestRateSwaption.JSON_PROPERTY_BUSINESS_DAY_CONVENTION,
-  InterestRateSwaption.JSON_PROPERTY_SETTLEMENT_CALENDARS
+  InterestRateSwaption.JSON_PROPERTY_SETTLEMENT_CALENDARS,
+  InterestRateSwaption.JSON_PROPERTY_DOM_CCY,
+  InterestRateSwaption.JSON_PROPERTY_EXERCISE_DATE,
+  InterestRateSwaption.JSON_PROPERTY_EXERCISE_TYPE,
+  InterestRateSwaption.JSON_PROPERTY_STRIKE,
+  InterestRateSwaption.JSON_PROPERTY_TRADING_CONVENTIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -109,6 +115,31 @@ public class InterestRateSwaption extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_SETTLEMENT_CALENDARS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<String> settlementCalendars;
+
+  public static final String JSON_PROPERTY_DOM_CCY = "domCcy";
+  @JsonProperty(JSON_PROPERTY_DOM_CCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String domCcy;
+
+  public static final String JSON_PROPERTY_EXERCISE_DATE = "exerciseDate";
+  @JsonProperty(JSON_PROPERTY_EXERCISE_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime exerciseDate;
+
+  public static final String JSON_PROPERTY_EXERCISE_TYPE = "exerciseType";
+  @JsonProperty(JSON_PROPERTY_EXERCISE_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String exerciseType;
+
+  public static final String JSON_PROPERTY_STRIKE = "strike";
+  @JsonProperty(JSON_PROPERTY_STRIKE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal strike;
+
+  public static final String JSON_PROPERTY_TRADING_CONVENTIONS = "tradingConventions";
+  @JsonProperty(JSON_PROPERTY_TRADING_CONVENTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private TradingConventions tradingConventions;
 
   public InterestRateSwaption() {
   }
@@ -311,6 +342,101 @@ public class InterestRateSwaption extends LusidInstrument {
   }
 
 
+  public InterestRateSwaption domCcy(String domCcy) {
+    this.domCcy = domCcy;
+    return this;
+  }
+
+  /**
+   * The currency the option settles in.                If not specified, the currency of the underlying swap is used. When specified it must be one of  the currencies of the underlying swap.
+   * @return domCcy
+   */
+  @javax.annotation.Nullable
+  public String getDomCcy() {
+    return domCcy;
+  }
+
+  public void setDomCcy(String domCcy) {
+    this.domCcy = domCcy;
+  }
+
+
+  public InterestRateSwaption exerciseDate(OffsetDateTime exerciseDate) {
+    this.exerciseDate = exerciseDate;
+    return this;
+  }
+
+  /**
+   * The date the option expires, and for European exercise the date it is exercised.                If not specified, the start date of the underlying swap is used.
+   * @return exerciseDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getExerciseDate() {
+    return exerciseDate;
+  }
+
+  public void setExerciseDate(OffsetDateTime exerciseDate) {
+    this.exerciseDate = exerciseDate;
+  }
+
+
+  public InterestRateSwaption exerciseType(String exerciseType) {
+    this.exerciseType = exerciseType;
+    return this;
+  }
+
+  /**
+   * Type of optionality that is present; European, American.                Supported string (enumeration) values are: [European, American].  Defaults to \&quot;European\&quot; if not set.                A European option is exercised on its exercise date, so its exercise event is generated with  that date already set. An American option may be exercised at any point in its life, so it  carries no scheduled date and the exercise date is supplied on the exercise event instead.                The swap delivered on exercise keeps the start date it was defined with, so exercising early  or late leaves it aged or forward-starting relative to the exercise. Keeping that swap  correct for the intended exercise is the responsibility of whoever defines it.
+   * @return exerciseType
+   */
+  @javax.annotation.Nullable
+  public String getExerciseType() {
+    return exerciseType;
+  }
+
+  public void setExerciseType(String exerciseType) {
+    this.exerciseType = exerciseType;
+  }
+
+
+  public InterestRateSwaption strike(java.math.BigDecimal strike) {
+    this.strike = strike;
+    return this;
+  }
+
+  /**
+   * The rate the option strikes against.                May only be specified when the underlying swap has no single fixed leg, as otherwise that leg&#39;s  fixed rate is the strike. It must be specified when the underlying swap has two fixed legs, as  there is then no single rate to strike against.
+   * @return strike
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getStrike() {
+    return strike;
+  }
+
+  public void setStrike(java.math.BigDecimal strike) {
+    this.strike = strike;
+  }
+
+
+  public InterestRateSwaption tradingConventions(TradingConventions tradingConventions) {
+    this.tradingConventions = tradingConventions;
+    return this;
+  }
+
+  /**
+   * Get tradingConventions
+   * @return tradingConventions
+   */
+  @javax.annotation.Nullable
+  public TradingConventions getTradingConventions() {
+    return tradingConventions;
+  }
+
+  public void setTradingConventions(TradingConventions tradingConventions) {
+    this.tradingConventions = tradingConventions;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -330,6 +456,11 @@ public class InterestRateSwaption extends LusidInstrument {
         Objects.equals(this.deliveryDays, interestRateSwaption.deliveryDays) &&
         Objects.equals(this.businessDayConvention, interestRateSwaption.businessDayConvention) &&
         Objects.equals(this.settlementCalendars, interestRateSwaption.settlementCalendars) &&
+        Objects.equals(this.domCcy, interestRateSwaption.domCcy) &&
+        Objects.equals(this.exerciseDate, interestRateSwaption.exerciseDate) &&
+        Objects.equals(this.exerciseType, interestRateSwaption.exerciseType) &&
+        (this.strike == null ? interestRateSwaption.strike == null : (interestRateSwaption.strike != null && this.strike.compareTo(interestRateSwaption.getStrike()) == 0)) &&
+        Objects.equals(this.tradingConventions, interestRateSwaption.tradingConventions) &&
         super.equals(o);
   }
 
@@ -339,7 +470,7 @@ public class InterestRateSwaption extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, payOrReceiveFixed, premium, deliveryMethod, swap, timeZoneConventions, underlying, deliveryDays, businessDayConvention, settlementCalendars, super.hashCode());
+    return Objects.hash(startDate, payOrReceiveFixed, premium, deliveryMethod, swap, timeZoneConventions, underlying, deliveryDays, businessDayConvention, settlementCalendars, domCcy, exerciseDate, exerciseType, strike, tradingConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -364,6 +495,11 @@ public class InterestRateSwaption extends LusidInstrument {
     sb.append("    deliveryDays: ").append(toIndentedString(deliveryDays)).append("\n");
     sb.append("    businessDayConvention: ").append(toIndentedString(businessDayConvention)).append("\n");
     sb.append("    settlementCalendars: ").append(toIndentedString(settlementCalendars)).append("\n");
+    sb.append("    domCcy: ").append(toIndentedString(domCcy)).append("\n");
+    sb.append("    exerciseDate: ").append(toIndentedString(exerciseDate)).append("\n");
+    sb.append("    exerciseType: ").append(toIndentedString(exerciseType)).append("\n");
+    sb.append("    strike: ").append(toIndentedString(strike)).append("\n");
+    sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

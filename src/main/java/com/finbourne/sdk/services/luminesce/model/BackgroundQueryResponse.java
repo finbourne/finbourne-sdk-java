@@ -47,7 +47,8 @@ import com.finbourne.sdk.JSON;
   BackgroundQueryResponse.JSON_PROPERTY_FETCH_PIPE,
   BackgroundQueryResponse.JSON_PROPERTY_FETCH_EXCEL,
   BackgroundQueryResponse.JSON_PROPERTY_FETCH_SQLITE,
-  BackgroundQueryResponse.JSON_PROPERTY_HISTOGRAM
+  BackgroundQueryResponse.JSON_PROPERTY_HISTOGRAM,
+  BackgroundQueryResponse.JSON_PROPERTY_SAVE_TO_DRIVE
 })
 
 public class BackgroundQueryResponse {
@@ -115,6 +116,11 @@ public class BackgroundQueryResponse {
   @JsonProperty(JSON_PROPERTY_HISTOGRAM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Link histogram;
+
+  public static final String JSON_PROPERTY_SAVE_TO_DRIVE = "saveToDrive";
+  @JsonProperty(JSON_PROPERTY_SAVE_TO_DRIVE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Link saveToDrive;
 
   public BackgroundQueryResponse() {
   }
@@ -366,6 +372,25 @@ public class BackgroundQueryResponse {
   }
 
 
+  public BackgroundQueryResponse saveToDrive(Link saveToDrive) {
+    this.saveToDrive = saveToDrive;
+    return this;
+  }
+
+  /**
+   * Get saveToDrive
+   * @return saveToDrive
+   */
+  @javax.annotation.Nullable
+  public Link getSaveToDrive() {
+    return saveToDrive;
+  }
+
+  public void setSaveToDrive(Link saveToDrive) {
+    this.saveToDrive = saveToDrive;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -387,7 +412,8 @@ public class BackgroundQueryResponse {
         Objects.equals(this.fetchPipe, backgroundQueryResponse.fetchPipe) &&
         Objects.equals(this.fetchExcel, backgroundQueryResponse.fetchExcel) &&
         Objects.equals(this.fetchSqlite, backgroundQueryResponse.fetchSqlite) &&
-        Objects.equals(this.histogram, backgroundQueryResponse.histogram);
+        Objects.equals(this.histogram, backgroundQueryResponse.histogram) &&
+        Objects.equals(this.saveToDrive, backgroundQueryResponse.saveToDrive);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -396,7 +422,7 @@ public class BackgroundQueryResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(executionId, progress, cancel, fetchJson, fetchJsonProper, fetchJsonProperWithLineage, fetchXml, fetchParquet, fetchCsv, fetchPipe, fetchExcel, fetchSqlite, histogram);
+    return Objects.hash(executionId, progress, cancel, fetchJson, fetchJsonProper, fetchJsonProperWithLineage, fetchXml, fetchParquet, fetchCsv, fetchPipe, fetchExcel, fetchSqlite, histogram, saveToDrive);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -423,6 +449,7 @@ public class BackgroundQueryResponse {
     sb.append("    fetchExcel: ").append(toIndentedString(fetchExcel)).append("\n");
     sb.append("    fetchSqlite: ").append(toIndentedString(fetchSqlite)).append("\n");
     sb.append("    histogram: ").append(toIndentedString(histogram)).append("\n");
+    sb.append("    saveToDrive: ").append(toIndentedString(saveToDrive)).append("\n");
     sb.append("}");
     return sb.toString();
   }

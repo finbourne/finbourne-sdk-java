@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.FundCalendarEntries;
 import com.finbourne.sdk.services.lusid.model.PreviousFundCalendarEntry;
 import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
 import java.net.URI;
@@ -59,7 +60,8 @@ import com.finbourne.sdk.JSON;
   FundBookmark.JSON_PROPERTY_PROPERTIES,
   FundBookmark.JSON_PROPERTY_VERSION,
   FundBookmark.JSON_PROPERTY_HREF,
-  FundBookmark.JSON_PROPERTY_LEADER_NAV_TYPE_CODE
+  FundBookmark.JSON_PROPERTY_LEADER_NAV_TYPE_CODE,
+  FundBookmark.JSON_PROPERTY_STAGED_MODIFICATIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -187,6 +189,11 @@ public class FundBookmark extends FundCalendarEntries {
   @JsonProperty(JSON_PROPERTY_LEADER_NAV_TYPE_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String leaderNavTypeCode;
+
+  public static final String JSON_PROPERTY_STAGED_MODIFICATIONS = "stagedModifications";
+  @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StagedModificationsInfo stagedModifications;
 
   public FundBookmark() {
   }
@@ -522,6 +529,25 @@ public class FundBookmark extends FundCalendarEntries {
   }
 
 
+  public FundBookmark stagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+    return this;
+  }
+
+  /**
+   * Get stagedModifications
+   * @return stagedModifications
+   */
+  @javax.annotation.Nullable
+  public StagedModificationsInfo getStagedModifications() {
+    return stagedModifications;
+  }
+
+  public void setStagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -548,6 +574,7 @@ public class FundBookmark extends FundCalendarEntries {
         Objects.equals(this.version, fundBookmark.version) &&
         Objects.equals(this.href, fundBookmark.href) &&
         Objects.equals(this.leaderNavTypeCode, fundBookmark.leaderNavTypeCode) &&
+        Objects.equals(this.stagedModifications, fundBookmark.stagedModifications) &&
         super.equals(o);
   }
 
@@ -557,7 +584,7 @@ public class FundBookmark extends FundCalendarEntries {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, displayName, description, navTypeCode, timelineId, previousEntry, effectiveAt, asAt, entryType, status, applyClearDown, holdingsAsAtOverride, valuationsAsAtOverride, properties, version, href, leaderNavTypeCode, super.hashCode());
+    return Objects.hash(code, displayName, description, navTypeCode, timelineId, previousEntry, effectiveAt, asAt, entryType, status, applyClearDown, holdingsAsAtOverride, valuationsAsAtOverride, properties, version, href, leaderNavTypeCode, stagedModifications, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -589,6 +616,7 @@ public class FundBookmark extends FundCalendarEntries {
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    leaderNavTypeCode: ").append(toIndentedString(leaderNavTypeCode)).append("\n");
+    sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("}");
     return sb.toString();
   }

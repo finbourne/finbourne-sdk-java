@@ -19,6 +19,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -42,7 +43,10 @@ import com.finbourne.sdk.JSON;
   QueryApplicableInstrumentEventsRequest.JSON_PROPERTY_WINDOW_END,
   QueryApplicableInstrumentEventsRequest.JSON_PROPERTY_EFFECTIVE_AT,
   QueryApplicableInstrumentEventsRequest.JSON_PROPERTY_PORTFOLIO_ENTITY_IDS,
-  QueryApplicableInstrumentEventsRequest.JSON_PROPERTY_FORECASTING_RECIPE_ID
+  QueryApplicableInstrumentEventsRequest.JSON_PROPERTY_FORECASTING_RECIPE_ID,
+  QueryApplicableInstrumentEventsRequest.JSON_PROPERTY_TIMELINE_SCOPE,
+  QueryApplicableInstrumentEventsRequest.JSON_PROPERTY_TIMELINE_CODE,
+  QueryApplicableInstrumentEventsRequest.JSON_PROPERTY_CLOSED_PERIOD_ID
 })
 
 public class QueryApplicableInstrumentEventsRequest {
@@ -58,7 +62,7 @@ public class QueryApplicableInstrumentEventsRequest {
 
   public static final String JSON_PROPERTY_EFFECTIVE_AT = "effectiveAt";
   @JsonProperty(JSON_PROPERTY_EFFECTIVE_AT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime effectiveAt;
 
   public static final String JSON_PROPERTY_PORTFOLIO_ENTITY_IDS = "portfolioEntityIds";
@@ -70,6 +74,21 @@ public class QueryApplicableInstrumentEventsRequest {
   @JsonProperty(JSON_PROPERTY_FORECASTING_RECIPE_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private ResourceId forecastingRecipeId;
+
+  public static final String JSON_PROPERTY_TIMELINE_SCOPE = "timelineScope";
+  @JsonProperty(JSON_PROPERTY_TIMELINE_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String timelineScope;
+
+  public static final String JSON_PROPERTY_TIMELINE_CODE = "timelineCode";
+  @JsonProperty(JSON_PROPERTY_TIMELINE_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String timelineCode;
+
+  public static final String JSON_PROPERTY_CLOSED_PERIOD_ID = "closedPeriodId";
+  @JsonProperty(JSON_PROPERTY_CLOSED_PERIOD_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String closedPeriodId;
 
   public QueryApplicableInstrumentEventsRequest() {
   }
@@ -118,10 +137,10 @@ public class QueryApplicableInstrumentEventsRequest {
   }
 
   /**
-   * The Effective date that splits query window into two parts: factual period and forecast period
+   * The Effective date that splits query window into two parts: factual period and forecast period. Optional - a timeline (with an optional closed period) may be supplied instead to derive the effective date.
    * @return effectiveAt
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public OffsetDateTime getEffectiveAt() {
     return effectiveAt;
   }
@@ -177,6 +196,63 @@ public class QueryApplicableInstrumentEventsRequest {
   }
 
 
+  public QueryApplicableInstrumentEventsRequest timelineScope(String timelineScope) {
+    this.timelineScope = timelineScope;
+    return this;
+  }
+
+  /**
+   * The scope of the timeline to be used when building the instrument events.
+   * @return timelineScope
+   */
+  @javax.annotation.Nullable
+  public String getTimelineScope() {
+    return timelineScope;
+  }
+
+  public void setTimelineScope(String timelineScope) {
+    this.timelineScope = timelineScope;
+  }
+
+
+  public QueryApplicableInstrumentEventsRequest timelineCode(String timelineCode) {
+    this.timelineCode = timelineCode;
+    return this;
+  }
+
+  /**
+   * The code of the timeline to be used when building the instrument events. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods.
+   * @return timelineCode
+   */
+  @javax.annotation.Nullable
+  public String getTimelineCode() {
+    return timelineCode;
+  }
+
+  public void setTimelineCode(String timelineCode) {
+    this.timelineCode = timelineCode;
+  }
+
+
+  public QueryApplicableInstrumentEventsRequest closedPeriodId(String closedPeriodId) {
+    this.closedPeriodId = closedPeriodId;
+    return this;
+  }
+
+  /**
+   * The id of the closed period, on the given timeline, to be used when building the instrument events.
+   * @return closedPeriodId
+   */
+  @javax.annotation.Nullable
+  public String getClosedPeriodId() {
+    return closedPeriodId;
+  }
+
+  public void setClosedPeriodId(String closedPeriodId) {
+    this.closedPeriodId = closedPeriodId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -190,12 +266,26 @@ public class QueryApplicableInstrumentEventsRequest {
         Objects.equals(this.windowEnd, queryApplicableInstrumentEventsRequest.windowEnd) &&
         Objects.equals(this.effectiveAt, queryApplicableInstrumentEventsRequest.effectiveAt) &&
         Objects.equals(this.portfolioEntityIds, queryApplicableInstrumentEventsRequest.portfolioEntityIds) &&
-        Objects.equals(this.forecastingRecipeId, queryApplicableInstrumentEventsRequest.forecastingRecipeId);
+        Objects.equals(this.forecastingRecipeId, queryApplicableInstrumentEventsRequest.forecastingRecipeId) &&
+        Objects.equals(this.timelineScope, queryApplicableInstrumentEventsRequest.timelineScope) &&
+        Objects.equals(this.timelineCode, queryApplicableInstrumentEventsRequest.timelineCode) &&
+        Objects.equals(this.closedPeriodId, queryApplicableInstrumentEventsRequest.closedPeriodId);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(windowStart, windowEnd, effectiveAt, portfolioEntityIds, forecastingRecipeId);
+    return Objects.hash(windowStart, windowEnd, effectiveAt, portfolioEntityIds, forecastingRecipeId, timelineScope, timelineCode, closedPeriodId);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -207,6 +297,9 @@ public class QueryApplicableInstrumentEventsRequest {
     sb.append("    effectiveAt: ").append(toIndentedString(effectiveAt)).append("\n");
     sb.append("    portfolioEntityIds: ").append(toIndentedString(portfolioEntityIds)).append("\n");
     sb.append("    forecastingRecipeId: ").append(toIndentedString(forecastingRecipeId)).append("\n");
+    sb.append("    timelineScope: ").append(toIndentedString(timelineScope)).append("\n");
+    sb.append("    timelineCode: ").append(toIndentedString(timelineCode)).append("\n");
+    sb.append("    closedPeriodId: ").append(toIndentedString(closedPeriodId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

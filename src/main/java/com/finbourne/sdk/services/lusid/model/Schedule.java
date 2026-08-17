@@ -44,6 +44,7 @@ import com.finbourne.sdk.JSON;
 @com.fasterxml.jackson.annotation.JsonSubTypes({
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BondConversionSchedule.class, name = "BondConversionSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CancelSchedule.class, name = "CancelSchedule"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CommodityCalendarSchedule.class, name = "CommodityCalendarSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FixedSchedule.class, name = "FixedSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FloatSchedule.class, name = "FloatSchedule"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxLinkedNotionalSchedule.class, name = "FxLinkedNotionalSchedule"),
@@ -55,7 +56,7 @@ import com.finbourne.sdk.JSON;
 
 public class Schedule {
   /**
-   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule.
+   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule.
    */
   public enum ScheduleTypeEnum {
     FIXED_SCHEDULE("FixedSchedule"),
@@ -75,6 +76,8 @@ public class Schedule {
     BOND_CONVERSION_SCHEDULE("BondConversionSchedule"),
     
     PIK_SCHEDULE("PikSchedule"),
+    
+    COMMODITY_CALENDAR_SCHEDULE("CommodityCalendarSchedule"),
     
     INVALID("Invalid"),
     
@@ -120,7 +123,7 @@ public class Schedule {
   }
 
   /**
-   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule.
+   * Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule.
    * @return scheduleType
    */
   @javax.annotation.Nonnull

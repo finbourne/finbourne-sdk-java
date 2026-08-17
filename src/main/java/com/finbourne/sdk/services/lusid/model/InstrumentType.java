@@ -119,7 +119,11 @@ public enum InstrumentType {
   
   COMMODITY_FORWARD("CommodityForward"),
   
-  BOND_OPTION("BondOption");
+  BOND_OPTION("BondOption"),
+  
+  CDS_OPTION("CdsOption"),
+  
+  COMMODITY_CALENDAR_SWAP("CommodityCalendarSwap");
 
   private String value;
 

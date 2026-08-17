@@ -112,6 +112,7 @@ InstrumentEventType method = InstrumentEventType.DELISTING_EVENT;
 InstrumentEventType method = InstrumentEventType.PIK_BOND_INTEREST_EVENT;
 InstrumentEventType method = InstrumentEventType.COMMODITY_FORWARD_CASH_SETTLEMENT_EVENT;
 InstrumentEventType method = InstrumentEventType.PAYMENT_IN_KIND_EVENT;
+InstrumentEventType method = InstrumentEventType.COMMODITY_FORWARD_PHYSICAL_SETTLEMENT_EVENT;
 ```
 
 

@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | [default to Version]
 **href** | [**URI**](URI.md) | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] [default to URI]
 **leaderNavTypeCode** | **String** | The code of the Nav Type that this Nav Type will follow when set. | [optional] [default to String]
+**stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FundBookmark;
@@ -47,6 +48,7 @@ Boolean applyClearDown = true;
 Version version = new Version();
 @javax.annotation.Nullable URI href = URI.create("http://example.com/href");
 @javax.annotation.Nullable String leaderNavTypeCode = "example leaderNavTypeCode";
+StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 
 
 FundBookmark fundBookmarkInstance = new FundBookmark()
@@ -66,7 +68,8 @@ FundBookmark fundBookmarkInstance = new FundBookmark()
     .properties(properties)
     .version(version)
     .href(href)
-    .leaderNavTypeCode(leaderNavTypeCode);
+    .leaderNavTypeCode(leaderNavTypeCode)
+    .stagedModifications(stagedModifications);
 ```
 
 

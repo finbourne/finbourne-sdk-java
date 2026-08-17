@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **fetchExcel** | [**Link**](Link.md) |  | [optional] [default to Link]
 **fetchSqlite** | [**Link**](Link.md) |  | [optional] [default to Link]
 **histogram** | [**Link**](Link.md) |  | [optional] [default to Link]
+**saveToDrive** | [**Link**](Link.md) |  | [optional] [default to Link]
 
 ```java
 import com.finbourne.sdk.services.luminesce.model.BackgroundQueryResponse;
@@ -39,6 +40,7 @@ Link fetchPipe = new Link();
 Link fetchExcel = new Link();
 Link fetchSqlite = new Link();
 Link histogram = new Link();
+Link saveToDrive = new Link();
 
 
 BackgroundQueryResponse backgroundQueryResponseInstance = new BackgroundQueryResponse()
@@ -54,7 +56,8 @@ BackgroundQueryResponse backgroundQueryResponseInstance = new BackgroundQueryRes
     .fetchPipe(fetchPipe)
     .fetchExcel(fetchExcel)
     .fetchSqlite(fetchSqlite)
-    .histogram(histogram);
+    .histogram(histogram)
+    .saveToDrive(saveToDrive);
 ```
 
 

@@ -41,6 +41,8 @@ public enum ScheduleType {
   
   PIK_SCHEDULE("PikSchedule"),
   
+  COMMODITY_CALENDAR_SCHEDULE("CommodityCalendarSchedule"),
+  
   INVALID("Invalid"),
   
   CANCEL_SCHEDULE("CancelSchedule");

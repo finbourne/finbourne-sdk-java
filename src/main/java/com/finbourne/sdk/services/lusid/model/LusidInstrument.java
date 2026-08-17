@@ -49,6 +49,8 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = Cash.class, name = "Cash"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CashPerpetual.class, name = "CashPerpetual"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CdsIndex.class, name = "CdsIndex"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CdsOption.class, name = "CdsOption"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CommodityCalendarSwap.class, name = "CommodityCalendarSwap"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CommodityForward.class, name = "CommodityForward"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComplexBond.class, name = "ComplexBond"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContractForDifference.class, name = "ContractForDifference"),
@@ -91,7 +93,7 @@ import com.finbourne.sdk.JSON;
 
 public class LusidInstrument {
   /**
-   * Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption.
+   * Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap.
    */
   public enum InstrumentTypeEnum {
     QUOTED_SECURITY("QuotedSecurity"),
@@ -190,7 +192,11 @@ public class LusidInstrument {
     
     COMMODITY_FORWARD("CommodityForward"),
     
-    BOND_OPTION("BondOption");
+    BOND_OPTION("BondOption"),
+    
+    CDS_OPTION("CdsOption"),
+    
+    COMMODITY_CALENDAR_SWAP("CommodityCalendarSwap");
 
     private String value;
 
@@ -232,7 +238,7 @@ public class LusidInstrument {
   }
 
   /**
-   * Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption.
+   * Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap.
    * @return instrumentType
    */
   @javax.annotation.Nonnull

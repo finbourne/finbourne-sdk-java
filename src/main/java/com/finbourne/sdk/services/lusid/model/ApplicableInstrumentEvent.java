@@ -19,6 +19,7 @@ import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.Transaction;
 import com.finbourne.sdk.services.lusid.model.TransactionDiagnostics;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +57,9 @@ import com.finbourne.sdk.JSON;
   ApplicableInstrumentEvent.JSON_PROPERTY_TRANSACTIONS,
   ApplicableInstrumentEvent.JSON_PROPERTY_TRANSACTION_DIAGNOSTICS,
   ApplicableInstrumentEvent.JSON_PROPERTY_APPLIED_INSTRUMENT_EVENT_INSTRUCTION,
-  ApplicableInstrumentEvent.JSON_PROPERTY_ELIGIBLE_BALANCE
+  ApplicableInstrumentEvent.JSON_PROPERTY_ELIGIBLE_BALANCE,
+  ApplicableInstrumentEvent.JSON_PROPERTY_INSTRUMENT_EVENT_STATUS,
+  ApplicableInstrumentEvent.JSON_PROPERTY_ACCOUNTING_DATE
 })
 
 public class ApplicableInstrumentEvent {
@@ -134,6 +137,16 @@ public class ApplicableInstrumentEvent {
   @JsonProperty(JSON_PROPERTY_ELIGIBLE_BALANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal eligibleBalance;
+
+  public static final String JSON_PROPERTY_INSTRUMENT_EVENT_STATUS = "instrumentEventStatus";
+  @JsonProperty(JSON_PROPERTY_INSTRUMENT_EVENT_STATUS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String instrumentEventStatus;
+
+  public static final String JSON_PROPERTY_ACCOUNTING_DATE = "accountingDate";
+  @JsonProperty(JSON_PROPERTY_ACCOUNTING_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime accountingDate;
 
   public ApplicableInstrumentEvent() {
   }
@@ -431,6 +444,44 @@ public class ApplicableInstrumentEvent {
   }
 
 
+  public ApplicableInstrumentEvent instrumentEventStatus(String instrumentEventStatus) {
+    this.instrumentEventStatus = instrumentEventStatus;
+    return this;
+  }
+
+  /**
+   * Available values: Active, ActiveReversal, ActiveTrueUp.
+   * @return instrumentEventStatus
+   */
+  @javax.annotation.Nullable
+  public String getInstrumentEventStatus() {
+    return instrumentEventStatus;
+  }
+
+  public void setInstrumentEventStatus(String instrumentEventStatus) {
+    this.instrumentEventStatus = instrumentEventStatus;
+  }
+
+
+  public ApplicableInstrumentEvent accountingDate(OffsetDateTime accountingDate) {
+    this.accountingDate = accountingDate;
+    return this;
+  }
+
+  /**
+   * Get accountingDate
+   * @return accountingDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getAccountingDate() {
+    return accountingDate;
+  }
+
+  public void setAccountingDate(OffsetDateTime accountingDate) {
+    this.accountingDate = accountingDate;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -454,7 +505,9 @@ public class ApplicableInstrumentEvent {
         Objects.equals(this.transactions, applicableInstrumentEvent.transactions) &&
         Objects.equals(this.transactionDiagnostics, applicableInstrumentEvent.transactionDiagnostics) &&
         Objects.equals(this.appliedInstrumentEventInstruction, applicableInstrumentEvent.appliedInstrumentEventInstruction) &&
-        (this.eligibleBalance == null ? applicableInstrumentEvent.eligibleBalance == null : (applicableInstrumentEvent.eligibleBalance != null && this.eligibleBalance.compareTo(applicableInstrumentEvent.getEligibleBalance()) == 0));
+        (this.eligibleBalance == null ? applicableInstrumentEvent.eligibleBalance == null : (applicableInstrumentEvent.eligibleBalance != null && this.eligibleBalance.compareTo(applicableInstrumentEvent.getEligibleBalance()) == 0)) &&
+        Objects.equals(this.instrumentEventStatus, applicableInstrumentEvent.instrumentEventStatus) &&
+        Objects.equals(this.accountingDate, applicableInstrumentEvent.accountingDate);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -463,7 +516,7 @@ public class ApplicableInstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(portfolioId, holdingId, lusidInstrumentId, instrumentScope, instrumentType, instrumentEventType, instrumentEventId, generatedEvent, generatedEventDiagnostics, loadedEvent, appliedInstrumentEventInstructionId, transactions, transactionDiagnostics, appliedInstrumentEventInstruction, eligibleBalance);
+    return Objects.hash(portfolioId, holdingId, lusidInstrumentId, instrumentScope, instrumentType, instrumentEventType, instrumentEventId, generatedEvent, generatedEventDiagnostics, loadedEvent, appliedInstrumentEventInstructionId, transactions, transactionDiagnostics, appliedInstrumentEventInstruction, eligibleBalance, instrumentEventStatus, accountingDate);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -492,6 +545,8 @@ public class ApplicableInstrumentEvent {
     sb.append("    transactionDiagnostics: ").append(toIndentedString(transactionDiagnostics)).append("\n");
     sb.append("    appliedInstrumentEventInstruction: ").append(toIndentedString(appliedInstrumentEventInstruction)).append("\n");
     sb.append("    eligibleBalance: ").append(toIndentedString(eligibleBalance)).append("\n");
+    sb.append("    instrumentEventStatus: ").append(toIndentedString(instrumentEventStatus)).append("\n");
+    sb.append("    accountingDate: ").append(toIndentedString(accountingDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }

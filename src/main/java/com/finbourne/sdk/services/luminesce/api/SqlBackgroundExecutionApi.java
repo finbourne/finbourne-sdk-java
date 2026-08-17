@@ -30,6 +30,8 @@ import java.io.IOException;
 import com.finbourne.sdk.services.luminesce.model.BackgroundQueryCancelResponse;
 import com.finbourne.sdk.services.luminesce.model.BackgroundQueryProgressResponse;
 import com.finbourne.sdk.services.luminesce.model.BackgroundQueryResponse;
+import com.finbourne.sdk.services.luminesce.model.ExportType;
+import com.finbourne.sdk.services.luminesce.model.ExternalQuerySource;
 import java.io.File;
 import com.finbourne.sdk.services.luminesce.model.LusidProblemDetails;
 import java.time.OffsetDateTime;
@@ -5841,6 +5843,566 @@ public class SqlBackgroundExecutionApi {
         return new APIgetProgressOfRequest(executionId);
     }
     /**
+     * Build call for saveQueryResultToDrive
+     * @param executionId ExecutionId returned when starting the query (required)
+     * @param driveLocationAndFileName Location and file name within drive where this should be saved to. Missing paths will be created, and extension (if given) will be ignored and inferred from the chosen format (required)
+     * @param mayOverwrite If there is an existing file at the requested location with the same name should this be overridden, or an error returned? (optional, default to false)
+     * @param format Format to save in. (optional)
+     * @param driveTemplateLocation Drive path and full file name including extension to be used for the export. Only some export types support templates, such as Excel and Pdf, and this will need to match the format type, if given. (optional)
+     * @param tableNameReference What should the &#39;exported table name&#39; be.  Defaults to &#39;Results&#39;. This has different meaning for different export types. (optional)
+     * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+     * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
+     * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
+     * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
+     * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest saveQueryResultToDriveCall(String executionId, String driveLocationAndFileName, Boolean mayOverwrite, ExportType format, String driveTemplateLocation, String tableNameReference, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback) throws ApiException {
+        return saveQueryResultToDriveCall(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for saveQueryResultToDrive. Use any specified configuration options to override any other configuration for this request only.
+     * @param executionId ExecutionId returned when starting the query (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param driveLocationAndFileName Location and file name within drive where this should be saved to. Missing paths will be created, and extension (if given) will be ignored and inferred from the chosen format (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param mayOverwrite If there is an existing file at the requested location with the same name should this be overridden, or an error returned? (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
+     * @param format Format to save in. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param driveTemplateLocation Drive path and full file name including extension to be used for the export. Only some export types support templates, such as Excel and Pdf, and this will need to match the format type, if given. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param tableNameReference What should the &#39;exported table name&#39; be.  Defaults to &#39;Results&#39;. This has different meaning for different export types. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest saveQueryResultToDriveCall(String executionId, String driveLocationAndFileName, Boolean mayOverwrite, ExportType format, String driveTemplateLocation, String tableNameReference, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/honeycomb/api/SqlBackground/{executionId}/drive"
+            .replace("{" + "executionId" + "}", localVarApiClient.escapeString(executionId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (driveLocationAndFileName != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("driveLocationAndFileName", driveLocationAndFileName));
+        }
+
+        if (mayOverwrite != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("mayOverwrite", mayOverwrite));
+        }
+
+        if (format != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("format", format));
+        }
+
+        if (driveTemplateLocation != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("driveTemplateLocation", driveTemplateLocation));
+        }
+
+        if (tableNameReference != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("tableNameReference", tableNameReference));
+        }
+
+        if (sortBy != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortBy", sortBy));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sqlFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sqlFilter", sqlFilter));
+        }
+
+        if (select != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("select", select));
+        }
+
+        if (groupBy != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("groupBy", groupBy));
+        }
+
+        if (dateTimeFormat != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dateTimeFormat", dateTimeFormat));
+        }
+
+        if (loadWaitMilliseconds != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("loadWaitMilliseconds", loadWaitMilliseconds));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest saveQueryResultToDriveValidateBeforeCall(String executionId, String driveLocationAndFileName, Boolean mayOverwrite, ExportType format, String driveTemplateLocation, String tableNameReference, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'executionId' is set
+        if (executionId == null) {
+            throw new ApiException("Missing the required parameter 'executionId' when calling saveQueryResultToDrive(Async)");
+        }
+
+        // verify the required parameter 'driveLocationAndFileName' is set
+        if (driveLocationAndFileName == null) {
+            throw new ApiException("Missing the required parameter 'driveLocationAndFileName' when calling saveQueryResultToDrive(Async)");
+        }
+
+        return saveQueryResultToDriveCall(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] SaveQueryResultToDrive: Saves the query results directly to Drive
+     * Saves the results directly to Drive.  This can be useful for sharing results with others, keeping persistent reports, etc.      Of course always consider data visibility and security as who can see these depends on users&#39; permissions to the chosen location within Drive.  Template support is provided, for the export types that allow this, but unlike using the &#x60;Drive.SaveAs&#x60; provider within the SQL itself, only one data set can be be saved  (the full query result set, optionally manipulated with the various parameters to this method).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query or drive parameters were incorrect in some way - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+     * @param executionId ExecutionId returned when starting the query (required)
+     * @param driveLocationAndFileName Location and file name within drive where this should be saved to. Missing paths will be created, and extension (if given) will be ignored and inferred from the chosen format (required)
+     * @param mayOverwrite If there is an existing file at the requested location with the same name should this be overridden, or an error returned? (optional, default to false)
+     * @param format Format to save in. (optional)
+     * @param driveTemplateLocation Drive path and full file name including extension to be used for the export. Only some export types support templates, such as Excel and Pdf, and this will need to match the format type, if given. (optional)
+     * @param tableNameReference What should the &#39;exported table name&#39; be.  Defaults to &#39;Results&#39;. This has different meaning for different export types. (optional)
+     * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+     * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
+     * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
+     * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
+     * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
+     * @return ApiResponse&lt;String&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<String> saveQueryResultToDriveWithHttpInfo(String executionId, String driveLocationAndFileName, Boolean mayOverwrite, ExportType format, String driveTemplateLocation, String tableNameReference, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds) throws ApiException {
+        HttpRequest localVarCall = saveQueryResultToDriveValidateBeforeCall(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<String>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] SaveQueryResultToDrive: Saves the query results directly to Drive
+     * Saves the results directly to Drive.  This can be useful for sharing results with others, keeping persistent reports, etc.      Of course always consider data visibility and security as who can see these depends on users&#39; permissions to the chosen location within Drive.  Template support is provided, for the export types that allow this, but unlike using the &#x60;Drive.SaveAs&#x60; provider within the SQL itself, only one data set can be be saved  (the full query result set, optionally manipulated with the various parameters to this method).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query or drive parameters were incorrect in some way - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
+     * @param executionId ExecutionId returned when starting the query (required)
+     * @param driveLocationAndFileName Location and file name within drive where this should be saved to. Missing paths will be created, and extension (if given) will be ignored and inferred from the chosen format (required)
+     * @param mayOverwrite If there is an existing file at the requested location with the same name should this be overridden, or an error returned? (optional, default to false)
+     * @param format Format to save in. (optional)
+     * @param driveTemplateLocation Drive path and full file name including extension to be used for the export. Only some export types support templates, such as Excel and Pdf, and this will need to match the format type, if given. (optional)
+     * @param tableNameReference What should the &#39;exported table name&#39; be.  Defaults to &#39;Results&#39;. This has different meaning for different export types. (optional)
+     * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+     * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
+     * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
+     * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
+     * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
+     * @return ApiResponse&lt;String&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<String> saveQueryResultToDriveWithHttpInfo(String executionId, String driveLocationAndFileName, Boolean mayOverwrite, ExportType format, String driveTemplateLocation, String tableNameReference, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = saveQueryResultToDriveValidateBeforeCall(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, null, opts);
+        Type localVarReturnType = new TypeReference<String>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] SaveQueryResultToDrive: Saves the query results directly to Drive (asynchronously)
+     * Saves the results directly to Drive.  This can be useful for sharing results with others, keeping persistent reports, etc.      Of course always consider data visibility and security as who can see these depends on users&#39; permissions to the chosen location within Drive.  Template support is provided, for the export types that allow this, but unlike using the &#x60;Drive.SaveAs&#x60; provider within the SQL itself, only one data set can be be saved  (the full query result set, optionally manipulated with the various parameters to this method).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query or drive parameters were incorrect in some way - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+     * @param executionId ExecutionId returned when starting the query (required)
+     * @param driveLocationAndFileName Location and file name within drive where this should be saved to. Missing paths will be created, and extension (if given) will be ignored and inferred from the chosen format (required)
+     * @param mayOverwrite If there is an existing file at the requested location with the same name should this be overridden, or an error returned? (optional, default to false)
+     * @param format Format to save in. (optional)
+     * @param driveTemplateLocation Drive path and full file name including extension to be used for the export. Only some export types support templates, such as Excel and Pdf, and this will need to match the format type, if given. (optional)
+     * @param tableNameReference What should the &#39;exported table name&#39; be.  Defaults to &#39;Results&#39;. This has different meaning for different export types. (optional)
+     * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+     * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
+     * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
+     * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
+     * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    private void saveQueryResultToDriveAsync(String executionId, String driveLocationAndFileName, Boolean mayOverwrite, ExportType format, String driveTemplateLocation, String tableNameReference, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback) throws ApiException {
+
+        HttpRequest localVarCall = saveQueryResultToDriveValidateBeforeCall(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<String>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] SaveQueryResultToDrive: Saves the query results directly to Drive (asynchronously)
+     * Saves the results directly to Drive.  This can be useful for sharing results with others, keeping persistent reports, etc.      Of course always consider data visibility and security as who can see these depends on users&#39; permissions to the chosen location within Drive.  Template support is provided, for the export types that allow this, but unlike using the &#x60;Drive.SaveAs&#x60; provider within the SQL itself, only one data set can be be saved  (the full query result set, optionally manipulated with the various parameters to this method).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query or drive parameters were incorrect in some way - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.Use any specified configuration options to override any other configuration for this request only
+     * @param executionId ExecutionId returned when starting the query (required)
+     * @param driveLocationAndFileName Location and file name within drive where this should be saved to. Missing paths will be created, and extension (if given) will be ignored and inferred from the chosen format (required)
+     * @param mayOverwrite If there is an existing file at the requested location with the same name should this be overridden, or an error returned? (optional, default to false)
+     * @param format Format to save in. (optional)
+     * @param driveTemplateLocation Drive path and full file name including extension to be used for the export. Only some export types support templates, such as Excel and Pdf, and this will need to match the format type, if given. (optional)
+     * @param tableNameReference What should the &#39;exported table name&#39; be.  Defaults to &#39;Results&#39;. This has different meaning for different export types. (optional)
+     * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
+     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+     * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+     * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
+     * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
+     * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
+     * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    private void saveQueryResultToDriveAsync(String executionId, String driveLocationAndFileName, Boolean mayOverwrite, ExportType format, String driveTemplateLocation, String tableNameReference, String sortBy, String filter, String sqlFilter, String select, String groupBy, String dateTimeFormat, Integer loadWaitMilliseconds, final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = saveQueryResultToDriveValidateBeforeCall(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+        Type localVarReturnType = new TypeReference<String>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIsaveQueryResultToDriveRequest {
+        private final String executionId;
+        private final String driveLocationAndFileName;
+        private Boolean mayOverwrite;
+        private ExportType format;
+        private String driveTemplateLocation;
+        private String tableNameReference;
+        private String sortBy;
+        private String filter;
+        private String sqlFilter;
+        private String select;
+        private String groupBy;
+        private String dateTimeFormat;
+        private Integer loadWaitMilliseconds;
+
+        private APIsaveQueryResultToDriveRequest(String executionId, String driveLocationAndFileName) {
+            this.executionId = executionId;
+            this.driveLocationAndFileName = driveLocationAndFileName;
+        }
+
+        /**
+         * Set mayOverwrite
+         * @param mayOverwrite If there is an existing file at the requested location with the same name should this be overridden, or an error returned? (optional, default to false)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest mayOverwrite(Boolean mayOverwrite) {
+            this.mayOverwrite = mayOverwrite;
+            return this;
+        }
+
+        /**
+         * Set format
+         * @param format Format to save in. (optional)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest format(ExportType format) {
+            this.format = format;
+            return this;
+        }
+
+        /**
+         * Set driveTemplateLocation
+         * @param driveTemplateLocation Drive path and full file name including extension to be used for the export. Only some export types support templates, such as Excel and Pdf, and this will need to match the format type, if given. (optional)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest driveTemplateLocation(String driveTemplateLocation) {
+            this.driveTemplateLocation = driveTemplateLocation;
+            return this;
+        }
+
+        /**
+         * Set tableNameReference
+         * @param tableNameReference What should the &#39;exported table name&#39; be.  Defaults to &#39;Results&#39;. This has different meaning for different export types. (optional)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest tableNameReference(String tableNameReference) {
+            this.tableNameReference = tableNameReference;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy Order the results by these fields.             Use the &#x60;-&#x60; sign to denote descending order, e.g. &#x60;-MyFieldName&#x60;.  Numeric indexes may be used also, e.g. &#x60;2,-3&#x60;.             Multiple fields can be denoted by a comma e.g. &#x60;-MyFieldName,AnotherFieldName,-AFurtherFieldName&#x60;.             Default is null, the sort order specified in the query itself. (optional)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest sortBy(String sortBy) {
+            this.sortBy = sortBy;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - may be combined with &#x60;sqlFilter&#x60;. (optional)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sqlFilter
+         * @param sqlFilter Further limits the fetched results beyond that of the original query. - Raw SQL for filtering, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; - may be combined with &#x60;filter&#x60; while supporting additional syntax that cannot. (optional)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest sqlFilter(String sqlFilter) {
+            this.sqlFilter = sqlFilter;
+            return this;
+        }
+
+        /**
+         * Set select
+         * @param select Default is null (meaning return all columns in the original query itself). The values are in terms of the result column name from the original data set and are comma delimited. The power of this comes in that you may aggregate the data if you wish (that is the main reason for allowing this, in fact). e.g.: - &#x60;MyField&#x60; - &#x60;Max(x) FILTER (WHERE y &gt; 12) as ABC&#x60; (max of a field, if another field lets it qualify, with a nice column name) - &#x60;count(*)&#x60; (count the rows for the given group, that would produce a rather ugly column name, but  it works) - &#x60;count(distinct x) as numOfXs&#x60; If there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ].  e.g. - &#x60;some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name&#x60;   where you would likely want to pass &#x60;1&#x60; as the &#x60;groupBy&#x60; also. (optional)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest select(String select) {
+            this.select = select;
+            return this;
+        }
+
+        /**
+         * Set groupBy
+         * @param groupBy Groups by the specified fields.             A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).             e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.             Default is null (meaning no grouping will be performed on the selected columns).             This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.             Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. (optional)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest groupBy(String groupBy) {
+            this.groupBy = groupBy;
+            return this;
+        }
+
+        /**
+         * Set dateTimeFormat
+         * @param dateTimeFormat Format to apply for DateTime data, leaving blank gives the Luminesce Exporter default, currently &#x60;yyyy-MM-dd HH:mm:ss.fff&#x60; (optional)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest dateTimeFormat(String dateTimeFormat) {
+            this.dateTimeFormat = dateTimeFormat;
+            return this;
+        }
+
+        /**
+         * Set loadWaitMilliseconds
+         * @param loadWaitMilliseconds Optional maximum additional wait period for post execution platform processing. (optional, default to 0)
+         * @return APIsaveQueryResultToDriveRequest
+         */
+        public APIsaveQueryResultToDriveRequest loadWaitMilliseconds(Integer loadWaitMilliseconds) {
+            this.loadWaitMilliseconds = loadWaitMilliseconds;
+            return this;
+        }
+
+        /**
+         * Build call for saveQueryResultToDrive
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return saveQueryResultToDriveCall(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback);
+        }
+
+        /**
+         * Execute saveQueryResultToDrive request
+         * @return String
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+         </table>
+         */
+        public String execute() throws ApiException {
+            ApiResponse<String> localVarResp = saveQueryResultToDriveWithHttpInfo(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute saveQueryResultToDrive request. Use any specified configuration options to override any other configuration for this request only.
+         * @return String
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+         </table>
+         */
+        public String execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<String> localVarResp = saveQueryResultToDriveWithHttpInfo(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute saveQueryResultToDrive request with HTTP info returned
+         * @return ApiResponse&lt;String&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<String> executeWithHttpInfo() throws ApiException {
+            return saveQueryResultToDriveWithHttpInfo(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds);
+        }
+
+        /**
+         * Execute saveQueryResultToDrive request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;String&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<String> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return saveQueryResultToDriveWithHttpInfo(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, opts);
+        }
+
+        /**
+         * Execute saveQueryResultToDrive request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<String> _callback) throws ApiException {
+            saveQueryResultToDriveAsync(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback);
+        }
+
+        /**
+         * Execute saveQueryResultToDrive request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<String> _callback, ConfigurationOptions opts) throws ApiException {
+            saveQueryResultToDriveAsync(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] SaveQueryResultToDrive: Saves the query results directly to Drive
+     * Saves the results directly to Drive.  This can be useful for sharing results with others, keeping persistent reports, etc.      Of course always consider data visibility and security as who can see these depends on users&#39; permissions to the chosen location within Drive.  Template support is provided, for the export types that allow this, but unlike using the &#x60;Drive.SaveAs&#x60; provider within the SQL itself, only one data set can be be saved  (the full query result set, optionally manipulated with the various parameters to this method).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query or drive parameters were incorrect in some way - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+     * @param executionId ExecutionId returned when starting the query (required)
+     * @param driveLocationAndFileName Location and file name within drive where this should be saved to. Missing paths will be created, and extension (if given) will be ignored and inferred from the chosen format (required)
+     * @return APIsaveQueryResultToDriveRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIsaveQueryResultToDriveRequest saveQueryResultToDrive(String executionId, String driveLocationAndFileName) {
+        return new APIsaveQueryResultToDriveRequest(executionId, driveLocationAndFileName);
+    }
+    /**
      * Build call for startQuery
      * @param body The LuminesceSql query to kick off. (required)
      * @param executionId An explicit ExecutionId to use.  This must be blank OR assigned to a valid GUID-as-a-string. It might be ignored / replaced, for example if using the query cache and a cached query is found. (optional)
@@ -5849,6 +6411,7 @@ public class SqlBackgroundExecutionApi {
      * @param timeoutSeconds Maximum time the query may run for, in seconds: &lt;0 → ∞, 0 → 7200 (2h) (optional, default to 0)
      * @param keepForSeconds Maximum time the result may be kept for, in seconds: &lt;0 → 1200 (20m), 0 → 28800 (8h), max &#x3D; 2,678,400 (31d) (optional, default to 0)
      * @param executionFlags Optional request flags for the execution.  Currently limited by may grow in time: - ProvideLineage : Should Lineage be requested when running the query?  This must be set in order to later retrieve Lineage. (optional)
+     * @param externalQuerySource Optional request to load the query from an external SQL-store. The payload is then a key that means something to the chosen source Currently limited by may grow in time: - SavedQuery : Load from Saved Queries (within the Workspaces API),   Query/Body examples: &#x60;personal/YourUserId/items/queries/SomeQuery&#x60; or &#x60;shared/SomeWorkspace/items/queries/SomeQuery&#x60;. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -5860,8 +6423,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest startQueryCall(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, final ApiCallback _callback) throws ApiException {
-        return startQueryCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags,  _callback, new ConfigurationOptions());
+    private HttpRequest startQueryCall(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, ExternalQuerySource externalQuerySource, final ApiCallback _callback) throws ApiException {
+        return startQueryCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -5872,7 +6435,8 @@ public class SqlBackgroundExecutionApi {
      * @param queryName A name for this query.  This goes into logs and is available in &#x60;Sys.Logs.HcQueryStart&#x60;. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param timeoutSeconds Maximum time the query may run for, in seconds: &lt;0 → ∞, 0 → 7200 (2h) (optional, default to 0). Use any specified configuration options to override any other configuration for this request only.
      * @param keepForSeconds Maximum time the result may be kept for, in seconds: &lt;0 → 1200 (20m), 0 → 28800 (8h), max &#x3D; 2,678,400 (31d) (optional, default to 0). Use any specified configuration options to override any other configuration for this request only.
-     * @param executionFlags Optional request flags for the execution.  Currently limited by may grow in time: - ProvideLineage : Should Lineage be requested when running the query?  This must be set in order to later retrieve Lineage. (optional)
+     * @param executionFlags Optional request flags for the execution.  Currently limited by may grow in time: - ProvideLineage : Should Lineage be requested when running the query?  This must be set in order to later retrieve Lineage. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param externalQuerySource Optional request to load the query from an external SQL-store. The payload is then a key that means something to the chosen source Currently limited by may grow in time: - SavedQuery : Load from Saved Queries (within the Workspaces API),   Query/Body examples: &#x60;personal/YourUserId/items/queries/SomeQuery&#x60; or &#x60;shared/SomeWorkspace/items/queries/SomeQuery&#x60;. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -5884,7 +6448,7 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest startQueryCall(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest startQueryCall(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, ExternalQuerySource externalQuerySource, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -5935,6 +6499,10 @@ public class SqlBackgroundExecutionApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("executionFlags", executionFlags));
         }
 
+        if (externalQuerySource != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("externalQuerySource", externalQuerySource));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -5958,13 +6526,13 @@ public class SqlBackgroundExecutionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest startQueryValidateBeforeCall(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest startQueryValidateBeforeCall(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, ExternalQuerySource externalQuerySource, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new ApiException("Missing the required parameter 'body' when calling startQuery(Async)");
         }
 
-        return startQueryCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, _callback, opts);
+        return startQueryCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, _callback, opts);
 
     }
 
@@ -5978,6 +6546,7 @@ public class SqlBackgroundExecutionApi {
      * @param timeoutSeconds Maximum time the query may run for, in seconds: &lt;0 → ∞, 0 → 7200 (2h) (optional, default to 0)
      * @param keepForSeconds Maximum time the result may be kept for, in seconds: &lt;0 → 1200 (20m), 0 → 28800 (8h), max &#x3D; 2,678,400 (31d) (optional, default to 0)
      * @param executionFlags Optional request flags for the execution.  Currently limited by may grow in time: - ProvideLineage : Should Lineage be requested when running the query?  This must be set in order to later retrieve Lineage. (optional)
+     * @param externalQuerySource Optional request to load the query from an external SQL-store. The payload is then a key that means something to the chosen source Currently limited by may grow in time: - SavedQuery : Load from Saved Queries (within the Workspaces API),   Query/Body examples: &#x60;personal/YourUserId/items/queries/SomeQuery&#x60; or &#x60;shared/SomeWorkspace/items/queries/SomeQuery&#x60;. (optional)
      * @return ApiResponse&lt;BackgroundQueryResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -5988,8 +6557,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<BackgroundQueryResponse> startQueryWithHttpInfo(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags) throws ApiException {
-        HttpRequest localVarCall = startQueryValidateBeforeCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, null, new ConfigurationOptions());
+    private ApiResponse<BackgroundQueryResponse> startQueryWithHttpInfo(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, ExternalQuerySource externalQuerySource) throws ApiException {
+        HttpRequest localVarCall = startQueryValidateBeforeCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<BackgroundQueryResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -6004,6 +6573,7 @@ public class SqlBackgroundExecutionApi {
      * @param timeoutSeconds Maximum time the query may run for, in seconds: &lt;0 → ∞, 0 → 7200 (2h) (optional, default to 0)
      * @param keepForSeconds Maximum time the result may be kept for, in seconds: &lt;0 → 1200 (20m), 0 → 28800 (8h), max &#x3D; 2,678,400 (31d) (optional, default to 0)
      * @param executionFlags Optional request flags for the execution.  Currently limited by may grow in time: - ProvideLineage : Should Lineage be requested when running the query?  This must be set in order to later retrieve Lineage. (optional)
+     * @param externalQuerySource Optional request to load the query from an external SQL-store. The payload is then a key that means something to the chosen source Currently limited by may grow in time: - SavedQuery : Load from Saved Queries (within the Workspaces API),   Query/Body examples: &#x60;personal/YourUserId/items/queries/SomeQuery&#x60; or &#x60;shared/SomeWorkspace/items/queries/SomeQuery&#x60;. (optional)
      * @return ApiResponse&lt;BackgroundQueryResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -6014,8 +6584,8 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<BackgroundQueryResponse> startQueryWithHttpInfo(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = startQueryValidateBeforeCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, null, opts);
+    private ApiResponse<BackgroundQueryResponse> startQueryWithHttpInfo(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, ExternalQuerySource externalQuerySource, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = startQueryValidateBeforeCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, null, opts);
         Type localVarReturnType = new TypeReference<BackgroundQueryResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -6030,6 +6600,7 @@ public class SqlBackgroundExecutionApi {
      * @param timeoutSeconds Maximum time the query may run for, in seconds: &lt;0 → ∞, 0 → 7200 (2h) (optional, default to 0)
      * @param keepForSeconds Maximum time the result may be kept for, in seconds: &lt;0 → 1200 (20m), 0 → 28800 (8h), max &#x3D; 2,678,400 (31d) (optional, default to 0)
      * @param executionFlags Optional request flags for the execution.  Currently limited by may grow in time: - ProvideLineage : Should Lineage be requested when running the query?  This must be set in order to later retrieve Lineage. (optional)
+     * @param externalQuerySource Optional request to load the query from an external SQL-store. The payload is then a key that means something to the chosen source Currently limited by may grow in time: - SavedQuery : Load from Saved Queries (within the Workspaces API),   Query/Body examples: &#x60;personal/YourUserId/items/queries/SomeQuery&#x60; or &#x60;shared/SomeWorkspace/items/queries/SomeQuery&#x60;. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -6040,9 +6611,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void startQueryAsync(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, final ApiCallback<BackgroundQueryResponse> _callback) throws ApiException {
+    private void startQueryAsync(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, ExternalQuerySource externalQuerySource, final ApiCallback<BackgroundQueryResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = startQueryValidateBeforeCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = startQueryValidateBeforeCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<BackgroundQueryResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -6057,6 +6628,7 @@ public class SqlBackgroundExecutionApi {
      * @param timeoutSeconds Maximum time the query may run for, in seconds: &lt;0 → ∞, 0 → 7200 (2h) (optional, default to 0)
      * @param keepForSeconds Maximum time the result may be kept for, in seconds: &lt;0 → 1200 (20m), 0 → 28800 (8h), max &#x3D; 2,678,400 (31d) (optional, default to 0)
      * @param executionFlags Optional request flags for the execution.  Currently limited by may grow in time: - ProvideLineage : Should Lineage be requested when running the query?  This must be set in order to later retrieve Lineage. (optional)
+     * @param externalQuerySource Optional request to load the query from an external SQL-store. The payload is then a key that means something to the chosen source Currently limited by may grow in time: - SavedQuery : Load from Saved Queries (within the Workspaces API),   Query/Body examples: &#x60;personal/YourUserId/items/queries/SomeQuery&#x60; or &#x60;shared/SomeWorkspace/items/queries/SomeQuery&#x60;. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -6067,9 +6639,9 @@ public class SqlBackgroundExecutionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    private void startQueryAsync(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, final ApiCallback<BackgroundQueryResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void startQueryAsync(String body, String executionId, Map<String, String> scalarParameters, String queryName, Integer timeoutSeconds, Integer keepForSeconds, SqlExecutionFlags executionFlags, ExternalQuerySource externalQuerySource, final ApiCallback<BackgroundQueryResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = startQueryValidateBeforeCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, _callback, opts);
+        HttpRequest localVarCall = startQueryValidateBeforeCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, _callback, opts);
         Type localVarReturnType = new TypeReference<BackgroundQueryResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -6082,6 +6654,7 @@ public class SqlBackgroundExecutionApi {
         private Integer timeoutSeconds;
         private Integer keepForSeconds;
         private SqlExecutionFlags executionFlags;
+        private ExternalQuerySource externalQuerySource;
 
         private APIstartQueryRequest(String body) {
             this.body = body;
@@ -6148,6 +6721,16 @@ public class SqlBackgroundExecutionApi {
         }
 
         /**
+         * Set externalQuerySource
+         * @param externalQuerySource Optional request to load the query from an external SQL-store. The payload is then a key that means something to the chosen source Currently limited by may grow in time: - SavedQuery : Load from Saved Queries (within the Workspaces API),   Query/Body examples: &#x60;personal/YourUserId/items/queries/SomeQuery&#x60; or &#x60;shared/SomeWorkspace/items/queries/SomeQuery&#x60;. (optional)
+         * @return APIstartQueryRequest
+         */
+        public APIstartQueryRequest externalQuerySource(ExternalQuerySource externalQuerySource) {
+            this.externalQuerySource = externalQuerySource;
+            return this;
+        }
+
+        /**
          * Build call for startQuery
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -6161,7 +6744,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return startQueryCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, _callback);
+            return startQueryCall(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, _callback);
         }
 
         /**
@@ -6177,7 +6760,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public BackgroundQueryResponse execute() throws ApiException {
-            ApiResponse<BackgroundQueryResponse> localVarResp = startQueryWithHttpInfo(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags);
+            ApiResponse<BackgroundQueryResponse> localVarResp = startQueryWithHttpInfo(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource);
             return localVarResp.getData();
         }
 
@@ -6194,7 +6777,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public BackgroundQueryResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<BackgroundQueryResponse> localVarResp = startQueryWithHttpInfo(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, opts);
+            ApiResponse<BackgroundQueryResponse> localVarResp = startQueryWithHttpInfo(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, opts);
             return localVarResp.getData();
         }
 
@@ -6211,7 +6794,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<BackgroundQueryResponse> executeWithHttpInfo() throws ApiException {
-            return startQueryWithHttpInfo(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags);
+            return startQueryWithHttpInfo(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource);
         }
 
         /**
@@ -6227,7 +6810,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public ApiResponse<BackgroundQueryResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return startQueryWithHttpInfo(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, opts);
+            return startQueryWithHttpInfo(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, opts);
         }
 
         /**
@@ -6243,7 +6826,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<BackgroundQueryResponse> _callback) throws ApiException {
-            startQueryAsync(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, _callback);
+            startQueryAsync(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, _callback);
         }
 
         /**
@@ -6259,7 +6842,7 @@ public class SqlBackgroundExecutionApi {
          </table>
          */
         public void executeAsync(final ApiCallback<BackgroundQueryResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            startQueryAsync(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, _callback, opts);
+            startQueryAsync(body, executionId, scalarParameters, queryName, timeoutSeconds, keepForSeconds, executionFlags, externalQuerySource, _callback, opts);
         }
     }
 
