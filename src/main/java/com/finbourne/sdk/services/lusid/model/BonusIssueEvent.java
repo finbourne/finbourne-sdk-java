@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.CashOfferElection;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import com.finbourne.sdk.services.lusid.model.LapseElection;
+import com.finbourne.sdk.services.lusid.model.MixedLotConstituentsElection;
 import com.finbourne.sdk.services.lusid.model.SecurityOfferElection;
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -51,7 +52,8 @@ import com.finbourne.sdk.JSON;
   BonusIssueEvent.JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES,
   BonusIssueEvent.JSON_PROPERTY_SECURITY_OFFER_ELECTIONS,
   BonusIssueEvent.JSON_PROPERTY_CASH_OFFER_ELECTIONS,
-  BonusIssueEvent.JSON_PROPERTY_LAPSE_ELECTIONS
+  BonusIssueEvent.JSON_PROPERTY_LAPSE_ELECTIONS,
+  BonusIssueEvent.JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -115,6 +117,11 @@ public class BonusIssueEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_LAPSE_ELECTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<LapseElection> lapseElections;
+
+  public static final String JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS = "mixedLotConstituentsElections";
+  @JsonProperty(JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<MixedLotConstituentsElection> mixedLotConstituentsElections;
 
   public BonusIssueEvent() {
   }
@@ -352,6 +359,33 @@ public class BonusIssueEvent extends InstrumentEvent {
   }
 
 
+  public BonusIssueEvent mixedLotConstituentsElections(List<MixedLotConstituentsElection> mixedLotConstituentsElections) {
+    this.mixedLotConstituentsElections = mixedLotConstituentsElections;
+    return this;
+  }
+
+  public BonusIssueEvent addMixedLotConstituentsElectionsItem(MixedLotConstituentsElection mixedLotConstituentsElectionsItem) {
+    if (this.mixedLotConstituentsElections == null) {
+      this.mixedLotConstituentsElections = new ArrayList<>();
+    }
+    this.mixedLotConstituentsElections.add(mixedLotConstituentsElectionsItem);
+    return this;
+  }
+
+  /**
+   * Possible MixedLotConstituentsElections for this Bonus Issue event, if any. Each election carries one or more  new securities credited alongside the retained original position (retain-and-add).
+   * @return mixedLotConstituentsElections
+   */
+  @javax.annotation.Nullable
+  public List<MixedLotConstituentsElection> getMixedLotConstituentsElections() {
+    return mixedLotConstituentsElections;
+  }
+
+  public void setMixedLotConstituentsElections(List<MixedLotConstituentsElection> mixedLotConstituentsElections) {
+    this.mixedLotConstituentsElections = mixedLotConstituentsElections;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -372,6 +406,7 @@ public class BonusIssueEvent extends InstrumentEvent {
         Objects.equals(this.securityOfferElections, bonusIssueEvent.securityOfferElections) &&
         Objects.equals(this.cashOfferElections, bonusIssueEvent.cashOfferElections) &&
         Objects.equals(this.lapseElections, bonusIssueEvent.lapseElections) &&
+        Objects.equals(this.mixedLotConstituentsElections, bonusIssueEvent.mixedLotConstituentsElections) &&
         super.equals(o);
   }
 
@@ -381,7 +416,7 @@ public class BonusIssueEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(announcementDate, exDate, recordDate, paymentDate, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, securityOfferElections, cashOfferElections, lapseElections, super.hashCode());
+    return Objects.hash(announcementDate, exDate, recordDate, paymentDate, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, securityOfferElections, cashOfferElections, lapseElections, mixedLotConstituentsElections, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -407,6 +442,7 @@ public class BonusIssueEvent extends InstrumentEvent {
     sb.append("    securityOfferElections: ").append(toIndentedString(securityOfferElections)).append("\n");
     sb.append("    cashOfferElections: ").append(toIndentedString(cashOfferElections)).append("\n");
     sb.append("    lapseElections: ").append(toIndentedString(lapseElections)).append("\n");
+    sb.append("    mixedLotConstituentsElections: ").append(toIndentedString(mixedLotConstituentsElections)).append("\n");
     sb.append("}");
     return sb.toString();
   }

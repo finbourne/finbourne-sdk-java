@@ -29,6 +29,7 @@ MarketDataType method = MarketDataType.FX_FORWARD_CURVE_BY_QUOTE_REFERENCE;
 MarketDataType method = MarketDataType.CREDIT_SPREAD_CURVE_DATA;
 MarketDataType method = MarketDataType.EQUITY_CURVE_BY_PRICES_DATA;
 MarketDataType method = MarketDataType.CONSTANT_VOLATILITY_SURFACE;
+MarketDataType method = MarketDataType.INFLATION_CURVE_DATA;
 ```
 
 

@@ -53,6 +53,7 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxForwardTenorCurveData.class, name = "FxForwardTenorCurveData"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxForwardTenorPipsCurveData.class, name = "FxForwardTenorPipsCurveData"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxVolSurfaceData.class, name = "FxVolSurfaceData"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InflationCurveData.class, name = "InflationCurveData"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = IrVolCubeData.class, name = "IrVolCubeData"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OpaqueMarketData.class, name = "OpaqueMarketData"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = YieldCurveData.class, name = "YieldCurveData"),
@@ -60,7 +61,7 @@ import com.finbourne.sdk.JSON;
 
 public class ComplexMarketData {
   /**
-   * Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface.
+   * Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface, InflationCurveData.
    */
   public enum MarketDataTypeEnum {
     DISCOUNT_FACTOR_CURVE_DATA("DiscountFactorCurveData"),
@@ -89,7 +90,9 @@ public class ComplexMarketData {
     
     EQUITY_CURVE_BY_PRICES_DATA("EquityCurveByPricesData"),
     
-    CONSTANT_VOLATILITY_SURFACE("ConstantVolatilitySurface");
+    CONSTANT_VOLATILITY_SURFACE("ConstantVolatilitySurface"),
+    
+    INFLATION_CURVE_DATA("InflationCurveData");
 
     private String value;
 
@@ -131,7 +134,7 @@ public class ComplexMarketData {
   }
 
   /**
-   * Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface.
+   * Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface, InflationCurveData.
    * @return marketDataType
    */
   @javax.annotation.Nonnull

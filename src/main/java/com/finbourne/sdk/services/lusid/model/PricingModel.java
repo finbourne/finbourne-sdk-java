@@ -67,7 +67,9 @@ public enum PricingModel {
   
   OVERRIDE_ONLY_PRICER("OverrideOnlyPricer"),
   
-  FLEXIBLE_REPO_SIMPLE_PRICER("FlexibleRepoSimplePricer");
+  FLEXIBLE_REPO_SIMPLE_PRICER("FlexibleRepoSimplePricer"),
+  
+  INFLATION_FORWARD("InflationForward");
 
   private String value;
 

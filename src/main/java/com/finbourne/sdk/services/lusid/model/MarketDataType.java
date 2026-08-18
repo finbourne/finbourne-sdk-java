@@ -49,7 +49,9 @@ public enum MarketDataType {
   
   EQUITY_CURVE_BY_PRICES_DATA("EquityCurveByPricesData"),
   
-  CONSTANT_VOLATILITY_SURFACE("ConstantVolatilitySurface");
+  CONSTANT_VOLATILITY_SURFACE("ConstantVolatilitySurface"),
+  
+  INFLATION_CURVE_DATA("InflationCurveData");
 
   private String value;
 

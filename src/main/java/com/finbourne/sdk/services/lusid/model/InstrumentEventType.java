@@ -217,7 +217,11 @@ public enum InstrumentEventType {
   
   PAYMENT_IN_KIND_EVENT("PaymentInKindEvent"),
   
-  COMMODITY_FORWARD_PHYSICAL_SETTLEMENT_EVENT("CommodityForwardPhysicalSettlementEvent");
+  COMMODITY_FORWARD_PHYSICAL_SETTLEMENT_EVENT("CommodityForwardPhysicalSettlementEvent"),
+  
+  CANCEL_SWAP_EVENT("CancelSwapEvent"),
+  
+  BOND_OPTION_TERMINATION_EVENT("BondOptionTerminationEvent");
 
   private String value;
 
