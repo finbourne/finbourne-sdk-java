@@ -30,14 +30,14 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Abstract base for tolerances that apply to aggregate matching rules. Distinguishes aggregate  tolerances from core tolerances at the type level (both share a common tolerance base).
+ * Base class for the tolerances that relax how strictly a matching rule compares its two sides. Polymorphic  by ToleranceType; each supported type has a corresponding inherited class.
  */
 @JsonPropertyOrder({
-  AggregateToleranceBase.JSON_PROPERTY_TOLERANCE_TYPE,
-  AggregateToleranceBase.JSON_PROPERTY_RULE_NAME
+  ToleranceBase.JSON_PROPERTY_TOLERANCE_TYPE,
+  ToleranceBase.JSON_PROPERTY_RULE_NAME
 })
 
-public class AggregateToleranceBase {
+public class ToleranceBase {
   public static final String JSON_PROPERTY_TOLERANCE_TYPE = "toleranceType";
   @JsonProperty(JSON_PROPERTY_TOLERANCE_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -48,10 +48,10 @@ public class AggregateToleranceBase {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String ruleName;
 
-  public AggregateToleranceBase() {
+  public ToleranceBase() {
   }
 
-  public AggregateToleranceBase toleranceType(String toleranceType) {
+  public ToleranceBase toleranceType(String toleranceType) {
     this.toleranceType = toleranceType;
     return this;
   }
@@ -70,7 +70,7 @@ public class AggregateToleranceBase {
   }
 
 
-  public AggregateToleranceBase ruleName(String ruleName) {
+  public ToleranceBase ruleName(String ruleName) {
     this.ruleName = ruleName;
     return this;
   }
@@ -97,9 +97,9 @@ public class AggregateToleranceBase {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AggregateToleranceBase aggregateToleranceBase = (AggregateToleranceBase) o;
-    return Objects.equals(this.toleranceType, aggregateToleranceBase.toleranceType) &&
-        Objects.equals(this.ruleName, aggregateToleranceBase.ruleName);
+    ToleranceBase toleranceBase = (ToleranceBase) o;
+    return Objects.equals(this.toleranceType, toleranceBase.toleranceType) &&
+        Objects.equals(this.ruleName, toleranceBase.ruleName);
   }
 
   @Override
@@ -110,7 +110,7 @@ public class AggregateToleranceBase {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AggregateToleranceBase {\n");
+    sb.append("class ToleranceBase {\n");
     sb.append("    toleranceType: ").append(toIndentedString(toleranceType)).append("\n");
     sb.append("    ruleName: ").append(toIndentedString(ruleName)).append("\n");
     sb.append("}");
@@ -130,18 +130,18 @@ public class AggregateToleranceBase {
 
 
   /**
-   * Create an instance of AggregateToleranceBase given an JSON string
+   * Create an instance of ToleranceBase given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of AggregateToleranceBase
-   * @throws java.io.IOException if the JSON string is invalid with respect to AggregateToleranceBase
+   * @return An instance of ToleranceBase
+   * @throws java.io.IOException if the JSON string is invalid with respect to ToleranceBase
    */
-  public static AggregateToleranceBase fromJson(String jsonString) throws java.io.IOException {
-    return JSON.getMapper().readValue(jsonString, AggregateToleranceBase.class);
+  public static ToleranceBase fromJson(String jsonString) throws java.io.IOException {
+    return JSON.getMapper().readValue(jsonString, ToleranceBase.class);
   }
 
   /**
-   * Convert an instance of AggregateToleranceBase to an JSON string
+   * Convert an instance of ToleranceBase to an JSON string
    *
    * @return JSON string
    */

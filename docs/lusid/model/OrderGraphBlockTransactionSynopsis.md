@@ -6,6 +6,7 @@ classname OrderGraphBlockTransactionSynopsis
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quantity** | **java.math.BigDecimal** | Total number of units booked. | [default to java.math.BigDecimal]
+**amount** | **java.math.BigDecimal** | Total consideration booked, in the block currency. | [optional] [default to java.math.BigDecimal]
 **details** | [**List&lt;OrderGraphBlockTransactionDetail&gt;**](OrderGraphBlockTransactionDetail.md) | Identifiers for each transaction in this block. | [default to List<OrderGraphBlockTransactionDetail>]
 
 ```java
@@ -15,11 +16,13 @@ import java.lang.System;
 import java.net.URI;
 
 java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal amount = new java.math.BigDecimal("100.00");
 List<OrderGraphBlockTransactionDetail> details = new List<OrderGraphBlockTransactionDetail>();
 
 
 OrderGraphBlockTransactionSynopsis orderGraphBlockTransactionSynopsisInstance = new OrderGraphBlockTransactionSynopsis()
     .quantity(quantity)
+    .amount(amount)
     .details(details);
 ```
 

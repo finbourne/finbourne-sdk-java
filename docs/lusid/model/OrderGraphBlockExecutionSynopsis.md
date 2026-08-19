@@ -6,6 +6,7 @@ classname OrderGraphBlockExecutionSynopsis
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quantity** | **java.math.BigDecimal** | Total number of units executed. | [default to java.math.BigDecimal]
+**amount** | **java.math.BigDecimal** | Total monetary value executed, derived from the quantity and price of each execution. | [optional] [default to java.math.BigDecimal]
 **details** | [**List&lt;OrderGraphBlockExecutionDetail&gt;**](OrderGraphBlockExecutionDetail.md) | Identifiers for each execution in this block. | [default to List<OrderGraphBlockExecutionDetail>]
 
 ```java
@@ -15,11 +16,13 @@ import java.lang.System;
 import java.net.URI;
 
 java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal amount = new java.math.BigDecimal("100.00");
 List<OrderGraphBlockExecutionDetail> details = new List<OrderGraphBlockExecutionDetail>();
 
 
 OrderGraphBlockExecutionSynopsis orderGraphBlockExecutionSynopsisInstance = new OrderGraphBlockExecutionSynopsis()
     .quantity(quantity)
+    .amount(amount)
     .details(details);
 ```
 

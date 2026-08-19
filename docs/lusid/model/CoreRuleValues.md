@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ruleName** | **String** | The name of the rule. | [default to String]
 **leftValue** | **String** | The left-side value. | [optional] [default to String]
 **rightValue** | **String** | The right-side value. | [optional] [default to String]
-**appliedTolerance** | [**CoreToleranceBase**](CoreToleranceBase.md) |  | [optional] [default to CoreToleranceBase]
+**appliedTolerance** | [**ToleranceBase**](ToleranceBase.md) |  | [optional] [default to ToleranceBase]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CoreRuleValues;
@@ -20,7 +20,7 @@ import java.net.URI;
 String ruleName = "example ruleName";
 @javax.annotation.Nullable String leftValue = "example leftValue";
 @javax.annotation.Nullable String rightValue = "example rightValue";
-CoreToleranceBase appliedTolerance = new CoreToleranceBase();
+ToleranceBase appliedTolerance = new ToleranceBase();
 
 
 CoreRuleValues coreRuleValuesInstance = new CoreRuleValues()

@@ -31,19 +31,28 @@ import com.finbourne.sdk.services.lusid.model.BatchManageCommentRequest;
 import com.finbourne.sdk.services.lusid.model.BatchManageCommentResponse;
 import com.finbourne.sdk.services.lusid.model.BatchReviewRecResultRequest;
 import com.finbourne.sdk.services.lusid.model.BatchReviewRecResultResponse;
+import com.finbourne.sdk.services.lusid.model.CreateMatchingRulesetRequest;
+import com.finbourne.sdk.services.lusid.model.CreateRecDefinitionRequest;
+import com.finbourne.sdk.services.lusid.model.DeletedEntityResponse;
 import com.finbourne.sdk.services.lusid.model.InstantiateRecRequest;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
+import com.finbourne.sdk.services.lusid.model.MatchingRuleset;
 import java.time.OffsetDateTime;
+import com.finbourne.sdk.services.lusid.model.PagedResourceListOfMatchingRuleset;
+import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecDefinition;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecInstance;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecResult;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecResultSet;
+import com.finbourne.sdk.services.lusid.model.RecDefinition;
 import com.finbourne.sdk.services.lusid.model.RecInstance;
 import com.finbourne.sdk.services.lusid.model.RecResult;
 import com.finbourne.sdk.services.lusid.model.RecResultSet;
 import com.finbourne.sdk.services.lusid.model.RecResultSetApprovalDecisionRequest;
 import com.finbourne.sdk.services.lusid.model.SubmitRecResultSetReviewRequest;
 import com.finbourne.sdk.services.lusid.model.TransitionRecInstanceRequest;
+import com.finbourne.sdk.services.lusid.model.UpdateMatchingRulesetRequest;
+import com.finbourne.sdk.services.lusid.model.UpdateRecDefinitionRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -1086,6 +1095,1980 @@ public class RecsApi {
      */
     public APIbatchReviewRecResultsRequest batchReviewRecResults(Map<String, BatchReviewRecResultRequest> requestBody) {
         return new APIbatchReviewRecResultsRequest(requestBody);
+    }
+    /**
+     * Build call for createMatchingRuleset
+     * @param createMatchingRulesetRequest The matching ruleset to create. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest createMatchingRulesetCall(CreateMatchingRulesetRequest createMatchingRulesetRequest, final ApiCallback _callback) throws ApiException {
+        return createMatchingRulesetCall(createMatchingRulesetRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for createMatchingRuleset. Use any specified configuration options to override any other configuration for this request only.
+     * @param createMatchingRulesetRequest The matching ruleset to create. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest createMatchingRulesetCall(CreateMatchingRulesetRequest createMatchingRulesetRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createMatchingRulesetRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/matchingrulesets";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest createMatchingRulesetValidateBeforeCall(CreateMatchingRulesetRequest createMatchingRulesetRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'createMatchingRulesetRequest' is set
+        if (createMatchingRulesetRequest == null) {
+            throw new ApiException("Missing the required parameter 'createMatchingRulesetRequest' when calling createMatchingRuleset(Async)");
+        }
+
+        return createMatchingRulesetCall(createMatchingRulesetRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateMatchingRuleset: CreateMatchingRuleset
+     * Create a matching ruleset, describing the core and aggregate rules used to match a reconciliation&#39;s two sides.
+     * @param createMatchingRulesetRequest The matching ruleset to create. (required)
+     * @return ApiResponse&lt;MatchingRuleset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MatchingRuleset> createMatchingRulesetWithHttpInfo(CreateMatchingRulesetRequest createMatchingRulesetRequest) throws ApiException {
+        HttpRequest localVarCall = createMatchingRulesetValidateBeforeCall(createMatchingRulesetRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateMatchingRuleset: CreateMatchingRuleset
+     * Create a matching ruleset, describing the core and aggregate rules used to match a reconciliation&#39;s two sides.Use any specified configuration options to override any other configuration for this request only
+     * @param createMatchingRulesetRequest The matching ruleset to create. (required)
+     * @return ApiResponse&lt;MatchingRuleset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MatchingRuleset> createMatchingRulesetWithHttpInfo(CreateMatchingRulesetRequest createMatchingRulesetRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = createMatchingRulesetValidateBeforeCall(createMatchingRulesetRequest, null, opts);
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateMatchingRuleset: CreateMatchingRuleset (asynchronously)
+     * Create a matching ruleset, describing the core and aggregate rules used to match a reconciliation&#39;s two sides.
+     * @param createMatchingRulesetRequest The matching ruleset to create. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void createMatchingRulesetAsync(CreateMatchingRulesetRequest createMatchingRulesetRequest, final ApiCallback<MatchingRuleset> _callback) throws ApiException {
+
+        HttpRequest localVarCall = createMatchingRulesetValidateBeforeCall(createMatchingRulesetRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateMatchingRuleset: CreateMatchingRuleset (asynchronously)
+     * Create a matching ruleset, describing the core and aggregate rules used to match a reconciliation&#39;s two sides.Use any specified configuration options to override any other configuration for this request only
+     * @param createMatchingRulesetRequest The matching ruleset to create. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void createMatchingRulesetAsync(CreateMatchingRulesetRequest createMatchingRulesetRequest, final ApiCallback<MatchingRuleset> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = createMatchingRulesetValidateBeforeCall(createMatchingRulesetRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIcreateMatchingRulesetRequest {
+        private final CreateMatchingRulesetRequest createMatchingRulesetRequest;
+
+        private APIcreateMatchingRulesetRequest(CreateMatchingRulesetRequest createMatchingRulesetRequest) {
+            this.createMatchingRulesetRequest = createMatchingRulesetRequest;
+        }
+
+        /**
+         * Build call for createMatchingRuleset
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return createMatchingRulesetCall(createMatchingRulesetRequest, _callback);
+        }
+
+        /**
+         * Execute createMatchingRuleset request
+         * @return MatchingRuleset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MatchingRuleset execute() throws ApiException {
+            ApiResponse<MatchingRuleset> localVarResp = createMatchingRulesetWithHttpInfo(createMatchingRulesetRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute createMatchingRuleset request. Use any specified configuration options to override any other configuration for this request only.
+         * @return MatchingRuleset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MatchingRuleset execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<MatchingRuleset> localVarResp = createMatchingRulesetWithHttpInfo(createMatchingRulesetRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute createMatchingRuleset request with HTTP info returned
+         * @return ApiResponse&lt;MatchingRuleset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MatchingRuleset> executeWithHttpInfo() throws ApiException {
+            return createMatchingRulesetWithHttpInfo(createMatchingRulesetRequest);
+        }
+
+        /**
+         * Execute createMatchingRuleset request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;MatchingRuleset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MatchingRuleset> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return createMatchingRulesetWithHttpInfo(createMatchingRulesetRequest, opts);
+        }
+
+        /**
+         * Execute createMatchingRuleset request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MatchingRuleset> _callback) throws ApiException {
+            createMatchingRulesetAsync(createMatchingRulesetRequest, _callback);
+        }
+
+        /**
+         * Execute createMatchingRuleset request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MatchingRuleset> _callback, ConfigurationOptions opts) throws ApiException {
+            createMatchingRulesetAsync(createMatchingRulesetRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateMatchingRuleset: CreateMatchingRuleset
+     * Create a matching ruleset, describing the core and aggregate rules used to match a reconciliation&#39;s two sides.
+     * @param createMatchingRulesetRequest The matching ruleset to create. (required)
+     * @return APIcreateMatchingRulesetRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIcreateMatchingRulesetRequest createMatchingRuleset(CreateMatchingRulesetRequest createMatchingRulesetRequest) {
+        return new APIcreateMatchingRulesetRequest(createMatchingRulesetRequest);
+    }
+    /**
+     * Build call for createRecDefinition
+     * @param createRecDefinitionRequest The rec definition to create. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest createRecDefinitionCall(CreateRecDefinitionRequest createRecDefinitionRequest, final ApiCallback _callback) throws ApiException {
+        return createRecDefinitionCall(createRecDefinitionRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for createRecDefinition. Use any specified configuration options to override any other configuration for this request only.
+     * @param createRecDefinitionRequest The rec definition to create. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest createRecDefinitionCall(CreateRecDefinitionRequest createRecDefinitionRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createRecDefinitionRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/definitions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest createRecDefinitionValidateBeforeCall(CreateRecDefinitionRequest createRecDefinitionRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'createRecDefinitionRequest' is set
+        if (createRecDefinitionRequest == null) {
+            throw new ApiException("Missing the required parameter 'createRecDefinitionRequest' when calling createRecDefinition(Async)");
+        }
+
+        return createRecDefinitionCall(createRecDefinitionRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateRecDefinition: CreateRecDefinition
+     * Create a rec definition, describing the two sides to reconcile and the rules to reconcile them with.
+     * @param createRecDefinitionRequest The rec definition to create. (required)
+     * @return ApiResponse&lt;RecDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecDefinition> createRecDefinitionWithHttpInfo(CreateRecDefinitionRequest createRecDefinitionRequest) throws ApiException {
+        HttpRequest localVarCall = createRecDefinitionValidateBeforeCall(createRecDefinitionRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateRecDefinition: CreateRecDefinition
+     * Create a rec definition, describing the two sides to reconcile and the rules to reconcile them with.Use any specified configuration options to override any other configuration for this request only
+     * @param createRecDefinitionRequest The rec definition to create. (required)
+     * @return ApiResponse&lt;RecDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecDefinition> createRecDefinitionWithHttpInfo(CreateRecDefinitionRequest createRecDefinitionRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = createRecDefinitionValidateBeforeCall(createRecDefinitionRequest, null, opts);
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateRecDefinition: CreateRecDefinition (asynchronously)
+     * Create a rec definition, describing the two sides to reconcile and the rules to reconcile them with.
+     * @param createRecDefinitionRequest The rec definition to create. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void createRecDefinitionAsync(CreateRecDefinitionRequest createRecDefinitionRequest, final ApiCallback<RecDefinition> _callback) throws ApiException {
+
+        HttpRequest localVarCall = createRecDefinitionValidateBeforeCall(createRecDefinitionRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateRecDefinition: CreateRecDefinition (asynchronously)
+     * Create a rec definition, describing the two sides to reconcile and the rules to reconcile them with.Use any specified configuration options to override any other configuration for this request only
+     * @param createRecDefinitionRequest The rec definition to create. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void createRecDefinitionAsync(CreateRecDefinitionRequest createRecDefinitionRequest, final ApiCallback<RecDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = createRecDefinitionValidateBeforeCall(createRecDefinitionRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIcreateRecDefinitionRequest {
+        private final CreateRecDefinitionRequest createRecDefinitionRequest;
+
+        private APIcreateRecDefinitionRequest(CreateRecDefinitionRequest createRecDefinitionRequest) {
+            this.createRecDefinitionRequest = createRecDefinitionRequest;
+        }
+
+        /**
+         * Build call for createRecDefinition
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return createRecDefinitionCall(createRecDefinitionRequest, _callback);
+        }
+
+        /**
+         * Execute createRecDefinition request
+         * @return RecDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecDefinition execute() throws ApiException {
+            ApiResponse<RecDefinition> localVarResp = createRecDefinitionWithHttpInfo(createRecDefinitionRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute createRecDefinition request. Use any specified configuration options to override any other configuration for this request only.
+         * @return RecDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecDefinition execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<RecDefinition> localVarResp = createRecDefinitionWithHttpInfo(createRecDefinitionRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute createRecDefinition request with HTTP info returned
+         * @return ApiResponse&lt;RecDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecDefinition> executeWithHttpInfo() throws ApiException {
+            return createRecDefinitionWithHttpInfo(createRecDefinitionRequest);
+        }
+
+        /**
+         * Execute createRecDefinition request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;RecDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecDefinition> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return createRecDefinitionWithHttpInfo(createRecDefinitionRequest, opts);
+        }
+
+        /**
+         * Execute createRecDefinition request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecDefinition> _callback) throws ApiException {
+            createRecDefinitionAsync(createRecDefinitionRequest, _callback);
+        }
+
+        /**
+         * Execute createRecDefinition request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+            createRecDefinitionAsync(createRecDefinitionRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] CreateRecDefinition: CreateRecDefinition
+     * Create a rec definition, describing the two sides to reconcile and the rules to reconcile them with.
+     * @param createRecDefinitionRequest The rec definition to create. (required)
+     * @return APIcreateRecDefinitionRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> The newly created rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIcreateRecDefinitionRequest createRecDefinition(CreateRecDefinitionRequest createRecDefinitionRequest) {
+        return new APIcreateRecDefinitionRequest(createRecDefinitionRequest);
+    }
+    /**
+     * Build call for deleteMatchingRuleset
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deleteMatchingRulesetCall(String scope, String code, final ApiCallback _callback) throws ApiException {
+        return deleteMatchingRulesetCall(scope, code,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for deleteMatchingRuleset. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the matching ruleset. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deleteMatchingRulesetCall(String scope, String code, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/matchingrulesets/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest deleteMatchingRulesetValidateBeforeCall(String scope, String code, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling deleteMatchingRuleset(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling deleteMatchingRuleset(Async)");
+        }
+
+        return deleteMatchingRulesetCall(scope, code, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteMatchingRuleset: DeleteMatchingRuleset
+     * Delete a matching ruleset identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the matching ruleset will no longer exist at any asAt datetime after the asAt datetime of deletion.
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteMatchingRulesetWithHttpInfo(String scope, String code) throws ApiException {
+        HttpRequest localVarCall = deleteMatchingRulesetValidateBeforeCall(scope, code, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteMatchingRuleset: DeleteMatchingRuleset
+     * Delete a matching ruleset identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the matching ruleset will no longer exist at any asAt datetime after the asAt datetime of deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteMatchingRulesetWithHttpInfo(String scope, String code, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = deleteMatchingRulesetValidateBeforeCall(scope, code, null, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteMatchingRuleset: DeleteMatchingRuleset (asynchronously)
+     * Delete a matching ruleset identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the matching ruleset will no longer exist at any asAt datetime after the asAt datetime of deletion.
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteMatchingRulesetAsync(String scope, String code, final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = deleteMatchingRulesetValidateBeforeCall(scope, code, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteMatchingRuleset: DeleteMatchingRuleset (asynchronously)
+     * Delete a matching ruleset identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the matching ruleset will no longer exist at any asAt datetime after the asAt datetime of deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteMatchingRulesetAsync(String scope, String code, final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = deleteMatchingRulesetValidateBeforeCall(scope, code, _callback, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIdeleteMatchingRulesetRequest {
+        private final String scope;
+        private final String code;
+
+        private APIdeleteMatchingRulesetRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Build call for deleteMatchingRuleset
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteMatchingRulesetCall(scope, code, _callback);
+        }
+
+        /**
+         * Execute deleteMatchingRuleset request
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute() throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteMatchingRulesetWithHttpInfo(scope, code);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteMatchingRuleset request. Use any specified configuration options to override any other configuration for this request only.
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteMatchingRulesetWithHttpInfo(scope, code, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteMatchingRuleset request with HTTP info returned
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo() throws ApiException {
+            return deleteMatchingRulesetWithHttpInfo(scope, code);
+        }
+
+        /**
+         * Execute deleteMatchingRuleset request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return deleteMatchingRulesetWithHttpInfo(scope, code, opts);
+        }
+
+        /**
+         * Execute deleteMatchingRuleset request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+            deleteMatchingRulesetAsync(scope, code, _callback);
+        }
+
+        /**
+         * Execute deleteMatchingRuleset request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            deleteMatchingRulesetAsync(scope, code, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteMatchingRuleset: DeleteMatchingRuleset
+     * Delete a matching ruleset identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the matching ruleset will no longer exist at any asAt datetime after the asAt datetime of deletion.
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @return APIdeleteMatchingRulesetRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIdeleteMatchingRulesetRequest deleteMatchingRuleset(String scope, String code) {
+        return new APIdeleteMatchingRulesetRequest(scope, code);
+    }
+    /**
+     * Build call for deleteRecDefinition
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deleteRecDefinitionCall(String scope, String code, final ApiCallback _callback) throws ApiException {
+        return deleteRecDefinitionCall(scope, code,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for deleteRecDefinition. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the rec definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deleteRecDefinitionCall(String scope, String code, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/definitions/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest deleteRecDefinitionValidateBeforeCall(String scope, String code, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling deleteRecDefinition(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling deleteRecDefinition(Async)");
+        }
+
+        return deleteRecDefinitionCall(scope, code, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteRecDefinition: DeleteRecDefinition
+     * Delete a rec definition identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the rec definition will no longer exist at any asAt datetime after the asAt datetime of deletion.
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteRecDefinitionWithHttpInfo(String scope, String code) throws ApiException {
+        HttpRequest localVarCall = deleteRecDefinitionValidateBeforeCall(scope, code, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteRecDefinition: DeleteRecDefinition
+     * Delete a rec definition identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the rec definition will no longer exist at any asAt datetime after the asAt datetime of deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteRecDefinitionWithHttpInfo(String scope, String code, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = deleteRecDefinitionValidateBeforeCall(scope, code, null, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteRecDefinition: DeleteRecDefinition (asynchronously)
+     * Delete a rec definition identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the rec definition will no longer exist at any asAt datetime after the asAt datetime of deletion.
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteRecDefinitionAsync(String scope, String code, final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = deleteRecDefinitionValidateBeforeCall(scope, code, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteRecDefinition: DeleteRecDefinition (asynchronously)
+     * Delete a rec definition identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the rec definition will no longer exist at any asAt datetime after the asAt datetime of deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteRecDefinitionAsync(String scope, String code, final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = deleteRecDefinitionValidateBeforeCall(scope, code, _callback, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIdeleteRecDefinitionRequest {
+        private final String scope;
+        private final String code;
+
+        private APIdeleteRecDefinitionRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Build call for deleteRecDefinition
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteRecDefinitionCall(scope, code, _callback);
+        }
+
+        /**
+         * Execute deleteRecDefinition request
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute() throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteRecDefinitionWithHttpInfo(scope, code);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteRecDefinition request. Use any specified configuration options to override any other configuration for this request only.
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteRecDefinitionWithHttpInfo(scope, code, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteRecDefinition request with HTTP info returned
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo() throws ApiException {
+            return deleteRecDefinitionWithHttpInfo(scope, code);
+        }
+
+        /**
+         * Execute deleteRecDefinition request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return deleteRecDefinitionWithHttpInfo(scope, code, opts);
+        }
+
+        /**
+         * Execute deleteRecDefinition request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+            deleteRecDefinitionAsync(scope, code, _callback);
+        }
+
+        /**
+         * Execute deleteRecDefinition request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            deleteRecDefinitionAsync(scope, code, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteRecDefinition: DeleteRecDefinition
+     * Delete a rec definition identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the rec definition will no longer exist at any asAt datetime after the asAt datetime of deletion.
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @return APIdeleteRecDefinitionRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted entity metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIdeleteRecDefinitionRequest deleteRecDefinition(String scope, String code) {
+        return new APIdeleteRecDefinitionRequest(scope, code);
+    }
+    /**
+     * Build call for getMatchingRuleset
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param asAt The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getMatchingRulesetCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
+        return getMatchingRulesetCall(scope, code, asAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getMatchingRuleset. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the matching ruleset. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getMatchingRulesetCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/matchingrulesets/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getMatchingRulesetValidateBeforeCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getMatchingRuleset(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getMatchingRuleset(Async)");
+        }
+
+        return getMatchingRulesetCall(scope, code, asAt, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset
+     * Retrieve a single matching ruleset by scope and code.
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param asAt The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified. (optional)
+     * @return ApiResponse&lt;MatchingRuleset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MatchingRuleset> getMatchingRulesetWithHttpInfo(String scope, String code, OffsetDateTime asAt) throws ApiException {
+        HttpRequest localVarCall = getMatchingRulesetValidateBeforeCall(scope, code, asAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset
+     * Retrieve a single matching ruleset by scope and code.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param asAt The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified. (optional)
+     * @return ApiResponse&lt;MatchingRuleset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MatchingRuleset> getMatchingRulesetWithHttpInfo(String scope, String code, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getMatchingRulesetValidateBeforeCall(scope, code, asAt, null, opts);
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset (asynchronously)
+     * Retrieve a single matching ruleset by scope and code.
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param asAt The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getMatchingRulesetAsync(String scope, String code, OffsetDateTime asAt, final ApiCallback<MatchingRuleset> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getMatchingRulesetValidateBeforeCall(scope, code, asAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset (asynchronously)
+     * Retrieve a single matching ruleset by scope and code.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param asAt The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getMatchingRulesetAsync(String scope, String code, OffsetDateTime asAt, final ApiCallback<MatchingRuleset> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getMatchingRulesetValidateBeforeCall(scope, code, asAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetMatchingRulesetRequest {
+        private final String scope;
+        private final String code;
+        private OffsetDateTime asAt;
+
+        private APIgetMatchingRulesetRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified. (optional)
+         * @return APIgetMatchingRulesetRequest
+         */
+        public APIgetMatchingRulesetRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Build call for getMatchingRuleset
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getMatchingRulesetCall(scope, code, asAt, _callback);
+        }
+
+        /**
+         * Execute getMatchingRuleset request
+         * @return MatchingRuleset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MatchingRuleset execute() throws ApiException {
+            ApiResponse<MatchingRuleset> localVarResp = getMatchingRulesetWithHttpInfo(scope, code, asAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getMatchingRuleset request. Use any specified configuration options to override any other configuration for this request only.
+         * @return MatchingRuleset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MatchingRuleset execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<MatchingRuleset> localVarResp = getMatchingRulesetWithHttpInfo(scope, code, asAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getMatchingRuleset request with HTTP info returned
+         * @return ApiResponse&lt;MatchingRuleset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MatchingRuleset> executeWithHttpInfo() throws ApiException {
+            return getMatchingRulesetWithHttpInfo(scope, code, asAt);
+        }
+
+        /**
+         * Execute getMatchingRuleset request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;MatchingRuleset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MatchingRuleset> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getMatchingRulesetWithHttpInfo(scope, code, asAt, opts);
+        }
+
+        /**
+         * Execute getMatchingRuleset request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MatchingRuleset> _callback) throws ApiException {
+            getMatchingRulesetAsync(scope, code, asAt, _callback);
+        }
+
+        /**
+         * Execute getMatchingRuleset request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MatchingRuleset> _callback, ConfigurationOptions opts) throws ApiException {
+            getMatchingRulesetAsync(scope, code, asAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset
+     * Retrieve a single matching ruleset by scope and code.
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @return APIgetMatchingRulesetRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetMatchingRulesetRequest getMatchingRuleset(String scope, String code) {
+        return new APIgetMatchingRulesetRequest(scope, code);
+    }
+    /**
+     * Build call for getRecDefinition
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param asAt The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getRecDefinitionCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
+        return getRecDefinitionCall(scope, code, asAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getRecDefinition. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the rec definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getRecDefinitionCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/definitions/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getRecDefinitionValidateBeforeCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getRecDefinition(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getRecDefinition(Async)");
+        }
+
+        return getRecDefinitionCall(scope, code, asAt, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecDefinition: GetRecDefinition
+     * Retrieve a single rec definition by scope and code.
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param asAt The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified. (optional)
+     * @return ApiResponse&lt;RecDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecDefinition> getRecDefinitionWithHttpInfo(String scope, String code, OffsetDateTime asAt) throws ApiException {
+        HttpRequest localVarCall = getRecDefinitionValidateBeforeCall(scope, code, asAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecDefinition: GetRecDefinition
+     * Retrieve a single rec definition by scope and code.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param asAt The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified. (optional)
+     * @return ApiResponse&lt;RecDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecDefinition> getRecDefinitionWithHttpInfo(String scope, String code, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getRecDefinitionValidateBeforeCall(scope, code, asAt, null, opts);
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecDefinition: GetRecDefinition (asynchronously)
+     * Retrieve a single rec definition by scope and code.
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param asAt The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getRecDefinitionAsync(String scope, String code, OffsetDateTime asAt, final ApiCallback<RecDefinition> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getRecDefinitionValidateBeforeCall(scope, code, asAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecDefinition: GetRecDefinition (asynchronously)
+     * Retrieve a single rec definition by scope and code.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param asAt The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getRecDefinitionAsync(String scope, String code, OffsetDateTime asAt, final ApiCallback<RecDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getRecDefinitionValidateBeforeCall(scope, code, asAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetRecDefinitionRequest {
+        private final String scope;
+        private final String code;
+        private OffsetDateTime asAt;
+
+        private APIgetRecDefinitionRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified. (optional)
+         * @return APIgetRecDefinitionRequest
+         */
+        public APIgetRecDefinitionRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Build call for getRecDefinition
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getRecDefinitionCall(scope, code, asAt, _callback);
+        }
+
+        /**
+         * Execute getRecDefinition request
+         * @return RecDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecDefinition execute() throws ApiException {
+            ApiResponse<RecDefinition> localVarResp = getRecDefinitionWithHttpInfo(scope, code, asAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRecDefinition request. Use any specified configuration options to override any other configuration for this request only.
+         * @return RecDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecDefinition execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<RecDefinition> localVarResp = getRecDefinitionWithHttpInfo(scope, code, asAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRecDefinition request with HTTP info returned
+         * @return ApiResponse&lt;RecDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecDefinition> executeWithHttpInfo() throws ApiException {
+            return getRecDefinitionWithHttpInfo(scope, code, asAt);
+        }
+
+        /**
+         * Execute getRecDefinition request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;RecDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecDefinition> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getRecDefinitionWithHttpInfo(scope, code, asAt, opts);
+        }
+
+        /**
+         * Execute getRecDefinition request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecDefinition> _callback) throws ApiException {
+            getRecDefinitionAsync(scope, code, asAt, _callback);
+        }
+
+        /**
+         * Execute getRecDefinition request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+            getRecDefinitionAsync(scope, code, asAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRecDefinition: GetRecDefinition
+     * Retrieve a single rec definition by scope and code.
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @return APIgetRecDefinitionRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetRecDefinitionRequest getRecDefinition(String scope, String code) {
+        return new APIgetRecDefinitionRequest(scope, code);
     }
     /**
      * Build call for getRecInstance
@@ -2453,6 +4436,808 @@ public class RecsApi {
      */
     public APIinstantiateRecRequest instantiateRec(InstantiateRecRequest instantiateRecRequest) {
         return new APIinstantiateRecRequest(instantiateRecRequest);
+    }
+    /**
+     * Build call for listMatchingRulesets
+     * @param asAt The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listMatchingRulesetsCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback _callback) throws ApiException {
+        return listMatchingRulesetsCall(asAt, page, sortBy, limit, filter,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listMatchingRulesets. Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listMatchingRulesetsCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/matchingrulesets";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listMatchingRulesetsValidateBeforeCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listMatchingRulesetsCall(asAt, page, sortBy, limit, filter, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets
+     * List matching rulesets, optionally filtered and sorted. Supports pagination.
+     * @param asAt The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfMatchingRuleset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfMatchingRuleset> listMatchingRulesetsWithHttpInfo(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter) throws ApiException {
+        HttpRequest localVarCall = listMatchingRulesetsValidateBeforeCall(asAt, page, sortBy, limit, filter, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMatchingRuleset>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets
+     * List matching rulesets, optionally filtered and sorted. Supports pagination.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfMatchingRuleset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfMatchingRuleset> listMatchingRulesetsWithHttpInfo(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listMatchingRulesetsValidateBeforeCall(asAt, page, sortBy, limit, filter, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMatchingRuleset>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets (asynchronously)
+     * List matching rulesets, optionally filtered and sorted. Supports pagination.
+     * @param asAt The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listMatchingRulesetsAsync(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback<PagedResourceListOfMatchingRuleset> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listMatchingRulesetsValidateBeforeCall(asAt, page, sortBy, limit, filter, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMatchingRuleset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets (asynchronously)
+     * List matching rulesets, optionally filtered and sorted. Supports pagination.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listMatchingRulesetsAsync(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback<PagedResourceListOfMatchingRuleset> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listMatchingRulesetsValidateBeforeCall(asAt, page, sortBy, limit, filter, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMatchingRuleset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistMatchingRulesetsRequest {
+        private OffsetDateTime asAt;
+        private String page;
+        private List<String> sortBy;
+        private Integer limit;
+        private String filter;
+
+        private APIlistMatchingRulesetsRequest() {
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified. (optional)
+         * @return APIlistMatchingRulesetsRequest
+         */
+        public APIlistMatchingRulesetsRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+         * @return APIlistMatchingRulesetsRequest
+         */
+        public APIlistMatchingRulesetsRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+         * @return APIlistMatchingRulesetsRequest
+         */
+        public APIlistMatchingRulesetsRequest sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+         * @return APIlistMatchingRulesetsRequest
+         */
+        public APIlistMatchingRulesetsRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+         * @return APIlistMatchingRulesetsRequest
+         */
+        public APIlistMatchingRulesetsRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Build call for listMatchingRulesets
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listMatchingRulesetsCall(asAt, page, sortBy, limit, filter, _callback);
+        }
+
+        /**
+         * Execute listMatchingRulesets request
+         * @return PagedResourceListOfMatchingRuleset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfMatchingRuleset execute() throws ApiException {
+            ApiResponse<PagedResourceListOfMatchingRuleset> localVarResp = listMatchingRulesetsWithHttpInfo(asAt, page, sortBy, limit, filter);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listMatchingRulesets request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfMatchingRuleset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfMatchingRuleset execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfMatchingRuleset> localVarResp = listMatchingRulesetsWithHttpInfo(asAt, page, sortBy, limit, filter, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listMatchingRulesets request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfMatchingRuleset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfMatchingRuleset> executeWithHttpInfo() throws ApiException {
+            return listMatchingRulesetsWithHttpInfo(asAt, page, sortBy, limit, filter);
+        }
+
+        /**
+         * Execute listMatchingRulesets request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfMatchingRuleset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfMatchingRuleset> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listMatchingRulesetsWithHttpInfo(asAt, page, sortBy, limit, filter, opts);
+        }
+
+        /**
+         * Execute listMatchingRulesets request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfMatchingRuleset> _callback) throws ApiException {
+            listMatchingRulesetsAsync(asAt, page, sortBy, limit, filter, _callback);
+        }
+
+        /**
+         * Execute listMatchingRulesets request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfMatchingRuleset> _callback, ConfigurationOptions opts) throws ApiException {
+            listMatchingRulesetsAsync(asAt, page, sortBy, limit, filter, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets
+     * List matching rulesets, optionally filtered and sorted. Supports pagination.
+     * @return APIlistMatchingRulesetsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of matching rulesets. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistMatchingRulesetsRequest listMatchingRulesets() {
+        return new APIlistMatchingRulesetsRequest();
+    }
+    /**
+     * Build call for listRecDefinitions
+     * @param asAt The asAt datetime at which to list the rec definitions. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listRecDefinitionsCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback _callback) throws ApiException {
+        return listRecDefinitionsCall(asAt, page, sortBy, limit, filter,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listRecDefinitions. Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to list the rec definitions. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listRecDefinitionsCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/definitions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listRecDefinitionsValidateBeforeCall(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listRecDefinitionsCall(asAt, page, sortBy, limit, filter, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions
+     * List rec definitions, optionally filtered and sorted. Supports pagination.
+     * @param asAt The asAt datetime at which to list the rec definitions. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfRecDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfRecDefinition> listRecDefinitionsWithHttpInfo(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter) throws ApiException {
+        HttpRequest localVarCall = listRecDefinitionsValidateBeforeCall(asAt, page, sortBy, limit, filter, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions
+     * List rec definitions, optionally filtered and sorted. Supports pagination.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list the rec definitions. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfRecDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfRecDefinition> listRecDefinitionsWithHttpInfo(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listRecDefinitionsValidateBeforeCall(asAt, page, sortBy, limit, filter, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions (asynchronously)
+     * List rec definitions, optionally filtered and sorted. Supports pagination.
+     * @param asAt The asAt datetime at which to list the rec definitions. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listRecDefinitionsAsync(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback<PagedResourceListOfRecDefinition> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listRecDefinitionsValidateBeforeCall(asAt, page, sortBy, limit, filter, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions (asynchronously)
+     * List rec definitions, optionally filtered and sorted. Supports pagination.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list the rec definitions. Defaults to latest if not specified. (optional)
+     * @param page The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listRecDefinitionsAsync(OffsetDateTime asAt, String page, List<String> sortBy, Integer limit, String filter, final ApiCallback<PagedResourceListOfRecDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listRecDefinitionsValidateBeforeCall(asAt, page, sortBy, limit, filter, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfRecDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistRecDefinitionsRequest {
+        private OffsetDateTime asAt;
+        private String page;
+        private List<String> sortBy;
+        private Integer limit;
+        private String filter;
+
+        private APIlistRecDefinitionsRequest() {
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to list the rec definitions. Defaults to latest if not specified. (optional)
+         * @return APIlistRecDefinitionsRequest
+         */
+        public APIlistRecDefinitionsRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request. (optional)
+         * @return APIlistRecDefinitionsRequest
+         */
+        public APIlistRecDefinitionsRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+         * @return APIlistRecDefinitionsRequest
+         */
+        public APIlistRecDefinitionsRequest sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit When paginating, limit the number of returned results to this many per page. (optional)
+         * @return APIlistRecDefinitionsRequest
+         */
+        public APIlistRecDefinitionsRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+         * @return APIlistRecDefinitionsRequest
+         */
+        public APIlistRecDefinitionsRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Build call for listRecDefinitions
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listRecDefinitionsCall(asAt, page, sortBy, limit, filter, _callback);
+        }
+
+        /**
+         * Execute listRecDefinitions request
+         * @return PagedResourceListOfRecDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfRecDefinition execute() throws ApiException {
+            ApiResponse<PagedResourceListOfRecDefinition> localVarResp = listRecDefinitionsWithHttpInfo(asAt, page, sortBy, limit, filter);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listRecDefinitions request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfRecDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfRecDefinition execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfRecDefinition> localVarResp = listRecDefinitionsWithHttpInfo(asAt, page, sortBy, limit, filter, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listRecDefinitions request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfRecDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfRecDefinition> executeWithHttpInfo() throws ApiException {
+            return listRecDefinitionsWithHttpInfo(asAt, page, sortBy, limit, filter);
+        }
+
+        /**
+         * Execute listRecDefinitions request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfRecDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfRecDefinition> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listRecDefinitionsWithHttpInfo(asAt, page, sortBy, limit, filter, opts);
+        }
+
+        /**
+         * Execute listRecDefinitions request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfRecDefinition> _callback) throws ApiException {
+            listRecDefinitionsAsync(asAt, page, sortBy, limit, filter, _callback);
+        }
+
+        /**
+         * Execute listRecDefinitions request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfRecDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+            listRecDefinitionsAsync(asAt, page, sortBy, limit, filter, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions
+     * List rec definitions, optionally filtered and sorted. Supports pagination.
+     * @return APIlistRecDefinitionsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested list of rec definitions. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistRecDefinitionsRequest listRecDefinitions() {
+        return new APIlistRecDefinitionsRequest();
     }
     /**
      * Build call for listRecInstances
@@ -4371,5 +7156,693 @@ public class RecsApi {
      */
     public APItransitionRecInstanceRequest transitionRecInstance(String instanceIdType, String instanceIdValue, TransitionRecInstanceRequest transitionRecInstanceRequest) {
         return new APItransitionRecInstanceRequest(instanceIdType, instanceIdValue, transitionRecInstanceRequest);
+    }
+    /**
+     * Build call for updateMatchingRuleset
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param updateMatchingRulesetRequest The updated matching ruleset values. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest updateMatchingRulesetCall(String scope, String code, UpdateMatchingRulesetRequest updateMatchingRulesetRequest, final ApiCallback _callback) throws ApiException {
+        return updateMatchingRulesetCall(scope, code, updateMatchingRulesetRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for updateMatchingRuleset. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the matching ruleset. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param updateMatchingRulesetRequest The updated matching ruleset values. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest updateMatchingRulesetCall(String scope, String code, UpdateMatchingRulesetRequest updateMatchingRulesetRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateMatchingRulesetRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/matchingrulesets/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest updateMatchingRulesetValidateBeforeCall(String scope, String code, UpdateMatchingRulesetRequest updateMatchingRulesetRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling updateMatchingRuleset(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling updateMatchingRuleset(Async)");
+        }
+
+        // verify the required parameter 'updateMatchingRulesetRequest' is set
+        if (updateMatchingRulesetRequest == null) {
+            throw new ApiException("Missing the required parameter 'updateMatchingRulesetRequest' when calling updateMatchingRuleset(Async)");
+        }
+
+        return updateMatchingRulesetCall(scope, code, updateMatchingRulesetRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset
+     * Overwrite an existing matching ruleset identified by scope and code.  The update request has the same required fields as create, apart from the identifier.
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param updateMatchingRulesetRequest The updated matching ruleset values. (required)
+     * @return ApiResponse&lt;MatchingRuleset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MatchingRuleset> updateMatchingRulesetWithHttpInfo(String scope, String code, UpdateMatchingRulesetRequest updateMatchingRulesetRequest) throws ApiException {
+        HttpRequest localVarCall = updateMatchingRulesetValidateBeforeCall(scope, code, updateMatchingRulesetRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset
+     * Overwrite an existing matching ruleset identified by scope and code.  The update request has the same required fields as create, apart from the identifier.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param updateMatchingRulesetRequest The updated matching ruleset values. (required)
+     * @return ApiResponse&lt;MatchingRuleset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MatchingRuleset> updateMatchingRulesetWithHttpInfo(String scope, String code, UpdateMatchingRulesetRequest updateMatchingRulesetRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = updateMatchingRulesetValidateBeforeCall(scope, code, updateMatchingRulesetRequest, null, opts);
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset (asynchronously)
+     * Overwrite an existing matching ruleset identified by scope and code.  The update request has the same required fields as create, apart from the identifier.
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param updateMatchingRulesetRequest The updated matching ruleset values. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void updateMatchingRulesetAsync(String scope, String code, UpdateMatchingRulesetRequest updateMatchingRulesetRequest, final ApiCallback<MatchingRuleset> _callback) throws ApiException {
+
+        HttpRequest localVarCall = updateMatchingRulesetValidateBeforeCall(scope, code, updateMatchingRulesetRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset (asynchronously)
+     * Overwrite an existing matching ruleset identified by scope and code.  The update request has the same required fields as create, apart from the identifier.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param updateMatchingRulesetRequest The updated matching ruleset values. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void updateMatchingRulesetAsync(String scope, String code, UpdateMatchingRulesetRequest updateMatchingRulesetRequest, final ApiCallback<MatchingRuleset> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = updateMatchingRulesetValidateBeforeCall(scope, code, updateMatchingRulesetRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<MatchingRuleset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIupdateMatchingRulesetRequest {
+        private final String scope;
+        private final String code;
+        private final UpdateMatchingRulesetRequest updateMatchingRulesetRequest;
+
+        private APIupdateMatchingRulesetRequest(String scope, String code, UpdateMatchingRulesetRequest updateMatchingRulesetRequest) {
+            this.scope = scope;
+            this.code = code;
+            this.updateMatchingRulesetRequest = updateMatchingRulesetRequest;
+        }
+
+        /**
+         * Build call for updateMatchingRuleset
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return updateMatchingRulesetCall(scope, code, updateMatchingRulesetRequest, _callback);
+        }
+
+        /**
+         * Execute updateMatchingRuleset request
+         * @return MatchingRuleset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MatchingRuleset execute() throws ApiException {
+            ApiResponse<MatchingRuleset> localVarResp = updateMatchingRulesetWithHttpInfo(scope, code, updateMatchingRulesetRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute updateMatchingRuleset request. Use any specified configuration options to override any other configuration for this request only.
+         * @return MatchingRuleset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MatchingRuleset execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<MatchingRuleset> localVarResp = updateMatchingRulesetWithHttpInfo(scope, code, updateMatchingRulesetRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute updateMatchingRuleset request with HTTP info returned
+         * @return ApiResponse&lt;MatchingRuleset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MatchingRuleset> executeWithHttpInfo() throws ApiException {
+            return updateMatchingRulesetWithHttpInfo(scope, code, updateMatchingRulesetRequest);
+        }
+
+        /**
+         * Execute updateMatchingRuleset request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;MatchingRuleset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MatchingRuleset> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return updateMatchingRulesetWithHttpInfo(scope, code, updateMatchingRulesetRequest, opts);
+        }
+
+        /**
+         * Execute updateMatchingRuleset request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MatchingRuleset> _callback) throws ApiException {
+            updateMatchingRulesetAsync(scope, code, updateMatchingRulesetRequest, _callback);
+        }
+
+        /**
+         * Execute updateMatchingRuleset request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MatchingRuleset> _callback, ConfigurationOptions opts) throws ApiException {
+            updateMatchingRulesetAsync(scope, code, updateMatchingRulesetRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset
+     * Overwrite an existing matching ruleset identified by scope and code.  The update request has the same required fields as create, apart from the identifier.
+     * @param scope The scope of the matching ruleset. (required)
+     * @param code The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+     * @param updateMatchingRulesetRequest The updated matching ruleset values. (required)
+     * @return APIupdateMatchingRulesetRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated matching ruleset. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIupdateMatchingRulesetRequest updateMatchingRuleset(String scope, String code, UpdateMatchingRulesetRequest updateMatchingRulesetRequest) {
+        return new APIupdateMatchingRulesetRequest(scope, code, updateMatchingRulesetRequest);
+    }
+    /**
+     * Build call for updateRecDefinition
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param updateRecDefinitionRequest The updated rec definition values. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest updateRecDefinitionCall(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest, final ApiCallback _callback) throws ApiException {
+        return updateRecDefinitionCall(scope, code, updateRecDefinitionRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for updateRecDefinition. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the rec definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param updateRecDefinitionRequest The updated rec definition values. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest updateRecDefinitionCall(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateRecDefinitionRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/definitions/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest updateRecDefinitionValidateBeforeCall(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling updateRecDefinition(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling updateRecDefinition(Async)");
+        }
+
+        // verify the required parameter 'updateRecDefinitionRequest' is set
+        if (updateRecDefinitionRequest == null) {
+            throw new ApiException("Missing the required parameter 'updateRecDefinitionRequest' when calling updateRecDefinition(Async)");
+        }
+
+        return updateRecDefinitionCall(scope, code, updateRecDefinitionRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition
+     * Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param updateRecDefinitionRequest The updated rec definition values. (required)
+     * @return ApiResponse&lt;RecDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecDefinition> updateRecDefinitionWithHttpInfo(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest) throws ApiException {
+        HttpRequest localVarCall = updateRecDefinitionValidateBeforeCall(scope, code, updateRecDefinitionRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition
+     * Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param updateRecDefinitionRequest The updated rec definition values. (required)
+     * @return ApiResponse&lt;RecDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<RecDefinition> updateRecDefinitionWithHttpInfo(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = updateRecDefinitionValidateBeforeCall(scope, code, updateRecDefinitionRequest, null, opts);
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition (asynchronously)
+     * Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param updateRecDefinitionRequest The updated rec definition values. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void updateRecDefinitionAsync(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest, final ApiCallback<RecDefinition> _callback) throws ApiException {
+
+        HttpRequest localVarCall = updateRecDefinitionValidateBeforeCall(scope, code, updateRecDefinitionRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition (asynchronously)
+     * Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param updateRecDefinitionRequest The updated rec definition values. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void updateRecDefinitionAsync(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest, final ApiCallback<RecDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = updateRecDefinitionValidateBeforeCall(scope, code, updateRecDefinitionRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<RecDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIupdateRecDefinitionRequest {
+        private final String scope;
+        private final String code;
+        private final UpdateRecDefinitionRequest updateRecDefinitionRequest;
+
+        private APIupdateRecDefinitionRequest(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest) {
+            this.scope = scope;
+            this.code = code;
+            this.updateRecDefinitionRequest = updateRecDefinitionRequest;
+        }
+
+        /**
+         * Build call for updateRecDefinition
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return updateRecDefinitionCall(scope, code, updateRecDefinitionRequest, _callback);
+        }
+
+        /**
+         * Execute updateRecDefinition request
+         * @return RecDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecDefinition execute() throws ApiException {
+            ApiResponse<RecDefinition> localVarResp = updateRecDefinitionWithHttpInfo(scope, code, updateRecDefinitionRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute updateRecDefinition request. Use any specified configuration options to override any other configuration for this request only.
+         * @return RecDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RecDefinition execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<RecDefinition> localVarResp = updateRecDefinitionWithHttpInfo(scope, code, updateRecDefinitionRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute updateRecDefinition request with HTTP info returned
+         * @return ApiResponse&lt;RecDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecDefinition> executeWithHttpInfo() throws ApiException {
+            return updateRecDefinitionWithHttpInfo(scope, code, updateRecDefinitionRequest);
+        }
+
+        /**
+         * Execute updateRecDefinition request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;RecDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RecDefinition> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return updateRecDefinitionWithHttpInfo(scope, code, updateRecDefinitionRequest, opts);
+        }
+
+        /**
+         * Execute updateRecDefinition request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecDefinition> _callback) throws ApiException {
+            updateRecDefinitionAsync(scope, code, updateRecDefinitionRequest, _callback);
+        }
+
+        /**
+         * Execute updateRecDefinition request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<RecDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+            updateRecDefinitionAsync(scope, code, updateRecDefinitionRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition
+     * Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.
+     * @param scope The scope of the rec definition. (required)
+     * @param code The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+     * @param updateRecDefinitionRequest The updated rec definition values. (required)
+     * @return APIupdateRecDefinitionRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated rec definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIupdateRecDefinitionRequest updateRecDefinition(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest) {
+        return new APIupdateRecDefinitionRequest(scope, code, updateRecDefinitionRequest);
     }
 }

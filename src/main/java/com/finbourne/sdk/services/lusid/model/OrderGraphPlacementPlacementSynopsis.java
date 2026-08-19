@@ -94,7 +94,7 @@ public class OrderGraphPlacementPlacementSynopsis {
   }
 
   /**
-   * Total number of units placed.
+   * Total number of units placed. Null where the placement is sized by amount.
    * @return quantity
    */
   @javax.annotation.Nullable
@@ -113,7 +113,7 @@ public class OrderGraphPlacementPlacementSynopsis {
   }
 
   /**
-   * Total monetary value placed, in the block currency.
+   * Total monetary value placed, in the block currency. Null where the placement has no amount.
    * @return amount
    */
   @javax.annotation.Nullable

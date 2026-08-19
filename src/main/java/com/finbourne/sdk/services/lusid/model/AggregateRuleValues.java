@@ -12,7 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
-import com.finbourne.sdk.services.lusid.model.AggregateToleranceBase;
+import com.finbourne.sdk.services.lusid.model.ToleranceBase;
 import java.io.IOException;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -66,7 +66,7 @@ public class AggregateRuleValues {
   public static final String JSON_PROPERTY_APPLIED_TOLERANCE = "appliedTolerance";
   @JsonProperty(JSON_PROPERTY_APPLIED_TOLERANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private AggregateToleranceBase appliedTolerance;
+  private ToleranceBase appliedTolerance;
 
   public AggregateRuleValues() {
   }
@@ -147,7 +147,7 @@ public class AggregateRuleValues {
   }
 
 
-  public AggregateRuleValues appliedTolerance(AggregateToleranceBase appliedTolerance) {
+  public AggregateRuleValues appliedTolerance(ToleranceBase appliedTolerance) {
     this.appliedTolerance = appliedTolerance;
     return this;
   }
@@ -157,11 +157,11 @@ public class AggregateRuleValues {
    * @return appliedTolerance
    */
   @javax.annotation.Nullable
-  public AggregateToleranceBase getAppliedTolerance() {
+  public ToleranceBase getAppliedTolerance() {
     return appliedTolerance;
   }
 
-  public void setAppliedTolerance(AggregateToleranceBase appliedTolerance) {
+  public void setAppliedTolerance(ToleranceBase appliedTolerance) {
     this.appliedTolerance = appliedTolerance;
   }
 

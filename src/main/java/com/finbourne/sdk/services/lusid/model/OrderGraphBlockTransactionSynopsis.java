@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -37,6 +38,7 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   OrderGraphBlockTransactionSynopsis.JSON_PROPERTY_QUANTITY,
+  OrderGraphBlockTransactionSynopsis.JSON_PROPERTY_AMOUNT,
   OrderGraphBlockTransactionSynopsis.JSON_PROPERTY_DETAILS
 })
 
@@ -45,6 +47,11 @@ public class OrderGraphBlockTransactionSynopsis {
   @JsonProperty(JSON_PROPERTY_QUANTITY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal quantity;
+
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal amount;
 
   public static final String JSON_PROPERTY_DETAILS = "details";
   @JsonProperty(JSON_PROPERTY_DETAILS)
@@ -70,6 +77,25 @@ public class OrderGraphBlockTransactionSynopsis {
 
   public void setQuantity(java.math.BigDecimal quantity) {
     this.quantity = quantity;
+  }
+
+
+  public OrderGraphBlockTransactionSynopsis amount(java.math.BigDecimal amount) {
+    this.amount = amount;
+    return this;
+  }
+
+  /**
+   * Total consideration booked, in the block currency.
+   * @return amount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getAmount() {
+    return amount;
+  }
+
+  public void setAmount(java.math.BigDecimal amount) {
+    this.amount = amount;
   }
 
 
@@ -110,12 +136,24 @@ public class OrderGraphBlockTransactionSynopsis {
     }
     OrderGraphBlockTransactionSynopsis orderGraphBlockTransactionSynopsis = (OrderGraphBlockTransactionSynopsis) o;
     return (this.quantity == null ? orderGraphBlockTransactionSynopsis.quantity == null : (orderGraphBlockTransactionSynopsis.quantity != null && this.quantity.compareTo(orderGraphBlockTransactionSynopsis.getQuantity()) == 0)) &&
+        (this.amount == null ? orderGraphBlockTransactionSynopsis.amount == null : (orderGraphBlockTransactionSynopsis.amount != null && this.amount.compareTo(orderGraphBlockTransactionSynopsis.getAmount()) == 0)) &&
         Objects.equals(this.details, orderGraphBlockTransactionSynopsis.details);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(quantity, details);
+    return Objects.hash(quantity, amount, details);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -123,6 +161,7 @@ public class OrderGraphBlockTransactionSynopsis {
     StringBuilder sb = new StringBuilder();
     sb.append("class OrderGraphBlockTransactionSynopsis {\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("}");
     return sb.toString();
