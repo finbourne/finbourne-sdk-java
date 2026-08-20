@@ -221,7 +221,9 @@ public enum InstrumentEventType {
   
   CANCEL_SWAP_EVENT("CancelSwapEvent"),
   
-  BOND_OPTION_TERMINATION_EVENT("BondOptionTerminationEvent");
+  BOND_OPTION_TERMINATION_EVENT("BondOptionTerminationEvent"),
+  
+  TERMINATION_EVENT("TerminationEvent");
 
   private String value;
 

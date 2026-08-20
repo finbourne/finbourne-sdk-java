@@ -22,6 +22,8 @@ AggregationType method = AggregationType.DATE_TIME;
 AggregationType method = AggregationType.BOOLEAN;
 AggregationType method = AggregationType.RESULT_VALUE;
 AggregationType method = AggregationType.RESULT0_D;
+AggregationType method = AggregationType.RESULT1_D;
+AggregationType method = AggregationType.RESULT2_D;
 AggregationType method = AggregationType.JSON;
 ```
 

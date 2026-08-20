@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **support** | [**SupportAccessExpiry**](SupportAccessExpiry.md) |  | [optional] [default to SupportAccessExpiry]
 **supportAccessExpiryWithRole** | [**List&lt;SupportAccessExpiryWithRole&gt;**](SupportAccessExpiryWithRole.md) |  | [optional] [default to List<SupportAccessExpiryWithRole>]
 **status** | **Boolean** |  | [optional] [default to Boolean]
+**code** | **Integer** | Internal provisioning code. | [optional] [default to Integer]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -25,6 +26,7 @@ String issuerUrl = "example issuerUrl";
 SupportAccessExpiry support = new SupportAccessExpiry();
 @javax.annotation.Nullable List<SupportAccessExpiryWithRole> supportAccessExpiryWithRole = new List<SupportAccessExpiryWithRole>();
 Boolean status = true;
+@javax.annotation.Nullable Integer code = new Integer("100.00");
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -35,6 +37,7 @@ AuthenticationInformation authenticationInformationInstance = new Authentication
     .support(support)
     .supportAccessExpiryWithRole(supportAccessExpiryWithRole)
     .status(status)
+    .code(code)
     .links(links);
 ```
 

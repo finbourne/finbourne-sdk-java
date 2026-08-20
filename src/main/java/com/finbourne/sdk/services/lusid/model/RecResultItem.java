@@ -12,7 +12,6 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
-import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -38,7 +37,6 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   RecResultItem.JSON_PROPERTY_ITEM_TYPE,
-  RecResultItem.JSON_PROPERTY_PORTFOLIO_ID,
   RecResultItem.JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES
 })
 
@@ -47,11 +45,6 @@ public class RecResultItem {
   @JsonProperty(JSON_PROPERTY_ITEM_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String itemType;
-
-  public static final String JSON_PROPERTY_PORTFOLIO_ID = "portfolioId";
-  @JsonProperty(JSON_PROPERTY_PORTFOLIO_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private ResourceId portfolioId;
 
   public static final String JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES = "ruleAndAttributeValues";
   @JsonProperty(JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES)
@@ -87,25 +80,6 @@ public class RecResultItem {
   }
 
 
-  public RecResultItem portfolioId(ResourceId portfolioId) {
-    this.portfolioId = portfolioId;
-    return this;
-  }
-
-  /**
-   * Get portfolioId
-   * @return portfolioId
-   */
-  @javax.annotation.Nonnull
-  public ResourceId getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(ResourceId portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-
   /**
    * The core rule, aggregate rule and supplemental attribute values for the item, keyed by name.
    * @return ruleAndAttributeValues
@@ -127,7 +101,6 @@ public class RecResultItem {
     }
     RecResultItem recResultItem = (RecResultItem) o;
     return Objects.equals(this.itemType, recResultItem.itemType) &&
-        Objects.equals(this.portfolioId, recResultItem.portfolioId) &&
         Objects.equals(this.ruleAndAttributeValues, recResultItem.ruleAndAttributeValues);
   }
 
@@ -137,7 +110,7 @@ public class RecResultItem {
 
   @Override
  public int hashCode() {
-    return Objects.hash(itemType, portfolioId, ruleAndAttributeValues);
+    return Objects.hash(itemType, ruleAndAttributeValues);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -152,7 +125,6 @@ public class RecResultItem {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecResultItem {\n");
     sb.append("    itemType: ").append(toIndentedString(itemType)).append("\n");
-    sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
     sb.append("    ruleAndAttributeValues: ").append(toIndentedString(ruleAndAttributeValues)).append("\n");
     sb.append("}");
     return sb.toString();

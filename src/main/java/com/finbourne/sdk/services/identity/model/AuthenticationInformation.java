@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   AuthenticationInformation.JSON_PROPERTY_SUPPORT,
   AuthenticationInformation.JSON_PROPERTY_SUPPORT_ACCESS_EXPIRY_WITH_ROLE,
   AuthenticationInformation.JSON_PROPERTY_STATUS,
+  AuthenticationInformation.JSON_PROPERTY_CODE,
   AuthenticationInformation.JSON_PROPERTY_LINKS
 })
 
@@ -78,6 +79,11 @@ public class AuthenticationInformation {
   @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean status;
+
+  public static final String JSON_PROPERTY_CODE = "code";
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer code;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -217,6 +223,25 @@ public class AuthenticationInformation {
   }
 
 
+  public AuthenticationInformation code(Integer code) {
+    this.code = code;
+    return this;
+  }
+
+  /**
+   * Internal provisioning code.
+   * @return code
+   */
+  @javax.annotation.Nullable
+  public Integer getCode() {
+    return code;
+  }
+
+  public void setCode(Integer code) {
+    this.code = code;
+  }
+
+
   public AuthenticationInformation links(List<Link> links) {
     this.links = links;
     return this;
@@ -259,6 +284,7 @@ public class AuthenticationInformation {
         Objects.equals(this.support, authenticationInformation.support) &&
         Objects.equals(this.supportAccessExpiryWithRole, authenticationInformation.supportAccessExpiryWithRole) &&
         Objects.equals(this.status, authenticationInformation.status) &&
+        Objects.equals(this.code, authenticationInformation.code) &&
         Objects.equals(this.links, authenticationInformation.links);
   }
 
@@ -268,7 +294,7 @@ public class AuthenticationInformation {
 
   @Override
  public int hashCode() {
-    return Objects.hash(issuerUrl, fallbackIssuerUrls, samlIdentityProviderId, support, supportAccessExpiryWithRole, status, links);
+    return Objects.hash(issuerUrl, fallbackIssuerUrls, samlIdentityProviderId, support, supportAccessExpiryWithRole, status, code, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -288,6 +314,7 @@ public class AuthenticationInformation {
     sb.append("    support: ").append(toIndentedString(support)).append("\n");
     sb.append("    supportAccessExpiryWithRole: ").append(toIndentedString(supportAccessExpiryWithRole)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

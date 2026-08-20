@@ -50,7 +50,7 @@ public class AddressDefinition {
   private String displayName;
 
   /**
-   * Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Json.
+   * Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.
    */
   public enum TypeEnum {
     STRING("String"),
@@ -66,6 +66,10 @@ public class AddressDefinition {
     RESULT_VALUE("ResultValue"),
     
     RESULT0_D("Result0D"),
+    
+    RESULT1_D("Result1D"),
+    
+    RESULT2_D("Result2D"),
     
     JSON("Json");
 
@@ -148,7 +152,7 @@ public class AddressDefinition {
   }
 
   /**
-   * Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Json.
+   * Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.
    * @return type
    */
   @javax.annotation.Nullable

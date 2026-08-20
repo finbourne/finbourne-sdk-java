@@ -19,7 +19,7 @@ All URIs are relative to *http://localhost*
 | [**getPortfolioCommands**](PortfoliosApi.md#getPortfolioCommands) | **GET** /api/api/portfolios/{scope}/{code}/commands | GetPortfolioCommands: Get portfolio commands |
 | [**getPortfolioMetadata**](PortfoliosApi.md#getPortfolioMetadata) | **GET** /api/api/portfolios/{scope}/{code}/metadata | GetPortfolioMetadata: Get access metadata rules for a portfolio |
 | [**getPortfolioProperties**](PortfoliosApi.md#getPortfolioProperties) | **GET** /api/api/portfolios/{scope}/{code}/properties | GetPortfolioProperties: Get portfolio properties |
-| [**getPortfolioPropertiesTimeSeries**](PortfoliosApi.md#getPortfolioPropertiesTimeSeries) | **GET** /api/api/portfolios/{scope}/{code}/properties/time-series/batch | [BETA] GetPortfolioPropertiesTimeSeries: Get portfolio properties time series |
+| [**getPortfolioPropertiesTimeSeries**](PortfoliosApi.md#getPortfolioPropertiesTimeSeries) | **GET** /api/api/portfolios/{scope}/{code}/properties/time-series/batch | GetPortfolioPropertiesTimeSeries: Get portfolio properties time series |
 | [**getPortfolioPropertyTimeSeries**](PortfoliosApi.md#getPortfolioPropertyTimeSeries) | **GET** /api/api/portfolios/{scope}/{code}/properties/time-series | GetPortfolioPropertyTimeSeries: Get portfolio property time series |
 | [**getPortfolioRelations**](PortfoliosApi.md#getPortfolioRelations) | **GET** /api/api/portfolios/{scope}/{code}/relations | [EXPERIMENTAL] GetPortfolioRelations: Get portfolio relations |
 | [**getPortfolioRelationships**](PortfoliosApi.md#getPortfolioRelationships) | **GET** /api/api/portfolios/{scope}/{code}/relationships | GetPortfolioRelationships: Get portfolio relationships |
@@ -1336,7 +1336,7 @@ public class PortfoliosApiExample {
 
 > ResourceListOfPropertyIntervalTimeSeries getPortfolioPropertiesTimeSeries(scope, code, propertyKeys, portfolioEffectiveAt, asAt, filter, page, limit)
 
-[BETA] GetPortfolioPropertiesTimeSeries: Get portfolio properties time series
+GetPortfolioPropertiesTimeSeries: Get portfolio properties time series
 
 Show the complete time series (history) for multiple portfolio properties at once, grouped by property key.
 
