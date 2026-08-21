@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.horizon.model;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -45,7 +46,8 @@ import com.finbourne.sdk.JSON;
   TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_PATH,
   TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_STATUS,
   TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_ERROR,
-  TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_NAME
+  TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_NAME,
+  TpfFileDeliveryResponse.JSON_PROPERTY_FILE_UUID
 })
 
 public class TpfFileDeliveryResponse {
@@ -103,6 +105,11 @@ public class TpfFileDeliveryResponse {
   @JsonProperty(JSON_PROPERTY_DESTINATION_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String destinationName;
+
+  public static final String JSON_PROPERTY_FILE_UUID = "fileUuid";
+  @JsonProperty(JSON_PROPERTY_FILE_UUID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private UUID fileUuid;
 
   public TpfFileDeliveryResponse() {
   }
@@ -316,6 +323,25 @@ public class TpfFileDeliveryResponse {
   }
 
 
+  public TpfFileDeliveryResponse fileUuid(UUID fileUuid) {
+    this.fileUuid = fileUuid;
+    return this;
+  }
+
+  /**
+   * Get fileUuid
+   * @return fileUuid
+   */
+  @javax.annotation.Nonnull
+  public UUID getFileUuid() {
+    return fileUuid;
+  }
+
+  public void setFileUuid(UUID fileUuid) {
+    this.fileUuid = fileUuid;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -335,7 +361,8 @@ public class TpfFileDeliveryResponse {
         Objects.equals(this.destinationPath, tpfFileDeliveryResponse.destinationPath) &&
         Objects.equals(this.destinationStatus, tpfFileDeliveryResponse.destinationStatus) &&
         Objects.equals(this.destinationError, tpfFileDeliveryResponse.destinationError) &&
-        Objects.equals(this.destinationName, tpfFileDeliveryResponse.destinationName);
+        Objects.equals(this.destinationName, tpfFileDeliveryResponse.destinationName) &&
+        Objects.equals(this.fileUuid, tpfFileDeliveryResponse.fileUuid);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -344,7 +371,7 @@ public class TpfFileDeliveryResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationStatus, destinationError, destinationName);
+    return Objects.hash(runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationStatus, destinationError, destinationName, fileUuid);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -369,6 +396,7 @@ public class TpfFileDeliveryResponse {
     sb.append("    destinationStatus: ").append(toIndentedString(destinationStatus)).append("\n");
     sb.append("    destinationError: ").append(toIndentedString(destinationError)).append("\n");
     sb.append("    destinationName: ").append(toIndentedString(destinationName)).append("\n");
+    sb.append("    fileUuid: ").append(toIndentedString(fileUuid)).append("\n");
     sb.append("}");
     return sb.toString();
   }

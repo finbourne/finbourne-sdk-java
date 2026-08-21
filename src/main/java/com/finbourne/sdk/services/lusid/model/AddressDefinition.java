@@ -12,9 +12,12 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ResultAxisDefinition;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -40,7 +43,8 @@ import com.finbourne.sdk.JSON;
   AddressDefinition.JSON_PROPERTY_DESCRIPTION,
   AddressDefinition.JSON_PROPERTY_LIFE_CYCLE_STATUS,
   AddressDefinition.JSON_PROPERTY_REMOVAL_DATE,
-  AddressDefinition.JSON_PROPERTY_DOCUMENTATION_LINK
+  AddressDefinition.JSON_PROPERTY_DOCUMENTATION_LINK,
+  AddressDefinition.JSON_PROPERTY_AXES
 })
 
 public class AddressDefinition {
@@ -123,6 +127,11 @@ public class AddressDefinition {
   @JsonProperty(JSON_PROPERTY_DOCUMENTATION_LINK)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String documentationLink;
+
+  public static final String JSON_PROPERTY_AXES = "axes";
+  @JsonProperty(JSON_PROPERTY_AXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ResultAxisDefinition> axes;
 
   public AddressDefinition() {
   }
@@ -241,6 +250,33 @@ public class AddressDefinition {
   }
 
 
+  public AddressDefinition axes(List<ResultAxisDefinition> axes) {
+    this.axes = axes;
+    return this;
+  }
+
+  public AddressDefinition addAxesItem(ResultAxisDefinition axesItem) {
+    if (this.axes == null) {
+      this.axes = new ArrayList<>();
+    }
+    this.axes.add(axesItem);
+    return this;
+  }
+
+  /**
+   * For keys whose type is a labelled vector or matrix (Result1D/Result2D), describes what the  labels on each axis mean. Null for scalar results and for shaped results whose axes have  not been described.
+   * @return axes
+   */
+  @javax.annotation.Nullable
+  public List<ResultAxisDefinition> getAxes() {
+    return axes;
+  }
+
+  public void setAxes(List<ResultAxisDefinition> axes) {
+    this.axes = axes;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -255,7 +291,8 @@ public class AddressDefinition {
         Objects.equals(this.description, addressDefinition.description) &&
         Objects.equals(this.lifeCycleStatus, addressDefinition.lifeCycleStatus) &&
         Objects.equals(this.removalDate, addressDefinition.removalDate) &&
-        Objects.equals(this.documentationLink, addressDefinition.documentationLink);
+        Objects.equals(this.documentationLink, addressDefinition.documentationLink) &&
+        Objects.equals(this.axes, addressDefinition.axes);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -264,7 +301,7 @@ public class AddressDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, type, description, lifeCycleStatus, removalDate, documentationLink);
+    return Objects.hash(displayName, type, description, lifeCycleStatus, removalDate, documentationLink, axes);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -284,6 +321,7 @@ public class AddressDefinition {
     sb.append("    lifeCycleStatus: ").append(toIndentedString(lifeCycleStatus)).append("\n");
     sb.append("    removalDate: ").append(toIndentedString(removalDate)).append("\n");
     sb.append("    documentationLink: ").append(toIndentedString(documentationLink)).append("\n");
+    sb.append("    axes: ").append(toIndentedString(axes)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -50,6 +50,7 @@ import com.finbourne.sdk.JSON;
   CreditDefaultSwap.JSON_PROPERTY_COUPON_RATE,
   CreditDefaultSwap.JSON_PROPERTY_CONVENTION_NAME,
   CreditDefaultSwap.JSON_PROPERTY_NOTIONAL,
+  CreditDefaultSwap.JSON_PROPERTY_IS_NON_STANDARD,
   CreditDefaultSwap.JSON_PROPERTY_PROTECTION_DETAIL_SPECIFICATION,
   CreditDefaultSwap.JSON_PROPERTY_ADDITIONAL_PAYMENTS,
   CreditDefaultSwap.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
@@ -96,6 +97,11 @@ public class CreditDefaultSwap extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_NOTIONAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal notional;
+
+  public static final String JSON_PROPERTY_IS_NON_STANDARD = "isNonStandard";
+  @JsonProperty(JSON_PROPERTY_IS_NON_STANDARD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean isNonStandard;
 
   public static final String JSON_PROPERTY_PROTECTION_DETAIL_SPECIFICATION = "protectionDetailSpecification";
   @JsonProperty(JSON_PROPERTY_PROTECTION_DETAIL_SPECIFICATION)
@@ -248,6 +254,25 @@ public class CreditDefaultSwap extends LusidInstrument {
   }
 
 
+  public CreditDefaultSwap isNonStandard(Boolean isNonStandard) {
+    this.isNonStandard = isNonStandard;
+    return this;
+  }
+
+  /**
+   * By default IsNonStandard is false, and the contract follows the IMM convention: the roll and payment  frequencies must be 3M or 6M, and the start and maturity dates are rolled onto IMM dates  (the 20th of March, June, September or December).  If IsNonStandard&#x3D;true, the premium schedule uses the stated start and maturity dates and any payment  frequency is accepted. The payment dates roll back from the maturity, so a term that is not a whole  number of payment periods has a short first period.
+   * @return isNonStandard
+   */
+  @javax.annotation.Nullable
+  public Boolean getIsNonStandard() {
+    return isNonStandard;
+  }
+
+  public void setIsNonStandard(Boolean isNonStandard) {
+    this.isNonStandard = isNonStandard;
+  }
+
+
   public CreditDefaultSwap protectionDetailSpecification(CdsProtectionDetailSpecification protectionDetailSpecification) {
     this.protectionDetailSpecification = protectionDetailSpecification;
     return this;
@@ -329,6 +354,7 @@ public class CreditDefaultSwap extends LusidInstrument {
         (this.couponRate == null ? creditDefaultSwap.couponRate == null : (creditDefaultSwap.couponRate != null && this.couponRate.compareTo(creditDefaultSwap.getCouponRate()) == 0)) &&
         Objects.equals(this.conventionName, creditDefaultSwap.conventionName) &&
         (this.notional == null ? creditDefaultSwap.notional == null : (creditDefaultSwap.notional != null && this.notional.compareTo(creditDefaultSwap.getNotional()) == 0)) &&
+        Objects.equals(this.isNonStandard, creditDefaultSwap.isNonStandard) &&
         Objects.equals(this.protectionDetailSpecification, creditDefaultSwap.protectionDetailSpecification) &&
         Objects.equals(this.additionalPayments, creditDefaultSwap.additionalPayments) &&
         Objects.equals(this.timeZoneConventions, creditDefaultSwap.timeZoneConventions) &&
@@ -341,7 +367,7 @@ public class CreditDefaultSwap extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(ticker, startDate, maturityDate, flowConventions, couponRate, conventionName, notional, protectionDetailSpecification, additionalPayments, timeZoneConventions, super.hashCode());
+    return Objects.hash(ticker, startDate, maturityDate, flowConventions, couponRate, conventionName, notional, isNonStandard, protectionDetailSpecification, additionalPayments, timeZoneConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -363,6 +389,7 @@ public class CreditDefaultSwap extends LusidInstrument {
     sb.append("    couponRate: ").append(toIndentedString(couponRate)).append("\n");
     sb.append("    conventionName: ").append(toIndentedString(conventionName)).append("\n");
     sb.append("    notional: ").append(toIndentedString(notional)).append("\n");
+    sb.append("    isNonStandard: ").append(toIndentedString(isNonStandard)).append("\n");
     sb.append("    protectionDetailSpecification: ").append(toIndentedString(protectionDetailSpecification)).append("\n");
     sb.append("    additionalPayments: ").append(toIndentedString(additionalPayments)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");

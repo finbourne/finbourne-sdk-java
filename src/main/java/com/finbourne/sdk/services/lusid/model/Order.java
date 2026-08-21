@@ -66,6 +66,7 @@ import com.finbourne.sdk.JSON;
   Order.JSON_PROPERTY_PACKAGE_ID,
   Order.JSON_PROPERTY_WEIGHT,
   Order.JSON_PROPERTY_AMOUNT,
+  Order.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID,
   Order.JSON_PROPERTY_DATA_MODEL_MEMBERSHIP,
   Order.JSON_PROPERTY_DERIVED_COMPLIANCE_STATE,
   Order.JSON_PROPERTY_DERIVED_APPROVAL_STATE,
@@ -177,6 +178,11 @@ public class Order {
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private CurrencyAndAmount amount;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID = "custodianAccountId";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId custodianAccountId;
 
   public static final String JSON_PROPERTY_DATA_MODEL_MEMBERSHIP = "dataModelMembership";
   @JsonProperty(JSON_PROPERTY_DATA_MODEL_MEMBERSHIP)
@@ -616,6 +622,25 @@ public class Order {
   }
 
 
+  public Order custodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+    return this;
+  }
+
+  /**
+   * Get custodianAccountId
+   * @return custodianAccountId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getCustodianAccountId() {
+    return custodianAccountId;
+  }
+
+  public void setCustodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+  }
+
+
   public Order dataModelMembership(DataModelMembership dataModelMembership) {
     this.dataModelMembership = dataModelMembership;
     return this;
@@ -730,6 +755,7 @@ public class Order {
         Objects.equals(this.packageId, order.packageId) &&
         (this.weight == null ? order.weight == null : (order.weight != null && this.weight.compareTo(order.getWeight()) == 0)) &&
         Objects.equals(this.amount, order.amount) &&
+        Objects.equals(this.custodianAccountId, order.custodianAccountId) &&
         Objects.equals(this.dataModelMembership, order.dataModelMembership) &&
         Objects.equals(this.derivedComplianceState, order.derivedComplianceState) &&
         Objects.equals(this.derivedApprovalState, order.derivedApprovalState) &&
@@ -742,7 +768,7 @@ public class Order {
 
   @Override
  public int hashCode() {
-    return Objects.hash(properties, version, instrumentIdentifiers, quantity, side, orderBookId, portfolioId, id, instrumentScope, lusidInstrumentId, state, type, timeInForce, date, price, limitPrice, stopPrice, orderInstructionId, packageId, weight, amount, dataModelMembership, derivedComplianceState, derivedApprovalState, links);
+    return Objects.hash(properties, version, instrumentIdentifiers, quantity, side, orderBookId, portfolioId, id, instrumentScope, lusidInstrumentId, state, type, timeInForce, date, price, limitPrice, stopPrice, orderInstructionId, packageId, weight, amount, custodianAccountId, dataModelMembership, derivedComplianceState, derivedApprovalState, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -777,6 +803,7 @@ public class Order {
     sb.append("    packageId: ").append(toIndentedString(packageId)).append("\n");
     sb.append("    weight: ").append(toIndentedString(weight)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("    dataModelMembership: ").append(toIndentedString(dataModelMembership)).append("\n");
     sb.append("    derivedComplianceState: ").append(toIndentedString(derivedComplianceState)).append("\n");
     sb.append("    derivedApprovalState: ").append(toIndentedString(derivedApprovalState)).append("\n");

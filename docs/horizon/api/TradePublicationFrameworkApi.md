@@ -15,7 +15,7 @@ All URIs are relative to *http://localhost*
 | [**replayTransactions**](TradePublicationFrameworkApi.md#replayTransactions) | **POST** /horizon/api/trade-publication-framework/instances/{instanceId}/replay | [EXPERIMENTAL] ReplayTransactions: Replay one or more transactions through a TPF instance |
 | [**resolveFailedDelivery**](TradePublicationFrameworkApi.md#resolveFailedDelivery) | **PUT** /horizon/api/trade-publication-framework/instances/{instanceId}/failed/{batchReferenceId}/resolve | [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry |
 | [**retryFailedDelivery**](TradePublicationFrameworkApi.md#retryFailedDelivery) | **POST** /horizon/api/trade-publication-framework/instances/{instanceId}/failed/retry | [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework |
-| [**retryTpfSftpDelivery**](TradePublicationFrameworkApi.md#retryTpfSftpDelivery) | **POST** /horizon/api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file |
+| [**retryTpfSftpDelivery**](TradePublicationFrameworkApi.md#retryTpfSftpDelivery) | **POST** /horizon/api/trade-publication-framework/instances/{instanceId}/files/{fileUuid}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file |
 
 
 
@@ -903,7 +903,7 @@ public class TradePublicationFrameworkApiExample {
 
 ## retryTpfSftpDelivery
 
-> TpfRetrySftpResponse retryTpfSftpDelivery(instanceId, fileId)
+> TpfRetrySftpResponse retryTpfSftpDelivery(instanceId, fileUuid)
 
 [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
 
@@ -933,12 +933,12 @@ public class TradePublicationFrameworkApiExample {
         
         TradePublicationFrameworkApi apiInstance = apiFactory.build(TradePublicationFrameworkApi.class);
         String instanceId = "instanceId_example"; // String | Integration instance ID
-        Long fileId = 56L; // Long | File delivery ID to retry
+        String fileUuid = "fileUuid_example"; // String | File delivery UUID to retry, as returned by the run-files and file-deliveries listings
         try {
             // uncomment the below to set overrides at the request level
-            // TpfRetrySftpResponse result = apiInstance.retryTpfSftpDelivery(instanceId, fileId).execute(opts);
+            // TpfRetrySftpResponse result = apiInstance.retryTpfSftpDelivery(instanceId, fileUuid).execute(opts);
 
-            TpfRetrySftpResponse result = apiInstance.retryTpfSftpDelivery(instanceId, fileId).execute();
+            TpfRetrySftpResponse result = apiInstance.retryTpfSftpDelivery(instanceId, fileUuid).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling TradePublicationFrameworkApi#retryTpfSftpDelivery");
@@ -955,7 +955,7 @@ public class TradePublicationFrameworkApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**| Integration instance ID | |
-| **fileId** | **Long**| File delivery ID to retry | |
+| **fileUuid** | **String**| File delivery UUID to retry, as returned by the run-files and file-deliveries listings | |
 
 ### Return type
 

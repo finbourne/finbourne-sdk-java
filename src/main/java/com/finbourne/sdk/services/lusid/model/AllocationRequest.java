@@ -58,7 +58,8 @@ import com.finbourne.sdk.JSON;
   AllocationRequest.JSON_PROPERTY_SETTLEMENT_CURRENCY,
   AllocationRequest.JSON_PROPERTY_SETTLEMENT_CURRENCY_FX_RATE,
   AllocationRequest.JSON_PROPERTY_COUNTERPARTY,
-  AllocationRequest.JSON_PROPERTY_EXECUTION_IDS
+  AllocationRequest.JSON_PROPERTY_EXECUTION_IDS,
+  AllocationRequest.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID
 })
 
 public class AllocationRequest {
@@ -146,6 +147,11 @@ public class AllocationRequest {
   @JsonProperty(JSON_PROPERTY_EXECUTION_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ResourceId> executionIds;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID = "custodianAccountId";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId custodianAccountId;
 
   public AllocationRequest() {
   }
@@ -505,6 +511,25 @@ public class AllocationRequest {
   }
 
 
+  public AllocationRequest custodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+    return this;
+  }
+
+  /**
+   * Get custodianAccountId
+   * @return custodianAccountId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getCustodianAccountId() {
+    return custodianAccountId;
+  }
+
+  public void setCustodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -530,7 +555,8 @@ public class AllocationRequest {
         Objects.equals(this.settlementCurrency, allocationRequest.settlementCurrency) &&
         (this.settlementCurrencyFxRate == null ? allocationRequest.settlementCurrencyFxRate == null : (allocationRequest.settlementCurrencyFxRate != null && this.settlementCurrencyFxRate.compareTo(allocationRequest.getSettlementCurrencyFxRate()) == 0)) &&
         Objects.equals(this.counterparty, allocationRequest.counterparty) &&
-        Objects.equals(this.executionIds, allocationRequest.executionIds);
+        Objects.equals(this.executionIds, allocationRequest.executionIds) &&
+        Objects.equals(this.custodianAccountId, allocationRequest.custodianAccountId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -539,7 +565,7 @@ public class AllocationRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(properties, instrumentIdentifiers, quantity, portfolioId, allocatedOrderId, id, placementIds, state, side, type, settlementDate, date, price, settlementCurrency, settlementCurrencyFxRate, counterparty, executionIds);
+    return Objects.hash(properties, instrumentIdentifiers, quantity, portfolioId, allocatedOrderId, id, placementIds, state, side, type, settlementDate, date, price, settlementCurrency, settlementCurrencyFxRate, counterparty, executionIds, custodianAccountId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -570,6 +596,7 @@ public class AllocationRequest {
     sb.append("    settlementCurrencyFxRate: ").append(toIndentedString(settlementCurrencyFxRate)).append("\n");
     sb.append("    counterparty: ").append(toIndentedString(counterparty)).append("\n");
     sb.append("    executionIds: ").append(toIndentedString(executionIds)).append("\n");
+    sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

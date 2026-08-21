@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **nodes** | [**List&lt;TraceDiagramNode&gt;**](TraceDiagramNode.md) | The nodes that make up the diagram. | [optional] [default to List<TraceDiagramNode>]
 **edges** | [**List&lt;TraceDiagramEdge&gt;**](TraceDiagramEdge.md) | The edges that connect the nodes in the diagram. | [optional] [default to List<TraceDiagramEdge>]
+**isPossiblyIncomplete** | **Boolean** | Whether detected retrieval or diagram degradation means some events may not be shown. | [optional] [default to Boolean]
 
 ```java
 import com.finbourne.sdk.services.insights.model.TraceDiagramResponse;
@@ -17,11 +18,13 @@ import java.net.URI;
 
 @javax.annotation.Nullable List<TraceDiagramNode> nodes = new List<TraceDiagramNode>();
 @javax.annotation.Nullable List<TraceDiagramEdge> edges = new List<TraceDiagramEdge>();
+Boolean isPossiblyIncomplete = true;
 
 
 TraceDiagramResponse traceDiagramResponseInstance = new TraceDiagramResponse()
     .nodes(nodes)
-    .edges(edges);
+    .edges(edges)
+    .isPossiblyIncomplete(isPossiblyIncomplete);
 ```
 
 

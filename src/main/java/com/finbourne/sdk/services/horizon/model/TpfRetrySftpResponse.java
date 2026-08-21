@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.horizon.model.TpfFileDeliveryInfo;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -38,7 +39,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   TpfRetrySftpResponse.JSON_PROPERTY_SUCCESS,
   TpfRetrySftpResponse.JSON_PROPERTY_MESSAGE,
-  TpfRetrySftpResponse.JSON_PROPERTY_NEW_FILE_DELIVERY_ID,
+  TpfRetrySftpResponse.JSON_PROPERTY_NEW_FILE_DELIVERY_UUID,
   TpfRetrySftpResponse.JSON_PROPERTY_RETRIED_AT,
   TpfRetrySftpResponse.JSON_PROPERTY_ORIGINAL_FILE,
   TpfRetrySftpResponse.JSON_PROPERTY_DUPLICATE_FILE
@@ -55,10 +56,10 @@ public class TpfRetrySftpResponse {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String message;
 
-  public static final String JSON_PROPERTY_NEW_FILE_DELIVERY_ID = "newFileDeliveryId";
-  @JsonProperty(JSON_PROPERTY_NEW_FILE_DELIVERY_ID)
+  public static final String JSON_PROPERTY_NEW_FILE_DELIVERY_UUID = "newFileDeliveryUuid";
+  @JsonProperty(JSON_PROPERTY_NEW_FILE_DELIVERY_UUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private Long newFileDeliveryId;
+  private UUID newFileDeliveryUuid;
 
   public static final String JSON_PROPERTY_RETRIED_AT = "retriedAt";
   @JsonProperty(JSON_PROPERTY_RETRIED_AT)
@@ -116,22 +117,22 @@ public class TpfRetrySftpResponse {
   }
 
 
-  public TpfRetrySftpResponse newFileDeliveryId(Long newFileDeliveryId) {
-    this.newFileDeliveryId = newFileDeliveryId;
+  public TpfRetrySftpResponse newFileDeliveryUuid(UUID newFileDeliveryUuid) {
+    this.newFileDeliveryUuid = newFileDeliveryUuid;
     return this;
   }
 
   /**
-   * ID of the new file delivery record created for this retry (if successful)
-   * @return newFileDeliveryId
+   * UUID of the new file delivery record created for this retry (if successful)
+   * @return newFileDeliveryUuid
    */
   @javax.annotation.Nullable
-  public Long getNewFileDeliveryId() {
-    return newFileDeliveryId;
+  public UUID getNewFileDeliveryUuid() {
+    return newFileDeliveryUuid;
   }
 
-  public void setNewFileDeliveryId(Long newFileDeliveryId) {
-    this.newFileDeliveryId = newFileDeliveryId;
+  public void setNewFileDeliveryUuid(UUID newFileDeliveryUuid) {
+    this.newFileDeliveryUuid = newFileDeliveryUuid;
   }
 
 
@@ -203,7 +204,7 @@ public class TpfRetrySftpResponse {
     TpfRetrySftpResponse tpfRetrySftpResponse = (TpfRetrySftpResponse) o;
     return Objects.equals(this.success, tpfRetrySftpResponse.success) &&
         Objects.equals(this.message, tpfRetrySftpResponse.message) &&
-        Objects.equals(this.newFileDeliveryId, tpfRetrySftpResponse.newFileDeliveryId) &&
+        Objects.equals(this.newFileDeliveryUuid, tpfRetrySftpResponse.newFileDeliveryUuid) &&
         Objects.equals(this.retriedAt, tpfRetrySftpResponse.retriedAt) &&
         Objects.equals(this.originalFile, tpfRetrySftpResponse.originalFile) &&
         Objects.equals(this.duplicateFile, tpfRetrySftpResponse.duplicateFile);
@@ -215,7 +216,7 @@ public class TpfRetrySftpResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(success, message, newFileDeliveryId, retriedAt, originalFile, duplicateFile);
+    return Objects.hash(success, message, newFileDeliveryUuid, retriedAt, originalFile, duplicateFile);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -231,7 +232,7 @@ public class TpfRetrySftpResponse {
     sb.append("class TpfRetrySftpResponse {\n");
     sb.append("    success: ").append(toIndentedString(success)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
-    sb.append("    newFileDeliveryId: ").append(toIndentedString(newFileDeliveryId)).append("\n");
+    sb.append("    newFileDeliveryUuid: ").append(toIndentedString(newFileDeliveryUuid)).append("\n");
     sb.append("    retriedAt: ").append(toIndentedString(retriedAt)).append("\n");
     sb.append("    originalFile: ").append(toIndentedString(originalFile)).append("\n");
     sb.append("    duplicateFile: ").append(toIndentedString(duplicateFile)).append("\n");

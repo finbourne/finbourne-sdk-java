@@ -16,6 +16,7 @@ All URIs are relative to *http://localhost*
 | [**getIntegrationConfigurationFields**](IntegrationsApi.md#getIntegrationConfigurationFields) | **GET** /horizon/api/integrations/configuration/{integration}/fields | [EXPERIMENTAL] GetIntegrationConfigurationFields: Get the Field Mapping configuration for a given integration |
 | [**getIntegrationConfigurationProperties**](IntegrationsApi.md#getIntegrationConfigurationProperties) | **GET** /horizon/api/integrations/configuration/{integration}/properties | [EXPERIMENTAL] GetIntegrationConfigurationProperties: Get the Property Mapping configuration for a given integration |
 | [**getSchema**](IntegrationsApi.md#getSchema) | **GET** /horizon/api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance. |
+| [**getWorkflowResultFields**](IntegrationsApi.md#getWorkflowResultFields) | **GET** /horizon/api/integrations/instances/{instanceId}/workflow/resultfields | [EXPERIMENTAL] GetWorkflowResultFields: Get the Workflow result fields an integration instance returns |
 | [**listDataflowProcessors**](IntegrationsApi.md#listDataflowProcessors) | **GET** /horizon/api/integrations/dataflow/processors | [EXPERIMENTAL] ListDataflowProcessors: List processor types. |
 | [**listInstances**](IntegrationsApi.md#listInstances) | **GET** /horizon/api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations. |
 | [**listIntegrations**](IntegrationsApi.md#listIntegrations) | **GET** /horizon/api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations. |
@@ -974,6 +975,84 @@ public class IntegrationsApiExample {
 | **200** | The system defined JSON schema for the details of a specified integration. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **404** | The integration type does not exist or is not enabled. |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getWorkflowResultFields
+
+> WorkflowResultFieldsResponse getWorkflowResultFields(instanceId)
+
+[EXPERIMENTAL] GetWorkflowResultFields: Get the Workflow result fields an integration instance returns
+
+Returns the result fields this instance&#39;s &#x60;RunWorkflow&#x60; post-process tasks declare, so a caller can discover what a run will report back before starting one. An instance with no enabled &#x60;RunWorkflow&#x60; post-process task is not an error: the response has &#x60;reportsToWorkflow&#x60; false and no fields. Note that such an instance will not report back at all, even when a Workflow task starts the run — configuring a &#x60;RunWorkflow&#x60; post-process task is what closes that loop. The user must be authenticated, entitled to call this method, and the user&#39;s domain must be licensed for the integration.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.horizon.model.*;
+import com.finbourne.sdk.services.horizon.api.IntegrationsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class IntegrationsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        IntegrationsApi apiInstance = apiFactory.build(IntegrationsApi.class);
+        String instanceId = "instanceId_example"; // String | Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
+        try {
+            // uncomment the below to set overrides at the request level
+            // WorkflowResultFieldsResponse result = apiInstance.getWorkflowResultFields(instanceId).execute(opts);
+
+            WorkflowResultFieldsResponse result = apiInstance.getWorkflowResultFields(instanceId).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling IntegrationsApi#getWorkflowResultFields");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **instanceId** | **String**| Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | |
+
+### Return type
+
+[**WorkflowResultFieldsResponse**](../model/WorkflowResultFieldsResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The declared result fields |  -  |
+| **400** | The details of the input related failure |  -  |
+| **404** | The integration instance does not exist |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

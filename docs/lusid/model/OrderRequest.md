@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **_package** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **weight** | **java.math.BigDecimal** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] [default to java.math.BigDecimal]
 **amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
+**custodianAccountId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.OrderRequest;
@@ -49,6 +50,7 @@ ResourceId orderInstruction = new ResourceId();
 ResourceId package = new ResourceId();
 @javax.annotation.Nullable java.math.BigDecimal weight = new java.math.BigDecimal("100.00");
 CurrencyAndAmount amount = new CurrencyAndAmount();
+ResourceId custodianAccountId = new ResourceId();
 
 
 OrderRequest orderRequestInstance = new OrderRequest()
@@ -69,7 +71,8 @@ OrderRequest orderRequestInstance = new OrderRequest()
     .orderInstruction(orderInstruction)
     .package(package)
     .weight(weight)
-    .amount(amount);
+    .amount(amount)
+    .custodianAccountId(custodianAccountId);
 ```
 
 

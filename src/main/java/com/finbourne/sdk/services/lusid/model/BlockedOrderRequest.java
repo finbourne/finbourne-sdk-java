@@ -51,7 +51,8 @@ import com.finbourne.sdk.JSON;
   BlockedOrderRequest.JSON_PROPERTY_PRICE,
   BlockedOrderRequest.JSON_PROPERTY_ORDER_INSTRUCTION,
   BlockedOrderRequest.JSON_PROPERTY_PACKAGE,
-  BlockedOrderRequest.JSON_PROPERTY_SIDE
+  BlockedOrderRequest.JSON_PROPERTY_SIDE,
+  BlockedOrderRequest.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID
 })
 
 public class BlockedOrderRequest {
@@ -114,6 +115,11 @@ public class BlockedOrderRequest {
   @JsonProperty(JSON_PROPERTY_SIDE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String side;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID = "custodianAccountId";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId custodianAccountId;
 
   public BlockedOrderRequest() {
   }
@@ -354,6 +360,25 @@ public class BlockedOrderRequest {
   }
 
 
+  public BlockedOrderRequest custodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+    return this;
+  }
+
+  /**
+   * Get custodianAccountId
+   * @return custodianAccountId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getCustodianAccountId() {
+    return custodianAccountId;
+  }
+
+  public void setCustodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -374,7 +399,8 @@ public class BlockedOrderRequest {
         Objects.equals(this.price, blockedOrderRequest.price) &&
         Objects.equals(this.orderInstruction, blockedOrderRequest.orderInstruction) &&
         Objects.equals(this._package, blockedOrderRequest._package) &&
-        Objects.equals(this.side, blockedOrderRequest.side);
+        Objects.equals(this.side, blockedOrderRequest.side) &&
+        Objects.equals(this.custodianAccountId, blockedOrderRequest.custodianAccountId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -383,7 +409,7 @@ public class BlockedOrderRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(properties, quantity, amount, orderBookId, portfolioId, id, state, date, price, orderInstruction, _package, side);
+    return Objects.hash(properties, quantity, amount, orderBookId, portfolioId, id, state, date, price, orderInstruction, _package, side, custodianAccountId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -409,6 +435,7 @@ public class BlockedOrderRequest {
     sb.append("    orderInstruction: ").append(toIndentedString(orderInstruction)).append("\n");
     sb.append("    _package: ").append(toIndentedString(_package)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
+    sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

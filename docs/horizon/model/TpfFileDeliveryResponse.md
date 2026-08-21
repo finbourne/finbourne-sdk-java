@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **destinationStatus** | **String** |  | [default to String]
 **destinationError** | **String** |  | [optional] [default to String]
 **destinationName** | **String** |  | [optional] [default to String]
+**fileUuid** | [**UUID**](UUID.md) |  | [default to UUID]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.TpfFileDeliveryResponse;
@@ -35,6 +36,7 @@ String destinationType = "example destinationType";
 String destinationStatus = "example destinationStatus";
 @javax.annotation.Nullable String destinationError = "example destinationError";
 @javax.annotation.Nullable String destinationName = "example destinationName";
+UUID fileUuid = "example fileUuid";
 
 
 TpfFileDeliveryResponse tpfFileDeliveryResponseInstance = new TpfFileDeliveryResponse()
@@ -48,7 +50,8 @@ TpfFileDeliveryResponse tpfFileDeliveryResponseInstance = new TpfFileDeliveryRes
     .destinationPath(destinationPath)
     .destinationStatus(destinationStatus)
     .destinationError(destinationError)
-    .destinationName(destinationName);
+    .destinationName(destinationName)
+    .fileUuid(fileUuid);
 ```
 
 

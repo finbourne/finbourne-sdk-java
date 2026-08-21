@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **agentCode** | **String** | The code identifier of the agent currently being interacted with | [default to String]
 **agentVersion** | **Integer** | The version of the circuit in which the trace event occurred. | [default to Integer]
 **nodeId** | **String** | The ID of the circuit&#39;s node at which the trace event occured. | [default to String]
+**rowId** | **String** | An opaque identifier for comparing complete trace event rows. | [optional] [default to String]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -34,6 +35,7 @@ String agentScope = "example agentScope";
 String agentCode = "example agentCode";
 Integer agentVersion = new Integer("100.00");
 String nodeId = "example nodeId";
+@javax.annotation.Nullable String rowId = "example rowId";
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -48,6 +50,7 @@ TraceEventLog traceEventLogInstance = new TraceEventLog()
     .agentCode(agentCode)
     .agentVersion(agentVersion)
     .nodeId(nodeId)
+    .rowId(rowId)
     .links(links);
 ```
 

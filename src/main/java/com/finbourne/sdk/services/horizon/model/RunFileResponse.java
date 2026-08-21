@@ -44,7 +44,9 @@ import com.finbourne.sdk.JSON;
   RunFileResponse.JSON_PROPERTY_FILE_HASH,
   RunFileResponse.JSON_PROPERTY_ENCRYPTED,
   RunFileResponse.JSON_PROPERTY_DESTINATIONS,
-  RunFileResponse.JSON_PROPERTY_TRANSACTION_IDS
+  RunFileResponse.JSON_PROPERTY_TRANSACTION_IDS,
+  RunFileResponse.JSON_PROPERTY_FILE_UUID,
+  RunFileResponse.JSON_PROPERTY_FAILED_TRANSACTION_IDS
 })
 
 public class RunFileResponse {
@@ -82,6 +84,16 @@ public class RunFileResponse {
   @JsonProperty(JSON_PROPERTY_TRANSACTION_IDS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<UUID> transactionIds = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_FILE_UUID = "fileUuid";
+  @JsonProperty(JSON_PROPERTY_FILE_UUID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private UUID fileUuid;
+
+  public static final String JSON_PROPERTY_FAILED_TRANSACTION_IDS = "failedTransactionIds";
+  @JsonProperty(JSON_PROPERTY_FAILED_TRANSACTION_IDS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<UUID> failedTransactionIds = new ArrayList<>();
 
   public RunFileResponse() {
   }
@@ -235,6 +247,52 @@ public class RunFileResponse {
   }
 
 
+  public RunFileResponse fileUuid(UUID fileUuid) {
+    this.fileUuid = fileUuid;
+    return this;
+  }
+
+  /**
+   * Get fileUuid
+   * @return fileUuid
+   */
+  @javax.annotation.Nonnull
+  public UUID getFileUuid() {
+    return fileUuid;
+  }
+
+  public void setFileUuid(UUID fileUuid) {
+    this.fileUuid = fileUuid;
+  }
+
+
+  public RunFileResponse failedTransactionIds(List<UUID> failedTransactionIds) {
+    this.failedTransactionIds = failedTransactionIds;
+    return this;
+  }
+
+  public RunFileResponse addFailedTransactionIdsItem(UUID failedTransactionIdsItem) {
+    if (this.failedTransactionIds == null) {
+      this.failedTransactionIds = new ArrayList<>();
+    }
+    this.failedTransactionIds.add(failedTransactionIdsItem);
+    return this;
+  }
+
+  /**
+   * Get failedTransactionIds
+   * @return failedTransactionIds
+   */
+  @javax.annotation.Nonnull
+  public List<UUID> getFailedTransactionIds() {
+    return failedTransactionIds;
+  }
+
+  public void setFailedTransactionIds(List<UUID> failedTransactionIds) {
+    this.failedTransactionIds = failedTransactionIds;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -250,12 +308,14 @@ public class RunFileResponse {
         Objects.equals(this.fileHash, runFileResponse.fileHash) &&
         Objects.equals(this.encrypted, runFileResponse.encrypted) &&
         Objects.equals(this.destinations, runFileResponse.destinations) &&
-        Objects.equals(this.transactionIds, runFileResponse.transactionIds);
+        Objects.equals(this.transactionIds, runFileResponse.transactionIds) &&
+        Objects.equals(this.fileUuid, runFileResponse.fileUuid) &&
+        Objects.equals(this.failedTransactionIds, runFileResponse.failedTransactionIds);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(fileName, generatedAt, rowCount, fileHash, encrypted, destinations, transactionIds);
+    return Objects.hash(fileName, generatedAt, rowCount, fileHash, encrypted, destinations, transactionIds, fileUuid, failedTransactionIds);
   }
 
   @Override
@@ -269,6 +329,8 @@ public class RunFileResponse {
     sb.append("    encrypted: ").append(toIndentedString(encrypted)).append("\n");
     sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
     sb.append("    transactionIds: ").append(toIndentedString(transactionIds)).append("\n");
+    sb.append("    fileUuid: ").append(toIndentedString(fileUuid)).append("\n");
+    sb.append("    failedTransactionIds: ").append(toIndentedString(failedTransactionIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

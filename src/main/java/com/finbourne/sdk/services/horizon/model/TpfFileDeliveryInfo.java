@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.horizon.model;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.UUID;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -34,7 +35,7 @@ import com.finbourne.sdk.JSON;
  * Information about a file delivery
  */
 @JsonPropertyOrder({
-  TpfFileDeliveryInfo.JSON_PROPERTY_ID,
+  TpfFileDeliveryInfo.JSON_PROPERTY_FILE_UUID,
   TpfFileDeliveryInfo.JSON_PROPERTY_FILE_NAME,
   TpfFileDeliveryInfo.JSON_PROPERTY_FILE_HASH,
   TpfFileDeliveryInfo.JSON_PROPERTY_DESTINATION_PATH,
@@ -43,10 +44,10 @@ import com.finbourne.sdk.JSON;
 })
 
 public class TpfFileDeliveryInfo {
-  public static final String JSON_PROPERTY_ID = "id";
-  @JsonProperty(JSON_PROPERTY_ID)
+  public static final String JSON_PROPERTY_FILE_UUID = "fileUuid";
+  @JsonProperty(JSON_PROPERTY_FILE_UUID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Long id;
+  private UUID fileUuid;
 
   public static final String JSON_PROPERTY_FILE_NAME = "fileName";
   @JsonProperty(JSON_PROPERTY_FILE_NAME)
@@ -76,22 +77,22 @@ public class TpfFileDeliveryInfo {
   public TpfFileDeliveryInfo() {
   }
 
-  public TpfFileDeliveryInfo id(Long id) {
-    this.id = id;
+  public TpfFileDeliveryInfo fileUuid(UUID fileUuid) {
+    this.fileUuid = fileUuid;
     return this;
   }
 
   /**
-   * File delivery ID
-   * @return id
+   * File delivery UUID — the identifier the retry endpoint accepts
+   * @return fileUuid
    */
   @javax.annotation.Nonnull
-  public Long getId() {
-    return id;
+  public UUID getFileUuid() {
+    return fileUuid;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public void setFileUuid(UUID fileUuid) {
+    this.fileUuid = fileUuid;
   }
 
 
@@ -199,7 +200,7 @@ public class TpfFileDeliveryInfo {
       return false;
     }
     TpfFileDeliveryInfo tpfFileDeliveryInfo = (TpfFileDeliveryInfo) o;
-    return Objects.equals(this.id, tpfFileDeliveryInfo.id) &&
+    return Objects.equals(this.fileUuid, tpfFileDeliveryInfo.fileUuid) &&
         Objects.equals(this.fileName, tpfFileDeliveryInfo.fileName) &&
         Objects.equals(this.fileHash, tpfFileDeliveryInfo.fileHash) &&
         Objects.equals(this.destinationPath, tpfFileDeliveryInfo.destinationPath) &&
@@ -209,14 +210,14 @@ public class TpfFileDeliveryInfo {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, fileName, fileHash, destinationPath, status, generatedAt);
+    return Objects.hash(fileUuid, fileName, fileHash, destinationPath, status, generatedAt);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TpfFileDeliveryInfo {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    fileUuid: ").append(toIndentedString(fileUuid)).append("\n");
     sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
     sb.append("    fileHash: ").append(toIndentedString(fileHash)).append("\n");
     sb.append("    destinationPath: ").append(toIndentedString(destinationPath)).append("\n");

@@ -39,7 +39,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   TraceDiagramResponse.JSON_PROPERTY_NODES,
-  TraceDiagramResponse.JSON_PROPERTY_EDGES
+  TraceDiagramResponse.JSON_PROPERTY_EDGES,
+  TraceDiagramResponse.JSON_PROPERTY_IS_POSSIBLY_INCOMPLETE
 })
 
 public class TraceDiagramResponse {
@@ -52,6 +53,11 @@ public class TraceDiagramResponse {
   @JsonProperty(JSON_PROPERTY_EDGES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<TraceDiagramEdge> edges;
+
+  public static final String JSON_PROPERTY_IS_POSSIBLY_INCOMPLETE = "isPossiblyIncomplete";
+  @JsonProperty(JSON_PROPERTY_IS_POSSIBLY_INCOMPLETE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean isPossiblyIncomplete;
 
   public TraceDiagramResponse() {
   }
@@ -110,6 +116,25 @@ public class TraceDiagramResponse {
   }
 
 
+  public TraceDiagramResponse isPossiblyIncomplete(Boolean isPossiblyIncomplete) {
+    this.isPossiblyIncomplete = isPossiblyIncomplete;
+    return this;
+  }
+
+  /**
+   * Whether detected retrieval or diagram degradation means some events may not be shown.
+   * @return isPossiblyIncomplete
+   */
+  @javax.annotation.Nullable
+  public Boolean getIsPossiblyIncomplete() {
+    return isPossiblyIncomplete;
+  }
+
+  public void setIsPossiblyIncomplete(Boolean isPossiblyIncomplete) {
+    this.isPossiblyIncomplete = isPossiblyIncomplete;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -120,7 +145,8 @@ public class TraceDiagramResponse {
     }
     TraceDiagramResponse traceDiagramResponse = (TraceDiagramResponse) o;
     return Objects.equals(this.nodes, traceDiagramResponse.nodes) &&
-        Objects.equals(this.edges, traceDiagramResponse.edges);
+        Objects.equals(this.edges, traceDiagramResponse.edges) &&
+        Objects.equals(this.isPossiblyIncomplete, traceDiagramResponse.isPossiblyIncomplete);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -129,7 +155,7 @@ public class TraceDiagramResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(nodes, edges);
+    return Objects.hash(nodes, edges, isPossiblyIncomplete);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -145,6 +171,7 @@ public class TraceDiagramResponse {
     sb.append("class TraceDiagramResponse {\n");
     sb.append("    nodes: ").append(toIndentedString(nodes)).append("\n");
     sb.append("    edges: ").append(toIndentedString(edges)).append("\n");
+    sb.append("    isPossiblyIncomplete: ").append(toIndentedString(isPossiblyIncomplete)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **encrypted** | **Boolean** |  | [default to Boolean]
 **destinations** | [**List&lt;FileDestinationResponse&gt;**](FileDestinationResponse.md) |  | [default to List<FileDestinationResponse>]
 **transactionIds** | [**List&lt;UUID&gt;**](UUID.md) |  | [default to List<UUID>]
+**fileUuid** | [**UUID**](UUID.md) |  | [default to UUID]
+**failedTransactionIds** | [**List&lt;UUID&gt;**](UUID.md) |  | [default to List<UUID>]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.RunFileResponse;
@@ -27,6 +29,8 @@ String fileHash = "example fileHash";
 Boolean encrypted = true;
 List<FileDestinationResponse> destinations = new List<FileDestinationResponse>();
 List<UUID> transactionIds = new List<UUID>();
+UUID fileUuid = "example fileUuid";
+List<UUID> failedTransactionIds = new List<UUID>();
 
 
 RunFileResponse runFileResponseInstance = new RunFileResponse()
@@ -36,7 +40,9 @@ RunFileResponse runFileResponseInstance = new RunFileResponse()
     .fileHash(fileHash)
     .encrypted(encrypted)
     .destinations(destinations)
-    .transactionIds(transactionIds);
+    .transactionIds(transactionIds)
+    .fileUuid(fileUuid)
+    .failedTransactionIds(failedTransactionIds);
 ```
 
 

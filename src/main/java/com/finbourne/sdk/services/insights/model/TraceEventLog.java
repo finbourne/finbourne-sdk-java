@@ -48,6 +48,7 @@ import com.finbourne.sdk.JSON;
   TraceEventLog.JSON_PROPERTY_AGENT_CODE,
   TraceEventLog.JSON_PROPERTY_AGENT_VERSION,
   TraceEventLog.JSON_PROPERTY_NODE_ID,
+  TraceEventLog.JSON_PROPERTY_ROW_ID,
   TraceEventLog.JSON_PROPERTY_LINKS
 })
 
@@ -101,6 +102,11 @@ public class TraceEventLog {
   @JsonProperty(JSON_PROPERTY_NODE_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String nodeId;
+
+  public static final String JSON_PROPERTY_ROW_ID = "rowId";
+  @JsonProperty(JSON_PROPERTY_ROW_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String rowId;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -300,6 +306,25 @@ public class TraceEventLog {
   }
 
 
+  public TraceEventLog rowId(String rowId) {
+    this.rowId = rowId;
+    return this;
+  }
+
+  /**
+   * An opaque identifier for comparing complete trace event rows.
+   * @return rowId
+   */
+  @javax.annotation.Nullable
+  public String getRowId() {
+    return rowId;
+  }
+
+  public void setRowId(String rowId) {
+    this.rowId = rowId;
+  }
+
+
   public TraceEventLog links(List<Link> links) {
     this.links = links;
     return this;
@@ -346,6 +371,7 @@ public class TraceEventLog {
         Objects.equals(this.agentCode, traceEventLog.agentCode) &&
         Objects.equals(this.agentVersion, traceEventLog.agentVersion) &&
         Objects.equals(this.nodeId, traceEventLog.nodeId) &&
+        Objects.equals(this.rowId, traceEventLog.rowId) &&
         Objects.equals(this.links, traceEventLog.links);
   }
 
@@ -355,7 +381,7 @@ public class TraceEventLog {
 
   @Override
  public int hashCode() {
-    return Objects.hash(traceEventId, traceId, createdAt, eventType, origin, content, agentScope, agentCode, agentVersion, nodeId, links);
+    return Objects.hash(traceEventId, traceId, createdAt, eventType, origin, content, agentScope, agentCode, agentVersion, nodeId, rowId, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -379,6 +405,7 @@ public class TraceEventLog {
     sb.append("    agentCode: ").append(toIndentedString(agentCode)).append("\n");
     sb.append("    agentVersion: ").append(toIndentedString(agentVersion)).append("\n");
     sb.append("    nodeId: ").append(toIndentedString(nodeId)).append("\n");
+    sb.append("    rowId: ").append(toIndentedString(rowId)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **settlementCurrencyFxRate** | **java.math.BigDecimal** | The settlement currency to allocation currency FX rate. | [optional] [default to java.math.BigDecimal]
 **counterparty** | **String** | The counterparty for this allocation. | [optional] [default to String]
 **executionIds** | [**List&lt;ResourceId&gt;**](ResourceId.md) | The executions associated with this allocation | [optional] [default to List<ResourceId>]
+**custodianAccountId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.AllocationRequest;
@@ -47,6 +48,7 @@ CurrencyAndAmount price = new CurrencyAndAmount();
 @javax.annotation.Nullable java.math.BigDecimal settlementCurrencyFxRate = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable String counterparty = "example counterparty";
 @javax.annotation.Nullable List<ResourceId> executionIds = new List<ResourceId>();
+ResourceId custodianAccountId = new ResourceId();
 
 
 AllocationRequest allocationRequestInstance = new AllocationRequest()
@@ -66,7 +68,8 @@ AllocationRequest allocationRequestInstance = new AllocationRequest()
     .settlementCurrency(settlementCurrency)
     .settlementCurrencyFxRate(settlementCurrencyFxRate)
     .counterparty(counterparty)
-    .executionIds(executionIds);
+    .executionIds(executionIds)
+    .custodianAccountId(custodianAccountId);
 ```
 
 

@@ -4074,7 +4074,7 @@ public class TradePublicationFrameworkApi {
     /**
      * Build call for retryTpfSftpDelivery
      * @param instanceId Integration instance ID (required)
-     * @param fileId File delivery ID to retry (required)
+     * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -4088,14 +4088,14 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest retryTpfSftpDeliveryCall(String instanceId, Long fileId, final ApiCallback _callback) throws ApiException {
-        return retryTpfSftpDeliveryCall(instanceId, fileId,  _callback, new ConfigurationOptions());
+    private HttpRequest retryTpfSftpDeliveryCall(String instanceId, String fileUuid, final ApiCallback _callback) throws ApiException {
+        return retryTpfSftpDeliveryCall(instanceId, fileUuid,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for retryTpfSftpDelivery. Use any specified configuration options to override any other configuration for this request only.
      * @param instanceId Integration instance ID (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param fileId File delivery ID to retry (required)
+     * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -4109,7 +4109,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest retryTpfSftpDeliveryCall(String instanceId, Long fileId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest retryTpfSftpDeliveryCall(String instanceId, String fileUuid, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4126,9 +4126,9 @@ public class TradePublicationFrameworkApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/horizon/api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp"
+        String localVarPath = "/horizon/api/trade-publication-framework/instances/{instanceId}/files/{fileUuid}/retry-sftp"
             .replace("{" + "instanceId" + "}", localVarApiClient.escapeString(instanceId.toString()))
-            .replace("{" + "fileId" + "}", localVarApiClient.escapeString(fileId.toString()));
+            .replace("{" + "fileUuid" + "}", localVarApiClient.escapeString(fileUuid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -4156,18 +4156,18 @@ public class TradePublicationFrameworkApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest retryTpfSftpDeliveryValidateBeforeCall(String instanceId, Long fileId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest retryTpfSftpDeliveryValidateBeforeCall(String instanceId, String fileUuid, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'instanceId' is set
         if (instanceId == null) {
             throw new ApiException("Missing the required parameter 'instanceId' when calling retryTpfSftpDelivery(Async)");
         }
 
-        // verify the required parameter 'fileId' is set
-        if (fileId == null) {
-            throw new ApiException("Missing the required parameter 'fileId' when calling retryTpfSftpDelivery(Async)");
+        // verify the required parameter 'fileUuid' is set
+        if (fileUuid == null) {
+            throw new ApiException("Missing the required parameter 'fileUuid' when calling retryTpfSftpDelivery(Async)");
         }
 
-        return retryTpfSftpDeliveryCall(instanceId, fileId, _callback, opts);
+        return retryTpfSftpDeliveryCall(instanceId, fileUuid, _callback, opts);
 
     }
 
@@ -4175,7 +4175,7 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
      * 
      * @param instanceId Integration instance ID (required)
-     * @param fileId File delivery ID to retry (required)
+     * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
      * @return ApiResponse&lt;TpfRetrySftpResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -4188,8 +4188,8 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<TpfRetrySftpResponse> retryTpfSftpDeliveryWithHttpInfo(String instanceId, Long fileId) throws ApiException {
-        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileId, null, new ConfigurationOptions());
+    private ApiResponse<TpfRetrySftpResponse> retryTpfSftpDeliveryWithHttpInfo(String instanceId, String fileUuid) throws ApiException {
+        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<TpfRetrySftpResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4198,7 +4198,7 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID (required)
-     * @param fileId File delivery ID to retry (required)
+     * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
      * @return ApiResponse&lt;TpfRetrySftpResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -4211,8 +4211,8 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<TpfRetrySftpResponse> retryTpfSftpDeliveryWithHttpInfo(String instanceId, Long fileId, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileId, null, opts);
+    private ApiResponse<TpfRetrySftpResponse> retryTpfSftpDeliveryWithHttpInfo(String instanceId, String fileUuid, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, null, opts);
         Type localVarReturnType = new TypeReference<TpfRetrySftpResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4221,7 +4221,7 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file (asynchronously)
      * 
      * @param instanceId Integration instance ID (required)
-     * @param fileId File delivery ID to retry (required)
+     * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -4234,9 +4234,9 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void retryTpfSftpDeliveryAsync(String instanceId, Long fileId, final ApiCallback<TpfRetrySftpResponse> _callback) throws ApiException {
+    private void retryTpfSftpDeliveryAsync(String instanceId, String fileUuid, final ApiCallback<TpfRetrySftpResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileId, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<TpfRetrySftpResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -4245,7 +4245,7 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file (asynchronously)
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID (required)
-     * @param fileId File delivery ID to retry (required)
+     * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -4258,20 +4258,20 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void retryTpfSftpDeliveryAsync(String instanceId, Long fileId, final ApiCallback<TpfRetrySftpResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void retryTpfSftpDeliveryAsync(String instanceId, String fileUuid, final ApiCallback<TpfRetrySftpResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileId, _callback, opts);
+        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, _callback, opts);
         Type localVarReturnType = new TypeReference<TpfRetrySftpResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     public class APIretryTpfSftpDeliveryRequest {
         private final String instanceId;
-        private final Long fileId;
+        private final String fileUuid;
 
-        private APIretryTpfSftpDeliveryRequest(String instanceId, Long fileId) {
+        private APIretryTpfSftpDeliveryRequest(String instanceId, String fileUuid) {
             this.instanceId = instanceId;
-            this.fileId = fileId;
+            this.fileUuid = fileUuid;
         }
 
         /**
@@ -4290,7 +4290,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return retryTpfSftpDeliveryCall(instanceId, fileId, _callback);
+            return retryTpfSftpDeliveryCall(instanceId, fileUuid, _callback);
         }
 
         /**
@@ -4308,7 +4308,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public TpfRetrySftpResponse execute() throws ApiException {
-            ApiResponse<TpfRetrySftpResponse> localVarResp = retryTpfSftpDeliveryWithHttpInfo(instanceId, fileId);
+            ApiResponse<TpfRetrySftpResponse> localVarResp = retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid);
             return localVarResp.getData();
         }
 
@@ -4327,7 +4327,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public TpfRetrySftpResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<TpfRetrySftpResponse> localVarResp = retryTpfSftpDeliveryWithHttpInfo(instanceId, fileId, opts);
+            ApiResponse<TpfRetrySftpResponse> localVarResp = retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid, opts);
             return localVarResp.getData();
         }
 
@@ -4346,7 +4346,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<TpfRetrySftpResponse> executeWithHttpInfo() throws ApiException {
-            return retryTpfSftpDeliveryWithHttpInfo(instanceId, fileId);
+            return retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid);
         }
 
         /**
@@ -4364,7 +4364,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<TpfRetrySftpResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return retryTpfSftpDeliveryWithHttpInfo(instanceId, fileId, opts);
+            return retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid, opts);
         }
 
         /**
@@ -4382,7 +4382,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<TpfRetrySftpResponse> _callback) throws ApiException {
-            retryTpfSftpDeliveryAsync(instanceId, fileId, _callback);
+            retryTpfSftpDeliveryAsync(instanceId, fileUuid, _callback);
         }
 
         /**
@@ -4400,7 +4400,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<TpfRetrySftpResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            retryTpfSftpDeliveryAsync(instanceId, fileId, _callback, opts);
+            retryTpfSftpDeliveryAsync(instanceId, fileUuid, _callback, opts);
         }
     }
 
@@ -4408,7 +4408,7 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
      * 
      * @param instanceId Integration instance ID (required)
-     * @param fileId File delivery ID to retry (required)
+     * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
      * @return APIretryTpfSftpDeliveryRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -4420,7 +4420,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    public APIretryTpfSftpDeliveryRequest retryTpfSftpDelivery(String instanceId, Long fileId) {
-        return new APIretryTpfSftpDeliveryRequest(instanceId, fileId);
+    public APIretryTpfSftpDeliveryRequest retryTpfSftpDelivery(String instanceId, String fileUuid) {
+        return new APIretryTpfSftpDeliveryRequest(instanceId, fileUuid);
     }
 }
