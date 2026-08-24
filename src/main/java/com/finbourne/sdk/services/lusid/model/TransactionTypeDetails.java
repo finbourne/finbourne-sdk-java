@@ -12,8 +12,12 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.MovementConditionMatch;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -35,7 +39,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   TransactionTypeDetails.JSON_PROPERTY_SCOPE,
   TransactionTypeDetails.JSON_PROPERTY_SOURCE,
-  TransactionTypeDetails.JSON_PROPERTY_TYPE
+  TransactionTypeDetails.JSON_PROPERTY_TYPE,
+  TransactionTypeDetails.JSON_PROPERTY_MOVEMENT_CONDITION_MATCHES
 })
 
 public class TransactionTypeDetails {
@@ -53,6 +58,11 @@ public class TransactionTypeDetails {
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String type;
+
+  public static final String JSON_PROPERTY_MOVEMENT_CONDITION_MATCHES = "movementConditionMatches";
+  @JsonProperty(JSON_PROPERTY_MOVEMENT_CONDITION_MATCHES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<MovementConditionMatch> movementConditionMatches;
 
   public TransactionTypeDetails() {
   }
@@ -114,6 +124,33 @@ public class TransactionTypeDetails {
   }
 
 
+  public TransactionTypeDetails movementConditionMatches(List<MovementConditionMatch> movementConditionMatches) {
+    this.movementConditionMatches = movementConditionMatches;
+    return this;
+  }
+
+  public TransactionTypeDetails addMovementConditionMatchesItem(MovementConditionMatch movementConditionMatchesItem) {
+    if (this.movementConditionMatches == null) {
+      this.movementConditionMatches = new ArrayList<>();
+    }
+    this.movementConditionMatches.add(movementConditionMatchesItem);
+    return this;
+  }
+
+  /**
+   * One entry for each movement on the resolved TransactionType, in the order the movements are configured, recording whether that movement&#39;s condition was satisfied by this transaction. Empty for transaction versions that generate no movements, such as cancelled and amended versions.
+   * @return movementConditionMatches
+   */
+  @javax.annotation.Nullable
+  public List<MovementConditionMatch> getMovementConditionMatches() {
+    return movementConditionMatches;
+  }
+
+  public void setMovementConditionMatches(List<MovementConditionMatch> movementConditionMatches) {
+    this.movementConditionMatches = movementConditionMatches;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -125,12 +162,24 @@ public class TransactionTypeDetails {
     TransactionTypeDetails transactionTypeDetails = (TransactionTypeDetails) o;
     return Objects.equals(this.scope, transactionTypeDetails.scope) &&
         Objects.equals(this.source, transactionTypeDetails.source) &&
-        Objects.equals(this.type, transactionTypeDetails.type);
+        Objects.equals(this.type, transactionTypeDetails.type) &&
+        Objects.equals(this.movementConditionMatches, transactionTypeDetails.movementConditionMatches);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(scope, source, type);
+    return Objects.hash(scope, source, type, movementConditionMatches);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -140,6 +189,7 @@ public class TransactionTypeDetails {
     sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
     sb.append("    source: ").append(toIndentedString(source)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    movementConditionMatches: ").append(toIndentedString(movementConditionMatches)).append("\n");
     sb.append("}");
     return sb.toString();
   }

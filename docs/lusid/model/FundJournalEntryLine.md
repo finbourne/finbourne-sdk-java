@@ -36,6 +36,8 @@ Name | Type | Description | Notes
 **ledgerColumn** | **String** | Indicates if the Journal Entry Line is credit or debit. Available values: Debit, Credit. | [optional] [default to String]
 **journalEntryLineType** | **String** | Indicates the Journal Entry Line type. Available values: Default, Reversal, TrueUp. | [optional] [default to String]
 **shareClassBreakdowns** | [**List&lt;JournalEntryLineShareClassBreakdown&gt;**](JournalEntryLineShareClassBreakdown.md) | Share Class breakdown data for this Journal Entry Line. | [optional] [default to List<JournalEntryLineShareClassBreakdown>]
+**custodianAccountId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
+**custodianAccountType** | **String** | Indicates the Account Type of the resolved Custodian Account for this Journal Entry Line. | [optional] [default to String]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -74,6 +76,8 @@ String economicBucket = "example economicBucket";
 @javax.annotation.Nullable String ledgerColumn = "example ledgerColumn";
 @javax.annotation.Nullable String journalEntryLineType = "example journalEntryLineType";
 @javax.annotation.Nullable List<JournalEntryLineShareClassBreakdown> shareClassBreakdowns = new List<JournalEntryLineShareClassBreakdown>();
+ResourceId custodianAccountId = new ResourceId();
+@javax.annotation.Nullable String custodianAccountType = "example custodianAccountType";
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -108,6 +112,8 @@ FundJournalEntryLine fundJournalEntryLineInstance = new FundJournalEntryLine()
     .ledgerColumn(ledgerColumn)
     .journalEntryLineType(journalEntryLineType)
     .shareClassBreakdowns(shareClassBreakdowns)
+    .custodianAccountId(custodianAccountId)
+    .custodianAccountType(custodianAccountType)
     .links(links);
 ```
 

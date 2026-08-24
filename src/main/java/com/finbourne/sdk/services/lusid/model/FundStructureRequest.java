@@ -16,11 +16,14 @@ import com.finbourne.sdk.services.lusid.model.AllocationGroup;
 import com.finbourne.sdk.services.lusid.model.FundDefinitionRequest;
 import com.finbourne.sdk.services.lusid.model.FundStructureEdge;
 import com.finbourne.sdk.services.lusid.model.FundStructureNode;
+import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -48,7 +51,8 @@ import com.finbourne.sdk.JSON;
   FundStructureRequest.JSON_PROPERTY_NEW_FUNDS,
   FundStructureRequest.JSON_PROPERTY_ALLOCATION_GROUPS,
   FundStructureRequest.JSON_PROPERTY_NODES,
-  FundStructureRequest.JSON_PROPERTY_EDGES
+  FundStructureRequest.JSON_PROPERTY_EDGES,
+  FundStructureRequest.JSON_PROPERTY_PROPERTIES
 })
 
 public class FundStructureRequest {
@@ -91,6 +95,11 @@ public class FundStructureRequest {
   @JsonProperty(JSON_PROPERTY_EDGES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<FundStructureEdge> edges = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, Property> properties;
 
   public FundStructureRequest() {
   }
@@ -287,6 +296,33 @@ public class FundStructureRequest {
   }
 
 
+  public FundStructureRequest properties(Map<String, Property> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public FundStructureRequest putPropertiesItem(String key, Property propertiesItem) {
+    if (this.properties == null) {
+      this.properties = new HashMap<>();
+    }
+    this.properties.put(key, propertiesItem);
+    return this;
+  }
+
+  /**
+   * A set of properties to decorate onto the Fund Structure.
+   * @return properties
+   */
+  @javax.annotation.Nullable
+  public Map<String, Property> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(Map<String, Property> properties) {
+    this.properties = properties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -303,7 +339,8 @@ public class FundStructureRequest {
         Objects.equals(this.newFunds, fundStructureRequest.newFunds) &&
         Objects.equals(this.allocationGroups, fundStructureRequest.allocationGroups) &&
         Objects.equals(this.nodes, fundStructureRequest.nodes) &&
-        Objects.equals(this.edges, fundStructureRequest.edges);
+        Objects.equals(this.edges, fundStructureRequest.edges) &&
+        Objects.equals(this.properties, fundStructureRequest.properties);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -312,7 +349,7 @@ public class FundStructureRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, name, description, existingFunds, newFunds, allocationGroups, nodes, edges);
+    return Objects.hash(code, name, description, existingFunds, newFunds, allocationGroups, nodes, edges, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -334,6 +371,7 @@ public class FundStructureRequest {
     sb.append("    allocationGroups: ").append(toIndentedString(allocationGroups)).append("\n");
     sb.append("    nodes: ").append(toIndentedString(nodes)).append("\n");
     sb.append("    edges: ").append(toIndentedString(edges)).append("\n");
+    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();
   }

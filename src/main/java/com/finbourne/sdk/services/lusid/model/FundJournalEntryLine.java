@@ -75,6 +75,8 @@ import com.finbourne.sdk.JSON;
   FundJournalEntryLine.JSON_PROPERTY_LEDGER_COLUMN,
   FundJournalEntryLine.JSON_PROPERTY_JOURNAL_ENTRY_LINE_TYPE,
   FundJournalEntryLine.JSON_PROPERTY_SHARE_CLASS_BREAKDOWNS,
+  FundJournalEntryLine.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID,
+  FundJournalEntryLine.JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE,
   FundJournalEntryLine.JSON_PROPERTY_LINKS
 })
 
@@ -228,6 +230,16 @@ public class FundJournalEntryLine {
   @JsonProperty(JSON_PROPERTY_SHARE_CLASS_BREAKDOWNS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<JournalEntryLineShareClassBreakdown> shareClassBreakdowns;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID = "custodianAccountId";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId custodianAccountId;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE = "custodianAccountType";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String custodianAccountType;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -847,6 +859,44 @@ public class FundJournalEntryLine {
   }
 
 
+  public FundJournalEntryLine custodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+    return this;
+  }
+
+  /**
+   * Get custodianAccountId
+   * @return custodianAccountId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getCustodianAccountId() {
+    return custodianAccountId;
+  }
+
+  public void setCustodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+  }
+
+
+  public FundJournalEntryLine custodianAccountType(String custodianAccountType) {
+    this.custodianAccountType = custodianAccountType;
+    return this;
+  }
+
+  /**
+   * Indicates the Account Type of the resolved Custodian Account for this Journal Entry Line.
+   * @return custodianAccountType
+   */
+  @javax.annotation.Nullable
+  public String getCustodianAccountType() {
+    return custodianAccountType;
+  }
+
+  public void setCustodianAccountType(String custodianAccountType) {
+    this.custodianAccountType = custodianAccountType;
+  }
+
+
   public FundJournalEntryLine links(List<Link> links) {
     this.links = links;
     return this;
@@ -913,6 +963,8 @@ public class FundJournalEntryLine {
         Objects.equals(this.ledgerColumn, fundJournalEntryLine.ledgerColumn) &&
         Objects.equals(this.journalEntryLineType, fundJournalEntryLine.journalEntryLineType) &&
         Objects.equals(this.shareClassBreakdowns, fundJournalEntryLine.shareClassBreakdowns) &&
+        Objects.equals(this.custodianAccountId, fundJournalEntryLine.custodianAccountId) &&
+        Objects.equals(this.custodianAccountType, fundJournalEntryLine.custodianAccountType) &&
         Objects.equals(this.links, fundJournalEntryLine.links);
   }
 
@@ -922,7 +974,7 @@ public class FundJournalEntryLine {
 
   @Override
  public int hashCode() {
-    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, shareClassBreakdowns, links);
+    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, shareClassBreakdowns, custodianAccountId, custodianAccountType, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -966,6 +1018,8 @@ public class FundJournalEntryLine {
     sb.append("    ledgerColumn: ").append(toIndentedString(ledgerColumn)).append("\n");
     sb.append("    journalEntryLineType: ").append(toIndentedString(journalEntryLineType)).append("\n");
     sb.append("    shareClassBreakdowns: ").append(toIndentedString(shareClassBreakdowns)).append("\n");
+    sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
+    sb.append("    custodianAccountType: ").append(toIndentedString(custodianAccountType)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

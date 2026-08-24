@@ -53,6 +53,7 @@ PropertyDomain method = PropertyDomain.ABOR;
 PropertyDomain method = PropertyDomain.ABOR_CONFIGURATION;
 PropertyDomain method = PropertyDomain.FUND;
 PropertyDomain method = PropertyDomain.FUND_CONFIGURATION;
+PropertyDomain method = PropertyDomain.FUND_STRUCTURE;
 PropertyDomain method = PropertyDomain.FEE;
 PropertyDomain method = PropertyDomain.RECONCILIATION;
 PropertyDomain method = PropertyDomain.PROPERTY_DEFINITION;

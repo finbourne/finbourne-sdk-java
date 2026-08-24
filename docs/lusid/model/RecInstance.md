@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**RecInstanceId**](RecInstanceId.md) |  | [default to RecInstanceId]
 **recDefinitionId** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
+**recDefinitionDisplayName** | **String** | The display name of the rec definition the rec was instantiated for, as it stood as-at instantiation. Not re-synchronised if the definition is later renamed. | [default to String]
 **asAtInstantiated** | [**OffsetDateTime**](OffsetDateTime.md) | The asAt datetime at which the instance was first created. | [default to OffsetDateTime]
 **status** | **String** | The instance-level lifecycle rollup. Available values: Running, Failures, ReviewAndApproval, AllApproved, Locked. | [default to String]
 **asAtLocked** | [**OffsetDateTime**](OffsetDateTime.md) | The wall-clock time the lock action was performed. Null when the instance has not been locked. | [optional] [default to OffsetDateTime]
@@ -26,6 +27,7 @@ import java.net.URI;
 
 RecInstanceId id = new RecInstanceId();
 ResourceId recDefinitionId = new ResourceId();
+String recDefinitionDisplayName = "example recDefinitionDisplayName";
 OffsetDateTime asAtInstantiated = OffsetDateTime.now();
 String status = "example status";
 @javax.annotation.Nullable OffsetDateTime asAtLocked = OffsetDateTime.now();
@@ -40,6 +42,7 @@ Version version = new Version();
 RecInstance recInstanceInstance = new RecInstance()
     .id(id)
     .recDefinitionId(recDefinitionId)
+    .recDefinitionDisplayName(recDefinitionDisplayName)
     .asAtInstantiated(asAtInstantiated)
     .status(status)
     .asAtLocked(asAtLocked)

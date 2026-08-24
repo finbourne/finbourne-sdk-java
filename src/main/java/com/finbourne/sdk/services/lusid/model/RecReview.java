@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -57,7 +58,7 @@ public class RecReview {
 
   public static final String JSON_PROPERTY_COMPLETION_RATIO = "completionRatio";
   @JsonProperty(JSON_PROPERTY_COMPLETION_RATIO)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal completionRatio;
 
   public RecReview() {
@@ -129,7 +130,7 @@ public class RecReview {
    * Reviewed / (Reviewed + Required). Is 1.0 when the denominator is zero, and null when execution failed.
    * @return completionRatio
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getCompletionRatio() {
     return completionRatio;
   }
@@ -154,9 +155,20 @@ public class RecReview {
         (this.completionRatio == null ? recReview.completionRatio == null : (recReview.completionRatio != null && this.completionRatio.compareTo(recReview.getCompletionRatio()) == 0));
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
  public int hashCode() {
     return Objects.hash(countReviewed, countRequired, countNotRequired, completionRatio);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

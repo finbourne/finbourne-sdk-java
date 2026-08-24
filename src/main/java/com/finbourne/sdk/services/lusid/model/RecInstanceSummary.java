@@ -13,7 +13,6 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.RecInstanceId;
-import com.finbourne.sdk.services.lusid.model.RecWorkflowTask;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -41,7 +40,6 @@ import com.finbourne.sdk.JSON;
   RecInstanceSummary.JSON_PROPERTY_ID,
   RecInstanceSummary.JSON_PROPERTY_REC_DEFINITION_ID,
   RecInstanceSummary.JSON_PROPERTY_AS_AT_INSTANTIATED,
-  RecInstanceSummary.JSON_PROPERTY_WORKFLOW_TASK_INSTANTIATED,
   RecInstanceSummary.JSON_PROPERTY_STATUS,
   RecInstanceSummary.JSON_PROPERTY_AS_AT_LOCKED
 })
@@ -61,11 +59,6 @@ public class RecInstanceSummary {
   @JsonProperty(JSON_PROPERTY_AS_AT_INSTANTIATED)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private OffsetDateTime asAtInstantiated;
-
-  public static final String JSON_PROPERTY_WORKFLOW_TASK_INSTANTIATED = "workflowTaskInstantiated";
-  @JsonProperty(JSON_PROPERTY_WORKFLOW_TASK_INSTANTIATED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private RecWorkflowTask workflowTaskInstantiated;
 
   public static final String JSON_PROPERTY_STATUS = "status";
   @JsonProperty(JSON_PROPERTY_STATUS)
@@ -137,25 +130,6 @@ public class RecInstanceSummary {
   }
 
 
-  public RecInstanceSummary workflowTaskInstantiated(RecWorkflowTask workflowTaskInstantiated) {
-    this.workflowTaskInstantiated = workflowTaskInstantiated;
-    return this;
-  }
-
-  /**
-   * Get workflowTaskInstantiated
-   * @return workflowTaskInstantiated
-   */
-  @javax.annotation.Nullable
-  public RecWorkflowTask getWorkflowTaskInstantiated() {
-    return workflowTaskInstantiated;
-  }
-
-  public void setWorkflowTaskInstantiated(RecWorkflowTask workflowTaskInstantiated) {
-    this.workflowTaskInstantiated = workflowTaskInstantiated;
-  }
-
-
   public RecInstanceSummary status(String status) {
     this.status = status;
     return this;
@@ -206,7 +180,6 @@ public class RecInstanceSummary {
     return Objects.equals(this.id, recInstanceSummary.id) &&
         Objects.equals(this.recDefinitionId, recInstanceSummary.recDefinitionId) &&
         Objects.equals(this.asAtInstantiated, recInstanceSummary.asAtInstantiated) &&
-        Objects.equals(this.workflowTaskInstantiated, recInstanceSummary.workflowTaskInstantiated) &&
         Objects.equals(this.status, recInstanceSummary.status) &&
         Objects.equals(this.asAtLocked, recInstanceSummary.asAtLocked);
   }
@@ -217,7 +190,7 @@ public class RecInstanceSummary {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, recDefinitionId, asAtInstantiated, workflowTaskInstantiated, status, asAtLocked);
+    return Objects.hash(id, recDefinitionId, asAtInstantiated, status, asAtLocked);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -234,7 +207,6 @@ public class RecInstanceSummary {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    recDefinitionId: ").append(toIndentedString(recDefinitionId)).append("\n");
     sb.append("    asAtInstantiated: ").append(toIndentedString(asAtInstantiated)).append("\n");
-    sb.append("    workflowTaskInstantiated: ").append(toIndentedString(workflowTaskInstantiated)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    asAtLocked: ").append(toIndentedString(asAtLocked)).append("\n");
     sb.append("}");
