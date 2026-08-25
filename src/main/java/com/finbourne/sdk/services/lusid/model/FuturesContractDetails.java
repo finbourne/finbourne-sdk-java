@@ -50,7 +50,11 @@ import com.finbourne.sdk.JSON;
   FuturesContractDetails.JSON_PROPERTY_TICKER_STEP,
   FuturesContractDetails.JSON_PROPERTY_UNIT_VALUE,
   FuturesContractDetails.JSON_PROPERTY_CALENDARS,
-  FuturesContractDetails.JSON_PROPERTY_DELIVERY_TYPE
+  FuturesContractDetails.JSON_PROPERTY_DELIVERY_TYPE,
+  FuturesContractDetails.JSON_PROPERTY_DELIVERABLE_MIN_MATURITY_YEARS,
+  FuturesContractDetails.JSON_PROPERTY_DELIVERABLE_MAX_MATURITY_YEARS,
+  FuturesContractDetails.JSON_PROPERTY_EXCLUDE_CALLABLE_BONDS,
+  FuturesContractDetails.JSON_PROPERTY_DELIVERABLE_MIN_AMOUNT_OUTSTANDING
 })
 
 public class FuturesContractDetails {
@@ -128,6 +132,26 @@ public class FuturesContractDetails {
   @JsonProperty(JSON_PROPERTY_DELIVERY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String deliveryType;
+
+  public static final String JSON_PROPERTY_DELIVERABLE_MIN_MATURITY_YEARS = "deliverableMinMaturityYears";
+  @JsonProperty(JSON_PROPERTY_DELIVERABLE_MIN_MATURITY_YEARS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal deliverableMinMaturityYears;
+
+  public static final String JSON_PROPERTY_DELIVERABLE_MAX_MATURITY_YEARS = "deliverableMaxMaturityYears";
+  @JsonProperty(JSON_PROPERTY_DELIVERABLE_MAX_MATURITY_YEARS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal deliverableMaxMaturityYears;
+
+  public static final String JSON_PROPERTY_EXCLUDE_CALLABLE_BONDS = "excludeCallableBonds";
+  @JsonProperty(JSON_PROPERTY_EXCLUDE_CALLABLE_BONDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean excludeCallableBonds;
+
+  public static final String JSON_PROPERTY_DELIVERABLE_MIN_AMOUNT_OUTSTANDING = "deliverableMinAmountOutstanding";
+  @JsonProperty(JSON_PROPERTY_DELIVERABLE_MIN_AMOUNT_OUTSTANDING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal deliverableMinAmountOutstanding;
 
   public FuturesContractDetails() {
   }
@@ -425,6 +449,82 @@ public class FuturesContractDetails {
   }
 
 
+  public FuturesContractDetails deliverableMinMaturityYears(java.math.BigDecimal deliverableMinMaturityYears) {
+    this.deliverableMinMaturityYears = deliverableMinMaturityYears;
+    return this;
+  }
+
+  /**
+   * For physically-delivered bond futures: the minimum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no lower bound is applied when matching eligible bonds.
+   * @return deliverableMinMaturityYears
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getDeliverableMinMaturityYears() {
+    return deliverableMinMaturityYears;
+  }
+
+  public void setDeliverableMinMaturityYears(java.math.BigDecimal deliverableMinMaturityYears) {
+    this.deliverableMinMaturityYears = deliverableMinMaturityYears;
+  }
+
+
+  public FuturesContractDetails deliverableMaxMaturityYears(java.math.BigDecimal deliverableMaxMaturityYears) {
+    this.deliverableMaxMaturityYears = deliverableMaxMaturityYears;
+    return this;
+  }
+
+  /**
+   * For physically-delivered bond futures: the maximum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no upper bound is applied when matching eligible bonds.
+   * @return deliverableMaxMaturityYears
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getDeliverableMaxMaturityYears() {
+    return deliverableMaxMaturityYears;
+  }
+
+  public void setDeliverableMaxMaturityYears(java.math.BigDecimal deliverableMaxMaturityYears) {
+    this.deliverableMaxMaturityYears = deliverableMaxMaturityYears;
+  }
+
+
+  public FuturesContractDetails excludeCallableBonds(Boolean excludeCallableBonds) {
+    this.excludeCallableBonds = excludeCallableBonds;
+    return this;
+  }
+
+  /**
+   * For physically-delivered bond futures: whether callable bonds are excluded from delivery against this  contract. Optional: defaults to false (callable bonds are not excluded).
+   * @return excludeCallableBonds
+   */
+  @javax.annotation.Nullable
+  public Boolean getExcludeCallableBonds() {
+    return excludeCallableBonds;
+  }
+
+  public void setExcludeCallableBonds(Boolean excludeCallableBonds) {
+    this.excludeCallableBonds = excludeCallableBonds;
+  }
+
+
+  public FuturesContractDetails deliverableMinAmountOutstanding(java.math.BigDecimal deliverableMinAmountOutstanding) {
+    this.deliverableMinAmountOutstanding = deliverableMinAmountOutstanding;
+    return this;
+  }
+
+  /**
+   * For physically-delivered bond futures: the minimum amount outstanding, in the domestic currency of the  contract, for a bond issue to be eligible for delivery against this contract.  Optional: if not set, no minimum is applied when matching eligible bonds.
+   * @return deliverableMinAmountOutstanding
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getDeliverableMinAmountOutstanding() {
+    return deliverableMinAmountOutstanding;
+  }
+
+  public void setDeliverableMinAmountOutstanding(java.math.BigDecimal deliverableMinAmountOutstanding) {
+    this.deliverableMinAmountOutstanding = deliverableMinAmountOutstanding;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -448,7 +548,11 @@ public class FuturesContractDetails {
         (this.tickerStep == null ? futuresContractDetails.tickerStep == null : (futuresContractDetails.tickerStep != null && this.tickerStep.compareTo(futuresContractDetails.getTickerStep()) == 0)) &&
         (this.unitValue == null ? futuresContractDetails.unitValue == null : (futuresContractDetails.unitValue != null && this.unitValue.compareTo(futuresContractDetails.getUnitValue()) == 0)) &&
         Objects.equals(this.calendars, futuresContractDetails.calendars) &&
-        Objects.equals(this.deliveryType, futuresContractDetails.deliveryType);
+        Objects.equals(this.deliveryType, futuresContractDetails.deliveryType) &&
+        (this.deliverableMinMaturityYears == null ? futuresContractDetails.deliverableMinMaturityYears == null : (futuresContractDetails.deliverableMinMaturityYears != null && this.deliverableMinMaturityYears.compareTo(futuresContractDetails.getDeliverableMinMaturityYears()) == 0)) &&
+        (this.deliverableMaxMaturityYears == null ? futuresContractDetails.deliverableMaxMaturityYears == null : (futuresContractDetails.deliverableMaxMaturityYears != null && this.deliverableMaxMaturityYears.compareTo(futuresContractDetails.getDeliverableMaxMaturityYears()) == 0)) &&
+        Objects.equals(this.excludeCallableBonds, futuresContractDetails.excludeCallableBonds) &&
+        (this.deliverableMinAmountOutstanding == null ? futuresContractDetails.deliverableMinAmountOutstanding == null : (futuresContractDetails.deliverableMinAmountOutstanding != null && this.deliverableMinAmountOutstanding.compareTo(futuresContractDetails.getDeliverableMinAmountOutstanding()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -457,7 +561,7 @@ public class FuturesContractDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(domCcy, fgnCcy, assetClass, contractCode, contractMonth, contractSize, convention, country, description, exchangeCode, exchangeName, tickerStep, unitValue, calendars, deliveryType);
+    return Objects.hash(domCcy, fgnCcy, assetClass, contractCode, contractMonth, contractSize, convention, country, description, exchangeCode, exchangeName, tickerStep, unitValue, calendars, deliveryType, deliverableMinMaturityYears, deliverableMaxMaturityYears, excludeCallableBonds, deliverableMinAmountOutstanding);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -486,6 +590,10 @@ public class FuturesContractDetails {
     sb.append("    unitValue: ").append(toIndentedString(unitValue)).append("\n");
     sb.append("    calendars: ").append(toIndentedString(calendars)).append("\n");
     sb.append("    deliveryType: ").append(toIndentedString(deliveryType)).append("\n");
+    sb.append("    deliverableMinMaturityYears: ").append(toIndentedString(deliverableMinMaturityYears)).append("\n");
+    sb.append("    deliverableMaxMaturityYears: ").append(toIndentedString(deliverableMaxMaturityYears)).append("\n");
+    sb.append("    excludeCallableBonds: ").append(toIndentedString(excludeCallableBonds)).append("\n");
+    sb.append("    deliverableMinAmountOutstanding: ").append(toIndentedString(deliverableMinAmountOutstanding)).append("\n");
     sb.append("}");
     return sb.toString();
   }

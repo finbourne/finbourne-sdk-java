@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.LusidEntityResult;
+import com.finbourne.sdk.services.lusid.model.PortfolioHoldingResult;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -51,7 +52,8 @@ import com.finbourne.sdk.JSON;
   DataQualityCheckResult.JSON_PROPERTY_LUSID_ENTITY,
   DataQualityCheckResult.JSON_PROPERTY_COUNT_RULE_BREACHES,
   DataQualityCheckResult.JSON_PROPERTY_ERROR_DETAIL,
-  DataQualityCheckResult.JSON_PROPERTY_RESULT_ID
+  DataQualityCheckResult.JSON_PROPERTY_RESULT_ID,
+  DataQualityCheckResult.JSON_PROPERTY_PORTFOLIO_HOLDING
 })
 
 public class DataQualityCheckResult {
@@ -134,6 +136,11 @@ public class DataQualityCheckResult {
   @JsonProperty(JSON_PROPERTY_RESULT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String resultId;
+
+  public static final String JSON_PROPERTY_PORTFOLIO_HOLDING = "portfolioHolding";
+  @JsonProperty(JSON_PROPERTY_PORTFOLIO_HOLDING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PortfolioHoldingResult portfolioHolding;
 
   public DataQualityCheckResult() {
   }
@@ -429,7 +436,7 @@ public class DataQualityCheckResult {
   }
 
   /**
-   * Unique identifier for the result in format: {{GUID of Check Definition}}-{{resultType}}-{{rulesetKey}}-{{ruleKey}}-{{entity GUID}}
+   * Unique identifier for the result in format: {{GUID of Check Definition}}-{{resultType}}-{{rulesetKey}}-{{ruleKey}}-{{entity GUID}}.  For holdings the trailing segment is {{source portfolio GUID}}-{{subEntityId}}, since a holding id only  identifies a holding within its own portfolio.
    * @return resultId
    */
   @javax.annotation.Nullable
@@ -439,6 +446,25 @@ public class DataQualityCheckResult {
 
   public void setResultId(String resultId) {
     this.resultId = resultId;
+  }
+
+
+  public DataQualityCheckResult portfolioHolding(PortfolioHoldingResult portfolioHolding) {
+    this.portfolioHolding = portfolioHolding;
+    return this;
+  }
+
+  /**
+   * Get portfolioHolding
+   * @return portfolioHolding
+   */
+  @javax.annotation.Nullable
+  public PortfolioHoldingResult getPortfolioHolding() {
+    return portfolioHolding;
+  }
+
+  public void setPortfolioHolding(PortfolioHoldingResult portfolioHolding) {
+    this.portfolioHolding = portfolioHolding;
   }
 
 
@@ -466,7 +492,8 @@ public class DataQualityCheckResult {
         Objects.equals(this.lusidEntity, dataQualityCheckResult.lusidEntity) &&
         Objects.equals(this.countRuleBreaches, dataQualityCheckResult.countRuleBreaches) &&
         Objects.equals(this.errorDetail, dataQualityCheckResult.errorDetail) &&
-        Objects.equals(this.resultId, dataQualityCheckResult.resultId);
+        Objects.equals(this.resultId, dataQualityCheckResult.resultId) &&
+        Objects.equals(this.portfolioHolding, dataQualityCheckResult.portfolioHolding);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -475,7 +502,7 @@ public class DataQualityCheckResult {
 
   @Override
  public int hashCode() {
-    return Objects.hash(checkDefinitionScope, checkDefinitionCode, checkDefinitionDisplayName, checkRunAsAt, resultType, ruleSetKey, ruleSetDisplayName, ruleKey, ruleDisplayName, ruleDescription, ruleFormula, severity, lusidEntity, countRuleBreaches, errorDetail, resultId);
+    return Objects.hash(checkDefinitionScope, checkDefinitionCode, checkDefinitionDisplayName, checkRunAsAt, resultType, ruleSetKey, ruleSetDisplayName, ruleKey, ruleDisplayName, ruleDescription, ruleFormula, severity, lusidEntity, countRuleBreaches, errorDetail, resultId, portfolioHolding);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -505,6 +532,7 @@ public class DataQualityCheckResult {
     sb.append("    countRuleBreaches: ").append(toIndentedString(countRuleBreaches)).append("\n");
     sb.append("    errorDetail: ").append(toIndentedString(errorDetail)).append("\n");
     sb.append("    resultId: ").append(toIndentedString(resultId)).append("\n");
+    sb.append("    portfolioHolding: ").append(toIndentedString(portfolioHolding)).append("\n");
     sb.append("}");
     return sb.toString();
   }

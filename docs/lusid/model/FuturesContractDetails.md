@@ -21,6 +21,10 @@ Name | Type | Description | Notes
 **unitValue** | **java.math.BigDecimal** | The value in the currency of a 1 unit change in the contract price. | [optional] [default to java.math.BigDecimal]
 **calendars** | **List&lt;String&gt;** | Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures). | [optional] [default to List<String>]
 **deliveryType** | **String** | Delivery type to be used on settling the contract.  Default value: Physical. Available values: Cash, Physical. | [optional] [default to String]
+**deliverableMinMaturityYears** | **java.math.BigDecimal** | For physically-delivered bond futures: the minimum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no lower bound is applied when matching eligible bonds. | [optional] [default to java.math.BigDecimal]
+**deliverableMaxMaturityYears** | **java.math.BigDecimal** | For physically-delivered bond futures: the maximum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no upper bound is applied when matching eligible bonds. | [optional] [default to java.math.BigDecimal]
+**excludeCallableBonds** | **Boolean** | For physically-delivered bond futures: whether callable bonds are excluded from delivery against this  contract. Optional: defaults to false (callable bonds are not excluded). | [optional] [default to Boolean]
+**deliverableMinAmountOutstanding** | **java.math.BigDecimal** | For physically-delivered bond futures: the minimum amount outstanding, in the domestic currency of the  contract, for a bond issue to be eligible for delivery against this contract.  Optional: if not set, no minimum is applied when matching eligible bonds. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FuturesContractDetails;
@@ -43,6 +47,10 @@ java.math.BigDecimal tickerStep = new java.math.BigDecimal("100.00");
 java.math.BigDecimal unitValue = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable List<String> calendars = new List<String>();
 @javax.annotation.Nullable String deliveryType = "example deliveryType";
+@javax.annotation.Nullable java.math.BigDecimal deliverableMinMaturityYears = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal deliverableMaxMaturityYears = new java.math.BigDecimal("100.00");
+Boolean excludeCallableBonds = true;
+@javax.annotation.Nullable java.math.BigDecimal deliverableMinAmountOutstanding = new java.math.BigDecimal("100.00");
 
 
 FuturesContractDetails futuresContractDetailsInstance = new FuturesContractDetails()
@@ -60,7 +68,11 @@ FuturesContractDetails futuresContractDetailsInstance = new FuturesContractDetai
     .tickerStep(tickerStep)
     .unitValue(unitValue)
     .calendars(calendars)
-    .deliveryType(deliveryType);
+    .deliveryType(deliveryType)
+    .deliverableMinMaturityYears(deliverableMinMaturityYears)
+    .deliverableMaxMaturityYears(deliverableMaxMaturityYears)
+    .excludeCallableBonds(excludeCallableBonds)
+    .deliverableMinAmountOutstanding(deliverableMinAmountOutstanding);
 ```
 
 

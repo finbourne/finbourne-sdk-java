@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **custodianAccountId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **unsettledUnits** | **java.math.BigDecimal** | The number of unsettled units for the holding. | [optional] [default to java.math.BigDecimal]
 **overdueUnits** | **java.math.BigDecimal** | The number of unsettled units for the holding that are beyond their contractual settlement date. | [optional] [default to java.math.BigDecimal]
+**custodianAccount** | [**CustodianAccount**](CustodianAccount.md) |  | [optional] [default to CustodianAccount]
 **resolvedCustodianAccount** | [**ResolvedCustodianAccount**](ResolvedCustodianAccount.md) |  | [optional] [default to ResolvedCustodianAccount]
 
 ```java
@@ -60,6 +61,7 @@ CurrencyAndAmount variationMarginPortfolioCcy = new CurrencyAndAmount();
 ResourceId custodianAccountId = new ResourceId();
 java.math.BigDecimal unsettledUnits = new java.math.BigDecimal("100.00");
 java.math.BigDecimal overdueUnits = new java.math.BigDecimal("100.00");
+CustodianAccount custodianAccount = new CustodianAccount();
 ResolvedCustodianAccount resolvedCustodianAccount = new ResolvedCustodianAccount();
 
 
@@ -87,6 +89,7 @@ PortfolioHolding portfolioHoldingInstance = new PortfolioHolding()
     .custodianAccountId(custodianAccountId)
     .unsettledUnits(unsettledUnits)
     .overdueUnits(overdueUnits)
+    .custodianAccount(custodianAccount)
     .resolvedCustodianAccount(resolvedCustodianAccount);
 ```
 

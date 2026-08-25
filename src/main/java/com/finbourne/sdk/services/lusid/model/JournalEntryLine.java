@@ -73,6 +73,8 @@ import com.finbourne.sdk.JSON;
   JournalEntryLine.JSON_PROPERTY_HOLDING_SIGN,
   JournalEntryLine.JSON_PROPERTY_LEDGER_COLUMN,
   JournalEntryLine.JSON_PROPERTY_JOURNAL_ENTRY_LINE_TYPE,
+  JournalEntryLine.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID,
+  JournalEntryLine.JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE,
   JournalEntryLine.JSON_PROPERTY_LINKS
 })
 
@@ -221,6 +223,16 @@ public class JournalEntryLine {
   @JsonProperty(JSON_PROPERTY_JOURNAL_ENTRY_LINE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String journalEntryLineType;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID = "custodianAccountId";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId custodianAccountId;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE = "custodianAccountType";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String custodianAccountType;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -813,6 +825,44 @@ public class JournalEntryLine {
   }
 
 
+  public JournalEntryLine custodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+    return this;
+  }
+
+  /**
+   * Get custodianAccountId
+   * @return custodianAccountId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getCustodianAccountId() {
+    return custodianAccountId;
+  }
+
+  public void setCustodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+  }
+
+
+  public JournalEntryLine custodianAccountType(String custodianAccountType) {
+    this.custodianAccountType = custodianAccountType;
+    return this;
+  }
+
+  /**
+   * Indicates the Account Type of the resolved Custodian Account for this Journal Entry Line.
+   * @return custodianAccountType
+   */
+  @javax.annotation.Nullable
+  public String getCustodianAccountType() {
+    return custodianAccountType;
+  }
+
+  public void setCustodianAccountType(String custodianAccountType) {
+    this.custodianAccountType = custodianAccountType;
+  }
+
+
   public JournalEntryLine links(List<Link> links) {
     this.links = links;
     return this;
@@ -878,6 +928,8 @@ public class JournalEntryLine {
         Objects.equals(this.holdingSign, journalEntryLine.holdingSign) &&
         Objects.equals(this.ledgerColumn, journalEntryLine.ledgerColumn) &&
         Objects.equals(this.journalEntryLineType, journalEntryLine.journalEntryLineType) &&
+        Objects.equals(this.custodianAccountId, journalEntryLine.custodianAccountId) &&
+        Objects.equals(this.custodianAccountType, journalEntryLine.custodianAccountType) &&
         Objects.equals(this.links, journalEntryLine.links);
   }
 
@@ -887,7 +939,7 @@ public class JournalEntryLine {
 
   @Override
  public int hashCode() {
-    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, links);
+    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, custodianAccountId, custodianAccountType, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -930,6 +982,8 @@ public class JournalEntryLine {
     sb.append("    holdingSign: ").append(toIndentedString(holdingSign)).append("\n");
     sb.append("    ledgerColumn: ").append(toIndentedString(ledgerColumn)).append("\n");
     sb.append("    journalEntryLineType: ").append(toIndentedString(journalEntryLineType)).append("\n");
+    sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
+    sb.append("    custodianAccountType: ").append(toIndentedString(custodianAccountType)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

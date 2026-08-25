@@ -21,7 +21,8 @@ Name | Type | Description | Notes
 **lusidEntity** | [**LusidEntityResult**](LusidEntityResult.md) |  | [optional] [default to LusidEntityResult]
 **countRuleBreaches** | **Integer** | The count of rule breaches (1 for RuleBreached, multiple for RuleBreachesOverLimit) | [optional] [default to Integer]
 **errorDetail** | **String** | Error details (for RulesetInvalid, RuleInvalid) | [optional] [default to String]
-**resultId** | **String** | Unique identifier for the result in format: {{GUID of Check Definition}}-{{resultType}}-{{rulesetKey}}-{{ruleKey}}-{{entity GUID}} | [optional] [default to String]
+**resultId** | **String** | Unique identifier for the result in format: {{GUID of Check Definition}}-{{resultType}}-{{rulesetKey}}-{{ruleKey}}-{{entity GUID}}.  For holdings the trailing segment is {{source portfolio GUID}}-{{subEntityId}}, since a holding id only  identifies a holding within its own portfolio. | [optional] [default to String]
+**portfolioHolding** | [**PortfolioHoldingResult**](PortfolioHoldingResult.md) |  | [optional] [default to PortfolioHoldingResult]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.DataQualityCheckResult;
@@ -45,6 +46,7 @@ LusidEntityResult lusidEntity = new LusidEntityResult();
 @javax.annotation.Nullable Integer countRuleBreaches = new Integer("100.00");
 @javax.annotation.Nullable String errorDetail = "example errorDetail";
 @javax.annotation.Nullable String resultId = "example resultId";
+PortfolioHoldingResult portfolioHolding = new PortfolioHoldingResult();
 
 
 DataQualityCheckResult dataQualityCheckResultInstance = new DataQualityCheckResult()
@@ -63,7 +65,8 @@ DataQualityCheckResult dataQualityCheckResultInstance = new DataQualityCheckResu
     .lusidEntity(lusidEntity)
     .countRuleBreaches(countRuleBreaches)
     .errorDetail(errorDetail)
-    .resultId(resultId);
+    .resultId(resultId)
+    .portfolioHolding(portfolioHolding);
 ```
 
 

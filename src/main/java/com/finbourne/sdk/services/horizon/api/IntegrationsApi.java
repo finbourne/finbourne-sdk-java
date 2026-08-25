@@ -1479,7 +1479,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
-     * 
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.
      * @param processorType  (required)
      * @return ApiResponse&lt;ProcessorSchemaResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1500,7 +1500,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
-     * Use any specified configuration options to override any other configuration for this request only
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.Use any specified configuration options to override any other configuration for this request only
      * @param processorType  (required)
      * @return ApiResponse&lt;ProcessorSchemaResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1521,7 +1521,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype. (asynchronously)
-     * 
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.
      * @param processorType  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1543,7 +1543,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype. (asynchronously)
-     * Use any specified configuration options to override any other configuration for this request only
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.Use any specified configuration options to override any other configuration for this request only
      * @param processorType  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1695,7 +1695,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
-     * 
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.
      * @param processorType  (required)
      * @return APIgetDataflowProcessorSchemaRequest
      * @http.response.details
@@ -4580,7 +4580,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types.
-     * The user must be authenticated to call this method.
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.
      * @return ApiResponse&lt;List&lt;ProcessorDescription&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -4599,7 +4599,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types.
-     * The user must be authenticated to call this method.Use any specified configuration options to override any other configuration for this request only
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.Use any specified configuration options to override any other configuration for this request only
      * @return ApiResponse&lt;List&lt;ProcessorDescription&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -4618,7 +4618,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types. (asynchronously)
-     * The user must be authenticated to call this method.
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -4638,7 +4638,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types. (asynchronously)
-     * The user must be authenticated to call this method.Use any specified configuration options to override any other configuration for this request only
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.Use any specified configuration options to override any other configuration for this request only
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -4779,7 +4779,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types.
-     * The user must be authenticated to call this method.
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method.
      * @return APIlistDataflowProcessorsRequest
      * @http.response.details
      <table summary="Response Details" border="1">
