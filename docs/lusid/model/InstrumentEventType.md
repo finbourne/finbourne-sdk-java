@@ -116,6 +116,7 @@ InstrumentEventType method = InstrumentEventType.COMMODITY_FORWARD_PHYSICAL_SETT
 InstrumentEventType method = InstrumentEventType.CANCEL_SWAP_EVENT;
 InstrumentEventType method = InstrumentEventType.BOND_OPTION_TERMINATION_EVENT;
 InstrumentEventType method = InstrumentEventType.TERMINATION_EVENT;
+InstrumentEventType method = InstrumentEventType.COMMODITY_CALENDAR_SWAP_CASH_FLOW_EVENT;
 ```
 
 

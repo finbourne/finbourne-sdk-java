@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **previousEntryTime** | [**OffsetDateTime**](OffsetDateTime.md) | The entry time of the previous diary entry. | [optional] [default to OffsetDateTime]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | A set of properties for the diary entry. | [optional] [default to Map<String, Property>]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
+**stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -37,6 +38,7 @@ OffsetDateTime queryAsAt = OffsetDateTime.now();
 OffsetDateTime previousEntryTime = OffsetDateTime.now();
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
 Version version = new Version();
+StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -53,6 +55,7 @@ DiaryEntry diaryEntryInstance = new DiaryEntry()
     .previousEntryTime(previousEntryTime)
     .properties(properties)
     .version(version)
+    .stagedModifications(stagedModifications)
     .links(links);
 ```
 

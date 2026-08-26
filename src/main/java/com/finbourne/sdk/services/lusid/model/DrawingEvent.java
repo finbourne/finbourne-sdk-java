@@ -33,7 +33,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Mandatory partial bond redemption (DRAW) where the issuer lottery-selects specific bonds for early redemption.  The affected face amount (AFFB) is pre-determined externally from the vendor notification and supplied on the event.
+ * Mandatory partial bond redemption (DRAW) where the issuer lottery-selects specific bonds for early redemption.  The affected face amount (AFFB) is the lottery-selected portion of a holding that is redeemed. Because the  lottery selects per holder, AFFB genuinely differs between portfolios holding the same instrument, so it is  supplied per portfolio via an instrument event instruction rather than on the event itself. The event-level  AffectedAmount remains available as an optional fallback applied uniformly to every holding.
  */
 @JsonPropertyOrder({
   DrawingEvent.JSON_PROPERTY_PAYMENT_DATE,
@@ -62,7 +62,7 @@ public class DrawingEvent extends InstrumentEvent {
 
   public static final String JSON_PROPERTY_AFFECTED_AMOUNT = "affectedAmount";
   @JsonProperty(JSON_PROPERTY_AFFECTED_AMOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal affectedAmount;
 
   public static final String JSON_PROPERTY_PRICE_PER_UNIT = "pricePerUnit";
@@ -122,10 +122,10 @@ public class DrawingEvent extends InstrumentEvent {
   }
 
   /**
-   * Affected face amount (AFFB) — the lottery-selected portion of the holding that is redeemed. Must be strictly positive.
+   * Affected face amount (AFFB) — the lottery-selected portion of the holding that is redeemed, applied uniformly  to every portfolio holding the instrument. Optional: because the lottery selects per holder, AFFB is normally  supplied per portfolio via an instrument event instruction instead. When supplied it must be strictly positive.  A portfolio with neither an instruction nor an event-level value is treated as unaffected (UNAF).
    * @return affectedAmount
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getAffectedAmount() {
     return affectedAmount;
   }

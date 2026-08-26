@@ -96,6 +96,7 @@ import com.finbourne.sdk.JSON;
   OutputTransaction.JSON_PROPERTY_STAGED_MODIFICATIONS,
   OutputTransaction.JSON_PROPERTY_CUSTODIAN_ENTRIES,
   OutputTransaction.JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNTS,
+  OutputTransaction.JSON_PROPERTY_UNRESOLVED_CUSTODIAN_ACCOUNTS,
   OutputTransaction.JSON_PROPERTY_IS_EXCLUDED
 })
 
@@ -351,6 +352,11 @@ public class OutputTransaction {
   @JsonProperty(JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ResolvedCustodianAccount> resolvedCustodianAccounts;
+
+  public static final String JSON_PROPERTY_UNRESOLVED_CUSTODIAN_ACCOUNTS = "unresolvedCustodianAccounts";
+  @JsonProperty(JSON_PROPERTY_UNRESOLVED_CUSTODIAN_ACCOUNTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<CustodianEntry> unresolvedCustodianAccounts;
 
   public static final String JSON_PROPERTY_IS_EXCLUDED = "isExcluded";
   @JsonProperty(JSON_PROPERTY_IS_EXCLUDED)
@@ -1214,6 +1220,33 @@ public class OutputTransaction {
   }
 
 
+  public OutputTransaction unresolvedCustodianAccounts(List<CustodianEntry> unresolvedCustodianAccounts) {
+    this.unresolvedCustodianAccounts = unresolvedCustodianAccounts;
+    return this;
+  }
+
+  public OutputTransaction addUnresolvedCustodianAccountsItem(CustodianEntry unresolvedCustodianAccountsItem) {
+    if (this.unresolvedCustodianAccounts == null) {
+      this.unresolvedCustodianAccounts = new ArrayList<>();
+    }
+    this.unresolvedCustodianAccounts.add(unresolvedCustodianAccountsItem);
+    return this;
+  }
+
+  /**
+   * Set of Custodian Entries on the Transaction that no movement was booked against, i.e. those which did not match a movement&#39;s account type and selector.
+   * @return unresolvedCustodianAccounts
+   */
+  @javax.annotation.Nullable
+  public List<CustodianEntry> getUnresolvedCustodianAccounts() {
+    return unresolvedCustodianAccounts;
+  }
+
+  public void setUnresolvedCustodianAccounts(List<CustodianEntry> unresolvedCustodianAccounts) {
+    this.unresolvedCustodianAccounts = unresolvedCustodianAccounts;
+  }
+
+
   public OutputTransaction isExcluded(Boolean isExcluded) {
     this.isExcluded = isExcluded;
     return this;
@@ -1284,6 +1317,7 @@ public class OutputTransaction {
         Objects.equals(this.stagedModifications, outputTransaction.stagedModifications) &&
         Objects.equals(this.custodianEntries, outputTransaction.custodianEntries) &&
         Objects.equals(this.resolvedCustodianAccounts, outputTransaction.resolvedCustodianAccounts) &&
+        Objects.equals(this.unresolvedCustodianAccounts, outputTransaction.unresolvedCustodianAccounts) &&
         Objects.equals(this.isExcluded, outputTransaction.isExcluded);
   }
 
@@ -1293,7 +1327,7 @@ public class OutputTransaction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, type, description, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionAmount, transactionPrice, totalConsideration, exchangeRate, transactionToPortfolioRate, transactionCurrency, properties, counterpartyId, source, transactionStatus, entryDateTime, cancelDateTime, realisedGainLoss, holdingIds, sourceType, sourceInstrumentEventId, custodianAccount, transactionGroupId, resolvedTransactionTypeDetails, grossTransactionAmount, otcConfirmation, orderId, allocationId, accountingDate, economics, dataModelMembership, sequence, sequencePriority, settlementSummary, version, stagedModifications, custodianEntries, resolvedCustodianAccounts, isExcluded);
+    return Objects.hash(transactionId, type, description, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionAmount, transactionPrice, totalConsideration, exchangeRate, transactionToPortfolioRate, transactionCurrency, properties, counterpartyId, source, transactionStatus, entryDateTime, cancelDateTime, realisedGainLoss, holdingIds, sourceType, sourceInstrumentEventId, custodianAccount, transactionGroupId, resolvedTransactionTypeDetails, grossTransactionAmount, otcConfirmation, orderId, allocationId, accountingDate, economics, dataModelMembership, sequence, sequencePriority, settlementSummary, version, stagedModifications, custodianEntries, resolvedCustodianAccounts, unresolvedCustodianAccounts, isExcluded);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1349,6 +1383,7 @@ public class OutputTransaction {
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("    custodianEntries: ").append(toIndentedString(custodianEntries)).append("\n");
     sb.append("    resolvedCustodianAccounts: ").append(toIndentedString(resolvedCustodianAccounts)).append("\n");
+    sb.append("    unresolvedCustodianAccounts: ").append(toIndentedString(unresolvedCustodianAccounts)).append("\n");
     sb.append("    isExcluded: ").append(toIndentedString(isExcluded)).append("\n");
     sb.append("}");
     return sb.toString();

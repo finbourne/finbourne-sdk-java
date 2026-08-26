@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **lusidInstrumentId** | **String** | The LUSID instrument id for the instrument placement. | [default to String]
 **quantity** | **java.math.BigDecimal** | The quantity of given instrument ordered. | [optional] [default to java.math.BigDecimal]
 **amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
+**basis** | **String** | The measure in which the placement was instructed. Expected values are &#39;Quantity&#39; or &#39;Amount&#39;; null when the placement carries no size measure. Read-only; derived from the populated size measures, taking quantity first, then amount. | [optional] [readonly] [default to String]
 **state** | **String** | The state of this placement (typically a FIX state; Open, Filled, etc). | [default to String]
 **side** | **String** | The side (Buy, Sell, ...) of this placement. | [default to String]
 **timeInForce** | **String** | The time in force applicable to this placement (GTC, FOK, Day, etc) | [default to String]
@@ -42,6 +43,7 @@ Map<String, String> instrumentIdentifiers = new Map<String, String>();
 String lusidInstrumentId = "example lusidInstrumentId";
 @javax.annotation.Nullable java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
 CurrencyAndAmount amount = new CurrencyAndAmount();
+@javax.annotation.Nullable String basis = "example basis";
 String state = "example state";
 String side = "example side";
 String timeInForce = "example timeInForce";
@@ -66,6 +68,7 @@ Placement placementInstance = new Placement()
     .lusidInstrumentId(lusidInstrumentId)
     .quantity(quantity)
     .amount(amount)
+    .basis(basis)
     .state(state)
     .side(side)
     .timeInForce(timeInForce)

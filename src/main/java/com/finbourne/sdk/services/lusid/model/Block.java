@@ -52,6 +52,7 @@ import com.finbourne.sdk.JSON;
   Block.JSON_PROPERTY_LUSID_INSTRUMENT_ID,
   Block.JSON_PROPERTY_QUANTITY,
   Block.JSON_PROPERTY_AMOUNT,
+  Block.JSON_PROPERTY_BASIS,
   Block.JSON_PROPERTY_SIDE,
   Block.JSON_PROPERTY_TYPE,
   Block.JSON_PROPERTY_TIME_IN_FORCE,
@@ -99,6 +100,11 @@ public class Block {
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private CurrencyAndAmount amount;
+
+  public static final String JSON_PROPERTY_BASIS = "basis";
+  @JsonProperty(JSON_PROPERTY_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String basis;
 
   public static final String JSON_PROPERTY_SIDE = "side";
   @JsonProperty(JSON_PROPERTY_SIDE)
@@ -151,6 +157,13 @@ public class Block {
   private List<Link> links;
 
   public Block() {
+  }
+
+  public Block(
+     String basis
+  ) {
+    this();
+    this.basis = basis;
   }
 
   public Block id(ResourceId id) {
@@ -308,6 +321,17 @@ public class Block {
   public void setAmount(CurrencyAndAmount amount) {
     this.amount = amount;
   }
+
+
+  /**
+   * The measure in which the block was instructed. Expected values are &#39;Quantity&#39; or &#39;Amount&#39;; null when the block carries no size measure. Read-only; derived from the populated size measures, taking quantity first, then amount.
+   * @return basis
+   */
+  @javax.annotation.Nullable
+  public String getBasis() {
+    return basis;
+  }
+
 
 
   public Block side(String side) {
@@ -524,6 +548,7 @@ public class Block {
         Objects.equals(this.lusidInstrumentId, block.lusidInstrumentId) &&
         (this.quantity == null ? block.quantity == null : (block.quantity != null && this.quantity.compareTo(block.getQuantity()) == 0)) &&
         Objects.equals(this.amount, block.amount) &&
+        Objects.equals(this.basis, block.basis) &&
         Objects.equals(this.side, block.side) &&
         Objects.equals(this.type, block.type) &&
         Objects.equals(this.timeInForce, block.timeInForce) &&
@@ -542,7 +567,7 @@ public class Block {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, orderIds, properties, instrumentIdentifiers, lusidInstrumentId, quantity, amount, side, type, timeInForce, createdDate, limitPrice, stopPrice, isSwept, version, dataModelMembership, links);
+    return Objects.hash(id, orderIds, properties, instrumentIdentifiers, lusidInstrumentId, quantity, amount, basis, side, type, timeInForce, createdDate, limitPrice, stopPrice, isSwept, version, dataModelMembership, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -563,6 +588,7 @@ public class Block {
     sb.append("    lusidInstrumentId: ").append(toIndentedString(lusidInstrumentId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    basis: ").append(toIndentedString(basis)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");

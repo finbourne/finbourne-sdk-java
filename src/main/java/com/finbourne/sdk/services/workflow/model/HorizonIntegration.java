@@ -33,7 +33,8 @@ import com.finbourne.sdk.JSON;
  * Configuration for a Worker that executes a Horizon integration instance
  */
 @JsonPropertyOrder({
-  HorizonIntegration.JSON_PROPERTY_TYPE
+  HorizonIntegration.JSON_PROPERTY_TYPE,
+  HorizonIntegration.JSON_PROPERTY_INTEGRATION_INSTANCE_ID
 })
 
 public class HorizonIntegration {
@@ -74,6 +75,11 @@ public class HorizonIntegration {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private TypeEnum type;
 
+  public static final String JSON_PROPERTY_INTEGRATION_INSTANCE_ID = "integrationInstanceId";
+  @JsonProperty(JSON_PROPERTY_INTEGRATION_INSTANCE_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String integrationInstanceId;
+
   public HorizonIntegration() {
   }
 
@@ -96,6 +102,25 @@ public class HorizonIntegration {
   }
 
 
+  public HorizonIntegration integrationInstanceId(String integrationInstanceId) {
+    this.integrationInstanceId = integrationInstanceId;
+    return this;
+  }
+
+  /**
+   * The id of the Horizon integration instance the worker executes.
+   * @return integrationInstanceId
+   */
+  @javax.annotation.Nonnull
+  public String getIntegrationInstanceId() {
+    return integrationInstanceId;
+  }
+
+  public void setIntegrationInstanceId(String integrationInstanceId) {
+    this.integrationInstanceId = integrationInstanceId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -105,12 +130,13 @@ public class HorizonIntegration {
       return false;
     }
     HorizonIntegration horizonIntegration = (HorizonIntegration) o;
-    return Objects.equals(this.type, horizonIntegration.type);
+    return Objects.equals(this.type, horizonIntegration.type) &&
+        Objects.equals(this.integrationInstanceId, horizonIntegration.integrationInstanceId);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(type);
+    return Objects.hash(type, integrationInstanceId);
   }
 
   @Override
@@ -118,6 +144,7 @@ public class HorizonIntegration {
     StringBuilder sb = new StringBuilder();
     sb.append("class HorizonIntegration {\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    integrationInstanceId: ").append(toIndentedString(integrationInstanceId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

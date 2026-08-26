@@ -66,6 +66,7 @@ import com.finbourne.sdk.JSON;
   Order.JSON_PROPERTY_PACKAGE_ID,
   Order.JSON_PROPERTY_WEIGHT,
   Order.JSON_PROPERTY_AMOUNT,
+  Order.JSON_PROPERTY_BASIS,
   Order.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID,
   Order.JSON_PROPERTY_DATA_MODEL_MEMBERSHIP,
   Order.JSON_PROPERTY_DERIVED_COMPLIANCE_STATE,
@@ -179,6 +180,11 @@ public class Order {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private CurrencyAndAmount amount;
 
+  public static final String JSON_PROPERTY_BASIS = "basis";
+  @JsonProperty(JSON_PROPERTY_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String basis;
+
   public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID = "custodianAccountId";
   @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -205,6 +211,13 @@ public class Order {
   private List<Link> links;
 
   public Order() {
+  }
+
+  public Order(
+     String basis
+  ) {
+    this();
+    this.basis = basis;
   }
 
   public Order properties(Map<String, PerpetualProperty> properties) {
@@ -622,6 +635,17 @@ public class Order {
   }
 
 
+  /**
+   * The measure in which the order was instructed. Expected values are &#39;Quantity&#39;, &#39;Amount&#39; or &#39;Weight&#39;; null when the order carries no size measure. Read-only; derived from the populated size measures, taking quantity first, then amount, then weight.
+   * @return basis
+   */
+  @javax.annotation.Nullable
+  public String getBasis() {
+    return basis;
+  }
+
+
+
   public Order custodianAccountId(ResourceId custodianAccountId) {
     this.custodianAccountId = custodianAccountId;
     return this;
@@ -755,6 +779,7 @@ public class Order {
         Objects.equals(this.packageId, order.packageId) &&
         (this.weight == null ? order.weight == null : (order.weight != null && this.weight.compareTo(order.getWeight()) == 0)) &&
         Objects.equals(this.amount, order.amount) &&
+        Objects.equals(this.basis, order.basis) &&
         Objects.equals(this.custodianAccountId, order.custodianAccountId) &&
         Objects.equals(this.dataModelMembership, order.dataModelMembership) &&
         Objects.equals(this.derivedComplianceState, order.derivedComplianceState) &&
@@ -768,7 +793,7 @@ public class Order {
 
   @Override
  public int hashCode() {
-    return Objects.hash(properties, version, instrumentIdentifiers, quantity, side, orderBookId, portfolioId, id, instrumentScope, lusidInstrumentId, state, type, timeInForce, date, price, limitPrice, stopPrice, orderInstructionId, packageId, weight, amount, custodianAccountId, dataModelMembership, derivedComplianceState, derivedApprovalState, links);
+    return Objects.hash(properties, version, instrumentIdentifiers, quantity, side, orderBookId, portfolioId, id, instrumentScope, lusidInstrumentId, state, type, timeInForce, date, price, limitPrice, stopPrice, orderInstructionId, packageId, weight, amount, basis, custodianAccountId, dataModelMembership, derivedComplianceState, derivedApprovalState, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -803,6 +828,7 @@ public class Order {
     sb.append("    packageId: ").append(toIndentedString(packageId)).append("\n");
     sb.append("    weight: ").append(toIndentedString(weight)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    basis: ").append(toIndentedString(basis)).append("\n");
     sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("    dataModelMembership: ").append(toIndentedString(dataModelMembership)).append("\n");
     sb.append("    derivedComplianceState: ").append(toIndentedString(derivedComplianceState)).append("\n");

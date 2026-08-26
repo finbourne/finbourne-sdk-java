@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **packageId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **weight** | **java.math.BigDecimal** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] [default to java.math.BigDecimal]
 **amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
+**basis** | **String** | The measure in which the order was instructed. Expected values are &#39;Quantity&#39;, &#39;Amount&#39; or &#39;Weight&#39;; null when the order carries no size measure. Read-only; derived from the populated size measures, taking quantity first, then amount, then weight. | [optional] [readonly] [default to String]
 **custodianAccountId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **dataModelMembership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] [default to DataModelMembership]
 **derivedComplianceState** | **String** | The compliance state of the order, derived from pre-trade compliance runs. | [optional] [default to String]
@@ -60,6 +61,7 @@ ResourceId orderInstructionId = new ResourceId();
 ResourceId packageId = new ResourceId();
 @javax.annotation.Nullable java.math.BigDecimal weight = new java.math.BigDecimal("100.00");
 CurrencyAndAmount amount = new CurrencyAndAmount();
+@javax.annotation.Nullable String basis = "example basis";
 ResourceId custodianAccountId = new ResourceId();
 DataModelMembership dataModelMembership = new DataModelMembership();
 @javax.annotation.Nullable String derivedComplianceState = "example derivedComplianceState";
@@ -89,6 +91,7 @@ Order orderInstance = new Order()
     .packageId(packageId)
     .weight(weight)
     .amount(amount)
+    .basis(basis)
     .custodianAccountId(custodianAccountId)
     .dataModelMembership(dataModelMembership)
     .derivedComplianceState(derivedComplianceState)

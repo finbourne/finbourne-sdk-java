@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.PreviousValuationPoint;
 import com.finbourne.sdk.services.lusid.model.Property;
+import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
 import java.net.URI;
@@ -57,6 +58,7 @@ import com.finbourne.sdk.JSON;
   ValuationPoint.JSON_PROPERTY_PREVIOUS,
   ValuationPoint.JSON_PROPERTY_PROPERTIES,
   ValuationPoint.JSON_PROPERTY_VERSION,
+  ValuationPoint.JSON_PROPERTY_STAGED_MODIFICATIONS,
   ValuationPoint.JSON_PROPERTY_LINKS
 })
 
@@ -125,6 +127,11 @@ public class ValuationPoint {
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Version version;
+
+  public static final String JSON_PROPERTY_STAGED_MODIFICATIONS = "stagedModifications";
+  @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StagedModificationsInfo stagedModifications;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -389,6 +396,25 @@ public class ValuationPoint {
   }
 
 
+  public ValuationPoint stagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+    return this;
+  }
+
+  /**
+   * Get stagedModifications
+   * @return stagedModifications
+   */
+  @javax.annotation.Nullable
+  public StagedModificationsInfo getStagedModifications() {
+    return stagedModifications;
+  }
+
+  public void setStagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+  }
+
+
   public ValuationPoint links(List<Link> links) {
     this.links = links;
     return this;
@@ -438,6 +464,7 @@ public class ValuationPoint {
         Objects.equals(this.previous, valuationPoint.previous) &&
         Objects.equals(this.properties, valuationPoint.properties) &&
         Objects.equals(this.version, valuationPoint.version) &&
+        Objects.equals(this.stagedModifications, valuationPoint.stagedModifications) &&
         Objects.equals(this.links, valuationPoint.links);
   }
 
@@ -447,7 +474,7 @@ public class ValuationPoint {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, valuationPointCode, variant, name, status, applyClearDown, effectiveAt, queryAsAt, holdingsAsAt, valuationAsAt, previous, properties, version, links);
+    return Objects.hash(href, valuationPointCode, variant, name, status, applyClearDown, effectiveAt, queryAsAt, holdingsAsAt, valuationAsAt, previous, properties, version, stagedModifications, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -474,6 +501,7 @@ public class ValuationPoint {
     sb.append("    previous: ").append(toIndentedString(previous)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

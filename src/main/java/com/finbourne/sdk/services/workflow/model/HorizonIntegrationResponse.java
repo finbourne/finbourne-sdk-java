@@ -34,7 +34,8 @@ import com.finbourne.sdk.JSON;
  * Readonly configuration for the Horizon Integration Worker
  */
 @JsonPropertyOrder({
-  HorizonIntegrationResponse.JSON_PROPERTY_TYPE
+  HorizonIntegrationResponse.JSON_PROPERTY_TYPE,
+  HorizonIntegrationResponse.JSON_PROPERTY_INTEGRATION_INSTANCE_ID
 })
 
 public class HorizonIntegrationResponse {
@@ -75,6 +76,11 @@ public class HorizonIntegrationResponse {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private TypeEnum type;
 
+  public static final String JSON_PROPERTY_INTEGRATION_INSTANCE_ID = "integrationInstanceId";
+  @JsonProperty(JSON_PROPERTY_INTEGRATION_INSTANCE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String integrationInstanceId;
+
   public HorizonIntegrationResponse() {
   }
 
@@ -97,6 +103,25 @@ public class HorizonIntegrationResponse {
   }
 
 
+  public HorizonIntegrationResponse integrationInstanceId(String integrationInstanceId) {
+    this.integrationInstanceId = integrationInstanceId;
+    return this;
+  }
+
+  /**
+   * The id of the Horizon integration instance the worker executes. Null on the library worker.
+   * @return integrationInstanceId
+   */
+  @javax.annotation.Nullable
+  public String getIntegrationInstanceId() {
+    return integrationInstanceId;
+  }
+
+  public void setIntegrationInstanceId(String integrationInstanceId) {
+    this.integrationInstanceId = integrationInstanceId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -106,7 +131,8 @@ public class HorizonIntegrationResponse {
       return false;
     }
     HorizonIntegrationResponse horizonIntegrationResponse = (HorizonIntegrationResponse) o;
-    return Objects.equals(this.type, horizonIntegrationResponse.type);
+    return Objects.equals(this.type, horizonIntegrationResponse.type) &&
+        Objects.equals(this.integrationInstanceId, horizonIntegrationResponse.integrationInstanceId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -115,7 +141,7 @@ public class HorizonIntegrationResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(type);
+    return Objects.hash(type, integrationInstanceId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -130,6 +156,7 @@ public class HorizonIntegrationResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class HorizonIntegrationResponse {\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    integrationInstanceId: ").append(toIndentedString(integrationInstanceId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

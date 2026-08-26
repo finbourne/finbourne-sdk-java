@@ -7,6 +7,7 @@ Readonly configuration for the Horizon Integration Worker
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **String** | The type of worker | [optional] [default to String]
+**integrationInstanceId** | **String** | The id of the Horizon integration instance the worker executes. Null on the library worker. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.workflow.model.HorizonIntegrationResponse;
@@ -15,10 +16,12 @@ import java.lang.System;
 import java.net.URI;
 
 @javax.annotation.Nullable String type = "example type";
+@javax.annotation.Nullable String integrationInstanceId = "example integrationInstanceId";
 
 
 HorizonIntegrationResponse horizonIntegrationResponseInstance = new HorizonIntegrationResponse()
-    .type(type);
+    .type(type)
+    .integrationInstanceId(integrationInstanceId);
 ```
 
 

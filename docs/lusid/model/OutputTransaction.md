@@ -48,6 +48,7 @@ Name | Type | Description | Notes
 **stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
 **custodianEntries** | [**List&lt;CustodianEntry&gt;**](CustodianEntry.md) | Set of of Custodian Entries associated with the transaction. | [optional] [default to List<CustodianEntry>]
 **resolvedCustodianAccounts** | [**List&lt;ResolvedCustodianAccount&gt;**](ResolvedCustodianAccount.md) | Set of Custodian Accounts resolved from each movement on the Transaction. | [optional] [default to List<ResolvedCustodianAccount>]
+**unresolvedCustodianAccounts** | [**List&lt;CustodianEntry&gt;**](CustodianEntry.md) | Set of Custodian Entries on the Transaction that no movement was booked against, i.e. those which did not match a movement&#39;s account type and selector. | [optional] [default to List<CustodianEntry>]
 **isExcluded** | **Boolean** | Whether the transaction was excluded from the portfolio&#39;s holdings by the portfolio&#39;s transaction exclusion filter. | [optional] [default to Boolean]
 
 ```java
@@ -98,6 +99,7 @@ Version version = new Version();
 StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 @javax.annotation.Nullable List<CustodianEntry> custodianEntries = new List<CustodianEntry>();
 @javax.annotation.Nullable List<ResolvedCustodianAccount> resolvedCustodianAccounts = new List<ResolvedCustodianAccount>();
+@javax.annotation.Nullable List<CustodianEntry> unresolvedCustodianAccounts = new List<CustodianEntry>();
 Boolean isExcluded = true;
 
 
@@ -144,6 +146,7 @@ OutputTransaction outputTransactionInstance = new OutputTransaction()
     .stagedModifications(stagedModifications)
     .custodianEntries(custodianEntries)
     .resolvedCustodianAccounts(resolvedCustodianAccounts)
+    .unresolvedCustodianAccounts(unresolvedCustodianAccounts)
     .isExcluded(isExcluded);
 ```
 

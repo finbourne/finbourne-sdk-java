@@ -53,6 +53,7 @@ import com.finbourne.sdk.JSON;
   Placement.JSON_PROPERTY_LUSID_INSTRUMENT_ID,
   Placement.JSON_PROPERTY_QUANTITY,
   Placement.JSON_PROPERTY_AMOUNT,
+  Placement.JSON_PROPERTY_BASIS,
   Placement.JSON_PROPERTY_STATE,
   Placement.JSON_PROPERTY_SIDE,
   Placement.JSON_PROPERTY_TIME_IN_FORCE,
@@ -108,6 +109,11 @@ public class Placement {
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private CurrencyAndAmount amount;
+
+  public static final String JSON_PROPERTY_BASIS = "basis";
+  @JsonProperty(JSON_PROPERTY_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String basis;
 
   public static final String JSON_PROPERTY_STATE = "state";
   @JsonProperty(JSON_PROPERTY_STATE)
@@ -175,6 +181,13 @@ public class Placement {
   private List<Link> links;
 
   public Placement() {
+  }
+
+  public Placement(
+     String basis
+  ) {
+    this();
+    this.basis = basis;
   }
 
   public Placement id(ResourceId id) {
@@ -351,6 +364,17 @@ public class Placement {
   public void setAmount(CurrencyAndAmount amount) {
     this.amount = amount;
   }
+
+
+  /**
+   * The measure in which the placement was instructed. Expected values are &#39;Quantity&#39; or &#39;Amount&#39;; null when the placement carries no size measure. Read-only; derived from the populated size measures, taking quantity first, then amount.
+   * @return basis
+   */
+  @javax.annotation.Nullable
+  public String getBasis() {
+    return basis;
+  }
+
 
 
   public Placement state(String state) {
@@ -625,6 +649,7 @@ public class Placement {
         Objects.equals(this.lusidInstrumentId, placement.lusidInstrumentId) &&
         (this.quantity == null ? placement.quantity == null : (placement.quantity != null && this.quantity.compareTo(placement.getQuantity()) == 0)) &&
         Objects.equals(this.amount, placement.amount) &&
+        Objects.equals(this.basis, placement.basis) &&
         Objects.equals(this.state, placement.state) &&
         Objects.equals(this.side, placement.side) &&
         Objects.equals(this.timeInForce, placement.timeInForce) &&
@@ -646,7 +671,7 @@ public class Placement {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, parentPlacementId, blockIds, properties, instrumentIdentifiers, lusidInstrumentId, quantity, amount, state, side, timeInForce, type, createdDate, limitPrice, stopPrice, counterparty, executionSystem, entryType, version, dataModelMembership, links);
+    return Objects.hash(id, parentPlacementId, blockIds, properties, instrumentIdentifiers, lusidInstrumentId, quantity, amount, basis, state, side, timeInForce, type, createdDate, limitPrice, stopPrice, counterparty, executionSystem, entryType, version, dataModelMembership, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -668,6 +693,7 @@ public class Placement {
     sb.append("    lusidInstrumentId: ").append(toIndentedString(lusidInstrumentId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    basis: ").append(toIndentedString(basis)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");

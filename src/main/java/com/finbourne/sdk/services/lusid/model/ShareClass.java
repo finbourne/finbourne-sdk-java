@@ -106,7 +106,7 @@ public class ShareClass {
 
   public static final String JSON_PROPERTY_DISTRIBUTION_TYPE = "distributionType";
   @JsonProperty(JSON_PROPERTY_DISTRIBUTION_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String distributionType;
 
   public static final String JSON_PROPERTY_DOM_CCY = "domCcy";
@@ -151,7 +151,7 @@ public class ShareClass {
 
   public static final String JSON_PROPERTY_HEDGING = "hedging";
   @JsonProperty(JSON_PROPERTY_HEDGING)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String hedging;
 
   public ShareClass() {
@@ -334,7 +334,7 @@ public class ShareClass {
    * The type of distribution the ShareClass will calculate. Available values: Income, Accumulation.
    * @return distributionType
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getDistributionType() {
     return distributionType;
   }
@@ -521,7 +521,7 @@ public class ShareClass {
    * Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging.
    * @return hedging
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getHedging() {
     return hedging;
   }
