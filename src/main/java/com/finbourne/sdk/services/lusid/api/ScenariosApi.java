@@ -749,7 +749,7 @@ public class ScenariosApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -769,7 +769,7 @@ public class ScenariosApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -853,7 +853,7 @@ public class ScenariosApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -875,7 +875,7 @@ public class ScenariosApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -897,7 +897,7 @@ public class ScenariosApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -920,7 +920,7 @@ public class ScenariosApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -960,7 +960,7 @@ public class ScenariosApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
@@ -976,7 +976,7 @@ public class ScenariosApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
@@ -993,7 +993,7 @@ public class ScenariosApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
@@ -1010,7 +1010,7 @@ public class ScenariosApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
@@ -1026,7 +1026,7 @@ public class ScenariosApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
@@ -1042,7 +1042,7 @@ public class ScenariosApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
@@ -1058,7 +1058,7 @@ public class ScenariosApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
@@ -1077,7 +1077,7 @@ public class ScenariosApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The successfully retrieved Scenario or any failure </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The successfully retrieved Scenario </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -1476,6 +1476,386 @@ public class ScenariosApi {
     }
     /**
      * Build call for listScenarios
+     * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
+     * @param filter Expression to filter the result set, e.g. \&quot;scope eq &#39;MyScope&#39;\&quot;. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listScenariosCall(OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback _callback) throws ApiException {
+        return listScenariosCall(asAt, filter, limit, page,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listScenarios. Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the result set, e.g. \&quot;scope eq &#39;MyScope&#39;\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit Maximum number of results to return. Defaults to 100. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listScenariosCall(OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/scenarios";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listScenariosValidateBeforeCall(OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listScenariosCall(asAt, filter, limit, page, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarios: List Scenarios
+     * List scenario definitions across all scopes at the specified date/time. Each item carries  its scope and code. Scenarios the caller is not entitled to read are omitted.
+     * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
+     * @param filter Expression to filter the result set, e.g. \&quot;scope eq &#39;MyScope&#39;\&quot;. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfGetScenarioResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfGetScenarioResponse> listScenariosWithHttpInfo(OffsetDateTime asAt, String filter, Integer limit, String page) throws ApiException {
+        HttpRequest localVarCall = listScenariosValidateBeforeCall(asAt, filter, limit, page, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfGetScenarioResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarios: List Scenarios
+     * List scenario definitions across all scopes at the specified date/time. Each item carries  its scope and code. Scenarios the caller is not entitled to read are omitted.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
+     * @param filter Expression to filter the result set, e.g. \&quot;scope eq &#39;MyScope&#39;\&quot;. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfGetScenarioResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfGetScenarioResponse> listScenariosWithHttpInfo(OffsetDateTime asAt, String filter, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listScenariosValidateBeforeCall(asAt, filter, limit, page, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfGetScenarioResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarios: List Scenarios (asynchronously)
+     * List scenario definitions across all scopes at the specified date/time. Each item carries  its scope and code. Scenarios the caller is not entitled to read are omitted.
+     * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
+     * @param filter Expression to filter the result set, e.g. \&quot;scope eq &#39;MyScope&#39;\&quot;. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listScenariosAsync(OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listScenariosValidateBeforeCall(asAt, filter, limit, page, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfGetScenarioResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarios: List Scenarios (asynchronously)
+     * List scenario definitions across all scopes at the specified date/time. Each item carries  its scope and code. Scenarios the caller is not entitled to read are omitted.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
+     * @param filter Expression to filter the result set, e.g. \&quot;scope eq &#39;MyScope&#39;\&quot;. (optional)
+     * @param limit Maximum number of results to return. Defaults to 100. (optional)
+     * @param page Pagination token from a previous result to fetch the next page. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listScenariosAsync(OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listScenariosValidateBeforeCall(asAt, filter, limit, page, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfGetScenarioResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistScenariosRequest {
+        private OffsetDateTime asAt;
+        private String filter;
+        private Integer limit;
+        private String page;
+
+        private APIlistScenariosRequest() {
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
+         * @return APIlistScenariosRequest
+         */
+        public APIlistScenariosRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Expression to filter the result set, e.g. \&quot;scope eq &#39;MyScope&#39;\&quot;. (optional)
+         * @return APIlistScenariosRequest
+         */
+        public APIlistScenariosRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit Maximum number of results to return. Defaults to 100. (optional)
+         * @return APIlistScenariosRequest
+         */
+        public APIlistScenariosRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page Pagination token from a previous result to fetch the next page. (optional)
+         * @return APIlistScenariosRequest
+         */
+        public APIlistScenariosRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Build call for listScenarios
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listScenariosCall(asAt, filter, limit, page, _callback);
+        }
+
+        /**
+         * Execute listScenarios request
+         * @return PagedResourceListOfGetScenarioResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfGetScenarioResponse execute() throws ApiException {
+            ApiResponse<PagedResourceListOfGetScenarioResponse> localVarResp = listScenariosWithHttpInfo(asAt, filter, limit, page);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listScenarios request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfGetScenarioResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfGetScenarioResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfGetScenarioResponse> localVarResp = listScenariosWithHttpInfo(asAt, filter, limit, page, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listScenarios request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfGetScenarioResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfGetScenarioResponse> executeWithHttpInfo() throws ApiException {
+            return listScenariosWithHttpInfo(asAt, filter, limit, page);
+        }
+
+        /**
+         * Execute listScenarios request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfGetScenarioResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfGetScenarioResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listScenariosWithHttpInfo(asAt, filter, limit, page, opts);
+        }
+
+        /**
+         * Execute listScenarios request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback) throws ApiException {
+            listScenariosAsync(asAt, filter, limit, page, _callback);
+        }
+
+        /**
+         * Execute listScenarios request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            listScenariosAsync(asAt, filter, limit, page, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarios: List Scenarios
+     * List scenario definitions across all scopes at the specified date/time. Each item carries  its scope and code. Scenarios the caller is not entitled to read are omitted.
+     * @return APIlistScenariosRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested scenarios </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistScenariosRequest listScenarios() {
+        return new APIlistScenariosRequest();
+    }
+    /**
+     * Build call for listScenariosForScope
      * @param scope The scope to list scenarios for. (required)
      * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
@@ -1492,12 +1872,12 @@ public class ScenariosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listScenariosCall(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback _callback) throws ApiException {
-        return listScenariosCall(scope, asAt, filter, limit, page,  _callback, new ConfigurationOptions());
+    private HttpRequest listScenariosForScopeCall(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback _callback) throws ApiException {
+        return listScenariosForScopeCall(scope, asAt, filter, limit, page,  _callback, new ConfigurationOptions());
     }
 
     /**
-     * Build call for listScenarios. Use any specified configuration options to override any other configuration for this request only.
+     * Build call for listScenariosForScope. Use any specified configuration options to override any other configuration for this request only.
      * @param scope The scope to list scenarios for. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param filter Expression to filter the result set. (optional). Use any specified configuration options to override any other configuration for this request only.
@@ -1514,7 +1894,7 @@ public class ScenariosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listScenariosCall(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listScenariosForScopeCall(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1578,19 +1958,19 @@ public class ScenariosApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listScenariosValidateBeforeCall(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listScenariosForScopeValidateBeforeCall(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
-            throw new ApiException("Missing the required parameter 'scope' when calling listScenarios(Async)");
+            throw new ApiException("Missing the required parameter 'scope' when calling listScenariosForScope(Async)");
         }
 
-        return listScenariosCall(scope, asAt, filter, limit, page, _callback, opts);
+        return listScenariosForScopeCall(scope, asAt, filter, limit, page, _callback, opts);
 
     }
 
     /**
-     * [EARLY ACCESS] ListScenarios: List the set of Scenario definitions
-     * List the set of scenario definitions at the specified date/time and scope.
+     * [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope
+     * List the set of scenario definitions in a single scope at the specified date/time.
      * @param scope The scope to list scenarios for. (required)
      * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
@@ -1606,15 +1986,15 @@ public class ScenariosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfGetScenarioResponse> listScenariosWithHttpInfo(String scope, OffsetDateTime asAt, String filter, Integer limit, String page) throws ApiException {
-        HttpRequest localVarCall = listScenariosValidateBeforeCall(scope, asAt, filter, limit, page, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfGetScenarioResponse> listScenariosForScopeWithHttpInfo(String scope, OffsetDateTime asAt, String filter, Integer limit, String page) throws ApiException {
+        HttpRequest localVarCall = listScenariosForScopeValidateBeforeCall(scope, asAt, filter, limit, page, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfGetScenarioResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EARLY ACCESS] ListScenarios: List the set of Scenario definitions
-     * List the set of scenario definitions at the specified date/time and scope.Use any specified configuration options to override any other configuration for this request only
+     * [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope
+     * List the set of scenario definitions in a single scope at the specified date/time.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope to list scenarios for. (required)
      * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
@@ -1630,15 +2010,15 @@ public class ScenariosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfGetScenarioResponse> listScenariosWithHttpInfo(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listScenariosValidateBeforeCall(scope, asAt, filter, limit, page, null, opts);
+    private ApiResponse<PagedResourceListOfGetScenarioResponse> listScenariosForScopeWithHttpInfo(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listScenariosForScopeValidateBeforeCall(scope, asAt, filter, limit, page, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfGetScenarioResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EARLY ACCESS] ListScenarios: List the set of Scenario definitions (asynchronously)
-     * List the set of scenario definitions at the specified date/time and scope.
+     * [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope (asynchronously)
+     * List the set of scenario definitions in a single scope at the specified date/time.
      * @param scope The scope to list scenarios for. (required)
      * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
@@ -1654,16 +2034,16 @@ public class ScenariosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listScenariosAsync(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback) throws ApiException {
+    private void listScenariosForScopeAsync(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listScenariosValidateBeforeCall(scope, asAt, filter, limit, page, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listScenariosForScopeValidateBeforeCall(scope, asAt, filter, limit, page, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfGetScenarioResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
-     * [EARLY ACCESS] ListScenarios: List the set of Scenario definitions (asynchronously)
-     * List the set of scenario definitions at the specified date/time and scope.Use any specified configuration options to override any other configuration for this request only
+     * [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope (asynchronously)
+     * List the set of scenario definitions in a single scope at the specified date/time.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope to list scenarios for. (required)
      * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
@@ -1679,30 +2059,30 @@ public class ScenariosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listScenariosAsync(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listScenariosForScopeAsync(String scope, OffsetDateTime asAt, String filter, Integer limit, String page, final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listScenariosValidateBeforeCall(scope, asAt, filter, limit, page, _callback, opts);
+        HttpRequest localVarCall = listScenariosForScopeValidateBeforeCall(scope, asAt, filter, limit, page, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfGetScenarioResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
-    public class APIlistScenariosRequest {
+    public class APIlistScenariosForScopeRequest {
         private final String scope;
         private OffsetDateTime asAt;
         private String filter;
         private Integer limit;
         private String page;
 
-        private APIlistScenariosRequest(String scope) {
+        private APIlistScenariosForScopeRequest(String scope) {
             this.scope = scope;
         }
 
         /**
          * Set asAt
          * @param asAt The asAt datetime at which to list the scenarios. Defaults to latest if not specified. (optional)
-         * @return APIlistScenariosRequest
+         * @return APIlistScenariosForScopeRequest
          */
-        public APIlistScenariosRequest asAt(OffsetDateTime asAt) {
+        public APIlistScenariosForScopeRequest asAt(OffsetDateTime asAt) {
             this.asAt = asAt;
             return this;
         }
@@ -1710,9 +2090,9 @@ public class ScenariosApi {
         /**
          * Set filter
          * @param filter Expression to filter the result set. (optional)
-         * @return APIlistScenariosRequest
+         * @return APIlistScenariosForScopeRequest
          */
-        public APIlistScenariosRequest filter(String filter) {
+        public APIlistScenariosForScopeRequest filter(String filter) {
             this.filter = filter;
             return this;
         }
@@ -1720,9 +2100,9 @@ public class ScenariosApi {
         /**
          * Set limit
          * @param limit Maximum number of results to return. Defaults to 100. (optional)
-         * @return APIlistScenariosRequest
+         * @return APIlistScenariosForScopeRequest
          */
-        public APIlistScenariosRequest limit(Integer limit) {
+        public APIlistScenariosForScopeRequest limit(Integer limit) {
             this.limit = limit;
             return this;
         }
@@ -1730,15 +2110,15 @@ public class ScenariosApi {
         /**
          * Set page
          * @param page Pagination token from a previous result to fetch the next page. (optional)
-         * @return APIlistScenariosRequest
+         * @return APIlistScenariosForScopeRequest
          */
-        public APIlistScenariosRequest page(String page) {
+        public APIlistScenariosForScopeRequest page(String page) {
             this.page = page;
             return this;
         }
 
         /**
-         * Build call for listScenarios
+         * Build call for listScenariosForScope
          * @param _callback ApiCallback API callback
          * @return Call to execute
          * @throws ApiException If fail to serialize the request body object
@@ -1751,11 +2131,11 @@ public class ScenariosApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listScenariosCall(scope, asAt, filter, limit, page, _callback);
+            return listScenariosForScopeCall(scope, asAt, filter, limit, page, _callback);
         }
 
         /**
-         * Execute listScenarios request
+         * Execute listScenariosForScope request
          * @return PagedResourceListOfGetScenarioResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
@@ -1767,12 +2147,12 @@ public class ScenariosApi {
          </table>
          */
         public PagedResourceListOfGetScenarioResponse execute() throws ApiException {
-            ApiResponse<PagedResourceListOfGetScenarioResponse> localVarResp = listScenariosWithHttpInfo(scope, asAt, filter, limit, page);
+            ApiResponse<PagedResourceListOfGetScenarioResponse> localVarResp = listScenariosForScopeWithHttpInfo(scope, asAt, filter, limit, page);
             return localVarResp.getData();
         }
 
         /**
-         * Execute listScenarios request. Use any specified configuration options to override any other configuration for this request only.
+         * Execute listScenariosForScope request. Use any specified configuration options to override any other configuration for this request only.
          * @return PagedResourceListOfGetScenarioResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
@@ -1784,12 +2164,12 @@ public class ScenariosApi {
          </table>
          */
         public PagedResourceListOfGetScenarioResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfGetScenarioResponse> localVarResp = listScenariosWithHttpInfo(scope, asAt, filter, limit, page, opts);
+            ApiResponse<PagedResourceListOfGetScenarioResponse> localVarResp = listScenariosForScopeWithHttpInfo(scope, asAt, filter, limit, page, opts);
             return localVarResp.getData();
         }
 
         /**
-         * Execute listScenarios request with HTTP info returned
+         * Execute listScenariosForScope request with HTTP info returned
          * @return ApiResponse&lt;PagedResourceListOfGetScenarioResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
@@ -1801,11 +2181,11 @@ public class ScenariosApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfGetScenarioResponse> executeWithHttpInfo() throws ApiException {
-            return listScenariosWithHttpInfo(scope, asAt, filter, limit, page);
+            return listScenariosForScopeWithHttpInfo(scope, asAt, filter, limit, page);
         }
 
         /**
-         * Execute listScenarios request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * Execute listScenariosForScope request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
          * @return ApiResponse&lt;PagedResourceListOfGetScenarioResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
@@ -1817,11 +2197,11 @@ public class ScenariosApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfGetScenarioResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listScenariosWithHttpInfo(scope, asAt, filter, limit, page, opts);
+            return listScenariosForScopeWithHttpInfo(scope, asAt, filter, limit, page, opts);
         }
 
         /**
-         * Execute listScenarios request (asynchronously)
+         * Execute listScenariosForScope request (asynchronously)
          * @param _callback The callback to be executed when the API call finishes
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          * @http.response.details
@@ -1833,11 +2213,11 @@ public class ScenariosApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback) throws ApiException {
-            listScenariosAsync(scope, asAt, filter, limit, page, _callback);
+            listScenariosForScopeAsync(scope, asAt, filter, limit, page, _callback);
         }
 
         /**
-         * Execute listScenarios request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * Execute listScenariosForScope request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
          * @param _callback The callback to be executed when the API call finishes
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          * @http.response.details
@@ -1849,15 +2229,15 @@ public class ScenariosApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfGetScenarioResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            listScenariosAsync(scope, asAt, filter, limit, page, _callback, opts);
+            listScenariosForScopeAsync(scope, asAt, filter, limit, page, _callback, opts);
         }
     }
 
     /**
-     * [EARLY ACCESS] ListScenarios: List the set of Scenario definitions
-     * List the set of scenario definitions at the specified date/time and scope.
+     * [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope
+     * List the set of scenario definitions in a single scope at the specified date/time.
      * @param scope The scope to list scenarios for. (required)
-     * @return APIlistScenariosRequest
+     * @return APIlistScenariosForScopeRequest
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
@@ -1866,8 +2246,8 @@ public class ScenariosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    public APIlistScenariosRequest listScenarios(String scope) {
-        return new APIlistScenariosRequest(scope);
+    public APIlistScenariosForScopeRequest listScenariosForScope(String scope) {
+        return new APIlistScenariosForScopeRequest(scope);
     }
     /**
      * Build call for previewScenario

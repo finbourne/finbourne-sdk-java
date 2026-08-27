@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.CashAndSecurityOfferElection;
 import com.finbourne.sdk.services.lusid.model.CashOfferElection;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
+import com.finbourne.sdk.services.lusid.model.MixedLotConstituentsElection;
 import com.finbourne.sdk.services.lusid.model.NewInstrument;
 import com.finbourne.sdk.services.lusid.model.SecurityOfferElection;
 import java.io.IOException;
@@ -54,6 +55,7 @@ import com.finbourne.sdk.JSON;
   TenderEvent.JSON_PROPERTY_SECURITY_OFFER_ELECTIONS,
   TenderEvent.JSON_PROPERTY_CASH_AND_SECURITY_OFFER_ELECTIONS,
   TenderEvent.JSON_PROPERTY_CASH_OFFER_ELECTIONS,
+  TenderEvent.JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS,
   TenderEvent.JSON_PROPERTY_OFFER_TYPE,
   TenderEvent.JSON_PROPERTY_ACCRUED_INTEREST_PER_UNIT,
   TenderEvent.JSON_PROPERTY_MIN_PIECE_SIZE,
@@ -130,6 +132,11 @@ public class TenderEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_CASH_OFFER_ELECTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<CashOfferElection> cashOfferElections;
+
+  public static final String JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS = "mixedLotConstituentsElections";
+  @JsonProperty(JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<MixedLotConstituentsElection> mixedLotConstituentsElections;
 
   public static final String JSON_PROPERTY_OFFER_TYPE = "offerType";
   @JsonProperty(JSON_PROPERTY_OFFER_TYPE)
@@ -426,6 +433,33 @@ public class TenderEvent extends InstrumentEvent {
   }
 
 
+  public TenderEvent mixedLotConstituentsElections(List<MixedLotConstituentsElection> mixedLotConstituentsElections) {
+    this.mixedLotConstituentsElections = mixedLotConstituentsElections;
+    return this;
+  }
+
+  public TenderEvent addMixedLotConstituentsElectionsItem(MixedLotConstituentsElection mixedLotConstituentsElectionsItem) {
+    if (this.mixedLotConstituentsElections == null) {
+      this.mixedLotConstituentsElections = new ArrayList<>();
+    }
+    this.mixedLotConstituentsElections.add(mixedLotConstituentsElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible mixed lot offers for this tender event, if any. Each election replaces the tendered  position with one or more distinct new securities and/or cash legs of its own, taking the place of the  single event-level NewInstrument that the other security-bearing elections resolve to.    A tender may carry more than one of these, describing mutually exclusive multi-destination options.
+   * @return mixedLotConstituentsElections
+   */
+  @javax.annotation.Nullable
+  public List<MixedLotConstituentsElection> getMixedLotConstituentsElections() {
+    return mixedLotConstituentsElections;
+  }
+
+  public void setMixedLotConstituentsElections(List<MixedLotConstituentsElection> mixedLotConstituentsElections) {
+    this.mixedLotConstituentsElections = mixedLotConstituentsElections;
+  }
+
+
   public TenderEvent offerType(String offerType) {
     this.offerType = offerType;
     return this;
@@ -599,6 +633,7 @@ public class TenderEvent extends InstrumentEvent {
         Objects.equals(this.securityOfferElections, tenderEvent.securityOfferElections) &&
         Objects.equals(this.cashAndSecurityOfferElections, tenderEvent.cashAndSecurityOfferElections) &&
         Objects.equals(this.cashOfferElections, tenderEvent.cashOfferElections) &&
+        Objects.equals(this.mixedLotConstituentsElections, tenderEvent.mixedLotConstituentsElections) &&
         Objects.equals(this.offerType, tenderEvent.offerType) &&
         (this.accruedInterestPerUnit == null ? tenderEvent.accruedInterestPerUnit == null : (tenderEvent.accruedInterestPerUnit != null && this.accruedInterestPerUnit.compareTo(tenderEvent.getAccruedInterestPerUnit()) == 0)) &&
         (this.minPieceSize == null ? tenderEvent.minPieceSize == null : (tenderEvent.minPieceSize != null && this.minPieceSize.compareTo(tenderEvent.getMinPieceSize()) == 0)) &&
@@ -616,7 +651,7 @@ public class TenderEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(announcementDate, exDate, recordDate, paymentDate, newInstrument, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, securityOfferElections, cashAndSecurityOfferElections, cashOfferElections, offerType, accruedInterestPerUnit, minPieceSize, minIncrement, prorationRate, responseDeadlineDate, marketDeadlineDate, earlyResponseDeadline, super.hashCode());
+    return Objects.hash(announcementDate, exDate, recordDate, paymentDate, newInstrument, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, securityOfferElections, cashAndSecurityOfferElections, cashOfferElections, mixedLotConstituentsElections, offerType, accruedInterestPerUnit, minPieceSize, minIncrement, prorationRate, responseDeadlineDate, marketDeadlineDate, earlyResponseDeadline, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -643,6 +678,7 @@ public class TenderEvent extends InstrumentEvent {
     sb.append("    securityOfferElections: ").append(toIndentedString(securityOfferElections)).append("\n");
     sb.append("    cashAndSecurityOfferElections: ").append(toIndentedString(cashAndSecurityOfferElections)).append("\n");
     sb.append("    cashOfferElections: ").append(toIndentedString(cashOfferElections)).append("\n");
+    sb.append("    mixedLotConstituentsElections: ").append(toIndentedString(mixedLotConstituentsElections)).append("\n");
     sb.append("    offerType: ").append(toIndentedString(offerType)).append("\n");
     sb.append("    accruedInterestPerUnit: ").append(toIndentedString(accruedInterestPerUnit)).append("\n");
     sb.append("    minPieceSize: ").append(toIndentedString(minPieceSize)).append("\n");

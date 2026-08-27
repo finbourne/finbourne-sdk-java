@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **securityOfferElections** | [**List&lt;SecurityOfferElection&gt;**](SecurityOfferElection.md) | List of possible SecurityOfferElections for this event. | [optional] [default to List<SecurityOfferElection>]
 **cashAndSecurityOfferElections** | [**List&lt;CashAndSecurityOfferElection&gt;**](CashAndSecurityOfferElection.md) | List of possible CashAndSecurityOfferElections for this event. | [optional] [default to List<CashAndSecurityOfferElection>]
 **cashOfferElections** | [**List&lt;CashOfferElection&gt;**](CashOfferElection.md) | List of possible CashOfferElections for this event. | [optional] [default to List<CashOfferElection>]
+**mixedLotConstituentsElections** | [**List&lt;MixedLotConstituentsElection&gt;**](MixedLotConstituentsElection.md) | List of possible mixed lot offers for this tender event, if any. Each election replaces the tendered  position with one or more distinct new securities and/or cash legs of its own, taking the place of the  single event-level NewInstrument that the other security-bearing elections resolve to.    A tender may carry more than one of these, describing mutually exclusive multi-destination options. | [optional] [default to List<MixedLotConstituentsElection>]
 **offerType** | **String** | Informational ISO 20022 OfferTp indicator (e.g. \&quot;ACPR\&quot;). Optional. No calculation impact. | [optional] [default to String]
 **accruedInterestPerUnit** | **java.math.BigDecimal** | Optional per-unit accrued interest on the tendered face, from the last coupon date up to  (but excluding) PaymentDate. Bond instrument types only. If left empty, analytics-core  resolves it at event time from the bond&#39;s coupon schedule and market data. | [optional] [default to java.math.BigDecimal]
 **minPieceSize** | **java.math.BigDecimal** | Bond-specific minimum instructable face amount. Optional. Must be strictly positive when set. | [optional] [default to java.math.BigDecimal]
@@ -46,6 +47,7 @@ NewInstrument newInstrument = new NewInstrument();
 @javax.annotation.Nullable List<SecurityOfferElection> securityOfferElections = new List<SecurityOfferElection>();
 @javax.annotation.Nullable List<CashAndSecurityOfferElection> cashAndSecurityOfferElections = new List<CashAndSecurityOfferElection>();
 @javax.annotation.Nullable List<CashOfferElection> cashOfferElections = new List<CashOfferElection>();
+@javax.annotation.Nullable List<MixedLotConstituentsElection> mixedLotConstituentsElections = new List<MixedLotConstituentsElection>();
 @javax.annotation.Nullable String offerType = "example offerType";
 @javax.annotation.Nullable java.math.BigDecimal accruedInterestPerUnit = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal minPieceSize = new java.math.BigDecimal("100.00");
@@ -69,6 +71,7 @@ TenderEvent tenderEventInstance = new TenderEvent()
     .securityOfferElections(securityOfferElections)
     .cashAndSecurityOfferElections(cashAndSecurityOfferElections)
     .cashOfferElections(cashOfferElections)
+    .mixedLotConstituentsElections(mixedLotConstituentsElections)
     .offerType(offerType)
     .accruedInterestPerUnit(accruedInterestPerUnit)
     .minPieceSize(minPieceSize)

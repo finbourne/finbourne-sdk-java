@@ -15,14 +15,14 @@ FINBOURNE Java SDK for accessing LUSID and related APIs.
 <dependency>
   <groupId>com.finbourne.sdk</groupId>
   <artifactId>finbourne.sdk</artifactId>
-  <version>0.0.53</version>
+  <version>0.0.54</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation "com.finbourne.sdk:finbourne.sdk:0.0.53"
+implementation "com.finbourne.sdk:finbourne.sdk:0.0.54"
 ```
 
 ## Authentication

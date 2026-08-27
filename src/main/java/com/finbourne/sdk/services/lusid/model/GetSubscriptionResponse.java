@@ -12,7 +12,6 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
-import com.finbourne.sdk.services.lusid.model.ErrorDetail;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.SubscriptionDefinition;
 import java.io.IOException;
@@ -37,12 +36,11 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * GetSubscriptionResponse
+ * The response to a singular subscription read. There is deliberately no failure block on this  type: every route returning it is a singular (or list-of-singular) read, never a batch keyed  lookup, so there is no per-key error to report - an invalid entity is rejected at upsert and  a failed read fails the whole request. The IGetResponse batch members below throw for the  same reason; do not reintroduce a Failed property when copying this shape.
  */
 @JsonPropertyOrder({
   GetSubscriptionResponse.JSON_PROPERTY_HREF,
   GetSubscriptionResponse.JSON_PROPERTY_VALUE,
-  GetSubscriptionResponse.JSON_PROPERTY_FAILED,
   GetSubscriptionResponse.JSON_PROPERTY_LINKS
 })
 
@@ -56,11 +54,6 @@ public class GetSubscriptionResponse {
   @JsonProperty(JSON_PROPERTY_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private SubscriptionDefinition value;
-
-  public static final String JSON_PROPERTY_FAILED = "failed";
-  @JsonProperty(JSON_PROPERTY_FAILED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private ErrorDetail failed;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -108,25 +101,6 @@ public class GetSubscriptionResponse {
   }
 
 
-  public GetSubscriptionResponse failed(ErrorDetail failed) {
-    this.failed = failed;
-    return this;
-  }
-
-  /**
-   * Get failed
-   * @return failed
-   */
-  @javax.annotation.Nullable
-  public ErrorDetail getFailed() {
-    return failed;
-  }
-
-  public void setFailed(ErrorDetail failed) {
-    this.failed = failed;
-  }
-
-
   public GetSubscriptionResponse links(List<Link> links) {
     this.links = links;
     return this;
@@ -165,7 +139,6 @@ public class GetSubscriptionResponse {
     GetSubscriptionResponse getSubscriptionResponse = (GetSubscriptionResponse) o;
     return Objects.equals(this.href, getSubscriptionResponse.href) &&
         Objects.equals(this.value, getSubscriptionResponse.value) &&
-        Objects.equals(this.failed, getSubscriptionResponse.failed) &&
         Objects.equals(this.links, getSubscriptionResponse.links);
   }
 
@@ -175,7 +148,7 @@ public class GetSubscriptionResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, value, failed, links);
+    return Objects.hash(href, value, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -191,7 +164,6 @@ public class GetSubscriptionResponse {
     sb.append("class GetSubscriptionResponse {\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
-    sb.append("    failed: ").append(toIndentedString(failed)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

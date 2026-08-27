@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **announcementDate** | [**OffsetDateTime**](OffsetDateTime.md) | The date the merger is announced. | [optional] [default to OffsetDateTime]
 **cashAndSecurityOfferElections** | [**List&lt;CashAndSecurityOfferElection&gt;**](CashAndSecurityOfferElection.md) | List of possible CashAndSecurityOfferElections for this merger event | [optional] [default to List<CashAndSecurityOfferElection>]
 **cashOfferElections** | [**List&lt;CashOfferElection&gt;**](CashOfferElection.md) | List of possible CashOfferElections for this merger event | [optional] [default to List<CashOfferElection>]
+**mixedLotConstituentsElections** | [**List&lt;MixedLotConstituentsElection&gt;**](MixedLotConstituentsElection.md) | List of possible mixed lot offers for this merger event, if any. Each election replaces the parent position  with one or more distinct new securities and/or cash legs of its own, taking the place of the single  event-level NewInstrument that the other security-bearing elections resolve to.    A merger may carry more than one of these, describing mutually exclusive multi-destination options. | [optional] [default to List<MixedLotConstituentsElection>]
 **exDate** | [**OffsetDateTime**](OffsetDateTime.md) | The first date on which the holder of record of the original shares has entitled ownership of the new shares. | [optional] [default to OffsetDateTime]
 **fractionalUnitsCashCurrency** | **String** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] [default to String]
 **fractionalUnitsCashPrice** | **java.math.BigDecimal** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] [default to java.math.BigDecimal]
@@ -29,6 +30,7 @@ import java.net.URI;
 @javax.annotation.Nullable OffsetDateTime announcementDate = OffsetDateTime.now();
 @javax.annotation.Nullable List<CashAndSecurityOfferElection> cashAndSecurityOfferElections = new List<CashAndSecurityOfferElection>();
 @javax.annotation.Nullable List<CashOfferElection> cashOfferElections = new List<CashOfferElection>();
+@javax.annotation.Nullable List<MixedLotConstituentsElection> mixedLotConstituentsElections = new List<MixedLotConstituentsElection>();
 OffsetDateTime exDate = OffsetDateTime.now();
 @javax.annotation.Nullable String fractionalUnitsCashCurrency = "example fractionalUnitsCashCurrency";
 @javax.annotation.Nullable java.math.BigDecimal fractionalUnitsCashPrice = new java.math.BigDecimal("100.00");
@@ -44,6 +46,7 @@ MergerEvent mergerEventInstance = new MergerEvent()
     .announcementDate(announcementDate)
     .cashAndSecurityOfferElections(cashAndSecurityOfferElections)
     .cashOfferElections(cashOfferElections)
+    .mixedLotConstituentsElections(mixedLotConstituentsElections)
     .exDate(exDate)
     .fractionalUnitsCashCurrency(fractionalUnitsCashCurrency)
     .fractionalUnitsCashPrice(fractionalUnitsCashPrice)

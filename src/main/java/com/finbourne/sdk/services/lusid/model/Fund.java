@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AllocationGroup;
 import com.finbourne.sdk.services.lusid.model.DayMonth;
+import com.finbourne.sdk.services.lusid.model.FundInstrument;
 import com.finbourne.sdk.services.lusid.model.InstrumentResolutionDetail;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.NavType;
@@ -70,6 +71,7 @@ import com.finbourne.sdk.JSON;
   Fund.JSON_PROPERTY_CREATE_INSTRUMENT,
   Fund.JSON_PROPERTY_ALLOCATION_GROUPS,
   Fund.JSON_PROPERTY_SHARE_CLASSES,
+  Fund.JSON_PROPERTY_FUND_INSTRUMENT,
   Fund.JSON_PROPERTY_VERSION,
   Fund.JSON_PROPERTY_LINKS
 })
@@ -174,6 +176,11 @@ public class Fund {
   @JsonProperty(JSON_PROPERTY_SHARE_CLASSES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ShareClass> shareClasses;
+
+  public static final String JSON_PROPERTY_FUND_INSTRUMENT = "fundInstrument";
+  @JsonProperty(JSON_PROPERTY_FUND_INSTRUMENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private FundInstrument fundInstrument;
 
   public static final String JSON_PROPERTY_VERSION = "version";
   @JsonProperty(JSON_PROPERTY_VERSION)
@@ -616,6 +623,25 @@ public class Fund {
   }
 
 
+  public Fund fundInstrument(FundInstrument fundInstrument) {
+    this.fundInstrument = fundInstrument;
+    return this;
+  }
+
+  /**
+   * Get fundInstrument
+   * @return fundInstrument
+   */
+  @javax.annotation.Nullable
+  public FundInstrument getFundInstrument() {
+    return fundInstrument;
+  }
+
+  public void setFundInstrument(FundInstrument fundInstrument) {
+    this.fundInstrument = fundInstrument;
+  }
+
+
   public Fund version(Version version) {
     this.version = version;
     return this;
@@ -691,6 +717,7 @@ public class Fund {
         Objects.equals(this.createInstrument, fund.createInstrument) &&
         Objects.equals(this.allocationGroups, fund.allocationGroups) &&
         Objects.equals(this.shareClasses, fund.shareClasses) &&
+        Objects.equals(this.fundInstrument, fund.fundInstrument) &&
         Objects.equals(this.version, fund.version) &&
         Objects.equals(this.links, fund.links);
   }
@@ -701,7 +728,7 @@ public class Fund {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, aborId, shareClassInstruments, type, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, version, links);
+    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, aborId, shareClassInstruments, type, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -735,6 +762,7 @@ public class Fund {
     sb.append("    createInstrument: ").append(toIndentedString(createInstrument)).append("\n");
     sb.append("    allocationGroups: ").append(toIndentedString(allocationGroups)).append("\n");
     sb.append("    shareClasses: ").append(toIndentedString(shareClasses)).append("\n");
+    sb.append("    fundInstrument: ").append(toIndentedString(fundInstrument)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **securityOfferElections** | [**List&lt;SecurityOfferElection&gt;**](SecurityOfferElection.md) | List of possible SecurityOfferElections for this event. Populated on the SECU path (Count &#x3D;&#x3D; 1);  empty on the CASH and CASE paths. | [optional] [default to List<SecurityOfferElection>]
 **cashAndSecurityOfferElections** | [**List&lt;CashAndSecurityOfferElection&gt;**](CashAndSecurityOfferElection.md) | List of possible CashAndSecurityOfferElections for this event. Populated on the CASE path  (Count &#x3D;&#x3D; 1); empty on the CASH and SECU paths. | [optional] [default to List<CashAndSecurityOfferElection>]
 **lapseElections** | [**List&lt;LapseElection&gt;**](LapseElection.md) | List of possible LapseElections for this event. Required on all three paths (Count &#x3D;&#x3D; 1).  Allows the holder to opt out of the offer (NOAC). | [optional] [default to List<LapseElection>]
+**mixedLotConstituentsElections** | [**List&lt;MixedLotConstituentsElection&gt;**](MixedLotConstituentsElection.md) | List of possible MixedLotConstituentsElections for this event, if any. Each election settles into one or more  distinct new securities and/or cash legs of its own, in place of the single event-level NewInstrument the  SecurityOffer and CashAndSecurityOffer paths resolve to.    Several may be present: a Dutch Auction commonly offers a number of mutually exclusive destinations, and each  is described by its own election. Not applicable to the CASH path, which has no security leg to multiply. | [optional] [default to List<MixedLotConstituentsElection>]
 **responseDeadlineDate** | [**OffsetDateTime**](OffsetDateTime.md) | Account-servicer response deadline. Defaults to MarketDeadlineDate when not supplied.  When provided, must be on or before MarketDeadlineDate. | [optional] [default to OffsetDateTime]
 **earlyResponseDeadline** | [**OffsetDateTime**](OffsetDateTime.md) | Early-participation deadline. When provided, must be on or before ResponseDeadlineDate. | [optional] [default to OffsetDateTime]
 **exDate** | [**OffsetDateTime**](OffsetDateTime.md) | The ex date of the event. Optional; carried for cross-event consistency. | [optional] [default to OffsetDateTime]
@@ -39,6 +40,7 @@ String currency = "example currency";
 @javax.annotation.Nullable List<SecurityOfferElection> securityOfferElections = new List<SecurityOfferElection>();
 @javax.annotation.Nullable List<CashAndSecurityOfferElection> cashAndSecurityOfferElections = new List<CashAndSecurityOfferElection>();
 @javax.annotation.Nullable List<LapseElection> lapseElections = new List<LapseElection>();
+@javax.annotation.Nullable List<MixedLotConstituentsElection> mixedLotConstituentsElections = new List<MixedLotConstituentsElection>();
 @javax.annotation.Nullable OffsetDateTime responseDeadlineDate = OffsetDateTime.now();
 @javax.annotation.Nullable OffsetDateTime earlyResponseDeadline = OffsetDateTime.now();
 @javax.annotation.Nullable OffsetDateTime exDate = OffsetDateTime.now();
@@ -60,6 +62,7 @@ DutchAuctionEvent dutchAuctionEventInstance = new DutchAuctionEvent()
     .securityOfferElections(securityOfferElections)
     .cashAndSecurityOfferElections(cashAndSecurityOfferElections)
     .lapseElections(lapseElections)
+    .mixedLotConstituentsElections(mixedLotConstituentsElections)
     .responseDeadlineDate(responseDeadlineDate)
     .earlyResponseDeadline(earlyResponseDeadline)
     .exDate(exDate)

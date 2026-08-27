@@ -12,13 +12,11 @@ Name | Type | Description | Notes
 **launchPrice** | **java.math.BigDecimal** | The launch price set when a shareclass is added to the fund. Defaults to 1. | [optional] [default to java.math.BigDecimal]
 **launchDate** | [**OffsetDateTime**](OffsetDateTime.md) | The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date. | [optional] [default to OffsetDateTime]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true. | [optional] [default to Map<String, Property>]
-**fundShareClassType** | **String** | The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership. | [default to String]
+**investorType** | **String** | The Type of Share Class. Available values: Unitised. | [default to String]
 **distributionType** | **String** | The type of distribution the ShareClass will calculate. Available values: Income, Accumulation. | [optional] [default to String]
 **domCcy** | **String** | The domestic currency of the ShareClass instrument. | [default to String]
 **tradingConventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] [default to TradingConventions]
-**unitsPrecision** | **Integer** | Decimal places for the share class units. | [optional] [default to Integer]
-**pricePrecision** | **Integer** | Decimal places for the share class price. | [optional] [default to Integer]
-**roundingConventions** | [**List&lt;SimpleRoundingConvention&gt;**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass quotes. | [optional] [default to List<SimpleRoundingConvention>]
+**roundingConventionsPrice** | [**List&lt;SimpleRoundingConvention&gt;**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass quotes. | [optional] [default to List<SimpleRoundingConvention>]
 **roundingConventionsUnits** | [**List&lt;SimpleRoundingConvention&gt;**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass units. | [optional] [default to List<SimpleRoundingConvention>]
 **timeZoneConventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] [default to TimeZoneConventions]
 **distributionPaymentType** | **String** | The tax treatment applied to distributions. Available values: Invalid, Gross, Net. | [optional] [default to String]
@@ -37,13 +35,11 @@ String shareClassShortCode = "example shareClassShortCode";
 @javax.annotation.Nullable java.math.BigDecimal launchPrice = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable OffsetDateTime launchDate = OffsetDateTime.now();
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
-String fundShareClassType = "example fundShareClassType";
+String investorType = "example investorType";
 @javax.annotation.Nullable String distributionType = "example distributionType";
 String domCcy = "example domCcy";
 TradingConventions tradingConventions = new TradingConventions();
-@javax.annotation.Nullable Integer unitsPrecision = new Integer("100.00");
-@javax.annotation.Nullable Integer pricePrecision = new Integer("100.00");
-@javax.annotation.Nullable List<SimpleRoundingConvention> roundingConventions = new List<SimpleRoundingConvention>();
+@javax.annotation.Nullable List<SimpleRoundingConvention> roundingConventionsPrice = new List<SimpleRoundingConvention>();
 @javax.annotation.Nullable List<SimpleRoundingConvention> roundingConventionsUnits = new List<SimpleRoundingConvention>();
 TimeZoneConventions timeZoneConventions = new TimeZoneConventions();
 @javax.annotation.Nullable String distributionPaymentType = "example distributionPaymentType";
@@ -58,13 +54,11 @@ ShareClassDefinition shareClassDefinitionInstance = new ShareClassDefinition()
     .launchPrice(launchPrice)
     .launchDate(launchDate)
     .properties(properties)
-    .fundShareClassType(fundShareClassType)
+    .investorType(investorType)
     .distributionType(distributionType)
     .domCcy(domCcy)
     .tradingConventions(tradingConventions)
-    .unitsPrecision(unitsPrecision)
-    .pricePrecision(pricePrecision)
-    .roundingConventions(roundingConventions)
+    .roundingConventionsPrice(roundingConventionsPrice)
     .roundingConventionsUnits(roundingConventionsUnits)
     .timeZoneConventions(timeZoneConventions)
     .distributionPaymentType(distributionPaymentType)

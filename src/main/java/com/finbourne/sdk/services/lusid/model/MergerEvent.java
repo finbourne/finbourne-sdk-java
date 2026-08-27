@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.CashAndSecurityOfferElection;
 import com.finbourne.sdk.services.lusid.model.CashOfferElection;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
+import com.finbourne.sdk.services.lusid.model.MixedLotConstituentsElection;
 import com.finbourne.sdk.services.lusid.model.NewInstrument;
 import com.finbourne.sdk.services.lusid.model.SecurityOfferElection;
 import java.io.IOException;
@@ -45,6 +46,7 @@ import com.finbourne.sdk.JSON;
   MergerEvent.JSON_PROPERTY_ANNOUNCEMENT_DATE,
   MergerEvent.JSON_PROPERTY_CASH_AND_SECURITY_OFFER_ELECTIONS,
   MergerEvent.JSON_PROPERTY_CASH_OFFER_ELECTIONS,
+  MergerEvent.JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS,
   MergerEvent.JSON_PROPERTY_EX_DATE,
   MergerEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY,
   MergerEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE,
@@ -77,6 +79,11 @@ public class MergerEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_CASH_OFFER_ELECTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<CashOfferElection> cashOfferElections;
+
+  public static final String JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS = "mixedLotConstituentsElections";
+  @JsonProperty(JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<MixedLotConstituentsElection> mixedLotConstituentsElections;
 
   public static final String JSON_PROPERTY_EX_DATE = "exDate";
   @JsonProperty(JSON_PROPERTY_EX_DATE)
@@ -196,6 +203,33 @@ public class MergerEvent extends InstrumentEvent {
 
   public void setCashOfferElections(List<CashOfferElection> cashOfferElections) {
     this.cashOfferElections = cashOfferElections;
+  }
+
+
+  public MergerEvent mixedLotConstituentsElections(List<MixedLotConstituentsElection> mixedLotConstituentsElections) {
+    this.mixedLotConstituentsElections = mixedLotConstituentsElections;
+    return this;
+  }
+
+  public MergerEvent addMixedLotConstituentsElectionsItem(MixedLotConstituentsElection mixedLotConstituentsElectionsItem) {
+    if (this.mixedLotConstituentsElections == null) {
+      this.mixedLotConstituentsElections = new ArrayList<>();
+    }
+    this.mixedLotConstituentsElections.add(mixedLotConstituentsElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible mixed lot offers for this merger event, if any. Each election replaces the parent position  with one or more distinct new securities and/or cash legs of its own, taking the place of the single  event-level NewInstrument that the other security-bearing elections resolve to.    A merger may carry more than one of these, describing mutually exclusive multi-destination options.
+   * @return mixedLotConstituentsElections
+   */
+  @javax.annotation.Nullable
+  public List<MixedLotConstituentsElection> getMixedLotConstituentsElections() {
+    return mixedLotConstituentsElections;
+  }
+
+  public void setMixedLotConstituentsElections(List<MixedLotConstituentsElection> mixedLotConstituentsElections) {
+    this.mixedLotConstituentsElections = mixedLotConstituentsElections;
   }
 
 
@@ -390,6 +424,7 @@ public class MergerEvent extends InstrumentEvent {
     return Objects.equals(this.announcementDate, mergerEvent.announcementDate) &&
         Objects.equals(this.cashAndSecurityOfferElections, mergerEvent.cashAndSecurityOfferElections) &&
         Objects.equals(this.cashOfferElections, mergerEvent.cashOfferElections) &&
+        Objects.equals(this.mixedLotConstituentsElections, mergerEvent.mixedLotConstituentsElections) &&
         Objects.equals(this.exDate, mergerEvent.exDate) &&
         Objects.equals(this.fractionalUnitsCashCurrency, mergerEvent.fractionalUnitsCashCurrency) &&
         (this.fractionalUnitsCashPrice == null ? mergerEvent.fractionalUnitsCashPrice == null : (mergerEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(mergerEvent.getFractionalUnitsCashPrice()) == 0)) &&
@@ -408,7 +443,7 @@ public class MergerEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(announcementDate, cashAndSecurityOfferElections, cashOfferElections, exDate, fractionalUnitsCashCurrency, fractionalUnitsCashPrice, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, newInstrument, paymentDate, recordDate, securityOfferElections, super.hashCode());
+    return Objects.hash(announcementDate, cashAndSecurityOfferElections, cashOfferElections, mixedLotConstituentsElections, exDate, fractionalUnitsCashCurrency, fractionalUnitsCashPrice, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, newInstrument, paymentDate, recordDate, securityOfferElections, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -426,6 +461,7 @@ public class MergerEvent extends InstrumentEvent {
     sb.append("    announcementDate: ").append(toIndentedString(announcementDate)).append("\n");
     sb.append("    cashAndSecurityOfferElections: ").append(toIndentedString(cashAndSecurityOfferElections)).append("\n");
     sb.append("    cashOfferElections: ").append(toIndentedString(cashOfferElections)).append("\n");
+    sb.append("    mixedLotConstituentsElections: ").append(toIndentedString(mixedLotConstituentsElections)).append("\n");
     sb.append("    exDate: ").append(toIndentedString(exDate)).append("\n");
     sb.append("    fractionalUnitsCashCurrency: ").append(toIndentedString(fractionalUnitsCashCurrency)).append("\n");
     sb.append("    fractionalUnitsCashPrice: ").append(toIndentedString(fractionalUnitsCashPrice)).append("\n");

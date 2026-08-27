@@ -17,6 +17,7 @@ import com.finbourne.sdk.services.lusid.model.CashOfferElection;
 import com.finbourne.sdk.services.lusid.model.EventDateRange;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import com.finbourne.sdk.services.lusid.model.LapseElection;
+import com.finbourne.sdk.services.lusid.model.MixedLotConstituentsElection;
 import com.finbourne.sdk.services.lusid.model.NewInstrument;
 import com.finbourne.sdk.services.lusid.model.SecurityOfferElection;
 import java.io.IOException;
@@ -59,6 +60,7 @@ import com.finbourne.sdk.JSON;
   ConversionEvent.JSON_PROPERTY_CASH_AND_SECURITY_OFFER_ELECTIONS,
   ConversionEvent.JSON_PROPERTY_CASH_OFFER_ELECTIONS,
   ConversionEvent.JSON_PROPERTY_LAPSE_ELECTIONS,
+  ConversionEvent.JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS,
   ConversionEvent.JSON_PROPERTY_CONVERSION_TYPE
 })
 
@@ -143,6 +145,11 @@ public class ConversionEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_LAPSE_ELECTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<LapseElection> lapseElections;
+
+  public static final String JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS = "mixedLotConstituentsElections";
+  @JsonProperty(JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<MixedLotConstituentsElection> mixedLotConstituentsElections;
 
   public static final String JSON_PROPERTY_CONVERSION_TYPE = "conversionType";
   @JsonProperty(JSON_PROPERTY_CONVERSION_TYPE)
@@ -469,6 +476,33 @@ public class ConversionEvent extends InstrumentEvent {
   }
 
 
+  public ConversionEvent mixedLotConstituentsElections(List<MixedLotConstituentsElection> mixedLotConstituentsElections) {
+    this.mixedLotConstituentsElections = mixedLotConstituentsElections;
+    return this;
+  }
+
+  public ConversionEvent addMixedLotConstituentsElectionsItem(MixedLotConstituentsElection mixedLotConstituentsElectionsItem) {
+    if (this.mixedLotConstituentsElections == null) {
+      this.mixedLotConstituentsElections = new ArrayList<>();
+    }
+    this.mixedLotConstituentsElections.add(mixedLotConstituentsElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible mixed lot offers for this conversion event, if any. Each election converts the parent position  into one or more distinct new securities and/or cash legs, taking the place of the single event-level  NewInstrument that the other security-bearing elections resolve to.    A conversion may carry more than one of these, describing mutually exclusive multi-destination options.  Only supported when ConversionType is Regular.
+   * @return mixedLotConstituentsElections
+   */
+  @javax.annotation.Nullable
+  public List<MixedLotConstituentsElection> getMixedLotConstituentsElections() {
+    return mixedLotConstituentsElections;
+  }
+
+  public void setMixedLotConstituentsElections(List<MixedLotConstituentsElection> mixedLotConstituentsElections) {
+    this.mixedLotConstituentsElections = mixedLotConstituentsElections;
+  }
+
+
   public ConversionEvent conversionType(String conversionType) {
     this.conversionType = conversionType;
     return this;
@@ -512,6 +546,7 @@ public class ConversionEvent extends InstrumentEvent {
         Objects.equals(this.cashAndSecurityOfferElections, conversionEvent.cashAndSecurityOfferElections) &&
         Objects.equals(this.cashOfferElections, conversionEvent.cashOfferElections) &&
         Objects.equals(this.lapseElections, conversionEvent.lapseElections) &&
+        Objects.equals(this.mixedLotConstituentsElections, conversionEvent.mixedLotConstituentsElections) &&
         Objects.equals(this.conversionType, conversionEvent.conversionType) &&
         super.equals(o);
   }
@@ -522,7 +557,7 @@ public class ConversionEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(recordDate, paymentDate, newInstrument, responseDeadlineDate, marketDeadlineDate, effectiveDate, periodOfAction, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, securityOfferElections, cashAndSecurityOfferElections, cashOfferElections, lapseElections, conversionType, super.hashCode());
+    return Objects.hash(recordDate, paymentDate, newInstrument, responseDeadlineDate, marketDeadlineDate, effectiveDate, periodOfAction, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, securityOfferElections, cashAndSecurityOfferElections, cashOfferElections, lapseElections, mixedLotConstituentsElections, conversionType, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -552,6 +587,7 @@ public class ConversionEvent extends InstrumentEvent {
     sb.append("    cashAndSecurityOfferElections: ").append(toIndentedString(cashAndSecurityOfferElections)).append("\n");
     sb.append("    cashOfferElections: ").append(toIndentedString(cashOfferElections)).append("\n");
     sb.append("    lapseElections: ").append(toIndentedString(lapseElections)).append("\n");
+    sb.append("    mixedLotConstituentsElections: ").append(toIndentedString(mixedLotConstituentsElections)).append("\n");
     sb.append("    conversionType: ").append(toIndentedString(conversionType)).append("\n");
     sb.append("}");
     return sb.toString();

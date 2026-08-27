@@ -50,13 +50,11 @@ import com.finbourne.sdk.JSON;
   ShareClassDefinition.JSON_PROPERTY_LAUNCH_PRICE,
   ShareClassDefinition.JSON_PROPERTY_LAUNCH_DATE,
   ShareClassDefinition.JSON_PROPERTY_PROPERTIES,
-  ShareClassDefinition.JSON_PROPERTY_FUND_SHARE_CLASS_TYPE,
+  ShareClassDefinition.JSON_PROPERTY_INVESTOR_TYPE,
   ShareClassDefinition.JSON_PROPERTY_DISTRIBUTION_TYPE,
   ShareClassDefinition.JSON_PROPERTY_DOM_CCY,
   ShareClassDefinition.JSON_PROPERTY_TRADING_CONVENTIONS,
-  ShareClassDefinition.JSON_PROPERTY_UNITS_PRECISION,
-  ShareClassDefinition.JSON_PROPERTY_PRICE_PRECISION,
-  ShareClassDefinition.JSON_PROPERTY_ROUNDING_CONVENTIONS,
+  ShareClassDefinition.JSON_PROPERTY_ROUNDING_CONVENTIONS_PRICE,
   ShareClassDefinition.JSON_PROPERTY_ROUNDING_CONVENTIONS_UNITS,
   ShareClassDefinition.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
   ShareClassDefinition.JSON_PROPERTY_DISTRIBUTION_PAYMENT_TYPE,
@@ -99,10 +97,10 @@ public class ShareClassDefinition {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, Property> properties;
 
-  public static final String JSON_PROPERTY_FUND_SHARE_CLASS_TYPE = "fundShareClassType";
-  @JsonProperty(JSON_PROPERTY_FUND_SHARE_CLASS_TYPE)
+  public static final String JSON_PROPERTY_INVESTOR_TYPE = "investorType";
+  @JsonProperty(JSON_PROPERTY_INVESTOR_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String fundShareClassType;
+  private String investorType;
 
   public static final String JSON_PROPERTY_DISTRIBUTION_TYPE = "distributionType";
   @JsonProperty(JSON_PROPERTY_DISTRIBUTION_TYPE)
@@ -119,20 +117,10 @@ public class ShareClassDefinition {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private TradingConventions tradingConventions;
 
-  public static final String JSON_PROPERTY_UNITS_PRECISION = "unitsPrecision";
-  @JsonProperty(JSON_PROPERTY_UNITS_PRECISION)
+  public static final String JSON_PROPERTY_ROUNDING_CONVENTIONS_PRICE = "roundingConventionsPrice";
+  @JsonProperty(JSON_PROPERTY_ROUNDING_CONVENTIONS_PRICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private Integer unitsPrecision;
-
-  public static final String JSON_PROPERTY_PRICE_PRECISION = "pricePrecision";
-  @JsonProperty(JSON_PROPERTY_PRICE_PRECISION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private Integer pricePrecision;
-
-  public static final String JSON_PROPERTY_ROUNDING_CONVENTIONS = "roundingConventions";
-  @JsonProperty(JSON_PROPERTY_ROUNDING_CONVENTIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private List<SimpleRoundingConvention> roundingConventions;
+  private List<SimpleRoundingConvention> roundingConventionsPrice;
 
   public static final String JSON_PROPERTY_ROUNDING_CONVENTIONS_UNITS = "roundingConventionsUnits";
   @JsonProperty(JSON_PROPERTY_ROUNDING_CONVENTIONS_UNITS)
@@ -306,22 +294,22 @@ public class ShareClassDefinition {
   }
 
 
-  public ShareClassDefinition fundShareClassType(String fundShareClassType) {
-    this.fundShareClassType = fundShareClassType;
+  public ShareClassDefinition investorType(String investorType) {
+    this.investorType = investorType;
     return this;
   }
 
   /**
-   * The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership.
-   * @return fundShareClassType
+   * The Type of Share Class. Available values: Unitised.
+   * @return investorType
    */
   @javax.annotation.Nonnull
-  public String getFundShareClassType() {
-    return fundShareClassType;
+  public String getInvestorType() {
+    return investorType;
   }
 
-  public void setFundShareClassType(String fundShareClassType) {
-    this.fundShareClassType = fundShareClassType;
+  public void setInvestorType(String investorType) {
+    this.investorType = investorType;
   }
 
 
@@ -382,68 +370,30 @@ public class ShareClassDefinition {
   }
 
 
-  public ShareClassDefinition unitsPrecision(Integer unitsPrecision) {
-    this.unitsPrecision = unitsPrecision;
+  public ShareClassDefinition roundingConventionsPrice(List<SimpleRoundingConvention> roundingConventionsPrice) {
+    this.roundingConventionsPrice = roundingConventionsPrice;
     return this;
   }
 
-  /**
-   * Decimal places for the share class units.
-   * @return unitsPrecision
-   */
-  @javax.annotation.Nullable
-  public Integer getUnitsPrecision() {
-    return unitsPrecision;
-  }
-
-  public void setUnitsPrecision(Integer unitsPrecision) {
-    this.unitsPrecision = unitsPrecision;
-  }
-
-
-  public ShareClassDefinition pricePrecision(Integer pricePrecision) {
-    this.pricePrecision = pricePrecision;
-    return this;
-  }
-
-  /**
-   * Decimal places for the share class price.
-   * @return pricePrecision
-   */
-  @javax.annotation.Nullable
-  public Integer getPricePrecision() {
-    return pricePrecision;
-  }
-
-  public void setPricePrecision(Integer pricePrecision) {
-    this.pricePrecision = pricePrecision;
-  }
-
-
-  public ShareClassDefinition roundingConventions(List<SimpleRoundingConvention> roundingConventions) {
-    this.roundingConventions = roundingConventions;
-    return this;
-  }
-
-  public ShareClassDefinition addRoundingConventionsItem(SimpleRoundingConvention roundingConventionsItem) {
-    if (this.roundingConventions == null) {
-      this.roundingConventions = new ArrayList<>();
+  public ShareClassDefinition addRoundingConventionsPriceItem(SimpleRoundingConvention roundingConventionsPriceItem) {
+    if (this.roundingConventionsPrice == null) {
+      this.roundingConventionsPrice = new ArrayList<>();
     }
-    this.roundingConventions.add(roundingConventionsItem);
+    this.roundingConventionsPrice.add(roundingConventionsPriceItem);
     return this;
   }
 
   /**
    * Rounding conventions used for the ShareClass quotes.
-   * @return roundingConventions
+   * @return roundingConventionsPrice
    */
   @javax.annotation.Nullable
-  public List<SimpleRoundingConvention> getRoundingConventions() {
-    return roundingConventions;
+  public List<SimpleRoundingConvention> getRoundingConventionsPrice() {
+    return roundingConventionsPrice;
   }
 
-  public void setRoundingConventions(List<SimpleRoundingConvention> roundingConventions) {
-    this.roundingConventions = roundingConventions;
+  public void setRoundingConventionsPrice(List<SimpleRoundingConvention> roundingConventionsPrice) {
+    this.roundingConventionsPrice = roundingConventionsPrice;
   }
 
 
@@ -547,13 +497,11 @@ public class ShareClassDefinition {
         (this.launchPrice == null ? shareClassDefinition.launchPrice == null : (shareClassDefinition.launchPrice != null && this.launchPrice.compareTo(shareClassDefinition.getLaunchPrice()) == 0)) &&
         Objects.equals(this.launchDate, shareClassDefinition.launchDate) &&
         Objects.equals(this.properties, shareClassDefinition.properties) &&
-        Objects.equals(this.fundShareClassType, shareClassDefinition.fundShareClassType) &&
+        Objects.equals(this.investorType, shareClassDefinition.investorType) &&
         Objects.equals(this.distributionType, shareClassDefinition.distributionType) &&
         Objects.equals(this.domCcy, shareClassDefinition.domCcy) &&
         Objects.equals(this.tradingConventions, shareClassDefinition.tradingConventions) &&
-        Objects.equals(this.unitsPrecision, shareClassDefinition.unitsPrecision) &&
-        Objects.equals(this.pricePrecision, shareClassDefinition.pricePrecision) &&
-        Objects.equals(this.roundingConventions, shareClassDefinition.roundingConventions) &&
+        Objects.equals(this.roundingConventionsPrice, shareClassDefinition.roundingConventionsPrice) &&
         Objects.equals(this.roundingConventionsUnits, shareClassDefinition.roundingConventionsUnits) &&
         Objects.equals(this.timeZoneConventions, shareClassDefinition.timeZoneConventions) &&
         Objects.equals(this.distributionPaymentType, shareClassDefinition.distributionPaymentType) &&
@@ -566,7 +514,7 @@ public class ShareClassDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, properties, fundShareClassType, distributionType, domCcy, tradingConventions, unitsPrecision, pricePrecision, roundingConventions, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
+    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, properties, investorType, distributionType, domCcy, tradingConventions, roundingConventionsPrice, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -587,13 +535,11 @@ public class ShareClassDefinition {
     sb.append("    launchPrice: ").append(toIndentedString(launchPrice)).append("\n");
     sb.append("    launchDate: ").append(toIndentedString(launchDate)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
-    sb.append("    fundShareClassType: ").append(toIndentedString(fundShareClassType)).append("\n");
+    sb.append("    investorType: ").append(toIndentedString(investorType)).append("\n");
     sb.append("    distributionType: ").append(toIndentedString(distributionType)).append("\n");
     sb.append("    domCcy: ").append(toIndentedString(domCcy)).append("\n");
     sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
-    sb.append("    unitsPrecision: ").append(toIndentedString(unitsPrecision)).append("\n");
-    sb.append("    pricePrecision: ").append(toIndentedString(pricePrecision)).append("\n");
-    sb.append("    roundingConventions: ").append(toIndentedString(roundingConventions)).append("\n");
+    sb.append("    roundingConventionsPrice: ").append(toIndentedString(roundingConventionsPrice)).append("\n");
     sb.append("    roundingConventionsUnits: ").append(toIndentedString(roundingConventionsUnits)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
     sb.append("    distributionPaymentType: ").append(toIndentedString(distributionPaymentType)).append("\n");
