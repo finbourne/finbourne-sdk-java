@@ -117,6 +117,9 @@ InstrumentEventType method = InstrumentEventType.CANCEL_SWAP_EVENT;
 InstrumentEventType method = InstrumentEventType.BOND_OPTION_TERMINATION_EVENT;
 InstrumentEventType method = InstrumentEventType.TERMINATION_EVENT;
 InstrumentEventType method = InstrumentEventType.COMMODITY_CALENDAR_SWAP_CASH_FLOW_EVENT;
+InstrumentEventType method = InstrumentEventType.DEPOSIT_SWEEP_EVENT;
+InstrumentEventType method = InstrumentEventType.BOND_FORWARD_CASH_SETTLEMENT_EVENT;
+InstrumentEventType method = InstrumentEventType.BOND_FORWARD_TERMINATION_EVENT;
 ```
 
 

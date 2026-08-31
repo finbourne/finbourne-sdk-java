@@ -38,6 +38,7 @@ import com.finbourne.sdk.JSON;
   MarketOptions.JSON_PROPERTY_DEFAULT_INSTRUMENT_CODE_TYPE,
   MarketOptions.JSON_PROPERTY_DEFAULT_SCOPE,
   MarketOptions.JSON_PROPERTY_ATTEMPT_TO_INFER_MISSING_FX,
+  MarketOptions.JSON_PROPERTY_ATTEMPT_TO_INFER_MISSING_FX_ON_FIXINGS,
   MarketOptions.JSON_PROPERTY_CALENDAR_SCOPE,
   MarketOptions.JSON_PROPERTY_CONVENTION_SCOPE
 })
@@ -62,6 +63,11 @@ public class MarketOptions {
   @JsonProperty(JSON_PROPERTY_ATTEMPT_TO_INFER_MISSING_FX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean attemptToInferMissingFx;
+
+  public static final String JSON_PROPERTY_ATTEMPT_TO_INFER_MISSING_FX_ON_FIXINGS = "attemptToInferMissingFxOnFixings";
+  @JsonProperty(JSON_PROPERTY_ATTEMPT_TO_INFER_MISSING_FX_ON_FIXINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean attemptToInferMissingFxOnFixings;
 
   public static final String JSON_PROPERTY_CALENDAR_SCOPE = "calendarScope";
   @JsonProperty(JSON_PROPERTY_CALENDAR_SCOPE)
@@ -152,6 +158,25 @@ public class MarketOptions {
   }
 
 
+  public MarketOptions attemptToInferMissingFxOnFixings(Boolean attemptToInferMissingFxOnFixings) {
+    this.attemptToInferMissingFxOnFixings = attemptToInferMissingFxOnFixings;
+    return this;
+  }
+
+  /**
+   * If true, applies the same inference as AttemptToInferMissingFx to FX fixings (resets), e.g. the fixing of a  non-deliverable FX forward: a fixing quoted only in the reverse direction, or derivable by triangulation  through a standard base currency at the fixing date, is inferred rather than reported missing. This is a  separate, explicit opt-in because a fixing is a contractual historical print: with this off (the default),  a fixing must be present as the exact oriented currency pair to be used.
+   * @return attemptToInferMissingFxOnFixings
+   */
+  @javax.annotation.Nullable
+  public Boolean getAttemptToInferMissingFxOnFixings() {
+    return attemptToInferMissingFxOnFixings;
+  }
+
+  public void setAttemptToInferMissingFxOnFixings(Boolean attemptToInferMissingFxOnFixings) {
+    this.attemptToInferMissingFxOnFixings = attemptToInferMissingFxOnFixings;
+  }
+
+
   public MarketOptions calendarScope(String calendarScope) {
     this.calendarScope = calendarScope;
     return this;
@@ -203,6 +228,7 @@ public class MarketOptions {
         Objects.equals(this.defaultInstrumentCodeType, marketOptions.defaultInstrumentCodeType) &&
         Objects.equals(this.defaultScope, marketOptions.defaultScope) &&
         Objects.equals(this.attemptToInferMissingFx, marketOptions.attemptToInferMissingFx) &&
+        Objects.equals(this.attemptToInferMissingFxOnFixings, marketOptions.attemptToInferMissingFxOnFixings) &&
         Objects.equals(this.calendarScope, marketOptions.calendarScope) &&
         Objects.equals(this.conventionScope, marketOptions.conventionScope);
   }
@@ -213,7 +239,7 @@ public class MarketOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(defaultSupplier, defaultInstrumentCodeType, defaultScope, attemptToInferMissingFx, calendarScope, conventionScope);
+    return Objects.hash(defaultSupplier, defaultInstrumentCodeType, defaultScope, attemptToInferMissingFx, attemptToInferMissingFxOnFixings, calendarScope, conventionScope);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -231,6 +257,7 @@ public class MarketOptions {
     sb.append("    defaultInstrumentCodeType: ").append(toIndentedString(defaultInstrumentCodeType)).append("\n");
     sb.append("    defaultScope: ").append(toIndentedString(defaultScope)).append("\n");
     sb.append("    attemptToInferMissingFx: ").append(toIndentedString(attemptToInferMissingFx)).append("\n");
+    sb.append("    attemptToInferMissingFxOnFixings: ").append(toIndentedString(attemptToInferMissingFxOnFixings)).append("\n");
     sb.append("    calendarScope: ").append(toIndentedString(calendarScope)).append("\n");
     sb.append("    conventionScope: ").append(toIndentedString(conventionScope)).append("\n");
     sb.append("}");

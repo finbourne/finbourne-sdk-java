@@ -47,7 +47,8 @@ import com.finbourne.sdk.JSON;
   CustodianAccount.JSON_PROPERTY_CURRENCY,
   CustodianAccount.JSON_PROPERTY_PROPERTIES,
   CustodianAccount.JSON_PROPERTY_CUSTODIAN,
-  CustodianAccount.JSON_PROPERTY_ACCOUNT_TYPE
+  CustodianAccount.JSON_PROPERTY_ACCOUNT_TYPE,
+  CustodianAccount.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS
 })
 
 public class CustodianAccount {
@@ -95,6 +96,11 @@ public class CustodianAccount {
   @JsonProperty(JSON_PROPERTY_ACCOUNT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String accountType;
+
+  public static final String JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS = "taxLotSelectionCostBasis";
+  @JsonProperty(JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String taxLotSelectionCostBasis;
 
   public CustodianAccount() {
   }
@@ -278,6 +284,25 @@ public class CustodianAccount {
   }
 
 
+  public CustodianAccount taxLotSelectionCostBasis(String taxLotSelectionCostBasis) {
+    this.taxLotSelectionCostBasis = taxLotSelectionCostBasis;
+    return this;
+  }
+
+  /**
+   * The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified, resolution falls through to the transaction type and then the portfolio&#39;s default. Available values: Cost, AmortisedCost.
+   * @return taxLotSelectionCostBasis
+   */
+  @javax.annotation.Nullable
+  public String getTaxLotSelectionCostBasis() {
+    return taxLotSelectionCostBasis;
+  }
+
+  public void setTaxLotSelectionCostBasis(String taxLotSelectionCostBasis) {
+    this.taxLotSelectionCostBasis = taxLotSelectionCostBasis;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -295,7 +320,8 @@ public class CustodianAccount {
         Objects.equals(this.currency, custodianAccount.currency) &&
         Objects.equals(this.properties, custodianAccount.properties) &&
         Objects.equals(this.custodian, custodianAccount.custodian) &&
-        Objects.equals(this.accountType, custodianAccount.accountType);
+        Objects.equals(this.accountType, custodianAccount.accountType) &&
+        Objects.equals(this.taxLotSelectionCostBasis, custodianAccount.taxLotSelectionCostBasis);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -304,7 +330,7 @@ public class CustodianAccount {
 
   @Override
  public int hashCode() {
-    return Objects.hash(custodianAccountId, status, accountNumber, accountName, accountingMethod, currency, properties, custodian, accountType);
+    return Objects.hash(custodianAccountId, status, accountNumber, accountName, accountingMethod, currency, properties, custodian, accountType, taxLotSelectionCostBasis);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -327,6 +353,7 @@ public class CustodianAccount {
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    custodian: ").append(toIndentedString(custodian)).append("\n");
     sb.append("    accountType: ").append(toIndentedString(accountType)).append("\n");
+    sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -112,7 +112,7 @@ public class MergerEvent extends InstrumentEvent {
 
   public static final String JSON_PROPERTY_NEW_INSTRUMENT = "newInstrument";
   @JsonProperty(JSON_PROPERTY_NEW_INSTRUMENT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private NewInstrument newInstrument;
 
   public static final String JSON_PROPERTY_PAYMENT_DATE = "paymentDate";
@@ -193,7 +193,7 @@ public class MergerEvent extends InstrumentEvent {
   }
 
   /**
-   * List of possible CashOfferElections for this merger event
+   * List of possible CashOfferElections for this merger event. Under ParticipationType.Mandatory  a single CashOfferElection may be the event&#39;s only election — a cash-only merger — in which  case no NewInstrument is required. Under ParticipationType.MandatoryWithChoices cash offers  are provided alongside the other elections on the event.
    * @return cashOfferElections
    */
   @javax.annotation.Nullable
@@ -337,7 +337,7 @@ public class MergerEvent extends InstrumentEvent {
    * Get newInstrument
    * @return newInstrument
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public NewInstrument getNewInstrument() {
     return newInstrument;
   }

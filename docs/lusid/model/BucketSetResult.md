@@ -6,6 +6,7 @@ A valuation point's results for one bucket set: whether the set is the apportion
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**bucketSetCode** | **String** | The code of the fund configuration&#39;s bucket set definition these results were produced from. Empty for a fund valued from component filters, which has no bucket set definition to name. | [default to String]
 **isApportionment** | **Boolean** | Whether this bucket set is the apportionment set (apportioning non-class-specific P&amp;L across share classes). | [default to Boolean]
 **nodes** | [**List&lt;BucketSetNode&gt;**](BucketSetNode.md) | The nodes making up the bucket set: the fund aggregate and one per share class. | [default to List<BucketSetNode>]
 
@@ -15,11 +16,13 @@ import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
+String bucketSetCode = "example bucketSetCode";
 Boolean isApportionment = true;
 List<BucketSetNode> nodes = new List<BucketSetNode>();
 
 
 BucketSetResult bucketSetResultInstance = new BucketSetResult()
+    .bucketSetCode(bucketSetCode)
     .isApportionment(isApportionment)
     .nodes(nodes);
 ```

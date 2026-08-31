@@ -14,6 +14,9 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -30,14 +33,19 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * One bucket&#39;s values within a bucket set node: the movement in the period plus the cumulative values before  and after it (CumulativeValue &#x3D; Value + PreviousCumulativeValue).
+ * One bucket&#39;s values within a bucket set node: the movement in the period plus the cumulative values before  and after it (CumulativeValue &#x3D; Value + PreviousCumulativeValue), and - on share class nodes - the breakdown  of the movement by the source that contributed it and the same values restated per unit in issue.
  */
 @JsonPropertyOrder({
   BucketSetResultBucket.JSON_PROPERTY_BUCKET_ID,
   BucketSetResultBucket.JSON_PROPERTY_BUCKET_TYPE,
   BucketSetResultBucket.JSON_PROPERTY_VALUE,
   BucketSetResultBucket.JSON_PROPERTY_PREVIOUS_CUMULATIVE_VALUE,
-  BucketSetResultBucket.JSON_PROPERTY_CUMULATIVE_VALUE
+  BucketSetResultBucket.JSON_PROPERTY_CUMULATIVE_VALUE,
+  BucketSetResultBucket.JSON_PROPERTY_SOURCE_BREAKDOWN,
+  BucketSetResultBucket.JSON_PROPERTY_PER_UNIT_VALUE,
+  BucketSetResultBucket.JSON_PROPERTY_UNITS_IN_ISSUE,
+  BucketSetResultBucket.JSON_PROPERTY_PREVIOUS_CUMULATIVE_PER_UNIT_VALUE,
+  BucketSetResultBucket.JSON_PROPERTY_CUMULATIVE_PER_UNIT_VALUE
 })
 
 public class BucketSetResultBucket {
@@ -65,6 +73,31 @@ public class BucketSetResultBucket {
   @JsonProperty(JSON_PROPERTY_CUMULATIVE_VALUE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal cumulativeValue;
+
+  public static final String JSON_PROPERTY_SOURCE_BREAKDOWN = "sourceBreakdown";
+  @JsonProperty(JSON_PROPERTY_SOURCE_BREAKDOWN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, java.math.BigDecimal> sourceBreakdown;
+
+  public static final String JSON_PROPERTY_PER_UNIT_VALUE = "perUnitValue";
+  @JsonProperty(JSON_PROPERTY_PER_UNIT_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal perUnitValue;
+
+  public static final String JSON_PROPERTY_UNITS_IN_ISSUE = "unitsInIssue";
+  @JsonProperty(JSON_PROPERTY_UNITS_IN_ISSUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal unitsInIssue;
+
+  public static final String JSON_PROPERTY_PREVIOUS_CUMULATIVE_PER_UNIT_VALUE = "previousCumulativePerUnitValue";
+  @JsonProperty(JSON_PROPERTY_PREVIOUS_CUMULATIVE_PER_UNIT_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal previousCumulativePerUnitValue;
+
+  public static final String JSON_PROPERTY_CUMULATIVE_PER_UNIT_VALUE = "cumulativePerUnitValue";
+  @JsonProperty(JSON_PROPERTY_CUMULATIVE_PER_UNIT_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal cumulativePerUnitValue;
 
   public BucketSetResultBucket() {
   }
@@ -164,6 +197,109 @@ public class BucketSetResultBucket {
   }
 
 
+  public BucketSetResultBucket sourceBreakdown(Map<String, java.math.BigDecimal> sourceBreakdown) {
+    this.sourceBreakdown = sourceBreakdown;
+    return this;
+  }
+
+  public BucketSetResultBucket putSourceBreakdownItem(String key, java.math.BigDecimal sourceBreakdownItem) {
+    if (this.sourceBreakdown == null) {
+      this.sourceBreakdown = new HashMap<>();
+    }
+    this.sourceBreakdown.put(key, sourceBreakdownItem);
+    return this;
+  }
+
+  /**
+   * The bucket&#39;s movement broken down by the source that contributed it, which always sums to Value. Set on share class nodes only. The keys are &#39;classSpecific&#39; for amounts booked directly to the share class, &#39;nonClassSpecific&#39; for fund-level amounts apportioned to it, and an allocation group&#39;s code for amounts allocated to that group and apportioned to the share class. Sources contributing nothing to the bucket are omitted.
+   * @return sourceBreakdown
+   */
+  @javax.annotation.Nullable
+  public Map<String, java.math.BigDecimal> getSourceBreakdown() {
+    return sourceBreakdown;
+  }
+
+  public void setSourceBreakdown(Map<String, java.math.BigDecimal> sourceBreakdown) {
+    this.sourceBreakdown = sourceBreakdown;
+  }
+
+
+  public BucketSetResultBucket perUnitValue(java.math.BigDecimal perUnitValue) {
+    this.perUnitValue = perUnitValue;
+    return this;
+  }
+
+  /**
+   * The bucket&#39;s movement over the period per unit in issue (Value divided by UnitsInIssue), in the fund currency, rounded to the share class&#39;s PricePrecision. Reported only where both the share class and the bucket are unitised and there are units in issue to divide by.
+   * @return perUnitValue
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPerUnitValue() {
+    return perUnitValue;
+  }
+
+  public void setPerUnitValue(java.math.BigDecimal perUnitValue) {
+    this.perUnitValue = perUnitValue;
+  }
+
+
+  public BucketSetResultBucket unitsInIssue(java.math.BigDecimal unitsInIssue) {
+    this.unitsInIssue = unitsInIssue;
+    return this;
+  }
+
+  /**
+   * The share class&#39;s units in issue at the end of the period. Reported only where both the share class and the bucket are unitised.
+   * @return unitsInIssue
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getUnitsInIssue() {
+    return unitsInIssue;
+  }
+
+  public void setUnitsInIssue(java.math.BigDecimal unitsInIssue) {
+    this.unitsInIssue = unitsInIssue;
+  }
+
+
+  public BucketSetResultBucket previousCumulativePerUnitValue(java.math.BigDecimal previousCumulativePerUnitValue) {
+    this.previousCumulativePerUnitValue = previousCumulativePerUnitValue;
+    return this;
+  }
+
+  /**
+   * The bucket&#39;s cumulative value at the start of the period, per unit in issue at that point - so it reads as it did at the previous valuation point rather than being restated at this period&#39;s unit count.
+   * @return previousCumulativePerUnitValue
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPreviousCumulativePerUnitValue() {
+    return previousCumulativePerUnitValue;
+  }
+
+  public void setPreviousCumulativePerUnitValue(java.math.BigDecimal previousCumulativePerUnitValue) {
+    this.previousCumulativePerUnitValue = previousCumulativePerUnitValue;
+  }
+
+
+  public BucketSetResultBucket cumulativePerUnitValue(java.math.BigDecimal cumulativePerUnitValue) {
+    this.cumulativePerUnitValue = cumulativePerUnitValue;
+    return this;
+  }
+
+  /**
+   * The bucket&#39;s cumulative value at the end of the period per unit in issue (CumulativeValue divided by UnitsInIssue). Reported only where both the share class and the bucket are unitised and there are units in issue to divide by.
+   * @return cumulativePerUnitValue
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getCumulativePerUnitValue() {
+    return cumulativePerUnitValue;
+  }
+
+  public void setCumulativePerUnitValue(java.math.BigDecimal cumulativePerUnitValue) {
+    this.cumulativePerUnitValue = cumulativePerUnitValue;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -177,12 +313,28 @@ public class BucketSetResultBucket {
         Objects.equals(this.bucketType, bucketSetResultBucket.bucketType) &&
         (this.value == null ? bucketSetResultBucket.value == null : (bucketSetResultBucket.value != null && this.value.compareTo(bucketSetResultBucket.getValue()) == 0)) &&
         (this.previousCumulativeValue == null ? bucketSetResultBucket.previousCumulativeValue == null : (bucketSetResultBucket.previousCumulativeValue != null && this.previousCumulativeValue.compareTo(bucketSetResultBucket.getPreviousCumulativeValue()) == 0)) &&
-        (this.cumulativeValue == null ? bucketSetResultBucket.cumulativeValue == null : (bucketSetResultBucket.cumulativeValue != null && this.cumulativeValue.compareTo(bucketSetResultBucket.getCumulativeValue()) == 0));
+        (this.cumulativeValue == null ? bucketSetResultBucket.cumulativeValue == null : (bucketSetResultBucket.cumulativeValue != null && this.cumulativeValue.compareTo(bucketSetResultBucket.getCumulativeValue()) == 0)) &&
+        Objects.equals(this.sourceBreakdown, bucketSetResultBucket.sourceBreakdown) &&
+        (this.perUnitValue == null ? bucketSetResultBucket.perUnitValue == null : (bucketSetResultBucket.perUnitValue != null && this.perUnitValue.compareTo(bucketSetResultBucket.getPerUnitValue()) == 0)) &&
+        (this.unitsInIssue == null ? bucketSetResultBucket.unitsInIssue == null : (bucketSetResultBucket.unitsInIssue != null && this.unitsInIssue.compareTo(bucketSetResultBucket.getUnitsInIssue()) == 0)) &&
+        (this.previousCumulativePerUnitValue == null ? bucketSetResultBucket.previousCumulativePerUnitValue == null : (bucketSetResultBucket.previousCumulativePerUnitValue != null && this.previousCumulativePerUnitValue.compareTo(bucketSetResultBucket.getPreviousCumulativePerUnitValue()) == 0)) &&
+        (this.cumulativePerUnitValue == null ? bucketSetResultBucket.cumulativePerUnitValue == null : (bucketSetResultBucket.cumulativePerUnitValue != null && this.cumulativePerUnitValue.compareTo(bucketSetResultBucket.getCumulativePerUnitValue()) == 0));
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(bucketId, bucketType, value, previousCumulativeValue, cumulativeValue);
+    return Objects.hash(bucketId, bucketType, value, previousCumulativeValue, cumulativeValue, sourceBreakdown, perUnitValue, unitsInIssue, previousCumulativePerUnitValue, cumulativePerUnitValue);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -194,6 +346,11 @@ public class BucketSetResultBucket {
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("    previousCumulativeValue: ").append(toIndentedString(previousCumulativeValue)).append("\n");
     sb.append("    cumulativeValue: ").append(toIndentedString(cumulativeValue)).append("\n");
+    sb.append("    sourceBreakdown: ").append(toIndentedString(sourceBreakdown)).append("\n");
+    sb.append("    perUnitValue: ").append(toIndentedString(perUnitValue)).append("\n");
+    sb.append("    unitsInIssue: ").append(toIndentedString(unitsInIssue)).append("\n");
+    sb.append("    previousCumulativePerUnitValue: ").append(toIndentedString(previousCumulativePerUnitValue)).append("\n");
+    sb.append("    cumulativePerUnitValue: ").append(toIndentedString(cumulativePerUnitValue)).append("\n");
     sb.append("}");
     return sb.toString();
   }

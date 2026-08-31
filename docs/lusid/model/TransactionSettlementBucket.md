@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **status** | **String** | The Status of the settlement bucket - &#39;Settled&#39;, &#39;Part Settled&#39; or &#39;Unsettled&#39;. Available values: Unsettled, PartSettled, Settled, None. | [default to String]
 **settlementInstructions** | [**List&lt;TransactionSettlementInstruction&gt;**](TransactionSettlementInstruction.md) | The settlement instructions received for this settlement bucket. | [optional] [default to List<TransactionSettlementInstruction>]
 **movements** | [**List&lt;TransactionSettlementMovement&gt;**](TransactionSettlementMovement.md) | The movements for the settlement bucket. | [optional] [default to List<TransactionSettlementMovement>]
+**custodianAccountId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.TransactionSettlementBucket;
@@ -36,6 +37,7 @@ java.math.BigDecimal overdueUnits = new java.math.BigDecimal("100.00");
 String status = "example status";
 @javax.annotation.Nullable List<TransactionSettlementInstruction> settlementInstructions = new List<TransactionSettlementInstruction>();
 @javax.annotation.Nullable List<TransactionSettlementMovement> movements = new List<TransactionSettlementMovement>();
+ResourceId custodianAccountId = new ResourceId();
 
 
 TransactionSettlementBucket transactionSettlementBucketInstance = new TransactionSettlementBucket()
@@ -50,7 +52,8 @@ TransactionSettlementBucket transactionSettlementBucketInstance = new Transactio
     .configuredSettlement(configuredSettlement)
     .status(status)
     .settlementInstructions(settlementInstructions)
-    .movements(movements);
+    .movements(movements)
+    .custodianAccountId(custodianAccountId);
 ```
 
 

@@ -41,6 +41,8 @@ import com.finbourne.sdk.JSON;
   ScenarioDefinition.JSON_PROPERTY_CODE,
   ScenarioDefinition.JSON_PROPERTY_DISPLAY_NAME,
   ScenarioDefinition.JSON_PROPERTY_DESCRIPTION,
+  ScenarioDefinition.JSON_PROPERTY_SHORT_CODE,
+  ScenarioDefinition.JSON_PROPERTY_SCENARIO_TYPE,
   ScenarioDefinition.JSON_PROPERTY_SHIFTS
 })
 
@@ -64,6 +66,16 @@ public class ScenarioDefinition {
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String description;
+
+  public static final String JSON_PROPERTY_SHORT_CODE = "shortCode";
+  @JsonProperty(JSON_PROPERTY_SHORT_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String shortCode;
+
+  public static final String JSON_PROPERTY_SCENARIO_TYPE = "scenarioType";
+  @JsonProperty(JSON_PROPERTY_SCENARIO_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String scenarioType;
 
   public static final String JSON_PROPERTY_SHIFTS = "shifts";
   @JsonProperty(JSON_PROPERTY_SHIFTS)
@@ -149,6 +161,44 @@ public class ScenarioDefinition {
   }
 
 
+  public ScenarioDefinition shortCode(String shortCode) {
+    this.shortCode = shortCode;
+    return this;
+  }
+
+  /**
+   * A short, memorable identifier for the scenario, for use in reporting. Optional on upsert:  when omitted, reads return a value inferred from the display name (falling back to the  code) rather than null; the inferred value is computed fresh on every read and is never  persisted. When supplied, the value is stored and returned verbatim. Independent of  scenarioType.
+   * @return shortCode
+   */
+  @javax.annotation.Nullable
+  public String getShortCode() {
+    return shortCode;
+  }
+
+  public void setShortCode(String shortCode) {
+    this.shortCode = shortCode;
+  }
+
+
+  public ScenarioDefinition scenarioType(String scenarioType) {
+    this.scenarioType = scenarioType;
+    return this;
+  }
+
+  /**
+   * Classifies the scenario. Required on upsert; supported string (enumeration) values are:  [Historical, Regulatory, Hypothetical]. Independent of shortCode. Available values: Historical, Regulatory, Hypothetical.
+   * @return scenarioType
+   */
+  @javax.annotation.Nonnull
+  public String getScenarioType() {
+    return scenarioType;
+  }
+
+  public void setScenarioType(String scenarioType) {
+    this.scenarioType = scenarioType;
+  }
+
+
   public ScenarioDefinition shifts(List<ScenarioShiftDefinition> shifts) {
     this.shifts = shifts;
     return this;
@@ -189,6 +239,8 @@ public class ScenarioDefinition {
         Objects.equals(this.code, scenarioDefinition.code) &&
         Objects.equals(this.displayName, scenarioDefinition.displayName) &&
         Objects.equals(this.description, scenarioDefinition.description) &&
+        Objects.equals(this.shortCode, scenarioDefinition.shortCode) &&
+        Objects.equals(this.scenarioType, scenarioDefinition.scenarioType) &&
         Objects.equals(this.shifts, scenarioDefinition.shifts);
   }
 
@@ -198,7 +250,7 @@ public class ScenarioDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(scope, code, displayName, description, shifts);
+    return Objects.hash(scope, code, displayName, description, shortCode, scenarioType, shifts);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -216,6 +268,8 @@ public class ScenarioDefinition {
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    shortCode: ").append(toIndentedString(shortCode)).append("\n");
+    sb.append("    scenarioType: ").append(toIndentedString(scenarioType)).append("\n");
     sb.append("    shifts: ").append(toIndentedString(shifts)).append("\n");
     sb.append("}");
     return sb.toString();

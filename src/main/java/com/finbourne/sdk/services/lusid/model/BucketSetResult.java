@@ -36,11 +36,17 @@ import com.finbourne.sdk.JSON;
  * A valuation point&#39;s results for one bucket set: whether the set is the apportionment set, and its per-node  (fund and share class) buckets and NAV. Allocation-group nodes are not included here - they are surfaced via  the apportionment results.
  */
 @JsonPropertyOrder({
+  BucketSetResult.JSON_PROPERTY_BUCKET_SET_CODE,
   BucketSetResult.JSON_PROPERTY_IS_APPORTIONMENT,
   BucketSetResult.JSON_PROPERTY_NODES
 })
 
 public class BucketSetResult {
+  public static final String JSON_PROPERTY_BUCKET_SET_CODE = "bucketSetCode";
+  @JsonProperty(JSON_PROPERTY_BUCKET_SET_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String bucketSetCode;
+
   public static final String JSON_PROPERTY_IS_APPORTIONMENT = "isApportionment";
   @JsonProperty(JSON_PROPERTY_IS_APPORTIONMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -53,6 +59,25 @@ public class BucketSetResult {
 
   public BucketSetResult() {
   }
+
+  public BucketSetResult bucketSetCode(String bucketSetCode) {
+    this.bucketSetCode = bucketSetCode;
+    return this;
+  }
+
+  /**
+   * The code of the fund configuration&#39;s bucket set definition these results were produced from. Empty for a fund valued from component filters, which has no bucket set definition to name.
+   * @return bucketSetCode
+   */
+  @javax.annotation.Nonnull
+  public String getBucketSetCode() {
+    return bucketSetCode;
+  }
+
+  public void setBucketSetCode(String bucketSetCode) {
+    this.bucketSetCode = bucketSetCode;
+  }
+
 
   public BucketSetResult isApportionment(Boolean isApportionment) {
     this.isApportionment = isApportionment;
@@ -109,19 +134,21 @@ public class BucketSetResult {
       return false;
     }
     BucketSetResult bucketSetResult = (BucketSetResult) o;
-    return Objects.equals(this.isApportionment, bucketSetResult.isApportionment) &&
+    return Objects.equals(this.bucketSetCode, bucketSetResult.bucketSetCode) &&
+        Objects.equals(this.isApportionment, bucketSetResult.isApportionment) &&
         Objects.equals(this.nodes, bucketSetResult.nodes);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(isApportionment, nodes);
+    return Objects.hash(bucketSetCode, isApportionment, nodes);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class BucketSetResult {\n");
+    sb.append("    bucketSetCode: ").append(toIndentedString(bucketSetCode)).append("\n");
     sb.append("    isApportionment: ").append(toIndentedString(isApportionment)).append("\n");
     sb.append("    nodes: ").append(toIndentedString(nodes)).append("\n");
     sb.append("}");

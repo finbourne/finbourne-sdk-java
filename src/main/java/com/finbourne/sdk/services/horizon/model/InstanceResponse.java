@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.horizon.model;
 
 import com.finbourne.sdk.services.horizon.model.InstanceDestinations;
+import com.finbourne.sdk.services.horizon.model.LatestRunsResponse;
 import com.finbourne.sdk.services.horizon.model.TpfPortfolio;
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -96,7 +97,7 @@ public class InstanceResponse {
   public static final String JSON_PROPERTY_LATEST_RUNS_IN24_HOURS = "latestRunsIn24Hours";
   @JsonProperty(JSON_PROPERTY_LATEST_RUNS_IN24_HOURS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private String latestRunsIn24Hours;
+  private LatestRunsResponse latestRunsIn24Hours;
 
   public static final String JSON_PROPERTY_DESTINATIONS = "destinations";
   @JsonProperty(JSON_PROPERTY_DESTINATIONS)
@@ -266,7 +267,7 @@ public class InstanceResponse {
   }
 
 
-  public InstanceResponse latestRunsIn24Hours(String latestRunsIn24Hours) {
+  public InstanceResponse latestRunsIn24Hours(LatestRunsResponse latestRunsIn24Hours) {
     this.latestRunsIn24Hours = latestRunsIn24Hours;
     return this;
   }
@@ -276,11 +277,11 @@ public class InstanceResponse {
    * @return latestRunsIn24Hours
    */
   @javax.annotation.Nullable
-  public String getLatestRunsIn24Hours() {
+  public LatestRunsResponse getLatestRunsIn24Hours() {
     return latestRunsIn24Hours;
   }
 
-  public void setLatestRunsIn24Hours(String latestRunsIn24Hours) {
+  public void setLatestRunsIn24Hours(LatestRunsResponse latestRunsIn24Hours) {
     this.latestRunsIn24Hours = latestRunsIn24Hours;
   }
 

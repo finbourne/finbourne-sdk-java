@@ -65,6 +65,7 @@ InstrumentType method = InstrumentType.COMMODITY_FORWARD;
 InstrumentType method = InstrumentType.BOND_OPTION;
 InstrumentType method = InstrumentType.CDS_OPTION;
 InstrumentType method = InstrumentType.COMMODITY_CALENDAR_SWAP;
+InstrumentType method = InstrumentType.BOND_FORWARD;
 ```
 
 

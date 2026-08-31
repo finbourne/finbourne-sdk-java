@@ -39,7 +39,11 @@ public enum ModelOptionsType {
   
   CDS_MODEL_OPTIONS("CdsModelOptions"),
   
-  FLEXIBLE_LOAN_PRICER_OPTIONS("FlexibleLoanPricerOptions");
+  FLEXIBLE_LOAN_PRICER_OPTIONS("FlexibleLoanPricerOptions"),
+  
+  HULL_WHITE_MODEL_OPTIONS("HullWhiteModelOptions"),
+  
+  BOND_LOOKUP_MODEL_OPTIONS("BondLookupModelOptions");
 
   private String value;
 

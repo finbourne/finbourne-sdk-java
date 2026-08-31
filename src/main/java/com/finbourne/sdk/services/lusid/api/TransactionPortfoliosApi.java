@@ -16917,7 +16917,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * PatchPortfolioDetails: Patch portfolio details
-     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter.
+     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter, TaxLotSelectionCostBasis.
      * @param scope The scope of the transaction portfolio. (required)
      * @param code The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. (required)
      * @param operation The patch document. (required)
@@ -16940,7 +16940,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * PatchPortfolioDetails: Patch portfolio details
-     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter.Use any specified configuration options to override any other configuration for this request only
+     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter, TaxLotSelectionCostBasis.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the transaction portfolio. (required)
      * @param code The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. (required)
      * @param operation The patch document. (required)
@@ -16963,7 +16963,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * PatchPortfolioDetails: Patch portfolio details (asynchronously)
-     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter.
+     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter, TaxLotSelectionCostBasis.
      * @param scope The scope of the transaction portfolio. (required)
      * @param code The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. (required)
      * @param operation The patch document. (required)
@@ -16987,7 +16987,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * PatchPortfolioDetails: Patch portfolio details (asynchronously)
-     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter.Use any specified configuration options to override any other configuration for this request only
+     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter, TaxLotSelectionCostBasis.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the transaction portfolio. (required)
      * @param code The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. (required)
      * @param operation The patch document. (required)
@@ -17149,7 +17149,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * PatchPortfolioDetails: Patch portfolio details
-     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter.
+     * Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, AccountingMethod, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration, TransactionExclusionFilter, TaxLotSelectionCostBasis.
      * @param scope The scope of the transaction portfolio. (required)
      * @param code The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. (required)
      * @param operation The patch document. (required)

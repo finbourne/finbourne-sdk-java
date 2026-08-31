@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -34,7 +35,8 @@ import com.finbourne.sdk.JSON;
  * CreatePortfolioDetails
  */
 @JsonPropertyOrder({
-  CreatePortfolioDetails.JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID
+  CreatePortfolioDetails.JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID,
+  CreatePortfolioDetails.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS
 })
 
 public class CreatePortfolioDetails {
@@ -42,6 +44,11 @@ public class CreatePortfolioDetails {
   @JsonProperty(JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId corporateActionSourceId;
+
+  public static final String JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS = "taxLotSelectionCostBasis";
+  @JsonProperty(JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String taxLotSelectionCostBasis;
 
   public CreatePortfolioDetails() {
   }
@@ -65,6 +72,25 @@ public class CreatePortfolioDetails {
   }
 
 
+  public CreatePortfolioDetails taxLotSelectionCostBasis(String taxLotSelectionCostBasis) {
+    this.taxLotSelectionCostBasis = taxLotSelectionCostBasis;
+    return this;
+  }
+
+  /**
+   * The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. If not supplied, the portfolio&#39;s current value is left unchanged; supply Default to reset it. Available values: Cost, AmortisedCost.
+   * @return taxLotSelectionCostBasis
+   */
+  @javax.annotation.Nullable
+  public String getTaxLotSelectionCostBasis() {
+    return taxLotSelectionCostBasis;
+  }
+
+  public void setTaxLotSelectionCostBasis(String taxLotSelectionCostBasis) {
+    this.taxLotSelectionCostBasis = taxLotSelectionCostBasis;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -74,12 +100,24 @@ public class CreatePortfolioDetails {
       return false;
     }
     CreatePortfolioDetails createPortfolioDetails = (CreatePortfolioDetails) o;
-    return Objects.equals(this.corporateActionSourceId, createPortfolioDetails.corporateActionSourceId);
+    return Objects.equals(this.corporateActionSourceId, createPortfolioDetails.corporateActionSourceId) &&
+        Objects.equals(this.taxLotSelectionCostBasis, createPortfolioDetails.taxLotSelectionCostBasis);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(corporateActionSourceId);
+    return Objects.hash(corporateActionSourceId, taxLotSelectionCostBasis);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -87,6 +125,7 @@ public class CreatePortfolioDetails {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreatePortfolioDetails {\n");
     sb.append("    corporateActionSourceId: ").append(toIndentedString(corporateActionSourceId)).append("\n");
+    sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("}");
     return sb.toString();
   }

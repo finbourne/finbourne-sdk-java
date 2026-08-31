@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **settlementConfiguration** | [**PortfolioSettlementConfiguration**](PortfolioSettlementConfiguration.md) |  | [optional] [default to PortfolioSettlementConfiguration]
 **stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
 **transactionExclusionFilter** | **String** | A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded. | [optional] [default to String]
+**taxLotSelectionCostBasis** | **String** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Available values: Cost, AmortisedCost. | [optional] [default to String]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -47,6 +48,7 @@ ResourceId amortisationRuleSetId = new ResourceId();
 PortfolioSettlementConfiguration settlementConfiguration = new PortfolioSettlementConfiguration();
 StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 @javax.annotation.Nullable String transactionExclusionFilter = "example transactionExclusionFilter";
+@javax.annotation.Nullable String taxLotSelectionCostBasis = "example taxLotSelectionCostBasis";
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -68,6 +70,7 @@ PortfolioDetails portfolioDetailsInstance = new PortfolioDetails()
     .settlementConfiguration(settlementConfiguration)
     .stagedModifications(stagedModifications)
     .transactionExclusionFilter(transactionExclusionFilter)
+    .taxLotSelectionCostBasis(taxLotSelectionCostBasis)
     .links(links);
 ```
 

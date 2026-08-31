@@ -37,6 +37,7 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   AssetLeg.JSON_PROPERTY_ASSET,
+  AssetLeg.JSON_PROPERTY_ASSET_SWAP_STRUCTURE,
   AssetLeg.JSON_PROPERTY_INCOME_POLICY,
   AssetLeg.JSON_PROPERTY_INITIAL_PRICE,
   AssetLeg.JSON_PROPERTY_PAY_RECEIVE,
@@ -48,6 +49,11 @@ public class AssetLeg {
   @JsonProperty(JSON_PROPERTY_ASSET)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private LusidInstrument asset;
+
+  public static final String JSON_PROPERTY_ASSET_SWAP_STRUCTURE = "assetSwapStructure";
+  @JsonProperty(JSON_PROPERTY_ASSET_SWAP_STRUCTURE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String assetSwapStructure;
 
   public static final String JSON_PROPERTY_INCOME_POLICY = "incomePolicy";
   @JsonProperty(JSON_PROPERTY_INCOME_POLICY)
@@ -88,6 +94,25 @@ public class AssetLeg {
 
   public void setAsset(LusidInstrument asset) {
     this.asset = asset;
+  }
+
+
+  public AssetLeg assetSwapStructure(String assetSwapStructure) {
+    this.assetSwapStructure = assetSwapStructure;
+    return this;
+  }
+
+  /**
+   * The relationship between the funding leg&#39;s notional and the asset&#39;s principal, for a bond-family Asset.  Par (and absent) requires the funding leg&#39;s notional to equal the asset&#39;s principal; Proceeds allows the  funding leg&#39;s notional to be the market proceeds of the asset instead, sizing the two legs on independent  bases. Optional and absent by default; absence is distinct from Par so that behaviour keyed to the field  being supplied fires only when it is.                Supported string (enumeration) values are: [Par, Proceeds].
+   * @return assetSwapStructure
+   */
+  @javax.annotation.Nullable
+  public String getAssetSwapStructure() {
+    return assetSwapStructure;
+  }
+
+  public void setAssetSwapStructure(String assetSwapStructure) {
+    this.assetSwapStructure = assetSwapStructure;
   }
 
 
@@ -177,6 +202,7 @@ public class AssetLeg {
     }
     AssetLeg assetLeg = (AssetLeg) o;
     return Objects.equals(this.asset, assetLeg.asset) &&
+        Objects.equals(this.assetSwapStructure, assetLeg.assetSwapStructure) &&
         Objects.equals(this.incomePolicy, assetLeg.incomePolicy) &&
         (this.initialPrice == null ? assetLeg.initialPrice == null : (assetLeg.initialPrice != null && this.initialPrice.compareTo(assetLeg.getInitialPrice()) == 0)) &&
         Objects.equals(this.payReceive, assetLeg.payReceive) &&
@@ -189,7 +215,7 @@ public class AssetLeg {
 
   @Override
  public int hashCode() {
-    return Objects.hash(asset, incomePolicy, initialPrice, payReceive, resetSchedule);
+    return Objects.hash(asset, assetSwapStructure, incomePolicy, initialPrice, payReceive, resetSchedule);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -204,6 +230,7 @@ public class AssetLeg {
     StringBuilder sb = new StringBuilder();
     sb.append("class AssetLeg {\n");
     sb.append("    asset: ").append(toIndentedString(asset)).append("\n");
+    sb.append("    assetSwapStructure: ").append(toIndentedString(assetSwapStructure)).append("\n");
     sb.append("    incomePolicy: ").append(toIndentedString(incomePolicy)).append("\n");
     sb.append("    initialPrice: ").append(toIndentedString(initialPrice)).append("\n");
     sb.append("    payReceive: ").append(toIndentedString(payReceive)).append("\n");

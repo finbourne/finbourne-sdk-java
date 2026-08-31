@@ -41,6 +41,7 @@ import com.finbourne.sdk.JSON;
   PricingOptions.JSON_PROPERTY_ALLOW_ANY_INSTRUMENTS_WITH_SEC_UID_TO_PRICE_OFF_LOOKUP,
   PricingOptions.JSON_PROPERTY_ALLOW_PARTIALLY_SUCCESSFUL_EVALUATION,
   PricingOptions.JSON_PROPERTY_RISK_ENGINE,
+  PricingOptions.JSON_PROPERTY_FIND_OR_CALCULATE,
   PricingOptions.JSON_PROPERTY_PRODUCE_SEPARATE_RESULT_FOR_LINEAR_OTC_LEGS,
   PricingOptions.JSON_PROPERTY_FX_FORWARD_CONTRACTS_AS_UNITS_IN_BOTH_LEGS,
   PricingOptions.JSON_PROPERTY_ENABLE_USE_OF_CACHED_UNIT_RESULTS,
@@ -82,6 +83,11 @@ public class PricingOptions {
   @JsonProperty(JSON_PROPERTY_RISK_ENGINE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String riskEngine;
+
+  public static final String JSON_PROPERTY_FIND_OR_CALCULATE = "findOrCalculate";
+  @JsonProperty(JSON_PROPERTY_FIND_OR_CALCULATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String findOrCalculate;
 
   public static final String JSON_PROPERTY_PRODUCE_SEPARATE_RESULT_FOR_LINEAR_OTC_LEGS = "produceSeparateResultForLinearOtcLegs";
   @JsonProperty(JSON_PROPERTY_PRODUCE_SEPARATE_RESULT_FOR_LINEAR_OTC_LEGS)
@@ -248,6 +254,25 @@ public class PricingOptions {
 
   public void setRiskEngine(String riskEngine) {
     this.riskEngine = riskEngine;
+  }
+
+
+  public PricingOptions findOrCalculate(String findOrCalculate) {
+    this.findOrCalculate = findOrCalculate;
+    return this;
+  }
+
+  /**
+   * Whether Risk/_* measures may be served from stored results instead of being recomputed.  A stored result is used only when the identity it was computed under (instrument version,  recipe, model and bump configuration, measure options, analytics version, and the content  of every market data dependency) exactly matches the identity computed fresh for this  request - a stale stored result is simply never matched. One of \&quot;Off\&quot; (default: compute  everything - the historical behaviour, used when this is absent), \&quot;Parity\&quot; (look up and  verify stored results but still compute everything, logging any divergence between stored  and computed values - the recommended enablement gate), or \&quot;Enabled\&quot; (serve verified  stored values and recompute only the measures with no verified stored result). Available values: Off, Parity, Enabled.
+   * @return findOrCalculate
+   */
+  @javax.annotation.Nullable
+  public String getFindOrCalculate() {
+    return findOrCalculate;
+  }
+
+  public void setFindOrCalculate(String findOrCalculate) {
+    this.findOrCalculate = findOrCalculate;
   }
 
 
@@ -531,6 +556,7 @@ public class PricingOptions {
         Objects.equals(this.allowAnyInstrumentsWithSecUidToPriceOffLookup, pricingOptions.allowAnyInstrumentsWithSecUidToPriceOffLookup) &&
         Objects.equals(this.allowPartiallySuccessfulEvaluation, pricingOptions.allowPartiallySuccessfulEvaluation) &&
         Objects.equals(this.riskEngine, pricingOptions.riskEngine) &&
+        Objects.equals(this.findOrCalculate, pricingOptions.findOrCalculate) &&
         Objects.equals(this.produceSeparateResultForLinearOtcLegs, pricingOptions.produceSeparateResultForLinearOtcLegs) &&
         Objects.equals(this.fxForwardContractsAsUnitsInBothLegs, pricingOptions.fxForwardContractsAsUnitsInBothLegs) &&
         Objects.equals(this.enableUseOfCachedUnitResults, pricingOptions.enableUseOfCachedUnitResults) &&
@@ -553,7 +579,7 @@ public class PricingOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize);
+    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -572,6 +598,7 @@ public class PricingOptions {
     sb.append("    allowAnyInstrumentsWithSecUidToPriceOffLookup: ").append(toIndentedString(allowAnyInstrumentsWithSecUidToPriceOffLookup)).append("\n");
     sb.append("    allowPartiallySuccessfulEvaluation: ").append(toIndentedString(allowPartiallySuccessfulEvaluation)).append("\n");
     sb.append("    riskEngine: ").append(toIndentedString(riskEngine)).append("\n");
+    sb.append("    findOrCalculate: ").append(toIndentedString(findOrCalculate)).append("\n");
     sb.append("    produceSeparateResultForLinearOtcLegs: ").append(toIndentedString(produceSeparateResultForLinearOtcLegs)).append("\n");
     sb.append("    fxForwardContractsAsUnitsInBothLegs: ").append(toIndentedString(fxForwardContractsAsUnitsInBothLegs)).append("\n");
     sb.append("    enableUseOfCachedUnitResults: ").append(toIndentedString(enableUseOfCachedUnitResults)).append("\n");

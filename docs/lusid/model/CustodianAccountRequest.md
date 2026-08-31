@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the &#39;CustodianAccount&#39; domain. | [optional] [default to Map<String, Property>]
 **custodianIdentifier** | [**TypedResourceId**](TypedResourceId.md) |  | [default to TypedResourceId]
 **accountType** | **String** | The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default. | [optional] [default to String]
+**taxLotSelectionCostBasis** | **String** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified, resolution falls through to the transaction type and then the portfolio&#39;s default. Available values: Cost, AmortisedCost. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CustodianAccountRequest;
@@ -32,6 +33,7 @@ String currency = "example currency";
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
 TypedResourceId custodianIdentifier = new TypedResourceId();
 @javax.annotation.Nullable String accountType = "example accountType";
+@javax.annotation.Nullable String taxLotSelectionCostBasis = "example taxLotSelectionCostBasis";
 
 
 CustodianAccountRequest custodianAccountRequestInstance = new CustodianAccountRequest()
@@ -44,7 +46,8 @@ CustodianAccountRequest custodianAccountRequestInstance = new CustodianAccountRe
     .currency(currency)
     .properties(properties)
     .custodianIdentifier(custodianIdentifier)
-    .accountType(accountType);
+    .accountType(accountType)
+    .taxLotSelectionCostBasis(taxLotSelectionCostBasis);
 ```
 
 

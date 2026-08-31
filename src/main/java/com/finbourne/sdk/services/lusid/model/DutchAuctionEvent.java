@@ -84,7 +84,7 @@ public class DutchAuctionEvent extends InstrumentEvent {
 
   public static final String JSON_PROPERTY_CURRENCY = "currency";
   @JsonProperty(JSON_PROPERTY_CURRENCY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String currency;
 
   public static final String JSON_PROPERTY_TENDER_OFFER_ELECTIONS = "tenderOfferElections";
@@ -214,10 +214,10 @@ public class DutchAuctionEvent extends InstrumentEvent {
   }
 
   /**
-   * Event settlement currency (ISO 4217).
+   * Event settlement currency (ISO 4217). Optional: when absent the settlement currency is  taken from the elected path (TenderOfferCurrency, CashOfferCurrency or  FractionalUnitsCashCurrency as applicable).
    * @return currency
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getCurrency() {
     return currency;
   }

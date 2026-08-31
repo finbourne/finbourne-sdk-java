@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **instrumentEventConfiguration** | [**InstrumentEventConfiguration**](InstrumentEventConfiguration.md) |  | [optional] [default to InstrumentEventConfiguration]
 **settlementConfiguration** | [**PortfolioSettlementConfiguration**](PortfolioSettlementConfiguration.md) |  | [optional] [default to PortfolioSettlementConfiguration]
 **transactionExclusionFilter** | **String** | A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded. | [optional] [default to String]
+**taxLotSelectionCostBasis** | **String** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Available values: Cost, AmortisedCost. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CreateDerivedTransactionPortfolioRequest;
@@ -46,6 +47,7 @@ ResourceId amortisationRuleSetId = new ResourceId();
 InstrumentEventConfiguration instrumentEventConfiguration = new InstrumentEventConfiguration();
 PortfolioSettlementConfiguration settlementConfiguration = new PortfolioSettlementConfiguration();
 @javax.annotation.Nullable String transactionExclusionFilter = "example transactionExclusionFilter";
+@javax.annotation.Nullable String taxLotSelectionCostBasis = "example taxLotSelectionCostBasis";
 
 
 CreateDerivedTransactionPortfolioRequest createDerivedTransactionPortfolioRequestInstance = new CreateDerivedTransactionPortfolioRequest()
@@ -65,7 +67,8 @@ CreateDerivedTransactionPortfolioRequest createDerivedTransactionPortfolioReques
     .amortisationRuleSetId(amortisationRuleSetId)
     .instrumentEventConfiguration(instrumentEventConfiguration)
     .settlementConfiguration(settlementConfiguration)
-    .transactionExclusionFilter(transactionExclusionFilter);
+    .transactionExclusionFilter(transactionExclusionFilter)
+    .taxLotSelectionCostBasis(taxLotSelectionCostBasis);
 ```
 
 

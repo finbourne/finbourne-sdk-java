@@ -34,14 +34,18 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * One node within a bucket set result: the fund aggregate or a single share class. Both carry NAV and buckets; the  capital ratio is set only on share class nodes.
+ * One node within a bucket set result: the fund aggregate or a single share class. Both carry NAV and buckets; the  capital ratio, the unit counts and the per-unit values are set only on share class nodes.
  */
 @JsonPropertyOrder({
   BucketSetNode.JSON_PROPERTY_NODE_TYPE,
   BucketSetNode.JSON_PROPERTY_SHARE_CLASS_SHORT_CODE,
   BucketSetNode.JSON_PROPERTY_NAV,
   BucketSetNode.JSON_PROPERTY_CAPITAL_RATIO,
-  BucketSetNode.JSON_PROPERTY_BUCKETS
+  BucketSetNode.JSON_PROPERTY_BUCKETS,
+  BucketSetNode.JSON_PROPERTY_PER_UNIT_VALUE,
+  BucketSetNode.JSON_PROPERTY_SHARES_IN_ISSUE,
+  BucketSetNode.JSON_PROPERTY_PREVIOUS_PER_UNIT_VALUE,
+  BucketSetNode.JSON_PROPERTY_PREVIOUS_SHARES_IN_ISSUE
 })
 
 public class BucketSetNode {
@@ -69,6 +73,26 @@ public class BucketSetNode {
   @JsonProperty(JSON_PROPERTY_BUCKETS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<BucketSetResultBucket> buckets = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_PER_UNIT_VALUE = "perUnitValue";
+  @JsonProperty(JSON_PROPERTY_PER_UNIT_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal perUnitValue;
+
+  public static final String JSON_PROPERTY_SHARES_IN_ISSUE = "sharesInIssue";
+  @JsonProperty(JSON_PROPERTY_SHARES_IN_ISSUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal sharesInIssue;
+
+  public static final String JSON_PROPERTY_PREVIOUS_PER_UNIT_VALUE = "previousPerUnitValue";
+  @JsonProperty(JSON_PROPERTY_PREVIOUS_PER_UNIT_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal previousPerUnitValue;
+
+  public static final String JSON_PROPERTY_PREVIOUS_SHARES_IN_ISSUE = "previousSharesInIssue";
+  @JsonProperty(JSON_PROPERTY_PREVIOUS_SHARES_IN_ISSUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal previousSharesInIssue;
 
   public BucketSetNode() {
   }
@@ -176,6 +200,82 @@ public class BucketSetNode {
   }
 
 
+  public BucketSetNode perUnitValue(java.math.BigDecimal perUnitValue) {
+    this.perUnitValue = perUnitValue;
+    return this;
+  }
+
+  /**
+   * The share class&#39;s NAV per unit in issue, in the fund currency, rounded to the share class&#39;s PricePrecision (left unrounded where the share class declares none). Reported only for a share class that is unitised and has units in issue to divide by. The dealing price - in the share class currency, with its instrument&#39;s rounding convention applied - is on the share class breakdown&#39;s unitisation data.
+   * @return perUnitValue
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPerUnitValue() {
+    return perUnitValue;
+  }
+
+  public void setPerUnitValue(java.math.BigDecimal perUnitValue) {
+    this.perUnitValue = perUnitValue;
+  }
+
+
+  public BucketSetNode sharesInIssue(java.math.BigDecimal sharesInIssue) {
+    this.sharesInIssue = sharesInIssue;
+    return this;
+  }
+
+  /**
+   * The share class&#39;s units in issue at the end of the period. Reported only for a share class that is unitised.
+   * @return sharesInIssue
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getSharesInIssue() {
+    return sharesInIssue;
+  }
+
+  public void setSharesInIssue(java.math.BigDecimal sharesInIssue) {
+    this.sharesInIssue = sharesInIssue;
+  }
+
+
+  public BucketSetNode previousPerUnitValue(java.math.BigDecimal previousPerUnitValue) {
+    this.previousPerUnitValue = previousPerUnitValue;
+    return this;
+  }
+
+  /**
+   * The share class&#39;s NAV per unit at the previous valuation point, on the same basis as PerUnitValue.
+   * @return previousPerUnitValue
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPreviousPerUnitValue() {
+    return previousPerUnitValue;
+  }
+
+  public void setPreviousPerUnitValue(java.math.BigDecimal previousPerUnitValue) {
+    this.previousPerUnitValue = previousPerUnitValue;
+  }
+
+
+  public BucketSetNode previousSharesInIssue(java.math.BigDecimal previousSharesInIssue) {
+    this.previousSharesInIssue = previousSharesInIssue;
+    return this;
+  }
+
+  /**
+   * The share class&#39;s units in issue at the start of the period. Reported only for a share class that is unitised.
+   * @return previousSharesInIssue
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPreviousSharesInIssue() {
+    return previousSharesInIssue;
+  }
+
+  public void setPreviousSharesInIssue(java.math.BigDecimal previousSharesInIssue) {
+    this.previousSharesInIssue = previousSharesInIssue;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -189,7 +289,11 @@ public class BucketSetNode {
         Objects.equals(this.shareClassShortCode, bucketSetNode.shareClassShortCode) &&
         (this.nav == null ? bucketSetNode.nav == null : (bucketSetNode.nav != null && this.nav.compareTo(bucketSetNode.getNav()) == 0)) &&
         (this.capitalRatio == null ? bucketSetNode.capitalRatio == null : (bucketSetNode.capitalRatio != null && this.capitalRatio.compareTo(bucketSetNode.getCapitalRatio()) == 0)) &&
-        Objects.equals(this.buckets, bucketSetNode.buckets);
+        Objects.equals(this.buckets, bucketSetNode.buckets) &&
+        (this.perUnitValue == null ? bucketSetNode.perUnitValue == null : (bucketSetNode.perUnitValue != null && this.perUnitValue.compareTo(bucketSetNode.getPerUnitValue()) == 0)) &&
+        (this.sharesInIssue == null ? bucketSetNode.sharesInIssue == null : (bucketSetNode.sharesInIssue != null && this.sharesInIssue.compareTo(bucketSetNode.getSharesInIssue()) == 0)) &&
+        (this.previousPerUnitValue == null ? bucketSetNode.previousPerUnitValue == null : (bucketSetNode.previousPerUnitValue != null && this.previousPerUnitValue.compareTo(bucketSetNode.getPreviousPerUnitValue()) == 0)) &&
+        (this.previousSharesInIssue == null ? bucketSetNode.previousSharesInIssue == null : (bucketSetNode.previousSharesInIssue != null && this.previousSharesInIssue.compareTo(bucketSetNode.getPreviousSharesInIssue()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -198,7 +302,7 @@ public class BucketSetNode {
 
   @Override
  public int hashCode() {
-    return Objects.hash(nodeType, shareClassShortCode, nav, capitalRatio, buckets);
+    return Objects.hash(nodeType, shareClassShortCode, nav, capitalRatio, buckets, perUnitValue, sharesInIssue, previousPerUnitValue, previousSharesInIssue);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -217,6 +321,10 @@ public class BucketSetNode {
     sb.append("    nav: ").append(toIndentedString(nav)).append("\n");
     sb.append("    capitalRatio: ").append(toIndentedString(capitalRatio)).append("\n");
     sb.append("    buckets: ").append(toIndentedString(buckets)).append("\n");
+    sb.append("    perUnitValue: ").append(toIndentedString(perUnitValue)).append("\n");
+    sb.append("    sharesInIssue: ").append(toIndentedString(sharesInIssue)).append("\n");
+    sb.append("    previousPerUnitValue: ").append(toIndentedString(previousPerUnitValue)).append("\n");
+    sb.append("    previousSharesInIssue: ").append(toIndentedString(previousSharesInIssue)).append("\n");
     sb.append("}");
     return sb.toString();
   }

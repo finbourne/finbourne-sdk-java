@@ -39,6 +39,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   RecInstanceSummary.JSON_PROPERTY_ID,
   RecInstanceSummary.JSON_PROPERTY_REC_DEFINITION_ID,
+  RecInstanceSummary.JSON_PROPERTY_REC_DEFINITION_DISPLAY_NAME,
   RecInstanceSummary.JSON_PROPERTY_AS_AT_INSTANTIATED,
   RecInstanceSummary.JSON_PROPERTY_STATUS,
   RecInstanceSummary.JSON_PROPERTY_AS_AT_LOCKED
@@ -54,6 +55,11 @@ public class RecInstanceSummary {
   @JsonProperty(JSON_PROPERTY_REC_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private ResourceId recDefinitionId;
+
+  public static final String JSON_PROPERTY_REC_DEFINITION_DISPLAY_NAME = "recDefinitionDisplayName";
+  @JsonProperty(JSON_PROPERTY_REC_DEFINITION_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String recDefinitionDisplayName;
 
   public static final String JSON_PROPERTY_AS_AT_INSTANTIATED = "asAtInstantiated";
   @JsonProperty(JSON_PROPERTY_AS_AT_INSTANTIATED)
@@ -108,6 +114,25 @@ public class RecInstanceSummary {
 
   public void setRecDefinitionId(ResourceId recDefinitionId) {
     this.recDefinitionId = recDefinitionId;
+  }
+
+
+  public RecInstanceSummary recDefinitionDisplayName(String recDefinitionDisplayName) {
+    this.recDefinitionDisplayName = recDefinitionDisplayName;
+    return this;
+  }
+
+  /**
+   * The display name of the rec definition the rec was instantiated for, as it stood as-at instantiation. Not re-synchronised if the definition is later renamed.
+   * @return recDefinitionDisplayName
+   */
+  @javax.annotation.Nonnull
+  public String getRecDefinitionDisplayName() {
+    return recDefinitionDisplayName;
+  }
+
+  public void setRecDefinitionDisplayName(String recDefinitionDisplayName) {
+    this.recDefinitionDisplayName = recDefinitionDisplayName;
   }
 
 
@@ -179,6 +204,7 @@ public class RecInstanceSummary {
     RecInstanceSummary recInstanceSummary = (RecInstanceSummary) o;
     return Objects.equals(this.id, recInstanceSummary.id) &&
         Objects.equals(this.recDefinitionId, recInstanceSummary.recDefinitionId) &&
+        Objects.equals(this.recDefinitionDisplayName, recInstanceSummary.recDefinitionDisplayName) &&
         Objects.equals(this.asAtInstantiated, recInstanceSummary.asAtInstantiated) &&
         Objects.equals(this.status, recInstanceSummary.status) &&
         Objects.equals(this.asAtLocked, recInstanceSummary.asAtLocked);
@@ -190,7 +216,7 @@ public class RecInstanceSummary {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, recDefinitionId, asAtInstantiated, status, asAtLocked);
+    return Objects.hash(id, recDefinitionId, recDefinitionDisplayName, asAtInstantiated, status, asAtLocked);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -206,6 +232,7 @@ public class RecInstanceSummary {
     sb.append("class RecInstanceSummary {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    recDefinitionId: ").append(toIndentedString(recDefinitionId)).append("\n");
+    sb.append("    recDefinitionDisplayName: ").append(toIndentedString(recDefinitionDisplayName)).append("\n");
     sb.append("    asAtInstantiated: ").append(toIndentedString(asAtInstantiated)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    asAtLocked: ").append(toIndentedString(asAtLocked)).append("\n");

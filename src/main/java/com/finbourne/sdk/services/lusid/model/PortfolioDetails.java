@@ -60,6 +60,7 @@ import com.finbourne.sdk.JSON;
   PortfolioDetails.JSON_PROPERTY_SETTLEMENT_CONFIGURATION,
   PortfolioDetails.JSON_PROPERTY_STAGED_MODIFICATIONS,
   PortfolioDetails.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
+  PortfolioDetails.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
   PortfolioDetails.JSON_PROPERTY_LINKS
 })
 
@@ -210,6 +211,11 @@ public class PortfolioDetails {
   @JsonProperty(JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String transactionExclusionFilter;
+
+  public static final String JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS = "taxLotSelectionCostBasis";
+  @JsonProperty(JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String taxLotSelectionCostBasis;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -558,6 +564,25 @@ public class PortfolioDetails {
   }
 
 
+  public PortfolioDetails taxLotSelectionCostBasis(String taxLotSelectionCostBasis) {
+    this.taxLotSelectionCostBasis = taxLotSelectionCostBasis;
+    return this;
+  }
+
+  /**
+   * The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Available values: Cost, AmortisedCost.
+   * @return taxLotSelectionCostBasis
+   */
+  @javax.annotation.Nullable
+  public String getTaxLotSelectionCostBasis() {
+    return taxLotSelectionCostBasis;
+  }
+
+  public void setTaxLotSelectionCostBasis(String taxLotSelectionCostBasis) {
+    this.taxLotSelectionCostBasis = taxLotSelectionCostBasis;
+  }
+
+
   public PortfolioDetails links(List<Link> links) {
     this.links = links;
     return this;
@@ -611,6 +636,7 @@ public class PortfolioDetails {
         Objects.equals(this.settlementConfiguration, portfolioDetails.settlementConfiguration) &&
         Objects.equals(this.stagedModifications, portfolioDetails.stagedModifications) &&
         Objects.equals(this.transactionExclusionFilter, portfolioDetails.transactionExclusionFilter) &&
+        Objects.equals(this.taxLotSelectionCostBasis, portfolioDetails.taxLotSelectionCostBasis) &&
         Objects.equals(this.links, portfolioDetails.links);
   }
 
@@ -620,7 +646,7 @@ public class PortfolioDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, originPortfolioId, version, baseCurrency, corporateActionSourceId, subHoldingKeys, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, stagedModifications, transactionExclusionFilter, links);
+    return Objects.hash(href, originPortfolioId, version, baseCurrency, corporateActionSourceId, subHoldingKeys, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, stagedModifications, transactionExclusionFilter, taxLotSelectionCostBasis, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -651,6 +677,7 @@ public class PortfolioDetails {
     sb.append("    settlementConfiguration: ").append(toIndentedString(settlementConfiguration)).append("\n");
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("    transactionExclusionFilter: ").append(toIndentedString(transactionExclusionFilter)).append("\n");
+    sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **taxRuleSetScope** | **String** | The scope of the tax rule sets for this portfolio. | [optional] [default to String]
 **settlementConfiguration** | [**PortfolioSettlementConfiguration**](PortfolioSettlementConfiguration.md) |  | [optional] [default to PortfolioSettlementConfiguration]
 **transactionExclusionFilter** | **String** | A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded. | [optional] [default to String]
+**taxLotSelectionCostBasis** | **String** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Available values: Cost, AmortisedCost. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CreateTransactionPortfolioRequest;
@@ -50,6 +51,7 @@ ResourceId amortisationRuleSetId = new ResourceId();
 @javax.annotation.Nullable String taxRuleSetScope = "example taxRuleSetScope";
 PortfolioSettlementConfiguration settlementConfiguration = new PortfolioSettlementConfiguration();
 @javax.annotation.Nullable String transactionExclusionFilter = "example transactionExclusionFilter";
+@javax.annotation.Nullable String taxLotSelectionCostBasis = "example taxLotSelectionCostBasis";
 
 
 CreateTransactionPortfolioRequest createTransactionPortfolioRequestInstance = new CreateTransactionPortfolioRequest()
@@ -71,7 +73,8 @@ CreateTransactionPortfolioRequest createTransactionPortfolioRequestInstance = ne
     .amortisationRuleSetId(amortisationRuleSetId)
     .taxRuleSetScope(taxRuleSetScope)
     .settlementConfiguration(settlementConfiguration)
-    .transactionExclusionFilter(transactionExclusionFilter);
+    .transactionExclusionFilter(transactionExclusionFilter)
+    .taxLotSelectionCostBasis(taxLotSelectionCostBasis);
 ```
 
 

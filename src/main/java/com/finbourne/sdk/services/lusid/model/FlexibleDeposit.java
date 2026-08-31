@@ -21,6 +21,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -43,6 +44,7 @@ import com.finbourne.sdk.JSON;
   FlexibleDeposit.JSON_PROPERTY_START_DATE,
   FlexibleDeposit.JSON_PROPERTY_MATURITY_DATE,
   FlexibleDeposit.JSON_PROPERTY_DOM_CCY,
+  FlexibleDeposit.JSON_PROPERTY_IS_STIF_SWEEP,
   FlexibleDeposit.JSON_PROPERTY_SCHEDULES,
   FlexibleDeposit.JSON_PROPERTY_TRADING_CONVENTIONS,
   FlexibleDeposit.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
@@ -69,6 +71,11 @@ public class FlexibleDeposit extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_DOM_CCY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String domCcy;
+
+  public static final String JSON_PROPERTY_IS_STIF_SWEEP = "isStifSweep";
+  @JsonProperty(JSON_PROPERTY_IS_STIF_SWEEP)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean isStifSweep;
 
   public static final String JSON_PROPERTY_SCHEDULES = "schedules";
   @JsonProperty(JSON_PROPERTY_SCHEDULES)
@@ -142,6 +149,25 @@ public class FlexibleDeposit extends LusidInstrument {
 
   public void setDomCcy(String domCcy) {
     this.domCcy = domCcy;
+  }
+
+
+  public FlexibleDeposit isStifSweep(Boolean isStifSweep) {
+    this.isStifSweep = isStifSweep;
+    return this;
+  }
+
+  /**
+   * Indicates this FlexibleDeposit represents a Short Term Investment Fund (STIF) sweep vehicle.  Its balance is derived daily from the portfolio&#39;s eligible cash rather than loaded via manual  events.
+   * @return isStifSweep
+   */
+  @javax.annotation.Nullable
+  public Boolean getIsStifSweep() {
+    return isStifSweep;
+  }
+
+  public void setIsStifSweep(Boolean isStifSweep) {
+    this.isStifSweep = isStifSweep;
   }
 
 
@@ -222,15 +248,27 @@ public class FlexibleDeposit extends LusidInstrument {
     return Objects.equals(this.startDate, flexibleDeposit.startDate) &&
         Objects.equals(this.maturityDate, flexibleDeposit.maturityDate) &&
         Objects.equals(this.domCcy, flexibleDeposit.domCcy) &&
+        Objects.equals(this.isStifSweep, flexibleDeposit.isStifSweep) &&
         Objects.equals(this.schedules, flexibleDeposit.schedules) &&
         Objects.equals(this.tradingConventions, flexibleDeposit.tradingConventions) &&
         Objects.equals(this.timeZoneConventions, flexibleDeposit.timeZoneConventions) &&
         super.equals(o);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, domCcy, schedules, tradingConventions, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, domCcy, isStifSweep, schedules, tradingConventions, timeZoneConventions, super.hashCode());
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -241,6 +279,7 @@ public class FlexibleDeposit extends LusidInstrument {
     sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");
     sb.append("    maturityDate: ").append(toIndentedString(maturityDate)).append("\n");
     sb.append("    domCcy: ").append(toIndentedString(domCcy)).append("\n");
+    sb.append("    isStifSweep: ").append(toIndentedString(isStifSweep)).append("\n");
     sb.append("    schedules: ").append(toIndentedString(schedules)).append("\n");
     sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");

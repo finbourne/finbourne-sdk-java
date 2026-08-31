@@ -21,6 +21,7 @@ import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.Strategy;
+import com.finbourne.sdk.services.lusid.model.TransactionEntityLink;
 import com.finbourne.sdk.services.lusid.model.TransactionPrice;
 import com.finbourne.sdk.services.lusid.model.TransactionTypeDetails;
 import com.finbourne.sdk.services.lusid.model.Version;
@@ -79,7 +80,8 @@ import com.finbourne.sdk.JSON;
   Transaction.JSON_PROPERTY_DATA_MODEL_MEMBERSHIP,
   Transaction.JSON_PROPERTY_VERSION,
   Transaction.JSON_PROPERTY_STAGED_MODIFICATIONS,
-  Transaction.JSON_PROPERTY_CUSTODIAN_ENTRIES
+  Transaction.JSON_PROPERTY_CUSTODIAN_ENTRIES,
+  Transaction.JSON_PROPERTY_ENTITY_LINKS
 })
 
 public class Transaction {
@@ -269,6 +271,11 @@ public class Transaction {
   @JsonProperty(JSON_PROPERTY_CUSTODIAN_ENTRIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<CustodianEntry> custodianEntries;
+
+  public static final String JSON_PROPERTY_ENTITY_LINKS = "entityLinks";
+  @JsonProperty(JSON_PROPERTY_ENTITY_LINKS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<TransactionEntityLink> entityLinks;
 
   public Transaction() {
   }
@@ -856,6 +863,33 @@ public class Transaction {
   }
 
 
+  public Transaction entityLinks(List<TransactionEntityLink> entityLinks) {
+    this.entityLinks = entityLinks;
+    return this;
+  }
+
+  public Transaction addEntityLinksItem(TransactionEntityLink entityLinksItem) {
+    if (this.entityLinks == null) {
+      this.entityLinks = new ArrayList<>();
+    }
+    this.entityLinks.add(entityLinksItem);
+    return this;
+  }
+
+  /**
+   * Links to the entities related to this transaction.
+   * @return entityLinks
+   */
+  @javax.annotation.Nullable
+  public List<TransactionEntityLink> getEntityLinks() {
+    return entityLinks;
+  }
+
+  public void setEntityLinks(List<TransactionEntityLink> entityLinks) {
+    this.entityLinks = entityLinks;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -893,7 +927,8 @@ public class Transaction {
         Objects.equals(this.dataModelMembership, transaction.dataModelMembership) &&
         Objects.equals(this.version, transaction.version) &&
         Objects.equals(this.stagedModifications, transaction.stagedModifications) &&
-        Objects.equals(this.custodianEntries, transaction.custodianEntries);
+        Objects.equals(this.custodianEntries, transaction.custodianEntries) &&
+        Objects.equals(this.entityLinks, transaction.entityLinks);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -902,7 +937,7 @@ public class Transaction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, type, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionPrice, totalConsideration, exchangeRate, transactionCurrency, properties, counterpartyId, source, entryDateTime, otcConfirmation, transactionStatus, cancelDateTime, orderId, allocationId, custodianAccount, transactionGroupId, strategyTag, resolvedTransactionTypeDetails, dataModelMembership, version, stagedModifications, custodianEntries);
+    return Objects.hash(transactionId, type, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionPrice, totalConsideration, exchangeRate, transactionCurrency, properties, counterpartyId, source, entryDateTime, otcConfirmation, transactionStatus, cancelDateTime, orderId, allocationId, custodianAccount, transactionGroupId, strategyTag, resolvedTransactionTypeDetails, dataModelMembership, version, stagedModifications, custodianEntries, entityLinks);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -945,6 +980,7 @@ public class Transaction {
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("    custodianEntries: ").append(toIndentedString(custodianEntries)).append("\n");
+    sb.append("    entityLinks: ").append(toIndentedString(entityLinks)).append("\n");
     sb.append("}");
     return sb.toString();
   }

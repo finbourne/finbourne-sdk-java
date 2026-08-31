@@ -57,7 +57,8 @@ import com.finbourne.sdk.JSON;
   CreateSimplePositionPortfolioRequest.JSON_PROPERTY_TRANSACTION_TYPE_SCOPE,
   CreateSimplePositionPortfolioRequest.JSON_PROPERTY_CASH_GAIN_LOSS_CALCULATION_DATE,
   CreateSimplePositionPortfolioRequest.JSON_PROPERTY_INSTRUMENT_EVENT_CONFIGURATION,
-  CreateSimplePositionPortfolioRequest.JSON_PROPERTY_AMORTISATION_RULE_SET_ID
+  CreateSimplePositionPortfolioRequest.JSON_PROPERTY_AMORTISATION_RULE_SET_ID,
+  CreateSimplePositionPortfolioRequest.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS
 })
 
 public class CreateSimplePositionPortfolioRequest {
@@ -202,6 +203,11 @@ public class CreateSimplePositionPortfolioRequest {
   @JsonProperty(JSON_PROPERTY_AMORTISATION_RULE_SET_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId amortisationRuleSetId;
+
+  public static final String JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS = "taxLotSelectionCostBasis";
+  @JsonProperty(JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String taxLotSelectionCostBasis;
 
   public CreateSimplePositionPortfolioRequest() {
   }
@@ -534,6 +540,25 @@ public class CreateSimplePositionPortfolioRequest {
   }
 
 
+  public CreateSimplePositionPortfolioRequest taxLotSelectionCostBasis(String taxLotSelectionCostBasis) {
+    this.taxLotSelectionCostBasis = taxLotSelectionCostBasis;
+    return this;
+  }
+
+  /**
+   * The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Available values: Cost, AmortisedCost.
+   * @return taxLotSelectionCostBasis
+   */
+  @javax.annotation.Nullable
+  public String getTaxLotSelectionCostBasis() {
+    return taxLotSelectionCostBasis;
+  }
+
+  public void setTaxLotSelectionCostBasis(String taxLotSelectionCostBasis) {
+    this.taxLotSelectionCostBasis = taxLotSelectionCostBasis;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -558,7 +583,8 @@ public class CreateSimplePositionPortfolioRequest {
         Objects.equals(this.transactionTypeScope, createSimplePositionPortfolioRequest.transactionTypeScope) &&
         Objects.equals(this.cashGainLossCalculationDate, createSimplePositionPortfolioRequest.cashGainLossCalculationDate) &&
         Objects.equals(this.instrumentEventConfiguration, createSimplePositionPortfolioRequest.instrumentEventConfiguration) &&
-        Objects.equals(this.amortisationRuleSetId, createSimplePositionPortfolioRequest.amortisationRuleSetId);
+        Objects.equals(this.amortisationRuleSetId, createSimplePositionPortfolioRequest.amortisationRuleSetId) &&
+        Objects.equals(this.taxLotSelectionCostBasis, createSimplePositionPortfolioRequest.taxLotSelectionCostBasis);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -567,7 +593,7 @@ public class CreateSimplePositionPortfolioRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, code, created, enablementDate, baseCurrency, corporateActionSourceId, accountingMethod, subHoldingKeys, properties, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId);
+    return Objects.hash(displayName, description, code, created, enablementDate, baseCurrency, corporateActionSourceId, accountingMethod, subHoldingKeys, properties, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxLotSelectionCostBasis);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -597,6 +623,7 @@ public class CreateSimplePositionPortfolioRequest {
     sb.append("    cashGainLossCalculationDate: ").append(toIndentedString(cashGainLossCalculationDate)).append("\n");
     sb.append("    instrumentEventConfiguration: ").append(toIndentedString(instrumentEventConfiguration)).append("\n");
     sb.append("    amortisationRuleSetId: ").append(toIndentedString(amortisationRuleSetId)).append("\n");
+    sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("}");
     return sb.toString();
   }

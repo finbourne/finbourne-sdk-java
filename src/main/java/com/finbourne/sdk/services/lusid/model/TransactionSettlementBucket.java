@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.TransactionSettlementInstruction;
 import com.finbourne.sdk.services.lusid.model.TransactionSettlementMovement;
 import java.io.IOException;
@@ -50,7 +51,8 @@ import com.finbourne.sdk.JSON;
   TransactionSettlementBucket.JSON_PROPERTY_CONFIGURED_SETTLEMENT,
   TransactionSettlementBucket.JSON_PROPERTY_STATUS,
   TransactionSettlementBucket.JSON_PROPERTY_SETTLEMENT_INSTRUCTIONS,
-  TransactionSettlementBucket.JSON_PROPERTY_MOVEMENTS
+  TransactionSettlementBucket.JSON_PROPERTY_MOVEMENTS,
+  TransactionSettlementBucket.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID
 })
 
 public class TransactionSettlementBucket {
@@ -113,6 +115,11 @@ public class TransactionSettlementBucket {
   @JsonProperty(JSON_PROPERTY_MOVEMENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<TransactionSettlementMovement> movements;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID = "custodianAccountId";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId custodianAccountId;
 
   public TransactionSettlementBucket() {
   }
@@ -361,6 +368,25 @@ public class TransactionSettlementBucket {
   }
 
 
+  public TransactionSettlementBucket custodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+    return this;
+  }
+
+  /**
+   * Get custodianAccountId
+   * @return custodianAccountId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getCustodianAccountId() {
+    return custodianAccountId;
+  }
+
+  public void setCustodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -381,7 +407,8 @@ public class TransactionSettlementBucket {
         Objects.equals(this.configuredSettlement, transactionSettlementBucket.configuredSettlement) &&
         Objects.equals(this.status, transactionSettlementBucket.status) &&
         Objects.equals(this.settlementInstructions, transactionSettlementBucket.settlementInstructions) &&
-        Objects.equals(this.movements, transactionSettlementBucket.movements);
+        Objects.equals(this.movements, transactionSettlementBucket.movements) &&
+        Objects.equals(this.custodianAccountId, transactionSettlementBucket.custodianAccountId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -390,7 +417,7 @@ public class TransactionSettlementBucket {
 
   @Override
  public int hashCode() {
-    return Objects.hash(settlementCategory, lusidInstrumentId, instrumentScope, contractualSettlementDate, contractedUnits, settledUnits, unsettledUnits, overdueUnits, configuredSettlement, status, settlementInstructions, movements);
+    return Objects.hash(settlementCategory, lusidInstrumentId, instrumentScope, contractualSettlementDate, contractedUnits, settledUnits, unsettledUnits, overdueUnits, configuredSettlement, status, settlementInstructions, movements, custodianAccountId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -416,6 +443,7 @@ public class TransactionSettlementBucket {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    settlementInstructions: ").append(toIndentedString(settlementInstructions)).append("\n");
     sb.append("    movements: ").append(toIndentedString(movements)).append("\n");
+    sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
