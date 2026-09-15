@@ -77,7 +77,7 @@ public class WorkflowResponse {
 
   public static final String JSON_PROPERTY_WORKFLOW_STRUCTURE = "workflowStructure";
   @JsonProperty(JSON_PROPERTY_WORKFLOW_STRUCTURE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private WorkflowStructure workflowStructure;
 
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
@@ -192,7 +192,7 @@ public class WorkflowResponse {
    * Get workflowStructure
    * @return workflowStructure
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public WorkflowStructure getWorkflowStructure() {
     return workflowStructure;
   }

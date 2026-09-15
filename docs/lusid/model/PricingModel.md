@@ -39,6 +39,8 @@ PricingModel method = PricingModel.OVERRIDE_ONLY_PRICER;
 PricingModel method = PricingModel.FLEXIBLE_REPO_SIMPLE_PRICER;
 PricingModel method = PricingModel.INFLATION_FORWARD;
 PricingModel method = PricingModel.HULL_WHITE1_F;
+PricingModel method = PricingModel.CAPITAL_INTEREST_PRICER;
+PricingModel method = PricingModel.DISCOUNTED_FORWARD;
 ```
 
 

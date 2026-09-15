@@ -13,11 +13,15 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ComplianceRuleResultPortfolioDetail;
+import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -46,7 +50,8 @@ import com.finbourne.sdk.JSON;
   ComplianceRuleResultDetail.JSON_PROPERTY_STATUS,
   ComplianceRuleResultDetail.JSON_PROPERTY_RULE_NAME,
   ComplianceRuleResultDetail.JSON_PROPERTY_RULE_DESCRIPTION,
-  ComplianceRuleResultDetail.JSON_PROPERTY_OUTCOME
+  ComplianceRuleResultDetail.JSON_PROPERTY_OUTCOME,
+  ComplianceRuleResultDetail.JSON_PROPERTY_PROPERTIES
 })
 
 public class ComplianceRuleResultDetail {
@@ -99,6 +104,11 @@ public class ComplianceRuleResultDetail {
   @JsonProperty(JSON_PROPERTY_OUTCOME)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String outcome;
+
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, PerpetualProperty> properties;
 
   public ComplianceRuleResultDetail() {
   }
@@ -309,6 +319,33 @@ public class ComplianceRuleResultDetail {
   }
 
 
+  public ComplianceRuleResultDetail properties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public ComplianceRuleResultDetail putPropertiesItem(String key, PerpetualProperty propertiesItem) {
+    if (this.properties == null) {
+      this.properties = new HashMap<>();
+    }
+    this.properties.put(key, propertiesItem);
+    return this;
+  }
+
+  /**
+   * Get properties
+   * @return properties
+   */
+  @javax.annotation.Nullable
+  public Map<String, PerpetualProperty> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -327,12 +364,24 @@ public class ComplianceRuleResultDetail {
         Objects.equals(this.status, complianceRuleResultDetail.status) &&
         Objects.equals(this.ruleName, complianceRuleResultDetail.ruleName) &&
         Objects.equals(this.ruleDescription, complianceRuleResultDetail.ruleDescription) &&
-        Objects.equals(this.outcome, complianceRuleResultDetail.outcome);
+        Objects.equals(this.outcome, complianceRuleResultDetail.outcome) &&
+        Objects.equals(this.properties, complianceRuleResultDetail.properties);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(ruleId, affectedPortfoliosDetails, affectedOrders, templateId, templateDescription, templateVariation, status, ruleName, ruleDescription, outcome);
+    return Objects.hash(ruleId, affectedPortfoliosDetails, affectedOrders, templateId, templateDescription, templateVariation, status, ruleName, ruleDescription, outcome, properties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -349,6 +398,7 @@ public class ComplianceRuleResultDetail {
     sb.append("    ruleName: ").append(toIndentedString(ruleName)).append("\n");
     sb.append("    ruleDescription: ").append(toIndentedString(ruleDescription)).append("\n");
     sb.append("    outcome: ").append(toIndentedString(outcome)).append("\n");
+    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -19,6 +19,7 @@ import com.finbourne.sdk.services.workflow.model.HorizonIntegrationResponse;
 import com.finbourne.sdk.services.workflow.model.LibraryResponse;
 import com.finbourne.sdk.services.workflow.model.LuminesceViewResponse;
 import com.finbourne.sdk.services.workflow.model.LusidEntityDataQualityCheckResponse;
+import com.finbourne.sdk.services.workflow.model.PortfolioHoldingDataQualityCheckResponse;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.SchedulerJobResponse;
 import com.finbourne.sdk.services.workflow.model.SleepResponse;
@@ -136,6 +137,16 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for LusidEntityDataQualityCheckResponse failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'LusidEntityDataQualityCheckResponse'", e);
             }
+            // deserialize PortfolioHoldingDataQualityCheckResponse
+            try {
+                deserialized = JSON.getMapper().treeToValue(node, PortfolioHoldingDataQualityCheckResponse.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'PortfolioHoldingDataQualityCheckResponse'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for PortfolioHoldingDataQualityCheckResponse failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'PortfolioHoldingDataQualityCheckResponse'", e);
+            }
             // deserialize SchedulerJobResponse
             try {
                 deserialized = JSON.getMapper().treeToValue(node, SchedulerJobResponse.class);
@@ -185,6 +196,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
         schemas.put("LibraryResponse", LibraryResponse.class);
         schemas.put("LuminesceViewResponse", LuminesceViewResponse.class);
         schemas.put("LusidEntityDataQualityCheckResponse", LusidEntityDataQualityCheckResponse.class);
+        schemas.put("PortfolioHoldingDataQualityCheckResponse", PortfolioHoldingDataQualityCheckResponse.class);
         schemas.put("SchedulerJobResponse", SchedulerJobResponse.class);
         schemas.put("SleepResponse", SleepResponse.class);
     }
@@ -197,7 +209,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
+     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -238,6 +250,11 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             return;
         }
 
+        if (instance instanceof PortfolioHoldingDataQualityCheckResponse) {
+            super.setActualInstance(instance);
+            return;
+        }
+
         if (instance instanceof SchedulerJobResponse) {
             super.setActualInstance(instance);
             return;
@@ -248,14 +265,14 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse");
+        throw new RuntimeException("Invalid instance type. Must be FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, SchedulerJobResponse, SleepResponse");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
+     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
      *
-     * @return The actual instance (FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse)
+     * @return The actual instance (FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, SchedulerJobResponse, SleepResponse)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -332,6 +349,16 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
      */
     public LusidEntityDataQualityCheckResponse getLusidEntityDataQualityCheckResponse() throws ClassCastException {
         return (LusidEntityDataQualityCheckResponse)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `PortfolioHoldingDataQualityCheckResponse`. If the actual instance is not `PortfolioHoldingDataQualityCheckResponse`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `PortfolioHoldingDataQualityCheckResponse`
+     * @throws ClassCastException if the instance is not `PortfolioHoldingDataQualityCheckResponse`
+     */
+    public PortfolioHoldingDataQualityCheckResponse getPortfolioHoldingDataQualityCheckResponse() throws ClassCastException {
+        return (PortfolioHoldingDataQualityCheckResponse)super.getActualInstance();
     }
     /**
      * Get the actual instance of `SchedulerJobResponse`. If the actual instance is not `SchedulerJobResponse`,

@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.BucketSetResultBucket;
+import com.finbourne.sdk.services.lusid.model.BucketSetShareClassDetails;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +46,11 @@ import com.finbourne.sdk.JSON;
   BucketSetNode.JSON_PROPERTY_PER_UNIT_VALUE,
   BucketSetNode.JSON_PROPERTY_SHARES_IN_ISSUE,
   BucketSetNode.JSON_PROPERTY_PREVIOUS_PER_UNIT_VALUE,
-  BucketSetNode.JSON_PROPERTY_PREVIOUS_SHARES_IN_ISSUE
+  BucketSetNode.JSON_PROPERTY_PREVIOUS_SHARES_IN_ISSUE,
+  BucketSetNode.JSON_PROPERTY_LABEL,
+  BucketSetNode.JSON_PROPERTY_PREVIOUS_NAV,
+  BucketSetNode.JSON_PROPERTY_NET_DEALING_UNITS,
+  BucketSetNode.JSON_PROPERTY_SHARE_CLASS_DETAILS
 })
 
 public class BucketSetNode {
@@ -93,6 +98,26 @@ public class BucketSetNode {
   @JsonProperty(JSON_PROPERTY_PREVIOUS_SHARES_IN_ISSUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal previousSharesInIssue;
+
+  public static final String JSON_PROPERTY_LABEL = "label";
+  @JsonProperty(JSON_PROPERTY_LABEL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String label;
+
+  public static final String JSON_PROPERTY_PREVIOUS_NAV = "previousNav";
+  @JsonProperty(JSON_PROPERTY_PREVIOUS_NAV)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal previousNav;
+
+  public static final String JSON_PROPERTY_NET_DEALING_UNITS = "netDealingUnits";
+  @JsonProperty(JSON_PROPERTY_NET_DEALING_UNITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal netDealingUnits;
+
+  public static final String JSON_PROPERTY_SHARE_CLASS_DETAILS = "shareClassDetails";
+  @JsonProperty(JSON_PROPERTY_SHARE_CLASS_DETAILS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private BucketSetShareClassDetails shareClassDetails;
 
   public BucketSetNode() {
   }
@@ -276,6 +301,82 @@ public class BucketSetNode {
   }
 
 
+  public BucketSetNode label(String label) {
+    this.label = label;
+    return this;
+  }
+
+  /**
+   * A display label for the node: the fund&#39;s display name on the fund node, the share class&#39;s name on a share class node.
+   * @return label
+   */
+  @javax.annotation.Nullable
+  public String getLabel() {
+    return label;
+  }
+
+  public void setLabel(String label) {
+    this.label = label;
+  }
+
+
+  public BucketSetNode previousNav(java.math.BigDecimal previousNav) {
+    this.previousNav = previousNav;
+    return this;
+  }
+
+  /**
+   * The net asset value this node carried at the previous valuation point, in the fund currency. Zero at the fund&#39;s first valuation point.
+   * @return previousNav
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPreviousNav() {
+    return previousNav;
+  }
+
+  public void setPreviousNav(java.math.BigDecimal previousNav) {
+    this.previousNav = previousNav;
+  }
+
+
+  public BucketSetNode netDealingUnits(java.math.BigDecimal netDealingUnits) {
+    this.netDealingUnits = netDealingUnits;
+    return this;
+  }
+
+  /**
+   * The net units dealt for the share class over the period, so that the shares in issue are the previous shares in issue plus this. Set only on share class nodes, and only where the bucket set is unitised.
+   * @return netDealingUnits
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getNetDealingUnits() {
+    return netDealingUnits;
+  }
+
+  public void setNetDealingUnits(java.math.BigDecimal netDealingUnits) {
+    this.netDealingUnits = netDealingUnits;
+  }
+
+
+  public BucketSetNode shareClassDetails(BucketSetShareClassDetails shareClassDetails) {
+    this.shareClassDetails = shareClassDetails;
+    return this;
+  }
+
+  /**
+   * Get shareClassDetails
+   * @return shareClassDetails
+   */
+  @javax.annotation.Nullable
+  public BucketSetShareClassDetails getShareClassDetails() {
+    return shareClassDetails;
+  }
+
+  public void setShareClassDetails(BucketSetShareClassDetails shareClassDetails) {
+    this.shareClassDetails = shareClassDetails;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -293,7 +394,11 @@ public class BucketSetNode {
         (this.perUnitValue == null ? bucketSetNode.perUnitValue == null : (bucketSetNode.perUnitValue != null && this.perUnitValue.compareTo(bucketSetNode.getPerUnitValue()) == 0)) &&
         (this.sharesInIssue == null ? bucketSetNode.sharesInIssue == null : (bucketSetNode.sharesInIssue != null && this.sharesInIssue.compareTo(bucketSetNode.getSharesInIssue()) == 0)) &&
         (this.previousPerUnitValue == null ? bucketSetNode.previousPerUnitValue == null : (bucketSetNode.previousPerUnitValue != null && this.previousPerUnitValue.compareTo(bucketSetNode.getPreviousPerUnitValue()) == 0)) &&
-        (this.previousSharesInIssue == null ? bucketSetNode.previousSharesInIssue == null : (bucketSetNode.previousSharesInIssue != null && this.previousSharesInIssue.compareTo(bucketSetNode.getPreviousSharesInIssue()) == 0));
+        (this.previousSharesInIssue == null ? bucketSetNode.previousSharesInIssue == null : (bucketSetNode.previousSharesInIssue != null && this.previousSharesInIssue.compareTo(bucketSetNode.getPreviousSharesInIssue()) == 0)) &&
+        Objects.equals(this.label, bucketSetNode.label) &&
+        (this.previousNav == null ? bucketSetNode.previousNav == null : (bucketSetNode.previousNav != null && this.previousNav.compareTo(bucketSetNode.getPreviousNav()) == 0)) &&
+        (this.netDealingUnits == null ? bucketSetNode.netDealingUnits == null : (bucketSetNode.netDealingUnits != null && this.netDealingUnits.compareTo(bucketSetNode.getNetDealingUnits()) == 0)) &&
+        Objects.equals(this.shareClassDetails, bucketSetNode.shareClassDetails);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -302,7 +407,7 @@ public class BucketSetNode {
 
   @Override
  public int hashCode() {
-    return Objects.hash(nodeType, shareClassShortCode, nav, capitalRatio, buckets, perUnitValue, sharesInIssue, previousPerUnitValue, previousSharesInIssue);
+    return Objects.hash(nodeType, shareClassShortCode, nav, capitalRatio, buckets, perUnitValue, sharesInIssue, previousPerUnitValue, previousSharesInIssue, label, previousNav, netDealingUnits, shareClassDetails);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -325,6 +430,10 @@ public class BucketSetNode {
     sb.append("    sharesInIssue: ").append(toIndentedString(sharesInIssue)).append("\n");
     sb.append("    previousPerUnitValue: ").append(toIndentedString(previousPerUnitValue)).append("\n");
     sb.append("    previousSharesInIssue: ").append(toIndentedString(previousSharesInIssue)).append("\n");
+    sb.append("    label: ").append(toIndentedString(label)).append("\n");
+    sb.append("    previousNav: ").append(toIndentedString(previousNav)).append("\n");
+    sb.append("    netDealingUnits: ").append(toIndentedString(netDealingUnits)).append("\n");
+    sb.append("    shareClassDetails: ").append(toIndentedString(shareClassDetails)).append("\n");
     sb.append("}");
     return sb.toString();
   }

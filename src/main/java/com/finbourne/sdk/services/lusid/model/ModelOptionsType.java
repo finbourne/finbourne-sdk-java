@@ -43,7 +43,9 @@ public enum ModelOptionsType {
   
   HULL_WHITE_MODEL_OPTIONS("HullWhiteModelOptions"),
   
-  BOND_LOOKUP_MODEL_OPTIONS("BondLookupModelOptions");
+  BOND_LOOKUP_MODEL_OPTIONS("BondLookupModelOptions"),
+  
+  BOND_FORWARD_MODEL_OPTIONS("BondForwardModelOptions");
 
   private String value;
 

@@ -78,12 +78,12 @@ public class OrderGraphApi {
 
     /**
      * Build call for listOrderGraphBlocks
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -102,12 +102,12 @@ public class OrderGraphApi {
 
     /**
      * Build call for listOrderGraphBlocks. Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
-     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -203,12 +203,12 @@ public class OrderGraphApi {
     /**
      * ListOrderGraphBlocks: Lists blocks that pass the filter provided, and builds a summary picture of the state of their associated order entities.
      * Lists all blocks of orders, subject to the filter, along with the IDs of orders, placements, allocations and  executions in the block, the total quantities of each, and a simple text field describing the overall state.
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
      * @return ApiResponse&lt;PagedResourceListOfOrderGraphBlock&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -229,12 +229,12 @@ public class OrderGraphApi {
     /**
      * ListOrderGraphBlocks: Lists blocks that pass the filter provided, and builds a summary picture of the state of their associated order entities.
      * Lists all blocks of orders, subject to the filter, along with the IDs of orders, placements, allocations and  executions in the block, the total quantities of each, and a simple text field describing the overall state.Use any specified configuration options to override any other configuration for this request only
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
      * @return ApiResponse&lt;PagedResourceListOfOrderGraphBlock&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -255,12 +255,12 @@ public class OrderGraphApi {
     /**
      * ListOrderGraphBlocks: Lists blocks that pass the filter provided, and builds a summary picture of the state of their associated order entities. (asynchronously)
      * Lists all blocks of orders, subject to the filter, along with the IDs of orders, placements, allocations and  executions in the block, the total quantities of each, and a simple text field describing the overall state.
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -282,12 +282,12 @@ public class OrderGraphApi {
     /**
      * ListOrderGraphBlocks: Lists blocks that pass the filter provided, and builds a summary picture of the state of their associated order entities. (asynchronously)
      * Lists all blocks of orders, subject to the filter, along with the IDs of orders, placements, allocations and  executions in the block, the total quantities of each, and a simple text field describing the overall state.Use any specified configuration options to override any other configuration for this request only
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -320,7 +320,7 @@ public class OrderGraphApi {
 
         /**
          * Set asAt
-         * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
+         * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
          * @return APIlistOrderGraphBlocksRequest
          */
         public APIlistOrderGraphBlocksRequest asAt(OffsetDateTime asAt) {
@@ -330,7 +330,7 @@ public class OrderGraphApi {
 
         /**
          * Set paginationToken
-         * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+         * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
          * @return APIlistOrderGraphBlocksRequest
          */
         public APIlistOrderGraphBlocksRequest paginationToken(String paginationToken) {
@@ -350,7 +350,7 @@ public class OrderGraphApi {
 
         /**
          * Set limit
-         * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+         * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
          * @return APIlistOrderGraphBlocksRequest
          */
         public APIlistOrderGraphBlocksRequest limit(Integer limit) {
@@ -360,7 +360,7 @@ public class OrderGraphApi {
 
         /**
          * Set filter
-         * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
+         * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
          * @return APIlistOrderGraphBlocksRequest
          */
         public APIlistOrderGraphBlocksRequest filter(String filter) {
@@ -370,7 +370,7 @@ public class OrderGraphApi {
 
         /**
          * Set propertyKeys
-         * @param propertyKeys Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+         * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
          * @return APIlistOrderGraphBlocksRequest
          */
         public APIlistOrderGraphBlocksRequest propertyKeys(List<String> propertyKeys) {
@@ -523,11 +523,11 @@ public class OrderGraphApi {
      * Build call for listOrderGraphPlacementChildren
      * @param scope The parent placement&#39;s scope (required)
      * @param code The parent placement&#39;s code (required)
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -547,11 +547,11 @@ public class OrderGraphApi {
      * Build call for listOrderGraphPlacementChildren. Use any specified configuration options to override any other configuration for this request only.
      * @param scope The parent placement&#39;s scope (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The parent placement&#39;s code (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -652,11 +652,11 @@ public class OrderGraphApi {
      * Lists all child order placements, for the specified parent placement, along with the IDs of the block and order that the  placement is for, each placement&#39;s quantity, the IDs of all allocations and executions in the placement  and the total quantities of those, and a simple text field describing the overall state of the placement.
      * @param scope The parent placement&#39;s scope (required)
      * @param code The parent placement&#39;s code (required)
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @return ApiResponse&lt;PagedResourceListOfOrderGraphPlacement&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -678,11 +678,11 @@ public class OrderGraphApi {
      * Lists all child order placements, for the specified parent placement, along with the IDs of the block and order that the  placement is for, each placement&#39;s quantity, the IDs of all allocations and executions in the placement  and the total quantities of those, and a simple text field describing the overall state of the placement.Use any specified configuration options to override any other configuration for this request only
      * @param scope The parent placement&#39;s scope (required)
      * @param code The parent placement&#39;s code (required)
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @return ApiResponse&lt;PagedResourceListOfOrderGraphPlacement&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -704,11 +704,11 @@ public class OrderGraphApi {
      * Lists all child order placements, for the specified parent placement, along with the IDs of the block and order that the  placement is for, each placement&#39;s quantity, the IDs of all allocations and executions in the placement  and the total quantities of those, and a simple text field describing the overall state of the placement.
      * @param scope The parent placement&#39;s scope (required)
      * @param code The parent placement&#39;s code (required)
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -731,11 +731,11 @@ public class OrderGraphApi {
      * Lists all child order placements, for the specified parent placement, along with the IDs of the block and order that the  placement is for, each placement&#39;s quantity, the IDs of all allocations and executions in the placement  and the total quantities of those, and a simple text field describing the overall state of the placement.Use any specified configuration options to override any other configuration for this request only
      * @param scope The parent placement&#39;s scope (required)
      * @param code The parent placement&#39;s code (required)
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -769,7 +769,7 @@ public class OrderGraphApi {
 
         /**
          * Set asAt
-         * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
+         * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
          * @return APIlistOrderGraphPlacementChildrenRequest
          */
         public APIlistOrderGraphPlacementChildrenRequest asAt(OffsetDateTime asAt) {
@@ -779,7 +779,7 @@ public class OrderGraphApi {
 
         /**
          * Set paginationToken
-         * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+         * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
          * @return APIlistOrderGraphPlacementChildrenRequest
          */
         public APIlistOrderGraphPlacementChildrenRequest paginationToken(String paginationToken) {
@@ -799,7 +799,7 @@ public class OrderGraphApi {
 
         /**
          * Set limit
-         * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+         * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
          * @return APIlistOrderGraphPlacementChildrenRequest
          */
         public APIlistOrderGraphPlacementChildrenRequest limit(Integer limit) {
@@ -809,7 +809,7 @@ public class OrderGraphApi {
 
         /**
          * Set propertyKeys
-         * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+         * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
          * @return APIlistOrderGraphPlacementChildrenRequest
          */
         public APIlistOrderGraphPlacementChildrenRequest propertyKeys(List<String> propertyKeys) {
@@ -952,12 +952,12 @@ public class OrderGraphApi {
     }
     /**
      * Build call for listOrderGraphPlacements
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -975,12 +975,12 @@ public class OrderGraphApi {
 
     /**
      * Build call for listOrderGraphPlacements. Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1071,12 +1071,12 @@ public class OrderGraphApi {
     /**
      * ListOrderGraphPlacements: Lists placements that pass the filter provided, and builds a summary picture of the state of their associated order entities.
      * Lists all order placements, subject to the filter, along with the IDs of the block and order that the  placement is for, each placement&#39;s quantity, the IDs of all allocations and executions in the placement  and the total quantities of those, and a simple text field describing the overall state of the placement.
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @return ApiResponse&lt;PagedResourceListOfOrderGraphPlacement&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1096,12 +1096,12 @@ public class OrderGraphApi {
     /**
      * ListOrderGraphPlacements: Lists placements that pass the filter provided, and builds a summary picture of the state of their associated order entities.
      * Lists all order placements, subject to the filter, along with the IDs of the block and order that the  placement is for, each placement&#39;s quantity, the IDs of all allocations and executions in the placement  and the total quantities of those, and a simple text field describing the overall state of the placement.Use any specified configuration options to override any other configuration for this request only
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @return ApiResponse&lt;PagedResourceListOfOrderGraphPlacement&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1121,12 +1121,12 @@ public class OrderGraphApi {
     /**
      * ListOrderGraphPlacements: Lists placements that pass the filter provided, and builds a summary picture of the state of their associated order entities. (asynchronously)
      * Lists all order placements, subject to the filter, along with the IDs of the block and order that the  placement is for, each placement&#39;s quantity, the IDs of all allocations and executions in the placement  and the total quantities of those, and a simple text field describing the overall state of the placement.
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1147,12 +1147,12 @@ public class OrderGraphApi {
     /**
      * ListOrderGraphPlacements: Lists placements that pass the filter provided, and builds a summary picture of the state of their associated order entities. (asynchronously)
      * Lists all order placements, subject to the filter, along with the IDs of the block and order that the  placement is for, each placement&#39;s quantity, the IDs of all allocations and executions in the placement  and the total quantities of those, and a simple text field describing the overall state of the placement.Use any specified configuration options to override any other configuration for this request only
-     * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-     * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+     * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+     * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
      * @param sortBy A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-     * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
-     * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+     * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+     * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
+     * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1183,7 +1183,7 @@ public class OrderGraphApi {
 
         /**
          * Set asAt
-         * @param asAt See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
+         * @param asAt See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
          * @return APIlistOrderGraphPlacementsRequest
          */
         public APIlistOrderGraphPlacementsRequest asAt(OffsetDateTime asAt) {
@@ -1193,7 +1193,7 @@ public class OrderGraphApi {
 
         /**
          * Set paginationToken
-         * @param paginationToken See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+         * @param paginationToken See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
          * @return APIlistOrderGraphPlacementsRequest
          */
         public APIlistOrderGraphPlacementsRequest paginationToken(String paginationToken) {
@@ -1213,7 +1213,7 @@ public class OrderGraphApi {
 
         /**
          * Set limit
-         * @param limit See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+         * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
          * @return APIlistOrderGraphPlacementsRequest
          */
         public APIlistOrderGraphPlacementsRequest limit(Integer limit) {
@@ -1223,7 +1223,7 @@ public class OrderGraphApi {
 
         /**
          * Set filter
-         * @param filter See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional, default to )
+         * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
          * @return APIlistOrderGraphPlacementsRequest
          */
         public APIlistOrderGraphPlacementsRequest filter(String filter) {
@@ -1233,7 +1233,7 @@ public class OrderGraphApi {
 
         /**
          * Set propertyKeys
-         * @param propertyKeys Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+         * @param propertyKeys Must be placement properties. See https://support.lusid.com/docs/properties (optional)
          * @return APIlistOrderGraphPlacementsRequest
          */
         public APIlistOrderGraphPlacementsRequest propertyKeys(List<String> propertyKeys) {

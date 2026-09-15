@@ -18,6 +18,7 @@ import com.finbourne.sdk.services.workflow.model.HealthCheck;
 import com.finbourne.sdk.services.workflow.model.HorizonIntegration;
 import com.finbourne.sdk.services.workflow.model.LuminesceView;
 import com.finbourne.sdk.services.workflow.model.LusidEntityDataQualityCheck;
+import com.finbourne.sdk.services.workflow.model.PortfolioHoldingDataQualityCheck;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.SchedulerJob;
 import com.finbourne.sdk.services.workflow.model.Sleep;
@@ -125,6 +126,16 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for LusidEntityDataQualityCheck failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'LusidEntityDataQualityCheck'", e);
             }
+            // deserialize PortfolioHoldingDataQualityCheck
+            try {
+                deserialized = JSON.getMapper().treeToValue(node, PortfolioHoldingDataQualityCheck.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'PortfolioHoldingDataQualityCheck'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for PortfolioHoldingDataQualityCheck failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'PortfolioHoldingDataQualityCheck'", e);
+            }
             // deserialize SchedulerJob
             try {
                 deserialized = JSON.getMapper().treeToValue(node, SchedulerJob.class);
@@ -173,6 +184,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
         schemas.put("HorizonIntegration", HorizonIntegration.class);
         schemas.put("LuminesceView", LuminesceView.class);
         schemas.put("LusidEntityDataQualityCheck", LusidEntityDataQualityCheck.class);
+        schemas.put("PortfolioHoldingDataQualityCheck", PortfolioHoldingDataQualityCheck.class);
         schemas.put("SchedulerJob", SchedulerJob.class);
         schemas.put("Sleep", Sleep.class);
     }
@@ -185,7 +197,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, SchedulerJob, Sleep
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -221,6 +233,11 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             return;
         }
 
+        if (instance instanceof PortfolioHoldingDataQualityCheck) {
+            super.setActualInstance(instance);
+            return;
+        }
+
         if (instance instanceof SchedulerJob) {
             super.setActualInstance(instance);
             return;
@@ -231,14 +248,14 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep");
+        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, SchedulerJob, Sleep");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, SchedulerJob, Sleep
      *
-     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, SchedulerJob, Sleep)
+     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, SchedulerJob, Sleep)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -305,6 +322,16 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
      */
     public LusidEntityDataQualityCheck getLusidEntityDataQualityCheck() throws ClassCastException {
         return (LusidEntityDataQualityCheck)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `PortfolioHoldingDataQualityCheck`. If the actual instance is not `PortfolioHoldingDataQualityCheck`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `PortfolioHoldingDataQualityCheck`
+     * @throws ClassCastException if the instance is not `PortfolioHoldingDataQualityCheck`
+     */
+    public PortfolioHoldingDataQualityCheck getPortfolioHoldingDataQualityCheck() throws ClassCastException {
+        return (PortfolioHoldingDataQualityCheck)super.getActualInstance();
     }
     /**
      * Get the actual instance of `SchedulerJob`. If the actual instance is not `SchedulerJob`,

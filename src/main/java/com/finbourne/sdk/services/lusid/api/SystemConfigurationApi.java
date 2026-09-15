@@ -487,7 +487,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EXPERIMENTAL] CreateSideDefinition: Create side definition
-     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.
+     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.
      * @param sideConfigurationDataRequest The definition of the side. (optional)
      * @return ApiResponse&lt;TransactionSetConfigurationData&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -507,7 +507,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EXPERIMENTAL] CreateSideDefinition: Create side definition
-     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.Use any specified configuration options to override any other configuration for this request only
+     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.Use any specified configuration options to override any other configuration for this request only
      * @param sideConfigurationDataRequest The definition of the side. (optional)
      * @return ApiResponse&lt;TransactionSetConfigurationData&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -527,7 +527,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EXPERIMENTAL] CreateSideDefinition: Create side definition (asynchronously)
-     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.
+     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.
      * @param sideConfigurationDataRequest The definition of the side. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -548,7 +548,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EXPERIMENTAL] CreateSideDefinition: Create side definition (asynchronously)
-     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.Use any specified configuration options to override any other configuration for this request only
+     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.Use any specified configuration options to override any other configuration for this request only
      * @param sideConfigurationDataRequest The definition of the side. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -701,7 +701,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EXPERIMENTAL] CreateSideDefinition: Create side definition
-     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.
+     * Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.
      * @return APIcreateSideDefinitionRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1447,7 +1447,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types
-     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.
+     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
      * @return ApiResponse&lt;TransactionSetConfigurationData&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1467,7 +1467,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types
-     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.Use any specified configuration options to override any other configuration for this request only
+     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
      * @return ApiResponse&lt;TransactionSetConfigurationData&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1487,7 +1487,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types (asynchronously)
-     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.
+     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1508,7 +1508,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types (asynchronously)
-     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.Use any specified configuration options to override any other configuration for this request only
+     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1661,7 +1661,7 @@ public class SystemConfigurationApi {
 
     /**
      * [EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types
-     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.
+     * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.
      * @return APIlistConfigurationTransactionTypesRequest
      * @http.response.details
      <table summary="Response Details" border="1">

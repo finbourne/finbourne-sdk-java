@@ -1639,7 +1639,7 @@ public class LegacyComplianceApi {
 
     /**
      * [EXPERIMENTAL] ListLegacyComplianceRules: List compliance rules, with optional filtering.
-     * For more information about filtering results,  see https://support.lusid.com/knowledgebase/article/KA-01914.
+     * For more information about filtering results,  see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
      * @param effectiveAt The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID  system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
      * @param page The pagination token to use to continue listing entities; this value is returned from the previous call. If  a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the  original request. (optional)
@@ -1663,7 +1663,7 @@ public class LegacyComplianceApi {
 
     /**
      * [EXPERIMENTAL] ListLegacyComplianceRules: List compliance rules, with optional filtering.
-     * For more information about filtering results,  see https://support.lusid.com/knowledgebase/article/KA-01914.Use any specified configuration options to override any other configuration for this request only
+     * For more information about filtering results,  see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID  system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
      * @param page The pagination token to use to continue listing entities; this value is returned from the previous call. If  a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the  original request. (optional)
@@ -1687,7 +1687,7 @@ public class LegacyComplianceApi {
 
     /**
      * [EXPERIMENTAL] ListLegacyComplianceRules: List compliance rules, with optional filtering. (asynchronously)
-     * For more information about filtering results,  see https://support.lusid.com/knowledgebase/article/KA-01914.
+     * For more information about filtering results,  see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
      * @param effectiveAt The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID  system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
      * @param page The pagination token to use to continue listing entities; this value is returned from the previous call. If  a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the  original request. (optional)
@@ -1712,7 +1712,7 @@ public class LegacyComplianceApi {
 
     /**
      * [EXPERIMENTAL] ListLegacyComplianceRules: List compliance rules, with optional filtering. (asynchronously)
-     * For more information about filtering results,  see https://support.lusid.com/knowledgebase/article/KA-01914.Use any specified configuration options to override any other configuration for this request only
+     * For more information about filtering results,  see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID  system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
      * @param page The pagination token to use to continue listing entities; this value is returned from the previous call. If  a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the  original request. (optional)
@@ -1913,7 +1913,7 @@ public class LegacyComplianceApi {
 
     /**
      * [EXPERIMENTAL] ListLegacyComplianceRules: List compliance rules, with optional filtering.
-     * For more information about filtering results,  see https://support.lusid.com/knowledgebase/article/KA-01914.
+     * For more information about filtering results,  see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
      * @return APIlistLegacyComplianceRulesRequest
      * @http.response.details
      <table summary="Response Details" border="1">

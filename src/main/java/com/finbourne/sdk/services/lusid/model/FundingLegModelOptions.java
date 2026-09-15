@@ -31,10 +31,10 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * FundingLegOptions
+ * FundingLegModelOptions
  */
 @JsonPropertyOrder({
-  FundingLegOptions.JSON_PROPERTY_EXPECTED_FUNDING_LEG_NOTIONAL
+  FundingLegModelOptions.JSON_PROPERTY_EXPECTED_FUNDING_LEG_NOTIONAL
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -43,16 +43,16 @@ import com.finbourne.sdk.JSON;
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = "modelOptionsType", visible = true)
 
-public class FundingLegOptions extends ModelOptions {
+public class FundingLegModelOptions extends ModelOptions {
   public static final String JSON_PROPERTY_EXPECTED_FUNDING_LEG_NOTIONAL = "expectedFundingLegNotional";
   @JsonProperty(JSON_PROPERTY_EXPECTED_FUNDING_LEG_NOTIONAL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String expectedFundingLegNotional;
 
-  public FundingLegOptions() {
+  public FundingLegModelOptions() {
   }
 
-  public FundingLegOptions expectedFundingLegNotional(String expectedFundingLegNotional) {
+  public FundingLegModelOptions expectedFundingLegNotional(String expectedFundingLegNotional) {
     this.expectedFundingLegNotional = expectedFundingLegNotional;
     return this;
   }
@@ -79,8 +79,8 @@ public class FundingLegOptions extends ModelOptions {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    FundingLegOptions fundingLegOptions = (FundingLegOptions) o;
-    return Objects.equals(this.expectedFundingLegNotional, fundingLegOptions.expectedFundingLegNotional) &&
+    FundingLegModelOptions fundingLegModelOptions = (FundingLegModelOptions) o;
+    return Objects.equals(this.expectedFundingLegNotional, fundingLegModelOptions.expectedFundingLegNotional) &&
         super.equals(o);
   }
 
@@ -92,7 +92,7 @@ public class FundingLegOptions extends ModelOptions {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class FundingLegOptions {\n");
+    sb.append("class FundingLegModelOptions {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    expectedFundingLegNotional: ").append(toIndentedString(expectedFundingLegNotional)).append("\n");
     sb.append("}");
@@ -112,18 +112,18 @@ public class FundingLegOptions extends ModelOptions {
 
 
   /**
-   * Create an instance of FundingLegOptions given an JSON string
+   * Create an instance of FundingLegModelOptions given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of FundingLegOptions
-   * @throws java.io.IOException if the JSON string is invalid with respect to FundingLegOptions
+   * @return An instance of FundingLegModelOptions
+   * @throws java.io.IOException if the JSON string is invalid with respect to FundingLegModelOptions
    */
-  public static FundingLegOptions fromJson(String jsonString) throws java.io.IOException {
-    return JSON.getMapper().readValue(jsonString, FundingLegOptions.class);
+  public static FundingLegModelOptions fromJson(String jsonString) throws java.io.IOException {
+    return JSON.getMapper().readValue(jsonString, FundingLegModelOptions.class);
   }
 
   /**
-   * Convert an instance of FundingLegOptions to an JSON string
+   * Convert an instance of FundingLegModelOptions to an JSON string
    *
    * @return JSON string
    */

@@ -54,7 +54,7 @@ public class AddressDefinition {
   private String displayName;
 
   /**
-   * Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.
+   * Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json, ResultND.
    */
   public enum TypeEnum {
     STRING("String"),
@@ -75,7 +75,9 @@ public class AddressDefinition {
     
     RESULT2_D("Result2D"),
     
-    JSON("Json");
+    JSON("Json"),
+    
+    RESULT_ND("ResultND");
 
     private String value;
 
@@ -161,7 +163,7 @@ public class AddressDefinition {
   }
 
   /**
-   * Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.
+   * Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json, ResultND.
    * @return type
    */
   @javax.annotation.Nullable
@@ -264,7 +266,7 @@ public class AddressDefinition {
   }
 
   /**
-   * For keys whose type is a labelled vector or matrix (Result1D/Result2D), describes what the  labels on each axis mean. Null for scalar results and for shaped results whose axes have  not been described.
+   * For keys whose type is a labelled vector or matrix (Result1D/Result2D), describes what the  labels on each axis mean. Null for scalar results and for shaped results whose axes have  not been described. Note the constructor below collapses an empty axes list to null, so a  described-but-empty axis set is indistinguishable from an undescribed one.
    * @return axes
    */
   @javax.annotation.Nullable

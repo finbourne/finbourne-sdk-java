@@ -30,13 +30,13 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Response from a replay transactions operation containing the CSV output.
+ * Response from a replay transactions operation. For DryRun, Finbourne.Horizon.Integrations.Web.Dto.Integrations.TradePublicationFramework.Response.ReplayTransactionsResponse.PayloadOutput carries the preview payload in the instance&#39;s configured output format (CSV or XML); for Committed it is empty.
  */
 @JsonPropertyOrder({
   ReplayTransactionsResponse.JSON_PROPERTY_BATCH_REFERENCE_ID,
   ReplayTransactionsResponse.JSON_PROPERTY_MODE,
   ReplayTransactionsResponse.JSON_PROPERTY_TRANSACTION_COUNT,
-  ReplayTransactionsResponse.JSON_PROPERTY_CSV_OUTPUT,
+  ReplayTransactionsResponse.JSON_PROPERTY_PAYLOAD_OUTPUT,
   ReplayTransactionsResponse.JSON_PROPERTY_MESSAGE
 })
 
@@ -56,10 +56,10 @@ public class ReplayTransactionsResponse {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Integer transactionCount;
 
-  public static final String JSON_PROPERTY_CSV_OUTPUT = "csvOutput";
-  @JsonProperty(JSON_PROPERTY_CSV_OUTPUT)
+  public static final String JSON_PROPERTY_PAYLOAD_OUTPUT = "payloadOutput";
+  @JsonProperty(JSON_PROPERTY_PAYLOAD_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String csvOutput;
+  private String payloadOutput;
 
   public static final String JSON_PROPERTY_MESSAGE = "message";
   @JsonProperty(JSON_PROPERTY_MESSAGE)
@@ -126,22 +126,22 @@ public class ReplayTransactionsResponse {
   }
 
 
-  public ReplayTransactionsResponse csvOutput(String csvOutput) {
-    this.csvOutput = csvOutput;
+  public ReplayTransactionsResponse payloadOutput(String payloadOutput) {
+    this.payloadOutput = payloadOutput;
     return this;
   }
 
   /**
-   * Get csvOutput
-   * @return csvOutput
+   * Get payloadOutput
+   * @return payloadOutput
    */
   @javax.annotation.Nonnull
-  public String getCsvOutput() {
-    return csvOutput;
+  public String getPayloadOutput() {
+    return payloadOutput;
   }
 
-  public void setCsvOutput(String csvOutput) {
-    this.csvOutput = csvOutput;
+  public void setPayloadOutput(String payloadOutput) {
+    this.payloadOutput = payloadOutput;
   }
 
 
@@ -176,13 +176,13 @@ public class ReplayTransactionsResponse {
     return Objects.equals(this.batchReferenceId, replayTransactionsResponse.batchReferenceId) &&
         Objects.equals(this.mode, replayTransactionsResponse.mode) &&
         Objects.equals(this.transactionCount, replayTransactionsResponse.transactionCount) &&
-        Objects.equals(this.csvOutput, replayTransactionsResponse.csvOutput) &&
+        Objects.equals(this.payloadOutput, replayTransactionsResponse.payloadOutput) &&
         Objects.equals(this.message, replayTransactionsResponse.message);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(batchReferenceId, mode, transactionCount, csvOutput, message);
+    return Objects.hash(batchReferenceId, mode, transactionCount, payloadOutput, message);
   }
 
   @Override
@@ -192,7 +192,7 @@ public class ReplayTransactionsResponse {
     sb.append("    batchReferenceId: ").append(toIndentedString(batchReferenceId)).append("\n");
     sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
     sb.append("    transactionCount: ").append(toIndentedString(transactionCount)).append("\n");
-    sb.append("    csvOutput: ").append(toIndentedString(csvOutput)).append("\n");
+    sb.append("    payloadOutput: ").append(toIndentedString(payloadOutput)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("}");
     return sb.toString();

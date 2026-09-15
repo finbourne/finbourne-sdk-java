@@ -45,7 +45,8 @@ import com.finbourne.sdk.JSON;
   ChangeEvent.JSON_PROPERTY_CHANGE_TYPE,
   ChangeEvent.JSON_PROPERTY_TERM_TARGET,
   ChangeEvent.JSON_PROPERTY_TERM_TARGET_IDENTIFIER,
-  ChangeEvent.JSON_PROPERTY_ADDITIONAL_INFORMATION
+  ChangeEvent.JSON_PROPERTY_ADDITIONAL_INFORMATION,
+  ChangeEvent.JSON_PROPERTY_CARRY_RELATIONSHIPS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -94,6 +95,11 @@ public class ChangeEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_ADDITIONAL_INFORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String additionalInformation;
+
+  public static final String JSON_PROPERTY_CARRY_RELATIONSHIPS = "carryRelationships";
+  @JsonProperty(JSON_PROPERTY_CARRY_RELATIONSHIPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String carryRelationships;
 
   public ChangeEvent() {
   }
@@ -250,6 +256,25 @@ public class ChangeEvent extends InstrumentEvent {
   }
 
 
+  public ChangeEvent carryRelationships(String carryRelationships) {
+    this.carryRelationships = carryRelationships;
+    return this;
+  }
+
+  /**
+   * Whether, and in which direction, the old instrument&#39;s Relationships are carried onto the new  instrument. One of \&quot;None\&quot;, \&quot;Outward\&quot; or \&quot;Both\&quot;; defaults to \&quot;Outward\&quot; when omitted.                Relationships resolve to the instrument entity, so nothing pointing at the old instrument  applies to the new one. This is a caller choice because relationship meaning is client-authored:  an index-to-constituent link should usually follow a rename, a historical order-to-instrument  link should not. Available values: None, Outward, Both.
+   * @return carryRelationships
+   */
+  @javax.annotation.Nullable
+  public String getCarryRelationships() {
+    return carryRelationships;
+  }
+
+  public void setCarryRelationships(String carryRelationships) {
+    this.carryRelationships = carryRelationships;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -267,6 +292,7 @@ public class ChangeEvent extends InstrumentEvent {
         Objects.equals(this.termTarget, changeEvent.termTarget) &&
         Objects.equals(this.termTargetIdentifier, changeEvent.termTargetIdentifier) &&
         Objects.equals(this.additionalInformation, changeEvent.additionalInformation) &&
+        Objects.equals(this.carryRelationships, changeEvent.carryRelationships) &&
         super.equals(o);
   }
 
@@ -276,7 +302,7 @@ public class ChangeEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(recordDate, paymentDate, newInstrument, unitsRatio, changeType, termTarget, termTargetIdentifier, additionalInformation, super.hashCode());
+    return Objects.hash(recordDate, paymentDate, newInstrument, unitsRatio, changeType, termTarget, termTargetIdentifier, additionalInformation, carryRelationships, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -299,6 +325,7 @@ public class ChangeEvent extends InstrumentEvent {
     sb.append("    termTarget: ").append(toIndentedString(termTarget)).append("\n");
     sb.append("    termTargetIdentifier: ").append(toIndentedString(termTargetIdentifier)).append("\n");
     sb.append("    additionalInformation: ").append(toIndentedString(additionalInformation)).append("\n");
+    sb.append("    carryRelationships: ").append(toIndentedString(carryRelationships)).append("\n");
     sb.append("}");
     return sb.toString();
   }

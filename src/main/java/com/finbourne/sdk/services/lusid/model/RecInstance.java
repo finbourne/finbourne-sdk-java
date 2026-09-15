@@ -16,7 +16,7 @@ import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.RecClosedPeriods;
 import com.finbourne.sdk.services.lusid.model.RecDatesReconciled;
 import com.finbourne.sdk.services.lusid.model.RecInstanceId;
-import com.finbourne.sdk.services.lusid.model.RecRunLogEntry;
+import com.finbourne.sdk.services.lusid.model.RecRunLog;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
@@ -24,7 +24,9 @@ import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -42,7 +44,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The expanded view of a rec instance: its identity, lifecycle status, lock state, closed periods  (for Closed Period windows) and the time-series of runs in the run log.
+ * The expanded view of a rec instance: its identity, lifecycle status, lock state, closed periods  (for Closed Period windows) and, per rec type, the time-series of runs in that rec type&#39;s run log.
  */
 @JsonPropertyOrder({
   RecInstance.JSON_PROPERTY_ID,
@@ -53,7 +55,7 @@ import com.finbourne.sdk.JSON;
   RecInstance.JSON_PROPERTY_AS_AT_LOCKED,
   RecInstance.JSON_PROPERTY_DATES_LOCKED,
   RecInstance.JSON_PROPERTY_CLOSED_PERIODS,
-  RecInstance.JSON_PROPERTY_RUN_LOG,
+  RecInstance.JSON_PROPERTY_RUN_LOGS,
   RecInstance.JSON_PROPERTY_HREF,
   RecInstance.JSON_PROPERTY_VERSION,
   RecInstance.JSON_PROPERTY_LINKS
@@ -100,10 +102,10 @@ public class RecInstance {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private RecClosedPeriods closedPeriods;
 
-  public static final String JSON_PROPERTY_RUN_LOG = "runLog";
-  @JsonProperty(JSON_PROPERTY_RUN_LOG)
+  public static final String JSON_PROPERTY_RUN_LOGS = "runLogs";
+  @JsonProperty(JSON_PROPERTY_RUN_LOGS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<RecRunLogEntry> runLog = new ArrayList<>();
+  private Map<String, RecRunLog> runLogs = new HashMap<>();
 
   public static final String JSON_PROPERTY_HREF = "href";
   @JsonProperty(JSON_PROPERTY_HREF)
@@ -275,30 +277,30 @@ public class RecInstance {
   }
 
 
-  public RecInstance runLog(List<RecRunLogEntry> runLog) {
-    this.runLog = runLog;
+  public RecInstance runLogs(Map<String, RecRunLog> runLogs) {
+    this.runLogs = runLogs;
     return this;
   }
 
-  public RecInstance addRunLogItem(RecRunLogEntry runLogItem) {
-    if (this.runLog == null) {
-      this.runLog = new ArrayList<>();
+  public RecInstance putRunLogsItem(String key, RecRunLog runLogsItem) {
+    if (this.runLogs == null) {
+      this.runLogs = new HashMap<>();
     }
-    this.runLog.add(runLogItem);
+    this.runLogs.put(key, runLogsItem);
     return this;
   }
 
   /**
-   * A chronologically ordered list of all runs on the instance. Always contains at least one entry.
-   * @return runLog
+   * The instance&#39;s run history, keyed by rec type. Contains an entry for each rec type that has produced a result set, so a run appears only once it has completed or failed. Empty while the instance&#39;s first run is still in flight.
+   * @return runLogs
    */
   @javax.annotation.Nonnull
-  public List<RecRunLogEntry> getRunLog() {
-    return runLog;
+  public Map<String, RecRunLog> getRunLogs() {
+    return runLogs;
   }
 
-  public void setRunLog(List<RecRunLogEntry> runLog) {
-    this.runLog = runLog;
+  public void setRunLogs(Map<String, RecRunLog> runLogs) {
+    this.runLogs = runLogs;
   }
 
 
@@ -384,7 +386,7 @@ public class RecInstance {
         Objects.equals(this.asAtLocked, recInstance.asAtLocked) &&
         Objects.equals(this.datesLocked, recInstance.datesLocked) &&
         Objects.equals(this.closedPeriods, recInstance.closedPeriods) &&
-        Objects.equals(this.runLog, recInstance.runLog) &&
+        Objects.equals(this.runLogs, recInstance.runLogs) &&
         Objects.equals(this.href, recInstance.href) &&
         Objects.equals(this.version, recInstance.version) &&
         Objects.equals(this.links, recInstance.links);
@@ -396,7 +398,7 @@ public class RecInstance {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, recDefinitionId, recDefinitionDisplayName, asAtInstantiated, status, asAtLocked, datesLocked, closedPeriods, runLog, href, version, links);
+    return Objects.hash(id, recDefinitionId, recDefinitionDisplayName, asAtInstantiated, status, asAtLocked, datesLocked, closedPeriods, runLogs, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -418,7 +420,7 @@ public class RecInstance {
     sb.append("    asAtLocked: ").append(toIndentedString(asAtLocked)).append("\n");
     sb.append("    datesLocked: ").append(toIndentedString(datesLocked)).append("\n");
     sb.append("    closedPeriods: ").append(toIndentedString(closedPeriods)).append("\n");
-    sb.append("    runLog: ").append(toIndentedString(runLog)).append("\n");
+    sb.append("    runLogs: ").append(toIndentedString(runLogs)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");

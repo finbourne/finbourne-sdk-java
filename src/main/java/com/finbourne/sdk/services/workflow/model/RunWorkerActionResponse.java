@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.workflow.model;
 
 import com.finbourne.sdk.services.workflow.model.FieldMapping;
+import com.finbourne.sdk.services.workflow.model.ReRunConfiguration;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.ResultantChildTaskConfiguration;
 import com.finbourne.sdk.services.workflow.model.WorkerStatusTriggers;
@@ -49,6 +50,7 @@ import com.finbourne.sdk.JSON;
   RunWorkerActionResponse.JSON_PROPERTY_WORKER_PARAMETERS,
   RunWorkerActionResponse.JSON_PROPERTY_WORKER_STATUS_TRIGGERS,
   RunWorkerActionResponse.JSON_PROPERTY_CHILD_TASK_CONFIGURATIONS,
+  RunWorkerActionResponse.JSON_PROPERTY_RE_RUN_CONFIGURATIONS,
   RunWorkerActionResponse.JSON_PROPERTY_WORKER_TIMEOUT
 })
 
@@ -114,6 +116,11 @@ public class RunWorkerActionResponse {
   @JsonProperty(JSON_PROPERTY_CHILD_TASK_CONFIGURATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ResultantChildTaskConfiguration> childTaskConfigurations;
+
+  public static final String JSON_PROPERTY_RE_RUN_CONFIGURATIONS = "reRunConfigurations";
+  @JsonProperty(JSON_PROPERTY_RE_RUN_CONFIGURATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ReRunConfiguration> reRunConfigurations;
 
   public static final String JSON_PROPERTY_WORKER_TIMEOUT = "workerTimeout";
   @JsonProperty(JSON_PROPERTY_WORKER_TIMEOUT)
@@ -253,6 +260,33 @@ public class RunWorkerActionResponse {
   }
 
 
+  public RunWorkerActionResponse reRunConfigurations(List<ReRunConfiguration> reRunConfigurations) {
+    this.reRunConfigurations = reRunConfigurations;
+    return this;
+  }
+
+  public RunWorkerActionResponse addReRunConfigurationsItem(ReRunConfiguration reRunConfigurationsItem) {
+    if (this.reRunConfigurations == null) {
+      this.reRunConfigurations = new ArrayList<>();
+    }
+    this.reRunConfigurations.add(reRunConfigurationsItem);
+    return this;
+  }
+
+  /**
+   * Configuration governing how re-run results are reconciled against existing child tasks from a previous run of this action against the same parent Task instance
+   * @return reRunConfigurations
+   */
+  @javax.annotation.Nullable
+  public List<ReRunConfiguration> getReRunConfigurations() {
+    return reRunConfigurations;
+  }
+
+  public void setReRunConfigurations(List<ReRunConfiguration> reRunConfigurations) {
+    this.reRunConfigurations = reRunConfigurations;
+  }
+
+
   public RunWorkerActionResponse workerTimeout(Integer workerTimeout) {
     this.workerTimeout = workerTimeout;
     return this;
@@ -287,6 +321,7 @@ public class RunWorkerActionResponse {
         Objects.equals(this.workerParameters, runWorkerActionResponse.workerParameters) &&
         Objects.equals(this.workerStatusTriggers, runWorkerActionResponse.workerStatusTriggers) &&
         Objects.equals(this.childTaskConfigurations, runWorkerActionResponse.childTaskConfigurations) &&
+        Objects.equals(this.reRunConfigurations, runWorkerActionResponse.reRunConfigurations) &&
         Objects.equals(this.workerTimeout, runWorkerActionResponse.workerTimeout);
   }
 
@@ -296,7 +331,7 @@ public class RunWorkerActionResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(type, workerId, workerAsAt, workerParameters, workerStatusTriggers, childTaskConfigurations, workerTimeout);
+    return Objects.hash(type, workerId, workerAsAt, workerParameters, workerStatusTriggers, childTaskConfigurations, reRunConfigurations, workerTimeout);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -316,6 +351,7 @@ public class RunWorkerActionResponse {
     sb.append("    workerParameters: ").append(toIndentedString(workerParameters)).append("\n");
     sb.append("    workerStatusTriggers: ").append(toIndentedString(workerStatusTriggers)).append("\n");
     sb.append("    childTaskConfigurations: ").append(toIndentedString(childTaskConfigurations)).append("\n");
+    sb.append("    reRunConfigurations: ").append(toIndentedString(reRunConfigurations)).append("\n");
     sb.append("    workerTimeout: ").append(toIndentedString(workerTimeout)).append("\n");
     sb.append("}");
     return sb.toString();

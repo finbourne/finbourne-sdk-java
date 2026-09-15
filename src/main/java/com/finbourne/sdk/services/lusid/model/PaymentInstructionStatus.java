@@ -64,7 +64,7 @@ public class PaymentInstructionStatus {
   }
 
   /**
-   * The current status value. One of: Created, Staged, Released, Instructed, Sent, Cancelled.
+   * The current status value. One of: Created, Staged, Released, Instructed, Sent, Cancelled, Failed.
    * @return currentValue
    */
   @javax.annotation.Nonnull

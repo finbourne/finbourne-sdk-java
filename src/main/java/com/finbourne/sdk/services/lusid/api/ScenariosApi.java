@@ -35,6 +35,7 @@ import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfGetScenarioResponse;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfVersion;
+import com.finbourne.sdk.services.lusid.model.ResourceListOfScenarioTemplateDefinition;
 import com.finbourne.sdk.services.lusid.model.ScenarioPreviewRequest;
 import com.finbourne.sdk.services.lusid.model.ScenarioPreviewResponse;
 import com.finbourne.sdk.services.lusid.model.UpsertScenarioRequest;
@@ -186,7 +187,7 @@ public class ScenariosApi {
 
     /**
      * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
-     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Use ListScenarioTemplates to discover the available templates and, for each, the parameters it  accepts, their defaults and their units. A parameter the template does not read is rejected  rather than ignored, and parameter names are case-sensitive.
      * @param scope The scope in which to create the scenario (required)
      * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
      * @return ApiResponse&lt;UpsertSingleStructuredDataResponse&gt;
@@ -207,7 +208,7 @@ public class ScenariosApi {
 
     /**
      * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
-     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.Use any specified configuration options to override any other configuration for this request only
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Use ListScenarioTemplates to discover the available templates and, for each, the parameters it  accepts, their defaults and their units. A parameter the template does not read is rejected  rather than ignored, and parameter names are case-sensitive.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope in which to create the scenario (required)
      * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
      * @return ApiResponse&lt;UpsertSingleStructuredDataResponse&gt;
@@ -228,7 +229,7 @@ public class ScenariosApi {
 
     /**
      * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template. (asynchronously)
-     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Use ListScenarioTemplates to discover the available templates and, for each, the parameters it  accepts, their defaults and their units. A parameter the template does not read is rejected  rather than ignored, and parameter names are case-sensitive.
      * @param scope The scope in which to create the scenario (required)
      * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -250,7 +251,7 @@ public class ScenariosApi {
 
     /**
      * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template. (asynchronously)
-     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.Use any specified configuration options to override any other configuration for this request only
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Use ListScenarioTemplates to discover the available templates and, for each, the parameters it  accepts, their defaults and their units. A parameter the template does not read is rejected  rather than ignored, and parameter names are case-sensitive.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope in which to create the scenario (required)
      * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -397,7 +398,7 @@ public class ScenariosApi {
 
     /**
      * [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
-     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+     * Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Use ListScenarioTemplates to discover the available templates and, for each, the parameters it  accepts, their defaults and their units. A parameter the template does not read is rejected  rather than ignored, and parameter names are case-sensitive.
      * @param scope The scope in which to create the scenario (required)
      * @param createScenarioFromTemplateRequest The template, code and parameters to create the scenario from (required)
      * @return APIcreateScenarioFromTemplateRequest
@@ -1084,6 +1085,288 @@ public class ScenariosApi {
      */
     public APIgetScenarioRequest getScenario(String scope, String code) {
         return new APIgetScenarioRequest(scope, code);
+    }
+    /**
+     * Build call for listScenarioTemplates
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listScenarioTemplatesCall(final ApiCallback _callback) throws ApiException {
+        return listScenarioTemplatesCall( _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listScenarioTemplates
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listScenarioTemplatesCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/scenarios/$templates";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listScenarioTemplatesValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listScenarioTemplatesCall(_callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates.
+     * Lists every template CreateScenarioFromTemplate accepts, with each template&#39;s parameters: the  parameter&#39;s name (case-sensitive), whether it is required, what it means, the default used when  it is omitted and the unit a numeric value is read in. The units differ between templates -  basis points, percentage points or a fraction - so read them per template rather than assuming  one convention. The list is static application metadata: it does not vary by tenant, scope or  date, so the endpoint takes no parameters.
+     * @return ApiResponse&lt;ResourceListOfScenarioTemplateDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfScenarioTemplateDefinition> listScenarioTemplatesWithHttpInfo() throws ApiException {
+        HttpRequest localVarCall = listScenarioTemplatesValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfScenarioTemplateDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates.
+     * Lists every template CreateScenarioFromTemplate accepts, with each template&#39;s parameters: the  parameter&#39;s name (case-sensitive), whether it is required, what it means, the default used when  it is omitted and the unit a numeric value is read in. The units differ between templates -  basis points, percentage points or a fraction - so read them per template rather than assuming  one convention. The list is static application metadata: it does not vary by tenant, scope or  date, so the endpoint takes no parameters.Use any specified configuration options to override any other configuration for this request only
+     * @return ApiResponse&lt;ResourceListOfScenarioTemplateDefinition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfScenarioTemplateDefinition> listScenarioTemplatesWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listScenarioTemplatesValidateBeforeCall(null, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfScenarioTemplateDefinition>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates. (asynchronously)
+     * Lists every template CreateScenarioFromTemplate accepts, with each template&#39;s parameters: the  parameter&#39;s name (case-sensitive), whether it is required, what it means, the default used when  it is omitted and the unit a numeric value is read in. The units differ between templates -  basis points, percentage points or a fraction - so read them per template rather than assuming  one convention. The list is static application metadata: it does not vary by tenant, scope or  date, so the endpoint takes no parameters.
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listScenarioTemplatesAsync(final ApiCallback<ResourceListOfScenarioTemplateDefinition> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listScenarioTemplatesValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfScenarioTemplateDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates. (asynchronously)
+     * Lists every template CreateScenarioFromTemplate accepts, with each template&#39;s parameters: the  parameter&#39;s name (case-sensitive), whether it is required, what it means, the default used when  it is omitted and the unit a numeric value is read in. The units differ between templates -  basis points, percentage points or a fraction - so read them per template rather than assuming  one convention. The list is static application metadata: it does not vary by tenant, scope or  date, so the endpoint takes no parameters.Use any specified configuration options to override any other configuration for this request only
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listScenarioTemplatesAsync(final ApiCallback<ResourceListOfScenarioTemplateDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listScenarioTemplatesValidateBeforeCall(_callback, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfScenarioTemplateDefinition>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistScenarioTemplatesRequest {
+
+        private APIlistScenarioTemplatesRequest() {
+        }
+
+        /**
+         * Build call for listScenarioTemplates
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listScenarioTemplatesCall(_callback);
+        }
+
+        /**
+         * Execute listScenarioTemplates request
+         * @return ResourceListOfScenarioTemplateDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfScenarioTemplateDefinition execute() throws ApiException {
+            ApiResponse<ResourceListOfScenarioTemplateDefinition> localVarResp = listScenarioTemplatesWithHttpInfo();
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listScenarioTemplates request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ResourceListOfScenarioTemplateDefinition
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfScenarioTemplateDefinition execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ResourceListOfScenarioTemplateDefinition> localVarResp = listScenarioTemplatesWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listScenarioTemplates request with HTTP info returned
+         * @return ApiResponse&lt;ResourceListOfScenarioTemplateDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfScenarioTemplateDefinition> executeWithHttpInfo() throws ApiException {
+            return listScenarioTemplatesWithHttpInfo();
+        }
+
+        /**
+         * Execute listScenarioTemplates request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ResourceListOfScenarioTemplateDefinition&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfScenarioTemplateDefinition> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listScenarioTemplatesWithHttpInfo(opts);
+        }
+
+        /**
+         * Execute listScenarioTemplates request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfScenarioTemplateDefinition> _callback) throws ApiException {
+            listScenarioTemplatesAsync(_callback);
+        }
+
+        /**
+         * Execute listScenarioTemplates request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfScenarioTemplateDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+            listScenarioTemplatesAsync(_callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates.
+     * Lists every template CreateScenarioFromTemplate accepts, with each template&#39;s parameters: the  parameter&#39;s name (case-sensitive), whether it is required, what it means, the default used when  it is omitted and the unit a numeric value is read in. The units differ between templates -  basis points, percentage points or a fraction - so read them per template rather than assuming  one convention. The list is static application metadata: it does not vary by tenant, scope or  date, so the endpoint takes no parameters.
+     * @return APIlistScenarioTemplatesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The available scenario templates </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistScenarioTemplatesRequest listScenarioTemplates() {
+        return new APIlistScenarioTemplatesRequest();
     }
     /**
      * Build call for listScenarioVersions

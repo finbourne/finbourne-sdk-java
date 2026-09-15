@@ -1,6 +1,6 @@
 # com.finbourne.sdk.services.lusid.model.RecInstance
 classname RecInstance
-The expanded view of a rec instance: its identity, lifecycle status, lock state, closed periods  (for Closed Period windows) and the time-series of runs in the run log.
+The expanded view of a rec instance: its identity, lifecycle status, lock state, closed periods  (for Closed Period windows) and, per rec type, the time-series of runs in that rec type's run log.
 
 ## Properties
 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **asAtLocked** | [**OffsetDateTime**](OffsetDateTime.md) | The wall-clock time the lock action was performed. Null when the instance has not been locked. | [optional] [default to OffsetDateTime]
 **datesLocked** | [**RecDatesReconciled**](RecDatesReconciled.md) |  | [optional] [default to RecDatesReconciled]
 **closedPeriods** | [**RecClosedPeriods**](RecClosedPeriods.md) |  | [optional] [default to RecClosedPeriods]
-**runLog** | [**List&lt;RecRunLogEntry&gt;**](RecRunLogEntry.md) | A chronologically ordered list of all runs on the instance. Always contains at least one entry. | [default to List<RecRunLogEntry>]
+**runLogs** | [**Map&lt;String, RecRunLog&gt;**](RecRunLog.md) | The instance&#39;s run history, keyed by rec type. Contains an entry for each rec type that has produced a result set, so a run appears only once it has completed or failed. Empty while the instance&#39;s first run is still in flight. | [default to Map<String, RecRunLog>]
 **href** | [**URI**](URI.md) | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] [default to URI]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
@@ -33,7 +33,7 @@ String status = "example status";
 @javax.annotation.Nullable OffsetDateTime asAtLocked = OffsetDateTime.now();
 RecDatesReconciled datesLocked = new RecDatesReconciled();
 RecClosedPeriods closedPeriods = new RecClosedPeriods();
-List<RecRunLogEntry> runLog = new List<RecRunLogEntry>();
+Map<String, RecRunLog> runLogs = new Map<String, RecRunLog>();
 @javax.annotation.Nullable URI href = URI.create("http://example.com/href");
 Version version = new Version();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
@@ -48,7 +48,7 @@ RecInstance recInstanceInstance = new RecInstance()
     .asAtLocked(asAtLocked)
     .datesLocked(datesLocked)
     .closedPeriods(closedPeriods)
-    .runLog(runLog)
+    .runLogs(runLogs)
     .href(href)
     .version(version)
     .links(links);

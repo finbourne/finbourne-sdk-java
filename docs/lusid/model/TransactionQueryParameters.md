@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **includeEconomics** | **Boolean** | By default is false. When set to true the Economics data would be populated in the response. | [optional] [default to Boolean]
 **includeSettlementStatus** | **Boolean** | By default is false. When set to true the Settlement Status data would be populated in the response. | [optional] [default to Boolean]
 **settlementStatusDate** | **String** | Optional date used to specify end of an extended window for settlement information. When provided, transactions will be returned between start and end date, but settlement information between start date and this date will be included. When provided, the value must be greater than or equal to end date. | [optional] [default to String]
+**returnExcludedTransactions** | **Boolean** | Option to specify whether or not to include transactions that are marked as excluded by the portfolio&#39;s transaction exclusion filter. Excluded transactions do not affect holdings. Defaults to false if not specified. | [optional] [default to Boolean]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.TransactionQueryParameters;
@@ -30,6 +31,7 @@ Boolean showCancelledTransactions = true;
 Boolean includeEconomics = true;
 Boolean includeSettlementStatus = true;
 @javax.annotation.Nullable String settlementStatusDate = "example settlementStatusDate";
+Boolean returnExcludedTransactions = true;
 
 
 TransactionQueryParameters transactionQueryParametersInstance = new TransactionQueryParameters()
@@ -41,7 +43,8 @@ TransactionQueryParameters transactionQueryParametersInstance = new TransactionQ
     .timelineCode(timelineCode)
     .includeEconomics(includeEconomics)
     .includeSettlementStatus(includeSettlementStatus)
-    .settlementStatusDate(settlementStatusDate);
+    .settlementStatusDate(settlementStatusDate)
+    .returnExcludedTransactions(returnExcludedTransactions);
 ```
 
 

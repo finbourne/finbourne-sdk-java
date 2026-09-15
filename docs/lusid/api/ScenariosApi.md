@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 | [**createScenarioFromTemplate**](ScenariosApi.md#createScenarioFromTemplate) | **POST** /api/api/scenarios/{scope}/$fromTemplate | [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template. |
 | [**deleteScenario**](ScenariosApi.md#deleteScenario) | **DELETE** /api/api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present. |
 | [**getScenario**](ScenariosApi.md#getScenario) | **GET** /api/api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario |
+| [**listScenarioTemplates**](ScenariosApi.md#listScenarioTemplates) | **GET** /api/api/scenarios/$templates | [EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates. |
 | [**listScenarioVersions**](ScenariosApi.md#listScenarioVersions) | **GET** /api/api/scenarios/{scope}/{code}/versions | [EARLY ACCESS] ListScenarioVersions: List the versions of a Scenario |
 | [**listScenarios**](ScenariosApi.md#listScenarios) | **GET** /api/api/scenarios | [EARLY ACCESS] ListScenarios: List Scenarios |
 | [**listScenariosForScope**](ScenariosApi.md#listScenariosForScope) | **GET** /api/api/scenarios/{scope} | [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope |
@@ -21,7 +22,7 @@ All URIs are relative to *http://localhost*
 
 [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
 
-Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario&#39;s shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Use ListScenarioTemplates to discover the available templates and, for each, the parameters it  accepts, their defaults and their units. A parameter the template does not read is rejected  rather than ignored, and parameter names are case-sensitive.
 
 ### Example
 
@@ -249,6 +250,78 @@ public class ScenariosApiExample {
 |-------------|-------------|------------------|
 | **200** | The successfully retrieved Scenario |  -  |
 | **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listScenarioTemplates
+
+> ResourceListOfScenarioTemplateDefinition listScenarioTemplates()
+
+[EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates.
+
+Lists every template CreateScenarioFromTemplate accepts, with each template&#39;s parameters: the  parameter&#39;s name (case-sensitive), whether it is required, what it means, the default used when  it is omitted and the unit a numeric value is read in. The units differ between templates -  basis points, percentage points or a fraction - so read them per template rather than assuming  one convention. The list is static application metadata: it does not vary by tenant, scope or  date, so the endpoint takes no parameters.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.ScenariosApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class ScenariosApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        ScenariosApi apiInstance = apiFactory.build(ScenariosApi.class);
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResourceListOfScenarioTemplateDefinition result = apiInstance.listScenarioTemplates().execute(opts);
+
+            ResourceListOfScenarioTemplateDefinition result = apiInstance.listScenarioTemplates().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ScenariosApi#listScenarioTemplates");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ResourceListOfScenarioTemplateDefinition**](../model/ResourceListOfScenarioTemplateDefinition.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The available scenario templates |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

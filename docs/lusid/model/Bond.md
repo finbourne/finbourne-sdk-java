@@ -6,7 +6,7 @@ LUSID representation of a Vanilla Fixed Rate Bond.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward. | [default to String]
+**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest. | [default to String]
 **startDate** | [**OffsetDateTime**](OffsetDateTime.md) | The Start date of the bond, this is normally when accrual of the first coupon begins. | [default to OffsetDateTime]
 **maturityDate** | [**OffsetDateTime**](OffsetDateTime.md) | The Maturity date of the bond, this is when the last coupon accrual period ends.  Note that while most bonds have their last payment on this date there are some cases where the final payment is the next working day. | [default to OffsetDateTime]
 **domCcy** | **String** | The domestic currency of the instrument. This should be the same as the Currency set on the FlowConventions. | [default to String]
@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **roundingConventions** | [**List&lt;RoundingConvention&gt;**](RoundingConvention.md) | Rounding conventions for analytics, if any. | [optional] [default to List<RoundingConvention>]
 **exDividendConfiguration** | [**ExDividendConfiguration**](ExDividendConfiguration.md) |  | [optional] [default to ExDividendConfiguration]
 **originalIssuePrice** | **java.math.BigDecimal** | The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] [default to java.math.BigDecimal]
+**parPerUnit** | **java.math.BigDecimal** | Optional value used to scale accrued interest and coupon amounts only (not CleanPV), in addition to  currentNotional and units. If you do not set this field, the value is 1 and no amount changes.  A model that calculates the price from the cash flows, for example Discounting, includes the scaled coupons  in the PV and thus in the CleanPV. The CleanPV exclusion applies to a quoted price. | [optional] [default to java.math.BigDecimal]
 **tradingConventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] [default to TradingConventions]
 **timeZoneConventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] [default to TimeZoneConventions]
 
@@ -44,6 +45,7 @@ java.math.BigDecimal couponRate = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable List<RoundingConvention> roundingConventions = new List<RoundingConvention>();
 ExDividendConfiguration exDividendConfiguration = new ExDividendConfiguration();
 @javax.annotation.Nullable java.math.BigDecimal originalIssuePrice = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal parPerUnit = new java.math.BigDecimal("100.00");
 TradingConventions tradingConventions = new TradingConventions();
 TimeZoneConventions timeZoneConventions = new TimeZoneConventions();
 
@@ -63,6 +65,7 @@ Bond bondInstance = new Bond()
     .roundingConventions(roundingConventions)
     .exDividendConfiguration(exDividendConfiguration)
     .originalIssuePrice(originalIssuePrice)
+    .parPerUnit(parPerUnit)
     .tradingConventions(tradingConventions)
     .timeZoneConventions(timeZoneConventions);
 ```

@@ -19,6 +19,9 @@ ScenarioShiftType method = ScenarioShiftType.FX_SHIFT_DEFINITION;
 ScenarioShiftType method = ScenarioShiftType.PRICE_SHIFT_DEFINITION;
 ScenarioShiftType method = ScenarioShiftType.VOL_SURFACE_SHIFT_DEFINITION;
 ScenarioShiftType method = ScenarioShiftType.MDKR_GROUP_SHIFT_DEFINITION;
+ScenarioShiftType method = ScenarioShiftType.INFLATION_CURVE_SHIFT_DEFINITION;
+ScenarioShiftType method = ScenarioShiftType.CREDIT_SPREAD_SHIFT_DEFINITION;
+ScenarioShiftType method = ScenarioShiftType.MODEL_OPTION_SHIFT_DEFINITION;
 ```
 
 

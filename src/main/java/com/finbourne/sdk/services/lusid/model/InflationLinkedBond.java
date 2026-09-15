@@ -63,6 +63,7 @@ import com.finbourne.sdk.JSON;
   InflationLinkedBond.JSON_PROPERTY_ROUNDING_CONVENTIONS,
   InflationLinkedBond.JSON_PROPERTY_TRADING_CONVENTIONS,
   InflationLinkedBond.JSON_PROPERTY_ORIGINAL_ISSUE_PRICE,
+  InflationLinkedBond.JSON_PROPERTY_PAR_PER_UNIT,
   InflationLinkedBond.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
   InflationLinkedBond.JSON_PROPERTY_AMORTISATION_SCHEDULE
 })
@@ -158,6 +159,11 @@ public class InflationLinkedBond extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_ORIGINAL_ISSUE_PRICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal originalIssuePrice;
+
+  public static final String JSON_PROPERTY_PAR_PER_UNIT = "parPerUnit";
+  @JsonProperty(JSON_PROPERTY_PAR_PER_UNIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal parPerUnit;
 
   public static final String JSON_PROPERTY_TIME_ZONE_CONVENTIONS = "timeZoneConventions";
   @JsonProperty(JSON_PROPERTY_TIME_ZONE_CONVENTIONS)
@@ -511,6 +517,25 @@ public class InflationLinkedBond extends LusidInstrument {
   }
 
 
+  public InflationLinkedBond parPerUnit(java.math.BigDecimal parPerUnit) {
+    this.parPerUnit = parPerUnit;
+    return this;
+  }
+
+  /**
+   * Optional value used to scale accrued interest and coupon amounts only (not CleanPV), in addition to  currentNotional and units. If you do not set this field, the value is 1 and no amount changes.  A model that calculates the price from the cash flows, for example InflationForward, includes the scaled  coupons in the PV and thus in the CleanPV. The CleanPV exclusion applies to a quoted price.
+   * @return parPerUnit
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getParPerUnit() {
+    return parPerUnit;
+  }
+
+  public void setParPerUnit(java.math.BigDecimal parPerUnit) {
+    this.parPerUnit = parPerUnit;
+  }
+
+
   public InflationLinkedBond timeZoneConventions(TimeZoneConventions timeZoneConventions) {
     this.timeZoneConventions = timeZoneConventions;
     return this;
@@ -575,6 +600,7 @@ public class InflationLinkedBond extends LusidInstrument {
         Objects.equals(this.roundingConventions, inflationLinkedBond.roundingConventions) &&
         Objects.equals(this.tradingConventions, inflationLinkedBond.tradingConventions) &&
         (this.originalIssuePrice == null ? inflationLinkedBond.originalIssuePrice == null : (inflationLinkedBond.originalIssuePrice != null && this.originalIssuePrice.compareTo(inflationLinkedBond.getOriginalIssuePrice()) == 0)) &&
+        (this.parPerUnit == null ? inflationLinkedBond.parPerUnit == null : (inflationLinkedBond.parPerUnit != null && this.parPerUnit.compareTo(inflationLinkedBond.getParPerUnit()) == 0)) &&
         Objects.equals(this.timeZoneConventions, inflationLinkedBond.timeZoneConventions) &&
         Objects.equals(this.amortisationSchedule, inflationLinkedBond.amortisationSchedule) &&
         super.equals(o);
@@ -586,7 +612,7 @@ public class InflationLinkedBond extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, flowConventions, inflationIndexConventions, couponRate, identifiers, baseCPI, baseCPIDate, calculationType, exDividendDays, indexPrecision, principal, principalProtection, stubType, roundingConventions, tradingConventions, originalIssuePrice, timeZoneConventions, amortisationSchedule, super.hashCode());
+    return Objects.hash(startDate, maturityDate, flowConventions, inflationIndexConventions, couponRate, identifiers, baseCPI, baseCPIDate, calculationType, exDividendDays, indexPrecision, principal, principalProtection, stubType, roundingConventions, tradingConventions, originalIssuePrice, parPerUnit, timeZoneConventions, amortisationSchedule, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -618,6 +644,7 @@ public class InflationLinkedBond extends LusidInstrument {
     sb.append("    roundingConventions: ").append(toIndentedString(roundingConventions)).append("\n");
     sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
     sb.append("    originalIssuePrice: ").append(toIndentedString(originalIssuePrice)).append("\n");
+    sb.append("    parPerUnit: ").append(toIndentedString(parPerUnit)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
     sb.append("    amortisationSchedule: ").append(toIndentedString(amortisationSchedule)).append("\n");
     sb.append("}");

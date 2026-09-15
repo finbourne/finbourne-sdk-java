@@ -57,7 +57,11 @@ public enum QuoteType {
   
   INTEREST_SHORTFALL("InterestShortfall"),
   
-  CONSTITUENT_WEIGHT_FACTOR("ConstituentWeightFactor");
+  CONSTITUENT_WEIGHT_FACTOR("ConstituentWeightFactor"),
+  
+  FORWARD_PRICE("ForwardPrice"),
+  
+  DISCOUNT_FACTOR("DiscountFactor");
 
   private String value;
 

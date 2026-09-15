@@ -37,7 +37,9 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   CurveOptions.JSON_PROPERTY_DAY_COUNT_CONVENTION,
   CurveOptions.JSON_PROPERTY_FRONT_EXTRAPOLATION_TYPE,
-  CurveOptions.JSON_PROPERTY_BACK_EXTRAPOLATION_TYPE
+  CurveOptions.JSON_PROPERTY_BACK_EXTRAPOLATION_TYPE,
+  CurveOptions.JSON_PROPERTY_INTERPOLATION_TYPE,
+  CurveOptions.JSON_PROPERTY_ORIGIN_ANCHOR
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -61,6 +63,16 @@ public class CurveOptions extends MarketDataOptions {
   @JsonProperty(JSON_PROPERTY_BACK_EXTRAPOLATION_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String backExtrapolationType;
+
+  public static final String JSON_PROPERTY_INTERPOLATION_TYPE = "interpolationType";
+  @JsonProperty(JSON_PROPERTY_INTERPOLATION_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String interpolationType;
+
+  public static final String JSON_PROPERTY_ORIGIN_ANCHOR = "originAnchor";
+  @JsonProperty(JSON_PROPERTY_ORIGIN_ANCHOR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String originAnchor;
 
   public CurveOptions() {
   }
@@ -122,6 +134,44 @@ public class CurveOptions extends MarketDataOptions {
   }
 
 
+  public CurveOptions interpolationType(String interpolationType) {
+    this.interpolationType = interpolationType;
+    return this;
+  }
+
+  /**
+   * What type of interpolation is used to build the curve. Default value: LinearOnRates. Available values: LinearOnRates, LinearOnLogOfRates, LinearOnDiscountFactors, LinearOnLogDiscountFactors, PiecewiseLinearForward, MonotoneConvex, LinearOnLogProbability.
+   * @return interpolationType
+   */
+  @javax.annotation.Nullable
+  public String getInterpolationType() {
+    return interpolationType;
+  }
+
+  public void setInterpolationType(String interpolationType) {
+    this.interpolationType = interpolationType;
+  }
+
+
+  public CurveOptions originAnchor(String originAnchor) {
+    this.originAnchor = originAnchor;
+    return this;
+  }
+
+  /**
+   * How the curve builder anchors the origin of a bootstrapped curve, i.e. the value the curve  carries in front of its shortest calibration instrument. Default value: ZeroRate, the  historical anchor, under which existing curves are unchanged. Available values: ZeroRate, FirstInstrumentRate.
+   * @return originAnchor
+   */
+  @javax.annotation.Nullable
+  public String getOriginAnchor() {
+    return originAnchor;
+  }
+
+  public void setOriginAnchor(String originAnchor) {
+    this.originAnchor = originAnchor;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -134,6 +184,8 @@ public class CurveOptions extends MarketDataOptions {
     return Objects.equals(this.dayCountConvention, curveOptions.dayCountConvention) &&
         Objects.equals(this.frontExtrapolationType, curveOptions.frontExtrapolationType) &&
         Objects.equals(this.backExtrapolationType, curveOptions.backExtrapolationType) &&
+        Objects.equals(this.interpolationType, curveOptions.interpolationType) &&
+        Objects.equals(this.originAnchor, curveOptions.originAnchor) &&
         super.equals(o);
   }
 
@@ -143,7 +195,7 @@ public class CurveOptions extends MarketDataOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(dayCountConvention, frontExtrapolationType, backExtrapolationType, super.hashCode());
+    return Objects.hash(dayCountConvention, frontExtrapolationType, backExtrapolationType, interpolationType, originAnchor, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -161,6 +213,8 @@ public class CurveOptions extends MarketDataOptions {
     sb.append("    dayCountConvention: ").append(toIndentedString(dayCountConvention)).append("\n");
     sb.append("    frontExtrapolationType: ").append(toIndentedString(frontExtrapolationType)).append("\n");
     sb.append("    backExtrapolationType: ").append(toIndentedString(backExtrapolationType)).append("\n");
+    sb.append("    interpolationType: ").append(toIndentedString(interpolationType)).append("\n");
+    sb.append("    originAnchor: ").append(toIndentedString(originAnchor)).append("\n");
     sb.append("}");
     return sb.toString();
   }

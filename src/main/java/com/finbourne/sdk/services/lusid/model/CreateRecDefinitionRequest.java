@@ -17,6 +17,7 @@ import com.finbourne.sdk.services.lusid.model.RecDefRecipeIds;
 import com.finbourne.sdk.services.lusid.model.RecDefRuleset;
 import com.finbourne.sdk.services.lusid.model.RecDefSideNames;
 import com.finbourne.sdk.services.lusid.model.RecDefSource;
+import com.finbourne.sdk.services.lusid.model.RecReviewConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,7 +52,8 @@ import com.finbourne.sdk.JSON;
   CreateRecDefinitionRequest.JSON_PROPERTY_RIGHT_PORTFOLIO_SOURCES,
   CreateRecDefinitionRequest.JSON_PROPERTY_VALUATION_RECIPES,
   CreateRecDefinitionRequest.JSON_PROPERTY_CURRENCIES,
-  CreateRecDefinitionRequest.JSON_PROPERTY_RULESETS
+  CreateRecDefinitionRequest.JSON_PROPERTY_RULESETS,
+  CreateRecDefinitionRequest.JSON_PROPERTY_REVIEW_CONFIGURATION
 })
 
 public class CreateRecDefinitionRequest {
@@ -104,6 +106,11 @@ public class CreateRecDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_RULESETS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<RecDefRuleset> rulesets = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_REVIEW_CONFIGURATION = "reviewConfiguration";
+  @JsonProperty(JSON_PROPERTY_REVIEW_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RecReviewConfiguration reviewConfiguration;
 
   public CreateRecDefinitionRequest() {
   }
@@ -322,6 +329,25 @@ public class CreateRecDefinitionRequest {
   }
 
 
+  public CreateRecDefinitionRequest reviewConfiguration(RecReviewConfiguration reviewConfiguration) {
+    this.reviewConfiguration = reviewConfiguration;
+    return this;
+  }
+
+  /**
+   * Get reviewConfiguration
+   * @return reviewConfiguration
+   */
+  @javax.annotation.Nullable
+  public RecReviewConfiguration getReviewConfiguration() {
+    return reviewConfiguration;
+  }
+
+  public void setReviewConfiguration(RecReviewConfiguration reviewConfiguration) {
+    this.reviewConfiguration = reviewConfiguration;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -340,7 +366,8 @@ public class CreateRecDefinitionRequest {
         Objects.equals(this.rightPortfolioSources, createRecDefinitionRequest.rightPortfolioSources) &&
         Objects.equals(this.valuationRecipes, createRecDefinitionRequest.valuationRecipes) &&
         Objects.equals(this.currencies, createRecDefinitionRequest.currencies) &&
-        Objects.equals(this.rulesets, createRecDefinitionRequest.rulesets);
+        Objects.equals(this.rulesets, createRecDefinitionRequest.rulesets) &&
+        Objects.equals(this.reviewConfiguration, createRecDefinitionRequest.reviewConfiguration);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -349,7 +376,7 @@ public class CreateRecDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets);
+    return Objects.hash(id, displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, reviewConfiguration);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -373,6 +400,7 @@ public class CreateRecDefinitionRequest {
     sb.append("    valuationRecipes: ").append(toIndentedString(valuationRecipes)).append("\n");
     sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
     sb.append("    rulesets: ").append(toIndentedString(rulesets)).append("\n");
+    sb.append("    reviewConfiguration: ").append(toIndentedString(reviewConfiguration)).append("\n");
     sb.append("}");
     return sb.toString();
   }

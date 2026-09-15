@@ -15,6 +15,8 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.CashOfferElection;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import com.finbourne.sdk.services.lusid.model.LapseElection;
+import com.finbourne.sdk.services.lusid.model.RetainElection;
+import com.finbourne.sdk.services.lusid.model.UnknownProceedsElection;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -51,7 +53,9 @@ import com.finbourne.sdk.JSON;
   PutRedemptionEvent.JSON_PROPERTY_EX_DATE,
   PutRedemptionEvent.JSON_PROPERTY_ANNOUNCEMENT_DATE,
   PutRedemptionEvent.JSON_PROPERTY_ACCRUED_INTEREST_PER_UNIT,
-  PutRedemptionEvent.JSON_PROPERTY_PRORATION_RATE
+  PutRedemptionEvent.JSON_PROPERTY_PRORATION_RATE,
+  PutRedemptionEvent.JSON_PROPERTY_RETAIN_ELECTIONS,
+  PutRedemptionEvent.JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -120,6 +124,16 @@ public class PutRedemptionEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_PRORATION_RATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal prorationRate;
+
+  public static final String JSON_PROPERTY_RETAIN_ELECTIONS = "retainElections";
+  @JsonProperty(JSON_PROPERTY_RETAIN_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<RetainElection> retainElections;
+
+  public static final String JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS = "unknownProceedsElections";
+  @JsonProperty(JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<UnknownProceedsElection> unknownProceedsElections;
 
   public PutRedemptionEvent() {
   }
@@ -368,6 +382,60 @@ public class PutRedemptionEvent extends InstrumentEvent {
   }
 
 
+  public PutRedemptionEvent retainElections(List<RetainElection> retainElections) {
+    this.retainElections = retainElections;
+    return this;
+  }
+
+  public PutRedemptionEvent addRetainElectionsItem(RetainElection retainElectionsItem) {
+    if (this.retainElections == null) {
+      this.retainElections = new ArrayList<>();
+    }
+    this.retainElections.add(retainElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible retain elections for this event (PROX) — keep the holding rather than redeem.
+   * @return retainElections
+   */
+  @javax.annotation.Nullable
+  public List<RetainElection> getRetainElections() {
+    return retainElections;
+  }
+
+  public void setRetainElections(List<RetainElection> retainElections) {
+    this.retainElections = retainElections;
+  }
+
+
+  public PutRedemptionEvent unknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+    return this;
+  }
+
+  public PutRedemptionEvent addUnknownProceedsElectionsItem(UnknownProceedsElection unknownProceedsElectionsItem) {
+    if (this.unknownProceedsElections == null) {
+      this.unknownProceedsElections = new ArrayList<>();
+    }
+    this.unknownProceedsElections.add(unknownProceedsElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible unknown-proceeds elections for this event (UNKNOWN) — the outturn is not yet known.
+   * @return unknownProceedsElections
+   */
+  @javax.annotation.Nullable
+  public List<UnknownProceedsElection> getUnknownProceedsElections() {
+    return unknownProceedsElections;
+  }
+
+  public void setUnknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -389,6 +457,8 @@ public class PutRedemptionEvent extends InstrumentEvent {
         Objects.equals(this.announcementDate, putRedemptionEvent.announcementDate) &&
         (this.accruedInterestPerUnit == null ? putRedemptionEvent.accruedInterestPerUnit == null : (putRedemptionEvent.accruedInterestPerUnit != null && this.accruedInterestPerUnit.compareTo(putRedemptionEvent.getAccruedInterestPerUnit()) == 0)) &&
         (this.prorationRate == null ? putRedemptionEvent.prorationRate == null : (putRedemptionEvent.prorationRate != null && this.prorationRate.compareTo(putRedemptionEvent.getProrationRate()) == 0)) &&
+        Objects.equals(this.retainElections, putRedemptionEvent.retainElections) &&
+        Objects.equals(this.unknownProceedsElections, putRedemptionEvent.unknownProceedsElections) &&
         super.equals(o);
   }
 
@@ -398,7 +468,7 @@ public class PutRedemptionEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, offerPrice, currency, cashOfferElections, lapseElections, marketDeadlineDate, responseDeadlineDate, earlyResponseDeadline, exDate, announcementDate, accruedInterestPerUnit, prorationRate, super.hashCode());
+    return Objects.hash(paymentDate, offerPrice, currency, cashOfferElections, lapseElections, marketDeadlineDate, responseDeadlineDate, earlyResponseDeadline, exDate, announcementDate, accruedInterestPerUnit, prorationRate, retainElections, unknownProceedsElections, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -425,6 +495,8 @@ public class PutRedemptionEvent extends InstrumentEvent {
     sb.append("    announcementDate: ").append(toIndentedString(announcementDate)).append("\n");
     sb.append("    accruedInterestPerUnit: ").append(toIndentedString(accruedInterestPerUnit)).append("\n");
     sb.append("    prorationRate: ").append(toIndentedString(prorationRate)).append("\n");
+    sb.append("    retainElections: ").append(toIndentedString(retainElections)).append("\n");
+    sb.append("    unknownProceedsElections: ").append(toIndentedString(unknownProceedsElections)).append("\n");
     sb.append("}");
     return sb.toString();
   }

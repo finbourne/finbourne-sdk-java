@@ -41,7 +41,12 @@ import com.finbourne.sdk.JSON;
   RateCurveShiftDefinition.JSON_PROPERTY_END_TENOR,
   RateCurveShiftDefinition.JSON_PROPERTY_SHIFT_TYPE,
   RateCurveShiftDefinition.JSON_PROPERTY_SCALE,
-  RateCurveShiftDefinition.JSON_PROPERTY_APPLY_TO
+  RateCurveShiftDefinition.JSON_PROPERTY_APPLY_TO,
+  RateCurveShiftDefinition.JSON_PROPERTY_PIVOT_TENOR,
+  RateCurveShiftDefinition.JSON_PROPERTY_WINDOW_BOUNDS,
+  RateCurveShiftDefinition.JSON_PROPERTY_CURVE_NAME,
+  RateCurveShiftDefinition.JSON_PROPERTY_MINIMUM_AMOUNT_BPS,
+  RateCurveShiftDefinition.JSON_PROPERTY_APPLY_WHEN_VALUE
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -72,7 +77,7 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
   private String endTenor;
 
   /**
-   * Available values: Parallel, Steepen, Flatten, Twist.
+   * Available values: Parallel, Steepen, Flatten, Twist, Tent.
    */
   public enum ShiftTypeEnum {
     PARALLEL("Parallel"),
@@ -81,7 +86,9 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
     
     FLATTEN("Flatten"),
     
-    TWIST("Twist");
+    TWIST("Twist"),
+    
+    TENT("Tent");
 
     private String value;
 
@@ -158,6 +165,105 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String applyTo;
 
+  public static final String JSON_PROPERTY_PIVOT_TENOR = "pivotTenor";
+  @JsonProperty(JSON_PROPERTY_PIVOT_TENOR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String pivotTenor;
+
+  /**
+   * Available values: Inclusive, StartExclusive, EndExclusive, Exclusive.
+   */
+  public enum WindowBoundsEnum {
+    INCLUSIVE("Inclusive"),
+    
+    START_EXCLUSIVE("StartExclusive"),
+    
+    END_EXCLUSIVE("EndExclusive"),
+    
+    EXCLUSIVE("Exclusive");
+
+    private String value;
+
+    WindowBoundsEnum(String value) {
+      this.value = value;
+    }
+
+    @com.fasterxml.jackson.annotation.JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static WindowBoundsEnum fromValue(String value) {
+      for (WindowBoundsEnum b : WindowBoundsEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+  public static final String JSON_PROPERTY_WINDOW_BOUNDS = "windowBounds";
+  @JsonProperty(JSON_PROPERTY_WINDOW_BOUNDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private WindowBoundsEnum windowBounds;
+
+  public static final String JSON_PROPERTY_CURVE_NAME = "curveName";
+  @JsonProperty(JSON_PROPERTY_CURVE_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String curveName;
+
+  public static final String JSON_PROPERTY_MINIMUM_AMOUNT_BPS = "minimumAmountBps";
+  @JsonProperty(JSON_PROPERTY_MINIMUM_AMOUNT_BPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal minimumAmountBps;
+
+  /**
+   * Available values: Any, Positive, Negative.
+   */
+  public enum ApplyWhenValueEnum {
+    ANY("Any"),
+    
+    POSITIVE("Positive"),
+    
+    NEGATIVE("Negative");
+
+    private String value;
+
+    ApplyWhenValueEnum(String value) {
+      this.value = value;
+    }
+
+    @com.fasterxml.jackson.annotation.JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static ApplyWhenValueEnum fromValue(String value) {
+      for (ApplyWhenValueEnum b : ApplyWhenValueEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+  public static final String JSON_PROPERTY_APPLY_WHEN_VALUE = "applyWhenValue";
+  @JsonProperty(JSON_PROPERTY_APPLY_WHEN_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ApplyWhenValueEnum applyWhenValue;
+
   public RateCurveShiftDefinition() {
   }
 
@@ -205,7 +311,7 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
   }
 
   /**
-   * Get startTenor
+   * The near end of the tenor window the shift applies over, resolved against the valuation  date. A whole number of units, in any case: BD (business day), D, W, M, Q or Qtr, SA  (semi-annual), Y or A - for example \&quot;1BD\&quot;, \&quot;3m\&quot;, \&quot;6M\&quot;, \&quot;1Qtr\&quot;, \&quot;5y\&quot;. Omitted, the window  is open at this end and every point up to EndTenor is in it.
    * @return startTenor
    */
   @javax.annotation.Nullable
@@ -224,7 +330,7 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
   }
 
   /**
-   * Get endTenor
+   * The far end of the tenor window, in the same units as StartTenor. Omitted, the window is  open at this end.
    * @return endTenor
    */
   @javax.annotation.Nullable
@@ -243,7 +349,7 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
   }
 
   /**
-   * Available values: Parallel, Steepen, Flatten, Twist.
+   * Available values: Parallel, Steepen, Flatten, Twist, Tent.
    * @return shiftType
    */
   @javax.annotation.Nonnull
@@ -294,6 +400,101 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
   }
 
 
+  public RateCurveShiftDefinition pivotTenor(String pivotTenor) {
+    this.pivotTenor = pivotTenor;
+    return this;
+  }
+
+  /**
+   * The tenor the Tent shift peaks at. The shift applies with the full Amount at this tenor,  falling linearly to zero at StartTenor and EndTenor - the key-rate triangle shape, whose  asymmetry matters because key-rate buckets are rarely evenly spaced. Only valid with  ShiftType Tent; omitted, a Tent peaks at the midpoint of the window. In the same units as  StartTenor. Declared last on purpose: generated SDKs emit their positional constructor in  property-declaration order, and this property must not shift the parameters of the ones  before it.  Over a window containing a single curve point, that point takes the full Amount regardless  of where the pivot lands: a one-point window has no slope to express, and every shift  shape degenerates the same way there.
+   * @return pivotTenor
+   */
+  @javax.annotation.Nullable
+  public String getPivotTenor() {
+    return pivotTenor;
+  }
+
+  public void setPivotTenor(String pivotTenor) {
+    this.pivotTenor = pivotTenor;
+  }
+
+
+  public RateCurveShiftDefinition windowBounds(WindowBoundsEnum windowBounds) {
+    this.windowBounds = windowBounds;
+    return this;
+  }
+
+  /**
+   * Available values: Inclusive, StartExclusive, EndExclusive, Exclusive.
+   * @return windowBounds
+   */
+  @javax.annotation.Nullable
+  public WindowBoundsEnum getWindowBounds() {
+    return windowBounds;
+  }
+
+  public void setWindowBounds(WindowBoundsEnum windowBounds) {
+    this.windowBounds = windowBounds;
+  }
+
+
+  public RateCurveShiftDefinition curveName(String curveName) {
+    this.curveName = curveName;
+    return this;
+  }
+
+  /**
+   * The funding identifier of the one curve in the currency this shift targets, letting a  scenario shock a named curve (say, an issuer discounting curve) without also moving the  risk-free curve mastered in the same currency. Omitted - as on every scenario stored  before this field existed - the shift matches every rate curve in the currency, exactly  as before. Declared last on purpose: generated SDKs emit their positional constructor in  property-declaration order, and this property must not shift the parameters of the ones  before it.
+   * @return curveName
+   */
+  @javax.annotation.Nullable
+  public String getCurveName() {
+    return curveName;
+  }
+
+  public void setCurveName(String curveName) {
+    this.curveName = curveName;
+  }
+
+
+  public RateCurveShiftDefinition minimumAmountBps(java.math.BigDecimal minimumAmountBps) {
+    this.minimumAmountBps = minimumAmountBps;
+    return this;
+  }
+
+  /**
+   * The smallest magnitude, in basis points, of the shift finally applied at each curve point.  Evaluated per point AFTER the shape weight, in the direction the shift acts there (the sign  of Amount times the shape weight): the applied move becomes at least the minimum in that  direction, even where a Percentage shift on a negative rate would have pointed the other  way - the Solvency II up-shock&#39;s \&quot;at least one percentage point at any maturity\&quot; is  MinimumAmountBps &#x3D; 100 on the relative shift the regulation states. A point whose shape  weight is exactly zero stays unshifted: the floor strengthens a shock where the shape  applies one, it does not extend the shock to points the shape excludes (a Tent&#39;s window  ends remain unmoved). Deliberately in basis points rather than in Scale units, because the  floor and the shift are in different units by construction: the regulation states a  relative shock with an absolute floor. Omitted, no floor applies - today&#39;s behaviour.  Declared after PivotTenor on purpose, for the constructor-ordering reason given there.
+   * @return minimumAmountBps
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getMinimumAmountBps() {
+    return minimumAmountBps;
+  }
+
+  public void setMinimumAmountBps(java.math.BigDecimal minimumAmountBps) {
+    this.minimumAmountBps = minimumAmountBps;
+  }
+
+
+  public RateCurveShiftDefinition applyWhenValue(ApplyWhenValueEnum applyWhenValue) {
+    this.applyWhenValue = applyWhenValue;
+    return this;
+  }
+
+  /**
+   * Available values: Any, Positive, Negative.
+   * @return applyWhenValue
+   */
+  @javax.annotation.Nullable
+  public ApplyWhenValueEnum getApplyWhenValue() {
+    return applyWhenValue;
+  }
+
+  public void setApplyWhenValue(ApplyWhenValueEnum applyWhenValue) {
+    this.applyWhenValue = applyWhenValue;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -310,6 +511,11 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
         Objects.equals(this.shiftType, rateCurveShiftDefinition.shiftType) &&
         Objects.equals(this.scale, rateCurveShiftDefinition.scale) &&
         Objects.equals(this.applyTo, rateCurveShiftDefinition.applyTo) &&
+        Objects.equals(this.pivotTenor, rateCurveShiftDefinition.pivotTenor) &&
+        Objects.equals(this.windowBounds, rateCurveShiftDefinition.windowBounds) &&
+        Objects.equals(this.curveName, rateCurveShiftDefinition.curveName) &&
+        (this.minimumAmountBps == null ? rateCurveShiftDefinition.minimumAmountBps == null : (rateCurveShiftDefinition.minimumAmountBps != null && this.minimumAmountBps.compareTo(rateCurveShiftDefinition.getMinimumAmountBps()) == 0)) &&
+        Objects.equals(this.applyWhenValue, rateCurveShiftDefinition.applyWhenValue) &&
         super.equals(o);
   }
 
@@ -319,7 +525,7 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(ccy, amount, startTenor, endTenor, shiftType, scale, applyTo, super.hashCode());
+    return Objects.hash(ccy, amount, startTenor, endTenor, shiftType, scale, applyTo, pivotTenor, windowBounds, curveName, minimumAmountBps, applyWhenValue, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -341,6 +547,11 @@ public class RateCurveShiftDefinition extends ScenarioShiftDefinition {
     sb.append("    shiftType: ").append(toIndentedString(shiftType)).append("\n");
     sb.append("    scale: ").append(toIndentedString(scale)).append("\n");
     sb.append("    applyTo: ").append(toIndentedString(applyTo)).append("\n");
+    sb.append("    pivotTenor: ").append(toIndentedString(pivotTenor)).append("\n");
+    sb.append("    windowBounds: ").append(toIndentedString(windowBounds)).append("\n");
+    sb.append("    curveName: ").append(toIndentedString(curveName)).append("\n");
+    sb.append("    minimumAmountBps: ").append(toIndentedString(minimumAmountBps)).append("\n");
+    sb.append("    applyWhenValue: ").append(toIndentedString(applyWhenValue)).append("\n");
     sb.append("}");
     return sb.toString();
   }

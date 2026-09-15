@@ -16,7 +16,10 @@ import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import com.finbourne.sdk.services.lusid.model.LapseElection;
 import com.finbourne.sdk.services.lusid.model.NewInstrument;
 import com.finbourne.sdk.services.lusid.model.OptionExerciseElection;
+import com.finbourne.sdk.services.lusid.model.OversubscribeElection;
+import com.finbourne.sdk.services.lusid.model.SellEntitlementElection;
 import com.finbourne.sdk.services.lusid.model.UnitsRatio;
+import com.finbourne.sdk.services.lusid.model.UnknownProceedsElection;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -49,7 +52,10 @@ import com.finbourne.sdk.JSON;
   CallOnIntermediateSecuritiesEvent.JSON_PROPERTY_PRICE,
   CallOnIntermediateSecuritiesEvent.JSON_PROPERTY_EXERCISE_CURRENCY,
   CallOnIntermediateSecuritiesEvent.JSON_PROPERTY_OPTION_EXERCISE_ELECTIONS,
-  CallOnIntermediateSecuritiesEvent.JSON_PROPERTY_LAPSE_ELECTIONS
+  CallOnIntermediateSecuritiesEvent.JSON_PROPERTY_LAPSE_ELECTIONS,
+  CallOnIntermediateSecuritiesEvent.JSON_PROPERTY_OVERSUBSCRIBE_ELECTIONS,
+  CallOnIntermediateSecuritiesEvent.JSON_PROPERTY_SELL_ENTITLEMENT_ELECTIONS,
+  CallOnIntermediateSecuritiesEvent.JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -98,6 +104,21 @@ public class CallOnIntermediateSecuritiesEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_LAPSE_ELECTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<LapseElection> lapseElections;
+
+  public static final String JSON_PROPERTY_OVERSUBSCRIBE_ELECTIONS = "oversubscribeElections";
+  @JsonProperty(JSON_PROPERTY_OVERSUBSCRIBE_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<OversubscribeElection> oversubscribeElections;
+
+  public static final String JSON_PROPERTY_SELL_ENTITLEMENT_ELECTIONS = "sellEntitlementElections";
+  @JsonProperty(JSON_PROPERTY_SELL_ENTITLEMENT_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<SellEntitlementElection> sellEntitlementElections;
+
+  public static final String JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS = "unknownProceedsElections";
+  @JsonProperty(JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<UnknownProceedsElection> unknownProceedsElections;
 
   public CallOnIntermediateSecuritiesEvent() {
   }
@@ -270,6 +291,87 @@ public class CallOnIntermediateSecuritiesEvent extends InstrumentEvent {
   }
 
 
+  public CallOnIntermediateSecuritiesEvent oversubscribeElections(List<OversubscribeElection> oversubscribeElections) {
+    this.oversubscribeElections = oversubscribeElections;
+    return this;
+  }
+
+  public CallOnIntermediateSecuritiesEvent addOversubscribeElectionsItem(OversubscribeElection oversubscribeElectionsItem) {
+    if (this.oversubscribeElections == null) {
+      this.oversubscribeElections = new ArrayList<>();
+    }
+    this.oversubscribeElections.add(oversubscribeElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible oversubscribe elections for this event (OVER) — subscribe for more than the entitled amount.
+   * @return oversubscribeElections
+   */
+  @javax.annotation.Nullable
+  public List<OversubscribeElection> getOversubscribeElections() {
+    return oversubscribeElections;
+  }
+
+  public void setOversubscribeElections(List<OversubscribeElection> oversubscribeElections) {
+    this.oversubscribeElections = oversubscribeElections;
+  }
+
+
+  public CallOnIntermediateSecuritiesEvent sellEntitlementElections(List<SellEntitlementElection> sellEntitlementElections) {
+    this.sellEntitlementElections = sellEntitlementElections;
+    return this;
+  }
+
+  public CallOnIntermediateSecuritiesEvent addSellEntitlementElectionsItem(SellEntitlementElection sellEntitlementElectionsItem) {
+    if (this.sellEntitlementElections == null) {
+      this.sellEntitlementElections = new ArrayList<>();
+    }
+    this.sellEntitlementElections.add(sellEntitlementElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible sell-entitlement elections for this event (SLLE) — sell the intermediate securities rather than exercise.
+   * @return sellEntitlementElections
+   */
+  @javax.annotation.Nullable
+  public List<SellEntitlementElection> getSellEntitlementElections() {
+    return sellEntitlementElections;
+  }
+
+  public void setSellEntitlementElections(List<SellEntitlementElection> sellEntitlementElections) {
+    this.sellEntitlementElections = sellEntitlementElections;
+  }
+
+
+  public CallOnIntermediateSecuritiesEvent unknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+    return this;
+  }
+
+  public CallOnIntermediateSecuritiesEvent addUnknownProceedsElectionsItem(UnknownProceedsElection unknownProceedsElectionsItem) {
+    if (this.unknownProceedsElections == null) {
+      this.unknownProceedsElections = new ArrayList<>();
+    }
+    this.unknownProceedsElections.add(unknownProceedsElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible unknown-proceeds elections for this event (UNKNOWN) — the outturn is not yet known.
+   * @return unknownProceedsElections
+   */
+  @javax.annotation.Nullable
+  public List<UnknownProceedsElection> getUnknownProceedsElections() {
+    return unknownProceedsElections;
+  }
+
+  public void setUnknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -287,6 +389,9 @@ public class CallOnIntermediateSecuritiesEvent extends InstrumentEvent {
         Objects.equals(this.exerciseCurrency, callOnIntermediateSecuritiesEvent.exerciseCurrency) &&
         Objects.equals(this.optionExerciseElections, callOnIntermediateSecuritiesEvent.optionExerciseElections) &&
         Objects.equals(this.lapseElections, callOnIntermediateSecuritiesEvent.lapseElections) &&
+        Objects.equals(this.oversubscribeElections, callOnIntermediateSecuritiesEvent.oversubscribeElections) &&
+        Objects.equals(this.sellEntitlementElections, callOnIntermediateSecuritiesEvent.sellEntitlementElections) &&
+        Objects.equals(this.unknownProceedsElections, callOnIntermediateSecuritiesEvent.unknownProceedsElections) &&
         super.equals(o);
   }
 
@@ -296,7 +401,7 @@ public class CallOnIntermediateSecuritiesEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(expiryDate, paymentDate, newInstrument, unitsRatio, price, exerciseCurrency, optionExerciseElections, lapseElections, super.hashCode());
+    return Objects.hash(expiryDate, paymentDate, newInstrument, unitsRatio, price, exerciseCurrency, optionExerciseElections, lapseElections, oversubscribeElections, sellEntitlementElections, unknownProceedsElections, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -319,6 +424,9 @@ public class CallOnIntermediateSecuritiesEvent extends InstrumentEvent {
     sb.append("    exerciseCurrency: ").append(toIndentedString(exerciseCurrency)).append("\n");
     sb.append("    optionExerciseElections: ").append(toIndentedString(optionExerciseElections)).append("\n");
     sb.append("    lapseElections: ").append(toIndentedString(lapseElections)).append("\n");
+    sb.append("    oversubscribeElections: ").append(toIndentedString(oversubscribeElections)).append("\n");
+    sb.append("    sellEntitlementElections: ").append(toIndentedString(sellEntitlementElections)).append("\n");
+    sb.append("    unknownProceedsElections: ").append(toIndentedString(unknownProceedsElections)).append("\n");
     sb.append("}");
     return sb.toString();
   }

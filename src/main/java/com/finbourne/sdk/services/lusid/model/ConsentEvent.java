@@ -12,7 +12,10 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AbstainElection;
 import com.finbourne.sdk.services.lusid.model.CashOfferElection;
+import com.finbourne.sdk.services.lusid.model.ConsentDeniedElection;
+import com.finbourne.sdk.services.lusid.model.ConsentGrantedElection;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import com.finbourne.sdk.services.lusid.model.LapseElection;
 import java.io.IOException;
@@ -47,7 +50,10 @@ import com.finbourne.sdk.JSON;
   ConsentEvent.JSON_PROPERTY_EARLY_RESPONSE_DEADLINE,
   ConsentEvent.JSON_PROPERTY_PAYMENT_DATE,
   ConsentEvent.JSON_PROPERTY_CASH_OFFER_ELECTIONS,
-  ConsentEvent.JSON_PROPERTY_LAPSE_ELECTIONS
+  ConsentEvent.JSON_PROPERTY_LAPSE_ELECTIONS,
+  ConsentEvent.JSON_PROPERTY_CONSENT_GRANTED_ELECTIONS,
+  ConsentEvent.JSON_PROPERTY_CONSENT_DENIED_ELECTIONS,
+  ConsentEvent.JSON_PROPERTY_ABSTAIN_ELECTIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -96,6 +102,21 @@ public class ConsentEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_LAPSE_ELECTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<LapseElection> lapseElections;
+
+  public static final String JSON_PROPERTY_CONSENT_GRANTED_ELECTIONS = "consentGrantedElections";
+  @JsonProperty(JSON_PROPERTY_CONSENT_GRANTED_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ConsentGrantedElection> consentGrantedElections;
+
+  public static final String JSON_PROPERTY_CONSENT_DENIED_ELECTIONS = "consentDeniedElections";
+  @JsonProperty(JSON_PROPERTY_CONSENT_DENIED_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ConsentDeniedElection> consentDeniedElections;
+
+  public static final String JSON_PROPERTY_ABSTAIN_ELECTIONS = "abstainElections";
+  @JsonProperty(JSON_PROPERTY_ABSTAIN_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AbstainElection> abstainElections;
 
   public ConsentEvent() {
   }
@@ -255,7 +276,7 @@ public class ConsentEvent extends InstrumentEvent {
   }
 
   /**
-   * List of possible lapse elections for this event (NOAC, CONN, ABST).
+   * List of possible lapse elections for this event (NOAC).
    * @return lapseElections
    */
   @javax.annotation.Nullable
@@ -265,6 +286,87 @@ public class ConsentEvent extends InstrumentEvent {
 
   public void setLapseElections(List<LapseElection> lapseElections) {
     this.lapseElections = lapseElections;
+  }
+
+
+  public ConsentEvent consentGrantedElections(List<ConsentGrantedElection> consentGrantedElections) {
+    this.consentGrantedElections = consentGrantedElections;
+    return this;
+  }
+
+  public ConsentEvent addConsentGrantedElectionsItem(ConsentGrantedElection consentGrantedElectionsItem) {
+    if (this.consentGrantedElections == null) {
+      this.consentGrantedElections = new ArrayList<>();
+    }
+    this.consentGrantedElections.add(consentGrantedElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible consent-granted elections for this event (CONY), each optionally carrying a consent fee.
+   * @return consentGrantedElections
+   */
+  @javax.annotation.Nullable
+  public List<ConsentGrantedElection> getConsentGrantedElections() {
+    return consentGrantedElections;
+  }
+
+  public void setConsentGrantedElections(List<ConsentGrantedElection> consentGrantedElections) {
+    this.consentGrantedElections = consentGrantedElections;
+  }
+
+
+  public ConsentEvent consentDeniedElections(List<ConsentDeniedElection> consentDeniedElections) {
+    this.consentDeniedElections = consentDeniedElections;
+    return this;
+  }
+
+  public ConsentEvent addConsentDeniedElectionsItem(ConsentDeniedElection consentDeniedElectionsItem) {
+    if (this.consentDeniedElections == null) {
+      this.consentDeniedElections = new ArrayList<>();
+    }
+    this.consentDeniedElections.add(consentDeniedElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible consent-denied elections for this event (CONN).
+   * @return consentDeniedElections
+   */
+  @javax.annotation.Nullable
+  public List<ConsentDeniedElection> getConsentDeniedElections() {
+    return consentDeniedElections;
+  }
+
+  public void setConsentDeniedElections(List<ConsentDeniedElection> consentDeniedElections) {
+    this.consentDeniedElections = consentDeniedElections;
+  }
+
+
+  public ConsentEvent abstainElections(List<AbstainElection> abstainElections) {
+    this.abstainElections = abstainElections;
+    return this;
+  }
+
+  public ConsentEvent addAbstainElectionsItem(AbstainElection abstainElectionsItem) {
+    if (this.abstainElections == null) {
+      this.abstainElections = new ArrayList<>();
+    }
+    this.abstainElections.add(abstainElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible abstain elections for this event (ABST).
+   * @return abstainElections
+   */
+  @javax.annotation.Nullable
+  public List<AbstainElection> getAbstainElections() {
+    return abstainElections;
+  }
+
+  public void setAbstainElections(List<AbstainElection> abstainElections) {
+    this.abstainElections = abstainElections;
   }
 
 
@@ -285,6 +387,9 @@ public class ConsentEvent extends InstrumentEvent {
         Objects.equals(this.paymentDate, consentEvent.paymentDate) &&
         Objects.equals(this.cashOfferElections, consentEvent.cashOfferElections) &&
         Objects.equals(this.lapseElections, consentEvent.lapseElections) &&
+        Objects.equals(this.consentGrantedElections, consentEvent.consentGrantedElections) &&
+        Objects.equals(this.consentDeniedElections, consentEvent.consentDeniedElections) &&
+        Objects.equals(this.abstainElections, consentEvent.abstainElections) &&
         super.equals(o);
   }
 
@@ -294,7 +399,7 @@ public class ConsentEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(consentType, recordDate, responseDeadline, marketDeadline, earlyResponseDeadline, paymentDate, cashOfferElections, lapseElections, super.hashCode());
+    return Objects.hash(consentType, recordDate, responseDeadline, marketDeadline, earlyResponseDeadline, paymentDate, cashOfferElections, lapseElections, consentGrantedElections, consentDeniedElections, abstainElections, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -317,6 +422,9 @@ public class ConsentEvent extends InstrumentEvent {
     sb.append("    paymentDate: ").append(toIndentedString(paymentDate)).append("\n");
     sb.append("    cashOfferElections: ").append(toIndentedString(cashOfferElections)).append("\n");
     sb.append("    lapseElections: ").append(toIndentedString(lapseElections)).append("\n");
+    sb.append("    consentGrantedElections: ").append(toIndentedString(consentGrantedElections)).append("\n");
+    sb.append("    consentDeniedElections: ").append(toIndentedString(consentDeniedElections)).append("\n");
+    sb.append("    abstainElections: ").append(toIndentedString(abstainElections)).append("\n");
     sb.append("}");
     return sb.toString();
   }

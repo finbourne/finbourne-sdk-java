@@ -42,8 +42,11 @@ import com.finbourne.sdk.JSON;
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = "scenarioShiftType", visible = true)
 @com.fasterxml.jackson.annotation.JsonSubTypes({
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreditSpreadShiftDefinition.class, name = "CreditSpreadShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxShiftDefinition.class, name = "FxShiftDefinition"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InflationCurveShiftDefinition.class, name = "InflationCurveShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MdkrGroupShiftDefinition.class, name = "MdkrGroupShiftDefinition"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ModelOptionShiftDefinition.class, name = "ModelOptionShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = PriceShiftDefinition.class, name = "PriceShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RateCurveShiftDefinition.class, name = "RateCurveShiftDefinition"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VolSurfaceShiftDefinition.class, name = "VolSurfaceShiftDefinition"),
@@ -51,7 +54,7 @@ import com.finbourne.sdk.JSON;
 
 public class ScenarioShiftDefinition {
   /**
-   * Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.
+   * Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition.
    */
   public enum ScenarioShiftTypeEnum {
     RATE_CURVE_SHIFT_DEFINITION("RateCurveShiftDefinition"),
@@ -62,7 +65,13 @@ public class ScenarioShiftDefinition {
     
     VOL_SURFACE_SHIFT_DEFINITION("VolSurfaceShiftDefinition"),
     
-    MDKR_GROUP_SHIFT_DEFINITION("MdkrGroupShiftDefinition");
+    MDKR_GROUP_SHIFT_DEFINITION("MdkrGroupShiftDefinition"),
+    
+    INFLATION_CURVE_SHIFT_DEFINITION("InflationCurveShiftDefinition"),
+    
+    CREDIT_SPREAD_SHIFT_DEFINITION("CreditSpreadShiftDefinition"),
+    
+    MODEL_OPTION_SHIFT_DEFINITION("ModelOptionShiftDefinition");
 
     private String value;
 
@@ -104,7 +113,7 @@ public class ScenarioShiftDefinition {
   }
 
   /**
-   * Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.
+   * Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition.
    * @return scenarioShiftType
    */
   @javax.annotation.Nonnull

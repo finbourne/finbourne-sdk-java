@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.workflow.model;
 
 import com.finbourne.sdk.services.workflow.model.CreateChildTasksActionResponse;
 import com.finbourne.sdk.services.workflow.model.FieldMapping;
+import com.finbourne.sdk.services.workflow.model.ReRunConfiguration;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.ResultantChildTaskConfiguration;
 import com.finbourne.sdk.services.workflow.model.RunWorkerActionResponse;

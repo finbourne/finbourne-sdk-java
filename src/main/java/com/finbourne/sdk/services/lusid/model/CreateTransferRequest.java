@@ -64,7 +64,7 @@ import com.finbourne.sdk.JSON;
   CreateTransferRequest.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID_IN,
   CreateTransferRequest.JSON_PROPERTY_SOURCE,
   CreateTransferRequest.JSON_PROPERTY_ACCOUNTING_METHOD,
-  CreateTransferRequest.JSON_PROPERTY_PROPERTIES,
+  CreateTransferRequest.JSON_PROPERTY_PROPERTIES_OUT,
   CreateTransferRequest.JSON_PROPERTY_PROPERTIES_IN
 })
 
@@ -194,10 +194,10 @@ public class CreateTransferRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String accountingMethod;
 
-  public static final String JSON_PROPERTY_PROPERTIES = "properties";
-  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  public static final String JSON_PROPERTY_PROPERTIES_OUT = "propertiesOut";
+  @JsonProperty(JSON_PROPERTY_PROPERTIES_OUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private Map<String, PerpetualProperty> properties;
+  private Map<String, PerpetualProperty> propertiesOut;
 
   public static final String JSON_PROPERTY_PROPERTIES_IN = "propertiesIn";
   @JsonProperty(JSON_PROPERTY_PROPERTIES_IN)
@@ -682,30 +682,30 @@ public class CreateTransferRequest {
   }
 
 
-  public CreateTransferRequest properties(Map<String, PerpetualProperty> properties) {
-    this.properties = properties;
+  public CreateTransferRequest propertiesOut(Map<String, PerpetualProperty> propertiesOut) {
+    this.propertiesOut = propertiesOut;
     return this;
   }
 
-  public CreateTransferRequest putPropertiesItem(String key, PerpetualProperty propertiesItem) {
-    if (this.properties == null) {
-      this.properties = new HashMap<>();
+  public CreateTransferRequest putPropertiesOutItem(String key, PerpetualProperty propertiesOutItem) {
+    if (this.propertiesOut == null) {
+      this.propertiesOut = new HashMap<>();
     }
-    this.properties.put(key, propertiesItem);
+    this.propertiesOut.put(key, propertiesOutItem);
     return this;
   }
 
   /**
-   * Get properties
-   * @return properties
+   * Get propertiesOut
+   * @return propertiesOut
    */
   @javax.annotation.Nullable
-  public Map<String, PerpetualProperty> getProperties() {
-    return properties;
+  public Map<String, PerpetualProperty> getPropertiesOut() {
+    return propertiesOut;
   }
 
-  public void setProperties(Map<String, PerpetualProperty> properties) {
-    this.properties = properties;
+  public void setPropertiesOut(Map<String, PerpetualProperty> propertiesOut) {
+    this.propertiesOut = propertiesOut;
   }
 
 
@@ -770,7 +770,7 @@ public class CreateTransferRequest {
         Objects.equals(this.custodianAccountIdIn, createTransferRequest.custodianAccountIdIn) &&
         Objects.equals(this.source, createTransferRequest.source) &&
         Objects.equals(this.accountingMethod, createTransferRequest.accountingMethod) &&
-        Objects.equals(this.properties, createTransferRequest.properties) &&
+        Objects.equals(this.propertiesOut, createTransferRequest.propertiesOut) &&
         Objects.equals(this.propertiesIn, createTransferRequest.propertiesIn);
   }
 
@@ -780,7 +780,7 @@ public class CreateTransferRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transferId, portfolioIdOut, portfolioIdIn, instrumentIdentifierOut, instrumentIdentifierIn, pricingMethod, taxLotStructure, unitsOut, unitsIn, amountOut, weightOut, tradeDateOut, tradeDateIn, settlementDateOut, settlementDateIn, exchangeRateOut, exchangeRateIn, transactionPriceOut, transactionPriceIn, counterpartyIdOut, counterpartyIdIn, custodianAccountIdOut, custodianAccountIdIn, source, accountingMethod, properties, propertiesIn);
+    return Objects.hash(transferId, portfolioIdOut, portfolioIdIn, instrumentIdentifierOut, instrumentIdentifierIn, pricingMethod, taxLotStructure, unitsOut, unitsIn, amountOut, weightOut, tradeDateOut, tradeDateIn, settlementDateOut, settlementDateIn, exchangeRateOut, exchangeRateIn, transactionPriceOut, transactionPriceIn, counterpartyIdOut, counterpartyIdIn, custodianAccountIdOut, custodianAccountIdIn, source, accountingMethod, propertiesOut, propertiesIn);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -819,7 +819,7 @@ public class CreateTransferRequest {
     sb.append("    custodianAccountIdIn: ").append(toIndentedString(custodianAccountIdIn)).append("\n");
     sb.append("    source: ").append(toIndentedString(source)).append("\n");
     sb.append("    accountingMethod: ").append(toIndentedString(accountingMethod)).append("\n");
-    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
+    sb.append("    propertiesOut: ").append(toIndentedString(propertiesOut)).append("\n");
     sb.append("    propertiesIn: ").append(toIndentedString(propertiesIn)).append("\n");
     sb.append("}");
     return sb.toString();

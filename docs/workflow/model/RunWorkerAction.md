@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **workerParameters** | [**Map&lt;String, FieldMapping&gt;**](FieldMapping.md) | Parameters for this Worker | [optional] [default to Map<String, FieldMapping>]
 **workerStatusTriggers** | [**WorkerStatusTriggers**](WorkerStatusTriggers.md) |  | [optional] [default to WorkerStatusTriggers]
 **childTaskConfigurations** | [**List&lt;ResultantChildTaskConfiguration&gt;**](ResultantChildTaskConfiguration.md) | Tasks can be generated from run worker results; this is the configuration | [optional] [default to List<ResultantChildTaskConfiguration>]
+**reRunConfigurations** | [**List&lt;ReRunConfiguration&gt;**](ReRunConfiguration.md) | Configuration governing how re-run results are reconciled against existing child tasks from a previous run of this action against the same parent Task instance | [optional] [default to List<ReRunConfiguration>]
 **workerTimeout** | **Integer** | Worker WorkerTimeout in seconds | [optional] [default to Integer]
 
 ```java
@@ -26,6 +27,7 @@ ResourceId workerId = new ResourceId();
 @javax.annotation.Nullable Map<String, FieldMapping> workerParameters = new Map<String, FieldMapping>();
 WorkerStatusTriggers workerStatusTriggers = new WorkerStatusTriggers();
 @javax.annotation.Nullable List<ResultantChildTaskConfiguration> childTaskConfigurations = new List<ResultantChildTaskConfiguration>();
+@javax.annotation.Nullable List<ReRunConfiguration> reRunConfigurations = new List<ReRunConfiguration>();
 @javax.annotation.Nullable Integer workerTimeout = new Integer("100.00");
 
 
@@ -36,6 +38,7 @@ RunWorkerAction runWorkerActionInstance = new RunWorkerAction()
     .workerParameters(workerParameters)
     .workerStatusTriggers(workerStatusTriggers)
     .childTaskConfigurations(childTaskConfigurations)
+    .reRunConfigurations(reRunConfigurations)
     .workerTimeout(workerTimeout);
 ```
 

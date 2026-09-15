@@ -205,7 +205,11 @@ public enum PropertyDomain {
   
   PAYMENT_INSTRUCTION("PaymentInstruction"),
   
-  TRANSFER("Transfer");
+  TRANSFER("Transfer"),
+  
+  CURRENCY_GROUP("CurrencyGroup"),
+  
+  REC_DEFINITION("RecDefinition");
 
   private String value;
 

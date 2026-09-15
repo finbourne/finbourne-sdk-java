@@ -120,6 +120,12 @@ InstrumentEventType method = InstrumentEventType.COMMODITY_CALENDAR_SWAP_CASH_FL
 InstrumentEventType method = InstrumentEventType.DEPOSIT_SWEEP_EVENT;
 InstrumentEventType method = InstrumentEventType.BOND_FORWARD_CASH_SETTLEMENT_EVENT;
 InstrumentEventType method = InstrumentEventType.BOND_FORWARD_TERMINATION_EVENT;
+InstrumentEventType method = InstrumentEventType.AMEND_COMMITMENT_EVENT;
+InstrumentEventType method = InstrumentEventType.CAPITAL_CALL_EVENT;
+InstrumentEventType method = InstrumentEventType.FUND_DISTRIBUTION_EVENT;
+InstrumentEventType method = InstrumentEventType.NAV_REPORT_EVENT;
+InstrumentEventType method = InstrumentEventType.DIVIDEND_SUSPENSION_EVENT;
+InstrumentEventType method = InstrumentEventType.LOAN_INTEREST_CAPITALISATION_EVENT;
 ```
 
 

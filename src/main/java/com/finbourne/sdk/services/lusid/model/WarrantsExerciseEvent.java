@@ -17,6 +17,7 @@ import com.finbourne.sdk.services.lusid.model.LapseElection;
 import com.finbourne.sdk.services.lusid.model.NewInstrument;
 import com.finbourne.sdk.services.lusid.model.OptionExerciseElection;
 import com.finbourne.sdk.services.lusid.model.UnitsRatio;
+import com.finbourne.sdk.services.lusid.model.UnknownProceedsElection;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -54,7 +55,8 @@ import com.finbourne.sdk.JSON;
   WarrantsExerciseEvent.JSON_PROPERTY_NEW_INSTRUMENT,
   WarrantsExerciseEvent.JSON_PROPERTY_FRACTION_DISPOSITION,
   WarrantsExerciseEvent.JSON_PROPERTY_OPTION_EXERCISE_ELECTIONS,
-  WarrantsExerciseEvent.JSON_PROPERTY_LAPSE_ELECTIONS
+  WarrantsExerciseEvent.JSON_PROPERTY_LAPSE_ELECTIONS,
+  WarrantsExerciseEvent.JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -128,6 +130,11 @@ public class WarrantsExerciseEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_LAPSE_ELECTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<LapseElection> lapseElections;
+
+  public static final String JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS = "unknownProceedsElections";
+  @JsonProperty(JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<UnknownProceedsElection> unknownProceedsElections;
 
   public WarrantsExerciseEvent() {
   }
@@ -395,6 +402,33 @@ public class WarrantsExerciseEvent extends InstrumentEvent {
   }
 
 
+  public WarrantsExerciseEvent unknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+    return this;
+  }
+
+  public WarrantsExerciseEvent addUnknownProceedsElectionsItem(UnknownProceedsElection unknownProceedsElectionsItem) {
+    if (this.unknownProceedsElections == null) {
+      this.unknownProceedsElections = new ArrayList<>();
+    }
+    this.unknownProceedsElections.add(unknownProceedsElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible unknown-proceeds elections for this event (UNKNOWN) — the outturn is not yet known.
+   * @return unknownProceedsElections
+   */
+  @javax.annotation.Nullable
+  public List<UnknownProceedsElection> getUnknownProceedsElections() {
+    return unknownProceedsElections;
+  }
+
+  public void setUnknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -417,6 +451,7 @@ public class WarrantsExerciseEvent extends InstrumentEvent {
         Objects.equals(this.fractionDisposition, warrantsExerciseEvent.fractionDisposition) &&
         Objects.equals(this.optionExerciseElections, warrantsExerciseEvent.optionExerciseElections) &&
         Objects.equals(this.lapseElections, warrantsExerciseEvent.lapseElections) &&
+        Objects.equals(this.unknownProceedsElections, warrantsExerciseEvent.unknownProceedsElections) &&
         super.equals(o);
   }
 
@@ -426,7 +461,7 @@ public class WarrantsExerciseEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, periodOfActionStart, periodOfActionEnd, responseDeadlineDate, marketDeadlineDate, earlyResponseDeadline, strikePerUnit, strikeCurrency, unitsRatio, newInstrument, fractionDisposition, optionExerciseElections, lapseElections, super.hashCode());
+    return Objects.hash(paymentDate, periodOfActionStart, periodOfActionEnd, responseDeadlineDate, marketDeadlineDate, earlyResponseDeadline, strikePerUnit, strikeCurrency, unitsRatio, newInstrument, fractionDisposition, optionExerciseElections, lapseElections, unknownProceedsElections, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -454,6 +489,7 @@ public class WarrantsExerciseEvent extends InstrumentEvent {
     sb.append("    fractionDisposition: ").append(toIndentedString(fractionDisposition)).append("\n");
     sb.append("    optionExerciseElections: ").append(toIndentedString(optionExerciseElections)).append("\n");
     sb.append("    lapseElections: ").append(toIndentedString(lapseElections)).append("\n");
+    sb.append("    unknownProceedsElections: ").append(toIndentedString(unknownProceedsElections)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -38,7 +38,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   AggregateSpec.JSON_PROPERTY_KEY,
   AggregateSpec.JSON_PROPERTY_OP,
-  AggregateSpec.JSON_PROPERTY_OPTIONS
+  AggregateSpec.JSON_PROPERTY_OPTIONS,
+  AggregateSpec.JSON_PROPERTY_RETURN_AS
 })
 
 public class AggregateSpec {
@@ -115,6 +116,11 @@ public class AggregateSpec {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, Object> options;
 
+  public static final String JSON_PROPERTY_RETURN_AS = "returnAs";
+  @JsonProperty(JSON_PROPERTY_RETURN_AS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String returnAs;
+
   public AggregateSpec() {
   }
 
@@ -183,6 +189,25 @@ public class AggregateSpec {
   }
 
 
+  public AggregateSpec returnAs(String returnAs) {
+    this.returnAs = returnAs;
+    return this;
+  }
+
+  /**
+   * Optional client-chosen name for this metric. When supplied, the corresponding column in the returned  data is keyed by this name instead of the serialised address key (with options), letting callers  associate each requested metric with its result without reconstructing the key serialisation.  Names must be unique within a request, start with a letter and contain only letters, digits,  underscores or hyphens. When omitted, the column is keyed by the serialised address key as before.
+   * @return returnAs
+   */
+  @javax.annotation.Nullable
+  public String getReturnAs() {
+    return returnAs;
+  }
+
+  public void setReturnAs(String returnAs) {
+    this.returnAs = returnAs;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -194,7 +219,8 @@ public class AggregateSpec {
     AggregateSpec aggregateSpec = (AggregateSpec) o;
     return Objects.equals(this.key, aggregateSpec.key) &&
         Objects.equals(this.op, aggregateSpec.op) &&
-        Objects.equals(this.options, aggregateSpec.options);
+        Objects.equals(this.options, aggregateSpec.options) &&
+        Objects.equals(this.returnAs, aggregateSpec.returnAs);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -203,7 +229,7 @@ public class AggregateSpec {
 
   @Override
  public int hashCode() {
-    return Objects.hash(key, op, options);
+    return Objects.hash(key, op, options, returnAs);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -220,6 +246,7 @@ public class AggregateSpec {
     sb.append("    key: ").append(toIndentedString(key)).append("\n");
     sb.append("    op: ").append(toIndentedString(op)).append("\n");
     sb.append("    options: ").append(toIndentedString(options)).append("\n");
+    sb.append("    returnAs: ").append(toIndentedString(returnAs)).append("\n");
     sb.append("}");
     return sb.toString();
   }

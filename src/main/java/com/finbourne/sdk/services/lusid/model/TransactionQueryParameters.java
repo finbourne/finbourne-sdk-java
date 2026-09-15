@@ -42,7 +42,8 @@ import com.finbourne.sdk.JSON;
   TransactionQueryParameters.JSON_PROPERTY_TIMELINE_CODE,
   TransactionQueryParameters.JSON_PROPERTY_INCLUDE_ECONOMICS,
   TransactionQueryParameters.JSON_PROPERTY_INCLUDE_SETTLEMENT_STATUS,
-  TransactionQueryParameters.JSON_PROPERTY_SETTLEMENT_STATUS_DATE
+  TransactionQueryParameters.JSON_PROPERTY_SETTLEMENT_STATUS_DATE,
+  TransactionQueryParameters.JSON_PROPERTY_RETURN_EXCLUDED_TRANSACTIONS
 })
 
 public class TransactionQueryParameters {
@@ -124,6 +125,11 @@ public class TransactionQueryParameters {
   @JsonProperty(JSON_PROPERTY_SETTLEMENT_STATUS_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String settlementStatusDate;
+
+  public static final String JSON_PROPERTY_RETURN_EXCLUDED_TRANSACTIONS = "returnExcludedTransactions";
+  @JsonProperty(JSON_PROPERTY_RETURN_EXCLUDED_TRANSACTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean returnExcludedTransactions;
 
   public TransactionQueryParameters() {
   }
@@ -299,6 +305,25 @@ public class TransactionQueryParameters {
   }
 
 
+  public TransactionQueryParameters returnExcludedTransactions(Boolean returnExcludedTransactions) {
+    this.returnExcludedTransactions = returnExcludedTransactions;
+    return this;
+  }
+
+  /**
+   * Option to specify whether or not to include transactions that are marked as excluded by the portfolio&#39;s transaction exclusion filter. Excluded transactions do not affect holdings. Defaults to false if not specified.
+   * @return returnExcludedTransactions
+   */
+  @javax.annotation.Nullable
+  public Boolean getReturnExcludedTransactions() {
+    return returnExcludedTransactions;
+  }
+
+  public void setReturnExcludedTransactions(Boolean returnExcludedTransactions) {
+    this.returnExcludedTransactions = returnExcludedTransactions;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -316,7 +341,8 @@ public class TransactionQueryParameters {
         Objects.equals(this.timelineCode, transactionQueryParameters.timelineCode) &&
         Objects.equals(this.includeEconomics, transactionQueryParameters.includeEconomics) &&
         Objects.equals(this.includeSettlementStatus, transactionQueryParameters.includeSettlementStatus) &&
-        Objects.equals(this.settlementStatusDate, transactionQueryParameters.settlementStatusDate);
+        Objects.equals(this.settlementStatusDate, transactionQueryParameters.settlementStatusDate) &&
+        Objects.equals(this.returnExcludedTransactions, transactionQueryParameters.returnExcludedTransactions);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -325,7 +351,7 @@ public class TransactionQueryParameters {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, endDate, queryMode, showCancelledTransactions, timelineScope, timelineCode, includeEconomics, includeSettlementStatus, settlementStatusDate);
+    return Objects.hash(startDate, endDate, queryMode, showCancelledTransactions, timelineScope, timelineCode, includeEconomics, includeSettlementStatus, settlementStatusDate, returnExcludedTransactions);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -348,6 +374,7 @@ public class TransactionQueryParameters {
     sb.append("    includeEconomics: ").append(toIndentedString(includeEconomics)).append("\n");
     sb.append("    includeSettlementStatus: ").append(toIndentedString(includeSettlementStatus)).append("\n");
     sb.append("    settlementStatusDate: ").append(toIndentedString(settlementStatusDate)).append("\n");
+    sb.append("    returnExcludedTransactions: ").append(toIndentedString(returnExcludedTransactions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

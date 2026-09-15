@@ -67,7 +67,7 @@ public class AggregationQuery {
   private String displayName;
 
   /**
-   * Financially meaningful results can be presented as either simple flat types or more complex expanded types. This field gives the type of the more complex representation.    For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied) or as a decimal-currency pair. In this example, the type returned in this field would be \&quot;Result0D\&quot;, the decimal-currency pair. Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.
+   * Financially meaningful results can be presented as either simple flat types or more complex expanded types. This field gives the type of the more complex representation.    For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied) or as a decimal-currency pair. In this example, the type returned in this field would be \&quot;Result0D\&quot;, the decimal-currency pair. Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json, ResultND.
    */
   public enum TypeEnum {
     STRING("String"),
@@ -88,7 +88,9 @@ public class AggregationQuery {
     
     RESULT2_D("Result2D"),
     
-    JSON("Json");
+    JSON("Json"),
+    
+    RESULT_ND("ResultND");
 
     private String value;
 
@@ -122,7 +124,7 @@ public class AggregationQuery {
   private TypeEnum type;
 
   /**
-   * Financially meaningful results can be presented as either simple flat types or more complex expanded types. This field gives the type of the simpler representation.    For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied) or as a decimal-currency pair. In this example, the type returned in this field would be \&quot;Decimal\&quot;. Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.
+   * Financially meaningful results can be presented as either simple flat types or more complex expanded types. This field gives the type of the simpler representation.    For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied) or as a decimal-currency pair. In this example, the type returned in this field would be \&quot;Decimal\&quot;. Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json, ResultND.
    */
   public enum FlattenedTypeEnum {
     STRING("String"),
@@ -143,7 +145,9 @@ public class AggregationQuery {
     
     RESULT2_D("Result2D"),
     
-    JSON("Json");
+    JSON("Json"),
+    
+    RESULT_ND("ResultND");
 
     private String value;
 
@@ -267,7 +271,7 @@ public class AggregationQuery {
   }
 
   /**
-   * Financially meaningful results can be presented as either simple flat types or more complex expanded types. This field gives the type of the more complex representation.    For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied) or as a decimal-currency pair. In this example, the type returned in this field would be \&quot;Result0D\&quot;, the decimal-currency pair. Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.
+   * Financially meaningful results can be presented as either simple flat types or more complex expanded types. This field gives the type of the more complex representation.    For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied) or as a decimal-currency pair. In this example, the type returned in this field would be \&quot;Result0D\&quot;, the decimal-currency pair. Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json, ResultND.
    * @return type
    */
   @javax.annotation.Nonnull
@@ -286,7 +290,7 @@ public class AggregationQuery {
   }
 
   /**
-   * Financially meaningful results can be presented as either simple flat types or more complex expanded types. This field gives the type of the simpler representation.    For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied) or as a decimal-currency pair. In this example, the type returned in this field would be \&quot;Decimal\&quot;. Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.
+   * Financially meaningful results can be presented as either simple flat types or more complex expanded types. This field gives the type of the simpler representation.    For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied) or as a decimal-currency pair. In this example, the type returned in this field would be \&quot;Decimal\&quot;. Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json, ResultND.
    * @return flattenedType
    */
   @javax.annotation.Nonnull

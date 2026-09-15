@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **lineage** | **String** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] [default to String]
 **marketDataOptions** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] [default to MarketDataOptions]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
+**fundingCurveName** | **String** | Optional name of the funding curve under which the calibration instruments are discounted,  for projection curves that are bootstrapped under a separate discount curve. This is the  funding identifier of the rates dependency for the calibration instruments&#39; domestic currency,  so a value of &#39;EUROIS&#39; names the discounting dependency Rates/EUR/EUROIS. When omitted the  calibration instruments are discounted on the curve being built, which is the classic  single-curve bootstrap. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.YieldCurveData;
@@ -26,6 +27,7 @@ List<MarketQuote> quotes = new List<MarketQuote>();
 @javax.annotation.Nullable String lineage = "example lineage";
 MarketDataOptions marketDataOptions = new MarketDataOptions();
 Version version = new Version();
+@javax.annotation.Nullable String fundingCurveName = "example fundingCurveName";
 
 
 YieldCurveData yieldCurveDataInstance = new YieldCurveData()
@@ -34,7 +36,8 @@ YieldCurveData yieldCurveDataInstance = new YieldCurveData()
     .quotes(quotes)
     .lineage(lineage)
     .marketDataOptions(marketDataOptions)
-    .version(version);
+    .version(version)
+    .fundingCurveName(fundingCurveName);
 ```
 
 

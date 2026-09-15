@@ -231,7 +231,19 @@ public enum InstrumentEventType {
   
   BOND_FORWARD_CASH_SETTLEMENT_EVENT("BondForwardCashSettlementEvent"),
   
-  BOND_FORWARD_TERMINATION_EVENT("BondForwardTerminationEvent");
+  BOND_FORWARD_TERMINATION_EVENT("BondForwardTerminationEvent"),
+  
+  AMEND_COMMITMENT_EVENT("AmendCommitmentEvent"),
+  
+  CAPITAL_CALL_EVENT("CapitalCallEvent"),
+  
+  FUND_DISTRIBUTION_EVENT("FundDistributionEvent"),
+  
+  NAV_REPORT_EVENT("NavReportEvent"),
+  
+  DIVIDEND_SUSPENSION_EVENT("DividendSuspensionEvent"),
+  
+  LOAN_INTEREST_CAPITALISATION_EVENT("LoanInterestCapitalisationEvent");
 
   private String value;
 

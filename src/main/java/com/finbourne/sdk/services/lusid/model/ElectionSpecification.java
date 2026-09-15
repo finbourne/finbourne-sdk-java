@@ -67,7 +67,7 @@ public class ElectionSpecification {
   }
 
   /**
-   * Available values: CashElection, CashAndSecurityOfferElection, CashOfferElection, EarlyRedemptionElection, LapseElection, OptionExerciseElection, SecurityElection, SecurityOfferElection, TenderOfferElection, MixedLotConstituentsElection, SubscribeElection.
+   * Available values: CashElection, CashAndSecurityOfferElection, CashOfferElection, EarlyRedemptionElection, LapseElection, OptionExerciseElection, SecurityElection, SecurityOfferElection, TenderOfferElection, MixedLotConstituentsElection, SubscribeElection, ConsentGrantedElection, ConsentDeniedElection, AbstainElection, ConsentAndTenderElection, ConsentAndExchangeElection, RetainElection, OversubscribeElection, SellEntitlementElection, UnknownProceedsElection.
    * @return electionType
    */
   @javax.annotation.Nonnull

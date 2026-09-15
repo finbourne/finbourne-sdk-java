@@ -40,8 +40,10 @@ import com.finbourne.sdk.JSON;
   HullWhiteModelOptions.JSON_PROPERTY_MEAN_REVERSION,
   HullWhiteModelOptions.JSON_PROPERTY_VOLATILITY,
   HullWhiteModelOptions.JSON_PROPERTY_LATTICE_STEPS,
+  HullWhiteModelOptions.JSON_PROPERTY_EFFECTIVE_RATE_BUMP_SIZE,
   HullWhiteModelOptions.JSON_PROPERTY_MEAN_REVERSION_BY_CURRENCY,
-  HullWhiteModelOptions.JSON_PROPERTY_VOLATILITY_BY_CURRENCY
+  HullWhiteModelOptions.JSON_PROPERTY_VOLATILITY_BY_CURRENCY,
+  HullWhiteModelOptions.JSON_PROPERTY_VOLATILITY_MULTIPLIER
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -66,6 +68,11 @@ public class HullWhiteModelOptions extends ModelOptions {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Integer latticeSteps;
 
+  public static final String JSON_PROPERTY_EFFECTIVE_RATE_BUMP_SIZE = "effectiveRateBumpSize";
+  @JsonProperty(JSON_PROPERTY_EFFECTIVE_RATE_BUMP_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal effectiveRateBumpSize;
+
   public static final String JSON_PROPERTY_MEAN_REVERSION_BY_CURRENCY = "meanReversionByCurrency";
   @JsonProperty(JSON_PROPERTY_MEAN_REVERSION_BY_CURRENCY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -75,6 +82,11 @@ public class HullWhiteModelOptions extends ModelOptions {
   @JsonProperty(JSON_PROPERTY_VOLATILITY_BY_CURRENCY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, java.math.BigDecimal> volatilityByCurrency;
+
+  public static final String JSON_PROPERTY_VOLATILITY_MULTIPLIER = "volatilityMultiplier";
+  @JsonProperty(JSON_PROPERTY_VOLATILITY_MULTIPLIER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal volatilityMultiplier;
 
   public HullWhiteModelOptions() {
   }
@@ -104,7 +116,7 @@ public class HullWhiteModelOptions extends ModelOptions {
   }
 
   /**
-   * The normal (absolute) volatility of the short rate, e.g. 0.008 for 80bp per year. Defaults to 0.008.
+   * The normal (absolute) volatility of the short rate, e.g. 0.008 for 80bp per year. Must not  be negative; zero is allowed and prices with a deterministic short rate. Defaults to 0.008.
    * @return volatility
    */
   @javax.annotation.Nullable
@@ -133,6 +145,25 @@ public class HullWhiteModelOptions extends ModelOptions {
 
   public void setLatticeSteps(Integer latticeSteps) {
     this.latticeSteps = latticeSteps;
+  }
+
+
+  public HullWhiteModelOptions effectiveRateBumpSize(java.math.BigDecimal effectiveRateBumpSize) {
+    this.effectiveRateBumpSize = effectiveRateBumpSize;
+    return this;
+  }
+
+  /**
+   * The parallel curve shift, as an absolute rate, used for the central-difference effective  duration and convexity, e.g. 0.0001 for a 1bp bump. Must be strictly positive.  Defaults to 0.0025 (25bp, the market convention for option-adjusted risk) when not supplied.
+   * @return effectiveRateBumpSize
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getEffectiveRateBumpSize() {
+    return effectiveRateBumpSize;
+  }
+
+  public void setEffectiveRateBumpSize(java.math.BigDecimal effectiveRateBumpSize) {
+    this.effectiveRateBumpSize = effectiveRateBumpSize;
   }
 
 
@@ -190,6 +221,25 @@ public class HullWhiteModelOptions extends ModelOptions {
   }
 
 
+  public HullWhiteModelOptions volatilityMultiplier(java.math.BigDecimal volatilityMultiplier) {
+    this.volatilityMultiplier = volatilityMultiplier;
+    return this;
+  }
+
+  /**
+   * A multiplicative scaling applied to the resolved short-rate volatility - the scalar  Volatility or its per-currency override, whichever applies - at the point of use, e.g. 1.1  prices with the configured volatility raised by ten percent. A single multiplier scales  every per-currency calibration coherently, so a shocked set of options can differ from its  base by this one field rather than a hand-rebuilt volatility (or map of volatilities).  Must not be negative; zero is allowed and prices with a deterministic short rate.  Defaults to 1, which reproduces the configured volatility exactly, when not supplied.
+   * @return volatilityMultiplier
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getVolatilityMultiplier() {
+    return volatilityMultiplier;
+  }
+
+  public void setVolatilityMultiplier(java.math.BigDecimal volatilityMultiplier) {
+    this.volatilityMultiplier = volatilityMultiplier;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -202,8 +252,10 @@ public class HullWhiteModelOptions extends ModelOptions {
     return (this.meanReversion == null ? hullWhiteModelOptions.meanReversion == null : (hullWhiteModelOptions.meanReversion != null && this.meanReversion.compareTo(hullWhiteModelOptions.getMeanReversion()) == 0)) &&
         (this.volatility == null ? hullWhiteModelOptions.volatility == null : (hullWhiteModelOptions.volatility != null && this.volatility.compareTo(hullWhiteModelOptions.getVolatility()) == 0)) &&
         Objects.equals(this.latticeSteps, hullWhiteModelOptions.latticeSteps) &&
+        (this.effectiveRateBumpSize == null ? hullWhiteModelOptions.effectiveRateBumpSize == null : (hullWhiteModelOptions.effectiveRateBumpSize != null && this.effectiveRateBumpSize.compareTo(hullWhiteModelOptions.getEffectiveRateBumpSize()) == 0)) &&
         Objects.equals(this.meanReversionByCurrency, hullWhiteModelOptions.meanReversionByCurrency) &&
         Objects.equals(this.volatilityByCurrency, hullWhiteModelOptions.volatilityByCurrency) &&
+        (this.volatilityMultiplier == null ? hullWhiteModelOptions.volatilityMultiplier == null : (hullWhiteModelOptions.volatilityMultiplier != null && this.volatilityMultiplier.compareTo(hullWhiteModelOptions.getVolatilityMultiplier()) == 0)) &&
         super.equals(o);
   }
 
@@ -213,7 +265,7 @@ public class HullWhiteModelOptions extends ModelOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(meanReversion, volatility, latticeSteps, meanReversionByCurrency, volatilityByCurrency, super.hashCode());
+    return Objects.hash(meanReversion, volatility, latticeSteps, effectiveRateBumpSize, meanReversionByCurrency, volatilityByCurrency, volatilityMultiplier, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -231,8 +283,10 @@ public class HullWhiteModelOptions extends ModelOptions {
     sb.append("    meanReversion: ").append(toIndentedString(meanReversion)).append("\n");
     sb.append("    volatility: ").append(toIndentedString(volatility)).append("\n");
     sb.append("    latticeSteps: ").append(toIndentedString(latticeSteps)).append("\n");
+    sb.append("    effectiveRateBumpSize: ").append(toIndentedString(effectiveRateBumpSize)).append("\n");
     sb.append("    meanReversionByCurrency: ").append(toIndentedString(meanReversionByCurrency)).append("\n");
     sb.append("    volatilityByCurrency: ").append(toIndentedString(volatilityByCurrency)).append("\n");
+    sb.append("    volatilityMultiplier: ").append(toIndentedString(volatilityMultiplier)).append("\n");
     sb.append("}");
     return sb.toString();
   }

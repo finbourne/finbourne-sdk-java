@@ -1040,7 +1040,7 @@ public class CustomEntityDefinitionsApi {
      * Build call for listCustomEntityDefinitions
      * @param asAt The asAt datetime at which to list the entities. Defaults to returning the latest version              of each portfolio if not specified. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
      * @param page The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit              and asAt fields must not have changed since the original request. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -1061,7 +1061,7 @@ public class CustomEntityDefinitionsApi {
      * Build call for listCustomEntityDefinitions. Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to list the entities. Defaults to returning the latest version              of each portfolio if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit              and asAt fields must not have changed since the original request. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -1147,7 +1147,7 @@ public class CustomEntityDefinitionsApi {
      * List all Custom Entity type definitions matching particular criteria.
      * @param asAt The asAt datetime at which to list the entities. Defaults to returning the latest version              of each portfolio if not specified. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
      * @param page The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit              and asAt fields must not have changed since the original request. (optional)
      * @return ApiResponse&lt;PagedResourceListOfCustomEntityDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1170,7 +1170,7 @@ public class CustomEntityDefinitionsApi {
      * List all Custom Entity type definitions matching particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list the entities. Defaults to returning the latest version              of each portfolio if not specified. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
      * @param page The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit              and asAt fields must not have changed since the original request. (optional)
      * @return ApiResponse&lt;PagedResourceListOfCustomEntityDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1193,7 +1193,7 @@ public class CustomEntityDefinitionsApi {
      * List all Custom Entity type definitions matching particular criteria.
      * @param asAt The asAt datetime at which to list the entities. Defaults to returning the latest version              of each portfolio if not specified. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
      * @param page The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit              and asAt fields must not have changed since the original request. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1217,7 +1217,7 @@ public class CustomEntityDefinitionsApi {
      * List all Custom Entity type definitions matching particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list the entities. Defaults to returning the latest version              of each portfolio if not specified. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+     * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
      * @param page The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit              and asAt fields must not have changed since the original request. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1267,7 +1267,7 @@ public class CustomEntityDefinitionsApi {
 
         /**
          * Set filter
-         * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+         * @param filter Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
          * @return APIlistCustomEntityDefinitionsRequest
          */
         public APIlistCustomEntityDefinitionsRequest filter(String filter) {

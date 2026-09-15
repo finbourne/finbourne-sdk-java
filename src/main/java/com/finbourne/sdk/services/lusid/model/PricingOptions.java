@@ -12,10 +12,14 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.InflationConvexityOptions;
 import com.finbourne.sdk.services.lusid.model.ModelSelection;
 import com.finbourne.sdk.services.lusid.model.ReturnZeroPvOptions;
+import com.finbourne.sdk.services.lusid.model.RiskBumpOptions;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -55,7 +59,13 @@ import com.finbourne.sdk.JSON;
   PricingOptions.JSON_PROPERTY_RETURN_ZERO_PV,
   PricingOptions.JSON_PROPERTY_ENABLE_LEG_LEVEL_INFERENCE_FOR_CUSTOM_SRS_COLUMNS,
   PricingOptions.JSON_PROPERTY_USE_INSTRUMENT_SCALE_FACTOR_AS_DEFAULT,
-  PricingOptions.JSON_PROPERTY_SCALE_INSTRUMENT_ACCRUED_OVERRIDE_BY_CONTRACT_SIZE
+  PricingOptions.JSON_PROPERTY_SCALE_INSTRUMENT_ACCRUED_OVERRIDE_BY_CONTRACT_SIZE,
+  PricingOptions.JSON_PROPERTY_RISK_BUMP_OPTIONS,
+  PricingOptions.JSON_PROPERTY_FUNDING_CURVE_BY_CURRENCY,
+  PricingOptions.JSON_PROPERTY_DEFAULT_POOL_FACTORS_TO_UNITY,
+  PricingOptions.JSON_PROPERTY_FIND_OR_CALCULATE_WRITE_THROUGH,
+  PricingOptions.JSON_PROPERTY_INFLATION_CONVEXITY,
+  PricingOptions.JSON_PROPERTY_ALLOW_FALLBACK_ON_MODEL_DECLINE
 })
 
 public class PricingOptions {
@@ -158,6 +168,36 @@ public class PricingOptions {
   @JsonProperty(JSON_PROPERTY_SCALE_INSTRUMENT_ACCRUED_OVERRIDE_BY_CONTRACT_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean scaleInstrumentAccruedOverrideByContractSize;
+
+  public static final String JSON_PROPERTY_RISK_BUMP_OPTIONS = "riskBumpOptions";
+  @JsonProperty(JSON_PROPERTY_RISK_BUMP_OPTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RiskBumpOptions riskBumpOptions;
+
+  public static final String JSON_PROPERTY_FUNDING_CURVE_BY_CURRENCY = "fundingCurveByCurrency";
+  @JsonProperty(JSON_PROPERTY_FUNDING_CURVE_BY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, String> fundingCurveByCurrency;
+
+  public static final String JSON_PROPERTY_DEFAULT_POOL_FACTORS_TO_UNITY = "defaultPoolFactorsToUnity";
+  @JsonProperty(JSON_PROPERTY_DEFAULT_POOL_FACTORS_TO_UNITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean defaultPoolFactorsToUnity;
+
+  public static final String JSON_PROPERTY_FIND_OR_CALCULATE_WRITE_THROUGH = "findOrCalculateWriteThrough";
+  @JsonProperty(JSON_PROPERTY_FIND_OR_CALCULATE_WRITE_THROUGH)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean findOrCalculateWriteThrough;
+
+  public static final String JSON_PROPERTY_INFLATION_CONVEXITY = "inflationConvexity";
+  @JsonProperty(JSON_PROPERTY_INFLATION_CONVEXITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private InflationConvexityOptions inflationConvexity;
+
+  public static final String JSON_PROPERTY_ALLOW_FALLBACK_ON_MODEL_DECLINE = "allowFallbackOnModelDecline";
+  @JsonProperty(JSON_PROPERTY_ALLOW_FALLBACK_ON_MODEL_DECLINE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean allowFallbackOnModelDecline;
 
   public PricingOptions() {
   }
@@ -542,6 +582,128 @@ public class PricingOptions {
   }
 
 
+  public PricingOptions riskBumpOptions(RiskBumpOptions riskBumpOptions) {
+    this.riskBumpOptions = riskBumpOptions;
+    return this;
+  }
+
+  /**
+   * Get riskBumpOptions
+   * @return riskBumpOptions
+   */
+  @javax.annotation.Nullable
+  public RiskBumpOptions getRiskBumpOptions() {
+    return riskBumpOptions;
+  }
+
+  public void setRiskBumpOptions(RiskBumpOptions riskBumpOptions) {
+    this.riskBumpOptions = riskBumpOptions;
+  }
+
+
+  public PricingOptions fundingCurveByCurrency(Map<String, String> fundingCurveByCurrency) {
+    this.fundingCurveByCurrency = fundingCurveByCurrency;
+    return this;
+  }
+
+  public PricingOptions putFundingCurveByCurrencyItem(String key, String fundingCurveByCurrencyItem) {
+    if (this.fundingCurveByCurrency == null) {
+      this.fundingCurveByCurrency = new HashMap<>();
+    }
+    this.fundingCurveByCurrency.put(key, fundingCurveByCurrencyItem);
+    return this;
+  }
+
+  /**
+   * Names the funding curve each currency discounts on, keyed by ISO 4217 currency code  (e.g. \&quot;GBP\&quot; -&gt; \&quot;GBPOIS-USDCOLL\&quot;). Keys are case-insensitive. A currency absent from  the map keeps the default funding curve, {CCY}OIS, so an absent or empty map leaves  every valuation unchanged.
+   * @return fundingCurveByCurrency
+   */
+  @javax.annotation.Nullable
+  public Map<String, String> getFundingCurveByCurrency() {
+    return fundingCurveByCurrency;
+  }
+
+  public void setFundingCurveByCurrency(Map<String, String> fundingCurveByCurrency) {
+    this.fundingCurveByCurrency = fundingCurveByCurrency;
+  }
+
+
+  public PricingOptions defaultPoolFactorsToUnity(Boolean defaultPoolFactorsToUnity) {
+    this.defaultPoolFactorsToUnity = defaultPoolFactorsToUnity;
+    return this;
+  }
+
+  /**
+   * When true, an asset-backed instrument with no pool-factor history defaults the pool  factor to 1.0 (the full original face) instead of 0. When false (default), the factor  defaults to 0 as before, preserving current behaviour.
+   * @return defaultPoolFactorsToUnity
+   */
+  @javax.annotation.Nullable
+  public Boolean getDefaultPoolFactorsToUnity() {
+    return defaultPoolFactorsToUnity;
+  }
+
+  public void setDefaultPoolFactorsToUnity(Boolean defaultPoolFactorsToUnity) {
+    this.defaultPoolFactorsToUnity = defaultPoolFactorsToUnity;
+  }
+
+
+  public PricingOptions findOrCalculateWriteThrough(Boolean findOrCalculateWriteThrough) {
+    this.findOrCalculateWriteThrough = findOrCalculateWriteThrough;
+    return this;
+  }
+
+  /**
+   * When true, and FindOrCalculate is Enabled, results that had to be calculated because no  verified stored value existed are written back into the structured result store, so a  later identical request can serve them without recomputing. The write targets the  document selected by the same result data key rules the lookup reads. When false  (default), calculated results are never persisted.  Results are stored at unit level (per unit of holding), so a value served from the store  is rescaled by the holding&#39;s units and may differ from a freshly calculated value in the  least significant digits.
+   * @return findOrCalculateWriteThrough
+   */
+  @javax.annotation.Nullable
+  public Boolean getFindOrCalculateWriteThrough() {
+    return findOrCalculateWriteThrough;
+  }
+
+  public void setFindOrCalculateWriteThrough(Boolean findOrCalculateWriteThrough) {
+    this.findOrCalculateWriteThrough = findOrCalculateWriteThrough;
+  }
+
+
+  public PricingOptions inflationConvexity(InflationConvexityOptions inflationConvexity) {
+    this.inflationConvexity = inflationConvexity;
+    return this;
+  }
+
+  /**
+   * Get inflationConvexity
+   * @return inflationConvexity
+   */
+  @javax.annotation.Nullable
+  public InflationConvexityOptions getInflationConvexity() {
+    return inflationConvexity;
+  }
+
+  public void setInflationConvexity(InflationConvexityOptions inflationConvexity) {
+    this.inflationConvexity = inflationConvexity;
+  }
+
+
+  public PricingOptions allowFallbackOnModelDecline(Boolean allowFallbackOnModelDecline) {
+    this.allowFallbackOnModelDecline = allowFallbackOnModelDecline;
+    return this;
+  }
+
+  /**
+   * When true, a model that refuses an instrument outright - because the instrument is outside  what that model can represent, not because data was missing - hands the instrument to the  next model this recipe&#39;s rules offer for it, and to the default model for its type after  those. The row is then priced by the first model that accepts it, and carries a diagnostic  naming the model that stood down, its objection, and the model that served it. The caller  must be entitled to the model that serves the row; where none of the alternatives is both  licensed and willing, the row keeps the original refusal.  When false (default), a refusal ends the row however many other models the recipe offers.  A failure that is not a refusal - a missing curve, an unresolved fixing, a malformed model  option - always ends the row, whatever this is set to, because another model&#39;s number would  hide the gap rather than close it.
+   * @return allowFallbackOnModelDecline
+   */
+  @javax.annotation.Nullable
+  public Boolean getAllowFallbackOnModelDecline() {
+    return allowFallbackOnModelDecline;
+  }
+
+  public void setAllowFallbackOnModelDecline(Boolean allowFallbackOnModelDecline) {
+    this.allowFallbackOnModelDecline = allowFallbackOnModelDecline;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -570,7 +732,13 @@ public class PricingOptions {
         Objects.equals(this.returnZeroPv, pricingOptions.returnZeroPv) &&
         Objects.equals(this.enableLegLevelInferenceForCustomSrsColumns, pricingOptions.enableLegLevelInferenceForCustomSrsColumns) &&
         Objects.equals(this.useInstrumentScaleFactorAsDefault, pricingOptions.useInstrumentScaleFactorAsDefault) &&
-        Objects.equals(this.scaleInstrumentAccruedOverrideByContractSize, pricingOptions.scaleInstrumentAccruedOverrideByContractSize);
+        Objects.equals(this.scaleInstrumentAccruedOverrideByContractSize, pricingOptions.scaleInstrumentAccruedOverrideByContractSize) &&
+        Objects.equals(this.riskBumpOptions, pricingOptions.riskBumpOptions) &&
+        Objects.equals(this.fundingCurveByCurrency, pricingOptions.fundingCurveByCurrency) &&
+        Objects.equals(this.defaultPoolFactorsToUnity, pricingOptions.defaultPoolFactorsToUnity) &&
+        Objects.equals(this.findOrCalculateWriteThrough, pricingOptions.findOrCalculateWriteThrough) &&
+        Objects.equals(this.inflationConvexity, pricingOptions.inflationConvexity) &&
+        Objects.equals(this.allowFallbackOnModelDecline, pricingOptions.allowFallbackOnModelDecline);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -579,7 +747,7 @@ public class PricingOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize);
+    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize, riskBumpOptions, fundingCurveByCurrency, defaultPoolFactorsToUnity, findOrCalculateWriteThrough, inflationConvexity, allowFallbackOnModelDecline);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -613,6 +781,12 @@ public class PricingOptions {
     sb.append("    enableLegLevelInferenceForCustomSrsColumns: ").append(toIndentedString(enableLegLevelInferenceForCustomSrsColumns)).append("\n");
     sb.append("    useInstrumentScaleFactorAsDefault: ").append(toIndentedString(useInstrumentScaleFactorAsDefault)).append("\n");
     sb.append("    scaleInstrumentAccruedOverrideByContractSize: ").append(toIndentedString(scaleInstrumentAccruedOverrideByContractSize)).append("\n");
+    sb.append("    riskBumpOptions: ").append(toIndentedString(riskBumpOptions)).append("\n");
+    sb.append("    fundingCurveByCurrency: ").append(toIndentedString(fundingCurveByCurrency)).append("\n");
+    sb.append("    defaultPoolFactorsToUnity: ").append(toIndentedString(defaultPoolFactorsToUnity)).append("\n");
+    sb.append("    findOrCalculateWriteThrough: ").append(toIndentedString(findOrCalculateWriteThrough)).append("\n");
+    sb.append("    inflationConvexity: ").append(toIndentedString(inflationConvexity)).append("\n");
+    sb.append("    allowFallbackOnModelDecline: ").append(toIndentedString(allowFallbackOnModelDecline)).append("\n");
     sb.append("}");
     return sb.toString();
   }

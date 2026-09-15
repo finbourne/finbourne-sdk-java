@@ -33,16 +33,21 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A PikSchedule represents Payment-in-Kind features for a ComplexBond.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.
+ * A PikSchedule represents Payment-in-Kind features for a ComplexBond, a FlexibleLoan or a LoanFacility.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.
  */
 @JsonPropertyOrder({
   PikSchedule.JSON_PROPERTY_START_DATE,
   PikSchedule.JSON_PROPERTY_MATURITY_DATE,
+  PikSchedule.JSON_PROPERTY_FACE_ROUNDING_CONVENTION,
+  PikSchedule.JSON_PROPERTY_FACE_ROUNDING_DECIMAL_PLACES,
   PikSchedule.JSON_PROPERTY_IS_PIK_FRACTION_ELECTABLE,
   PikSchedule.JSON_PROPERTY_PIK_FRACTION,
+  PikSchedule.JSON_PROPERTY_PIK_MARGIN,
   PikSchedule.JSON_PROPERTY_PIK_PAYMENT_TYPE,
   PikSchedule.JSON_PROPERTY_PIK_RATE,
-  PikSchedule.JSON_PROPERTY_PIK_SPREAD
+  PikSchedule.JSON_PROPERTY_PIK_SPREAD,
+  PikSchedule.JSON_PROPERTY_PIK_TRAVELS_FREE,
+  PikSchedule.JSON_PROPERTY_PIK_INTEREST_BASIS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -62,6 +67,16 @@ public class PikSchedule extends Schedule {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private OffsetDateTime maturityDate;
 
+  public static final String JSON_PROPERTY_FACE_ROUNDING_CONVENTION = "faceRoundingConvention";
+  @JsonProperty(JSON_PROPERTY_FACE_ROUNDING_CONVENTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String faceRoundingConvention;
+
+  public static final String JSON_PROPERTY_FACE_ROUNDING_DECIMAL_PLACES = "faceRoundingDecimalPlaces";
+  @JsonProperty(JSON_PROPERTY_FACE_ROUNDING_DECIMAL_PLACES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer faceRoundingDecimalPlaces;
+
   public static final String JSON_PROPERTY_IS_PIK_FRACTION_ELECTABLE = "isPikFractionElectable";
   @JsonProperty(JSON_PROPERTY_IS_PIK_FRACTION_ELECTABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -71,6 +86,11 @@ public class PikSchedule extends Schedule {
   @JsonProperty(JSON_PROPERTY_PIK_FRACTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal pikFraction;
+
+  public static final String JSON_PROPERTY_PIK_MARGIN = "pikMargin";
+  @JsonProperty(JSON_PROPERTY_PIK_MARGIN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal pikMargin;
 
   public static final String JSON_PROPERTY_PIK_PAYMENT_TYPE = "pikPaymentType";
   @JsonProperty(JSON_PROPERTY_PIK_PAYMENT_TYPE)
@@ -86,6 +106,16 @@ public class PikSchedule extends Schedule {
   @JsonProperty(JSON_PROPERTY_PIK_SPREAD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal pikSpread;
+
+  public static final String JSON_PROPERTY_PIK_TRAVELS_FREE = "pikTravelsFree";
+  @JsonProperty(JSON_PROPERTY_PIK_TRAVELS_FREE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean pikTravelsFree;
+
+  public static final String JSON_PROPERTY_PIK_INTEREST_BASIS = "pikInterestBasis";
+  @JsonProperty(JSON_PROPERTY_PIK_INTEREST_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String pikInterestBasis;
 
   public PikSchedule() {
   }
@@ -128,6 +158,44 @@ public class PikSchedule extends Schedule {
   }
 
 
+  public PikSchedule faceRoundingConvention(String faceRoundingConvention) {
+    this.faceRoundingConvention = faceRoundingConvention;
+    return this;
+  }
+
+  /**
+   * How the face credited by an interest capitalisation is rounded. A PIK indenture typically increases  the note&#39;s principal by the interest payable rounded to a whole currency unit, and which way it  rounds varies by issuer. Defaults to null, which leaves the credited face unrounded. BuyUp is one  of the available values but is rejected: a capitalisation has no cash leg to fund the next whole  unit from. The per-unit coupon itself is never rounded. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.
+   * @return faceRoundingConvention
+   */
+  @javax.annotation.Nullable
+  public String getFaceRoundingConvention() {
+    return faceRoundingConvention;
+  }
+
+  public void setFaceRoundingConvention(String faceRoundingConvention) {
+    this.faceRoundingConvention = faceRoundingConvention;
+  }
+
+
+  public PikSchedule faceRoundingDecimalPlaces(Integer faceRoundingDecimalPlaces) {
+    this.faceRoundingDecimalPlaces = faceRoundingDecimalPlaces;
+    return this;
+  }
+
+  /**
+   * The number of decimal places the credited face is rounded to. Required when  FaceRoundingConvention is RoundToDecimalPlaces and not permitted otherwise.
+   * @return faceRoundingDecimalPlaces
+   */
+  @javax.annotation.Nullable
+  public Integer getFaceRoundingDecimalPlaces() {
+    return faceRoundingDecimalPlaces;
+  }
+
+  public void setFaceRoundingDecimalPlaces(Integer faceRoundingDecimalPlaces) {
+    this.faceRoundingDecimalPlaces = faceRoundingDecimalPlaces;
+  }
+
+
   public PikSchedule isPikFractionElectable(Boolean isPikFractionElectable) {
     this.isPikFractionElectable = isPikFractionElectable;
     return this;
@@ -163,6 +231,25 @@ public class PikSchedule extends Schedule {
 
   public void setPikFraction(java.math.BigDecimal pikFraction) {
     this.pikFraction = pikFraction;
+  }
+
+
+  public PikSchedule pikMargin(java.math.BigDecimal pikMargin) {
+    this.pikMargin = pikMargin;
+    return this;
+  }
+
+  /**
+   * The portion of the coupon that is paid in kind, stated in the leg&#39;s own rate units (an annualised  rate on the notional) rather than as a fraction of the coupon. The in-kind leg accrues at this flat  rate and the cash leg accrues the remainder of the coupon, so on a floating leg the in-kind portion  stays constant across fixings — the shape of a loan quoted as \&quot;index + 700bp, of which 250bp paid  in kind\&quot;. On a fixed leg it is equivalent to pikFraction &#x3D; pikMargin / couponRate. Should the  period&#39;s whole coupon fall below the margin, the in-kind portion is capped at the whole  (non-negative) coupon and the cash leg floors at zero.  Mutually exclusive with pikFraction, pikRate, pikSpread and isPikFractionElectable.  Must be greater than or equal to zero. null indicates the split is stated by pikFraction instead.
+   * @return pikMargin
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPikMargin() {
+    return pikMargin;
+  }
+
+  public void setPikMargin(java.math.BigDecimal pikMargin) {
+    this.pikMargin = pikMargin;
   }
 
 
@@ -223,6 +310,44 @@ public class PikSchedule extends Schedule {
   }
 
 
+  public PikSchedule pikTravelsFree(Boolean pikTravelsFree) {
+    this.pikTravelsFree = pikTravelsFree;
+    return this;
+  }
+
+  /**
+   * Whether the in-kind entitlement travels with the traded position for the whole period, the way bond  interest does, rather than being earned from settlement the way loan cash interest is. When true, a  holder who buys before the period end takes the full-period in-kind amount on the amount bought even  if the trade settles after the ex-date. When false, the in-kind amount is day-weighted on the settled  balance path and the settled holder keeps it. Defaults to true. Bank debt only: a ComplexBond&#39;s  in-kind entitlement already follows the record date.                Nullable in the constructor and initialised here, unlike the generated shape: Newtonsoft passes  default(bool) for a value-type constructor parameter the payload omits, so a plain  &#x60;bool pikTravelsFree &#x3D; true&#x60; would come back false for every client that did not state it.
+   * @return pikTravelsFree
+   */
+  @javax.annotation.Nullable
+  public Boolean getPikTravelsFree() {
+    return pikTravelsFree;
+  }
+
+  public void setPikTravelsFree(Boolean pikTravelsFree) {
+    this.pikTravelsFree = pikTravelsFree;
+  }
+
+
+  public PikSchedule pikInterestBasis(String pikInterestBasis) {
+    this.pikInterestBasis = pikInterestBasis;
+    return this;
+  }
+
+  /**
+   * Whether the in-kind leg stands in place of the cash leg or is paid on top of it.                Alternative, the default, is the toggling structure: one period&#39;s interest settled partly in cash  and partly in kind, so the cash leg settles the complement of PikFraction and the period&#39;s  interest is the weighted sum of the two accruals, lying between them. Additional makes the two  separate legs of one loan, each settled in full, so the period&#39;s interest is their sum and  PikFraction weights only the in-kind leg.                The two accruals cannot be told apart without this: 500 accrued in cash against 600 in kind is  560 of interest on one reading and 1,100 on the other. A PikMargin schedule is Additional  whichever is stated, because the margin is already carved out of the coupon.                Defaulted here as well as in the constructor for the reason PikTravelsFree is.
+   * @return pikInterestBasis
+   */
+  @javax.annotation.Nullable
+  public String getPikInterestBasis() {
+    return pikInterestBasis;
+  }
+
+  public void setPikInterestBasis(String pikInterestBasis) {
+    this.pikInterestBasis = pikInterestBasis;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -234,11 +359,16 @@ public class PikSchedule extends Schedule {
     PikSchedule pikSchedule = (PikSchedule) o;
     return Objects.equals(this.startDate, pikSchedule.startDate) &&
         Objects.equals(this.maturityDate, pikSchedule.maturityDate) &&
+        Objects.equals(this.faceRoundingConvention, pikSchedule.faceRoundingConvention) &&
+        Objects.equals(this.faceRoundingDecimalPlaces, pikSchedule.faceRoundingDecimalPlaces) &&
         Objects.equals(this.isPikFractionElectable, pikSchedule.isPikFractionElectable) &&
         (this.pikFraction == null ? pikSchedule.pikFraction == null : (pikSchedule.pikFraction != null && this.pikFraction.compareTo(pikSchedule.getPikFraction()) == 0)) &&
+        (this.pikMargin == null ? pikSchedule.pikMargin == null : (pikSchedule.pikMargin != null && this.pikMargin.compareTo(pikSchedule.getPikMargin()) == 0)) &&
         Objects.equals(this.pikPaymentType, pikSchedule.pikPaymentType) &&
         (this.pikRate == null ? pikSchedule.pikRate == null : (pikSchedule.pikRate != null && this.pikRate.compareTo(pikSchedule.getPikRate()) == 0)) &&
         (this.pikSpread == null ? pikSchedule.pikSpread == null : (pikSchedule.pikSpread != null && this.pikSpread.compareTo(pikSchedule.getPikSpread()) == 0)) &&
+        Objects.equals(this.pikTravelsFree, pikSchedule.pikTravelsFree) &&
+        Objects.equals(this.pikInterestBasis, pikSchedule.pikInterestBasis) &&
         super.equals(o);
   }
 
@@ -248,7 +378,7 @@ public class PikSchedule extends Schedule {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, isPikFractionElectable, pikFraction, pikPaymentType, pikRate, pikSpread, super.hashCode());
+    return Objects.hash(startDate, maturityDate, faceRoundingConvention, faceRoundingDecimalPlaces, isPikFractionElectable, pikFraction, pikMargin, pikPaymentType, pikRate, pikSpread, pikTravelsFree, pikInterestBasis, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -265,11 +395,16 @@ public class PikSchedule extends Schedule {
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");
     sb.append("    maturityDate: ").append(toIndentedString(maturityDate)).append("\n");
+    sb.append("    faceRoundingConvention: ").append(toIndentedString(faceRoundingConvention)).append("\n");
+    sb.append("    faceRoundingDecimalPlaces: ").append(toIndentedString(faceRoundingDecimalPlaces)).append("\n");
     sb.append("    isPikFractionElectable: ").append(toIndentedString(isPikFractionElectable)).append("\n");
     sb.append("    pikFraction: ").append(toIndentedString(pikFraction)).append("\n");
+    sb.append("    pikMargin: ").append(toIndentedString(pikMargin)).append("\n");
     sb.append("    pikPaymentType: ").append(toIndentedString(pikPaymentType)).append("\n");
     sb.append("    pikRate: ").append(toIndentedString(pikRate)).append("\n");
     sb.append("    pikSpread: ").append(toIndentedString(pikSpread)).append("\n");
+    sb.append("    pikTravelsFree: ").append(toIndentedString(pikTravelsFree)).append("\n");
+    sb.append("    pikInterestBasis: ").append(toIndentedString(pikInterestBasis)).append("\n");
     sb.append("}");
     return sb.toString();
   }

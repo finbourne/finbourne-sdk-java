@@ -47,7 +47,8 @@ import com.finbourne.sdk.JSON;
   YieldCurveData.JSON_PROPERTY_QUOTES,
   YieldCurveData.JSON_PROPERTY_LINEAGE,
   YieldCurveData.JSON_PROPERTY_MARKET_DATA_OPTIONS,
-  YieldCurveData.JSON_PROPERTY_VERSION
+  YieldCurveData.JSON_PROPERTY_VERSION,
+  YieldCurveData.JSON_PROPERTY_FUNDING_CURVE_NAME
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -86,6 +87,11 @@ public class YieldCurveData extends ComplexMarketData {
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Version version;
+
+  public static final String JSON_PROPERTY_FUNDING_CURVE_NAME = "fundingCurveName";
+  @JsonProperty(JSON_PROPERTY_FUNDING_CURVE_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String fundingCurveName;
 
   public YieldCurveData() {
   }
@@ -220,6 +226,25 @@ public class YieldCurveData extends ComplexMarketData {
   }
 
 
+  public YieldCurveData fundingCurveName(String fundingCurveName) {
+    this.fundingCurveName = fundingCurveName;
+    return this;
+  }
+
+  /**
+   * Optional name of the funding curve under which the calibration instruments are discounted,  for projection curves that are bootstrapped under a separate discount curve. This is the  funding identifier of the rates dependency for the calibration instruments&#39; domestic currency,  so a value of &#39;EUROIS&#39; names the discounting dependency Rates/EUR/EUROIS. When omitted the  calibration instruments are discounted on the curve being built, which is the classic  single-curve bootstrap.
+   * @return fundingCurveName
+   */
+  @javax.annotation.Nullable
+  public String getFundingCurveName() {
+    return fundingCurveName;
+  }
+
+  public void setFundingCurveName(String fundingCurveName) {
+    this.fundingCurveName = fundingCurveName;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -235,6 +260,7 @@ public class YieldCurveData extends ComplexMarketData {
         Objects.equals(this.lineage, yieldCurveData.lineage) &&
         Objects.equals(this.marketDataOptions, yieldCurveData.marketDataOptions) &&
         Objects.equals(this.version, yieldCurveData.version) &&
+        Objects.equals(this.fundingCurveName, yieldCurveData.fundingCurveName) &&
         super.equals(o);
   }
 
@@ -244,7 +270,7 @@ public class YieldCurveData extends ComplexMarketData {
 
   @Override
  public int hashCode() {
-    return Objects.hash(baseDate, instruments, quotes, lineage, marketDataOptions, version, super.hashCode());
+    return Objects.hash(baseDate, instruments, quotes, lineage, marketDataOptions, version, fundingCurveName, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -265,6 +291,7 @@ public class YieldCurveData extends ComplexMarketData {
     sb.append("    lineage: ").append(toIndentedString(lineage)).append("\n");
     sb.append("    marketDataOptions: ").append(toIndentedString(marketDataOptions)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    fundingCurveName: ").append(toIndentedString(fundingCurveName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

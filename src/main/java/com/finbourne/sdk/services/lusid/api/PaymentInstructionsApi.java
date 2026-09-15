@@ -27,6 +27,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
+import com.finbourne.sdk.services.lusid.model.DeletedEntityResponse;
+import com.finbourne.sdk.services.lusid.model.GetPaymentInstructionsResponse;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
@@ -77,6 +79,332 @@ public class PaymentInstructionsApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    /**
+     * Build call for deletePaymentInstruction
+     * @param scope The scope of the payment instruction. (required)
+     * @param code The code of the payment instruction. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deletePaymentInstructionCall(String scope, String code, final ApiCallback _callback) throws ApiException {
+        return deletePaymentInstructionCall(scope, code,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for deletePaymentInstruction. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the payment instruction. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the payment instruction. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deletePaymentInstructionCall(String scope, String code, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/paymentinstructions/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest deletePaymentInstructionValidateBeforeCall(String scope, String code, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling deletePaymentInstruction(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling deletePaymentInstruction(Async)");
+        }
+
+        return deletePaymentInstructionCall(scope, code, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction
+     * Delete a Payment Instruction. Deletion will be valid from the payment instruction&#39;s creation datetime.  This means that the payment instruction will no longer exist at any effective datetime from the asAt datetime  of deletion. Any payment records the instruction owns are released and become available to another instruction.  A payment instruction that has been released, instructed, sent, cancelled or failed cannot be deleted.
+     * @param scope The scope of the payment instruction. (required)
+     * @param code The code of the payment instruction. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deletePaymentInstructionWithHttpInfo(String scope, String code) throws ApiException {
+        HttpRequest localVarCall = deletePaymentInstructionValidateBeforeCall(scope, code, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction
+     * Delete a Payment Instruction. Deletion will be valid from the payment instruction&#39;s creation datetime.  This means that the payment instruction will no longer exist at any effective datetime from the asAt datetime  of deletion. Any payment records the instruction owns are released and become available to another instruction.  A payment instruction that has been released, instructed, sent, cancelled or failed cannot be deleted.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the payment instruction. (required)
+     * @param code The code of the payment instruction. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deletePaymentInstructionWithHttpInfo(String scope, String code, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = deletePaymentInstructionValidateBeforeCall(scope, code, null, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction (asynchronously)
+     * Delete a Payment Instruction. Deletion will be valid from the payment instruction&#39;s creation datetime.  This means that the payment instruction will no longer exist at any effective datetime from the asAt datetime  of deletion. Any payment records the instruction owns are released and become available to another instruction.  A payment instruction that has been released, instructed, sent, cancelled or failed cannot be deleted.
+     * @param scope The scope of the payment instruction. (required)
+     * @param code The code of the payment instruction. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deletePaymentInstructionAsync(String scope, String code, final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = deletePaymentInstructionValidateBeforeCall(scope, code, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction (asynchronously)
+     * Delete a Payment Instruction. Deletion will be valid from the payment instruction&#39;s creation datetime.  This means that the payment instruction will no longer exist at any effective datetime from the asAt datetime  of deletion. Any payment records the instruction owns are released and become available to another instruction.  A payment instruction that has been released, instructed, sent, cancelled or failed cannot be deleted.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the payment instruction. (required)
+     * @param code The code of the payment instruction. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deletePaymentInstructionAsync(String scope, String code, final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = deletePaymentInstructionValidateBeforeCall(scope, code, _callback, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIdeletePaymentInstructionRequest {
+        private final String scope;
+        private final String code;
+
+        private APIdeletePaymentInstructionRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Build call for deletePaymentInstruction
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return deletePaymentInstructionCall(scope, code, _callback);
+        }
+
+        /**
+         * Execute deletePaymentInstruction request
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute() throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deletePaymentInstructionWithHttpInfo(scope, code);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deletePaymentInstruction request. Use any specified configuration options to override any other configuration for this request only.
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deletePaymentInstructionWithHttpInfo(scope, code, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deletePaymentInstruction request with HTTP info returned
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo() throws ApiException {
+            return deletePaymentInstructionWithHttpInfo(scope, code);
+        }
+
+        /**
+         * Execute deletePaymentInstruction request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return deletePaymentInstructionWithHttpInfo(scope, code, opts);
+        }
+
+        /**
+         * Execute deletePaymentInstruction request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+            deletePaymentInstructionAsync(scope, code, _callback);
+        }
+
+        /**
+         * Execute deletePaymentInstruction request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            deletePaymentInstructionAsync(scope, code, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction
+     * Delete a Payment Instruction. Deletion will be valid from the payment instruction&#39;s creation datetime.  This means that the payment instruction will no longer exist at any effective datetime from the asAt datetime  of deletion. Any payment records the instruction owns are released and become available to another instruction.  A payment instruction that has been released, instructed, sent, cancelled or failed cannot be deleted.
+     * @param scope The scope of the payment instruction. (required)
+     * @param code The code of the payment instruction. (required)
+     * @return APIdeletePaymentInstructionRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting the payment instruction </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIdeletePaymentInstructionRequest deletePaymentInstruction(String scope, String code) {
+        return new APIdeletePaymentInstructionRequest(scope, code);
+    }
     /**
      * Build call for getPaymentInstruction
      * @param scope The scope of the payment instruction. (required)
@@ -194,7 +522,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] GetPaymentInstruction: Get Payment Instruction
+     * [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction
      * Retrieve a single Payment Instruction.
      * @param scope The scope of the payment instruction. (required)
      * @param code The code of the payment instruction. (required)
@@ -218,7 +546,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] GetPaymentInstruction: Get Payment Instruction
+     * [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction
      * Retrieve a single Payment Instruction.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the payment instruction. (required)
      * @param code The code of the payment instruction. (required)
@@ -242,7 +570,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] GetPaymentInstruction: Get Payment Instruction (asynchronously)
+     * [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction (asynchronously)
      * Retrieve a single Payment Instruction.
      * @param scope The scope of the payment instruction. (required)
      * @param code The code of the payment instruction. (required)
@@ -267,7 +595,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] GetPaymentInstruction: Get Payment Instruction (asynchronously)
+     * [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction (asynchronously)
      * Retrieve a single Payment Instruction.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the payment instruction. (required)
      * @param code The code of the payment instruction. (required)
@@ -450,7 +778,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] GetPaymentInstruction: Get Payment Instruction
+     * [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction
      * Retrieve a single Payment Instruction.
      * @param scope The scope of the payment instruction. (required)
      * @param code The code of the payment instruction. (required)
@@ -465,6 +793,383 @@ public class PaymentInstructionsApi {
      */
     public APIgetPaymentInstructionRequest getPaymentInstruction(String scope, String code) {
         return new APIgetPaymentInstructionRequest(scope, code);
+    }
+    /**
+     * Build call for getPaymentInstructionsByPaymentRecordIds
+     * @param requestBody A collection of payment record ids to retrieve payment instructions for.              Duplicate ids are ignored. (required)
+     * @param propertyKeys A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto each              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the payment instructions.              Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the payment instructions. Defaults to return the latest              version of each payment instruction if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getPaymentInstructionsByPaymentRecordIdsCall(List<String> requestBody, List<String> propertyKeys, String effectiveAt, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
+        return getPaymentInstructionsByPaymentRecordIdsCall(requestBody, propertyKeys, effectiveAt, asAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getPaymentInstructionsByPaymentRecordIds. Use any specified configuration options to override any other configuration for this request only.
+     * @param requestBody A collection of payment record ids to retrieve payment instructions for.              Duplicate ids are ignored. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto each              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the payment instructions.              Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the payment instructions. Defaults to return the latest              version of each payment instruction if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getPaymentInstructionsByPaymentRecordIdsCall(List<String> requestBody, List<String> propertyKeys, String effectiveAt, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = requestBody;
+
+        // create path and map variables
+        String localVarPath = "/api/api/paymentinstructions/$getByPaymentRecordIds";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (propertyKeys != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "propertyKeys", propertyKeys));
+        }
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getPaymentInstructionsByPaymentRecordIdsValidateBeforeCall(List<String> requestBody, List<String> propertyKeys, String effectiveAt, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'requestBody' is set
+        if (requestBody == null) {
+            throw new ApiException("Missing the required parameter 'requestBody' when calling getPaymentInstructionsByPaymentRecordIds(Async)");
+        }
+
+        return getPaymentInstructionsByPaymentRecordIdsCall(requestBody, propertyKeys, effectiveAt, asAt, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids
+     * Retrieve the Payment Instructions that reference the given Payment Records. Payment record ids are unique  across the system scope, so no scope or identifier type is required. The response contains the payment  instructions that could be found, keyed by the payment record id used to retrieve them, along with the  nature of any failures.
+     * @param requestBody A collection of payment record ids to retrieve payment instructions for.              Duplicate ids are ignored. (required)
+     * @param propertyKeys A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto each              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the payment instructions.              Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the payment instructions. Defaults to return the latest              version of each payment instruction if not specified. (optional)
+     * @return ApiResponse&lt;GetPaymentInstructionsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<GetPaymentInstructionsResponse> getPaymentInstructionsByPaymentRecordIdsWithHttpInfo(List<String> requestBody, List<String> propertyKeys, String effectiveAt, OffsetDateTime asAt) throws ApiException {
+        HttpRequest localVarCall = getPaymentInstructionsByPaymentRecordIdsValidateBeforeCall(requestBody, propertyKeys, effectiveAt, asAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<GetPaymentInstructionsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids
+     * Retrieve the Payment Instructions that reference the given Payment Records. Payment record ids are unique  across the system scope, so no scope or identifier type is required. The response contains the payment  instructions that could be found, keyed by the payment record id used to retrieve them, along with the  nature of any failures.Use any specified configuration options to override any other configuration for this request only
+     * @param requestBody A collection of payment record ids to retrieve payment instructions for.              Duplicate ids are ignored. (required)
+     * @param propertyKeys A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto each              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the payment instructions.              Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the payment instructions. Defaults to return the latest              version of each payment instruction if not specified. (optional)
+     * @return ApiResponse&lt;GetPaymentInstructionsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<GetPaymentInstructionsResponse> getPaymentInstructionsByPaymentRecordIdsWithHttpInfo(List<String> requestBody, List<String> propertyKeys, String effectiveAt, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getPaymentInstructionsByPaymentRecordIdsValidateBeforeCall(requestBody, propertyKeys, effectiveAt, asAt, null, opts);
+        Type localVarReturnType = new TypeReference<GetPaymentInstructionsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids (asynchronously)
+     * Retrieve the Payment Instructions that reference the given Payment Records. Payment record ids are unique  across the system scope, so no scope or identifier type is required. The response contains the payment  instructions that could be found, keyed by the payment record id used to retrieve them, along with the  nature of any failures.
+     * @param requestBody A collection of payment record ids to retrieve payment instructions for.              Duplicate ids are ignored. (required)
+     * @param propertyKeys A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto each              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the payment instructions.              Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the payment instructions. Defaults to return the latest              version of each payment instruction if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getPaymentInstructionsByPaymentRecordIdsAsync(List<String> requestBody, List<String> propertyKeys, String effectiveAt, OffsetDateTime asAt, final ApiCallback<GetPaymentInstructionsResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getPaymentInstructionsByPaymentRecordIdsValidateBeforeCall(requestBody, propertyKeys, effectiveAt, asAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<GetPaymentInstructionsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids (asynchronously)
+     * Retrieve the Payment Instructions that reference the given Payment Records. Payment record ids are unique  across the system scope, so no scope or identifier type is required. The response contains the payment  instructions that could be found, keyed by the payment record id used to retrieve them, along with the  nature of any failures.Use any specified configuration options to override any other configuration for this request only
+     * @param requestBody A collection of payment record ids to retrieve payment instructions for.              Duplicate ids are ignored. (required)
+     * @param propertyKeys A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto each              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the payment instructions.              Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the payment instructions. Defaults to return the latest              version of each payment instruction if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getPaymentInstructionsByPaymentRecordIdsAsync(List<String> requestBody, List<String> propertyKeys, String effectiveAt, OffsetDateTime asAt, final ApiCallback<GetPaymentInstructionsResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getPaymentInstructionsByPaymentRecordIdsValidateBeforeCall(requestBody, propertyKeys, effectiveAt, asAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<GetPaymentInstructionsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetPaymentInstructionsByPaymentRecordIdsRequest {
+        private final List<String> requestBody;
+        private List<String> propertyKeys;
+        private String effectiveAt;
+        private OffsetDateTime asAt;
+
+        private APIgetPaymentInstructionsByPaymentRecordIdsRequest(List<String> requestBody) {
+            this.requestBody = requestBody;
+        }
+
+        /**
+         * Set propertyKeys
+         * @param propertyKeys A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto each              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. (optional)
+         * @return APIgetPaymentInstructionsByPaymentRecordIdsRequest
+         */
+        public APIgetPaymentInstructionsByPaymentRecordIdsRequest propertyKeys(List<String> propertyKeys) {
+            this.propertyKeys = propertyKeys;
+            return this;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label at which to retrieve the payment instructions.              Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIgetPaymentInstructionsByPaymentRecordIdsRequest
+         */
+        public APIgetPaymentInstructionsByPaymentRecordIdsRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the payment instructions. Defaults to return the latest              version of each payment instruction if not specified. (optional)
+         * @return APIgetPaymentInstructionsByPaymentRecordIdsRequest
+         */
+        public APIgetPaymentInstructionsByPaymentRecordIdsRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Build call for getPaymentInstructionsByPaymentRecordIds
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getPaymentInstructionsByPaymentRecordIdsCall(requestBody, propertyKeys, effectiveAt, asAt, _callback);
+        }
+
+        /**
+         * Execute getPaymentInstructionsByPaymentRecordIds request
+         * @return GetPaymentInstructionsResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public GetPaymentInstructionsResponse execute() throws ApiException {
+            ApiResponse<GetPaymentInstructionsResponse> localVarResp = getPaymentInstructionsByPaymentRecordIdsWithHttpInfo(requestBody, propertyKeys, effectiveAt, asAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getPaymentInstructionsByPaymentRecordIds request. Use any specified configuration options to override any other configuration for this request only.
+         * @return GetPaymentInstructionsResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public GetPaymentInstructionsResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<GetPaymentInstructionsResponse> localVarResp = getPaymentInstructionsByPaymentRecordIdsWithHttpInfo(requestBody, propertyKeys, effectiveAt, asAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getPaymentInstructionsByPaymentRecordIds request with HTTP info returned
+         * @return ApiResponse&lt;GetPaymentInstructionsResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<GetPaymentInstructionsResponse> executeWithHttpInfo() throws ApiException {
+            return getPaymentInstructionsByPaymentRecordIdsWithHttpInfo(requestBody, propertyKeys, effectiveAt, asAt);
+        }
+
+        /**
+         * Execute getPaymentInstructionsByPaymentRecordIds request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;GetPaymentInstructionsResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<GetPaymentInstructionsResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getPaymentInstructionsByPaymentRecordIdsWithHttpInfo(requestBody, propertyKeys, effectiveAt, asAt, opts);
+        }
+
+        /**
+         * Execute getPaymentInstructionsByPaymentRecordIds request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<GetPaymentInstructionsResponse> _callback) throws ApiException {
+            getPaymentInstructionsByPaymentRecordIdsAsync(requestBody, propertyKeys, effectiveAt, asAt, _callback);
+        }
+
+        /**
+         * Execute getPaymentInstructionsByPaymentRecordIds request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<GetPaymentInstructionsResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            getPaymentInstructionsByPaymentRecordIdsAsync(requestBody, propertyKeys, effectiveAt, asAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids
+     * Retrieve the Payment Instructions that reference the given Payment Records. Payment record ids are unique  across the system scope, so no scope or identifier type is required. The response contains the payment  instructions that could be found, keyed by the payment record id used to retrieve them, along with the  nature of any failures.
+     * @param requestBody A collection of payment record ids to retrieve payment instructions for.              Duplicate ids are ignored. (required)
+     * @return APIgetPaymentInstructionsByPaymentRecordIdsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The payment instructions that could be found for the supplied payment record ids, along with any failures </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetPaymentInstructionsByPaymentRecordIdsRequest getPaymentInstructionsByPaymentRecordIds(List<String> requestBody) {
+        return new APIgetPaymentInstructionsByPaymentRecordIdsRequest(requestBody);
     }
     /**
      * Build call for upsertPaymentInstructions
@@ -560,7 +1265,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] UpsertPaymentInstructions: Upsert Payment Instructions
+     * [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions
      * Create or update a collection of Payment Instructions.
      * @param requestBody A collection of requests to create or update Payment Instructions. (required)
      * @return ApiResponse&lt;PaymentInstructionsResponse&gt;
@@ -580,7 +1285,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] UpsertPaymentInstructions: Upsert Payment Instructions
+     * [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions
      * Create or update a collection of Payment Instructions.Use any specified configuration options to override any other configuration for this request only
      * @param requestBody A collection of requests to create or update Payment Instructions. (required)
      * @return ApiResponse&lt;PaymentInstructionsResponse&gt;
@@ -600,7 +1305,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] UpsertPaymentInstructions: Upsert Payment Instructions (asynchronously)
+     * [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions (asynchronously)
      * Create or update a collection of Payment Instructions.
      * @param requestBody A collection of requests to create or update Payment Instructions. (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -621,7 +1326,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] UpsertPaymentInstructions: Upsert Payment Instructions (asynchronously)
+     * [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions (asynchronously)
      * Create or update a collection of Payment Instructions.Use any specified configuration options to override any other configuration for this request only
      * @param requestBody A collection of requests to create or update Payment Instructions. (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -765,7 +1470,7 @@ public class PaymentInstructionsApi {
     }
 
     /**
-     * [EARLY ACCESS] UpsertPaymentInstructions: Upsert Payment Instructions
+     * [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions
      * Create or update a collection of Payment Instructions.
      * @param requestBody A collection of requests to create or update Payment Instructions. (required)
      * @return APIupsertPaymentInstructionsRequest

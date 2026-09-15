@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **groupStatus** | **String** |  | [default to String]
 **resultsUsed** | **Map&lt;String, java.math.BigDecimal&gt;** |  | [default to Map<String, java.math.BigDecimal>]
+**formulaValues** | **Map&lt;String, java.math.BigDecimal&gt;** |  | [optional] [default to Map<String, java.math.BigDecimal>]
 **propertiesUsed** | [**Map&lt;String, List&lt;Property&gt;&gt;**](List.md) |  | [default to Map<String, List<Property>>]
 **missingDataInformation** | **List&lt;String&gt;** |  | [default to List<String>]
 **lineage** | [**List&lt;LineageMember&gt;**](LineageMember.md) |  | [default to List<LineageMember>]
@@ -19,6 +20,7 @@ import java.net.URI;
 
 String groupStatus = "example groupStatus";
 Map<String, java.math.BigDecimal> resultsUsed = new Map<String, java.math.BigDecimal>();
+@javax.annotation.Nullable Map<String, java.math.BigDecimal> formulaValues = new Map<String, java.math.BigDecimal>();
 Map<String, List<Property>> propertiesUsed = new Map<String, List<Property>>();
 List<String> missingDataInformation = new List<String>();
 List<LineageMember> lineage = new List<LineageMember>();
@@ -27,6 +29,7 @@ List<LineageMember> lineage = new List<LineageMember>();
 ComplianceRuleBreakdownRequest complianceRuleBreakdownRequestInstance = new ComplianceRuleBreakdownRequest()
     .groupStatus(groupStatus)
     .resultsUsed(resultsUsed)
+    .formulaValues(formulaValues)
     .propertiesUsed(propertiesUsed)
     .missingDataInformation(missingDataInformation)
     .lineage(lineage);

@@ -61,7 +61,7 @@ public class ReferencePortfolioConstituentRequest {
 
   public static final String JSON_PROPERTY_CURRENCY = "currency";
   @JsonProperty(JSON_PROPERTY_CURRENCY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String currency;
 
   public ReferencePortfolioConstituentRequest() {
@@ -149,7 +149,7 @@ public class ReferencePortfolioConstituentRequest {
    * 
    * @return currency
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public String getCurrency() {
     return currency;
   }

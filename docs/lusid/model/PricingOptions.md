@@ -26,6 +26,12 @@ Name | Type | Description | Notes
 **enableLegLevelInferenceForCustomSrsColumns** | **Boolean** | When enabled, allows inference between leg-level and  instrument-level data during portfolio valuation. If  data is missing at one level, it may be inferred from  the other level. For example, missing leg-level data   may be inferred from existing leg-level and instrument-  level data when ProduceSeparateResultForLinearOtcLegs  is enabled, and vice versa. Explicitly provided data  always takes precedence. | [optional] [default to Boolean]
 **useInstrumentScaleFactorAsDefault** | **Boolean** | When enabled, priceScaleFactor defined at the instrument level will  be used in the absence of quote scaleFactor when resolving quotes. | [optional] [default to Boolean]
 **scaleInstrumentAccruedOverrideByContractSize** | **Boolean** | When enabled, an SRS InstrumentAccrued override is multiplied by the instrument contractSize (legacy behaviour).  By default this is disabled, and the override is treated as the accrued for a single unit, keeping the  holding-level identity PV &#x3D; CleanPv + Accrued consistent. | [optional] [default to Boolean]
+**riskBumpOptions** | [**RiskBumpOptions**](RiskBumpOptions.md) |  | [optional] [default to RiskBumpOptions]
+**fundingCurveByCurrency** | **Map&lt;String, String&gt;** | Names the funding curve each currency discounts on, keyed by ISO 4217 currency code  (e.g. \&quot;GBP\&quot; -&gt; \&quot;GBPOIS-USDCOLL\&quot;). Keys are case-insensitive. A currency absent from  the map keeps the default funding curve, {CCY}OIS, so an absent or empty map leaves  every valuation unchanged. | [optional] [default to Map<String, String>]
+**defaultPoolFactorsToUnity** | **Boolean** | When true, an asset-backed instrument with no pool-factor history defaults the pool  factor to 1.0 (the full original face) instead of 0. When false (default), the factor  defaults to 0 as before, preserving current behaviour. | [optional] [default to Boolean]
+**findOrCalculateWriteThrough** | **Boolean** | When true, and FindOrCalculate is Enabled, results that had to be calculated because no  verified stored value existed are written back into the structured result store, so a  later identical request can serve them without recomputing. The write targets the  document selected by the same result data key rules the lookup reads. When false  (default), calculated results are never persisted.  Results are stored at unit level (per unit of holding), so a value served from the store  is rescaled by the holding&#39;s units and may differ from a freshly calculated value in the  least significant digits. | [optional] [default to Boolean]
+**inflationConvexity** | [**InflationConvexityOptions**](InflationConvexityOptions.md) |  | [optional] [default to InflationConvexityOptions]
+**allowFallbackOnModelDecline** | **Boolean** | When true, a model that refuses an instrument outright - because the instrument is outside  what that model can represent, not because data was missing - hands the instrument to the  next model this recipe&#39;s rules offer for it, and to the default model for its type after  those. The row is then priced by the first model that accepts it, and carries a diagnostic  naming the model that stood down, its objection, and the model that served it. The caller  must be entitled to the model that serves the row; where none of the alternatives is both  licensed and willing, the row keeps the original refusal.  When false (default), a refusal ends the row however many other models the recipe offers.  A failure that is not a refusal - a missing curve, an unresolved fixing, a malformed model  option - always ends the row, whatever this is set to, because another model&#39;s number would  hide the gap rather than close it. | [optional] [default to Boolean]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.PricingOptions;
@@ -53,6 +59,12 @@ ReturnZeroPvOptions returnZeroPv = new ReturnZeroPvOptions();
 Boolean enableLegLevelInferenceForCustomSrsColumns = true;
 Boolean useInstrumentScaleFactorAsDefault = true;
 Boolean scaleInstrumentAccruedOverrideByContractSize = true;
+RiskBumpOptions riskBumpOptions = new RiskBumpOptions();
+@javax.annotation.Nullable Map<String, String> fundingCurveByCurrency = new Map<String, String>();
+Boolean defaultPoolFactorsToUnity = true;
+Boolean findOrCalculateWriteThrough = true;
+InflationConvexityOptions inflationConvexity = new InflationConvexityOptions();
+Boolean allowFallbackOnModelDecline = true;
 
 
 PricingOptions pricingOptionsInstance = new PricingOptions()
@@ -75,7 +87,13 @@ PricingOptions pricingOptionsInstance = new PricingOptions()
     .returnZeroPv(returnZeroPv)
     .enableLegLevelInferenceForCustomSrsColumns(enableLegLevelInferenceForCustomSrsColumns)
     .useInstrumentScaleFactorAsDefault(useInstrumentScaleFactorAsDefault)
-    .scaleInstrumentAccruedOverrideByContractSize(scaleInstrumentAccruedOverrideByContractSize);
+    .scaleInstrumentAccruedOverrideByContractSize(scaleInstrumentAccruedOverrideByContractSize)
+    .riskBumpOptions(riskBumpOptions)
+    .fundingCurveByCurrency(fundingCurveByCurrency)
+    .defaultPoolFactorsToUnity(defaultPoolFactorsToUnity)
+    .findOrCalculateWriteThrough(findOrCalculateWriteThrough)
+    .inflationConvexity(inflationConvexity)
+    .allowFallbackOnModelDecline(allowFallbackOnModelDecline);
 ```
 
 

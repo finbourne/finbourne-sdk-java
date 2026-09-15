@@ -16,7 +16,6 @@ import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.CustodianAccount;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.Property;
-import com.finbourne.sdk.services.lusid.model.ResolvedCustodianAccount;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.SettlementSchedule;
 import com.finbourne.sdk.services.lusid.model.Transaction;
@@ -69,8 +68,7 @@ import com.finbourne.sdk.JSON;
   PortfolioHolding.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID,
   PortfolioHolding.JSON_PROPERTY_UNSETTLED_UNITS,
   PortfolioHolding.JSON_PROPERTY_OVERDUE_UNITS,
-  PortfolioHolding.JSON_PROPERTY_CUSTODIAN_ACCOUNT,
-  PortfolioHolding.JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNT
+  PortfolioHolding.JSON_PROPERTY_CUSTODIAN_ACCOUNT
 })
 
 public class PortfolioHolding {
@@ -193,11 +191,6 @@ public class PortfolioHolding {
   @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private CustodianAccount custodianAccount;
-
-  public static final String JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNT = "resolvedCustodianAccount";
-  @JsonProperty(JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private ResolvedCustodianAccount resolvedCustodianAccount;
 
   public PortfolioHolding() {
   }
@@ -682,25 +675,6 @@ public class PortfolioHolding {
   }
 
 
-  public PortfolioHolding resolvedCustodianAccount(ResolvedCustodianAccount resolvedCustodianAccount) {
-    this.resolvedCustodianAccount = resolvedCustodianAccount;
-    return this;
-  }
-
-  /**
-   * Get resolvedCustodianAccount
-   * @return resolvedCustodianAccount
-   */
-  @javax.annotation.Nullable
-  public ResolvedCustodianAccount getResolvedCustodianAccount() {
-    return resolvedCustodianAccount;
-  }
-
-  public void setResolvedCustodianAccount(ResolvedCustodianAccount resolvedCustodianAccount) {
-    this.resolvedCustodianAccount = resolvedCustodianAccount;
-  }
-
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -733,8 +707,7 @@ public class PortfolioHolding {
         Objects.equals(this.custodianAccountId, portfolioHolding.custodianAccountId) &&
         (this.unsettledUnits == null ? portfolioHolding.unsettledUnits == null : (portfolioHolding.unsettledUnits != null && this.unsettledUnits.compareTo(portfolioHolding.getUnsettledUnits()) == 0)) &&
         (this.overdueUnits == null ? portfolioHolding.overdueUnits == null : (portfolioHolding.overdueUnits != null && this.overdueUnits.compareTo(portfolioHolding.getOverdueUnits()) == 0)) &&
-        Objects.equals(this.custodianAccount, portfolioHolding.custodianAccount) &&
-        Objects.equals(this.resolvedCustodianAccount, portfolioHolding.resolvedCustodianAccount);
+        Objects.equals(this.custodianAccount, portfolioHolding.custodianAccount);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -743,7 +716,7 @@ public class PortfolioHolding {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentScope, instrumentUid, subHoldingKeys, properties, holdingType, units, settledUnits, cost, costPortfolioCcy, transaction, currency, holdingTypeName, holdingId, notionalCost, amortisedCost, amortisedCostPortfolioCcy, variationMargin, variationMarginPortfolioCcy, settlementSchedule, currentFace, custodianAccountId, unsettledUnits, overdueUnits, custodianAccount, resolvedCustodianAccount);
+    return Objects.hash(instrumentScope, instrumentUid, subHoldingKeys, properties, holdingType, units, settledUnits, cost, costPortfolioCcy, transaction, currency, holdingTypeName, holdingId, notionalCost, amortisedCost, amortisedCostPortfolioCcy, variationMargin, variationMarginPortfolioCcy, settlementSchedule, currentFace, custodianAccountId, unsettledUnits, overdueUnits, custodianAccount);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -781,7 +754,6 @@ public class PortfolioHolding {
     sb.append("    unsettledUnits: ").append(toIndentedString(unsettledUnits)).append("\n");
     sb.append("    overdueUnits: ").append(toIndentedString(overdueUnits)).append("\n");
     sb.append("    custodianAccount: ").append(toIndentedString(custodianAccount)).append("\n");
-    sb.append("    resolvedCustodianAccount: ").append(toIndentedString(resolvedCustodianAccount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

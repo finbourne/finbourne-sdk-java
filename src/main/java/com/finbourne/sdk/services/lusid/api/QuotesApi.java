@@ -217,7 +217,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
+     * DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
      * Delete the Quote Access Metadata Rule that exactly matches the provided identifier parts
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param provider The Provider of the rule (optional)
@@ -244,7 +244,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
+     * DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
      * Delete the Quote Access Metadata Rule that exactly matches the provided identifier partsUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param provider The Provider of the rule (optional)
@@ -271,7 +271,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule (asynchronously)
+     * DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule (asynchronously)
      * Delete the Quote Access Metadata Rule that exactly matches the provided identifier parts
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param provider The Provider of the rule (optional)
@@ -299,7 +299,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule (asynchronously)
+     * DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule (asynchronously)
      * Delete the Quote Access Metadata Rule that exactly matches the provided identifier partsUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param provider The Provider of the rule (optional)
@@ -527,7 +527,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
+     * DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
      * Delete the Quote Access Metadata Rule that exactly matches the provided identifier parts
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @return APIdeleteQuoteAccessMetadataRuleRequest
@@ -1411,7 +1411,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule
+     * GetQuotesAccessMetadataRule: Get a quote access metadata rule
      * Get a specific quote access metadata rule by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param provider The Provider of the rule (optional)
@@ -1439,7 +1439,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule
+     * GetQuotesAccessMetadataRule: Get a quote access metadata rule
      * Get a specific quote access metadata rule by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the ruleUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param provider The Provider of the rule (optional)
@@ -1467,7 +1467,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule (asynchronously)
+     * GetQuotesAccessMetadataRule: Get a quote access metadata rule (asynchronously)
      * Get a specific quote access metadata rule by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param provider The Provider of the rule (optional)
@@ -1496,7 +1496,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule (asynchronously)
+     * GetQuotesAccessMetadataRule: Get a quote access metadata rule (asynchronously)
      * Get a specific quote access metadata rule by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the ruleUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param provider The Provider of the rule (optional)
@@ -1736,7 +1736,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule
+     * GetQuotesAccessMetadataRule: Get a quote access metadata rule
      * Get a specific quote access metadata rule by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @return APIgetQuotesAccessMetadataRuleRequest
@@ -2243,7 +2243,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
+     * ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
      * Get all the quote access metadata rules in the specified scope
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param asAt The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified. (optional)
@@ -2264,7 +2264,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
+     * ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
      * Get all the quote access metadata rules in the specified scopeUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param asAt The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified. (optional)
@@ -2285,7 +2285,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope (asynchronously)
+     * ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope (asynchronously)
      * Get all the quote access metadata rules in the specified scope
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param asAt The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified. (optional)
@@ -2307,7 +2307,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope (asynchronously)
+     * ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope (asynchronously)
      * Get all the quote access metadata rules in the specified scopeUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @param asAt The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified. (optional)
@@ -2463,7 +2463,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
+     * ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
      * Get all the quote access metadata rules in the specified scope
      * @param scope The scope of the Quote Access Metadata Rule to retrieve. (required)
      * @return APIlistQuotesAccessMetadataRulesRequest
@@ -2987,7 +2987,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
+     * UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
      * Update or insert one Quote Access Metadata Rule in a single scope. An item will be updated if it already exists  and inserted if it does not.    The response will return the successfully updated or inserted Quote Access Metadata Rule or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a key can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched
      * @param scope The scope to use when updating or inserting the Quote Access Metadata Rule. (required)
      * @param upsertQuoteAccessMetadataRuleRequest The Quote Access Metadata Rule to update or insert (required)
@@ -3010,7 +3010,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
+     * UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
      * Update or insert one Quote Access Metadata Rule in a single scope. An item will be updated if it already exists  and inserted if it does not.    The response will return the successfully updated or inserted Quote Access Metadata Rule or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a key can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetchedUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope to use when updating or inserting the Quote Access Metadata Rule. (required)
      * @param upsertQuoteAccessMetadataRuleRequest The Quote Access Metadata Rule to update or insert (required)
@@ -3033,7 +3033,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID. (asynchronously)
+     * UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID. (asynchronously)
      * Update or insert one Quote Access Metadata Rule in a single scope. An item will be updated if it already exists  and inserted if it does not.    The response will return the successfully updated or inserted Quote Access Metadata Rule or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a key can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched
      * @param scope The scope to use when updating or inserting the Quote Access Metadata Rule. (required)
      * @param upsertQuoteAccessMetadataRuleRequest The Quote Access Metadata Rule to update or insert (required)
@@ -3057,7 +3057,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID. (asynchronously)
+     * UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID. (asynchronously)
      * Update or insert one Quote Access Metadata Rule in a single scope. An item will be updated if it already exists  and inserted if it does not.    The response will return the successfully updated or inserted Quote Access Metadata Rule or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a key can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetchedUse any specified configuration options to override any other configuration for this request only
      * @param scope The scope to use when updating or inserting the Quote Access Metadata Rule. (required)
      * @param upsertQuoteAccessMetadataRuleRequest The Quote Access Metadata Rule to update or insert (required)
@@ -3228,7 +3228,7 @@ public class QuotesApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
+     * UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
      * Update or insert one Quote Access Metadata Rule in a single scope. An item will be updated if it already exists  and inserted if it does not.    The response will return the successfully updated or inserted Quote Access Metadata Rule or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a key can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched
      * @param scope The scope to use when updating or inserting the Quote Access Metadata Rule. (required)
      * @param upsertQuoteAccessMetadataRuleRequest The Quote Access Metadata Rule to update or insert (required)

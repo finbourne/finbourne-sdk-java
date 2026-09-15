@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.BucketMembership;
 import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.JournalEntryLineShareClassBreakdown;
 import com.finbourne.sdk.services.lusid.model.Link;
@@ -77,6 +78,7 @@ import com.finbourne.sdk.JSON;
   FundJournalEntryLine.JSON_PROPERTY_SHARE_CLASS_BREAKDOWNS,
   FundJournalEntryLine.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID,
   FundJournalEntryLine.JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE,
+  FundJournalEntryLine.JSON_PROPERTY_BUCKET_MEMBERSHIPS,
   FundJournalEntryLine.JSON_PROPERTY_LINKS
 })
 
@@ -240,6 +242,11 @@ public class FundJournalEntryLine {
   @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String custodianAccountType;
+
+  public static final String JSON_PROPERTY_BUCKET_MEMBERSHIPS = "bucketMemberships";
+  @JsonProperty(JSON_PROPERTY_BUCKET_MEMBERSHIPS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<BucketMembership> bucketMemberships;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -897,6 +904,33 @@ public class FundJournalEntryLine {
   }
 
 
+  public FundJournalEntryLine bucketMemberships(List<BucketMembership> bucketMemberships) {
+    this.bucketMemberships = bucketMemberships;
+    return this;
+  }
+
+  public FundJournalEntryLine addBucketMembershipsItem(BucketMembership bucketMembershipsItem) {
+    if (this.bucketMemberships == null) {
+      this.bucketMemberships = new ArrayList<>();
+    }
+    this.bucketMemberships.add(bucketMembershipsItem);
+    return this;
+  }
+
+  /**
+   * The bucket this Journal Entry Line is assigned to in each of the Fund Configuration&#39;s bucket sets that covers the NAV type, in bucket set definition order. Each bucket set classifies the line independently, so a line normally carries one entry per bucket set.
+   * @return bucketMemberships
+   */
+  @javax.annotation.Nullable
+  public List<BucketMembership> getBucketMemberships() {
+    return bucketMemberships;
+  }
+
+  public void setBucketMemberships(List<BucketMembership> bucketMemberships) {
+    this.bucketMemberships = bucketMemberships;
+  }
+
+
   public FundJournalEntryLine links(List<Link> links) {
     this.links = links;
     return this;
@@ -965,6 +999,7 @@ public class FundJournalEntryLine {
         Objects.equals(this.shareClassBreakdowns, fundJournalEntryLine.shareClassBreakdowns) &&
         Objects.equals(this.custodianAccountId, fundJournalEntryLine.custodianAccountId) &&
         Objects.equals(this.custodianAccountType, fundJournalEntryLine.custodianAccountType) &&
+        Objects.equals(this.bucketMemberships, fundJournalEntryLine.bucketMemberships) &&
         Objects.equals(this.links, fundJournalEntryLine.links);
   }
 
@@ -974,7 +1009,7 @@ public class FundJournalEntryLine {
 
   @Override
  public int hashCode() {
-    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, shareClassBreakdowns, custodianAccountId, custodianAccountType, links);
+    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, shareClassBreakdowns, custodianAccountId, custodianAccountType, bucketMemberships, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1020,6 +1055,7 @@ public class FundJournalEntryLine {
     sb.append("    shareClassBreakdowns: ").append(toIndentedString(shareClassBreakdowns)).append("\n");
     sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("    custodianAccountType: ").append(toIndentedString(custodianAccountType)).append("\n");
+    sb.append("    bucketMemberships: ").append(toIndentedString(bucketMemberships)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

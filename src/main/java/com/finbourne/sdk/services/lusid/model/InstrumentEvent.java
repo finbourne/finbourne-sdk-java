@@ -44,6 +44,7 @@ import com.finbourne.sdk.JSON;
 @com.fasterxml.jackson.annotation.JsonSubTypes({
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AccumulationEvent.class, name = "AccumulationEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AdjustGlobalCommitmentEvent.class, name = "AdjustGlobalCommitmentEvent"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AmendCommitmentEvent.class, name = "AmendCommitmentEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AmortisationEvent.class, name = "AmortisationEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BankruptcyEvent.class, name = "BankruptcyEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BondCouponEvent.class, name = "BondCouponEvent"),
@@ -55,6 +56,7 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BonusIssueEvent.class, name = "BonusIssueEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CallOnIntermediateSecuritiesEvent.class, name = "CallOnIntermediateSecuritiesEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CancelSwapEvent.class, name = "CancelSwapEvent"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CapitalCallEvent.class, name = "CapitalCallEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CapitalDistributionEvent.class, name = "CapitalDistributionEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CapitalGainsDistributionEvent.class, name = "CapitalGainsDistributionEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CapletFloorletCashFlowEvent.class, name = "CapletFloorletCashFlowEvent"),
@@ -79,6 +81,7 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DepositSweepEvent.class, name = "DepositSweepEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DividendOptionEvent.class, name = "DividendOptionEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DividendReinvestmentEvent.class, name = "DividendReinvestmentEvent"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DividendSuspensionEvent.class, name = "DividendSuspensionEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DrawdownEvent.class, name = "DrawdownEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DrawingEvent.class, name = "DrawingEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DutchAuctionEvent.class, name = "DutchAuctionEvent"),
@@ -92,6 +95,7 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FlexibleRepoFullClosureEvent.class, name = "FlexibleRepoFullClosureEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FlexibleRepoInterestPaymentEvent.class, name = "FlexibleRepoInterestPaymentEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FlexibleRepoPartialClosureEvent.class, name = "FlexibleRepoPartialClosureEvent"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FundDistributionEvent.class, name = "FundDistributionEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FutureExpiryEvent.class, name = "FutureExpiryEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FutureMarkToMarketEvent.class, name = "FutureMarkToMarketEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxForwardSettlementEvent.class, name = "FxForwardSettlementEvent"),
@@ -102,6 +106,7 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiquidationPaymentEvent.class, name = "LiquidationPaymentEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LoanFacilityContractRolloverEvent.class, name = "LoanFacilityContractRolloverEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LoanFacilityDelayedCompensationPaymentEvent.class, name = "LoanFacilityDelayedCompensationPaymentEvent"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LoanInterestCapitalisationEvent.class, name = "LoanInterestCapitalisationEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LoanInterestRepaymentEvent.class, name = "LoanInterestRepaymentEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LoanPrincipalRepaymentEvent.class, name = "LoanPrincipalRepaymentEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MaturityEvent.class, name = "MaturityEvent"),
@@ -111,6 +116,7 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MbsPrincipalEvent.class, name = "MbsPrincipalEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MbsPrincipalWriteOffEvent.class, name = "MbsPrincipalWriteOffEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MergerEvent.class, name = "MergerEvent"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = NavReportEvent.class, name = "NavReportEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OpenEvent.class, name = "OpenEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OptionExerciseCashEvent.class, name = "OptionExerciseCashEvent"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OptionExercisePhysicalEvent.class, name = "OptionExercisePhysicalEvent"),
@@ -151,7 +157,7 @@ import com.finbourne.sdk.JSON;
 
 public class InstrumentEvent {
   /**
-   * The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent.
+   * The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent.
    */
   public enum InstrumentEventTypeEnum {
     TRANSITION_EVENT("TransitionEvent"),
@@ -362,7 +368,19 @@ public class InstrumentEvent {
     
     BOND_FORWARD_CASH_SETTLEMENT_EVENT("BondForwardCashSettlementEvent"),
     
-    BOND_FORWARD_TERMINATION_EVENT("BondForwardTerminationEvent");
+    BOND_FORWARD_TERMINATION_EVENT("BondForwardTerminationEvent"),
+    
+    AMEND_COMMITMENT_EVENT("AmendCommitmentEvent"),
+    
+    CAPITAL_CALL_EVENT("CapitalCallEvent"),
+    
+    FUND_DISTRIBUTION_EVENT("FundDistributionEvent"),
+    
+    NAV_REPORT_EVENT("NavReportEvent"),
+    
+    DIVIDEND_SUSPENSION_EVENT("DividendSuspensionEvent"),
+    
+    LOAN_INTEREST_CAPITALISATION_EVENT("LoanInterestCapitalisationEvent");
 
     private String value;
 
@@ -404,7 +422,7 @@ public class InstrumentEvent {
   }
 
   /**
-   * The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent.
+   * The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent.
    * @return instrumentEventType
    */
   @javax.annotation.Nonnull

@@ -48,6 +48,7 @@ import com.finbourne.sdk.JSON;
   ComplexBond.JSON_PROPERTY_CALCULATION_TYPE,
   ComplexBond.JSON_PROPERTY_SCHEDULES,
   ComplexBond.JSON_PROPERTY_ORIGINAL_ISSUE_PRICE,
+  ComplexBond.JSON_PROPERTY_PAR_PER_UNIT,
   ComplexBond.JSON_PROPERTY_ISSUE_DATE,
   ComplexBond.JSON_PROPERTY_ROUNDING_CONVENTIONS,
   ComplexBond.JSON_PROPERTY_ASSET_BACKED,
@@ -82,6 +83,11 @@ public class ComplexBond extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_ORIGINAL_ISSUE_PRICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal originalIssuePrice;
+
+  public static final String JSON_PROPERTY_PAR_PER_UNIT = "parPerUnit";
+  @JsonProperty(JSON_PROPERTY_PAR_PER_UNIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal parPerUnit;
 
   public static final String JSON_PROPERTY_ISSUE_DATE = "issueDate";
   @JsonProperty(JSON_PROPERTY_ISSUE_DATE)
@@ -205,6 +211,25 @@ public class ComplexBond extends LusidInstrument {
 
   public void setOriginalIssuePrice(java.math.BigDecimal originalIssuePrice) {
     this.originalIssuePrice = originalIssuePrice;
+  }
+
+
+  public ComplexBond parPerUnit(java.math.BigDecimal parPerUnit) {
+    this.parPerUnit = parPerUnit;
+    return this;
+  }
+
+  /**
+   * Optional value used to scale accrued interest and coupon amounts only (not CleanPV), in addition to  currentNotional and units. If you do not set this field, the value is 1 and no amount changes.  A model that calculates the price from the cash flows, for example Discounting, includes the scaled coupons   in the PV and thus in the CleanPV. The CleanPV exclusion applies to a quoted price.
+   * @return parPerUnit
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getParPerUnit() {
+    return parPerUnit;
+  }
+
+  public void setParPerUnit(java.math.BigDecimal parPerUnit) {
+    this.parPerUnit = parPerUnit;
   }
 
 
@@ -343,6 +368,7 @@ public class ComplexBond extends LusidInstrument {
         Objects.equals(this.calculationType, complexBond.calculationType) &&
         Objects.equals(this.schedules, complexBond.schedules) &&
         (this.originalIssuePrice == null ? complexBond.originalIssuePrice == null : (complexBond.originalIssuePrice != null && this.originalIssuePrice.compareTo(complexBond.getOriginalIssuePrice()) == 0)) &&
+        (this.parPerUnit == null ? complexBond.parPerUnit == null : (complexBond.parPerUnit != null && this.parPerUnit.compareTo(complexBond.getParPerUnit()) == 0)) &&
         Objects.equals(this.issueDate, complexBond.issueDate) &&
         Objects.equals(this.roundingConventions, complexBond.roundingConventions) &&
         Objects.equals(this.assetBacked, complexBond.assetBacked) &&
@@ -358,7 +384,7 @@ public class ComplexBond extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(identifiers, calculationType, schedules, originalIssuePrice, issueDate, roundingConventions, assetBacked, assetPoolIdentifier, tradingConventions, timeZoneConventions, super.hashCode());
+    return Objects.hash(identifiers, calculationType, schedules, originalIssuePrice, parPerUnit, issueDate, roundingConventions, assetBacked, assetPoolIdentifier, tradingConventions, timeZoneConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -377,6 +403,7 @@ public class ComplexBond extends LusidInstrument {
     sb.append("    calculationType: ").append(toIndentedString(calculationType)).append("\n");
     sb.append("    schedules: ").append(toIndentedString(schedules)).append("\n");
     sb.append("    originalIssuePrice: ").append(toIndentedString(originalIssuePrice)).append("\n");
+    sb.append("    parPerUnit: ").append(toIndentedString(parPerUnit)).append("\n");
     sb.append("    issueDate: ").append(toIndentedString(issueDate)).append("\n");
     sb.append("    roundingConventions: ").append(toIndentedString(roundingConventions)).append("\n");
     sb.append("    assetBacked: ").append(toIndentedString(assetBacked)).append("\n");

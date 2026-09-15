@@ -12,12 +12,16 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AbstainElection;
+import com.finbourne.sdk.services.lusid.model.CashAndSecurityOfferElection;
 import com.finbourne.sdk.services.lusid.model.CashOfferElection;
+import com.finbourne.sdk.services.lusid.model.ConsentAndExchangeElection;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import com.finbourne.sdk.services.lusid.model.LapseElection;
 import com.finbourne.sdk.services.lusid.model.MixedLotConstituentsElection;
 import com.finbourne.sdk.services.lusid.model.NewInstrument;
 import com.finbourne.sdk.services.lusid.model.SecurityOfferElection;
+import com.finbourne.sdk.services.lusid.model.UnknownProceedsElection;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -51,6 +55,10 @@ import com.finbourne.sdk.JSON;
   ExchangeOfferEvent.JSON_PROPERTY_SECURITY_OFFER_ELECTIONS,
   ExchangeOfferEvent.JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS,
   ExchangeOfferEvent.JSON_PROPERTY_LAPSE_ELECTIONS,
+  ExchangeOfferEvent.JSON_PROPERTY_CASH_AND_SECURITY_OFFER_ELECTIONS,
+  ExchangeOfferEvent.JSON_PROPERTY_CONSENT_AND_EXCHANGE_ELECTIONS,
+  ExchangeOfferEvent.JSON_PROPERTY_ABSTAIN_ELECTIONS,
+  ExchangeOfferEvent.JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS,
   ExchangeOfferEvent.JSON_PROPERTY_MIN_PIECE_SIZE,
   ExchangeOfferEvent.JSON_PROPERTY_MIN_INCREMENT,
   ExchangeOfferEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE,
@@ -106,6 +114,26 @@ public class ExchangeOfferEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_LAPSE_ELECTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<LapseElection> lapseElections;
+
+  public static final String JSON_PROPERTY_CASH_AND_SECURITY_OFFER_ELECTIONS = "cashAndSecurityOfferElections";
+  @JsonProperty(JSON_PROPERTY_CASH_AND_SECURITY_OFFER_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<CashAndSecurityOfferElection> cashAndSecurityOfferElections;
+
+  public static final String JSON_PROPERTY_CONSENT_AND_EXCHANGE_ELECTIONS = "consentAndExchangeElections";
+  @JsonProperty(JSON_PROPERTY_CONSENT_AND_EXCHANGE_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ConsentAndExchangeElection> consentAndExchangeElections;
+
+  public static final String JSON_PROPERTY_ABSTAIN_ELECTIONS = "abstainElections";
+  @JsonProperty(JSON_PROPERTY_ABSTAIN_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AbstainElection> abstainElections;
+
+  public static final String JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS = "unknownProceedsElections";
+  @JsonProperty(JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<UnknownProceedsElection> unknownProceedsElections;
 
   public static final String JSON_PROPERTY_MIN_PIECE_SIZE = "minPieceSize";
   @JsonProperty(JSON_PROPERTY_MIN_PIECE_SIZE)
@@ -329,6 +357,114 @@ public class ExchangeOfferEvent extends InstrumentEvent {
   }
 
 
+  public ExchangeOfferEvent cashAndSecurityOfferElections(List<CashAndSecurityOfferElection> cashAndSecurityOfferElections) {
+    this.cashAndSecurityOfferElections = cashAndSecurityOfferElections;
+    return this;
+  }
+
+  public ExchangeOfferEvent addCashAndSecurityOfferElectionsItem(CashAndSecurityOfferElection cashAndSecurityOfferElectionsItem) {
+    if (this.cashAndSecurityOfferElections == null) {
+      this.cashAndSecurityOfferElections = new ArrayList<>();
+    }
+    this.cashAndSecurityOfferElections.add(cashAndSecurityOfferElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible CashAndSecurityOfferElections for this exchange offer event.
+   * @return cashAndSecurityOfferElections
+   */
+  @javax.annotation.Nullable
+  public List<CashAndSecurityOfferElection> getCashAndSecurityOfferElections() {
+    return cashAndSecurityOfferElections;
+  }
+
+  public void setCashAndSecurityOfferElections(List<CashAndSecurityOfferElection> cashAndSecurityOfferElections) {
+    this.cashAndSecurityOfferElections = cashAndSecurityOfferElections;
+  }
+
+
+  public ExchangeOfferEvent consentAndExchangeElections(List<ConsentAndExchangeElection> consentAndExchangeElections) {
+    this.consentAndExchangeElections = consentAndExchangeElections;
+    return this;
+  }
+
+  public ExchangeOfferEvent addConsentAndExchangeElectionsItem(ConsentAndExchangeElection consentAndExchangeElectionsItem) {
+    if (this.consentAndExchangeElections == null) {
+      this.consentAndExchangeElections = new ArrayList<>();
+    }
+    this.consentAndExchangeElections.add(consentAndExchangeElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible consent-and-exchange elections for this event (CTEN-style consent paired with the exchange).
+   * @return consentAndExchangeElections
+   */
+  @javax.annotation.Nullable
+  public List<ConsentAndExchangeElection> getConsentAndExchangeElections() {
+    return consentAndExchangeElections;
+  }
+
+  public void setConsentAndExchangeElections(List<ConsentAndExchangeElection> consentAndExchangeElections) {
+    this.consentAndExchangeElections = consentAndExchangeElections;
+  }
+
+
+  public ExchangeOfferEvent abstainElections(List<AbstainElection> abstainElections) {
+    this.abstainElections = abstainElections;
+    return this;
+  }
+
+  public ExchangeOfferEvent addAbstainElectionsItem(AbstainElection abstainElectionsItem) {
+    if (this.abstainElections == null) {
+      this.abstainElections = new ArrayList<>();
+    }
+    this.abstainElections.add(abstainElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible abstain elections for this event (ABST) — decline to vote on the consent.
+   * @return abstainElections
+   */
+  @javax.annotation.Nullable
+  public List<AbstainElection> getAbstainElections() {
+    return abstainElections;
+  }
+
+  public void setAbstainElections(List<AbstainElection> abstainElections) {
+    this.abstainElections = abstainElections;
+  }
+
+
+  public ExchangeOfferEvent unknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+    return this;
+  }
+
+  public ExchangeOfferEvent addUnknownProceedsElectionsItem(UnknownProceedsElection unknownProceedsElectionsItem) {
+    if (this.unknownProceedsElections == null) {
+      this.unknownProceedsElections = new ArrayList<>();
+    }
+    this.unknownProceedsElections.add(unknownProceedsElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible unknown-proceeds elections for this event (UNKNOWN) — the outturn is not yet known.
+   * @return unknownProceedsElections
+   */
+  @javax.annotation.Nullable
+  public List<UnknownProceedsElection> getUnknownProceedsElections() {
+    return unknownProceedsElections;
+  }
+
+  public void setUnknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+  }
+
+
   public ExchangeOfferEvent minPieceSize(java.math.BigDecimal minPieceSize) {
     this.minPieceSize = minPieceSize;
     return this;
@@ -479,6 +615,10 @@ public class ExchangeOfferEvent extends InstrumentEvent {
         Objects.equals(this.securityOfferElections, exchangeOfferEvent.securityOfferElections) &&
         Objects.equals(this.mixedLotConstituentsElections, exchangeOfferEvent.mixedLotConstituentsElections) &&
         Objects.equals(this.lapseElections, exchangeOfferEvent.lapseElections) &&
+        Objects.equals(this.cashAndSecurityOfferElections, exchangeOfferEvent.cashAndSecurityOfferElections) &&
+        Objects.equals(this.consentAndExchangeElections, exchangeOfferEvent.consentAndExchangeElections) &&
+        Objects.equals(this.abstainElections, exchangeOfferEvent.abstainElections) &&
+        Objects.equals(this.unknownProceedsElections, exchangeOfferEvent.unknownProceedsElections) &&
         (this.minPieceSize == null ? exchangeOfferEvent.minPieceSize == null : (exchangeOfferEvent.minPieceSize != null && this.minPieceSize.compareTo(exchangeOfferEvent.getMinPieceSize()) == 0)) &&
         (this.minIncrement == null ? exchangeOfferEvent.minIncrement == null : (exchangeOfferEvent.minIncrement != null && this.minIncrement.compareTo(exchangeOfferEvent.getMinIncrement()) == 0)) &&
         (this.fractionalUnitsCashPrice == null ? exchangeOfferEvent.fractionalUnitsCashPrice == null : (exchangeOfferEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(exchangeOfferEvent.getFractionalUnitsCashPrice()) == 0)) &&
@@ -495,7 +635,7 @@ public class ExchangeOfferEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(effectiveDate, settlementDate, eventSource, newInstrument, cashOfferElections, securityOfferElections, mixedLotConstituentsElections, lapseElections, minPieceSize, minIncrement, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, instructionReference, super.hashCode());
+    return Objects.hash(effectiveDate, settlementDate, eventSource, newInstrument, cashOfferElections, securityOfferElections, mixedLotConstituentsElections, lapseElections, cashAndSecurityOfferElections, consentAndExchangeElections, abstainElections, unknownProceedsElections, minPieceSize, minIncrement, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, instructionReference, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -518,6 +658,10 @@ public class ExchangeOfferEvent extends InstrumentEvent {
     sb.append("    securityOfferElections: ").append(toIndentedString(securityOfferElections)).append("\n");
     sb.append("    mixedLotConstituentsElections: ").append(toIndentedString(mixedLotConstituentsElections)).append("\n");
     sb.append("    lapseElections: ").append(toIndentedString(lapseElections)).append("\n");
+    sb.append("    cashAndSecurityOfferElections: ").append(toIndentedString(cashAndSecurityOfferElections)).append("\n");
+    sb.append("    consentAndExchangeElections: ").append(toIndentedString(consentAndExchangeElections)).append("\n");
+    sb.append("    abstainElections: ").append(toIndentedString(abstainElections)).append("\n");
+    sb.append("    unknownProceedsElections: ").append(toIndentedString(unknownProceedsElections)).append("\n");
     sb.append("    minPieceSize: ").append(toIndentedString(minPieceSize)).append("\n");
     sb.append("    minIncrement: ").append(toIndentedString(minIncrement)).append("\n");
     sb.append("    fractionalUnitsCashPrice: ").append(toIndentedString(fractionalUnitsCashPrice)).append("\n");

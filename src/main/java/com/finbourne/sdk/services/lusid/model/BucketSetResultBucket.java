@@ -45,7 +45,8 @@ import com.finbourne.sdk.JSON;
   BucketSetResultBucket.JSON_PROPERTY_PER_UNIT_VALUE,
   BucketSetResultBucket.JSON_PROPERTY_UNITS_IN_ISSUE,
   BucketSetResultBucket.JSON_PROPERTY_PREVIOUS_CUMULATIVE_PER_UNIT_VALUE,
-  BucketSetResultBucket.JSON_PROPERTY_CUMULATIVE_PER_UNIT_VALUE
+  BucketSetResultBucket.JSON_PROPERTY_CUMULATIVE_PER_UNIT_VALUE,
+  BucketSetResultBucket.JSON_PROPERTY_DISPLAY_NAME
 })
 
 public class BucketSetResultBucket {
@@ -98,6 +99,11 @@ public class BucketSetResultBucket {
   @JsonProperty(JSON_PROPERTY_CUMULATIVE_PER_UNIT_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal cumulativePerUnitValue;
+
+  public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
+  @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String displayName;
 
   public BucketSetResultBucket() {
   }
@@ -300,6 +306,25 @@ public class BucketSetResultBucket {
   }
 
 
+  public BucketSetResultBucket displayName(String displayName) {
+    this.displayName = displayName;
+    return this;
+  }
+
+  /**
+   * The display name of the bucket, as configured on the fund configuration.
+   * @return displayName
+   */
+  @javax.annotation.Nullable
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -318,7 +343,8 @@ public class BucketSetResultBucket {
         (this.perUnitValue == null ? bucketSetResultBucket.perUnitValue == null : (bucketSetResultBucket.perUnitValue != null && this.perUnitValue.compareTo(bucketSetResultBucket.getPerUnitValue()) == 0)) &&
         (this.unitsInIssue == null ? bucketSetResultBucket.unitsInIssue == null : (bucketSetResultBucket.unitsInIssue != null && this.unitsInIssue.compareTo(bucketSetResultBucket.getUnitsInIssue()) == 0)) &&
         (this.previousCumulativePerUnitValue == null ? bucketSetResultBucket.previousCumulativePerUnitValue == null : (bucketSetResultBucket.previousCumulativePerUnitValue != null && this.previousCumulativePerUnitValue.compareTo(bucketSetResultBucket.getPreviousCumulativePerUnitValue()) == 0)) &&
-        (this.cumulativePerUnitValue == null ? bucketSetResultBucket.cumulativePerUnitValue == null : (bucketSetResultBucket.cumulativePerUnitValue != null && this.cumulativePerUnitValue.compareTo(bucketSetResultBucket.getCumulativePerUnitValue()) == 0));
+        (this.cumulativePerUnitValue == null ? bucketSetResultBucket.cumulativePerUnitValue == null : (bucketSetResultBucket.cumulativePerUnitValue != null && this.cumulativePerUnitValue.compareTo(bucketSetResultBucket.getCumulativePerUnitValue()) == 0)) &&
+        Objects.equals(this.displayName, bucketSetResultBucket.displayName);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -327,7 +353,7 @@ public class BucketSetResultBucket {
 
   @Override
  public int hashCode() {
-    return Objects.hash(bucketId, bucketType, value, previousCumulativeValue, cumulativeValue, sourceBreakdown, perUnitValue, unitsInIssue, previousCumulativePerUnitValue, cumulativePerUnitValue);
+    return Objects.hash(bucketId, bucketType, value, previousCumulativeValue, cumulativeValue, sourceBreakdown, perUnitValue, unitsInIssue, previousCumulativePerUnitValue, cumulativePerUnitValue, displayName);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -351,6 +377,7 @@ public class BucketSetResultBucket {
     sb.append("    unitsInIssue: ").append(toIndentedString(unitsInIssue)).append("\n");
     sb.append("    previousCumulativePerUnitValue: ").append(toIndentedString(previousCumulativePerUnitValue)).append("\n");
     sb.append("    cumulativePerUnitValue: ").append(toIndentedString(cumulativePerUnitValue)).append("\n");
+    sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

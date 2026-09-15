@@ -13,7 +13,11 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.RecDatesReconciled;
+import com.finbourne.sdk.services.lusid.model.RecExecution;
+import com.finbourne.sdk.services.lusid.model.RecResultCounts;
+import com.finbourne.sdk.services.lusid.model.RecReview;
 import java.io.IOException;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -33,13 +37,18 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A single run within an instance&#39;s run log. All runs share the same effective dates (frozen at  instantiation); each has a different asAt, advanced on re-run.
+ * A summary of a single run of a single rec type within an instance&#39;s run log, carrying the per-run outcome  detail the grouped-by-instance overview renders. Every entry comes off a result set, so only a run that has  completed or failed appears: a run still in flight is not logged until it lands.
  */
 @JsonPropertyOrder({
   RecRunLogEntry.JSON_PROPERTY_RUN_NUMBER,
   RecRunLogEntry.JSON_PROPERTY_RUN_AS_AT,
   RecRunLogEntry.JSON_PROPERTY_SUPERSEDED_AS_AT,
-  RecRunLogEntry.JSON_PROPERTY_DATES_RECONCILED
+  RecRunLogEntry.JSON_PROPERTY_DATES_RECONCILED,
+  RecRunLogEntry.JSON_PROPERTY_EXECUTION,
+  RecRunLogEntry.JSON_PROPERTY_APPROVAL_STATUS,
+  RecRunLogEntry.JSON_PROPERTY_RESULT_COUNTS,
+  RecRunLogEntry.JSON_PROPERTY_REVIEW,
+  RecRunLogEntry.JSON_PROPERTY_REC_RESULT_SET_HREF
 })
 
 public class RecRunLogEntry {
@@ -62,6 +71,31 @@ public class RecRunLogEntry {
   @JsonProperty(JSON_PROPERTY_DATES_RECONCILED)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private RecDatesReconciled datesReconciled;
+
+  public static final String JSON_PROPERTY_EXECUTION = "execution";
+  @JsonProperty(JSON_PROPERTY_EXECUTION)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private RecExecution execution;
+
+  public static final String JSON_PROPERTY_APPROVAL_STATUS = "approvalStatus";
+  @JsonProperty(JSON_PROPERTY_APPROVAL_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String approvalStatus;
+
+  public static final String JSON_PROPERTY_RESULT_COUNTS = "resultCounts";
+  @JsonProperty(JSON_PROPERTY_RESULT_COUNTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RecResultCounts resultCounts;
+
+  public static final String JSON_PROPERTY_REVIEW = "review";
+  @JsonProperty(JSON_PROPERTY_REVIEW)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RecReview review;
+
+  public static final String JSON_PROPERTY_REC_RESULT_SET_HREF = "recResultSetHref";
+  @JsonProperty(JSON_PROPERTY_REC_RESULT_SET_HREF)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private URI recResultSetHref;
 
   public RecRunLogEntry() {
   }
@@ -142,6 +176,101 @@ public class RecRunLogEntry {
   }
 
 
+  public RecRunLogEntry execution(RecExecution execution) {
+    this.execution = execution;
+    return this;
+  }
+
+  /**
+   * Get execution
+   * @return execution
+   */
+  @javax.annotation.Nonnull
+  public RecExecution getExecution() {
+    return execution;
+  }
+
+  public void setExecution(RecExecution execution) {
+    this.execution = execution;
+  }
+
+
+  public RecRunLogEntry approvalStatus(String approvalStatus) {
+    this.approvalStatus = approvalStatus;
+    return this;
+  }
+
+  /**
+   * The position of this result set in the approval ceremony. Available values: UnderReview, PendingApproval, RevisionsRequested, Approved, NotApplicable.
+   * @return approvalStatus
+   */
+  @javax.annotation.Nonnull
+  public String getApprovalStatus() {
+    return approvalStatus;
+  }
+
+  public void setApprovalStatus(String approvalStatus) {
+    this.approvalStatus = approvalStatus;
+  }
+
+
+  public RecRunLogEntry resultCounts(RecResultCounts resultCounts) {
+    this.resultCounts = resultCounts;
+    return this;
+  }
+
+  /**
+   * Get resultCounts
+   * @return resultCounts
+   */
+  @javax.annotation.Nullable
+  public RecResultCounts getResultCounts() {
+    return resultCounts;
+  }
+
+  public void setResultCounts(RecResultCounts resultCounts) {
+    this.resultCounts = resultCounts;
+  }
+
+
+  public RecRunLogEntry review(RecReview review) {
+    this.review = review;
+    return this;
+  }
+
+  /**
+   * Get review
+   * @return review
+   */
+  @javax.annotation.Nullable
+  public RecReview getReview() {
+    return review;
+  }
+
+  public void setReview(RecReview review) {
+    this.review = review;
+  }
+
+
+  public RecRunLogEntry recResultSetHref(URI recResultSetHref) {
+    this.recResultSetHref = recResultSetHref;
+    return this;
+  }
+
+  /**
+   * The specific Uniform Resource Identifier (URI) of the full rec result set this run belongs to.
+   * @return recResultSetHref
+   */
+  @javax.annotation.Nonnull
+  public URI getRecResultSetHref() {
+    return recResultSetHref;
+  }
+
+  public void setRecResultSetHref(URI recResultSetHref) {
+    this.recResultSetHref = recResultSetHref;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -154,7 +283,12 @@ public class RecRunLogEntry {
     return Objects.equals(this.runNumber, recRunLogEntry.runNumber) &&
         Objects.equals(this.runAsAt, recRunLogEntry.runAsAt) &&
         Objects.equals(this.supersededAsAt, recRunLogEntry.supersededAsAt) &&
-        Objects.equals(this.datesReconciled, recRunLogEntry.datesReconciled);
+        Objects.equals(this.datesReconciled, recRunLogEntry.datesReconciled) &&
+        Objects.equals(this.execution, recRunLogEntry.execution) &&
+        Objects.equals(this.approvalStatus, recRunLogEntry.approvalStatus) &&
+        Objects.equals(this.resultCounts, recRunLogEntry.resultCounts) &&
+        Objects.equals(this.review, recRunLogEntry.review) &&
+        Objects.equals(this.recResultSetHref, recRunLogEntry.recResultSetHref);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -163,7 +297,7 @@ public class RecRunLogEntry {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runNumber, runAsAt, supersededAsAt, datesReconciled);
+    return Objects.hash(runNumber, runAsAt, supersededAsAt, datesReconciled, execution, approvalStatus, resultCounts, review, recResultSetHref);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -181,6 +315,11 @@ public class RecRunLogEntry {
     sb.append("    runAsAt: ").append(toIndentedString(runAsAt)).append("\n");
     sb.append("    supersededAsAt: ").append(toIndentedString(supersededAsAt)).append("\n");
     sb.append("    datesReconciled: ").append(toIndentedString(datesReconciled)).append("\n");
+    sb.append("    execution: ").append(toIndentedString(execution)).append("\n");
+    sb.append("    approvalStatus: ").append(toIndentedString(approvalStatus)).append("\n");
+    sb.append("    resultCounts: ").append(toIndentedString(resultCounts)).append("\n");
+    sb.append("    review: ").append(toIndentedString(review)).append("\n");
+    sb.append("    recResultSetHref: ").append(toIndentedString(recResultSetHref)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -90,7 +90,7 @@ public class GeneratedEventDiagnostics {
   }
 
   /**
-   * Available values: MarketDataFailure, TransactionFailure, EventCombinationFailure, RepodOutHolding, ScheduleFailure.
+   * Available values: MarketDataFailure, TransactionFailure, EventCombinationFailure, RepodOutHolding, ScheduleFailure, ModelSubstitution.
    * @return type
    */
   @javax.annotation.Nonnull

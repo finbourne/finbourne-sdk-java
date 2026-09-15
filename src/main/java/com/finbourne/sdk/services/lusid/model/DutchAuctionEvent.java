@@ -19,6 +19,7 @@ import com.finbourne.sdk.services.lusid.model.MixedLotConstituentsElection;
 import com.finbourne.sdk.services.lusid.model.NewInstrument;
 import com.finbourne.sdk.services.lusid.model.SecurityOfferElection;
 import com.finbourne.sdk.services.lusid.model.TenderOfferElection;
+import com.finbourne.sdk.services.lusid.model.UnknownProceedsElection;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ import com.finbourne.sdk.JSON;
   DutchAuctionEvent.JSON_PROPERTY_CASH_AND_SECURITY_OFFER_ELECTIONS,
   DutchAuctionEvent.JSON_PROPERTY_LAPSE_ELECTIONS,
   DutchAuctionEvent.JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS,
+  DutchAuctionEvent.JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS,
   DutchAuctionEvent.JSON_PROPERTY_RESPONSE_DEADLINE_DATE,
   DutchAuctionEvent.JSON_PROPERTY_EARLY_RESPONSE_DEADLINE,
   DutchAuctionEvent.JSON_PROPERTY_EX_DATE,
@@ -111,6 +113,11 @@ public class DutchAuctionEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_MIXED_LOT_CONSTITUENTS_ELECTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<MixedLotConstituentsElection> mixedLotConstituentsElections;
+
+  public static final String JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS = "unknownProceedsElections";
+  @JsonProperty(JSON_PROPERTY_UNKNOWN_PROCEEDS_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<UnknownProceedsElection> unknownProceedsElections;
 
   public static final String JSON_PROPERTY_RESPONSE_DEADLINE_DATE = "responseDeadlineDate";
   @JsonProperty(JSON_PROPERTY_RESPONSE_DEADLINE_DATE)
@@ -362,6 +369,33 @@ public class DutchAuctionEvent extends InstrumentEvent {
   }
 
 
+  public DutchAuctionEvent unknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+    return this;
+  }
+
+  public DutchAuctionEvent addUnknownProceedsElectionsItem(UnknownProceedsElection unknownProceedsElectionsItem) {
+    if (this.unknownProceedsElections == null) {
+      this.unknownProceedsElections = new ArrayList<>();
+    }
+    this.unknownProceedsElections.add(unknownProceedsElectionsItem);
+    return this;
+  }
+
+  /**
+   * List of possible unknown-proceeds elections for this event (UNKNOWN) — the outturn is not yet known.
+   * @return unknownProceedsElections
+   */
+  @javax.annotation.Nullable
+  public List<UnknownProceedsElection> getUnknownProceedsElections() {
+    return unknownProceedsElections;
+  }
+
+  public void setUnknownProceedsElections(List<UnknownProceedsElection> unknownProceedsElections) {
+    this.unknownProceedsElections = unknownProceedsElections;
+  }
+
+
   public DutchAuctionEvent responseDeadlineDate(OffsetDateTime responseDeadlineDate) {
     this.responseDeadlineDate = responseDeadlineDate;
     return this;
@@ -588,6 +622,7 @@ public class DutchAuctionEvent extends InstrumentEvent {
         Objects.equals(this.cashAndSecurityOfferElections, dutchAuctionEvent.cashAndSecurityOfferElections) &&
         Objects.equals(this.lapseElections, dutchAuctionEvent.lapseElections) &&
         Objects.equals(this.mixedLotConstituentsElections, dutchAuctionEvent.mixedLotConstituentsElections) &&
+        Objects.equals(this.unknownProceedsElections, dutchAuctionEvent.unknownProceedsElections) &&
         Objects.equals(this.responseDeadlineDate, dutchAuctionEvent.responseDeadlineDate) &&
         Objects.equals(this.earlyResponseDeadline, dutchAuctionEvent.earlyResponseDeadline) &&
         Objects.equals(this.exDate, dutchAuctionEvent.exDate) &&
@@ -608,7 +643,7 @@ public class DutchAuctionEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, marketDeadlineDate, currency, tenderOfferElections, securityOfferElections, cashAndSecurityOfferElections, lapseElections, mixedLotConstituentsElections, responseDeadlineDate, earlyResponseDeadline, exDate, recordDate, announcementDate, targetQuantity, prorationRate, newInstrument, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, bidPrice, super.hashCode());
+    return Objects.hash(paymentDate, marketDeadlineDate, currency, tenderOfferElections, securityOfferElections, cashAndSecurityOfferElections, lapseElections, mixedLotConstituentsElections, unknownProceedsElections, responseDeadlineDate, earlyResponseDeadline, exDate, recordDate, announcementDate, targetQuantity, prorationRate, newInstrument, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, bidPrice, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -631,6 +666,7 @@ public class DutchAuctionEvent extends InstrumentEvent {
     sb.append("    cashAndSecurityOfferElections: ").append(toIndentedString(cashAndSecurityOfferElections)).append("\n");
     sb.append("    lapseElections: ").append(toIndentedString(lapseElections)).append("\n");
     sb.append("    mixedLotConstituentsElections: ").append(toIndentedString(mixedLotConstituentsElections)).append("\n");
+    sb.append("    unknownProceedsElections: ").append(toIndentedString(unknownProceedsElections)).append("\n");
     sb.append("    responseDeadlineDate: ").append(toIndentedString(responseDeadlineDate)).append("\n");
     sb.append("    earlyResponseDeadline: ").append(toIndentedString(earlyResponseDeadline)).append("\n");
     sb.append("    exDate: ").append(toIndentedString(exDate)).append("\n");

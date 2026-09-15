@@ -44,7 +44,8 @@ import com.finbourne.sdk.JSON;
   TargetTaxLotRequest.JSON_PROPERTY_SETTLEMENT_DATE,
   TargetTaxLotRequest.JSON_PROPERTY_NOTIONAL_COST,
   TargetTaxLotRequest.JSON_PROPERTY_VARIATION_MARGIN,
-  TargetTaxLotRequest.JSON_PROPERTY_VARIATION_MARGIN_PORTFOLIO_CCY
+  TargetTaxLotRequest.JSON_PROPERTY_VARIATION_MARGIN_PORTFOLIO_CCY,
+  TargetTaxLotRequest.JSON_PROPERTY_AMORTISED_COST
 })
 
 public class TargetTaxLotRequest {
@@ -92,6 +93,11 @@ public class TargetTaxLotRequest {
   @JsonProperty(JSON_PROPERTY_VARIATION_MARGIN_PORTFOLIO_CCY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal variationMarginPortfolioCcy;
+
+  public static final String JSON_PROPERTY_AMORTISED_COST = "amortisedCost";
+  @JsonProperty(JSON_PROPERTY_AMORTISED_COST)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal amortisedCost;
 
   public TargetTaxLotRequest() {
   }
@@ -267,6 +273,25 @@ public class TargetTaxLotRequest {
   }
 
 
+  public TargetTaxLotRequest amortisedCost(java.math.BigDecimal amortisedCost) {
+    this.amortisedCost = amortisedCost;
+    return this;
+  }
+
+  /**
+   * The amortised cost of the tax-lot in the settlement currency, for example a supplied amortised cost at migration. If supplied, this value seeds the tax-lot&#39;s amortised cost at the adjustment date and amortisation continues forward from it; if not supplied, the amortised cost defaults to the cost of the tax-lot.
+   * @return amortisedCost
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getAmortisedCost() {
+    return amortisedCost;
+  }
+
+  public void setAmortisedCost(java.math.BigDecimal amortisedCost) {
+    this.amortisedCost = amortisedCost;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -284,7 +309,8 @@ public class TargetTaxLotRequest {
         Objects.equals(this.settlementDate, targetTaxLotRequest.settlementDate) &&
         (this.notionalCost == null ? targetTaxLotRequest.notionalCost == null : (targetTaxLotRequest.notionalCost != null && this.notionalCost.compareTo(targetTaxLotRequest.getNotionalCost()) == 0)) &&
         (this.variationMargin == null ? targetTaxLotRequest.variationMargin == null : (targetTaxLotRequest.variationMargin != null && this.variationMargin.compareTo(targetTaxLotRequest.getVariationMargin()) == 0)) &&
-        (this.variationMarginPortfolioCcy == null ? targetTaxLotRequest.variationMarginPortfolioCcy == null : (targetTaxLotRequest.variationMarginPortfolioCcy != null && this.variationMarginPortfolioCcy.compareTo(targetTaxLotRequest.getVariationMarginPortfolioCcy()) == 0));
+        (this.variationMarginPortfolioCcy == null ? targetTaxLotRequest.variationMarginPortfolioCcy == null : (targetTaxLotRequest.variationMarginPortfolioCcy != null && this.variationMarginPortfolioCcy.compareTo(targetTaxLotRequest.getVariationMarginPortfolioCcy()) == 0)) &&
+        (this.amortisedCost == null ? targetTaxLotRequest.amortisedCost == null : (targetTaxLotRequest.amortisedCost != null && this.amortisedCost.compareTo(targetTaxLotRequest.getAmortisedCost()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -293,7 +319,7 @@ public class TargetTaxLotRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(units, cost, portfolioCost, price, purchaseDate, settlementDate, notionalCost, variationMargin, variationMarginPortfolioCcy);
+    return Objects.hash(units, cost, portfolioCost, price, purchaseDate, settlementDate, notionalCost, variationMargin, variationMarginPortfolioCcy, amortisedCost);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -316,6 +342,7 @@ public class TargetTaxLotRequest {
     sb.append("    notionalCost: ").append(toIndentedString(notionalCost)).append("\n");
     sb.append("    variationMargin: ").append(toIndentedString(variationMargin)).append("\n");
     sb.append("    variationMarginPortfolioCcy: ").append(toIndentedString(variationMarginPortfolioCcy)).append("\n");
+    sb.append("    amortisedCost: ").append(toIndentedString(amortisedCost)).append("\n");
     sb.append("}");
     return sb.toString();
   }

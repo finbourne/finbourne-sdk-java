@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **marketIdentifier** | **String** | Type of the code identifying the asset, e.g. ISIN or CUSIP | [default to String]
 **code** | **String** | The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN | [default to String]
 **date** | [**OffsetDateTime**](OffsetDateTime.md) | The effectiveAt of the quote for the identified entity. | [default to OffsetDateTime]
+**descriptor** | **List&lt;String&gt;** | Optional additional description of the quote being depended upon, e.g. the model or lineage that produced it.  When matching a dependency against supplied market data overrides, the descriptor must match as well as the identifier and code.  If omitted, the dependency has no descriptor. | [optional] [default to List<String>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.QuoteDependency;
@@ -20,12 +21,14 @@ import java.net.URI;
 String marketIdentifier = "example marketIdentifier";
 String code = "example code";
 OffsetDateTime date = OffsetDateTime.now();
+@javax.annotation.Nullable List<String> descriptor = new List<String>();
 
 
 QuoteDependency quoteDependencyInstance = new QuoteDependency()
     .marketIdentifier(marketIdentifier)
     .code(code)
-    .date(date);
+    .date(date)
+    .descriptor(descriptor);
 ```
 
 

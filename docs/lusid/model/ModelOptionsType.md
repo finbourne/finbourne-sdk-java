@@ -25,6 +25,7 @@ ModelOptionsType method = ModelOptionsType.CDS_MODEL_OPTIONS;
 ModelOptionsType method = ModelOptionsType.FLEXIBLE_LOAN_PRICER_OPTIONS;
 ModelOptionsType method = ModelOptionsType.HULL_WHITE_MODEL_OPTIONS;
 ModelOptionsType method = ModelOptionsType.BOND_LOOKUP_MODEL_OPTIONS;
+ModelOptionsType method = ModelOptionsType.BOND_FORWARD_MODEL_OPTIONS;
 ```
 
 

@@ -59,6 +59,7 @@ import com.finbourne.sdk.JSON;
   Bond.JSON_PROPERTY_ROUNDING_CONVENTIONS,
   Bond.JSON_PROPERTY_EX_DIVIDEND_CONFIGURATION,
   Bond.JSON_PROPERTY_ORIGINAL_ISSUE_PRICE,
+  Bond.JSON_PROPERTY_PAR_PER_UNIT,
   Bond.JSON_PROPERTY_TRADING_CONVENTIONS,
   Bond.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
 })
@@ -139,6 +140,11 @@ public class Bond extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_ORIGINAL_ISSUE_PRICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal originalIssuePrice;
+
+  public static final String JSON_PROPERTY_PAR_PER_UNIT = "parPerUnit";
+  @JsonProperty(JSON_PROPERTY_PAR_PER_UNIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal parPerUnit;
 
   public static final String JSON_PROPERTY_TRADING_CONVENTIONS = "tradingConventions";
   @JsonProperty(JSON_PROPERTY_TRADING_CONVENTIONS)
@@ -435,6 +441,25 @@ public class Bond extends LusidInstrument {
   }
 
 
+  public Bond parPerUnit(java.math.BigDecimal parPerUnit) {
+    this.parPerUnit = parPerUnit;
+    return this;
+  }
+
+  /**
+   * Optional value used to scale accrued interest and coupon amounts only (not CleanPV), in addition to  currentNotional and units. If you do not set this field, the value is 1 and no amount changes.  A model that calculates the price from the cash flows, for example Discounting, includes the scaled coupons  in the PV and thus in the CleanPV. The CleanPV exclusion applies to a quoted price.
+   * @return parPerUnit
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getParPerUnit() {
+    return parPerUnit;
+  }
+
+  public void setParPerUnit(java.math.BigDecimal parPerUnit) {
+    this.parPerUnit = parPerUnit;
+  }
+
+
   public Bond tradingConventions(TradingConventions tradingConventions) {
     this.tradingConventions = tradingConventions;
     return this;
@@ -496,6 +521,7 @@ public class Bond extends LusidInstrument {
         Objects.equals(this.roundingConventions, bond.roundingConventions) &&
         Objects.equals(this.exDividendConfiguration, bond.exDividendConfiguration) &&
         (this.originalIssuePrice == null ? bond.originalIssuePrice == null : (bond.originalIssuePrice != null && this.originalIssuePrice.compareTo(bond.getOriginalIssuePrice()) == 0)) &&
+        (this.parPerUnit == null ? bond.parPerUnit == null : (bond.parPerUnit != null && this.parPerUnit.compareTo(bond.getParPerUnit()) == 0)) &&
         Objects.equals(this.tradingConventions, bond.tradingConventions) &&
         Objects.equals(this.timeZoneConventions, bond.timeZoneConventions) &&
         super.equals(o);
@@ -507,7 +533,7 @@ public class Bond extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, domCcy, flowConventions, principal, couponRate, identifiers, exDividendDays, initialCouponDate, firstCouponPayDate, calculationType, roundingConventions, exDividendConfiguration, originalIssuePrice, tradingConventions, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, domCcy, flowConventions, principal, couponRate, identifiers, exDividendDays, initialCouponDate, firstCouponPayDate, calculationType, roundingConventions, exDividendConfiguration, originalIssuePrice, parPerUnit, tradingConventions, timeZoneConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -536,6 +562,7 @@ public class Bond extends LusidInstrument {
     sb.append("    roundingConventions: ").append(toIndentedString(roundingConventions)).append("\n");
     sb.append("    exDividendConfiguration: ").append(toIndentedString(exDividendConfiguration)).append("\n");
     sb.append("    originalIssuePrice: ").append(toIndentedString(originalIssuePrice)).append("\n");
+    sb.append("    parPerUnit: ").append(toIndentedString(parPerUnit)).append("\n");
     sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
     sb.append("}");

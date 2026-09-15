@@ -60,7 +60,7 @@ public class AggregateRuleValues {
 
   public static final String JSON_PROPERTY_DIFFERENCE = "difference";
   @JsonProperty(JSON_PROPERTY_DIFFERENCE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String difference;
 
   public static final String JSON_PROPERTY_APPLIED_TOLERANCE = "appliedTolerance";
@@ -137,7 +137,7 @@ public class AggregateRuleValues {
    * The measured magnitude of the difference, ToString(ABS(leftValue - rightValue)).
    * @return difference
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getDifference() {
     return difference;
   }

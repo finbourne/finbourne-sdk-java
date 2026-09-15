@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **unitsInIssue** | **java.math.BigDecimal** | The share class&#39;s units in issue at the end of the period. Reported only where both the share class and the bucket are unitised. | [optional] [default to java.math.BigDecimal]
 **previousCumulativePerUnitValue** | **java.math.BigDecimal** | The bucket&#39;s cumulative value at the start of the period, per unit in issue at that point - so it reads as it did at the previous valuation point rather than being restated at this period&#39;s unit count. | [optional] [default to java.math.BigDecimal]
 **cumulativePerUnitValue** | **java.math.BigDecimal** | The bucket&#39;s cumulative value at the end of the period per unit in issue (CumulativeValue divided by UnitsInIssue). Reported only where both the share class and the bucket are unitised and there are units in issue to divide by. | [optional] [default to java.math.BigDecimal]
+**displayName** | **String** | The display name of the bucket, as configured on the fund configuration. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.BucketSetResultBucket;
@@ -33,6 +34,7 @@ java.math.BigDecimal cumulativeValue = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal unitsInIssue = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal previousCumulativePerUnitValue = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal cumulativePerUnitValue = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable String displayName = "example displayName";
 
 
 BucketSetResultBucket bucketSetResultBucketInstance = new BucketSetResultBucket()
@@ -45,7 +47,8 @@ BucketSetResultBucket bucketSetResultBucketInstance = new BucketSetResultBucket(
     .perUnitValue(perUnitValue)
     .unitsInIssue(unitsInIssue)
     .previousCumulativePerUnitValue(previousCumulativePerUnitValue)
-    .cumulativePerUnitValue(cumulativePerUnitValue);
+    .cumulativePerUnitValue(cumulativePerUnitValue)
+    .displayName(displayName);
 ```
 
 

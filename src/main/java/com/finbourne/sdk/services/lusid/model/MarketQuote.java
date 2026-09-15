@@ -39,7 +39,7 @@ import com.finbourne.sdk.JSON;
 
 public class MarketQuote {
   /**
-   * Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor.
+   * Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor, ForwardPrice, DiscountFactor.
    */
   public enum QuoteTypeEnum {
     PRICE("Price"),
@@ -76,7 +76,11 @@ public class MarketQuote {
     
     INTEREST_SHORTFALL("InterestShortfall"),
     
-    CONSTITUENT_WEIGHT_FACTOR("ConstituentWeightFactor");
+    CONSTITUENT_WEIGHT_FACTOR("ConstituentWeightFactor"),
+    
+    FORWARD_PRICE("ForwardPrice"),
+    
+    DISCOUNT_FACTOR("DiscountFactor");
 
     private String value;
 
@@ -123,7 +127,7 @@ public class MarketQuote {
   }
 
   /**
-   * Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor.
+   * Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor, ForwardPrice, DiscountFactor.
    * @return quoteType
    */
   @javax.annotation.Nonnull

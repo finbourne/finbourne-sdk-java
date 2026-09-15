@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -41,6 +42,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   ComplianceRuleBreakdown.JSON_PROPERTY_GROUP_STATUS,
   ComplianceRuleBreakdown.JSON_PROPERTY_RESULTS_USED,
+  ComplianceRuleBreakdown.JSON_PROPERTY_FORMULA_VALUES,
   ComplianceRuleBreakdown.JSON_PROPERTY_PROPERTIES_USED,
   ComplianceRuleBreakdown.JSON_PROPERTY_MISSING_DATA_INFORMATION,
   ComplianceRuleBreakdown.JSON_PROPERTY_LINEAGE
@@ -56,6 +58,11 @@ public class ComplianceRuleBreakdown {
   @JsonProperty(JSON_PROPERTY_RESULTS_USED)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Map<String, java.math.BigDecimal> resultsUsed = new HashMap<>();
+
+  public static final String JSON_PROPERTY_FORMULA_VALUES = "formulaValues";
+  @JsonProperty(JSON_PROPERTY_FORMULA_VALUES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, java.math.BigDecimal> formulaValues;
 
   public static final String JSON_PROPERTY_PROPERTIES_USED = "propertiesUsed";
   @JsonProperty(JSON_PROPERTY_PROPERTIES_USED)
@@ -118,6 +125,33 @@ public class ComplianceRuleBreakdown {
 
   public void setResultsUsed(Map<String, java.math.BigDecimal> resultsUsed) {
     this.resultsUsed = resultsUsed;
+  }
+
+
+  public ComplianceRuleBreakdown formulaValues(Map<String, java.math.BigDecimal> formulaValues) {
+    this.formulaValues = formulaValues;
+    return this;
+  }
+
+  public ComplianceRuleBreakdown putFormulaValuesItem(String key, java.math.BigDecimal formulaValuesItem) {
+    if (this.formulaValues == null) {
+      this.formulaValues = new HashMap<>();
+    }
+    this.formulaValues.put(key, formulaValuesItem);
+    return this;
+  }
+
+  /**
+   * The value each formula within the check criterion evaluated to for this group. Empty where the criterion  compares a single value or is not numerical, since the operand values already recorded describe those.
+   * @return formulaValues
+   */
+  @javax.annotation.Nullable
+  public Map<String, java.math.BigDecimal> getFormulaValues() {
+    return formulaValues;
+  }
+
+  public void setFormulaValues(Map<String, java.math.BigDecimal> formulaValues) {
+    this.formulaValues = formulaValues;
   }
 
 
@@ -213,14 +247,26 @@ public class ComplianceRuleBreakdown {
     ComplianceRuleBreakdown complianceRuleBreakdown = (ComplianceRuleBreakdown) o;
     return Objects.equals(this.groupStatus, complianceRuleBreakdown.groupStatus) &&
         Objects.equals(this.resultsUsed, complianceRuleBreakdown.resultsUsed) &&
+        Objects.equals(this.formulaValues, complianceRuleBreakdown.formulaValues) &&
         Objects.equals(this.propertiesUsed, complianceRuleBreakdown.propertiesUsed) &&
         Objects.equals(this.missingDataInformation, complianceRuleBreakdown.missingDataInformation) &&
         Objects.equals(this.lineage, complianceRuleBreakdown.lineage);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
  public int hashCode() {
-    return Objects.hash(groupStatus, resultsUsed, propertiesUsed, missingDataInformation, lineage);
+    return Objects.hash(groupStatus, resultsUsed, formulaValues, propertiesUsed, missingDataInformation, lineage);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -229,6 +275,7 @@ public class ComplianceRuleBreakdown {
     sb.append("class ComplianceRuleBreakdown {\n");
     sb.append("    groupStatus: ").append(toIndentedString(groupStatus)).append("\n");
     sb.append("    resultsUsed: ").append(toIndentedString(resultsUsed)).append("\n");
+    sb.append("    formulaValues: ").append(toIndentedString(formulaValues)).append("\n");
     sb.append("    propertiesUsed: ").append(toIndentedString(propertiesUsed)).append("\n");
     sb.append("    missingDataInformation: ").append(toIndentedString(missingDataInformation)).append("\n");
     sb.append("    lineage: ").append(toIndentedString(lineage)).append("\n");

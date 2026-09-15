@@ -42,12 +42,13 @@ import com.finbourne.sdk.JSON;
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = "modelOptionsType", visible = true)
 @com.fasterxml.jackson.annotation.JsonSubTypes({
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BondForwardModelOptions.class, name = "BondForwardModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BondLookupModelOptions.class, name = "BondLookupModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CdsModelOptions.class, name = "CdsModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EmptyModelOptions.class, name = "EmptyModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EquityModelOptions.class, name = "EquityModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FlexibleLoanPricerOptions.class, name = "FlexibleLoanPricerOptions"),
-  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FundingLegOptions.class, name = "FundingLegOptions"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FundingLegModelOptions.class, name = "FundingLegModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FxForwardModelOptions.class, name = "FxForwardModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HullWhiteModelOptions.class, name = "HullWhiteModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = IndexModelOptions.class, name = "IndexModelOptions"),
@@ -56,7 +57,7 @@ import com.finbourne.sdk.JSON;
 
 public class ModelOptions {
   /**
-   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions.
+   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions.
    */
   public enum ModelOptionsTypeEnum {
     INVALID("Invalid"),
@@ -79,7 +80,9 @@ public class ModelOptions {
     
     HULL_WHITE_MODEL_OPTIONS("HullWhiteModelOptions"),
     
-    BOND_LOOKUP_MODEL_OPTIONS("BondLookupModelOptions");
+    BOND_LOOKUP_MODEL_OPTIONS("BondLookupModelOptions"),
+    
+    BOND_FORWARD_MODEL_OPTIONS("BondForwardModelOptions");
 
     private String value;
 
@@ -121,7 +124,7 @@ public class ModelOptions {
   }
 
   /**
-   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions.
+   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions.
    * @return modelOptionsType
    */
   @javax.annotation.Nonnull

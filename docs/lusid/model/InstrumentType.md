@@ -66,6 +66,8 @@ InstrumentType method = InstrumentType.BOND_OPTION;
 InstrumentType method = InstrumentType.CDS_OPTION;
 InstrumentType method = InstrumentType.COMMODITY_CALENDAR_SWAP;
 InstrumentType method = InstrumentType.BOND_FORWARD;
+InstrumentType method = InstrumentType.PREFERRED_SHARE;
+InstrumentType method = InstrumentType.CAPITAL_INTEREST;
 ```
 
 

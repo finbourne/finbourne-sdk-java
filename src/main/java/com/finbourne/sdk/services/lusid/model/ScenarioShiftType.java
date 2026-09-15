@@ -31,7 +31,13 @@ public enum ScenarioShiftType {
   
   VOL_SURFACE_SHIFT_DEFINITION("VolSurfaceShiftDefinition"),
   
-  MDKR_GROUP_SHIFT_DEFINITION("MdkrGroupShiftDefinition");
+  MDKR_GROUP_SHIFT_DEFINITION("MdkrGroupShiftDefinition"),
+  
+  INFLATION_CURVE_SHIFT_DEFINITION("InflationCurveShiftDefinition"),
+  
+  CREDIT_SPREAD_SHIFT_DEFINITION("CreditSpreadShiftDefinition"),
+  
+  MODEL_OPTION_SHIFT_DEFINITION("ModelOptionShiftDefinition");
 
   private String value;
 

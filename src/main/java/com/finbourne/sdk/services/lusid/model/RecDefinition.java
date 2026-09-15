@@ -18,6 +18,7 @@ import com.finbourne.sdk.services.lusid.model.RecDefRecipeIds;
 import com.finbourne.sdk.services.lusid.model.RecDefRuleset;
 import com.finbourne.sdk.services.lusid.model.RecDefSideNames;
 import com.finbourne.sdk.services.lusid.model.RecDefSource;
+import com.finbourne.sdk.services.lusid.model.RecReviewConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
@@ -55,6 +56,7 @@ import com.finbourne.sdk.JSON;
   RecDefinition.JSON_PROPERTY_VALUATION_RECIPES,
   RecDefinition.JSON_PROPERTY_CURRENCIES,
   RecDefinition.JSON_PROPERTY_RULESETS,
+  RecDefinition.JSON_PROPERTY_REVIEW_CONFIGURATION,
   RecDefinition.JSON_PROPERTY_HREF,
   RecDefinition.JSON_PROPERTY_VERSION,
   RecDefinition.JSON_PROPERTY_LINKS
@@ -110,6 +112,11 @@ public class RecDefinition {
   @JsonProperty(JSON_PROPERTY_RULESETS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<RecDefRuleset> rulesets = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_REVIEW_CONFIGURATION = "reviewConfiguration";
+  @JsonProperty(JSON_PROPERTY_REVIEW_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private RecReviewConfiguration reviewConfiguration;
 
   public static final String JSON_PROPERTY_HREF = "href";
   @JsonProperty(JSON_PROPERTY_HREF)
@@ -343,6 +350,25 @@ public class RecDefinition {
   }
 
 
+  public RecDefinition reviewConfiguration(RecReviewConfiguration reviewConfiguration) {
+    this.reviewConfiguration = reviewConfiguration;
+    return this;
+  }
+
+  /**
+   * Get reviewConfiguration
+   * @return reviewConfiguration
+   */
+  @javax.annotation.Nonnull
+  public RecReviewConfiguration getReviewConfiguration() {
+    return reviewConfiguration;
+  }
+
+  public void setReviewConfiguration(RecReviewConfiguration reviewConfiguration) {
+    this.reviewConfiguration = reviewConfiguration;
+  }
+
+
   public RecDefinition href(URI href) {
     this.href = href;
     return this;
@@ -427,6 +453,7 @@ public class RecDefinition {
         Objects.equals(this.valuationRecipes, recDefinition.valuationRecipes) &&
         Objects.equals(this.currencies, recDefinition.currencies) &&
         Objects.equals(this.rulesets, recDefinition.rulesets) &&
+        Objects.equals(this.reviewConfiguration, recDefinition.reviewConfiguration) &&
         Objects.equals(this.href, recDefinition.href) &&
         Objects.equals(this.version, recDefinition.version) &&
         Objects.equals(this.links, recDefinition.links);
@@ -438,7 +465,7 @@ public class RecDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, href, version, links);
+    return Objects.hash(id, displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, reviewConfiguration, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -462,6 +489,7 @@ public class RecDefinition {
     sb.append("    valuationRecipes: ").append(toIndentedString(valuationRecipes)).append("\n");
     sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
     sb.append("    rulesets: ").append(toIndentedString(rulesets)).append("\n");
+    sb.append("    reviewConfiguration: ").append(toIndentedString(reviewConfiguration)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");

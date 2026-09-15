@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -38,7 +39,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   BucketSetResult.JSON_PROPERTY_BUCKET_SET_CODE,
   BucketSetResult.JSON_PROPERTY_IS_APPORTIONMENT,
-  BucketSetResult.JSON_PROPERTY_NODES
+  BucketSetResult.JSON_PROPERTY_NODES,
+  BucketSetResult.JSON_PROPERTY_DISPLAY_NAME
 })
 
 public class BucketSetResult {
@@ -56,6 +58,11 @@ public class BucketSetResult {
   @JsonProperty(JSON_PROPERTY_NODES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<BucketSetNode> nodes = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
+  @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String displayName;
 
   public BucketSetResult() {
   }
@@ -125,6 +132,25 @@ public class BucketSetResult {
   }
 
 
+  public BucketSetResult displayName(String displayName) {
+    this.displayName = displayName;
+    return this;
+  }
+
+  /**
+   * The display name of the bucket set, as configured on the fund configuration.
+   * @return displayName
+   */
+  @javax.annotation.Nullable
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -136,12 +162,24 @@ public class BucketSetResult {
     BucketSetResult bucketSetResult = (BucketSetResult) o;
     return Objects.equals(this.bucketSetCode, bucketSetResult.bucketSetCode) &&
         Objects.equals(this.isApportionment, bucketSetResult.isApportionment) &&
-        Objects.equals(this.nodes, bucketSetResult.nodes);
+        Objects.equals(this.nodes, bucketSetResult.nodes) &&
+        Objects.equals(this.displayName, bucketSetResult.displayName);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(bucketSetCode, isApportionment, nodes);
+    return Objects.hash(bucketSetCode, isApportionment, nodes, displayName);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -151,6 +189,7 @@ public class BucketSetResult {
     sb.append("    bucketSetCode: ").append(toIndentedString(bucketSetCode)).append("\n");
     sb.append("    isApportionment: ").append(toIndentedString(isApportionment)).append("\n");
     sb.append("    nodes: ").append(toIndentedString(nodes)).append("\n");
+    sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

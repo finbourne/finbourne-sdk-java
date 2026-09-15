@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.HoldingPropertyDelta;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.TransactionTypePropertyMapping;
 import java.io.IOException;
@@ -52,7 +53,8 @@ import com.finbourne.sdk.JSON;
   TransactionTypeMovement.JSON_PROPERTY_SETTLEMENT_MODE,
   TransactionTypeMovement.JSON_PROPERTY_CALCULATE_TRADE_DATE_TO_SETTLEMENT_FX_PN_L,
   TransactionTypeMovement.JSON_PROPERTY_CUSTODIAN_ACCOUNT_TYPE,
-  TransactionTypeMovement.JSON_PROPERTY_ACCOUNT_SELECTOR
+  TransactionTypeMovement.JSON_PROPERTY_ACCOUNT_SELECTOR,
+  TransactionTypeMovement.JSON_PROPERTY_HOLDING_PROPERTY_DELTAS
 })
 
 public class TransactionTypeMovement {
@@ -120,6 +122,11 @@ public class TransactionTypeMovement {
   @JsonProperty(JSON_PROPERTY_ACCOUNT_SELECTOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String accountSelector;
+
+  public static final String JSON_PROPERTY_HOLDING_PROPERTY_DELTAS = "holdingPropertyDeltas";
+  @JsonProperty(JSON_PROPERTY_HOLDING_PROPERTY_DELTAS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<HoldingPropertyDelta> holdingPropertyDeltas;
 
   public TransactionTypeMovement() {
   }
@@ -395,6 +402,33 @@ public class TransactionTypeMovement {
   }
 
 
+  public TransactionTypeMovement holdingPropertyDeltas(List<HoldingPropertyDelta> holdingPropertyDeltas) {
+    this.holdingPropertyDeltas = holdingPropertyDeltas;
+    return this;
+  }
+
+  public TransactionTypeMovement addHoldingPropertyDeltasItem(HoldingPropertyDelta holdingPropertyDeltasItem) {
+    if (this.holdingPropertyDeltas == null) {
+      this.holdingPropertyDeltas = new ArrayList<>();
+    }
+    this.holdingPropertyDeltas.add(holdingPropertyDeltasItem);
+    return this;
+  }
+
+  /**
+   * An optional list of running balances on the holding that this movement adjusts, for example the committed, funded and unfunded capital balances maintained by the private equity transaction types. Each delta names the balance to adjust, the transaction field that sources the adjustment amount, and the direction in which to apply it.
+   * @return holdingPropertyDeltas
+   */
+  @javax.annotation.Nullable
+  public List<HoldingPropertyDelta> getHoldingPropertyDeltas() {
+    return holdingPropertyDeltas;
+  }
+
+  public void setHoldingPropertyDeltas(List<HoldingPropertyDelta> holdingPropertyDeltas) {
+    this.holdingPropertyDeltas = holdingPropertyDeltas;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -416,7 +450,8 @@ public class TransactionTypeMovement {
         Objects.equals(this.settlementMode, transactionTypeMovement.settlementMode) &&
         Objects.equals(this.calculateTradeDateToSettlementFxPnL, transactionTypeMovement.calculateTradeDateToSettlementFxPnL) &&
         Objects.equals(this.custodianAccountType, transactionTypeMovement.custodianAccountType) &&
-        Objects.equals(this.accountSelector, transactionTypeMovement.accountSelector);
+        Objects.equals(this.accountSelector, transactionTypeMovement.accountSelector) &&
+        Objects.equals(this.holdingPropertyDeltas, transactionTypeMovement.holdingPropertyDeltas);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -425,7 +460,7 @@ public class TransactionTypeMovement {
 
   @Override
  public int hashCode() {
-    return Objects.hash(movementTypes, side, direction, properties, mappings, name, movementOptions, settlementDateOverride, condition, settlementMode, calculateTradeDateToSettlementFxPnL, custodianAccountType, accountSelector);
+    return Objects.hash(movementTypes, side, direction, properties, mappings, name, movementOptions, settlementDateOverride, condition, settlementMode, calculateTradeDateToSettlementFxPnL, custodianAccountType, accountSelector, holdingPropertyDeltas);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -452,6 +487,7 @@ public class TransactionTypeMovement {
     sb.append("    calculateTradeDateToSettlementFxPnL: ").append(toIndentedString(calculateTradeDateToSettlementFxPnL)).append("\n");
     sb.append("    custodianAccountType: ").append(toIndentedString(custodianAccountType)).append("\n");
     sb.append("    accountSelector: ").append(toIndentedString(accountSelector)).append("\n");
+    sb.append("    holdingPropertyDeltas: ").append(toIndentedString(holdingPropertyDeltas)).append("\n");
     sb.append("}");
     return sb.toString();
   }
