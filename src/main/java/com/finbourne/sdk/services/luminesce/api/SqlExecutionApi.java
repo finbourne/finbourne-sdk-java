@@ -147,7 +147,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -601,7 +601,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -1000,7 +1000,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -1414,7 +1414,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -1794,7 +1794,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -2208,7 +2208,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -2586,7 +2586,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -2988,7 +2988,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -3442,7 +3442,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -3841,7 +3841,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -4255,7 +4255,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -4635,7 +4635,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -5049,7 +5049,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
@@ -5427,7 +5427,7 @@ public class SqlExecutionApi {
 
         if (scalarParameters != null) {
             for (java.util.Map.Entry<String, String> _scalarEntry : scalarParameters.entrySet()) {
-                localVarQueryParams.addAll(localVarApiClient.parameterToPair("scalarParameters[" + _scalarEntry.getKey() + "]", _scalarEntry.getValue()));
+                localVarQueryParams.addAll(localVarApiClient.parameterToPair(_scalarEntry.getKey(), _scalarEntry.getValue()));
             }
         }
 
