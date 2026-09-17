@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **parameters** | [**Map&lt;String, ComplianceParameter&gt;**](ComplianceParameter.md) |  | [optional] [default to Map<String, ComplianceParameter>]
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) |  | [optional] [default to Map<String, PerpetualProperty>]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
+**stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -33,6 +34,7 @@ ResourceId portfolioGroupId = new ResourceId();
 @javax.annotation.Nullable Map<String, ComplianceParameter> parameters = new Map<String, ComplianceParameter>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 Version version = new Version();
+StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -47,6 +49,7 @@ ComplianceRuleResponse complianceRuleResponseInstance = new ComplianceRuleRespon
     .parameters(parameters)
     .properties(properties)
     .version(version)
+    .stagedModifications(stagedModifications)
     .links(links);
 ```
 

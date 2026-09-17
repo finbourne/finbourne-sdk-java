@@ -48,7 +48,8 @@ import com.finbourne.sdk.JSON;
   FxForward.JSON_PROPERTY_FIXING_DATE,
   FxForward.JSON_PROPERTY_SETTLEMENT_CCY,
   FxForward.JSON_PROPERTY_BOOKED_AS_SPOT,
-  FxForward.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
+  FxForward.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
+  FxForward.JSON_PROPERTY_IS_POOLED
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -70,7 +71,7 @@ public class FxForward extends LusidInstrument {
 
   public static final String JSON_PROPERTY_DOM_AMOUNT = "domAmount";
   @JsonProperty(JSON_PROPERTY_DOM_AMOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal domAmount;
 
   public static final String JSON_PROPERTY_DOM_CCY = "domCcy";
@@ -80,7 +81,7 @@ public class FxForward extends LusidInstrument {
 
   public static final String JSON_PROPERTY_FGN_AMOUNT = "fgnAmount";
   @JsonProperty(JSON_PROPERTY_FGN_AMOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal fgnAmount;
 
   public static final String JSON_PROPERTY_FGN_CCY = "fgnCcy";
@@ -117,6 +118,11 @@ public class FxForward extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_TIME_ZONE_CONVENTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private TimeZoneConventions timeZoneConventions;
+
+  public static final String JSON_PROPERTY_IS_POOLED = "isPooled";
+  @JsonProperty(JSON_PROPERTY_IS_POOLED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean isPooled;
 
   public FxForward() {
   }
@@ -165,10 +171,10 @@ public class FxForward extends LusidInstrument {
   }
 
   /**
-   * The amount that is to be paid in the domestic currency on the maturity date.
+   * The amount that is to be paid in the domestic currency on the maturity date.  Required unless isPooled is set. On a pooled FX forward the domestic amount is the contract size and  not a traded amount: leave it absent and it is populated as one, so that holding units are amounts of  the domestic currency.
    * @return domAmount
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getDomAmount() {
     return domAmount;
   }
@@ -203,10 +209,10 @@ public class FxForward extends LusidInstrument {
   }
 
   /**
-   * The amount that is to be paid in the foreign currency on the maturity date.
+   * The amount that is to be paid in the foreign currency on the maturity date.  Required unless isPooled is set. On a pooled FX forward it must be absent or zero, because the whole  foreign consideration is carried by the transactions booked against the pool.
    * @return fgnAmount
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getFgnAmount() {
     return fgnAmount;
   }
@@ -349,6 +355,25 @@ public class FxForward extends LusidInstrument {
   }
 
 
+  public FxForward isPooled(Boolean isPooled) {
+    this.isPooled = isPooled;
+    return this;
+  }
+
+  /**
+   * Declares the contract to be a pool, carrying no traded amounts of its own. A pool is defined once for a  currency pair and maturity date and traded repeatedly at different rates, so the traded amounts are carried  by the transactions booked against it rather than by the instrument. The domestic amount of a pool is  therefore the contract size and not a traded amount, and is pinned to one so that holding units are amounts  of the domestic currency; the foreign amount and the reference spot rate must be absent, because the whole  foreign consideration is carried by the transaction.                Orientation is part of a pool&#39;s identity: the domestic currency is the unit currency and the foreign  currency the consideration currency, so a USD/JPY pool and a JPY/USD pool are distinct instruments, and  transactions must be booked in the pool&#39;s own direction (transaction currency equal to the domestic  currency, settlement currency equal to the foreign currency). This will default to False if not provided.
+   * @return isPooled
+   */
+  @javax.annotation.Nullable
+  public Boolean getIsPooled() {
+    return isPooled;
+  }
+
+  public void setIsPooled(Boolean isPooled) {
+    this.isPooled = isPooled;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -370,6 +395,7 @@ public class FxForward extends LusidInstrument {
         Objects.equals(this.settlementCcy, fxForward.settlementCcy) &&
         Objects.equals(this.bookedAsSpot, fxForward.bookedAsSpot) &&
         Objects.equals(this.timeZoneConventions, fxForward.timeZoneConventions) &&
+        Objects.equals(this.isPooled, fxForward.isPooled) &&
         super.equals(o);
   }
 
@@ -379,7 +405,7 @@ public class FxForward extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, domAmount, domCcy, fgnAmount, fgnCcy, refSpotRate, isNdf, fixingDate, settlementCcy, bookedAsSpot, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, domAmount, domCcy, fgnAmount, fgnCcy, refSpotRate, isNdf, fixingDate, settlementCcy, bookedAsSpot, timeZoneConventions, isPooled, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -406,6 +432,7 @@ public class FxForward extends LusidInstrument {
     sb.append("    settlementCcy: ").append(toIndentedString(settlementCcy)).append("\n");
     sb.append("    bookedAsSpot: ").append(toIndentedString(bookedAsSpot)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
+    sb.append("    isPooled: ").append(toIndentedString(isPooled)).append("\n");
     sb.append("}");
     return sb.toString();
   }

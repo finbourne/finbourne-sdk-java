@@ -15,7 +15,8 @@ Name | Type | Description | Notes
 **byTaxLots** | **Boolean** |  | [optional] [default to Boolean]
 **subscriptionType** | **String** | The kind of data the subscription streams (holdings or transactions), defaulting to holdings.  Address keys and byTaxLots are not valid for a transactions subscription. Available values: Holdings, Transactions. | [optional] [default to String]
 **startEffectiveAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
-**endEffectiveAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
+**endEffectiveAt** | [**OffsetDateTime**](OffsetDateTime.md) | Deprecated and no longer honoured: a fixed forward date stops being a forward view once  the live edge passes it. Use effectiveForwardDays instead. Still accepted and echoed back  so existing subscriptions keep round-tripping. | [optional] [default to OffsetDateTime]
+**effectiveForwardDays** | **Integer** | How far forward the subscription reports, as a number of calendar days past the live  edge — a rolling forward view that advances as time passes. | [optional] [default to Integer]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.SubscriptionDefinition;
@@ -34,6 +35,7 @@ Boolean byTaxLots = true;
 @javax.annotation.Nullable String subscriptionType = "example subscriptionType";
 @javax.annotation.Nullable OffsetDateTime startEffectiveAt = OffsetDateTime.now();
 @javax.annotation.Nullable OffsetDateTime endEffectiveAt = OffsetDateTime.now();
+@javax.annotation.Nullable Integer effectiveForwardDays = new Integer("100.00");
 
 
 SubscriptionDefinition subscriptionDefinitionInstance = new SubscriptionDefinition()
@@ -47,7 +49,8 @@ SubscriptionDefinition subscriptionDefinitionInstance = new SubscriptionDefiniti
     .byTaxLots(byTaxLots)
     .subscriptionType(subscriptionType)
     .startEffectiveAt(startEffectiveAt)
-    .endEffectiveAt(endEffectiveAt);
+    .endEffectiveAt(endEffectiveAt)
+    .effectiveForwardDays(effectiveForwardDays);
 ```
 
 

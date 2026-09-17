@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.ComplianceParameter;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ import com.finbourne.sdk.JSON;
   ComplianceRuleResponse.JSON_PROPERTY_PARAMETERS,
   ComplianceRuleResponse.JSON_PROPERTY_PROPERTIES,
   ComplianceRuleResponse.JSON_PROPERTY_VERSION,
+  ComplianceRuleResponse.JSON_PROPERTY_STAGED_MODIFICATIONS,
   ComplianceRuleResponse.JSON_PROPERTY_LINKS
 })
 
@@ -106,6 +108,11 @@ public class ComplianceRuleResponse {
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Version version;
+
+  public static final String JSON_PROPERTY_STAGED_MODIFICATIONS = "stagedModifications";
+  @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StagedModificationsInfo stagedModifications;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -321,6 +328,25 @@ public class ComplianceRuleResponse {
   }
 
 
+  public ComplianceRuleResponse stagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+    return this;
+  }
+
+  /**
+   * Get stagedModifications
+   * @return stagedModifications
+   */
+  @javax.annotation.Nullable
+  public StagedModificationsInfo getStagedModifications() {
+    return stagedModifications;
+  }
+
+  public void setStagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+  }
+
+
   public ComplianceRuleResponse links(List<Link> links) {
     this.links = links;
     return this;
@@ -367,6 +393,7 @@ public class ComplianceRuleResponse {
         Objects.equals(this.parameters, complianceRuleResponse.parameters) &&
         Objects.equals(this.properties, complianceRuleResponse.properties) &&
         Objects.equals(this.version, complianceRuleResponse.version) &&
+        Objects.equals(this.stagedModifications, complianceRuleResponse.stagedModifications) &&
         Objects.equals(this.links, complianceRuleResponse.links);
   }
 
@@ -376,7 +403,7 @@ public class ComplianceRuleResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, name, description, active, templateId, variation, portfolioGroupId, parameters, properties, version, links);
+    return Objects.hash(id, name, description, active, templateId, variation, portfolioGroupId, parameters, properties, version, stagedModifications, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -400,6 +427,7 @@ public class ComplianceRuleResponse {
     sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

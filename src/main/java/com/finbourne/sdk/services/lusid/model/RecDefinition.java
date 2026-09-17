@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.Link;
+import com.finbourne.sdk.services.lusid.model.RecDatePolicy;
 import com.finbourne.sdk.services.lusid.model.RecDefCurrencies;
 import com.finbourne.sdk.services.lusid.model.RecDefRecipeIds;
 import com.finbourne.sdk.services.lusid.model.RecDefRuleset;
@@ -57,6 +58,7 @@ import com.finbourne.sdk.JSON;
   RecDefinition.JSON_PROPERTY_CURRENCIES,
   RecDefinition.JSON_PROPERTY_RULESETS,
   RecDefinition.JSON_PROPERTY_REVIEW_CONFIGURATION,
+  RecDefinition.JSON_PROPERTY_DATE_POLICY,
   RecDefinition.JSON_PROPERTY_HREF,
   RecDefinition.JSON_PROPERTY_VERSION,
   RecDefinition.JSON_PROPERTY_LINKS
@@ -117,6 +119,11 @@ public class RecDefinition {
   @JsonProperty(JSON_PROPERTY_REVIEW_CONFIGURATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private RecReviewConfiguration reviewConfiguration;
+
+  public static final String JSON_PROPERTY_DATE_POLICY = "datePolicy";
+  @JsonProperty(JSON_PROPERTY_DATE_POLICY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private RecDatePolicy datePolicy;
 
   public static final String JSON_PROPERTY_HREF = "href";
   @JsonProperty(JSON_PROPERTY_HREF)
@@ -369,6 +376,25 @@ public class RecDefinition {
   }
 
 
+  public RecDefinition datePolicy(RecDatePolicy datePolicy) {
+    this.datePolicy = datePolicy;
+    return this;
+  }
+
+  /**
+   * Get datePolicy
+   * @return datePolicy
+   */
+  @javax.annotation.Nonnull
+  public RecDatePolicy getDatePolicy() {
+    return datePolicy;
+  }
+
+  public void setDatePolicy(RecDatePolicy datePolicy) {
+    this.datePolicy = datePolicy;
+  }
+
+
   public RecDefinition href(URI href) {
     this.href = href;
     return this;
@@ -454,6 +480,7 @@ public class RecDefinition {
         Objects.equals(this.currencies, recDefinition.currencies) &&
         Objects.equals(this.rulesets, recDefinition.rulesets) &&
         Objects.equals(this.reviewConfiguration, recDefinition.reviewConfiguration) &&
+        Objects.equals(this.datePolicy, recDefinition.datePolicy) &&
         Objects.equals(this.href, recDefinition.href) &&
         Objects.equals(this.version, recDefinition.version) &&
         Objects.equals(this.links, recDefinition.links);
@@ -465,7 +492,7 @@ public class RecDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, reviewConfiguration, href, version, links);
+    return Objects.hash(id, displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, reviewConfiguration, datePolicy, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -490,6 +517,7 @@ public class RecDefinition {
     sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
     sb.append("    rulesets: ").append(toIndentedString(rulesets)).append("\n");
     sb.append("    reviewConfiguration: ").append(toIndentedString(reviewConfiguration)).append("\n");
+    sb.append("    datePolicy: ").append(toIndentedString(datePolicy)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");

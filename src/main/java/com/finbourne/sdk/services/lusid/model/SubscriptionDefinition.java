@@ -48,7 +48,8 @@ import com.finbourne.sdk.JSON;
   SubscriptionDefinition.JSON_PROPERTY_BY_TAX_LOTS,
   SubscriptionDefinition.JSON_PROPERTY_SUBSCRIPTION_TYPE,
   SubscriptionDefinition.JSON_PROPERTY_START_EFFECTIVE_AT,
-  SubscriptionDefinition.JSON_PROPERTY_END_EFFECTIVE_AT
+  SubscriptionDefinition.JSON_PROPERTY_END_EFFECTIVE_AT,
+  SubscriptionDefinition.JSON_PROPERTY_EFFECTIVE_FORWARD_DAYS
 })
 
 public class SubscriptionDefinition {
@@ -106,6 +107,11 @@ public class SubscriptionDefinition {
   @JsonProperty(JSON_PROPERTY_END_EFFECTIVE_AT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime endEffectiveAt;
+
+  public static final String JSON_PROPERTY_EFFECTIVE_FORWARD_DAYS = "effectiveForwardDays";
+  @JsonProperty(JSON_PROPERTY_EFFECTIVE_FORWARD_DAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer effectiveForwardDays;
 
   public SubscriptionDefinition() {
   }
@@ -314,7 +320,7 @@ public class SubscriptionDefinition {
   }
 
   /**
-   * Get endEffectiveAt
+   * Deprecated and no longer honoured: a fixed forward date stops being a forward view once  the live edge passes it. Use effectiveForwardDays instead. Still accepted and echoed back  so existing subscriptions keep round-tripping.
    * @return endEffectiveAt
    */
   @javax.annotation.Nullable
@@ -324,6 +330,25 @@ public class SubscriptionDefinition {
 
   public void setEndEffectiveAt(OffsetDateTime endEffectiveAt) {
     this.endEffectiveAt = endEffectiveAt;
+  }
+
+
+  public SubscriptionDefinition effectiveForwardDays(Integer effectiveForwardDays) {
+    this.effectiveForwardDays = effectiveForwardDays;
+    return this;
+  }
+
+  /**
+   * How far forward the subscription reports, as a number of calendar days past the live  edge — a rolling forward view that advances as time passes.
+   * @return effectiveForwardDays
+   */
+  @javax.annotation.Nullable
+  public Integer getEffectiveForwardDays() {
+    return effectiveForwardDays;
+  }
+
+  public void setEffectiveForwardDays(Integer effectiveForwardDays) {
+    this.effectiveForwardDays = effectiveForwardDays;
   }
 
 
@@ -346,7 +371,8 @@ public class SubscriptionDefinition {
         Objects.equals(this.byTaxLots, subscriptionDefinition.byTaxLots) &&
         Objects.equals(this.subscriptionType, subscriptionDefinition.subscriptionType) &&
         Objects.equals(this.startEffectiveAt, subscriptionDefinition.startEffectiveAt) &&
-        Objects.equals(this.endEffectiveAt, subscriptionDefinition.endEffectiveAt);
+        Objects.equals(this.endEffectiveAt, subscriptionDefinition.endEffectiveAt) &&
+        Objects.equals(this.effectiveForwardDays, subscriptionDefinition.effectiveForwardDays);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -355,7 +381,7 @@ public class SubscriptionDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt);
+    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt, effectiveForwardDays);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -380,6 +406,7 @@ public class SubscriptionDefinition {
     sb.append("    subscriptionType: ").append(toIndentedString(subscriptionType)).append("\n");
     sb.append("    startEffectiveAt: ").append(toIndentedString(startEffectiveAt)).append("\n");
     sb.append("    endEffectiveAt: ").append(toIndentedString(endEffectiveAt)).append("\n");
+    sb.append("    effectiveForwardDays: ").append(toIndentedString(effectiveForwardDays)).append("\n");
     sb.append("}");
     return sb.toString();
   }

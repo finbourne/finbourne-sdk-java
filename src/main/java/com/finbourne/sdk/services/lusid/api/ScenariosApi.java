@@ -36,6 +36,8 @@ import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfGetScenarioResponse;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfVersion;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfScenarioTemplateDefinition;
+import com.finbourne.sdk.services.lusid.model.ReverseStressRequest;
+import com.finbourne.sdk.services.lusid.model.ReverseStressResponse;
 import com.finbourne.sdk.services.lusid.model.ScenarioPreviewRequest;
 import com.finbourne.sdk.services.lusid.model.ScenarioPreviewResponse;
 import com.finbourne.sdk.services.lusid.model.UpsertScenarioRequest;
@@ -2845,6 +2847,320 @@ public class ScenariosApi {
      */
     public APIpreviewScenarioRequest previewScenario(ScenarioPreviewRequest scenarioPreviewRequest) {
         return new APIpreviewScenarioRequest(scenarioPreviewRequest);
+    }
+    /**
+     * Build call for solveReverseStress
+     * @param reverseStressRequest The recipe, portfolios, effective date, scenario direction and target change in value (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest solveReverseStressCall(ReverseStressRequest reverseStressRequest, final ApiCallback _callback) throws ApiException {
+        return solveReverseStressCall(reverseStressRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for solveReverseStress. Use any specified configuration options to override any other configuration for this request only.
+     * @param reverseStressRequest The recipe, portfolios, effective date, scenario direction and target change in value (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest solveReverseStressCall(ReverseStressRequest reverseStressRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = reverseStressRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/scenarios/$reversestress";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest solveReverseStressValidateBeforeCall(ReverseStressRequest reverseStressRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'reverseStressRequest' is set
+        if (reverseStressRequest == null) {
+            throw new ApiException("Missing the required parameter 'reverseStressRequest' when calling solveReverseStress(Async)");
+        }
+
+        return solveReverseStressCall(reverseStressRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] SolveReverseStress: Solve a reverse stress test
+     * Solve for how far the market has to move to produce a given change in portfolio value.                A scenario supplies the direction the market moves in: which risk factors move, and in what  proportion to each other. The solve is over a single factor its shifts are multiplied by, so the  answer is a multiple of the scenario rather than a set of shifts in its own right - a factor of  two means twice every shift the scenario states.                A ladder of factors is valued first, all in one valuation so the rungs share market data  resolution, then the bracketing pair is interpolated and the interpolated factor valued again to  confirm it. The whole ladder is returned: a reverse stress is only meaningful where the change in  value moves in one direction with the factor, and the ladder is what shows whether it does.                The solve is refused rather than approximated where it cannot be trusted: a scenario carrying a  shift with no size to scale (a model option, or a market data routing override), a measure that  cannot be computed under a scenario, or a valuation that could not price every holding.
+     * @param reverseStressRequest The recipe, portfolios, effective date, scenario direction and target change in value (required)
+     * @return ApiResponse&lt;ReverseStressResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ReverseStressResponse> solveReverseStressWithHttpInfo(ReverseStressRequest reverseStressRequest) throws ApiException {
+        HttpRequest localVarCall = solveReverseStressValidateBeforeCall(reverseStressRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ReverseStressResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] SolveReverseStress: Solve a reverse stress test
+     * Solve for how far the market has to move to produce a given change in portfolio value.                A scenario supplies the direction the market moves in: which risk factors move, and in what  proportion to each other. The solve is over a single factor its shifts are multiplied by, so the  answer is a multiple of the scenario rather than a set of shifts in its own right - a factor of  two means twice every shift the scenario states.                A ladder of factors is valued first, all in one valuation so the rungs share market data  resolution, then the bracketing pair is interpolated and the interpolated factor valued again to  confirm it. The whole ladder is returned: a reverse stress is only meaningful where the change in  value moves in one direction with the factor, and the ladder is what shows whether it does.                The solve is refused rather than approximated where it cannot be trusted: a scenario carrying a  shift with no size to scale (a model option, or a market data routing override), a measure that  cannot be computed under a scenario, or a valuation that could not price every holding.Use any specified configuration options to override any other configuration for this request only
+     * @param reverseStressRequest The recipe, portfolios, effective date, scenario direction and target change in value (required)
+     * @return ApiResponse&lt;ReverseStressResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ReverseStressResponse> solveReverseStressWithHttpInfo(ReverseStressRequest reverseStressRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = solveReverseStressValidateBeforeCall(reverseStressRequest, null, opts);
+        Type localVarReturnType = new TypeReference<ReverseStressResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] SolveReverseStress: Solve a reverse stress test (asynchronously)
+     * Solve for how far the market has to move to produce a given change in portfolio value.                A scenario supplies the direction the market moves in: which risk factors move, and in what  proportion to each other. The solve is over a single factor its shifts are multiplied by, so the  answer is a multiple of the scenario rather than a set of shifts in its own right - a factor of  two means twice every shift the scenario states.                A ladder of factors is valued first, all in one valuation so the rungs share market data  resolution, then the bracketing pair is interpolated and the interpolated factor valued again to  confirm it. The whole ladder is returned: a reverse stress is only meaningful where the change in  value moves in one direction with the factor, and the ladder is what shows whether it does.                The solve is refused rather than approximated where it cannot be trusted: a scenario carrying a  shift with no size to scale (a model option, or a market data routing override), a measure that  cannot be computed under a scenario, or a valuation that could not price every holding.
+     * @param reverseStressRequest The recipe, portfolios, effective date, scenario direction and target change in value (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void solveReverseStressAsync(ReverseStressRequest reverseStressRequest, final ApiCallback<ReverseStressResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = solveReverseStressValidateBeforeCall(reverseStressRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ReverseStressResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] SolveReverseStress: Solve a reverse stress test (asynchronously)
+     * Solve for how far the market has to move to produce a given change in portfolio value.                A scenario supplies the direction the market moves in: which risk factors move, and in what  proportion to each other. The solve is over a single factor its shifts are multiplied by, so the  answer is a multiple of the scenario rather than a set of shifts in its own right - a factor of  two means twice every shift the scenario states.                A ladder of factors is valued first, all in one valuation so the rungs share market data  resolution, then the bracketing pair is interpolated and the interpolated factor valued again to  confirm it. The whole ladder is returned: a reverse stress is only meaningful where the change in  value moves in one direction with the factor, and the ladder is what shows whether it does.                The solve is refused rather than approximated where it cannot be trusted: a scenario carrying a  shift with no size to scale (a model option, or a market data routing override), a measure that  cannot be computed under a scenario, or a valuation that could not price every holding.Use any specified configuration options to override any other configuration for this request only
+     * @param reverseStressRequest The recipe, portfolios, effective date, scenario direction and target change in value (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void solveReverseStressAsync(ReverseStressRequest reverseStressRequest, final ApiCallback<ReverseStressResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = solveReverseStressValidateBeforeCall(reverseStressRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<ReverseStressResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIsolveReverseStressRequest {
+        private final ReverseStressRequest reverseStressRequest;
+
+        private APIsolveReverseStressRequest(ReverseStressRequest reverseStressRequest) {
+            this.reverseStressRequest = reverseStressRequest;
+        }
+
+        /**
+         * Build call for solveReverseStress
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return solveReverseStressCall(reverseStressRequest, _callback);
+        }
+
+        /**
+         * Execute solveReverseStress request
+         * @return ReverseStressResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ReverseStressResponse execute() throws ApiException {
+            ApiResponse<ReverseStressResponse> localVarResp = solveReverseStressWithHttpInfo(reverseStressRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute solveReverseStress request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ReverseStressResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ReverseStressResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ReverseStressResponse> localVarResp = solveReverseStressWithHttpInfo(reverseStressRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute solveReverseStress request with HTTP info returned
+         * @return ApiResponse&lt;ReverseStressResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ReverseStressResponse> executeWithHttpInfo() throws ApiException {
+            return solveReverseStressWithHttpInfo(reverseStressRequest);
+        }
+
+        /**
+         * Execute solveReverseStress request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ReverseStressResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ReverseStressResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return solveReverseStressWithHttpInfo(reverseStressRequest, opts);
+        }
+
+        /**
+         * Execute solveReverseStress request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ReverseStressResponse> _callback) throws ApiException {
+            solveReverseStressAsync(reverseStressRequest, _callback);
+        }
+
+        /**
+         * Execute solveReverseStress request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ReverseStressResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            solveReverseStressAsync(reverseStressRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] SolveReverseStress: Solve a reverse stress test
+     * Solve for how far the market has to move to produce a given change in portfolio value.                A scenario supplies the direction the market moves in: which risk factors move, and in what  proportion to each other. The solve is over a single factor its shifts are multiplied by, so the  answer is a multiple of the scenario rather than a set of shifts in its own right - a factor of  two means twice every shift the scenario states.                A ladder of factors is valued first, all in one valuation so the rungs share market data  resolution, then the bracketing pair is interpolated and the interpolated factor valued again to  confirm it. The whole ladder is returned: a reverse stress is only meaningful where the change in  value moves in one direction with the factor, and the ladder is what shows whether it does.                The solve is refused rather than approximated where it cannot be trusted: a scenario carrying a  shift with no size to scale (a model option, or a market data routing override), a measure that  cannot be computed under a scenario, or a valuation that could not price every holding.
+     * @param reverseStressRequest The recipe, portfolios, effective date, scenario direction and target change in value (required)
+     * @return APIsolveReverseStressRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The solved scale with the evaluated ladder, or any failure </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIsolveReverseStressRequest solveReverseStress(ReverseStressRequest reverseStressRequest) {
+        return new APIsolveReverseStressRequest(reverseStressRequest);
     }
     /**
      * Build call for upsertScenario

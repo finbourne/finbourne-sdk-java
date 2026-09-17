@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.RecDatePolicy;
 import com.finbourne.sdk.services.lusid.model.RecDefCurrencies;
 import com.finbourne.sdk.services.lusid.model.RecDefRecipeIds;
 import com.finbourne.sdk.services.lusid.model.RecDefRuleset;
@@ -51,7 +52,8 @@ import com.finbourne.sdk.JSON;
   UpdateRecDefinitionRequest.JSON_PROPERTY_VALUATION_RECIPES,
   UpdateRecDefinitionRequest.JSON_PROPERTY_CURRENCIES,
   UpdateRecDefinitionRequest.JSON_PROPERTY_RULESETS,
-  UpdateRecDefinitionRequest.JSON_PROPERTY_REVIEW_CONFIGURATION
+  UpdateRecDefinitionRequest.JSON_PROPERTY_REVIEW_CONFIGURATION,
+  UpdateRecDefinitionRequest.JSON_PROPERTY_DATE_POLICY
 })
 
 public class UpdateRecDefinitionRequest {
@@ -104,6 +106,11 @@ public class UpdateRecDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_REVIEW_CONFIGURATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private RecReviewConfiguration reviewConfiguration;
+
+  public static final String JSON_PROPERTY_DATE_POLICY = "datePolicy";
+  @JsonProperty(JSON_PROPERTY_DATE_POLICY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RecDatePolicy datePolicy;
 
   public UpdateRecDefinitionRequest() {
   }
@@ -322,6 +329,25 @@ public class UpdateRecDefinitionRequest {
   }
 
 
+  public UpdateRecDefinitionRequest datePolicy(RecDatePolicy datePolicy) {
+    this.datePolicy = datePolicy;
+    return this;
+  }
+
+  /**
+   * Get datePolicy
+   * @return datePolicy
+   */
+  @javax.annotation.Nullable
+  public RecDatePolicy getDatePolicy() {
+    return datePolicy;
+  }
+
+  public void setDatePolicy(RecDatePolicy datePolicy) {
+    this.datePolicy = datePolicy;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -340,7 +366,8 @@ public class UpdateRecDefinitionRequest {
         Objects.equals(this.valuationRecipes, updateRecDefinitionRequest.valuationRecipes) &&
         Objects.equals(this.currencies, updateRecDefinitionRequest.currencies) &&
         Objects.equals(this.rulesets, updateRecDefinitionRequest.rulesets) &&
-        Objects.equals(this.reviewConfiguration, updateRecDefinitionRequest.reviewConfiguration);
+        Objects.equals(this.reviewConfiguration, updateRecDefinitionRequest.reviewConfiguration) &&
+        Objects.equals(this.datePolicy, updateRecDefinitionRequest.datePolicy);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -349,7 +376,7 @@ public class UpdateRecDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, reviewConfiguration);
+    return Objects.hash(displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, reviewConfiguration, datePolicy);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -373,6 +400,7 @@ public class UpdateRecDefinitionRequest {
     sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
     sb.append("    rulesets: ").append(toIndentedString(rulesets)).append("\n");
     sb.append("    reviewConfiguration: ").append(toIndentedString(reviewConfiguration)).append("\n");
+    sb.append("    datePolicy: ").append(toIndentedString(datePolicy)).append("\n");
     sb.append("}");
     return sb.toString();
   }

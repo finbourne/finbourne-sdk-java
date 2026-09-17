@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **currencies** | [**RecDefCurrencies**](RecDefCurrencies.md) |  | [optional] [default to RecDefCurrencies]
 **rulesets** | [**List&lt;RecDefRuleset&gt;**](RecDefRuleset.md) | The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once. | [default to List<RecDefRuleset>]
 **reviewConfiguration** | [**RecReviewConfiguration**](RecReviewConfiguration.md) |  | [default to RecReviewConfiguration]
+**datePolicy** | [**RecDatePolicy**](RecDatePolicy.md) |  | [default to RecDatePolicy]
 **href** | [**URI**](URI.md) | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] [default to URI]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
@@ -37,6 +38,7 @@ RecDefRecipeIds valuationRecipes = new RecDefRecipeIds();
 RecDefCurrencies currencies = new RecDefCurrencies();
 List<RecDefRuleset> rulesets = new List<RecDefRuleset>();
 RecReviewConfiguration reviewConfiguration = new RecReviewConfiguration();
+RecDatePolicy datePolicy = new RecDatePolicy();
 @javax.annotation.Nullable URI href = URI.create("http://example.com/href");
 Version version = new Version();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
@@ -54,6 +56,7 @@ RecDefinition recDefinitionInstance = new RecDefinition()
     .currencies(currencies)
     .rulesets(rulesets)
     .reviewConfiguration(reviewConfiguration)
+    .datePolicy(datePolicy)
     .href(href)
     .version(version)
     .links(links);

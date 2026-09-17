@@ -12,8 +12,11 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ApportionmentInput;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -38,7 +41,8 @@ import com.finbourne.sdk.JSON;
   ApportionmentMemberFactor.JSON_PROPERTY_FUND_SCOPE,
   ApportionmentMemberFactor.JSON_PROPERTY_FUND_CODE,
   ApportionmentMemberFactor.JSON_PROPERTY_BASE_VALUE,
-  ApportionmentMemberFactor.JSON_PROPERTY_APPORTIONMENT_FACTOR
+  ApportionmentMemberFactor.JSON_PROPERTY_APPORTIONMENT_FACTOR,
+  ApportionmentMemberFactor.JSON_PROPERTY_INPUTS
 })
 
 public class ApportionmentMemberFactor {
@@ -66,6 +70,11 @@ public class ApportionmentMemberFactor {
   @JsonProperty(JSON_PROPERTY_APPORTIONMENT_FACTOR)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal apportionmentFactor;
+
+  public static final String JSON_PROPERTY_INPUTS = "inputs";
+  @JsonProperty(JSON_PROPERTY_INPUTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ApportionmentInput> inputs;
 
   public ApportionmentMemberFactor() {
   }
@@ -165,6 +174,33 @@ public class ApportionmentMemberFactor {
   }
 
 
+  public ApportionmentMemberFactor inputs(List<ApportionmentInput> inputs) {
+    this.inputs = inputs;
+    return this;
+  }
+
+  public ApportionmentMemberFactor addInputsItem(ApportionmentInput inputsItem) {
+    if (this.inputs == null) {
+      this.inputs = new ArrayList<>();
+    }
+    this.inputs.add(inputsItem);
+    return this;
+  }
+
+  /**
+   * The named amounts the apportionment method summed to reach the base value, always summing to it. Absent where the method defines no such breakdown.
+   * @return inputs
+   */
+  @javax.annotation.Nullable
+  public List<ApportionmentInput> getInputs() {
+    return inputs;
+  }
+
+  public void setInputs(List<ApportionmentInput> inputs) {
+    this.inputs = inputs;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -178,7 +214,8 @@ public class ApportionmentMemberFactor {
         Objects.equals(this.fundScope, apportionmentMemberFactor.fundScope) &&
         Objects.equals(this.fundCode, apportionmentMemberFactor.fundCode) &&
         (this.baseValue == null ? apportionmentMemberFactor.baseValue == null : (apportionmentMemberFactor.baseValue != null && this.baseValue.compareTo(apportionmentMemberFactor.getBaseValue()) == 0)) &&
-        (this.apportionmentFactor == null ? apportionmentMemberFactor.apportionmentFactor == null : (apportionmentMemberFactor.apportionmentFactor != null && this.apportionmentFactor.compareTo(apportionmentMemberFactor.getApportionmentFactor()) == 0));
+        (this.apportionmentFactor == null ? apportionmentMemberFactor.apportionmentFactor == null : (apportionmentMemberFactor.apportionmentFactor != null && this.apportionmentFactor.compareTo(apportionmentMemberFactor.getApportionmentFactor()) == 0)) &&
+        Objects.equals(this.inputs, apportionmentMemberFactor.inputs);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -187,7 +224,7 @@ public class ApportionmentMemberFactor {
 
   @Override
  public int hashCode() {
-    return Objects.hash(memberIdentifier, fundScope, fundCode, baseValue, apportionmentFactor);
+    return Objects.hash(memberIdentifier, fundScope, fundCode, baseValue, apportionmentFactor, inputs);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -206,6 +243,7 @@ public class ApportionmentMemberFactor {
     sb.append("    fundCode: ").append(toIndentedString(fundCode)).append("\n");
     sb.append("    baseValue: ").append(toIndentedString(baseValue)).append("\n");
     sb.append("    apportionmentFactor: ").append(toIndentedString(apportionmentFactor)).append("\n");
+    sb.append("    inputs: ").append(toIndentedString(inputs)).append("\n");
     sb.append("}");
     return sb.toString();
   }
