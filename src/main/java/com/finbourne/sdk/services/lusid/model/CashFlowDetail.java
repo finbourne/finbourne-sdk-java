@@ -44,9 +44,11 @@ import com.finbourne.sdk.JSON;
   CashFlowDetail.JSON_PROPERTY_CURRENCY,
   CashFlowDetail.JSON_PROPERTY_SOURCE_TYPE,
   CashFlowDetail.JSON_PROPERTY_INSTRUMENT_ID,
+  CashFlowDetail.JSON_PROPERTY_INSTRUMENT_DISPLAY_NAME,
   CashFlowDetail.JSON_PROPERTY_TRANSACTION_ID,
   CashFlowDetail.JSON_PROPERTY_PORTFOLIO_ID,
   CashFlowDetail.JSON_PROPERTY_FLOW_TYPE,
+  CashFlowDetail.JSON_PROPERTY_MOVEMENT_NAME,
   CashFlowDetail.JSON_PROPERTY_PAY_RECEIVE,
   CashFlowDetail.JSON_PROPERTY_GROSS_AMOUNT,
   CashFlowDetail.JSON_PROPERTY_HAIRCUT_FRACTION,
@@ -82,6 +84,11 @@ public class CashFlowDetail {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String instrumentId;
 
+  public static final String JSON_PROPERTY_INSTRUMENT_DISPLAY_NAME = "instrumentDisplayName";
+  @JsonProperty(JSON_PROPERTY_INSTRUMENT_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String instrumentDisplayName;
+
   public static final String JSON_PROPERTY_TRANSACTION_ID = "transactionId";
   @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -96,6 +103,11 @@ public class CashFlowDetail {
   @JsonProperty(JSON_PROPERTY_FLOW_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String flowType;
+
+  public static final String JSON_PROPERTY_MOVEMENT_NAME = "movementName";
+  @JsonProperty(JSON_PROPERTY_MOVEMENT_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String movementName;
 
   public static final String JSON_PROPERTY_PAY_RECEIVE = "payReceive";
   @JsonProperty(JSON_PROPERTY_PAY_RECEIVE)
@@ -230,6 +242,25 @@ public class CashFlowDetail {
   }
 
 
+  public CashFlowDetail instrumentDisplayName(String instrumentDisplayName) {
+    this.instrumentDisplayName = instrumentDisplayName;
+    return this;
+  }
+
+  /**
+   * The display name of the instrument that produced the cashflow. Not present when the instrument cannot be resolved (e.g. deleted, no permission).
+   * @return instrumentDisplayName
+   */
+  @javax.annotation.Nullable
+  public String getInstrumentDisplayName() {
+    return instrumentDisplayName;
+  }
+
+  public void setInstrumentDisplayName(String instrumentDisplayName) {
+    this.instrumentDisplayName = instrumentDisplayName;
+  }
+
+
   public CashFlowDetail transactionId(String transactionId) {
     this.transactionId = transactionId;
     return this;
@@ -284,6 +315,25 @@ public class CashFlowDetail {
 
   public void setFlowType(String flowType) {
     this.flowType = flowType;
+  }
+
+
+  public CashFlowDetail movementName(String movementName) {
+    this.movementName = movementName;
+    return this;
+  }
+
+  /**
+   * The name of the movement that produced the cashflow (e.g. Coupon, Side1), falling back to the flow type when the movement is unnamed. Not present when the cashflow could not be valued.
+   * @return movementName
+   */
+  @javax.annotation.Nullable
+  public String getMovementName() {
+    return movementName;
+  }
+
+  public void setMovementName(String movementName) {
+    this.movementName = movementName;
   }
 
 
@@ -442,9 +492,11 @@ public class CashFlowDetail {
         Objects.equals(this.currency, cashFlowDetail.currency) &&
         Objects.equals(this.sourceType, cashFlowDetail.sourceType) &&
         Objects.equals(this.instrumentId, cashFlowDetail.instrumentId) &&
+        Objects.equals(this.instrumentDisplayName, cashFlowDetail.instrumentDisplayName) &&
         Objects.equals(this.transactionId, cashFlowDetail.transactionId) &&
         Objects.equals(this.portfolioId, cashFlowDetail.portfolioId) &&
         Objects.equals(this.flowType, cashFlowDetail.flowType) &&
+        Objects.equals(this.movementName, cashFlowDetail.movementName) &&
         Objects.equals(this.payReceive, cashFlowDetail.payReceive) &&
         (this.grossAmount == null ? cashFlowDetail.grossAmount == null : (cashFlowDetail.grossAmount != null && this.grossAmount.compareTo(cashFlowDetail.getGrossAmount()) == 0)) &&
         (this.haircutFraction == null ? cashFlowDetail.haircutFraction == null : (cashFlowDetail.haircutFraction != null && this.haircutFraction.compareTo(cashFlowDetail.getHaircutFraction()) == 0)) &&
@@ -460,7 +512,7 @@ public class CashFlowDetail {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, amount, currency, sourceType, instrumentId, transactionId, portfolioId, flowType, payReceive, grossAmount, haircutFraction, netAmount, haircutRuleApplied, error, links);
+    return Objects.hash(paymentDate, amount, currency, sourceType, instrumentId, instrumentDisplayName, transactionId, portfolioId, flowType, movementName, payReceive, grossAmount, haircutFraction, netAmount, haircutRuleApplied, error, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -479,9 +531,11 @@ public class CashFlowDetail {
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    sourceType: ").append(toIndentedString(sourceType)).append("\n");
     sb.append("    instrumentId: ").append(toIndentedString(instrumentId)).append("\n");
+    sb.append("    instrumentDisplayName: ").append(toIndentedString(instrumentDisplayName)).append("\n");
     sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
     sb.append("    flowType: ").append(toIndentedString(flowType)).append("\n");
+    sb.append("    movementName: ").append(toIndentedString(movementName)).append("\n");
     sb.append("    payReceive: ").append(toIndentedString(payReceive)).append("\n");
     sb.append("    grossAmount: ").append(toIndentedString(grossAmount)).append("\n");
     sb.append("    haircutFraction: ").append(toIndentedString(haircutFraction)).append("\n");

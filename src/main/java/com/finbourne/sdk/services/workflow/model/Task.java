@@ -19,6 +19,7 @@ import com.finbourne.sdk.services.workflow.model.TaskDefinitionVersion;
 import com.finbourne.sdk.services.workflow.model.TaskInstanceField;
 import com.finbourne.sdk.services.workflow.model.TaskSummary;
 import com.finbourne.sdk.services.workflow.model.VersionInfo;
+import com.finbourne.sdk.services.workflow.model.WorkflowRun;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ import com.finbourne.sdk.JSON;
   Task.JSON_PROPERTY_TASK_DEFINITION_DISPLAY_NAME,
   Task.JSON_PROPERTY_WORKFLOW_ID,
   Task.JSON_PROPERTY_WORKFLOW_DISPLAY_NAME,
+  Task.JSON_PROPERTY_WORKFLOW_RUN,
   Task.JSON_PROPERTY_STATE,
   Task.JSON_PROPERTY_STATE_DISPLAY_NAME,
   Task.JSON_PROPERTY_ULTIMATE_PARENT_TASK,
@@ -106,6 +108,11 @@ public class Task {
   @JsonProperty(JSON_PROPERTY_WORKFLOW_DISPLAY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String workflowDisplayName;
+
+  public static final String JSON_PROPERTY_WORKFLOW_RUN = "workflowRun";
+  @JsonProperty(JSON_PROPERTY_WORKFLOW_RUN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private WorkflowRun workflowRun;
 
   public static final String JSON_PROPERTY_STATE = "state";
   @JsonProperty(JSON_PROPERTY_STATE)
@@ -326,6 +333,25 @@ public class Task {
 
   public void setWorkflowDisplayName(String workflowDisplayName) {
     this.workflowDisplayName = workflowDisplayName;
+  }
+
+
+  public Task workflowRun(WorkflowRun workflowRun) {
+    this.workflowRun = workflowRun;
+    return this;
+  }
+
+  /**
+   * Get workflowRun
+   * @return workflowRun
+   */
+  @javax.annotation.Nullable
+  public WorkflowRun getWorkflowRun() {
+    return workflowRun;
+  }
+
+  public void setWorkflowRun(WorkflowRun workflowRun) {
+    this.workflowRun = workflowRun;
   }
 
 
@@ -775,6 +801,7 @@ public class Task {
         Objects.equals(this.taskDefinitionDisplayName, task.taskDefinitionDisplayName) &&
         Objects.equals(this.workflowId, task.workflowId) &&
         Objects.equals(this.workflowDisplayName, task.workflowDisplayName) &&
+        Objects.equals(this.workflowRun, task.workflowRun) &&
         Objects.equals(this.state, task.state) &&
         Objects.equals(this.stateDisplayName, task.stateDisplayName) &&
         Objects.equals(this.ultimateParentTask, task.ultimateParentTask) &&
@@ -804,7 +831,7 @@ public class Task {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, taskDefinitionId, taskDefinitionVersion, taskDefinitionDisplayName, workflowId, workflowDisplayName, state, stateDisplayName, ultimateParentTask, parentTask, childTasks, correlationIds, version, terminalState, asAtLastTransition, fields, stackingKey, stack, actionLogIdCreated, actionLogIdModified, actionLogIdSubmitted, hierarchicalPosition, completionStatus, openDuration, openDurationSinceLastUpdate, openDurationSinceLastTransition, properties);
+    return Objects.hash(id, taskDefinitionId, taskDefinitionVersion, taskDefinitionDisplayName, workflowId, workflowDisplayName, workflowRun, state, stateDisplayName, ultimateParentTask, parentTask, childTasks, correlationIds, version, terminalState, asAtLastTransition, fields, stackingKey, stack, actionLogIdCreated, actionLogIdModified, actionLogIdSubmitted, hierarchicalPosition, completionStatus, openDuration, openDurationSinceLastUpdate, openDurationSinceLastTransition, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -824,6 +851,7 @@ public class Task {
     sb.append("    taskDefinitionDisplayName: ").append(toIndentedString(taskDefinitionDisplayName)).append("\n");
     sb.append("    workflowId: ").append(toIndentedString(workflowId)).append("\n");
     sb.append("    workflowDisplayName: ").append(toIndentedString(workflowDisplayName)).append("\n");
+    sb.append("    workflowRun: ").append(toIndentedString(workflowRun)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    stateDisplayName: ").append(toIndentedString(stateDisplayName)).append("\n");
     sb.append("    ultimateParentTask: ").append(toIndentedString(ultimateParentTask)).append("\n");

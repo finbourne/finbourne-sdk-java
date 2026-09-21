@@ -63,6 +63,7 @@ import com.finbourne.sdk.JSON;
   JournalEntryLine.JSON_PROPERTY_SOURCE_ID,
   JournalEntryLine.JSON_PROPERTY_PROPERTIES,
   JournalEntryLine.JSON_PROPERTY_MOVEMENT_NAME,
+  JournalEntryLine.JSON_PROPERTY_TXN_TYPE,
   JournalEntryLine.JSON_PROPERTY_HOLDING_TYPE,
   JournalEntryLine.JSON_PROPERTY_ECONOMIC_BUCKET,
   JournalEntryLine.JSON_PROPERTY_ECONOMIC_BUCKET_COMPONENT,
@@ -173,6 +174,11 @@ public class JournalEntryLine {
   @JsonProperty(JSON_PROPERTY_MOVEMENT_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String movementName;
+
+  public static final String JSON_PROPERTY_TXN_TYPE = "txnType";
+  @JsonProperty(JSON_PROPERTY_TXN_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String txnType;
 
   public static final String JSON_PROPERTY_HOLDING_TYPE = "holdingType";
   @JsonProperty(JSON_PROPERTY_HOLDING_TYPE)
@@ -619,6 +625,25 @@ public class JournalEntryLine {
   }
 
 
+  public JournalEntryLine txnType(String txnType) {
+    this.txnType = txnType;
+    return this;
+  }
+
+  /**
+   * If the JE Line is generated from a transaction, the type of that transaction. Null where the line is not linked to a transaction, such as a valuation line.
+   * @return txnType
+   */
+  @javax.annotation.Nullable
+  public String getTxnType() {
+    return txnType;
+  }
+
+  public void setTxnType(String txnType) {
+    this.txnType = txnType;
+  }
+
+
   public JournalEntryLine holdingType(String holdingType) {
     this.holdingType = holdingType;
     return this;
@@ -918,6 +943,7 @@ public class JournalEntryLine {
         Objects.equals(this.sourceId, journalEntryLine.sourceId) &&
         Objects.equals(this.properties, journalEntryLine.properties) &&
         Objects.equals(this.movementName, journalEntryLine.movementName) &&
+        Objects.equals(this.txnType, journalEntryLine.txnType) &&
         Objects.equals(this.holdingType, journalEntryLine.holdingType) &&
         Objects.equals(this.economicBucket, journalEntryLine.economicBucket) &&
         Objects.equals(this.economicBucketComponent, journalEntryLine.economicBucketComponent) &&
@@ -939,7 +965,7 @@ public class JournalEntryLine {
 
   @Override
  public int hashCode() {
-    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, custodianAccountId, custodianAccountType, links);
+    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, txnType, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, custodianAccountId, custodianAccountType, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -972,6 +998,7 @@ public class JournalEntryLine {
     sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    movementName: ").append(toIndentedString(movementName)).append("\n");
+    sb.append("    txnType: ").append(toIndentedString(txnType)).append("\n");
     sb.append("    holdingType: ").append(toIndentedString(holdingType)).append("\n");
     sb.append("    economicBucket: ").append(toIndentedString(economicBucket)).append("\n");
     sb.append("    economicBucketComponent: ").append(toIndentedString(economicBucketComponent)).append("\n");

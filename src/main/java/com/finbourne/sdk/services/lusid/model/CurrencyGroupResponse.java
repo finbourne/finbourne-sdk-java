@@ -75,7 +75,7 @@ public class CurrencyGroupResponse {
   public static final String JSON_PROPERTY_CIRCULATION_DOMAIN = "circulationDomain";
   @JsonProperty(JSON_PROPERTY_CIRCULATION_DOMAIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private String circulationDomain;
+  private List<String> circulationDomain;
 
   public static final String JSON_PROPERTY_MINOR_UNITS = "minorUnits";
   @JsonProperty(JSON_PROPERTY_MINOR_UNITS)
@@ -163,7 +163,7 @@ public class CurrencyGroupResponse {
   }
 
   /**
-   * The three-letter, case-sensitive currency code of the group&#39;s major unit, e.g. GBP for the sterling group.
+   * The three to five letter, case-sensitive currency code of the group&#39;s major unit, e.g. GBP for the sterling group.
    * @return majorUnitCurrency
    */
   @javax.annotation.Nullable
@@ -176,21 +176,29 @@ public class CurrencyGroupResponse {
   }
 
 
-  public CurrencyGroupResponse circulationDomain(String circulationDomain) {
+  public CurrencyGroupResponse circulationDomain(List<String> circulationDomain) {
     this.circulationDomain = circulationDomain;
     return this;
   }
 
+  public CurrencyGroupResponse addCirculationDomainItem(String circulationDomainItem) {
+    if (this.circulationDomain == null) {
+      this.circulationDomain = new ArrayList<>();
+    }
+    this.circulationDomain.add(circulationDomainItem);
+    return this;
+  }
+
   /**
-   * The domain in which the group&#39;s currencies circulate, e.g. an ISO 3166 country code.
+   * The domains in which the group&#39;s currencies circulate, e.g. ISO 3166 country codes or the ISO 4217 entity names of the countries using the major unit.
    * @return circulationDomain
    */
   @javax.annotation.Nullable
-  public String getCirculationDomain() {
+  public List<String> getCirculationDomain() {
     return circulationDomain;
   }
 
-  public void setCirculationDomain(String circulationDomain) {
+  public void setCirculationDomain(List<String> circulationDomain) {
     this.circulationDomain = circulationDomain;
   }
 

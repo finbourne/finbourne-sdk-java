@@ -209,7 +209,9 @@ public enum PropertyDomain {
   
   CURRENCY_GROUP("CurrencyGroup"),
   
-  REC_DEFINITION("RecDefinition");
+  REC_DEFINITION("RecDefinition"),
+  
+  REC_RESULT("RecResult");
 
   private String value;
 

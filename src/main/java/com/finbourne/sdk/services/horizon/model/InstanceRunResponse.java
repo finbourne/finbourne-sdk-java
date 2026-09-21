@@ -37,7 +37,7 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   InstanceRunResponse.JSON_PROPERTY_RUN_ID,
-  InstanceRunResponse.JSON_PROPERTY_BATCH_REFERENCE_ID,
+  InstanceRunResponse.JSON_PROPERTY_REFERENCE_ID,
   InstanceRunResponse.JSON_PROPERTY_ATTEMPT,
   InstanceRunResponse.JSON_PROPERTY_START_TIME,
   InstanceRunResponse.JSON_PROPERTY_END_TIME,
@@ -57,10 +57,10 @@ public class InstanceRunResponse {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private UUID runId;
 
-  public static final String JSON_PROPERTY_BATCH_REFERENCE_ID = "batchReferenceId";
-  @JsonProperty(JSON_PROPERTY_BATCH_REFERENCE_ID)
+  public static final String JSON_PROPERTY_REFERENCE_ID = "referenceId";
+  @JsonProperty(JSON_PROPERTY_REFERENCE_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private UUID batchReferenceId;
+  private UUID referenceId;
 
   public static final String JSON_PROPERTY_ATTEMPT = "attempt";
   @JsonProperty(JSON_PROPERTY_ATTEMPT)
@@ -139,22 +139,22 @@ public class InstanceRunResponse {
   }
 
 
-  public InstanceRunResponse batchReferenceId(UUID batchReferenceId) {
-    this.batchReferenceId = batchReferenceId;
+  public InstanceRunResponse referenceId(UUID referenceId) {
+    this.referenceId = referenceId;
     return this;
   }
 
   /**
-   * Get batchReferenceId
-   * @return batchReferenceId
+   * Get referenceId
+   * @return referenceId
    */
   @javax.annotation.Nonnull
-  public UUID getBatchReferenceId() {
-    return batchReferenceId;
+  public UUID getReferenceId() {
+    return referenceId;
   }
 
-  public void setBatchReferenceId(UUID batchReferenceId) {
-    this.batchReferenceId = batchReferenceId;
+  public void setReferenceId(UUID referenceId) {
+    this.referenceId = referenceId;
   }
 
 
@@ -377,7 +377,7 @@ public class InstanceRunResponse {
     }
     InstanceRunResponse instanceRunResponse = (InstanceRunResponse) o;
     return Objects.equals(this.runId, instanceRunResponse.runId) &&
-        Objects.equals(this.batchReferenceId, instanceRunResponse.batchReferenceId) &&
+        Objects.equals(this.referenceId, instanceRunResponse.referenceId) &&
         Objects.equals(this.attempt, instanceRunResponse.attempt) &&
         Objects.equals(this.startTime, instanceRunResponse.startTime) &&
         Objects.equals(this.endTime, instanceRunResponse.endTime) &&
@@ -397,7 +397,7 @@ public class InstanceRunResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, batchReferenceId, attempt, startTime, endTime, duration, status, triggeredBy, total, sentCount, skippedCount, failedCount, failedFiles);
+    return Objects.hash(runId, referenceId, attempt, startTime, endTime, duration, status, triggeredBy, total, sentCount, skippedCount, failedCount, failedFiles);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -412,7 +412,7 @@ public class InstanceRunResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class InstanceRunResponse {\n");
     sb.append("    runId: ").append(toIndentedString(runId)).append("\n");
-    sb.append("    batchReferenceId: ").append(toIndentedString(batchReferenceId)).append("\n");
+    sb.append("    referenceId: ").append(toIndentedString(referenceId)).append("\n");
     sb.append("    attempt: ").append(toIndentedString(attempt)).append("\n");
     sb.append("    startTime: ").append(toIndentedString(startTime)).append("\n");
     sb.append("    endTime: ").append(toIndentedString(endTime)).append("\n");

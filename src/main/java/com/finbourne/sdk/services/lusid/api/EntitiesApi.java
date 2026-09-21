@@ -29,6 +29,7 @@ import java.io.IOException;
 
 import com.finbourne.sdk.services.lusid.model.BookmarkEntity;
 import com.finbourne.sdk.services.lusid.model.ComplianceRuleEntity;
+import com.finbourne.sdk.services.lusid.model.ComplianceRuleTemplateEntity;
 import com.finbourne.sdk.services.lusid.model.CustomEntityEntity;
 import com.finbourne.sdk.services.lusid.model.DataTypeEntity;
 import com.finbourne.sdk.services.lusid.model.InstrumentEntity;
@@ -790,6 +791,359 @@ public class EntitiesApi {
      */
     public APIgetComplianceRuleByEntityUniqueIdRequest getComplianceRuleByEntityUniqueId(String entityUniqueId) {
         return new APIgetComplianceRuleByEntityUniqueIdRequest(entityUniqueId);
+    }
+    /**
+     * Build call for getComplianceRuleTemplateByEntityUniqueId
+     * @param entityUniqueId The universally unique identifier of the compliance rule template. (required)
+     * @param asAt The asAt datetime at which to retrieve the compliance rule template. Defaults to returning the latest version of the compliance rule template if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getComplianceRuleTemplateByEntityUniqueIdCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback _callback) throws ApiException {
+        return getComplianceRuleTemplateByEntityUniqueIdCall(entityUniqueId, asAt, previews,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getComplianceRuleTemplateByEntityUniqueId. Use any specified configuration options to override any other configuration for this request only.
+     * @param entityUniqueId The universally unique identifier of the compliance rule template. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the compliance rule template. Defaults to returning the latest version of the compliance rule template if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getComplianceRuleTemplateByEntityUniqueIdCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/entities/complianceruletemplates/{entityUniqueId}"
+            .replace("{" + "entityUniqueId" + "}", localVarApiClient.escapeString(entityUniqueId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (previews != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "previews", previews));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getComplianceRuleTemplateByEntityUniqueIdValidateBeforeCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'entityUniqueId' is set
+        if (entityUniqueId == null) {
+            throw new ApiException("Missing the required parameter 'entityUniqueId' when calling getComplianceRuleTemplateByEntityUniqueId(Async)");
+        }
+
+        return getComplianceRuleTemplateByEntityUniqueIdCall(entityUniqueId, asAt, previews, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetComplianceRuleTemplateByEntityUniqueId: Get compliance rule template by EntityUniqueId
+     * Retrieve the definition of a particular compliance rule template.    If the compliance rule template is deleted, this will return the state of the template immediately prior to  deletion.
+     * @param entityUniqueId The universally unique identifier of the compliance rule template. (required)
+     * @param asAt The asAt datetime at which to retrieve the compliance rule template. Defaults to returning the latest version of the compliance rule template if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @return ApiResponse&lt;ComplianceRuleTemplateEntity&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleTemplateEntity> getComplianceRuleTemplateByEntityUniqueIdWithHttpInfo(String entityUniqueId, OffsetDateTime asAt, List<String> previews) throws ApiException {
+        HttpRequest localVarCall = getComplianceRuleTemplateByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleTemplateEntity>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetComplianceRuleTemplateByEntityUniqueId: Get compliance rule template by EntityUniqueId
+     * Retrieve the definition of a particular compliance rule template.    If the compliance rule template is deleted, this will return the state of the template immediately prior to  deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param entityUniqueId The universally unique identifier of the compliance rule template. (required)
+     * @param asAt The asAt datetime at which to retrieve the compliance rule template. Defaults to returning the latest version of the compliance rule template if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @return ApiResponse&lt;ComplianceRuleTemplateEntity&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleTemplateEntity> getComplianceRuleTemplateByEntityUniqueIdWithHttpInfo(String entityUniqueId, OffsetDateTime asAt, List<String> previews, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getComplianceRuleTemplateByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, null, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleTemplateEntity>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetComplianceRuleTemplateByEntityUniqueId: Get compliance rule template by EntityUniqueId (asynchronously)
+     * Retrieve the definition of a particular compliance rule template.    If the compliance rule template is deleted, this will return the state of the template immediately prior to  deletion.
+     * @param entityUniqueId The universally unique identifier of the compliance rule template. (required)
+     * @param asAt The asAt datetime at which to retrieve the compliance rule template. Defaults to returning the latest version of the compliance rule template if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getComplianceRuleTemplateByEntityUniqueIdAsync(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback<ComplianceRuleTemplateEntity> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getComplianceRuleTemplateByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleTemplateEntity>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetComplianceRuleTemplateByEntityUniqueId: Get compliance rule template by EntityUniqueId (asynchronously)
+     * Retrieve the definition of a particular compliance rule template.    If the compliance rule template is deleted, this will return the state of the template immediately prior to  deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param entityUniqueId The universally unique identifier of the compliance rule template. (required)
+     * @param asAt The asAt datetime at which to retrieve the compliance rule template. Defaults to returning the latest version of the compliance rule template if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getComplianceRuleTemplateByEntityUniqueIdAsync(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback<ComplianceRuleTemplateEntity> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getComplianceRuleTemplateByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, _callback, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleTemplateEntity>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetComplianceRuleTemplateByEntityUniqueIdRequest {
+        private final String entityUniqueId;
+        private OffsetDateTime asAt;
+        private List<String> previews;
+
+        private APIgetComplianceRuleTemplateByEntityUniqueIdRequest(String entityUniqueId) {
+            this.entityUniqueId = entityUniqueId;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the compliance rule template. Defaults to returning the latest version of the compliance rule template if not specified. (optional)
+         * @return APIgetComplianceRuleTemplateByEntityUniqueIdRequest
+         */
+        public APIgetComplianceRuleTemplateByEntityUniqueIdRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set previews
+         * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+         * @return APIgetComplianceRuleTemplateByEntityUniqueIdRequest
+         */
+        public APIgetComplianceRuleTemplateByEntityUniqueIdRequest previews(List<String> previews) {
+            this.previews = previews;
+            return this;
+        }
+
+        /**
+         * Build call for getComplianceRuleTemplateByEntityUniqueId
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getComplianceRuleTemplateByEntityUniqueIdCall(entityUniqueId, asAt, previews, _callback);
+        }
+
+        /**
+         * Execute getComplianceRuleTemplateByEntityUniqueId request
+         * @return ComplianceRuleTemplateEntity
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleTemplateEntity execute() throws ApiException {
+            ApiResponse<ComplianceRuleTemplateEntity> localVarResp = getComplianceRuleTemplateByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getComplianceRuleTemplateByEntityUniqueId request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ComplianceRuleTemplateEntity
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleTemplateEntity execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ComplianceRuleTemplateEntity> localVarResp = getComplianceRuleTemplateByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getComplianceRuleTemplateByEntityUniqueId request with HTTP info returned
+         * @return ApiResponse&lt;ComplianceRuleTemplateEntity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleTemplateEntity> executeWithHttpInfo() throws ApiException {
+            return getComplianceRuleTemplateByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews);
+        }
+
+        /**
+         * Execute getComplianceRuleTemplateByEntityUniqueId request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ComplianceRuleTemplateEntity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleTemplateEntity> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getComplianceRuleTemplateByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, opts);
+        }
+
+        /**
+         * Execute getComplianceRuleTemplateByEntityUniqueId request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleTemplateEntity> _callback) throws ApiException {
+            getComplianceRuleTemplateByEntityUniqueIdAsync(entityUniqueId, asAt, previews, _callback);
+        }
+
+        /**
+         * Execute getComplianceRuleTemplateByEntityUniqueId request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleTemplateEntity> _callback, ConfigurationOptions opts) throws ApiException {
+            getComplianceRuleTemplateByEntityUniqueIdAsync(entityUniqueId, asAt, previews, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetComplianceRuleTemplateByEntityUniqueId: Get compliance rule template by EntityUniqueId
+     * Retrieve the definition of a particular compliance rule template.    If the compliance rule template is deleted, this will return the state of the template immediately prior to  deletion.
+     * @param entityUniqueId The universally unique identifier of the compliance rule template. (required)
+     * @return APIgetComplianceRuleTemplateByEntityUniqueIdRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested compliance rule template entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetComplianceRuleTemplateByEntityUniqueIdRequest getComplianceRuleTemplateByEntityUniqueId(String entityUniqueId) {
+        return new APIgetComplianceRuleTemplateByEntityUniqueIdRequest(entityUniqueId);
     }
     /**
      * Build call for getCustomEntityByEntityUniqueId

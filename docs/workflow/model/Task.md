@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **taskDefinitionDisplayName** | **String** | The display name of the Task Definition used by this Task | [default to String]
 **workflowId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **workflowDisplayName** | **String** | The display name of the Workflow that this Task is a member of, if any | [optional] [default to String]
+**workflowRun** | [**WorkflowRun**](WorkflowRun.md) |  | [optional] [default to WorkflowRun]
 **state** | **String** | Current State | [default to String]
 **stateDisplayName** | **String** | The display name of the current State, from the Task Definition, if one is provided | [optional] [default to String]
 **ultimateParentTask** | [**TaskSummary**](TaskSummary.md) |  | [default to TaskSummary]
@@ -46,6 +47,7 @@ TaskDefinitionVersion taskDefinitionVersion = new TaskDefinitionVersion();
 String taskDefinitionDisplayName = "example taskDefinitionDisplayName";
 ResourceId workflowId = new ResourceId();
 @javax.annotation.Nullable String workflowDisplayName = "example workflowDisplayName";
+WorkflowRun workflowRun = new WorkflowRun();
 String state = "example state";
 @javax.annotation.Nullable String stateDisplayName = "example stateDisplayName";
 TaskSummary ultimateParentTask = new TaskSummary();
@@ -76,6 +78,7 @@ Task taskInstance = new Task()
     .taskDefinitionDisplayName(taskDefinitionDisplayName)
     .workflowId(workflowId)
     .workflowDisplayName(workflowDisplayName)
+    .workflowRun(workflowRun)
     .state(state)
     .stateDisplayName(stateDisplayName)
     .ultimateParentTask(ultimateParentTask)

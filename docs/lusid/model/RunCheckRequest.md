@@ -1,5 +1,6 @@
 # com.finbourne.sdk.services.lusid.model.RunCheckRequest
 classname RunCheckRequest
+Exactly one dataset must be provided, matching the check definition's datasetSchema.
 
 ## Properties
 
@@ -8,6 +9,7 @@ Name | Type | Description | Notes
 **lusidEntityDataset** | [**LusidEntityDataset**](LusidEntityDataset.md) |  | [optional] [default to LusidEntityDataset]
 **limitIndividualBreachesPerRule** | **Integer** | The maximum number of individual breaches to return per rule. Defaults to 100 if not specified. | [optional] [default to Integer]
 **portfolioHoldingDataset** | [**PortfolioHoldingDataset**](PortfolioHoldingDataset.md) |  | [optional] [default to PortfolioHoldingDataset]
+**portfolioTransactionDataset** | [**PortfolioTransactionDataset**](PortfolioTransactionDataset.md) |  | [optional] [default to PortfolioTransactionDataset]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.RunCheckRequest;
@@ -18,12 +20,14 @@ import java.net.URI;
 LusidEntityDataset lusidEntityDataset = new LusidEntityDataset();
 Integer limitIndividualBreachesPerRule = new Integer("100.00");
 PortfolioHoldingDataset portfolioHoldingDataset = new PortfolioHoldingDataset();
+PortfolioTransactionDataset portfolioTransactionDataset = new PortfolioTransactionDataset();
 
 
 RunCheckRequest runCheckRequestInstance = new RunCheckRequest()
     .lusidEntityDataset(lusidEntityDataset)
     .limitIndividualBreachesPerRule(limitIndividualBreachesPerRule)
-    .portfolioHoldingDataset(portfolioHoldingDataset);
+    .portfolioHoldingDataset(portfolioHoldingDataset)
+    .portfolioTransactionDataset(portfolioTransactionDataset);
 ```
 
 

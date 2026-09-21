@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **variations** | [**List&lt;ComplianceTemplateVariationDto&gt;**](ComplianceTemplateVariationDto.md) | Variation details of a Compliance Template | [optional] [default to List<ComplianceTemplateVariationDto>]
 **href** | [**URI**](URI.md) | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] [default to URI]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
+**stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -25,6 +26,7 @@ ResourceId id = new ResourceId();
 @javax.annotation.Nullable List<ComplianceTemplateVariationDto> variations = new List<ComplianceTemplateVariationDto>();
 @javax.annotation.Nullable URI href = URI.create("http://example.com/href");
 Version version = new Version();
+StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -35,6 +37,7 @@ ComplianceRuleTemplate complianceRuleTemplateInstance = new ComplianceRuleTempla
     .variations(variations)
     .href(href)
     .version(version)
+    .stagedModifications(stagedModifications)
     .links(links);
 ```
 

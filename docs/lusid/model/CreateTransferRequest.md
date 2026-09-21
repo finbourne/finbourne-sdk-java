@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **accountingMethod** | **String** | Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | [optional] [default to String]
 **propertiesOut** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) |  | [optional] [default to Map<String, PerpetualProperty>]
 **propertiesIn** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) |  | [optional] [default to Map<String, PerpetualProperty>]
+**properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) |  | [optional] [default to Map<String, PerpetualProperty>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CreateTransferRequest;
@@ -67,6 +68,7 @@ String source = "example source";
 @javax.annotation.Nullable String accountingMethod = "example accountingMethod";
 @javax.annotation.Nullable Map<String, PerpetualProperty> propertiesOut = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> propertiesIn = new Map<String, PerpetualProperty>();
+@javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 
 
 CreateTransferRequest createTransferRequestInstance = new CreateTransferRequest()
@@ -96,7 +98,8 @@ CreateTransferRequest createTransferRequestInstance = new CreateTransferRequest(
     .source(source)
     .accountingMethod(accountingMethod)
     .propertiesOut(propertiesOut)
-    .propertiesIn(propertiesIn);
+    .propertiesIn(propertiesIn)
+    .properties(properties);
 ```
 
 

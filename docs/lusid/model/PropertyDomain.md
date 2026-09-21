@@ -109,6 +109,7 @@ PropertyDomain method = PropertyDomain.PAYMENT_INSTRUCTION;
 PropertyDomain method = PropertyDomain.TRANSFER;
 PropertyDomain method = PropertyDomain.CURRENCY_GROUP;
 PropertyDomain method = PropertyDomain.REC_DEFINITION;
+PropertyDomain method = PropertyDomain.REC_RESULT;
 ```
 
 

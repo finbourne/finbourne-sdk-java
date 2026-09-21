@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.FractionalUnitsTrueUpConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.Arrays;
@@ -36,7 +37,9 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   CreatePortfolioDetails.JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID,
-  CreatePortfolioDetails.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS
+  CreatePortfolioDetails.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
+  CreatePortfolioDetails.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
+  CreatePortfolioDetails.JSON_PROPERTY_HOLDINGS_FUNGIBILITY
 })
 
 public class CreatePortfolioDetails {
@@ -49,6 +52,16 @@ public class CreatePortfolioDetails {
   @JsonProperty(JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String taxLotSelectionCostBasis;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION = "fractionalUnitsTrueUpConfiguration";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration;
+
+  public static final String JSON_PROPERTY_HOLDINGS_FUNGIBILITY = "holdingsFungibility";
+  @JsonProperty(JSON_PROPERTY_HOLDINGS_FUNGIBILITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String holdingsFungibility;
 
   public CreatePortfolioDetails() {
   }
@@ -91,6 +104,44 @@ public class CreatePortfolioDetails {
   }
 
 
+  public CreatePortfolioDetails fractionalUnitsTrueUpConfiguration(FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration) {
+    this.fractionalUnitsTrueUpConfiguration = fractionalUnitsTrueUpConfiguration;
+    return this;
+  }
+
+  /**
+   * Get fractionalUnitsTrueUpConfiguration
+   * @return fractionalUnitsTrueUpConfiguration
+   */
+  @javax.annotation.Nullable
+  public FractionalUnitsTrueUpConfiguration getFractionalUnitsTrueUpConfiguration() {
+    return fractionalUnitsTrueUpConfiguration;
+  }
+
+  public void setFractionalUnitsTrueUpConfiguration(FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration) {
+    this.fractionalUnitsTrueUpConfiguration = fractionalUnitsTrueUpConfiguration;
+  }
+
+
+  public CreatePortfolioDetails holdingsFungibility(String holdingsFungibility) {
+    this.holdingsFungibility = holdingsFungibility;
+    return this;
+  }
+
+  /**
+   * Whether the portfolio&#39;s holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. If not supplied, the portfolio&#39;s current value is left unchanged; supply Default to reset it. A reset or never-configured flag reads back as absent. Available values: Default, Enabled.
+   * @return holdingsFungibility
+   */
+  @javax.annotation.Nullable
+  public String getHoldingsFungibility() {
+    return holdingsFungibility;
+  }
+
+  public void setHoldingsFungibility(String holdingsFungibility) {
+    this.holdingsFungibility = holdingsFungibility;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -101,7 +152,9 @@ public class CreatePortfolioDetails {
     }
     CreatePortfolioDetails createPortfolioDetails = (CreatePortfolioDetails) o;
     return Objects.equals(this.corporateActionSourceId, createPortfolioDetails.corporateActionSourceId) &&
-        Objects.equals(this.taxLotSelectionCostBasis, createPortfolioDetails.taxLotSelectionCostBasis);
+        Objects.equals(this.taxLotSelectionCostBasis, createPortfolioDetails.taxLotSelectionCostBasis) &&
+        Objects.equals(this.fractionalUnitsTrueUpConfiguration, createPortfolioDetails.fractionalUnitsTrueUpConfiguration) &&
+        Objects.equals(this.holdingsFungibility, createPortfolioDetails.holdingsFungibility);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -110,7 +163,7 @@ public class CreatePortfolioDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(corporateActionSourceId, taxLotSelectionCostBasis);
+    return Objects.hash(corporateActionSourceId, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -126,6 +179,8 @@ public class CreatePortfolioDetails {
     sb.append("class CreatePortfolioDetails {\n");
     sb.append("    corporateActionSourceId: ").append(toIndentedString(corporateActionSourceId)).append("\n");
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
+    sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
+    sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
     sb.append("}");
     return sb.toString();
   }

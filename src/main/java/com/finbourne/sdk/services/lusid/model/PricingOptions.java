@@ -54,6 +54,7 @@ import com.finbourne.sdk.JSON;
   PricingOptions.JSON_PROPERTY_USE_CHILD_SUB_HOLDING_KEYS_FOR_PORTFOLIO_EXPANSION,
   PricingOptions.JSON_PROPERTY_VALIDATE_DOMESTIC_AND_QUOTE_CURRENCIES_ARE_CONSISTENT,
   PricingOptions.JSON_PROPERTY_MBS_VALUATION_USING_HOLDING_CURRENT_FACE,
+  PricingOptions.JSON_PROPERTY_FIXED_INCOME_VALUATIONS_USING_CURRENT_FACE,
   PricingOptions.JSON_PROPERTY_CONVERT_SRS_CASH_FLOWS_TO_PORTFOLIO_CURRENCY,
   PricingOptions.JSON_PROPERTY_CONSERVED_QUANTITY_FOR_LOOKTHROUGH_EXPANSION,
   PricingOptions.JSON_PROPERTY_RETURN_ZERO_PV,
@@ -138,6 +139,11 @@ public class PricingOptions {
   @JsonProperty(JSON_PROPERTY_MBS_VALUATION_USING_HOLDING_CURRENT_FACE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean mbsValuationUsingHoldingCurrentFace;
+
+  public static final String JSON_PROPERTY_FIXED_INCOME_VALUATIONS_USING_CURRENT_FACE = "fixedIncomeValuationsUsingCurrentFace";
+  @JsonProperty(JSON_PROPERTY_FIXED_INCOME_VALUATIONS_USING_CURRENT_FACE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean fixedIncomeValuationsUsingCurrentFace;
 
   public static final String JSON_PROPERTY_CONVERT_SRS_CASH_FLOWS_TO_PORTFOLIO_CURRENCY = "convertSrsCashFlowsToPortfolioCurrency";
   @JsonProperty(JSON_PROPERTY_CONVERT_SRS_CASH_FLOWS_TO_PORTFOLIO_CURRENCY)
@@ -468,6 +474,25 @@ public class PricingOptions {
   }
 
 
+  public PricingOptions fixedIncomeValuationsUsingCurrentFace(Boolean fixedIncomeValuationsUsingCurrentFace) {
+    this.fixedIncomeValuationsUsingCurrentFace = fixedIncomeValuationsUsingCurrentFace;
+    return this;
+  }
+
+  /**
+   * Scale holding-level fixed-income results by the holding&#39;s current face over the instrument&#39;s  face per unit, rather than by the holding&#39;s traded units. Applies to Bond, ComplexBond and  InflationLinkedBond. Defaults to false.                Governs scaling basis only, and only for bonds outside the asset-backed family. An asset-backed  bond keeps its own machinery and its own option, MbsValuationUsingHoldingCurrentFace: because a  current face is defined as poolFactor x contractSize x units, the two are the same arithmetic at  the contract size of 1 that convention recommends, so there is nothing for this option to add  there. Neither option implies the other.                Turning this on without supplying current-face data changes no published number: a holding with  no current face scales by a quantity equal to its unit count. Numbers move only where a current  face has been supplied, whether on a transaction or by a face-moving instrument event.
+   * @return fixedIncomeValuationsUsingCurrentFace
+   */
+  @javax.annotation.Nullable
+  public Boolean getFixedIncomeValuationsUsingCurrentFace() {
+    return fixedIncomeValuationsUsingCurrentFace;
+  }
+
+  public void setFixedIncomeValuationsUsingCurrentFace(Boolean fixedIncomeValuationsUsingCurrentFace) {
+    this.fixedIncomeValuationsUsingCurrentFace = fixedIncomeValuationsUsingCurrentFace;
+  }
+
+
   public PricingOptions convertSrsCashFlowsToPortfolioCurrency(Boolean convertSrsCashFlowsToPortfolioCurrency) {
     this.convertSrsCashFlowsToPortfolioCurrency = convertSrsCashFlowsToPortfolioCurrency;
     return this;
@@ -727,6 +752,7 @@ public class PricingOptions {
         Objects.equals(this.useChildSubHoldingKeysForPortfolioExpansion, pricingOptions.useChildSubHoldingKeysForPortfolioExpansion) &&
         Objects.equals(this.validateDomesticAndQuoteCurrenciesAreConsistent, pricingOptions.validateDomesticAndQuoteCurrenciesAreConsistent) &&
         Objects.equals(this.mbsValuationUsingHoldingCurrentFace, pricingOptions.mbsValuationUsingHoldingCurrentFace) &&
+        Objects.equals(this.fixedIncomeValuationsUsingCurrentFace, pricingOptions.fixedIncomeValuationsUsingCurrentFace) &&
         Objects.equals(this.convertSrsCashFlowsToPortfolioCurrency, pricingOptions.convertSrsCashFlowsToPortfolioCurrency) &&
         Objects.equals(this.conservedQuantityForLookthroughExpansion, pricingOptions.conservedQuantityForLookthroughExpansion) &&
         Objects.equals(this.returnZeroPv, pricingOptions.returnZeroPv) &&
@@ -747,7 +773,7 @@ public class PricingOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize, riskBumpOptions, fundingCurveByCurrency, defaultPoolFactorsToUnity, findOrCalculateWriteThrough, inflationConvexity, allowFallbackOnModelDecline);
+    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, fixedIncomeValuationsUsingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize, riskBumpOptions, fundingCurveByCurrency, defaultPoolFactorsToUnity, findOrCalculateWriteThrough, inflationConvexity, allowFallbackOnModelDecline);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -775,6 +801,7 @@ public class PricingOptions {
     sb.append("    useChildSubHoldingKeysForPortfolioExpansion: ").append(toIndentedString(useChildSubHoldingKeysForPortfolioExpansion)).append("\n");
     sb.append("    validateDomesticAndQuoteCurrenciesAreConsistent: ").append(toIndentedString(validateDomesticAndQuoteCurrenciesAreConsistent)).append("\n");
     sb.append("    mbsValuationUsingHoldingCurrentFace: ").append(toIndentedString(mbsValuationUsingHoldingCurrentFace)).append("\n");
+    sb.append("    fixedIncomeValuationsUsingCurrentFace: ").append(toIndentedString(fixedIncomeValuationsUsingCurrentFace)).append("\n");
     sb.append("    convertSrsCashFlowsToPortfolioCurrency: ").append(toIndentedString(convertSrsCashFlowsToPortfolioCurrency)).append("\n");
     sb.append("    conservedQuantityForLookthroughExpansion: ").append(toIndentedString(conservedQuantityForLookthroughExpansion)).append("\n");
     sb.append("    returnZeroPv: ").append(toIndentedString(returnZeroPv)).append("\n");

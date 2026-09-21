@@ -46,6 +46,7 @@ import com.finbourne.sdk.JSON;
   WorkflowResponse.JSON_PROPERTY_DESCRIPTION,
   WorkflowResponse.JSON_PROPERTY_ROOT_TASK_DEFINITION_ID,
   WorkflowResponse.JSON_PROPERTY_WORKFLOW_STRUCTURE,
+  WorkflowResponse.JSON_PROPERTY_RUN_COUNT,
   WorkflowResponse.JSON_PROPERTY_PROPERTIES
 })
 
@@ -79,6 +80,11 @@ public class WorkflowResponse {
   @JsonProperty(JSON_PROPERTY_WORKFLOW_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private WorkflowStructure workflowStructure;
+
+  public static final String JSON_PROPERTY_RUN_COUNT = "runCount";
+  @JsonProperty(JSON_PROPERTY_RUN_COUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Integer runCount;
 
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
@@ -202,6 +208,25 @@ public class WorkflowResponse {
   }
 
 
+  public WorkflowResponse runCount(Integer runCount) {
+    this.runCount = runCount;
+    return this;
+  }
+
+  /**
+   * The number of times this Workflow has been run. Starts at 0 and increments by 1 each time a new run is instantiated.
+   * @return runCount
+   */
+  @javax.annotation.Nonnull
+  public Integer getRunCount() {
+    return runCount;
+  }
+
+  public void setRunCount(Integer runCount) {
+    this.runCount = runCount;
+  }
+
+
   public WorkflowResponse properties(Map<String, PerpetualProperty> properties) {
     this.properties = properties;
     return this;
@@ -244,6 +269,7 @@ public class WorkflowResponse {
         Objects.equals(this.description, workflowResponse.description) &&
         Objects.equals(this.rootTaskDefinitionId, workflowResponse.rootTaskDefinitionId) &&
         Objects.equals(this.workflowStructure, workflowResponse.workflowStructure) &&
+        Objects.equals(this.runCount, workflowResponse.runCount) &&
         Objects.equals(this.properties, workflowResponse.properties);
   }
 
@@ -253,7 +279,7 @@ public class WorkflowResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, version, displayName, description, rootTaskDefinitionId, workflowStructure, properties);
+    return Objects.hash(id, version, displayName, description, rootTaskDefinitionId, workflowStructure, runCount, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -273,6 +299,7 @@ public class WorkflowResponse {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    rootTaskDefinitionId: ").append(toIndentedString(rootTaskDefinitionId)).append("\n");
     sb.append("    workflowStructure: ").append(toIndentedString(workflowStructure)).append("\n");
+    sb.append("    runCount: ").append(toIndentedString(runCount)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();

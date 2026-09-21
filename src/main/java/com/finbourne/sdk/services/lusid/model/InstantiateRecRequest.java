@@ -96,7 +96,7 @@ public class InstantiateRecRequest {
   }
 
   /**
-   * The left effective datetime, as a date-time or a LUSID cut label. Defaults to the current date-time.
+   * The left effective datetime, as a date-time or a LUSID cut label. Defaults to the current date-time. When the definition&#39;s datePolicy.effectiveAtProgression is Series, must be strictly after the previous instance&#39;s leftEffectiveAt.
    * @return leftEffectiveAt
    */
   @javax.annotation.Nullable
@@ -115,7 +115,7 @@ public class InstantiateRecRequest {
   }
 
   /**
-   * The left asAt datetime, as a date-time or a LUSID cut label. Defaults to the current date-time.
+   * The left asAt datetime, as a date-time or a LUSID cut label. Must be omitted when the definition&#39;s datePolicy.asAtPolicy.left is Latest, as the system reconciles at the latest knowledge on every run. When it is Explicit, defaults to the current date-time and is pinned on the instance.
    * @return leftAsAt
    */
   @javax.annotation.Nullable
@@ -134,7 +134,7 @@ public class InstantiateRecRequest {
   }
 
   /**
-   * The right effective datetime, as a date-time or a LUSID cut label. Defaults to the current date-time.
+   * The right effective datetime, as a date-time or a LUSID cut label. Defaults to the current date-time. When the definition&#39;s datePolicy.effectiveAtProgression is Series, must be strictly after the previous instance&#39;s rightEffectiveAt.
    * @return rightEffectiveAt
    */
   @javax.annotation.Nullable
@@ -153,7 +153,7 @@ public class InstantiateRecRequest {
   }
 
   /**
-   * The right asAt datetime, as a date-time or a LUSID cut label. Defaults to the current date-time.
+   * The right asAt datetime, as a date-time or a LUSID cut label. Must be omitted when the definition&#39;s datePolicy.asAtPolicy.right is Latest, as the system reconciles at the latest knowledge on every run. When it is Explicit, defaults to the current date-time and is pinned on the instance.
    * @return rightAsAt
    */
   @javax.annotation.Nullable

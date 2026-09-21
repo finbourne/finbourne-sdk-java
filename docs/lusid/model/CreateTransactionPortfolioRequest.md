@@ -25,6 +25,8 @@ Name | Type | Description | Notes
 **settlementConfiguration** | [**PortfolioSettlementConfiguration**](PortfolioSettlementConfiguration.md) |  | [optional] [default to PortfolioSettlementConfiguration]
 **transactionExclusionFilter** | **String** | A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded. | [optional] [default to String]
 **taxLotSelectionCostBasis** | **String** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Supply Default to explicitly reset it; a reset or never-configured basis reads back as absent. Available values: Default, Cost, AmortisedCost. | [optional] [default to String]
+**fractionalUnitsTrueUpConfiguration** | [**FractionalUnitsTrueUpConfiguration**](FractionalUnitsTrueUpConfiguration.md) |  | [optional] [default to FractionalUnitsTrueUpConfiguration]
+**holdingsFungibility** | **String** | Whether the portfolio&#39;s holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. Defaults to Default if not specified, which currently means holdings fungibility is not applied. Supply Default to explicitly reset it; a reset or never-configured flag reads back as absent. Available values: Default, Enabled. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CreateTransactionPortfolioRequest;
@@ -52,6 +54,8 @@ ResourceId amortisationRuleSetId = new ResourceId();
 PortfolioSettlementConfiguration settlementConfiguration = new PortfolioSettlementConfiguration();
 @javax.annotation.Nullable String transactionExclusionFilter = "example transactionExclusionFilter";
 @javax.annotation.Nullable String taxLotSelectionCostBasis = "example taxLotSelectionCostBasis";
+FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration = new FractionalUnitsTrueUpConfiguration();
+@javax.annotation.Nullable String holdingsFungibility = "example holdingsFungibility";
 
 
 CreateTransactionPortfolioRequest createTransactionPortfolioRequestInstance = new CreateTransactionPortfolioRequest()
@@ -74,7 +78,9 @@ CreateTransactionPortfolioRequest createTransactionPortfolioRequestInstance = ne
     .taxRuleSetScope(taxRuleSetScope)
     .settlementConfiguration(settlementConfiguration)
     .transactionExclusionFilter(transactionExclusionFilter)
-    .taxLotSelectionCostBasis(taxLotSelectionCostBasis);
+    .taxLotSelectionCostBasis(taxLotSelectionCostBasis)
+    .fractionalUnitsTrueUpConfiguration(fractionalUnitsTrueUpConfiguration)
+    .holdingsFungibility(holdingsFungibility);
 ```
 
 

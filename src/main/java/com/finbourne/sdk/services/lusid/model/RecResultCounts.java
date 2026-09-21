@@ -36,12 +36,18 @@ import com.finbourne.sdk.JSON;
  * Counts of results broken down by the structural categories that align with the review configuration.
  */
 @JsonPropertyOrder({
+  RecResultCounts.JSON_PROPERTY_TOTAL,
   RecResultCounts.JSON_PROPERTY_OPEN_EXCEPTIONS,
   RecResultCounts.JSON_PROPERTY_CLOSED_EXCEPTIONS,
   RecResultCounts.JSON_PROPERTY_MATCHES
 })
 
 public class RecResultCounts {
+  public static final String JSON_PROPERTY_TOTAL = "total";
+  @JsonProperty(JSON_PROPERTY_TOTAL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Integer total;
+
   public static final String JSON_PROPERTY_OPEN_EXCEPTIONS = "openExceptions";
   @JsonProperty(JSON_PROPERTY_OPEN_EXCEPTIONS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -59,6 +65,25 @@ public class RecResultCounts {
 
   public RecResultCounts() {
   }
+
+  public RecResultCounts total(Integer total) {
+    this.total = total;
+    return this;
+  }
+
+  /**
+   * The total number of results in this result set, across all categories.
+   * @return total
+   */
+  @javax.annotation.Nonnull
+  public Integer getTotal() {
+    return total;
+  }
+
+  public void setTotal(Integer total) {
+    this.total = total;
+  }
+
 
   public RecResultCounts openExceptions(RecOpenExceptionCounts openExceptions) {
     this.openExceptions = openExceptions;
@@ -126,20 +151,22 @@ public class RecResultCounts {
       return false;
     }
     RecResultCounts recResultCounts = (RecResultCounts) o;
-    return Objects.equals(this.openExceptions, recResultCounts.openExceptions) &&
+    return Objects.equals(this.total, recResultCounts.total) &&
+        Objects.equals(this.openExceptions, recResultCounts.openExceptions) &&
         Objects.equals(this.closedExceptions, recResultCounts.closedExceptions) &&
         Objects.equals(this.matches, recResultCounts.matches);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(openExceptions, closedExceptions, matches);
+    return Objects.hash(total, openExceptions, closedExceptions, matches);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecResultCounts {\n");
+    sb.append("    total: ").append(toIndentedString(total)).append("\n");
     sb.append("    openExceptions: ").append(toIndentedString(openExceptions)).append("\n");
     sb.append("    closedExceptions: ").append(toIndentedString(closedExceptions)).append("\n");
     sb.append("    matches: ").append(toIndentedString(matches)).append("\n");

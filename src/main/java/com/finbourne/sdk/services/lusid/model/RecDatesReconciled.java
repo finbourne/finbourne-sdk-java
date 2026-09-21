@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,13 +32,15 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The left and right effective and asAt dates of the data reconciled in a run.
+ * The left and right effective and asAt dates of the data reconciled in a run, plus the exclusive lower bound of each side&#39;s activity window on activity-based rec types.
  */
 @JsonPropertyOrder({
   RecDatesReconciled.JSON_PROPERTY_LEFT_EFFECTIVE_AT,
   RecDatesReconciled.JSON_PROPERTY_LEFT_AS_AT,
   RecDatesReconciled.JSON_PROPERTY_RIGHT_EFFECTIVE_AT,
-  RecDatesReconciled.JSON_PROPERTY_RIGHT_AS_AT
+  RecDatesReconciled.JSON_PROPERTY_RIGHT_AS_AT,
+  RecDatesReconciled.JSON_PROPERTY_LEFT_ACTIVITY_SINCE_EFFECTIVE_AT,
+  RecDatesReconciled.JSON_PROPERTY_RIGHT_ACTIVITY_SINCE_EFFECTIVE_AT
 })
 
 public class RecDatesReconciled {
@@ -60,6 +63,16 @@ public class RecDatesReconciled {
   @JsonProperty(JSON_PROPERTY_RIGHT_AS_AT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private OffsetDateTime rightAsAt;
+
+  public static final String JSON_PROPERTY_LEFT_ACTIVITY_SINCE_EFFECTIVE_AT = "leftActivitySinceEffectiveAt";
+  @JsonProperty(JSON_PROPERTY_LEFT_ACTIVITY_SINCE_EFFECTIVE_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime leftActivitySinceEffectiveAt;
+
+  public static final String JSON_PROPERTY_RIGHT_ACTIVITY_SINCE_EFFECTIVE_AT = "rightActivitySinceEffectiveAt";
+  @JsonProperty(JSON_PROPERTY_RIGHT_ACTIVITY_SINCE_EFFECTIVE_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime rightActivitySinceEffectiveAt;
 
   public RecDatesReconciled() {
   }
@@ -140,6 +153,44 @@ public class RecDatesReconciled {
   }
 
 
+  public RecDatesReconciled leftActivitySinceEffectiveAt(OffsetDateTime leftActivitySinceEffectiveAt) {
+    this.leftActivitySinceEffectiveAt = leftActivitySinceEffectiveAt;
+    return this;
+  }
+
+  /**
+   * The exclusive lower bound of the left side&#39;s activity window, so the window is (leftActivitySinceEffectiveAt, leftEffectiveAt]. Populated only on activity-based rec types; null on point-in-time rec types and when the definition has no activity window.
+   * @return leftActivitySinceEffectiveAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getLeftActivitySinceEffectiveAt() {
+    return leftActivitySinceEffectiveAt;
+  }
+
+  public void setLeftActivitySinceEffectiveAt(OffsetDateTime leftActivitySinceEffectiveAt) {
+    this.leftActivitySinceEffectiveAt = leftActivitySinceEffectiveAt;
+  }
+
+
+  public RecDatesReconciled rightActivitySinceEffectiveAt(OffsetDateTime rightActivitySinceEffectiveAt) {
+    this.rightActivitySinceEffectiveAt = rightActivitySinceEffectiveAt;
+    return this;
+  }
+
+  /**
+   * The exclusive lower bound of the right side&#39;s activity window, so the window is (rightActivitySinceEffectiveAt, rightEffectiveAt]. Populated only on activity-based rec types; null on point-in-time rec types and when the definition has no activity window.
+   * @return rightActivitySinceEffectiveAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getRightActivitySinceEffectiveAt() {
+    return rightActivitySinceEffectiveAt;
+  }
+
+  public void setRightActivitySinceEffectiveAt(OffsetDateTime rightActivitySinceEffectiveAt) {
+    this.rightActivitySinceEffectiveAt = rightActivitySinceEffectiveAt;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -152,12 +203,25 @@ public class RecDatesReconciled {
     return Objects.equals(this.leftEffectiveAt, recDatesReconciled.leftEffectiveAt) &&
         Objects.equals(this.leftAsAt, recDatesReconciled.leftAsAt) &&
         Objects.equals(this.rightEffectiveAt, recDatesReconciled.rightEffectiveAt) &&
-        Objects.equals(this.rightAsAt, recDatesReconciled.rightAsAt);
+        Objects.equals(this.rightAsAt, recDatesReconciled.rightAsAt) &&
+        Objects.equals(this.leftActivitySinceEffectiveAt, recDatesReconciled.leftActivitySinceEffectiveAt) &&
+        Objects.equals(this.rightActivitySinceEffectiveAt, recDatesReconciled.rightActivitySinceEffectiveAt);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(leftEffectiveAt, leftAsAt, rightEffectiveAt, rightAsAt);
+    return Objects.hash(leftEffectiveAt, leftAsAt, rightEffectiveAt, rightAsAt, leftActivitySinceEffectiveAt, rightActivitySinceEffectiveAt);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -168,6 +232,8 @@ public class RecDatesReconciled {
     sb.append("    leftAsAt: ").append(toIndentedString(leftAsAt)).append("\n");
     sb.append("    rightEffectiveAt: ").append(toIndentedString(rightEffectiveAt)).append("\n");
     sb.append("    rightAsAt: ").append(toIndentedString(rightAsAt)).append("\n");
+    sb.append("    leftActivitySinceEffectiveAt: ").append(toIndentedString(leftActivitySinceEffectiveAt)).append("\n");
+    sb.append("    rightActivitySinceEffectiveAt: ").append(toIndentedString(rightActivitySinceEffectiveAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

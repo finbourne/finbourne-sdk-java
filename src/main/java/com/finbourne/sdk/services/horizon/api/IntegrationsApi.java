@@ -42,6 +42,7 @@ import com.finbourne.sdk.services.horizon.model.PagedResourceListOfIFieldMapping
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfIPropertyMapping;
 import com.finbourne.sdk.services.horizon.model.ProcessorDescription;
 import com.finbourne.sdk.services.horizon.model.ProcessorSchemaResponse;
+import com.finbourne.sdk.services.horizon.model.SetInstanceOptionalPropertyMappingResponse;
 import com.finbourne.sdk.services.horizon.model.UpdateInstanceRequest;
 import com.finbourne.sdk.services.horizon.model.WorkflowResultFieldsResponse;
 
@@ -1398,7 +1399,7 @@ public class IntegrationsApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
@@ -1417,7 +1418,7 @@ public class IntegrationsApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
@@ -1479,7 +1480,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
-     * 
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method. An unlicensed domain is answered with a 404, as for an unknown processor type.
      * @param processorType  (required)
      * @return ApiResponse&lt;ProcessorSchemaResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1488,7 +1489,7 @@ public class IntegrationsApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
@@ -1500,7 +1501,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
-     * Use any specified configuration options to override any other configuration for this request only
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method. An unlicensed domain is answered with a 404, as for an unknown processor type.Use any specified configuration options to override any other configuration for this request only
      * @param processorType  (required)
      * @return ApiResponse&lt;ProcessorSchemaResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1509,7 +1510,7 @@ public class IntegrationsApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
@@ -1521,7 +1522,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype. (asynchronously)
-     * 
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method. An unlicensed domain is answered with a 404, as for an unknown processor type.
      * @param processorType  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1530,7 +1531,7 @@ public class IntegrationsApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
@@ -1543,7 +1544,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype. (asynchronously)
-     * Use any specified configuration options to override any other configuration for this request only
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method. An unlicensed domain is answered with a 404, as for an unknown processor type.Use any specified configuration options to override any other configuration for this request only
      * @param processorType  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1552,7 +1553,7 @@ public class IntegrationsApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
@@ -1580,7 +1581,7 @@ public class IntegrationsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1597,7 +1598,7 @@ public class IntegrationsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1615,7 +1616,7 @@ public class IntegrationsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1633,7 +1634,7 @@ public class IntegrationsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1650,7 +1651,7 @@ public class IntegrationsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1667,7 +1668,7 @@ public class IntegrationsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1684,7 +1685,7 @@ public class IntegrationsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1695,7 +1696,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
-     * 
+     * The user must be authenticated and the user&#39;s domain must be licensed for integration dataflow to call this method. An unlicensed domain is answered with a 404, as for an unknown processor type.
      * @param processorType  (required)
      * @return APIgetDataflowProcessorSchemaRequest
      * @http.response.details
@@ -1703,7 +1704,7 @@ public class IntegrationsApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The processor type does not exist. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The processor type does not exist, or your domain is not licensed for integration dataflow. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
@@ -4580,7 +4581,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types.
-     * The user must be authenticated to call this method.
+     * Any authenticated user can call this method. The processor list is empty unless the user&#39;s domain is licensed for integration dataflow.
      * @return ApiResponse&lt;List&lt;ProcessorDescription&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -4599,7 +4600,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types.
-     * The user must be authenticated to call this method.Use any specified configuration options to override any other configuration for this request only
+     * Any authenticated user can call this method. The processor list is empty unless the user&#39;s domain is licensed for integration dataflow.Use any specified configuration options to override any other configuration for this request only
      * @return ApiResponse&lt;List&lt;ProcessorDescription&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -4618,7 +4619,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types. (asynchronously)
-     * The user must be authenticated to call this method.
+     * Any authenticated user can call this method. The processor list is empty unless the user&#39;s domain is licensed for integration dataflow.
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -4638,7 +4639,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types. (asynchronously)
-     * The user must be authenticated to call this method.Use any specified configuration options to override any other configuration for this request only
+     * Any authenticated user can call this method. The processor list is empty unless the user&#39;s domain is licensed for integration dataflow.Use any specified configuration options to override any other configuration for this request only
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -4779,7 +4780,7 @@ public class IntegrationsApi {
 
     /**
      * [EXPERIMENTAL] ListDataflowProcessors: List processor types.
-     * The user must be authenticated to call this method.
+     * Any authenticated user can call this method. The processor list is empty unless the user&#39;s domain is licensed for integration dataflow.
      * @return APIlistDataflowProcessorsRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -4794,6 +4795,8 @@ public class IntegrationsApi {
     }
     /**
      * Build call for listInstances
+     * @param integrationTypes Restrict results to these integration types e.g. \&quot;copp-clark\&quot;. Types the caller is not licensed and entitled for match nothing. (optional)
+     * @param filter A Finbourne filter over Name, Description and Enabled e.g. Name eq &#39;Market data&#39;. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -4801,16 +4804,19 @@ public class IntegrationsApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listInstancesCall(final ApiCallback _callback) throws ApiException {
-        return listInstancesCall( _callback, new ConfigurationOptions());
+    private HttpRequest listInstancesCall(List<String> integrationTypes, String filter, final ApiCallback _callback) throws ApiException {
+        return listInstancesCall(integrationTypes, filter,  _callback, new ConfigurationOptions());
     }
 
     /**
-     * Build call for listInstances
+     * Build call for listInstances. Use any specified configuration options to override any other configuration for this request only.
+     * @param integrationTypes Restrict results to these integration types e.g. \&quot;copp-clark\&quot;. Types the caller is not licensed and entitled for match nothing. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter A Finbourne filter over Name, Description and Enabled e.g. Name eq &#39;Market data&#39;. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -4818,11 +4824,12 @@ public class IntegrationsApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listInstancesCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listInstancesCall(List<String> integrationTypes, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4847,6 +4854,14 @@ public class IntegrationsApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (integrationTypes != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "integrationTypes", integrationTypes));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -4867,26 +4882,29 @@ public class IntegrationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listInstancesValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listInstancesCall(_callback, opts);
+    private HttpRequest listInstancesValidateBeforeCall(List<String> integrationTypes, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listInstancesCall(integrationTypes, filter, _callback, opts);
 
     }
 
     /**
      * [EXPERIMENTAL] ListInstances: List instances across all integrations.
      * The user must be authenticated to call this method.
+     * @param integrationTypes Restrict results to these integration types e.g. \&quot;copp-clark\&quot;. Types the caller is not licensed and entitled for match nothing. (optional)
+     * @param filter A Finbourne filter over Name, Description and Enabled e.g. Name eq &#39;Market data&#39;. (optional)
      * @return ApiResponse&lt;List&lt;IntegrationInstance&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<List<IntegrationInstance>> listInstancesWithHttpInfo() throws ApiException {
-        HttpRequest localVarCall = listInstancesValidateBeforeCall(null, new ConfigurationOptions());
+    private ApiResponse<List<IntegrationInstance>> listInstancesWithHttpInfo(List<String> integrationTypes, String filter) throws ApiException {
+        HttpRequest localVarCall = listInstancesValidateBeforeCall(integrationTypes, filter, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<List<IntegrationInstance>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4894,18 +4912,21 @@ public class IntegrationsApi {
     /**
      * [EXPERIMENTAL] ListInstances: List instances across all integrations.
      * The user must be authenticated to call this method.Use any specified configuration options to override any other configuration for this request only
+     * @param integrationTypes Restrict results to these integration types e.g. \&quot;copp-clark\&quot;. Types the caller is not licensed and entitled for match nothing. (optional)
+     * @param filter A Finbourne filter over Name, Description and Enabled e.g. Name eq &#39;Market data&#39;. (optional)
      * @return ApiResponse&lt;List&lt;IntegrationInstance&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<List<IntegrationInstance>> listInstancesWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listInstancesValidateBeforeCall(null, opts);
+    private ApiResponse<List<IntegrationInstance>> listInstancesWithHttpInfo(List<String> integrationTypes, String filter, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listInstancesValidateBeforeCall(integrationTypes, filter, null, opts);
         Type localVarReturnType = new TypeReference<List<IntegrationInstance>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4913,19 +4934,22 @@ public class IntegrationsApi {
     /**
      * [EXPERIMENTAL] ListInstances: List instances across all integrations. (asynchronously)
      * The user must be authenticated to call this method.
+     * @param integrationTypes Restrict results to these integration types e.g. \&quot;copp-clark\&quot;. Types the caller is not licensed and entitled for match nothing. (optional)
+     * @param filter A Finbourne filter over Name, Description and Enabled e.g. Name eq &#39;Market data&#39;. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listInstancesAsync(final ApiCallback<List<IntegrationInstance>> _callback) throws ApiException {
+    private void listInstancesAsync(List<String> integrationTypes, String filter, final ApiCallback<List<IntegrationInstance>> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listInstancesValidateBeforeCall(_callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listInstancesValidateBeforeCall(integrationTypes, filter, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<List<IntegrationInstance>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -4933,26 +4957,51 @@ public class IntegrationsApi {
     /**
      * [EXPERIMENTAL] ListInstances: List instances across all integrations. (asynchronously)
      * The user must be authenticated to call this method.Use any specified configuration options to override any other configuration for this request only
+     * @param integrationTypes Restrict results to these integration types e.g. \&quot;copp-clark\&quot;. Types the caller is not licensed and entitled for match nothing. (optional)
+     * @param filter A Finbourne filter over Name, Description and Enabled e.g. Name eq &#39;Market data&#39;. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listInstancesAsync(final ApiCallback<List<IntegrationInstance>> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listInstancesAsync(List<String> integrationTypes, String filter, final ApiCallback<List<IntegrationInstance>> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listInstancesValidateBeforeCall(_callback, opts);
+        HttpRequest localVarCall = listInstancesValidateBeforeCall(integrationTypes, filter, _callback, opts);
         Type localVarReturnType = new TypeReference<List<IntegrationInstance>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     public class APIlistInstancesRequest {
+        private List<String> integrationTypes;
+        private String filter;
 
         private APIlistInstancesRequest() {
+        }
+
+        /**
+         * Set integrationTypes
+         * @param integrationTypes Restrict results to these integration types e.g. \&quot;copp-clark\&quot;. Types the caller is not licensed and entitled for match nothing. (optional)
+         * @return APIlistInstancesRequest
+         */
+        public APIlistInstancesRequest integrationTypes(List<String> integrationTypes) {
+            this.integrationTypes = integrationTypes;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter A Finbourne filter over Name, Description and Enabled e.g. Name eq &#39;Market data&#39;. (optional)
+         * @return APIlistInstancesRequest
+         */
+        public APIlistInstancesRequest filter(String filter) {
+            this.filter = filter;
+            return this;
         }
 
         /**
@@ -4964,12 +5013,13 @@ public class IntegrationsApi {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listInstancesCall(_callback);
+            return listInstancesCall(integrationTypes, filter, _callback);
         }
 
         /**
@@ -4980,12 +5030,13 @@ public class IntegrationsApi {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
         public List<IntegrationInstance> execute() throws ApiException {
-            ApiResponse<List<IntegrationInstance>> localVarResp = listInstancesWithHttpInfo();
+            ApiResponse<List<IntegrationInstance>> localVarResp = listInstancesWithHttpInfo(integrationTypes, filter);
             return localVarResp.getData();
         }
 
@@ -4997,12 +5048,13 @@ public class IntegrationsApi {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
         public List<IntegrationInstance> execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<List<IntegrationInstance>> localVarResp = listInstancesWithHttpInfo(opts);
+            ApiResponse<List<IntegrationInstance>> localVarResp = listInstancesWithHttpInfo(integrationTypes, filter, opts);
             return localVarResp.getData();
         }
 
@@ -5014,12 +5066,13 @@ public class IntegrationsApi {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<IntegrationInstance>> executeWithHttpInfo() throws ApiException {
-            return listInstancesWithHttpInfo();
+            return listInstancesWithHttpInfo(integrationTypes, filter);
         }
 
         /**
@@ -5030,12 +5083,13 @@ public class IntegrationsApi {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<IntegrationInstance>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listInstancesWithHttpInfo(opts);
+            return listInstancesWithHttpInfo(integrationTypes, filter, opts);
         }
 
         /**
@@ -5046,12 +5100,13 @@ public class IntegrationsApi {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
         public void executeAsync(final ApiCallback<List<IntegrationInstance>> _callback) throws ApiException {
-            listInstancesAsync(_callback);
+            listInstancesAsync(integrationTypes, filter, _callback);
         }
 
         /**
@@ -5062,12 +5117,13 @@ public class IntegrationsApi {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
         public void executeAsync(final ApiCallback<List<IntegrationInstance>> _callback, ConfigurationOptions opts) throws ApiException {
-            listInstancesAsync(_callback, opts);
+            listInstancesAsync(integrationTypes, filter, _callback, opts);
         }
     }
 
@@ -5079,6 +5135,7 @@ public class IntegrationsApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The requested instance(s) do not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -5473,7 +5530,7 @@ public class IntegrationsApi {
      * @param instanceId Identifier of the instance (required)
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
      * @param requestBody Properties to be included and any overrides (optional)
-     * @return ApiResponse&lt;Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;&gt;
+     * @return ApiResponse&lt;SetInstanceOptionalPropertyMappingResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -5484,9 +5541,9 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Map<String, LusidPropertyDefinitionOverridesByType>> setInstanceOptionalPropertyMappingWithHttpInfo(String instanceId, String integration, Map<String, LusidPropertyDefinitionOverridesByType> requestBody) throws ApiException {
+    private ApiResponse<SetInstanceOptionalPropertyMappingResponse> setInstanceOptionalPropertyMappingWithHttpInfo(String instanceId, String integration, Map<String, LusidPropertyDefinitionOverridesByType> requestBody) throws ApiException {
         HttpRequest localVarCall = setInstanceOptionalPropertyMappingValidateBeforeCall(instanceId, integration, requestBody, null, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<Map<String, LusidPropertyDefinitionOverridesByType>>(){}.getType();
+        Type localVarReturnType = new TypeReference<SetInstanceOptionalPropertyMappingResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -5496,7 +5553,7 @@ public class IntegrationsApi {
      * @param instanceId Identifier of the instance (required)
      * @param integration The type of the integration e.g. \&quot;copp-clark\&quot;. (required)
      * @param requestBody Properties to be included and any overrides (optional)
-     * @return ApiResponse&lt;Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;&gt;
+     * @return ApiResponse&lt;SetInstanceOptionalPropertyMappingResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -5507,9 +5564,9 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Map<String, LusidPropertyDefinitionOverridesByType>> setInstanceOptionalPropertyMappingWithHttpInfo(String instanceId, String integration, Map<String, LusidPropertyDefinitionOverridesByType> requestBody, ConfigurationOptions opts) throws ApiException {
+    private ApiResponse<SetInstanceOptionalPropertyMappingResponse> setInstanceOptionalPropertyMappingWithHttpInfo(String instanceId, String integration, Map<String, LusidPropertyDefinitionOverridesByType> requestBody, ConfigurationOptions opts) throws ApiException {
         HttpRequest localVarCall = setInstanceOptionalPropertyMappingValidateBeforeCall(instanceId, integration, requestBody, null, opts);
-        Type localVarReturnType = new TypeReference<Map<String, LusidPropertyDefinitionOverridesByType>>(){}.getType();
+        Type localVarReturnType = new TypeReference<SetInstanceOptionalPropertyMappingResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -5530,10 +5587,10 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void setInstanceOptionalPropertyMappingAsync(String instanceId, String integration, Map<String, LusidPropertyDefinitionOverridesByType> requestBody, final ApiCallback<Map<String, LusidPropertyDefinitionOverridesByType>> _callback) throws ApiException {
+    private void setInstanceOptionalPropertyMappingAsync(String instanceId, String integration, Map<String, LusidPropertyDefinitionOverridesByType> requestBody, final ApiCallback<SetInstanceOptionalPropertyMappingResponse> _callback) throws ApiException {
 
         HttpRequest localVarCall = setInstanceOptionalPropertyMappingValidateBeforeCall(instanceId, integration, requestBody, _callback, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<Map<String, LusidPropertyDefinitionOverridesByType>>(){}.getType();
+        Type localVarReturnType = new TypeReference<SetInstanceOptionalPropertyMappingResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
@@ -5554,10 +5611,10 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void setInstanceOptionalPropertyMappingAsync(String instanceId, String integration, Map<String, LusidPropertyDefinitionOverridesByType> requestBody, final ApiCallback<Map<String, LusidPropertyDefinitionOverridesByType>> _callback, ConfigurationOptions opts) throws ApiException {
+    private void setInstanceOptionalPropertyMappingAsync(String instanceId, String integration, Map<String, LusidPropertyDefinitionOverridesByType> requestBody, final ApiCallback<SetInstanceOptionalPropertyMappingResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
         HttpRequest localVarCall = setInstanceOptionalPropertyMappingValidateBeforeCall(instanceId, integration, requestBody, _callback, opts);
-        Type localVarReturnType = new TypeReference<Map<String, LusidPropertyDefinitionOverridesByType>>(){}.getType();
+        Type localVarReturnType = new TypeReference<SetInstanceOptionalPropertyMappingResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
@@ -5601,7 +5658,7 @@ public class IntegrationsApi {
 
         /**
          * Execute setInstanceOptionalPropertyMapping request
-         * @return Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;
+         * @return SetInstanceOptionalPropertyMappingResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -5612,14 +5669,14 @@ public class IntegrationsApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public Map<String, LusidPropertyDefinitionOverridesByType> execute() throws ApiException {
-            ApiResponse<Map<String, LusidPropertyDefinitionOverridesByType>> localVarResp = setInstanceOptionalPropertyMappingWithHttpInfo(instanceId, integration, requestBody);
+        public SetInstanceOptionalPropertyMappingResponse execute() throws ApiException {
+            ApiResponse<SetInstanceOptionalPropertyMappingResponse> localVarResp = setInstanceOptionalPropertyMappingWithHttpInfo(instanceId, integration, requestBody);
             return localVarResp.getData();
         }
 
         /**
          * Execute setInstanceOptionalPropertyMapping request. Use any specified configuration options to override any other configuration for this request only.
-         * @return Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;
+         * @return SetInstanceOptionalPropertyMappingResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -5630,14 +5687,14 @@ public class IntegrationsApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public Map<String, LusidPropertyDefinitionOverridesByType> execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<Map<String, LusidPropertyDefinitionOverridesByType>> localVarResp = setInstanceOptionalPropertyMappingWithHttpInfo(instanceId, integration, requestBody, opts);
+        public SetInstanceOptionalPropertyMappingResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<SetInstanceOptionalPropertyMappingResponse> localVarResp = setInstanceOptionalPropertyMappingWithHttpInfo(instanceId, integration, requestBody, opts);
             return localVarResp.getData();
         }
 
         /**
          * Execute setInstanceOptionalPropertyMapping request with HTTP info returned
-         * @return ApiResponse&lt;Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;&gt;
+         * @return ApiResponse&lt;SetInstanceOptionalPropertyMappingResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -5648,13 +5705,13 @@ public class IntegrationsApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<Map<String, LusidPropertyDefinitionOverridesByType>> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<SetInstanceOptionalPropertyMappingResponse> executeWithHttpInfo() throws ApiException {
             return setInstanceOptionalPropertyMappingWithHttpInfo(instanceId, integration, requestBody);
         }
 
         /**
          * Execute setInstanceOptionalPropertyMapping request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
-         * @return ApiResponse&lt;Map&lt;String, LusidPropertyDefinitionOverridesByType&gt;&gt;
+         * @return ApiResponse&lt;SetInstanceOptionalPropertyMappingResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -5665,7 +5722,7 @@ public class IntegrationsApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<Map<String, LusidPropertyDefinitionOverridesByType>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        public ApiResponse<SetInstanceOptionalPropertyMappingResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
             return setInstanceOptionalPropertyMappingWithHttpInfo(instanceId, integration, requestBody, opts);
         }
 
@@ -5682,7 +5739,7 @@ public class IntegrationsApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<Map<String, LusidPropertyDefinitionOverridesByType>> _callback) throws ApiException {
+        public void executeAsync(final ApiCallback<SetInstanceOptionalPropertyMappingResponse> _callback) throws ApiException {
             setInstanceOptionalPropertyMappingAsync(instanceId, integration, requestBody, _callback);
         }
 
@@ -5699,7 +5756,7 @@ public class IntegrationsApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<Map<String, LusidPropertyDefinitionOverridesByType>> _callback, ConfigurationOptions opts) throws ApiException {
+        public void executeAsync(final ApiCallback<SetInstanceOptionalPropertyMappingResponse> _callback, ConfigurationOptions opts) throws ApiException {
             setInstanceOptionalPropertyMappingAsync(instanceId, integration, requestBody, _callback, opts);
         }
     }

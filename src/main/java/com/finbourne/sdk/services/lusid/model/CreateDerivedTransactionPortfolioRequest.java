@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.FractionalUnitsTrueUpConfiguration;
 import com.finbourne.sdk.services.lusid.model.InstrumentEventConfiguration;
 import com.finbourne.sdk.services.lusid.model.PortfolioSettlementConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
@@ -57,7 +58,9 @@ import com.finbourne.sdk.JSON;
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_INSTRUMENT_EVENT_CONFIGURATION,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_SETTLEMENT_CONFIGURATION,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
-  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_HOLDINGS_FUNGIBILITY
 })
 
 public class CreateDerivedTransactionPortfolioRequest {
@@ -212,6 +215,16 @@ public class CreateDerivedTransactionPortfolioRequest {
   @JsonProperty(JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String taxLotSelectionCostBasis;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION = "fractionalUnitsTrueUpConfiguration";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration;
+
+  public static final String JSON_PROPERTY_HOLDINGS_FUNGIBILITY = "holdingsFungibility";
+  @JsonProperty(JSON_PROPERTY_HOLDINGS_FUNGIBILITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String holdingsFungibility;
 
   public CreateDerivedTransactionPortfolioRequest() {
   }
@@ -574,6 +587,44 @@ public class CreateDerivedTransactionPortfolioRequest {
   }
 
 
+  public CreateDerivedTransactionPortfolioRequest fractionalUnitsTrueUpConfiguration(FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration) {
+    this.fractionalUnitsTrueUpConfiguration = fractionalUnitsTrueUpConfiguration;
+    return this;
+  }
+
+  /**
+   * Get fractionalUnitsTrueUpConfiguration
+   * @return fractionalUnitsTrueUpConfiguration
+   */
+  @javax.annotation.Nullable
+  public FractionalUnitsTrueUpConfiguration getFractionalUnitsTrueUpConfiguration() {
+    return fractionalUnitsTrueUpConfiguration;
+  }
+
+  public void setFractionalUnitsTrueUpConfiguration(FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration) {
+    this.fractionalUnitsTrueUpConfiguration = fractionalUnitsTrueUpConfiguration;
+  }
+
+
+  public CreateDerivedTransactionPortfolioRequest holdingsFungibility(String holdingsFungibility) {
+    this.holdingsFungibility = holdingsFungibility;
+    return this;
+  }
+
+  /**
+   * Whether the portfolio&#39;s holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. Defaults to Default if not specified, which currently means holdings fungibility is not applied. Supply Default to explicitly reset it; a reset or never-configured flag reads back as absent. Available values: Default, Enabled.
+   * @return holdingsFungibility
+   */
+  @javax.annotation.Nullable
+  public String getHoldingsFungibility() {
+    return holdingsFungibility;
+  }
+
+  public void setHoldingsFungibility(String holdingsFungibility) {
+    this.holdingsFungibility = holdingsFungibility;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -600,7 +651,9 @@ public class CreateDerivedTransactionPortfolioRequest {
         Objects.equals(this.instrumentEventConfiguration, createDerivedTransactionPortfolioRequest.instrumentEventConfiguration) &&
         Objects.equals(this.settlementConfiguration, createDerivedTransactionPortfolioRequest.settlementConfiguration) &&
         Objects.equals(this.transactionExclusionFilter, createDerivedTransactionPortfolioRequest.transactionExclusionFilter) &&
-        Objects.equals(this.taxLotSelectionCostBasis, createDerivedTransactionPortfolioRequest.taxLotSelectionCostBasis);
+        Objects.equals(this.taxLotSelectionCostBasis, createDerivedTransactionPortfolioRequest.taxLotSelectionCostBasis) &&
+        Objects.equals(this.fractionalUnitsTrueUpConfiguration, createDerivedTransactionPortfolioRequest.fractionalUnitsTrueUpConfiguration) &&
+        Objects.equals(this.holdingsFungibility, createDerivedTransactionPortfolioRequest.holdingsFungibility);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -609,7 +662,7 @@ public class CreateDerivedTransactionPortfolioRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, code, parentPortfolioId, created, enablementDate, corporateActionSourceId, accountingMethod, subHoldingKeys, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, instrumentEventConfiguration, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis);
+    return Objects.hash(displayName, description, code, parentPortfolioId, created, enablementDate, corporateActionSourceId, accountingMethod, subHoldingKeys, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, instrumentEventConfiguration, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -641,6 +694,8 @@ public class CreateDerivedTransactionPortfolioRequest {
     sb.append("    settlementConfiguration: ").append(toIndentedString(settlementConfiguration)).append("\n");
     sb.append("    transactionExclusionFilter: ").append(toIndentedString(transactionExclusionFilter)).append("\n");
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
+    sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
+    sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
     sb.append("}");
     return sb.toString();
   }

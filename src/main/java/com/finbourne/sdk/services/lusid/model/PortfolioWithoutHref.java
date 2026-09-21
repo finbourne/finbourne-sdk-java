@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.FractionalUnitsTrueUpConfiguration;
 import com.finbourne.sdk.services.lusid.model.InstrumentEventConfiguration;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.PortfolioSettlementConfiguration;
@@ -71,6 +72,8 @@ import com.finbourne.sdk.JSON;
   PortfolioWithoutHref.JSON_PROPERTY_SETTLEMENT_CONFIGURATION,
   PortfolioWithoutHref.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
   PortfolioWithoutHref.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
+  PortfolioWithoutHref.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
+  PortfolioWithoutHref.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
   PortfolioWithoutHref.JSON_PROPERTY_LINKS
 })
 
@@ -294,6 +297,16 @@ public class PortfolioWithoutHref {
   @JsonProperty(JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String taxLotSelectionCostBasis;
+
+  public static final String JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION = "fractionalUnitsTrueUpConfiguration";
+  @JsonProperty(JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration;
+
+  public static final String JSON_PROPERTY_HOLDINGS_FUNGIBILITY = "holdingsFungibility";
+  @JsonProperty(JSON_PROPERTY_HOLDINGS_FUNGIBILITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String holdingsFungibility;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -783,6 +796,44 @@ public class PortfolioWithoutHref {
   }
 
 
+  public PortfolioWithoutHref fractionalUnitsTrueUpConfiguration(FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration) {
+    this.fractionalUnitsTrueUpConfiguration = fractionalUnitsTrueUpConfiguration;
+    return this;
+  }
+
+  /**
+   * Get fractionalUnitsTrueUpConfiguration
+   * @return fractionalUnitsTrueUpConfiguration
+   */
+  @javax.annotation.Nullable
+  public FractionalUnitsTrueUpConfiguration getFractionalUnitsTrueUpConfiguration() {
+    return fractionalUnitsTrueUpConfiguration;
+  }
+
+  public void setFractionalUnitsTrueUpConfiguration(FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration) {
+    this.fractionalUnitsTrueUpConfiguration = fractionalUnitsTrueUpConfiguration;
+  }
+
+
+  public PortfolioWithoutHref holdingsFungibility(String holdingsFungibility) {
+    this.holdingsFungibility = holdingsFungibility;
+    return this;
+  }
+
+  /**
+   * Whether the portfolio&#39;s holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. Defaults to Default if not specified, which currently means holdings fungibility is not applied. Supply Default to explicitly reset it; a reset or never-configured flag reads back as absent. Available values: Default, Enabled.
+   * @return holdingsFungibility
+   */
+  @javax.annotation.Nullable
+  public String getHoldingsFungibility() {
+    return holdingsFungibility;
+  }
+
+  public void setHoldingsFungibility(String holdingsFungibility) {
+    this.holdingsFungibility = holdingsFungibility;
+  }
+
+
   public PortfolioWithoutHref links(List<Link> links) {
     this.links = links;
     return this;
@@ -843,6 +894,8 @@ public class PortfolioWithoutHref {
         Objects.equals(this.settlementConfiguration, portfolioWithoutHref.settlementConfiguration) &&
         Objects.equals(this.transactionExclusionFilter, portfolioWithoutHref.transactionExclusionFilter) &&
         Objects.equals(this.taxLotSelectionCostBasis, portfolioWithoutHref.taxLotSelectionCostBasis) &&
+        Objects.equals(this.fractionalUnitsTrueUpConfiguration, portfolioWithoutHref.fractionalUnitsTrueUpConfiguration) &&
+        Objects.equals(this.holdingsFungibility, portfolioWithoutHref.holdingsFungibility) &&
         Objects.equals(this.links, portfolioWithoutHref.links);
   }
 
@@ -852,7 +905,7 @@ public class PortfolioWithoutHref {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, type, displayName, description, created, enablementDate, parentPortfolioId, version, stagedModifications, isDerived, baseCurrency, properties, relationships, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, links);
+    return Objects.hash(id, type, displayName, description, created, enablementDate, parentPortfolioId, version, stagedModifications, isDerived, baseCurrency, properties, relationships, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -890,6 +943,8 @@ public class PortfolioWithoutHref {
     sb.append("    settlementConfiguration: ").append(toIndentedString(settlementConfiguration)).append("\n");
     sb.append("    transactionExclusionFilter: ").append(toIndentedString(transactionExclusionFilter)).append("\n");
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
+    sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
+    sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

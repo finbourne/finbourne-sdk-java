@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.LusidEntityDataset;
 import com.finbourne.sdk.services.lusid.model.PortfolioHoldingDataset;
+import com.finbourne.sdk.services.lusid.model.PortfolioTransactionDataset;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -32,12 +33,13 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * RunCheckRequest
+ * Exactly one dataset must be provided, matching the check definition&#39;s datasetSchema.
  */
 @JsonPropertyOrder({
   RunCheckRequest.JSON_PROPERTY_LUSID_ENTITY_DATASET,
   RunCheckRequest.JSON_PROPERTY_LIMIT_INDIVIDUAL_BREACHES_PER_RULE,
-  RunCheckRequest.JSON_PROPERTY_PORTFOLIO_HOLDING_DATASET
+  RunCheckRequest.JSON_PROPERTY_PORTFOLIO_HOLDING_DATASET,
+  RunCheckRequest.JSON_PROPERTY_PORTFOLIO_TRANSACTION_DATASET
 })
 
 public class RunCheckRequest {
@@ -55,6 +57,11 @@ public class RunCheckRequest {
   @JsonProperty(JSON_PROPERTY_PORTFOLIO_HOLDING_DATASET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private PortfolioHoldingDataset portfolioHoldingDataset;
+
+  public static final String JSON_PROPERTY_PORTFOLIO_TRANSACTION_DATASET = "portfolioTransactionDataset";
+  @JsonProperty(JSON_PROPERTY_PORTFOLIO_TRANSACTION_DATASET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PortfolioTransactionDataset portfolioTransactionDataset;
 
   public RunCheckRequest() {
   }
@@ -116,6 +123,25 @@ public class RunCheckRequest {
   }
 
 
+  public RunCheckRequest portfolioTransactionDataset(PortfolioTransactionDataset portfolioTransactionDataset) {
+    this.portfolioTransactionDataset = portfolioTransactionDataset;
+    return this;
+  }
+
+  /**
+   * Get portfolioTransactionDataset
+   * @return portfolioTransactionDataset
+   */
+  @javax.annotation.Nullable
+  public PortfolioTransactionDataset getPortfolioTransactionDataset() {
+    return portfolioTransactionDataset;
+  }
+
+  public void setPortfolioTransactionDataset(PortfolioTransactionDataset portfolioTransactionDataset) {
+    this.portfolioTransactionDataset = portfolioTransactionDataset;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -127,12 +153,13 @@ public class RunCheckRequest {
     RunCheckRequest runCheckRequest = (RunCheckRequest) o;
     return Objects.equals(this.lusidEntityDataset, runCheckRequest.lusidEntityDataset) &&
         Objects.equals(this.limitIndividualBreachesPerRule, runCheckRequest.limitIndividualBreachesPerRule) &&
-        Objects.equals(this.portfolioHoldingDataset, runCheckRequest.portfolioHoldingDataset);
+        Objects.equals(this.portfolioHoldingDataset, runCheckRequest.portfolioHoldingDataset) &&
+        Objects.equals(this.portfolioTransactionDataset, runCheckRequest.portfolioTransactionDataset);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(lusidEntityDataset, limitIndividualBreachesPerRule, portfolioHoldingDataset);
+    return Objects.hash(lusidEntityDataset, limitIndividualBreachesPerRule, portfolioHoldingDataset, portfolioTransactionDataset);
   }
 
   @Override
@@ -142,6 +169,7 @@ public class RunCheckRequest {
     sb.append("    lusidEntityDataset: ").append(toIndentedString(lusidEntityDataset)).append("\n");
     sb.append("    limitIndividualBreachesPerRule: ").append(toIndentedString(limitIndividualBreachesPerRule)).append("\n");
     sb.append("    portfolioHoldingDataset: ").append(toIndentedString(portfolioHoldingDataset)).append("\n");
+    sb.append("    portfolioTransactionDataset: ").append(toIndentedString(portfolioTransactionDataset)).append("\n");
     sb.append("}");
     return sb.toString();
   }

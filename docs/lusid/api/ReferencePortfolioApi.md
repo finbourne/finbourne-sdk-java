@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createReferencePortfolio**](ReferencePortfolioApi.md#createReferencePortfolio) | **POST** /api/api/referenceportfolios/{scope} | CreateReferencePortfolio: Create reference portfolio |
+| [**deleteReferencePortfolioConstituentAdjustment**](ReferencePortfolioApi.md#deleteReferencePortfolioConstituentAdjustment) | **DELETE** /api/api/referenceportfolios/{scope}/{code}/constituentsadjustment | DeleteReferencePortfolioConstituentAdjustment: Delete constituents adjustment |
 | [**getReferencePortfolioConstituents**](ReferencePortfolioApi.md#getReferencePortfolioConstituents) | **GET** /api/api/referenceportfolios/{scope}/{code}/constituents | GetReferencePortfolioConstituents: Get reference portfolio constituents |
 | [**listConstituentsAdjustments**](ReferencePortfolioApi.md#listConstituentsAdjustments) | **GET** /api/api/referenceportfolios/{scope}/{code}/constituentsadjustments | ListConstituentsAdjustments: List constituents adjustments |
 | [**upsertReferencePortfolioConstituentProperties**](ReferencePortfolioApi.md#upsertReferencePortfolioConstituentProperties) | **POST** /api/api/referenceportfolios/{scope}/{code}/constituents/properties | [EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties |
@@ -85,6 +86,87 @@ public class ReferencePortfolioApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | The created reference portfolio, with populated id |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## deleteReferencePortfolioConstituentAdjustment
+
+> DeletedEntityResponse deleteReferencePortfolioConstituentAdjustment(scope, code, effectiveAt)
+
+DeleteReferencePortfolioConstituentAdjustment: Delete constituents adjustment
+
+Delete the constituents adjustment made to a reference portfolio at the specified effective  datetime. After deletion the constituents in effect revert to the previous effective-dated  adjustment, or to none if there is no earlier adjustment.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.ReferencePortfolioApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class ReferencePortfolioApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        ReferencePortfolioApi apiInstance = apiFactory.build(ReferencePortfolioApi.class);
+        String scope = "scope_example"; // String | The scope of the reference portfolio.
+        String code = "code_example"; // String | The code of the reference portfolio. Together with the scope this uniquely              identifies the reference portfolio.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which the constituents adjustment was made.
+        try {
+            // uncomment the below to set overrides at the request level
+            // DeletedEntityResponse result = apiInstance.deleteReferencePortfolioConstituentAdjustment(scope, code, effectiveAt).execute(opts);
+
+            DeletedEntityResponse result = apiInstance.deleteReferencePortfolioConstituentAdjustment(scope, code, effectiveAt).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ReferencePortfolioApi#deleteReferencePortfolioConstituentAdjustment");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the reference portfolio. | |
+| **code** | **String**| The code of the reference portfolio. Together with the scope this uniquely              identifies the reference portfolio. | |
+| **effectiveAt** | **String**| The effective datetime or cut label at which the constituents adjustment was made. | |
+
+### Return type
+
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The datetime that the constituents adjustment was deleted |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

@@ -33,7 +33,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Termination of a derivative at fair settlement value before or at its own maturity, triggered by the  economic life of a referenced underlying ending first (redemption, tender, repurchase offer, spin-off,  conversion, exchange offer), or by the derivative maturing while the underlying still has remaining  value. Synthesised by the instrument itself; the settlement amounts are painted on by post-processing  and the resulting transaction closes the holding and settles the net amount.
+ * Termination of a derivative at fair settlement value before or at its own maturity, triggered by the  economic life of a referenced underlying ending first (a bond&#39;s redemption, tender, repurchase offer or  conversion; an equity&#39;s merger, spin-off or exchange offer), or by the derivative maturing while the  underlying still has remaining value. Synthesised by the instrument itself; the settlement amounts are  painted on by post-processing and the resulting transaction closes the holding and settles the net amount.
  */
 @JsonPropertyOrder({
   TerminationEvent.JSON_PROPERTY_EFFECTIVE_DATE,
@@ -44,7 +44,8 @@ import com.finbourne.sdk.JSON;
   TerminationEvent.JSON_PROPERTY_SETTLEMENT_METHOD,
   TerminationEvent.JSON_PROPERTY_ASSET_SETTLEMENT_AMOUNT,
   TerminationEvent.JSON_PROPERTY_FUNDING_ACCRUED_AMOUNT,
-  TerminationEvent.JSON_PROPERTY_TERMINATION_AMOUNT
+  TerminationEvent.JSON_PROPERTY_TERMINATION_AMOUNT,
+  TerminationEvent.JSON_PROPERTY_TERMINATION_PRICE
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -98,6 +99,11 @@ public class TerminationEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_TERMINATION_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal terminationAmount;
+
+  public static final String JSON_PROPERTY_TERMINATION_PRICE = "terminationPrice";
+  @JsonProperty(JSON_PROPERTY_TERMINATION_PRICE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal terminationPrice;
 
   public TerminationEvent() {
   }
@@ -165,7 +171,7 @@ public class TerminationEvent extends InstrumentEvent {
   }
 
   /**
-   * The type of the event on the underlying that triggered the termination, for provenance. Required.  A maturity-triggered termination is marked with the MaturityEvent type. Available values: Unknown, CashDividendEvent, StockSplitEvent, BondDefaultEvent, Exercise, Trigger, Default, Reset, Coupon, Amortisation, Principal, Start, EarlyClose, Maturity, CloseEvent, OpenEvent, CorporateAction, Premium, CashSettlement, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, TenderEvent, IntermediateSecuritiesDistributionEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, CallOnIntermediateSecuritiesEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoPartialClosureEvent, ConversionEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, DepositRollEvent, EarlyCloseOutEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, ChangeEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, AmendCommitmentEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent.
+   * The type of the event on the underlying that triggered the termination, for provenance. Required.  A maturity-triggered termination is marked with the MaturityEvent type. Available values: Unknown, CashDividendEvent, StockSplitEvent, BondDefaultEvent, Exercise, Trigger, Default, Reset, Coupon, Amortisation, Principal, Start, EarlyClose, Maturity, CloseEvent, OpenEvent, CorporateAction, Premium, CashSettlement, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, TenderEvent, IntermediateSecuritiesDistributionEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, CallOnIntermediateSecuritiesEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoPartialClosureEvent, ConversionEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, DepositRollEvent, EarlyCloseOutEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, ChangeEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, AmendCommitmentEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent.
    * @return triggeringEventType
    */
   @javax.annotation.Nonnull
@@ -273,6 +279,25 @@ public class TerminationEvent extends InstrumentEvent {
   }
 
 
+  public TerminationEvent terminationPrice(java.math.BigDecimal terminationPrice) {
+    this.terminationPrice = terminationPrice;
+    return this;
+  }
+
+  /**
+   * The per-unit price of the underlying the asset side settled at, for a price-return termination:  the triggering event&#39;s chosen cash-offer price when it has one, otherwise the underlying&#39;s last  available quote on or before the effective date. Optional — absent for formula-based settlements  and until enriched by post-processing.
+   * @return terminationPrice
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getTerminationPrice() {
+    return terminationPrice;
+  }
+
+  public void setTerminationPrice(java.math.BigDecimal terminationPrice) {
+    this.terminationPrice = terminationPrice;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -291,6 +316,7 @@ public class TerminationEvent extends InstrumentEvent {
         (this.assetSettlementAmount == null ? terminationEvent.assetSettlementAmount == null : (terminationEvent.assetSettlementAmount != null && this.assetSettlementAmount.compareTo(terminationEvent.getAssetSettlementAmount()) == 0)) &&
         (this.fundingAccruedAmount == null ? terminationEvent.fundingAccruedAmount == null : (terminationEvent.fundingAccruedAmount != null && this.fundingAccruedAmount.compareTo(terminationEvent.getFundingAccruedAmount()) == 0)) &&
         (this.terminationAmount == null ? terminationEvent.terminationAmount == null : (terminationEvent.terminationAmount != null && this.terminationAmount.compareTo(terminationEvent.getTerminationAmount()) == 0)) &&
+        (this.terminationPrice == null ? terminationEvent.terminationPrice == null : (terminationEvent.terminationPrice != null && this.terminationPrice.compareTo(terminationEvent.getTerminationPrice()) == 0)) &&
         super.equals(o);
   }
 
@@ -300,7 +326,7 @@ public class TerminationEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(effectiveDate, settlementDate, settlementCurrency, triggeringEventType, triggeringEventId, settlementMethod, assetSettlementAmount, fundingAccruedAmount, terminationAmount, super.hashCode());
+    return Objects.hash(effectiveDate, settlementDate, settlementCurrency, triggeringEventType, triggeringEventId, settlementMethod, assetSettlementAmount, fundingAccruedAmount, terminationAmount, terminationPrice, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -324,6 +350,7 @@ public class TerminationEvent extends InstrumentEvent {
     sb.append("    assetSettlementAmount: ").append(toIndentedString(assetSettlementAmount)).append("\n");
     sb.append("    fundingAccruedAmount: ").append(toIndentedString(fundingAccruedAmount)).append("\n");
     sb.append("    terminationAmount: ").append(toIndentedString(terminationAmount)).append("\n");
+    sb.append("    terminationPrice: ").append(toIndentedString(terminationPrice)).append("\n");
     sb.append("}");
     return sb.toString();
   }

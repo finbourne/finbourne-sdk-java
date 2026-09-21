@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **description** | **String** | Human readable description | [optional] [default to String]
 **rootTaskDefinitionId** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
 **workflowStructure** | [**WorkflowStructure**](WorkflowStructure.md) |  | [default to WorkflowStructure]
+**runCount** | **Integer** | The number of times this Workflow has been run. Starts at 0 and increments by 1 each time a new run is instantiated. | [default to Integer]
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | The properties of the Workflow, keyed by property key. | [optional] [default to Map<String, PerpetualProperty>]
 
 ```java
@@ -26,6 +27,7 @@ String displayName = "example displayName";
 @javax.annotation.Nullable String description = "example description";
 ResourceId rootTaskDefinitionId = new ResourceId();
 WorkflowStructure workflowStructure = new WorkflowStructure();
+Integer runCount = new Integer("100.00");
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 
 
@@ -36,6 +38,7 @@ WorkflowResponse workflowResponseInstance = new WorkflowResponse()
     .description(description)
     .rootTaskDefinitionId(rootTaskDefinitionId)
     .workflowStructure(workflowStructure)
+    .runCount(runCount)
     .properties(properties);
 ```
 

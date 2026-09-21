@@ -7,7 +7,7 @@ Response containing details of a single run for an instance.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **runId** | [**UUID**](UUID.md) |  | [default to UUID]
-**batchReferenceId** | [**UUID**](UUID.md) |  | [default to UUID]
+**referenceId** | [**UUID**](UUID.md) |  | [default to UUID]
 **attempt** | **Integer** |  | [optional] [default to Integer]
 **startTime** | [**OffsetDateTime**](OffsetDateTime.md) |  | [default to OffsetDateTime]
 **endTime** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
@@ -27,7 +27,7 @@ import java.lang.System;
 import java.net.URI;
 
 UUID runId = "example runId";
-UUID batchReferenceId = "example batchReferenceId";
+UUID referenceId = "example referenceId";
 @javax.annotation.Nullable Integer attempt = new Integer("100.00");
 OffsetDateTime startTime = OffsetDateTime.now();
 @javax.annotation.Nullable OffsetDateTime endTime = OffsetDateTime.now();
@@ -43,7 +43,7 @@ Integer failedFiles = new Integer("100.00");
 
 InstanceRunResponse instanceRunResponseInstance = new InstanceRunResponse()
     .runId(runId)
-    .batchReferenceId(batchReferenceId)
+    .referenceId(referenceId)
     .attempt(attempt)
     .startTime(startTime)
     .endTime(endTime)

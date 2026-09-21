@@ -39,7 +39,8 @@ import com.finbourne.sdk.JSON;
   IntegrationDescription.JSON_PROPERTY_NAME,
   IntegrationDescription.JSON_PROPERTY_DESCRIPTION,
   IntegrationDescription.JSON_PROPERTY_SUPPORTED_TRIGGER_TYPES,
-  IntegrationDescription.JSON_PROPERTY_LICENSED
+  IntegrationDescription.JSON_PROPERTY_LICENSED,
+  IntegrationDescription.JSON_PROPERTY_SUPPORTS_EFFECTIVE_FROM_OVERRIDE
 })
 
 public class IntegrationDescription {
@@ -67,6 +68,11 @@ public class IntegrationDescription {
   @JsonProperty(JSON_PROPERTY_LICENSED)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Boolean licensed;
+
+  public static final String JSON_PROPERTY_SUPPORTS_EFFECTIVE_FROM_OVERRIDE = "supportsEffectiveFromOverride";
+  @JsonProperty(JSON_PROPERTY_SUPPORTS_EFFECTIVE_FROM_OVERRIDE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Boolean supportsEffectiveFromOverride;
 
   public IntegrationDescription() {
   }
@@ -174,6 +180,25 @@ public class IntegrationDescription {
   }
 
 
+  public IntegrationDescription supportsEffectiveFromOverride(Boolean supportsEffectiveFromOverride) {
+    this.supportsEffectiveFromOverride = supportsEffectiveFromOverride;
+    return this;
+  }
+
+  /**
+   * True if this integration allows a per-property effectiveFromOverride to be set via the optional property mapping endpoints, otherwise false.
+   * @return supportsEffectiveFromOverride
+   */
+  @javax.annotation.Nonnull
+  public Boolean getSupportsEffectiveFromOverride() {
+    return supportsEffectiveFromOverride;
+  }
+
+  public void setSupportsEffectiveFromOverride(Boolean supportsEffectiveFromOverride) {
+    this.supportsEffectiveFromOverride = supportsEffectiveFromOverride;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -187,12 +212,13 @@ public class IntegrationDescription {
         Objects.equals(this.name, integrationDescription.name) &&
         Objects.equals(this.description, integrationDescription.description) &&
         Objects.equals(this.supportedTriggerTypes, integrationDescription.supportedTriggerTypes) &&
-        Objects.equals(this.licensed, integrationDescription.licensed);
+        Objects.equals(this.licensed, integrationDescription.licensed) &&
+        Objects.equals(this.supportsEffectiveFromOverride, integrationDescription.supportsEffectiveFromOverride);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(type, name, description, supportedTriggerTypes, licensed);
+    return Objects.hash(type, name, description, supportedTriggerTypes, licensed, supportsEffectiveFromOverride);
   }
 
   @Override
@@ -204,6 +230,7 @@ public class IntegrationDescription {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    supportedTriggerTypes: ").append(toIndentedString(supportedTriggerTypes)).append("\n");
     sb.append("    licensed: ").append(toIndentedString(licensed)).append("\n");
+    sb.append("    supportsEffectiveFromOverride: ").append(toIndentedString(supportsEffectiveFromOverride)).append("\n");
     sb.append("}");
     return sb.toString();
   }

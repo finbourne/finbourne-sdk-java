@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.ComplianceTemplateVariationDto;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
 import java.net.URI;
@@ -50,6 +51,7 @@ import com.finbourne.sdk.JSON;
   ComplianceRuleTemplate.JSON_PROPERTY_VARIATIONS,
   ComplianceRuleTemplate.JSON_PROPERTY_HREF,
   ComplianceRuleTemplate.JSON_PROPERTY_VERSION,
+  ComplianceRuleTemplate.JSON_PROPERTY_STAGED_MODIFICATIONS,
   ComplianceRuleTemplate.JSON_PROPERTY_LINKS
 })
 
@@ -83,6 +85,11 @@ public class ComplianceRuleTemplate {
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Version version;
+
+  public static final String JSON_PROPERTY_STAGED_MODIFICATIONS = "stagedModifications";
+  @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StagedModificationsInfo stagedModifications;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -222,6 +229,25 @@ public class ComplianceRuleTemplate {
   }
 
 
+  public ComplianceRuleTemplate stagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+    return this;
+  }
+
+  /**
+   * Get stagedModifications
+   * @return stagedModifications
+   */
+  @javax.annotation.Nullable
+  public StagedModificationsInfo getStagedModifications() {
+    return stagedModifications;
+  }
+
+  public void setStagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+  }
+
+
   public ComplianceRuleTemplate links(List<Link> links) {
     this.links = links;
     return this;
@@ -264,6 +290,7 @@ public class ComplianceRuleTemplate {
         Objects.equals(this.variations, complianceRuleTemplate.variations) &&
         Objects.equals(this.href, complianceRuleTemplate.href) &&
         Objects.equals(this.version, complianceRuleTemplate.version) &&
+        Objects.equals(this.stagedModifications, complianceRuleTemplate.stagedModifications) &&
         Objects.equals(this.links, complianceRuleTemplate.links);
   }
 
@@ -273,7 +300,7 @@ public class ComplianceRuleTemplate {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, description, properties, variations, href, version, links);
+    return Objects.hash(id, description, properties, variations, href, version, stagedModifications, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -293,6 +320,7 @@ public class ComplianceRuleTemplate {
     sb.append("    variations: ").append(toIndentedString(variations)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

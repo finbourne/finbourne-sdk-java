@@ -18,6 +18,7 @@ import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.RecDatesReconciled;
 import com.finbourne.sdk.services.lusid.model.RecInstanceId;
+import com.finbourne.sdk.services.lusid.model.RecLinkedResult;
 import com.finbourne.sdk.services.lusid.model.RecResultException;
 import com.finbourne.sdk.services.lusid.model.RecResultItemDetails;
 import com.finbourne.sdk.services.lusid.model.RecResultReview;
@@ -69,6 +70,7 @@ import com.finbourne.sdk.JSON;
   RecResult.JSON_PROPERTY_AGGREGATE_RULES,
   RecResult.JSON_PROPERTY_SUPPLEMENTAL_ATTRIBUTES,
   RecResult.JSON_PROPERTY_ITEMS,
+  RecResult.JSON_PROPERTY_LINKED_RESULTS,
   RecResult.JSON_PROPERTY_COMMENTS,
   RecResult.JSON_PROPERTY_PROPERTIES,
   RecResult.JSON_PROPERTY_ASSIGNED_USER,
@@ -158,6 +160,11 @@ public class RecResult {
   @JsonProperty(JSON_PROPERTY_ITEMS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private RecResultItemDetails items;
+
+  public static final String JSON_PROPERTY_LINKED_RESULTS = "linkedResults";
+  @JsonProperty(JSON_PROPERTY_LINKED_RESULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<RecLinkedResult> linkedResults = new ArrayList<>();
 
   public static final String JSON_PROPERTY_COMMENTS = "comments";
   @JsonProperty(JSON_PROPERTY_COMMENTS)
@@ -525,6 +532,33 @@ public class RecResult {
   }
 
 
+  public RecResult linkedResults(List<RecLinkedResult> linkedResults) {
+    this.linkedResults = linkedResults;
+    return this;
+  }
+
+  public RecResult addLinkedResultsItem(RecLinkedResult linkedResultsItem) {
+    if (this.linkedResults == null) {
+      this.linkedResults = new ArrayList<>();
+    }
+    this.linkedResults.add(linkedResultsItem);
+    return this;
+  }
+
+  /**
+   * Results of other rec types in the same rec instance run whose items share an identifier with this result&#39;s items. Only exceptions link, and only to exceptions; symmetric. Set by the linking pass once every rec type of the run has completed, so empty until then.
+   * @return linkedResults
+   */
+  @javax.annotation.Nonnull
+  public List<RecLinkedResult> getLinkedResults() {
+    return linkedResults;
+  }
+
+  public void setLinkedResults(List<RecLinkedResult> linkedResults) {
+    this.linkedResults = linkedResults;
+  }
+
+
   public RecResult comments(List<RecUserComment> comments) {
     this.comments = comments;
     return this;
@@ -707,6 +741,7 @@ public class RecResult {
         Objects.equals(this.aggregateRules, recResult.aggregateRules) &&
         Objects.equals(this.supplementalAttributes, recResult.supplementalAttributes) &&
         Objects.equals(this.items, recResult.items) &&
+        Objects.equals(this.linkedResults, recResult.linkedResults) &&
         Objects.equals(this.comments, recResult.comments) &&
         Objects.equals(this.properties, recResult.properties) &&
         Objects.equals(this.assignedUser, recResult.assignedUser) &&
@@ -722,7 +757,7 @@ public class RecResult {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, recType, instanceId, recDefinitionId, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, comments, properties, assignedUser, assignedRole, href, version, links);
+    return Objects.hash(id, recType, instanceId, recDefinitionId, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, linkedResults, comments, properties, assignedUser, assignedRole, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -752,6 +787,7 @@ public class RecResult {
     sb.append("    aggregateRules: ").append(toIndentedString(aggregateRules)).append("\n");
     sb.append("    supplementalAttributes: ").append(toIndentedString(supplementalAttributes)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
+    sb.append("    linkedResults: ").append(toIndentedString(linkedResults)).append("\n");
     sb.append("    comments: ").append(toIndentedString(comments)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    assignedUser: ").append(toIndentedString(assignedUser)).append("\n");

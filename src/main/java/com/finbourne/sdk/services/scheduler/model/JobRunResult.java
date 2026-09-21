@@ -54,7 +54,11 @@ import com.finbourne.sdk.JSON;
   JobRunResult.JSON_PROPERTY_SCHEDULE_ID,
   JobRunResult.JSON_PROPERTY_RESULT_URL,
   JobRunResult.JSON_PROPERTY_MANUALLY_TRIGGERED_BY,
-  JobRunResult.JSON_PROPERTY_MESSAGE
+  JobRunResult.JSON_PROPERTY_MESSAGE,
+  JobRunResult.JSON_PROPERTY_IMAGE_NAME,
+  JobRunResult.JSON_PROPERTY_IMAGE_TAG,
+  JobRunResult.JSON_PROPERTY_TTL,
+  JobRunResult.JSON_PROPERTY_USER_ID
 })
 
 public class JobRunResult {
@@ -137,6 +141,26 @@ public class JobRunResult {
   @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String message;
+
+  public static final String JSON_PROPERTY_IMAGE_NAME = "imageName";
+  @JsonProperty(JSON_PROPERTY_IMAGE_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String imageName;
+
+  public static final String JSON_PROPERTY_IMAGE_TAG = "imageTag";
+  @JsonProperty(JSON_PROPERTY_IMAGE_TAG)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String imageTag;
+
+  public static final String JSON_PROPERTY_TTL = "ttl";
+  @JsonProperty(JSON_PROPERTY_TTL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer ttl;
+
+  public static final String JSON_PROPERTY_USER_ID = "userId";
+  @JsonProperty(JSON_PROPERTY_USER_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String userId;
 
   public JobRunResult() {
   }
@@ -460,6 +484,82 @@ public class JobRunResult {
   }
 
 
+  public JobRunResult imageName(String imageName) {
+    this.imageName = imageName;
+    return this;
+  }
+
+  /**
+   * Name of the container image the job ran with
+   * @return imageName
+   */
+  @javax.annotation.Nullable
+  public String getImageName() {
+    return imageName;
+  }
+
+  public void setImageName(String imageName) {
+    this.imageName = imageName;
+  }
+
+
+  public JobRunResult imageTag(String imageTag) {
+    this.imageTag = imageTag;
+    return this;
+  }
+
+  /**
+   * Tag of the container image the job ran with
+   * @return imageTag
+   */
+  @javax.annotation.Nullable
+  public String getImageTag() {
+    return imageTag;
+  }
+
+  public void setImageTag(String imageTag) {
+    this.imageTag = imageTag;
+  }
+
+
+  public JobRunResult ttl(Integer ttl) {
+    this.ttl = ttl;
+    return this;
+  }
+
+  /**
+   * TTL (in seconds) that was in effect for this job run
+   * @return ttl
+   */
+  @javax.annotation.Nullable
+  public Integer getTtl() {
+    return ttl;
+  }
+
+  public void setTtl(Integer ttl) {
+    this.ttl = ttl;
+  }
+
+
+  public JobRunResult userId(String userId) {
+    this.userId = userId;
+    return this;
+  }
+
+  /**
+   * UserId of the user that this run was executed as. For manual runs this is the triggering user (or the impersonated user if UseAsAuth was provided); for scheduled runs this is the owner of the Schedule
+   * @return userId
+   */
+  @javax.annotation.Nullable
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -484,7 +584,11 @@ public class JobRunResult {
         Objects.equals(this.scheduleId, jobRunResult.scheduleId) &&
         Objects.equals(this.resultUrl, jobRunResult.resultUrl) &&
         Objects.equals(this.manuallyTriggeredBy, jobRunResult.manuallyTriggeredBy) &&
-        Objects.equals(this.message, jobRunResult.message);
+        Objects.equals(this.message, jobRunResult.message) &&
+        Objects.equals(this.imageName, jobRunResult.imageName) &&
+        Objects.equals(this.imageTag, jobRunResult.imageTag) &&
+        Objects.equals(this.ttl, jobRunResult.ttl) &&
+        Objects.equals(this.userId, jobRunResult.userId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -493,7 +597,7 @@ public class JobRunResult {
 
   @Override
  public int hashCode() {
-    return Objects.hash(consoleOutputUrl, runId, jobId, name, initialisedDate, startDate, endDate, arguments, environmentVariables, jobStatus, jobResult, description, scheduleId, resultUrl, manuallyTriggeredBy, message);
+    return Objects.hash(consoleOutputUrl, runId, jobId, name, initialisedDate, startDate, endDate, arguments, environmentVariables, jobStatus, jobResult, description, scheduleId, resultUrl, manuallyTriggeredBy, message, imageName, imageTag, ttl, userId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -523,6 +627,10 @@ public class JobRunResult {
     sb.append("    resultUrl: ").append(toIndentedString(resultUrl)).append("\n");
     sb.append("    manuallyTriggeredBy: ").append(toIndentedString(manuallyTriggeredBy)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    imageName: ").append(toIndentedString(imageName)).append("\n");
+    sb.append("    imageTag: ").append(toIndentedString(imageTag)).append("\n");
+    sb.append("    ttl: ").append(toIndentedString(ttl)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
