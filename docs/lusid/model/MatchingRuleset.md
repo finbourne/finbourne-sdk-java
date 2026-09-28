@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **aggregateTolerances** | [**List&lt;ToleranceBase&gt;**](ToleranceBase.md) | Tolerance configurations applied to aggregate rule matching. | [optional] [default to List<ToleranceBase>]
 **allowPartialMatching** | **Boolean** | Whether to permit partial matches when applying rules. | [optional] [default to Boolean]
 **supplementalAttributes** | [**List&lt;SupplementalAttribute&gt;**](SupplementalAttribute.md) | Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself. | [optional] [default to List<SupplementalAttribute>]
+**writebackConfigurations** | [**List&lt;WritebackConfiguration&gt;**](WritebackConfiguration.md) | The writeback suggestions generated against this ruleset&#39;s results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty. | [optional] [default to List<WritebackConfiguration>]
 **href** | [**URI**](URI.md) | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] [default to URI]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
@@ -37,6 +38,7 @@ List<AggregateMatchingRule> aggregateRules = new List<AggregateMatchingRule>();
 @javax.annotation.Nullable List<ToleranceBase> aggregateTolerances = new List<ToleranceBase>();
 Boolean allowPartialMatching = true;
 @javax.annotation.Nullable List<SupplementalAttribute> supplementalAttributes = new List<SupplementalAttribute>();
+@javax.annotation.Nullable List<WritebackConfiguration> writebackConfigurations = new List<WritebackConfiguration>();
 @javax.annotation.Nullable URI href = URI.create("http://example.com/href");
 Version version = new Version();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
@@ -54,6 +56,7 @@ MatchingRuleset matchingRulesetInstance = new MatchingRuleset()
     .aggregateTolerances(aggregateTolerances)
     .allowPartialMatching(allowPartialMatching)
     .supplementalAttributes(supplementalAttributes)
+    .writebackConfigurations(writebackConfigurations)
     .href(href)
     .version(version)
     .links(links);

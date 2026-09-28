@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **complianceParameterType** | **String** | The parameter type. Available values: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter, GroupBySelectorComplianceParameter, PropertyListComplianceParameter, GroupCalculationComplianceParameter. | [default to String]
 **value** | **java.math.BigDecimal** |  | [default to java.math.BigDecimal]
+**inclusiveBounds** | **Boolean** | Whether the bound is inclusive of the value; when true a candidate landing exactly on the bound satisfies it. Defaults to false (exclusive). | [optional] [default to Boolean]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.DecimalComplianceParameter;
@@ -15,10 +16,12 @@ import java.lang.System;
 import java.net.URI;
 
 java.math.BigDecimal value = new java.math.BigDecimal("100.00");
+Boolean inclusiveBounds = true;
 
 
 DecimalComplianceParameter decimalComplianceParameterInstance = new DecimalComplianceParameter()
-    .value(value);
+    .value(value)
+    .inclusiveBounds(inclusiveBounds);
 ```
 
 

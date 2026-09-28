@@ -14,9 +14,10 @@ Name | Type | Description | Notes
 **investorStructure** | **String** | The Investor structure to be used by the Fund. Available values: NonUnitised, Classes. | [default to String]
 **portfolioIds** | [**List&lt;PortfolioEntityIdWithDetails&gt;**](PortfolioEntityIdWithDetails.md) | A list of the portfolios on the fund, which are part of the Fund. Note: These must all have the same base currency, which must also match the Fund Base Currency. | [optional] [default to List<PortfolioEntityIdWithDetails>]
 **fundConfigurationId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
+**shortCode** | **String** | A short code for the Fund. A fund structure tags journal entry lines with the short code of the member they originated from, so it should be unique across the funds of one structure. Optional. | [optional] [default to String]
 **aborId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **shareClassInstruments** | [**List&lt;InstrumentResolutionDetail&gt;**](InstrumentResolutionDetail.md) | Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures. | [optional] [default to List<InstrumentResolutionDetail>]
-**type** | **String** | The type of fund. Available values: Standalone, Master, Feeder. | [optional] [default to String]
+**type** | **String** | The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA. | [optional] [default to String]
 **inceptionDate** | [**OffsetDateTime**](OffsetDateTime.md) | Inception date of the Fund | [default to OffsetDateTime]
 **decimalPlaces** | **Integer** | Number of decimal places for reporting | [optional] [default to Integer]
 **yearEndDate** | [**DayMonth**](DayMonth.md) |  | [optional] [default to DayMonth]
@@ -44,6 +45,7 @@ ResourceId id = new ResourceId();
 String investorStructure = "example investorStructure";
 @javax.annotation.Nullable List<PortfolioEntityIdWithDetails> portfolioIds = new List<PortfolioEntityIdWithDetails>();
 ResourceId fundConfigurationId = new ResourceId();
+@javax.annotation.Nullable String shortCode = "example shortCode";
 ResourceId aborId = new ResourceId();
 @javax.annotation.Nullable List<InstrumentResolutionDetail> shareClassInstruments = new List<InstrumentResolutionDetail>();
 @javax.annotation.Nullable String type = "example type";
@@ -70,6 +72,7 @@ Fund fundInstance = new Fund()
     .investorStructure(investorStructure)
     .portfolioIds(portfolioIds)
     .fundConfigurationId(fundConfigurationId)
+    .shortCode(shortCode)
     .aborId(aborId)
     .shareClassInstruments(shareClassInstruments)
     .type(type)

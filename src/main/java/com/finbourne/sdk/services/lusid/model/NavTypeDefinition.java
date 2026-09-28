@@ -54,7 +54,8 @@ import com.finbourne.sdk.JSON;
   NavTypeDefinition.JSON_PROPERTY_CASH_GAIN_LOSS_CALCULATION_DATE,
   NavTypeDefinition.JSON_PROPERTY_AMORTISATION_RULE_SET_ID,
   NavTypeDefinition.JSON_PROPERTY_LEADER_NAV_TYPE_CODE,
-  NavTypeDefinition.JSON_PROPERTY_TRANSACTION_TEMPLATE_SCOPE
+  NavTypeDefinition.JSON_PROPERTY_TRANSACTION_TEMPLATE_SCOPE,
+  NavTypeDefinition.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER
 })
 
 public class NavTypeDefinition {
@@ -142,6 +143,11 @@ public class NavTypeDefinition {
   @JsonProperty(JSON_PROPERTY_TRANSACTION_TEMPLATE_SCOPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String transactionTemplateScope;
+
+  public static final String JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER = "transactionExclusionFilter";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionExclusionFilter;
 
   public NavTypeDefinition() {
   }
@@ -493,6 +499,25 @@ public class NavTypeDefinition {
   }
 
 
+  public NavTypeDefinition transactionExclusionFilter(String transactionExclusionFilter) {
+    this.transactionExclusionFilter = transactionExclusionFilter;
+    return this;
+  }
+
+  /**
+   * Optional filter expression to exclude specific transactions from this NavType&#39;s derived portfolios. The filter can reference Transaction, Portfolio, or Instrument fields and properties.
+   * @return transactionExclusionFilter
+   */
+  @javax.annotation.Nullable
+  public String getTransactionExclusionFilter() {
+    return transactionExclusionFilter;
+  }
+
+  public void setTransactionExclusionFilter(String transactionExclusionFilter) {
+    this.transactionExclusionFilter = transactionExclusionFilter;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -518,7 +543,8 @@ public class NavTypeDefinition {
         Objects.equals(this.cashGainLossCalculationDate, navTypeDefinition.cashGainLossCalculationDate) &&
         Objects.equals(this.amortisationRuleSetId, navTypeDefinition.amortisationRuleSetId) &&
         Objects.equals(this.leaderNavTypeCode, navTypeDefinition.leaderNavTypeCode) &&
-        Objects.equals(this.transactionTemplateScope, navTypeDefinition.transactionTemplateScope);
+        Objects.equals(this.transactionTemplateScope, navTypeDefinition.transactionTemplateScope) &&
+        Objects.equals(this.transactionExclusionFilter, navTypeDefinition.transactionExclusionFilter);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -527,7 +553,7 @@ public class NavTypeDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope);
+    return Objects.hash(code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope, transactionExclusionFilter);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -558,6 +584,7 @@ public class NavTypeDefinition {
     sb.append("    amortisationRuleSetId: ").append(toIndentedString(amortisationRuleSetId)).append("\n");
     sb.append("    leaderNavTypeCode: ").append(toIndentedString(leaderNavTypeCode)).append("\n");
     sb.append("    transactionTemplateScope: ").append(toIndentedString(transactionTemplateScope)).append("\n");
+    sb.append("    transactionExclusionFilter: ").append(toIndentedString(transactionExclusionFilter)).append("\n");
     sb.append("}");
     return sb.toString();
   }

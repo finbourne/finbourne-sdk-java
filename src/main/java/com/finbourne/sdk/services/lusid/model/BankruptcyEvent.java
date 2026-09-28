@@ -12,10 +12,14 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.CashOfferElection;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
+import com.finbourne.sdk.services.lusid.model.LapseElection;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -33,13 +37,16 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A Bankruptcy (BRUP) event recording the legal status of a company unable to meet its financial  obligations. Pure informational marker — generates no transactions and has no position impact.
+ * A Bankruptcy (BRUP) event recording the legal status of a company unable to meet its financial  obligations. With no elections it is a pure informational marker, generating no transactions and  having no position impact. It may also carry a ballot: one CashOfferElection per option that pays  cash and one LapseElection per option that pays nothing.
  */
 @JsonPropertyOrder({
   BankruptcyEvent.JSON_PROPERTY_EFFECTIVE_DATE,
   BankruptcyEvent.JSON_PROPERTY_NOTIFICATION_TYPE,
   BankruptcyEvent.JSON_PROPERTY_CLAIM_FILING_DEADLINE,
-  BankruptcyEvent.JSON_PROPERTY_NARRATIVE
+  BankruptcyEvent.JSON_PROPERTY_NARRATIVE,
+  BankruptcyEvent.JSON_PROPERTY_PAYMENT_DATE,
+  BankruptcyEvent.JSON_PROPERTY_CASH_OFFER_ELECTIONS,
+  BankruptcyEvent.JSON_PROPERTY_LAPSE_ELECTIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -68,6 +75,21 @@ public class BankruptcyEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_NARRATIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String narrative;
+
+  public static final String JSON_PROPERTY_PAYMENT_DATE = "paymentDate";
+  @JsonProperty(JSON_PROPERTY_PAYMENT_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime paymentDate;
+
+  public static final String JSON_PROPERTY_CASH_OFFER_ELECTIONS = "cashOfferElections";
+  @JsonProperty(JSON_PROPERTY_CASH_OFFER_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<CashOfferElection> cashOfferElections;
+
+  public static final String JSON_PROPERTY_LAPSE_ELECTIONS = "lapseElections";
+  @JsonProperty(JSON_PROPERTY_LAPSE_ELECTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<LapseElection> lapseElections;
 
   public BankruptcyEvent() {
   }
@@ -148,6 +170,79 @@ public class BankruptcyEvent extends InstrumentEvent {
   }
 
 
+  public BankruptcyEvent paymentDate(OffsetDateTime paymentDate) {
+    this.paymentDate = paymentDate;
+    return this;
+  }
+
+  /**
+   * Settlement date of the cash leg. Required when a CashOfferElection is offered, and accepted  but unused otherwise — inbound ballot notifications populate a pay date on pure votes that  settle no cash.
+   * @return paymentDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getPaymentDate() {
+    return paymentDate;
+  }
+
+  public void setPaymentDate(OffsetDateTime paymentDate) {
+    this.paymentDate = paymentDate;
+  }
+
+
+  public BankruptcyEvent cashOfferElections(List<CashOfferElection> cashOfferElections) {
+    this.cashOfferElections = cashOfferElections;
+    return this;
+  }
+
+  public BankruptcyEvent addCashOfferElectionsItem(CashOfferElection cashOfferElectionsItem) {
+    if (this.cashOfferElections == null) {
+      this.cashOfferElections = new ArrayList<>();
+    }
+    this.cashOfferElections.add(cashOfferElectionsItem);
+    return this;
+  }
+
+  /**
+   * One election per ballot option that pays cash, keyed \&quot;{OptionNumber}-{OptionCode}\&quot;, for  example \&quot;1-CASH\&quot;. Each election&#39;s CashOfferPrice is per eligible unit, not per 1000 of face.  Defaults to an empty list.
+   * @return cashOfferElections
+   */
+  @javax.annotation.Nullable
+  public List<CashOfferElection> getCashOfferElections() {
+    return cashOfferElections;
+  }
+
+  public void setCashOfferElections(List<CashOfferElection> cashOfferElections) {
+    this.cashOfferElections = cashOfferElections;
+  }
+
+
+  public BankruptcyEvent lapseElections(List<LapseElection> lapseElections) {
+    this.lapseElections = lapseElections;
+    return this;
+  }
+
+  public BankruptcyEvent addLapseElectionsItem(LapseElection lapseElectionsItem) {
+    if (this.lapseElections == null) {
+      this.lapseElections = new ArrayList<>();
+    }
+    this.lapseElections.add(lapseElectionsItem);
+    return this;
+  }
+
+  /**
+   * One election per ballot option that pays nothing — consent granted with no fee, consent  denied, abstain, or no action — keyed \&quot;{OptionNumber}-{OptionCode}\&quot;, for example \&quot;6-NOAC\&quot;.  Keys are free-form because a real ballot carries CONY twice and CONN twice. Defaults to an  empty list.
+   * @return lapseElections
+   */
+  @javax.annotation.Nullable
+  public List<LapseElection> getLapseElections() {
+    return lapseElections;
+  }
+
+  public void setLapseElections(List<LapseElection> lapseElections) {
+    this.lapseElections = lapseElections;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -161,6 +256,9 @@ public class BankruptcyEvent extends InstrumentEvent {
         Objects.equals(this.notificationType, bankruptcyEvent.notificationType) &&
         Objects.equals(this.claimFilingDeadline, bankruptcyEvent.claimFilingDeadline) &&
         Objects.equals(this.narrative, bankruptcyEvent.narrative) &&
+        Objects.equals(this.paymentDate, bankruptcyEvent.paymentDate) &&
+        Objects.equals(this.cashOfferElections, bankruptcyEvent.cashOfferElections) &&
+        Objects.equals(this.lapseElections, bankruptcyEvent.lapseElections) &&
         super.equals(o);
   }
 
@@ -170,7 +268,7 @@ public class BankruptcyEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(effectiveDate, notificationType, claimFilingDeadline, narrative, super.hashCode());
+    return Objects.hash(effectiveDate, notificationType, claimFilingDeadline, narrative, paymentDate, cashOfferElections, lapseElections, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -189,6 +287,9 @@ public class BankruptcyEvent extends InstrumentEvent {
     sb.append("    notificationType: ").append(toIndentedString(notificationType)).append("\n");
     sb.append("    claimFilingDeadline: ").append(toIndentedString(claimFilingDeadline)).append("\n");
     sb.append("    narrative: ").append(toIndentedString(narrative)).append("\n");
+    sb.append("    paymentDate: ").append(toIndentedString(paymentDate)).append("\n");
+    sb.append("    cashOfferElections: ").append(toIndentedString(cashOfferElections)).append("\n");
+    sb.append("    lapseElections: ").append(toIndentedString(lapseElections)).append("\n");
     sb.append("}");
     return sb.toString();
   }

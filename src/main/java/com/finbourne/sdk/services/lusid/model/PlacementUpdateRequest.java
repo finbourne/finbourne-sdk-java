@@ -36,7 +36,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A request to create or update a Placement.
+ * A request to update a Placement.
  */
 @JsonPropertyOrder({
   PlacementUpdateRequest.JSON_PROPERTY_ID,
@@ -48,7 +48,8 @@ import com.finbourne.sdk.JSON;
   PlacementUpdateRequest.JSON_PROPERTY_STOP_PRICE,
   PlacementUpdateRequest.JSON_PROPERTY_COUNTERPARTY,
   PlacementUpdateRequest.JSON_PROPERTY_EXECUTION_SYSTEM,
-  PlacementUpdateRequest.JSON_PROPERTY_ENTRY_TYPE
+  PlacementUpdateRequest.JSON_PROPERTY_ENTRY_TYPE,
+  PlacementUpdateRequest.JSON_PROPERTY_CURRENCY
 })
 
 public class PlacementUpdateRequest {
@@ -101,6 +102,11 @@ public class PlacementUpdateRequest {
   @JsonProperty(JSON_PROPERTY_ENTRY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String entryType;
+
+  public static final String JSON_PROPERTY_CURRENCY = "currency";
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String currency;
 
   public PlacementUpdateRequest() {
   }
@@ -195,7 +201,7 @@ public class PlacementUpdateRequest {
   }
 
   /**
-   * The type of this placement (Market, Limit, etc).
+   * Optionally changes the type of this placement (Market, Limit, Stop, StopLimit, etc). A type change is permitted only when the associated block is of type &#39;Market&#39;. Setting the type to &#39;Market&#39; clears the placement&#39;s stop and limit prices; any other type change leaves them as they are.
    * @return type
    */
   @javax.annotation.Nullable
@@ -214,7 +220,7 @@ public class PlacementUpdateRequest {
   }
 
   /**
-   * The optional price, as currency and amount, associated with this placement.
+   * Optionally updates the limit price of this placement, in the placement&#39;s limit price currency unless a currency is also specified. A price on a placement with no limit price currency is stored but not returned until a currency is supplied.
    * @return limitPrice
    */
   @javax.annotation.Nullable
@@ -233,7 +239,7 @@ public class PlacementUpdateRequest {
   }
 
   /**
-   * The optional price, as currency and amount, associated with this placement.
+   * Optionally updates the stop price of this placement, in the placement&#39;s stop price currency unless a currency is also specified. A price on a placement with no stop price currency is stored but not returned until a currency is supplied.
    * @return stopPrice
    */
   @javax.annotation.Nullable
@@ -303,6 +309,25 @@ public class PlacementUpdateRequest {
   }
 
 
+  public PlacementUpdateRequest currency(String currency) {
+    this.currency = currency;
+    return this;
+  }
+
+  /**
+   * Optionally sets the ISO currency code of the placement&#39;s stop and/or limit price. Not permitted for a Market placement. For a value placement it must match the currency of the amount exactly, whether that amount is on the placement or in the update. When omitted, no currency checks are applied.
+   * @return currency
+   */
+  @javax.annotation.Nullable
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -321,7 +346,8 @@ public class PlacementUpdateRequest {
         (this.stopPrice == null ? placementUpdateRequest.stopPrice == null : (placementUpdateRequest.stopPrice != null && this.stopPrice.compareTo(placementUpdateRequest.getStopPrice()) == 0)) &&
         Objects.equals(this.counterparty, placementUpdateRequest.counterparty) &&
         Objects.equals(this.executionSystem, placementUpdateRequest.executionSystem) &&
-        Objects.equals(this.entryType, placementUpdateRequest.entryType);
+        Objects.equals(this.entryType, placementUpdateRequest.entryType) &&
+        Objects.equals(this.currency, placementUpdateRequest.currency);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -330,7 +356,7 @@ public class PlacementUpdateRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, quantity, amount, properties, type, limitPrice, stopPrice, counterparty, executionSystem, entryType);
+    return Objects.hash(id, quantity, amount, properties, type, limitPrice, stopPrice, counterparty, executionSystem, entryType, currency);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -354,6 +380,7 @@ public class PlacementUpdateRequest {
     sb.append("    counterparty: ").append(toIndentedString(counterparty)).append("\n");
     sb.append("    executionSystem: ").append(toIndentedString(executionSystem)).append("\n");
     sb.append("    entryType: ").append(toIndentedString(entryType)).append("\n");
+    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("}");
     return sb.toString();
   }

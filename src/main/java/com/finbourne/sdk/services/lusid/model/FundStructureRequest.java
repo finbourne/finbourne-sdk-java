@@ -13,12 +13,12 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AllocationGroup;
-import com.finbourne.sdk.services.lusid.model.FundDefinitionRequest;
 import com.finbourne.sdk.services.lusid.model.FundStructureEdge;
 import com.finbourne.sdk.services.lusid.model.FundStructureNode;
 import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -48,10 +48,12 @@ import com.finbourne.sdk.JSON;
   FundStructureRequest.JSON_PROPERTY_NAME,
   FundStructureRequest.JSON_PROPERTY_DESCRIPTION,
   FundStructureRequest.JSON_PROPERTY_EXISTING_FUNDS,
-  FundStructureRequest.JSON_PROPERTY_NEW_FUNDS,
   FundStructureRequest.JSON_PROPERTY_ALLOCATION_GROUPS,
   FundStructureRequest.JSON_PROPERTY_NODES,
   FundStructureRequest.JSON_PROPERTY_EDGES,
+  FundStructureRequest.JSON_PROPERTY_EFFECTIVE_AT,
+  FundStructureRequest.JSON_PROPERTY_ROLE_DATA_TYPE_ID,
+  FundStructureRequest.JSON_PROPERTY_NAV_TYPE_CODES,
   FundStructureRequest.JSON_PROPERTY_PROPERTIES
 })
 
@@ -76,11 +78,6 @@ public class FundStructureRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ResourceId> existingFunds;
 
-  public static final String JSON_PROPERTY_NEW_FUNDS = "newFunds";
-  @JsonProperty(JSON_PROPERTY_NEW_FUNDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private List<FundDefinitionRequest> newFunds;
-
   public static final String JSON_PROPERTY_ALLOCATION_GROUPS = "allocationGroups";
   @JsonProperty(JSON_PROPERTY_ALLOCATION_GROUPS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -88,13 +85,28 @@ public class FundStructureRequest {
 
   public static final String JSON_PROPERTY_NODES = "nodes";
   @JsonProperty(JSON_PROPERTY_NODES)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<FundStructureNode> nodes = new ArrayList<>();
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<FundStructureNode> nodes;
 
   public static final String JSON_PROPERTY_EDGES = "edges";
   @JsonProperty(JSON_PROPERTY_EDGES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<FundStructureEdge> edges;
+
+  public static final String JSON_PROPERTY_EFFECTIVE_AT = "effectiveAt";
+  @JsonProperty(JSON_PROPERTY_EFFECTIVE_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime effectiveAt;
+
+  public static final String JSON_PROPERTY_ROLE_DATA_TYPE_ID = "roleDataTypeId";
+  @JsonProperty(JSON_PROPERTY_ROLE_DATA_TYPE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId roleDataTypeId;
+
+  public static final String JSON_PROPERTY_NAV_TYPE_CODES = "navTypeCodes";
+  @JsonProperty(JSON_PROPERTY_NAV_TYPE_CODES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<FundStructureEdge> edges = new ArrayList<>();
+  private List<String> navTypeCodes = new ArrayList<>();
 
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
@@ -188,33 +200,6 @@ public class FundStructureRequest {
   }
 
 
-  public FundStructureRequest newFunds(List<FundDefinitionRequest> newFunds) {
-    this.newFunds = newFunds;
-    return this;
-  }
-
-  public FundStructureRequest addNewFundsItem(FundDefinitionRequest newFundsItem) {
-    if (this.newFunds == null) {
-      this.newFunds = new ArrayList<>();
-    }
-    this.newFunds.add(newFundsItem);
-    return this;
-  }
-
-  /**
-   * An optional list of Fund definitions to be created inline as part of the structure.
-   * @return newFunds
-   */
-  @javax.annotation.Nullable
-  public List<FundDefinitionRequest> getNewFunds() {
-    return newFunds;
-  }
-
-  public void setNewFunds(List<FundDefinitionRequest> newFunds) {
-    this.newFunds = newFunds;
-  }
-
-
   public FundStructureRequest allocationGroups(List<AllocationGroup> allocationGroups) {
     this.allocationGroups = allocationGroups;
     return this;
@@ -229,7 +214,7 @@ public class FundStructureRequest {
   }
 
   /**
-   * An optional list of Allocation Groups that can apply across a Fund Structure. Only classes and feeder funds linked to the master fund specified are allowed.
+   * An optional list of Allocation Groups that can apply across a Fund Structure. A group may span the share classes of a member and the members that invest into it through dedicated share class links.
    * @return allocationGroups
    */
   @javax.annotation.Nullable
@@ -256,10 +241,10 @@ public class FundStructureRequest {
   }
 
   /**
-   * The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role.
+   * The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role. May be empty on create, with members added later through the members endpoint.
    * @return nodes
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<FundStructureNode> getNodes() {
     return nodes;
   }
@@ -283,16 +268,81 @@ public class FundStructureRequest {
   }
 
   /**
-   * The list of edges that define the relationships between feeder and master nodes in the structure.
+   * The list of edges that define how the members of the structure are linked: a member investing into a dedicated share class of another, or holding an equity, GP, LP or carry interest in another through an instrument.
    * @return edges
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<FundStructureEdge> getEdges() {
     return edges;
   }
 
   public void setEdges(List<FundStructureEdge> edges) {
     this.edges = edges;
+  }
+
+
+  public FundStructureRequest effectiveAt(OffsetDateTime effectiveAt) {
+    this.effectiveAt = effectiveAt;
+    return this;
+  }
+
+  /**
+   * The effective datetime from which the Fund Structure applies. Defaults to the beginning of time if not specified, so that the structure is visible at every effective datetime.
+   * @return effectiveAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getEffectiveAt() {
+    return effectiveAt;
+  }
+
+  public void setEffectiveAt(OffsetDateTime effectiveAt) {
+    this.effectiveAt = effectiveAt;
+  }
+
+
+  public FundStructureRequest roleDataTypeId(ResourceId roleDataTypeId) {
+    this.roleDataTypeId = roleDataTypeId;
+    return this;
+  }
+
+  /**
+   * Get roleDataTypeId
+   * @return roleDataTypeId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getRoleDataTypeId() {
+    return roleDataTypeId;
+  }
+
+  public void setRoleDataTypeId(ResourceId roleDataTypeId) {
+    this.roleDataTypeId = roleDataTypeId;
+  }
+
+
+  public FundStructureRequest navTypeCodes(List<String> navTypeCodes) {
+    this.navTypeCodes = navTypeCodes;
+    return this;
+  }
+
+  public FundStructureRequest addNavTypeCodesItem(String navTypeCodesItem) {
+    if (this.navTypeCodes == null) {
+      this.navTypeCodes = new ArrayList<>();
+    }
+    this.navTypeCodes.add(navTypeCodesItem);
+    return this;
+  }
+
+  /**
+   * The NAV types every member of the structure produces, by code. Declaring them once here gives the structure a shared Timeline. At least one is required, and every member fund must define a NAV type with each of these codes.
+   * @return navTypeCodes
+   */
+  @javax.annotation.Nonnull
+  public List<String> getNavTypeCodes() {
+    return navTypeCodes;
+  }
+
+  public void setNavTypeCodes(List<String> navTypeCodes) {
+    this.navTypeCodes = navTypeCodes;
   }
 
 
@@ -336,10 +386,12 @@ public class FundStructureRequest {
         Objects.equals(this.name, fundStructureRequest.name) &&
         Objects.equals(this.description, fundStructureRequest.description) &&
         Objects.equals(this.existingFunds, fundStructureRequest.existingFunds) &&
-        Objects.equals(this.newFunds, fundStructureRequest.newFunds) &&
         Objects.equals(this.allocationGroups, fundStructureRequest.allocationGroups) &&
         Objects.equals(this.nodes, fundStructureRequest.nodes) &&
         Objects.equals(this.edges, fundStructureRequest.edges) &&
+        Objects.equals(this.effectiveAt, fundStructureRequest.effectiveAt) &&
+        Objects.equals(this.roleDataTypeId, fundStructureRequest.roleDataTypeId) &&
+        Objects.equals(this.navTypeCodes, fundStructureRequest.navTypeCodes) &&
         Objects.equals(this.properties, fundStructureRequest.properties);
   }
 
@@ -349,7 +401,7 @@ public class FundStructureRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, name, description, existingFunds, newFunds, allocationGroups, nodes, edges, properties);
+    return Objects.hash(code, name, description, existingFunds, allocationGroups, nodes, edges, effectiveAt, roleDataTypeId, navTypeCodes, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -367,10 +419,12 @@ public class FundStructureRequest {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    existingFunds: ").append(toIndentedString(existingFunds)).append("\n");
-    sb.append("    newFunds: ").append(toIndentedString(newFunds)).append("\n");
     sb.append("    allocationGroups: ").append(toIndentedString(allocationGroups)).append("\n");
     sb.append("    nodes: ").append(toIndentedString(nodes)).append("\n");
     sb.append("    edges: ").append(toIndentedString(edges)).append("\n");
+    sb.append("    effectiveAt: ").append(toIndentedString(effectiveAt)).append("\n");
+    sb.append("    roleDataTypeId: ").append(toIndentedString(roleDataTypeId)).append("\n");
+    sb.append("    navTypeCodes: ").append(toIndentedString(navTypeCodes)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();

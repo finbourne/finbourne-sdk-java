@@ -6,6 +6,7 @@ Base class for the activity windows that give the date range a rec definition's 
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**initialActivitySinceEffectiveAt** | [**RecActivitySinceEffectiveAt**](RecActivitySinceEffectiveAt.md) |  | [default to RecActivitySinceEffectiveAt]
 **windowType** | **String** | Polymorphic discriminator. Supported types: Contiguous. Contiguous requires effectiveAtProgression Series. Available values: Contiguous, FixedLookback, Explicit, ClosedPeriod, ContiguousAsAt. | [default to String]
 
 ```java
@@ -14,10 +15,12 @@ import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
+RecActivitySinceEffectiveAt initialActivitySinceEffectiveAt = new RecActivitySinceEffectiveAt();
 String windowType = "example windowType";
 
 
 RecActivityWindow recActivityWindowInstance = new RecActivityWindow()
+    .initialActivitySinceEffectiveAt(initialActivitySinceEffectiveAt)
     .windowType(windowType);
 ```
 

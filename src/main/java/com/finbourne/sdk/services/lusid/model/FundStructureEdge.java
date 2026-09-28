@@ -13,8 +13,10 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.FundStructureEdgeTarget;
+import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,11 +33,13 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A directed edge in a Fund Structure, defining a relationship from a feeder node to a master node share class.
+ * A link from one member of a Fund Structure to another, and how that link is held.
  */
 @JsonPropertyOrder({
   FundStructureEdge.JSON_PROPERTY_FROM,
-  FundStructureEdge.JSON_PROPERTY_TO
+  FundStructureEdge.JSON_PROPERTY_TO,
+  FundStructureEdge.JSON_PROPERTY_LINKAGE_TYPE,
+  FundStructureEdge.JSON_PROPERTY_VIA_INSTRUMENT_ID
 })
 
 public class FundStructureEdge {
@@ -49,6 +53,16 @@ public class FundStructureEdge {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private FundStructureEdgeTarget to;
 
+  public static final String JSON_PROPERTY_LINKAGE_TYPE = "linkageType";
+  @JsonProperty(JSON_PROPERTY_LINKAGE_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String linkageType;
+
+  public static final String JSON_PROPERTY_VIA_INSTRUMENT_ID = "viaInstrumentId";
+  @JsonProperty(JSON_PROPERTY_VIA_INSTRUMENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId viaInstrumentId;
+
   public FundStructureEdge() {
   }
 
@@ -58,7 +72,7 @@ public class FundStructureEdge {
   }
 
   /**
-   * The node code of the feeder node that is the source of this relationship.
+   * The node code of the member that holds the link: the investor or the owner.
    * @return from
    */
   @javax.annotation.Nonnull
@@ -90,6 +104,44 @@ public class FundStructureEdge {
   }
 
 
+  public FundStructureEdge linkageType(String linkageType) {
+    this.linkageType = linkageType;
+    return this;
+  }
+
+  /**
+   * How the link is held. DedicatedShareClass (the default) means the source invests into a share class of the target; DirectEquityInstrument, GPInterest, LPInterest and CarryInterest mean the source holds that interest in the target through the instrument in viaInstrumentId. Available values: DedicatedShareClass, DirectEquityInstrument, GPInterest, LPInterest, CarryInterest.
+   * @return linkageType
+   */
+  @javax.annotation.Nullable
+  public String getLinkageType() {
+    return linkageType;
+  }
+
+  public void setLinkageType(String linkageType) {
+    this.linkageType = linkageType;
+  }
+
+
+  public FundStructureEdge viaInstrumentId(ResourceId viaInstrumentId) {
+    this.viaInstrumentId = viaInstrumentId;
+    return this;
+  }
+
+  /**
+   * Get viaInstrumentId
+   * @return viaInstrumentId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getViaInstrumentId() {
+    return viaInstrumentId;
+  }
+
+  public void setViaInstrumentId(ResourceId viaInstrumentId) {
+    this.viaInstrumentId = viaInstrumentId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -100,12 +152,25 @@ public class FundStructureEdge {
     }
     FundStructureEdge fundStructureEdge = (FundStructureEdge) o;
     return Objects.equals(this.from, fundStructureEdge.from) &&
-        Objects.equals(this.to, fundStructureEdge.to);
+        Objects.equals(this.to, fundStructureEdge.to) &&
+        Objects.equals(this.linkageType, fundStructureEdge.linkageType) &&
+        Objects.equals(this.viaInstrumentId, fundStructureEdge.viaInstrumentId);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(from, to);
+    return Objects.hash(from, to, linkageType, viaInstrumentId);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -114,6 +179,8 @@ public class FundStructureEdge {
     sb.append("class FundStructureEdge {\n");
     sb.append("    from: ").append(toIndentedString(from)).append("\n");
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
+    sb.append("    linkageType: ").append(toIndentedString(linkageType)).append("\n");
+    sb.append("    viaInstrumentId: ").append(toIndentedString(viaInstrumentId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

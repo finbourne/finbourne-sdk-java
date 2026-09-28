@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -35,7 +36,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   TradingConventions.JSON_PROPERTY_PRICE_SCALE_FACTOR,
   TradingConventions.JSON_PROPERTY_MINIMUM_ORDER_SIZE,
-  TradingConventions.JSON_PROPERTY_MINIMUM_ORDER_INCREMENT
+  TradingConventions.JSON_PROPERTY_MINIMUM_ORDER_INCREMENT,
+  TradingConventions.JSON_PROPERTY_PRICE_QUOTATION_TYPE
 })
 
 public class TradingConventions {
@@ -53,6 +55,11 @@ public class TradingConventions {
   @JsonProperty(JSON_PROPERTY_MINIMUM_ORDER_INCREMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal minimumOrderIncrement;
+
+  public static final String JSON_PROPERTY_PRICE_QUOTATION_TYPE = "priceQuotationType";
+  @JsonProperty(JSON_PROPERTY_PRICE_QUOTATION_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String priceQuotationType;
 
   public TradingConventions() {
   }
@@ -114,6 +121,25 @@ public class TradingConventions {
   }
 
 
+  public TradingConventions priceQuotationType(String priceQuotationType) {
+    this.priceQuotationType = priceQuotationType;
+    return this;
+  }
+
+  /**
+   * Conventional price quotation type of the instrument.  Whether its quoted price excludes accrued interest (Clean) or includes it (Dirty).  Defaults to Clean if not set.                Supported string (enumeration) values are: [Clean, Dirty]. Available values: Clean, Dirty.
+   * @return priceQuotationType
+   */
+  @javax.annotation.Nullable
+  public String getPriceQuotationType() {
+    return priceQuotationType;
+  }
+
+  public void setPriceQuotationType(String priceQuotationType) {
+    this.priceQuotationType = priceQuotationType;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -125,12 +151,24 @@ public class TradingConventions {
     TradingConventions tradingConventions = (TradingConventions) o;
     return (this.priceScaleFactor == null ? tradingConventions.priceScaleFactor == null : (tradingConventions.priceScaleFactor != null && this.priceScaleFactor.compareTo(tradingConventions.getPriceScaleFactor()) == 0)) &&
         (this.minimumOrderSize == null ? tradingConventions.minimumOrderSize == null : (tradingConventions.minimumOrderSize != null && this.minimumOrderSize.compareTo(tradingConventions.getMinimumOrderSize()) == 0)) &&
-        (this.minimumOrderIncrement == null ? tradingConventions.minimumOrderIncrement == null : (tradingConventions.minimumOrderIncrement != null && this.minimumOrderIncrement.compareTo(tradingConventions.getMinimumOrderIncrement()) == 0));
+        (this.minimumOrderIncrement == null ? tradingConventions.minimumOrderIncrement == null : (tradingConventions.minimumOrderIncrement != null && this.minimumOrderIncrement.compareTo(tradingConventions.getMinimumOrderIncrement()) == 0)) &&
+        Objects.equals(this.priceQuotationType, tradingConventions.priceQuotationType);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(priceScaleFactor, minimumOrderSize, minimumOrderIncrement);
+    return Objects.hash(priceScaleFactor, minimumOrderSize, minimumOrderIncrement, priceQuotationType);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -140,6 +178,7 @@ public class TradingConventions {
     sb.append("    priceScaleFactor: ").append(toIndentedString(priceScaleFactor)).append("\n");
     sb.append("    minimumOrderSize: ").append(toIndentedString(minimumOrderSize)).append("\n");
     sb.append("    minimumOrderIncrement: ").append(toIndentedString(minimumOrderIncrement)).append("\n");
+    sb.append("    priceQuotationType: ").append(toIndentedString(priceQuotationType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

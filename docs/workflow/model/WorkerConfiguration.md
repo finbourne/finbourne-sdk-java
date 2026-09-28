@@ -39,6 +39,8 @@ WorkerConfiguration config = new WorkerConfiguration(workerConfiguration);
 
 * [PortfolioHoldingDataQualityCheck](./PortfolioHoldingDataQualityCheck.md)
 
+* [PortfolioTransactionDataQualityCheck](./PortfolioTransactionDataQualityCheck.md)
+
 * [SchedulerJob](./SchedulerJob.md)
 
 * [Sleep](./Sleep.md)

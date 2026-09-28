@@ -10,11 +10,11 @@ Name | Type | Description | Notes
 **publicationStatus** | **String** |  | [default to String]
 **portfolioScope** | **String** |  | [optional] [default to String]
 **portfolioCode** | **String** |  | [optional] [default to String]
-**instrumentId** | **String** |  | [default to String]
-**instrumentType** | **String** |  | [default to String]
-**instrumentName** | **String** |  | [default to String]
-**tradeDate** | [**OffsetDateTime**](OffsetDateTime.md) |  | [default to OffsetDateTime]
-**settlementDate** | [**OffsetDateTime**](OffsetDateTime.md) |  | [default to OffsetDateTime]
+**instrumentId** | **String** |  | [optional] [default to String]
+**instrumentType** | **String** |  | [optional] [default to String]
+**instrumentName** | **String** |  | [optional] [default to String]
+**tradeDate** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
+**settlementDate** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
 **status** | **String** |  | [default to String]
 **skipReason** | **String** |  | [optional] [default to String]
 **failureReason** | **String** |  | [optional] [default to String]
@@ -32,11 +32,11 @@ String transactionId = "example transactionId";
 String publicationStatus = "example publicationStatus";
 @javax.annotation.Nullable String portfolioScope = "example portfolioScope";
 @javax.annotation.Nullable String portfolioCode = "example portfolioCode";
-String instrumentId = "example instrumentId";
-String instrumentType = "example instrumentType";
-String instrumentName = "example instrumentName";
-OffsetDateTime tradeDate = OffsetDateTime.now();
-OffsetDateTime settlementDate = OffsetDateTime.now();
+@javax.annotation.Nullable String instrumentId = "example instrumentId";
+@javax.annotation.Nullable String instrumentType = "example instrumentType";
+@javax.annotation.Nullable String instrumentName = "example instrumentName";
+@javax.annotation.Nullable OffsetDateTime tradeDate = OffsetDateTime.now();
+@javax.annotation.Nullable OffsetDateTime settlementDate = OffsetDateTime.now();
 String status = "example status";
 @javax.annotation.Nullable String skipReason = "example skipReason";
 @javax.annotation.Nullable String failureReason = "example failureReason";

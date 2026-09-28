@@ -53,11 +53,12 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HullWhiteModelOptions.class, name = "HullWhiteModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = IndexModelOptions.class, name = "IndexModelOptions"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OpaqueModelOptions.class, name = "OpaqueModelOptions"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SimpleModelOptions.class, name = "SimpleModelOptions"),
 })
 
 public class ModelOptions {
   /**
-   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions.
+   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.
    */
   public enum ModelOptionsTypeEnum {
     INVALID("Invalid"),
@@ -82,7 +83,9 @@ public class ModelOptions {
     
     BOND_LOOKUP_MODEL_OPTIONS("BondLookupModelOptions"),
     
-    BOND_FORWARD_MODEL_OPTIONS("BondForwardModelOptions");
+    BOND_FORWARD_MODEL_OPTIONS("BondForwardModelOptions"),
+    
+    SIMPLE_MODEL_OPTIONS("SimpleModelOptions");
 
     private String value;
 
@@ -124,7 +127,7 @@ public class ModelOptions {
   }
 
   /**
-   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions.
+   * Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.
    * @return modelOptionsType
    */
   @javax.annotation.Nonnull

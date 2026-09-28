@@ -5,7 +5,7 @@ classname FundingLegModelOptions
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**modelOptionsType** | **String** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions. | [default to String]
+**modelOptionsType** | **String** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions. | [default to String]
 **expectedFundingLegNotional** | **String** | Assumption made on future expected notional of the funding leg. | [default to String]
 
 ```java

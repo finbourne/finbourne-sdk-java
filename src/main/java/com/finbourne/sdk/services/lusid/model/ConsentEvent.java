@@ -65,7 +65,7 @@ import com.finbourne.sdk.JSON;
 public class ConsentEvent extends InstrumentEvent {
   public static final String JSON_PROPERTY_CONSENT_TYPE = "consentType";
   @JsonProperty(JSON_PROPERTY_CONSENT_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String consentType;
 
   public static final String JSON_PROPERTY_RECORD_DATE = "recordDate";
@@ -127,10 +127,10 @@ public class ConsentEvent extends InstrumentEvent {
   }
 
   /**
-   * The type of consent solicitation.                Supported string (enumeration) values are: [ChangeInTerms, DueAndPayable]. Available values: ChangeInTerms, DueAndPayable.
+   * The type of consent solicitation. Optional; omitting it records Unknown.                Supported string (enumeration) values are: [ChangeInTerms, DueAndPayable, Unknown]. Available values: ChangeInTerms, DueAndPayable, Unknown.
    * @return consentType
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getConsentType() {
     return consentType;
   }

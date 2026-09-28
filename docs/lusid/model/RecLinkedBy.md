@@ -1,13 +1,13 @@
 # com.finbourne.sdk.services.lusid.model.RecLinkedBy
 classname RecLinkedBy
-The item keys a link between two rec results was established on, per side.
+The item pairings a link between two rec results was established on, per side.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**left** | [**List&lt;RecLinkKey&gt;**](RecLinkKey.md) | The keys shared by the two results&#39; left-side items. May be empty. | [default to List<RecLinkKey>]
-**right** | [**List&lt;RecLinkKey&gt;**](RecLinkKey.md) | The keys shared by the two results&#39; right-side items. May be empty. | [default to List<RecLinkKey>]
+**left** | [**List&lt;RecResultLinkKey&gt;**](RecResultLinkKey.md) | The pairings between the two results&#39; left-side items, one entry per pairing. May be empty. | [default to List<RecResultLinkKey>]
+**right** | [**List&lt;RecResultLinkKey&gt;**](RecResultLinkKey.md) | The pairings between the two results&#39; right-side items, one entry per pairing. May be empty. | [default to List<RecResultLinkKey>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.RecLinkedBy;
@@ -15,8 +15,8 @@ import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
-List<RecLinkKey> left = new List<RecLinkKey>();
-List<RecLinkKey> right = new List<RecLinkKey>();
+List<RecResultLinkKey> left = new List<RecResultLinkKey>();
+List<RecResultLinkKey> right = new List<RecResultLinkKey>();
 
 
 RecLinkedBy recLinkedByInstance = new RecLinkedBy()

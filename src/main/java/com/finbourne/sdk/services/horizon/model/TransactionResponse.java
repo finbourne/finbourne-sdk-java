@@ -78,27 +78,27 @@ public class TransactionResponse {
 
   public static final String JSON_PROPERTY_INSTRUMENT_ID = "instrumentId";
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String instrumentId;
 
   public static final String JSON_PROPERTY_INSTRUMENT_TYPE = "instrumentType";
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String instrumentType;
 
   public static final String JSON_PROPERTY_INSTRUMENT_NAME = "instrumentName";
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String instrumentName;
 
   public static final String JSON_PROPERTY_TRADE_DATE = "tradeDate";
   @JsonProperty(JSON_PROPERTY_TRADE_DATE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime tradeDate;
 
   public static final String JSON_PROPERTY_SETTLEMENT_DATE = "settlementDate";
   @JsonProperty(JSON_PROPERTY_SETTLEMENT_DATE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime settlementDate;
 
   public static final String JSON_PROPERTY_STATUS = "status";
@@ -219,7 +219,7 @@ public class TransactionResponse {
    * Get instrumentId
    * @return instrumentId
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getInstrumentId() {
     return instrumentId;
   }
@@ -238,7 +238,7 @@ public class TransactionResponse {
    * Get instrumentType
    * @return instrumentType
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getInstrumentType() {
     return instrumentType;
   }
@@ -257,7 +257,7 @@ public class TransactionResponse {
    * Get instrumentName
    * @return instrumentName
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getInstrumentName() {
     return instrumentName;
   }
@@ -276,7 +276,7 @@ public class TransactionResponse {
    * Get tradeDate
    * @return tradeDate
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public OffsetDateTime getTradeDate() {
     return tradeDate;
   }
@@ -295,7 +295,7 @@ public class TransactionResponse {
    * Get settlementDate
    * @return settlementDate
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public OffsetDateTime getSettlementDate() {
     return settlementDate;
   }

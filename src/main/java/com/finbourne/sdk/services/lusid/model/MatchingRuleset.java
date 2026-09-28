@@ -21,6 +21,7 @@ import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.SupplementalAttribute;
 import com.finbourne.sdk.services.lusid.model.ToleranceBase;
 import com.finbourne.sdk.services.lusid.model.Version;
+import com.finbourne.sdk.services.lusid.model.WritebackConfiguration;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ import com.finbourne.sdk.JSON;
   MatchingRuleset.JSON_PROPERTY_AGGREGATE_TOLERANCES,
   MatchingRuleset.JSON_PROPERTY_ALLOW_PARTIAL_MATCHING,
   MatchingRuleset.JSON_PROPERTY_SUPPLEMENTAL_ATTRIBUTES,
+  MatchingRuleset.JSON_PROPERTY_WRITEBACK_CONFIGURATIONS,
   MatchingRuleset.JSON_PROPERTY_HREF,
   MatchingRuleset.JSON_PROPERTY_VERSION,
   MatchingRuleset.JSON_PROPERTY_LINKS
@@ -117,6 +119,11 @@ public class MatchingRuleset {
   @JsonProperty(JSON_PROPERTY_SUPPLEMENTAL_ATTRIBUTES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<SupplementalAttribute> supplementalAttributes;
+
+  public static final String JSON_PROPERTY_WRITEBACK_CONFIGURATIONS = "writebackConfigurations";
+  @JsonProperty(JSON_PROPERTY_WRITEBACK_CONFIGURATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<WritebackConfiguration> writebackConfigurations;
 
   public static final String JSON_PROPERTY_HREF = "href";
   @JsonProperty(JSON_PROPERTY_HREF)
@@ -385,6 +392,33 @@ public class MatchingRuleset {
   }
 
 
+  public MatchingRuleset writebackConfigurations(List<WritebackConfiguration> writebackConfigurations) {
+    this.writebackConfigurations = writebackConfigurations;
+    return this;
+  }
+
+  public MatchingRuleset addWritebackConfigurationsItem(WritebackConfiguration writebackConfigurationsItem) {
+    if (this.writebackConfigurations == null) {
+      this.writebackConfigurations = new ArrayList<>();
+    }
+    this.writebackConfigurations.add(writebackConfigurationsItem);
+    return this;
+  }
+
+  /**
+   * The writeback suggestions generated against this ruleset&#39;s results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty.
+   * @return writebackConfigurations
+   */
+  @javax.annotation.Nullable
+  public List<WritebackConfiguration> getWritebackConfigurations() {
+    return writebackConfigurations;
+  }
+
+  public void setWritebackConfigurations(List<WritebackConfiguration> writebackConfigurations) {
+    this.writebackConfigurations = writebackConfigurations;
+  }
+
+
   public MatchingRuleset href(URI href) {
     this.href = href;
     return this;
@@ -470,6 +504,7 @@ public class MatchingRuleset {
         Objects.equals(this.aggregateTolerances, matchingRuleset.aggregateTolerances) &&
         Objects.equals(this.allowPartialMatching, matchingRuleset.allowPartialMatching) &&
         Objects.equals(this.supplementalAttributes, matchingRuleset.supplementalAttributes) &&
+        Objects.equals(this.writebackConfigurations, matchingRuleset.writebackConfigurations) &&
         Objects.equals(this.href, matchingRuleset.href) &&
         Objects.equals(this.version, matchingRuleset.version) &&
         Objects.equals(this.links, matchingRuleset.links);
@@ -481,7 +516,7 @@ public class MatchingRuleset {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, displayName, recType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, href, version, links);
+    return Objects.hash(id, displayName, recType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -506,6 +541,7 @@ public class MatchingRuleset {
     sb.append("    aggregateTolerances: ").append(toIndentedString(aggregateTolerances)).append("\n");
     sb.append("    allowPartialMatching: ").append(toIndentedString(allowPartialMatching)).append("\n");
     sb.append("    supplementalAttributes: ").append(toIndentedString(supplementalAttributes)).append("\n");
+    sb.append("    writebackConfigurations: ").append(toIndentedString(writebackConfigurations)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");

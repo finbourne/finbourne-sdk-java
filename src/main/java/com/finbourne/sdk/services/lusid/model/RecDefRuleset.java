@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.RecDefByTaxLots;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.Arrays;
@@ -37,7 +38,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   RecDefRuleset.JSON_PROPERTY_REC_TYPE,
   RecDefRuleset.JSON_PROPERTY_MATCHING_RULESET_ID,
-  RecDefRuleset.JSON_PROPERTY_RELATIONAL_DATA_FILTER
+  RecDefRuleset.JSON_PROPERTY_RELATIONAL_DATA_FILTER,
+  RecDefRuleset.JSON_PROPERTY_BY_TAX_LOTS
 })
 
 public class RecDefRuleset {
@@ -55,6 +57,11 @@ public class RecDefRuleset {
   @JsonProperty(JSON_PROPERTY_RELATIONAL_DATA_FILTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String relationalDataFilter;
+
+  public static final String JSON_PROPERTY_BY_TAX_LOTS = "byTaxLots";
+  @JsonProperty(JSON_PROPERTY_BY_TAX_LOTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RecDefByTaxLots byTaxLots;
 
   public RecDefRuleset() {
   }
@@ -116,6 +123,25 @@ public class RecDefRuleset {
   }
 
 
+  public RecDefRuleset byTaxLots(RecDefByTaxLots byTaxLots) {
+    this.byTaxLots = byTaxLots;
+    return this;
+  }
+
+  /**
+   * Get byTaxLots
+   * @return byTaxLots
+   */
+  @javax.annotation.Nullable
+  public RecDefByTaxLots getByTaxLots() {
+    return byTaxLots;
+  }
+
+  public void setByTaxLots(RecDefByTaxLots byTaxLots) {
+    this.byTaxLots = byTaxLots;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -127,7 +153,8 @@ public class RecDefRuleset {
     RecDefRuleset recDefRuleset = (RecDefRuleset) o;
     return Objects.equals(this.recType, recDefRuleset.recType) &&
         Objects.equals(this.matchingRulesetId, recDefRuleset.matchingRulesetId) &&
-        Objects.equals(this.relationalDataFilter, recDefRuleset.relationalDataFilter);
+        Objects.equals(this.relationalDataFilter, recDefRuleset.relationalDataFilter) &&
+        Objects.equals(this.byTaxLots, recDefRuleset.byTaxLots);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -136,7 +163,7 @@ public class RecDefRuleset {
 
   @Override
  public int hashCode() {
-    return Objects.hash(recType, matchingRulesetId, relationalDataFilter);
+    return Objects.hash(recType, matchingRulesetId, relationalDataFilter, byTaxLots);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -153,6 +180,7 @@ public class RecDefRuleset {
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
     sb.append("    matchingRulesetId: ").append(toIndentedString(matchingRulesetId)).append("\n");
     sb.append("    relationalDataFilter: ").append(toIndentedString(relationalDataFilter)).append("\n");
+    sb.append("    byTaxLots: ").append(toIndentedString(byTaxLots)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -65,9 +65,17 @@ public class TaskActivity extends AbstractOpenApiSchema {
             int match = 0;
             ArrayList<String> errorMessages = new ArrayList<>();
 
+            // Try each oneOf variant with a strict mapper: variants have
+            // overlapping (or identical) property sets and Jackson silently
+            // ignores unknown fields by default, so a non-strict mapper lets
+            // multiple variants "match" the same payload. Requiring
+            // FAIL_ON_UNKNOWN_PROPERTIES makes the additionalProperties:false
+            // contract on each variant disambiguate the union.
+            com.fasterxml.jackson.databind.ObjectMapper _strictMapper = JSON.getMapper().copy()
+                    .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
             // deserialize CreateNewTaskActivity
             try {
-                deserialized = JSON.getMapper().treeToValue(node, CreateNewTaskActivity.class);
+                deserialized = _strictMapper.treeToValue(node, CreateNewTaskActivity.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'CreateNewTaskActivity'");
                 result.setActualInstance(deserialized);
@@ -77,7 +85,7 @@ public class TaskActivity extends AbstractOpenApiSchema {
             }
             // deserialize UpdateMatchingTasksActivity
             try {
-                deserialized = JSON.getMapper().treeToValue(node, UpdateMatchingTasksActivity.class);
+                deserialized = _strictMapper.treeToValue(node, UpdateMatchingTasksActivity.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'UpdateMatchingTasksActivity'");
                 result.setActualInstance(deserialized);

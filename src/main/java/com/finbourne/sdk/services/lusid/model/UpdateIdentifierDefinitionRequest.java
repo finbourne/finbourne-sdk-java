@@ -40,6 +40,7 @@ import com.finbourne.sdk.JSON;
   UpdateIdentifierDefinitionRequest.JSON_PROPERTY_HIERARCHY_LEVEL,
   UpdateIdentifierDefinitionRequest.JSON_PROPERTY_DISPLAY_NAME,
   UpdateIdentifierDefinitionRequest.JSON_PROPERTY_DESCRIPTION,
+  UpdateIdentifierDefinitionRequest.JSON_PROPERTY_HIERARCHY_USAGE,
   UpdateIdentifierDefinitionRequest.JSON_PROPERTY_PROPERTIES
 })
 
@@ -58,6 +59,11 @@ public class UpdateIdentifierDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String description;
+
+  public static final String JSON_PROPERTY_HIERARCHY_USAGE = "hierarchyUsage";
+  @JsonProperty(JSON_PROPERTY_HIERARCHY_USAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String hierarchyUsage;
 
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
@@ -124,6 +130,25 @@ public class UpdateIdentifierDefinitionRequest {
   }
 
 
+  public UpdateIdentifierDefinitionRequest hierarchyUsage(String hierarchyUsage) {
+    this.hierarchyUsage = hierarchyUsage;
+    return this;
+  }
+
+  /**
+   * Optional. When supplied, relaxes the identifier definition from MasterIdentifier (unique) to ParentIdentifier (non-unique).  Tightening from ParentIdentifier back to MasterIdentifier is refused.  Omit to leave the HierarchyUsage unchanged. Available values: MasterIdentifier, ParentIdentifier.
+   * @return hierarchyUsage
+   */
+  @javax.annotation.Nullable
+  public String getHierarchyUsage() {
+    return hierarchyUsage;
+  }
+
+  public void setHierarchyUsage(String hierarchyUsage) {
+    this.hierarchyUsage = hierarchyUsage;
+  }
+
+
   public UpdateIdentifierDefinitionRequest properties(Map<String, Property> properties) {
     this.properties = properties;
     return this;
@@ -163,6 +188,7 @@ public class UpdateIdentifierDefinitionRequest {
     return Objects.equals(this.hierarchyLevel, updateIdentifierDefinitionRequest.hierarchyLevel) &&
         Objects.equals(this.displayName, updateIdentifierDefinitionRequest.displayName) &&
         Objects.equals(this.description, updateIdentifierDefinitionRequest.description) &&
+        Objects.equals(this.hierarchyUsage, updateIdentifierDefinitionRequest.hierarchyUsage) &&
         Objects.equals(this.properties, updateIdentifierDefinitionRequest.properties);
   }
 
@@ -172,7 +198,7 @@ public class UpdateIdentifierDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(hierarchyLevel, displayName, description, properties);
+    return Objects.hash(hierarchyLevel, displayName, description, hierarchyUsage, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -189,6 +215,7 @@ public class UpdateIdentifierDefinitionRequest {
     sb.append("    hierarchyLevel: ").append(toIndentedString(hierarchyLevel)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    hierarchyUsage: ").append(toIndentedString(hierarchyUsage)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();

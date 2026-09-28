@@ -12,7 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
-import com.finbourne.sdk.services.lusid.model.RecLinkKey;
+import com.finbourne.sdk.services.lusid.model.RecResultLinkKey;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +33,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The item keys a link between two rec results was established on, per side.
+ * The item pairings a link between two rec results was established on, per side.
  */
 @JsonPropertyOrder({
   RecLinkedBy.JSON_PROPERTY_LEFT,
@@ -44,22 +44,22 @@ public class RecLinkedBy {
   public static final String JSON_PROPERTY_LEFT = "left";
   @JsonProperty(JSON_PROPERTY_LEFT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<RecLinkKey> left = new ArrayList<>();
+  private List<RecResultLinkKey> left = new ArrayList<>();
 
   public static final String JSON_PROPERTY_RIGHT = "right";
   @JsonProperty(JSON_PROPERTY_RIGHT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<RecLinkKey> right = new ArrayList<>();
+  private List<RecResultLinkKey> right = new ArrayList<>();
 
   public RecLinkedBy() {
   }
 
-  public RecLinkedBy left(List<RecLinkKey> left) {
+  public RecLinkedBy left(List<RecResultLinkKey> left) {
     this.left = left;
     return this;
   }
 
-  public RecLinkedBy addLeftItem(RecLinkKey leftItem) {
+  public RecLinkedBy addLeftItem(RecResultLinkKey leftItem) {
     if (this.left == null) {
       this.left = new ArrayList<>();
     }
@@ -68,25 +68,25 @@ public class RecLinkedBy {
   }
 
   /**
-   * The keys shared by the two results&#39; left-side items. May be empty.
+   * The pairings between the two results&#39; left-side items, one entry per pairing. May be empty.
    * @return left
    */
   @javax.annotation.Nonnull
-  public List<RecLinkKey> getLeft() {
+  public List<RecResultLinkKey> getLeft() {
     return left;
   }
 
-  public void setLeft(List<RecLinkKey> left) {
+  public void setLeft(List<RecResultLinkKey> left) {
     this.left = left;
   }
 
 
-  public RecLinkedBy right(List<RecLinkKey> right) {
+  public RecLinkedBy right(List<RecResultLinkKey> right) {
     this.right = right;
     return this;
   }
 
-  public RecLinkedBy addRightItem(RecLinkKey rightItem) {
+  public RecLinkedBy addRightItem(RecResultLinkKey rightItem) {
     if (this.right == null) {
       this.right = new ArrayList<>();
     }
@@ -95,15 +95,15 @@ public class RecLinkedBy {
   }
 
   /**
-   * The keys shared by the two results&#39; right-side items. May be empty.
+   * The pairings between the two results&#39; right-side items, one entry per pairing. May be empty.
    * @return right
    */
   @javax.annotation.Nonnull
-  public List<RecLinkKey> getRight() {
+  public List<RecResultLinkKey> getRight() {
     return right;
   }
 
-  public void setRight(List<RecLinkKey> right) {
+  public void setRight(List<RecResultLinkKey> right) {
     this.right = right;
   }
 

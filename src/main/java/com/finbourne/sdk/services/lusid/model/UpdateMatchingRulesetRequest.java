@@ -18,6 +18,7 @@ import com.finbourne.sdk.services.lusid.model.GroupReconciliationFilters;
 import com.finbourne.sdk.services.lusid.model.RecDatasetSchemas;
 import com.finbourne.sdk.services.lusid.model.SupplementalAttribute;
 import com.finbourne.sdk.services.lusid.model.ToleranceBase;
+import com.finbourne.sdk.services.lusid.model.WritebackConfiguration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +52,8 @@ import com.finbourne.sdk.JSON;
   UpdateMatchingRulesetRequest.JSON_PROPERTY_CORE_TOLERANCES,
   UpdateMatchingRulesetRequest.JSON_PROPERTY_AGGREGATE_TOLERANCES,
   UpdateMatchingRulesetRequest.JSON_PROPERTY_ALLOW_PARTIAL_MATCHING,
-  UpdateMatchingRulesetRequest.JSON_PROPERTY_SUPPLEMENTAL_ATTRIBUTES
+  UpdateMatchingRulesetRequest.JSON_PROPERTY_SUPPLEMENTAL_ATTRIBUTES,
+  UpdateMatchingRulesetRequest.JSON_PROPERTY_WRITEBACK_CONFIGURATIONS
 })
 
 public class UpdateMatchingRulesetRequest {
@@ -104,6 +106,11 @@ public class UpdateMatchingRulesetRequest {
   @JsonProperty(JSON_PROPERTY_SUPPLEMENTAL_ATTRIBUTES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<SupplementalAttribute> supplementalAttributes;
+
+  public static final String JSON_PROPERTY_WRITEBACK_CONFIGURATIONS = "writebackConfigurations";
+  @JsonProperty(JSON_PROPERTY_WRITEBACK_CONFIGURATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<WritebackConfiguration> writebackConfigurations;
 
   public UpdateMatchingRulesetRequest() {
   }
@@ -338,6 +345,33 @@ public class UpdateMatchingRulesetRequest {
   }
 
 
+  public UpdateMatchingRulesetRequest writebackConfigurations(List<WritebackConfiguration> writebackConfigurations) {
+    this.writebackConfigurations = writebackConfigurations;
+    return this;
+  }
+
+  public UpdateMatchingRulesetRequest addWritebackConfigurationsItem(WritebackConfiguration writebackConfigurationsItem) {
+    if (this.writebackConfigurations == null) {
+      this.writebackConfigurations = new ArrayList<>();
+    }
+    this.writebackConfigurations.add(writebackConfigurationsItem);
+    return this;
+  }
+
+  /**
+   * The writeback suggestions generated against this ruleset&#39;s results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty.
+   * @return writebackConfigurations
+   */
+  @javax.annotation.Nullable
+  public List<WritebackConfiguration> getWritebackConfigurations() {
+    return writebackConfigurations;
+  }
+
+  public void setWritebackConfigurations(List<WritebackConfiguration> writebackConfigurations) {
+    this.writebackConfigurations = writebackConfigurations;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -356,7 +390,8 @@ public class UpdateMatchingRulesetRequest {
         Objects.equals(this.coreTolerances, updateMatchingRulesetRequest.coreTolerances) &&
         Objects.equals(this.aggregateTolerances, updateMatchingRulesetRequest.aggregateTolerances) &&
         Objects.equals(this.allowPartialMatching, updateMatchingRulesetRequest.allowPartialMatching) &&
-        Objects.equals(this.supplementalAttributes, updateMatchingRulesetRequest.supplementalAttributes);
+        Objects.equals(this.supplementalAttributes, updateMatchingRulesetRequest.supplementalAttributes) &&
+        Objects.equals(this.writebackConfigurations, updateMatchingRulesetRequest.writebackConfigurations);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -365,7 +400,7 @@ public class UpdateMatchingRulesetRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, recType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes);
+    return Objects.hash(displayName, recType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -389,6 +424,7 @@ public class UpdateMatchingRulesetRequest {
     sb.append("    aggregateTolerances: ").append(toIndentedString(aggregateTolerances)).append("\n");
     sb.append("    allowPartialMatching: ").append(toIndentedString(allowPartialMatching)).append("\n");
     sb.append("    supplementalAttributes: ").append(toIndentedString(supplementalAttributes)).append("\n");
+    sb.append("    writebackConfigurations: ").append(toIndentedString(writebackConfigurations)).append("\n");
     sb.append("}");
     return sb.toString();
   }

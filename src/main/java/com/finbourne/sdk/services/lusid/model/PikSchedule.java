@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.MasteredInstrument;
 import com.finbourne.sdk.services.lusid.model.Schedule;
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -40,6 +41,7 @@ import com.finbourne.sdk.JSON;
   PikSchedule.JSON_PROPERTY_MATURITY_DATE,
   PikSchedule.JSON_PROPERTY_FACE_ROUNDING_CONVENTION,
   PikSchedule.JSON_PROPERTY_FACE_ROUNDING_DECIMAL_PLACES,
+  PikSchedule.JSON_PROPERTY_PIK_DELIVERABLE,
   PikSchedule.JSON_PROPERTY_IS_PIK_FRACTION_ELECTABLE,
   PikSchedule.JSON_PROPERTY_PIK_FRACTION,
   PikSchedule.JSON_PROPERTY_PIK_MARGIN,
@@ -76,6 +78,11 @@ public class PikSchedule extends Schedule {
   @JsonProperty(JSON_PROPERTY_FACE_ROUNDING_DECIMAL_PLACES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Integer faceRoundingDecimalPlaces;
+
+  public static final String JSON_PROPERTY_PIK_DELIVERABLE = "pikDeliverable";
+  @JsonProperty(JSON_PROPERTY_PIK_DELIVERABLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private MasteredInstrument pikDeliverable;
 
   public static final String JSON_PROPERTY_IS_PIK_FRACTION_ELECTABLE = "isPikFractionElectable";
   @JsonProperty(JSON_PROPERTY_IS_PIK_FRACTION_ELECTABLE)
@@ -196,6 +203,25 @@ public class PikSchedule extends Schedule {
   }
 
 
+  public PikSchedule pikDeliverable(MasteredInstrument pikDeliverable) {
+    this.pikDeliverable = pikDeliverable;
+    return this;
+  }
+
+  /**
+   * Get pikDeliverable
+   * @return pikDeliverable
+   */
+  @javax.annotation.Nullable
+  public MasteredInstrument getPikDeliverable() {
+    return pikDeliverable;
+  }
+
+  public void setPikDeliverable(MasteredInstrument pikDeliverable) {
+    this.pikDeliverable = pikDeliverable;
+  }
+
+
   public PikSchedule isPikFractionElectable(Boolean isPikFractionElectable) {
     this.isPikFractionElectable = isPikFractionElectable;
     return this;
@@ -259,7 +285,7 @@ public class PikSchedule extends Schedule {
   }
 
   /**
-   * The type of PIK payment to be used for the duration of this schedule.  InterestCapitalisation adds the paid-in-kind portion to the bond&#39;s current face;  AdditionalSecurities settles it by delivering units of another instrument, named on each  period&#39;s PikBondInterestEvent; Electable leaves the choice to a per-period election.                Supported string (enumeration) values are: [Electable, InterestCapitalisation, AdditionalSecurities].
+   * The type of PIK payment to be used for the duration of this schedule.  InterestCapitalisation adds the paid-in-kind portion to the bond&#39;s current face;  AdditionalSecurities settles it by delivering units of an instrument, named by pikDeliverable  and by default the bond itself; Electable leaves the choice to a per-period election.                Supported string (enumeration) values are: [Electable, InterestCapitalisation, AdditionalSecurities].
    * @return pikPaymentType
    */
   @javax.annotation.Nullable
@@ -361,6 +387,7 @@ public class PikSchedule extends Schedule {
         Objects.equals(this.maturityDate, pikSchedule.maturityDate) &&
         Objects.equals(this.faceRoundingConvention, pikSchedule.faceRoundingConvention) &&
         Objects.equals(this.faceRoundingDecimalPlaces, pikSchedule.faceRoundingDecimalPlaces) &&
+        Objects.equals(this.pikDeliverable, pikSchedule.pikDeliverable) &&
         Objects.equals(this.isPikFractionElectable, pikSchedule.isPikFractionElectable) &&
         (this.pikFraction == null ? pikSchedule.pikFraction == null : (pikSchedule.pikFraction != null && this.pikFraction.compareTo(pikSchedule.getPikFraction()) == 0)) &&
         (this.pikMargin == null ? pikSchedule.pikMargin == null : (pikSchedule.pikMargin != null && this.pikMargin.compareTo(pikSchedule.getPikMargin()) == 0)) &&
@@ -378,7 +405,7 @@ public class PikSchedule extends Schedule {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, faceRoundingConvention, faceRoundingDecimalPlaces, isPikFractionElectable, pikFraction, pikMargin, pikPaymentType, pikRate, pikSpread, pikTravelsFree, pikInterestBasis, super.hashCode());
+    return Objects.hash(startDate, maturityDate, faceRoundingConvention, faceRoundingDecimalPlaces, pikDeliverable, isPikFractionElectable, pikFraction, pikMargin, pikPaymentType, pikRate, pikSpread, pikTravelsFree, pikInterestBasis, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -397,6 +424,7 @@ public class PikSchedule extends Schedule {
     sb.append("    maturityDate: ").append(toIndentedString(maturityDate)).append("\n");
     sb.append("    faceRoundingConvention: ").append(toIndentedString(faceRoundingConvention)).append("\n");
     sb.append("    faceRoundingDecimalPlaces: ").append(toIndentedString(faceRoundingDecimalPlaces)).append("\n");
+    sb.append("    pikDeliverable: ").append(toIndentedString(pikDeliverable)).append("\n");
     sb.append("    isPikFractionElectable: ").append(toIndentedString(isPikFractionElectable)).append("\n");
     sb.append("    pikFraction: ").append(toIndentedString(pikFraction)).append("\n");
     sb.append("    pikMargin: ").append(toIndentedString(pikMargin)).append("\n");

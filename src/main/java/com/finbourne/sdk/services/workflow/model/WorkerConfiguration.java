@@ -19,6 +19,7 @@ import com.finbourne.sdk.services.workflow.model.HorizonIntegration;
 import com.finbourne.sdk.services.workflow.model.LuminesceView;
 import com.finbourne.sdk.services.workflow.model.LusidEntityDataQualityCheck;
 import com.finbourne.sdk.services.workflow.model.PortfolioHoldingDataQualityCheck;
+import com.finbourne.sdk.services.workflow.model.PortfolioTransactionDataQualityCheck;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.SchedulerJob;
 import com.finbourne.sdk.services.workflow.model.Sleep;
@@ -66,9 +67,17 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             int match = 0;
             ArrayList<String> errorMessages = new ArrayList<>();
 
+            // Try each oneOf variant with a strict mapper: variants have
+            // overlapping (or identical) property sets and Jackson silently
+            // ignores unknown fields by default, so a non-strict mapper lets
+            // multiple variants "match" the same payload. Requiring
+            // FAIL_ON_UNKNOWN_PROPERTIES makes the additionalProperties:false
+            // contract on each variant disambiguate the union.
+            com.fasterxml.jackson.databind.ObjectMapper _strictMapper = JSON.getMapper().copy()
+                    .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
             // deserialize Fail
             try {
-                deserialized = JSON.getMapper().treeToValue(node, Fail.class);
+                deserialized = _strictMapper.treeToValue(node, Fail.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'Fail'");
                 result.setActualInstance(deserialized);
@@ -78,7 +87,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             }
             // deserialize GroupReconciliation
             try {
-                deserialized = JSON.getMapper().treeToValue(node, GroupReconciliation.class);
+                deserialized = _strictMapper.treeToValue(node, GroupReconciliation.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'GroupReconciliation'");
                 result.setActualInstance(deserialized);
@@ -88,7 +97,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             }
             // deserialize HealthCheck
             try {
-                deserialized = JSON.getMapper().treeToValue(node, HealthCheck.class);
+                deserialized = _strictMapper.treeToValue(node, HealthCheck.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'HealthCheck'");
                 result.setActualInstance(deserialized);
@@ -98,7 +107,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             }
             // deserialize HorizonIntegration
             try {
-                deserialized = JSON.getMapper().treeToValue(node, HorizonIntegration.class);
+                deserialized = _strictMapper.treeToValue(node, HorizonIntegration.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'HorizonIntegration'");
                 result.setActualInstance(deserialized);
@@ -108,7 +117,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             }
             // deserialize LuminesceView
             try {
-                deserialized = JSON.getMapper().treeToValue(node, LuminesceView.class);
+                deserialized = _strictMapper.treeToValue(node, LuminesceView.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'LuminesceView'");
                 result.setActualInstance(deserialized);
@@ -118,7 +127,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             }
             // deserialize LusidEntityDataQualityCheck
             try {
-                deserialized = JSON.getMapper().treeToValue(node, LusidEntityDataQualityCheck.class);
+                deserialized = _strictMapper.treeToValue(node, LusidEntityDataQualityCheck.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'LusidEntityDataQualityCheck'");
                 result.setActualInstance(deserialized);
@@ -128,7 +137,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             }
             // deserialize PortfolioHoldingDataQualityCheck
             try {
-                deserialized = JSON.getMapper().treeToValue(node, PortfolioHoldingDataQualityCheck.class);
+                deserialized = _strictMapper.treeToValue(node, PortfolioHoldingDataQualityCheck.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'PortfolioHoldingDataQualityCheck'");
                 result.setActualInstance(deserialized);
@@ -136,9 +145,19 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for PortfolioHoldingDataQualityCheck failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'PortfolioHoldingDataQualityCheck'", e);
             }
+            // deserialize PortfolioTransactionDataQualityCheck
+            try {
+                deserialized = _strictMapper.treeToValue(node, PortfolioTransactionDataQualityCheck.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'PortfolioTransactionDataQualityCheck'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for PortfolioTransactionDataQualityCheck failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'PortfolioTransactionDataQualityCheck'", e);
+            }
             // deserialize SchedulerJob
             try {
-                deserialized = JSON.getMapper().treeToValue(node, SchedulerJob.class);
+                deserialized = _strictMapper.treeToValue(node, SchedulerJob.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'SchedulerJob'");
                 result.setActualInstance(deserialized);
@@ -148,7 +167,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             }
             // deserialize Sleep
             try {
-                deserialized = JSON.getMapper().treeToValue(node, Sleep.class);
+                deserialized = _strictMapper.treeToValue(node, Sleep.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'Sleep'");
                 result.setActualInstance(deserialized);
@@ -185,6 +204,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
         schemas.put("LuminesceView", LuminesceView.class);
         schemas.put("LusidEntityDataQualityCheck", LusidEntityDataQualityCheck.class);
         schemas.put("PortfolioHoldingDataQualityCheck", PortfolioHoldingDataQualityCheck.class);
+        schemas.put("PortfolioTransactionDataQualityCheck", PortfolioTransactionDataQualityCheck.class);
         schemas.put("SchedulerJob", SchedulerJob.class);
         schemas.put("Sleep", Sleep.class);
     }
@@ -197,7 +217,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -238,6 +258,11 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             return;
         }
 
+        if (instance instanceof PortfolioTransactionDataQualityCheck) {
+            super.setActualInstance(instance);
+            return;
+        }
+
         if (instance instanceof SchedulerJob) {
             super.setActualInstance(instance);
             return;
@@ -248,14 +273,14 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, SchedulerJob, Sleep");
+        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep
      *
-     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, SchedulerJob, Sleep)
+     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -332,6 +357,16 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
      */
     public PortfolioHoldingDataQualityCheck getPortfolioHoldingDataQualityCheck() throws ClassCastException {
         return (PortfolioHoldingDataQualityCheck)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `PortfolioTransactionDataQualityCheck`. If the actual instance is not `PortfolioTransactionDataQualityCheck`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `PortfolioTransactionDataQualityCheck`
+     * @throws ClassCastException if the instance is not `PortfolioTransactionDataQualityCheck`
+     */
+    public PortfolioTransactionDataQualityCheck getPortfolioTransactionDataQualityCheck() throws ClassCastException {
+        return (PortfolioTransactionDataQualityCheck)super.getActualInstance();
     }
     /**
      * Get the actual instance of `SchedulerJob`. If the actual instance is not `SchedulerJob`,

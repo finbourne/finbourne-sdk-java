@@ -527,7 +527,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
-     * Add, edit or delete comments on rec results in a batch.
+     * Add, edit or delete comments on rec results in a batch.  The batch limit per request is 2,000.
      * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
      * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
      * @return ApiResponse&lt;BatchManageCommentResponse&gt;
@@ -548,7 +548,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
-     * Add, edit or delete comments on rec results in a batch.Use any specified configuration options to override any other configuration for this request only
+     * Add, edit or delete comments on rec results in a batch.  The batch limit per request is 2,000.Use any specified configuration options to override any other configuration for this request only
      * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
      * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
      * @return ApiResponse&lt;BatchManageCommentResponse&gt;
@@ -569,7 +569,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments (asynchronously)
-     * Add, edit or delete comments on rec results in a batch.
+     * Add, edit or delete comments on rec results in a batch.  The batch limit per request is 2,000.
      * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
      * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
      * @param _callback The callback to be executed when the API call finishes
@@ -591,7 +591,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments (asynchronously)
-     * Add, edit or delete comments on rec results in a batch.Use any specified configuration options to override any other configuration for this request only
+     * Add, edit or delete comments on rec results in a batch.  The batch limit per request is 2,000.Use any specified configuration options to override any other configuration for this request only
      * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
      * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
      * @param _callback The callback to be executed when the API call finishes
@@ -747,7 +747,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
-     * Add, edit or delete comments on rec results in a batch.
+     * Add, edit or delete comments on rec results in a batch.  The batch limit per request is 2,000.
      * @param requestBody The batch of comment operations, keyed by a client-supplied correlation key. (required)
      * @return APIbatchManageRecResultCommentsRequest
      * @http.response.details
@@ -862,7 +862,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
-     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.  The batch limit per request is 2,000.
      * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
      * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
      * @return ApiResponse&lt;BatchReviewRecResultResponse&gt;
@@ -883,7 +883,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
-     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.Use any specified configuration options to override any other configuration for this request only
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.  The batch limit per request is 2,000.Use any specified configuration options to override any other configuration for this request only
      * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
      * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
      * @return ApiResponse&lt;BatchReviewRecResultResponse&gt;
@@ -904,7 +904,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults (asynchronously)
-     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.  The batch limit per request is 2,000.
      * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
      * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
      * @param _callback The callback to be executed when the API call finishes
@@ -926,7 +926,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults (asynchronously)
-     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.Use any specified configuration options to override any other configuration for this request only
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.  The batch limit per request is 2,000.Use any specified configuration options to override any other configuration for this request only
      * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
      * @param successMode Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional, default to Partial)
      * @param _callback The callback to be executed when the API call finishes
@@ -1082,7 +1082,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
-     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.
+     * Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.  The batch limit per request is 2,000.
      * @param requestBody The batch of review items, keyed by a client-supplied correlation key. (required)
      * @return APIbatchReviewRecResultsRequest
      * @http.response.details

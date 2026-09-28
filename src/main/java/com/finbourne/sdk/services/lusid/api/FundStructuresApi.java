@@ -27,7 +27,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
+import com.finbourne.sdk.services.lusid.model.DeletedEntityResponse;
 import com.finbourne.sdk.services.lusid.model.FundStructure;
+import com.finbourne.sdk.services.lusid.model.FundStructureMemberRequest;
 import com.finbourne.sdk.services.lusid.model.FundStructureRequest;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
@@ -77,6 +79,371 @@ public class FundStructuresApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    /**
+     * Build call for addFundStructureMember
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureMemberRequest The node to add and the links joining it to existing members. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest addFundStructureMemberCall(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest, String effectiveAt, final ApiCallback _callback) throws ApiException {
+        return addFundStructureMemberCall(scope, code, fundStructureMemberRequest, effectiveAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for addFundStructureMember. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param fundStructureMemberRequest The node to add and the links joining it to existing members. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest addFundStructureMemberCall(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = fundStructureMemberRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/fundstructures/{scope}/{code}/members"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest addFundStructureMemberValidateBeforeCall(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling addFundStructureMember(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling addFundStructureMember(Async)");
+        }
+
+        // verify the required parameter 'fundStructureMemberRequest' is set
+        if (fundStructureMemberRequest == null) {
+            throw new ApiException("Missing the required parameter 'fundStructureMemberRequest' when calling addFundStructureMember(Async)");
+        }
+
+        return addFundStructureMemberCall(scope, code, fundStructureMemberRequest, effectiveAt, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+     * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureMemberRequest The node to add and the links joining it to existing members. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @return ApiResponse&lt;FundStructure&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<FundStructure> addFundStructureMemberWithHttpInfo(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest, String effectiveAt) throws ApiException {
+        HttpRequest localVarCall = addFundStructureMemberValidateBeforeCall(scope, code, fundStructureMemberRequest, effectiveAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+     * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureMemberRequest The node to add and the links joining it to existing members. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @return ApiResponse&lt;FundStructure&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<FundStructure> addFundStructureMemberWithHttpInfo(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest, String effectiveAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = addFundStructureMemberValidateBeforeCall(scope, code, fundStructureMemberRequest, effectiveAt, null, opts);
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure. (asynchronously)
+     * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureMemberRequest The node to add and the links joining it to existing members. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void addFundStructureMemberAsync(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest, String effectiveAt, final ApiCallback<FundStructure> _callback) throws ApiException {
+
+        HttpRequest localVarCall = addFundStructureMemberValidateBeforeCall(scope, code, fundStructureMemberRequest, effectiveAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure. (asynchronously)
+     * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureMemberRequest The node to add and the links joining it to existing members. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void addFundStructureMemberAsync(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest, String effectiveAt, final ApiCallback<FundStructure> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = addFundStructureMemberValidateBeforeCall(scope, code, fundStructureMemberRequest, effectiveAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIaddFundStructureMemberRequest {
+        private final String scope;
+        private final String code;
+        private final FundStructureMemberRequest fundStructureMemberRequest;
+        private String effectiveAt;
+
+        private APIaddFundStructureMemberRequest(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest) {
+            this.scope = scope;
+            this.code = code;
+            this.fundStructureMemberRequest = fundStructureMemberRequest;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIaddFundStructureMemberRequest
+         */
+        public APIaddFundStructureMemberRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Build call for addFundStructureMember
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return addFundStructureMemberCall(scope, code, fundStructureMemberRequest, effectiveAt, _callback);
+        }
+
+        /**
+         * Execute addFundStructureMember request
+         * @return FundStructure
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public FundStructure execute() throws ApiException {
+            ApiResponse<FundStructure> localVarResp = addFundStructureMemberWithHttpInfo(scope, code, fundStructureMemberRequest, effectiveAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute addFundStructureMember request. Use any specified configuration options to override any other configuration for this request only.
+         * @return FundStructure
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public FundStructure execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<FundStructure> localVarResp = addFundStructureMemberWithHttpInfo(scope, code, fundStructureMemberRequest, effectiveAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute addFundStructureMember request with HTTP info returned
+         * @return ApiResponse&lt;FundStructure&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<FundStructure> executeWithHttpInfo() throws ApiException {
+            return addFundStructureMemberWithHttpInfo(scope, code, fundStructureMemberRequest, effectiveAt);
+        }
+
+        /**
+         * Execute addFundStructureMember request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;FundStructure&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<FundStructure> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return addFundStructureMemberWithHttpInfo(scope, code, fundStructureMemberRequest, effectiveAt, opts);
+        }
+
+        /**
+         * Execute addFundStructureMember request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<FundStructure> _callback) throws ApiException {
+            addFundStructureMemberAsync(scope, code, fundStructureMemberRequest, effectiveAt, _callback);
+        }
+
+        /**
+         * Execute addFundStructureMember request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<FundStructure> _callback, ConfigurationOptions opts) throws ApiException {
+            addFundStructureMemberAsync(scope, code, fundStructureMemberRequest, effectiveAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+     * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureMemberRequest The node to add and the links joining it to existing members. (required)
+     * @return APIaddFundStructureMemberRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member added. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIaddFundStructureMemberRequest addFundStructureMember(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest) {
+        return new APIaddFundStructureMemberRequest(scope, code, fundStructureMemberRequest);
+    }
     /**
      * Build call for createFundStructure
      * @param scope The scope of the Fund Structure. (required)
@@ -407,44 +774,42 @@ public class FundStructuresApi {
         return new APIcreateFundStructureRequest(scope, fundStructureRequest);
     }
     /**
-     * Build call for getFundStructure
-     * @param scope The scope of the Fund Structure. (required)
-     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
-     * @param asAt The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. (optional)
-     * @param propertyKeys A list of property keys from the &#39;FundStructure&#39; domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example &#39;FundStructure/Manager/Id&#39;. If no properties are specified, then no properties will be returned. (optional)
+     * Build call for deleteFundStructure
+     * @param scope The scope of the Fund Structure to be deleted. (required)
+     * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The requested Fund Structure. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getFundStructureCall(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
-        return getFundStructureCall(scope, code, asAt, propertyKeys,  _callback, new ConfigurationOptions());
+    private HttpRequest deleteFundStructureCall(String scope, String code, String effectiveAt, final ApiCallback _callback) throws ApiException {
+        return deleteFundStructureCall(scope, code, effectiveAt,  _callback, new ConfigurationOptions());
     }
 
     /**
-     * Build call for getFundStructure. Use any specified configuration options to override any other configuration for this request only.
-     * @param scope The scope of the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param propertyKeys A list of property keys from the &#39;FundStructure&#39; domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example &#39;FundStructure/Manager/Id&#39;. If no properties are specified, then no properties will be returned. (optional)
+     * Build call for deleteFundStructure. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund Structure to be deleted. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The requested Fund Structure. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getFundStructureCall(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest deleteFundStructureCall(String scope, String code, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -470,6 +835,361 @@ public class FundStructuresApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest deleteFundStructureValidateBeforeCall(String scope, String code, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling deleteFundStructure(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling deleteFundStructure(Async)");
+        }
+
+        return deleteFundStructureCall(scope, code, effectiveAt, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+     * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.
+     * @param scope The scope of the Fund Structure to be deleted. (required)
+     * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteFundStructureWithHttpInfo(String scope, String code, String effectiveAt) throws ApiException {
+        HttpRequest localVarCall = deleteFundStructureValidateBeforeCall(scope, code, effectiveAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+     * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure to be deleted. (required)
+     * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteFundStructureWithHttpInfo(String scope, String code, String effectiveAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = deleteFundStructureValidateBeforeCall(scope, code, effectiveAt, null, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure. (asynchronously)
+     * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.
+     * @param scope The scope of the Fund Structure to be deleted. (required)
+     * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteFundStructureAsync(String scope, String code, String effectiveAt, final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = deleteFundStructureValidateBeforeCall(scope, code, effectiveAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure. (asynchronously)
+     * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure to be deleted. (required)
+     * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteFundStructureAsync(String scope, String code, String effectiveAt, final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = deleteFundStructureValidateBeforeCall(scope, code, effectiveAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIdeleteFundStructureRequest {
+        private final String scope;
+        private final String code;
+        private String effectiveAt;
+
+        private APIdeleteFundStructureRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIdeleteFundStructureRequest
+         */
+        public APIdeleteFundStructureRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Build call for deleteFundStructure
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteFundStructureCall(scope, code, effectiveAt, _callback);
+        }
+
+        /**
+         * Execute deleteFundStructure request
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute() throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteFundStructureWithHttpInfo(scope, code, effectiveAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteFundStructure request. Use any specified configuration options to override any other configuration for this request only.
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteFundStructureWithHttpInfo(scope, code, effectiveAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteFundStructure request with HTTP info returned
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo() throws ApiException {
+            return deleteFundStructureWithHttpInfo(scope, code, effectiveAt);
+        }
+
+        /**
+         * Execute deleteFundStructure request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return deleteFundStructureWithHttpInfo(scope, code, effectiveAt, opts);
+        }
+
+        /**
+         * Execute deleteFundStructure request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+            deleteFundStructureAsync(scope, code, effectiveAt, _callback);
+        }
+
+        /**
+         * Execute deleteFundStructure request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            deleteFundStructureAsync(scope, code, effectiveAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+     * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.
+     * @param scope The scope of the Fund Structure to be deleted. (required)
+     * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @return APIdeleteFundStructureRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The datetime that the Fund Structure was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIdeleteFundStructureRequest deleteFundStructure(String scope, String code) {
+        return new APIdeleteFundStructureRequest(scope, code);
+    }
+    /**
+     * Build call for getFundStructure
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. (optional)
+     * @param propertyKeys A list of property keys from the &#39;FundStructure&#39; domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example &#39;FundStructure/Manager/Id&#39;. If no properties are specified, then no properties will be returned. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested Fund Structure. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getFundStructureCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return getFundStructureCall(scope, code, effectiveAt, asAt, propertyKeys,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getFundStructure. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys A list of property keys from the &#39;FundStructure&#39; domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example &#39;FundStructure/Manager/Id&#39;. If no properties are specified, then no properties will be returned. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested Fund Structure. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getFundStructureCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/fundstructures/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
 
         if (asAt != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
@@ -501,7 +1221,7 @@ public class FundStructuresApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getFundStructureValidateBeforeCall(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getFundStructureValidateBeforeCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling getFundStructure(Async)");
@@ -512,15 +1232,16 @@ public class FundStructuresApi {
             throw new ApiException("Missing the required parameter 'code' when calling getFundStructure(Async)");
         }
 
-        return getFundStructureCall(scope, code, asAt, propertyKeys, _callback, opts);
+        return getFundStructureCall(scope, code, effectiveAt, asAt, propertyKeys, _callback, opts);
 
     }
 
     /**
      * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
-     * Retrieve the definition of a particular Fund Structure, including its nodes, edges, and any inline fund definitions.
+     * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. (optional)
      * @param propertyKeys A list of property keys from the &#39;FundStructure&#39; domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example &#39;FundStructure/Manager/Id&#39;. If no properties are specified, then no properties will be returned. (optional)
      * @return ApiResponse&lt;FundStructure&gt;
@@ -533,17 +1254,18 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<FundStructure> getFundStructureWithHttpInfo(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys) throws ApiException {
-        HttpRequest localVarCall = getFundStructureValidateBeforeCall(scope, code, asAt, propertyKeys, null, new ConfigurationOptions());
+    private ApiResponse<FundStructure> getFundStructureWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = getFundStructureValidateBeforeCall(scope, code, effectiveAt, asAt, propertyKeys, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
-     * Retrieve the definition of a particular Fund Structure, including its nodes, edges, and any inline fund definitions.Use any specified configuration options to override any other configuration for this request only
+     * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. (optional)
      * @param propertyKeys A list of property keys from the &#39;FundStructure&#39; domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example &#39;FundStructure/Manager/Id&#39;. If no properties are specified, then no properties will be returned. (optional)
      * @return ApiResponse&lt;FundStructure&gt;
@@ -556,17 +1278,18 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<FundStructure> getFundStructureWithHttpInfo(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getFundStructureValidateBeforeCall(scope, code, asAt, propertyKeys, null, opts);
+    private ApiResponse<FundStructure> getFundStructureWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getFundStructureValidateBeforeCall(scope, code, effectiveAt, asAt, propertyKeys, null, opts);
         Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure. (asynchronously)
-     * Retrieve the definition of a particular Fund Structure, including its nodes, edges, and any inline fund definitions.
+     * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. (optional)
      * @param propertyKeys A list of property keys from the &#39;FundStructure&#39; domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example &#39;FundStructure/Manager/Id&#39;. If no properties are specified, then no properties will be returned. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -579,18 +1302,19 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getFundStructureAsync(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<FundStructure> _callback) throws ApiException {
+    private void getFundStructureAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<FundStructure> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getFundStructureValidateBeforeCall(scope, code, asAt, propertyKeys, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getFundStructureValidateBeforeCall(scope, code, effectiveAt, asAt, propertyKeys, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure. (asynchronously)
-     * Retrieve the definition of a particular Fund Structure, including its nodes, edges, and any inline fund definitions.Use any specified configuration options to override any other configuration for this request only
+     * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param effectiveAt The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. (optional)
      * @param propertyKeys A list of property keys from the &#39;FundStructure&#39; domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example &#39;FundStructure/Manager/Id&#39;. If no properties are specified, then no properties will be returned. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -603,9 +1327,9 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getFundStructureAsync(String scope, String code, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<FundStructure> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getFundStructureAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<FundStructure> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getFundStructureValidateBeforeCall(scope, code, asAt, propertyKeys, _callback, opts);
+        HttpRequest localVarCall = getFundStructureValidateBeforeCall(scope, code, effectiveAt, asAt, propertyKeys, _callback, opts);
         Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -613,12 +1337,23 @@ public class FundStructuresApi {
     public class APIgetFundStructureRequest {
         private final String scope;
         private final String code;
+        private String effectiveAt;
         private OffsetDateTime asAt;
         private List<String> propertyKeys;
 
         private APIgetFundStructureRequest(String scope, String code) {
             this.scope = scope;
             this.code = code;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIgetFundStructureRequest
+         */
+        public APIgetFundStructureRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
         }
 
         /**
@@ -655,7 +1390,7 @@ public class FundStructuresApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getFundStructureCall(scope, code, asAt, propertyKeys, _callback);
+            return getFundStructureCall(scope, code, effectiveAt, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -671,7 +1406,7 @@ public class FundStructuresApi {
          </table>
          */
         public FundStructure execute() throws ApiException {
-            ApiResponse<FundStructure> localVarResp = getFundStructureWithHttpInfo(scope, code, asAt, propertyKeys);
+            ApiResponse<FundStructure> localVarResp = getFundStructureWithHttpInfo(scope, code, effectiveAt, asAt, propertyKeys);
             return localVarResp.getData();
         }
 
@@ -688,7 +1423,7 @@ public class FundStructuresApi {
          </table>
          */
         public FundStructure execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<FundStructure> localVarResp = getFundStructureWithHttpInfo(scope, code, asAt, propertyKeys, opts);
+            ApiResponse<FundStructure> localVarResp = getFundStructureWithHttpInfo(scope, code, effectiveAt, asAt, propertyKeys, opts);
             return localVarResp.getData();
         }
 
@@ -705,7 +1440,7 @@ public class FundStructuresApi {
          </table>
          */
         public ApiResponse<FundStructure> executeWithHttpInfo() throws ApiException {
-            return getFundStructureWithHttpInfo(scope, code, asAt, propertyKeys);
+            return getFundStructureWithHttpInfo(scope, code, effectiveAt, asAt, propertyKeys);
         }
 
         /**
@@ -721,7 +1456,7 @@ public class FundStructuresApi {
          </table>
          */
         public ApiResponse<FundStructure> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getFundStructureWithHttpInfo(scope, code, asAt, propertyKeys, opts);
+            return getFundStructureWithHttpInfo(scope, code, effectiveAt, asAt, propertyKeys, opts);
         }
 
         /**
@@ -737,7 +1472,7 @@ public class FundStructuresApi {
          </table>
          */
         public void executeAsync(final ApiCallback<FundStructure> _callback) throws ApiException {
-            getFundStructureAsync(scope, code, asAt, propertyKeys, _callback);
+            getFundStructureAsync(scope, code, effectiveAt, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -753,13 +1488,13 @@ public class FundStructuresApi {
          </table>
          */
         public void executeAsync(final ApiCallback<FundStructure> _callback, ConfigurationOptions opts) throws ApiException {
-            getFundStructureAsync(scope, code, asAt, propertyKeys, _callback, opts);
+            getFundStructureAsync(scope, code, effectiveAt, asAt, propertyKeys, _callback, opts);
         }
     }
 
     /**
      * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
-     * Retrieve the definition of a particular Fund Structure, including its nodes, edges, and any inline fund definitions.
+     * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
      * @return APIgetFundStructureRequest
@@ -776,6 +1511,7 @@ public class FundStructuresApi {
     }
     /**
      * Build call for listFundStructures
+     * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
      * @param page The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
@@ -793,12 +1529,13 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listFundStructuresCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
-        return listFundStructuresCall(asAt, page, limit, filter, sortBy, propertyKeys,  _callback, new ConfigurationOptions());
+    private HttpRequest listFundStructuresCall(String effectiveAt, OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return listFundStructuresCall(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for listFundStructures. Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
@@ -816,7 +1553,7 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listFundStructuresCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listFundStructuresCall(String effectiveAt, OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -840,6 +1577,10 @@ public class FundStructuresApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
 
         if (asAt != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
@@ -887,14 +1628,15 @@ public class FundStructuresApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listFundStructuresValidateBeforeCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listFundStructuresCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
+    private HttpRequest listFundStructuresValidateBeforeCall(String effectiveAt, OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listFundStructuresCall(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
 
     }
 
     /**
      * [EXPERIMENTAL] ListFundStructures: List Fund Structures.
      * List all the Fund Structures matching the given criteria.
+     * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
      * @param page The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
@@ -911,8 +1653,8 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfFundStructure> listFundStructuresWithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys) throws ApiException {
-        HttpRequest localVarCall = listFundStructuresValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfFundStructure> listFundStructuresWithHttpInfo(String effectiveAt, OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = listFundStructuresValidateBeforeCall(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfFundStructure>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -920,6 +1662,7 @@ public class FundStructuresApi {
     /**
      * [EXPERIMENTAL] ListFundStructures: List Fund Structures.
      * List all the Fund Structures matching the given criteria.Use any specified configuration options to override any other configuration for this request only
+     * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
      * @param page The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
@@ -936,8 +1679,8 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfFundStructure> listFundStructuresWithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listFundStructuresValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, null, opts);
+    private ApiResponse<PagedResourceListOfFundStructure> listFundStructuresWithHttpInfo(String effectiveAt, OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listFundStructuresValidateBeforeCall(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfFundStructure>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -945,6 +1688,7 @@ public class FundStructuresApi {
     /**
      * [EXPERIMENTAL] ListFundStructures: List Fund Structures. (asynchronously)
      * List all the Fund Structures matching the given criteria.
+     * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
      * @param page The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
@@ -961,9 +1705,9 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listFundStructuresAsync(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback<PagedResourceListOfFundStructure> _callback) throws ApiException {
+    private void listFundStructuresAsync(String effectiveAt, OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback<PagedResourceListOfFundStructure> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listFundStructuresValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listFundStructuresValidateBeforeCall(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfFundStructure>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -971,6 +1715,7 @@ public class FundStructuresApi {
     /**
      * [EXPERIMENTAL] ListFundStructures: List Fund Structures. (asynchronously)
      * List all the Fund Structures matching the given criteria.Use any specified configuration options to override any other configuration for this request only
+     * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
      * @param page The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
@@ -987,14 +1732,15 @@ public class FundStructuresApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listFundStructuresAsync(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback<PagedResourceListOfFundStructure> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listFundStructuresAsync(String effectiveAt, OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback<PagedResourceListOfFundStructure> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listFundStructuresValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
+        HttpRequest localVarCall = listFundStructuresValidateBeforeCall(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfFundStructure>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     public class APIlistFundStructuresRequest {
+        private String effectiveAt;
         private OffsetDateTime asAt;
         private String page;
         private Integer limit;
@@ -1003,6 +1749,16 @@ public class FundStructuresApi {
         private List<String> propertyKeys;
 
         private APIlistFundStructuresRequest() {
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIlistFundStructuresRequest
+         */
+        public APIlistFundStructuresRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
         }
 
         /**
@@ -1079,7 +1835,7 @@ public class FundStructuresApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listFundStructuresCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback);
+            return listFundStructuresCall(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, _callback);
         }
 
         /**
@@ -1095,7 +1851,7 @@ public class FundStructuresApi {
          </table>
          */
         public PagedResourceListOfFundStructure execute() throws ApiException {
-            ApiResponse<PagedResourceListOfFundStructure> localVarResp = listFundStructuresWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys);
+            ApiResponse<PagedResourceListOfFundStructure> localVarResp = listFundStructuresWithHttpInfo(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys);
             return localVarResp.getData();
         }
 
@@ -1112,7 +1868,7 @@ public class FundStructuresApi {
          </table>
          */
         public PagedResourceListOfFundStructure execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfFundStructure> localVarResp = listFundStructuresWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys, opts);
+            ApiResponse<PagedResourceListOfFundStructure> localVarResp = listFundStructuresWithHttpInfo(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, opts);
             return localVarResp.getData();
         }
 
@@ -1129,7 +1885,7 @@ public class FundStructuresApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfFundStructure> executeWithHttpInfo() throws ApiException {
-            return listFundStructuresWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys);
+            return listFundStructuresWithHttpInfo(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys);
         }
 
         /**
@@ -1145,7 +1901,7 @@ public class FundStructuresApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfFundStructure> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listFundStructuresWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys, opts);
+            return listFundStructuresWithHttpInfo(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, opts);
         }
 
         /**
@@ -1161,7 +1917,7 @@ public class FundStructuresApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfFundStructure> _callback) throws ApiException {
-            listFundStructuresAsync(asAt, page, limit, filter, sortBy, propertyKeys, _callback);
+            listFundStructuresAsync(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, _callback);
         }
 
         /**
@@ -1177,7 +1933,7 @@ public class FundStructuresApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfFundStructure> _callback, ConfigurationOptions opts) throws ApiException {
-            listFundStructuresAsync(asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
+            listFundStructuresAsync(effectiveAt, asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
         }
     }
 
@@ -1195,5 +1951,711 @@ public class FundStructuresApi {
      */
     public APIlistFundStructuresRequest listFundStructures() {
         return new APIlistFundStructuresRequest();
+    }
+    /**
+     * Build call for removeFundStructureMember
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param nodeCode The node code of the member to remove. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest removeFundStructureMemberCall(String scope, String code, String nodeCode, String effectiveAt, final ApiCallback _callback) throws ApiException {
+        return removeFundStructureMemberCall(scope, code, nodeCode, effectiveAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for removeFundStructureMember. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param nodeCode The node code of the member to remove. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest removeFundStructureMemberCall(String scope, String code, String nodeCode, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/fundstructures/{scope}/{code}/members/{nodeCode}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()))
+            .replace("{" + "nodeCode" + "}", localVarApiClient.escapeString(nodeCode.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest removeFundStructureMemberValidateBeforeCall(String scope, String code, String nodeCode, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling removeFundStructureMember(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling removeFundStructureMember(Async)");
+        }
+
+        // verify the required parameter 'nodeCode' is set
+        if (nodeCode == null) {
+            throw new ApiException("Missing the required parameter 'nodeCode' when calling removeFundStructureMember(Async)");
+        }
+
+        return removeFundStructureMemberCall(scope, code, nodeCode, effectiveAt, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+     * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param nodeCode The node code of the member to remove. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @return ApiResponse&lt;FundStructure&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<FundStructure> removeFundStructureMemberWithHttpInfo(String scope, String code, String nodeCode, String effectiveAt) throws ApiException {
+        HttpRequest localVarCall = removeFundStructureMemberValidateBeforeCall(scope, code, nodeCode, effectiveAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+     * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param nodeCode The node code of the member to remove. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @return ApiResponse&lt;FundStructure&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<FundStructure> removeFundStructureMemberWithHttpInfo(String scope, String code, String nodeCode, String effectiveAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = removeFundStructureMemberValidateBeforeCall(scope, code, nodeCode, effectiveAt, null, opts);
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure. (asynchronously)
+     * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param nodeCode The node code of the member to remove. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void removeFundStructureMemberAsync(String scope, String code, String nodeCode, String effectiveAt, final ApiCallback<FundStructure> _callback) throws ApiException {
+
+        HttpRequest localVarCall = removeFundStructureMemberValidateBeforeCall(scope, code, nodeCode, effectiveAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure. (asynchronously)
+     * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param nodeCode The node code of the member to remove. (required)
+     * @param effectiveAt The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void removeFundStructureMemberAsync(String scope, String code, String nodeCode, String effectiveAt, final ApiCallback<FundStructure> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = removeFundStructureMemberValidateBeforeCall(scope, code, nodeCode, effectiveAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIremoveFundStructureMemberRequest {
+        private final String scope;
+        private final String code;
+        private final String nodeCode;
+        private String effectiveAt;
+
+        private APIremoveFundStructureMemberRequest(String scope, String code, String nodeCode) {
+            this.scope = scope;
+            this.code = code;
+            this.nodeCode = nodeCode;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIremoveFundStructureMemberRequest
+         */
+        public APIremoveFundStructureMemberRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Build call for removeFundStructureMember
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return removeFundStructureMemberCall(scope, code, nodeCode, effectiveAt, _callback);
+        }
+
+        /**
+         * Execute removeFundStructureMember request
+         * @return FundStructure
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public FundStructure execute() throws ApiException {
+            ApiResponse<FundStructure> localVarResp = removeFundStructureMemberWithHttpInfo(scope, code, nodeCode, effectiveAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute removeFundStructureMember request. Use any specified configuration options to override any other configuration for this request only.
+         * @return FundStructure
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public FundStructure execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<FundStructure> localVarResp = removeFundStructureMemberWithHttpInfo(scope, code, nodeCode, effectiveAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute removeFundStructureMember request with HTTP info returned
+         * @return ApiResponse&lt;FundStructure&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<FundStructure> executeWithHttpInfo() throws ApiException {
+            return removeFundStructureMemberWithHttpInfo(scope, code, nodeCode, effectiveAt);
+        }
+
+        /**
+         * Execute removeFundStructureMember request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;FundStructure&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<FundStructure> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return removeFundStructureMemberWithHttpInfo(scope, code, nodeCode, effectiveAt, opts);
+        }
+
+        /**
+         * Execute removeFundStructureMember request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<FundStructure> _callback) throws ApiException {
+            removeFundStructureMemberAsync(scope, code, nodeCode, effectiveAt, _callback);
+        }
+
+        /**
+         * Execute removeFundStructureMember request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<FundStructure> _callback, ConfigurationOptions opts) throws ApiException {
+            removeFundStructureMemberAsync(scope, code, nodeCode, effectiveAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+     * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param nodeCode The node code of the member to remove. (required)
+     * @return APIremoveFundStructureMemberRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure with the member removed. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIremoveFundStructureMemberRequest removeFundStructureMember(String scope, String code, String nodeCode) {
+        return new APIremoveFundStructureMemberRequest(scope, code, nodeCode);
+    }
+    /**
+     * Build call for upsertFundStructure
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
+     * @param fundStructureRequest The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertFundStructureCall(String scope, String code, FundStructureRequest fundStructureRequest, final ApiCallback _callback) throws ApiException {
+        return upsertFundStructureCall(scope, code, fundStructureRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for upsertFundStructure. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param fundStructureRequest The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertFundStructureCall(String scope, String code, FundStructureRequest fundStructureRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = fundStructureRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/fundstructures/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest upsertFundStructureValidateBeforeCall(String scope, String code, FundStructureRequest fundStructureRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling upsertFundStructure(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling upsertFundStructure(Async)");
+        }
+
+        // verify the required parameter 'fundStructureRequest' is set
+        if (fundStructureRequest == null) {
+            throw new ApiException("Missing the required parameter 'fundStructureRequest' when calling upsertFundStructure(Async)");
+        }
+
+        return upsertFundStructureCall(scope, code, fundStructureRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+     * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
+     * @param fundStructureRequest The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified. (required)
+     * @return ApiResponse&lt;FundStructure&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<FundStructure> upsertFundStructureWithHttpInfo(String scope, String code, FundStructureRequest fundStructureRequest) throws ApiException {
+        HttpRequest localVarCall = upsertFundStructureValidateBeforeCall(scope, code, fundStructureRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+     * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
+     * @param fundStructureRequest The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified. (required)
+     * @return ApiResponse&lt;FundStructure&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<FundStructure> upsertFundStructureWithHttpInfo(String scope, String code, FundStructureRequest fundStructureRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = upsertFundStructureValidateBeforeCall(scope, code, fundStructureRequest, null, opts);
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure. (asynchronously)
+     * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
+     * @param fundStructureRequest The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertFundStructureAsync(String scope, String code, FundStructureRequest fundStructureRequest, final ApiCallback<FundStructure> _callback) throws ApiException {
+
+        HttpRequest localVarCall = upsertFundStructureValidateBeforeCall(scope, code, fundStructureRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure. (asynchronously)
+     * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
+     * @param fundStructureRequest The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertFundStructureAsync(String scope, String code, FundStructureRequest fundStructureRequest, final ApiCallback<FundStructure> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = upsertFundStructureValidateBeforeCall(scope, code, fundStructureRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<FundStructure>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIupsertFundStructureRequest {
+        private final String scope;
+        private final String code;
+        private final FundStructureRequest fundStructureRequest;
+
+        private APIupsertFundStructureRequest(String scope, String code, FundStructureRequest fundStructureRequest) {
+            this.scope = scope;
+            this.code = code;
+            this.fundStructureRequest = fundStructureRequest;
+        }
+
+        /**
+         * Build call for upsertFundStructure
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return upsertFundStructureCall(scope, code, fundStructureRequest, _callback);
+        }
+
+        /**
+         * Execute upsertFundStructure request
+         * @return FundStructure
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public FundStructure execute() throws ApiException {
+            ApiResponse<FundStructure> localVarResp = upsertFundStructureWithHttpInfo(scope, code, fundStructureRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertFundStructure request. Use any specified configuration options to override any other configuration for this request only.
+         * @return FundStructure
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public FundStructure execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<FundStructure> localVarResp = upsertFundStructureWithHttpInfo(scope, code, fundStructureRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertFundStructure request with HTTP info returned
+         * @return ApiResponse&lt;FundStructure&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<FundStructure> executeWithHttpInfo() throws ApiException {
+            return upsertFundStructureWithHttpInfo(scope, code, fundStructureRequest);
+        }
+
+        /**
+         * Execute upsertFundStructure request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;FundStructure&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<FundStructure> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return upsertFundStructureWithHttpInfo(scope, code, fundStructureRequest, opts);
+        }
+
+        /**
+         * Execute upsertFundStructure request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<FundStructure> _callback) throws ApiException {
+            upsertFundStructureAsync(scope, code, fundStructureRequest, _callback);
+        }
+
+        /**
+         * Execute upsertFundStructure request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<FundStructure> _callback, ConfigurationOptions opts) throws ApiException {
+            upsertFundStructureAsync(scope, code, fundStructureRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+     * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
+     * @param fundStructureRequest The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified. (required)
+     * @return APIupsertFundStructureRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Fund Structure as it stands from the effective datetime. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIupsertFundStructureRequest upsertFundStructure(String scope, String code, FundStructureRequest fundStructureRequest) {
+        return new APIupsertFundStructureRequest(scope, code, fundStructureRequest);
     }
 }

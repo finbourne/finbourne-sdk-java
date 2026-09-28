@@ -1391,7 +1391,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
+     * @param filter Further limits the rows counted beyond that of the original query. An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; or &#x60;SomeField in &#39;a&#39;, &#39;b&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -1415,7 +1415,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Further limits the rows counted beyond that of the original query. An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; or &#x60;SomeField in &#39;a&#39;, &#39;b&#39;&#x60; (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -1523,7 +1523,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
+     * @param filter Further limits the rows counted beyond that of the original query. An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; or &#x60;SomeField in &#39;a&#39;, &#39;b&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1549,7 +1549,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
+     * @param filter Further limits the rows counted beyond that of the original query. An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; or &#x60;SomeField in &#39;a&#39;, &#39;b&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1575,7 +1575,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
+     * @param filter Further limits the rows counted beyond that of the original query. An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; or &#x60;SomeField in &#39;a&#39;, &#39;b&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1602,7 +1602,7 @@ public class SqlBackgroundExecutionApi {
      * @param startAt Start point (of the timestampFieldName field) for the histogram (optional)
      * @param endAt End point (of the timestampFieldName field) for the histogram (optional)
      * @param bucketSize Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
-     * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
+     * @param filter Further limits the rows counted beyond that of the original query. An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; or &#x60;SomeField in &#39;a&#39;, &#39;b&#39;&#x60; (optional)
      * @param jsonProper Should this be text/json (not json-encoded-as-a-string) (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1667,7 +1667,7 @@ public class SqlBackgroundExecutionApi {
 
         /**
          * Set filter
-         * @param filter Further limits the fetched results beyond that of the original query. - An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; - Or raw SqLite SQL, this must then begin with &#x60;WHERE &#x60; and is more flexible, e.g. &#x60;strftime(&#39;%Y-%m&#39;, SomeDateField) &#x3D; &#39;2026-06&#39;&#x60; (optional)
+         * @param filter Further limits the rows counted beyond that of the original query. An ODATA filter per Finbourne.Filtering syntax, e.g. &#x60;SomeField eq &#39;Hello&#39;&#x60; or &#x60;SomeField in &#39;a&#39;, &#39;b&#39;&#x60; (optional)
          * @return APIfetchQueryResultHistogramRequest
          */
         public APIfetchQueryResultHistogramRequest filter(String filter) {

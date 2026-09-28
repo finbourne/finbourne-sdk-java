@@ -34,7 +34,8 @@ import com.finbourne.sdk.JSON;
  * DecimalComplianceParameter
  */
 @JsonPropertyOrder({
-  DecimalComplianceParameter.JSON_PROPERTY_VALUE
+  DecimalComplianceParameter.JSON_PROPERTY_VALUE,
+  DecimalComplianceParameter.JSON_PROPERTY_INCLUSIVE_BOUNDS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -48,6 +49,11 @@ public class DecimalComplianceParameter extends ComplianceParameter {
   @JsonProperty(JSON_PROPERTY_VALUE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal value;
+
+  public static final String JSON_PROPERTY_INCLUSIVE_BOUNDS = "inclusiveBounds";
+  @JsonProperty(JSON_PROPERTY_INCLUSIVE_BOUNDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean inclusiveBounds;
 
   public DecimalComplianceParameter() {
   }
@@ -71,6 +77,25 @@ public class DecimalComplianceParameter extends ComplianceParameter {
   }
 
 
+  public DecimalComplianceParameter inclusiveBounds(Boolean inclusiveBounds) {
+    this.inclusiveBounds = inclusiveBounds;
+    return this;
+  }
+
+  /**
+   * Whether the bound is inclusive of the value; when true a candidate landing exactly on the bound satisfies it. Defaults to false (exclusive).
+   * @return inclusiveBounds
+   */
+  @javax.annotation.Nullable
+  public Boolean getInclusiveBounds() {
+    return inclusiveBounds;
+  }
+
+  public void setInclusiveBounds(Boolean inclusiveBounds) {
+    this.inclusiveBounds = inclusiveBounds;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -81,12 +106,13 @@ public class DecimalComplianceParameter extends ComplianceParameter {
     }
     DecimalComplianceParameter decimalComplianceParameter = (DecimalComplianceParameter) o;
     return (this.value == null ? decimalComplianceParameter.value == null : (decimalComplianceParameter.value != null && this.value.compareTo(decimalComplianceParameter.getValue()) == 0)) &&
+        Objects.equals(this.inclusiveBounds, decimalComplianceParameter.inclusiveBounds) &&
         super.equals(o);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(value, super.hashCode());
+    return Objects.hash(value, inclusiveBounds, super.hashCode());
   }
 
   @Override
@@ -95,6 +121,7 @@ public class DecimalComplianceParameter extends ComplianceParameter {
     sb.append("class DecimalComplianceParameter {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    inclusiveBounds: ").append(toIndentedString(inclusiveBounds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

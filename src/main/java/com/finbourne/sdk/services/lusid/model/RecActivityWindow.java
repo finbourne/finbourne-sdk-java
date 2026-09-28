@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.RecActivitySinceEffectiveAt;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -33,10 +34,16 @@ import com.finbourne.sdk.JSON;
  * Base class for the activity windows that give the date range a rec definition&#39;s activity-based  reconciliations cover. Polymorphic by windowType; each supported type has a corresponding inherited class.
  */
 @JsonPropertyOrder({
+  RecActivityWindow.JSON_PROPERTY_INITIAL_ACTIVITY_SINCE_EFFECTIVE_AT,
   RecActivityWindow.JSON_PROPERTY_WINDOW_TYPE
 })
 
 public class RecActivityWindow {
+  public static final String JSON_PROPERTY_INITIAL_ACTIVITY_SINCE_EFFECTIVE_AT = "initialActivitySinceEffectiveAt";
+  @JsonProperty(JSON_PROPERTY_INITIAL_ACTIVITY_SINCE_EFFECTIVE_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private RecActivitySinceEffectiveAt initialActivitySinceEffectiveAt;
+
   public static final String JSON_PROPERTY_WINDOW_TYPE = "windowType";
   @JsonProperty(JSON_PROPERTY_WINDOW_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -44,6 +51,25 @@ public class RecActivityWindow {
 
   public RecActivityWindow() {
   }
+
+  public RecActivityWindow initialActivitySinceEffectiveAt(RecActivitySinceEffectiveAt initialActivitySinceEffectiveAt) {
+    this.initialActivitySinceEffectiveAt = initialActivitySinceEffectiveAt;
+    return this;
+  }
+
+  /**
+   * Get initialActivitySinceEffectiveAt
+   * @return initialActivitySinceEffectiveAt
+   */
+  @javax.annotation.Nonnull
+  public RecActivitySinceEffectiveAt getInitialActivitySinceEffectiveAt() {
+    return initialActivitySinceEffectiveAt;
+  }
+
+  public void setInitialActivitySinceEffectiveAt(RecActivitySinceEffectiveAt initialActivitySinceEffectiveAt) {
+    this.initialActivitySinceEffectiveAt = initialActivitySinceEffectiveAt;
+  }
+
 
   public RecActivityWindow windowType(String windowType) {
     this.windowType = windowType;
@@ -73,18 +99,20 @@ public class RecActivityWindow {
       return false;
     }
     RecActivityWindow recActivityWindow = (RecActivityWindow) o;
-    return Objects.equals(this.windowType, recActivityWindow.windowType);
+    return Objects.equals(this.initialActivitySinceEffectiveAt, recActivityWindow.initialActivitySinceEffectiveAt) &&
+        Objects.equals(this.windowType, recActivityWindow.windowType);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(windowType);
+    return Objects.hash(initialActivitySinceEffectiveAt, windowType);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecActivityWindow {\n");
+    sb.append("    initialActivitySinceEffectiveAt: ").append(toIndentedString(initialActivitySinceEffectiveAt)).append("\n");
     sb.append("    windowType: ").append(toIndentedString(windowType)).append("\n");
     sb.append("}");
     return sb.toString();

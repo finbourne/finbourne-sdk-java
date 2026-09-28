@@ -45,7 +45,9 @@ public enum ModelOptionsType {
   
   BOND_LOOKUP_MODEL_OPTIONS("BondLookupModelOptions"),
   
-  BOND_FORWARD_MODEL_OPTIONS("BondForwardModelOptions");
+  BOND_FORWARD_MODEL_OPTIONS("BondForwardModelOptions"),
+  
+  SIMPLE_MODEL_OPTIONS("SimpleModelOptions");
 
   private String value;
 

@@ -55,6 +55,8 @@ import com.finbourne.sdk.JSON;
   FundStructure.JSON_PROPERTY_ALLOCATION_GROUPS,
   FundStructure.JSON_PROPERTY_NODES,
   FundStructure.JSON_PROPERTY_EDGES,
+  FundStructure.JSON_PROPERTY_ROLE_DATA_TYPE_ID,
+  FundStructure.JSON_PROPERTY_NAV_TYPE_CODES,
   FundStructure.JSON_PROPERTY_VERSION,
   FundStructure.JSON_PROPERTY_PROPERTIES,
   FundStructure.JSON_PROPERTY_LINKS
@@ -100,6 +102,16 @@ public class FundStructure {
   @JsonProperty(JSON_PROPERTY_EDGES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<FundStructureEdge> edges = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_ROLE_DATA_TYPE_ID = "roleDataTypeId";
+  @JsonProperty(JSON_PROPERTY_ROLE_DATA_TYPE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId roleDataTypeId;
+
+  public static final String JSON_PROPERTY_NAV_TYPE_CODES = "navTypeCodes";
+  @JsonProperty(JSON_PROPERTY_NAV_TYPE_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> navTypeCodes;
 
   public static final String JSON_PROPERTY_VERSION = "version";
   @JsonProperty(JSON_PROPERTY_VERSION)
@@ -236,7 +248,7 @@ public class FundStructure {
   }
 
   /**
-   * An optional list of Allocation Groups that can apply across a Fund Structure. Only classes and feeder funds linked to the master fund specified are allowed.
+   * An optional list of Allocation Groups that can apply across a Fund Structure. A group may span the share classes of a member and the members that invest into it through dedicated share class links.
    * @return allocationGroups
    */
   @javax.annotation.Nullable
@@ -263,7 +275,7 @@ public class FundStructure {
   }
 
   /**
-   * The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role.
+   * The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role. May be empty on create, with members added later through the members endpoint.
    * @return nodes
    */
   @javax.annotation.Nonnull
@@ -290,7 +302,7 @@ public class FundStructure {
   }
 
   /**
-   * The list of edges that define the relationships between feeder and master nodes in the structure.
+   * The list of edges that define how the members of the structure are linked: a member investing into a dedicated share class of another, or holding an equity, GP, LP or carry interest in another through an instrument.
    * @return edges
    */
   @javax.annotation.Nonnull
@@ -300,6 +312,52 @@ public class FundStructure {
 
   public void setEdges(List<FundStructureEdge> edges) {
     this.edges = edges;
+  }
+
+
+  public FundStructure roleDataTypeId(ResourceId roleDataTypeId) {
+    this.roleDataTypeId = roleDataTypeId;
+    return this;
+  }
+
+  /**
+   * Get roleDataTypeId
+   * @return roleDataTypeId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getRoleDataTypeId() {
+    return roleDataTypeId;
+  }
+
+  public void setRoleDataTypeId(ResourceId roleDataTypeId) {
+    this.roleDataTypeId = roleDataTypeId;
+  }
+
+
+  public FundStructure navTypeCodes(List<String> navTypeCodes) {
+    this.navTypeCodes = navTypeCodes;
+    return this;
+  }
+
+  public FundStructure addNavTypeCodesItem(String navTypeCodesItem) {
+    if (this.navTypeCodes == null) {
+      this.navTypeCodes = new ArrayList<>();
+    }
+    this.navTypeCodes.add(navTypeCodesItem);
+    return this;
+  }
+
+  /**
+   * The NAV types every member of the structure produces, by code. Declaring them once here gives the structure a shared Timeline. At least one is required, and every member fund must define a NAV type with each of these codes.
+   * @return navTypeCodes
+   */
+  @javax.annotation.Nullable
+  public List<String> getNavTypeCodes() {
+    return navTypeCodes;
+  }
+
+  public void setNavTypeCodes(List<String> navTypeCodes) {
+    this.navTypeCodes = navTypeCodes;
   }
 
 
@@ -393,6 +451,8 @@ public class FundStructure {
         Objects.equals(this.allocationGroups, fundStructure.allocationGroups) &&
         Objects.equals(this.nodes, fundStructure.nodes) &&
         Objects.equals(this.edges, fundStructure.edges) &&
+        Objects.equals(this.roleDataTypeId, fundStructure.roleDataTypeId) &&
+        Objects.equals(this.navTypeCodes, fundStructure.navTypeCodes) &&
         Objects.equals(this.version, fundStructure.version) &&
         Objects.equals(this.properties, fundStructure.properties) &&
         Objects.equals(this.links, fundStructure.links);
@@ -404,7 +464,7 @@ public class FundStructure {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, name, description, funds, allocationGroups, nodes, edges, version, properties, links);
+    return Objects.hash(href, id, name, description, funds, allocationGroups, nodes, edges, roleDataTypeId, navTypeCodes, version, properties, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -426,6 +486,8 @@ public class FundStructure {
     sb.append("    allocationGroups: ").append(toIndentedString(allocationGroups)).append("\n");
     sb.append("    nodes: ").append(toIndentedString(nodes)).append("\n");
     sb.append("    edges: ").append(toIndentedString(edges)).append("\n");
+    sb.append("    roleDataTypeId: ").append(toIndentedString(roleDataTypeId)).append("\n");
+    sb.append("    navTypeCodes: ").append(toIndentedString(navTypeCodes)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");

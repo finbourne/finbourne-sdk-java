@@ -10667,6 +10667,7 @@ public class FundsApi {
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter. Defaults to False if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -10678,8 +10679,8 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getValuationPointTransactionsCall(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, final ApiCallback _callback) throws ApiException {
-        return getValuationPointTransactionsCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType,  _callback, new ConfigurationOptions());
+    private HttpRequest getValuationPointTransactionsCall(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, Boolean returnExcludedTransactions, final ApiCallback _callback) throws ApiException {
+        return getValuationPointTransactionsCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -10696,7 +10697,8 @@ public class FundsApi {
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param dataModelCode The optional code of a Custom Data Model to use (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter. Defaults to False if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -10708,7 +10710,7 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getValuationPointTransactionsCall(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getValuationPointTransactionsCall(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, Boolean returnExcludedTransactions, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -10775,6 +10777,10 @@ public class FundsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("membershipType", membershipType));
         }
 
+        if (returnExcludedTransactions != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("returnExcludedTransactions", returnExcludedTransactions));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -10801,7 +10807,7 @@ public class FundsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getValuationPointTransactionsValidateBeforeCall(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getValuationPointTransactionsValidateBeforeCall(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, Boolean returnExcludedTransactions, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling getValuationPointTransactions(Async)");
@@ -10817,7 +10823,7 @@ public class FundsApi {
             throw new ApiException("Missing the required parameter 'valuationPointDataQueryParameters' when calling getValuationPointTransactions(Async)");
         }
 
-        return getValuationPointTransactionsCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, _callback, opts);
+        return getValuationPointTransactionsCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, _callback, opts);
 
     }
 
@@ -10837,6 +10843,7 @@ public class FundsApi {
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter. Defaults to False if not specified. (optional)
      * @return ApiResponse&lt;ValuationPointResourceListOfAccountedTransaction&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -10847,8 +10854,8 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ValuationPointResourceListOfAccountedTransaction> getValuationPointTransactionsWithHttpInfo(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType) throws ApiException {
-        HttpRequest localVarCall = getValuationPointTransactionsValidateBeforeCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, null, new ConfigurationOptions());
+    private ApiResponse<ValuationPointResourceListOfAccountedTransaction> getValuationPointTransactionsWithHttpInfo(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, Boolean returnExcludedTransactions) throws ApiException {
+        HttpRequest localVarCall = getValuationPointTransactionsValidateBeforeCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ValuationPointResourceListOfAccountedTransaction>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -10869,6 +10876,7 @@ public class FundsApi {
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter. Defaults to False if not specified. (optional)
      * @return ApiResponse&lt;ValuationPointResourceListOfAccountedTransaction&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -10879,8 +10887,8 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ValuationPointResourceListOfAccountedTransaction> getValuationPointTransactionsWithHttpInfo(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getValuationPointTransactionsValidateBeforeCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, null, opts);
+    private ApiResponse<ValuationPointResourceListOfAccountedTransaction> getValuationPointTransactionsWithHttpInfo(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, Boolean returnExcludedTransactions, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getValuationPointTransactionsValidateBeforeCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, null, opts);
         Type localVarReturnType = new TypeReference<ValuationPointResourceListOfAccountedTransaction>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -10901,6 +10909,7 @@ public class FundsApi {
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter. Defaults to False if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -10911,9 +10920,9 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getValuationPointTransactionsAsync(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, final ApiCallback<ValuationPointResourceListOfAccountedTransaction> _callback) throws ApiException {
+    private void getValuationPointTransactionsAsync(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, Boolean returnExcludedTransactions, final ApiCallback<ValuationPointResourceListOfAccountedTransaction> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getValuationPointTransactionsValidateBeforeCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getValuationPointTransactionsValidateBeforeCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ValuationPointResourceListOfAccountedTransaction>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -10934,6 +10943,7 @@ public class FundsApi {
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
      * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter. Defaults to False if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -10944,9 +10954,9 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getValuationPointTransactionsAsync(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, final ApiCallback<ValuationPointResourceListOfAccountedTransaction> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getValuationPointTransactionsAsync(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters, OffsetDateTime asAt, String filter, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String dataModelScope, String dataModelCode, Boolean showCancelledTransactions, String membershipType, Boolean returnExcludedTransactions, final ApiCallback<ValuationPointResourceListOfAccountedTransaction> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getValuationPointTransactionsValidateBeforeCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, _callback, opts);
+        HttpRequest localVarCall = getValuationPointTransactionsValidateBeforeCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, _callback, opts);
         Type localVarReturnType = new TypeReference<ValuationPointResourceListOfAccountedTransaction>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -10965,6 +10975,7 @@ public class FundsApi {
         private String dataModelCode;
         private Boolean showCancelledTransactions;
         private String membershipType;
+        private Boolean returnExcludedTransactions;
 
         private APIgetValuationPointTransactionsRequest(String scope, String code, ValuationPointDataQueryParameters valuationPointDataQueryParameters) {
             this.scope = scope;
@@ -11073,6 +11084,16 @@ public class FundsApi {
         }
 
         /**
+         * Set returnExcludedTransactions
+         * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter. Defaults to False if not specified. (optional)
+         * @return APIgetValuationPointTransactionsRequest
+         */
+        public APIgetValuationPointTransactionsRequest returnExcludedTransactions(Boolean returnExcludedTransactions) {
+            this.returnExcludedTransactions = returnExcludedTransactions;
+            return this;
+        }
+
+        /**
          * Build call for getValuationPointTransactions
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -11086,7 +11107,7 @@ public class FundsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getValuationPointTransactionsCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, _callback);
+            return getValuationPointTransactionsCall(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, _callback);
         }
 
         /**
@@ -11102,7 +11123,7 @@ public class FundsApi {
          </table>
          */
         public ValuationPointResourceListOfAccountedTransaction execute() throws ApiException {
-            ApiResponse<ValuationPointResourceListOfAccountedTransaction> localVarResp = getValuationPointTransactionsWithHttpInfo(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType);
+            ApiResponse<ValuationPointResourceListOfAccountedTransaction> localVarResp = getValuationPointTransactionsWithHttpInfo(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions);
             return localVarResp.getData();
         }
 
@@ -11119,7 +11140,7 @@ public class FundsApi {
          </table>
          */
         public ValuationPointResourceListOfAccountedTransaction execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<ValuationPointResourceListOfAccountedTransaction> localVarResp = getValuationPointTransactionsWithHttpInfo(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, opts);
+            ApiResponse<ValuationPointResourceListOfAccountedTransaction> localVarResp = getValuationPointTransactionsWithHttpInfo(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, opts);
             return localVarResp.getData();
         }
 
@@ -11136,7 +11157,7 @@ public class FundsApi {
          </table>
          */
         public ApiResponse<ValuationPointResourceListOfAccountedTransaction> executeWithHttpInfo() throws ApiException {
-            return getValuationPointTransactionsWithHttpInfo(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType);
+            return getValuationPointTransactionsWithHttpInfo(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions);
         }
 
         /**
@@ -11152,7 +11173,7 @@ public class FundsApi {
          </table>
          */
         public ApiResponse<ValuationPointResourceListOfAccountedTransaction> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getValuationPointTransactionsWithHttpInfo(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, opts);
+            return getValuationPointTransactionsWithHttpInfo(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, opts);
         }
 
         /**
@@ -11168,7 +11189,7 @@ public class FundsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ValuationPointResourceListOfAccountedTransaction> _callback) throws ApiException {
-            getValuationPointTransactionsAsync(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, _callback);
+            getValuationPointTransactionsAsync(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, _callback);
         }
 
         /**
@@ -11184,7 +11205,7 @@ public class FundsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ValuationPointResourceListOfAccountedTransaction> _callback, ConfigurationOptions opts) throws ApiException {
-            getValuationPointTransactionsAsync(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, _callback, opts);
+            getValuationPointTransactionsAsync(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions, _callback, opts);
         }
     }
 
@@ -11722,15 +11743,12 @@ public class FundsApi {
      * Build call for getValuationPointUnsettledTransactions
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
      * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
-     * @param date The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry. (optional)
-     * @param diaryEntry The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date. (optional)
-     * @param variant The optional variant code of the Valuation Point to report against, as an alternative to              supplying it in the request body. Only required when it is necessary to choose between scenarios with multiple              estimates. (optional)
-     * @param singleValuationPointQueryParameters The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -11742,23 +11760,20 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getValuationPointUnsettledTransactionsCall(String scope, String code, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String date, String diaryEntry, String variant, SingleValuationPointQueryParameters singleValuationPointQueryParameters, final ApiCallback _callback) throws ApiException {
-        return getValuationPointUnsettledTransactionsCall(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters,  _callback, new ConfigurationOptions());
+    private HttpRequest getValuationPointUnsettledTransactionsCall(String scope, String code, SingleValuationPointQueryParameters singleValuationPointQueryParameters, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, final ApiCallback _callback) throws ApiException {
+        return getValuationPointUnsettledTransactionsCall(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getValuationPointUnsettledTransactions. Use any specified configuration options to override any other configuration for this request only.
      * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token to use to continue listing from a previous call. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param date The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param diaryEntry The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param variant The optional variant code of the Valuation Point to report against, as an alternative to              supplying it in the request body. Only required when it is necessary to choose between scenarios with multiple              estimates. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param singleValuationPointQueryParameters The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters. (optional)
+     * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -11770,7 +11785,7 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getValuationPointUnsettledTransactionsCall(String scope, String code, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String date, String diaryEntry, String variant, SingleValuationPointQueryParameters singleValuationPointQueryParameters, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getValuationPointUnsettledTransactionsCall(String scope, String code, SingleValuationPointQueryParameters singleValuationPointQueryParameters, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -11817,18 +11832,6 @@ public class FundsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("navTypeCode", navTypeCode));
         }
 
-        if (date != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("date", date));
-        }
-
-        if (diaryEntry != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("diaryEntry", diaryEntry));
-        }
-
-        if (variant != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("variant", variant));
-        }
-
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -11855,7 +11858,7 @@ public class FundsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getValuationPointUnsettledTransactionsValidateBeforeCall(String scope, String code, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String date, String diaryEntry, String variant, SingleValuationPointQueryParameters singleValuationPointQueryParameters, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getValuationPointUnsettledTransactionsValidateBeforeCall(String scope, String code, SingleValuationPointQueryParameters singleValuationPointQueryParameters, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling getValuationPointUnsettledTransactions(Async)");
@@ -11866,24 +11869,26 @@ public class FundsApi {
             throw new ApiException("Missing the required parameter 'code' when calling getValuationPointUnsettledTransactions(Async)");
         }
 
-        return getValuationPointUnsettledTransactionsCall(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, _callback, opts);
+        // verify the required parameter 'singleValuationPointQueryParameters' is set
+        if (singleValuationPointQueryParameters == null) {
+            throw new ApiException("Missing the required parameter 'singleValuationPointQueryParameters' when calling getValuationPointUnsettledTransactions(Async)");
+        }
+
+        return getValuationPointUnsettledTransactionsCall(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, _callback, opts);
 
     }
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  The Valuation Point must be identified either by the date or diaryEntry query parameters or by the  &#39;dateOrDiaryEntry&#39; parameter in the request body; when both are supplied the query parameters are used.
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
      * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
-     * @param date The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry. (optional)
-     * @param diaryEntry The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date. (optional)
-     * @param variant The optional variant code of the Valuation Point to report against, as an alternative to              supplying it in the request body. Only required when it is necessary to choose between scenarios with multiple              estimates. (optional)
-     * @param singleValuationPointQueryParameters The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters. (optional)
      * @return ApiResponse&lt;ValuationPointResourceListOfUnsettledTransaction&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -11894,26 +11899,23 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ValuationPointResourceListOfUnsettledTransaction> getValuationPointUnsettledTransactionsWithHttpInfo(String scope, String code, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String date, String diaryEntry, String variant, SingleValuationPointQueryParameters singleValuationPointQueryParameters) throws ApiException {
-        HttpRequest localVarCall = getValuationPointUnsettledTransactionsValidateBeforeCall(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, null, new ConfigurationOptions());
+    private ApiResponse<ValuationPointResourceListOfUnsettledTransaction> getValuationPointUnsettledTransactionsWithHttpInfo(String scope, String code, SingleValuationPointQueryParameters singleValuationPointQueryParameters, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode) throws ApiException {
+        HttpRequest localVarCall = getValuationPointUnsettledTransactionsValidateBeforeCall(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ValuationPointResourceListOfUnsettledTransaction>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  The Valuation Point must be identified either by the date or diaryEntry query parameters or by the  &#39;dateOrDiaryEntry&#39; parameter in the request body; when both are supplied the query parameters are used.Use any specified configuration options to override any other configuration for this request only
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
      * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
-     * @param date The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry. (optional)
-     * @param diaryEntry The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date. (optional)
-     * @param variant The optional variant code of the Valuation Point to report against, as an alternative to              supplying it in the request body. Only required when it is necessary to choose between scenarios with multiple              estimates. (optional)
-     * @param singleValuationPointQueryParameters The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters. (optional)
      * @return ApiResponse&lt;ValuationPointResourceListOfUnsettledTransaction&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -11924,26 +11926,23 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ValuationPointResourceListOfUnsettledTransaction> getValuationPointUnsettledTransactionsWithHttpInfo(String scope, String code, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String date, String diaryEntry, String variant, SingleValuationPointQueryParameters singleValuationPointQueryParameters, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getValuationPointUnsettledTransactionsValidateBeforeCall(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, null, opts);
+    private ApiResponse<ValuationPointResourceListOfUnsettledTransaction> getValuationPointUnsettledTransactionsWithHttpInfo(String scope, String code, SingleValuationPointQueryParameters singleValuationPointQueryParameters, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getValuationPointUnsettledTransactionsValidateBeforeCall(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, null, opts);
         Type localVarReturnType = new TypeReference<ValuationPointResourceListOfUnsettledTransaction>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund. (asynchronously)
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  The Valuation Point must be identified either by the date or diaryEntry query parameters or by the  &#39;dateOrDiaryEntry&#39; parameter in the request body; when both are supplied the query parameters are used.
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
      * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
-     * @param date The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry. (optional)
-     * @param diaryEntry The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date. (optional)
-     * @param variant The optional variant code of the Valuation Point to report against, as an alternative to              supplying it in the request body. Only required when it is necessary to choose between scenarios with multiple              estimates. (optional)
-     * @param singleValuationPointQueryParameters The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -11954,27 +11953,24 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getValuationPointUnsettledTransactionsAsync(String scope, String code, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String date, String diaryEntry, String variant, SingleValuationPointQueryParameters singleValuationPointQueryParameters, final ApiCallback<ValuationPointResourceListOfUnsettledTransaction> _callback) throws ApiException {
+    private void getValuationPointUnsettledTransactionsAsync(String scope, String code, SingleValuationPointQueryParameters singleValuationPointQueryParameters, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, final ApiCallback<ValuationPointResourceListOfUnsettledTransaction> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getValuationPointUnsettledTransactionsValidateBeforeCall(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getValuationPointUnsettledTransactionsValidateBeforeCall(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ValuationPointResourceListOfUnsettledTransaction>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund. (asynchronously)
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  The Valuation Point must be identified either by the date or diaryEntry query parameters or by the  &#39;dateOrDiaryEntry&#39; parameter in the request body; when both are supplied the query parameters are used.Use any specified configuration options to override any other configuration for this request only
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
      * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
-     * @param date The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry. (optional)
-     * @param diaryEntry The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date. (optional)
-     * @param variant The optional variant code of the Valuation Point to report against, as an alternative to              supplying it in the request body. Only required when it is necessary to choose between scenarios with multiple              estimates. (optional)
-     * @param singleValuationPointQueryParameters The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -11985,9 +11981,9 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getValuationPointUnsettledTransactionsAsync(String scope, String code, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, String date, String diaryEntry, String variant, SingleValuationPointQueryParameters singleValuationPointQueryParameters, final ApiCallback<ValuationPointResourceListOfUnsettledTransaction> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getValuationPointUnsettledTransactionsAsync(String scope, String code, SingleValuationPointQueryParameters singleValuationPointQueryParameters, OffsetDateTime asAt, Integer limit, String page, List<String> propertyKeys, String navTypeCode, final ApiCallback<ValuationPointResourceListOfUnsettledTransaction> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getValuationPointUnsettledTransactionsValidateBeforeCall(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, _callback, opts);
+        HttpRequest localVarCall = getValuationPointUnsettledTransactionsValidateBeforeCall(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, _callback, opts);
         Type localVarReturnType = new TypeReference<ValuationPointResourceListOfUnsettledTransaction>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -11995,19 +11991,17 @@ public class FundsApi {
     public class APIgetValuationPointUnsettledTransactionsRequest {
         private final String scope;
         private final String code;
+        private final SingleValuationPointQueryParameters singleValuationPointQueryParameters;
         private OffsetDateTime asAt;
         private Integer limit;
         private String page;
         private List<String> propertyKeys;
         private String navTypeCode;
-        private String date;
-        private String diaryEntry;
-        private String variant;
-        private SingleValuationPointQueryParameters singleValuationPointQueryParameters;
 
-        private APIgetValuationPointUnsettledTransactionsRequest(String scope, String code) {
+        private APIgetValuationPointUnsettledTransactionsRequest(String scope, String code, SingleValuationPointQueryParameters singleValuationPointQueryParameters) {
             this.scope = scope;
             this.code = code;
+            this.singleValuationPointQueryParameters = singleValuationPointQueryParameters;
         }
 
         /**
@@ -12061,46 +12055,6 @@ public class FundsApi {
         }
 
         /**
-         * Set date
-         * @param date The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry. (optional)
-         * @return APIgetValuationPointUnsettledTransactionsRequest
-         */
-        public APIgetValuationPointUnsettledTransactionsRequest date(String date) {
-            this.date = date;
-            return this;
-        }
-
-        /**
-         * Set diaryEntry
-         * @param diaryEntry The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date. (optional)
-         * @return APIgetValuationPointUnsettledTransactionsRequest
-         */
-        public APIgetValuationPointUnsettledTransactionsRequest diaryEntry(String diaryEntry) {
-            this.diaryEntry = diaryEntry;
-            return this;
-        }
-
-        /**
-         * Set variant
-         * @param variant The optional variant code of the Valuation Point to report against, as an alternative to              supplying it in the request body. Only required when it is necessary to choose between scenarios with multiple              estimates. (optional)
-         * @return APIgetValuationPointUnsettledTransactionsRequest
-         */
-        public APIgetValuationPointUnsettledTransactionsRequest variant(String variant) {
-            this.variant = variant;
-            return this;
-        }
-
-        /**
-         * Set singleValuationPointQueryParameters
-         * @param singleValuationPointQueryParameters The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters. (optional)
-         * @return APIgetValuationPointUnsettledTransactionsRequest
-         */
-        public APIgetValuationPointUnsettledTransactionsRequest singleValuationPointQueryParameters(SingleValuationPointQueryParameters singleValuationPointQueryParameters) {
-            this.singleValuationPointQueryParameters = singleValuationPointQueryParameters;
-            return this;
-        }
-
-        /**
          * Build call for getValuationPointUnsettledTransactions
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -12114,7 +12068,7 @@ public class FundsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getValuationPointUnsettledTransactionsCall(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, _callback);
+            return getValuationPointUnsettledTransactionsCall(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, _callback);
         }
 
         /**
@@ -12130,7 +12084,7 @@ public class FundsApi {
          </table>
          */
         public ValuationPointResourceListOfUnsettledTransaction execute() throws ApiException {
-            ApiResponse<ValuationPointResourceListOfUnsettledTransaction> localVarResp = getValuationPointUnsettledTransactionsWithHttpInfo(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters);
+            ApiResponse<ValuationPointResourceListOfUnsettledTransaction> localVarResp = getValuationPointUnsettledTransactionsWithHttpInfo(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode);
             return localVarResp.getData();
         }
 
@@ -12147,7 +12101,7 @@ public class FundsApi {
          </table>
          */
         public ValuationPointResourceListOfUnsettledTransaction execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<ValuationPointResourceListOfUnsettledTransaction> localVarResp = getValuationPointUnsettledTransactionsWithHttpInfo(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, opts);
+            ApiResponse<ValuationPointResourceListOfUnsettledTransaction> localVarResp = getValuationPointUnsettledTransactionsWithHttpInfo(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, opts);
             return localVarResp.getData();
         }
 
@@ -12164,7 +12118,7 @@ public class FundsApi {
          </table>
          */
         public ApiResponse<ValuationPointResourceListOfUnsettledTransaction> executeWithHttpInfo() throws ApiException {
-            return getValuationPointUnsettledTransactionsWithHttpInfo(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters);
+            return getValuationPointUnsettledTransactionsWithHttpInfo(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode);
         }
 
         /**
@@ -12180,7 +12134,7 @@ public class FundsApi {
          </table>
          */
         public ApiResponse<ValuationPointResourceListOfUnsettledTransaction> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getValuationPointUnsettledTransactionsWithHttpInfo(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, opts);
+            return getValuationPointUnsettledTransactionsWithHttpInfo(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, opts);
         }
 
         /**
@@ -12196,7 +12150,7 @@ public class FundsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ValuationPointResourceListOfUnsettledTransaction> _callback) throws ApiException {
-            getValuationPointUnsettledTransactionsAsync(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, _callback);
+            getValuationPointUnsettledTransactionsAsync(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, _callback);
         }
 
         /**
@@ -12212,15 +12166,16 @@ public class FundsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ValuationPointResourceListOfUnsettledTransaction> _callback, ConfigurationOptions opts) throws ApiException {
-            getValuationPointUnsettledTransactionsAsync(scope, code, asAt, limit, page, propertyKeys, navTypeCode, date, diaryEntry, variant, singleValuationPointQueryParameters, _callback, opts);
+            getValuationPointUnsettledTransactionsAsync(scope, code, singleValuationPointQueryParameters, asAt, limit, page, propertyKeys, navTypeCode, _callback, opts);
         }
     }
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  The Valuation Point must be identified either by the date or diaryEntry query parameters or by the  &#39;dateOrDiaryEntry&#39; parameter in the request body; when both are supplied the query parameters are used.
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @return APIgetValuationPointUnsettledTransactionsRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -12230,8 +12185,8 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    public APIgetValuationPointUnsettledTransactionsRequest getValuationPointUnsettledTransactions(String scope, String code) {
-        return new APIgetValuationPointUnsettledTransactionsRequest(scope, code);
+    public APIgetValuationPointUnsettledTransactionsRequest getValuationPointUnsettledTransactions(String scope, String code, SingleValuationPointQueryParameters singleValuationPointQueryParameters) {
+        return new APIgetValuationPointUnsettledTransactionsRequest(scope, code, singleValuationPointQueryParameters);
     }
     /**
      * Build call for listFees

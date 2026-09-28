@@ -12,140 +12,237 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AggregateNumericTolerance;
+import com.finbourne.sdk.services.lusid.model.CoreAttributeOptionalityTolerance;
+import com.finbourne.sdk.services.lusid.model.CoreDateTolerance;
+import com.finbourne.sdk.services.lusid.model.CoreStringCrossTolerance;
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 
-import java.util.HashMap;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import com.finbourne.sdk.JSON;
 
-/**
- * Base class for the tolerances that relax how strictly a matching rule compares its two sides. Polymorphic  by ToleranceType; each supported type has a corresponding inherited class.
- */
-@JsonPropertyOrder({
-  ToleranceBase.JSON_PROPERTY_TOLERANCE_TYPE,
-  ToleranceBase.JSON_PROPERTY_RULE_NAME
-})
 
-public class ToleranceBase {
-  public static final String JSON_PROPERTY_TOLERANCE_TYPE = "toleranceType";
-  @JsonProperty(JSON_PROPERTY_TOLERANCE_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String toleranceType;
+@JsonDeserialize(using = ToleranceBase.ToleranceBaseDeserializer.class)
+public class ToleranceBase extends AbstractOpenApiSchema {
+    private static final Logger log = Logger.getLogger(ToleranceBase.class.getName());
 
-  public static final String JSON_PROPERTY_RULE_NAME = "ruleName";
-  @JsonProperty(JSON_PROPERTY_RULE_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String ruleName;
+    public static class ToleranceBaseDeserializer extends JsonDeserializer<ToleranceBase> {
+        @Override
+        public ToleranceBase deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+            JsonNode node = p.readValueAsTree();
+            ToleranceBase result = new ToleranceBase();
+            Object deserialized = null;
 
-  public ToleranceBase() {
-  }
+            int match = 0;
+            ArrayList<String> errorMessages = new ArrayList<>();
 
-  public ToleranceBase toleranceType(String toleranceType) {
-    this.toleranceType = toleranceType;
-    return this;
-  }
+            // Try each oneOf variant with a strict mapper: variants have
+            // overlapping (or identical) property sets and Jackson silently
+            // ignores unknown fields by default, so a non-strict mapper lets
+            // multiple variants "match" the same payload. Requiring
+            // FAIL_ON_UNKNOWN_PROPERTIES makes the additionalProperties:false
+            // contract on each variant disambiguate the union.
+            com.fasterxml.jackson.databind.ObjectMapper _strictMapper = JSON.getMapper().copy()
+                    .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+            // deserialize AggregateNumericTolerance
+            try {
+                deserialized = _strictMapper.treeToValue(node, AggregateNumericTolerance.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'AggregateNumericTolerance'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for AggregateNumericTolerance failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'AggregateNumericTolerance'", e);
+            }
+            // deserialize CoreAttributeOptionalityTolerance
+            try {
+                deserialized = _strictMapper.treeToValue(node, CoreAttributeOptionalityTolerance.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'CoreAttributeOptionalityTolerance'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for CoreAttributeOptionalityTolerance failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'CoreAttributeOptionalityTolerance'", e);
+            }
+            // deserialize CoreDateTolerance
+            try {
+                deserialized = _strictMapper.treeToValue(node, CoreDateTolerance.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'CoreDateTolerance'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for CoreDateTolerance failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'CoreDateTolerance'", e);
+            }
+            // deserialize CoreStringCrossTolerance
+            try {
+                deserialized = _strictMapper.treeToValue(node, CoreStringCrossTolerance.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'CoreStringCrossTolerance'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for CoreStringCrossTolerance failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'CoreStringCrossTolerance'", e);
+            }
 
-  /**
-   * Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric.
-   * @return toleranceType
-   */
-  @javax.annotation.Nonnull
-  public String getToleranceType() {
-    return toleranceType;
-  }
+            if (match == 1) {
+                return result;
+            }
 
-  public void setToleranceType(String toleranceType) {
-    this.toleranceType = toleranceType;
-  }
-
-
-  public ToleranceBase ruleName(String ruleName) {
-    this.ruleName = ruleName;
-    return this;
-  }
-
-  /**
-   * The reference name of the rule that this tolerance relaxes.
-   * @return ruleName
-   */
-  @javax.annotation.Nonnull
-  public String getRuleName() {
-    return ruleName;
-  }
-
-  public void setRuleName(String ruleName) {
-    this.ruleName = ruleName;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+            throw new IOException(String.format("Failed deserialization for ToleranceBase: %d classes match result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", match, errorMessages, node.toString()));
+        }
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    // store a list of schema names defined in oneOf
+    public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
+
+    public ToleranceBase() {
+        super("oneOf", Boolean.FALSE);
     }
-    ToleranceBase toleranceBase = (ToleranceBase) o;
-    return Objects.equals(this.toleranceType, toleranceBase.toleranceType) &&
-        Objects.equals(this.ruleName, toleranceBase.ruleName);
-  }
 
-  @Override
- public int hashCode() {
-    return Objects.hash(toleranceType, ruleName);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class ToleranceBase {\n");
-    sb.append("    toleranceType: ").append(toIndentedString(toleranceType)).append("\n");
-    sb.append("    ruleName: ").append(toIndentedString(ruleName)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    public ToleranceBase(Object o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
     }
-    return o.toString().replace("\n", "\n    ");
-  }
 
+    static {
+        schemas.put("AggregateNumericTolerance", AggregateNumericTolerance.class);
+        schemas.put("CoreAttributeOptionalityTolerance", CoreAttributeOptionalityTolerance.class);
+        schemas.put("CoreDateTolerance", CoreDateTolerance.class);
+        schemas.put("CoreStringCrossTolerance", CoreStringCrossTolerance.class);
+    }
 
-  /**
-   * Create an instance of ToleranceBase given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of ToleranceBase
-   * @throws java.io.IOException if the JSON string is invalid with respect to ToleranceBase
-   */
-  public static ToleranceBase fromJson(String jsonString) throws java.io.IOException {
-    return JSON.getMapper().readValue(jsonString, ToleranceBase.class);
-  }
+    @Override
+    public Map<String, Class<?>> getSchemas() {
+        return ToleranceBase.schemas;
+    }
 
-  /**
-   * Convert an instance of ToleranceBase to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.serialize(this);
-  }
+    /**
+     * Set the instance that matches the oneOf child schema, check
+     * the instance parameter is valid against the oneOf child schemas:
+     * AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance
+     *
+     * It could be an instance of the 'oneOf' schemas.
+     */
+    @Override
+    public void setActualInstance(Object instance) {
+        if (instance instanceof AggregateNumericTolerance) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof CoreAttributeOptionalityTolerance) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof CoreDateTolerance) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof CoreStringCrossTolerance) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        throw new RuntimeException("Invalid instance type. Must be AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance");
+    }
+
+    /**
+     * Get the actual instance, which can be the following:
+     * AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance
+     *
+     * @return The actual instance (AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Object getActualInstance() {
+        return super.getActualInstance();
+    }
+
+    /**
+     * Get the actual instance of `AggregateNumericTolerance`. If the actual instance is not `AggregateNumericTolerance`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `AggregateNumericTolerance`
+     * @throws ClassCastException if the instance is not `AggregateNumericTolerance`
+     */
+    public AggregateNumericTolerance getAggregateNumericTolerance() throws ClassCastException {
+        return (AggregateNumericTolerance)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `CoreAttributeOptionalityTolerance`. If the actual instance is not `CoreAttributeOptionalityTolerance`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `CoreAttributeOptionalityTolerance`
+     * @throws ClassCastException if the instance is not `CoreAttributeOptionalityTolerance`
+     */
+    public CoreAttributeOptionalityTolerance getCoreAttributeOptionalityTolerance() throws ClassCastException {
+        return (CoreAttributeOptionalityTolerance)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `CoreDateTolerance`. If the actual instance is not `CoreDateTolerance`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `CoreDateTolerance`
+     * @throws ClassCastException if the instance is not `CoreDateTolerance`
+     */
+    public CoreDateTolerance getCoreDateTolerance() throws ClassCastException {
+        return (CoreDateTolerance)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `CoreStringCrossTolerance`. If the actual instance is not `CoreStringCrossTolerance`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `CoreStringCrossTolerance`
+     * @throws ClassCastException if the instance is not `CoreStringCrossTolerance`
+     */
+    public CoreStringCrossTolerance getCoreStringCrossTolerance() throws ClassCastException {
+        return (CoreStringCrossTolerance)super.getActualInstance();
+    }
+
+    /**
+     * Create an instance of ToleranceBase given an JSON string
+     *
+     * @param jsonString JSON string
+     * @return An instance of ToleranceBase
+     * @throws IOException if the JSON string is invalid with respect to ToleranceBase
+     */
+    public static ToleranceBase fromJson(String jsonString) throws IOException {
+        return JSON.getMapper().readValue(jsonString, ToleranceBase.class);
+    }
+
+    /**
+     * Convert an instance of ToleranceBase to an JSON string
+     *
+     * @return JSON string
+     */
+    public String toJson() {
+        return JSON.serialize(this);
+    }
 }

@@ -50,7 +50,8 @@ import com.finbourne.sdk.JSON;
   QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_RECIPE_ID,
   QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_REPORT_CURRENCY,
   QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_EXCLUDE_UNSETTLED_TRADES,
-  QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_HAIRCUT_RULES
+  QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_HAIRCUT_RULES,
+  QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_CASH_TYPE
 })
 
 public class QueryBucketCashFlowDrillDownRequest {
@@ -108,6 +109,11 @@ public class QueryBucketCashFlowDrillDownRequest {
   @JsonProperty(JSON_PROPERTY_HAIRCUT_RULES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<CashFlowHaircutRule> haircutRules;
+
+  public static final String JSON_PROPERTY_CASH_TYPE = "cashType";
+  @JsonProperty(JSON_PROPERTY_CASH_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String cashType;
 
   public QueryBucketCashFlowDrillDownRequest() {
   }
@@ -337,6 +343,25 @@ public class QueryBucketCashFlowDrillDownRequest {
   }
 
 
+  public QueryBucketCashFlowDrillDownRequest cashType(String cashType) {
+    this.cashType = cashType;
+    return this;
+  }
+
+  /**
+   * Which date basis buckets cash flows: TradeDate uses each cash flow&#39;s transaction date, SettleDate (default) uses its payment date. The response&#39;s CashFlowDetail.PaymentDate reflects whichever basis was used. Available values: TradeDate, SettleDate.
+   * @return cashType
+   */
+  @javax.annotation.Nullable
+  public String getCashType() {
+    return cashType;
+  }
+
+  public void setCashType(String cashType) {
+    this.cashType = cashType;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -356,7 +381,8 @@ public class QueryBucketCashFlowDrillDownRequest {
         Objects.equals(this.recipeId, queryBucketCashFlowDrillDownRequest.recipeId) &&
         Objects.equals(this.reportCurrency, queryBucketCashFlowDrillDownRequest.reportCurrency) &&
         Objects.equals(this.excludeUnsettledTrades, queryBucketCashFlowDrillDownRequest.excludeUnsettledTrades) &&
-        Objects.equals(this.haircutRules, queryBucketCashFlowDrillDownRequest.haircutRules);
+        Objects.equals(this.haircutRules, queryBucketCashFlowDrillDownRequest.haircutRules) &&
+        Objects.equals(this.cashType, queryBucketCashFlowDrillDownRequest.cashType);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -365,7 +391,7 @@ public class QueryBucketCashFlowDrillDownRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(asAt, bucketStart, bucketEnd, startInclusive, endInclusive, portfolioEntityIds, effectiveAt, recipeId, reportCurrency, excludeUnsettledTrades, haircutRules);
+    return Objects.hash(asAt, bucketStart, bucketEnd, startInclusive, endInclusive, portfolioEntityIds, effectiveAt, recipeId, reportCurrency, excludeUnsettledTrades, haircutRules, cashType);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -390,6 +416,7 @@ public class QueryBucketCashFlowDrillDownRequest {
     sb.append("    reportCurrency: ").append(toIndentedString(reportCurrency)).append("\n");
     sb.append("    excludeUnsettledTrades: ").append(toIndentedString(excludeUnsettledTrades)).append("\n");
     sb.append("    haircutRules: ").append(toIndentedString(haircutRules)).append("\n");
+    sb.append("    cashType: ").append(toIndentedString(cashType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

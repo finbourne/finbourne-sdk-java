@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 | [**generateConfigurationRecipe**](AggregationApi.md#generateConfigurationRecipe) | **POST** /api/api/aggregation/{scope}/{code}/$generateconfigurationrecipe | [EXPERIMENTAL] GenerateConfigurationRecipe: Generates a recipe sufficient to perform valuations for the given portfolio. |
 | [**getQueryableKeys**](AggregationApi.md#getQueryableKeys) | **GET** /api/api/results/queryable/keys | GetQueryableKeys: Query the set of supported \&quot;addresses\&quot; that can be queried from the aggregation endpoint. |
+| [**getQueryableKeysForMetrics**](AggregationApi.md#getQueryableKeysForMetrics) | **POST** /api/api/aggregation/$queryablekeys | [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics. |
 | [**getValuation**](AggregationApi.md#getValuation) | **POST** /api/api/aggregation/$valuation | GetValuation: Perform valuation for a list of portfolios and/or portfolio groups |
 | [**getValuationOfWeightedInstruments**](AggregationApi.md#getValuationOfWeightedInstruments) | **POST** /api/api/aggregation/$valuationinlined | GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio |
 
@@ -160,6 +161,83 @@ public class AggregationApiExample {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getQueryableKeysForMetrics
+
+> QueryableKeysForMetricsResponse getQueryableKeysForMetrics(queryableKeysForMetricsRequest)
+
+[EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
+
+Describes what a valuation would return for each of the supplied metrics, so that a caller can  prepare for the response, and render it, without having to ask for the valuation first. The  metrics are given exactly as they would be supplied to the metrics of a valuation request.                Each metric is reported on individually, keyed by its normalised address key: those that resolve  appear under metrics with their queryable key definition, and the rest appear under failed with the  reason. A metric that does not exist, or that you are not entitled to read, is reported as failed;  the two cases are not distinguished from one another.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.AggregationApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class AggregationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        AggregationApi apiInstance = apiFactory.build(AggregationApi.class);
+        QueryableKeysForMetricsRequest queryableKeysForMetricsRequest = new QueryableKeysForMetricsRequest(); // QueryableKeysForMetricsRequest | The set of metrics whose queryable keys are to be described
+        try {
+            // uncomment the below to set overrides at the request level
+            // QueryableKeysForMetricsResponse result = apiInstance.getQueryableKeysForMetrics(queryableKeysForMetricsRequest).execute(opts);
+
+            QueryableKeysForMetricsResponse result = apiInstance.getQueryableKeysForMetrics(queryableKeysForMetricsRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AggregationApi#getQueryableKeysForMetrics");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **queryableKeysForMetricsRequest** | [**QueryableKeysForMetricsRequest**](../model/QueryableKeysForMetricsRequest.md)| The set of metrics whose queryable keys are to be described | [optional] |
+
+### Return type
+
+[**QueryableKeysForMetricsResponse**](../model/QueryableKeysForMetricsResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
 - **Accept**: text/plain, application/json, text/json
 
 

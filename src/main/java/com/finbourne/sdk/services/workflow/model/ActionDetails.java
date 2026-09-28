@@ -70,9 +70,17 @@ public class ActionDetails extends AbstractOpenApiSchema {
             int match = 0;
             ArrayList<String> errorMessages = new ArrayList<>();
 
+            // Try each oneOf variant with a strict mapper: variants have
+            // overlapping (or identical) property sets and Jackson silently
+            // ignores unknown fields by default, so a non-strict mapper lets
+            // multiple variants "match" the same payload. Requiring
+            // FAIL_ON_UNKNOWN_PROPERTIES makes the additionalProperties:false
+            // contract on each variant disambiguate the union.
+            com.fasterxml.jackson.databind.ObjectMapper _strictMapper = JSON.getMapper().copy()
+                    .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
             // deserialize CreateChildTasksAction
             try {
-                deserialized = JSON.getMapper().treeToValue(node, CreateChildTasksAction.class);
+                deserialized = _strictMapper.treeToValue(node, CreateChildTasksAction.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'CreateChildTasksAction'");
                 result.setActualInstance(deserialized);
@@ -82,7 +90,7 @@ public class ActionDetails extends AbstractOpenApiSchema {
             }
             // deserialize RunWorkerAction
             try {
-                deserialized = JSON.getMapper().treeToValue(node, RunWorkerAction.class);
+                deserialized = _strictMapper.treeToValue(node, RunWorkerAction.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'RunWorkerAction'");
                 result.setActualInstance(deserialized);
@@ -92,7 +100,7 @@ public class ActionDetails extends AbstractOpenApiSchema {
             }
             // deserialize TriggerChildTasksAction
             try {
-                deserialized = JSON.getMapper().treeToValue(node, TriggerChildTasksAction.class);
+                deserialized = _strictMapper.treeToValue(node, TriggerChildTasksAction.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'TriggerChildTasksAction'");
                 result.setActualInstance(deserialized);
@@ -102,7 +110,7 @@ public class ActionDetails extends AbstractOpenApiSchema {
             }
             // deserialize TriggerParentTaskAction
             try {
-                deserialized = JSON.getMapper().treeToValue(node, TriggerParentTaskAction.class);
+                deserialized = _strictMapper.treeToValue(node, TriggerParentTaskAction.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'TriggerParentTaskAction'");
                 result.setActualInstance(deserialized);

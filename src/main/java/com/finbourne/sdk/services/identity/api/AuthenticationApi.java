@@ -750,7 +750,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetSessionPolicy: Get session policy
+     * GetSessionPolicy: Get session policy
      * Get the configured session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
      * @return ApiResponse&lt;SessionPolicyResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -768,7 +768,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetSessionPolicy: Get session policy
+     * GetSessionPolicy: Get session policy
      * Get the configured session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.Use any specified configuration options to override any other configuration for this request only
      * @return ApiResponse&lt;SessionPolicyResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -786,7 +786,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetSessionPolicy: Get session policy (asynchronously)
+     * GetSessionPolicy: Get session policy (asynchronously)
      * Get the configured session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -805,7 +805,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetSessionPolicy: Get session policy (asynchronously)
+     * GetSessionPolicy: Get session policy (asynchronously)
      * Get the configured session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.Use any specified configuration options to override any other configuration for this request only
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -938,7 +938,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetSessionPolicy: Get session policy
+     * GetSessionPolicy: Get session policy
      * Get the configured session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
      * @return APIgetSessionPolicyRequest
      * @http.response.details
@@ -2581,7 +2581,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateSessionPolicy: Update session policy
+     * UpdateSessionPolicy: Update session policy
      * Update the session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
      * @param updateSessionPolicyRequest The desired session timing settings (required)
      * @return ApiResponse&lt;SessionPolicyResponse&gt;
@@ -2601,7 +2601,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateSessionPolicy: Update session policy
+     * UpdateSessionPolicy: Update session policy
      * Update the session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.Use any specified configuration options to override any other configuration for this request only
      * @param updateSessionPolicyRequest The desired session timing settings (required)
      * @return ApiResponse&lt;SessionPolicyResponse&gt;
@@ -2621,7 +2621,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateSessionPolicy: Update session policy (asynchronously)
+     * UpdateSessionPolicy: Update session policy (asynchronously)
      * Update the session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
      * @param updateSessionPolicyRequest The desired session timing settings (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -2642,7 +2642,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateSessionPolicy: Update session policy (asynchronously)
+     * UpdateSessionPolicy: Update session policy (asynchronously)
      * Update the session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.Use any specified configuration options to override any other configuration for this request only
      * @param updateSessionPolicyRequest The desired session timing settings (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -2786,7 +2786,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateSessionPolicy: Update session policy
+     * UpdateSessionPolicy: Update session policy
      * Update the session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
      * @param updateSessionPolicyRequest The desired session timing settings (required)
      * @return APIupdateSessionPolicyRequest

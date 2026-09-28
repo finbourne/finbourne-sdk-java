@@ -66,9 +66,17 @@ public class NotificationTypeResponse extends AbstractOpenApiSchema {
             int match = 0;
             ArrayList<String> errorMessages = new ArrayList<>();
 
+            // Try each oneOf variant with a strict mapper: variants have
+            // overlapping (or identical) property sets and Jackson silently
+            // ignores unknown fields by default, so a non-strict mapper lets
+            // multiple variants "match" the same payload. Requiring
+            // FAIL_ON_UNKNOWN_PROPERTIES makes the additionalProperties:false
+            // contract on each variant disambiguate the union.
+            com.fasterxml.jackson.databind.ObjectMapper _strictMapper = JSON.getMapper().copy()
+                    .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
             // deserialize AmazonSqsNotificationTypeResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, AmazonSqsNotificationTypeResponse.class);
+                deserialized = _strictMapper.treeToValue(node, AmazonSqsNotificationTypeResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'AmazonSqsNotificationTypeResponse'");
                 result.setActualInstance(deserialized);
@@ -78,7 +86,7 @@ public class NotificationTypeResponse extends AbstractOpenApiSchema {
             }
             // deserialize AmazonSqsPrincipalAuthNotificationTypeResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, AmazonSqsPrincipalAuthNotificationTypeResponse.class);
+                deserialized = _strictMapper.treeToValue(node, AmazonSqsPrincipalAuthNotificationTypeResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'AmazonSqsPrincipalAuthNotificationTypeResponse'");
                 result.setActualInstance(deserialized);
@@ -88,7 +96,7 @@ public class NotificationTypeResponse extends AbstractOpenApiSchema {
             }
             // deserialize AzureServiceBusTypeResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, AzureServiceBusTypeResponse.class);
+                deserialized = _strictMapper.treeToValue(node, AzureServiceBusTypeResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'AzureServiceBusTypeResponse'");
                 result.setActualInstance(deserialized);
@@ -98,7 +106,7 @@ public class NotificationTypeResponse extends AbstractOpenApiSchema {
             }
             // deserialize EmailNotificationTypeResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, EmailNotificationTypeResponse.class);
+                deserialized = _strictMapper.treeToValue(node, EmailNotificationTypeResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'EmailNotificationTypeResponse'");
                 result.setActualInstance(deserialized);
@@ -108,7 +116,7 @@ public class NotificationTypeResponse extends AbstractOpenApiSchema {
             }
             // deserialize SmsNotificationTypeResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, SmsNotificationTypeResponse.class);
+                deserialized = _strictMapper.treeToValue(node, SmsNotificationTypeResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'SmsNotificationTypeResponse'");
                 result.setActualInstance(deserialized);
@@ -118,7 +126,7 @@ public class NotificationTypeResponse extends AbstractOpenApiSchema {
             }
             // deserialize WebhookNotificationTypeResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, WebhookNotificationTypeResponse.class);
+                deserialized = _strictMapper.treeToValue(node, WebhookNotificationTypeResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'WebhookNotificationTypeResponse'");
                 result.setActualInstance(deserialized);

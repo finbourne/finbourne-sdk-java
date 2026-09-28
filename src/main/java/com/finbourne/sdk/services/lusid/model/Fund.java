@@ -59,6 +59,7 @@ import com.finbourne.sdk.JSON;
   Fund.JSON_PROPERTY_INVESTOR_STRUCTURE,
   Fund.JSON_PROPERTY_PORTFOLIO_IDS,
   Fund.JSON_PROPERTY_FUND_CONFIGURATION_ID,
+  Fund.JSON_PROPERTY_SHORT_CODE,
   Fund.JSON_PROPERTY_ABOR_ID,
   Fund.JSON_PROPERTY_SHARE_CLASS_INSTRUMENTS,
   Fund.JSON_PROPERTY_TYPE,
@@ -116,6 +117,11 @@ public class Fund {
   @JsonProperty(JSON_PROPERTY_FUND_CONFIGURATION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId fundConfigurationId;
+
+  public static final String JSON_PROPERTY_SHORT_CODE = "shortCode";
+  @JsonProperty(JSON_PROPERTY_SHORT_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String shortCode;
 
   public static final String JSON_PROPERTY_ABOR_ID = "aborId";
   @JsonProperty(JSON_PROPERTY_ABOR_ID)
@@ -355,6 +361,25 @@ public class Fund {
   }
 
 
+  public Fund shortCode(String shortCode) {
+    this.shortCode = shortCode;
+    return this;
+  }
+
+  /**
+   * A short code for the Fund. A fund structure tags journal entry lines with the short code of the member they originated from, so it should be unique across the funds of one structure. Optional.
+   * @return shortCode
+   */
+  @javax.annotation.Nullable
+  public String getShortCode() {
+    return shortCode;
+  }
+
+  public void setShortCode(String shortCode) {
+    this.shortCode = shortCode;
+  }
+
+
   public Fund aborId(ResourceId aborId) {
     this.aborId = aborId;
     return this;
@@ -407,7 +432,7 @@ public class Fund {
   }
 
   /**
-   * The type of fund. Available values: Standalone, Master, Feeder.
+   * The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.
    * @return type
    */
   @javax.annotation.Nullable
@@ -705,6 +730,7 @@ public class Fund {
         Objects.equals(this.investorStructure, fund.investorStructure) &&
         Objects.equals(this.portfolioIds, fund.portfolioIds) &&
         Objects.equals(this.fundConfigurationId, fund.fundConfigurationId) &&
+        Objects.equals(this.shortCode, fund.shortCode) &&
         Objects.equals(this.aborId, fund.aborId) &&
         Objects.equals(this.shareClassInstruments, fund.shareClassInstruments) &&
         Objects.equals(this.type, fund.type) &&
@@ -728,7 +754,7 @@ public class Fund {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, aborId, shareClassInstruments, type, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, version, links);
+    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shortCode, aborId, shareClassInstruments, type, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -750,6 +776,7 @@ public class Fund {
     sb.append("    investorStructure: ").append(toIndentedString(investorStructure)).append("\n");
     sb.append("    portfolioIds: ").append(toIndentedString(portfolioIds)).append("\n");
     sb.append("    fundConfigurationId: ").append(toIndentedString(fundConfigurationId)).append("\n");
+    sb.append("    shortCode: ").append(toIndentedString(shortCode)).append("\n");
     sb.append("    aborId: ").append(toIndentedString(aborId)).append("\n");
     sb.append("    shareClassInstruments: ").append(toIndentedString(shareClassInstruments)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");

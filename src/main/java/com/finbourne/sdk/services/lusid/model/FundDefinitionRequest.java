@@ -46,6 +46,7 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   FundDefinitionRequest.JSON_PROPERTY_CODE,
+  FundDefinitionRequest.JSON_PROPERTY_SHORT_CODE,
   FundDefinitionRequest.JSON_PROPERTY_DISPLAY_NAME,
   FundDefinitionRequest.JSON_PROPERTY_DESCRIPTION,
   FundDefinitionRequest.JSON_PROPERTY_BASE_CURRENCY,
@@ -69,6 +70,11 @@ public class FundDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String code;
+
+  public static final String JSON_PROPERTY_SHORT_CODE = "shortCode";
+  @JsonProperty(JSON_PROPERTY_SHORT_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String shortCode;
 
   public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
   @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
@@ -169,6 +175,25 @@ public class FundDefinitionRequest {
 
   public void setCode(String code) {
     this.code = code;
+  }
+
+
+  public FundDefinitionRequest shortCode(String shortCode) {
+    this.shortCode = shortCode;
+    return this;
+  }
+
+  /**
+   * A short code for the Fund. A fund structure tags journal entry lines with the short code of the member they originated from, so it should be unique across the funds of one structure. Optional.
+   * @return shortCode
+   */
+  @javax.annotation.Nullable
+  public String getShortCode() {
+    return shortCode;
+  }
+
+  public void setShortCode(String shortCode) {
+    this.shortCode = shortCode;
   }
 
 
@@ -354,7 +379,7 @@ public class FundDefinitionRequest {
   }
 
   /**
-   * The type of fund. Available values: Standalone, Master, Feeder.
+   * The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.
    * @return type
    */
   @javax.annotation.Nullable
@@ -534,6 +559,7 @@ public class FundDefinitionRequest {
     }
     FundDefinitionRequest fundDefinitionRequest = (FundDefinitionRequest) o;
     return Objects.equals(this.code, fundDefinitionRequest.code) &&
+        Objects.equals(this.shortCode, fundDefinitionRequest.shortCode) &&
         Objects.equals(this.displayName, fundDefinitionRequest.displayName) &&
         Objects.equals(this.description, fundDefinitionRequest.description) &&
         Objects.equals(this.baseCurrency, fundDefinitionRequest.baseCurrency) &&
@@ -558,7 +584,7 @@ public class FundDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, shareClasses);
+    return Objects.hash(code, shortCode, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, shareClasses);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -573,6 +599,7 @@ public class FundDefinitionRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class FundDefinitionRequest {\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
+    sb.append("    shortCode: ").append(toIndentedString(shortCode)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    baseCurrency: ").append(toIndentedString(baseCurrency)).append("\n");

@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **amortisationRuleSetId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **leaderNavTypeCode** | **String** | The code of the Nav Type that this Nav Type will follow when set. | [optional] [default to String]
 **transactionTemplateScope** | **String** | The Transaction Template Scope used by the NavType. | [default to String]
+**transactionExclusionFilter** | **String** | Optional filter expression to exclude specific transactions from this NavType&#39;s derived portfolios. The filter can reference Transaction, Portfolio, or Instrument fields and properties. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.NavTypeDefinition;
@@ -46,6 +47,7 @@ String cashGainLossCalculationDate = "example cashGainLossCalculationDate";
 ResourceId amortisationRuleSetId = new ResourceId();
 @javax.annotation.Nullable String leaderNavTypeCode = "example leaderNavTypeCode";
 String transactionTemplateScope = "example transactionTemplateScope";
+@javax.annotation.Nullable String transactionExclusionFilter = "example transactionExclusionFilter";
 
 
 NavTypeDefinition navTypeDefinitionInstance = new NavTypeDefinition()
@@ -65,7 +67,8 @@ NavTypeDefinition navTypeDefinitionInstance = new NavTypeDefinition()
     .cashGainLossCalculationDate(cashGainLossCalculationDate)
     .amortisationRuleSetId(amortisationRuleSetId)
     .leaderNavTypeCode(leaderNavTypeCode)
-    .transactionTemplateScope(transactionTemplateScope);
+    .transactionTemplateScope(transactionTemplateScope)
+    .transactionExclusionFilter(transactionExclusionFilter);
 ```
 
 

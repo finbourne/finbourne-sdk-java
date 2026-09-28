@@ -67,6 +67,7 @@ import com.finbourne.sdk.JSON;
   Allocation.JSON_PROPERTY_EXECUTION_IDS,
   Allocation.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID,
   Allocation.JSON_PROPERTY_DATA_MODEL_MEMBERSHIP,
+  Allocation.JSON_PROPERTY_DIRECTION,
   Allocation.JSON_PROPERTY_LINKS
 })
 
@@ -180,6 +181,11 @@ public class Allocation {
   @JsonProperty(JSON_PROPERTY_DATA_MODEL_MEMBERSHIP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private DataModelMembership dataModelMembership;
+
+  public static final String JSON_PROPERTY_DIRECTION = "direction";
+  @JsonProperty(JSON_PROPERTY_DIRECTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer direction;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -639,6 +645,25 @@ public class Allocation {
   }
 
 
+  public Allocation direction(Integer direction) {
+    this.direction = direction;
+    return this;
+  }
+
+  /**
+   * The direction of the allocation&#39;s side, derived from its transaction type at write time: 1 the side increases the position (longer), -1 it decreases it (shorter), null when no direction could be resolved.
+   * @return direction
+   */
+  @javax.annotation.Nullable
+  public Integer getDirection() {
+    return direction;
+  }
+
+  public void setDirection(Integer direction) {
+    this.direction = direction;
+  }
+
+
   public Allocation links(List<Link> links) {
     this.links = links;
     return this;
@@ -697,6 +722,7 @@ public class Allocation {
         Objects.equals(this.executionIds, allocation.executionIds) &&
         Objects.equals(this.custodianAccountId, allocation.custodianAccountId) &&
         Objects.equals(this.dataModelMembership, allocation.dataModelMembership) &&
+        Objects.equals(this.direction, allocation.direction) &&
         Objects.equals(this.links, allocation.links);
   }
 
@@ -706,7 +732,7 @@ public class Allocation {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, allocatedOrderId, portfolioId, quantity, instrumentIdentifiers, version, properties, instrumentScope, lusidInstrumentId, placementIds, state, side, type, settlementDate, date, price, settlementCurrency, settlementCurrencyFxRate, counterparty, executionIds, custodianAccountId, dataModelMembership, links);
+    return Objects.hash(id, allocatedOrderId, portfolioId, quantity, instrumentIdentifiers, version, properties, instrumentScope, lusidInstrumentId, placementIds, state, side, type, settlementDate, date, price, settlementCurrency, settlementCurrencyFxRate, counterparty, executionIds, custodianAccountId, dataModelMembership, direction, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -742,6 +768,7 @@ public class Allocation {
     sb.append("    executionIds: ").append(toIndentedString(executionIds)).append("\n");
     sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("    dataModelMembership: ").append(toIndentedString(dataModelMembership)).append("\n");
+    sb.append("    direction: ").append(toIndentedString(direction)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

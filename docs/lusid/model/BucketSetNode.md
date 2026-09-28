@@ -19,6 +19,9 @@ Name | Type | Description | Notes
 **previousNav** | **java.math.BigDecimal** | The net asset value this node carried at the previous valuation point, in the fund currency. Zero at the fund&#39;s first valuation point. | [optional] [default to java.math.BigDecimal]
 **netDealingUnits** | **java.math.BigDecimal** | The net units dealt for the share class over the period, so that the shares in issue are the previous shares in issue plus this. Omitted on the fund node and where the bucket set is not unitised. | [optional] [default to java.math.BigDecimal]
 **shareClassDetails** | [**BucketSetShareClassDetails**](BucketSetShareClassDetails.md) |  | [optional] [default to BucketSetShareClassDetails]
+**navShareClassCurrency** | **java.math.BigDecimal** | The node&#39;s net asset value restated in the share class&#39; own currency, at the rate this node publishes. Set only on share class nodes. | [optional] [default to java.math.BigDecimal]
+**shareClassToFundFxRate** | **java.math.BigDecimal** | The fx rate from the share class currency to the fund currency at this valuation point. Nav and the bucket values are in the fund currency, so divide by this rate to restate them in the share class currency. Set only on share class nodes. | [optional] [default to java.math.BigDecimal]
+**previousNavShareClassCurrency** | **java.math.BigDecimal** | The net asset value in the share class&#39; currency at the previous valuation point, as that point published it, at the rate that point struck. Zero at the fund&#39;s first valuation point. Absent (rather than zero) if the previous valuation point predates this field. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.BucketSetNode;
@@ -39,6 +42,9 @@ List<BucketSetResultBucket> buckets = new List<BucketSetResultBucket>();
 @javax.annotation.Nullable java.math.BigDecimal previousNav = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal netDealingUnits = new java.math.BigDecimal("100.00");
 BucketSetShareClassDetails shareClassDetails = new BucketSetShareClassDetails();
+@javax.annotation.Nullable java.math.BigDecimal navShareClassCurrency = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal shareClassToFundFxRate = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal previousNavShareClassCurrency = new java.math.BigDecimal("100.00");
 
 
 BucketSetNode bucketSetNodeInstance = new BucketSetNode()
@@ -54,7 +60,10 @@ BucketSetNode bucketSetNodeInstance = new BucketSetNode()
     .label(label)
     .previousNav(previousNav)
     .netDealingUnits(netDealingUnits)
-    .shareClassDetails(shareClassDetails);
+    .shareClassDetails(shareClassDetails)
+    .navShareClassCurrency(navShareClassCurrency)
+    .shareClassToFundFxRate(shareClassToFundFxRate)
+    .previousNavShareClassCurrency(previousNavShareClassCurrency);
 ```
 
 

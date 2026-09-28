@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **executionIds** | [**List&lt;ResourceId&gt;**](ResourceId.md) | The executions associated with this allocation | [optional] [default to List<ResourceId>]
 **custodianAccountId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **dataModelMembership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] [default to DataModelMembership]
+**direction** | **Integer** | The direction of the allocation&#39;s side, derived from its transaction type at write time: 1 the side increases the position (longer), -1 it decreases it (shorter), null when no direction could be resolved. | [optional] [default to Integer]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -58,6 +59,7 @@ CurrencyAndAmount price = new CurrencyAndAmount();
 @javax.annotation.Nullable List<ResourceId> executionIds = new List<ResourceId>();
 ResourceId custodianAccountId = new ResourceId();
 DataModelMembership dataModelMembership = new DataModelMembership();
+@javax.annotation.Nullable Integer direction = new Integer("100.00");
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -84,6 +86,7 @@ Allocation allocationInstance = new Allocation()
     .executionIds(executionIds)
     .custodianAccountId(custodianAccountId)
     .dataModelMembership(dataModelMembership)
+    .direction(direction)
     .links(links);
 ```
 

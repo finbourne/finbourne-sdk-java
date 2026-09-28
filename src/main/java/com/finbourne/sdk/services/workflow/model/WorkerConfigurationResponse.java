@@ -20,6 +20,7 @@ import com.finbourne.sdk.services.workflow.model.LibraryResponse;
 import com.finbourne.sdk.services.workflow.model.LuminesceViewResponse;
 import com.finbourne.sdk.services.workflow.model.LusidEntityDataQualityCheckResponse;
 import com.finbourne.sdk.services.workflow.model.PortfolioHoldingDataQualityCheckResponse;
+import com.finbourne.sdk.services.workflow.model.PortfolioTransactionDataQualityCheckResponse;
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.SchedulerJobResponse;
 import com.finbourne.sdk.services.workflow.model.SleepResponse;
@@ -67,9 +68,17 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             int match = 0;
             ArrayList<String> errorMessages = new ArrayList<>();
 
+            // Try each oneOf variant with a strict mapper: variants have
+            // overlapping (or identical) property sets and Jackson silently
+            // ignores unknown fields by default, so a non-strict mapper lets
+            // multiple variants "match" the same payload. Requiring
+            // FAIL_ON_UNKNOWN_PROPERTIES makes the additionalProperties:false
+            // contract on each variant disambiguate the union.
+            com.fasterxml.jackson.databind.ObjectMapper _strictMapper = JSON.getMapper().copy()
+                    .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
             // deserialize FailResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, FailResponse.class);
+                deserialized = _strictMapper.treeToValue(node, FailResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'FailResponse'");
                 result.setActualInstance(deserialized);
@@ -79,7 +88,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             }
             // deserialize GroupReconciliationResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, GroupReconciliationResponse.class);
+                deserialized = _strictMapper.treeToValue(node, GroupReconciliationResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'GroupReconciliationResponse'");
                 result.setActualInstance(deserialized);
@@ -89,7 +98,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             }
             // deserialize HealthCheckResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, HealthCheckResponse.class);
+                deserialized = _strictMapper.treeToValue(node, HealthCheckResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'HealthCheckResponse'");
                 result.setActualInstance(deserialized);
@@ -99,7 +108,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             }
             // deserialize HorizonIntegrationResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, HorizonIntegrationResponse.class);
+                deserialized = _strictMapper.treeToValue(node, HorizonIntegrationResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'HorizonIntegrationResponse'");
                 result.setActualInstance(deserialized);
@@ -109,7 +118,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             }
             // deserialize LibraryResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, LibraryResponse.class);
+                deserialized = _strictMapper.treeToValue(node, LibraryResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'LibraryResponse'");
                 result.setActualInstance(deserialized);
@@ -119,7 +128,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             }
             // deserialize LuminesceViewResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, LuminesceViewResponse.class);
+                deserialized = _strictMapper.treeToValue(node, LuminesceViewResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'LuminesceViewResponse'");
                 result.setActualInstance(deserialized);
@@ -129,7 +138,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             }
             // deserialize LusidEntityDataQualityCheckResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, LusidEntityDataQualityCheckResponse.class);
+                deserialized = _strictMapper.treeToValue(node, LusidEntityDataQualityCheckResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'LusidEntityDataQualityCheckResponse'");
                 result.setActualInstance(deserialized);
@@ -139,7 +148,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             }
             // deserialize PortfolioHoldingDataQualityCheckResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, PortfolioHoldingDataQualityCheckResponse.class);
+                deserialized = _strictMapper.treeToValue(node, PortfolioHoldingDataQualityCheckResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'PortfolioHoldingDataQualityCheckResponse'");
                 result.setActualInstance(deserialized);
@@ -147,9 +156,19 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for PortfolioHoldingDataQualityCheckResponse failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'PortfolioHoldingDataQualityCheckResponse'", e);
             }
+            // deserialize PortfolioTransactionDataQualityCheckResponse
+            try {
+                deserialized = _strictMapper.treeToValue(node, PortfolioTransactionDataQualityCheckResponse.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'PortfolioTransactionDataQualityCheckResponse'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for PortfolioTransactionDataQualityCheckResponse failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'PortfolioTransactionDataQualityCheckResponse'", e);
+            }
             // deserialize SchedulerJobResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, SchedulerJobResponse.class);
+                deserialized = _strictMapper.treeToValue(node, SchedulerJobResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'SchedulerJobResponse'");
                 result.setActualInstance(deserialized);
@@ -159,7 +178,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             }
             // deserialize SleepResponse
             try {
-                deserialized = JSON.getMapper().treeToValue(node, SleepResponse.class);
+                deserialized = _strictMapper.treeToValue(node, SleepResponse.class);
                 match++;
                 log.log(Level.FINER, "Input data matches schema 'SleepResponse'");
                 result.setActualInstance(deserialized);
@@ -197,6 +216,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
         schemas.put("LuminesceViewResponse", LuminesceViewResponse.class);
         schemas.put("LusidEntityDataQualityCheckResponse", LusidEntityDataQualityCheckResponse.class);
         schemas.put("PortfolioHoldingDataQualityCheckResponse", PortfolioHoldingDataQualityCheckResponse.class);
+        schemas.put("PortfolioTransactionDataQualityCheckResponse", PortfolioTransactionDataQualityCheckResponse.class);
         schemas.put("SchedulerJobResponse", SchedulerJobResponse.class);
         schemas.put("SleepResponse", SleepResponse.class);
     }
@@ -209,7 +229,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
+     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -255,6 +275,11 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             return;
         }
 
+        if (instance instanceof PortfolioTransactionDataQualityCheckResponse) {
+            super.setActualInstance(instance);
+            return;
+        }
+
         if (instance instanceof SchedulerJobResponse) {
             super.setActualInstance(instance);
             return;
@@ -265,14 +290,14 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, SchedulerJobResponse, SleepResponse");
+        throw new RuntimeException("Invalid instance type. Must be FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
+     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
      *
-     * @return The actual instance (FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, SchedulerJobResponse, SleepResponse)
+     * @return The actual instance (FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -359,6 +384,16 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
      */
     public PortfolioHoldingDataQualityCheckResponse getPortfolioHoldingDataQualityCheckResponse() throws ClassCastException {
         return (PortfolioHoldingDataQualityCheckResponse)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `PortfolioTransactionDataQualityCheckResponse`. If the actual instance is not `PortfolioTransactionDataQualityCheckResponse`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `PortfolioTransactionDataQualityCheckResponse`
+     * @throws ClassCastException if the instance is not `PortfolioTransactionDataQualityCheckResponse`
+     */
+    public PortfolioTransactionDataQualityCheckResponse getPortfolioTransactionDataQualityCheckResponse() throws ClassCastException {
+        return (PortfolioTransactionDataQualityCheckResponse)super.getActualInstance();
     }
     /**
      * Get the actual instance of `SchedulerJobResponse`. If the actual instance is not `SchedulerJobResponse`,

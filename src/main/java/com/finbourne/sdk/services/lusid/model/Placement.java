@@ -66,6 +66,7 @@ import com.finbourne.sdk.JSON;
   Placement.JSON_PROPERTY_ENTRY_TYPE,
   Placement.JSON_PROPERTY_VERSION,
   Placement.JSON_PROPERTY_DATA_MODEL_MEMBERSHIP,
+  Placement.JSON_PROPERTY_DIRECTION,
   Placement.JSON_PROPERTY_LINKS
 })
 
@@ -174,6 +175,11 @@ public class Placement {
   @JsonProperty(JSON_PROPERTY_DATA_MODEL_MEMBERSHIP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private DataModelMembership dataModelMembership;
+
+  public static final String JSON_PROPERTY_DIRECTION = "direction";
+  @JsonProperty(JSON_PROPERTY_DIRECTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer direction;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -605,6 +611,25 @@ public class Placement {
   }
 
 
+  public Placement direction(Integer direction) {
+    this.direction = direction;
+    return this;
+  }
+
+  /**
+   * The direction of the placement&#39;s side, inherited at creation from its block&#39;s orders: 1 the side increases the position (longer), -1 it decreases it (shorter), 0 the block&#39;s orders net flat, null when no direction could be resolved.
+   * @return direction
+   */
+  @javax.annotation.Nullable
+  public Integer getDirection() {
+    return direction;
+  }
+
+  public void setDirection(Integer direction) {
+    this.direction = direction;
+  }
+
+
   public Placement links(List<Link> links) {
     this.links = links;
     return this;
@@ -662,6 +687,7 @@ public class Placement {
         Objects.equals(this.entryType, placement.entryType) &&
         Objects.equals(this.version, placement.version) &&
         Objects.equals(this.dataModelMembership, placement.dataModelMembership) &&
+        Objects.equals(this.direction, placement.direction) &&
         Objects.equals(this.links, placement.links);
   }
 
@@ -671,7 +697,7 @@ public class Placement {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, parentPlacementId, blockIds, properties, instrumentIdentifiers, lusidInstrumentId, quantity, amount, basis, state, side, timeInForce, type, createdDate, limitPrice, stopPrice, counterparty, executionSystem, entryType, version, dataModelMembership, links);
+    return Objects.hash(id, parentPlacementId, blockIds, properties, instrumentIdentifiers, lusidInstrumentId, quantity, amount, basis, state, side, timeInForce, type, createdDate, limitPrice, stopPrice, counterparty, executionSystem, entryType, version, dataModelMembership, direction, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -706,6 +732,7 @@ public class Placement {
     sb.append("    entryType: ").append(toIndentedString(entryType)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    dataModelMembership: ").append(toIndentedString(dataModelMembership)).append("\n");
+    sb.append("    direction: ").append(toIndentedString(direction)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

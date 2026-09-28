@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -30,7 +31,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The target of a Fund Structure edge, identifying the master node and share class the feeder invests into.
+ * The member a link points at, and for a dedicated share class link the share class on that member.
  */
 @JsonPropertyOrder({
   FundStructureEdgeTarget.JSON_PROPERTY_NODE,
@@ -45,7 +46,7 @@ public class FundStructureEdgeTarget {
 
   public static final String JSON_PROPERTY_SHARE_CLASS_SHORT_CODE = "shareClassShortCode";
   @JsonProperty(JSON_PROPERTY_SHARE_CLASS_SHORT_CODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String shareClassShortCode;
 
   public FundStructureEdgeTarget() {
@@ -57,7 +58,7 @@ public class FundStructureEdgeTarget {
   }
 
   /**
-   * The node code of the master node that is the target of this relationship.
+   * The node code of the member the link points at.
    * @return node
    */
   @javax.annotation.Nonnull
@@ -76,10 +77,10 @@ public class FundStructureEdgeTarget {
   }
 
   /**
-   * The short code of the share class on the master fund that the feeder invests into.
+   * The short code of the share class on the target member that the source invests into. Required for a DedicatedShareClass link and not allowed on any other.
    * @return shareClassShortCode
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getShareClassShortCode() {
     return shareClassShortCode;
   }
@@ -102,9 +103,20 @@ public class FundStructureEdgeTarget {
         Objects.equals(this.shareClassShortCode, fundStructureEdgeTarget.shareClassShortCode);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
  public int hashCode() {
     return Objects.hash(node, shareClassShortCode);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

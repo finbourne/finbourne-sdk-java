@@ -20,6 +20,7 @@ import com.finbourne.sdk.services.lusid.model.OrderGraphBlockPlacementSynopsis;
 import com.finbourne.sdk.services.lusid.model.OrderGraphBlockTransactionSynopsis;
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -47,7 +48,8 @@ import com.finbourne.sdk.JSON;
   OrderGraphBlock.JSON_PROPERTY_BOOKED,
   OrderGraphBlock.JSON_PROPERTY_DERIVED_STATE,
   OrderGraphBlock.JSON_PROPERTY_DERIVED_COMPLIANCE_STATE,
-  OrderGraphBlock.JSON_PROPERTY_DERIVED_APPROVAL_STATE
+  OrderGraphBlock.JSON_PROPERTY_DERIVED_APPROVAL_STATE,
+  OrderGraphBlock.JSON_PROPERTY_DERIVED_DIRECTION
 })
 
 public class OrderGraphBlock {
@@ -95,6 +97,11 @@ public class OrderGraphBlock {
   @JsonProperty(JSON_PROPERTY_DERIVED_APPROVAL_STATE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String derivedApprovalState;
+
+  public static final String JSON_PROPERTY_DERIVED_DIRECTION = "derivedDirection";
+  @JsonProperty(JSON_PROPERTY_DERIVED_DIRECTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer derivedDirection;
 
   public OrderGraphBlock() {
   }
@@ -270,6 +277,25 @@ public class OrderGraphBlock {
   }
 
 
+  public OrderGraphBlock derivedDirection(Integer derivedDirection) {
+    this.derivedDirection = derivedDirection;
+    return this;
+  }
+
+  /**
+   * The overall direction of a block, derived from its orders&#39; transaction types: 1 the block increases the position (longer), -1 it decreases it (shorter), 0 its orders net flat, null when no direction could be resolved (including unsolicited blocks).
+   * @return derivedDirection
+   */
+  @javax.annotation.Nullable
+  public Integer getDerivedDirection() {
+    return derivedDirection;
+  }
+
+  public void setDerivedDirection(Integer derivedDirection) {
+    this.derivedDirection = derivedDirection;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -287,12 +313,24 @@ public class OrderGraphBlock {
         Objects.equals(this.booked, orderGraphBlock.booked) &&
         Objects.equals(this.derivedState, orderGraphBlock.derivedState) &&
         Objects.equals(this.derivedComplianceState, orderGraphBlock.derivedComplianceState) &&
-        Objects.equals(this.derivedApprovalState, orderGraphBlock.derivedApprovalState);
+        Objects.equals(this.derivedApprovalState, orderGraphBlock.derivedApprovalState) &&
+        Objects.equals(this.derivedDirection, orderGraphBlock.derivedDirection);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(block, ordered, placed, executed, allocated, booked, derivedState, derivedComplianceState, derivedApprovalState);
+    return Objects.hash(block, ordered, placed, executed, allocated, booked, derivedState, derivedComplianceState, derivedApprovalState, derivedDirection);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -308,6 +346,7 @@ public class OrderGraphBlock {
     sb.append("    derivedState: ").append(toIndentedString(derivedState)).append("\n");
     sb.append("    derivedComplianceState: ").append(toIndentedString(derivedComplianceState)).append("\n");
     sb.append("    derivedApprovalState: ").append(toIndentedString(derivedApprovalState)).append("\n");
+    sb.append("    derivedDirection: ").append(toIndentedString(derivedDirection)).append("\n");
     sb.append("}");
     return sb.toString();
   }

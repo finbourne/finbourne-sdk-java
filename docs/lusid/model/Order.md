@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **dataModelMembership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] [default to DataModelMembership]
 **derivedComplianceState** | **String** | The compliance state of the order, derived from pre-trade compliance runs. | [optional] [default to String]
 **derivedApprovalState** | **String** | The approval state of the order. | [optional] [default to String]
+**direction** | **Integer** | The direction of the order&#39;s side, derived from its transaction type at write time: 1 the side increases the position (longer), -1 it decreases it (shorter), null when no direction could be resolved. | [optional] [default to Integer]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -66,6 +67,7 @@ ResourceId custodianAccountId = new ResourceId();
 DataModelMembership dataModelMembership = new DataModelMembership();
 @javax.annotation.Nullable String derivedComplianceState = "example derivedComplianceState";
 @javax.annotation.Nullable String derivedApprovalState = "example derivedApprovalState";
+@javax.annotation.Nullable Integer direction = new Integer("100.00");
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -96,6 +98,7 @@ Order orderInstance = new Order()
     .dataModelMembership(dataModelMembership)
     .derivedComplianceState(derivedComplianceState)
     .derivedApprovalState(derivedApprovalState)
+    .direction(direction)
     .links(links);
 ```
 

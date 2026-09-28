@@ -55,6 +55,8 @@ import com.finbourne.sdk.JSON;
   CashFlowDetail.JSON_PROPERTY_NET_AMOUNT,
   CashFlowDetail.JSON_PROPERTY_HAIRCUT_RULE_APPLIED,
   CashFlowDetail.JSON_PROPERTY_ERROR,
+  CashFlowDetail.JSON_PROPERTY_AMOUNT_IN_PORTFOLIO_CCY,
+  CashFlowDetail.JSON_PROPERTY_TRADE_TO_PORTFOLIO_RATE,
   CashFlowDetail.JSON_PROPERTY_LINKS
 })
 
@@ -138,6 +140,16 @@ public class CashFlowDetail {
   @JsonProperty(JSON_PROPERTY_ERROR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String error;
+
+  public static final String JSON_PROPERTY_AMOUNT_IN_PORTFOLIO_CCY = "amountInPortfolioCcy";
+  @JsonProperty(JSON_PROPERTY_AMOUNT_IN_PORTFOLIO_CCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal amountInPortfolioCcy;
+
+  public static final String JSON_PROPERTY_TRADE_TO_PORTFOLIO_RATE = "tradeToPortfolioRate";
+  @JsonProperty(JSON_PROPERTY_TRADE_TO_PORTFOLIO_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal tradeToPortfolioRate;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -438,7 +450,7 @@ public class CashFlowDetail {
   }
 
   /**
-   * Only present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. When set, the amount is null rather than zero.
+   * Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the portfolio-currency FX lookup failed (see AmountInPortfolioCcy), in which case the base Amount remains populated and only AmountInPortfolioCcy and TradeToPortfolioRate are null.
    * @return error
    */
   @javax.annotation.Nullable
@@ -448,6 +460,44 @@ public class CashFlowDetail {
 
   public void setError(String error) {
     this.error = error;
+  }
+
+
+  public CashFlowDetail amountInPortfolioCcy(java.math.BigDecimal amountInPortfolioCcy) {
+    this.amountInPortfolioCcy = amountInPortfolioCcy;
+    return this;
+  }
+
+  /**
+   * The signed amount of the cashflow (see Amount), converted into the portfolio&#39;s base currency. Not present when the FX rate used to convert into the portfolio currency could not be resolved; see Error.
+   * @return amountInPortfolioCcy
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getAmountInPortfolioCcy() {
+    return amountInPortfolioCcy;
+  }
+
+  public void setAmountInPortfolioCcy(java.math.BigDecimal amountInPortfolioCcy) {
+    this.amountInPortfolioCcy = amountInPortfolioCcy;
+  }
+
+
+  public CashFlowDetail tradeToPortfolioRate(java.math.BigDecimal tradeToPortfolioRate) {
+    this.tradeToPortfolioRate = tradeToPortfolioRate;
+    return this;
+  }
+
+  /**
+   * The FX rate used to convert the cashflow amount into the portfolio&#39;s base currency, resolved at the cashflow&#39;s transaction (trade) date, not its payment date. Not present when the rate could not be resolved; see Error.
+   * @return tradeToPortfolioRate
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getTradeToPortfolioRate() {
+    return tradeToPortfolioRate;
+  }
+
+  public void setTradeToPortfolioRate(java.math.BigDecimal tradeToPortfolioRate) {
+    this.tradeToPortfolioRate = tradeToPortfolioRate;
   }
 
 
@@ -503,6 +553,8 @@ public class CashFlowDetail {
         (this.netAmount == null ? cashFlowDetail.netAmount == null : (cashFlowDetail.netAmount != null && this.netAmount.compareTo(cashFlowDetail.getNetAmount()) == 0)) &&
         Objects.equals(this.haircutRuleApplied, cashFlowDetail.haircutRuleApplied) &&
         Objects.equals(this.error, cashFlowDetail.error) &&
+        (this.amountInPortfolioCcy == null ? cashFlowDetail.amountInPortfolioCcy == null : (cashFlowDetail.amountInPortfolioCcy != null && this.amountInPortfolioCcy.compareTo(cashFlowDetail.getAmountInPortfolioCcy()) == 0)) &&
+        (this.tradeToPortfolioRate == null ? cashFlowDetail.tradeToPortfolioRate == null : (cashFlowDetail.tradeToPortfolioRate != null && this.tradeToPortfolioRate.compareTo(cashFlowDetail.getTradeToPortfolioRate()) == 0)) &&
         Objects.equals(this.links, cashFlowDetail.links);
   }
 
@@ -512,7 +564,7 @@ public class CashFlowDetail {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, amount, currency, sourceType, instrumentId, instrumentDisplayName, transactionId, portfolioId, flowType, movementName, payReceive, grossAmount, haircutFraction, netAmount, haircutRuleApplied, error, links);
+    return Objects.hash(paymentDate, amount, currency, sourceType, instrumentId, instrumentDisplayName, transactionId, portfolioId, flowType, movementName, payReceive, grossAmount, haircutFraction, netAmount, haircutRuleApplied, error, amountInPortfolioCcy, tradeToPortfolioRate, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -542,6 +594,8 @@ public class CashFlowDetail {
     sb.append("    netAmount: ").append(toIndentedString(netAmount)).append("\n");
     sb.append("    haircutRuleApplied: ").append(toIndentedString(haircutRuleApplied)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("    amountInPortfolioCcy: ").append(toIndentedString(amountInPortfolioCcy)).append("\n");
+    sb.append("    tradeToPortfolioRate: ").append(toIndentedString(tradeToPortfolioRate)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

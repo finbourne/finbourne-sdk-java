@@ -50,7 +50,10 @@ import com.finbourne.sdk.JSON;
   BucketSetNode.JSON_PROPERTY_LABEL,
   BucketSetNode.JSON_PROPERTY_PREVIOUS_NAV,
   BucketSetNode.JSON_PROPERTY_NET_DEALING_UNITS,
-  BucketSetNode.JSON_PROPERTY_SHARE_CLASS_DETAILS
+  BucketSetNode.JSON_PROPERTY_SHARE_CLASS_DETAILS,
+  BucketSetNode.JSON_PROPERTY_NAV_SHARE_CLASS_CURRENCY,
+  BucketSetNode.JSON_PROPERTY_SHARE_CLASS_TO_FUND_FX_RATE,
+  BucketSetNode.JSON_PROPERTY_PREVIOUS_NAV_SHARE_CLASS_CURRENCY
 })
 
 public class BucketSetNode {
@@ -118,6 +121,21 @@ public class BucketSetNode {
   @JsonProperty(JSON_PROPERTY_SHARE_CLASS_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private BucketSetShareClassDetails shareClassDetails;
+
+  public static final String JSON_PROPERTY_NAV_SHARE_CLASS_CURRENCY = "navShareClassCurrency";
+  @JsonProperty(JSON_PROPERTY_NAV_SHARE_CLASS_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal navShareClassCurrency;
+
+  public static final String JSON_PROPERTY_SHARE_CLASS_TO_FUND_FX_RATE = "shareClassToFundFxRate";
+  @JsonProperty(JSON_PROPERTY_SHARE_CLASS_TO_FUND_FX_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal shareClassToFundFxRate;
+
+  public static final String JSON_PROPERTY_PREVIOUS_NAV_SHARE_CLASS_CURRENCY = "previousNavShareClassCurrency";
+  @JsonProperty(JSON_PROPERTY_PREVIOUS_NAV_SHARE_CLASS_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal previousNavShareClassCurrency;
 
   public BucketSetNode() {
   }
@@ -377,6 +395,63 @@ public class BucketSetNode {
   }
 
 
+  public BucketSetNode navShareClassCurrency(java.math.BigDecimal navShareClassCurrency) {
+    this.navShareClassCurrency = navShareClassCurrency;
+    return this;
+  }
+
+  /**
+   * The node&#39;s net asset value restated in the share class&#39; own currency, at the rate this node publishes. Set only on share class nodes.
+   * @return navShareClassCurrency
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getNavShareClassCurrency() {
+    return navShareClassCurrency;
+  }
+
+  public void setNavShareClassCurrency(java.math.BigDecimal navShareClassCurrency) {
+    this.navShareClassCurrency = navShareClassCurrency;
+  }
+
+
+  public BucketSetNode shareClassToFundFxRate(java.math.BigDecimal shareClassToFundFxRate) {
+    this.shareClassToFundFxRate = shareClassToFundFxRate;
+    return this;
+  }
+
+  /**
+   * The fx rate from the share class currency to the fund currency at this valuation point. Nav and the bucket values are in the fund currency, so divide by this rate to restate them in the share class currency. Set only on share class nodes.
+   * @return shareClassToFundFxRate
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getShareClassToFundFxRate() {
+    return shareClassToFundFxRate;
+  }
+
+  public void setShareClassToFundFxRate(java.math.BigDecimal shareClassToFundFxRate) {
+    this.shareClassToFundFxRate = shareClassToFundFxRate;
+  }
+
+
+  public BucketSetNode previousNavShareClassCurrency(java.math.BigDecimal previousNavShareClassCurrency) {
+    this.previousNavShareClassCurrency = previousNavShareClassCurrency;
+    return this;
+  }
+
+  /**
+   * The net asset value in the share class&#39; currency at the previous valuation point, as that point published it, at the rate that point struck. Zero at the fund&#39;s first valuation point. Absent (rather than zero) if the previous valuation point predates this field.
+   * @return previousNavShareClassCurrency
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPreviousNavShareClassCurrency() {
+    return previousNavShareClassCurrency;
+  }
+
+  public void setPreviousNavShareClassCurrency(java.math.BigDecimal previousNavShareClassCurrency) {
+    this.previousNavShareClassCurrency = previousNavShareClassCurrency;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -398,7 +473,10 @@ public class BucketSetNode {
         Objects.equals(this.label, bucketSetNode.label) &&
         (this.previousNav == null ? bucketSetNode.previousNav == null : (bucketSetNode.previousNav != null && this.previousNav.compareTo(bucketSetNode.getPreviousNav()) == 0)) &&
         (this.netDealingUnits == null ? bucketSetNode.netDealingUnits == null : (bucketSetNode.netDealingUnits != null && this.netDealingUnits.compareTo(bucketSetNode.getNetDealingUnits()) == 0)) &&
-        Objects.equals(this.shareClassDetails, bucketSetNode.shareClassDetails);
+        Objects.equals(this.shareClassDetails, bucketSetNode.shareClassDetails) &&
+        (this.navShareClassCurrency == null ? bucketSetNode.navShareClassCurrency == null : (bucketSetNode.navShareClassCurrency != null && this.navShareClassCurrency.compareTo(bucketSetNode.getNavShareClassCurrency()) == 0)) &&
+        (this.shareClassToFundFxRate == null ? bucketSetNode.shareClassToFundFxRate == null : (bucketSetNode.shareClassToFundFxRate != null && this.shareClassToFundFxRate.compareTo(bucketSetNode.getShareClassToFundFxRate()) == 0)) &&
+        (this.previousNavShareClassCurrency == null ? bucketSetNode.previousNavShareClassCurrency == null : (bucketSetNode.previousNavShareClassCurrency != null && this.previousNavShareClassCurrency.compareTo(bucketSetNode.getPreviousNavShareClassCurrency()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -407,7 +485,7 @@ public class BucketSetNode {
 
   @Override
  public int hashCode() {
-    return Objects.hash(nodeType, shareClassShortCode, nav, capitalRatio, buckets, perUnitValue, sharesInIssue, previousPerUnitValue, previousSharesInIssue, label, previousNav, netDealingUnits, shareClassDetails);
+    return Objects.hash(nodeType, shareClassShortCode, nav, capitalRatio, buckets, perUnitValue, sharesInIssue, previousPerUnitValue, previousSharesInIssue, label, previousNav, netDealingUnits, shareClassDetails, navShareClassCurrency, shareClassToFundFxRate, previousNavShareClassCurrency);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -434,6 +512,9 @@ public class BucketSetNode {
     sb.append("    previousNav: ").append(toIndentedString(previousNav)).append("\n");
     sb.append("    netDealingUnits: ").append(toIndentedString(netDealingUnits)).append("\n");
     sb.append("    shareClassDetails: ").append(toIndentedString(shareClassDetails)).append("\n");
+    sb.append("    navShareClassCurrency: ").append(toIndentedString(navShareClassCurrency)).append("\n");
+    sb.append("    shareClassToFundFxRate: ").append(toIndentedString(shareClassToFundFxRate)).append("\n");
+    sb.append("    previousNavShareClassCurrency: ").append(toIndentedString(previousNavShareClassCurrency)).append("\n");
     sb.append("}");
     return sb.toString();
   }
