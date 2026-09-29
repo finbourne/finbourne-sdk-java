@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
 **displayName** | **String** | The name of the rec definition. | [default to String]
 **description** | **String** | A description of the rec definition. | [optional] [default to String]
-**definitionType** | **String** | What this definition reconciles, naming the kind of dataset that must be present on at least one side. One of: PortfolioContents, LusidEntity, RelationalData. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData. | [default to String]
+**definitionType** | **String** | What this definition reconciles, naming the kind of dataset that must be present on at least one side. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData. | [default to String]
 **sideNames** | [**RecDefSideNames**](RecDefSideNames.md) |  | [optional] [default to RecDefSideNames]
 **leftPortfolioSources** | [**List&lt;RecDefSource&gt;**](RecDefSource.md) | The portfolios, portfolio groups and funds contributing to the left side. Empty when the left side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty. | [default to List<RecDefSource>]
 **rightPortfolioSources** | [**List&lt;RecDefSource&gt;**](RecDefSource.md) | The portfolios, portfolio groups and funds contributing to the right side. Empty when the right side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty. | [default to List<RecDefSource>]
@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **rulesets** | [**List&lt;RecDefRuleset&gt;**](RecDefRuleset.md) | The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once. | [default to List<RecDefRuleset>]
 **reviewConfiguration** | [**RecReviewConfiguration**](RecReviewConfiguration.md) |  | [default to RecReviewConfiguration]
 **datePolicy** | [**RecDatePolicy**](RecDatePolicy.md) |  | [default to RecDatePolicy]
+**properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Properties in the RecDefinition domain. On update, a property with a null value is deleted and omitted properties are left unchanged. Filterable and sortable. | [optional] [default to Map<String, PerpetualProperty>]
 **href** | [**URI**](URI.md) | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] [default to URI]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
@@ -39,6 +40,7 @@ RecDefCurrencies currencies = new RecDefCurrencies();
 List<RecDefRuleset> rulesets = new List<RecDefRuleset>();
 RecReviewConfiguration reviewConfiguration = new RecReviewConfiguration();
 RecDatePolicy datePolicy = new RecDatePolicy();
+@javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable URI href = URI.create("http://example.com/href");
 Version version = new Version();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
@@ -57,6 +59,7 @@ RecDefinition recDefinitionInstance = new RecDefinition()
     .rulesets(rulesets)
     .reviewConfiguration(reviewConfiguration)
     .datePolicy(datePolicy)
+    .properties(properties)
     .href(href)
     .version(version)
     .links(links);

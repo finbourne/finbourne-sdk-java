@@ -46,6 +46,7 @@ import com.finbourne.sdk.JSON;
   FxForwardTenorPipsCurveData.JSON_PROPERTY_FGN_CCY,
   FxForwardTenorPipsCurveData.JSON_PROPERTY_TENORS,
   FxForwardTenorPipsCurveData.JSON_PROPERTY_PIP_RATES,
+  FxForwardTenorPipsCurveData.JSON_PROPERTY_PIP_MULTIPLIER,
   FxForwardTenorPipsCurveData.JSON_PROPERTY_LINEAGE,
   FxForwardTenorPipsCurveData.JSON_PROPERTY_MARKET_DATA_OPTIONS,
   FxForwardTenorPipsCurveData.JSON_PROPERTY_CALENDARS,
@@ -84,6 +85,11 @@ public class FxForwardTenorPipsCurveData extends ComplexMarketData {
   @JsonProperty(JSON_PROPERTY_PIP_RATES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<java.math.BigDecimal> pipRates = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_PIP_MULTIPLIER = "pipMultiplier";
+  @JsonProperty(JSON_PROPERTY_PIP_MULTIPLIER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal pipMultiplier;
 
   public static final String JSON_PROPERTY_LINEAGE = "lineage";
   @JsonProperty(JSON_PROPERTY_LINEAGE)
@@ -224,6 +230,25 @@ public class FxForwardTenorPipsCurveData extends ComplexMarketData {
   }
 
 
+  public FxForwardTenorPipsCurveData pipMultiplier(java.math.BigDecimal pipMultiplier) {
+    this.pipMultiplier = pipMultiplier;
+    return this;
+  }
+
+  /**
+   * Optional. The scaling factor applied to the pip rates to convert them into a forward rate adjustment,  so that forwardRate &#x3D; spotRate + pipRate * pipMultiplier. Must be strictly positive when supplied.  When omitted, the market convention for the currency pair is used:  0.01 when the foreign (quote) currency is JPY, and 0.0001 (the four-decimal-place convention of the major pairs) otherwise.
+   * @return pipMultiplier
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPipMultiplier() {
+    return pipMultiplier;
+  }
+
+  public void setPipMultiplier(java.math.BigDecimal pipMultiplier) {
+    this.pipMultiplier = pipMultiplier;
+  }
+
+
   public FxForwardTenorPipsCurveData lineage(String lineage) {
     this.lineage = lineage;
     return this;
@@ -341,6 +366,7 @@ public class FxForwardTenorPipsCurveData extends ComplexMarketData {
         Objects.equals(this.fgnCcy, fxForwardTenorPipsCurveData.fgnCcy) &&
         Objects.equals(this.tenors, fxForwardTenorPipsCurveData.tenors) &&
         Objects.equals(this.pipRates, fxForwardTenorPipsCurveData.pipRates) &&
+        (this.pipMultiplier == null ? fxForwardTenorPipsCurveData.pipMultiplier == null : (fxForwardTenorPipsCurveData.pipMultiplier != null && this.pipMultiplier.compareTo(fxForwardTenorPipsCurveData.getPipMultiplier()) == 0)) &&
         Objects.equals(this.lineage, fxForwardTenorPipsCurveData.lineage) &&
         Objects.equals(this.marketDataOptions, fxForwardTenorPipsCurveData.marketDataOptions) &&
         Objects.equals(this.calendars, fxForwardTenorPipsCurveData.calendars) &&
@@ -355,7 +381,7 @@ public class FxForwardTenorPipsCurveData extends ComplexMarketData {
 
   @Override
  public int hashCode() {
-    return Objects.hash(baseDate, domCcy, fgnCcy, tenors, pipRates, lineage, marketDataOptions, calendars, spotDaysCalculationType, version, super.hashCode());
+    return Objects.hash(baseDate, domCcy, fgnCcy, tenors, pipRates, pipMultiplier, lineage, marketDataOptions, calendars, spotDaysCalculationType, version, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -375,6 +401,7 @@ public class FxForwardTenorPipsCurveData extends ComplexMarketData {
     sb.append("    fgnCcy: ").append(toIndentedString(fgnCcy)).append("\n");
     sb.append("    tenors: ").append(toIndentedString(tenors)).append("\n");
     sb.append("    pipRates: ").append(toIndentedString(pipRates)).append("\n");
+    sb.append("    pipMultiplier: ").append(toIndentedString(pipMultiplier)).append("\n");
     sb.append("    lineage: ").append(toIndentedString(lineage)).append("\n");
     sb.append("    marketDataOptions: ").append(toIndentedString(marketDataOptions)).append("\n");
     sb.append("    calendars: ").append(toIndentedString(calendars)).append("\n");

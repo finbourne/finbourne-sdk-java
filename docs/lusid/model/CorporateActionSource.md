@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **description** | **String** | The description of the corporate action source | [optional] [default to String]
 **instrumentScopes** | **List&lt;String&gt;** | The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions. | [optional] [default to List<String>]
 **eventInheritance** | [**EventInheritance**](EventInheritance.md) |  | [optional] [default to EventInheritance]
+**stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -28,6 +29,7 @@ Version version = new Version();
 @javax.annotation.Nullable String description = "example description";
 @javax.annotation.Nullable List<String> instrumentScopes = new List<String>();
 EventInheritance eventInheritance = new EventInheritance();
+StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -39,6 +41,7 @@ CorporateActionSource corporateActionSourceInstance = new CorporateActionSource(
     .description(description)
     .instrumentScopes(instrumentScopes)
     .eventInheritance(eventInheritance)
+    .stagedModifications(stagedModifications)
     .links(links);
 ```
 

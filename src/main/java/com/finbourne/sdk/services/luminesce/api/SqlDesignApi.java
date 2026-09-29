@@ -3269,19 +3269,19 @@ public class SqlDesignApi {
     /**
      * Build call for putQueryToFormat
      * @param body LuminesceSql to Pretty-Print. Even if it doesn&#39;t parse an attempt will be made to format it (required)
-     * @param trailingCommas Should commas be after an expression (as opposed to before) (optional, default to true)
-     * @param uppercaseKeywords Should key words be capitalized (optional, default to false)
-     * @param breakJoinOnSections Should clauses on joins be given line breaks? (optional, default to true)
-     * @param spaceAfterExpandedComma Should comma-lists have spaces after the commas? (optional, default to true)
-     * @param keywordStandardization Should the \&quot;nicest\&quot; key words be used? (e.g. JOIN -&gt; INNER JOIN) (optional, default to true)
-     * @param expandCommaLists Should comma-lists (e.g. select a,b,c) have line breaks added? (optional, default to false)
-     * @param expandInLists Should IN-lists have line breaks added? (optional, default to false)
-     * @param expandBooleanExpressions Should boolean expressions have line breaks added? (optional, default to true)
-     * @param expandBetweenConditions Should between conditions have line breaks added? (optional, default to true)
-     * @param expandCaseStatements Should case-statements have line breaks added? (optional, default to true)
+     * @param trailingCommas No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param uppercaseKeywords No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param breakJoinOnSections No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param spaceAfterExpandedComma No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param keywordStandardization No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCommaLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandInLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandBooleanExpressions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandBetweenConditions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCaseStatements No longer has any effect, retained only for compatibility (optional, default to true)
      * @param maxLineWidth Maximum number of characters to allow on one line (if possible) (optional, default to 120)
-     * @param spaceBeforeTrailingSingleLineComments Should the be a space before trailing single line comments? (optional, default to true)
-     * @param multilineCommentExtraLineBreak Should an additional line break be added after multi-line comments? (optional, default to false)
+     * @param spaceBeforeTrailingSingleLineComments No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param multilineCommentExtraLineBreak No longer has any effect, retained only for compatibility (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3300,19 +3300,19 @@ public class SqlDesignApi {
     /**
      * Build call for putQueryToFormat. Use any specified configuration options to override any other configuration for this request only.
      * @param body LuminesceSql to Pretty-Print. Even if it doesn&#39;t parse an attempt will be made to format it (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param trailingCommas Should commas be after an expression (as opposed to before) (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
-     * @param uppercaseKeywords Should key words be capitalized (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
-     * @param breakJoinOnSections Should clauses on joins be given line breaks? (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
-     * @param spaceAfterExpandedComma Should comma-lists have spaces after the commas? (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
-     * @param keywordStandardization Should the \&quot;nicest\&quot; key words be used? (e.g. JOIN -&gt; INNER JOIN) (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
-     * @param expandCommaLists Should comma-lists (e.g. select a,b,c) have line breaks added? (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
-     * @param expandInLists Should IN-lists have line breaks added? (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
-     * @param expandBooleanExpressions Should boolean expressions have line breaks added? (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
-     * @param expandBetweenConditions Should between conditions have line breaks added? (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
-     * @param expandCaseStatements Should case-statements have line breaks added? (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
+     * @param trailingCommas No longer has any effect, retained only for compatibility (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
+     * @param uppercaseKeywords No longer has any effect, retained only for compatibility (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
+     * @param breakJoinOnSections No longer has any effect, retained only for compatibility (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
+     * @param spaceAfterExpandedComma No longer has any effect, retained only for compatibility (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
+     * @param keywordStandardization No longer has any effect, retained only for compatibility (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
+     * @param expandCommaLists No longer has any effect, retained only for compatibility (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
+     * @param expandInLists No longer has any effect, retained only for compatibility (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
+     * @param expandBooleanExpressions No longer has any effect, retained only for compatibility (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
+     * @param expandBetweenConditions No longer has any effect, retained only for compatibility (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
+     * @param expandCaseStatements No longer has any effect, retained only for compatibility (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
      * @param maxLineWidth Maximum number of characters to allow on one line (if possible) (optional, default to 120). Use any specified configuration options to override any other configuration for this request only.
-     * @param spaceBeforeTrailingSingleLineComments Should the be a space before trailing single line comments? (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
-     * @param multilineCommentExtraLineBreak Should an additional line break be added after multi-line comments? (optional, default to false)
+     * @param spaceBeforeTrailingSingleLineComments No longer has any effect, retained only for compatibility (optional, default to true). Use any specified configuration options to override any other configuration for this request only.
+     * @param multilineCommentExtraLineBreak No longer has any effect, retained only for compatibility (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3436,21 +3436,21 @@ public class SqlDesignApi {
 
     /**
      * PutQueryToFormat: Format SQL into a more readable form
-     *  This formats SQL (given a set of options as to how to do so), a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b    on a.x &#x3D; b.x where x &gt; y    or y !&#x3D; z &#x60;&#x60;&#x60; 
+     *  This formats SQL, a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. Of the options only &#x60;maxLineWidth&#x60; has any effect, the rest are retained for compatibility. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b on a.x &#x3D; b.x where x &gt; y   or y !&#x3D; z &#x60;&#x60;&#x60; 
      * @param body LuminesceSql to Pretty-Print. Even if it doesn&#39;t parse an attempt will be made to format it (required)
-     * @param trailingCommas Should commas be after an expression (as opposed to before) (optional, default to true)
-     * @param uppercaseKeywords Should key words be capitalized (optional, default to false)
-     * @param breakJoinOnSections Should clauses on joins be given line breaks? (optional, default to true)
-     * @param spaceAfterExpandedComma Should comma-lists have spaces after the commas? (optional, default to true)
-     * @param keywordStandardization Should the \&quot;nicest\&quot; key words be used? (e.g. JOIN -&gt; INNER JOIN) (optional, default to true)
-     * @param expandCommaLists Should comma-lists (e.g. select a,b,c) have line breaks added? (optional, default to false)
-     * @param expandInLists Should IN-lists have line breaks added? (optional, default to false)
-     * @param expandBooleanExpressions Should boolean expressions have line breaks added? (optional, default to true)
-     * @param expandBetweenConditions Should between conditions have line breaks added? (optional, default to true)
-     * @param expandCaseStatements Should case-statements have line breaks added? (optional, default to true)
+     * @param trailingCommas No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param uppercaseKeywords No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param breakJoinOnSections No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param spaceAfterExpandedComma No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param keywordStandardization No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCommaLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandInLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandBooleanExpressions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandBetweenConditions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCaseStatements No longer has any effect, retained only for compatibility (optional, default to true)
      * @param maxLineWidth Maximum number of characters to allow on one line (if possible) (optional, default to 120)
-     * @param spaceBeforeTrailingSingleLineComments Should the be a space before trailing single line comments? (optional, default to true)
-     * @param multilineCommentExtraLineBreak Should an additional line break be added after multi-line comments? (optional, default to false)
+     * @param spaceBeforeTrailingSingleLineComments No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param multilineCommentExtraLineBreak No longer has any effect, retained only for compatibility (optional, default to false)
      * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3469,21 +3469,21 @@ public class SqlDesignApi {
 
     /**
      * PutQueryToFormat: Format SQL into a more readable form
-     *  This formats SQL (given a set of options as to how to do so), a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b    on a.x &#x3D; b.x where x &gt; y    or y !&#x3D; z &#x60;&#x60;&#x60; Use any specified configuration options to override any other configuration for this request only
+     *  This formats SQL, a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. Of the options only &#x60;maxLineWidth&#x60; has any effect, the rest are retained for compatibility. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b on a.x &#x3D; b.x where x &gt; y   or y !&#x3D; z &#x60;&#x60;&#x60; Use any specified configuration options to override any other configuration for this request only
      * @param body LuminesceSql to Pretty-Print. Even if it doesn&#39;t parse an attempt will be made to format it (required)
-     * @param trailingCommas Should commas be after an expression (as opposed to before) (optional, default to true)
-     * @param uppercaseKeywords Should key words be capitalized (optional, default to false)
-     * @param breakJoinOnSections Should clauses on joins be given line breaks? (optional, default to true)
-     * @param spaceAfterExpandedComma Should comma-lists have spaces after the commas? (optional, default to true)
-     * @param keywordStandardization Should the \&quot;nicest\&quot; key words be used? (e.g. JOIN -&gt; INNER JOIN) (optional, default to true)
-     * @param expandCommaLists Should comma-lists (e.g. select a,b,c) have line breaks added? (optional, default to false)
-     * @param expandInLists Should IN-lists have line breaks added? (optional, default to false)
-     * @param expandBooleanExpressions Should boolean expressions have line breaks added? (optional, default to true)
-     * @param expandBetweenConditions Should between conditions have line breaks added? (optional, default to true)
-     * @param expandCaseStatements Should case-statements have line breaks added? (optional, default to true)
+     * @param trailingCommas No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param uppercaseKeywords No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param breakJoinOnSections No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param spaceAfterExpandedComma No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param keywordStandardization No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCommaLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandInLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandBooleanExpressions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandBetweenConditions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCaseStatements No longer has any effect, retained only for compatibility (optional, default to true)
      * @param maxLineWidth Maximum number of characters to allow on one line (if possible) (optional, default to 120)
-     * @param spaceBeforeTrailingSingleLineComments Should the be a space before trailing single line comments? (optional, default to true)
-     * @param multilineCommentExtraLineBreak Should an additional line break be added after multi-line comments? (optional, default to false)
+     * @param spaceBeforeTrailingSingleLineComments No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param multilineCommentExtraLineBreak No longer has any effect, retained only for compatibility (optional, default to false)
      * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3502,21 +3502,21 @@ public class SqlDesignApi {
 
     /**
      * PutQueryToFormat: Format SQL into a more readable form (asynchronously)
-     *  This formats SQL (given a set of options as to how to do so), a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b    on a.x &#x3D; b.x where x &gt; y    or y !&#x3D; z &#x60;&#x60;&#x60; 
+     *  This formats SQL, a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. Of the options only &#x60;maxLineWidth&#x60; has any effect, the rest are retained for compatibility. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b on a.x &#x3D; b.x where x &gt; y   or y !&#x3D; z &#x60;&#x60;&#x60; 
      * @param body LuminesceSql to Pretty-Print. Even if it doesn&#39;t parse an attempt will be made to format it (required)
-     * @param trailingCommas Should commas be after an expression (as opposed to before) (optional, default to true)
-     * @param uppercaseKeywords Should key words be capitalized (optional, default to false)
-     * @param breakJoinOnSections Should clauses on joins be given line breaks? (optional, default to true)
-     * @param spaceAfterExpandedComma Should comma-lists have spaces after the commas? (optional, default to true)
-     * @param keywordStandardization Should the \&quot;nicest\&quot; key words be used? (e.g. JOIN -&gt; INNER JOIN) (optional, default to true)
-     * @param expandCommaLists Should comma-lists (e.g. select a,b,c) have line breaks added? (optional, default to false)
-     * @param expandInLists Should IN-lists have line breaks added? (optional, default to false)
-     * @param expandBooleanExpressions Should boolean expressions have line breaks added? (optional, default to true)
-     * @param expandBetweenConditions Should between conditions have line breaks added? (optional, default to true)
-     * @param expandCaseStatements Should case-statements have line breaks added? (optional, default to true)
+     * @param trailingCommas No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param uppercaseKeywords No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param breakJoinOnSections No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param spaceAfterExpandedComma No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param keywordStandardization No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCommaLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandInLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandBooleanExpressions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandBetweenConditions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCaseStatements No longer has any effect, retained only for compatibility (optional, default to true)
      * @param maxLineWidth Maximum number of characters to allow on one line (if possible) (optional, default to 120)
-     * @param spaceBeforeTrailingSingleLineComments Should the be a space before trailing single line comments? (optional, default to true)
-     * @param multilineCommentExtraLineBreak Should an additional line break be added after multi-line comments? (optional, default to false)
+     * @param spaceBeforeTrailingSingleLineComments No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param multilineCommentExtraLineBreak No longer has any effect, retained only for compatibility (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3536,21 +3536,21 @@ public class SqlDesignApi {
 
     /**
      * PutQueryToFormat: Format SQL into a more readable form (asynchronously)
-     *  This formats SQL (given a set of options as to how to do so), a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b    on a.x &#x3D; b.x where x &gt; y    or y !&#x3D; z &#x60;&#x60;&#x60; Use any specified configuration options to override any other configuration for this request only
+     *  This formats SQL, a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. Of the options only &#x60;maxLineWidth&#x60; has any effect, the rest are retained for compatibility. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b on a.x &#x3D; b.x where x &gt; y   or y !&#x3D; z &#x60;&#x60;&#x60; Use any specified configuration options to override any other configuration for this request only
      * @param body LuminesceSql to Pretty-Print. Even if it doesn&#39;t parse an attempt will be made to format it (required)
-     * @param trailingCommas Should commas be after an expression (as opposed to before) (optional, default to true)
-     * @param uppercaseKeywords Should key words be capitalized (optional, default to false)
-     * @param breakJoinOnSections Should clauses on joins be given line breaks? (optional, default to true)
-     * @param spaceAfterExpandedComma Should comma-lists have spaces after the commas? (optional, default to true)
-     * @param keywordStandardization Should the \&quot;nicest\&quot; key words be used? (e.g. JOIN -&gt; INNER JOIN) (optional, default to true)
-     * @param expandCommaLists Should comma-lists (e.g. select a,b,c) have line breaks added? (optional, default to false)
-     * @param expandInLists Should IN-lists have line breaks added? (optional, default to false)
-     * @param expandBooleanExpressions Should boolean expressions have line breaks added? (optional, default to true)
-     * @param expandBetweenConditions Should between conditions have line breaks added? (optional, default to true)
-     * @param expandCaseStatements Should case-statements have line breaks added? (optional, default to true)
+     * @param trailingCommas No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param uppercaseKeywords No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param breakJoinOnSections No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param spaceAfterExpandedComma No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param keywordStandardization No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCommaLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandInLists No longer has any effect, retained only for compatibility (optional, default to false)
+     * @param expandBooleanExpressions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandBetweenConditions No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param expandCaseStatements No longer has any effect, retained only for compatibility (optional, default to true)
      * @param maxLineWidth Maximum number of characters to allow on one line (if possible) (optional, default to 120)
-     * @param spaceBeforeTrailingSingleLineComments Should the be a space before trailing single line comments? (optional, default to true)
-     * @param multilineCommentExtraLineBreak Should an additional line break be added after multi-line comments? (optional, default to false)
+     * @param spaceBeforeTrailingSingleLineComments No longer has any effect, retained only for compatibility (optional, default to true)
+     * @param multilineCommentExtraLineBreak No longer has any effect, retained only for compatibility (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3590,7 +3590,7 @@ public class SqlDesignApi {
 
         /**
          * Set trailingCommas
-         * @param trailingCommas Should commas be after an expression (as opposed to before) (optional, default to true)
+         * @param trailingCommas No longer has any effect, retained only for compatibility (optional, default to true)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest trailingCommas(Boolean trailingCommas) {
@@ -3600,7 +3600,7 @@ public class SqlDesignApi {
 
         /**
          * Set uppercaseKeywords
-         * @param uppercaseKeywords Should key words be capitalized (optional, default to false)
+         * @param uppercaseKeywords No longer has any effect, retained only for compatibility (optional, default to false)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest uppercaseKeywords(Boolean uppercaseKeywords) {
@@ -3610,7 +3610,7 @@ public class SqlDesignApi {
 
         /**
          * Set breakJoinOnSections
-         * @param breakJoinOnSections Should clauses on joins be given line breaks? (optional, default to true)
+         * @param breakJoinOnSections No longer has any effect, retained only for compatibility (optional, default to true)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest breakJoinOnSections(Boolean breakJoinOnSections) {
@@ -3620,7 +3620,7 @@ public class SqlDesignApi {
 
         /**
          * Set spaceAfterExpandedComma
-         * @param spaceAfterExpandedComma Should comma-lists have spaces after the commas? (optional, default to true)
+         * @param spaceAfterExpandedComma No longer has any effect, retained only for compatibility (optional, default to true)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest spaceAfterExpandedComma(Boolean spaceAfterExpandedComma) {
@@ -3630,7 +3630,7 @@ public class SqlDesignApi {
 
         /**
          * Set keywordStandardization
-         * @param keywordStandardization Should the \&quot;nicest\&quot; key words be used? (e.g. JOIN -&gt; INNER JOIN) (optional, default to true)
+         * @param keywordStandardization No longer has any effect, retained only for compatibility (optional, default to true)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest keywordStandardization(Boolean keywordStandardization) {
@@ -3640,7 +3640,7 @@ public class SqlDesignApi {
 
         /**
          * Set expandCommaLists
-         * @param expandCommaLists Should comma-lists (e.g. select a,b,c) have line breaks added? (optional, default to false)
+         * @param expandCommaLists No longer has any effect, retained only for compatibility (optional, default to false)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest expandCommaLists(Boolean expandCommaLists) {
@@ -3650,7 +3650,7 @@ public class SqlDesignApi {
 
         /**
          * Set expandInLists
-         * @param expandInLists Should IN-lists have line breaks added? (optional, default to false)
+         * @param expandInLists No longer has any effect, retained only for compatibility (optional, default to false)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest expandInLists(Boolean expandInLists) {
@@ -3660,7 +3660,7 @@ public class SqlDesignApi {
 
         /**
          * Set expandBooleanExpressions
-         * @param expandBooleanExpressions Should boolean expressions have line breaks added? (optional, default to true)
+         * @param expandBooleanExpressions No longer has any effect, retained only for compatibility (optional, default to true)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest expandBooleanExpressions(Boolean expandBooleanExpressions) {
@@ -3670,7 +3670,7 @@ public class SqlDesignApi {
 
         /**
          * Set expandBetweenConditions
-         * @param expandBetweenConditions Should between conditions have line breaks added? (optional, default to true)
+         * @param expandBetweenConditions No longer has any effect, retained only for compatibility (optional, default to true)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest expandBetweenConditions(Boolean expandBetweenConditions) {
@@ -3680,7 +3680,7 @@ public class SqlDesignApi {
 
         /**
          * Set expandCaseStatements
-         * @param expandCaseStatements Should case-statements have line breaks added? (optional, default to true)
+         * @param expandCaseStatements No longer has any effect, retained only for compatibility (optional, default to true)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest expandCaseStatements(Boolean expandCaseStatements) {
@@ -3700,7 +3700,7 @@ public class SqlDesignApi {
 
         /**
          * Set spaceBeforeTrailingSingleLineComments
-         * @param spaceBeforeTrailingSingleLineComments Should the be a space before trailing single line comments? (optional, default to true)
+         * @param spaceBeforeTrailingSingleLineComments No longer has any effect, retained only for compatibility (optional, default to true)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest spaceBeforeTrailingSingleLineComments(Boolean spaceBeforeTrailingSingleLineComments) {
@@ -3710,7 +3710,7 @@ public class SqlDesignApi {
 
         /**
          * Set multilineCommentExtraLineBreak
-         * @param multilineCommentExtraLineBreak Should an additional line break be added after multi-line comments? (optional, default to false)
+         * @param multilineCommentExtraLineBreak No longer has any effect, retained only for compatibility (optional, default to false)
          * @return APIputQueryToFormatRequest
          */
         public APIputQueryToFormatRequest multilineCommentExtraLineBreak(Boolean multilineCommentExtraLineBreak) {
@@ -3836,7 +3836,7 @@ public class SqlDesignApi {
 
     /**
      * PutQueryToFormat: Format SQL into a more readable form
-     *  This formats SQL (given a set of options as to how to do so), a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b    on a.x &#x3D; b.x where x &gt; y    or y !&#x3D; z &#x60;&#x60;&#x60; 
+     *  This formats SQL, a.k.a. Pretty-Print the SQL. It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. Of the options only &#x60;maxLineWidth&#x60; has any effect, the rest are retained for compatibility. e.g. &#x60;&#x60;&#x60;sql select x,y,z from a inner join b on a.x&#x3D;b.x where x&gt;y or y!&#x3D;z &#x60;&#x60;&#x60; becomes &#x60;&#x60;&#x60;sql select x, y, z from a inner join b on a.x &#x3D; b.x where x &gt; y   or y !&#x3D; z &#x60;&#x60;&#x60; 
      * @param body LuminesceSql to Pretty-Print. Even if it doesn&#39;t parse an attempt will be made to format it (required)
      * @return APIputQueryToFormatRequest
      * @http.response.details

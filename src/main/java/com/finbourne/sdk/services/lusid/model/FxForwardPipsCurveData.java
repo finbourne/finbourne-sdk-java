@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   FxForwardPipsCurveData.JSON_PROPERTY_FGN_CCY,
   FxForwardPipsCurveData.JSON_PROPERTY_DATES,
   FxForwardPipsCurveData.JSON_PROPERTY_PIP_RATES,
+  FxForwardPipsCurveData.JSON_PROPERTY_PIP_MULTIPLIER,
   FxForwardPipsCurveData.JSON_PROPERTY_LINEAGE,
   FxForwardPipsCurveData.JSON_PROPERTY_MARKET_DATA_OPTIONS,
   FxForwardPipsCurveData.JSON_PROPERTY_VERSION
@@ -81,6 +82,11 @@ public class FxForwardPipsCurveData extends ComplexMarketData {
   @JsonProperty(JSON_PROPERTY_PIP_RATES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<java.math.BigDecimal> pipRates = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_PIP_MULTIPLIER = "pipMultiplier";
+  @JsonProperty(JSON_PROPERTY_PIP_MULTIPLIER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal pipMultiplier;
 
   public static final String JSON_PROPERTY_LINEAGE = "lineage";
   @JsonProperty(JSON_PROPERTY_LINEAGE)
@@ -211,6 +217,25 @@ public class FxForwardPipsCurveData extends ComplexMarketData {
   }
 
 
+  public FxForwardPipsCurveData pipMultiplier(java.math.BigDecimal pipMultiplier) {
+    this.pipMultiplier = pipMultiplier;
+    return this;
+  }
+
+  /**
+   * Optional. The scaling factor applied to the pip rates to convert them into a forward rate adjustment,  so that forwardRate &#x3D; spotRate + pipRate * pipMultiplier. Must be strictly positive when supplied.  When omitted, the market convention for the currency pair is used:  0.01 when the foreign (quote) currency is JPY, and 0.0001 (the four-decimal-place convention of the major pairs) otherwise.
+   * @return pipMultiplier
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPipMultiplier() {
+    return pipMultiplier;
+  }
+
+  public void setPipMultiplier(java.math.BigDecimal pipMultiplier) {
+    this.pipMultiplier = pipMultiplier;
+  }
+
+
   public FxForwardPipsCurveData lineage(String lineage) {
     this.lineage = lineage;
     return this;
@@ -282,6 +307,7 @@ public class FxForwardPipsCurveData extends ComplexMarketData {
         Objects.equals(this.fgnCcy, fxForwardPipsCurveData.fgnCcy) &&
         Objects.equals(this.dates, fxForwardPipsCurveData.dates) &&
         Objects.equals(this.pipRates, fxForwardPipsCurveData.pipRates) &&
+        (this.pipMultiplier == null ? fxForwardPipsCurveData.pipMultiplier == null : (fxForwardPipsCurveData.pipMultiplier != null && this.pipMultiplier.compareTo(fxForwardPipsCurveData.getPipMultiplier()) == 0)) &&
         Objects.equals(this.lineage, fxForwardPipsCurveData.lineage) &&
         Objects.equals(this.marketDataOptions, fxForwardPipsCurveData.marketDataOptions) &&
         Objects.equals(this.version, fxForwardPipsCurveData.version) &&
@@ -294,7 +320,7 @@ public class FxForwardPipsCurveData extends ComplexMarketData {
 
   @Override
  public int hashCode() {
-    return Objects.hash(baseDate, domCcy, fgnCcy, dates, pipRates, lineage, marketDataOptions, version, super.hashCode());
+    return Objects.hash(baseDate, domCcy, fgnCcy, dates, pipRates, pipMultiplier, lineage, marketDataOptions, version, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -314,6 +340,7 @@ public class FxForwardPipsCurveData extends ComplexMarketData {
     sb.append("    fgnCcy: ").append(toIndentedString(fgnCcy)).append("\n");
     sb.append("    dates: ").append(toIndentedString(dates)).append("\n");
     sb.append("    pipRates: ").append(toIndentedString(pipRates)).append("\n");
+    sb.append("    pipMultiplier: ").append(toIndentedString(pipMultiplier)).append("\n");
     sb.append("    lineage: ").append(toIndentedString(lineage)).append("\n");
     sb.append("    marketDataOptions: ").append(toIndentedString(marketDataOptions)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");

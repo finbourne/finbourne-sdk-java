@@ -61,7 +61,7 @@ public class AggregateNumericTolerance {
 
   public static final String JSON_PROPERTY_THRESHOLD_PRIORITY = "thresholdPriority";
   @JsonProperty(JSON_PROPERTY_THRESHOLD_PRIORITY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String thresholdPriority;
 
   public static final String JSON_PROPERTY_OFFSET = "offset";
@@ -88,7 +88,7 @@ public class AggregateNumericTolerance {
   }
 
   /**
-   * Reference side (source of truth). One of: Left, Right. Available values: Left, Right.
+   * Reference side (source of truth). Available values: Left, Right.
    * @return referenceSide
    */
   @javax.annotation.Nonnull
@@ -145,10 +145,10 @@ public class AggregateNumericTolerance {
   }
 
   /**
-   * Whether to apply the GreaterOf or LesserOf the absoluteThreshold vs relativeThreshold. One of: GreaterOf, LesserOf. Available values: GreaterOf, LesserOf.
+   * Whether to apply the GreaterOf or LesserOf the absoluteThreshold vs relativeThreshold. Required when both thresholds are provided; must be omitted when only one is. Available values: GreaterOf, LesserOf.
    * @return thresholdPriority
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getThresholdPriority() {
     return thresholdPriority;
   }
@@ -164,7 +164,7 @@ public class AggregateNumericTolerance {
   }
 
   /**
-   * How the threshold should be applied to the reference side value. One of: Above, Below, Either. Defaults to Either. Available values: Above, Below, Either.
+   * How the threshold should be applied to the reference side value. Defaults to Either. Available values: Above, Below, Either.
    * @return offset
    */
   @javax.annotation.Nullable

@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.RecDatePolicy;
 import com.finbourne.sdk.services.lusid.model.RecDefCurrencies;
 import com.finbourne.sdk.services.lusid.model.RecDefRecipeIds;
@@ -22,7 +23,9 @@ import com.finbourne.sdk.services.lusid.model.RecReviewConfiguration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -53,7 +56,8 @@ import com.finbourne.sdk.JSON;
   UpdateRecDefinitionRequest.JSON_PROPERTY_CURRENCIES,
   UpdateRecDefinitionRequest.JSON_PROPERTY_RULESETS,
   UpdateRecDefinitionRequest.JSON_PROPERTY_REVIEW_CONFIGURATION,
-  UpdateRecDefinitionRequest.JSON_PROPERTY_DATE_POLICY
+  UpdateRecDefinitionRequest.JSON_PROPERTY_DATE_POLICY,
+  UpdateRecDefinitionRequest.JSON_PROPERTY_PROPERTIES
 })
 
 public class UpdateRecDefinitionRequest {
@@ -112,6 +116,11 @@ public class UpdateRecDefinitionRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private RecDatePolicy datePolicy;
 
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, PerpetualProperty> properties;
+
   public UpdateRecDefinitionRequest() {
   }
 
@@ -159,7 +168,7 @@ public class UpdateRecDefinitionRequest {
   }
 
   /**
-   * What this definition reconciles, naming the kind of dataset that must be present on at least one side. One of: PortfolioContents, LusidEntity, RelationalData. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData.
+   * What this definition reconciles, naming the kind of dataset that must be present on at least one side. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData.
    * @return definitionType
    */
   @javax.annotation.Nonnull
@@ -348,6 +357,33 @@ public class UpdateRecDefinitionRequest {
   }
 
 
+  public UpdateRecDefinitionRequest properties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public UpdateRecDefinitionRequest putPropertiesItem(String key, PerpetualProperty propertiesItem) {
+    if (this.properties == null) {
+      this.properties = new HashMap<>();
+    }
+    this.properties.put(key, propertiesItem);
+    return this;
+  }
+
+  /**
+   * Properties in the RecDefinition domain. On update, a property with a null value is deleted and omitted properties are left unchanged. Filterable and sortable.
+   * @return properties
+   */
+  @javax.annotation.Nullable
+  public Map<String, PerpetualProperty> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(Map<String, PerpetualProperty> properties) {
+    this.properties = properties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -367,7 +403,8 @@ public class UpdateRecDefinitionRequest {
         Objects.equals(this.currencies, updateRecDefinitionRequest.currencies) &&
         Objects.equals(this.rulesets, updateRecDefinitionRequest.rulesets) &&
         Objects.equals(this.reviewConfiguration, updateRecDefinitionRequest.reviewConfiguration) &&
-        Objects.equals(this.datePolicy, updateRecDefinitionRequest.datePolicy);
+        Objects.equals(this.datePolicy, updateRecDefinitionRequest.datePolicy) &&
+        Objects.equals(this.properties, updateRecDefinitionRequest.properties);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -376,7 +413,7 @@ public class UpdateRecDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, reviewConfiguration, datePolicy);
+    return Objects.hash(displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, reviewConfiguration, datePolicy, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -401,6 +438,7 @@ public class UpdateRecDefinitionRequest {
     sb.append("    rulesets: ").append(toIndentedString(rulesets)).append("\n");
     sb.append("    reviewConfiguration: ").append(toIndentedString(reviewConfiguration)).append("\n");
     sb.append("    datePolicy: ").append(toIndentedString(datePolicy)).append("\n");
+    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();
   }

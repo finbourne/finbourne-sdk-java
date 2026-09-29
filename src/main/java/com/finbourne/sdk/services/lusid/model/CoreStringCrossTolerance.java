@@ -114,7 +114,7 @@ public class CoreStringCrossTolerance {
   }
 
   /**
-   * Reference side (source of truth). One of: Left, Right. Available values: Left, Right, Either.
+   * Reference side (source of truth). Available values: Left, Right, Either.
    * @return referenceSide
    */
   @javax.annotation.Nullable

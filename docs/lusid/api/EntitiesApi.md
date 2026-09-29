@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 | [**getBookmarkByEntityUniqueId**](EntitiesApi.md#getBookmarkByEntityUniqueId) | **GET** /api/api/entities/bookmarks/{entityUniqueId} | GetBookmarkByEntityUniqueId: Get bookmark by EntityUniqueId |
 | [**getComplianceRuleByEntityUniqueId**](EntitiesApi.md#getComplianceRuleByEntityUniqueId) | **GET** /api/api/entities/compliancerules/{entityUniqueId} | [EARLY ACCESS] GetComplianceRuleByEntityUniqueId: Get compliance rule by EntityUniqueId |
 | [**getComplianceRuleTemplateByEntityUniqueId**](EntitiesApi.md#getComplianceRuleTemplateByEntityUniqueId) | **GET** /api/api/entities/complianceruletemplates/{entityUniqueId} | [EARLY ACCESS] GetComplianceRuleTemplateByEntityUniqueId: Get compliance rule template by EntityUniqueId |
+| [**getCorporateActionSourceByEntityUniqueId**](EntitiesApi.md#getCorporateActionSourceByEntityUniqueId) | **GET** /api/api/entities/corporateactionsources/{entityUniqueId} | [EARLY ACCESS] GetCorporateActionSourceByEntityUniqueId: Get corporate action source by EntityUniqueId |
 | [**getCustomEntityByEntityUniqueId**](EntitiesApi.md#getCustomEntityByEntityUniqueId) | **GET** /api/api/entities/customentities/{entityUniqueId} | GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId |
 | [**getDataTypeByEntityUniqueId**](EntitiesApi.md#getDataTypeByEntityUniqueId) | **GET** /api/api/entities/datatypes/{entityUniqueId} | GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId |
 | [**getEntityHistory**](EntitiesApi.md#getEntityHistory) | **GET** /api/api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity&#39;s history information |
@@ -256,6 +257,87 @@ public class EntitiesApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The requested compliance rule template entity |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getCorporateActionSourceByEntityUniqueId
+
+> CorporateActionSourceEntity getCorporateActionSourceByEntityUniqueId(entityUniqueId, asAt, previews)
+
+[EARLY ACCESS] GetCorporateActionSourceByEntityUniqueId: Get corporate action source by EntityUniqueId
+
+Retrieve the definition of a particular corporate action source.    If the corporate action source is deleted, this will return the state of the source immediately prior to deletion.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.EntitiesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class EntitiesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        EntitiesApi apiInstance = apiFactory.build(EntitiesApi.class);
+        String entityUniqueId = "entityUniqueId_example"; // String | The universally unique identifier of the corporate action source.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to retrieve the corporate action source. Defaults to returning the latest version of the corporate action source if not specified.
+        List<String> previews = Arrays.asList(); // List<String> | The ids of the staged modifications to be previewed in the response.
+        try {
+            // uncomment the below to set overrides at the request level
+            // CorporateActionSourceEntity result = apiInstance.getCorporateActionSourceByEntityUniqueId(entityUniqueId, asAt, previews).execute(opts);
+
+            CorporateActionSourceEntity result = apiInstance.getCorporateActionSourceByEntityUniqueId(entityUniqueId, asAt, previews).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling EntitiesApi#getCorporateActionSourceByEntityUniqueId");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **entityUniqueId** | **String**| The universally unique identifier of the corporate action source. | |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the corporate action source. Defaults to returning the latest version of the corporate action source if not specified. | [optional] |
+| **previews** | [**List&lt;String&gt;**](../model/String.md)| The ids of the staged modifications to be previewed in the response. | [optional] |
+
+### Return type
+
+[**CorporateActionSourceEntity**](../model/CorporateActionSourceEntity.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The requested corporate action source entity |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

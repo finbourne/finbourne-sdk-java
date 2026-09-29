@@ -1610,9 +1610,10 @@ public class TradePublicationFrameworkApi {
     /**
      * Build call for listInstanceRunHistory
      * @param instanceId  (required)
-     * @param page  (optional, default to )
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize  (optional, default to 100)
-     * @param filter A Finbourne filter over runId, referenceId, attempt, total, sentCount, skippedCount, failedCount and failedFiles e.g. failedCount gt 0. status, triggeredBy, duration, startTime and endTime are not filterable and will result in a 400 response. (optional)
+     * @param filter A Finbourne filter on any response field except duration, e.g. startTime gte &#39;2026-04-01T00:00:00Z&#39; and status eq &#39;Auto-retry&#39;. status is the displayed status. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1624,16 +1625,17 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listInstanceRunHistoryCall(String instanceId, String page, Integer pageSize, String filter, final ApiCallback _callback) throws ApiException {
-        return listInstanceRunHistoryCall(instanceId, page, pageSize, filter,  _callback, new ConfigurationOptions());
+    private HttpRequest listInstanceRunHistoryCall(String instanceId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback _callback) throws ApiException {
+        return listInstanceRunHistoryCall(instanceId, page, pageSize, filter, sortBy,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for listInstanceRunHistory. Use any specified configuration options to override any other configuration for this request only.
      * @param instanceId  (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param page  (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
      * @param pageSize  (optional, default to 100). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter A Finbourne filter over runId, referenceId, attempt, total, sentCount, skippedCount, failedCount and failedFiles e.g. failedCount gt 0. status, triggeredBy, duration, startTime and endTime are not filterable and will result in a 400 response. (optional)
+     * @param filter A Finbourne filter on any response field except duration, e.g. startTime gte &#39;2026-04-01T00:00:00Z&#39; and status eq &#39;Auto-retry&#39;. status is the displayed status. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1645,7 +1647,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listInstanceRunHistoryCall(String instanceId, String page, Integer pageSize, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listInstanceRunHistoryCall(String instanceId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1683,6 +1685,10 @@ public class TradePublicationFrameworkApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
         }
 
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1703,13 +1709,13 @@ public class TradePublicationFrameworkApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listInstanceRunHistoryValidateBeforeCall(String instanceId, String page, Integer pageSize, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listInstanceRunHistoryValidateBeforeCall(String instanceId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'instanceId' is set
         if (instanceId == null) {
             throw new ApiException("Missing the required parameter 'instanceId' when calling listInstanceRunHistory(Async)");
         }
 
-        return listInstanceRunHistoryCall(instanceId, page, pageSize, filter, _callback, opts);
+        return listInstanceRunHistoryCall(instanceId, page, pageSize, filter, sortBy, _callback, opts);
 
     }
 
@@ -1717,9 +1723,10 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.
      * 
      * @param instanceId  (required)
-     * @param page  (optional, default to )
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize  (optional, default to 100)
-     * @param filter A Finbourne filter over runId, referenceId, attempt, total, sentCount, skippedCount, failedCount and failedFiles e.g. failedCount gt 0. status, triggeredBy, duration, startTime and endTime are not filterable and will result in a 400 response. (optional)
+     * @param filter A Finbourne filter on any response field except duration, e.g. startTime gte &#39;2026-04-01T00:00:00Z&#39; and status eq &#39;Auto-retry&#39;. status is the displayed status. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first. (optional)
      * @return ApiResponse&lt;PagedResourceListOfInstanceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1730,8 +1737,8 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfInstanceRunResponse> listInstanceRunHistoryWithHttpInfo(String instanceId, String page, Integer pageSize, String filter) throws ApiException {
-        HttpRequest localVarCall = listInstanceRunHistoryValidateBeforeCall(instanceId, page, pageSize, filter, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfInstanceRunResponse> listInstanceRunHistoryWithHttpInfo(String instanceId, String page, Integer pageSize, String filter, List<String> sortBy) throws ApiException {
+        HttpRequest localVarCall = listInstanceRunHistoryValidateBeforeCall(instanceId, page, pageSize, filter, sortBy, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfInstanceRunResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1740,9 +1747,10 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId  (required)
-     * @param page  (optional, default to )
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize  (optional, default to 100)
-     * @param filter A Finbourne filter over runId, referenceId, attempt, total, sentCount, skippedCount, failedCount and failedFiles e.g. failedCount gt 0. status, triggeredBy, duration, startTime and endTime are not filterable and will result in a 400 response. (optional)
+     * @param filter A Finbourne filter on any response field except duration, e.g. startTime gte &#39;2026-04-01T00:00:00Z&#39; and status eq &#39;Auto-retry&#39;. status is the displayed status. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first. (optional)
      * @return ApiResponse&lt;PagedResourceListOfInstanceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1753,8 +1761,8 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfInstanceRunResponse> listInstanceRunHistoryWithHttpInfo(String instanceId, String page, Integer pageSize, String filter, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listInstanceRunHistoryValidateBeforeCall(instanceId, page, pageSize, filter, null, opts);
+    private ApiResponse<PagedResourceListOfInstanceRunResponse> listInstanceRunHistoryWithHttpInfo(String instanceId, String page, Integer pageSize, String filter, List<String> sortBy, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listInstanceRunHistoryValidateBeforeCall(instanceId, page, pageSize, filter, sortBy, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfInstanceRunResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1763,9 +1771,10 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support. (asynchronously)
      * 
      * @param instanceId  (required)
-     * @param page  (optional, default to )
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize  (optional, default to 100)
-     * @param filter A Finbourne filter over runId, referenceId, attempt, total, sentCount, skippedCount, failedCount and failedFiles e.g. failedCount gt 0. status, triggeredBy, duration, startTime and endTime are not filterable and will result in a 400 response. (optional)
+     * @param filter A Finbourne filter on any response field except duration, e.g. startTime gte &#39;2026-04-01T00:00:00Z&#39; and status eq &#39;Auto-retry&#39;. status is the displayed status. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1776,9 +1785,9 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listInstanceRunHistoryAsync(String instanceId, String page, Integer pageSize, String filter, final ApiCallback<PagedResourceListOfInstanceRunResponse> _callback) throws ApiException {
+    private void listInstanceRunHistoryAsync(String instanceId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback<PagedResourceListOfInstanceRunResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listInstanceRunHistoryValidateBeforeCall(instanceId, page, pageSize, filter, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listInstanceRunHistoryValidateBeforeCall(instanceId, page, pageSize, filter, sortBy, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfInstanceRunResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1787,9 +1796,10 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support. (asynchronously)
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId  (required)
-     * @param page  (optional, default to )
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize  (optional, default to 100)
-     * @param filter A Finbourne filter over runId, referenceId, attempt, total, sentCount, skippedCount, failedCount and failedFiles e.g. failedCount gt 0. status, triggeredBy, duration, startTime and endTime are not filterable and will result in a 400 response. (optional)
+     * @param filter A Finbourne filter on any response field except duration, e.g. startTime gte &#39;2026-04-01T00:00:00Z&#39; and status eq &#39;Auto-retry&#39;. status is the displayed status. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1800,9 +1810,9 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listInstanceRunHistoryAsync(String instanceId, String page, Integer pageSize, String filter, final ApiCallback<PagedResourceListOfInstanceRunResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listInstanceRunHistoryAsync(String instanceId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback<PagedResourceListOfInstanceRunResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listInstanceRunHistoryValidateBeforeCall(instanceId, page, pageSize, filter, _callback, opts);
+        HttpRequest localVarCall = listInstanceRunHistoryValidateBeforeCall(instanceId, page, pageSize, filter, sortBy, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfInstanceRunResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1812,6 +1822,7 @@ public class TradePublicationFrameworkApi {
         private String page;
         private Integer pageSize;
         private String filter;
+        private List<String> sortBy;
 
         private APIlistInstanceRunHistoryRequest(String instanceId) {
             this.instanceId = instanceId;
@@ -1819,7 +1830,7 @@ public class TradePublicationFrameworkApi {
 
         /**
          * Set page
-         * @param page  (optional, default to )
+         * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
          * @return APIlistInstanceRunHistoryRequest
          */
         public APIlistInstanceRunHistoryRequest page(String page) {
@@ -1839,11 +1850,21 @@ public class TradePublicationFrameworkApi {
 
         /**
          * Set filter
-         * @param filter A Finbourne filter over runId, referenceId, attempt, total, sentCount, skippedCount, failedCount and failedFiles e.g. failedCount gt 0. status, triggeredBy, duration, startTime and endTime are not filterable and will result in a 400 response. (optional)
+         * @param filter A Finbourne filter on any response field except duration, e.g. startTime gte &#39;2026-04-01T00:00:00Z&#39; and status eq &#39;Auto-retry&#39;. status is the displayed status. (optional)
          * @return APIlistInstanceRunHistoryRequest
          */
         public APIlistInstanceRunHistoryRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first. (optional)
+         * @return APIlistInstanceRunHistoryRequest
+         */
+        public APIlistInstanceRunHistoryRequest sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
             return this;
         }
 
@@ -1861,7 +1882,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listInstanceRunHistoryCall(instanceId, page, pageSize, filter, _callback);
+            return listInstanceRunHistoryCall(instanceId, page, pageSize, filter, sortBy, _callback);
         }
 
         /**
@@ -1877,7 +1898,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public PagedResourceListOfInstanceRunResponse execute() throws ApiException {
-            ApiResponse<PagedResourceListOfInstanceRunResponse> localVarResp = listInstanceRunHistoryWithHttpInfo(instanceId, page, pageSize, filter);
+            ApiResponse<PagedResourceListOfInstanceRunResponse> localVarResp = listInstanceRunHistoryWithHttpInfo(instanceId, page, pageSize, filter, sortBy);
             return localVarResp.getData();
         }
 
@@ -1894,7 +1915,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public PagedResourceListOfInstanceRunResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfInstanceRunResponse> localVarResp = listInstanceRunHistoryWithHttpInfo(instanceId, page, pageSize, filter, opts);
+            ApiResponse<PagedResourceListOfInstanceRunResponse> localVarResp = listInstanceRunHistoryWithHttpInfo(instanceId, page, pageSize, filter, sortBy, opts);
             return localVarResp.getData();
         }
 
@@ -1911,7 +1932,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfInstanceRunResponse> executeWithHttpInfo() throws ApiException {
-            return listInstanceRunHistoryWithHttpInfo(instanceId, page, pageSize, filter);
+            return listInstanceRunHistoryWithHttpInfo(instanceId, page, pageSize, filter, sortBy);
         }
 
         /**
@@ -1927,7 +1948,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfInstanceRunResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listInstanceRunHistoryWithHttpInfo(instanceId, page, pageSize, filter, opts);
+            return listInstanceRunHistoryWithHttpInfo(instanceId, page, pageSize, filter, sortBy, opts);
         }
 
         /**
@@ -1943,7 +1964,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfInstanceRunResponse> _callback) throws ApiException {
-            listInstanceRunHistoryAsync(instanceId, page, pageSize, filter, _callback);
+            listInstanceRunHistoryAsync(instanceId, page, pageSize, filter, sortBy, _callback);
         }
 
         /**
@@ -1959,7 +1980,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfInstanceRunResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            listInstanceRunHistoryAsync(instanceId, page, pageSize, filter, _callback, opts);
+            listInstanceRunHistoryAsync(instanceId, page, pageSize, filter, sortBy, _callback, opts);
         }
     }
 

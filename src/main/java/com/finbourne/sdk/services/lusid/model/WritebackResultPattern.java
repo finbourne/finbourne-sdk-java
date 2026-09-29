@@ -63,7 +63,7 @@ public class WritebackResultPattern {
   }
 
   /**
-   * How the origin units compare to the target units, on a literal comparison rather than on the result type. One of: Exact, ShortWithinTolerance, ShortBeyondTolerance, LongWithinTolerance. LongBeyondTolerance is reported on results but cannot be configured. Available values: Exact, ShortWithinTolerance, ShortBeyondTolerance, LongWithinTolerance, LongBeyondTolerance.
+   * How the origin units compare to the target units, on a literal comparison rather than on the result type. LongBeyondTolerance is reported on results but cannot be configured. Available values: Exact, ShortWithinTolerance, ShortBeyondTolerance, LongWithinTolerance, LongBeyondTolerance.
    * @return unitsDifference
    */
   @javax.annotation.Nonnull
@@ -82,7 +82,7 @@ public class WritebackResultPattern {
   }
 
   /**
-   * The item cardinality of the result, read left to right. One of: OneToOne, OneToMany, ManyToOne. ManyToMany is not supported. Available values: OneToOne, OneToMany, ManyToOne, ManyToMany, OneToNone, ManyToNone, NoneToOne, NoneToMany, NoneToNone.
+   * The item cardinality of the result, read left to right. ManyToMany is not supported. Available values: OneToOne, OneToMany, ManyToOne, ManyToMany, OneToNone, ManyToNone, NoneToOne, NoneToMany, NoneToNone.
    * @return resultCardinality
    */
   @javax.annotation.Nonnull

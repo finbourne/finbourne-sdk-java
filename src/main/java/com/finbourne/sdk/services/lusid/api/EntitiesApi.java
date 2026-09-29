@@ -30,6 +30,7 @@ import java.io.IOException;
 import com.finbourne.sdk.services.lusid.model.BookmarkEntity;
 import com.finbourne.sdk.services.lusid.model.ComplianceRuleEntity;
 import com.finbourne.sdk.services.lusid.model.ComplianceRuleTemplateEntity;
+import com.finbourne.sdk.services.lusid.model.CorporateActionSourceEntity;
 import com.finbourne.sdk.services.lusid.model.CustomEntityEntity;
 import com.finbourne.sdk.services.lusid.model.DataTypeEntity;
 import com.finbourne.sdk.services.lusid.model.InstrumentEntity;
@@ -1144,6 +1145,359 @@ public class EntitiesApi {
      */
     public APIgetComplianceRuleTemplateByEntityUniqueIdRequest getComplianceRuleTemplateByEntityUniqueId(String entityUniqueId) {
         return new APIgetComplianceRuleTemplateByEntityUniqueIdRequest(entityUniqueId);
+    }
+    /**
+     * Build call for getCorporateActionSourceByEntityUniqueId
+     * @param entityUniqueId The universally unique identifier of the corporate action source. (required)
+     * @param asAt The asAt datetime at which to retrieve the corporate action source. Defaults to returning the latest version of the corporate action source if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getCorporateActionSourceByEntityUniqueIdCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback _callback) throws ApiException {
+        return getCorporateActionSourceByEntityUniqueIdCall(entityUniqueId, asAt, previews,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getCorporateActionSourceByEntityUniqueId. Use any specified configuration options to override any other configuration for this request only.
+     * @param entityUniqueId The universally unique identifier of the corporate action source. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the corporate action source. Defaults to returning the latest version of the corporate action source if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getCorporateActionSourceByEntityUniqueIdCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/entities/corporateactionsources/{entityUniqueId}"
+            .replace("{" + "entityUniqueId" + "}", localVarApiClient.escapeString(entityUniqueId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (previews != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "previews", previews));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getCorporateActionSourceByEntityUniqueIdValidateBeforeCall(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'entityUniqueId' is set
+        if (entityUniqueId == null) {
+            throw new ApiException("Missing the required parameter 'entityUniqueId' when calling getCorporateActionSourceByEntityUniqueId(Async)");
+        }
+
+        return getCorporateActionSourceByEntityUniqueIdCall(entityUniqueId, asAt, previews, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetCorporateActionSourceByEntityUniqueId: Get corporate action source by EntityUniqueId
+     * Retrieve the definition of a particular corporate action source.    If the corporate action source is deleted, this will return the state of the source immediately prior to deletion.
+     * @param entityUniqueId The universally unique identifier of the corporate action source. (required)
+     * @param asAt The asAt datetime at which to retrieve the corporate action source. Defaults to returning the latest version of the corporate action source if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @return ApiResponse&lt;CorporateActionSourceEntity&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<CorporateActionSourceEntity> getCorporateActionSourceByEntityUniqueIdWithHttpInfo(String entityUniqueId, OffsetDateTime asAt, List<String> previews) throws ApiException {
+        HttpRequest localVarCall = getCorporateActionSourceByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<CorporateActionSourceEntity>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetCorporateActionSourceByEntityUniqueId: Get corporate action source by EntityUniqueId
+     * Retrieve the definition of a particular corporate action source.    If the corporate action source is deleted, this will return the state of the source immediately prior to deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param entityUniqueId The universally unique identifier of the corporate action source. (required)
+     * @param asAt The asAt datetime at which to retrieve the corporate action source. Defaults to returning the latest version of the corporate action source if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @return ApiResponse&lt;CorporateActionSourceEntity&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<CorporateActionSourceEntity> getCorporateActionSourceByEntityUniqueIdWithHttpInfo(String entityUniqueId, OffsetDateTime asAt, List<String> previews, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getCorporateActionSourceByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, null, opts);
+        Type localVarReturnType = new TypeReference<CorporateActionSourceEntity>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetCorporateActionSourceByEntityUniqueId: Get corporate action source by EntityUniqueId (asynchronously)
+     * Retrieve the definition of a particular corporate action source.    If the corporate action source is deleted, this will return the state of the source immediately prior to deletion.
+     * @param entityUniqueId The universally unique identifier of the corporate action source. (required)
+     * @param asAt The asAt datetime at which to retrieve the corporate action source. Defaults to returning the latest version of the corporate action source if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getCorporateActionSourceByEntityUniqueIdAsync(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback<CorporateActionSourceEntity> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getCorporateActionSourceByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<CorporateActionSourceEntity>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetCorporateActionSourceByEntityUniqueId: Get corporate action source by EntityUniqueId (asynchronously)
+     * Retrieve the definition of a particular corporate action source.    If the corporate action source is deleted, this will return the state of the source immediately prior to deletion.Use any specified configuration options to override any other configuration for this request only
+     * @param entityUniqueId The universally unique identifier of the corporate action source. (required)
+     * @param asAt The asAt datetime at which to retrieve the corporate action source. Defaults to returning the latest version of the corporate action source if not specified. (optional)
+     * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getCorporateActionSourceByEntityUniqueIdAsync(String entityUniqueId, OffsetDateTime asAt, List<String> previews, final ApiCallback<CorporateActionSourceEntity> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getCorporateActionSourceByEntityUniqueIdValidateBeforeCall(entityUniqueId, asAt, previews, _callback, opts);
+        Type localVarReturnType = new TypeReference<CorporateActionSourceEntity>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetCorporateActionSourceByEntityUniqueIdRequest {
+        private final String entityUniqueId;
+        private OffsetDateTime asAt;
+        private List<String> previews;
+
+        private APIgetCorporateActionSourceByEntityUniqueIdRequest(String entityUniqueId) {
+            this.entityUniqueId = entityUniqueId;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the corporate action source. Defaults to returning the latest version of the corporate action source if not specified. (optional)
+         * @return APIgetCorporateActionSourceByEntityUniqueIdRequest
+         */
+        public APIgetCorporateActionSourceByEntityUniqueIdRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set previews
+         * @param previews The ids of the staged modifications to be previewed in the response. (optional)
+         * @return APIgetCorporateActionSourceByEntityUniqueIdRequest
+         */
+        public APIgetCorporateActionSourceByEntityUniqueIdRequest previews(List<String> previews) {
+            this.previews = previews;
+            return this;
+        }
+
+        /**
+         * Build call for getCorporateActionSourceByEntityUniqueId
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getCorporateActionSourceByEntityUniqueIdCall(entityUniqueId, asAt, previews, _callback);
+        }
+
+        /**
+         * Execute getCorporateActionSourceByEntityUniqueId request
+         * @return CorporateActionSourceEntity
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CorporateActionSourceEntity execute() throws ApiException {
+            ApiResponse<CorporateActionSourceEntity> localVarResp = getCorporateActionSourceByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getCorporateActionSourceByEntityUniqueId request. Use any specified configuration options to override any other configuration for this request only.
+         * @return CorporateActionSourceEntity
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CorporateActionSourceEntity execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<CorporateActionSourceEntity> localVarResp = getCorporateActionSourceByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getCorporateActionSourceByEntityUniqueId request with HTTP info returned
+         * @return ApiResponse&lt;CorporateActionSourceEntity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CorporateActionSourceEntity> executeWithHttpInfo() throws ApiException {
+            return getCorporateActionSourceByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews);
+        }
+
+        /**
+         * Execute getCorporateActionSourceByEntityUniqueId request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;CorporateActionSourceEntity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CorporateActionSourceEntity> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getCorporateActionSourceByEntityUniqueIdWithHttpInfo(entityUniqueId, asAt, previews, opts);
+        }
+
+        /**
+         * Execute getCorporateActionSourceByEntityUniqueId request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<CorporateActionSourceEntity> _callback) throws ApiException {
+            getCorporateActionSourceByEntityUniqueIdAsync(entityUniqueId, asAt, previews, _callback);
+        }
+
+        /**
+         * Execute getCorporateActionSourceByEntityUniqueId request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<CorporateActionSourceEntity> _callback, ConfigurationOptions opts) throws ApiException {
+            getCorporateActionSourceByEntityUniqueIdAsync(entityUniqueId, asAt, previews, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetCorporateActionSourceByEntityUniqueId: Get corporate action source by EntityUniqueId
+     * Retrieve the definition of a particular corporate action source.    If the corporate action source is deleted, this will return the state of the source immediately prior to deletion.
+     * @param entityUniqueId The universally unique identifier of the corporate action source. (required)
+     * @return APIgetCorporateActionSourceByEntityUniqueIdRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested corporate action source entity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetCorporateActionSourceByEntityUniqueIdRequest getCorporateActionSourceByEntityUniqueId(String entityUniqueId) {
+        return new APIgetCorporateActionSourceByEntityUniqueIdRequest(entityUniqueId);
     }
     /**
      * Build call for getCustomEntityByEntityUniqueId
