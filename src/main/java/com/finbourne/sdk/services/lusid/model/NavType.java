@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.NavSettlementConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.SwingPricingRule;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +57,10 @@ import com.finbourne.sdk.JSON;
   NavType.JSON_PROPERTY_AMORTISATION_RULE_SET_ID,
   NavType.JSON_PROPERTY_LEADER_NAV_TYPE_CODE,
   NavType.JSON_PROPERTY_TRANSACTION_TEMPLATE_SCOPE,
-  NavType.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER
+  NavType.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
+  NavType.JSON_PROPERTY_PRICING_BASIS,
+  NavType.JSON_PROPERTY_SWING_PRICING,
+  NavType.JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID
 })
 
 public class NavType {
@@ -154,6 +158,21 @@ public class NavType {
   @JsonProperty(JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String transactionExclusionFilter;
+
+  public static final String JSON_PROPERTY_PRICING_BASIS = "pricingBasis";
+  @JsonProperty(JSON_PROPERTY_PRICING_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String pricingBasis;
+
+  public static final String JSON_PROPERTY_SWING_PRICING = "swingPricing";
+  @JsonProperty(JSON_PROPERTY_SWING_PRICING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private SwingPricingRule swingPricing;
+
+  public static final String JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID = "notionalDealingCostTableId";
+  @JsonProperty(JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId notionalDealingCostTableId;
 
   public NavType() {
   }
@@ -543,6 +562,63 @@ public class NavType {
   }
 
 
+  public NavType pricingBasis(String pricingBasis) {
+    this.pricingBasis = pricingBasis;
+    return this;
+  }
+
+  /**
+   * The side of the quote this Nav Type values the fund on: Mid, Bid or Ask. Overrides the pricing basis of the valuation recipe&#39;s market options for this Nav Type only, so a bid NAV and an ask NAV can share one recipe. Omit it to value on the recipe&#39;s own pricing basis. Available values: Mid, Bid, Ask.
+   * @return pricingBasis
+   */
+  @javax.annotation.Nullable
+  public String getPricingBasis() {
+    return pricingBasis;
+  }
+
+  public void setPricingBasis(String pricingBasis) {
+    this.pricingBasis = pricingBasis;
+  }
+
+
+  public NavType swingPricing(SwingPricingRule swingPricing) {
+    this.swingPricing = swingPricing;
+    return this;
+  }
+
+  /**
+   * Get swingPricing
+   * @return swingPricing
+   */
+  @javax.annotation.Nullable
+  public SwingPricingRule getSwingPricing() {
+    return swingPricing;
+  }
+
+  public void setSwingPricing(SwingPricingRule swingPricing) {
+    this.swingPricing = swingPricing;
+  }
+
+
+  public NavType notionalDealingCostTableId(ResourceId notionalDealingCostTableId) {
+    this.notionalDealingCostTableId = notionalDealingCostTableId;
+    return this;
+  }
+
+  /**
+   * Get notionalDealingCostTableId
+   * @return notionalDealingCostTableId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getNotionalDealingCostTableId() {
+    return notionalDealingCostTableId;
+  }
+
+  public void setNotionalDealingCostTableId(ResourceId notionalDealingCostTableId) {
+    this.notionalDealingCostTableId = notionalDealingCostTableId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -570,7 +646,10 @@ public class NavType {
         Objects.equals(this.amortisationRuleSetId, navType.amortisationRuleSetId) &&
         Objects.equals(this.leaderNavTypeCode, navType.leaderNavTypeCode) &&
         Objects.equals(this.transactionTemplateScope, navType.transactionTemplateScope) &&
-        Objects.equals(this.transactionExclusionFilter, navType.transactionExclusionFilter);
+        Objects.equals(this.transactionExclusionFilter, navType.transactionExclusionFilter) &&
+        Objects.equals(this.pricingBasis, navType.pricingBasis) &&
+        Objects.equals(this.swingPricing, navType.swingPricing) &&
+        Objects.equals(this.notionalDealingCostTableId, navType.notionalDealingCostTableId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -579,7 +658,7 @@ public class NavType {
 
   @Override
  public int hashCode() {
-    return Objects.hash(status, code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope, transactionExclusionFilter);
+    return Objects.hash(status, code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope, transactionExclusionFilter, pricingBasis, swingPricing, notionalDealingCostTableId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -612,6 +691,9 @@ public class NavType {
     sb.append("    leaderNavTypeCode: ").append(toIndentedString(leaderNavTypeCode)).append("\n");
     sb.append("    transactionTemplateScope: ").append(toIndentedString(transactionTemplateScope)).append("\n");
     sb.append("    transactionExclusionFilter: ").append(toIndentedString(transactionExclusionFilter)).append("\n");
+    sb.append("    pricingBasis: ").append(toIndentedString(pricingBasis)).append("\n");
+    sb.append("    swingPricing: ").append(toIndentedString(swingPricing)).append("\n");
+    sb.append("    notionalDealingCostTableId: ").append(toIndentedString(notionalDealingCostTableId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

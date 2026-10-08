@@ -51,7 +51,8 @@ import com.finbourne.sdk.JSON;
   RunWorkerAction.JSON_PROPERTY_WORKER_STATUS_TRIGGERS,
   RunWorkerAction.JSON_PROPERTY_CHILD_TASK_CONFIGURATIONS,
   RunWorkerAction.JSON_PROPERTY_RE_RUN_CONFIGURATIONS,
-  RunWorkerAction.JSON_PROPERTY_WORKER_TIMEOUT
+  RunWorkerAction.JSON_PROPERTY_WORKER_TIMEOUT,
+  RunWorkerAction.JSON_PROPERTY_ORDERING
 })
 
 public class RunWorkerAction {
@@ -126,6 +127,11 @@ public class RunWorkerAction {
   @JsonProperty(JSON_PROPERTY_WORKER_TIMEOUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Integer workerTimeout;
+
+  public static final String JSON_PROPERTY_ORDERING = "ordering";
+  @JsonProperty(JSON_PROPERTY_ORDERING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String ordering;
 
   public RunWorkerAction() {
   }
@@ -306,6 +312,25 @@ public class RunWorkerAction {
   }
 
 
+  public RunWorkerAction ordering(String ordering) {
+    this.ordering = ordering;
+    return this;
+  }
+
+  /**
+   * How the created child tasks are ordered for execution: Parallel (default), Series, or ParallelSeries
+   * @return ordering
+   */
+  @javax.annotation.Nullable
+  public String getOrdering() {
+    return ordering;
+  }
+
+  public void setOrdering(String ordering) {
+    this.ordering = ordering;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -322,7 +347,8 @@ public class RunWorkerAction {
         Objects.equals(this.workerStatusTriggers, runWorkerAction.workerStatusTriggers) &&
         Objects.equals(this.childTaskConfigurations, runWorkerAction.childTaskConfigurations) &&
         Objects.equals(this.reRunConfigurations, runWorkerAction.reRunConfigurations) &&
-        Objects.equals(this.workerTimeout, runWorkerAction.workerTimeout);
+        Objects.equals(this.workerTimeout, runWorkerAction.workerTimeout) &&
+        Objects.equals(this.ordering, runWorkerAction.ordering);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -331,7 +357,7 @@ public class RunWorkerAction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(type, workerId, workerAsAt, workerParameters, workerStatusTriggers, childTaskConfigurations, reRunConfigurations, workerTimeout);
+    return Objects.hash(type, workerId, workerAsAt, workerParameters, workerStatusTriggers, childTaskConfigurations, reRunConfigurations, workerTimeout, ordering);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -353,6 +379,7 @@ public class RunWorkerAction {
     sb.append("    childTaskConfigurations: ").append(toIndentedString(childTaskConfigurations)).append("\n");
     sb.append("    reRunConfigurations: ").append(toIndentedString(reRunConfigurations)).append("\n");
     sb.append("    workerTimeout: ").append(toIndentedString(workerTimeout)).append("\n");
+    sb.append("    ordering: ").append(toIndentedString(ordering)).append("\n");
     sb.append("}");
     return sb.toString();
   }

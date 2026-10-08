@@ -14,11 +14,14 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.InflationConvexityOptions;
 import com.finbourne.sdk.services.lusid.model.ModelSelection;
+import com.finbourne.sdk.services.lusid.model.NamedPrice;
 import com.finbourne.sdk.services.lusid.model.ReturnZeroPvOptions;
 import com.finbourne.sdk.services.lusid.model.RiskBumpOptions;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
@@ -66,7 +69,8 @@ import com.finbourne.sdk.JSON;
   PricingOptions.JSON_PROPERTY_DEFAULT_POOL_FACTORS_TO_UNITY,
   PricingOptions.JSON_PROPERTY_FIND_OR_CALCULATE_WRITE_THROUGH,
   PricingOptions.JSON_PROPERTY_INFLATION_CONVEXITY,
-  PricingOptions.JSON_PROPERTY_ALLOW_FALLBACK_ON_MODEL_DECLINE
+  PricingOptions.JSON_PROPERTY_ALLOW_FALLBACK_ON_MODEL_DECLINE,
+  PricingOptions.JSON_PROPERTY_NAMED_PRICES
 })
 
 public class PricingOptions {
@@ -204,6 +208,11 @@ public class PricingOptions {
   @JsonProperty(JSON_PROPERTY_ALLOW_FALLBACK_ON_MODEL_DECLINE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean allowFallbackOnModelDecline;
+
+  public static final String JSON_PROPERTY_NAMED_PRICES = "namedPrices";
+  @JsonProperty(JSON_PROPERTY_NAMED_PRICES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<NamedPrice> namedPrices;
 
   public PricingOptions() {
   }
@@ -729,6 +738,33 @@ public class PricingOptions {
   }
 
 
+  public PricingOptions namedPrices(List<NamedPrice> namedPrices) {
+    this.namedPrices = namedPrices;
+    return this;
+  }
+
+  public PricingOptions addNamedPricesItem(NamedPrice namedPricesItem) {
+    if (this.namedPrices == null) {
+      this.namedPrices = new ArrayList<>();
+    }
+    this.namedPrices.add(namedPricesItem);
+    return this;
+  }
+
+  /**
+   * Names a valuation request can use to ask for a pricing side and a notional dealing cost  treatment in one column, as Valuation/PV(NamedPrice&#x3D;name) (and likewise PvInReportCcy and  PvInPortfolioCcy). For example a fund might define \&quot;creation\&quot; as the offer side plus the  buy-side dealing cost, \&quot;cancellation\&quot; as the bid side less the sell-side cost, and  \&quot;perfRef\&quot; as the plain mid. Each name must start with a letter, contain only letters and  digits, and be unique within the recipe ignoring case; a request must spell the name exactly as  defined. Absent or empty defines no names.
+   * @return namedPrices
+   */
+  @javax.annotation.Nullable
+  public List<NamedPrice> getNamedPrices() {
+    return namedPrices;
+  }
+
+  public void setNamedPrices(List<NamedPrice> namedPrices) {
+    this.namedPrices = namedPrices;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -764,7 +800,8 @@ public class PricingOptions {
         Objects.equals(this.defaultPoolFactorsToUnity, pricingOptions.defaultPoolFactorsToUnity) &&
         Objects.equals(this.findOrCalculateWriteThrough, pricingOptions.findOrCalculateWriteThrough) &&
         Objects.equals(this.inflationConvexity, pricingOptions.inflationConvexity) &&
-        Objects.equals(this.allowFallbackOnModelDecline, pricingOptions.allowFallbackOnModelDecline);
+        Objects.equals(this.allowFallbackOnModelDecline, pricingOptions.allowFallbackOnModelDecline) &&
+        Objects.equals(this.namedPrices, pricingOptions.namedPrices);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -773,7 +810,7 @@ public class PricingOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, fixedIncomeValuationsUsingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize, riskBumpOptions, fundingCurveByCurrency, defaultPoolFactorsToUnity, findOrCalculateWriteThrough, inflationConvexity, allowFallbackOnModelDecline);
+    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, fixedIncomeValuationsUsingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize, riskBumpOptions, fundingCurveByCurrency, defaultPoolFactorsToUnity, findOrCalculateWriteThrough, inflationConvexity, allowFallbackOnModelDecline, namedPrices);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -814,6 +851,7 @@ public class PricingOptions {
     sb.append("    findOrCalculateWriteThrough: ").append(toIndentedString(findOrCalculateWriteThrough)).append("\n");
     sb.append("    inflationConvexity: ").append(toIndentedString(inflationConvexity)).append("\n");
     sb.append("    allowFallbackOnModelDecline: ").append(toIndentedString(allowFallbackOnModelDecline)).append("\n");
+    sb.append("    namedPrices: ").append(toIndentedString(namedPrices)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.QualifierDefinitionRequest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +40,8 @@ import com.finbourne.sdk.JSON;
   UpdatePropertyDefinitionRequest.JSON_PROPERTY_DISPLAY_NAME,
   UpdatePropertyDefinitionRequest.JSON_PROPERTY_PROPERTY_DESCRIPTION,
   UpdatePropertyDefinitionRequest.JSON_PROPERTY_CUSTOM_ENTITY_TYPES,
-  UpdatePropertyDefinitionRequest.JSON_PROPERTY_VALUE_FORMAT
+  UpdatePropertyDefinitionRequest.JSON_PROPERTY_VALUE_FORMAT,
+  UpdatePropertyDefinitionRequest.JSON_PROPERTY_QUALIFIER_DEFINITIONS
 })
 
 public class UpdatePropertyDefinitionRequest {
@@ -62,6 +64,11 @@ public class UpdatePropertyDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_VALUE_FORMAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String valueFormat;
+
+  public static final String JSON_PROPERTY_QUALIFIER_DEFINITIONS = "qualifierDefinitions";
+  @JsonProperty(JSON_PROPERTY_QUALIFIER_DEFINITIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<QualifierDefinitionRequest> qualifierDefinitions;
 
   public UpdatePropertyDefinitionRequest() {
   }
@@ -150,6 +157,33 @@ public class UpdatePropertyDefinitionRequest {
   }
 
 
+  public UpdatePropertyDefinitionRequest qualifierDefinitions(List<QualifierDefinitionRequest> qualifierDefinitions) {
+    this.qualifierDefinitions = qualifierDefinitions;
+    return this;
+  }
+
+  public UpdatePropertyDefinitionRequest addQualifierDefinitionsItem(QualifierDefinitionRequest qualifierDefinitionsItem) {
+    if (this.qualifierDefinitions == null) {
+      this.qualifierDefinitions = new ArrayList<>();
+    }
+    this.qualifierDefinitions.add(qualifierDefinitionsItem);
+    return this;
+  }
+
+  /**
+   * The qualifiers declared against this property definition. Omit this field, or supply it as null, to leave the declared qualifiers unchanged. Otherwise the supplied array replaces the stored array in full, so a qualifier omitted from it is no longer declared and can no longer be set, and an empty array clears every declaration. Stored qualifier values are retained in every case and become readable again if the same keys are re-declared with the same data types.
+   * @return qualifierDefinitions
+   */
+  @javax.annotation.Nullable
+  public List<QualifierDefinitionRequest> getQualifierDefinitions() {
+    return qualifierDefinitions;
+  }
+
+  public void setQualifierDefinitions(List<QualifierDefinitionRequest> qualifierDefinitions) {
+    this.qualifierDefinitions = qualifierDefinitions;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -162,7 +196,8 @@ public class UpdatePropertyDefinitionRequest {
     return Objects.equals(this.displayName, updatePropertyDefinitionRequest.displayName) &&
         Objects.equals(this.propertyDescription, updatePropertyDefinitionRequest.propertyDescription) &&
         Objects.equals(this.customEntityTypes, updatePropertyDefinitionRequest.customEntityTypes) &&
-        Objects.equals(this.valueFormat, updatePropertyDefinitionRequest.valueFormat);
+        Objects.equals(this.valueFormat, updatePropertyDefinitionRequest.valueFormat) &&
+        Objects.equals(this.qualifierDefinitions, updatePropertyDefinitionRequest.qualifierDefinitions);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -171,7 +206,7 @@ public class UpdatePropertyDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, propertyDescription, customEntityTypes, valueFormat);
+    return Objects.hash(displayName, propertyDescription, customEntityTypes, valueFormat, qualifierDefinitions);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -189,6 +224,7 @@ public class UpdatePropertyDefinitionRequest {
     sb.append("    propertyDescription: ").append(toIndentedString(propertyDescription)).append("\n");
     sb.append("    customEntityTypes: ").append(toIndentedString(customEntityTypes)).append("\n");
     sb.append("    valueFormat: ").append(toIndentedString(valueFormat)).append("\n");
+    sb.append("    qualifierDefinitions: ").append(toIndentedString(qualifierDefinitions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

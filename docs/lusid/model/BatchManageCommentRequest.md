@@ -6,6 +6,9 @@ One item of a batch comment request. The operation (add/edit/delete) is inferred
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**instanceId** | [**RecInstanceId**](RecInstanceId.md) |  | [default to RecInstanceId]
+**recType** | **String** | The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | [default to String]
+**runNumber** | **Integer** | The run of the instance whose results this item targets. | [default to Integer]
 **recResultId** | **String** | The rec result the comment operation targets. | [default to String]
 **commentId** | **String** | The comment id. Null with text &#x3D; add; provided with text &#x3D; edit; provided with null text &#x3D; delete. | [optional] [default to String]
 **commentText** | **String** | The comment body. See operation inference. | [optional] [default to String]
@@ -16,12 +19,18 @@ import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
+RecInstanceId instanceId = new RecInstanceId();
+String recType = "example recType";
+Integer runNumber = new Integer("100.00");
 String recResultId = "example recResultId";
 @javax.annotation.Nullable String commentId = "example commentId";
 @javax.annotation.Nullable String commentText = "example commentText";
 
 
 BatchManageCommentRequest batchManageCommentRequestInstance = new BatchManageCommentRequest()
+    .instanceId(instanceId)
+    .recType(recType)
+    .runNumber(runNumber)
     .recResultId(recResultId)
     .commentId(commentId)
     .commentText(commentText);

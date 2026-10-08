@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.QualifierDefinitionRequest;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +49,8 @@ import com.finbourne.sdk.JSON;
   CreatePropertyDefinitionRequest.JSON_PROPERTY_PROPERTY_DESCRIPTION,
   CreatePropertyDefinitionRequest.JSON_PROPERTY_COLLECTION_TYPE,
   CreatePropertyDefinitionRequest.JSON_PROPERTY_CUSTOM_ENTITY_TYPES,
-  CreatePropertyDefinitionRequest.JSON_PROPERTY_VALUE_FORMAT
+  CreatePropertyDefinitionRequest.JSON_PROPERTY_VALUE_FORMAT,
+  CreatePropertyDefinitionRequest.JSON_PROPERTY_QUALIFIER_DEFINITIONS
 })
 
 public class CreatePropertyDefinitionRequest {
@@ -368,6 +370,11 @@ public class CreatePropertyDefinitionRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String valueFormat;
 
+  public static final String JSON_PROPERTY_QUALIFIER_DEFINITIONS = "qualifierDefinitions";
+  @JsonProperty(JSON_PROPERTY_QUALIFIER_DEFINITIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<QualifierDefinitionRequest> qualifierDefinitions;
+
   public CreatePropertyDefinitionRequest() {
   }
 
@@ -607,6 +614,33 @@ public class CreatePropertyDefinitionRequest {
   }
 
 
+  public CreatePropertyDefinitionRequest qualifierDefinitions(List<QualifierDefinitionRequest> qualifierDefinitions) {
+    this.qualifierDefinitions = qualifierDefinitions;
+    return this;
+  }
+
+  public CreatePropertyDefinitionRequest addQualifierDefinitionsItem(QualifierDefinitionRequest qualifierDefinitionsItem) {
+    if (this.qualifierDefinitions == null) {
+      this.qualifierDefinitions = new ArrayList<>();
+    }
+    this.qualifierDefinitions.add(qualifierDefinitionsItem);
+    return this;
+  }
+
+  /**
+   * The qualifiers to declare against this property definition. A qualifier attaches an individually typed supporting fact to a value of this property, sharing that value&#39;s interval. Supported only where the constraint style is Property and no collection type is set.
+   * @return qualifierDefinitions
+   */
+  @javax.annotation.Nullable
+  public List<QualifierDefinitionRequest> getQualifierDefinitions() {
+    return qualifierDefinitions;
+  }
+
+  public void setQualifierDefinitions(List<QualifierDefinitionRequest> qualifierDefinitions) {
+    this.qualifierDefinitions = qualifierDefinitions;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -627,7 +661,8 @@ public class CreatePropertyDefinitionRequest {
         Objects.equals(this.propertyDescription, createPropertyDefinitionRequest.propertyDescription) &&
         Objects.equals(this.collectionType, createPropertyDefinitionRequest.collectionType) &&
         Objects.equals(this.customEntityTypes, createPropertyDefinitionRequest.customEntityTypes) &&
-        Objects.equals(this.valueFormat, createPropertyDefinitionRequest.valueFormat);
+        Objects.equals(this.valueFormat, createPropertyDefinitionRequest.valueFormat) &&
+        Objects.equals(this.qualifierDefinitions, createPropertyDefinitionRequest.qualifierDefinitions);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -636,7 +671,7 @@ public class CreatePropertyDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(domain, scope, code, valueRequired, displayName, dataTypeId, lifeTime, constraintStyle, propertyDescription, collectionType, customEntityTypes, valueFormat);
+    return Objects.hash(domain, scope, code, valueRequired, displayName, dataTypeId, lifeTime, constraintStyle, propertyDescription, collectionType, customEntityTypes, valueFormat, qualifierDefinitions);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -662,6 +697,7 @@ public class CreatePropertyDefinitionRequest {
     sb.append("    collectionType: ").append(toIndentedString(collectionType)).append("\n");
     sb.append("    customEntityTypes: ").append(toIndentedString(customEntityTypes)).append("\n");
     sb.append("    valueFormat: ").append(toIndentedString(valueFormat)).append("\n");
+    sb.append("    qualifierDefinitions: ").append(toIndentedString(qualifierDefinitions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

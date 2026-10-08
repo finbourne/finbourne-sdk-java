@@ -6,7 +6,7 @@ Inflation Linked Bond.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest. | [default to String]
+**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility. | [default to String]
 **startDate** | [**OffsetDateTime**](OffsetDateTime.md) | The start date of the bond. | [default to OffsetDateTime]
 **maturityDate** | [**OffsetDateTime**](OffsetDateTime.md) | The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it. | [default to OffsetDateTime]
 **flowConventions** | [**FlowConventions**](FlowConventions.md) |  | [default to FlowConventions]
@@ -21,6 +21,10 @@ Name | Type | Description | Notes
 **principal** | **java.math.BigDecimal** | The face-value or principal for the bond at outset. | [default to java.math.BigDecimal]
 **principalProtection** | **Boolean** | If true then the principal is protected in that the redemption amount will be at least the face value (Principal).  This is typically set to true for inflation linked bonds issued by the United States and France (for example).  This is typically set to false for inflation linked bonds issued by the United Kingdom (post 2005).  For other sovereigns this can vary from issue to issue.  If not set this property defaults to true.  This is sometimes referred to as Deflation protection or an inflation floor of 0%. | [optional] [default to Boolean]
 **stubType** | **String** | StubType. Most Inflation linked bonds have a ShortFront stub type so this is the default, however in some cases  with a long front stub LongFront should be selected.  StubType Both is not supported for InflationLinkedBonds.    Supported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both]. | [optional] [default to String]
+**firstCouponPayDate** | [**OffsetDateTime**](OffsetDateTime.md) | Optional. The date on which the first coupon is paid. Set this date for an irregular first coupon period.  If this date is an adjusted date, also set SecondPeriodStartDate. | [optional] [default to OffsetDateTime]
+**secondPeriodStartDate** | [**OffsetDateTime**](OffsetDateTime.md) | Optional. The date on which the second coupon period starts. This is also the accrual end date of the first coupon period.  Set this date together with FirstCouponPayDate when the first coupon pay date is an adjusted date. | [optional] [default to OffsetDateTime]
+**penultimateCouponPayDate** | [**OffsetDateTime**](OffsetDateTime.md) | Optional. The date on which the penultimate coupon is paid. Set this date for an irregular last coupon period.  If this date is an adjusted date, also set LastPeriodStartDate. | [optional] [default to OffsetDateTime]
+**lastPeriodStartDate** | [**OffsetDateTime**](OffsetDateTime.md) | Optional. The date on which the last coupon period starts. This is also the accrual end date of the penultimate coupon period.  Set this date together with PenultimateCouponPayDate when the penultimate coupon pay date is an adjusted date. | [optional] [default to OffsetDateTime]
 **roundingConventions** | [**List&lt;RoundingConvention&gt;**](RoundingConvention.md) | Rounding conventions for analytics, if any. | [optional] [default to List<RoundingConvention>]
 **tradingConventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] [default to TradingConventions]
 **originalIssuePrice** | **java.math.BigDecimal** | The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] [default to java.math.BigDecimal]
@@ -48,6 +52,10 @@ Integer indexPrecision = new Integer("100.00");
 java.math.BigDecimal principal = new java.math.BigDecimal("100.00");
 Boolean principalProtection = true;
 @javax.annotation.Nullable String stubType = "example stubType";
+@javax.annotation.Nullable OffsetDateTime firstCouponPayDate = OffsetDateTime.now();
+@javax.annotation.Nullable OffsetDateTime secondPeriodStartDate = OffsetDateTime.now();
+@javax.annotation.Nullable OffsetDateTime penultimateCouponPayDate = OffsetDateTime.now();
+@javax.annotation.Nullable OffsetDateTime lastPeriodStartDate = OffsetDateTime.now();
 @javax.annotation.Nullable List<RoundingConvention> roundingConventions = new List<RoundingConvention>();
 TradingConventions tradingConventions = new TradingConventions();
 @javax.annotation.Nullable java.math.BigDecimal originalIssuePrice = new java.math.BigDecimal("100.00");
@@ -71,6 +79,10 @@ InflationLinkedBond inflationLinkedBondInstance = new InflationLinkedBond()
     .principal(principal)
     .principalProtection(principalProtection)
     .stubType(stubType)
+    .firstCouponPayDate(firstCouponPayDate)
+    .secondPeriodStartDate(secondPeriodStartDate)
+    .penultimateCouponPayDate(penultimateCouponPayDate)
+    .lastPeriodStartDate(lastPeriodStartDate)
     .roundingConventions(roundingConventions)
     .tradingConventions(tradingConventions)
     .originalIssuePrice(originalIssuePrice)

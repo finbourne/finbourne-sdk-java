@@ -33,6 +33,8 @@ WorkerConfigurationResponse config = new WorkerConfigurationResponse(workerConfi
 
 * [HorizonIntegrationResponse](./HorizonIntegrationResponse.md)
 
+* [InstantiateRecResponse](./InstantiateRecResponse.md)
+
 * [LibraryResponse](./LibraryResponse.md)
 
 * [LuminesceViewResponse](./LuminesceViewResponse.md)

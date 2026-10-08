@@ -27,7 +27,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
+import com.finbourne.sdk.services.lusid.model.BatchDeleteRelationalDataResponse;
+import com.finbourne.sdk.services.lusid.model.BatchUpsertWithholdingTaxRatesResponse;
 import com.finbourne.sdk.services.lusid.model.CreateWithholdingTaxDatasetDefinitionsRequest;
+import com.finbourne.sdk.services.lusid.model.DeleteWithholdingTaxRateRequest;
 import com.finbourne.sdk.services.lusid.model.DeletedEntityResponse;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
@@ -36,6 +39,7 @@ import com.finbourne.sdk.services.lusid.model.Operation;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfWithholdingTaxConfiguration;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfWithholdingTaxDataset;
 import com.finbourne.sdk.services.lusid.model.UpsertWithholdingTaxConfigurationRequest;
+import com.finbourne.sdk.services.lusid.model.UpsertWithholdingTaxRateRequest;
 import com.finbourne.sdk.services.lusid.model.WithholdingTaxConfiguration;
 import com.finbourne.sdk.services.lusid.model.WithholdingTaxDataset;
 import com.finbourne.sdk.services.lusid.model.WithholdingTaxDatasetDefinitions;
@@ -83,6 +87,736 @@ public class WithholdingTaxApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    /**
+     * Build call for batchDeleteWithholdingTaxRates
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest batchDeleteWithholdingTaxRatesCall(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback) throws ApiException {
+        return batchDeleteWithholdingTaxRatesCall(scope, code, requestBody, successMode,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for batchDeleteWithholdingTaxRates. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest batchDeleteWithholdingTaxRatesCall(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = requestBody;
+
+        // create path and map variables
+        String localVarPath = "/api/api/withholdingtax/rates/{scope}/{code}/$batchDelete"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (successMode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("successMode", successMode));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest batchDeleteWithholdingTaxRatesValidateBeforeCall(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling batchDeleteWithholdingTaxRates(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling batchDeleteWithholdingTaxRates(Async)");
+        }
+
+        // verify the required parameter 'requestBody' is set
+        if (requestBody == null) {
+            throw new ApiException("Missing the required parameter 'requestBody' when calling batchDeleteWithholdingTaxRates(Async)");
+        }
+
+        return batchDeleteWithholdingTaxRatesCall(scope, code, requestBody, successMode, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
+     * Also how a rate with no replacement is expired, there being no effectiveTo field. Deletes are  bitemporal, so rows stay readable at a prior asAt.
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @return ApiResponse&lt;BatchDeleteRelationalDataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchDeleteRelationalDataResponse> batchDeleteWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode) throws ApiException {
+        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchDeleteRelationalDataResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
+     * Also how a rate with no replacement is expired, there being no effectiveTo field. Deletes are  bitemporal, so rows stay readable at a prior asAt.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @return ApiResponse&lt;BatchDeleteRelationalDataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchDeleteRelationalDataResponse> batchDeleteWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, null, opts);
+        Type localVarReturnType = new TypeReference<BatchDeleteRelationalDataResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset. (asynchronously)
+     * Also how a rate with no replacement is expired, there being no effectiveTo field. Deletes are  bitemporal, so rows stay readable at a prior asAt.
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void batchDeleteWithholdingTaxRatesAsync(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback<BatchDeleteRelationalDataResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchDeleteRelationalDataResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset. (asynchronously)
+     * Also how a rate with no replacement is expired, there being no effectiveTo field. Deletes are  bitemporal, so rows stay readable at a prior asAt.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void batchDeleteWithholdingTaxRatesAsync(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback<BatchDeleteRelationalDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, _callback, opts);
+        Type localVarReturnType = new TypeReference<BatchDeleteRelationalDataResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIbatchDeleteWithholdingTaxRatesRequest {
+        private final String scope;
+        private final String code;
+        private final Map<String, DeleteWithholdingTaxRateRequest> requestBody;
+        private String successMode;
+
+        private APIbatchDeleteWithholdingTaxRatesRequest(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody) {
+            this.scope = scope;
+            this.code = code;
+            this.requestBody = requestBody;
+        }
+
+        /**
+         * Set successMode
+         * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+         * @return APIbatchDeleteWithholdingTaxRatesRequest
+         */
+        public APIbatchDeleteWithholdingTaxRatesRequest successMode(String successMode) {
+            this.successMode = successMode;
+            return this;
+        }
+
+        /**
+         * Build call for batchDeleteWithholdingTaxRates
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return batchDeleteWithholdingTaxRatesCall(scope, code, requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute batchDeleteWithholdingTaxRates request
+         * @return BatchDeleteRelationalDataResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchDeleteRelationalDataResponse execute() throws ApiException {
+            ApiResponse<BatchDeleteRelationalDataResponse> localVarResp = batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute batchDeleteWithholdingTaxRates request. Use any specified configuration options to override any other configuration for this request only.
+         * @return BatchDeleteRelationalDataResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchDeleteRelationalDataResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<BatchDeleteRelationalDataResponse> localVarResp = batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute batchDeleteWithholdingTaxRates request with HTTP info returned
+         * @return ApiResponse&lt;BatchDeleteRelationalDataResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchDeleteRelationalDataResponse> executeWithHttpInfo() throws ApiException {
+            return batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode);
+        }
+
+        /**
+         * Execute batchDeleteWithholdingTaxRates request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;BatchDeleteRelationalDataResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchDeleteRelationalDataResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, opts);
+        }
+
+        /**
+         * Execute batchDeleteWithholdingTaxRates request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchDeleteRelationalDataResponse> _callback) throws ApiException {
+            batchDeleteWithholdingTaxRatesAsync(scope, code, requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute batchDeleteWithholdingTaxRates request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchDeleteRelationalDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            batchDeleteWithholdingTaxRatesAsync(scope, code, requestBody, successMode, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
+     * Also how a rate with no replacement is expired, there being no effectiveTo field. Deletes are  bitemporal, so rows stay readable at a prior asAt.
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
+     * @return APIbatchDeleteWithholdingTaxRatesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted rate row metadata. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIbatchDeleteWithholdingTaxRatesRequest batchDeleteWithholdingTaxRates(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody) {
+        return new APIbatchDeleteWithholdingTaxRatesRequest(scope, code, requestBody);
+    }
+    /**
+     * Build call for batchUpsertWithholdingTaxRates
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest batchUpsertWithholdingTaxRatesCall(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback) throws ApiException {
+        return batchUpsertWithholdingTaxRatesCall(scope, code, requestBody, successMode,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for batchUpsertWithholdingTaxRates. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest batchUpsertWithholdingTaxRatesCall(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = requestBody;
+
+        // create path and map variables
+        String localVarPath = "/api/api/withholdingtax/rates/{scope}/{code}/$batchUpsert"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (successMode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("successMode", successMode));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest batchUpsertWithholdingTaxRatesValidateBeforeCall(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling batchUpsertWithholdingTaxRates(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling batchUpsertWithholdingTaxRates(Async)");
+        }
+
+        // verify the required parameter 'requestBody' is set
+        if (requestBody == null) {
+            throw new ApiException("Missing the required parameter 'requestBody' when calling batchUpsertWithholdingTaxRates(Async)");
+        }
+
+        return batchUpsertWithholdingTaxRatesCall(scope, code, requestBody, successMode, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
+     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @return ApiResponse&lt;BatchUpsertWithholdingTaxRatesResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchUpsertWithholdingTaxRatesResponse> batchUpsertWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode) throws ApiException {
+        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchUpsertWithholdingTaxRatesResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
+     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @return ApiResponse&lt;BatchUpsertWithholdingTaxRatesResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<BatchUpsertWithholdingTaxRatesResponse> batchUpsertWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, null, opts);
+        Type localVarReturnType = new TypeReference<BatchUpsertWithholdingTaxRatesResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands. (asynchronously)
+     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void batchUpsertWithholdingTaxRatesAsync(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<BatchUpsertWithholdingTaxRatesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands. (asynchronously)
+     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
+     * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void batchUpsertWithholdingTaxRatesAsync(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, _callback, opts);
+        Type localVarReturnType = new TypeReference<BatchUpsertWithholdingTaxRatesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIbatchUpsertWithholdingTaxRatesRequest {
+        private final String scope;
+        private final String code;
+        private final Map<String, UpsertWithholdingTaxRateRequest> requestBody;
+        private String successMode;
+
+        private APIbatchUpsertWithholdingTaxRatesRequest(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody) {
+            this.scope = scope;
+            this.code = code;
+            this.requestBody = requestBody;
+        }
+
+        /**
+         * Set successMode
+         * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+         * @return APIbatchUpsertWithholdingTaxRatesRequest
+         */
+        public APIbatchUpsertWithholdingTaxRatesRequest successMode(String successMode) {
+            this.successMode = successMode;
+            return this;
+        }
+
+        /**
+         * Build call for batchUpsertWithholdingTaxRates
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return batchUpsertWithholdingTaxRatesCall(scope, code, requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute batchUpsertWithholdingTaxRates request
+         * @return BatchUpsertWithholdingTaxRatesResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchUpsertWithholdingTaxRatesResponse execute() throws ApiException {
+            ApiResponse<BatchUpsertWithholdingTaxRatesResponse> localVarResp = batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute batchUpsertWithholdingTaxRates request. Use any specified configuration options to override any other configuration for this request only.
+         * @return BatchUpsertWithholdingTaxRatesResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public BatchUpsertWithholdingTaxRatesResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<BatchUpsertWithholdingTaxRatesResponse> localVarResp = batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute batchUpsertWithholdingTaxRates request with HTTP info returned
+         * @return ApiResponse&lt;BatchUpsertWithholdingTaxRatesResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchUpsertWithholdingTaxRatesResponse> executeWithHttpInfo() throws ApiException {
+            return batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode);
+        }
+
+        /**
+         * Execute batchUpsertWithholdingTaxRates request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;BatchUpsertWithholdingTaxRatesResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BatchUpsertWithholdingTaxRatesResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, opts);
+        }
+
+        /**
+         * Execute batchUpsertWithholdingTaxRates request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback) throws ApiException {
+            batchUpsertWithholdingTaxRatesAsync(scope, code, requestBody, successMode, _callback);
+        }
+
+        /**
+         * Execute batchUpsertWithholdingTaxRates request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            batchUpsertWithholdingTaxRatesAsync(scope, code, requestBody, successMode, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
+     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+     * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
+     * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
+     * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
+     * @return APIbatchUpsertWithholdingTaxRatesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate rows that were upserted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIbatchUpsertWithholdingTaxRatesRequest batchUpsertWithholdingTaxRates(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody) {
+        return new APIbatchUpsertWithholdingTaxRatesRequest(scope, code, requestBody);
+    }
     /**
      * Build call for createWithholdingTaxDatasetDefinitions
      * @param createWithholdingTaxDatasetDefinitionsRequest The scope, code and matching dimensions of each of the two datasets to create. (required)
@@ -2656,7 +3390,7 @@ public class WithholdingTaxApi {
 
     /**
      * [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition.
-     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, and amend one in place with an add on its index.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.
+     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, insert one at a position with an add on its index,  and remove one with a remove on its index. To amend a dimension, remove it and add it again.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.
      * @param scope The scope of the dataset definition to amend. (required)
      * @param code The code of the dataset definition to amend. Together with the scope this uniquely identifies the definition. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
@@ -2678,7 +3412,7 @@ public class WithholdingTaxApi {
 
     /**
      * [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition.
-     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, and amend one in place with an add on its index.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.Use any specified configuration options to override any other configuration for this request only
+     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, insert one at a position with an add on its index,  and remove one with a remove on its index. To amend a dimension, remove it and add it again.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the dataset definition to amend. (required)
      * @param code The code of the dataset definition to amend. Together with the scope this uniquely identifies the definition. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
@@ -2700,7 +3434,7 @@ public class WithholdingTaxApi {
 
     /**
      * [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition. (asynchronously)
-     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, and amend one in place with an add on its index.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.
+     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, insert one at a position with an add on its index,  and remove one with a remove on its index. To amend a dimension, remove it and add it again.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.
      * @param scope The scope of the dataset definition to amend. (required)
      * @param code The code of the dataset definition to amend. Together with the scope this uniquely identifies the definition. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
@@ -2723,7 +3457,7 @@ public class WithholdingTaxApi {
 
     /**
      * [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition. (asynchronously)
-     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, and amend one in place with an add on its index.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.Use any specified configuration options to override any other configuration for this request only
+     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, insert one at a position with an add on its index,  and remove one with a remove on its index. To amend a dimension, remove it and add it again.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the dataset definition to amend. (required)
      * @param code The code of the dataset definition to amend. Together with the scope this uniquely identifies the definition. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
@@ -2873,7 +3607,7 @@ public class WithholdingTaxApi {
 
     /**
      * [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition.
-     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, and amend one in place with an add on its index.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.
+     * Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, insert one at a position with an add on its index,  and remove one with a remove on its index. To amend a dimension, remove it and add it again.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.
      * @param scope The scope of the dataset definition to amend. (required)
      * @param code The code of the dataset definition to amend. Together with the scope this uniquely identifies the definition. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)

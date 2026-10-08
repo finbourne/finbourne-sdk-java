@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.Property;
+import com.finbourne.sdk.services.lusid.model.QualifierDefinition;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.Version;
@@ -67,6 +68,7 @@ import com.finbourne.sdk.JSON;
   PropertyDefinition.JSON_PROPERTY_IS_FILTERABLE,
   PropertyDefinition.JSON_PROPERTY_CUSTOM_ENTITY_TYPES,
   PropertyDefinition.JSON_PROPERTY_VALUE_FORMAT,
+  PropertyDefinition.JSON_PROPERTY_QUALIFIER_DEFINITIONS,
   PropertyDefinition.JSON_PROPERTY_LINKS
 })
 
@@ -620,6 +622,11 @@ public class PropertyDefinition {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String valueFormat;
 
+  public static final String JSON_PROPERTY_QUALIFIER_DEFINITIONS = "qualifierDefinitions";
+  @JsonProperty(JSON_PROPERTY_QUALIFIER_DEFINITIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<QualifierDefinition> qualifierDefinitions;
+
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -1074,6 +1081,33 @@ public class PropertyDefinition {
   }
 
 
+  public PropertyDefinition qualifierDefinitions(List<QualifierDefinition> qualifierDefinitions) {
+    this.qualifierDefinitions = qualifierDefinitions;
+    return this;
+  }
+
+  public PropertyDefinition addQualifierDefinitionsItem(QualifierDefinition qualifierDefinitionsItem) {
+    if (this.qualifierDefinitions == null) {
+      this.qualifierDefinitions = new ArrayList<>();
+    }
+    this.qualifierDefinitions.add(qualifierDefinitionsItem);
+    return this;
+  }
+
+  /**
+   * The qualifiers declared against this property definition, each with its value type resolved from its data type. Absent where the definition declares no qualifiers. Qualifiers are supported only on single-value properties.
+   * @return qualifierDefinitions
+   */
+  @javax.annotation.Nullable
+  public List<QualifierDefinition> getQualifierDefinitions() {
+    return qualifierDefinitions;
+  }
+
+  public void setQualifierDefinitions(List<QualifierDefinition> qualifierDefinitions) {
+    this.qualifierDefinitions = qualifierDefinitions;
+  }
+
+
   public PropertyDefinition links(List<Link> links) {
     this.links = links;
     return this;
@@ -1133,6 +1167,7 @@ public class PropertyDefinition {
         Objects.equals(this.isFilterable, propertyDefinition.isFilterable) &&
         Objects.equals(this.customEntityTypes, propertyDefinition.customEntityTypes) &&
         Objects.equals(this.valueFormat, propertyDefinition.valueFormat) &&
+        Objects.equals(this.qualifierDefinitions, propertyDefinition.qualifierDefinitions) &&
         Objects.equals(this.links, propertyDefinition.links);
   }
 
@@ -1142,7 +1177,7 @@ public class PropertyDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, key, valueType, displayName, dataTypeId, type, unitSchema, domain, scope, code, valueRequired, lifeTime, constraintStyle, propertyDefinitionType, propertyDescription, derivationFormula, collectionType, properties, version, stagedModifications, isFilterable, customEntityTypes, valueFormat, links);
+    return Objects.hash(href, key, valueType, displayName, dataTypeId, type, unitSchema, domain, scope, code, valueRequired, lifeTime, constraintStyle, propertyDefinitionType, propertyDescription, derivationFormula, collectionType, properties, version, stagedModifications, isFilterable, customEntityTypes, valueFormat, qualifierDefinitions, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1179,6 +1214,7 @@ public class PropertyDefinition {
     sb.append("    isFilterable: ").append(toIndentedString(isFilterable)).append("\n");
     sb.append("    customEntityTypes: ").append(toIndentedString(customEntityTypes)).append("\n");
     sb.append("    valueFormat: ").append(toIndentedString(valueFormat)).append("\n");
+    sb.append("    qualifierDefinitions: ").append(toIndentedString(qualifierDefinitions)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

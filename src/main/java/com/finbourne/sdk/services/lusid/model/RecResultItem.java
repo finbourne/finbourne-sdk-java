@@ -17,6 +17,7 @@ import com.finbourne.sdk.services.lusid.model.RecResultHoldingItem;
 import com.finbourne.sdk.services.lusid.model.RecResultSettlementActivityItem;
 import com.finbourne.sdk.services.lusid.model.RecResultTransactionItem;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.WritebackSuggestion;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;

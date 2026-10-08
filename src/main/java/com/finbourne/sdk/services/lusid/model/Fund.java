@@ -63,6 +63,7 @@ import com.finbourne.sdk.JSON;
   Fund.JSON_PROPERTY_ABOR_ID,
   Fund.JSON_PROPERTY_SHARE_CLASS_INSTRUMENTS,
   Fund.JSON_PROPERTY_TYPE,
+  Fund.JSON_PROPERTY_TAX_TRANSPARENCY,
   Fund.JSON_PROPERTY_INCEPTION_DATE,
   Fund.JSON_PROPERTY_DECIMAL_PLACES,
   Fund.JSON_PROPERTY_YEAR_END_DATE,
@@ -137,6 +138,11 @@ public class Fund {
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String type;
+
+  public static final String JSON_PROPERTY_TAX_TRANSPARENCY = "taxTransparency";
+  @JsonProperty(JSON_PROPERTY_TAX_TRANSPARENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String taxTransparency;
 
   public static final String JSON_PROPERTY_INCEPTION_DATE = "inceptionDate";
   @JsonProperty(JSON_PROPERTY_INCEPTION_DATE)
@@ -432,7 +438,7 @@ public class Fund {
   }
 
   /**
-   * The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.
+   * The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Master and Feeder are deprecated: the structural role of a fund now lives on its fund structure node, and a fund with either type cannot be a member of a fund structure. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.
    * @return type
    */
   @javax.annotation.Nullable
@@ -442,6 +448,25 @@ public class Fund {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+
+  public Fund taxTransparency(String taxTransparency) {
+    this.taxTransparency = taxTransparency;
+    return this;
+  }
+
+  /**
+   * Whether the Fund is looked through for tax: Transparent passes its income and gains to its holders as their own, Opaque is taxed in its own right. Optional; if not set, a TaxBlocker is Opaque and a CarryVehicle or GPInterestHolder is Transparent. A fund structure requires it on every SPV and AIV member. Available values: Transparent, Opaque.
+   * @return taxTransparency
+   */
+  @javax.annotation.Nullable
+  public String getTaxTransparency() {
+    return taxTransparency;
+  }
+
+  public void setTaxTransparency(String taxTransparency) {
+    this.taxTransparency = taxTransparency;
   }
 
 
@@ -734,6 +759,7 @@ public class Fund {
         Objects.equals(this.aborId, fund.aborId) &&
         Objects.equals(this.shareClassInstruments, fund.shareClassInstruments) &&
         Objects.equals(this.type, fund.type) &&
+        Objects.equals(this.taxTransparency, fund.taxTransparency) &&
         Objects.equals(this.inceptionDate, fund.inceptionDate) &&
         Objects.equals(this.decimalPlaces, fund.decimalPlaces) &&
         Objects.equals(this.yearEndDate, fund.yearEndDate) &&
@@ -754,7 +780,7 @@ public class Fund {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shortCode, aborId, shareClassInstruments, type, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, version, links);
+    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shortCode, aborId, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -780,6 +806,7 @@ public class Fund {
     sb.append("    aborId: ").append(toIndentedString(aborId)).append("\n");
     sb.append("    shareClassInstruments: ").append(toIndentedString(shareClassInstruments)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    taxTransparency: ").append(toIndentedString(taxTransparency)).append("\n");
     sb.append("    inceptionDate: ").append(toIndentedString(inceptionDate)).append("\n");
     sb.append("    decimalPlaces: ").append(toIndentedString(decimalPlaces)).append("\n");
     sb.append("    yearEndDate: ").append(toIndentedString(yearEndDate)).append("\n");

@@ -60,7 +60,7 @@ public class LauncherSummaries {
   }
 
   /**
-   * A sentence that says when the Launcher starts a run, for example \&quot;At 09:00 every weekday, London time\&quot;.              Null for an Event Launcher, which has no schedule
+   * A sentence that says when the Launcher starts a run, for example \&quot;Weekly on Mon at 09:00, rolled forward to the next business day\&quot;.              Null for an Event Launcher, which has no schedule
    * @return schedule
    */
   @javax.annotation.Nullable

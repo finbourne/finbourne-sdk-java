@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.workflow.model;
 
 import com.finbourne.sdk.services.workflow.model.ChildTaskDefinitionEdge;
+import com.finbourne.sdk.services.workflow.model.LauncherEdge;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,10 +35,11 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The edges of a Workflow structure graph — the parent-child relationships between Task Definitions
+ * The edges of a Workflow structure graph — the parent-child relationships between Task Definitions and the relationships between Launchers and the Task Definitions they start
  */
 @JsonPropertyOrder({
-  WorkflowStructureEdges.JSON_PROPERTY_CHILD_TASK_DEFINITIONS
+  WorkflowStructureEdges.JSON_PROPERTY_CHILD_TASK_DEFINITIONS,
+  WorkflowStructureEdges.JSON_PROPERTY_LAUNCHERS
 })
 
 public class WorkflowStructureEdges {
@@ -45,6 +47,11 @@ public class WorkflowStructureEdges {
   @JsonProperty(JSON_PROPERTY_CHILD_TASK_DEFINITIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ChildTaskDefinitionEdge> childTaskDefinitions;
+
+  public static final String JSON_PROPERTY_LAUNCHERS = "launchers";
+  @JsonProperty(JSON_PROPERTY_LAUNCHERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<LauncherEdge> launchers;
 
   public WorkflowStructureEdges() {
   }
@@ -76,6 +83,33 @@ public class WorkflowStructureEdges {
   }
 
 
+  public WorkflowStructureEdges launchers(List<LauncherEdge> launchers) {
+    this.launchers = launchers;
+    return this;
+  }
+
+  public WorkflowStructureEdges addLaunchersItem(LauncherEdge launchersItem) {
+    if (this.launchers == null) {
+      this.launchers = new ArrayList<>();
+    }
+    this.launchers.add(launchersItem);
+    return this;
+  }
+
+  /**
+   * The Launcher relationships. There is one entry per Launcher in nodes.launchers, in the same order
+   * @return launchers
+   */
+  @javax.annotation.Nullable
+  public List<LauncherEdge> getLaunchers() {
+    return launchers;
+  }
+
+  public void setLaunchers(List<LauncherEdge> launchers) {
+    this.launchers = launchers;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -85,7 +119,8 @@ public class WorkflowStructureEdges {
       return false;
     }
     WorkflowStructureEdges workflowStructureEdges = (WorkflowStructureEdges) o;
-    return Objects.equals(this.childTaskDefinitions, workflowStructureEdges.childTaskDefinitions);
+    return Objects.equals(this.childTaskDefinitions, workflowStructureEdges.childTaskDefinitions) &&
+        Objects.equals(this.launchers, workflowStructureEdges.launchers);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -94,7 +129,7 @@ public class WorkflowStructureEdges {
 
   @Override
  public int hashCode() {
-    return Objects.hash(childTaskDefinitions);
+    return Objects.hash(childTaskDefinitions, launchers);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -109,6 +144,7 @@ public class WorkflowStructureEdges {
     StringBuilder sb = new StringBuilder();
     sb.append("class WorkflowStructureEdges {\n");
     sb.append("    childTaskDefinitions: ").append(toIndentedString(childTaskDefinitions)).append("\n");
+    sb.append("    launchers: ").append(toIndentedString(launchers)).append("\n");
     sb.append("}");
     return sb.toString();
   }

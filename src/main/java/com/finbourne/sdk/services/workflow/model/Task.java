@@ -60,6 +60,9 @@ import com.finbourne.sdk.JSON;
   Task.JSON_PROPERTY_ULTIMATE_PARENT_TASK,
   Task.JSON_PROPERTY_PARENT_TASK,
   Task.JSON_PROPERTY_CHILD_TASKS,
+  Task.JSON_PROPERTY_PREVIOUS_TASK,
+  Task.JSON_PROPERTY_NEXT_TASK,
+  Task.JSON_PROPERTY_NEXT_TASK_INITIAL_TRIGGER,
   Task.JSON_PROPERTY_CORRELATION_IDS,
   Task.JSON_PROPERTY_VERSION,
   Task.JSON_PROPERTY_TERMINAL_STATE,
@@ -138,6 +141,21 @@ public class Task {
   @JsonProperty(JSON_PROPERTY_CHILD_TASKS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<TaskSummary> childTasks;
+
+  public static final String JSON_PROPERTY_PREVIOUS_TASK = "previousTask";
+  @JsonProperty(JSON_PROPERTY_PREVIOUS_TASK)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private TaskSummary previousTask;
+
+  public static final String JSON_PROPERTY_NEXT_TASK = "nextTask";
+  @JsonProperty(JSON_PROPERTY_NEXT_TASK)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private TaskSummary nextTask;
+
+  public static final String JSON_PROPERTY_NEXT_TASK_INITIAL_TRIGGER = "nextTaskInitialTrigger";
+  @JsonProperty(JSON_PROPERTY_NEXT_TASK_INITIAL_TRIGGER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String nextTaskInitialTrigger;
 
   public static final String JSON_PROPERTY_CORRELATION_IDS = "correlationIds";
   @JsonProperty(JSON_PROPERTY_CORRELATION_IDS)
@@ -455,6 +473,63 @@ public class Task {
 
   public void setChildTasks(List<TaskSummary> childTasks) {
     this.childTasks = childTasks;
+  }
+
+
+  public Task previousTask(TaskSummary previousTask) {
+    this.previousTask = previousTask;
+    return this;
+  }
+
+  /**
+   * Get previousTask
+   * @return previousTask
+   */
+  @javax.annotation.Nullable
+  public TaskSummary getPreviousTask() {
+    return previousTask;
+  }
+
+  public void setPreviousTask(TaskSummary previousTask) {
+    this.previousTask = previousTask;
+  }
+
+
+  public Task nextTask(TaskSummary nextTask) {
+    this.nextTask = nextTask;
+    return this;
+  }
+
+  /**
+   * Get nextTask
+   * @return nextTask
+   */
+  @javax.annotation.Nullable
+  public TaskSummary getNextTask() {
+    return nextTask;
+  }
+
+  public void setNextTask(TaskSummary nextTask) {
+    this.nextTask = nextTask;
+  }
+
+
+  public Task nextTaskInitialTrigger(String nextTaskInitialTrigger) {
+    this.nextTaskInitialTrigger = nextTaskInitialTrigger;
+    return this;
+  }
+
+  /**
+   * The trigger this Task&#39;s next Task should receive when this Task completes, if any
+   * @return nextTaskInitialTrigger
+   */
+  @javax.annotation.Nullable
+  public String getNextTaskInitialTrigger() {
+    return nextTaskInitialTrigger;
+  }
+
+  public void setNextTaskInitialTrigger(String nextTaskInitialTrigger) {
+    this.nextTaskInitialTrigger = nextTaskInitialTrigger;
   }
 
 
@@ -807,6 +882,9 @@ public class Task {
         Objects.equals(this.ultimateParentTask, task.ultimateParentTask) &&
         Objects.equals(this.parentTask, task.parentTask) &&
         Objects.equals(this.childTasks, task.childTasks) &&
+        Objects.equals(this.previousTask, task.previousTask) &&
+        Objects.equals(this.nextTask, task.nextTask) &&
+        Objects.equals(this.nextTaskInitialTrigger, task.nextTaskInitialTrigger) &&
         Objects.equals(this.correlationIds, task.correlationIds) &&
         Objects.equals(this.version, task.version) &&
         Objects.equals(this.terminalState, task.terminalState) &&
@@ -831,7 +909,7 @@ public class Task {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, taskDefinitionId, taskDefinitionVersion, taskDefinitionDisplayName, workflowId, workflowDisplayName, workflowRun, state, stateDisplayName, ultimateParentTask, parentTask, childTasks, correlationIds, version, terminalState, asAtLastTransition, fields, stackingKey, stack, actionLogIdCreated, actionLogIdModified, actionLogIdSubmitted, hierarchicalPosition, completionStatus, openDuration, openDurationSinceLastUpdate, openDurationSinceLastTransition, properties);
+    return Objects.hash(id, taskDefinitionId, taskDefinitionVersion, taskDefinitionDisplayName, workflowId, workflowDisplayName, workflowRun, state, stateDisplayName, ultimateParentTask, parentTask, childTasks, previousTask, nextTask, nextTaskInitialTrigger, correlationIds, version, terminalState, asAtLastTransition, fields, stackingKey, stack, actionLogIdCreated, actionLogIdModified, actionLogIdSubmitted, hierarchicalPosition, completionStatus, openDuration, openDurationSinceLastUpdate, openDurationSinceLastTransition, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -857,6 +935,9 @@ public class Task {
     sb.append("    ultimateParentTask: ").append(toIndentedString(ultimateParentTask)).append("\n");
     sb.append("    parentTask: ").append(toIndentedString(parentTask)).append("\n");
     sb.append("    childTasks: ").append(toIndentedString(childTasks)).append("\n");
+    sb.append("    previousTask: ").append(toIndentedString(previousTask)).append("\n");
+    sb.append("    nextTask: ").append(toIndentedString(nextTask)).append("\n");
+    sb.append("    nextTaskInitialTrigger: ").append(toIndentedString(nextTaskInitialTrigger)).append("\n");
     sb.append("    correlationIds: ").append(toIndentedString(correlationIds)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    terminalState: ").append(toIndentedString(terminalState)).append("\n");

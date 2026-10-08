@@ -55,6 +55,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   RecResult.JSON_PROPERTY_ID,
+  RecResult.JSON_PROPERTY_RESULT_NUMBER,
+  RecResult.JSON_PROPERTY_FIRST_RUN_SEEN,
   RecResult.JSON_PROPERTY_REC_TYPE,
   RecResult.JSON_PROPERTY_INSTANCE_ID,
   RecResult.JSON_PROPERTY_REC_DEFINITION_ID,
@@ -85,6 +87,16 @@ public class RecResult {
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String id;
+
+  public static final String JSON_PROPERTY_RESULT_NUMBER = "resultNumber";
+  @JsonProperty(JSON_PROPERTY_RESULT_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Integer resultNumber;
+
+  public static final String JSON_PROPERTY_FIRST_RUN_SEEN = "firstRunSeen";
+  @JsonProperty(JSON_PROPERTY_FIRST_RUN_SEEN)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Integer firstRunSeen;
 
   public static final String JSON_PROPERTY_REC_TYPE = "recType";
   @JsonProperty(JSON_PROPERTY_REC_TYPE)
@@ -210,7 +222,7 @@ public class RecResult {
   }
 
   /**
-   * The system-generated identifier for the rec result. Comprises the rec definition id, the instance id, the rec type and the core rule values.
+   * The id of the result within its run: its result type and result number, e.g. &#39;break-3&#39;. Unique within one run of one rec type of an instance; the same id in another run of the instance names the same result, for as long as it keeps its result type.
    * @return id
    */
   @javax.annotation.Nonnull
@@ -220,6 +232,44 @@ public class RecResult {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+
+  public RecResult resultNumber(Integer resultNumber) {
+    this.resultNumber = resultNumber;
+    return this;
+  }
+
+  /**
+   * The result&#39;s number within its result type. Kept across runs while the result keeps its type; never reused once assigned.
+   * @return resultNumber
+   */
+  @javax.annotation.Nonnull
+  public Integer getResultNumber() {
+    return resultNumber;
+  }
+
+  public void setResultNumber(Integer resultNumber) {
+    this.resultNumber = resultNumber;
+  }
+
+
+  public RecResult firstRunSeen(Integer firstRunSeen) {
+    this.firstRunSeen = firstRunSeen;
+    return this;
+  }
+
+  /**
+   * The run in which the result was first assigned its id.
+   * @return firstRunSeen
+   */
+  @javax.annotation.Nonnull
+  public Integer getFirstRunSeen() {
+    return firstRunSeen;
+  }
+
+  public void setFirstRunSeen(Integer firstRunSeen) {
+    this.firstRunSeen = firstRunSeen;
   }
 
 
@@ -726,6 +776,8 @@ public class RecResult {
     }
     RecResult recResult = (RecResult) o;
     return Objects.equals(this.id, recResult.id) &&
+        Objects.equals(this.resultNumber, recResult.resultNumber) &&
+        Objects.equals(this.firstRunSeen, recResult.firstRunSeen) &&
         Objects.equals(this.recType, recResult.recType) &&
         Objects.equals(this.instanceId, recResult.instanceId) &&
         Objects.equals(this.recDefinitionId, recResult.recDefinitionId) &&
@@ -757,7 +809,7 @@ public class RecResult {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, recType, instanceId, recDefinitionId, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, linkedResults, comments, properties, assignedUser, assignedRole, href, version, links);
+    return Objects.hash(id, resultNumber, firstRunSeen, recType, instanceId, recDefinitionId, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, linkedResults, comments, properties, assignedUser, assignedRole, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -772,6 +824,8 @@ public class RecResult {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecResult {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    resultNumber: ").append(toIndentedString(resultNumber)).append("\n");
+    sb.append("    firstRunSeen: ").append(toIndentedString(firstRunSeen)).append("\n");
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
     sb.append("    instanceId: ").append(toIndentedString(instanceId)).append("\n");
     sb.append("    recDefinitionId: ").append(toIndentedString(recDefinitionId)).append("\n");

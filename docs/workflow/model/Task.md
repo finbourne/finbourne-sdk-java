@@ -18,6 +18,9 @@ Name | Type | Description | Notes
 **ultimateParentTask** | [**TaskSummary**](TaskSummary.md) |  | [default to TaskSummary]
 **parentTask** | [**TaskSummary**](TaskSummary.md) |  | [optional] [default to TaskSummary]
 **childTasks** | [**List&lt;TaskSummary&gt;**](TaskSummary.md) | This Task&#39;s child tasks | [optional] [default to List<TaskSummary>]
+**previousTask** | [**TaskSummary**](TaskSummary.md) |  | [optional] [default to TaskSummary]
+**nextTask** | [**TaskSummary**](TaskSummary.md) |  | [optional] [default to TaskSummary]
+**nextTaskInitialTrigger** | **String** | The trigger this Task&#39;s next Task should receive when this Task completes, if any | [optional] [default to String]
 **correlationIds** | **List&lt;String&gt;** | User-provided ID used to link entities and tasks | [optional] [default to List<String>]
 **version** | [**VersionInfo**](VersionInfo.md) |  | [optional] [default to VersionInfo]
 **terminalState** | **Boolean** | True if no onward transitions are possible | [default to Boolean]
@@ -53,6 +56,9 @@ String state = "example state";
 TaskSummary ultimateParentTask = new TaskSummary();
 TaskSummary parentTask = new TaskSummary();
 @javax.annotation.Nullable List<TaskSummary> childTasks = new List<TaskSummary>();
+TaskSummary previousTask = new TaskSummary();
+TaskSummary nextTask = new TaskSummary();
+@javax.annotation.Nullable String nextTaskInitialTrigger = "example nextTaskInitialTrigger";
 @javax.annotation.Nullable List<String> correlationIds = new List<String>();
 VersionInfo version = new VersionInfo();
 Boolean terminalState = true;
@@ -84,6 +90,9 @@ Task taskInstance = new Task()
     .ultimateParentTask(ultimateParentTask)
     .parentTask(parentTask)
     .childTasks(childTasks)
+    .previousTask(previousTask)
+    .nextTask(nextTask)
+    .nextTaskInitialTrigger(nextTaskInitialTrigger)
     .correlationIds(correlationIds)
     .version(version)
     .terminalState(terminalState)

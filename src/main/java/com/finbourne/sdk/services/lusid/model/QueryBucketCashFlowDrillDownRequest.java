@@ -97,7 +97,7 @@ public class QueryBucketCashFlowDrillDownRequest {
 
   public static final String JSON_PROPERTY_REPORT_CURRENCY = "reportCurrency";
   @JsonProperty(JSON_PROPERTY_REPORT_CURRENCY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String reportCurrency;
 
   public static final String JSON_PROPERTY_EXCLUDE_UNSETTLED_TRADES = "excludeUnsettledTrades";
@@ -284,10 +284,10 @@ public class QueryBucketCashFlowDrillDownRequest {
   }
 
   /**
-   * Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.
+   * Optional three letter ISO currency string to convert cashflow amounts into. When supplied, each returned cashflow additionally carries ReportCurrencyAmount and TradeToReportCurrencyRate, converted from its own payment (instrument) currency. When omitted, those two fields are not present on any cashflow: Amount (always in the cashflow&#39;s own payment currency) are unaffected either way.
    * @return reportCurrency
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getReportCurrency() {
     return reportCurrency;
   }

@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.SwingPricingDecision;
 import java.io.IOException;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -34,7 +35,9 @@ import com.finbourne.sdk.JSON;
  * The details of a Fund.
  */
 @JsonPropertyOrder({
-  FundDetails.JSON_PROPERTY_CURRENCY
+  FundDetails.JSON_PROPERTY_CURRENCY,
+  FundDetails.JSON_PROPERTY_PRICING_BASIS,
+  FundDetails.JSON_PROPERTY_SWING_PRICING
 })
 
 public class FundDetails {
@@ -42,6 +45,16 @@ public class FundDetails {
   @JsonProperty(JSON_PROPERTY_CURRENCY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String currency;
+
+  public static final String JSON_PROPERTY_PRICING_BASIS = "pricingBasis";
+  @JsonProperty(JSON_PROPERTY_PRICING_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String pricingBasis;
+
+  public static final String JSON_PROPERTY_SWING_PRICING = "swingPricing";
+  @JsonProperty(JSON_PROPERTY_SWING_PRICING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private SwingPricingDecision swingPricing;
 
   public FundDetails() {
   }
@@ -65,6 +78,44 @@ public class FundDetails {
   }
 
 
+  public FundDetails pricingBasis(String pricingBasis) {
+    this.pricingBasis = pricingBasis;
+    return this;
+  }
+
+  /**
+   * The side of the quote the NAV type valued the fund on: Mid, Bid or Ask. Absent when the NAV type defers to the valuation recipe&#39;s own pricing basis. When the NAV type has a swing pricing rule this is the basis the rule applied.
+   * @return pricingBasis
+   */
+  @javax.annotation.Nullable
+  public String getPricingBasis() {
+    return pricingBasis;
+  }
+
+  public void setPricingBasis(String pricingBasis) {
+    this.pricingBasis = pricingBasis;
+  }
+
+
+  public FundDetails swingPricing(SwingPricingDecision swingPricing) {
+    this.swingPricing = swingPricing;
+    return this;
+  }
+
+  /**
+   * Get swingPricing
+   * @return swingPricing
+   */
+  @javax.annotation.Nullable
+  public SwingPricingDecision getSwingPricing() {
+    return swingPricing;
+  }
+
+  public void setSwingPricing(SwingPricingDecision swingPricing) {
+    this.swingPricing = swingPricing;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -74,7 +125,9 @@ public class FundDetails {
       return false;
     }
     FundDetails fundDetails = (FundDetails) o;
-    return Objects.equals(this.currency, fundDetails.currency);
+    return Objects.equals(this.currency, fundDetails.currency) &&
+        Objects.equals(this.pricingBasis, fundDetails.pricingBasis) &&
+        Objects.equals(this.swingPricing, fundDetails.swingPricing);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -83,7 +136,7 @@ public class FundDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(currency);
+    return Objects.hash(currency, pricingBasis, swingPricing);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -98,6 +151,8 @@ public class FundDetails {
     StringBuilder sb = new StringBuilder();
     sb.append("class FundDetails {\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
+    sb.append("    pricingBasis: ").append(toIndentedString(pricingBasis)).append("\n");
+    sb.append("    swingPricing: ").append(toIndentedString(swingPricing)).append("\n");
     sb.append("}");
     return sb.toString();
   }

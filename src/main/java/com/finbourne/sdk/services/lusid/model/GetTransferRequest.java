@@ -138,7 +138,7 @@ public class GetTransferRequest {
   }
 
   /**
-   * Get propertyKeys
+   * A list of property keys from the Transfer domain to decorate onto the transfer. These must have the format {domain}/{scope}/{code}.
    * @return propertyKeys
    */
   @javax.annotation.Nullable

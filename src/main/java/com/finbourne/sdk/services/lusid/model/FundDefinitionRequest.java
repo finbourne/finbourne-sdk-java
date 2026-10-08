@@ -56,6 +56,7 @@ import com.finbourne.sdk.JSON;
   FundDefinitionRequest.JSON_PROPERTY_SHARE_CLASS_INSTRUMENT_SCOPES,
   FundDefinitionRequest.JSON_PROPERTY_SHARE_CLASS_INSTRUMENTS,
   FundDefinitionRequest.JSON_PROPERTY_TYPE,
+  FundDefinitionRequest.JSON_PROPERTY_TAX_TRANSPARENCY,
   FundDefinitionRequest.JSON_PROPERTY_INCEPTION_DATE,
   FundDefinitionRequest.JSON_PROPERTY_DECIMAL_PLACES,
   FundDefinitionRequest.JSON_PROPERTY_PRIMARY_NAV_TYPE,
@@ -120,6 +121,11 @@ public class FundDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String type;
+
+  public static final String JSON_PROPERTY_TAX_TRANSPARENCY = "taxTransparency";
+  @JsonProperty(JSON_PROPERTY_TAX_TRANSPARENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String taxTransparency;
 
   public static final String JSON_PROPERTY_INCEPTION_DATE = "inceptionDate";
   @JsonProperty(JSON_PROPERTY_INCEPTION_DATE)
@@ -379,7 +385,7 @@ public class FundDefinitionRequest {
   }
 
   /**
-   * The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.
+   * The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Master and Feeder are deprecated: the structural role of a fund now lives on its fund structure node, and a fund with either type cannot be a member of a fund structure. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.
    * @return type
    */
   @javax.annotation.Nullable
@@ -389,6 +395,25 @@ public class FundDefinitionRequest {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+
+  public FundDefinitionRequest taxTransparency(String taxTransparency) {
+    this.taxTransparency = taxTransparency;
+    return this;
+  }
+
+  /**
+   * Whether the Fund is looked through for tax: Transparent passes its income and gains to its holders as their own, Opaque is taxed in its own right. Optional; if not set, a TaxBlocker is Opaque and a CarryVehicle or GPInterestHolder is Transparent. A fund structure requires it on every SPV and AIV member. Available values: Transparent, Opaque.
+   * @return taxTransparency
+   */
+  @javax.annotation.Nullable
+  public String getTaxTransparency() {
+    return taxTransparency;
+  }
+
+  public void setTaxTransparency(String taxTransparency) {
+    this.taxTransparency = taxTransparency;
   }
 
 
@@ -569,6 +594,7 @@ public class FundDefinitionRequest {
         Objects.equals(this.shareClassInstrumentScopes, fundDefinitionRequest.shareClassInstrumentScopes) &&
         Objects.equals(this.shareClassInstruments, fundDefinitionRequest.shareClassInstruments) &&
         Objects.equals(this.type, fundDefinitionRequest.type) &&
+        Objects.equals(this.taxTransparency, fundDefinitionRequest.taxTransparency) &&
         Objects.equals(this.inceptionDate, fundDefinitionRequest.inceptionDate) &&
         Objects.equals(this.decimalPlaces, fundDefinitionRequest.decimalPlaces) &&
         Objects.equals(this.primaryNavType, fundDefinitionRequest.primaryNavType) &&
@@ -584,7 +610,7 @@ public class FundDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, shortCode, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, shareClasses);
+    return Objects.hash(code, shortCode, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, shareClasses);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -609,6 +635,7 @@ public class FundDefinitionRequest {
     sb.append("    shareClassInstrumentScopes: ").append(toIndentedString(shareClassInstrumentScopes)).append("\n");
     sb.append("    shareClassInstruments: ").append(toIndentedString(shareClassInstruments)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    taxTransparency: ").append(toIndentedString(taxTransparency)).append("\n");
     sb.append("    inceptionDate: ").append(toIndentedString(inceptionDate)).append("\n");
     sb.append("    decimalPlaces: ").append(toIndentedString(decimalPlaces)).append("\n");
     sb.append("    primaryNavType: ").append(toIndentedString(primaryNavType)).append("\n");

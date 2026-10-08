@@ -17,6 +17,7 @@ All URIs are relative to *http://localhost*
 | [**fetchQueryResultXml**](SqlBackgroundExecutionApi.md#fetchQueryResultXml) | **GET** /honeycomb/api/SqlBackground/{executionId}/xml | FetchQueryResultXml: Fetch the result of a query as XML |
 | [**getHistoricalFeedback**](SqlBackgroundExecutionApi.md#getHistoricalFeedback) | **GET** /honeycomb/api/SqlBackground/{executionId}/historicalFeedback | GetHistoricalFeedback: View historical query progress (for older queries) |
 | [**getProgressOf**](SqlBackgroundExecutionApi.md#getProgressOf) | **GET** /honeycomb/api/SqlBackground/{executionId} | GetProgressOf: View query progress up to this point. |
+| [**listQueries**](SqlBackgroundExecutionApi.md#listQueries) | **GET** /honeycomb/api/SqlBackground | [EXPERIMENTAL] ListQueries: List the background queries available to the calling user |
 | [**saveQueryResultToDrive**](SqlBackgroundExecutionApi.md#saveQueryResultToDrive) | **GET** /honeycomb/api/SqlBackground/{executionId}/drive | [EXPERIMENTAL] SaveQueryResultToDrive: Saves the query results directly to Drive |
 | [**startQuery**](SqlBackgroundExecutionApi.md#startQuery) | **PUT** /honeycomb/api/SqlBackground | StartQuery: Start to Execute Sql in the background |
 
@@ -1173,6 +1174,81 @@ public class SqlBackgroundExecutionApiExample {
 ### Return type
 
 [**BackgroundQueryProgressResponse**](../model/BackgroundQueryProgressResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listQueries
+
+> List&lt;BackgroundQueryListItem&gt; listQueries(sqlLike)
+
+[EXPERIMENTAL] ListQueries: List the background queries available to the calling user
+
+Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are.  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 Unauthorized
+
+### Example
+
+```java
+import com.finbourne.sdk.services.luminesce.model.*;
+import com.finbourne.sdk.services.luminesce.api.SqlBackgroundExecutionApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class SqlBackgroundExecutionApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        SqlBackgroundExecutionApi apiInstance = apiFactory.build(SqlBackgroundExecutionApi.class);
+        String sqlLike = "sqlLike_example"; // String | An optional SQL-LIKE style filter on the LuminesceSql of the queries (manually include wildcards if desired).
+        try {
+            // uncomment the below to set overrides at the request level
+            // List<BackgroundQueryListItem> result = apiInstance.listQueries(sqlLike).execute(opts);
+
+            List<BackgroundQueryListItem> result = apiInstance.listQueries(sqlLike).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SqlBackgroundExecutionApi#listQueries");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **sqlLike** | **String**| An optional SQL-LIKE style filter on the LuminesceSql of the queries (manually include wildcards if desired). | [optional] |
+
+### Return type
+
+[**List&lt;BackgroundQueryListItem&gt;**](../model/BackgroundQueryListItem.md)
 
 
 ### HTTP request headers

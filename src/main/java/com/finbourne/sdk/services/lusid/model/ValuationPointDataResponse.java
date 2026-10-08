@@ -19,6 +19,7 @@ import com.finbourne.sdk.services.lusid.model.FundValuationPointData;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.ShareClassData;
 import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
+import com.finbourne.sdk.services.lusid.model.ValuationPointDiagnostic;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -55,6 +56,9 @@ import com.finbourne.sdk.JSON;
   ValuationPointDataResponse.JSON_PROPERTY_APPORTIONMENT_RESULTS,
   ValuationPointDataResponse.JSON_PROPERTY_BUCKET_SET_RESULTS,
   ValuationPointDataResponse.JSON_PROPERTY_STAGED_MODIFICATIONS,
+  ValuationPointDataResponse.JSON_PROPERTY_IS_BACKFILLED,
+  ValuationPointDataResponse.JSON_PROPERTY_APPLY_CLEAR_DOWN,
+  ValuationPointDataResponse.JSON_PROPERTY_DIAGNOSTICS,
   ValuationPointDataResponse.JSON_PROPERTY_LINKS
 })
 
@@ -113,6 +117,21 @@ public class ValuationPointDataResponse {
   @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private StagedModificationsInfo stagedModifications;
+
+  public static final String JSON_PROPERTY_IS_BACKFILLED = "isBackfilled";
+  @JsonProperty(JSON_PROPERTY_IS_BACKFILLED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean isBackfilled;
+
+  public static final String JSON_PROPERTY_APPLY_CLEAR_DOWN = "applyClearDown";
+  @JsonProperty(JSON_PROPERTY_APPLY_CLEAR_DOWN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean applyClearDown;
+
+  public static final String JSON_PROPERTY_DIAGNOSTICS = "diagnostics";
+  @JsonProperty(JSON_PROPERTY_DIAGNOSTICS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ValuationPointDiagnostic> diagnostics;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -355,6 +374,71 @@ public class ValuationPointDataResponse {
   }
 
 
+  public ValuationPointDataResponse isBackfilled(Boolean isBackfilled) {
+    this.isBackfilled = isBackfilled;
+    return this;
+  }
+
+  /**
+   * Set to True if the Valuation Point has backfilled bucket set results, False otherwise.
+   * @return isBackfilled
+   */
+  @javax.annotation.Nullable
+  public Boolean getIsBackfilled() {
+    return isBackfilled;
+  }
+
+  public void setIsBackfilled(Boolean isBackfilled) {
+    this.isBackfilled = isBackfilled;
+  }
+
+
+  public ValuationPointDataResponse applyClearDown(Boolean applyClearDown) {
+    this.applyClearDown = applyClearDown;
+    return this;
+  }
+
+  /**
+   * Set to True if the Valuation Point applies a clear down, False otherwise. The Valuation Point shows its bucket values before the clear down, and the next Valuation Point opens from the balances after it.
+   * @return applyClearDown
+   */
+  @javax.annotation.Nullable
+  public Boolean getApplyClearDown() {
+    return applyClearDown;
+  }
+
+  public void setApplyClearDown(Boolean applyClearDown) {
+    this.applyClearDown = applyClearDown;
+  }
+
+
+  public ValuationPointDataResponse diagnostics(List<ValuationPointDiagnostic> diagnostics) {
+    this.diagnostics = diagnostics;
+    return this;
+  }
+
+  public ValuationPointDataResponse addDiagnosticsItem(ValuationPointDiagnostic diagnosticsItem) {
+    if (this.diagnostics == null) {
+      this.diagnostics = new ArrayList<>();
+    }
+    this.diagnostics.add(diagnosticsItem);
+    return this;
+  }
+
+  /**
+   * Findings made while striking the valuation point that did not stop it but should be looked at, such as a fund structure holder whose declared sharing percentage in a member has drifted from the share its contributions make of that member&#39;s capital. Absent when there are none.
+   * @return diagnostics
+   */
+  @javax.annotation.Nullable
+  public List<ValuationPointDiagnostic> getDiagnostics() {
+    return diagnostics;
+  }
+
+  public void setDiagnostics(List<ValuationPointDiagnostic> diagnostics) {
+    this.diagnostics = diagnostics;
+  }
+
+
   public ValuationPointDataResponse links(List<Link> links) {
     this.links = links;
     return this;
@@ -402,6 +486,9 @@ public class ValuationPointDataResponse {
         Objects.equals(this.apportionmentResults, valuationPointDataResponse.apportionmentResults) &&
         Objects.equals(this.bucketSetResults, valuationPointDataResponse.bucketSetResults) &&
         Objects.equals(this.stagedModifications, valuationPointDataResponse.stagedModifications) &&
+        Objects.equals(this.isBackfilled, valuationPointDataResponse.isBackfilled) &&
+        Objects.equals(this.applyClearDown, valuationPointDataResponse.applyClearDown) &&
+        Objects.equals(this.diagnostics, valuationPointDataResponse.diagnostics) &&
         Objects.equals(this.links, valuationPointDataResponse.links);
   }
 
@@ -411,7 +498,7 @@ public class ValuationPointDataResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, type, status, fundDetails, fundValuationPointData, shareClassData, valuationPointCode, previousValuationPointCode, apportionmentResults, bucketSetResults, stagedModifications, links);
+    return Objects.hash(href, type, status, fundDetails, fundValuationPointData, shareClassData, valuationPointCode, previousValuationPointCode, apportionmentResults, bucketSetResults, stagedModifications, isBackfilled, applyClearDown, diagnostics, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -436,6 +523,9 @@ public class ValuationPointDataResponse {
     sb.append("    apportionmentResults: ").append(toIndentedString(apportionmentResults)).append("\n");
     sb.append("    bucketSetResults: ").append(toIndentedString(bucketSetResults)).append("\n");
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
+    sb.append("    isBackfilled: ").append(toIndentedString(isBackfilled)).append("\n");
+    sb.append("    applyClearDown: ").append(toIndentedString(applyClearDown)).append("\n");
+    sb.append("    diagnostics: ").append(toIndentedString(diagnostics)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

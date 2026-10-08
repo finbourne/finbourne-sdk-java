@@ -57,7 +57,8 @@ import com.finbourne.sdk.JSON;
   TransactionSettlementInstruction.JSON_PROPERTY_SETTLEMENT_IN_LIEU,
   TransactionSettlementInstruction.JSON_PROPERTY_IS_ACTIVE,
   TransactionSettlementInstruction.JSON_PROPERTY_PROPERTIES,
-  TransactionSettlementInstruction.JSON_PROPERTY_VERSION
+  TransactionSettlementInstruction.JSON_PROPERTY_VERSION,
+  TransactionSettlementInstruction.JSON_PROPERTY_PROBLEM_CODE
 })
 
 public class TransactionSettlementInstruction {
@@ -145,6 +146,11 @@ public class TransactionSettlementInstruction {
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Version version;
+
+  public static final String JSON_PROPERTY_PROBLEM_CODE = "problemCode";
+  @JsonProperty(JSON_PROPERTY_PROBLEM_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String problemCode;
 
   public TransactionSettlementInstruction() {
   }
@@ -496,6 +502,25 @@ public class TransactionSettlementInstruction {
   }
 
 
+  public TransactionSettlementInstruction problemCode(String problemCode) {
+    this.problemCode = problemCode;
+    return this;
+  }
+
+  /**
+   * Why the settlement instruction was not applied. Set only when the status is Invalid, Orphan or Rejected.
+   * @return problemCode
+   */
+  @javax.annotation.Nullable
+  public String getProblemCode() {
+    return problemCode;
+  }
+
+  public void setProblemCode(String problemCode) {
+    this.problemCode = problemCode;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -521,7 +546,8 @@ public class TransactionSettlementInstruction {
         Objects.equals(this.settlementInLieu, transactionSettlementInstruction.settlementInLieu) &&
         Objects.equals(this.isActive, transactionSettlementInstruction.isActive) &&
         Objects.equals(this.properties, transactionSettlementInstruction.properties) &&
-        Objects.equals(this.version, transactionSettlementInstruction.version);
+        Objects.equals(this.version, transactionSettlementInstruction.version) &&
+        Objects.equals(this.problemCode, transactionSettlementInstruction.problemCode);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -530,7 +556,7 @@ public class TransactionSettlementInstruction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(settlementInstructionId, instructionType, actualSettlementDate, units, transactionId, settlementCategory, lusidInstrumentId, contractualSettlementDate, subHoldingKeyOverrides, custodianAccountOverride, instrumentIdentifiers, status, instructionToPortfolioRate, settlementInLieu, isActive, properties, version);
+    return Objects.hash(settlementInstructionId, instructionType, actualSettlementDate, units, transactionId, settlementCategory, lusidInstrumentId, contractualSettlementDate, subHoldingKeyOverrides, custodianAccountOverride, instrumentIdentifiers, status, instructionToPortfolioRate, settlementInLieu, isActive, properties, version, problemCode);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -561,6 +587,7 @@ public class TransactionSettlementInstruction {
     sb.append("    isActive: ").append(toIndentedString(isActive)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    problemCode: ").append(toIndentedString(problemCode)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -45,7 +45,8 @@ import com.finbourne.sdk.JSON;
   TargetTaxLot.JSON_PROPERTY_NOTIONAL_COST,
   TargetTaxLot.JSON_PROPERTY_VARIATION_MARGIN,
   TargetTaxLot.JSON_PROPERTY_VARIATION_MARGIN_PORTFOLIO_CCY,
-  TargetTaxLot.JSON_PROPERTY_AMORTISED_COST
+  TargetTaxLot.JSON_PROPERTY_AMORTISED_COST,
+  TargetTaxLot.JSON_PROPERTY_CURRENT_FACE
 })
 
 public class TargetTaxLot {
@@ -98,6 +99,11 @@ public class TargetTaxLot {
   @JsonProperty(JSON_PROPERTY_AMORTISED_COST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal amortisedCost;
+
+  public static final String JSON_PROPERTY_CURRENT_FACE = "currentFace";
+  @JsonProperty(JSON_PROPERTY_CURRENT_FACE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal currentFace;
 
   public TargetTaxLot() {
   }
@@ -292,6 +298,25 @@ public class TargetTaxLot {
   }
 
 
+  public TargetTaxLot currentFace(java.math.BigDecimal currentFace) {
+    this.currentFace = currentFace;
+    return this;
+  }
+
+  /**
+   * The current face of the tax-lot, i.e. its outstanding notional after any reduction by the instrument&#39;s pool factor. If supplied, this value seeds the tax-lot&#39;s current face, so that later paydowns on an asset-backed instrument reduce the cost against it; if not supplied, a tax-lot that already has a current face keeps its pool factor as its units change.
+   * @return currentFace
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getCurrentFace() {
+    return currentFace;
+  }
+
+  public void setCurrentFace(java.math.BigDecimal currentFace) {
+    this.currentFace = currentFace;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -310,7 +335,8 @@ public class TargetTaxLot {
         (this.notionalCost == null ? targetTaxLot.notionalCost == null : (targetTaxLot.notionalCost != null && this.notionalCost.compareTo(targetTaxLot.getNotionalCost()) == 0)) &&
         (this.variationMargin == null ? targetTaxLot.variationMargin == null : (targetTaxLot.variationMargin != null && this.variationMargin.compareTo(targetTaxLot.getVariationMargin()) == 0)) &&
         (this.variationMarginPortfolioCcy == null ? targetTaxLot.variationMarginPortfolioCcy == null : (targetTaxLot.variationMarginPortfolioCcy != null && this.variationMarginPortfolioCcy.compareTo(targetTaxLot.getVariationMarginPortfolioCcy()) == 0)) &&
-        (this.amortisedCost == null ? targetTaxLot.amortisedCost == null : (targetTaxLot.amortisedCost != null && this.amortisedCost.compareTo(targetTaxLot.getAmortisedCost()) == 0));
+        (this.amortisedCost == null ? targetTaxLot.amortisedCost == null : (targetTaxLot.amortisedCost != null && this.amortisedCost.compareTo(targetTaxLot.getAmortisedCost()) == 0)) &&
+        (this.currentFace == null ? targetTaxLot.currentFace == null : (targetTaxLot.currentFace != null && this.currentFace.compareTo(targetTaxLot.getCurrentFace()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -319,7 +345,7 @@ public class TargetTaxLot {
 
   @Override
  public int hashCode() {
-    return Objects.hash(units, cost, portfolioCost, price, purchaseDate, settlementDate, notionalCost, variationMargin, variationMarginPortfolioCcy, amortisedCost);
+    return Objects.hash(units, cost, portfolioCost, price, purchaseDate, settlementDate, notionalCost, variationMargin, variationMarginPortfolioCcy, amortisedCost, currentFace);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -343,6 +369,7 @@ public class TargetTaxLot {
     sb.append("    variationMargin: ").append(toIndentedString(variationMargin)).append("\n");
     sb.append("    variationMarginPortfolioCcy: ").append(toIndentedString(variationMarginPortfolioCcy)).append("\n");
     sb.append("    amortisedCost: ").append(toIndentedString(amortisedCost)).append("\n");
+    sb.append("    currentFace: ").append(toIndentedString(currentFace)).append("\n");
     sb.append("}");
     return sb.toString();
   }

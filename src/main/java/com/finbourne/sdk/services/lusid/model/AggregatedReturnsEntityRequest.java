@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AggregatedReturnsEntityId;
+import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.ReturnsMetric;
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -40,13 +41,13 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   AggregatedReturnsEntityRequest.JSON_PROPERTY_ENTITY,
-  AggregatedReturnsEntityRequest.JSON_PROPERTY_RETURNS_SCOPE,
-  AggregatedReturnsEntityRequest.JSON_PROPERTY_RETURNS_CODE,
+  AggregatedReturnsEntityRequest.JSON_PROPERTY_RETURNS_ID,
   AggregatedReturnsEntityRequest.JSON_PROPERTY_METRICS,
   AggregatedReturnsEntityRequest.JSON_PROPERTY_PERIOD,
   AggregatedReturnsEntityRequest.JSON_PROPERTY_FROM_EFFECTIVE_AT,
   AggregatedReturnsEntityRequest.JSON_PROPERTY_TO_EFFECTIVE_AT,
-  AggregatedReturnsEntityRequest.JSON_PROPERTY_AS_AT
+  AggregatedReturnsEntityRequest.JSON_PROPERTY_AS_AT,
+  AggregatedReturnsEntityRequest.JSON_PROPERTY_CURRENCY
 })
 
 public class AggregatedReturnsEntityRequest {
@@ -55,15 +56,10 @@ public class AggregatedReturnsEntityRequest {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private AggregatedReturnsEntityId entity;
 
-  public static final String JSON_PROPERTY_RETURNS_SCOPE = "returnsScope";
-  @JsonProperty(JSON_PROPERTY_RETURNS_SCOPE)
+  public static final String JSON_PROPERTY_RETURNS_ID = "returnsId";
+  @JsonProperty(JSON_PROPERTY_RETURNS_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String returnsScope;
-
-  public static final String JSON_PROPERTY_RETURNS_CODE = "returnsCode";
-  @JsonProperty(JSON_PROPERTY_RETURNS_CODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String returnsCode;
+  private ResourceId returnsId;
 
   public static final String JSON_PROPERTY_METRICS = "metrics";
   @JsonProperty(JSON_PROPERTY_METRICS)
@@ -90,6 +86,11 @@ public class AggregatedReturnsEntityRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime asAt;
 
+  public static final String JSON_PROPERTY_CURRENCY = "currency";
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String currency;
+
   public AggregatedReturnsEntityRequest() {
   }
 
@@ -112,41 +113,22 @@ public class AggregatedReturnsEntityRequest {
   }
 
 
-  public AggregatedReturnsEntityRequest returnsScope(String returnsScope) {
-    this.returnsScope = returnsScope;
+  public AggregatedReturnsEntityRequest returnsId(ResourceId returnsId) {
+    this.returnsId = returnsId;
     return this;
   }
 
   /**
-   * Get returnsScope
-   * @return returnsScope
+   * Get returnsId
+   * @return returnsId
    */
   @javax.annotation.Nonnull
-  public String getReturnsScope() {
-    return returnsScope;
+  public ResourceId getReturnsId() {
+    return returnsId;
   }
 
-  public void setReturnsScope(String returnsScope) {
-    this.returnsScope = returnsScope;
-  }
-
-
-  public AggregatedReturnsEntityRequest returnsCode(String returnsCode) {
-    this.returnsCode = returnsCode;
-    return this;
-  }
-
-  /**
-   * Get returnsCode
-   * @return returnsCode
-   */
-  @javax.annotation.Nonnull
-  public String getReturnsCode() {
-    return returnsCode;
-  }
-
-  public void setReturnsCode(String returnsCode) {
-    this.returnsCode = returnsCode;
+  public void setReturnsId(ResourceId returnsId) {
+    this.returnsId = returnsId;
   }
 
 
@@ -253,6 +235,25 @@ public class AggregatedReturnsEntityRequest {
   }
 
 
+  public AggregatedReturnsEntityRequest currency(String currency) {
+    this.currency = currency;
+    return this;
+  }
+
+  /**
+   * Get currency
+   * @return currency
+   */
+  @javax.annotation.Nullable
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -263,13 +264,13 @@ public class AggregatedReturnsEntityRequest {
     }
     AggregatedReturnsEntityRequest aggregatedReturnsEntityRequest = (AggregatedReturnsEntityRequest) o;
     return Objects.equals(this.entity, aggregatedReturnsEntityRequest.entity) &&
-        Objects.equals(this.returnsScope, aggregatedReturnsEntityRequest.returnsScope) &&
-        Objects.equals(this.returnsCode, aggregatedReturnsEntityRequest.returnsCode) &&
+        Objects.equals(this.returnsId, aggregatedReturnsEntityRequest.returnsId) &&
         Objects.equals(this.metrics, aggregatedReturnsEntityRequest.metrics) &&
         Objects.equals(this.period, aggregatedReturnsEntityRequest.period) &&
         Objects.equals(this.fromEffectiveAt, aggregatedReturnsEntityRequest.fromEffectiveAt) &&
         Objects.equals(this.toEffectiveAt, aggregatedReturnsEntityRequest.toEffectiveAt) &&
-        Objects.equals(this.asAt, aggregatedReturnsEntityRequest.asAt);
+        Objects.equals(this.asAt, aggregatedReturnsEntityRequest.asAt) &&
+        Objects.equals(this.currency, aggregatedReturnsEntityRequest.currency);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -278,7 +279,7 @@ public class AggregatedReturnsEntityRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(entity, returnsScope, returnsCode, metrics, period, fromEffectiveAt, toEffectiveAt, asAt);
+    return Objects.hash(entity, returnsId, metrics, period, fromEffectiveAt, toEffectiveAt, asAt, currency);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -293,13 +294,13 @@ public class AggregatedReturnsEntityRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class AggregatedReturnsEntityRequest {\n");
     sb.append("    entity: ").append(toIndentedString(entity)).append("\n");
-    sb.append("    returnsScope: ").append(toIndentedString(returnsScope)).append("\n");
-    sb.append("    returnsCode: ").append(toIndentedString(returnsCode)).append("\n");
+    sb.append("    returnsId: ").append(toIndentedString(returnsId)).append("\n");
     sb.append("    metrics: ").append(toIndentedString(metrics)).append("\n");
     sb.append("    period: ").append(toIndentedString(period)).append("\n");
     sb.append("    fromEffectiveAt: ").append(toIndentedString(fromEffectiveAt)).append("\n");
     sb.append("    toEffectiveAt: ").append(toIndentedString(toEffectiveAt)).append("\n");
     sb.append("    asAt: ").append(toIndentedString(asAt)).append("\n");
+    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("}");
     return sb.toString();
   }

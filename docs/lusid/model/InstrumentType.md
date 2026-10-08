@@ -68,6 +68,7 @@ InstrumentType method = InstrumentType.COMMODITY_CALENDAR_SWAP;
 InstrumentType method = InstrumentType.BOND_FORWARD;
 InstrumentType method = InstrumentType.PREFERRED_SHARE;
 InstrumentType method = InstrumentType.CAPITAL_INTEREST;
+InstrumentType method = InstrumentType.WHOLE_LOAN_FACILITY;
 ```
 
 

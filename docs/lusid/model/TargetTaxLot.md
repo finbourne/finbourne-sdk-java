@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **variationMargin** | **java.math.BigDecimal** | The variation margin of the tax-lot&#39;s opening transaction. | [optional] [default to java.math.BigDecimal]
 **variationMarginPortfolioCcy** | **java.math.BigDecimal** | The variation margin in portfolio currency of the tax-lot&#39;s opening transaction. | [optional] [default to java.math.BigDecimal]
 **amortisedCost** | **java.math.BigDecimal** | The amortised cost of the tax-lot in the settlement currency, for example a supplied amortised cost at migration. If supplied, this value seeds the tax-lot&#39;s amortised cost at the adjustment date and amortisation continues forward from it; if not supplied, the amortised cost defaults to the cost of the tax-lot. | [optional] [default to java.math.BigDecimal]
+**currentFace** | **java.math.BigDecimal** | The current face of the tax-lot, i.e. its outstanding notional after any reduction by the instrument&#39;s pool factor. If supplied, this value seeds the tax-lot&#39;s current face, so that later paydowns on an asset-backed instrument reduce the cost against it; if not supplied, a tax-lot that already has a current face keeps its pool factor as its units change. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.TargetTaxLot;
@@ -33,6 +34,7 @@ CurrencyAndAmount cost = new CurrencyAndAmount();
 @javax.annotation.Nullable java.math.BigDecimal variationMargin = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal variationMarginPortfolioCcy = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal amortisedCost = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal currentFace = new java.math.BigDecimal("100.00");
 
 
 TargetTaxLot targetTaxLotInstance = new TargetTaxLot()
@@ -45,7 +47,8 @@ TargetTaxLot targetTaxLotInstance = new TargetTaxLot()
     .notionalCost(notionalCost)
     .variationMargin(variationMargin)
     .variationMarginPortfolioCcy(variationMarginPortfolioCcy)
-    .amortisedCost(amortisedCost);
+    .amortisedCost(amortisedCost)
+    .currentFace(currentFace);
 ```
 
 

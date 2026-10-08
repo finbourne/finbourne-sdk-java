@@ -38,7 +38,9 @@ import com.finbourne.sdk.JSON;
   BucketDefinition.JSON_PROPERTY_DISPLAY_NAME,
   BucketDefinition.JSON_PROPERTY_FILTER_EXPRESSION,
   BucketDefinition.JSON_PROPERTY_BUCKET_TYPE,
-  BucketDefinition.JSON_PROPERTY_UNITISED
+  BucketDefinition.JSON_PROPERTY_UNITISED,
+  BucketDefinition.JSON_PROPERTY_CLEARDOWN_BEHAVIOUR,
+  BucketDefinition.JSON_PROPERTY_CLEARS_TO
 })
 
 public class BucketDefinition {
@@ -66,6 +68,16 @@ public class BucketDefinition {
   @JsonProperty(JSON_PROPERTY_UNITISED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean unitised;
+
+  public static final String JSON_PROPERTY_CLEARDOWN_BEHAVIOUR = "cleardownBehaviour";
+  @JsonProperty(JSON_PROPERTY_CLEARDOWN_BEHAVIOUR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String cleardownBehaviour;
+
+  public static final String JSON_PROPERTY_CLEARS_TO = "clearsTo";
+  @JsonProperty(JSON_PROPERTY_CLEARS_TO)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String clearsTo;
 
   public BucketDefinition() {
   }
@@ -165,6 +177,44 @@ public class BucketDefinition {
   }
 
 
+  public BucketDefinition cleardownBehaviour(String cleardownBehaviour) {
+    this.cleardownBehaviour = cleardownBehaviour;
+    return this;
+  }
+
+  /**
+   * Available values: Clear, CarryForward.
+   * @return cleardownBehaviour
+   */
+  @javax.annotation.Nullable
+  public String getCleardownBehaviour() {
+    return cleardownBehaviour;
+  }
+
+  public void setCleardownBehaviour(String cleardownBehaviour) {
+    this.cleardownBehaviour = cleardownBehaviour;
+  }
+
+
+  public BucketDefinition clearsTo(String clearsTo) {
+    this.clearsTo = clearsTo;
+    return this;
+  }
+
+  /**
+   * Get clearsTo
+   * @return clearsTo
+   */
+  @javax.annotation.Nullable
+  public String getClearsTo() {
+    return clearsTo;
+  }
+
+  public void setClearsTo(String clearsTo) {
+    this.clearsTo = clearsTo;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -178,7 +228,9 @@ public class BucketDefinition {
         Objects.equals(this.displayName, bucketDefinition.displayName) &&
         Objects.equals(this.filterExpression, bucketDefinition.filterExpression) &&
         Objects.equals(this.bucketType, bucketDefinition.bucketType) &&
-        Objects.equals(this.unitised, bucketDefinition.unitised);
+        Objects.equals(this.unitised, bucketDefinition.unitised) &&
+        Objects.equals(this.cleardownBehaviour, bucketDefinition.cleardownBehaviour) &&
+        Objects.equals(this.clearsTo, bucketDefinition.clearsTo);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -187,7 +239,7 @@ public class BucketDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(bucketId, displayName, filterExpression, bucketType, unitised);
+    return Objects.hash(bucketId, displayName, filterExpression, bucketType, unitised, cleardownBehaviour, clearsTo);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -206,6 +258,8 @@ public class BucketDefinition {
     sb.append("    filterExpression: ").append(toIndentedString(filterExpression)).append("\n");
     sb.append("    bucketType: ").append(toIndentedString(bucketType)).append("\n");
     sb.append("    unitised: ").append(toIndentedString(unitised)).append("\n");
+    sb.append("    cleardownBehaviour: ").append(toIndentedString(cleardownBehaviour)).append("\n");
+    sb.append("    clearsTo: ").append(toIndentedString(clearsTo)).append("\n");
     sb.append("}");
     return sb.toString();
   }

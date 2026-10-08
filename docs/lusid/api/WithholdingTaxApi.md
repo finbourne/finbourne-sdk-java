@@ -4,6 +4,8 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**batchDeleteWithholdingTaxRates**](WithholdingTaxApi.md#batchDeleteWithholdingTaxRates) | **POST** /api/api/withholdingtax/rates/{scope}/{code}/$batchDelete | [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset. |
+| [**batchUpsertWithholdingTaxRates**](WithholdingTaxApi.md#batchUpsertWithholdingTaxRates) | **POST** /api/api/withholdingtax/rates/{scope}/{code}/$batchUpsert | [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands. |
 | [**createWithholdingTaxDatasetDefinitions**](WithholdingTaxApi.md#createWithholdingTaxDatasetDefinitions) | **POST** /api/api/withholdingtax/datasetdefinitions | [EARLY ACCESS] CreateWithholdingTaxDatasetDefinitions: Create the Withholding Tax dataset definitions. |
 | [**deleteWithholdingTaxConfiguration**](WithholdingTaxApi.md#deleteWithholdingTaxConfiguration) | **DELETE** /api/api/withholdingtax/configurations/{scope}/{code} | [EARLY ACCESS] DeleteWithholdingTaxConfiguration: Delete a Withholding Tax Configuration. |
 | [**deleteWithholdingTaxDatasetDefinition**](WithholdingTaxApi.md#deleteWithholdingTaxDatasetDefinition) | **DELETE** /api/api/withholdingtax/datasetdefinitions/{scope}/{code} | [EARLY ACCESS] DeleteWithholdingTaxDatasetDefinition: Delete a Withholding Tax dataset definition. |
@@ -14,6 +16,172 @@ All URIs are relative to *http://localhost*
 | [**patchWithholdingTaxDatasetDefinition**](WithholdingTaxApi.md#patchWithholdingTaxDatasetDefinition) | **PATCH** /api/api/withholdingtax/datasetdefinitions/{scope}/{code} | [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition. |
 | [**upsertWithholdingTaxConfiguration**](WithholdingTaxApi.md#upsertWithholdingTaxConfiguration) | **POST** /api/api/withholdingtax/configurations/{scope}/{code} | [EARLY ACCESS] UpsertWithholdingTaxConfiguration: Upsert a Withholding Tax Configuration. |
 
+
+
+## batchDeleteWithholdingTaxRates
+
+> BatchDeleteRelationalDataResponse batchDeleteWithholdingTaxRates(scope, code, requestBody, successMode)
+
+[EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
+
+Also how a rate with no replacement is expired, there being no effectiveTo field. Deletes are  bitemporal, so rows stay readable at a prior asAt.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.WithholdingTaxApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class WithholdingTaxApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        WithholdingTaxApi apiInstance = apiFactory.build(WithholdingTaxApi.class);
+        String scope = "scope_example"; // String | The Scope of the rate dataset's relational dataset definition.
+        String code = "code_example"; // String | The Code of the rate dataset's relational dataset definition.
+        Map<String, DeleteWithholdingTaxRateRequest> requestBody = new HashMap(); // Map<String, DeleteWithholdingTaxRateRequest> | The rate rows to delete, keyed by a correlation id echoed back in the response.
+        String successMode = "Atomic"; // String | Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.
+        try {
+            // uncomment the below to set overrides at the request level
+            // BatchDeleteRelationalDataResponse result = apiInstance.batchDeleteWithholdingTaxRates(scope, code, requestBody, successMode).execute(opts);
+
+            BatchDeleteRelationalDataResponse result = apiInstance.batchDeleteWithholdingTaxRates(scope, code, requestBody, successMode).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WithholdingTaxApi#batchDeleteWithholdingTaxRates");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The Scope of the rate dataset&#39;s relational dataset definition. | |
+| **code** | **String**| The Code of the rate dataset&#39;s relational dataset definition. | |
+| **requestBody** | [**Map&lt;String, DeleteWithholdingTaxRateRequest&gt;**](../model/DeleteWithholdingTaxRateRequest.md)| The rate rows to delete, keyed by a correlation id echoed back in the response. | |
+| **successMode** | **String**| Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. | [optional] [default to Atomic] |
+
+### Return type
+
+[**BatchDeleteRelationalDataResponse**](../model/BatchDeleteRelationalDataResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The deleted rate row metadata. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## batchUpsertWithholdingTaxRates
+
+> BatchUpsertWithholdingTaxRatesResponse batchUpsertWithholdingTaxRates(scope, code, requestBody, successMode)
+
+[EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
+
+Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.WithholdingTaxApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class WithholdingTaxApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        WithholdingTaxApi apiInstance = apiFactory.build(WithholdingTaxApi.class);
+        String scope = "scope_example"; // String | The Scope of the rate dataset's relational dataset definition.
+        String code = "code_example"; // String | The Code of the rate dataset's relational dataset definition.
+        Map<String, UpsertWithholdingTaxRateRequest> requestBody = new HashMap(); // Map<String, UpsertWithholdingTaxRateRequest> | The rate rows to upsert, keyed by a correlation id echoed back in the response.
+        String successMode = "Atomic"; // String | Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.
+        try {
+            // uncomment the below to set overrides at the request level
+            // BatchUpsertWithholdingTaxRatesResponse result = apiInstance.batchUpsertWithholdingTaxRates(scope, code, requestBody, successMode).execute(opts);
+
+            BatchUpsertWithholdingTaxRatesResponse result = apiInstance.batchUpsertWithholdingTaxRates(scope, code, requestBody, successMode).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WithholdingTaxApi#batchUpsertWithholdingTaxRates");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The Scope of the rate dataset&#39;s relational dataset definition. | |
+| **code** | **String**| The Code of the rate dataset&#39;s relational dataset definition. | |
+| **requestBody** | [**Map&lt;String, UpsertWithholdingTaxRateRequest&gt;**](../model/UpsertWithholdingTaxRateRequest.md)| The rate rows to upsert, keyed by a correlation id echoed back in the response. | |
+| **successMode** | **String**| Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. | [optional] [default to Atomic] |
+
+### Return type
+
+[**BatchUpsertWithholdingTaxRatesResponse**](../model/BatchUpsertWithholdingTaxRatesResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The Withholding Tax rate rows that were upserted. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
 ## createWithholdingTaxDatasetDefinitions
@@ -589,7 +757,7 @@ public class WithholdingTaxApiExample {
 
 [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition.
 
-Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, and amend one in place with an add on its index.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.
+Amend one Withholding Tax relational dataset definition, adding a matching dimension being the common case.  Subject to the platform&#39;s own rules on what may be changed on a populated dataset.                Only the matching dimensions the document addresses are affected; a dimension it does not address is left as  it is. Append a dimension with an add on \&quot;/dimensions/-\&quot;, insert one at a position with an add on its index,  and remove one with a remove on its index. To amend a dimension, remove it and add it again.                A dimension whose name collides with a mandatory core field is rejected, as is any attempt to add a rate tier:  the tier set is fixed at four and cannot be extended by schema evolution, because the engine could never read  a tier it does not know by name. The mandatory core is not addressable by this endpoint at all.                The amended dataset is returned in the same shape the get and the list return: the matching dimensions alone.  Read the full field schema from the relational dataset definition at the returned href.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Dimensions.
 
 ### Example
 

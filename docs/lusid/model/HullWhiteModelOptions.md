@@ -14,6 +14,12 @@ Name | Type | Description | Notes
 **meanReversionByCurrency** | **Map&lt;String, java.math.BigDecimal&gt;** | Per-currency mean-reversion overrides, keyed by ISO currency code.  A currency absent from this map uses MeanReversion. | [optional] [default to Map<String, java.math.BigDecimal>]
 **volatilityByCurrency** | **Map&lt;String, java.math.BigDecimal&gt;** | Per-currency short-rate volatility overrides, keyed by ISO currency code.  A currency absent from this map uses Volatility. Short-rate volatility is a per-currency  quantity in practice, so a book spanning several currencies can calibrate each currency  separately instead of sharing a single global figure. | [optional] [default to Map<String, java.math.BigDecimal>]
 **volatilityMultiplier** | **java.math.BigDecimal** | A multiplicative scaling applied to the resolved short-rate volatility - the scalar  Volatility or its per-currency override, whichever applies - at the point of use, e.g. 1.1  prices with the configured volatility raised by ten percent. A single multiplier scales  every per-currency calibration coherently, so a shocked set of options can differ from its  base by this one field rather than a hand-rebuilt volatility (or map of volatilities).  Must not be negative; zero is allowed and prices with a deterministic short rate.  Defaults to 1, which reproduces the configured volatility exactly, when not supplied. | [optional] [default to java.math.BigDecimal]
+**effectiveCs01BumpWidth** | **java.math.BigDecimal** | The TOTAL width, as an absolute spread, of the central-difference stencil used for the  option-adjusted Analytic/EffectiveCS01: the two reprice points sit at the solved OAS plus  and minus half of this. The reported figure is normalised to a one-basis-point move  whatever width is configured. Must be strictly positive. Defaults to 0.0001 (1bp, the  market convention for a credit sensitivity) when not supplied. | [optional] [default to java.math.BigDecimal]
+**effectiveKeyRateBuckets** | **List&lt;String&gt;** | The maturity buckets of the Analytic/EffectiveKeyRateDuration ladder, as tenor strings  such as \&quot;1Y\&quot; or \&quot;6M\&quot;, in strictly increasing order. Each bucket is repriced under a  tent-shaped curve shift centred on its own tenor, so the ladder sums to the parallel  effective duration to first order. Buckets past an instrument&#39;s maturity report zero, so  one grid can serve a whole book. Defaults to the 1Y, 2Y, 3Y, 5Y, 7Y, 10Y, 20Y, 30Y grid  when not supplied; an empty list is rejected. | [optional] [default to List<String>]
+**priceToFirstReset** | **Boolean** | Value a fixed-to-float callable bond only to its first reset. The bond must be a  ComplexBond with one fixed schedule, one floating schedule starting on the fixed schedule&#39;s  maturity, and a call exercisable on that date; it is then valued as if called there, redeemed  at the call strike on the principal outstanding, with the fixed coupon paid on that date kept  and no floating coupon projected. Any call before that date stays live on the lattice. Bonds  of any other shape are refused by name rather than valued over their full life. Rows priced  this way carry the reset date in the Diagnostics/Model/PricingHorizon valuation key. Defaults  to false, which values the bond over its full life. | [optional] [default to Boolean]
+**latticeStepsPerYear** | **Integer** | The lattice time-step density as steps per year. When supplied, the lattice uses  ceil(horizon in years x this value) steps, raised if necessary so that one step is no longer  than the shortest gap between consecutive cashflows, so the fixed LatticeSteps is ignored and  the \&quot;lattice coarser than coupon spacing\&quot; refusal cannot fire. Must be at least 1 when  supplied. Absent, the fixed LatticeSteps count applies. | [optional] [default to Integer]
+**maxLatticeNodes** | **Integer** | A ceiling on the lattice size, counted as (steps + 1) x rate levels, that the pricer may  build for one instrument. An instrument whose lattice would exceed it is declined by the  model before any allocation, so the cost of a long-dated or finely-stepped row can be  bounded. Must be at least 1 when supplied. Absent, no ceiling applies. | [optional] [default to Integer]
+**priceAtQuoteImpliedOas** | **Boolean** | Price at the option-adjusted spread implied by the instrument&#39;s quoted price instead of at zero  spread, so the present value reproduces the quote and curve risk is measured with the spread  held. The spread is taken from an OAS quote served for the instrument (a quote with descriptor  [\&quot;OAS\&quot;] keyed by its identifiers, from a Rate-typed market data rule or a market data override)  when there is one, and is then held across every bumped valuation; otherwise it is solved  against the quote in the valuation&#39;s own market. A request for a Risk measure requires the OAS  quote, since a spread re-solved under each bump would leave the measure at zero. Also prices  compounded-in-arrears floating coupons, exercises inside an unfixed floating period and  asset-backed bonds, which are otherwise refused. For an asset-backed bond the pool is held at  its latest factor to legal final with no prepayment, so EffectiveDuration and Pv01 on those  rows are legal-final durations that ignore prepayment. A constant prepayment rate served for the  pool is not read, so the lattice, the cash flows and WeightedAverageLife all run the pool to  legal final. Rows carry the source of the spread in the Diagnostics/Model/PricingSpreadSource  valuation key. Defaults to false. | [optional] [default to Boolean]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.HullWhiteModelOptions;
@@ -28,6 +34,12 @@ Integer latticeSteps = new Integer("100.00");
 @javax.annotation.Nullable Map<String, java.math.BigDecimal> meanReversionByCurrency = new Map<String, java.math.BigDecimal>();
 @javax.annotation.Nullable Map<String, java.math.BigDecimal> volatilityByCurrency = new Map<String, java.math.BigDecimal>();
 @javax.annotation.Nullable java.math.BigDecimal volatilityMultiplier = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal effectiveCs01BumpWidth = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable List<String> effectiveKeyRateBuckets = new List<String>();
+@javax.annotation.Nullable Boolean priceToFirstReset = true;
+@javax.annotation.Nullable Integer latticeStepsPerYear = new Integer("100.00");
+@javax.annotation.Nullable Integer maxLatticeNodes = new Integer("100.00");
+@javax.annotation.Nullable Boolean priceAtQuoteImpliedOas = true;
 
 
 HullWhiteModelOptions hullWhiteModelOptionsInstance = new HullWhiteModelOptions()
@@ -37,7 +49,13 @@ HullWhiteModelOptions hullWhiteModelOptionsInstance = new HullWhiteModelOptions(
     .effectiveRateBumpSize(effectiveRateBumpSize)
     .meanReversionByCurrency(meanReversionByCurrency)
     .volatilityByCurrency(volatilityByCurrency)
-    .volatilityMultiplier(volatilityMultiplier);
+    .volatilityMultiplier(volatilityMultiplier)
+    .effectiveCs01BumpWidth(effectiveCs01BumpWidth)
+    .effectiveKeyRateBuckets(effectiveKeyRateBuckets)
+    .priceToFirstReset(priceToFirstReset)
+    .latticeStepsPerYear(latticeStepsPerYear)
+    .maxLatticeNodes(maxLatticeNodes)
+    .priceAtQuoteImpliedOas(priceAtQuoteImpliedOas);
 ```
 
 

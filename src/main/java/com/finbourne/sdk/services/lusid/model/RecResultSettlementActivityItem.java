@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.RecResultHoldingImpact;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.WritebackSuggestion;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +47,8 @@ import com.finbourne.sdk.JSON;
   RecResultSettlementActivityItem.JSON_PROPERTY_SETTLEMENT_INSTRUCTION_ID,
   RecResultSettlementActivityItem.JSON_PROPERTY_HOLDING_IMPACTS,
   RecResultSettlementActivityItem.JSON_PROPERTY_ITEM_TYPE,
-  RecResultSettlementActivityItem.JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES
+  RecResultSettlementActivityItem.JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES,
+  RecResultSettlementActivityItem.JSON_PROPERTY_WRITEBACK_SUGGESTIONS
 })
 
 public class RecResultSettlementActivityItem {
@@ -85,7 +87,19 @@ public class RecResultSettlementActivityItem {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, String> ruleAndAttributeValues;
 
+  public static final String JSON_PROPERTY_WRITEBACK_SUGGESTIONS = "writebackSuggestions";
+  @JsonProperty(JSON_PROPERTY_WRITEBACK_SUGGESTIONS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<WritebackSuggestion> writebackSuggestions = new ArrayList<>();
+
   public RecResultSettlementActivityItem() {
+  }
+
+  public RecResultSettlementActivityItem(
+     List<WritebackSuggestion> writebackSuggestions
+  ) {
+    this();
+    this.writebackSuggestions = writebackSuggestions;
   }
 
   public RecResultSettlementActivityItem portfolioId(ResourceId portfolioId) {
@@ -237,6 +251,17 @@ public class RecResultSettlementActivityItem {
   }
 
 
+  /**
+   * The writebacks suggested against this item, as configured by the matching ruleset&#39;s writebackConfigurations. Only ever populated on target-side items. Suggestions only: a user is expected to review them before acting. Required, but may be empty.
+   * @return writebackSuggestions
+   */
+  @javax.annotation.Nonnull
+  public List<WritebackSuggestion> getWritebackSuggestions() {
+    return writebackSuggestions;
+  }
+
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -252,7 +277,8 @@ public class RecResultSettlementActivityItem {
         Objects.equals(this.settlementInstructionId, recResultSettlementActivityItem.settlementInstructionId) &&
         Objects.equals(this.holdingImpacts, recResultSettlementActivityItem.holdingImpacts) &&
         Objects.equals(this.itemType, recResultSettlementActivityItem.itemType) &&
-        Objects.equals(this.ruleAndAttributeValues, recResultSettlementActivityItem.ruleAndAttributeValues);
+        Objects.equals(this.ruleAndAttributeValues, recResultSettlementActivityItem.ruleAndAttributeValues) &&
+        Objects.equals(this.writebackSuggestions, recResultSettlementActivityItem.writebackSuggestions);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -261,7 +287,7 @@ public class RecResultSettlementActivityItem {
 
   @Override
  public int hashCode() {
-    return Objects.hash(portfolioId, activityId, transactionId, settlementInstructionId, holdingImpacts, itemType, ruleAndAttributeValues);
+    return Objects.hash(portfolioId, activityId, transactionId, settlementInstructionId, holdingImpacts, itemType, ruleAndAttributeValues, writebackSuggestions);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -282,6 +308,7 @@ public class RecResultSettlementActivityItem {
     sb.append("    holdingImpacts: ").append(toIndentedString(holdingImpacts)).append("\n");
     sb.append("    itemType: ").append(toIndentedString(itemType)).append("\n");
     sb.append("    ruleAndAttributeValues: ").append(toIndentedString(ruleAndAttributeValues)).append("\n");
+    sb.append("    writebackSuggestions: ").append(toIndentedString(writebackSuggestions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

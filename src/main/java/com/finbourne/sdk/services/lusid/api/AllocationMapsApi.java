@@ -86,7 +86,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param allocationMapException The exception to add. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label of the map version that gains the exception. Defaults to the exception&#39;s effectiveFrom when that is earlier than the current LUSID system datetime, and to the current LUSID system datetime otherwise. Refused if the map has any version starting after that datetime, including a re-save of the same definition, or a later deletion, since neither would carry the exception. Also refused, with the reason, if the defaulted effectiveFrom is before the map&#39;s first version. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -107,7 +107,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param allocationMapException The exception to add. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param effectiveAt The effective datetime or cut label from which the exception applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label of the map version that gains the exception. Defaults to the exception&#39;s effectiveFrom when that is earlier than the current LUSID system datetime, and to the current LUSID system datetime otherwise. Refused if the map has any version starting after that datetime, including a re-save of the same definition, or a later deletion, since neither would carry the exception. Also refused, with the reason, if the defaulted effectiveFrom is before the map&#39;s first version. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -202,7 +202,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param allocationMapException The exception to add. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label of the map version that gains the exception. Defaults to the exception&#39;s effectiveFrom when that is earlier than the current LUSID system datetime, and to the current LUSID system datetime otherwise. Refused if the map has any version starting after that datetime, including a re-save of the same definition, or a later deletion, since neither would carry the exception. Also refused, with the reason, if the defaulted effectiveFrom is before the map&#39;s first version. (optional)
      * @return ApiResponse&lt;AllocationMap&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -225,7 +225,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param allocationMapException The exception to add. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label of the map version that gains the exception. Defaults to the exception&#39;s effectiveFrom when that is earlier than the current LUSID system datetime, and to the current LUSID system datetime otherwise. Refused if the map has any version starting after that datetime, including a re-save of the same definition, or a later deletion, since neither would carry the exception. Also refused, with the reason, if the defaulted effectiveFrom is before the map&#39;s first version. (optional)
      * @return ApiResponse&lt;AllocationMap&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -248,7 +248,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param allocationMapException The exception to add. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label of the map version that gains the exception. Defaults to the exception&#39;s effectiveFrom when that is earlier than the current LUSID system datetime, and to the current LUSID system datetime otherwise. Refused if the map has any version starting after that datetime, including a re-save of the same definition, or a later deletion, since neither would carry the exception. Also refused, with the reason, if the defaulted effectiveFrom is before the map&#39;s first version. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -272,7 +272,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param allocationMapException The exception to add. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label of the map version that gains the exception. Defaults to the exception&#39;s effectiveFrom when that is earlier than the current LUSID system datetime, and to the current LUSID system datetime otherwise. Refused if the map has any version starting after that datetime, including a re-save of the same definition, or a later deletion, since neither would carry the exception. Also refused, with the reason, if the defaulted effectiveFrom is before the map&#39;s first version. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -304,7 +304,7 @@ public class AllocationMapsApi {
 
         /**
          * Set effectiveAt
-         * @param effectiveAt The effective datetime or cut label from which the exception applies. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @param effectiveAt The effective datetime or cut label of the map version that gains the exception. Defaults to the exception&#39;s effectiveFrom when that is earlier than the current LUSID system datetime, and to the current LUSID system datetime otherwise. Refused if the map has any version starting after that datetime, including a re-save of the same definition, or a later deletion, since neither would carry the exception. Also refused, with the reason, if the defaulted effectiveFrom is before the map&#39;s first version. (optional)
          * @return APIaddAllocationMapExceptionRequest
          */
         public APIaddAllocationMapExceptionRequest effectiveAt(String effectiveAt) {
@@ -1917,7 +1917,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param investorRecordId The investor record whose exception is removed. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. Refused if the map has any version starting after that datetime, including a re-save of the same definition, which would still carry the exception, or a later deletion. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1938,7 +1938,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param investorRecordId The investor record whose exception is removed. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. Refused if the map has any version starting after that datetime, including a re-save of the same definition, which would still carry the exception, or a later deletion. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2030,7 +2030,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param investorRecordId The investor record whose exception is removed. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. Refused if the map has any version starting after that datetime, including a re-save of the same definition, which would still carry the exception, or a later deletion. (optional)
      * @return ApiResponse&lt;AllocationMap&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2053,7 +2053,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param investorRecordId The investor record whose exception is removed. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. Refused if the map has any version starting after that datetime, including a re-save of the same definition, which would still carry the exception, or a later deletion. (optional)
      * @return ApiResponse&lt;AllocationMap&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2076,7 +2076,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param investorRecordId The investor record whose exception is removed. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. Refused if the map has any version starting after that datetime, including a re-save of the same definition, which would still carry the exception, or a later deletion. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2100,7 +2100,7 @@ public class AllocationMapsApi {
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
      * @param investorRecordId The investor record whose exception is removed. (required)
-     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. Refused if the map has any version starting after that datetime, including a re-save of the same definition, which would still carry the exception, or a later deletion. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2132,7 +2132,7 @@ public class AllocationMapsApi {
 
         /**
          * Set effectiveAt
-         * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @param effectiveAt The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. Refused if the map has any version starting after that datetime, including a re-save of the same definition, which would still carry the exception, or a later deletion. (optional)
          * @return APIremoveAllocationMapExceptionRequest
          */
         public APIremoveAllocationMapExceptionRequest effectiveAt(String effectiveAt) {

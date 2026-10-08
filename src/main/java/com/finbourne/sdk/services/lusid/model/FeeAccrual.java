@@ -161,7 +161,7 @@ public class FeeAccrual {
   }
 
   /**
-   * The result of the evaluating the fee&#39;s calculation base expression.
+   * The basis the annual accrual derives from: the result of evaluating the fee&#39;s calculation base expression, or the configured annual amount for a fixed-amount fee.
    * @return calculationBase
    */
   @javax.annotation.Nullable

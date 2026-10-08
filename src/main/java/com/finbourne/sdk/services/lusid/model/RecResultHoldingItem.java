@@ -13,9 +13,12 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.WritebackSuggestion;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
@@ -41,7 +44,8 @@ import com.finbourne.sdk.JSON;
   RecResultHoldingItem.JSON_PROPERTY_HOLDING_ID,
   RecResultHoldingItem.JSON_PROPERTY_TAX_LOT_ID,
   RecResultHoldingItem.JSON_PROPERTY_ITEM_TYPE,
-  RecResultHoldingItem.JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES
+  RecResultHoldingItem.JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES,
+  RecResultHoldingItem.JSON_PROPERTY_WRITEBACK_SUGGESTIONS
 })
 
 public class RecResultHoldingItem {
@@ -70,7 +74,19 @@ public class RecResultHoldingItem {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, String> ruleAndAttributeValues;
 
+  public static final String JSON_PROPERTY_WRITEBACK_SUGGESTIONS = "writebackSuggestions";
+  @JsonProperty(JSON_PROPERTY_WRITEBACK_SUGGESTIONS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<WritebackSuggestion> writebackSuggestions = new ArrayList<>();
+
   public RecResultHoldingItem() {
+  }
+
+  public RecResultHoldingItem(
+     List<WritebackSuggestion> writebackSuggestions
+  ) {
+    this();
+    this.writebackSuggestions = writebackSuggestions;
   }
 
   public RecResultHoldingItem portfolioId(ResourceId portfolioId) {
@@ -176,6 +192,17 @@ public class RecResultHoldingItem {
   }
 
 
+  /**
+   * The writebacks suggested against this item, as configured by the matching ruleset&#39;s writebackConfigurations. Only ever populated on target-side items. Suggestions only: a user is expected to review them before acting. Required, but may be empty.
+   * @return writebackSuggestions
+   */
+  @javax.annotation.Nonnull
+  public List<WritebackSuggestion> getWritebackSuggestions() {
+    return writebackSuggestions;
+  }
+
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -189,7 +216,8 @@ public class RecResultHoldingItem {
         Objects.equals(this.holdingId, recResultHoldingItem.holdingId) &&
         Objects.equals(this.taxLotId, recResultHoldingItem.taxLotId) &&
         Objects.equals(this.itemType, recResultHoldingItem.itemType) &&
-        Objects.equals(this.ruleAndAttributeValues, recResultHoldingItem.ruleAndAttributeValues);
+        Objects.equals(this.ruleAndAttributeValues, recResultHoldingItem.ruleAndAttributeValues) &&
+        Objects.equals(this.writebackSuggestions, recResultHoldingItem.writebackSuggestions);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -198,7 +226,7 @@ public class RecResultHoldingItem {
 
   @Override
  public int hashCode() {
-    return Objects.hash(portfolioId, holdingId, taxLotId, itemType, ruleAndAttributeValues);
+    return Objects.hash(portfolioId, holdingId, taxLotId, itemType, ruleAndAttributeValues, writebackSuggestions);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -217,6 +245,7 @@ public class RecResultHoldingItem {
     sb.append("    taxLotId: ").append(toIndentedString(taxLotId)).append("\n");
     sb.append("    itemType: ").append(toIndentedString(itemType)).append("\n");
     sb.append("    ruleAndAttributeValues: ").append(toIndentedString(ruleAndAttributeValues)).append("\n");
+    sb.append("    writebackSuggestions: ").append(toIndentedString(writebackSuggestions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -32,11 +32,12 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Describes the structure of a Workflow as a graph of Task Definitions
+ * Describes the structure of a Workflow as a graph of its Task Definitions and its Launchers
  */
 @JsonPropertyOrder({
   WorkflowStructure.JSON_PROPERTY_NODES,
-  WorkflowStructure.JSON_PROPERTY_EDGES
+  WorkflowStructure.JSON_PROPERTY_EDGES,
+  WorkflowStructure.JSON_PROPERTY_LAUNCHERS_TRUNCATED
 })
 
 public class WorkflowStructure {
@@ -49,6 +50,11 @@ public class WorkflowStructure {
   @JsonProperty(JSON_PROPERTY_EDGES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private WorkflowStructureEdges edges;
+
+  public static final String JSON_PROPERTY_LAUNCHERS_TRUNCATED = "launchersTruncated";
+  @JsonProperty(JSON_PROPERTY_LAUNCHERS_TRUNCATED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean launchersTruncated;
 
   public WorkflowStructure() {
   }
@@ -91,6 +97,25 @@ public class WorkflowStructure {
   }
 
 
+  public WorkflowStructure launchersTruncated(Boolean launchersTruncated) {
+    this.launchersTruncated = launchersTruncated;
+    return this;
+  }
+
+  /**
+   * True when the Workflow has more Launchers than were returned inline in nodes.launchers. Call ListLaunchers for the full set
+   * @return launchersTruncated
+   */
+  @javax.annotation.Nullable
+  public Boolean getLaunchersTruncated() {
+    return launchersTruncated;
+  }
+
+  public void setLaunchersTruncated(Boolean launchersTruncated) {
+    this.launchersTruncated = launchersTruncated;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -101,12 +126,13 @@ public class WorkflowStructure {
     }
     WorkflowStructure workflowStructure = (WorkflowStructure) o;
     return Objects.equals(this.nodes, workflowStructure.nodes) &&
-        Objects.equals(this.edges, workflowStructure.edges);
+        Objects.equals(this.edges, workflowStructure.edges) &&
+        Objects.equals(this.launchersTruncated, workflowStructure.launchersTruncated);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(nodes, edges);
+    return Objects.hash(nodes, edges, launchersTruncated);
   }
 
   @Override
@@ -115,6 +141,7 @@ public class WorkflowStructure {
     sb.append("class WorkflowStructure {\n");
     sb.append("    nodes: ").append(toIndentedString(nodes)).append("\n");
     sb.append("    edges: ").append(toIndentedString(edges)).append("\n");
+    sb.append("    launchersTruncated: ").append(toIndentedString(launchersTruncated)).append("\n");
     sb.append("}");
     return sb.toString();
   }

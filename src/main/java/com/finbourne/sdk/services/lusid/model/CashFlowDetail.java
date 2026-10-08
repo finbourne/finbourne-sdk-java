@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
@@ -41,7 +42,6 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   CashFlowDetail.JSON_PROPERTY_PAYMENT_DATE,
   CashFlowDetail.JSON_PROPERTY_AMOUNT,
-  CashFlowDetail.JSON_PROPERTY_CURRENCY,
   CashFlowDetail.JSON_PROPERTY_SOURCE_TYPE,
   CashFlowDetail.JSON_PROPERTY_INSTRUMENT_ID,
   CashFlowDetail.JSON_PROPERTY_INSTRUMENT_DISPLAY_NAME,
@@ -55,7 +55,7 @@ import com.finbourne.sdk.JSON;
   CashFlowDetail.JSON_PROPERTY_NET_AMOUNT,
   CashFlowDetail.JSON_PROPERTY_HAIRCUT_RULE_APPLIED,
   CashFlowDetail.JSON_PROPERTY_ERROR,
-  CashFlowDetail.JSON_PROPERTY_AMOUNT_IN_REPORT_CURRENCY,
+  CashFlowDetail.JSON_PROPERTY_REPORT_CURRENCY_AMOUNT,
   CashFlowDetail.JSON_PROPERTY_TRADE_TO_REPORT_CURRENCY_RATE,
   CashFlowDetail.JSON_PROPERTY_LINKS
 })
@@ -69,12 +69,7 @@ public class CashFlowDetail {
   public static final String JSON_PROPERTY_AMOUNT = "amount";
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private java.math.BigDecimal amount;
-
-  public static final String JSON_PROPERTY_CURRENCY = "currency";
-  @JsonProperty(JSON_PROPERTY_CURRENCY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String currency;
+  private CurrencyAndAmount amount;
 
   public static final String JSON_PROPERTY_SOURCE_TYPE = "sourceType";
   @JsonProperty(JSON_PROPERTY_SOURCE_TYPE)
@@ -119,7 +114,7 @@ public class CashFlowDetail {
   public static final String JSON_PROPERTY_GROSS_AMOUNT = "grossAmount";
   @JsonProperty(JSON_PROPERTY_GROSS_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private java.math.BigDecimal grossAmount;
+  private CurrencyAndAmount grossAmount;
 
   public static final String JSON_PROPERTY_HAIRCUT_FRACTION = "haircutFraction";
   @JsonProperty(JSON_PROPERTY_HAIRCUT_FRACTION)
@@ -129,7 +124,7 @@ public class CashFlowDetail {
   public static final String JSON_PROPERTY_NET_AMOUNT = "netAmount";
   @JsonProperty(JSON_PROPERTY_NET_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private java.math.BigDecimal netAmount;
+  private CurrencyAndAmount netAmount;
 
   public static final String JSON_PROPERTY_HAIRCUT_RULE_APPLIED = "haircutRuleApplied";
   @JsonProperty(JSON_PROPERTY_HAIRCUT_RULE_APPLIED)
@@ -141,10 +136,10 @@ public class CashFlowDetail {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String error;
 
-  public static final String JSON_PROPERTY_AMOUNT_IN_REPORT_CURRENCY = "amountInReportCurrency";
-  @JsonProperty(JSON_PROPERTY_AMOUNT_IN_REPORT_CURRENCY)
+  public static final String JSON_PROPERTY_REPORT_CURRENCY_AMOUNT = "reportCurrencyAmount";
+  @JsonProperty(JSON_PROPERTY_REPORT_CURRENCY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private java.math.BigDecimal amountInReportCurrency;
+  private CurrencyAndAmount reportCurrencyAmount;
 
   public static final String JSON_PROPERTY_TRADE_TO_REPORT_CURRENCY_RATE = "tradeToReportCurrencyRate";
   @JsonProperty(JSON_PROPERTY_TRADE_TO_REPORT_CURRENCY_RATE)
@@ -178,41 +173,22 @@ public class CashFlowDetail {
   }
 
 
-  public CashFlowDetail amount(java.math.BigDecimal amount) {
+  public CashFlowDetail amount(CurrencyAndAmount amount) {
     this.amount = amount;
     return this;
   }
 
   /**
-   * The signed amount of the cashflow. A positive amount indicates money is received, a negative amount indicates money is paid. The amount is always the gross (pre-haircut) signed amount; when haircut rules are supplied the haircut and net amounts are reported separately.
+   * Get amount
    * @return amount
    */
   @javax.annotation.Nullable
-  public java.math.BigDecimal getAmount() {
+  public CurrencyAndAmount getAmount() {
     return amount;
   }
 
-  public void setAmount(java.math.BigDecimal amount) {
+  public void setAmount(CurrencyAndAmount amount) {
     this.amount = amount;
-  }
-
-
-  public CashFlowDetail currency(String currency) {
-    this.currency = currency;
-    return this;
-  }
-
-  /**
-   * The payment currency of the cashflow.
-   * @return currency
-   */
-  @javax.annotation.Nonnull
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
   }
 
 
@@ -368,21 +344,21 @@ public class CashFlowDetail {
   }
 
 
-  public CashFlowDetail grossAmount(java.math.BigDecimal grossAmount) {
+  public CashFlowDetail grossAmount(CurrencyAndAmount grossAmount) {
     this.grossAmount = grossAmount;
     return this;
   }
 
   /**
-   * The signed amount of the cashflow before any haircut was applied. Only populated when haircut rules were supplied on the request.
+   * Get grossAmount
    * @return grossAmount
    */
   @javax.annotation.Nullable
-  public java.math.BigDecimal getGrossAmount() {
+  public CurrencyAndAmount getGrossAmount() {
     return grossAmount;
   }
 
-  public void setGrossAmount(java.math.BigDecimal grossAmount) {
+  public void setGrossAmount(CurrencyAndAmount grossAmount) {
     this.grossAmount = grossAmount;
   }
 
@@ -406,21 +382,21 @@ public class CashFlowDetail {
   }
 
 
-  public CashFlowDetail netAmount(java.math.BigDecimal netAmount) {
+  public CashFlowDetail netAmount(CurrencyAndAmount netAmount) {
     this.netAmount = netAmount;
     return this;
   }
 
   /**
-   * The signed amount of the cashflow net of the haircut. Only populated when haircut rules were supplied on the request.
+   * Get netAmount
    * @return netAmount
    */
   @javax.annotation.Nullable
-  public java.math.BigDecimal getNetAmount() {
+  public CurrencyAndAmount getNetAmount() {
     return netAmount;
   }
 
-  public void setNetAmount(java.math.BigDecimal netAmount) {
+  public void setNetAmount(CurrencyAndAmount netAmount) {
     this.netAmount = netAmount;
   }
 
@@ -450,7 +426,7 @@ public class CashFlowDetail {
   }
 
   /**
-   * Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the report-currency FX lookup failed (see AmountInReportCurrency), in which case the base Amount remains populated and only AmountInReportCurrency and TradeToReportCurrencyRate are null.
+   * Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the report-currency FX lookup failed (see ReportCurrencyAmount), in which case the base Amount remains populated and only ReportCurrencyAmount and TradeToReportCurrencyRate are null.
    * @return error
    */
   @javax.annotation.Nullable
@@ -463,22 +439,22 @@ public class CashFlowDetail {
   }
 
 
-  public CashFlowDetail amountInReportCurrency(java.math.BigDecimal amountInReportCurrency) {
-    this.amountInReportCurrency = amountInReportCurrency;
+  public CashFlowDetail reportCurrencyAmount(CurrencyAndAmount reportCurrencyAmount) {
+    this.reportCurrencyAmount = reportCurrencyAmount;
     return this;
   }
 
   /**
-   * The signed amount of the cashflow (see Amount), converted into the request&#39;s report currency (see QueryBucketCashFlowDrillDownRequest.ReportCurrency). Not present when the FX rate used to convert into the report currency could not be resolved; see Error.
-   * @return amountInReportCurrency
+   * Get reportCurrencyAmount
+   * @return reportCurrencyAmount
    */
   @javax.annotation.Nullable
-  public java.math.BigDecimal getAmountInReportCurrency() {
-    return amountInReportCurrency;
+  public CurrencyAndAmount getReportCurrencyAmount() {
+    return reportCurrencyAmount;
   }
 
-  public void setAmountInReportCurrency(java.math.BigDecimal amountInReportCurrency) {
-    this.amountInReportCurrency = amountInReportCurrency;
+  public void setReportCurrencyAmount(CurrencyAndAmount reportCurrencyAmount) {
+    this.reportCurrencyAmount = reportCurrencyAmount;
   }
 
 
@@ -488,7 +464,7 @@ public class CashFlowDetail {
   }
 
   /**
-   * The FX rate used to convert the cashflow amount into the request&#39;s report currency, resolved at the cashflow&#39;s transaction (trade) date, not its payment date. Not present when the rate could not be resolved; see Error.
+   * The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request&#39;s report currency, resolved at the cashflow&#39;s transaction (trade) date, not its payment date. Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error).
    * @return tradeToReportCurrencyRate
    */
   @javax.annotation.Nullable
@@ -538,8 +514,7 @@ public class CashFlowDetail {
     }
     CashFlowDetail cashFlowDetail = (CashFlowDetail) o;
     return Objects.equals(this.paymentDate, cashFlowDetail.paymentDate) &&
-        (this.amount == null ? cashFlowDetail.amount == null : (cashFlowDetail.amount != null && this.amount.compareTo(cashFlowDetail.getAmount()) == 0)) &&
-        Objects.equals(this.currency, cashFlowDetail.currency) &&
+        Objects.equals(this.amount, cashFlowDetail.amount) &&
         Objects.equals(this.sourceType, cashFlowDetail.sourceType) &&
         Objects.equals(this.instrumentId, cashFlowDetail.instrumentId) &&
         Objects.equals(this.instrumentDisplayName, cashFlowDetail.instrumentDisplayName) &&
@@ -548,12 +523,12 @@ public class CashFlowDetail {
         Objects.equals(this.flowType, cashFlowDetail.flowType) &&
         Objects.equals(this.movementName, cashFlowDetail.movementName) &&
         Objects.equals(this.payReceive, cashFlowDetail.payReceive) &&
-        (this.grossAmount == null ? cashFlowDetail.grossAmount == null : (cashFlowDetail.grossAmount != null && this.grossAmount.compareTo(cashFlowDetail.getGrossAmount()) == 0)) &&
+        Objects.equals(this.grossAmount, cashFlowDetail.grossAmount) &&
         (this.haircutFraction == null ? cashFlowDetail.haircutFraction == null : (cashFlowDetail.haircutFraction != null && this.haircutFraction.compareTo(cashFlowDetail.getHaircutFraction()) == 0)) &&
-        (this.netAmount == null ? cashFlowDetail.netAmount == null : (cashFlowDetail.netAmount != null && this.netAmount.compareTo(cashFlowDetail.getNetAmount()) == 0)) &&
+        Objects.equals(this.netAmount, cashFlowDetail.netAmount) &&
         Objects.equals(this.haircutRuleApplied, cashFlowDetail.haircutRuleApplied) &&
         Objects.equals(this.error, cashFlowDetail.error) &&
-        (this.amountInReportCurrency == null ? cashFlowDetail.amountInReportCurrency == null : (cashFlowDetail.amountInReportCurrency != null && this.amountInReportCurrency.compareTo(cashFlowDetail.getAmountInReportCurrency()) == 0)) &&
+        Objects.equals(this.reportCurrencyAmount, cashFlowDetail.reportCurrencyAmount) &&
         (this.tradeToReportCurrencyRate == null ? cashFlowDetail.tradeToReportCurrencyRate == null : (cashFlowDetail.tradeToReportCurrencyRate != null && this.tradeToReportCurrencyRate.compareTo(cashFlowDetail.getTradeToReportCurrencyRate()) == 0)) &&
         Objects.equals(this.links, cashFlowDetail.links);
   }
@@ -564,7 +539,7 @@ public class CashFlowDetail {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, amount, currency, sourceType, instrumentId, instrumentDisplayName, transactionId, portfolioId, flowType, movementName, payReceive, grossAmount, haircutFraction, netAmount, haircutRuleApplied, error, amountInReportCurrency, tradeToReportCurrencyRate, links);
+    return Objects.hash(paymentDate, amount, sourceType, instrumentId, instrumentDisplayName, transactionId, portfolioId, flowType, movementName, payReceive, grossAmount, haircutFraction, netAmount, haircutRuleApplied, error, reportCurrencyAmount, tradeToReportCurrencyRate, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -580,7 +555,6 @@ public class CashFlowDetail {
     sb.append("class CashFlowDetail {\n");
     sb.append("    paymentDate: ").append(toIndentedString(paymentDate)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
-    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    sourceType: ").append(toIndentedString(sourceType)).append("\n");
     sb.append("    instrumentId: ").append(toIndentedString(instrumentId)).append("\n");
     sb.append("    instrumentDisplayName: ").append(toIndentedString(instrumentDisplayName)).append("\n");
@@ -594,7 +568,7 @@ public class CashFlowDetail {
     sb.append("    netAmount: ").append(toIndentedString(netAmount)).append("\n");
     sb.append("    haircutRuleApplied: ").append(toIndentedString(haircutRuleApplied)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
-    sb.append("    amountInReportCurrency: ").append(toIndentedString(amountInReportCurrency)).append("\n");
+    sb.append("    reportCurrencyAmount: ").append(toIndentedString(reportCurrencyAmount)).append("\n");
     sb.append("    tradeToReportCurrencyRate: ").append(toIndentedString(tradeToReportCurrencyRate)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");

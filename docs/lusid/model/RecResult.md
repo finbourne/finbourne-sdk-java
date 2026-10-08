@@ -6,7 +6,9 @@ An individual reconciliation result — the aggregate result for a set of core r
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** | The system-generated identifier for the rec result. Comprises the rec definition id, the instance id, the rec type and the core rule values. | [default to String]
+**id** | **String** | The id of the result within its run: its result type and result number, e.g. &#39;break-3&#39;. Unique within one run of one rec type of an instance; the same id in another run of the instance names the same result, for as long as it keeps its result type. | [default to String]
+**resultNumber** | **Integer** | The result&#39;s number within its result type. Kept across runs while the result keeps its type; never reused once assigned. | [default to Integer]
+**firstRunSeen** | **Integer** | The run in which the result was first assigned its id. | [default to Integer]
 **recType** | **String** | The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | [default to String]
 **instanceId** | [**RecInstanceId**](RecInstanceId.md) |  | [default to RecInstanceId]
 **recDefinitionId** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
@@ -38,6 +40,8 @@ import java.lang.System;
 import java.net.URI;
 
 String id = "example id";
+Integer resultNumber = new Integer("100.00");
+Integer firstRunSeen = new Integer("100.00");
 String recType = "example recType";
 RecInstanceId instanceId = new RecInstanceId();
 ResourceId recDefinitionId = new ResourceId();
@@ -65,6 +69,8 @@ Version version = new Version();
 
 RecResult recResultInstance = new RecResult()
     .id(id)
+    .resultNumber(resultNumber)
+    .firstRunSeen(firstRunSeen)
     .recType(recType)
     .instanceId(instanceId)
     .recDefinitionId(recDefinitionId)

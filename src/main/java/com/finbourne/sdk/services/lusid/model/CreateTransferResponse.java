@@ -102,7 +102,7 @@ public class CreateTransferResponse {
   }
 
   /**
-   * Get transferType
+   * The derived type of the transfer: &#39;Transfer&#39; when the position moves between portfolios, &#39;Switch&#39; when one instrument is exchanged for another within a portfolio, and &#39;Twitch&#39; when the position moves between portfolios and changes instrument at the same time.
    * @return transferType
    */
   @javax.annotation.Nullable
@@ -159,7 +159,7 @@ public class CreateTransferResponse {
   }
 
   /**
-   * Get transactionIdOut
+   * The transaction id of the created outgoing leg.
    * @return transactionIdOut
    */
   @javax.annotation.Nullable
@@ -178,7 +178,7 @@ public class CreateTransferResponse {
   }
 
   /**
-   * Get transactionIdIn
+   * The transaction id of the created incoming leg.
    * @return transactionIdIn
    */
   @javax.annotation.Nullable

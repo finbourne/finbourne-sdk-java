@@ -129,7 +129,9 @@ public enum InstrumentType {
   
   PREFERRED_SHARE("PreferredShare"),
   
-  CAPITAL_INTEREST("CapitalInterest");
+  CAPITAL_INTEREST("CapitalInterest"),
+  
+  WHOLE_LOAN_FACILITY("WholeLoanFacility");
 
   private String value;
 

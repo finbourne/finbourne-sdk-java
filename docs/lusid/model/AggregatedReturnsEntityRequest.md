@@ -7,13 +7,13 @@ The request body for the aggregated-returns (TWR) endpoint: the entity to calcul
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **entity** | [**AggregatedReturnsEntityId**](AggregatedReturnsEntityId.md) |  | [default to AggregatedReturnsEntityId]
-**returnsScope** | **String** |  | [default to String]
-**returnsCode** | **String** |  | [default to String]
+**returnsId** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
 **metrics** | [**List&lt;ReturnsMetric&gt;**](ReturnsMetric.md) |  | [default to List<ReturnsMetric>]
 **period** | **String** | Available values: Daily, Monthly. | [optional] [default to String]
 **fromEffectiveAt** | **String** |  | [optional] [default to String]
 **toEffectiveAt** | **String** |  | [optional] [default to String]
 **asAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
+**currency** | **String** |  | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.AggregatedReturnsEntityRequest;
@@ -22,24 +22,24 @@ import java.lang.System;
 import java.net.URI;
 
 AggregatedReturnsEntityId entity = new AggregatedReturnsEntityId();
-String returnsScope = "example returnsScope";
-String returnsCode = "example returnsCode";
+ResourceId returnsId = new ResourceId();
 List<ReturnsMetric> metrics = new List<ReturnsMetric>();
 @javax.annotation.Nullable String period = "example period";
 @javax.annotation.Nullable String fromEffectiveAt = "example fromEffectiveAt";
 @javax.annotation.Nullable String toEffectiveAt = "example toEffectiveAt";
 @javax.annotation.Nullable OffsetDateTime asAt = OffsetDateTime.now();
+@javax.annotation.Nullable String currency = "example currency";
 
 
 AggregatedReturnsEntityRequest aggregatedReturnsEntityRequestInstance = new AggregatedReturnsEntityRequest()
     .entity(entity)
-    .returnsScope(returnsScope)
-    .returnsCode(returnsCode)
+    .returnsId(returnsId)
     .metrics(metrics)
     .period(period)
     .fromEffectiveAt(fromEffectiveAt)
     .toEffectiveAt(toEffectiveAt)
-    .asAt(asAt);
+    .asAt(asAt)
+    .currency(currency);
 ```
 
 

@@ -17,6 +17,9 @@ Name | Type | Description | Notes
 **apportionmentResults** | [**List&lt;ApportionmentBreakdown&gt;**](ApportionmentBreakdown.md) | The apportionment results for the valuation point: one fund-level entry plus one entry per allocation group. | [optional] [default to List<ApportionmentBreakdown>]
 **bucketSetResults** | [**List&lt;BucketSetResult&gt;**](BucketSetResult.md) | The bucket set results for the valuation point: for each bucket set, the per-node (fund and share class) buckets and NAV. | [optional] [default to List<BucketSetResult>]
 **stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
+**isBackfilled** | **Boolean** | Set to True if the Valuation Point has backfilled bucket set results, False otherwise. | [optional] [default to Boolean]
+**applyClearDown** | **Boolean** | Set to True if the Valuation Point applies a clear down, False otherwise. The Valuation Point shows its bucket values before the clear down, and the next Valuation Point opens from the balances after it. | [optional] [default to Boolean]
+**diagnostics** | [**List&lt;ValuationPointDiagnostic&gt;**](ValuationPointDiagnostic.md) | Findings made while striking the valuation point that did not stop it but should be looked at, such as a fund structure holder whose declared sharing percentage in a member has drifted from the share its contributions make of that member&#39;s capital. Absent when there are none. | [optional] [default to List<ValuationPointDiagnostic>]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -36,6 +39,9 @@ List<ShareClassData> shareClassData = new List<ShareClassData>();
 @javax.annotation.Nullable List<ApportionmentBreakdown> apportionmentResults = new List<ApportionmentBreakdown>();
 @javax.annotation.Nullable List<BucketSetResult> bucketSetResults = new List<BucketSetResult>();
 StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
+Boolean isBackfilled = true;
+Boolean applyClearDown = true;
+@javax.annotation.Nullable List<ValuationPointDiagnostic> diagnostics = new List<ValuationPointDiagnostic>();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -51,6 +57,9 @@ ValuationPointDataResponse valuationPointDataResponseInstance = new ValuationPoi
     .apportionmentResults(apportionmentResults)
     .bucketSetResults(bucketSetResults)
     .stagedModifications(stagedModifications)
+    .isBackfilled(isBackfilled)
+    .applyClearDown(applyClearDown)
+    .diagnostics(diagnostics)
     .links(links);
 ```
 

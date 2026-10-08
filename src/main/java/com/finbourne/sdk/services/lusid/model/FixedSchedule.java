@@ -48,6 +48,10 @@ import com.finbourne.sdk.JSON;
   FixedSchedule.JSON_PROPERTY_NOTIONAL,
   FixedSchedule.JSON_PROPERTY_PAYMENT_CURRENCY,
   FixedSchedule.JSON_PROPERTY_STUB_TYPE,
+  FixedSchedule.JSON_PROPERTY_FIRST_COUPON_PAY_DATE,
+  FixedSchedule.JSON_PROPERTY_SECOND_PERIOD_START_DATE,
+  FixedSchedule.JSON_PROPERTY_PENULTIMATE_COUPON_PAY_DATE,
+  FixedSchedule.JSON_PROPERTY_LAST_PERIOD_START_DATE,
   FixedSchedule.JSON_PROPERTY_EX_DIVIDEND_CONFIGURATION,
   FixedSchedule.JSON_PROPERTY_SCHEDULE_ID
 })
@@ -103,6 +107,26 @@ public class FixedSchedule extends Schedule {
   @JsonProperty(JSON_PROPERTY_STUB_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String stubType;
+
+  public static final String JSON_PROPERTY_FIRST_COUPON_PAY_DATE = "firstCouponPayDate";
+  @JsonProperty(JSON_PROPERTY_FIRST_COUPON_PAY_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime firstCouponPayDate;
+
+  public static final String JSON_PROPERTY_SECOND_PERIOD_START_DATE = "secondPeriodStartDate";
+  @JsonProperty(JSON_PROPERTY_SECOND_PERIOD_START_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime secondPeriodStartDate;
+
+  public static final String JSON_PROPERTY_PENULTIMATE_COUPON_PAY_DATE = "penultimateCouponPayDate";
+  @JsonProperty(JSON_PROPERTY_PENULTIMATE_COUPON_PAY_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime penultimateCouponPayDate;
+
+  public static final String JSON_PROPERTY_LAST_PERIOD_START_DATE = "lastPeriodStartDate";
+  @JsonProperty(JSON_PROPERTY_LAST_PERIOD_START_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime lastPeriodStartDate;
 
   public static final String JSON_PROPERTY_EX_DIVIDEND_CONFIGURATION = "exDividendConfiguration";
   @JsonProperty(JSON_PROPERTY_EX_DIVIDEND_CONFIGURATION)
@@ -288,6 +312,82 @@ public class FixedSchedule extends Schedule {
   }
 
 
+  public FixedSchedule firstCouponPayDate(OffsetDateTime firstCouponPayDate) {
+    this.firstCouponPayDate = firstCouponPayDate;
+    return this;
+  }
+
+  /**
+   * Optional. The date on which the first coupon is paid. Set this date for an irregular first coupon period.  If this date is an adjusted date, also set SecondPeriodStartDate.
+   * @return firstCouponPayDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getFirstCouponPayDate() {
+    return firstCouponPayDate;
+  }
+
+  public void setFirstCouponPayDate(OffsetDateTime firstCouponPayDate) {
+    this.firstCouponPayDate = firstCouponPayDate;
+  }
+
+
+  public FixedSchedule secondPeriodStartDate(OffsetDateTime secondPeriodStartDate) {
+    this.secondPeriodStartDate = secondPeriodStartDate;
+    return this;
+  }
+
+  /**
+   * Optional. The date on which the second coupon period starts. This is also the accrual end date of the first coupon period.  Set this date together with FirstCouponPayDate when the first coupon pay date is an adjusted date.
+   * @return secondPeriodStartDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getSecondPeriodStartDate() {
+    return secondPeriodStartDate;
+  }
+
+  public void setSecondPeriodStartDate(OffsetDateTime secondPeriodStartDate) {
+    this.secondPeriodStartDate = secondPeriodStartDate;
+  }
+
+
+  public FixedSchedule penultimateCouponPayDate(OffsetDateTime penultimateCouponPayDate) {
+    this.penultimateCouponPayDate = penultimateCouponPayDate;
+    return this;
+  }
+
+  /**
+   * Optional. The date on which the penultimate coupon is paid. Set this date for an irregular last coupon period.  If this date is an adjusted date, also set LastPeriodStartDate.
+   * @return penultimateCouponPayDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getPenultimateCouponPayDate() {
+    return penultimateCouponPayDate;
+  }
+
+  public void setPenultimateCouponPayDate(OffsetDateTime penultimateCouponPayDate) {
+    this.penultimateCouponPayDate = penultimateCouponPayDate;
+  }
+
+
+  public FixedSchedule lastPeriodStartDate(OffsetDateTime lastPeriodStartDate) {
+    this.lastPeriodStartDate = lastPeriodStartDate;
+    return this;
+  }
+
+  /**
+   * Optional. The date on which the last coupon period starts. This is also the accrual end date of the penultimate coupon period.  Set this date together with PenultimateCouponPayDate when the penultimate coupon pay date is an adjusted date.
+   * @return lastPeriodStartDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getLastPeriodStartDate() {
+    return lastPeriodStartDate;
+  }
+
+  public void setLastPeriodStartDate(OffsetDateTime lastPeriodStartDate) {
+    this.lastPeriodStartDate = lastPeriodStartDate;
+  }
+
+
   public FixedSchedule exDividendConfiguration(ExDividendConfiguration exDividendConfiguration) {
     this.exDividendConfiguration = exDividendConfiguration;
     return this;
@@ -344,6 +444,10 @@ public class FixedSchedule extends Schedule {
         (this.notional == null ? fixedSchedule.notional == null : (fixedSchedule.notional != null && this.notional.compareTo(fixedSchedule.getNotional()) == 0)) &&
         Objects.equals(this.paymentCurrency, fixedSchedule.paymentCurrency) &&
         Objects.equals(this.stubType, fixedSchedule.stubType) &&
+        Objects.equals(this.firstCouponPayDate, fixedSchedule.firstCouponPayDate) &&
+        Objects.equals(this.secondPeriodStartDate, fixedSchedule.secondPeriodStartDate) &&
+        Objects.equals(this.penultimateCouponPayDate, fixedSchedule.penultimateCouponPayDate) &&
+        Objects.equals(this.lastPeriodStartDate, fixedSchedule.lastPeriodStartDate) &&
         Objects.equals(this.exDividendConfiguration, fixedSchedule.exDividendConfiguration) &&
         Objects.equals(this.scheduleId, fixedSchedule.scheduleId) &&
         super.equals(o);
@@ -355,7 +459,7 @@ public class FixedSchedule extends Schedule {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, flowConventions, couponRate, conventionName, exDividendDays, notional, paymentCurrency, stubType, exDividendConfiguration, scheduleId, super.hashCode());
+    return Objects.hash(startDate, maturityDate, flowConventions, couponRate, conventionName, exDividendDays, notional, paymentCurrency, stubType, firstCouponPayDate, secondPeriodStartDate, penultimateCouponPayDate, lastPeriodStartDate, exDividendConfiguration, scheduleId, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -379,6 +483,10 @@ public class FixedSchedule extends Schedule {
     sb.append("    notional: ").append(toIndentedString(notional)).append("\n");
     sb.append("    paymentCurrency: ").append(toIndentedString(paymentCurrency)).append("\n");
     sb.append("    stubType: ").append(toIndentedString(stubType)).append("\n");
+    sb.append("    firstCouponPayDate: ").append(toIndentedString(firstCouponPayDate)).append("\n");
+    sb.append("    secondPeriodStartDate: ").append(toIndentedString(secondPeriodStartDate)).append("\n");
+    sb.append("    penultimateCouponPayDate: ").append(toIndentedString(penultimateCouponPayDate)).append("\n");
+    sb.append("    lastPeriodStartDate: ").append(toIndentedString(lastPeriodStartDate)).append("\n");
     sb.append("    exDividendConfiguration: ").append(toIndentedString(exDividendConfiguration)).append("\n");
     sb.append("    scheduleId: ").append(toIndentedString(scheduleId)).append("\n");
     sb.append("}");

@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost*
 | [**getMatchingRuleset**](RecsApi.md#getMatchingRuleset) | **GET** /api/api/recs/matchingrulesets/{scope}/{code} | [EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset |
 | [**getRecDefinition**](RecsApi.md#getRecDefinition) | **GET** /api/api/recs/definitions/{scope}/{code} | [EXPERIMENTAL] GetRecDefinition: GetRecDefinition |
 | [**getRecInstance**](RecsApi.md#getRecInstance) | **GET** /api/api/recs/instances/{instanceIdType}/{instanceIdValue} | [EXPERIMENTAL] GetRecInstance: GetRecInstance |
-| [**getRecResult**](RecsApi.md#getRecResult) | **GET** /api/api/recs/results/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult |
+| [**getRecResult**](RecsApi.md#getRecResult) | **GET** /api/api/recs/results/{instanceIdType}/{instanceIdValue}/{recType}/{runNumber}/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult |
 | [**getRecResultSet**](RecsApi.md#getRecResultSet) | **GET** /api/api/recs/resultsets/{entityUniqueId} | [EXPERIMENTAL] GetRecResultSet: GetRecResultSet |
 | [**instantiateRec**](RecsApi.md#instantiateRec) | **POST** /api/api/recs/instances | [EXPERIMENTAL] InstantiateRec: InstantiateRec |
 | [**listMatchingRulesets**](RecsApi.md#listMatchingRulesets) | **GET** /api/api/recs/matchingrulesets | [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets |
@@ -26,6 +26,7 @@ All URIs are relative to *http://localhost*
 | [**transitionRecInstance**](RecsApi.md#transitionRecInstance) | **POST** /api/api/recs/instances/{instanceIdType}/{instanceIdValue}/$transition | [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance |
 | [**updateMatchingRuleset**](RecsApi.md#updateMatchingRuleset) | **PUT** /api/api/recs/matchingrulesets/{scope}/{code} | [EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset |
 | [**updateRecDefinition**](RecsApi.md#updateRecDefinition) | **PUT** /api/api/recs/definitions/{scope}/{code} | [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition |
+| [**upsertRecDefinitionProperties**](RecsApi.md#upsertRecDefinitionProperties) | **POST** /api/api/recs/definitions/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties |
 
 
 
@@ -825,11 +826,11 @@ public class RecsApiExample {
 
 ## getRecResult
 
-> RecResult getRecResult(id, asAt, propertyKeys)
+> RecResult getRecResult(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys)
 
 [EXPERIMENTAL] GetRecResult: GetRecResult
 
-Retrieve a single rec result by its id.
+Retrieve a single rec result by the run it belongs to and its id within that run.
 
 ### Example
 
@@ -856,14 +857,18 @@ public class RecsApiExample {
         ApiFactory apiFactory = new ApiFactoryBuilder().build();
         
         RecsApi apiInstance = apiFactory.build(RecsApi.class);
-        String id = "id_example"; // String | The system-generated id of the rec result.
+        String instanceIdType = "instanceIdType_example"; // String | How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.
+        String instanceIdValue = "instanceIdValue_example"; // String | The unique identifier of the rec instance.
+        String recType = "recType_example"; // String | The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.
+        Integer runNumber = 56; // Integer | The run of the instance the result belongs to.
+        String id = "id_example"; // String | The id of the rec result within the run, e.g. \"break-3\".
         OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to retrieve the result. Defaults to latest if not specified.
         List<String> propertyKeys = Arrays.asList(); // List<String> | The property keys to decorate onto the result.
         try {
             // uncomment the below to set overrides at the request level
-            // RecResult result = apiInstance.getRecResult(id, asAt, propertyKeys).execute(opts);
+            // RecResult result = apiInstance.getRecResult(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys).execute(opts);
 
-            RecResult result = apiInstance.getRecResult(id, asAt, propertyKeys).execute();
+            RecResult result = apiInstance.getRecResult(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling RecsApi#getRecResult");
@@ -879,7 +884,11 @@ public class RecsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| The system-generated id of the rec result. | |
+| **instanceIdType** | **String**| How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. | |
+| **instanceIdValue** | **String**| The unique identifier of the rec instance. | |
+| **recType** | **String**| The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | |
+| **runNumber** | **Integer**| The run of the instance the result belongs to. | |
+| **id** | **String**| The id of the rec result within the run, e.g. \&quot;break-3\&quot;. | |
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the result. Defaults to latest if not specified. | [optional] |
 | **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| The property keys to decorate onto the result. | [optional] |
 
@@ -1809,6 +1818,87 @@ public class RecsApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The updated rec definition. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## upsertRecDefinitionProperties
+
+> UpsertRecDefinitionPropertiesResponse upsertRecDefinitionProperties(scope, code, requestBody)
+
+[EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties
+
+Update or insert one or more properties onto a single rec definition. A property will be updated if it already  exists and inserted if it does not. All properties must be of the domain &#39;RecDefinition&#39;, and are perpetual.                Upserting a property that exists for a rec definition, with a null value, will delete the instance of the  property for that rec definition. Properties not supplied are left unchanged, as is every other field of the  rec definition.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.RecsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RecsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        RecsApi apiInstance = apiFactory.build(RecsApi.class);
+        String scope = "scope_example"; // String | The scope of the rec definition to update or insert the properties onto.
+        String code = "code_example"; // String | The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition.
+        Map<String, PerpetualProperty> requestBody = new HashMap(); // Map<String, PerpetualProperty> | The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'RecDefinition/Workflow/WorkflowId'.
+        try {
+            // uncomment the below to set overrides at the request level
+            // UpsertRecDefinitionPropertiesResponse result = apiInstance.upsertRecDefinitionProperties(scope, code, requestBody).execute(opts);
+
+            UpsertRecDefinitionPropertiesResponse result = apiInstance.upsertRecDefinitionProperties(scope, code, requestBody).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RecsApi#upsertRecDefinitionProperties");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the rec definition to update or insert the properties onto. | |
+| **code** | **String**| The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. | |
+| **requestBody** | [**Map&lt;String, PerpetualProperty&gt;**](../model/PerpetualProperty.md)| The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;RecDefinition/Workflow/WorkflowId&#39;. | |
+
+### Return type
+
+[**UpsertRecDefinitionPropertiesResponse**](../model/UpsertRecDefinitionPropertiesResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The updated or inserted properties. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

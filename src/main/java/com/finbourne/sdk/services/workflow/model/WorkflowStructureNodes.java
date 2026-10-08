@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.workflow.model;
 
+import com.finbourne.sdk.services.workflow.model.LauncherResponse;
 import com.finbourne.sdk.services.workflow.model.TaskDefinition;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,10 +35,11 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The nodes of a Workflow structure graph — the Task Definitions involved
+ * The nodes of a Workflow structure graph — the Task Definitions and the Launchers involved
  */
 @JsonPropertyOrder({
-  WorkflowStructureNodes.JSON_PROPERTY_TASK_DEFINITIONS
+  WorkflowStructureNodes.JSON_PROPERTY_TASK_DEFINITIONS,
+  WorkflowStructureNodes.JSON_PROPERTY_LAUNCHERS
 })
 
 public class WorkflowStructureNodes {
@@ -45,6 +47,11 @@ public class WorkflowStructureNodes {
   @JsonProperty(JSON_PROPERTY_TASK_DEFINITIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<TaskDefinition> taskDefinitions;
+
+  public static final String JSON_PROPERTY_LAUNCHERS = "launchers";
+  @JsonProperty(JSON_PROPERTY_LAUNCHERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<LauncherResponse> launchers;
 
   public WorkflowStructureNodes() {
   }
@@ -76,6 +83,33 @@ public class WorkflowStructureNodes {
   }
 
 
+  public WorkflowStructureNodes launchers(List<LauncherResponse> launchers) {
+    this.launchers = launchers;
+    return this;
+  }
+
+  public WorkflowStructureNodes addLaunchersItem(LauncherResponse launchersItem) {
+    if (this.launchers == null) {
+      this.launchers = new ArrayList<>();
+    }
+    this.launchers.add(launchersItem);
+    return this;
+  }
+
+  /**
+   * The Launchers of this Workflow, as full Launcher objects. At most the first 10 by launcher id are returned, in the same order as ListLaunchers gives by default. Inactive Launchers are included. When the Workflow has more, launchersTruncated is true and ListLaunchers returns the full set
+   * @return launchers
+   */
+  @javax.annotation.Nullable
+  public List<LauncherResponse> getLaunchers() {
+    return launchers;
+  }
+
+  public void setLaunchers(List<LauncherResponse> launchers) {
+    this.launchers = launchers;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -85,7 +119,8 @@ public class WorkflowStructureNodes {
       return false;
     }
     WorkflowStructureNodes workflowStructureNodes = (WorkflowStructureNodes) o;
-    return Objects.equals(this.taskDefinitions, workflowStructureNodes.taskDefinitions);
+    return Objects.equals(this.taskDefinitions, workflowStructureNodes.taskDefinitions) &&
+        Objects.equals(this.launchers, workflowStructureNodes.launchers);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -94,7 +129,7 @@ public class WorkflowStructureNodes {
 
   @Override
  public int hashCode() {
-    return Objects.hash(taskDefinitions);
+    return Objects.hash(taskDefinitions, launchers);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -109,6 +144,7 @@ public class WorkflowStructureNodes {
     StringBuilder sb = new StringBuilder();
     sb.append("class WorkflowStructureNodes {\n");
     sb.append("    taskDefinitions: ").append(toIndentedString(taskDefinitions)).append("\n");
+    sb.append("    launchers: ").append(toIndentedString(launchers)).append("\n");
     sb.append("}");
     return sb.toString();
   }

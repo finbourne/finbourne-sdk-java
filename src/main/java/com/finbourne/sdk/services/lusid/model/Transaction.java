@@ -171,7 +171,7 @@ public class Transaction {
   private OtcConfirmation otcConfirmation;
 
   /**
-   * The status of the transaction. Available values: Active, Amended, Cancelled, ActiveReversal, ActiveTrueUp, CancelledTrueUp.
+   * The status of the transaction. Available values: Active, Amended, Cancelled, ActiveReversal, ActiveTrueUp, CancelledTrueUp, PendingReversal, Reversed.
    */
   public enum TransactionStatusEnum {
     ACTIVE("Active"),
@@ -184,7 +184,11 @@ public class Transaction {
     
     ACTIVE_TRUE_UP("ActiveTrueUp"),
     
-    CANCELLED_TRUE_UP("CancelledTrueUp");
+    CANCELLED_TRUE_UP("CancelledTrueUp"),
+    
+    PENDING_REVERSAL("PendingReversal"),
+    
+    REVERSED("Reversed");
 
     private String value;
 
@@ -625,7 +629,7 @@ public class Transaction {
   }
 
   /**
-   * The status of the transaction. Available values: Active, Amended, Cancelled, ActiveReversal, ActiveTrueUp, CancelledTrueUp.
+   * The status of the transaction. Available values: Active, Amended, Cancelled, ActiveReversal, ActiveTrueUp, CancelledTrueUp, PendingReversal, Reversed.
    * @return transactionStatus
    */
   @javax.annotation.Nullable

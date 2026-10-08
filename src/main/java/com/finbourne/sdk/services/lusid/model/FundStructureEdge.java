@@ -39,7 +39,8 @@ import com.finbourne.sdk.JSON;
   FundStructureEdge.JSON_PROPERTY_FROM,
   FundStructureEdge.JSON_PROPERTY_TO,
   FundStructureEdge.JSON_PROPERTY_LINKAGE_TYPE,
-  FundStructureEdge.JSON_PROPERTY_VIA_INSTRUMENT_ID
+  FundStructureEdge.JSON_PROPERTY_VIA_INSTRUMENT_ID,
+  FundStructureEdge.JSON_PROPERTY_SHARING_PERCENTAGE
 })
 
 public class FundStructureEdge {
@@ -62,6 +63,11 @@ public class FundStructureEdge {
   @JsonProperty(JSON_PROPERTY_VIA_INSTRUMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId viaInstrumentId;
+
+  public static final String JSON_PROPERTY_SHARING_PERCENTAGE = "sharingPercentage";
+  @JsonProperty(JSON_PROPERTY_SHARING_PERCENTAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal sharingPercentage;
 
   public FundStructureEdge() {
   }
@@ -142,6 +148,25 @@ public class FundStructureEdge {
   }
 
 
+  public FundStructureEdge sharingPercentage(java.math.BigDecimal sharingPercentage) {
+    this.sharingPercentage = sharingPercentage;
+    return this;
+  }
+
+  /**
+   * The holder&#39;s ILPA sharing percentage in the target member, adjusted for transfers and equalisation but not reduced by ordinary distributions. Between 0 and 1 inclusive; the percentages declared into any one member must sum to no more than 1. Defaults to 1 (sole ownership) when not supplied. A value of 0 records a full exit: keep the edge and set it to 0 from the date the interest ended, so that the change in percentage from one version of the structure to the next tells the P&amp;L flow what was disposed of. Each disposal or acquisition trade of the holder&#39;s needs its own version of the structure, effective on that trade&#39;s date: proceeds received on a date with no change in percentage are taken as a distribution on the retained interest, not a disposal. A change in percentage with no trade of the holder&#39;s on its date takes effect at the holder&#39;s next transaction on the member or period close, whichever comes first.
+   * @return sharingPercentage
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getSharingPercentage() {
+    return sharingPercentage;
+  }
+
+  public void setSharingPercentage(java.math.BigDecimal sharingPercentage) {
+    this.sharingPercentage = sharingPercentage;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -154,7 +179,8 @@ public class FundStructureEdge {
     return Objects.equals(this.from, fundStructureEdge.from) &&
         Objects.equals(this.to, fundStructureEdge.to) &&
         Objects.equals(this.linkageType, fundStructureEdge.linkageType) &&
-        Objects.equals(this.viaInstrumentId, fundStructureEdge.viaInstrumentId);
+        Objects.equals(this.viaInstrumentId, fundStructureEdge.viaInstrumentId) &&
+        (this.sharingPercentage == null ? fundStructureEdge.sharingPercentage == null : (fundStructureEdge.sharingPercentage != null && this.sharingPercentage.compareTo(fundStructureEdge.getSharingPercentage()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -163,7 +189,7 @@ public class FundStructureEdge {
 
   @Override
  public int hashCode() {
-    return Objects.hash(from, to, linkageType, viaInstrumentId);
+    return Objects.hash(from, to, linkageType, viaInstrumentId, sharingPercentage);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -181,6 +207,7 @@ public class FundStructureEdge {
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("    linkageType: ").append(toIndentedString(linkageType)).append("\n");
     sb.append("    viaInstrumentId: ").append(toIndentedString(viaInstrumentId)).append("\n");
+    sb.append("    sharingPercentage: ").append(toIndentedString(sharingPercentage)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **marketDataOverrides** | [**MarketDataOverrides**](MarketDataOverrides.md) |  | [optional] [default to MarketDataOverrides]
 **corporateActionSourceId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **scenario** | [**ScenarioReference**](ScenarioReference.md) |  | [optional] [default to ScenarioReference]
+**notionalDealingCostTableId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.ValuationRequest;
@@ -43,6 +44,7 @@ ValuationSchedule valuationSchedule = new ValuationSchedule();
 MarketDataOverrides marketDataOverrides = new MarketDataOverrides();
 ResourceId corporateActionSourceId = new ResourceId();
 ScenarioReference scenario = new ScenarioReference();
+ResourceId notionalDealingCostTableId = new ResourceId();
 
 
 ValuationRequest valuationRequestInstance = new ValuationRequest()
@@ -60,7 +62,8 @@ ValuationRequest valuationRequestInstance = new ValuationRequest()
     .valuationSchedule(valuationSchedule)
     .marketDataOverrides(marketDataOverrides)
     .corporateActionSourceId(corporateActionSourceId)
-    .scenario(scenario);
+    .scenario(scenario)
+    .notionalDealingCostTableId(notionalDealingCostTableId);
 ```
 
 

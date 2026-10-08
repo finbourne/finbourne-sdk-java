@@ -24,6 +24,9 @@ Name | Type | Description | Notes
 **leaderNavTypeCode** | **String** | The code of the Nav Type that this Nav Type will follow when set. | [optional] [default to String]
 **transactionTemplateScope** | **String** | The Transaction Template Scope used by the NavType. | [default to String]
 **transactionExclusionFilter** | **String** | Optional filter expression to exclude specific transactions from this NavType&#39;s derived portfolios. The filter can reference Transaction, Portfolio, or Instrument fields and properties. | [optional] [default to String]
+**pricingBasis** | **String** | The side of the quote this Nav Type values the fund on: Mid, Bid or Ask. Overrides the pricing basis of the valuation recipe&#39;s market options for this Nav Type only, so a bid NAV and an ask NAV can share one recipe. Omit it to value on the recipe&#39;s own pricing basis. Available values: Mid, Bid, Ask. | [optional] [default to String]
+**swingPricing** | [**SwingPricingRule**](SwingPricingRule.md) |  | [optional] [default to SwingPricingRule]
+**notionalDealingCostTableId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.NavType;
@@ -50,6 +53,9 @@ ResourceId amortisationRuleSetId = new ResourceId();
 @javax.annotation.Nullable String leaderNavTypeCode = "example leaderNavTypeCode";
 String transactionTemplateScope = "example transactionTemplateScope";
 @javax.annotation.Nullable String transactionExclusionFilter = "example transactionExclusionFilter";
+@javax.annotation.Nullable String pricingBasis = "example pricingBasis";
+SwingPricingRule swingPricing = new SwingPricingRule();
+ResourceId notionalDealingCostTableId = new ResourceId();
 
 
 NavType navTypeInstance = new NavType()
@@ -71,7 +77,10 @@ NavType navTypeInstance = new NavType()
     .amortisationRuleSetId(amortisationRuleSetId)
     .leaderNavTypeCode(leaderNavTypeCode)
     .transactionTemplateScope(transactionTemplateScope)
-    .transactionExclusionFilter(transactionExclusionFilter);
+    .transactionExclusionFilter(transactionExclusionFilter)
+    .pricingBasis(pricingBasis)
+    .swingPricing(swingPricing)
+    .notionalDealingCostTableId(notionalDealingCostTableId);
 ```
 
 

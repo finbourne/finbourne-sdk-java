@@ -500,7 +500,7 @@ public class AggregatedReturnsApi {
 
     /**
      * [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
-     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied scope/code; the request fails if no such entity exists.
+     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.
      * @param aggregatedReturnsEntityRequest The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. (required)
      * @return ApiResponse&lt;AggregatedReturnsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -520,7 +520,7 @@ public class AggregatedReturnsApi {
 
     /**
      * [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
-     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied scope/code; the request fails if no such entity exists.Use any specified configuration options to override any other configuration for this request only
+     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.Use any specified configuration options to override any other configuration for this request only
      * @param aggregatedReturnsEntityRequest The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. (required)
      * @return ApiResponse&lt;AggregatedReturnsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -540,7 +540,7 @@ public class AggregatedReturnsApi {
 
     /**
      * [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity. (asynchronously)
-     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied scope/code; the request fails if no such entity exists.
+     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.
      * @param aggregatedReturnsEntityRequest The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -561,7 +561,7 @@ public class AggregatedReturnsApi {
 
     /**
      * [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity. (asynchronously)
-     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied scope/code; the request fails if no such entity exists.Use any specified configuration options to override any other configuration for this request only
+     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.Use any specified configuration options to override any other configuration for this request only
      * @param aggregatedReturnsEntityRequest The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -705,7 +705,7 @@ public class AggregatedReturnsApi {
 
     /**
      * [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
-     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied scope/code; the request fails if no such entity exists.
+     * Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.
      * @param aggregatedReturnsEntityRequest The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. (required)
      * @return APIgetAggregatedReturnsRequest
      * @http.response.details

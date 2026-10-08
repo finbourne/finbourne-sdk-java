@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.RecResultHoldingImpact;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.WritebackSuggestion;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +45,8 @@ import com.finbourne.sdk.JSON;
   RecResultTransactionItem.JSON_PROPERTY_TRANSACTION_ID,
   RecResultTransactionItem.JSON_PROPERTY_HOLDING_IMPACTS,
   RecResultTransactionItem.JSON_PROPERTY_ITEM_TYPE,
-  RecResultTransactionItem.JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES
+  RecResultTransactionItem.JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES,
+  RecResultTransactionItem.JSON_PROPERTY_WRITEBACK_SUGGESTIONS
 })
 
 public class RecResultTransactionItem {
@@ -73,7 +75,19 @@ public class RecResultTransactionItem {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, String> ruleAndAttributeValues;
 
+  public static final String JSON_PROPERTY_WRITEBACK_SUGGESTIONS = "writebackSuggestions";
+  @JsonProperty(JSON_PROPERTY_WRITEBACK_SUGGESTIONS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<WritebackSuggestion> writebackSuggestions = new ArrayList<>();
+
   public RecResultTransactionItem() {
+  }
+
+  public RecResultTransactionItem(
+     List<WritebackSuggestion> writebackSuggestions
+  ) {
+    this();
+    this.writebackSuggestions = writebackSuggestions;
   }
 
   public RecResultTransactionItem portfolioId(ResourceId portfolioId) {
@@ -187,6 +201,17 @@ public class RecResultTransactionItem {
   }
 
 
+  /**
+   * The writebacks suggested against this item, as configured by the matching ruleset&#39;s writebackConfigurations. Only ever populated on target-side items. Suggestions only: a user is expected to review them before acting. Required, but may be empty.
+   * @return writebackSuggestions
+   */
+  @javax.annotation.Nonnull
+  public List<WritebackSuggestion> getWritebackSuggestions() {
+    return writebackSuggestions;
+  }
+
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -200,7 +225,8 @@ public class RecResultTransactionItem {
         Objects.equals(this.transactionId, recResultTransactionItem.transactionId) &&
         Objects.equals(this.holdingImpacts, recResultTransactionItem.holdingImpacts) &&
         Objects.equals(this.itemType, recResultTransactionItem.itemType) &&
-        Objects.equals(this.ruleAndAttributeValues, recResultTransactionItem.ruleAndAttributeValues);
+        Objects.equals(this.ruleAndAttributeValues, recResultTransactionItem.ruleAndAttributeValues) &&
+        Objects.equals(this.writebackSuggestions, recResultTransactionItem.writebackSuggestions);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -209,7 +235,7 @@ public class RecResultTransactionItem {
 
   @Override
  public int hashCode() {
-    return Objects.hash(portfolioId, transactionId, holdingImpacts, itemType, ruleAndAttributeValues);
+    return Objects.hash(portfolioId, transactionId, holdingImpacts, itemType, ruleAndAttributeValues, writebackSuggestions);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -228,6 +254,7 @@ public class RecResultTransactionItem {
     sb.append("    holdingImpacts: ").append(toIndentedString(holdingImpacts)).append("\n");
     sb.append("    itemType: ").append(toIndentedString(itemType)).append("\n");
     sb.append("    ruleAndAttributeValues: ").append(toIndentedString(ruleAndAttributeValues)).append("\n");
+    sb.append("    writebackSuggestions: ").append(toIndentedString(writebackSuggestions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -14,8 +14,10 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ModelOptions;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
@@ -43,7 +45,13 @@ import com.finbourne.sdk.JSON;
   HullWhiteModelOptions.JSON_PROPERTY_EFFECTIVE_RATE_BUMP_SIZE,
   HullWhiteModelOptions.JSON_PROPERTY_MEAN_REVERSION_BY_CURRENCY,
   HullWhiteModelOptions.JSON_PROPERTY_VOLATILITY_BY_CURRENCY,
-  HullWhiteModelOptions.JSON_PROPERTY_VOLATILITY_MULTIPLIER
+  HullWhiteModelOptions.JSON_PROPERTY_VOLATILITY_MULTIPLIER,
+  HullWhiteModelOptions.JSON_PROPERTY_EFFECTIVE_CS01_BUMP_WIDTH,
+  HullWhiteModelOptions.JSON_PROPERTY_EFFECTIVE_KEY_RATE_BUCKETS,
+  HullWhiteModelOptions.JSON_PROPERTY_PRICE_TO_FIRST_RESET,
+  HullWhiteModelOptions.JSON_PROPERTY_LATTICE_STEPS_PER_YEAR,
+  HullWhiteModelOptions.JSON_PROPERTY_MAX_LATTICE_NODES,
+  HullWhiteModelOptions.JSON_PROPERTY_PRICE_AT_QUOTE_IMPLIED_OAS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -87,6 +95,36 @@ public class HullWhiteModelOptions extends ModelOptions {
   @JsonProperty(JSON_PROPERTY_VOLATILITY_MULTIPLIER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal volatilityMultiplier;
+
+  public static final String JSON_PROPERTY_EFFECTIVE_CS01_BUMP_WIDTH = "effectiveCs01BumpWidth";
+  @JsonProperty(JSON_PROPERTY_EFFECTIVE_CS01_BUMP_WIDTH)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal effectiveCs01BumpWidth;
+
+  public static final String JSON_PROPERTY_EFFECTIVE_KEY_RATE_BUCKETS = "effectiveKeyRateBuckets";
+  @JsonProperty(JSON_PROPERTY_EFFECTIVE_KEY_RATE_BUCKETS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> effectiveKeyRateBuckets;
+
+  public static final String JSON_PROPERTY_PRICE_TO_FIRST_RESET = "priceToFirstReset";
+  @JsonProperty(JSON_PROPERTY_PRICE_TO_FIRST_RESET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean priceToFirstReset;
+
+  public static final String JSON_PROPERTY_LATTICE_STEPS_PER_YEAR = "latticeStepsPerYear";
+  @JsonProperty(JSON_PROPERTY_LATTICE_STEPS_PER_YEAR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer latticeStepsPerYear;
+
+  public static final String JSON_PROPERTY_MAX_LATTICE_NODES = "maxLatticeNodes";
+  @JsonProperty(JSON_PROPERTY_MAX_LATTICE_NODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer maxLatticeNodes;
+
+  public static final String JSON_PROPERTY_PRICE_AT_QUOTE_IMPLIED_OAS = "priceAtQuoteImpliedOas";
+  @JsonProperty(JSON_PROPERTY_PRICE_AT_QUOTE_IMPLIED_OAS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean priceAtQuoteImpliedOas;
 
   public HullWhiteModelOptions() {
   }
@@ -240,6 +278,128 @@ public class HullWhiteModelOptions extends ModelOptions {
   }
 
 
+  public HullWhiteModelOptions effectiveCs01BumpWidth(java.math.BigDecimal effectiveCs01BumpWidth) {
+    this.effectiveCs01BumpWidth = effectiveCs01BumpWidth;
+    return this;
+  }
+
+  /**
+   * The TOTAL width, as an absolute spread, of the central-difference stencil used for the  option-adjusted Analytic/EffectiveCS01: the two reprice points sit at the solved OAS plus  and minus half of this. The reported figure is normalised to a one-basis-point move  whatever width is configured. Must be strictly positive. Defaults to 0.0001 (1bp, the  market convention for a credit sensitivity) when not supplied.
+   * @return effectiveCs01BumpWidth
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getEffectiveCs01BumpWidth() {
+    return effectiveCs01BumpWidth;
+  }
+
+  public void setEffectiveCs01BumpWidth(java.math.BigDecimal effectiveCs01BumpWidth) {
+    this.effectiveCs01BumpWidth = effectiveCs01BumpWidth;
+  }
+
+
+  public HullWhiteModelOptions effectiveKeyRateBuckets(List<String> effectiveKeyRateBuckets) {
+    this.effectiveKeyRateBuckets = effectiveKeyRateBuckets;
+    return this;
+  }
+
+  public HullWhiteModelOptions addEffectiveKeyRateBucketsItem(String effectiveKeyRateBucketsItem) {
+    if (this.effectiveKeyRateBuckets == null) {
+      this.effectiveKeyRateBuckets = new ArrayList<>();
+    }
+    this.effectiveKeyRateBuckets.add(effectiveKeyRateBucketsItem);
+    return this;
+  }
+
+  /**
+   * The maturity buckets of the Analytic/EffectiveKeyRateDuration ladder, as tenor strings  such as \&quot;1Y\&quot; or \&quot;6M\&quot;, in strictly increasing order. Each bucket is repriced under a  tent-shaped curve shift centred on its own tenor, so the ladder sums to the parallel  effective duration to first order. Buckets past an instrument&#39;s maturity report zero, so  one grid can serve a whole book. Defaults to the 1Y, 2Y, 3Y, 5Y, 7Y, 10Y, 20Y, 30Y grid  when not supplied; an empty list is rejected.
+   * @return effectiveKeyRateBuckets
+   */
+  @javax.annotation.Nullable
+  public List<String> getEffectiveKeyRateBuckets() {
+    return effectiveKeyRateBuckets;
+  }
+
+  public void setEffectiveKeyRateBuckets(List<String> effectiveKeyRateBuckets) {
+    this.effectiveKeyRateBuckets = effectiveKeyRateBuckets;
+  }
+
+
+  public HullWhiteModelOptions priceToFirstReset(Boolean priceToFirstReset) {
+    this.priceToFirstReset = priceToFirstReset;
+    return this;
+  }
+
+  /**
+   * Value a fixed-to-float callable bond only to its first reset. The bond must be a  ComplexBond with one fixed schedule, one floating schedule starting on the fixed schedule&#39;s  maturity, and a call exercisable on that date; it is then valued as if called there, redeemed  at the call strike on the principal outstanding, with the fixed coupon paid on that date kept  and no floating coupon projected. Any call before that date stays live on the lattice. Bonds  of any other shape are refused by name rather than valued over their full life. Rows priced  this way carry the reset date in the Diagnostics/Model/PricingHorizon valuation key. Defaults  to false, which values the bond over its full life.
+   * @return priceToFirstReset
+   */
+  @javax.annotation.Nullable
+  public Boolean getPriceToFirstReset() {
+    return priceToFirstReset;
+  }
+
+  public void setPriceToFirstReset(Boolean priceToFirstReset) {
+    this.priceToFirstReset = priceToFirstReset;
+  }
+
+
+  public HullWhiteModelOptions latticeStepsPerYear(Integer latticeStepsPerYear) {
+    this.latticeStepsPerYear = latticeStepsPerYear;
+    return this;
+  }
+
+  /**
+   * The lattice time-step density as steps per year. When supplied, the lattice uses  ceil(horizon in years x this value) steps, raised if necessary so that one step is no longer  than the shortest gap between consecutive cashflows, so the fixed LatticeSteps is ignored and  the \&quot;lattice coarser than coupon spacing\&quot; refusal cannot fire. Must be at least 1 when  supplied. Absent, the fixed LatticeSteps count applies.
+   * @return latticeStepsPerYear
+   */
+  @javax.annotation.Nullable
+  public Integer getLatticeStepsPerYear() {
+    return latticeStepsPerYear;
+  }
+
+  public void setLatticeStepsPerYear(Integer latticeStepsPerYear) {
+    this.latticeStepsPerYear = latticeStepsPerYear;
+  }
+
+
+  public HullWhiteModelOptions maxLatticeNodes(Integer maxLatticeNodes) {
+    this.maxLatticeNodes = maxLatticeNodes;
+    return this;
+  }
+
+  /**
+   * A ceiling on the lattice size, counted as (steps + 1) x rate levels, that the pricer may  build for one instrument. An instrument whose lattice would exceed it is declined by the  model before any allocation, so the cost of a long-dated or finely-stepped row can be  bounded. Must be at least 1 when supplied. Absent, no ceiling applies.
+   * @return maxLatticeNodes
+   */
+  @javax.annotation.Nullable
+  public Integer getMaxLatticeNodes() {
+    return maxLatticeNodes;
+  }
+
+  public void setMaxLatticeNodes(Integer maxLatticeNodes) {
+    this.maxLatticeNodes = maxLatticeNodes;
+  }
+
+
+  public HullWhiteModelOptions priceAtQuoteImpliedOas(Boolean priceAtQuoteImpliedOas) {
+    this.priceAtQuoteImpliedOas = priceAtQuoteImpliedOas;
+    return this;
+  }
+
+  /**
+   * Price at the option-adjusted spread implied by the instrument&#39;s quoted price instead of at zero  spread, so the present value reproduces the quote and curve risk is measured with the spread  held. The spread is taken from an OAS quote served for the instrument (a quote with descriptor  [\&quot;OAS\&quot;] keyed by its identifiers, from a Rate-typed market data rule or a market data override)  when there is one, and is then held across every bumped valuation; otherwise it is solved  against the quote in the valuation&#39;s own market. A request for a Risk measure requires the OAS  quote, since a spread re-solved under each bump would leave the measure at zero. Also prices  compounded-in-arrears floating coupons, exercises inside an unfixed floating period and  asset-backed bonds, which are otherwise refused. For an asset-backed bond the pool is held at  its latest factor to legal final with no prepayment, so EffectiveDuration and Pv01 on those  rows are legal-final durations that ignore prepayment. A constant prepayment rate served for the  pool is not read, so the lattice, the cash flows and WeightedAverageLife all run the pool to  legal final. Rows carry the source of the spread in the Diagnostics/Model/PricingSpreadSource  valuation key. Defaults to false.
+   * @return priceAtQuoteImpliedOas
+   */
+  @javax.annotation.Nullable
+  public Boolean getPriceAtQuoteImpliedOas() {
+    return priceAtQuoteImpliedOas;
+  }
+
+  public void setPriceAtQuoteImpliedOas(Boolean priceAtQuoteImpliedOas) {
+    this.priceAtQuoteImpliedOas = priceAtQuoteImpliedOas;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -256,6 +416,12 @@ public class HullWhiteModelOptions extends ModelOptions {
         Objects.equals(this.meanReversionByCurrency, hullWhiteModelOptions.meanReversionByCurrency) &&
         Objects.equals(this.volatilityByCurrency, hullWhiteModelOptions.volatilityByCurrency) &&
         (this.volatilityMultiplier == null ? hullWhiteModelOptions.volatilityMultiplier == null : (hullWhiteModelOptions.volatilityMultiplier != null && this.volatilityMultiplier.compareTo(hullWhiteModelOptions.getVolatilityMultiplier()) == 0)) &&
+        (this.effectiveCs01BumpWidth == null ? hullWhiteModelOptions.effectiveCs01BumpWidth == null : (hullWhiteModelOptions.effectiveCs01BumpWidth != null && this.effectiveCs01BumpWidth.compareTo(hullWhiteModelOptions.getEffectiveCs01BumpWidth()) == 0)) &&
+        Objects.equals(this.effectiveKeyRateBuckets, hullWhiteModelOptions.effectiveKeyRateBuckets) &&
+        Objects.equals(this.priceToFirstReset, hullWhiteModelOptions.priceToFirstReset) &&
+        Objects.equals(this.latticeStepsPerYear, hullWhiteModelOptions.latticeStepsPerYear) &&
+        Objects.equals(this.maxLatticeNodes, hullWhiteModelOptions.maxLatticeNodes) &&
+        Objects.equals(this.priceAtQuoteImpliedOas, hullWhiteModelOptions.priceAtQuoteImpliedOas) &&
         super.equals(o);
   }
 
@@ -265,7 +431,7 @@ public class HullWhiteModelOptions extends ModelOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(meanReversion, volatility, latticeSteps, effectiveRateBumpSize, meanReversionByCurrency, volatilityByCurrency, volatilityMultiplier, super.hashCode());
+    return Objects.hash(meanReversion, volatility, latticeSteps, effectiveRateBumpSize, meanReversionByCurrency, volatilityByCurrency, volatilityMultiplier, effectiveCs01BumpWidth, effectiveKeyRateBuckets, priceToFirstReset, latticeStepsPerYear, maxLatticeNodes, priceAtQuoteImpliedOas, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -287,6 +453,12 @@ public class HullWhiteModelOptions extends ModelOptions {
     sb.append("    meanReversionByCurrency: ").append(toIndentedString(meanReversionByCurrency)).append("\n");
     sb.append("    volatilityByCurrency: ").append(toIndentedString(volatilityByCurrency)).append("\n");
     sb.append("    volatilityMultiplier: ").append(toIndentedString(volatilityMultiplier)).append("\n");
+    sb.append("    effectiveCs01BumpWidth: ").append(toIndentedString(effectiveCs01BumpWidth)).append("\n");
+    sb.append("    effectiveKeyRateBuckets: ").append(toIndentedString(effectiveKeyRateBuckets)).append("\n");
+    sb.append("    priceToFirstReset: ").append(toIndentedString(priceToFirstReset)).append("\n");
+    sb.append("    latticeStepsPerYear: ").append(toIndentedString(latticeStepsPerYear)).append("\n");
+    sb.append("    maxLatticeNodes: ").append(toIndentedString(maxLatticeNodes)).append("\n");
+    sb.append("    priceAtQuoteImpliedOas: ").append(toIndentedString(priceAtQuoteImpliedOas)).append("\n");
     sb.append("}");
     return sb.toString();
   }

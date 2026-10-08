@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.RecInstanceId;
 import java.io.IOException;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -34,12 +35,30 @@ import com.finbourne.sdk.JSON;
  * One item of a batch comment request. The operation (add/edit/delete) is inferred from the  combination of commentId and commentText.
  */
 @JsonPropertyOrder({
+  BatchManageCommentRequest.JSON_PROPERTY_INSTANCE_ID,
+  BatchManageCommentRequest.JSON_PROPERTY_REC_TYPE,
+  BatchManageCommentRequest.JSON_PROPERTY_RUN_NUMBER,
   BatchManageCommentRequest.JSON_PROPERTY_REC_RESULT_ID,
   BatchManageCommentRequest.JSON_PROPERTY_COMMENT_ID,
   BatchManageCommentRequest.JSON_PROPERTY_COMMENT_TEXT
 })
 
 public class BatchManageCommentRequest {
+  public static final String JSON_PROPERTY_INSTANCE_ID = "instanceId";
+  @JsonProperty(JSON_PROPERTY_INSTANCE_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private RecInstanceId instanceId;
+
+  public static final String JSON_PROPERTY_REC_TYPE = "recType";
+  @JsonProperty(JSON_PROPERTY_REC_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String recType;
+
+  public static final String JSON_PROPERTY_RUN_NUMBER = "runNumber";
+  @JsonProperty(JSON_PROPERTY_RUN_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Integer runNumber;
+
   public static final String JSON_PROPERTY_REC_RESULT_ID = "recResultId";
   @JsonProperty(JSON_PROPERTY_REC_RESULT_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -57,6 +76,63 @@ public class BatchManageCommentRequest {
 
   public BatchManageCommentRequest() {
   }
+
+  public BatchManageCommentRequest instanceId(RecInstanceId instanceId) {
+    this.instanceId = instanceId;
+    return this;
+  }
+
+  /**
+   * Get instanceId
+   * @return instanceId
+   */
+  @javax.annotation.Nonnull
+  public RecInstanceId getInstanceId() {
+    return instanceId;
+  }
+
+  public void setInstanceId(RecInstanceId instanceId) {
+    this.instanceId = instanceId;
+  }
+
+
+  public BatchManageCommentRequest recType(String recType) {
+    this.recType = recType;
+    return this;
+  }
+
+  /**
+   * The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.
+   * @return recType
+   */
+  @javax.annotation.Nonnull
+  public String getRecType() {
+    return recType;
+  }
+
+  public void setRecType(String recType) {
+    this.recType = recType;
+  }
+
+
+  public BatchManageCommentRequest runNumber(Integer runNumber) {
+    this.runNumber = runNumber;
+    return this;
+  }
+
+  /**
+   * The run of the instance whose results this item targets.
+   * @return runNumber
+   */
+  @javax.annotation.Nonnull
+  public Integer getRunNumber() {
+    return runNumber;
+  }
+
+  public void setRunNumber(Integer runNumber) {
+    this.runNumber = runNumber;
+  }
+
 
   public BatchManageCommentRequest recResultId(String recResultId) {
     this.recResultId = recResultId;
@@ -124,7 +200,10 @@ public class BatchManageCommentRequest {
       return false;
     }
     BatchManageCommentRequest batchManageCommentRequest = (BatchManageCommentRequest) o;
-    return Objects.equals(this.recResultId, batchManageCommentRequest.recResultId) &&
+    return Objects.equals(this.instanceId, batchManageCommentRequest.instanceId) &&
+        Objects.equals(this.recType, batchManageCommentRequest.recType) &&
+        Objects.equals(this.runNumber, batchManageCommentRequest.runNumber) &&
+        Objects.equals(this.recResultId, batchManageCommentRequest.recResultId) &&
         Objects.equals(this.commentId, batchManageCommentRequest.commentId) &&
         Objects.equals(this.commentText, batchManageCommentRequest.commentText);
   }
@@ -135,7 +214,7 @@ public class BatchManageCommentRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(recResultId, commentId, commentText);
+    return Objects.hash(instanceId, recType, runNumber, recResultId, commentId, commentText);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -149,6 +228,9 @@ public class BatchManageCommentRequest {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class BatchManageCommentRequest {\n");
+    sb.append("    instanceId: ").append(toIndentedString(instanceId)).append("\n");
+    sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
+    sb.append("    runNumber: ").append(toIndentedString(runNumber)).append("\n");
     sb.append("    recResultId: ").append(toIndentedString(recResultId)).append("\n");
     sb.append("    commentId: ").append(toIndentedString(commentId)).append("\n");
     sb.append("    commentText: ").append(toIndentedString(commentText)).append("\n");

@@ -40,7 +40,8 @@ import com.finbourne.sdk.JSON;
   MarketOptions.JSON_PROPERTY_ATTEMPT_TO_INFER_MISSING_FX,
   MarketOptions.JSON_PROPERTY_ATTEMPT_TO_INFER_MISSING_FX_ON_FIXINGS,
   MarketOptions.JSON_PROPERTY_CALENDAR_SCOPE,
-  MarketOptions.JSON_PROPERTY_CONVENTION_SCOPE
+  MarketOptions.JSON_PROPERTY_CONVENTION_SCOPE,
+  MarketOptions.JSON_PROPERTY_PRICING_BASIS
 })
 
 public class MarketOptions {
@@ -78,6 +79,11 @@ public class MarketOptions {
   @JsonProperty(JSON_PROPERTY_CONVENTION_SCOPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String conventionScope;
+
+  public static final String JSON_PROPERTY_PRICING_BASIS = "pricingBasis";
+  @JsonProperty(JSON_PROPERTY_PRICING_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String pricingBasis;
 
   public MarketOptions() {
   }
@@ -215,6 +221,25 @@ public class MarketOptions {
   }
 
 
+  public MarketOptions pricingBasis(String pricingBasis) {
+    this.pricingBasis = pricingBasis;
+    return this;
+  }
+
+  /**
+   * The side of the instrument price quote the recipe values on: Mid (the default), Bid or Ask. This is a  property of the pricing methodology, not of any one column: with Bid or Ask, every instrument price rule  in the market data waterfall reads that quote field, so the same rules, scopes and fallbacks produce a  bid- or ask-struck valuation (for example a swing-priced NAV). Mid leaves each rule reading the field it  was written with (mid where none is given), which is the historical behaviour. FX, curve, spread, rate  and volatility rules are never affected. Available values: Mid, Bid, Ask.
+   * @return pricingBasis
+   */
+  @javax.annotation.Nullable
+  public String getPricingBasis() {
+    return pricingBasis;
+  }
+
+  public void setPricingBasis(String pricingBasis) {
+    this.pricingBasis = pricingBasis;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -230,7 +255,8 @@ public class MarketOptions {
         Objects.equals(this.attemptToInferMissingFx, marketOptions.attemptToInferMissingFx) &&
         Objects.equals(this.attemptToInferMissingFxOnFixings, marketOptions.attemptToInferMissingFxOnFixings) &&
         Objects.equals(this.calendarScope, marketOptions.calendarScope) &&
-        Objects.equals(this.conventionScope, marketOptions.conventionScope);
+        Objects.equals(this.conventionScope, marketOptions.conventionScope) &&
+        Objects.equals(this.pricingBasis, marketOptions.pricingBasis);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -239,7 +265,7 @@ public class MarketOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(defaultSupplier, defaultInstrumentCodeType, defaultScope, attemptToInferMissingFx, attemptToInferMissingFxOnFixings, calendarScope, conventionScope);
+    return Objects.hash(defaultSupplier, defaultInstrumentCodeType, defaultScope, attemptToInferMissingFx, attemptToInferMissingFxOnFixings, calendarScope, conventionScope, pricingBasis);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -260,6 +286,7 @@ public class MarketOptions {
     sb.append("    attemptToInferMissingFxOnFixings: ").append(toIndentedString(attemptToInferMissingFxOnFixings)).append("\n");
     sb.append("    calendarScope: ").append(toIndentedString(calendarScope)).append("\n");
     sb.append("    conventionScope: ").append(toIndentedString(conventionScope)).append("\n");
+    sb.append("    pricingBasis: ").append(toIndentedString(pricingBasis)).append("\n");
     sb.append("}");
     return sb.toString();
   }

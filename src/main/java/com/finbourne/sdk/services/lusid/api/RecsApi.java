@@ -44,6 +44,7 @@ import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecDefinition;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecInstance;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecResult;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfRecResultSet;
+import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.RecDefinition;
 import com.finbourne.sdk.services.lusid.model.RecInstance;
 import com.finbourne.sdk.services.lusid.model.RecResult;
@@ -53,6 +54,7 @@ import com.finbourne.sdk.services.lusid.model.SubmitRecResultSetReviewRequest;
 import com.finbourne.sdk.services.lusid.model.TransitionRecInstanceRequest;
 import com.finbourne.sdk.services.lusid.model.UpdateMatchingRulesetRequest;
 import com.finbourne.sdk.services.lusid.model.UpdateRecDefinitionRequest;
+import com.finbourne.sdk.services.lusid.model.UpsertRecDefinitionPropertiesResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -3440,7 +3442,11 @@ public class RecsApi {
     }
     /**
      * Build call for getRecResult
-     * @param id The system-generated id of the rec result. (required)
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The unique identifier of the rec instance. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
+     * @param runNumber The run of the instance the result belongs to. (required)
+     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @param _callback Callback for upload/download progress
@@ -3454,13 +3460,17 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getRecResultCall(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
-        return getRecResultCall(id, asAt, propertyKeys,  _callback, new ConfigurationOptions());
+    private HttpRequest getRecResultCall(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return getRecResultCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getRecResult. Use any specified configuration options to override any other configuration for this request only.
-     * @param id The system-generated id of the rec result. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceIdValue The unique identifier of the rec instance. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param runNumber The run of the instance the result belongs to. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @param _callback Callback for upload/download progress
@@ -3474,7 +3484,7 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getRecResultCall(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getRecResultCall(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3491,7 +3501,11 @@ public class RecsApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/api/api/recs/results/{id}"
+        String localVarPath = "/api/api/recs/results/{instanceIdType}/{instanceIdValue}/{recType}/{runNumber}/{id}"
+            .replace("{" + "instanceIdType" + "}", localVarApiClient.escapeString(instanceIdType.toString()))
+            .replace("{" + "instanceIdValue" + "}", localVarApiClient.escapeString(instanceIdValue.toString()))
+            .replace("{" + "recType" + "}", localVarApiClient.escapeString(recType.toString()))
+            .replace("{" + "runNumber" + "}", localVarApiClient.escapeString(runNumber.toString()))
             .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -3530,20 +3544,44 @@ public class RecsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getRecResultValidateBeforeCall(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getRecResultValidateBeforeCall(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'instanceIdType' is set
+        if (instanceIdType == null) {
+            throw new ApiException("Missing the required parameter 'instanceIdType' when calling getRecResult(Async)");
+        }
+
+        // verify the required parameter 'instanceIdValue' is set
+        if (instanceIdValue == null) {
+            throw new ApiException("Missing the required parameter 'instanceIdValue' when calling getRecResult(Async)");
+        }
+
+        // verify the required parameter 'recType' is set
+        if (recType == null) {
+            throw new ApiException("Missing the required parameter 'recType' when calling getRecResult(Async)");
+        }
+
+        // verify the required parameter 'runNumber' is set
+        if (runNumber == null) {
+            throw new ApiException("Missing the required parameter 'runNumber' when calling getRecResult(Async)");
+        }
+
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getRecResult(Async)");
         }
 
-        return getRecResultCall(id, asAt, propertyKeys, _callback, opts);
+        return getRecResultCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback, opts);
 
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult
-     * Retrieve a single rec result by its id.
-     * @param id The system-generated id of the rec result. (required)
+     * Retrieve a single rec result by the run it belongs to and its id within that run.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The unique identifier of the rec instance. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
+     * @param runNumber The run of the instance the result belongs to. (required)
+     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @return ApiResponse&lt;RecResult&gt;
@@ -3556,16 +3594,20 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<RecResult> getRecResultWithHttpInfo(String id, OffsetDateTime asAt, List<String> propertyKeys) throws ApiException {
-        HttpRequest localVarCall = getRecResultValidateBeforeCall(id, asAt, propertyKeys, null, new ConfigurationOptions());
+    private ApiResponse<RecResult> getRecResultWithHttpInfo(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult
-     * Retrieve a single rec result by its id.Use any specified configuration options to override any other configuration for this request only
-     * @param id The system-generated id of the rec result. (required)
+     * Retrieve a single rec result by the run it belongs to and its id within that run.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The unique identifier of the rec instance. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
+     * @param runNumber The run of the instance the result belongs to. (required)
+     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @return ApiResponse&lt;RecResult&gt;
@@ -3578,16 +3620,20 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<RecResult> getRecResultWithHttpInfo(String id, OffsetDateTime asAt, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getRecResultValidateBeforeCall(id, asAt, propertyKeys, null, opts);
+    private ApiResponse<RecResult> getRecResultWithHttpInfo(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, null, opts);
         Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult (asynchronously)
-     * Retrieve a single rec result by its id.
-     * @param id The system-generated id of the rec result. (required)
+     * Retrieve a single rec result by the run it belongs to and its id within that run.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The unique identifier of the rec instance. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
+     * @param runNumber The run of the instance the result belongs to. (required)
+     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -3600,17 +3646,21 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getRecResultAsync(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback) throws ApiException {
+    private void getRecResultAsync(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getRecResultValidateBeforeCall(id, asAt, propertyKeys, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult (asynchronously)
-     * Retrieve a single rec result by its id.Use any specified configuration options to override any other configuration for this request only
-     * @param id The system-generated id of the rec result. (required)
+     * Retrieve a single rec result by the run it belongs to and its id within that run.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The unique identifier of the rec instance. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
+     * @param runNumber The run of the instance the result belongs to. (required)
+     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -3623,19 +3673,27 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getRecResultAsync(String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getRecResultAsync(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getRecResultValidateBeforeCall(id, asAt, propertyKeys, _callback, opts);
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback, opts);
         Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     public class APIgetRecResultRequest {
+        private final String instanceIdType;
+        private final String instanceIdValue;
+        private final String recType;
+        private final Integer runNumber;
         private final String id;
         private OffsetDateTime asAt;
         private List<String> propertyKeys;
 
-        private APIgetRecResultRequest(String id) {
+        private APIgetRecResultRequest(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id) {
+            this.instanceIdType = instanceIdType;
+            this.instanceIdValue = instanceIdValue;
+            this.recType = recType;
+            this.runNumber = runNumber;
             this.id = id;
         }
 
@@ -3673,7 +3731,7 @@ public class RecsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getRecResultCall(id, asAt, propertyKeys, _callback);
+            return getRecResultCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -3689,7 +3747,7 @@ public class RecsApi {
          </table>
          */
         public RecResult execute() throws ApiException {
-            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(id, asAt, propertyKeys);
+            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys);
             return localVarResp.getData();
         }
 
@@ -3706,7 +3764,7 @@ public class RecsApi {
          </table>
          */
         public RecResult execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(id, asAt, propertyKeys, opts);
+            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, opts);
             return localVarResp.getData();
         }
 
@@ -3723,7 +3781,7 @@ public class RecsApi {
          </table>
          */
         public ApiResponse<RecResult> executeWithHttpInfo() throws ApiException {
-            return getRecResultWithHttpInfo(id, asAt, propertyKeys);
+            return getRecResultWithHttpInfo(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys);
         }
 
         /**
@@ -3739,7 +3797,7 @@ public class RecsApi {
          </table>
          */
         public ApiResponse<RecResult> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getRecResultWithHttpInfo(id, asAt, propertyKeys, opts);
+            return getRecResultWithHttpInfo(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, opts);
         }
 
         /**
@@ -3755,7 +3813,7 @@ public class RecsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<RecResult> _callback) throws ApiException {
-            getRecResultAsync(id, asAt, propertyKeys, _callback);
+            getRecResultAsync(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -3771,14 +3829,18 @@ public class RecsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<RecResult> _callback, ConfigurationOptions opts) throws ApiException {
-            getRecResultAsync(id, asAt, propertyKeys, _callback, opts);
+            getRecResultAsync(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback, opts);
         }
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult
-     * Retrieve a single rec result by its id.
-     * @param id The system-generated id of the rec result. (required)
+     * Retrieve a single rec result by the run it belongs to and its id within that run.
+     * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
+     * @param instanceIdValue The unique identifier of the rec instance. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
+     * @param runNumber The run of the instance the result belongs to. (required)
+     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
      * @return APIgetRecResultRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -3788,8 +3850,8 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    public APIgetRecResultRequest getRecResult(String id) {
-        return new APIgetRecResultRequest(id);
+    public APIgetRecResultRequest getRecResult(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id) {
+        return new APIgetRecResultRequest(instanceIdType, instanceIdValue, recType, runNumber, id);
     }
     /**
      * Build call for getRecResultSet
@@ -7886,5 +7948,349 @@ public class RecsApi {
      */
     public APIupdateRecDefinitionRequest updateRecDefinition(String scope, String code, UpdateRecDefinitionRequest updateRecDefinitionRequest) {
         return new APIupdateRecDefinitionRequest(scope, code, updateRecDefinitionRequest);
+    }
+    /**
+     * Build call for upsertRecDefinitionProperties
+     * @param scope The scope of the rec definition to update or insert the properties onto. (required)
+     * @param code The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. (required)
+     * @param requestBody The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;RecDefinition/Workflow/WorkflowId&#39;. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertRecDefinitionPropertiesCall(String scope, String code, Map<String, PerpetualProperty> requestBody, final ApiCallback _callback) throws ApiException {
+        return upsertRecDefinitionPropertiesCall(scope, code, requestBody,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for upsertRecDefinitionProperties. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the rec definition to update or insert the properties onto. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param requestBody The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;RecDefinition/Workflow/WorkflowId&#39;. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertRecDefinitionPropertiesCall(String scope, String code, Map<String, PerpetualProperty> requestBody, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = requestBody;
+
+        // create path and map variables
+        String localVarPath = "/api/api/recs/definitions/{scope}/{code}/properties/$upsert"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest upsertRecDefinitionPropertiesValidateBeforeCall(String scope, String code, Map<String, PerpetualProperty> requestBody, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling upsertRecDefinitionProperties(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling upsertRecDefinitionProperties(Async)");
+        }
+
+        // verify the required parameter 'requestBody' is set
+        if (requestBody == null) {
+            throw new ApiException("Missing the required parameter 'requestBody' when calling upsertRecDefinitionProperties(Async)");
+        }
+
+        return upsertRecDefinitionPropertiesCall(scope, code, requestBody, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties
+     * Update or insert one or more properties onto a single rec definition. A property will be updated if it already  exists and inserted if it does not. All properties must be of the domain &#39;RecDefinition&#39;, and are perpetual.                Upserting a property that exists for a rec definition, with a null value, will delete the instance of the  property for that rec definition. Properties not supplied are left unchanged, as is every other field of the  rec definition.
+     * @param scope The scope of the rec definition to update or insert the properties onto. (required)
+     * @param code The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. (required)
+     * @param requestBody The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;RecDefinition/Workflow/WorkflowId&#39;. (required)
+     * @return ApiResponse&lt;UpsertRecDefinitionPropertiesResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<UpsertRecDefinitionPropertiesResponse> upsertRecDefinitionPropertiesWithHttpInfo(String scope, String code, Map<String, PerpetualProperty> requestBody) throws ApiException {
+        HttpRequest localVarCall = upsertRecDefinitionPropertiesValidateBeforeCall(scope, code, requestBody, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<UpsertRecDefinitionPropertiesResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties
+     * Update or insert one or more properties onto a single rec definition. A property will be updated if it already  exists and inserted if it does not. All properties must be of the domain &#39;RecDefinition&#39;, and are perpetual.                Upserting a property that exists for a rec definition, with a null value, will delete the instance of the  property for that rec definition. Properties not supplied are left unchanged, as is every other field of the  rec definition.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the rec definition to update or insert the properties onto. (required)
+     * @param code The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. (required)
+     * @param requestBody The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;RecDefinition/Workflow/WorkflowId&#39;. (required)
+     * @return ApiResponse&lt;UpsertRecDefinitionPropertiesResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<UpsertRecDefinitionPropertiesResponse> upsertRecDefinitionPropertiesWithHttpInfo(String scope, String code, Map<String, PerpetualProperty> requestBody, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = upsertRecDefinitionPropertiesValidateBeforeCall(scope, code, requestBody, null, opts);
+        Type localVarReturnType = new TypeReference<UpsertRecDefinitionPropertiesResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties (asynchronously)
+     * Update or insert one or more properties onto a single rec definition. A property will be updated if it already  exists and inserted if it does not. All properties must be of the domain &#39;RecDefinition&#39;, and are perpetual.                Upserting a property that exists for a rec definition, with a null value, will delete the instance of the  property for that rec definition. Properties not supplied are left unchanged, as is every other field of the  rec definition.
+     * @param scope The scope of the rec definition to update or insert the properties onto. (required)
+     * @param code The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. (required)
+     * @param requestBody The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;RecDefinition/Workflow/WorkflowId&#39;. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertRecDefinitionPropertiesAsync(String scope, String code, Map<String, PerpetualProperty> requestBody, final ApiCallback<UpsertRecDefinitionPropertiesResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = upsertRecDefinitionPropertiesValidateBeforeCall(scope, code, requestBody, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<UpsertRecDefinitionPropertiesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties (asynchronously)
+     * Update or insert one or more properties onto a single rec definition. A property will be updated if it already  exists and inserted if it does not. All properties must be of the domain &#39;RecDefinition&#39;, and are perpetual.                Upserting a property that exists for a rec definition, with a null value, will delete the instance of the  property for that rec definition. Properties not supplied are left unchanged, as is every other field of the  rec definition.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the rec definition to update or insert the properties onto. (required)
+     * @param code The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. (required)
+     * @param requestBody The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;RecDefinition/Workflow/WorkflowId&#39;. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertRecDefinitionPropertiesAsync(String scope, String code, Map<String, PerpetualProperty> requestBody, final ApiCallback<UpsertRecDefinitionPropertiesResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = upsertRecDefinitionPropertiesValidateBeforeCall(scope, code, requestBody, _callback, opts);
+        Type localVarReturnType = new TypeReference<UpsertRecDefinitionPropertiesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIupsertRecDefinitionPropertiesRequest {
+        private final String scope;
+        private final String code;
+        private final Map<String, PerpetualProperty> requestBody;
+
+        private APIupsertRecDefinitionPropertiesRequest(String scope, String code, Map<String, PerpetualProperty> requestBody) {
+            this.scope = scope;
+            this.code = code;
+            this.requestBody = requestBody;
+        }
+
+        /**
+         * Build call for upsertRecDefinitionProperties
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return upsertRecDefinitionPropertiesCall(scope, code, requestBody, _callback);
+        }
+
+        /**
+         * Execute upsertRecDefinitionProperties request
+         * @return UpsertRecDefinitionPropertiesResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UpsertRecDefinitionPropertiesResponse execute() throws ApiException {
+            ApiResponse<UpsertRecDefinitionPropertiesResponse> localVarResp = upsertRecDefinitionPropertiesWithHttpInfo(scope, code, requestBody);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertRecDefinitionProperties request. Use any specified configuration options to override any other configuration for this request only.
+         * @return UpsertRecDefinitionPropertiesResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UpsertRecDefinitionPropertiesResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<UpsertRecDefinitionPropertiesResponse> localVarResp = upsertRecDefinitionPropertiesWithHttpInfo(scope, code, requestBody, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertRecDefinitionProperties request with HTTP info returned
+         * @return ApiResponse&lt;UpsertRecDefinitionPropertiesResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UpsertRecDefinitionPropertiesResponse> executeWithHttpInfo() throws ApiException {
+            return upsertRecDefinitionPropertiesWithHttpInfo(scope, code, requestBody);
+        }
+
+        /**
+         * Execute upsertRecDefinitionProperties request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;UpsertRecDefinitionPropertiesResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UpsertRecDefinitionPropertiesResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return upsertRecDefinitionPropertiesWithHttpInfo(scope, code, requestBody, opts);
+        }
+
+        /**
+         * Execute upsertRecDefinitionProperties request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<UpsertRecDefinitionPropertiesResponse> _callback) throws ApiException {
+            upsertRecDefinitionPropertiesAsync(scope, code, requestBody, _callback);
+        }
+
+        /**
+         * Execute upsertRecDefinitionProperties request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<UpsertRecDefinitionPropertiesResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            upsertRecDefinitionPropertiesAsync(scope, code, requestBody, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties
+     * Update or insert one or more properties onto a single rec definition. A property will be updated if it already  exists and inserted if it does not. All properties must be of the domain &#39;RecDefinition&#39;, and are perpetual.                Upserting a property that exists for a rec definition, with a null value, will delete the instance of the  property for that rec definition. Properties not supplied are left unchanged, as is every other field of the  rec definition.
+     * @param scope The scope of the rec definition to update or insert the properties onto. (required)
+     * @param code The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. (required)
+     * @param requestBody The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;RecDefinition/Workflow/WorkflowId&#39;. (required)
+     * @return APIupsertRecDefinitionPropertiesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIupsertRecDefinitionPropertiesRequest upsertRecDefinitionProperties(String scope, String code, Map<String, PerpetualProperty> requestBody) {
+        return new APIupsertRecDefinitionPropertiesRequest(scope, code, requestBody);
     }
 }

@@ -14,6 +14,8 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -34,8 +36,7 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   TransactionEntityLink.JSON_PROPERTY_ENTITY_TYPE,
-  TransactionEntityLink.JSON_PROPERTY_ENTITY_ID_NAME,
-  TransactionEntityLink.JSON_PROPERTY_ENTITY_ID_VALUE,
+  TransactionEntityLink.JSON_PROPERTY_ENTITY_ID,
   TransactionEntityLink.JSON_PROPERTY_RESTRICT_EDITING
 })
 
@@ -45,15 +46,10 @@ public class TransactionEntityLink {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String entityType;
 
-  public static final String JSON_PROPERTY_ENTITY_ID_NAME = "entityIdName";
-  @JsonProperty(JSON_PROPERTY_ENTITY_ID_NAME)
+  public static final String JSON_PROPERTY_ENTITY_ID = "entityId";
+  @JsonProperty(JSON_PROPERTY_ENTITY_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String entityIdName;
-
-  public static final String JSON_PROPERTY_ENTITY_ID_VALUE = "entityIdValue";
-  @JsonProperty(JSON_PROPERTY_ENTITY_ID_VALUE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String entityIdValue;
+  private Map<String, String> entityId = new HashMap<>();
 
   public static final String JSON_PROPERTY_RESTRICT_EDITING = "restrictEditing";
   @JsonProperty(JSON_PROPERTY_RESTRICT_EDITING)
@@ -82,41 +78,30 @@ public class TransactionEntityLink {
   }
 
 
-  public TransactionEntityLink entityIdName(String entityIdName) {
-    this.entityIdName = entityIdName;
+  public TransactionEntityLink entityId(Map<String, String> entityId) {
+    this.entityId = entityId;
+    return this;
+  }
+
+  public TransactionEntityLink putEntityIdItem(String key, String entityIdItem) {
+    if (this.entityId == null) {
+      this.entityId = new HashMap<>();
+    }
+    this.entityId.put(key, entityIdItem);
     return this;
   }
 
   /**
-   * Get entityIdName
-   * @return entityIdName
+   * Get entityId
+   * @return entityId
    */
   @javax.annotation.Nonnull
-  public String getEntityIdName() {
-    return entityIdName;
+  public Map<String, String> getEntityId() {
+    return entityId;
   }
 
-  public void setEntityIdName(String entityIdName) {
-    this.entityIdName = entityIdName;
-  }
-
-
-  public TransactionEntityLink entityIdValue(String entityIdValue) {
-    this.entityIdValue = entityIdValue;
-    return this;
-  }
-
-  /**
-   * Get entityIdValue
-   * @return entityIdValue
-   */
-  @javax.annotation.Nonnull
-  public String getEntityIdValue() {
-    return entityIdValue;
-  }
-
-  public void setEntityIdValue(String entityIdValue) {
-    this.entityIdValue = entityIdValue;
+  public void setEntityId(Map<String, String> entityId) {
+    this.entityId = entityId;
   }
 
 
@@ -149,14 +134,13 @@ public class TransactionEntityLink {
     }
     TransactionEntityLink transactionEntityLink = (TransactionEntityLink) o;
     return Objects.equals(this.entityType, transactionEntityLink.entityType) &&
-        Objects.equals(this.entityIdName, transactionEntityLink.entityIdName) &&
-        Objects.equals(this.entityIdValue, transactionEntityLink.entityIdValue) &&
+        Objects.equals(this.entityId, transactionEntityLink.entityId) &&
         Objects.equals(this.restrictEditing, transactionEntityLink.restrictEditing);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(entityType, entityIdName, entityIdValue, restrictEditing);
+    return Objects.hash(entityType, entityId, restrictEditing);
   }
 
   @Override
@@ -164,8 +148,7 @@ public class TransactionEntityLink {
     StringBuilder sb = new StringBuilder();
     sb.append("class TransactionEntityLink {\n");
     sb.append("    entityType: ").append(toIndentedString(entityType)).append("\n");
-    sb.append("    entityIdName: ").append(toIndentedString(entityIdName)).append("\n");
-    sb.append("    entityIdValue: ").append(toIndentedString(entityIdValue)).append("\n");
+    sb.append("    entityId: ").append(toIndentedString(entityId)).append("\n");
     sb.append("    restrictEditing: ").append(toIndentedString(restrictEditing)).append("\n");
     sb.append("}");
     return sb.toString();

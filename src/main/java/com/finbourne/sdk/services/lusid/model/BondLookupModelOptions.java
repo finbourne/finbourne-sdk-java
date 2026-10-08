@@ -36,7 +36,9 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   BondLookupModelOptions.JSON_PROPERTY_SPREAD_ANCHORED_RISK,
-  BondLookupModelOptions.JSON_PROPERTY_CS01_BUMP_WIDTH
+  BondLookupModelOptions.JSON_PROPERTY_CS01_BUMP_WIDTH,
+  BondLookupModelOptions.JSON_PROPERTY_SPREAD_ANCHOR_SOURCE,
+  BondLookupModelOptions.JSON_PROPERTY_SPREAD_TERM_STRUCTURE
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -56,6 +58,16 @@ public class BondLookupModelOptions extends ModelOptions {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal cs01BumpWidth;
 
+  public static final String JSON_PROPERTY_SPREAD_ANCHOR_SOURCE = "spreadAnchorSource";
+  @JsonProperty(JSON_PROPERTY_SPREAD_ANCHOR_SOURCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String spreadAnchorSource;
+
+  public static final String JSON_PROPERTY_SPREAD_TERM_STRUCTURE = "spreadTermStructure";
+  @JsonProperty(JSON_PROPERTY_SPREAD_TERM_STRUCTURE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean spreadTermStructure;
+
   public BondLookupModelOptions() {
   }
 
@@ -65,7 +77,7 @@ public class BondLookupModelOptions extends ModelOptions {
   }
 
   /**
-   * Price the bond by discounting its own cashflows over its discounting curve at a constant  spread, instead of marking it to its quoted price. Marking to a quote declares no curve  dependency, so a lookup-priced bond reports no curve delta at all. In this mode the pricer  declares both the discounting curve and a ZSpread quote for the instrument and prices off  them, so holding the spread fixed while the curve is perturbed produces the curve&#39;s delta.  Off by default, as the mode changes both the declared dependencies and where the price  comes from.
+   * Price the bond by discounting its own cashflows over its discounting curve at a constant  spread, instead of marking it to its quoted price. Marking to a quote declares no curve  dependency, so a lookup-priced bond reports no curve delta at all. In this mode the pricer  declares both the discounting curve and a ZSpread quote for the instrument and prices off  them, so holding the spread fixed while the curve is perturbed produces the curve&#39;s delta.  The anchor may also be served as a per-instrument CreditSpreadCurve complex market data  document (rule key Credit.CreditSpreadCurve[.IdentifierType], market asset  CreditSpreadCurve/&lt;identifier&gt;), which takes precedence over the quote when present.  Only the spread at the bond&#39;s maturity is read off it; the document&#39;s recoveryRate is not  used by this pricer.  Off by default, as the mode changes both the declared dependencies and where the price  comes from.
    * @return spreadAnchoredRisk
    */
   @javax.annotation.Nonnull
@@ -97,6 +109,44 @@ public class BondLookupModelOptions extends ModelOptions {
   }
 
 
+  public BondLookupModelOptions spreadAnchorSource(String spreadAnchorSource) {
+    this.spreadAnchorSource = spreadAnchorSource;
+    return this;
+  }
+
+  /**
+   * Where the spread anchor comes from when no CreditSpreadCurve is served for the instrument. Only  read when SpreadAnchoredRisk is true.                Supported string (enumeration) values are: [MarketData, SolvedFromPrice].  Defaults to MarketData - the original behaviour, where a ZSpread quote must be served from the  quote store or as a market data override - when not supplied.                SolvedFromPrice: a served CreditSpreadCurve or ZSpread quote still wins. When neither is served,  the bond is valued exactly as the plain lookup values it, and the anchor is the z-spread its  looked-up price implies over the discounting curve (the value Analytic/ZSpread returns). Risk  measures, carry and scenario columns solve that anchor against the unperturbed market and hold it,  so no spread has to be stored or sent.
+   * @return spreadAnchorSource
+   */
+  @javax.annotation.Nullable
+  public String getSpreadAnchorSource() {
+    return spreadAnchorSource;
+  }
+
+  public void setSpreadAnchorSource(String spreadAnchorSource) {
+    this.spreadAnchorSource = spreadAnchorSource;
+  }
+
+
+  public BondLookupModelOptions spreadTermStructure(Boolean spreadTermStructure) {
+    this.spreadTermStructure = spreadTermStructure;
+    return this;
+  }
+
+  /**
+   * In spread-anchored mode with a credit-spread curve (a served CreditSpreadCurve, or the curve the  risk engine builds from the ZSpread quote), discount each cash flow at the curve&#39;s level on its own  payment date instead of discounting every flow at the level at maturity. Pointwise and bucketed  Risk/Credit ladders then split CS01 by cash flow, and the curve built from a quote carries one pillar  per remaining payment date. The price is unchanged on a flat curve (and so on any curve built from a  quote) but not on a sloped served curve.  Defaults to false - the level at maturity - when not supplied.
+   * @return spreadTermStructure
+   */
+  @javax.annotation.Nullable
+  public Boolean getSpreadTermStructure() {
+    return spreadTermStructure;
+  }
+
+  public void setSpreadTermStructure(Boolean spreadTermStructure) {
+    this.spreadTermStructure = spreadTermStructure;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -108,6 +158,8 @@ public class BondLookupModelOptions extends ModelOptions {
     BondLookupModelOptions bondLookupModelOptions = (BondLookupModelOptions) o;
     return Objects.equals(this.spreadAnchoredRisk, bondLookupModelOptions.spreadAnchoredRisk) &&
         (this.cs01BumpWidth == null ? bondLookupModelOptions.cs01BumpWidth == null : (bondLookupModelOptions.cs01BumpWidth != null && this.cs01BumpWidth.compareTo(bondLookupModelOptions.getCs01BumpWidth()) == 0)) &&
+        Objects.equals(this.spreadAnchorSource, bondLookupModelOptions.spreadAnchorSource) &&
+        Objects.equals(this.spreadTermStructure, bondLookupModelOptions.spreadTermStructure) &&
         super.equals(o);
   }
 
@@ -117,7 +169,7 @@ public class BondLookupModelOptions extends ModelOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(spreadAnchoredRisk, cs01BumpWidth, super.hashCode());
+    return Objects.hash(spreadAnchoredRisk, cs01BumpWidth, spreadAnchorSource, spreadTermStructure, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -134,6 +186,8 @@ public class BondLookupModelOptions extends ModelOptions {
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    spreadAnchoredRisk: ").append(toIndentedString(spreadAnchoredRisk)).append("\n");
     sb.append("    cs01BumpWidth: ").append(toIndentedString(cs01BumpWidth)).append("\n");
+    sb.append("    spreadAnchorSource: ").append(toIndentedString(spreadAnchorSource)).append("\n");
+    sb.append("    spreadTermStructure: ").append(toIndentedString(spreadTermStructure)).append("\n");
     sb.append("}");
     return sb.toString();
   }

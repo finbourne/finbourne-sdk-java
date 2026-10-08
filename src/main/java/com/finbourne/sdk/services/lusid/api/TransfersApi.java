@@ -29,11 +29,13 @@ import java.io.IOException;
 
 import com.finbourne.sdk.services.lusid.model.CreateTransferRequest;
 import com.finbourne.sdk.services.lusid.model.CreateTransferResponse;
+import com.finbourne.sdk.services.lusid.model.DeletedEntityResponse;
 import com.finbourne.sdk.services.lusid.model.GetTransferRequest;
-import com.finbourne.sdk.services.lusid.model.GetTransferResponse;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
+import com.finbourne.sdk.services.lusid.model.ResourceListOfTransfer;
+import com.finbourne.sdk.services.lusid.model.Transfer;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -393,6 +395,418 @@ public class TransfersApi {
         return new APIcreateTransferRequest(createTransferRequest);
     }
     /**
+     * Build call for deleteTransfer
+     * @param scope The scope of the transfer. (required)
+     * @param code The code of the transfer. Together with the scope and both portfolios this uniquely               identifies the transfer. (required)
+     * @param portfolioScopeOut The scope of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioCodeOut The code of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioScopeIn The scope of the portfolio the incoming leg is booked in. (required)
+     * @param portfolioCodeIn The code of the portfolio the incoming leg is booked in. Equal to               portfolioCodeOut for a switch between instruments within one portfolio. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deleteTransferCall(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn, final ApiCallback _callback) throws ApiException {
+        return deleteTransferCall(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for deleteTransfer. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the transfer. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the transfer. Together with the scope and both portfolios this uniquely               identifies the transfer. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param portfolioScopeOut The scope of the portfolio the outgoing leg is booked in. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param portfolioCodeOut The code of the portfolio the outgoing leg is booked in. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param portfolioScopeIn The scope of the portfolio the incoming leg is booked in. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param portfolioCodeIn The code of the portfolio the incoming leg is booked in. Equal to               portfolioCodeOut for a switch between instruments within one portfolio. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deleteTransferCall(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/transfers/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (portfolioScopeOut != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("portfolioScopeOut", portfolioScopeOut));
+        }
+
+        if (portfolioCodeOut != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("portfolioCodeOut", portfolioCodeOut));
+        }
+
+        if (portfolioScopeIn != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("portfolioScopeIn", portfolioScopeIn));
+        }
+
+        if (portfolioCodeIn != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("portfolioCodeIn", portfolioCodeIn));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest deleteTransferValidateBeforeCall(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling deleteTransfer(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling deleteTransfer(Async)");
+        }
+
+        // verify the required parameter 'portfolioScopeOut' is set
+        if (portfolioScopeOut == null) {
+            throw new ApiException("Missing the required parameter 'portfolioScopeOut' when calling deleteTransfer(Async)");
+        }
+
+        // verify the required parameter 'portfolioCodeOut' is set
+        if (portfolioCodeOut == null) {
+            throw new ApiException("Missing the required parameter 'portfolioCodeOut' when calling deleteTransfer(Async)");
+        }
+
+        // verify the required parameter 'portfolioScopeIn' is set
+        if (portfolioScopeIn == null) {
+            throw new ApiException("Missing the required parameter 'portfolioScopeIn' when calling deleteTransfer(Async)");
+        }
+
+        // verify the required parameter 'portfolioCodeIn' is set
+        if (portfolioCodeIn == null) {
+            throw new ApiException("Missing the required parameter 'portfolioCodeIn' when calling deleteTransfer(Async)");
+        }
+
+        return deleteTransferCall(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteTransfer: Delete a transfer.
+     * Delete the Transfer entity recording a transfer and cancel the transaction legs it still has, as a single  atomic operation: if any part of the request is rejected, nothing is changed. A leg that has already gone is  skipped, so a transfer with no legs left can still be deleted to clear the record.                A transfer is identified by its scope, its code and both of its portfolios, so all four are required. Where  no transfer matches all four, the request is reported as not found.
+     * @param scope The scope of the transfer. (required)
+     * @param code The code of the transfer. Together with the scope and both portfolios this uniquely               identifies the transfer. (required)
+     * @param portfolioScopeOut The scope of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioCodeOut The code of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioScopeIn The scope of the portfolio the incoming leg is booked in. (required)
+     * @param portfolioCodeIn The code of the portfolio the incoming leg is booked in. Equal to               portfolioCodeOut for a switch between instruments within one portfolio. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteTransferWithHttpInfo(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn) throws ApiException {
+        HttpRequest localVarCall = deleteTransferValidateBeforeCall(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteTransfer: Delete a transfer.
+     * Delete the Transfer entity recording a transfer and cancel the transaction legs it still has, as a single  atomic operation: if any part of the request is rejected, nothing is changed. A leg that has already gone is  skipped, so a transfer with no legs left can still be deleted to clear the record.                A transfer is identified by its scope, its code and both of its portfolios, so all four are required. Where  no transfer matches all four, the request is reported as not found.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the transfer. (required)
+     * @param code The code of the transfer. Together with the scope and both portfolios this uniquely               identifies the transfer. (required)
+     * @param portfolioScopeOut The scope of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioCodeOut The code of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioScopeIn The scope of the portfolio the incoming leg is booked in. (required)
+     * @param portfolioCodeIn The code of the portfolio the incoming leg is booked in. Equal to               portfolioCodeOut for a switch between instruments within one portfolio. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteTransferWithHttpInfo(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = deleteTransferValidateBeforeCall(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, null, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteTransfer: Delete a transfer. (asynchronously)
+     * Delete the Transfer entity recording a transfer and cancel the transaction legs it still has, as a single  atomic operation: if any part of the request is rejected, nothing is changed. A leg that has already gone is  skipped, so a transfer with no legs left can still be deleted to clear the record.                A transfer is identified by its scope, its code and both of its portfolios, so all four are required. Where  no transfer matches all four, the request is reported as not found.
+     * @param scope The scope of the transfer. (required)
+     * @param code The code of the transfer. Together with the scope and both portfolios this uniquely               identifies the transfer. (required)
+     * @param portfolioScopeOut The scope of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioCodeOut The code of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioScopeIn The scope of the portfolio the incoming leg is booked in. (required)
+     * @param portfolioCodeIn The code of the portfolio the incoming leg is booked in. Equal to               portfolioCodeOut for a switch between instruments within one portfolio. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteTransferAsync(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn, final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = deleteTransferValidateBeforeCall(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteTransfer: Delete a transfer. (asynchronously)
+     * Delete the Transfer entity recording a transfer and cancel the transaction legs it still has, as a single  atomic operation: if any part of the request is rejected, nothing is changed. A leg that has already gone is  skipped, so a transfer with no legs left can still be deleted to clear the record.                A transfer is identified by its scope, its code and both of its portfolios, so all four are required. Where  no transfer matches all four, the request is reported as not found.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the transfer. (required)
+     * @param code The code of the transfer. Together with the scope and both portfolios this uniquely               identifies the transfer. (required)
+     * @param portfolioScopeOut The scope of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioCodeOut The code of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioScopeIn The scope of the portfolio the incoming leg is booked in. (required)
+     * @param portfolioCodeIn The code of the portfolio the incoming leg is booked in. Equal to               portfolioCodeOut for a switch between instruments within one portfolio. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteTransferAsync(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn, final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = deleteTransferValidateBeforeCall(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, _callback, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIdeleteTransferRequest {
+        private final String scope;
+        private final String code;
+        private final String portfolioScopeOut;
+        private final String portfolioCodeOut;
+        private final String portfolioScopeIn;
+        private final String portfolioCodeIn;
+
+        private APIdeleteTransferRequest(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn) {
+            this.scope = scope;
+            this.code = code;
+            this.portfolioScopeOut = portfolioScopeOut;
+            this.portfolioCodeOut = portfolioCodeOut;
+            this.portfolioScopeIn = portfolioScopeIn;
+            this.portfolioCodeIn = portfolioCodeIn;
+        }
+
+        /**
+         * Build call for deleteTransfer
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteTransferCall(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, _callback);
+        }
+
+        /**
+         * Execute deleteTransfer request
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute() throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteTransferWithHttpInfo(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteTransfer request. Use any specified configuration options to override any other configuration for this request only.
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteTransferWithHttpInfo(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteTransfer request with HTTP info returned
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo() throws ApiException {
+            return deleteTransferWithHttpInfo(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn);
+        }
+
+        /**
+         * Execute deleteTransfer request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return deleteTransferWithHttpInfo(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, opts);
+        }
+
+        /**
+         * Execute deleteTransfer request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+            deleteTransferAsync(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, _callback);
+        }
+
+        /**
+         * Execute deleteTransfer request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            deleteTransferAsync(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteTransfer: Delete a transfer.
+     * Delete the Transfer entity recording a transfer and cancel the transaction legs it still has, as a single  atomic operation: if any part of the request is rejected, nothing is changed. A leg that has already gone is  skipped, so a transfer with no legs left can still be deleted to clear the record.                A transfer is identified by its scope, its code and both of its portfolios, so all four are required. Where  no transfer matches all four, the request is reported as not found.
+     * @param scope The scope of the transfer. (required)
+     * @param code The code of the transfer. Together with the scope and both portfolios this uniquely               identifies the transfer. (required)
+     * @param portfolioScopeOut The scope of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioCodeOut The code of the portfolio the outgoing leg is booked in. (required)
+     * @param portfolioScopeIn The scope of the portfolio the incoming leg is booked in. (required)
+     * @param portfolioCodeIn The code of the portfolio the incoming leg is booked in. Equal to               portfolioCodeOut for a switch between instruments within one portfolio. (required)
+     * @return APIdeleteTransferRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The asAt the deletion landed at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer with the given scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIdeleteTransferRequest deleteTransfer(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn) {
+        return new APIdeleteTransferRequest(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn);
+    }
+    /**
      * Build call for getTransfer
      * @param getTransferRequest The transfer to retrieve. (required)
      * @param asAt The asAt datetime at which to retrieve the transfer. Defaults to latest              version if not specified. (optional)
@@ -498,7 +912,7 @@ public class TransfersApi {
      * Retrieve a transfer and both of the transactions it booked.  A transfer is identified by its scope, its code and both of its portfolios, so all four are supplied in  the request body rather than in the path.
      * @param getTransferRequest The transfer to retrieve. (required)
      * @param asAt The asAt datetime at which to retrieve the transfer. Defaults to latest              version if not specified. (optional)
-     * @return ApiResponse&lt;GetTransferResponse&gt;
+     * @return ApiResponse&lt;Transfer&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -509,9 +923,9 @@ public class TransfersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<GetTransferResponse> getTransferWithHttpInfo(GetTransferRequest getTransferRequest, OffsetDateTime asAt) throws ApiException {
+    private ApiResponse<Transfer> getTransferWithHttpInfo(GetTransferRequest getTransferRequest, OffsetDateTime asAt) throws ApiException {
         HttpRequest localVarCall = getTransferValidateBeforeCall(getTransferRequest, asAt, null, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<GetTransferResponse>(){}.getType();
+        Type localVarReturnType = new TypeReference<Transfer>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -520,7 +934,7 @@ public class TransfersApi {
      * Retrieve a transfer and both of the transactions it booked.  A transfer is identified by its scope, its code and both of its portfolios, so all four are supplied in  the request body rather than in the path.Use any specified configuration options to override any other configuration for this request only
      * @param getTransferRequest The transfer to retrieve. (required)
      * @param asAt The asAt datetime at which to retrieve the transfer. Defaults to latest              version if not specified. (optional)
-     * @return ApiResponse&lt;GetTransferResponse&gt;
+     * @return ApiResponse&lt;Transfer&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -531,9 +945,9 @@ public class TransfersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<GetTransferResponse> getTransferWithHttpInfo(GetTransferRequest getTransferRequest, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
+    private ApiResponse<Transfer> getTransferWithHttpInfo(GetTransferRequest getTransferRequest, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
         HttpRequest localVarCall = getTransferValidateBeforeCall(getTransferRequest, asAt, null, opts);
-        Type localVarReturnType = new TypeReference<GetTransferResponse>(){}.getType();
+        Type localVarReturnType = new TypeReference<Transfer>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -553,10 +967,10 @@ public class TransfersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTransferAsync(GetTransferRequest getTransferRequest, OffsetDateTime asAt, final ApiCallback<GetTransferResponse> _callback) throws ApiException {
+    private void getTransferAsync(GetTransferRequest getTransferRequest, OffsetDateTime asAt, final ApiCallback<Transfer> _callback) throws ApiException {
 
         HttpRequest localVarCall = getTransferValidateBeforeCall(getTransferRequest, asAt, _callback, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<GetTransferResponse>(){}.getType();
+        Type localVarReturnType = new TypeReference<Transfer>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
@@ -576,10 +990,10 @@ public class TransfersApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTransferAsync(GetTransferRequest getTransferRequest, OffsetDateTime asAt, final ApiCallback<GetTransferResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getTransferAsync(GetTransferRequest getTransferRequest, OffsetDateTime asAt, final ApiCallback<Transfer> _callback, ConfigurationOptions opts) throws ApiException {
 
         HttpRequest localVarCall = getTransferValidateBeforeCall(getTransferRequest, asAt, _callback, opts);
-        Type localVarReturnType = new TypeReference<GetTransferResponse>(){}.getType();
+        Type localVarReturnType = new TypeReference<Transfer>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
@@ -621,7 +1035,7 @@ public class TransfersApi {
 
         /**
          * Execute getTransfer request
-         * @return GetTransferResponse
+         * @return Transfer
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -632,14 +1046,14 @@ public class TransfersApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public GetTransferResponse execute() throws ApiException {
-            ApiResponse<GetTransferResponse> localVarResp = getTransferWithHttpInfo(getTransferRequest, asAt);
+        public Transfer execute() throws ApiException {
+            ApiResponse<Transfer> localVarResp = getTransferWithHttpInfo(getTransferRequest, asAt);
             return localVarResp.getData();
         }
 
         /**
          * Execute getTransfer request. Use any specified configuration options to override any other configuration for this request only.
-         * @return GetTransferResponse
+         * @return Transfer
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -650,14 +1064,14 @@ public class TransfersApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public GetTransferResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<GetTransferResponse> localVarResp = getTransferWithHttpInfo(getTransferRequest, asAt, opts);
+        public Transfer execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<Transfer> localVarResp = getTransferWithHttpInfo(getTransferRequest, asAt, opts);
             return localVarResp.getData();
         }
 
         /**
          * Execute getTransfer request with HTTP info returned
-         * @return ApiResponse&lt;GetTransferResponse&gt;
+         * @return ApiResponse&lt;Transfer&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -668,13 +1082,13 @@ public class TransfersApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<GetTransferResponse> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<Transfer> executeWithHttpInfo() throws ApiException {
             return getTransferWithHttpInfo(getTransferRequest, asAt);
         }
 
         /**
          * Execute getTransfer request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
-         * @return ApiResponse&lt;GetTransferResponse&gt;
+         * @return ApiResponse&lt;Transfer&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -685,7 +1099,7 @@ public class TransfersApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<GetTransferResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        public ApiResponse<Transfer> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
             return getTransferWithHttpInfo(getTransferRequest, asAt, opts);
         }
 
@@ -702,7 +1116,7 @@ public class TransfersApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<GetTransferResponse> _callback) throws ApiException {
+        public void executeAsync(final ApiCallback<Transfer> _callback) throws ApiException {
             getTransferAsync(getTransferRequest, asAt, _callback);
         }
 
@@ -719,7 +1133,7 @@ public class TransfersApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<GetTransferResponse> _callback, ConfigurationOptions opts) throws ApiException {
+        public void executeAsync(final ApiCallback<Transfer> _callback, ConfigurationOptions opts) throws ApiException {
             getTransferAsync(getTransferRequest, asAt, _callback, opts);
         }
     }
@@ -740,5 +1154,427 @@ public class TransfersApi {
      */
     public APIgetTransferRequest getTransfer(GetTransferRequest getTransferRequest) {
         return new APIgetTransferRequest(getTransferRequest);
+    }
+    /**
+     * Build call for listTransfers
+     * @param asAt The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. (optional)
+     * @param page The pagination token to use to continue listing transfers from a previous call. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The collection of &#x60;PropertyKey&#x60;s to decorate onto each transfer. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listTransfersCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return listTransfersCall(asAt, page, limit, filter, sortBy, propertyKeys,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listTransfers. Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing transfers from a previous call. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit When paginating, limit the number of returned results to this many. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys The collection of &#x60;PropertyKey&#x60;s to decorate onto each transfer. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listTransfersCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/transfers";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
+        }
+
+        if (propertyKeys != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "propertyKeys", propertyKeys));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listTransfersValidateBeforeCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listTransfersCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ListTransfers: List transfers
+     * List transfers matching the specified criteria, decorated with the requested properties.
+     * @param asAt The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. (optional)
+     * @param page The pagination token to use to continue listing transfers from a previous call. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The collection of &#x60;PropertyKey&#x60;s to decorate onto each transfer. (optional)
+     * @return ApiResponse&lt;ResourceListOfTransfer&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfTransfer> listTransfersWithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = listTransfersValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfTransfer>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListTransfers: List transfers
+     * List transfers matching the specified criteria, decorated with the requested properties.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. (optional)
+     * @param page The pagination token to use to continue listing transfers from a previous call. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The collection of &#x60;PropertyKey&#x60;s to decorate onto each transfer. (optional)
+     * @return ApiResponse&lt;ResourceListOfTransfer&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfTransfer> listTransfersWithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listTransfersValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, null, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfTransfer>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListTransfers: List transfers (asynchronously)
+     * List transfers matching the specified criteria, decorated with the requested properties.
+     * @param asAt The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. (optional)
+     * @param page The pagination token to use to continue listing transfers from a previous call. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The collection of &#x60;PropertyKey&#x60;s to decorate onto each transfer. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listTransfersAsync(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback<ResourceListOfTransfer> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listTransfersValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfTransfer>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListTransfers: List transfers (asynchronously)
+     * List transfers matching the specified criteria, decorated with the requested properties.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. (optional)
+     * @param page The pagination token to use to continue listing transfers from a previous call. (optional)
+     * @param limit When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+     * @param propertyKeys The collection of &#x60;PropertyKey&#x60;s to decorate onto each transfer. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listTransfersAsync(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, List<String> propertyKeys, final ApiCallback<ResourceListOfTransfer> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listTransfersValidateBeforeCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfTransfer>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistTransfersRequest {
+        private OffsetDateTime asAt;
+        private String page;
+        private Integer limit;
+        private String filter;
+        private List<String> sortBy;
+        private List<String> propertyKeys;
+
+        private APIlistTransfersRequest() {
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. (optional)
+         * @return APIlistTransfersRequest
+         */
+        public APIlistTransfersRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page The pagination token to use to continue listing transfers from a previous call. (optional)
+         * @return APIlistTransfersRequest
+         */
+        public APIlistTransfersRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit When paginating, limit the number of returned results to this many. (optional)
+         * @return APIlistTransfersRequest
+         */
+        public APIlistTransfersRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. (optional)
+         * @return APIlistTransfersRequest
+         */
+        public APIlistTransfersRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+         * @return APIlistTransfersRequest
+         */
+        public APIlistTransfersRequest sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
+            return this;
+        }
+
+        /**
+         * Set propertyKeys
+         * @param propertyKeys The collection of &#x60;PropertyKey&#x60;s to decorate onto each transfer. (optional)
+         * @return APIlistTransfersRequest
+         */
+        public APIlistTransfersRequest propertyKeys(List<String> propertyKeys) {
+            this.propertyKeys = propertyKeys;
+            return this;
+        }
+
+        /**
+         * Build call for listTransfers
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listTransfersCall(asAt, page, limit, filter, sortBy, propertyKeys, _callback);
+        }
+
+        /**
+         * Execute listTransfers request
+         * @return ResourceListOfTransfer
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfTransfer execute() throws ApiException {
+            ApiResponse<ResourceListOfTransfer> localVarResp = listTransfersWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listTransfers request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ResourceListOfTransfer
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfTransfer execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ResourceListOfTransfer> localVarResp = listTransfersWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listTransfers request with HTTP info returned
+         * @return ApiResponse&lt;ResourceListOfTransfer&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfTransfer> executeWithHttpInfo() throws ApiException {
+            return listTransfersWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys);
+        }
+
+        /**
+         * Execute listTransfers request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ResourceListOfTransfer&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfTransfer> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listTransfersWithHttpInfo(asAt, page, limit, filter, sortBy, propertyKeys, opts);
+        }
+
+        /**
+         * Execute listTransfers request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfTransfer> _callback) throws ApiException {
+            listTransfersAsync(asAt, page, limit, filter, sortBy, propertyKeys, _callback);
+        }
+
+        /**
+         * Execute listTransfers request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfTransfer> _callback, ConfigurationOptions opts) throws ApiException {
+            listTransfersAsync(asAt, page, limit, filter, sortBy, propertyKeys, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ListTransfers: List transfers
+     * List transfers matching the specified criteria, decorated with the requested properties.
+     * @return APIlistTransfersRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A collection of transfers matching the specified criteria. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistTransfersRequest listTransfers() {
+        return new APIlistTransfersRequest();
     }
 }

@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.workflow.model.Fail;
 import com.finbourne.sdk.services.workflow.model.GroupReconciliation;
 import com.finbourne.sdk.services.workflow.model.HealthCheck;
 import com.finbourne.sdk.services.workflow.model.HorizonIntegration;
+import com.finbourne.sdk.services.workflow.model.InstantiateRec;
 import com.finbourne.sdk.services.workflow.model.LuminesceView;
 import com.finbourne.sdk.services.workflow.model.LusidEntityDataQualityCheck;
 import com.finbourne.sdk.services.workflow.model.PortfolioHoldingDataQualityCheck;
@@ -115,6 +116,16 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for HorizonIntegration failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'HorizonIntegration'", e);
             }
+            // deserialize InstantiateRec
+            try {
+                deserialized = _strictMapper.treeToValue(node, InstantiateRec.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'InstantiateRec'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for InstantiateRec failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'InstantiateRec'", e);
+            }
             // deserialize LuminesceView
             try {
                 deserialized = _strictMapper.treeToValue(node, LuminesceView.class);
@@ -201,6 +212,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
         schemas.put("GroupReconciliation", GroupReconciliation.class);
         schemas.put("HealthCheck", HealthCheck.class);
         schemas.put("HorizonIntegration", HorizonIntegration.class);
+        schemas.put("InstantiateRec", InstantiateRec.class);
         schemas.put("LuminesceView", LuminesceView.class);
         schemas.put("LusidEntityDataQualityCheck", LusidEntityDataQualityCheck.class);
         schemas.put("PortfolioHoldingDataQualityCheck", PortfolioHoldingDataQualityCheck.class);
@@ -217,7 +229,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -239,6 +251,11 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
         }
 
         if (instance instanceof HorizonIntegration) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof InstantiateRec) {
             super.setActualInstance(instance);
             return;
         }
@@ -273,14 +290,14 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep");
+        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep
      *
-     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, HorizonIntegration, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep)
+     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -327,6 +344,16 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
      */
     public HorizonIntegration getHorizonIntegration() throws ClassCastException {
         return (HorizonIntegration)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `InstantiateRec`. If the actual instance is not `InstantiateRec`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `InstantiateRec`
+     * @throws ClassCastException if the instance is not `InstantiateRec`
+     */
+    public InstantiateRec getInstantiateRec() throws ClassCastException {
+        return (InstantiateRec)super.getActualInstance();
     }
     /**
      * Get the actual instance of `LuminesceView`. If the actual instance is not `LuminesceView`,

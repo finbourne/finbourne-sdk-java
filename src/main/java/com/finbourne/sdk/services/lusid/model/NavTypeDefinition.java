@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.NavSettlementConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.SwingPricingRule;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +56,10 @@ import com.finbourne.sdk.JSON;
   NavTypeDefinition.JSON_PROPERTY_AMORTISATION_RULE_SET_ID,
   NavTypeDefinition.JSON_PROPERTY_LEADER_NAV_TYPE_CODE,
   NavTypeDefinition.JSON_PROPERTY_TRANSACTION_TEMPLATE_SCOPE,
-  NavTypeDefinition.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER
+  NavTypeDefinition.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
+  NavTypeDefinition.JSON_PROPERTY_PRICING_BASIS,
+  NavTypeDefinition.JSON_PROPERTY_SWING_PRICING,
+  NavTypeDefinition.JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID
 })
 
 public class NavTypeDefinition {
@@ -148,6 +152,21 @@ public class NavTypeDefinition {
   @JsonProperty(JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String transactionExclusionFilter;
+
+  public static final String JSON_PROPERTY_PRICING_BASIS = "pricingBasis";
+  @JsonProperty(JSON_PROPERTY_PRICING_BASIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String pricingBasis;
+
+  public static final String JSON_PROPERTY_SWING_PRICING = "swingPricing";
+  @JsonProperty(JSON_PROPERTY_SWING_PRICING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private SwingPricingRule swingPricing;
+
+  public static final String JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID = "notionalDealingCostTableId";
+  @JsonProperty(JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId notionalDealingCostTableId;
 
   public NavTypeDefinition() {
   }
@@ -518,6 +537,63 @@ public class NavTypeDefinition {
   }
 
 
+  public NavTypeDefinition pricingBasis(String pricingBasis) {
+    this.pricingBasis = pricingBasis;
+    return this;
+  }
+
+  /**
+   * The side of the quote this Nav Type values the fund on: Mid, Bid or Ask. Overrides the pricing basis of the valuation recipe&#39;s market options for this Nav Type only, so a bid NAV and an ask NAV can share one recipe. Omit it to value on the recipe&#39;s own pricing basis. Available values: Mid, Bid, Ask.
+   * @return pricingBasis
+   */
+  @javax.annotation.Nullable
+  public String getPricingBasis() {
+    return pricingBasis;
+  }
+
+  public void setPricingBasis(String pricingBasis) {
+    this.pricingBasis = pricingBasis;
+  }
+
+
+  public NavTypeDefinition swingPricing(SwingPricingRule swingPricing) {
+    this.swingPricing = swingPricing;
+    return this;
+  }
+
+  /**
+   * Get swingPricing
+   * @return swingPricing
+   */
+  @javax.annotation.Nullable
+  public SwingPricingRule getSwingPricing() {
+    return swingPricing;
+  }
+
+  public void setSwingPricing(SwingPricingRule swingPricing) {
+    this.swingPricing = swingPricing;
+  }
+
+
+  public NavTypeDefinition notionalDealingCostTableId(ResourceId notionalDealingCostTableId) {
+    this.notionalDealingCostTableId = notionalDealingCostTableId;
+    return this;
+  }
+
+  /**
+   * Get notionalDealingCostTableId
+   * @return notionalDealingCostTableId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getNotionalDealingCostTableId() {
+    return notionalDealingCostTableId;
+  }
+
+  public void setNotionalDealingCostTableId(ResourceId notionalDealingCostTableId) {
+    this.notionalDealingCostTableId = notionalDealingCostTableId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -544,7 +620,10 @@ public class NavTypeDefinition {
         Objects.equals(this.amortisationRuleSetId, navTypeDefinition.amortisationRuleSetId) &&
         Objects.equals(this.leaderNavTypeCode, navTypeDefinition.leaderNavTypeCode) &&
         Objects.equals(this.transactionTemplateScope, navTypeDefinition.transactionTemplateScope) &&
-        Objects.equals(this.transactionExclusionFilter, navTypeDefinition.transactionExclusionFilter);
+        Objects.equals(this.transactionExclusionFilter, navTypeDefinition.transactionExclusionFilter) &&
+        Objects.equals(this.pricingBasis, navTypeDefinition.pricingBasis) &&
+        Objects.equals(this.swingPricing, navTypeDefinition.swingPricing) &&
+        Objects.equals(this.notionalDealingCostTableId, navTypeDefinition.notionalDealingCostTableId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -553,7 +632,7 @@ public class NavTypeDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope, transactionExclusionFilter);
+    return Objects.hash(code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope, transactionExclusionFilter, pricingBasis, swingPricing, notionalDealingCostTableId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -585,6 +664,9 @@ public class NavTypeDefinition {
     sb.append("    leaderNavTypeCode: ").append(toIndentedString(leaderNavTypeCode)).append("\n");
     sb.append("    transactionTemplateScope: ").append(toIndentedString(transactionTemplateScope)).append("\n");
     sb.append("    transactionExclusionFilter: ").append(toIndentedString(transactionExclusionFilter)).append("\n");
+    sb.append("    pricingBasis: ").append(toIndentedString(pricingBasis)).append("\n");
+    sb.append("    swingPricing: ").append(toIndentedString(swingPricing)).append("\n");
+    sb.append("    notionalDealingCostTableId: ").append(toIndentedString(notionalDealingCostTableId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

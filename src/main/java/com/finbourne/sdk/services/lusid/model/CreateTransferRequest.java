@@ -276,7 +276,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get instrumentIdentifierOut
+   * The LUSID instrument id of the instrument moving out. A position in this instrument must exist in the outgoing portfolio on the outgoing trade date.
    * @return instrumentIdentifierOut
    */
   @javax.annotation.Nonnull
@@ -295,7 +295,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get instrumentIdentifierIn
+   * The LUSID instrument id of the instrument moving in. Equal to InstrumentIdentifierOut for a transfer between portfolios.
    * @return instrumentIdentifierIn
    */
   @javax.annotation.Nonnull
@@ -314,7 +314,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Available values: AtCost, AtPrice.
+   * How the legs are priced. &#39;AtCost&#39; uses the cost per unit of the outgoing holding; &#39;AtPrice&#39; uses the supplied TransactionPriceOut, which is then required. Available values: AtCost, AtPrice.
    * @return pricingMethod
    */
   @javax.annotation.Nonnull
@@ -333,7 +333,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Available values: Consolidate, Preserve.
+   * What happens to the tax lots of the outgoing position. Only &#39;Consolidate&#39; is currently supported; &#39;Preserve&#39; is rejected. Defaults to &#39;Consolidate&#39;. Available values: Consolidate, Preserve.
    * @return taxLotStructure
    */
   @javax.annotation.Nullable
@@ -352,7 +352,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get unitsOut
+   * The number of units to move out. Must be greater than zero.
    * @return unitsOut
    */
   @javax.annotation.Nonnull
@@ -371,7 +371,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get unitsIn
+   * The number of units to move in. Must be greater than zero.
    * @return unitsIn
    */
   @javax.annotation.Nonnull
@@ -390,7 +390,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get amountOut
+   * The total consideration of the outgoing leg. Recorded, not applied.
    * @return amountOut
    */
   @javax.annotation.Nullable
@@ -409,7 +409,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get weightOut
+   * The weighting factor of the outgoing leg. Recorded, not applied.
    * @return weightOut
    */
   @javax.annotation.Nullable
@@ -428,7 +428,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get tradeDateOut
+   * The trade date of the outgoing leg. Must not be later than TradeDateIn.
    * @return tradeDateOut
    */
   @javax.annotation.Nonnull
@@ -447,7 +447,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get tradeDateIn
+   * The trade date of the incoming leg.
    * @return tradeDateIn
    */
   @javax.annotation.Nonnull
@@ -466,7 +466,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get settlementDateOut
+   * The settlement date of the outgoing leg. Must not be later than SettlementDateIn.
    * @return settlementDateOut
    */
   @javax.annotation.Nonnull
@@ -485,7 +485,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get settlementDateIn
+   * The settlement date of the incoming leg. Defaults to SettlementDateOut when not supplied.
    * @return settlementDateIn
    */
   @javax.annotation.Nullable
@@ -504,7 +504,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get exchangeRateOut
+   * The FX rate to apply to the outgoing leg.
    * @return exchangeRateOut
    */
   @javax.annotation.Nullable
@@ -523,7 +523,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get exchangeRateIn
+   * The FX rate to apply to the incoming leg.
    * @return exchangeRateIn
    */
   @javax.annotation.Nullable
@@ -542,7 +542,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get transactionPriceOut
+   * The unit price of the outgoing leg. Required when PricingMethod is &#39;AtPrice&#39;, and ignored when it is &#39;AtCost&#39;.
    * @return transactionPriceOut
    */
   @javax.annotation.Nullable
@@ -561,7 +561,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get transactionPriceIn
+   * The unit price of the incoming leg. Ignored for a transfer, which carries the outgoing price across; defaults to the outgoing price for a switch.
    * @return transactionPriceIn
    */
   @javax.annotation.Nullable
@@ -580,7 +580,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get counterpartyIdOut
+   * The counterparty identifier of the outgoing leg.
    * @return counterpartyIdOut
    */
   @javax.annotation.Nullable
@@ -599,7 +599,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get counterpartyIdIn
+   * The counterparty identifier of the incoming leg. Defaults to CounterpartyIdOut.
    * @return counterpartyIdIn
    */
   @javax.annotation.Nullable
@@ -656,7 +656,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get source
+   * The transaction source the generated legs are booked against.
    * @return source
    */
   @javax.annotation.Nonnull
@@ -675,7 +675,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.
+   * An accounting method to record against the transfer. Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.
    * @return accountingMethod
    */
   @javax.annotation.Nullable
@@ -702,7 +702,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get propertiesOut
+   * Transaction Properties to set on the outgoing transaction leg, and on the incoming transaction leg when PropertiesIn is absent. Supplying an empty collection for PropertiesIn leaves the incoming leg with no properties.
    * @return propertiesOut
    */
   @javax.annotation.Nullable
@@ -729,7 +729,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get propertiesIn
+   * Transaction Properties to set on the incoming transaction leg, replacing rather than adding to PropertiesOut.
    * @return propertiesIn
    */
   @javax.annotation.Nullable
@@ -756,7 +756,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * Get properties
+   * Properties to set on the transfer itself, in the Transfer domain. These are separate from PropertiesOut and PropertiesIn, which are Transaction domain and land on the legs.
    * @return properties
    */
   @javax.annotation.Nullable

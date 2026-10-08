@@ -18,6 +18,10 @@ Name | Type | Description | Notes
 **paymentCurrency** | **String** | Payment currency. This does not have to be the same as the nominal bond or observation/reset currency. | [default to String]
 **spread** | **java.math.BigDecimal** | Spread over floating rate given as a fraction. | [optional] [default to java.math.BigDecimal]
 **stubType** | **String** | When a payment schedule doesn&#39;t have regular payment intervals just because of the  first and/or last coupons of the schedule, we call those irregular coupons stubs.  This configuration specifies what type of stub is used when building the schedule  Supported values are:  None &#x3D; this is a regular payment schedule with no stubs. DO NOT use it with irregular schedules or you will get incorrect and unexpected behaviour.  ShortFront &#x3D; this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is shorter than the regular payment period.  ShortBack &#x3D; this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is shorter than the regular payment period.  LongFront &#x3D; this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is longer than the regular payment period.  LongBack &#x3D; this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is longer than the regular payment period.  Both &#x3D; this is an irregular payment schedule where both the first and the last coupons are irregular, and the length of these periods is calculated based on the first coupon payment date that should have been explicitly set. | [optional] [default to String]
+**firstCouponPayDate** | [**OffsetDateTime**](OffsetDateTime.md) | Optional. The date on which the first coupon is paid. Set this date for an irregular first coupon period.  If this date is an adjusted date, also set SecondPeriodStartDate. | [optional] [default to OffsetDateTime]
+**secondPeriodStartDate** | [**OffsetDateTime**](OffsetDateTime.md) | Optional. The date on which the second coupon period starts. This is also the accrual end date of the first coupon period.  Set this date together with FirstCouponPayDate when the first coupon pay date is an adjusted date. | [optional] [default to OffsetDateTime]
+**penultimateCouponPayDate** | [**OffsetDateTime**](OffsetDateTime.md) | Optional. The date on which the penultimate coupon is paid. Set this date for an irregular last coupon period.  If this date is an adjusted date, also set LastPeriodStartDate. | [optional] [default to OffsetDateTime]
+**lastPeriodStartDate** | [**OffsetDateTime**](OffsetDateTime.md) | Optional. The date on which the last coupon period starts. This is also the accrual end date of the penultimate coupon period.  Set this date together with PenultimateCouponPayDate when the penultimate coupon pay date is an adjusted date. | [optional] [default to OffsetDateTime]
 **exDividendConfiguration** | [**ExDividendConfiguration**](ExDividendConfiguration.md) |  | [optional] [default to ExDividendConfiguration]
 **compounding** | [**Compounding**](Compounding.md) |  | [optional] [default to Compounding]
 **resetConvention** | **String** | Control how resets are generated relative to payment convention(s).    Default value: InAdvance. Available values: InAdvance, InArrears. | [optional] [default to String]
@@ -43,6 +47,10 @@ java.math.BigDecimal notional = new java.math.BigDecimal("100.00");
 String paymentCurrency = "example paymentCurrency";
 java.math.BigDecimal spread = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable String stubType = "example stubType";
+@javax.annotation.Nullable OffsetDateTime firstCouponPayDate = OffsetDateTime.now();
+@javax.annotation.Nullable OffsetDateTime secondPeriodStartDate = OffsetDateTime.now();
+@javax.annotation.Nullable OffsetDateTime penultimateCouponPayDate = OffsetDateTime.now();
+@javax.annotation.Nullable OffsetDateTime lastPeriodStartDate = OffsetDateTime.now();
 ExDividendConfiguration exDividendConfiguration = new ExDividendConfiguration();
 Compounding compounding = new Compounding();
 @javax.annotation.Nullable String resetConvention = "example resetConvention";
@@ -64,6 +72,10 @@ FloatSchedule floatScheduleInstance = new FloatSchedule()
     .paymentCurrency(paymentCurrency)
     .spread(spread)
     .stubType(stubType)
+    .firstCouponPayDate(firstCouponPayDate)
+    .secondPeriodStartDate(secondPeriodStartDate)
+    .penultimateCouponPayDate(penultimateCouponPayDate)
+    .lastPeriodStartDate(lastPeriodStartDate)
     .exDividendConfiguration(exDividendConfiguration)
     .compounding(compounding)
     .resetConvention(resetConvention)

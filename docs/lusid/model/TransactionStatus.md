@@ -20,6 +20,8 @@ TransactionStatus method = TransactionStatus.CANCELLED;
 TransactionStatus method = TransactionStatus.ACTIVE_REVERSAL;
 TransactionStatus method = TransactionStatus.ACTIVE_TRUE_UP;
 TransactionStatus method = TransactionStatus.CANCELLED_TRUE_UP;
+TransactionStatus method = TransactionStatus.PENDING_REVERSAL;
+TransactionStatus method = TransactionStatus.REVERSED;
 ```
 
 

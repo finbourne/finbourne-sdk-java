@@ -5,7 +5,9 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createTransfer**](TransfersApi.md#createTransfer) | **POST** /api/api/transfers | [EXPERIMENTAL] CreateTransfer: Create a transfer. |
+| [**deleteTransfer**](TransfersApi.md#deleteTransfer) | **DELETE** /api/api/transfers/{scope}/{code} | [EXPERIMENTAL] DeleteTransfer: Delete a transfer. |
 | [**getTransfer**](TransfersApi.md#getTransfer) | **POST** /api/api/transfers/$get | [EXPERIMENTAL] GetTransfer: Get a transfer |
+| [**listTransfers**](TransfersApi.md#listTransfers) | **GET** /api/api/transfers | [EXPERIMENTAL] ListTransfers: List transfers |
 
 
 
@@ -86,9 +88,97 @@ public class TransfersApiExample {
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
+## deleteTransfer
+
+> DeletedEntityResponse deleteTransfer(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn)
+
+[EXPERIMENTAL] DeleteTransfer: Delete a transfer.
+
+Delete the Transfer entity recording a transfer and cancel the transaction legs it still has, as a single  atomic operation: if any part of the request is rejected, nothing is changed. A leg that has already gone is  skipped, so a transfer with no legs left can still be deleted to clear the record.                A transfer is identified by its scope, its code and both of its portfolios, so all four are required. Where  no transfer matches all four, the request is reported as not found.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.TransfersApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TransfersApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        TransfersApi apiInstance = apiFactory.build(TransfersApi.class);
+        String scope = "scope_example"; // String | The scope of the transfer.
+        String code = "code_example"; // String | The code of the transfer. Together with the scope and both portfolios this uniquely               identifies the transfer.
+        String portfolioScopeOut = "portfolioScopeOut_example"; // String | The scope of the portfolio the outgoing leg is booked in.
+        String portfolioCodeOut = "portfolioCodeOut_example"; // String | The code of the portfolio the outgoing leg is booked in.
+        String portfolioScopeIn = "portfolioScopeIn_example"; // String | The scope of the portfolio the incoming leg is booked in.
+        String portfolioCodeIn = "portfolioCodeIn_example"; // String | The code of the portfolio the incoming leg is booked in. Equal to               portfolioCodeOut for a switch between instruments within one portfolio.
+        try {
+            // uncomment the below to set overrides at the request level
+            // DeletedEntityResponse result = apiInstance.deleteTransfer(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn).execute(opts);
+
+            DeletedEntityResponse result = apiInstance.deleteTransfer(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TransfersApi#deleteTransfer");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the transfer. | |
+| **code** | **String**| The code of the transfer. Together with the scope and both portfolios this uniquely               identifies the transfer. | |
+| **portfolioScopeOut** | **String**| The scope of the portfolio the outgoing leg is booked in. | |
+| **portfolioCodeOut** | **String**| The code of the portfolio the outgoing leg is booked in. | |
+| **portfolioScopeIn** | **String**| The scope of the portfolio the incoming leg is booked in. | |
+| **portfolioCodeIn** | **String**| The code of the portfolio the incoming leg is booked in. Equal to               portfolioCodeOut for a switch between instruments within one portfolio. | |
+
+### Return type
+
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The asAt the deletion landed at. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **404** | No transfer with the given scope, code and portfolios. |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
 ## getTransfer
 
-> GetTransferResponse getTransfer(getTransferRequest, asAt)
+> Transfer getTransfer(getTransferRequest, asAt)
 
 [EXPERIMENTAL] GetTransfer: Get a transfer
 
@@ -123,9 +213,9 @@ public class TransfersApiExample {
         OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to retrieve the transfer. Defaults to latest              version if not specified.
         try {
             // uncomment the below to set overrides at the request level
-            // GetTransferResponse result = apiInstance.getTransfer(getTransferRequest, asAt).execute(opts);
+            // Transfer result = apiInstance.getTransfer(getTransferRequest, asAt).execute(opts);
 
-            GetTransferResponse result = apiInstance.getTransfer(getTransferRequest, asAt).execute();
+            Transfer result = apiInstance.getTransfer(getTransferRequest, asAt).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling TransfersApi#getTransfer");
@@ -146,7 +236,7 @@ public class TransfersApiExample {
 
 ### Return type
 
-[**GetTransferResponse**](../model/GetTransferResponse.md)
+[**Transfer**](../model/Transfer.md)
 
 
 ### HTTP request headers
@@ -161,6 +251,93 @@ public class TransfersApiExample {
 | **200** | The requested transfer and both of its transactions. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **404** | No transfer exists with the requested scope, code and portfolios. |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listTransfers
+
+> ResourceListOfTransfer listTransfers(asAt, page, limit, filter, sortBy, propertyKeys)
+
+[EXPERIMENTAL] ListTransfers: List transfers
+
+List transfers matching the specified criteria, decorated with the requested properties.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.TransfersApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TransfersApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        TransfersApi apiInstance = apiFactory.build(TransfersApi.class);
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified.
+        String page = "page_example"; // String | The pagination token to use to continue listing transfers from a previous call.
+        Integer limit = 56; // Integer | When paginating, limit the number of returned results to this many.
+        String filter = "filter_example"; // String | Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported.
+        List<String> sortBy = Arrays.asList(); // List<String> | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        List<String> propertyKeys = Arrays.asList(); // List<String> | The collection of `PropertyKey`s to decorate onto each transfer.
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResourceListOfTransfer result = apiInstance.listTransfers(asAt, page, limit, filter, sortBy, propertyKeys).execute(opts);
+
+            ResourceListOfTransfer result = apiInstance.listTransfers(asAt, page, limit, filter, sortBy, propertyKeys).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TransfersApi#listTransfers");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. | [optional] |
+| **page** | **String**| The pagination token to use to continue listing transfers from a previous call. | [optional] |
+| **limit** | **Integer**| When paginating, limit the number of returned results to this many. | [optional] |
+| **filter** | **String**| Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| The collection of &#x60;PropertyKey&#x60;s to decorate onto each transfer. | [optional] |
+
+### Return type
+
+[**ResourceListOfTransfer**](../model/ResourceListOfTransfer.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A collection of transfers matching the specified criteria. |  -  |
+| **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
