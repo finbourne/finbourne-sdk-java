@@ -19,7 +19,9 @@ import com.finbourne.sdk.services.lusid.model.InstrumentResolutionDetail;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.NavType;
 import com.finbourne.sdk.services.lusid.model.PortfolioEntityIdWithDetails;
+import com.finbourne.sdk.services.lusid.model.PricingMethodology;
 import com.finbourne.sdk.services.lusid.model.Property;
+import com.finbourne.sdk.services.lusid.model.ReportingPrice;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.ShareClass;
 import com.finbourne.sdk.services.lusid.model.Version;
@@ -74,6 +76,8 @@ import com.finbourne.sdk.JSON;
   Fund.JSON_PROPERTY_ALLOCATION_GROUPS,
   Fund.JSON_PROPERTY_SHARE_CLASSES,
   Fund.JSON_PROPERTY_FUND_INSTRUMENT,
+  Fund.JSON_PROPERTY_PRICING_METHODOLOGY,
+  Fund.JSON_PROPERTY_REPORTING_PRICES,
   Fund.JSON_PROPERTY_VERSION,
   Fund.JSON_PROPERTY_LINKS
 })
@@ -193,6 +197,16 @@ public class Fund {
   @JsonProperty(JSON_PROPERTY_FUND_INSTRUMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private FundInstrument fundInstrument;
+
+  public static final String JSON_PROPERTY_PRICING_METHODOLOGY = "pricingMethodology";
+  @JsonProperty(JSON_PROPERTY_PRICING_METHODOLOGY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PricingMethodology pricingMethodology;
+
+  public static final String JSON_PROPERTY_REPORTING_PRICES = "reportingPrices";
+  @JsonProperty(JSON_PROPERTY_REPORTING_PRICES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ReportingPrice> reportingPrices;
 
   public static final String JSON_PROPERTY_VERSION = "version";
   @JsonProperty(JSON_PROPERTY_VERSION)
@@ -692,6 +706,52 @@ public class Fund {
   }
 
 
+  public Fund pricingMethodology(PricingMethodology pricingMethodology) {
+    this.pricingMethodology = pricingMethodology;
+    return this;
+  }
+
+  /**
+   * Get pricingMethodology
+   * @return pricingMethodology
+   */
+  @javax.annotation.Nullable
+  public PricingMethodology getPricingMethodology() {
+    return pricingMethodology;
+  }
+
+  public void setPricingMethodology(PricingMethodology pricingMethodology) {
+    this.pricingMethodology = pricingMethodology;
+  }
+
+
+  public Fund reportingPrices(List<ReportingPrice> reportingPrices) {
+    this.reportingPrices = reportingPrices;
+    return this;
+  }
+
+  public Fund addReportingPricesItem(ReportingPrice reportingPricesItem) {
+    if (this.reportingPrices == null) {
+      this.reportingPrices = new ArrayList<>();
+    }
+    this.reportingPrices.add(reportingPricesItem);
+    return this;
+  }
+
+  /**
+   * Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices.
+   * @return reportingPrices
+   */
+  @javax.annotation.Nullable
+  public List<ReportingPrice> getReportingPrices() {
+    return reportingPrices;
+  }
+
+  public void setReportingPrices(List<ReportingPrice> reportingPrices) {
+    this.reportingPrices = reportingPrices;
+  }
+
+
   public Fund version(Version version) {
     this.version = version;
     return this;
@@ -770,6 +830,8 @@ public class Fund {
         Objects.equals(this.allocationGroups, fund.allocationGroups) &&
         Objects.equals(this.shareClasses, fund.shareClasses) &&
         Objects.equals(this.fundInstrument, fund.fundInstrument) &&
+        Objects.equals(this.pricingMethodology, fund.pricingMethodology) &&
+        Objects.equals(this.reportingPrices, fund.reportingPrices) &&
         Objects.equals(this.version, fund.version) &&
         Objects.equals(this.links, fund.links);
   }
@@ -780,7 +842,7 @@ public class Fund {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shortCode, aborId, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, version, links);
+    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shortCode, aborId, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, pricingMethodology, reportingPrices, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -817,6 +879,8 @@ public class Fund {
     sb.append("    allocationGroups: ").append(toIndentedString(allocationGroups)).append("\n");
     sb.append("    shareClasses: ").append(toIndentedString(shareClasses)).append("\n");
     sb.append("    fundInstrument: ").append(toIndentedString(fundInstrument)).append("\n");
+    sb.append("    pricingMethodology: ").append(toIndentedString(pricingMethodology)).append("\n");
+    sb.append("    reportingPrices: ").append(toIndentedString(reportingPrices)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");

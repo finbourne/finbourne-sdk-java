@@ -95,7 +95,7 @@ public class SubscriptionDefinition {
 
   public static final String JSON_PROPERTY_SUBSCRIPTION_TYPE = "subscriptionType";
   @JsonProperty(JSON_PROPERTY_SUBSCRIPTION_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String subscriptionType;
 
   public static final String JSON_PROPERTY_START_EFFECTIVE_AT = "startEffectiveAt";
@@ -282,10 +282,10 @@ public class SubscriptionDefinition {
   }
 
   /**
-   * The kind of data the subscription streams, defaulting to holdings: before/after effects per  holding (holdings), the transactions themselves (transactions), or each changed holding&#39;s  complete current state (positions). Address keys and byTaxLots are not valid for a  transactions subscription. Available values: Holdings, Transactions, Positions.
+   * Required. The kind of data the subscription streams: before/after effects per  holding (holdings), the transactions themselves (transactions), or each changed holding&#39;s  complete current state (positions). Address keys and byTaxLots are not valid for a  transactions subscription. Available values: Holdings, Transactions, Positions.
    * @return subscriptionType
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public String getSubscriptionType() {
     return subscriptionType;
   }

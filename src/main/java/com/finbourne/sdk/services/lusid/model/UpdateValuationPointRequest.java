@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.PricingMethodologyOverrideRequest;
 import com.finbourne.sdk.services.lusid.model.Property;
 import java.io.IOException;
 import java.util.Arrays;
@@ -42,7 +43,8 @@ import com.finbourne.sdk.JSON;
   UpdateValuationPointRequest.JSON_PROPERTY_NAME,
   UpdateValuationPointRequest.JSON_PROPERTY_PROPERTIES,
   UpdateValuationPointRequest.JSON_PROPERTY_APPLY_CLEAR_DOWN,
-  UpdateValuationPointRequest.JSON_PROPERTY_UPDATE_INCLUSION_DATE_NAV_ADJUSTMENTS
+  UpdateValuationPointRequest.JSON_PROPERTY_UPDATE_INCLUSION_DATE_NAV_ADJUSTMENTS,
+  UpdateValuationPointRequest.JSON_PROPERTY_PRICING_METHODOLOGY_OVERRIDE
 })
 
 public class UpdateValuationPointRequest {
@@ -75,6 +77,11 @@ public class UpdateValuationPointRequest {
   @JsonProperty(JSON_PROPERTY_UPDATE_INCLUSION_DATE_NAV_ADJUSTMENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean updateInclusionDateNavAdjustments;
+
+  public static final String JSON_PROPERTY_PRICING_METHODOLOGY_OVERRIDE = "pricingMethodologyOverride";
+  @JsonProperty(JSON_PROPERTY_PRICING_METHODOLOGY_OVERRIDE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PricingMethodologyOverrideRequest pricingMethodologyOverride;
 
   public UpdateValuationPointRequest() {
   }
@@ -201,6 +208,25 @@ public class UpdateValuationPointRequest {
   }
 
 
+  public UpdateValuationPointRequest pricingMethodologyOverride(PricingMethodologyOverrideRequest pricingMethodologyOverride) {
+    this.pricingMethodologyOverride = pricingMethodologyOverride;
+    return this;
+  }
+
+  /**
+   * Get pricingMethodologyOverride
+   * @return pricingMethodologyOverride
+   */
+  @javax.annotation.Nullable
+  public PricingMethodologyOverrideRequest getPricingMethodologyOverride() {
+    return pricingMethodologyOverride;
+  }
+
+  public void setPricingMethodologyOverride(PricingMethodologyOverrideRequest pricingMethodologyOverride) {
+    this.pricingMethodologyOverride = pricingMethodologyOverride;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -215,7 +241,8 @@ public class UpdateValuationPointRequest {
         Objects.equals(this.name, updateValuationPointRequest.name) &&
         Objects.equals(this.properties, updateValuationPointRequest.properties) &&
         Objects.equals(this.applyClearDown, updateValuationPointRequest.applyClearDown) &&
-        Objects.equals(this.updateInclusionDateNavAdjustments, updateValuationPointRequest.updateInclusionDateNavAdjustments);
+        Objects.equals(this.updateInclusionDateNavAdjustments, updateValuationPointRequest.updateInclusionDateNavAdjustments) &&
+        Objects.equals(this.pricingMethodologyOverride, updateValuationPointRequest.pricingMethodologyOverride);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -224,7 +251,7 @@ public class UpdateValuationPointRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(valuationPointCode, variant, name, properties, applyClearDown, updateInclusionDateNavAdjustments);
+    return Objects.hash(valuationPointCode, variant, name, properties, applyClearDown, updateInclusionDateNavAdjustments, pricingMethodologyOverride);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -244,6 +271,7 @@ public class UpdateValuationPointRequest {
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    applyClearDown: ").append(toIndentedString(applyClearDown)).append("\n");
     sb.append("    updateInclusionDateNavAdjustments: ").append(toIndentedString(updateInclusionDateNavAdjustments)).append("\n");
+    sb.append("    pricingMethodologyOverride: ").append(toIndentedString(pricingMethodologyOverride)).append("\n");
     sb.append("}");
     return sb.toString();
   }

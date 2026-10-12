@@ -29,6 +29,8 @@ Name | Type | Description | Notes
 **allocationGroups** | [**List&lt;AllocationGroup&gt;**](AllocationGroup.md) | An optional list of Allocation Group definitions for the Fund. | [optional] [default to List<AllocationGroup>]
 **shareClasses** | [**List&lt;ShareClass&gt;**](ShareClass.md) | An optional list of Share Class definitions for the Fund. | [optional] [default to List<ShareClass>]
 **fundInstrument** | [**FundInstrument**](FundInstrument.md) |  | [optional] [default to FundInstrument]
+**pricingMethodology** | [**PricingMethodology**](PricingMethodology.md) |  | [optional] [default to PricingMethodology]
+**reportingPrices** | [**List&lt;ReportingPrice&gt;**](ReportingPrice.md) | Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices. | [optional] [default to List<ReportingPrice>]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
@@ -61,6 +63,8 @@ Boolean createInstrument = true;
 @javax.annotation.Nullable List<AllocationGroup> allocationGroups = new List<AllocationGroup>();
 @javax.annotation.Nullable List<ShareClass> shareClasses = new List<ShareClass>();
 FundInstrument fundInstrument = new FundInstrument();
+PricingMethodology pricingMethodology = new PricingMethodology();
+@javax.annotation.Nullable List<ReportingPrice> reportingPrices = new List<ReportingPrice>();
 Version version = new Version();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
@@ -89,6 +93,8 @@ Fund fundInstance = new Fund()
     .allocationGroups(allocationGroups)
     .shareClasses(shareClasses)
     .fundInstrument(fundInstrument)
+    .pricingMethodology(pricingMethodology)
+    .reportingPrices(reportingPrices)
     .version(version)
     .links(links);
 ```

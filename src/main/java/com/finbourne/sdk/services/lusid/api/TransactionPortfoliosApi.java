@@ -7314,6 +7314,10 @@ public class TransactionPortfoliosApi {
      * @param recipeIdCode The code of the given recipeId (optional)
      * @param propertyKeys A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. (optional)
      * @param filter Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param splitHeldAndTradingReturns When true, P&amp;L is split into separate Held and Trading returns: Held returns capture              market movement on the starting position, and Trading returns capture profit from buy/sell decisions made during the period.              When false (the default), the standard combined A2B report is returned. Cannot currently be combined with the timeline              parameters (timelineScope, timelineCode, closedPeriodId). (optional, default to false)
+     * @param timelineScope The scope of the timeline to use for loading data per closed period. (optional)
+     * @param timelineCode The code of the timeline to use for loading data per closed period. (optional)
+     * @param closedPeriodId The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period&#39;s data is returned within that window. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -7325,8 +7329,8 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getA2BMovementsCall(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, final ApiCallback _callback) throws ApiException {
-        return getA2BMovementsCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter,  _callback, new ConfigurationOptions());
+    private HttpRequest getA2BMovementsCall(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, Boolean splitHeldAndTradingReturns, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback _callback) throws ApiException {
+        return getA2BMovementsCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -7339,7 +7343,11 @@ public class TransactionPortfoliosApi {
      * @param recipeIdScope The scope of the given recipeId (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param recipeIdCode The code of the given recipeId (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param propertyKeys A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param filter Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param splitHeldAndTradingReturns When true, P&amp;L is split into separate Held and Trading returns: Held returns capture              market movement on the starting position, and Trading returns capture profit from buy/sell decisions made during the period.              When false (the default), the standard combined A2B report is returned. Cannot currently be combined with the timeline              parameters (timelineScope, timelineCode, closedPeriodId). (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
+     * @param timelineScope The scope of the timeline to use for loading data per closed period. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param timelineCode The code of the timeline to use for loading data per closed period. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param closedPeriodId The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period&#39;s data is returned within that window. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -7351,7 +7359,7 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getA2BMovementsCall(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getA2BMovementsCall(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, Boolean splitHeldAndTradingReturns, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -7406,6 +7414,22 @@ public class TransactionPortfoliosApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
         }
 
+        if (splitHeldAndTradingReturns != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("splitHeldAndTradingReturns", splitHeldAndTradingReturns));
+        }
+
+        if (timelineScope != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("timelineScope", timelineScope));
+        }
+
+        if (timelineCode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("timelineCode", timelineCode));
+        }
+
+        if (closedPeriodId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("closedPeriodId", closedPeriodId));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -7428,7 +7452,7 @@ public class TransactionPortfoliosApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getA2BMovementsValidateBeforeCall(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getA2BMovementsValidateBeforeCall(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, Boolean splitHeldAndTradingReturns, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling getA2BMovements(Async)");
@@ -7449,7 +7473,7 @@ public class TransactionPortfoliosApi {
             throw new ApiException("Missing the required parameter 'toEffectiveAt' when calling getA2BMovements(Async)");
         }
 
-        return getA2BMovementsCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, _callback, opts);
+        return getA2BMovementsCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, _callback, opts);
 
     }
 
@@ -7465,6 +7489,10 @@ public class TransactionPortfoliosApi {
      * @param recipeIdCode The code of the given recipeId (optional)
      * @param propertyKeys A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. (optional)
      * @param filter Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param splitHeldAndTradingReturns When true, P&amp;L is split into separate Held and Trading returns: Held returns capture              market movement on the starting position, and Trading returns capture profit from buy/sell decisions made during the period.              When false (the default), the standard combined A2B report is returned. Cannot currently be combined with the timeline              parameters (timelineScope, timelineCode, closedPeriodId). (optional, default to false)
+     * @param timelineScope The scope of the timeline to use for loading data per closed period. (optional)
+     * @param timelineCode The code of the timeline to use for loading data per closed period. (optional)
+     * @param closedPeriodId The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period&#39;s data is returned within that window. (optional)
      * @return ApiResponse&lt;VersionedResourceListOfA2BMovementRecord&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -7475,8 +7503,8 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<VersionedResourceListOfA2BMovementRecord> getA2BMovementsWithHttpInfo(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter) throws ApiException {
-        HttpRequest localVarCall = getA2BMovementsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, null, new ConfigurationOptions());
+    private ApiResponse<VersionedResourceListOfA2BMovementRecord> getA2BMovementsWithHttpInfo(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, Boolean splitHeldAndTradingReturns, String timelineScope, String timelineCode, String closedPeriodId) throws ApiException {
+        HttpRequest localVarCall = getA2BMovementsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<VersionedResourceListOfA2BMovementRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -7493,6 +7521,10 @@ public class TransactionPortfoliosApi {
      * @param recipeIdCode The code of the given recipeId (optional)
      * @param propertyKeys A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. (optional)
      * @param filter Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param splitHeldAndTradingReturns When true, P&amp;L is split into separate Held and Trading returns: Held returns capture              market movement on the starting position, and Trading returns capture profit from buy/sell decisions made during the period.              When false (the default), the standard combined A2B report is returned. Cannot currently be combined with the timeline              parameters (timelineScope, timelineCode, closedPeriodId). (optional, default to false)
+     * @param timelineScope The scope of the timeline to use for loading data per closed period. (optional)
+     * @param timelineCode The code of the timeline to use for loading data per closed period. (optional)
+     * @param closedPeriodId The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period&#39;s data is returned within that window. (optional)
      * @return ApiResponse&lt;VersionedResourceListOfA2BMovementRecord&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -7503,8 +7535,8 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<VersionedResourceListOfA2BMovementRecord> getA2BMovementsWithHttpInfo(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getA2BMovementsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, null, opts);
+    private ApiResponse<VersionedResourceListOfA2BMovementRecord> getA2BMovementsWithHttpInfo(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, Boolean splitHeldAndTradingReturns, String timelineScope, String timelineCode, String closedPeriodId, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getA2BMovementsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, null, opts);
         Type localVarReturnType = new TypeReference<VersionedResourceListOfA2BMovementRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -7521,6 +7553,10 @@ public class TransactionPortfoliosApi {
      * @param recipeIdCode The code of the given recipeId (optional)
      * @param propertyKeys A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. (optional)
      * @param filter Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param splitHeldAndTradingReturns When true, P&amp;L is split into separate Held and Trading returns: Held returns capture              market movement on the starting position, and Trading returns capture profit from buy/sell decisions made during the period.              When false (the default), the standard combined A2B report is returned. Cannot currently be combined with the timeline              parameters (timelineScope, timelineCode, closedPeriodId). (optional, default to false)
+     * @param timelineScope The scope of the timeline to use for loading data per closed period. (optional)
+     * @param timelineCode The code of the timeline to use for loading data per closed period. (optional)
+     * @param closedPeriodId The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period&#39;s data is returned within that window. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -7531,9 +7567,9 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getA2BMovementsAsync(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, final ApiCallback<VersionedResourceListOfA2BMovementRecord> _callback) throws ApiException {
+    private void getA2BMovementsAsync(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, Boolean splitHeldAndTradingReturns, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback<VersionedResourceListOfA2BMovementRecord> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getA2BMovementsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getA2BMovementsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<VersionedResourceListOfA2BMovementRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -7550,6 +7586,10 @@ public class TransactionPortfoliosApi {
      * @param recipeIdCode The code of the given recipeId (optional)
      * @param propertyKeys A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. (optional)
      * @param filter Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param splitHeldAndTradingReturns When true, P&amp;L is split into separate Held and Trading returns: Held returns capture              market movement on the starting position, and Trading returns capture profit from buy/sell decisions made during the period.              When false (the default), the standard combined A2B report is returned. Cannot currently be combined with the timeline              parameters (timelineScope, timelineCode, closedPeriodId). (optional, default to false)
+     * @param timelineScope The scope of the timeline to use for loading data per closed period. (optional)
+     * @param timelineCode The code of the timeline to use for loading data per closed period. (optional)
+     * @param closedPeriodId The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period&#39;s data is returned within that window. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -7560,9 +7600,9 @@ public class TransactionPortfoliosApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getA2BMovementsAsync(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, final ApiCallback<VersionedResourceListOfA2BMovementRecord> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getA2BMovementsAsync(String scope, String code, String fromEffectiveAt, String toEffectiveAt, OffsetDateTime asAt, String recipeIdScope, String recipeIdCode, List<String> propertyKeys, String filter, Boolean splitHeldAndTradingReturns, String timelineScope, String timelineCode, String closedPeriodId, final ApiCallback<VersionedResourceListOfA2BMovementRecord> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getA2BMovementsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, _callback, opts);
+        HttpRequest localVarCall = getA2BMovementsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, _callback, opts);
         Type localVarReturnType = new TypeReference<VersionedResourceListOfA2BMovementRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -7577,6 +7617,10 @@ public class TransactionPortfoliosApi {
         private String recipeIdCode;
         private List<String> propertyKeys;
         private String filter;
+        private Boolean splitHeldAndTradingReturns;
+        private String timelineScope;
+        private String timelineCode;
+        private String closedPeriodId;
 
         private APIgetA2BMovementsRequest(String scope, String code, String fromEffectiveAt, String toEffectiveAt) {
             this.scope = scope;
@@ -7636,6 +7680,46 @@ public class TransactionPortfoliosApi {
         }
 
         /**
+         * Set splitHeldAndTradingReturns
+         * @param splitHeldAndTradingReturns When true, P&amp;L is split into separate Held and Trading returns: Held returns capture              market movement on the starting position, and Trading returns capture profit from buy/sell decisions made during the period.              When false (the default), the standard combined A2B report is returned. Cannot currently be combined with the timeline              parameters (timelineScope, timelineCode, closedPeriodId). (optional, default to false)
+         * @return APIgetA2BMovementsRequest
+         */
+        public APIgetA2BMovementsRequest splitHeldAndTradingReturns(Boolean splitHeldAndTradingReturns) {
+            this.splitHeldAndTradingReturns = splitHeldAndTradingReturns;
+            return this;
+        }
+
+        /**
+         * Set timelineScope
+         * @param timelineScope The scope of the timeline to use for loading data per closed period. (optional)
+         * @return APIgetA2BMovementsRequest
+         */
+        public APIgetA2BMovementsRequest timelineScope(String timelineScope) {
+            this.timelineScope = timelineScope;
+            return this;
+        }
+
+        /**
+         * Set timelineCode
+         * @param timelineCode The code of the timeline to use for loading data per closed period. (optional)
+         * @return APIgetA2BMovementsRequest
+         */
+        public APIgetA2BMovementsRequest timelineCode(String timelineCode) {
+            this.timelineCode = timelineCode;
+            return this;
+        }
+
+        /**
+         * Set closedPeriodId
+         * @param closedPeriodId The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period&#39;s data is returned within that window. (optional)
+         * @return APIgetA2BMovementsRequest
+         */
+        public APIgetA2BMovementsRequest closedPeriodId(String closedPeriodId) {
+            this.closedPeriodId = closedPeriodId;
+            return this;
+        }
+
+        /**
          * Build call for getA2BMovements
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -7649,7 +7733,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getA2BMovementsCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, _callback);
+            return getA2BMovementsCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, _callback);
         }
 
         /**
@@ -7665,7 +7749,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public VersionedResourceListOfA2BMovementRecord execute() throws ApiException {
-            ApiResponse<VersionedResourceListOfA2BMovementRecord> localVarResp = getA2BMovementsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter);
+            ApiResponse<VersionedResourceListOfA2BMovementRecord> localVarResp = getA2BMovementsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId);
             return localVarResp.getData();
         }
 
@@ -7682,7 +7766,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public VersionedResourceListOfA2BMovementRecord execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<VersionedResourceListOfA2BMovementRecord> localVarResp = getA2BMovementsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, opts);
+            ApiResponse<VersionedResourceListOfA2BMovementRecord> localVarResp = getA2BMovementsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, opts);
             return localVarResp.getData();
         }
 
@@ -7699,7 +7783,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public ApiResponse<VersionedResourceListOfA2BMovementRecord> executeWithHttpInfo() throws ApiException {
-            return getA2BMovementsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter);
+            return getA2BMovementsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId);
         }
 
         /**
@@ -7715,7 +7799,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public ApiResponse<VersionedResourceListOfA2BMovementRecord> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getA2BMovementsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, opts);
+            return getA2BMovementsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, opts);
         }
 
         /**
@@ -7731,7 +7815,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public void executeAsync(final ApiCallback<VersionedResourceListOfA2BMovementRecord> _callback) throws ApiException {
-            getA2BMovementsAsync(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, _callback);
+            getA2BMovementsAsync(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, _callback);
         }
 
         /**
@@ -7747,7 +7831,7 @@ public class TransactionPortfoliosApi {
          </table>
          */
         public void executeAsync(final ApiCallback<VersionedResourceListOfA2BMovementRecord> _callback, ConfigurationOptions opts) throws ApiException {
-            getA2BMovementsAsync(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, _callback, opts);
+            getA2BMovementsAsync(scope, code, fromEffectiveAt, toEffectiveAt, asAt, recipeIdScope, recipeIdCode, propertyKeys, filter, splitHeldAndTradingReturns, timelineScope, timelineCode, closedPeriodId, _callback, opts);
         }
     }
 
@@ -7940,7 +8024,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EXPERIMENTAL] GetA2BMovementsTradingVsHolding: Get an A2B report at the movement level for the given portfolio, with P&amp;L split between holding and trading returns.
-     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a  synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on  the starting position) versus trading returns (profit from buy/sell decisions).
+     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on the starting position) versus trading returns (profit from buy/sell decisions).    Prefer the standard GetA2BMovements endpoint with splitHeldAndTradingReturns&#x3D;true, which offers the same capability (not currently combinable with the timeline parameters).
      * @param scope The scope of the portfolio to retrieve the A2B movement report for. (required)
      * @param code The code of the portfolio to retrieve the A2B movement report for. Together with the scope this              uniquely identifies the portfolio. (required)
      * @param fromEffectiveAt The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. (required)
@@ -7971,7 +8055,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EXPERIMENTAL] GetA2BMovementsTradingVsHolding: Get an A2B report at the movement level for the given portfolio, with P&amp;L split between holding and trading returns.
-     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a  synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on  the starting position) versus trading returns (profit from buy/sell decisions).Use any specified configuration options to override any other configuration for this request only
+     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on the starting position) versus trading returns (profit from buy/sell decisions).    Prefer the standard GetA2BMovements endpoint with splitHeldAndTradingReturns&#x3D;true, which offers the same capability (not currently combinable with the timeline parameters).Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the portfolio to retrieve the A2B movement report for. (required)
      * @param code The code of the portfolio to retrieve the A2B movement report for. Together with the scope this              uniquely identifies the portfolio. (required)
      * @param fromEffectiveAt The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. (required)
@@ -8002,7 +8086,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EXPERIMENTAL] GetA2BMovementsTradingVsHolding: Get an A2B report at the movement level for the given portfolio, with P&amp;L split between holding and trading returns. (asynchronously)
-     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a  synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on  the starting position) versus trading returns (profit from buy/sell decisions).
+     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on the starting position) versus trading returns (profit from buy/sell decisions).    Prefer the standard GetA2BMovements endpoint with splitHeldAndTradingReturns&#x3D;true, which offers the same capability (not currently combinable with the timeline parameters).
      * @param scope The scope of the portfolio to retrieve the A2B movement report for. (required)
      * @param code The code of the portfolio to retrieve the A2B movement report for. Together with the scope this              uniquely identifies the portfolio. (required)
      * @param fromEffectiveAt The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. (required)
@@ -8034,7 +8118,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EXPERIMENTAL] GetA2BMovementsTradingVsHolding: Get an A2B report at the movement level for the given portfolio, with P&amp;L split between holding and trading returns. (asynchronously)
-     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a  synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on  the starting position) versus trading returns (profit from buy/sell decisions).Use any specified configuration options to override any other configuration for this request only
+     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on the starting position) versus trading returns (profit from buy/sell decisions).    Prefer the standard GetA2BMovements endpoint with splitHeldAndTradingReturns&#x3D;true, which offers the same capability (not currently combinable with the timeline parameters).Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the portfolio to retrieve the A2B movement report for. (required)
      * @param code The code of the portfolio to retrieve the A2B movement report for. Together with the scope this              uniquely identifies the portfolio. (required)
      * @param fromEffectiveAt The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. (required)
@@ -8283,7 +8367,7 @@ public class TransactionPortfoliosApi {
 
     /**
      * [EXPERIMENTAL] GetA2BMovementsTradingVsHolding: Get an A2B report at the movement level for the given portfolio, with P&amp;L split between holding and trading returns.
-     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a  synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on  the starting position) versus trading returns (profit from buy/sell decisions).
+     * Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a synthetic holding rather than a flow, allowing P&amp;L to be attributed to holding returns (market movement on the starting position) versus trading returns (profit from buy/sell decisions).    Prefer the standard GetA2BMovements endpoint with splitHeldAndTradingReturns&#x3D;true, which offers the same capability (not currently combinable with the timeline parameters).
      * @param scope The scope of the portfolio to retrieve the A2B movement report for. (required)
      * @param code The code of the portfolio to retrieve the A2B movement report for. Together with the scope this              uniquely identifies the portfolio. (required)
      * @param fromEffectiveAt The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. (required)

@@ -61,7 +61,7 @@ import com.finbourne.sdk.JSON;
 public class FundShareClass extends LusidInstrument {
   public static final String JSON_PROPERTY_SHORT_CODE = "shortCode";
   @JsonProperty(JSON_PROPERTY_SHORT_CODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String shortCode;
 
   public static final String JSON_PROPERTY_FUND_SHARE_CLASS_TYPE = "fundShareClassType";
@@ -121,7 +121,7 @@ public class FundShareClass extends LusidInstrument {
    * A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \&quot;A Accumulation Euro Hedged Class\&quot; could become \&quot;A Acc H EUR\&quot;.
    * @return shortCode
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getShortCode() {
     return shortCode;
   }

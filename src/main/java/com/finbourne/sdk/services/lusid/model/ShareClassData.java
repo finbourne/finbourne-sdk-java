@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.PricingMethodologyResult;
 import com.finbourne.sdk.services.lusid.model.ShareClassBreakdown;
 import com.finbourne.sdk.services.lusid.model.ShareClassDetails;
 import java.io.IOException;
@@ -36,7 +37,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   ShareClassData.JSON_PROPERTY_SHARE_CLASS_BREAKDOWN,
-  ShareClassData.JSON_PROPERTY_SHARE_CLASS_DETAILS
+  ShareClassData.JSON_PROPERTY_SHARE_CLASS_DETAILS,
+  ShareClassData.JSON_PROPERTY_PRICING_METHODOLOGY
 })
 
 public class ShareClassData {
@@ -49,6 +51,11 @@ public class ShareClassData {
   @JsonProperty(JSON_PROPERTY_SHARE_CLASS_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ShareClassDetails shareClassDetails;
+
+  public static final String JSON_PROPERTY_PRICING_METHODOLOGY = "pricingMethodology";
+  @JsonProperty(JSON_PROPERTY_PRICING_METHODOLOGY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PricingMethodologyResult pricingMethodology;
 
   public ShareClassData() {
   }
@@ -91,6 +98,25 @@ public class ShareClassData {
   }
 
 
+  public ShareClassData pricingMethodology(PricingMethodologyResult pricingMethodology) {
+    this.pricingMethodology = pricingMethodology;
+    return this;
+  }
+
+  /**
+   * Get pricingMethodology
+   * @return pricingMethodology
+   */
+  @javax.annotation.Nullable
+  public PricingMethodologyResult getPricingMethodology() {
+    return pricingMethodology;
+  }
+
+  public void setPricingMethodology(PricingMethodologyResult pricingMethodology) {
+    this.pricingMethodology = pricingMethodology;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -101,12 +127,13 @@ public class ShareClassData {
     }
     ShareClassData shareClassData = (ShareClassData) o;
     return Objects.equals(this.shareClassBreakdown, shareClassData.shareClassBreakdown) &&
-        Objects.equals(this.shareClassDetails, shareClassData.shareClassDetails);
+        Objects.equals(this.shareClassDetails, shareClassData.shareClassDetails) &&
+        Objects.equals(this.pricingMethodology, shareClassData.pricingMethodology);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(shareClassBreakdown, shareClassDetails);
+    return Objects.hash(shareClassBreakdown, shareClassDetails, pricingMethodology);
   }
 
   @Override
@@ -115,6 +142,7 @@ public class ShareClassData {
     sb.append("class ShareClassData {\n");
     sb.append("    shareClassBreakdown: ").append(toIndentedString(shareClassBreakdown)).append("\n");
     sb.append("    shareClassDetails: ").append(toIndentedString(shareClassDetails)).append("\n");
+    sb.append("    pricingMethodology: ").append(toIndentedString(pricingMethodology)).append("\n");
     sb.append("}");
     return sb.toString();
   }

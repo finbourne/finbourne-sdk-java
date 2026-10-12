@@ -294,7 +294,7 @@ public class PriorityIssueEvent extends InstrumentEvent {
   }
 
   /**
-   * The subscription price per new unit. Applies to both SECU and OVER subscriptions.  Must be greater than zero.
+   * The subscription price per new unit. Applies to both SECU and OVER subscriptions.  Must be greater than zero. For Bond and ComplexBond it is per unit of face, e.g. 0.97 for 97% of par.
    * @return subscriptionPrice
    */
   @javax.annotation.Nullable

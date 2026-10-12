@@ -1,6 +1,6 @@
 # com.finbourne.sdk.services.lusid.model.SwingPricingDecision
 classname SwingPricingDecision
-What the NAV type's swing pricing rule decided for a valuation point: the net dealing flow it measured, how  it compared with the threshold, and the pricing basis the point was valued on as a result.
+Deprecated and no longer produced; see the share class's pricing methodology result.  What the NAV type's swing pricing rule decided for a valuation point: the net dealing flow it measured, how  it compared with the threshold, and the pricing basis the point was valued on as a result.
 
 ## Properties
 

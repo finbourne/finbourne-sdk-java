@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **resultId** | **String** | Unique, stable identifier for this result, scoped to the check definition, ruleset, rule and breaching  entity. Treat as opaque — composition varies by entityType. | [optional] [default to String]
 **portfolioHolding** | [**PortfolioHoldingResult**](PortfolioHoldingResult.md) |  | [optional] [default to PortfolioHoldingResult]
 **portfolioTransaction** | [**PortfolioTransactionResult**](PortfolioTransactionResult.md) |  | [optional] [default to PortfolioTransactionResult]
+**structuredResultData** | [**StructuredResultDataResult**](StructuredResultDataResult.md) |  | [optional] [default to StructuredResultDataResult]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.DataQualityCheckResult;
@@ -49,6 +50,7 @@ LusidEntityResult lusidEntity = new LusidEntityResult();
 @javax.annotation.Nullable String resultId = "example resultId";
 PortfolioHoldingResult portfolioHolding = new PortfolioHoldingResult();
 PortfolioTransactionResult portfolioTransaction = new PortfolioTransactionResult();
+StructuredResultDataResult structuredResultData = new StructuredResultDataResult();
 
 
 DataQualityCheckResult dataQualityCheckResultInstance = new DataQualityCheckResult()
@@ -69,7 +71,8 @@ DataQualityCheckResult dataQualityCheckResultInstance = new DataQualityCheckResu
     .errorDetail(errorDetail)
     .resultId(resultId)
     .portfolioHolding(portfolioHolding)
-    .portfolioTransaction(portfolioTransaction);
+    .portfolioTransaction(portfolioTransaction)
+    .structuredResultData(structuredResultData);
 ```
 
 

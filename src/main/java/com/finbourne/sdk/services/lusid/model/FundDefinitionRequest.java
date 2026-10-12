@@ -15,7 +15,9 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.InstrumentResolutionDetail;
 import com.finbourne.sdk.services.lusid.model.NavTypeDefinition;
 import com.finbourne.sdk.services.lusid.model.PortfolioEntityId;
+import com.finbourne.sdk.services.lusid.model.PricingMethodology;
 import com.finbourne.sdk.services.lusid.model.Property;
+import com.finbourne.sdk.services.lusid.model.ReportingPrice;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.ShareClassDefinition;
 import java.io.IOException;
@@ -63,7 +65,9 @@ import com.finbourne.sdk.JSON;
   FundDefinitionRequest.JSON_PROPERTY_ADDITIONAL_NAV_TYPES,
   FundDefinitionRequest.JSON_PROPERTY_PROPERTIES,
   FundDefinitionRequest.JSON_PROPERTY_CREATE_INSTRUMENT,
-  FundDefinitionRequest.JSON_PROPERTY_SHARE_CLASSES
+  FundDefinitionRequest.JSON_PROPERTY_SHARE_CLASSES,
+  FundDefinitionRequest.JSON_PROPERTY_PRICING_METHODOLOGY,
+  FundDefinitionRequest.JSON_PROPERTY_REPORTING_PRICES
 })
 
 public class FundDefinitionRequest {
@@ -161,6 +165,16 @@ public class FundDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_SHARE_CLASSES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ShareClassDefinition> shareClasses;
+
+  public static final String JSON_PROPERTY_PRICING_METHODOLOGY = "pricingMethodology";
+  @JsonProperty(JSON_PROPERTY_PRICING_METHODOLOGY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PricingMethodology pricingMethodology;
+
+  public static final String JSON_PROPERTY_REPORTING_PRICES = "reportingPrices";
+  @JsonProperty(JSON_PROPERTY_REPORTING_PRICES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ReportingPrice> reportingPrices;
 
   public FundDefinitionRequest() {
   }
@@ -574,6 +588,52 @@ public class FundDefinitionRequest {
   }
 
 
+  public FundDefinitionRequest pricingMethodology(PricingMethodology pricingMethodology) {
+    this.pricingMethodology = pricingMethodology;
+    return this;
+  }
+
+  /**
+   * Get pricingMethodology
+   * @return pricingMethodology
+   */
+  @javax.annotation.Nullable
+  public PricingMethodology getPricingMethodology() {
+    return pricingMethodology;
+  }
+
+  public void setPricingMethodology(PricingMethodology pricingMethodology) {
+    this.pricingMethodology = pricingMethodology;
+  }
+
+
+  public FundDefinitionRequest reportingPrices(List<ReportingPrice> reportingPrices) {
+    this.reportingPrices = reportingPrices;
+    return this;
+  }
+
+  public FundDefinitionRequest addReportingPricesItem(ReportingPrice reportingPricesItem) {
+    if (this.reportingPrices == null) {
+      this.reportingPrices = new ArrayList<>();
+    }
+    this.reportingPrices.add(reportingPricesItem);
+    return this;
+  }
+
+  /**
+   * Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices.
+   * @return reportingPrices
+   */
+  @javax.annotation.Nullable
+  public List<ReportingPrice> getReportingPrices() {
+    return reportingPrices;
+  }
+
+  public void setReportingPrices(List<ReportingPrice> reportingPrices) {
+    this.reportingPrices = reportingPrices;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -601,7 +661,9 @@ public class FundDefinitionRequest {
         Objects.equals(this.additionalNavTypes, fundDefinitionRequest.additionalNavTypes) &&
         Objects.equals(this.properties, fundDefinitionRequest.properties) &&
         Objects.equals(this.createInstrument, fundDefinitionRequest.createInstrument) &&
-        Objects.equals(this.shareClasses, fundDefinitionRequest.shareClasses);
+        Objects.equals(this.shareClasses, fundDefinitionRequest.shareClasses) &&
+        Objects.equals(this.pricingMethodology, fundDefinitionRequest.pricingMethodology) &&
+        Objects.equals(this.reportingPrices, fundDefinitionRequest.reportingPrices);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -610,7 +672,7 @@ public class FundDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, shortCode, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, shareClasses);
+    return Objects.hash(code, shortCode, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, shareClasses, pricingMethodology, reportingPrices);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -643,6 +705,8 @@ public class FundDefinitionRequest {
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    createInstrument: ").append(toIndentedString(createInstrument)).append("\n");
     sb.append("    shareClasses: ").append(toIndentedString(shareClasses)).append("\n");
+    sb.append("    pricingMethodology: ").append(toIndentedString(pricingMethodology)).append("\n");
+    sb.append("    reportingPrices: ").append(toIndentedString(reportingPrices)).append("\n");
     sb.append("}");
     return sb.toString();
   }

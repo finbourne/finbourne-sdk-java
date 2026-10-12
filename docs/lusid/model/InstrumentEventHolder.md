@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **participationType** | **String** | Indicates the type of participation in this event. Default value: Mandatory. Available values: Mandatory, MandatoryWithChoices, Voluntary. | [optional] [default to String]
 **asAt** | [**OffsetDateTime**](OffsetDateTime.md) | The AsAt time of the instrument event, if available. This is a readonly field and should not be provided on upsert. | [optional] [readonly] [default to OffsetDateTime]
 **groupCode** | **String** | The group code that determines the processing order of instrument events with the same effective datetime. Available values: Tier1, Tier2, Tier3, Legacy. | [optional] [default to String]
+**stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.InstrumentEventHolder;
@@ -41,6 +42,7 @@ Integer sequenceNumber = new Integer("100.00");
 @javax.annotation.Nullable String participationType = "example participationType";
 @javax.annotation.Nullable OffsetDateTime asAt = OffsetDateTime.now();
 @javax.annotation.Nullable String groupCode = "example groupCode";
+StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 
 
 InstrumentEventHolder instrumentEventHolderInstance = new InstrumentEventHolder()
@@ -57,7 +59,8 @@ InstrumentEventHolder instrumentEventHolderInstance = new InstrumentEventHolder(
     .sequenceNumber(sequenceNumber)
     .participationType(participationType)
     .asAt(asAt)
-    .groupCode(groupCode);
+    .groupCode(groupCode)
+    .stagedModifications(stagedModifications);
 ```
 
 

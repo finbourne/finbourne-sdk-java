@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.LusidEntityResult;
 import com.finbourne.sdk.services.lusid.model.PortfolioHoldingResult;
 import com.finbourne.sdk.services.lusid.model.PortfolioTransactionResult;
+import com.finbourne.sdk.services.lusid.model.StructuredResultDataResult;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -55,7 +56,8 @@ import com.finbourne.sdk.JSON;
   DataQualityCheckResult.JSON_PROPERTY_ERROR_DETAIL,
   DataQualityCheckResult.JSON_PROPERTY_RESULT_ID,
   DataQualityCheckResult.JSON_PROPERTY_PORTFOLIO_HOLDING,
-  DataQualityCheckResult.JSON_PROPERTY_PORTFOLIO_TRANSACTION
+  DataQualityCheckResult.JSON_PROPERTY_PORTFOLIO_TRANSACTION,
+  DataQualityCheckResult.JSON_PROPERTY_STRUCTURED_RESULT_DATA
 })
 
 public class DataQualityCheckResult {
@@ -148,6 +150,11 @@ public class DataQualityCheckResult {
   @JsonProperty(JSON_PROPERTY_PORTFOLIO_TRANSACTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private PortfolioTransactionResult portfolioTransaction;
+
+  public static final String JSON_PROPERTY_STRUCTURED_RESULT_DATA = "structuredResultData";
+  @JsonProperty(JSON_PROPERTY_STRUCTURED_RESULT_DATA)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StructuredResultDataResult structuredResultData;
 
   public DataQualityCheckResult() {
   }
@@ -494,6 +501,25 @@ public class DataQualityCheckResult {
   }
 
 
+  public DataQualityCheckResult structuredResultData(StructuredResultDataResult structuredResultData) {
+    this.structuredResultData = structuredResultData;
+    return this;
+  }
+
+  /**
+   * Get structuredResultData
+   * @return structuredResultData
+   */
+  @javax.annotation.Nullable
+  public StructuredResultDataResult getStructuredResultData() {
+    return structuredResultData;
+  }
+
+  public void setStructuredResultData(StructuredResultDataResult structuredResultData) {
+    this.structuredResultData = structuredResultData;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -520,7 +546,8 @@ public class DataQualityCheckResult {
         Objects.equals(this.errorDetail, dataQualityCheckResult.errorDetail) &&
         Objects.equals(this.resultId, dataQualityCheckResult.resultId) &&
         Objects.equals(this.portfolioHolding, dataQualityCheckResult.portfolioHolding) &&
-        Objects.equals(this.portfolioTransaction, dataQualityCheckResult.portfolioTransaction);
+        Objects.equals(this.portfolioTransaction, dataQualityCheckResult.portfolioTransaction) &&
+        Objects.equals(this.structuredResultData, dataQualityCheckResult.structuredResultData);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -529,7 +556,7 @@ public class DataQualityCheckResult {
 
   @Override
  public int hashCode() {
-    return Objects.hash(checkDefinitionScope, checkDefinitionCode, checkDefinitionDisplayName, checkRunAsAt, resultType, ruleSetKey, ruleSetDisplayName, ruleKey, ruleDisplayName, ruleDescription, ruleFormula, severity, lusidEntity, countRuleBreaches, errorDetail, resultId, portfolioHolding, portfolioTransaction);
+    return Objects.hash(checkDefinitionScope, checkDefinitionCode, checkDefinitionDisplayName, checkRunAsAt, resultType, ruleSetKey, ruleSetDisplayName, ruleKey, ruleDisplayName, ruleDescription, ruleFormula, severity, lusidEntity, countRuleBreaches, errorDetail, resultId, portfolioHolding, portfolioTransaction, structuredResultData);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -561,6 +588,7 @@ public class DataQualityCheckResult {
     sb.append("    resultId: ").append(toIndentedString(resultId)).append("\n");
     sb.append("    portfolioHolding: ").append(toIndentedString(portfolioHolding)).append("\n");
     sb.append("    portfolioTransaction: ").append(toIndentedString(portfolioTransaction)).append("\n");
+    sb.append("    structuredResultData: ").append(toIndentedString(structuredResultData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

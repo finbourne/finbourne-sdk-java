@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.EventDateRange;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -56,7 +57,8 @@ import com.finbourne.sdk.JSON;
   InstrumentEventHolder.JSON_PROPERTY_SEQUENCE_NUMBER,
   InstrumentEventHolder.JSON_PROPERTY_PARTICIPATION_TYPE,
   InstrumentEventHolder.JSON_PROPERTY_AS_AT,
-  InstrumentEventHolder.JSON_PROPERTY_GROUP_CODE
+  InstrumentEventHolder.JSON_PROPERTY_GROUP_CODE,
+  InstrumentEventHolder.JSON_PROPERTY_STAGED_MODIFICATIONS
 })
 
 public class InstrumentEventHolder {
@@ -129,6 +131,11 @@ public class InstrumentEventHolder {
   @JsonProperty(JSON_PROPERTY_GROUP_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String groupCode;
+
+  public static final String JSON_PROPERTY_STAGED_MODIFICATIONS = "stagedModifications";
+  @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StagedModificationsInfo stagedModifications;
 
   public InstrumentEventHolder() {
   }
@@ -408,6 +415,25 @@ public class InstrumentEventHolder {
   }
 
 
+  public InstrumentEventHolder stagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+    return this;
+  }
+
+  /**
+   * Get stagedModifications
+   * @return stagedModifications
+   */
+  @javax.annotation.Nullable
+  public StagedModificationsInfo getStagedModifications() {
+    return stagedModifications;
+  }
+
+  public void setStagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -430,7 +456,8 @@ public class InstrumentEventHolder {
         Objects.equals(this.sequenceNumber, instrumentEventHolder.sequenceNumber) &&
         Objects.equals(this.participationType, instrumentEventHolder.participationType) &&
         Objects.equals(this.asAt, instrumentEventHolder.asAt) &&
-        Objects.equals(this.groupCode, instrumentEventHolder.groupCode);
+        Objects.equals(this.groupCode, instrumentEventHolder.groupCode) &&
+        Objects.equals(this.stagedModifications, instrumentEventHolder.stagedModifications);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -439,7 +466,7 @@ public class InstrumentEventHolder {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentEventId, corporateActionSourceId, instrumentIdentifiers, lusidInstrumentId, instrumentScope, description, eventDateRange, completeness, instrumentEvent, properties, sequenceNumber, participationType, asAt, groupCode);
+    return Objects.hash(instrumentEventId, corporateActionSourceId, instrumentIdentifiers, lusidInstrumentId, instrumentScope, description, eventDateRange, completeness, instrumentEvent, properties, sequenceNumber, participationType, asAt, groupCode, stagedModifications);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -467,6 +494,7 @@ public class InstrumentEventHolder {
     sb.append("    participationType: ").append(toIndentedString(participationType)).append("\n");
     sb.append("    asAt: ").append(toIndentedString(asAt)).append("\n");
     sb.append("    groupCode: ").append(toIndentedString(groupCode)).append("\n");
+    sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("}");
     return sb.toString();
   }

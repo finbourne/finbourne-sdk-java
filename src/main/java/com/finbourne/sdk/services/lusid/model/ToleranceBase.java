@@ -57,6 +57,32 @@ public class ToleranceBase extends AbstractOpenApiSchema {
             ToleranceBase result = new ToleranceBase();
             Object deserialized = null;
 
+            // use discriminator value for faster oneOf lookup
+            JsonNode discriminatorNode = node.get("toleranceType");
+            if (discriminatorNode != null && discriminatorNode.isTextual()) {
+                String discriminatorValue = discriminatorNode.asText();
+                switch (discriminatorValue) {
+                    case "CoreAttributeOptionality":
+                        deserialized = JSON.getMapper().treeToValue(node, CoreAttributeOptionalityTolerance.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    case "CoreDateTolerance":
+                        deserialized = JSON.getMapper().treeToValue(node, CoreDateTolerance.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    case "CoreStringCross":
+                        deserialized = JSON.getMapper().treeToValue(node, CoreStringCrossTolerance.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    case "Numeric":
+                        deserialized = JSON.getMapper().treeToValue(node, AggregateNumericTolerance.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    default:
+                        log.log(Level.WARNING, String.format("Failed to lookup discriminator value `%s` for ToleranceBase. Possible values: CoreAttributeOptionality CoreDateTolerance CoreStringCross Numeric", discriminatorValue));
+                }
+            }
+
             int match = 0;
             ArrayList<String> errorMessages = new ArrayList<>();
 

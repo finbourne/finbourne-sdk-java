@@ -34,6 +34,8 @@ Name | Type | Description | Notes
 **propertiesOut** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Transaction Properties to set on the outgoing transaction leg, and on the incoming transaction leg when PropertiesIn is absent. Supplying an empty collection for PropertiesIn leaves the incoming leg with no properties. | [optional] [default to Map<String, PerpetualProperty>]
 **propertiesIn** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Transaction Properties to set on the incoming transaction leg, replacing rather than adding to PropertiesOut. | [optional] [default to Map<String, PerpetualProperty>]
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Properties to set on the transfer itself, in the Transfer domain. These are separate from PropertiesOut and PropertiesIn, which are Transaction domain and land on the legs. | [optional] [default to Map<String, PerpetualProperty>]
+**transactionToPortfolioRateOut** | **java.math.BigDecimal** | The rate from the outgoing leg&#39;s trade currency to the outgoing portfolio&#39;s base currency, applied whenever supplied. | [optional] [default to java.math.BigDecimal]
+**transactionToPortfolioRateIn** | **java.math.BigDecimal** | The rate from the incoming leg&#39;s trade currency to the incoming portfolio&#39;s base currency. Required when the two portfolios have different base currencies, and applied whenever supplied. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CreateTransferRequest;
@@ -69,6 +71,8 @@ String source = "example source";
 @javax.annotation.Nullable Map<String, PerpetualProperty> propertiesOut = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> propertiesIn = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
+@javax.annotation.Nullable java.math.BigDecimal transactionToPortfolioRateOut = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal transactionToPortfolioRateIn = new java.math.BigDecimal("100.00");
 
 
 CreateTransferRequest createTransferRequestInstance = new CreateTransferRequest()
@@ -99,7 +103,9 @@ CreateTransferRequest createTransferRequestInstance = new CreateTransferRequest(
     .accountingMethod(accountingMethod)
     .propertiesOut(propertiesOut)
     .propertiesIn(propertiesIn)
-    .properties(properties);
+    .properties(properties)
+    .transactionToPortfolioRateOut(transactionToPortfolioRateOut)
+    .transactionToPortfolioRateIn(transactionToPortfolioRateIn);
 ```
 
 

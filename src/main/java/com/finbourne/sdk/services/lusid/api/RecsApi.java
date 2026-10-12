@@ -3445,8 +3445,8 @@ public class RecsApi {
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
      * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
-     * @param runNumber The run of the instance the result belongs to. (required)
-     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
+     * @param runNumber The run of the instance whose view of the result is read. (required)
+     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @param _callback Callback for upload/download progress
@@ -3469,8 +3469,8 @@ public class RecsApi {
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param instanceIdValue The unique identifier of the rec instance. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param runNumber The run of the instance the result belongs to. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param runNumber The run of the instance whose view of the result is read. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @param _callback Callback for upload/download progress
@@ -3576,12 +3576,12 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult
-     * Retrieve a single rec result by the run it belongs to and its id within that run.
+     * Retrieve a single rec result by its display id, as it stood in the run named.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
      * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
-     * @param runNumber The run of the instance the result belongs to. (required)
-     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
+     * @param runNumber The run of the instance whose view of the result is read. (required)
+     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @return ApiResponse&lt;RecResult&gt;
@@ -3602,12 +3602,12 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult
-     * Retrieve a single rec result by the run it belongs to and its id within that run.Use any specified configuration options to override any other configuration for this request only
+     * Retrieve a single rec result by its display id, as it stood in the run named.Use any specified configuration options to override any other configuration for this request only
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
      * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
-     * @param runNumber The run of the instance the result belongs to. (required)
-     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
+     * @param runNumber The run of the instance whose view of the result is read. (required)
+     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @return ApiResponse&lt;RecResult&gt;
@@ -3628,12 +3628,12 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult (asynchronously)
-     * Retrieve a single rec result by the run it belongs to and its id within that run.
+     * Retrieve a single rec result by its display id, as it stood in the run named.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
      * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
-     * @param runNumber The run of the instance the result belongs to. (required)
-     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
+     * @param runNumber The run of the instance whose view of the result is read. (required)
+     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -3655,12 +3655,12 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult (asynchronously)
-     * Retrieve a single rec result by the run it belongs to and its id within that run.Use any specified configuration options to override any other configuration for this request only
+     * Retrieve a single rec result by its display id, as it stood in the run named.Use any specified configuration options to override any other configuration for this request only
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
      * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
-     * @param runNumber The run of the instance the result belongs to. (required)
-     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
+     * @param runNumber The run of the instance whose view of the result is read. (required)
+     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -3835,12 +3835,12 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult
-     * Retrieve a single rec result by the run it belongs to and its id within that run.
+     * Retrieve a single rec result by its display id, as it stood in the run named.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
      * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
-     * @param runNumber The run of the instance the result belongs to. (required)
-     * @param id The id of the rec result within the run, e.g. \&quot;break-3\&quot;. (required)
+     * @param runNumber The run of the instance whose view of the result is read. (required)
+     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @return APIgetRecResultRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -6286,7 +6286,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] ListRecResults: ListRecResults
-     * List rec results.
+     * List rec results. A result&#39;s runNumber is the run that last wrote it; a run&#39;s results as they stood are read at that run&#39;s asAt.
      * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
      * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
@@ -6311,7 +6311,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] ListRecResults: ListRecResults
-     * List rec results.Use any specified configuration options to override any other configuration for this request only
+     * List rec results. A result&#39;s runNumber is the run that last wrote it; a run&#39;s results as they stood are read at that run&#39;s asAt.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
      * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
@@ -6336,7 +6336,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] ListRecResults: ListRecResults (asynchronously)
-     * List rec results.
+     * List rec results. A result&#39;s runNumber is the run that last wrote it; a run&#39;s results as they stood are read at that run&#39;s asAt.
      * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
      * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
@@ -6362,7 +6362,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] ListRecResults: ListRecResults (asynchronously)
-     * List rec results.Use any specified configuration options to override any other configuration for this request only
+     * List rec results. A result&#39;s runNumber is the run that last wrote it; a run&#39;s results as they stood are read at that run&#39;s asAt.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
      * @param page The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
@@ -6575,7 +6575,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] ListRecResults: ListRecResults
-     * List rec results.
+     * List rec results. A result&#39;s runNumber is the run that last wrote it; a run&#39;s results as they stood are read at that run&#39;s asAt.
      * @return APIlistRecResultsRequest
      * @http.response.details
      <table summary="Response Details" border="1">

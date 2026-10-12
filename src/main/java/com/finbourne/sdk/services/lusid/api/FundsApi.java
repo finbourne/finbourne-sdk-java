@@ -16277,6 +16277,7 @@ public class FundsApi {
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+     * @param effectiveAt The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -16288,15 +16289,16 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest patchFundCall(String scope, String code, List<Operation> operation, final ApiCallback _callback) throws ApiException {
-        return patchFundCall(scope, code, operation,  _callback, new ConfigurationOptions());
+    private HttpRequest patchFundCall(String scope, String code, List<Operation> operation, String effectiveAt, final ApiCallback _callback) throws ApiException {
+        return patchFundCall(scope, code, operation, effectiveAt,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for patchFund. Use any specified configuration options to override any other configuration for this request only.
      * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+     * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -16308,7 +16310,7 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest patchFundCall(String scope, String code, List<Operation> operation, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest patchFundCall(String scope, String code, List<Operation> operation, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -16334,6 +16336,10 @@ public class FundsApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
 
         final String[] localVarAccepts = {
             "text/plain",
@@ -16361,7 +16367,7 @@ public class FundsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest patchFundValidateBeforeCall(String scope, String code, List<Operation> operation, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest patchFundValidateBeforeCall(String scope, String code, List<Operation> operation, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling patchFund(Async)");
@@ -16377,16 +16383,17 @@ public class FundsApi {
             throw new ApiException("Missing the required parameter 'operation' when calling patchFund(Async)");
         }
 
-        return patchFundCall(scope, code, operation, _callback, opts);
+        return patchFundCall(scope, code, operation, effectiveAt, _callback, opts);
 
     }
 
     /**
      * [EARLY ACCESS] PatchFund: Patch a Fund.
-     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate.
+     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+     * @param effectiveAt The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. (optional)
      * @return ApiResponse&lt;Fund&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -16397,18 +16404,19 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Fund> patchFundWithHttpInfo(String scope, String code, List<Operation> operation) throws ApiException {
-        HttpRequest localVarCall = patchFundValidateBeforeCall(scope, code, operation, null, new ConfigurationOptions());
+    private ApiResponse<Fund> patchFundWithHttpInfo(String scope, String code, List<Operation> operation, String effectiveAt) throws ApiException {
+        HttpRequest localVarCall = patchFundValidateBeforeCall(scope, code, operation, effectiveAt, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<Fund>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EARLY ACCESS] PatchFund: Patch a Fund.
-     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate.Use any specified configuration options to override any other configuration for this request only
+     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+     * @param effectiveAt The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. (optional)
      * @return ApiResponse&lt;Fund&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -16419,18 +16427,19 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Fund> patchFundWithHttpInfo(String scope, String code, List<Operation> operation, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = patchFundValidateBeforeCall(scope, code, operation, null, opts);
+    private ApiResponse<Fund> patchFundWithHttpInfo(String scope, String code, List<Operation> operation, String effectiveAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = patchFundValidateBeforeCall(scope, code, operation, effectiveAt, null, opts);
         Type localVarReturnType = new TypeReference<Fund>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EARLY ACCESS] PatchFund: Patch a Fund. (asynchronously)
-     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate.
+     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+     * @param effectiveAt The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -16441,19 +16450,20 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void patchFundAsync(String scope, String code, List<Operation> operation, final ApiCallback<Fund> _callback) throws ApiException {
+    private void patchFundAsync(String scope, String code, List<Operation> operation, String effectiveAt, final ApiCallback<Fund> _callback) throws ApiException {
 
-        HttpRequest localVarCall = patchFundValidateBeforeCall(scope, code, operation, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = patchFundValidateBeforeCall(scope, code, operation, effectiveAt, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<Fund>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EARLY ACCESS] PatchFund: Patch a Fund. (asynchronously)
-     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate.Use any specified configuration options to override any other configuration for this request only
+     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+     * @param effectiveAt The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -16464,9 +16474,9 @@ public class FundsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void patchFundAsync(String scope, String code, List<Operation> operation, final ApiCallback<Fund> _callback, ConfigurationOptions opts) throws ApiException {
+    private void patchFundAsync(String scope, String code, List<Operation> operation, String effectiveAt, final ApiCallback<Fund> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = patchFundValidateBeforeCall(scope, code, operation, _callback, opts);
+        HttpRequest localVarCall = patchFundValidateBeforeCall(scope, code, operation, effectiveAt, _callback, opts);
         Type localVarReturnType = new TypeReference<Fund>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -16475,11 +16485,22 @@ public class FundsApi {
         private final String scope;
         private final String code;
         private final List<Operation> operation;
+        private String effectiveAt;
 
         private APIpatchFundRequest(String scope, String code, List<Operation> operation) {
             this.scope = scope;
             this.code = code;
             this.operation = operation;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. (optional)
+         * @return APIpatchFundRequest
+         */
+        public APIpatchFundRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
         }
 
         /**
@@ -16496,7 +16517,7 @@ public class FundsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return patchFundCall(scope, code, operation, _callback);
+            return patchFundCall(scope, code, operation, effectiveAt, _callback);
         }
 
         /**
@@ -16512,7 +16533,7 @@ public class FundsApi {
          </table>
          */
         public Fund execute() throws ApiException {
-            ApiResponse<Fund> localVarResp = patchFundWithHttpInfo(scope, code, operation);
+            ApiResponse<Fund> localVarResp = patchFundWithHttpInfo(scope, code, operation, effectiveAt);
             return localVarResp.getData();
         }
 
@@ -16529,7 +16550,7 @@ public class FundsApi {
          </table>
          */
         public Fund execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<Fund> localVarResp = patchFundWithHttpInfo(scope, code, operation, opts);
+            ApiResponse<Fund> localVarResp = patchFundWithHttpInfo(scope, code, operation, effectiveAt, opts);
             return localVarResp.getData();
         }
 
@@ -16546,7 +16567,7 @@ public class FundsApi {
          </table>
          */
         public ApiResponse<Fund> executeWithHttpInfo() throws ApiException {
-            return patchFundWithHttpInfo(scope, code, operation);
+            return patchFundWithHttpInfo(scope, code, operation, effectiveAt);
         }
 
         /**
@@ -16562,7 +16583,7 @@ public class FundsApi {
          </table>
          */
         public ApiResponse<Fund> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return patchFundWithHttpInfo(scope, code, operation, opts);
+            return patchFundWithHttpInfo(scope, code, operation, effectiveAt, opts);
         }
 
         /**
@@ -16578,7 +16599,7 @@ public class FundsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<Fund> _callback) throws ApiException {
-            patchFundAsync(scope, code, operation, _callback);
+            patchFundAsync(scope, code, operation, effectiveAt, _callback);
         }
 
         /**
@@ -16594,13 +16615,13 @@ public class FundsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<Fund> _callback, ConfigurationOptions opts) throws ApiException {
-            patchFundAsync(scope, code, operation, _callback, opts);
+            patchFundAsync(scope, code, operation, effectiveAt, _callback, opts);
         }
     }
 
     /**
      * [EARLY ACCESS] PatchFund: Patch a Fund.
-     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate.
+     * Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param operation The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)

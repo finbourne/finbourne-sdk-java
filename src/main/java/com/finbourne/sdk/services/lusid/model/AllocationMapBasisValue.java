@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -34,7 +35,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   AllocationMapBasisValue.JSON_PROPERTY_INVESTOR_RECORD_ID,
-  AllocationMapBasisValue.JSON_PROPERTY_BASIS_VALUE
+  AllocationMapBasisValue.JSON_PROPERTY_BASIS_VALUE,
+  AllocationMapBasisValue.JSON_PROPERTY_CURRENCY
 })
 
 public class AllocationMapBasisValue {
@@ -47,6 +49,11 @@ public class AllocationMapBasisValue {
   @JsonProperty(JSON_PROPERTY_BASIS_VALUE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal basisValue;
+
+  public static final String JSON_PROPERTY_CURRENCY = "currency";
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String currency;
 
   public AllocationMapBasisValue() {
   }
@@ -89,6 +96,25 @@ public class AllocationMapBasisValue {
   }
 
 
+  public AllocationMapBasisValue currency(String currency) {
+    this.currency = currency;
+    return this;
+  }
+
+  /**
+   * The currency the basis value is held in. Absent means the base currency of the map&#39;s member fund. When the basis values span more than one currency, each is translated into the fund&#39;s base currency at the spot rate on the event date, from the fund&#39;s ABOR recipe, before it weights the allocation. The rate on the event date is the latest quote at or before 00:00 UTC on that date.
+   * @return currency
+   */
+  @javax.annotation.Nullable
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -99,12 +125,24 @@ public class AllocationMapBasisValue {
     }
     AllocationMapBasisValue allocationMapBasisValue = (AllocationMapBasisValue) o;
     return Objects.equals(this.investorRecordId, allocationMapBasisValue.investorRecordId) &&
-        (this.basisValue == null ? allocationMapBasisValue.basisValue == null : (allocationMapBasisValue.basisValue != null && this.basisValue.compareTo(allocationMapBasisValue.getBasisValue()) == 0));
+        (this.basisValue == null ? allocationMapBasisValue.basisValue == null : (allocationMapBasisValue.basisValue != null && this.basisValue.compareTo(allocationMapBasisValue.getBasisValue()) == 0)) &&
+        Objects.equals(this.currency, allocationMapBasisValue.currency);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(investorRecordId, basisValue);
+    return Objects.hash(investorRecordId, basisValue, currency);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -113,6 +151,7 @@ public class AllocationMapBasisValue {
     sb.append("class AllocationMapBasisValue {\n");
     sb.append("    investorRecordId: ").append(toIndentedString(investorRecordId)).append("\n");
     sb.append("    basisValue: ").append(toIndentedString(basisValue)).append("\n");
+    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("}");
     return sb.toString();
   }

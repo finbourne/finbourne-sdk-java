@@ -31,7 +31,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Moves a NAV type&#39;s pricing basis with its net dealing flow. When the flow, as a percentage of the previous  valuation point&#39;s NAV, exceeds the threshold the fund is valued on the inflow or outflow basis instead of  the NAV type&#39;s own basis.
+ * Deprecated and ignored; use the Fund&#39;s pricing methodology.  Moved a NAV type&#39;s pricing basis with its net dealing flow. When the flow, as a percentage of the previous  valuation point&#39;s NAV, exceeded the threshold the fund was valued on the inflow or outflow basis instead of  the NAV type&#39;s own basis.
  */
 @JsonPropertyOrder({
   SwingPricingRule.JSON_PROPERTY_THRESHOLD_PERCENTAGE_OF_NAV,

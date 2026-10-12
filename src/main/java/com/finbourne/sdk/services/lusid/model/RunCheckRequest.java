@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.LusidEntityDataset;
 import com.finbourne.sdk.services.lusid.model.PortfolioHoldingDataset;
 import com.finbourne.sdk.services.lusid.model.PortfolioTransactionDataset;
+import com.finbourne.sdk.services.lusid.model.StructuredResultDataset;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -39,7 +40,8 @@ import com.finbourne.sdk.JSON;
   RunCheckRequest.JSON_PROPERTY_LUSID_ENTITY_DATASET,
   RunCheckRequest.JSON_PROPERTY_LIMIT_INDIVIDUAL_BREACHES_PER_RULE,
   RunCheckRequest.JSON_PROPERTY_PORTFOLIO_HOLDING_DATASET,
-  RunCheckRequest.JSON_PROPERTY_PORTFOLIO_TRANSACTION_DATASET
+  RunCheckRequest.JSON_PROPERTY_PORTFOLIO_TRANSACTION_DATASET,
+  RunCheckRequest.JSON_PROPERTY_STRUCTURED_RESULT_DATASET
 })
 
 public class RunCheckRequest {
@@ -62,6 +64,11 @@ public class RunCheckRequest {
   @JsonProperty(JSON_PROPERTY_PORTFOLIO_TRANSACTION_DATASET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private PortfolioTransactionDataset portfolioTransactionDataset;
+
+  public static final String JSON_PROPERTY_STRUCTURED_RESULT_DATASET = "structuredResultDataset";
+  @JsonProperty(JSON_PROPERTY_STRUCTURED_RESULT_DATASET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StructuredResultDataset structuredResultDataset;
 
   public RunCheckRequest() {
   }
@@ -142,6 +149,25 @@ public class RunCheckRequest {
   }
 
 
+  public RunCheckRequest structuredResultDataset(StructuredResultDataset structuredResultDataset) {
+    this.structuredResultDataset = structuredResultDataset;
+    return this;
+  }
+
+  /**
+   * Get structuredResultDataset
+   * @return structuredResultDataset
+   */
+  @javax.annotation.Nullable
+  public StructuredResultDataset getStructuredResultDataset() {
+    return structuredResultDataset;
+  }
+
+  public void setStructuredResultDataset(StructuredResultDataset structuredResultDataset) {
+    this.structuredResultDataset = structuredResultDataset;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -154,12 +180,13 @@ public class RunCheckRequest {
     return Objects.equals(this.lusidEntityDataset, runCheckRequest.lusidEntityDataset) &&
         Objects.equals(this.limitIndividualBreachesPerRule, runCheckRequest.limitIndividualBreachesPerRule) &&
         Objects.equals(this.portfolioHoldingDataset, runCheckRequest.portfolioHoldingDataset) &&
-        Objects.equals(this.portfolioTransactionDataset, runCheckRequest.portfolioTransactionDataset);
+        Objects.equals(this.portfolioTransactionDataset, runCheckRequest.portfolioTransactionDataset) &&
+        Objects.equals(this.structuredResultDataset, runCheckRequest.structuredResultDataset);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(lusidEntityDataset, limitIndividualBreachesPerRule, portfolioHoldingDataset, portfolioTransactionDataset);
+    return Objects.hash(lusidEntityDataset, limitIndividualBreachesPerRule, portfolioHoldingDataset, portfolioTransactionDataset, structuredResultDataset);
   }
 
   @Override
@@ -170,6 +197,7 @@ public class RunCheckRequest {
     sb.append("    limitIndividualBreachesPerRule: ").append(toIndentedString(limitIndividualBreachesPerRule)).append("\n");
     sb.append("    portfolioHoldingDataset: ").append(toIndentedString(portfolioHoldingDataset)).append("\n");
     sb.append("    portfolioTransactionDataset: ").append(toIndentedString(portfolioTransactionDataset)).append("\n");
+    sb.append("    structuredResultDataset: ").append(toIndentedString(structuredResultDataset)).append("\n");
     sb.append("}");
     return sb.toString();
   }

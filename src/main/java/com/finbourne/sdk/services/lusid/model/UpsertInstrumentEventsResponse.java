@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   UpsertInstrumentEventsResponse.JSON_PROPERTY_HREF,
   UpsertInstrumentEventsResponse.JSON_PROPERTY_VALUES,
   UpsertInstrumentEventsResponse.JSON_PROPERTY_FAILED,
+  UpsertInstrumentEventsResponse.JSON_PROPERTY_STAGED,
   UpsertInstrumentEventsResponse.JSON_PROPERTY_LINKS
 })
 
@@ -63,6 +64,11 @@ public class UpsertInstrumentEventsResponse {
   @JsonProperty(JSON_PROPERTY_FAILED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, ErrorDetail> failed;
+
+  public static final String JSON_PROPERTY_STAGED = "staged";
+  @JsonProperty(JSON_PROPERTY_STAGED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, InstrumentEventHolder> staged;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -105,7 +111,7 @@ public class UpsertInstrumentEventsResponse {
   }
 
   /**
-   * The corporate actions which have been successfully updated or inserted.
+   * The instrument events which have been successfully updated or inserted.
    * @return values
    */
   @javax.annotation.Nullable
@@ -132,7 +138,7 @@ public class UpsertInstrumentEventsResponse {
   }
 
   /**
-   * The corporate actions that could not be updated or inserted along with a reason for their failure.
+   * The instrument events that could not be updated or inserted along with a reason for their failure.
    * @return failed
    */
   @javax.annotation.Nullable
@@ -142,6 +148,33 @@ public class UpsertInstrumentEventsResponse {
 
   public void setFailed(Map<String, ErrorDetail> failed) {
     this.failed = failed;
+  }
+
+
+  public UpsertInstrumentEventsResponse staged(Map<String, InstrumentEventHolder> staged) {
+    this.staged = staged;
+    return this;
+  }
+
+  public UpsertInstrumentEventsResponse putStagedItem(String key, InstrumentEventHolder stagedItem) {
+    if (this.staged == null) {
+      this.staged = new HashMap<>();
+    }
+    this.staged.put(key, stagedItem);
+    return this;
+  }
+
+  /**
+   * The instrument events that have been staged pending approval.
+   * @return staged
+   */
+  @javax.annotation.Nullable
+  public Map<String, InstrumentEventHolder> getStaged() {
+    return staged;
+  }
+
+  public void setStaged(Map<String, InstrumentEventHolder> staged) {
+    this.staged = staged;
   }
 
 
@@ -184,6 +217,7 @@ public class UpsertInstrumentEventsResponse {
     return Objects.equals(this.href, upsertInstrumentEventsResponse.href) &&
         Objects.equals(this.values, upsertInstrumentEventsResponse.values) &&
         Objects.equals(this.failed, upsertInstrumentEventsResponse.failed) &&
+        Objects.equals(this.staged, upsertInstrumentEventsResponse.staged) &&
         Objects.equals(this.links, upsertInstrumentEventsResponse.links);
   }
 
@@ -193,7 +227,7 @@ public class UpsertInstrumentEventsResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, values, failed, links);
+    return Objects.hash(href, values, failed, staged, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -210,6 +244,7 @@ public class UpsertInstrumentEventsResponse {
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    values: ").append(toIndentedString(values)).append("\n");
     sb.append("    failed: ").append(toIndentedString(failed)).append("\n");
+    sb.append("    staged: ").append(toIndentedString(staged)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

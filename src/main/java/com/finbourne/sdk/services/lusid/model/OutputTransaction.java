@@ -845,7 +845,7 @@ public class OutputTransaction {
   }
 
   /**
-   * The type of source that the transaction originated from. Available values: Unknown, InputTransaction, InstrumentEvent, HoldingAdjustment, OverriddenVirtualTransaction.
+   * The type of source that the transaction originated from. Available values: Unknown, InputTransaction, InstrumentEvent, HoldingAdjustment, OverriddenVirtualTransaction, Reversal.
    * @return sourceType
    */
   @javax.annotation.Nullable

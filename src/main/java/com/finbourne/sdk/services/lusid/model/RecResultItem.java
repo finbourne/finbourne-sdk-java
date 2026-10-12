@@ -63,6 +63,32 @@ public class RecResultItem extends AbstractOpenApiSchema {
             RecResultItem result = new RecResultItem();
             Object deserialized = null;
 
+            // use discriminator value for faster oneOf lookup
+            JsonNode discriminatorNode = node.get("itemType");
+            if (discriminatorNode != null && discriminatorNode.isTextual()) {
+                String discriminatorValue = discriminatorNode.asText();
+                switch (discriminatorValue) {
+                    case "Holding":
+                        deserialized = JSON.getMapper().treeToValue(node, RecResultHoldingItem.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    case "SettlementActivity":
+                        deserialized = JSON.getMapper().treeToValue(node, RecResultSettlementActivityItem.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    case "Transaction":
+                        deserialized = JSON.getMapper().treeToValue(node, RecResultTransactionItem.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    case "ValuedHolding":
+                        deserialized = JSON.getMapper().treeToValue(node, RecResultHoldingItem.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    default:
+                        log.log(Level.WARNING, String.format("Failed to lookup discriminator value `%s` for RecResultItem. Possible values: Holding SettlementActivity Transaction ValuedHolding", discriminatorValue));
+                }
+            }
+
             int match = 0;
             ArrayList<String> errorMessages = new ArrayList<>();
 

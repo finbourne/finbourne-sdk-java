@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -35,7 +36,11 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   UnitisationData.JSON_PROPERTY_SHARES_IN_ISSUE,
   UnitisationData.JSON_PROPERTY_UNIT_PRICE,
-  UnitisationData.JSON_PROPERTY_NET_DEALING_UNITS
+  UnitisationData.JSON_PROPERTY_NET_DEALING_UNITS,
+  UnitisationData.JSON_PROPERTY_BID_PRICE,
+  UnitisationData.JSON_PROPERTY_OFFER_PRICE,
+  UnitisationData.JSON_PROPERTY_BID_PRICE_INC_NDC,
+  UnitisationData.JSON_PROPERTY_OFFER_PRICE_INC_NDC
 })
 
 public class UnitisationData {
@@ -53,6 +58,26 @@ public class UnitisationData {
   @JsonProperty(JSON_PROPERTY_NET_DEALING_UNITS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal netDealingUnits;
+
+  public static final String JSON_PROPERTY_BID_PRICE = "bidPrice";
+  @JsonProperty(JSON_PROPERTY_BID_PRICE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal bidPrice;
+
+  public static final String JSON_PROPERTY_OFFER_PRICE = "offerPrice";
+  @JsonProperty(JSON_PROPERTY_OFFER_PRICE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal offerPrice;
+
+  public static final String JSON_PROPERTY_BID_PRICE_INC_NDC = "bidPriceIncNdc";
+  @JsonProperty(JSON_PROPERTY_BID_PRICE_INC_NDC)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal bidPriceIncNdc;
+
+  public static final String JSON_PROPERTY_OFFER_PRICE_INC_NDC = "offerPriceIncNdc";
+  @JsonProperty(JSON_PROPERTY_OFFER_PRICE_INC_NDC)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal offerPriceIncNdc;
 
   public UnitisationData() {
   }
@@ -114,6 +139,82 @@ public class UnitisationData {
   }
 
 
+  public UnitisationData bidPrice(java.math.BigDecimal bidPrice) {
+    this.bidPrice = bidPrice;
+    return this;
+  }
+
+  /**
+   * The price of one unit of the share class on the bid side at a valuation point: the class&#39;s NAV with the fund&#39;s holdings marked at their bid prices. Equal to the unit price when the fund is struck on the bid. Absent when a holding&#39;s bid could not be priced.
+   * @return bidPrice
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getBidPrice() {
+    return bidPrice;
+  }
+
+  public void setBidPrice(java.math.BigDecimal bidPrice) {
+    this.bidPrice = bidPrice;
+  }
+
+
+  public UnitisationData offerPrice(java.math.BigDecimal offerPrice) {
+    this.offerPrice = offerPrice;
+    return this;
+  }
+
+  /**
+   * The price of one unit of the share class on the offer side at a valuation point: the class&#39;s NAV with the fund&#39;s holdings marked at their ask prices. Equal to the unit price when the fund is struck on the ask. Absent when a holding&#39;s ask could not be priced.
+   * @return offerPrice
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getOfferPrice() {
+    return offerPrice;
+  }
+
+  public void setOfferPrice(java.math.BigDecimal offerPrice) {
+    this.offerPrice = offerPrice;
+  }
+
+
+  public UnitisationData bidPriceIncNdc(java.math.BigDecimal bidPriceIncNdc) {
+    this.bidPriceIncNdc = bidPriceIncNdc;
+    return this;
+  }
+
+  /**
+   * The bid price of one unit of the share class less the class&#39;s share of the notional dealing costs of selling the fund&#39;s holdings, at a valuation point. Absent when the NAV type has no notional dealing cost table.
+   * @return bidPriceIncNdc
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getBidPriceIncNdc() {
+    return bidPriceIncNdc;
+  }
+
+  public void setBidPriceIncNdc(java.math.BigDecimal bidPriceIncNdc) {
+    this.bidPriceIncNdc = bidPriceIncNdc;
+  }
+
+
+  public UnitisationData offerPriceIncNdc(java.math.BigDecimal offerPriceIncNdc) {
+    this.offerPriceIncNdc = offerPriceIncNdc;
+    return this;
+  }
+
+  /**
+   * The offer price of one unit of the share class plus the class&#39;s share of the notional dealing costs of buying the fund&#39;s holdings, at a valuation point. Absent when the NAV type has no notional dealing cost table.
+   * @return offerPriceIncNdc
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getOfferPriceIncNdc() {
+    return offerPriceIncNdc;
+  }
+
+  public void setOfferPriceIncNdc(java.math.BigDecimal offerPriceIncNdc) {
+    this.offerPriceIncNdc = offerPriceIncNdc;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -125,12 +226,27 @@ public class UnitisationData {
     UnitisationData unitisationData = (UnitisationData) o;
     return (this.sharesInIssue == null ? unitisationData.sharesInIssue == null : (unitisationData.sharesInIssue != null && this.sharesInIssue.compareTo(unitisationData.getSharesInIssue()) == 0)) &&
         (this.unitPrice == null ? unitisationData.unitPrice == null : (unitisationData.unitPrice != null && this.unitPrice.compareTo(unitisationData.getUnitPrice()) == 0)) &&
-        (this.netDealingUnits == null ? unitisationData.netDealingUnits == null : (unitisationData.netDealingUnits != null && this.netDealingUnits.compareTo(unitisationData.getNetDealingUnits()) == 0));
+        (this.netDealingUnits == null ? unitisationData.netDealingUnits == null : (unitisationData.netDealingUnits != null && this.netDealingUnits.compareTo(unitisationData.getNetDealingUnits()) == 0)) &&
+        (this.bidPrice == null ? unitisationData.bidPrice == null : (unitisationData.bidPrice != null && this.bidPrice.compareTo(unitisationData.getBidPrice()) == 0)) &&
+        (this.offerPrice == null ? unitisationData.offerPrice == null : (unitisationData.offerPrice != null && this.offerPrice.compareTo(unitisationData.getOfferPrice()) == 0)) &&
+        (this.bidPriceIncNdc == null ? unitisationData.bidPriceIncNdc == null : (unitisationData.bidPriceIncNdc != null && this.bidPriceIncNdc.compareTo(unitisationData.getBidPriceIncNdc()) == 0)) &&
+        (this.offerPriceIncNdc == null ? unitisationData.offerPriceIncNdc == null : (unitisationData.offerPriceIncNdc != null && this.offerPriceIncNdc.compareTo(unitisationData.getOfferPriceIncNdc()) == 0));
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(sharesInIssue, unitPrice, netDealingUnits);
+    return Objects.hash(sharesInIssue, unitPrice, netDealingUnits, bidPrice, offerPrice, bidPriceIncNdc, offerPriceIncNdc);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -140,6 +256,10 @@ public class UnitisationData {
     sb.append("    sharesInIssue: ").append(toIndentedString(sharesInIssue)).append("\n");
     sb.append("    unitPrice: ").append(toIndentedString(unitPrice)).append("\n");
     sb.append("    netDealingUnits: ").append(toIndentedString(netDealingUnits)).append("\n");
+    sb.append("    bidPrice: ").append(toIndentedString(bidPrice)).append("\n");
+    sb.append("    offerPrice: ").append(toIndentedString(offerPrice)).append("\n");
+    sb.append("    bidPriceIncNdc: ").append(toIndentedString(bidPriceIncNdc)).append("\n");
+    sb.append("    offerPriceIncNdc: ").append(toIndentedString(offerPriceIncNdc)).append("\n");
     sb.append("}");
     return sb.toString();
   }
