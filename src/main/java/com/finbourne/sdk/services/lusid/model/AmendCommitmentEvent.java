@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -36,7 +37,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   AmendCommitmentEvent.JSON_PROPERTY_DATE,
-  AmendCommitmentEvent.JSON_PROPERTY_AMOUNT
+  AmendCommitmentEvent.JSON_PROPERTY_AMOUNT,
+  AmendCommitmentEvent.JSON_PROPERTY_COMPONENT
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -55,6 +57,11 @@ public class AmendCommitmentEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal amount;
+
+  public static final String JSON_PROPERTY_COMPONENT = "component";
+  @JsonProperty(JSON_PROPERTY_COMPONENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String component;
 
   public AmendCommitmentEvent() {
   }
@@ -97,6 +104,25 @@ public class AmendCommitmentEvent extends InstrumentEvent {
   }
 
 
+  public AmendCommitmentEvent component(String component) {
+    this.component = component;
+    return this;
+  }
+
+  /**
+   * The component of the commitment the amendment is recorded under: &#39;Commitment&#39; for a commitment made  or upsized, &#39;Release&#39; for committed capital released. Optional; when absent the sign of the amount  decides.
+   * @return component
+   */
+  @javax.annotation.Nullable
+  public String getComponent() {
+    return component;
+  }
+
+  public void setComponent(String component) {
+    this.component = component;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -108,12 +134,24 @@ public class AmendCommitmentEvent extends InstrumentEvent {
     AmendCommitmentEvent amendCommitmentEvent = (AmendCommitmentEvent) o;
     return Objects.equals(this.date, amendCommitmentEvent.date) &&
         (this.amount == null ? amendCommitmentEvent.amount == null : (amendCommitmentEvent.amount != null && this.amount.compareTo(amendCommitmentEvent.getAmount()) == 0)) &&
+        Objects.equals(this.component, amendCommitmentEvent.component) &&
         super.equals(o);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(date, amount, super.hashCode());
+    return Objects.hash(date, amount, component, super.hashCode());
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -123,6 +161,7 @@ public class AmendCommitmentEvent extends InstrumentEvent {
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    date: ").append(toIndentedString(date)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    component: ").append(toIndentedString(component)).append("\n");
     sb.append("}");
     return sb.toString();
   }

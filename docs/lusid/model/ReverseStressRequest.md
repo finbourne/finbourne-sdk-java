@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **ladderPoints** | **Integer** | How many factors to evaluate between zero and MaxScale. All of them are valued in  one request - the rungs share market data resolution - so a finer ladder costs far less than  its rung count suggests, and a coarse one is the main source of a missed bracket. | [optional] [default to Integer]
 **tolerance** | **java.math.BigDecimal** | How close the achieved loss must be to the target, relative to the target&#39;s own size. Relative  rather than absolute because the same reverse stress is asked of books whose value differs by  orders of magnitude. | [optional] [default to java.math.BigDecimal]
 **maxIterations** | **Integer** | How many refinement rounds are allowed after the opening ladder. Each round costs one  valuation; on a near-linear P&amp;L the first interpolation is usually already inside tolerance,  so the default exists for the mildly curved case rather than the normal one. | [optional] [default to Integer]
+**marketDataOverrides** | [**MarketDataOverrides**](MarketDataOverrides.md) |  | [optional] [default to MarketDataOverrides]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.ReverseStressRequest;
@@ -39,6 +40,7 @@ java.math.BigDecimal maxScale = new java.math.BigDecimal("100.00");
 Integer ladderPoints = new Integer("100.00");
 java.math.BigDecimal tolerance = new java.math.BigDecimal("100.00");
 Integer maxIterations = new Integer("100.00");
+MarketDataOverrides marketDataOverrides = new MarketDataOverrides();
 
 
 ReverseStressRequest reverseStressRequestInstance = new ReverseStressRequest()
@@ -54,7 +56,8 @@ ReverseStressRequest reverseStressRequestInstance = new ReverseStressRequest()
     .maxScale(maxScale)
     .ladderPoints(ladderPoints)
     .tolerance(tolerance)
-    .maxIterations(maxIterations);
+    .maxIterations(maxIterations)
+    .marketDataOverrides(marketDataOverrides);
 ```
 
 

@@ -111,6 +111,7 @@ PropertyDomain method = PropertyDomain.CURRENCY_GROUP;
 PropertyDomain method = PropertyDomain.REC_DEFINITION;
 PropertyDomain method = PropertyDomain.REC_RESULT;
 PropertyDomain method = PropertyDomain.JOURNAL_ENTRY;
+PropertyDomain method = PropertyDomain.ELIGIBLE_COLLATERAL_SCHEDULE;
 ```
 
 

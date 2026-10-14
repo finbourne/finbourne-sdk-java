@@ -249,7 +249,21 @@ public enum InstrumentEventType {
   
   GLOBAL_LOAN_FACILITY_REINITIALISATION_EVENT("GlobalLoanFacilityReinitialisationEvent"),
   
-  INVESTOR_LOAN_FACILITY_REINITIALISATION_EVENT("InvestorLoanFacilityReinitialisationEvent");
+  INVESTOR_LOAN_FACILITY_REINITIALISATION_EVENT("InvestorLoanFacilityReinitialisationEvent"),
+  
+  CAPITAL_CALL_RECEIPT_EVENT("CapitalCallReceiptEvent"),
+  
+  RECALLABLE_CAPITAL_EXPIRY_EVENT("RecallableCapitalExpiryEvent"),
+  
+  CAPITAL_INTEREST_TRANSFER_EVENT("CapitalInterestTransferEvent"),
+  
+  FACILITY_DRAW_EVENT("FacilityDrawEvent"),
+  
+  FACILITY_REPAYMENT_EVENT("FacilityRepaymentEvent"),
+  
+  FACILITY_INTEREST_EVENT("FacilityInterestEvent"),
+  
+  FACILITY_COMMITMENT_FEE_EVENT("FacilityCommitmentFeeEvent");
 
   private String value;
 

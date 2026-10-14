@@ -47,5 +47,7 @@ WorkerConfiguration config = new WorkerConfiguration(workerConfiguration);
 
 * [Sleep](./Sleep.md)
 
+* [StructuredResultDataQualityCheck](./StructuredResultDataQualityCheck.md)
+
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

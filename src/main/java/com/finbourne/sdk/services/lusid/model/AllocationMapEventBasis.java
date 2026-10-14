@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.AllocationMapBasis;
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -35,7 +36,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   AllocationMapEventBasis.JSON_PROPERTY_EVENT_TYPE,
-  AllocationMapEventBasis.JSON_PROPERTY_BASIS
+  AllocationMapEventBasis.JSON_PROPERTY_BASIS,
+  AllocationMapEventBasis.JSON_PROPERTY_COMPONENT
 })
 
 public class AllocationMapEventBasis {
@@ -49,6 +51,11 @@ public class AllocationMapEventBasis {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private AllocationMapBasis basis;
 
+  public static final String JSON_PROPERTY_COMPONENT = "component";
+  @JsonProperty(JSON_PROPERTY_COMPONENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String component;
+
   public AllocationMapEventBasis() {
   }
 
@@ -58,7 +65,7 @@ public class AllocationMapEventBasis {
   }
 
   /**
-   * The kind of allocation event the basis applies to: CapitalCall, Distribution, FeeExpense or ValuationMove. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove.
+   * The kind of allocation event the basis applies to: CapitalCall, Distribution, FeeExpense, ValuationMove, Equalisation, RecallExpiry, Transfer, Default, Commitment or DealFunding. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove, Commitment, Equalisation, RecallExpiry, Transfer, Default, DealFunding.
    * @return eventType
    */
   @javax.annotation.Nonnull
@@ -90,6 +97,25 @@ public class AllocationMapEventBasis {
   }
 
 
+  public AllocationMapEventBasis component(String component) {
+    this.component = component;
+    return this;
+  }
+
+  /**
+   * The component of the event the basis applies to, for example MgmtFee or OrgCost. Absent means the entry is the default for every component of the event type without an entry of its own.
+   * @return component
+   */
+  @javax.annotation.Nullable
+  public String getComponent() {
+    return component;
+  }
+
+  public void setComponent(String component) {
+    this.component = component;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -100,12 +126,24 @@ public class AllocationMapEventBasis {
     }
     AllocationMapEventBasis allocationMapEventBasis = (AllocationMapEventBasis) o;
     return Objects.equals(this.eventType, allocationMapEventBasis.eventType) &&
-        Objects.equals(this.basis, allocationMapEventBasis.basis);
+        Objects.equals(this.basis, allocationMapEventBasis.basis) &&
+        Objects.equals(this.component, allocationMapEventBasis.component);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(eventType, basis);
+    return Objects.hash(eventType, basis, component);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -114,6 +152,7 @@ public class AllocationMapEventBasis {
     sb.append("class AllocationMapEventBasis {\n");
     sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
     sb.append("    basis: ").append(toIndentedString(basis)).append("\n");
+    sb.append("    component: ").append(toIndentedString(component)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -49,5 +49,7 @@ WorkerConfigurationResponse config = new WorkerConfigurationResponse(workerConfi
 
 * [SleepResponse](./SleepResponse.md)
 
+* [StructuredResultDataQualityCheckResponse](./StructuredResultDataQualityCheckResponse.md)
+
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

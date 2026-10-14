@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -38,7 +39,11 @@ import com.finbourne.sdk.JSON;
   AllocationMapAllocation.JSON_PROPERTY_BASIS_VALUE,
   AllocationMapAllocation.JSON_PROPERTY_WEIGHT,
   AllocationMapAllocation.JSON_PROPERTY_AMOUNT,
-  AllocationMapAllocation.JSON_PROPERTY_TREATMENT
+  AllocationMapAllocation.JSON_PROPERTY_TREATMENT,
+  AllocationMapAllocation.JSON_PROPERTY_COMMITMENT_LINE_ID,
+  AllocationMapAllocation.JSON_PROPERTY_PORTFOLIO_ID,
+  AllocationMapAllocation.JSON_PROPERTY_COMPONENT,
+  AllocationMapAllocation.JSON_PROPERTY_ORIGIN_MEMBER_SHORT_CODE
 })
 
 public class AllocationMapAllocation {
@@ -66,6 +71,26 @@ public class AllocationMapAllocation {
   @JsonProperty(JSON_PROPERTY_TREATMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String treatment;
+
+  public static final String JSON_PROPERTY_COMMITMENT_LINE_ID = "commitmentLineId";
+  @JsonProperty(JSON_PROPERTY_COMMITMENT_LINE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String commitmentLineId;
+
+  public static final String JSON_PROPERTY_PORTFOLIO_ID = "portfolioId";
+  @JsonProperty(JSON_PROPERTY_PORTFOLIO_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId portfolioId;
+
+  public static final String JSON_PROPERTY_COMPONENT = "component";
+  @JsonProperty(JSON_PROPERTY_COMPONENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String component;
+
+  public static final String JSON_PROPERTY_ORIGIN_MEMBER_SHORT_CODE = "originMemberShortCode";
+  @JsonProperty(JSON_PROPERTY_ORIGIN_MEMBER_SHORT_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String originMemberShortCode;
 
   public AllocationMapAllocation() {
   }
@@ -165,6 +190,82 @@ public class AllocationMapAllocation {
   }
 
 
+  public AllocationMapAllocation commitmentLineId(String commitmentLineId) {
+    this.commitmentLineId = commitmentLineId;
+    return this;
+  }
+
+  /**
+   * For a Commitment event, the commitment line the share is recorded against. Absent for other event types.
+   * @return commitmentLineId
+   */
+  @javax.annotation.Nullable
+  public String getCommitmentLineId() {
+    return commitmentLineId;
+  }
+
+  public void setCommitmentLineId(String commitmentLineId) {
+    this.commitmentLineId = commitmentLineId;
+  }
+
+
+  public AllocationMapAllocation portfolioId(ResourceId portfolioId) {
+    this.portfolioId = portfolioId;
+    return this;
+  }
+
+  /**
+   * Get portfolioId
+   * @return portfolioId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(ResourceId portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+
+  public AllocationMapAllocation component(String component) {
+    this.component = component;
+    return this;
+  }
+
+  /**
+   * The component of the event the share belongs to. Absent when the event was resolved whole.
+   * @return component
+   */
+  @javax.annotation.Nullable
+  public String getComponent() {
+    return component;
+  }
+
+  public void setComponent(String component) {
+    this.component = component;
+  }
+
+
+  public AllocationMapAllocation originMemberShortCode(String originMemberShortCode) {
+    this.originMemberShortCode = originMemberShortCode;
+    return this;
+  }
+
+  /**
+   * The deal the share is for, when a capital call&#39;s use of proceeds split one component across deals. Absent when the component&#39;s own origin applies.
+   * @return originMemberShortCode
+   */
+  @javax.annotation.Nullable
+  public String getOriginMemberShortCode() {
+    return originMemberShortCode;
+  }
+
+  public void setOriginMemberShortCode(String originMemberShortCode) {
+    this.originMemberShortCode = originMemberShortCode;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -178,7 +279,11 @@ public class AllocationMapAllocation {
         (this.basisValue == null ? allocationMapAllocation.basisValue == null : (allocationMapAllocation.basisValue != null && this.basisValue.compareTo(allocationMapAllocation.getBasisValue()) == 0)) &&
         (this.weight == null ? allocationMapAllocation.weight == null : (allocationMapAllocation.weight != null && this.weight.compareTo(allocationMapAllocation.getWeight()) == 0)) &&
         (this.amount == null ? allocationMapAllocation.amount == null : (allocationMapAllocation.amount != null && this.amount.compareTo(allocationMapAllocation.getAmount()) == 0)) &&
-        Objects.equals(this.treatment, allocationMapAllocation.treatment);
+        Objects.equals(this.treatment, allocationMapAllocation.treatment) &&
+        Objects.equals(this.commitmentLineId, allocationMapAllocation.commitmentLineId) &&
+        Objects.equals(this.portfolioId, allocationMapAllocation.portfolioId) &&
+        Objects.equals(this.component, allocationMapAllocation.component) &&
+        Objects.equals(this.originMemberShortCode, allocationMapAllocation.originMemberShortCode);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -187,7 +292,7 @@ public class AllocationMapAllocation {
 
   @Override
  public int hashCode() {
-    return Objects.hash(investorRecordId, basisValue, weight, amount, treatment);
+    return Objects.hash(investorRecordId, basisValue, weight, amount, treatment, commitmentLineId, portfolioId, component, originMemberShortCode);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -206,6 +311,10 @@ public class AllocationMapAllocation {
     sb.append("    weight: ").append(toIndentedString(weight)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    treatment: ").append(toIndentedString(treatment)).append("\n");
+    sb.append("    commitmentLineId: ").append(toIndentedString(commitmentLineId)).append("\n");
+    sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
+    sb.append("    component: ").append(toIndentedString(component)).append("\n");
+    sb.append("    originMemberShortCode: ").append(toIndentedString(originMemberShortCode)).append("\n");
     sb.append("}");
     return sb.toString();
   }

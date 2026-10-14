@@ -24,6 +24,7 @@ import com.finbourne.sdk.services.workflow.model.PortfolioTransactionDataQuality
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.SchedulerJob;
 import com.finbourne.sdk.services.workflow.model.Sleep;
+import com.finbourne.sdk.services.workflow.model.StructuredResultDataQualityCheck;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
@@ -186,6 +187,16 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for Sleep failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'Sleep'", e);
             }
+            // deserialize StructuredResultDataQualityCheck
+            try {
+                deserialized = _strictMapper.treeToValue(node, StructuredResultDataQualityCheck.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'StructuredResultDataQualityCheck'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for StructuredResultDataQualityCheck failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'StructuredResultDataQualityCheck'", e);
+            }
 
             if (match == 1) {
                 return result;
@@ -219,6 +230,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
         schemas.put("PortfolioTransactionDataQualityCheck", PortfolioTransactionDataQualityCheck.class);
         schemas.put("SchedulerJob", SchedulerJob.class);
         schemas.put("Sleep", Sleep.class);
+        schemas.put("StructuredResultDataQualityCheck", StructuredResultDataQualityCheck.class);
     }
 
     @Override
@@ -229,7 +241,7 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep, StructuredResultDataQualityCheck
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -290,14 +302,19 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep");
+        if (instance instanceof StructuredResultDataQualityCheck) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        throw new RuntimeException("Invalid instance type. Must be Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep, StructuredResultDataQualityCheck");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep
+     * Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep, StructuredResultDataQualityCheck
      *
-     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep)
+     * @return The actual instance (Fail, GroupReconciliation, HealthCheck, HorizonIntegration, InstantiateRec, LuminesceView, LusidEntityDataQualityCheck, PortfolioHoldingDataQualityCheck, PortfolioTransactionDataQualityCheck, SchedulerJob, Sleep, StructuredResultDataQualityCheck)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -414,6 +431,16 @@ public class WorkerConfiguration extends AbstractOpenApiSchema {
      */
     public Sleep getSleep() throws ClassCastException {
         return (Sleep)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `StructuredResultDataQualityCheck`. If the actual instance is not `StructuredResultDataQualityCheck`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `StructuredResultDataQualityCheck`
+     * @throws ClassCastException if the instance is not `StructuredResultDataQualityCheck`
+     */
+    public StructuredResultDataQualityCheck getStructuredResultDataQualityCheck() throws ClassCastException {
+        return (StructuredResultDataQualityCheck)super.getActualInstance();
     }
 
     /**

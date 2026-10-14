@@ -16,6 +16,9 @@ Name | Type | Description | Notes
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | A set of properties for the Fund Configuration. | [optional] [default to Map<String, Property>]
 **apportionmentBucketSet** | **String** | The code of the bucket set definition within this fund configuration that is designated as the apportionment bucket set. Must reference a BucketSetDefinition code within the BucketSets collection. | [optional] [default to String]
 **apportionmentMethodProperty** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] [default to ApportionmentMethodProperty]
+**partnershipAccounting** | [**PartnershipAccountingConfiguration**](PartnershipAccountingConfiguration.md) |  | [optional] [default to PartnershipAccountingConfiguration]
+**fundTerms** | [**FundTerms**](FundTerms.md) |  | [optional] [default to FundTerms]
+**closings** | [**List&lt;FundClosing&gt;**](FundClosing.md) | The register of fund closings (first close, subsequent closes, final close) for partnership funds using this configuration. | [optional] [default to List<FundClosing>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FundConfigurationRequest;
@@ -34,6 +37,9 @@ String code = "example code";
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
 @javax.annotation.Nullable String apportionmentBucketSet = "example apportionmentBucketSet";
 ApportionmentMethodProperty apportionmentMethodProperty = new ApportionmentMethodProperty();
+PartnershipAccountingConfiguration partnershipAccounting = new PartnershipAccountingConfiguration();
+FundTerms fundTerms = new FundTerms();
+@javax.annotation.Nullable List<FundClosing> closings = new List<FundClosing>();
 
 
 FundConfigurationRequest fundConfigurationRequestInstance = new FundConfigurationRequest()
@@ -47,7 +53,10 @@ FundConfigurationRequest fundConfigurationRequestInstance = new FundConfiguratio
     .bucketSets(bucketSets)
     .properties(properties)
     .apportionmentBucketSet(apportionmentBucketSet)
-    .apportionmentMethodProperty(apportionmentMethodProperty);
+    .apportionmentMethodProperty(apportionmentMethodProperty)
+    .partnershipAccounting(partnershipAccounting)
+    .fundTerms(fundTerms)
+    .closings(closings);
 ```
 
 

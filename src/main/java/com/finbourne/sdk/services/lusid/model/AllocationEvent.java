@@ -12,6 +12,17 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AllocationEventBasisDiagnostics;
+import com.finbourne.sdk.services.lusid.model.AllocationEventBookingError;
+import com.finbourne.sdk.services.lusid.model.AllocationEventBookingWarning;
+import com.finbourne.sdk.services.lusid.model.AllocationEventComponent;
+import com.finbourne.sdk.services.lusid.model.AllocationEventDealFunding;
+import com.finbourne.sdk.services.lusid.model.AllocationEventEqualisation;
+import com.finbourne.sdk.services.lusid.model.AllocationEventReceipt;
+import com.finbourne.sdk.services.lusid.model.AllocationEventReversal;
+import com.finbourne.sdk.services.lusid.model.AllocationEventRoundingResidual;
+import com.finbourne.sdk.services.lusid.model.AllocationEventTransfer;
+import com.finbourne.sdk.services.lusid.model.AllocationEventUseOfProceeds;
 import com.finbourne.sdk.services.lusid.model.AllocationMapAllocation;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
@@ -56,7 +67,24 @@ import com.finbourne.sdk.JSON;
   AllocationEvent.JSON_PROPERTY_BOOKING_REFERENCE,
   AllocationEvent.JSON_PROPERTY_BOOKED_AT,
   AllocationEvent.JSON_PROPERTY_REALLOCATION_REASON,
+  AllocationEvent.JSON_PROPERTY_COMPONENTS,
+  AllocationEvent.JSON_PROPERTY_RESIDUALS,
+  AllocationEvent.JSON_PROPERTY_BASIS_DIAGNOSTICS,
+  AllocationEvent.JSON_PROPERTY_WRITTEN_IDS,
+  AllocationEvent.JSON_PROPERTY_BOOKING_ERRORS,
+  AllocationEvent.JSON_PROPERTY_WARNINGS,
+  AllocationEvent.JSON_PROPERTY_TRANSFERS,
+  AllocationEvent.JSON_PROPERTY_EQUALISATION,
+  AllocationEvent.JSON_PROPERTY_USE_OF_PROCEEDS,
+  AllocationEvent.JSON_PROPERTY_DEAL_FUNDING,
   AllocationEvent.JSON_PROPERTY_VERSION,
+  AllocationEvent.JSON_PROPERTY_PARENT_ALLOCATION_EVENT_ID,
+  AllocationEvent.JSON_PROPERTY_REPLACES,
+  AllocationEvent.JSON_PROPERTY_REVERSAL,
+  AllocationEvent.JSON_PROPERTY_NOTICE_DATE,
+  AllocationEvent.JSON_PROPERTY_DUE_DATE,
+  AllocationEvent.JSON_PROPERTY_SETTLEMENT_DATE,
+  AllocationEvent.JSON_PROPERTY_RECEIPTS,
   AllocationEvent.JSON_PROPERTY_LINKS
 })
 
@@ -131,10 +159,95 @@ public class AllocationEvent {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String reallocationReason;
 
+  public static final String JSON_PROPERTY_COMPONENTS = "components";
+  @JsonProperty(JSON_PROPERTY_COMPONENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationEventComponent> components;
+
+  public static final String JSON_PROPERTY_RESIDUALS = "residuals";
+  @JsonProperty(JSON_PROPERTY_RESIDUALS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationEventRoundingResidual> residuals;
+
+  public static final String JSON_PROPERTY_BASIS_DIAGNOSTICS = "basisDiagnostics";
+  @JsonProperty(JSON_PROPERTY_BASIS_DIAGNOSTICS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private AllocationEventBasisDiagnostics basisDiagnostics;
+
+  public static final String JSON_PROPERTY_WRITTEN_IDS = "writtenIds";
+  @JsonProperty(JSON_PROPERTY_WRITTEN_IDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> writtenIds;
+
+  public static final String JSON_PROPERTY_BOOKING_ERRORS = "bookingErrors";
+  @JsonProperty(JSON_PROPERTY_BOOKING_ERRORS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationEventBookingError> bookingErrors;
+
+  public static final String JSON_PROPERTY_WARNINGS = "warnings";
+  @JsonProperty(JSON_PROPERTY_WARNINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationEventBookingWarning> warnings;
+
+  public static final String JSON_PROPERTY_TRANSFERS = "transfers";
+  @JsonProperty(JSON_PROPERTY_TRANSFERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationEventTransfer> transfers;
+
+  public static final String JSON_PROPERTY_EQUALISATION = "equalisation";
+  @JsonProperty(JSON_PROPERTY_EQUALISATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private AllocationEventEqualisation equalisation;
+
+  public static final String JSON_PROPERTY_USE_OF_PROCEEDS = "useOfProceeds";
+  @JsonProperty(JSON_PROPERTY_USE_OF_PROCEEDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationEventUseOfProceeds> useOfProceeds;
+
+  public static final String JSON_PROPERTY_DEAL_FUNDING = "dealFunding";
+  @JsonProperty(JSON_PROPERTY_DEAL_FUNDING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private AllocationEventDealFunding dealFunding;
+
   public static final String JSON_PROPERTY_VERSION = "version";
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Version version;
+
+  public static final String JSON_PROPERTY_PARENT_ALLOCATION_EVENT_ID = "parentAllocationEventId";
+  @JsonProperty(JSON_PROPERTY_PARENT_ALLOCATION_EVENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId parentAllocationEventId;
+
+  public static final String JSON_PROPERTY_REPLACES = "replaces";
+  @JsonProperty(JSON_PROPERTY_REPLACES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId replaces;
+
+  public static final String JSON_PROPERTY_REVERSAL = "reversal";
+  @JsonProperty(JSON_PROPERTY_REVERSAL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private AllocationEventReversal reversal;
+
+  public static final String JSON_PROPERTY_NOTICE_DATE = "noticeDate";
+  @JsonProperty(JSON_PROPERTY_NOTICE_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime noticeDate;
+
+  public static final String JSON_PROPERTY_DUE_DATE = "dueDate";
+  @JsonProperty(JSON_PROPERTY_DUE_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime dueDate;
+
+  public static final String JSON_PROPERTY_SETTLEMENT_DATE = "settlementDate";
+  @JsonProperty(JSON_PROPERTY_SETTLEMENT_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime settlementDate;
+
+  public static final String JSON_PROPERTY_RECEIPTS = "receipts";
+  @JsonProperty(JSON_PROPERTY_RECEIPTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationEventReceipt> receipts;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -226,7 +339,7 @@ public class AllocationEvent {
   }
 
   /**
-   * The type of the event: CapitalCall, Distribution, FeeExpense or ValuationMove. Selects the basis rule from the map. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove.
+   * The type of the event: CapitalCall, Distribution, FeeExpense, ValuationMove, Equalisation, RecallExpiry, Transfer, Default, Commitment or DealFunding. Selects the basis rule from the map. A recall is a CapitalCall with a Recall component. A Commitment event is not shared from a basis: its basis values are the signed commitment amounts per commitment line, and they must sum to the amount. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove, Commitment, Equalisation, RecallExpiry, Transfer, Default, DealFunding.
    * @return eventType
    */
   @javax.annotation.Nonnull
@@ -302,7 +415,7 @@ public class AllocationEvent {
   }
 
   /**
-   * The lifecycle status of the event: Draft until its shares are computed, Computed once they are, and Booked once posted. Available values: Draft, Computed, Booked.
+   * The lifecycle status of the event: Draft until its shares are computed, Computed once they are, Booking while its postings are being written, Booked once they all are, and Reversed once a booked event has been backed out. Available values: Draft, Computed, Booked, Booking, Reversed.
    * @return status
    */
   @javax.annotation.Nonnull
@@ -418,6 +531,252 @@ public class AllocationEvent {
   }
 
 
+  public AllocationEvent components(List<AllocationEventComponent> components) {
+    this.components = components;
+    return this;
+  }
+
+  public AllocationEvent addComponentsItem(AllocationEventComponent componentsItem) {
+    if (this.components == null) {
+      this.components = new ArrayList<>();
+    }
+    this.components.add(componentsItem);
+    return this;
+  }
+
+  /**
+   * The parts the amount splits into, each shared on its own basis and booked to its own slot. The component amounts must sum to the event amount. Absent means the whole amount is one component: Investment for a CapitalCall, ROC for a Distribution.
+   * @return components
+   */
+  @javax.annotation.Nullable
+  public List<AllocationEventComponent> getComponents() {
+    return components;
+  }
+
+  public void setComponents(List<AllocationEventComponent> components) {
+    this.components = components;
+  }
+
+
+  public AllocationEvent residuals(List<AllocationEventRoundingResidual> residuals) {
+    this.residuals = residuals;
+    return this;
+  }
+
+  public AllocationEvent addResidualsItem(AllocationEventRoundingResidual residualsItem) {
+    if (this.residuals == null) {
+      this.residuals = new ArrayList<>();
+    }
+    this.residuals.add(residualsItem);
+    return this;
+  }
+
+  /**
+   * The minor units left over when each component&#39;s shares were rounded to the currency, and which investor records took them.
+   * @return residuals
+   */
+  @javax.annotation.Nullable
+  public List<AllocationEventRoundingResidual> getResiduals() {
+    return residuals;
+  }
+
+  public void setResiduals(List<AllocationEventRoundingResidual> residuals) {
+    this.residuals = residuals;
+  }
+
+
+  public AllocationEvent basisDiagnostics(AllocationEventBasisDiagnostics basisDiagnostics) {
+    this.basisDiagnostics = basisDiagnostics;
+    return this;
+  }
+
+  /**
+   * Get basisDiagnostics
+   * @return basisDiagnostics
+   */
+  @javax.annotation.Nullable
+  public AllocationEventBasisDiagnostics getBasisDiagnostics() {
+    return basisDiagnostics;
+  }
+
+  public void setBasisDiagnostics(AllocationEventBasisDiagnostics basisDiagnostics) {
+    this.basisDiagnostics = basisDiagnostics;
+  }
+
+
+  public AllocationEvent writtenIds(List<String> writtenIds) {
+    this.writtenIds = writtenIds;
+    return this;
+  }
+
+  public AllocationEvent addWrittenIdsItem(String writtenIdsItem) {
+    if (this.writtenIds == null) {
+      this.writtenIds = new ArrayList<>();
+    }
+    this.writtenIds.add(writtenIdsItem);
+    return this;
+  }
+
+  /**
+   * The identifiers of the postings the booking has written so far, in write order. Complete once the event is Booked.
+   * @return writtenIds
+   */
+  @javax.annotation.Nullable
+  public List<String> getWrittenIds() {
+    return writtenIds;
+  }
+
+  public void setWrittenIds(List<String> writtenIds) {
+    this.writtenIds = writtenIds;
+  }
+
+
+  public AllocationEvent bookingErrors(List<AllocationEventBookingError> bookingErrors) {
+    this.bookingErrors = bookingErrors;
+    return this;
+  }
+
+  public AllocationEvent addBookingErrorsItem(AllocationEventBookingError bookingErrorsItem) {
+    if (this.bookingErrors == null) {
+      this.bookingErrors = new ArrayList<>();
+    }
+    this.bookingErrors.add(bookingErrorsItem);
+    return this;
+  }
+
+  /**
+   * The postings the booking could not write. Non-empty leaves the event in Booking; book again under the same reference to resume, or unbook to cancel what was written.
+   * @return bookingErrors
+   */
+  @javax.annotation.Nullable
+  public List<AllocationEventBookingError> getBookingErrors() {
+    return bookingErrors;
+  }
+
+  public void setBookingErrors(List<AllocationEventBookingError> bookingErrors) {
+    this.bookingErrors = bookingErrors;
+  }
+
+
+  public AllocationEvent warnings(List<AllocationEventBookingWarning> warnings) {
+    this.warnings = warnings;
+    return this;
+  }
+
+  public AllocationEvent addWarningsItem(AllocationEventBookingWarning warningsItem) {
+    if (this.warnings == null) {
+      this.warnings = new ArrayList<>();
+    }
+    this.warnings.add(warningsItem);
+    return this;
+  }
+
+  /**
+   * The validation rules the booking was allowed to proceed through under the map&#39;s policy, for instance an OverCall on a map that warns rather than refuses. Kept for the life of the event.
+   * @return warnings
+   */
+  @javax.annotation.Nullable
+  public List<AllocationEventBookingWarning> getWarnings() {
+    return warnings;
+  }
+
+  public void setWarnings(List<AllocationEventBookingWarning> warnings) {
+    this.warnings = warnings;
+  }
+
+
+  public AllocationEvent transfers(List<AllocationEventTransfer> transfers) {
+    this.transfers = transfers;
+    return this;
+  }
+
+  public AllocationEvent addTransfersItem(AllocationEventTransfer transfersItem) {
+    if (this.transfers == null) {
+      this.transfers = new ArrayList<>();
+    }
+    this.transfers.add(transfersItem);
+    return this;
+  }
+
+  /**
+   * For a Transfer event, the legs to book: each moves a fraction of one capital interest line to another. Required for a Transfer event and not allowed on any other type. The fractions out of one line must sum to at most one; the amount of a Transfer event is zero.
+   * @return transfers
+   */
+  @javax.annotation.Nullable
+  public List<AllocationEventTransfer> getTransfers() {
+    return transfers;
+  }
+
+  public void setTransfers(List<AllocationEventTransfer> transfers) {
+    this.transfers = transfers;
+  }
+
+
+  public AllocationEvent equalisation(AllocationEventEqualisation equalisation) {
+    this.equalisation = equalisation;
+    return this;
+  }
+
+  /**
+   * Get equalisation
+   * @return equalisation
+   */
+  @javax.annotation.Nullable
+  public AllocationEventEqualisation getEqualisation() {
+    return equalisation;
+  }
+
+  public void setEqualisation(AllocationEventEqualisation equalisation) {
+    this.equalisation = equalisation;
+  }
+
+
+  public AllocationEvent useOfProceeds(List<AllocationEventUseOfProceeds> useOfProceeds) {
+    this.useOfProceeds = useOfProceeds;
+    return this;
+  }
+
+  public AllocationEvent addUseOfProceedsItem(AllocationEventUseOfProceeds useOfProceedsItem) {
+    if (this.useOfProceeds == null) {
+      this.useOfProceeds = new ArrayList<>();
+    }
+    this.useOfProceeds.add(useOfProceedsItem);
+    return this;
+  }
+
+  /**
+   * For a CapitalCall, what the call pays for: rows of purpose, deal and amount that sum to the call amount. An Investment row names a deal the vehicle has funded and is shared under that deal&#39;s participation, with each investor&#39;s share recorded as paid in for that deal; when the deal was funded from a facility the row repays the draw. Not allowed with components or on any other event type.
+   * @return useOfProceeds
+   */
+  @javax.annotation.Nullable
+  public List<AllocationEventUseOfProceeds> getUseOfProceeds() {
+    return useOfProceeds;
+  }
+
+  public void setUseOfProceeds(List<AllocationEventUseOfProceeds> useOfProceeds) {
+    this.useOfProceeds = useOfProceeds;
+  }
+
+
+  public AllocationEvent dealFunding(AllocationEventDealFunding dealFunding) {
+    this.dealFunding = dealFunding;
+    return this;
+  }
+
+  /**
+   * Get dealFunding
+   * @return dealFunding
+   */
+  @javax.annotation.Nullable
+  public AllocationEventDealFunding getDealFunding() {
+    return dealFunding;
+  }
+
+  public void setDealFunding(AllocationEventDealFunding dealFunding) {
+    this.dealFunding = dealFunding;
+  }
+
+
   public AllocationEvent version(Version version) {
     this.version = version;
     return this;
@@ -434,6 +793,147 @@ public class AllocationEvent {
 
   public void setVersion(Version version) {
     this.version = version;
+  }
+
+
+  public AllocationEvent parentAllocationEventId(ResourceId parentAllocationEventId) {
+    this.parentAllocationEventId = parentAllocationEventId;
+    return this;
+  }
+
+  /**
+   * Get parentAllocationEventId
+   * @return parentAllocationEventId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getParentAllocationEventId() {
+    return parentAllocationEventId;
+  }
+
+  public void setParentAllocationEventId(ResourceId parentAllocationEventId) {
+    this.parentAllocationEventId = parentAllocationEventId;
+  }
+
+
+  public AllocationEvent replaces(ResourceId replaces) {
+    this.replaces = replaces;
+    return this;
+  }
+
+  /**
+   * Get replaces
+   * @return replaces
+   */
+  @javax.annotation.Nullable
+  public ResourceId getReplaces() {
+    return replaces;
+  }
+
+  public void setReplaces(ResourceId replaces) {
+    this.replaces = replaces;
+  }
+
+
+  public AllocationEvent reversal(AllocationEventReversal reversal) {
+    this.reversal = reversal;
+    return this;
+  }
+
+  /**
+   * Get reversal
+   * @return reversal
+   */
+  @javax.annotation.Nullable
+  public AllocationEventReversal getReversal() {
+    return reversal;
+  }
+
+  public void setReversal(AllocationEventReversal reversal) {
+    this.reversal = reversal;
+  }
+
+
+  public AllocationEvent noticeDate(OffsetDateTime noticeDate) {
+    this.noticeDate = noticeDate;
+    return this;
+  }
+
+  /**
+   * The date the notice went to investors.
+   * @return noticeDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getNoticeDate() {
+    return noticeDate;
+  }
+
+  public void setNoticeDate(OffsetDateTime noticeDate) {
+    this.noticeDate = noticeDate;
+  }
+
+
+  public AllocationEvent dueDate(OffsetDateTime dueDate) {
+    this.dueDate = dueDate;
+    return this;
+  }
+
+  /**
+   * The date the investors&#39; cash is due.
+   * @return dueDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getDueDate() {
+    return dueDate;
+  }
+
+  public void setDueDate(OffsetDateTime dueDate) {
+    this.dueDate = dueDate;
+  }
+
+
+  public AllocationEvent settlementDate(OffsetDateTime settlementDate) {
+    this.settlementDate = settlementDate;
+    return this;
+  }
+
+  /**
+   * The date the postings settle. Defaults to the event date.
+   * @return settlementDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getSettlementDate() {
+    return settlementDate;
+  }
+
+  public void setSettlementDate(OffsetDateTime settlementDate) {
+    this.settlementDate = settlementDate;
+  }
+
+
+  public AllocationEvent receipts(List<AllocationEventReceipt> receipts) {
+    this.receipts = receipts;
+    return this;
+  }
+
+  public AllocationEvent addReceiptsItem(AllocationEventReceipt receiptsItem) {
+    if (this.receipts == null) {
+      this.receipts = new ArrayList<>();
+    }
+    this.receipts.add(receiptsItem);
+    return this;
+  }
+
+  /**
+   * The cash received against the event, in the order it was recorded.
+   * @return receipts
+   */
+  @javax.annotation.Nullable
+  public List<AllocationEventReceipt> getReceipts() {
+    return receipts;
+  }
+
+  public void setReceipts(List<AllocationEventReceipt> receipts) {
+    this.receipts = receipts;
   }
 
 
@@ -487,7 +987,24 @@ public class AllocationEvent {
         Objects.equals(this.bookingReference, allocationEvent.bookingReference) &&
         Objects.equals(this.bookedAt, allocationEvent.bookedAt) &&
         Objects.equals(this.reallocationReason, allocationEvent.reallocationReason) &&
+        Objects.equals(this.components, allocationEvent.components) &&
+        Objects.equals(this.residuals, allocationEvent.residuals) &&
+        Objects.equals(this.basisDiagnostics, allocationEvent.basisDiagnostics) &&
+        Objects.equals(this.writtenIds, allocationEvent.writtenIds) &&
+        Objects.equals(this.bookingErrors, allocationEvent.bookingErrors) &&
+        Objects.equals(this.warnings, allocationEvent.warnings) &&
+        Objects.equals(this.transfers, allocationEvent.transfers) &&
+        Objects.equals(this.equalisation, allocationEvent.equalisation) &&
+        Objects.equals(this.useOfProceeds, allocationEvent.useOfProceeds) &&
+        Objects.equals(this.dealFunding, allocationEvent.dealFunding) &&
         Objects.equals(this.version, allocationEvent.version) &&
+        Objects.equals(this.parentAllocationEventId, allocationEvent.parentAllocationEventId) &&
+        Objects.equals(this.replaces, allocationEvent.replaces) &&
+        Objects.equals(this.reversal, allocationEvent.reversal) &&
+        Objects.equals(this.noticeDate, allocationEvent.noticeDate) &&
+        Objects.equals(this.dueDate, allocationEvent.dueDate) &&
+        Objects.equals(this.settlementDate, allocationEvent.settlementDate) &&
+        Objects.equals(this.receipts, allocationEvent.receipts) &&
         Objects.equals(this.links, allocationEvent.links);
   }
 
@@ -497,7 +1014,7 @@ public class AllocationEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, description, allocationMapId, eventType, amount, currency, eventDate, status, basisSource, allocations, bookingReference, bookedAt, reallocationReason, version, links);
+    return Objects.hash(href, id, description, allocationMapId, eventType, amount, currency, eventDate, status, basisSource, allocations, bookingReference, bookedAt, reallocationReason, components, residuals, basisDiagnostics, writtenIds, bookingErrors, warnings, transfers, equalisation, useOfProceeds, dealFunding, version, parentAllocationEventId, replaces, reversal, noticeDate, dueDate, settlementDate, receipts, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -525,7 +1042,24 @@ public class AllocationEvent {
     sb.append("    bookingReference: ").append(toIndentedString(bookingReference)).append("\n");
     sb.append("    bookedAt: ").append(toIndentedString(bookedAt)).append("\n");
     sb.append("    reallocationReason: ").append(toIndentedString(reallocationReason)).append("\n");
+    sb.append("    components: ").append(toIndentedString(components)).append("\n");
+    sb.append("    residuals: ").append(toIndentedString(residuals)).append("\n");
+    sb.append("    basisDiagnostics: ").append(toIndentedString(basisDiagnostics)).append("\n");
+    sb.append("    writtenIds: ").append(toIndentedString(writtenIds)).append("\n");
+    sb.append("    bookingErrors: ").append(toIndentedString(bookingErrors)).append("\n");
+    sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
+    sb.append("    transfers: ").append(toIndentedString(transfers)).append("\n");
+    sb.append("    equalisation: ").append(toIndentedString(equalisation)).append("\n");
+    sb.append("    useOfProceeds: ").append(toIndentedString(useOfProceeds)).append("\n");
+    sb.append("    dealFunding: ").append(toIndentedString(dealFunding)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    parentAllocationEventId: ").append(toIndentedString(parentAllocationEventId)).append("\n");
+    sb.append("    replaces: ").append(toIndentedString(replaces)).append("\n");
+    sb.append("    reversal: ").append(toIndentedString(reversal)).append("\n");
+    sb.append("    noticeDate: ").append(toIndentedString(noticeDate)).append("\n");
+    sb.append("    dueDate: ").append(toIndentedString(dueDate)).append("\n");
+    sb.append("    settlementDate: ").append(toIndentedString(settlementDate)).append("\n");
+    sb.append("    receipts: ").append(toIndentedString(receipts)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

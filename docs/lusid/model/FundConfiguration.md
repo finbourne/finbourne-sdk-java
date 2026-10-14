@@ -18,6 +18,9 @@ Name | Type | Description | Notes
 **bucketSets** | [**List&lt;BucketSetDefinition&gt;**](BucketSetDefinition.md) | The ordered set of component bucket set definitions for this fund configuration. Each bucket set defines how JE lines are grouped into buckets at VP finalisation. | [optional] [default to List<BucketSetDefinition>]
 **apportionmentBucketSet** | **String** | The code of the bucket set definition within this fund configuration that is designated as the apportionment bucket set. Must reference a BucketSetDefinition code within the BucketSets collection. | [optional] [default to String]
 **apportionmentMethodProperty** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] [default to ApportionmentMethodProperty]
+**partnershipAccounting** | [**PartnershipAccountingConfiguration**](PartnershipAccountingConfiguration.md) |  | [optional] [default to PartnershipAccountingConfiguration]
+**fundTerms** | [**FundTerms**](FundTerms.md) |  | [optional] [default to FundTerms]
+**closings** | [**List&lt;FundClosing&gt;**](FundClosing.md) | The register of fund closings (first close, subsequent closes, final close) for partnership funds using this configuration. | [optional] [default to List<FundClosing>]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -39,6 +42,9 @@ Version version = new Version();
 @javax.annotation.Nullable List<BucketSetDefinition> bucketSets = new List<BucketSetDefinition>();
 @javax.annotation.Nullable String apportionmentBucketSet = "example apportionmentBucketSet";
 ApportionmentMethodProperty apportionmentMethodProperty = new ApportionmentMethodProperty();
+PartnershipAccountingConfiguration partnershipAccounting = new PartnershipAccountingConfiguration();
+FundTerms fundTerms = new FundTerms();
+@javax.annotation.Nullable List<FundClosing> closings = new List<FundClosing>();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -56,6 +62,9 @@ FundConfiguration fundConfigurationInstance = new FundConfiguration()
     .bucketSets(bucketSets)
     .apportionmentBucketSet(apportionmentBucketSet)
     .apportionmentMethodProperty(apportionmentMethodProperty)
+    .partnershipAccounting(partnershipAccounting)
+    .fundTerms(fundTerms)
+    .closings(closings)
     .links(links);
 ```
 

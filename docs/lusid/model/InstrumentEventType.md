@@ -129,6 +129,13 @@ InstrumentEventType method = InstrumentEventType.LOAN_INTEREST_CAPITALISATION_EV
 InstrumentEventType method = InstrumentEventType.TOTAL_RETURN_SWAP_CASH_FLOW_EVENT;
 InstrumentEventType method = InstrumentEventType.GLOBAL_LOAN_FACILITY_REINITIALISATION_EVENT;
 InstrumentEventType method = InstrumentEventType.INVESTOR_LOAN_FACILITY_REINITIALISATION_EVENT;
+InstrumentEventType method = InstrumentEventType.CAPITAL_CALL_RECEIPT_EVENT;
+InstrumentEventType method = InstrumentEventType.RECALLABLE_CAPITAL_EXPIRY_EVENT;
+InstrumentEventType method = InstrumentEventType.CAPITAL_INTEREST_TRANSFER_EVENT;
+InstrumentEventType method = InstrumentEventType.FACILITY_DRAW_EVENT;
+InstrumentEventType method = InstrumentEventType.FACILITY_REPAYMENT_EVENT;
+InstrumentEventType method = InstrumentEventType.FACILITY_INTEREST_EVENT;
+InstrumentEventType method = InstrumentEventType.FACILITY_COMMITMENT_FEE_EVENT;
 ```
 
 

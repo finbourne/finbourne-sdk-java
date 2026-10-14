@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **executionId** | [**UUID**](UUID.md) |  | [optional] [readonly] [default to UUID]
 **progress** | [**Link**](Link.md) |  | [optional] [default to Link]
 **cancel** | [**Link**](Link.md) |  | [optional] [default to Link]
+**download** | [**Link**](Link.md) |  | [optional] [default to Link]
+**saveToDrive** | [**Link**](Link.md) |  | [optional] [default to Link]
 **fetchJson** | [**List&lt;Link&gt;**](Link.md) | Json (as a string) data request links for all of the child queries | [optional] [readonly] [default to List<Link>]
 **fetchJsonProper** | [**List&lt;Link&gt;**](Link.md) | Json-proper data request links for all of the child queries | [optional] [readonly] [default to List<Link>]
 **fetchJsonProperWithLineage** | [**List&lt;Link&gt;**](Link.md) | Json-proper-with-lineage data request links for all of the child queries | [optional] [readonly] [default to List<Link>]
@@ -28,6 +30,8 @@ import java.net.URI;
 UUID executionId = "example executionId";
 Link progress = new Link();
 Link cancel = new Link();
+Link download = new Link();
+Link saveToDrive = new Link();
 @javax.annotation.Nullable List<Link> fetchJson = new List<Link>();
 @javax.annotation.Nullable List<Link> fetchJsonProper = new List<Link>();
 @javax.annotation.Nullable List<Link> fetchJsonProperWithLineage = new List<Link>();
@@ -44,6 +48,8 @@ BackgroundMultiQueryResponse backgroundMultiQueryResponseInstance = new Backgrou
     .executionId(executionId)
     .progress(progress)
     .cancel(cancel)
+    .download(download)
+    .saveToDrive(saveToDrive)
     .fetchJson(fetchJson)
     .fetchJsonProper(fetchJsonProper)
     .fetchJsonProperWithLineage(fetchJsonProperWithLineage)

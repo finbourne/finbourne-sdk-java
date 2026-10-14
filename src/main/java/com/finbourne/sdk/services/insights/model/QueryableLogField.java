@@ -12,10 +12,12 @@
 
 package com.finbourne.sdk.services.insights.model;
 
+import com.finbourne.sdk.services.insights.model.AvailableValue;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -39,7 +41,8 @@ import com.finbourne.sdk.JSON;
   QueryableLogField.JSON_PROPERTY_DATA_TYPE,
   QueryableLogField.JSON_PROPERTY_SUPPORTED_OPERATIONS,
   QueryableLogField.JSON_PROPERTY_FILTERABLE,
-  QueryableLogField.JSON_PROPERTY_ALWAYS_RETURNED
+  QueryableLogField.JSON_PROPERTY_ALWAYS_RETURNED,
+  QueryableLogField.JSON_PROPERTY_AVAILABLE_VALUES
 })
 
 public class QueryableLogField {
@@ -67,6 +70,11 @@ public class QueryableLogField {
   @JsonProperty(JSON_PROPERTY_ALWAYS_RETURNED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean alwaysReturned;
+
+  public static final String JSON_PROPERTY_AVAILABLE_VALUES = "availableValues";
+  @JsonProperty(JSON_PROPERTY_AVAILABLE_VALUES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AvailableValue> availableValues;
 
   public QueryableLogField() {
   }
@@ -174,6 +182,33 @@ public class QueryableLogField {
   }
 
 
+  public QueryableLogField availableValues(List<AvailableValue> availableValues) {
+    this.availableValues = availableValues;
+    return this;
+  }
+
+  public QueryableLogField addAvailableValuesItem(AvailableValue availableValuesItem) {
+    if (this.availableValues == null) {
+      this.availableValues = new ArrayList<>();
+    }
+    this.availableValues.add(availableValuesItem);
+    return this;
+  }
+
+  /**
+   * The values known to be valid for this field, which a UI can offer when filtering on it. Null when the field has no known set of values. The list is not exhaustive: other values may still be filtered on.
+   * @return availableValues
+   */
+  @javax.annotation.Nullable
+  public List<AvailableValue> getAvailableValues() {
+    return availableValues;
+  }
+
+  public void setAvailableValues(List<AvailableValue> availableValues) {
+    this.availableValues = availableValues;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -187,12 +222,24 @@ public class QueryableLogField {
         Objects.equals(this.dataType, queryableLogField.dataType) &&
         Objects.equals(this.supportedOperations, queryableLogField.supportedOperations) &&
         Objects.equals(this.filterable, queryableLogField.filterable) &&
-        Objects.equals(this.alwaysReturned, queryableLogField.alwaysReturned);
+        Objects.equals(this.alwaysReturned, queryableLogField.alwaysReturned) &&
+        Objects.equals(this.availableValues, queryableLogField.availableValues);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(name, dataType, supportedOperations, filterable, alwaysReturned);
+    return Objects.hash(name, dataType, supportedOperations, filterable, alwaysReturned, availableValues);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -204,6 +251,7 @@ public class QueryableLogField {
     sb.append("    supportedOperations: ").append(toIndentedString(supportedOperations)).append("\n");
     sb.append("    filterable: ").append(toIndentedString(filterable)).append("\n");
     sb.append("    alwaysReturned: ").append(toIndentedString(alwaysReturned)).append("\n");
+    sb.append("    availableValues: ").append(toIndentedString(availableValues)).append("\n");
     sb.append("}");
     return sb.toString();
   }

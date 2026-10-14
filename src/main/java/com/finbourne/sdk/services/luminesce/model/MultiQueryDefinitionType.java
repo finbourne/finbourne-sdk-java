@@ -49,7 +49,9 @@ public enum MultiQueryDefinitionType {
   
   CANDELA_TRACE_LOGS("CandelaTraceLogs"),
   
-  CANDELA_TRACE_EVENT_LOGS("CandelaTraceEventLogs");
+  CANDELA_TRACE_EVENT_LOGS("CandelaTraceEventLogs"),
+  
+  CUSTOM("Custom");
 
   private String value;
 

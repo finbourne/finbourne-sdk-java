@@ -41,6 +41,8 @@ import com.finbourne.sdk.JSON;
   BackgroundMultiQueryResponse.JSON_PROPERTY_EXECUTION_ID,
   BackgroundMultiQueryResponse.JSON_PROPERTY_PROGRESS,
   BackgroundMultiQueryResponse.JSON_PROPERTY_CANCEL,
+  BackgroundMultiQueryResponse.JSON_PROPERTY_DOWNLOAD,
+  BackgroundMultiQueryResponse.JSON_PROPERTY_SAVE_TO_DRIVE,
   BackgroundMultiQueryResponse.JSON_PROPERTY_FETCH_JSON,
   BackgroundMultiQueryResponse.JSON_PROPERTY_FETCH_JSON_PROPER,
   BackgroundMultiQueryResponse.JSON_PROPERTY_FETCH_JSON_PROPER_WITH_LINEAGE,
@@ -68,6 +70,16 @@ public class BackgroundMultiQueryResponse {
   @JsonProperty(JSON_PROPERTY_CANCEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Link cancel;
+
+  public static final String JSON_PROPERTY_DOWNLOAD = "download";
+  @JsonProperty(JSON_PROPERTY_DOWNLOAD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Link download;
+
+  public static final String JSON_PROPERTY_SAVE_TO_DRIVE = "saveToDrive";
+  @JsonProperty(JSON_PROPERTY_SAVE_TO_DRIVE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Link saveToDrive;
 
   public static final String JSON_PROPERTY_FETCH_JSON = "fetchJson";
   @JsonProperty(JSON_PROPERTY_FETCH_JSON)
@@ -198,6 +210,44 @@ public class BackgroundMultiQueryResponse {
   }
 
 
+  public BackgroundMultiQueryResponse download(Link download) {
+    this.download = download;
+    return this;
+  }
+
+  /**
+   * Get download
+   * @return download
+   */
+  @javax.annotation.Nullable
+  public Link getDownload() {
+    return download;
+  }
+
+  public void setDownload(Link download) {
+    this.download = download;
+  }
+
+
+  public BackgroundMultiQueryResponse saveToDrive(Link saveToDrive) {
+    this.saveToDrive = saveToDrive;
+    return this;
+  }
+
+  /**
+   * Get saveToDrive
+   * @return saveToDrive
+   */
+  @javax.annotation.Nullable
+  public Link getSaveToDrive() {
+    return saveToDrive;
+  }
+
+  public void setSaveToDrive(Link saveToDrive) {
+    this.saveToDrive = saveToDrive;
+  }
+
+
   /**
    * Json (as a string) data request links for all of the child queries
    * @return fetchJson
@@ -320,6 +370,8 @@ public class BackgroundMultiQueryResponse {
     return Objects.equals(this.executionId, backgroundMultiQueryResponse.executionId) &&
         Objects.equals(this.progress, backgroundMultiQueryResponse.progress) &&
         Objects.equals(this.cancel, backgroundMultiQueryResponse.cancel) &&
+        Objects.equals(this.download, backgroundMultiQueryResponse.download) &&
+        Objects.equals(this.saveToDrive, backgroundMultiQueryResponse.saveToDrive) &&
         Objects.equals(this.fetchJson, backgroundMultiQueryResponse.fetchJson) &&
         Objects.equals(this.fetchJsonProper, backgroundMultiQueryResponse.fetchJsonProper) &&
         Objects.equals(this.fetchJsonProperWithLineage, backgroundMultiQueryResponse.fetchJsonProperWithLineage) &&
@@ -338,7 +390,7 @@ public class BackgroundMultiQueryResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(executionId, progress, cancel, fetchJson, fetchJsonProper, fetchJsonProperWithLineage, fetchXml, fetchParquet, fetchCsv, fetchPipe, fetchExcel, fetchSqlite, histogram);
+    return Objects.hash(executionId, progress, cancel, download, saveToDrive, fetchJson, fetchJsonProper, fetchJsonProperWithLineage, fetchXml, fetchParquet, fetchCsv, fetchPipe, fetchExcel, fetchSqlite, histogram);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -355,6 +407,8 @@ public class BackgroundMultiQueryResponse {
     sb.append("    executionId: ").append(toIndentedString(executionId)).append("\n");
     sb.append("    progress: ").append(toIndentedString(progress)).append("\n");
     sb.append("    cancel: ").append(toIndentedString(cancel)).append("\n");
+    sb.append("    download: ").append(toIndentedString(download)).append("\n");
+    sb.append("    saveToDrive: ").append(toIndentedString(saveToDrive)).append("\n");
     sb.append("    fetchJson: ").append(toIndentedString(fetchJson)).append("\n");
     sb.append("    fetchJsonProper: ").append(toIndentedString(fetchJsonProper)).append("\n");
     sb.append("    fetchJsonProperWithLineage: ").append(toIndentedString(fetchJsonProperWithLineage)).append("\n");

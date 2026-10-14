@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **supportedOperations** | **List&lt;String&gt;** | The comparator operations available for this field. Empty when the field is not filterable. | [default to List<String>]
 **filterable** | **Boolean** | Whether the field can be used in a filter. | [optional] [default to Boolean]
 **alwaysReturned** | **Boolean** | Whether the field is always returned (and therefore need not be requested). | [optional] [default to Boolean]
+**availableValues** | [**List&lt;AvailableValue&gt;**](AvailableValue.md) | The values known to be valid for this field, which a UI can offer when filtering on it. Null when the field has no known set of values. The list is not exhaustive: other values may still be filtered on. | [optional] [default to List<AvailableValue>]
 
 ```java
 import com.finbourne.sdk.services.insights.model.QueryableLogField;
@@ -23,6 +24,7 @@ String dataType = "example dataType";
 List<String> supportedOperations = new List<String>();
 Boolean filterable = true;
 Boolean alwaysReturned = true;
+@javax.annotation.Nullable List<AvailableValue> availableValues = new List<AvailableValue>();
 
 
 QueryableLogField queryableLogFieldInstance = new QueryableLogField()
@@ -30,7 +32,8 @@ QueryableLogField queryableLogFieldInstance = new QueryableLogField()
     .dataType(dataType)
     .supportedOperations(supportedOperations)
     .filterable(filterable)
-    .alwaysReturned(alwaysReturned);
+    .alwaysReturned(alwaysReturned)
+    .availableValues(availableValues);
 ```
 
 

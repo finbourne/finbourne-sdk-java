@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **id** | **Integer** | The id of this run of the Workflow. Assigned once, when the run is instantiated. | [default to Integer]
 **asAtCreated** | [**OffsetDateTime**](OffsetDateTime.md) | The version.asAtCreated of the root/ultimate parent Task of this run. | [default to OffsetDateTime]
 **completionStatus** | **String** | The completion status of the root/ultimate parent Task of this run: NotStarted, InProgress, or Completed. | [default to String]
+**launchedBy** | [**LaunchedBy**](LaunchedBy.md) |  | [optional] [default to LaunchedBy]
 
 ```java
 import com.finbourne.sdk.services.workflow.model.WorkflowRun;
@@ -19,12 +20,14 @@ import java.net.URI;
 Integer id = new Integer("100.00");
 OffsetDateTime asAtCreated = OffsetDateTime.now();
 String completionStatus = "example completionStatus";
+LaunchedBy launchedBy = new LaunchedBy();
 
 
 WorkflowRun workflowRunInstance = new WorkflowRun()
     .id(id)
     .asAtCreated(asAtCreated)
-    .completionStatus(completionStatus);
+    .completionStatus(completionStatus)
+    .launchedBy(launchedBy);
 ```
 
 

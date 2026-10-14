@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AllocationMapEventBasis;
+import com.finbourne.sdk.services.lusid.model.AllocationMapIlpaTransactionType;
 import com.finbourne.sdk.services.lusid.model.AllocationMapParticipants;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
@@ -47,6 +48,8 @@ import com.finbourne.sdk.JSON;
   AllocationMapRequest.JSON_PROPERTY_INHERITS_FROM,
   AllocationMapRequest.JSON_PROPERTY_PARTICIPANTS,
   AllocationMapRequest.JSON_PROPERTY_BASIS_BY_EVENT_TYPE,
+  AllocationMapRequest.JSON_PROPERTY_ROUNDING_PARTNER_LINE,
+  AllocationMapRequest.JSON_PROPERTY_ILPA_TRANSACTION_TYPES,
   AllocationMapRequest.JSON_PROPERTY_EFFECTIVE_AT
 })
 
@@ -85,6 +88,16 @@ public class AllocationMapRequest {
   @JsonProperty(JSON_PROPERTY_BASIS_BY_EVENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<AllocationMapEventBasis> basisByEventType;
+
+  public static final String JSON_PROPERTY_ROUNDING_PARTNER_LINE = "roundingPartnerLine";
+  @JsonProperty(JSON_PROPERTY_ROUNDING_PARTNER_LINE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String roundingPartnerLine;
+
+  public static final String JSON_PROPERTY_ILPA_TRANSACTION_TYPES = "ilpaTransactionTypes";
+  @JsonProperty(JSON_PROPERTY_ILPA_TRANSACTION_TYPES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationMapIlpaTransactionType> ilpaTransactionTypes;
 
   public static final String JSON_PROPERTY_EFFECTIVE_AT = "effectiveAt";
   @JsonProperty(JSON_PROPERTY_EFFECTIVE_AT)
@@ -222,7 +235,7 @@ public class AllocationMapRequest {
   }
 
   /**
-   * The basis on which each kind of allocation event is shared between the participants. At most one entry per event type.
+   * The basis on which each kind of allocation event is shared between the participants. At most one entry per event type and component; an entry without a component is the default for the event type.
    * @return basisByEventType
    */
   @javax.annotation.Nullable
@@ -232,6 +245,52 @@ public class AllocationMapRequest {
 
   public void setBasisByEventType(List<AllocationMapEventBasis> basisByEventType) {
     this.basisByEventType = basisByEventType;
+  }
+
+
+  public AllocationMapRequest roundingPartnerLine(String roundingPartnerLine) {
+    this.roundingPartnerLine = roundingPartnerLine;
+    return this;
+  }
+
+  /**
+   * The investor record that takes every minor unit left over when the shares of an event are rounded. Absent means the leftover is spread one minor unit at a time over the largest remainders.
+   * @return roundingPartnerLine
+   */
+  @javax.annotation.Nullable
+  public String getRoundingPartnerLine() {
+    return roundingPartnerLine;
+  }
+
+  public void setRoundingPartnerLine(String roundingPartnerLine) {
+    this.roundingPartnerLine = roundingPartnerLine;
+  }
+
+
+  public AllocationMapRequest ilpaTransactionTypes(List<AllocationMapIlpaTransactionType> ilpaTransactionTypes) {
+    this.ilpaTransactionTypes = ilpaTransactionTypes;
+    return this;
+  }
+
+  public AllocationMapRequest addIlpaTransactionTypesItem(AllocationMapIlpaTransactionType ilpaTransactionTypesItem) {
+    if (this.ilpaTransactionTypes == null) {
+      this.ilpaTransactionTypes = new ArrayList<>();
+    }
+    this.ilpaTransactionTypes.add(ilpaTransactionTypesItem);
+    return this;
+  }
+
+  /**
+   * The ILPA transaction types the map reports particular kinds of allocation event under, where they differ from the default for the event type and component. At most one entry per event type and component; an entry without a component is the default for the event type. Every value must be one the system IlpaTransactionType data type lists.
+   * @return ilpaTransactionTypes
+   */
+  @javax.annotation.Nullable
+  public List<AllocationMapIlpaTransactionType> getIlpaTransactionTypes() {
+    return ilpaTransactionTypes;
+  }
+
+  public void setIlpaTransactionTypes(List<AllocationMapIlpaTransactionType> ilpaTransactionTypes) {
+    this.ilpaTransactionTypes = ilpaTransactionTypes;
   }
 
 
@@ -270,6 +329,8 @@ public class AllocationMapRequest {
         Objects.equals(this.inheritsFrom, allocationMapRequest.inheritsFrom) &&
         Objects.equals(this.participants, allocationMapRequest.participants) &&
         Objects.equals(this.basisByEventType, allocationMapRequest.basisByEventType) &&
+        Objects.equals(this.roundingPartnerLine, allocationMapRequest.roundingPartnerLine) &&
+        Objects.equals(this.ilpaTransactionTypes, allocationMapRequest.ilpaTransactionTypes) &&
         Objects.equals(this.effectiveAt, allocationMapRequest.effectiveAt);
   }
 
@@ -279,7 +340,7 @@ public class AllocationMapRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, name, description, structureMemberId, inheritsFrom, participants, basisByEventType, effectiveAt);
+    return Objects.hash(code, name, description, structureMemberId, inheritsFrom, participants, basisByEventType, roundingPartnerLine, ilpaTransactionTypes, effectiveAt);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -300,6 +361,8 @@ public class AllocationMapRequest {
     sb.append("    inheritsFrom: ").append(toIndentedString(inheritsFrom)).append("\n");
     sb.append("    participants: ").append(toIndentedString(participants)).append("\n");
     sb.append("    basisByEventType: ").append(toIndentedString(basisByEventType)).append("\n");
+    sb.append("    roundingPartnerLine: ").append(toIndentedString(roundingPartnerLine)).append("\n");
+    sb.append("    ilpaTransactionTypes: ").append(toIndentedString(ilpaTransactionTypes)).append("\n");
     sb.append("    effectiveAt: ").append(toIndentedString(effectiveAt)).append("\n");
     sb.append("}");
     return sb.toString();

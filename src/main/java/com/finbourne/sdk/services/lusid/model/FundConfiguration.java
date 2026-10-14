@@ -16,7 +16,10 @@ import com.finbourne.sdk.services.lusid.model.ApportionmentMethodProperty;
 import com.finbourne.sdk.services.lusid.model.BucketSetDefinition;
 import com.finbourne.sdk.services.lusid.model.ComponentFilter;
 import com.finbourne.sdk.services.lusid.model.ExternalFeeComponentFilter;
+import com.finbourne.sdk.services.lusid.model.FundClosing;
+import com.finbourne.sdk.services.lusid.model.FundTerms;
 import com.finbourne.sdk.services.lusid.model.Link;
+import com.finbourne.sdk.services.lusid.model.PartnershipAccountingConfiguration;
 import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.Version;
@@ -60,6 +63,9 @@ import com.finbourne.sdk.JSON;
   FundConfiguration.JSON_PROPERTY_BUCKET_SETS,
   FundConfiguration.JSON_PROPERTY_APPORTIONMENT_BUCKET_SET,
   FundConfiguration.JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY,
+  FundConfiguration.JSON_PROPERTY_PARTNERSHIP_ACCOUNTING,
+  FundConfiguration.JSON_PROPERTY_FUND_TERMS,
+  FundConfiguration.JSON_PROPERTY_CLOSINGS,
   FundConfiguration.JSON_PROPERTY_LINKS
 })
 
@@ -128,6 +134,21 @@ public class FundConfiguration {
   @JsonProperty(JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ApportionmentMethodProperty apportionmentMethodProperty;
+
+  public static final String JSON_PROPERTY_PARTNERSHIP_ACCOUNTING = "partnershipAccounting";
+  @JsonProperty(JSON_PROPERTY_PARTNERSHIP_ACCOUNTING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PartnershipAccountingConfiguration partnershipAccounting;
+
+  public static final String JSON_PROPERTY_FUND_TERMS = "fundTerms";
+  @JsonProperty(JSON_PROPERTY_FUND_TERMS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private FundTerms fundTerms;
+
+  public static final String JSON_PROPERTY_CLOSINGS = "closings";
+  @JsonProperty(JSON_PROPERTY_CLOSINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<FundClosing> closings;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -432,6 +453,71 @@ public class FundConfiguration {
   }
 
 
+  public FundConfiguration partnershipAccounting(PartnershipAccountingConfiguration partnershipAccounting) {
+    this.partnershipAccounting = partnershipAccounting;
+    return this;
+  }
+
+  /**
+   * Get partnershipAccounting
+   * @return partnershipAccounting
+   */
+  @javax.annotation.Nullable
+  public PartnershipAccountingConfiguration getPartnershipAccounting() {
+    return partnershipAccounting;
+  }
+
+  public void setPartnershipAccounting(PartnershipAccountingConfiguration partnershipAccounting) {
+    this.partnershipAccounting = partnershipAccounting;
+  }
+
+
+  public FundConfiguration fundTerms(FundTerms fundTerms) {
+    this.fundTerms = fundTerms;
+    return this;
+  }
+
+  /**
+   * Get fundTerms
+   * @return fundTerms
+   */
+  @javax.annotation.Nullable
+  public FundTerms getFundTerms() {
+    return fundTerms;
+  }
+
+  public void setFundTerms(FundTerms fundTerms) {
+    this.fundTerms = fundTerms;
+  }
+
+
+  public FundConfiguration closings(List<FundClosing> closings) {
+    this.closings = closings;
+    return this;
+  }
+
+  public FundConfiguration addClosingsItem(FundClosing closingsItem) {
+    if (this.closings == null) {
+      this.closings = new ArrayList<>();
+    }
+    this.closings.add(closingsItem);
+    return this;
+  }
+
+  /**
+   * The register of fund closings (first close, subsequent closes, final close) for partnership funds using this configuration.
+   * @return closings
+   */
+  @javax.annotation.Nullable
+  public List<FundClosing> getClosings() {
+    return closings;
+  }
+
+  public void setClosings(List<FundClosing> closings) {
+    this.closings = closings;
+  }
+
+
   public FundConfiguration links(List<Link> links) {
     this.links = links;
     return this;
@@ -481,6 +567,9 @@ public class FundConfiguration {
         Objects.equals(this.bucketSets, fundConfiguration.bucketSets) &&
         Objects.equals(this.apportionmentBucketSet, fundConfiguration.apportionmentBucketSet) &&
         Objects.equals(this.apportionmentMethodProperty, fundConfiguration.apportionmentMethodProperty) &&
+        Objects.equals(this.partnershipAccounting, fundConfiguration.partnershipAccounting) &&
+        Objects.equals(this.fundTerms, fundConfiguration.fundTerms) &&
+        Objects.equals(this.closings, fundConfiguration.closings) &&
         Objects.equals(this.links, fundConfiguration.links);
   }
 
@@ -490,7 +579,7 @@ public class FundConfiguration {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, displayName, description, dealingFilters, pnlFilters, backOutFilters, externalFeeFilters, properties, version, bucketSets, apportionmentBucketSet, apportionmentMethodProperty, links);
+    return Objects.hash(href, id, displayName, description, dealingFilters, pnlFilters, backOutFilters, externalFeeFilters, properties, version, bucketSets, apportionmentBucketSet, apportionmentMethodProperty, partnershipAccounting, fundTerms, closings, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -517,6 +606,9 @@ public class FundConfiguration {
     sb.append("    bucketSets: ").append(toIndentedString(bucketSets)).append("\n");
     sb.append("    apportionmentBucketSet: ").append(toIndentedString(apportionmentBucketSet)).append("\n");
     sb.append("    apportionmentMethodProperty: ").append(toIndentedString(apportionmentMethodProperty)).append("\n");
+    sb.append("    partnershipAccounting: ").append(toIndentedString(partnershipAccounting)).append("\n");
+    sb.append("    fundTerms: ").append(toIndentedString(fundTerms)).append("\n");
+    sb.append("    closings: ").append(toIndentedString(closings)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

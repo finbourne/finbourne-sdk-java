@@ -25,6 +25,7 @@ import com.finbourne.sdk.services.workflow.model.PortfolioTransactionDataQuality
 import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.SchedulerJobResponse;
 import com.finbourne.sdk.services.workflow.model.SleepResponse;
+import com.finbourne.sdk.services.workflow.model.StructuredResultDataQualityCheckResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -197,6 +198,16 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for SleepResponse failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'SleepResponse'", e);
             }
+            // deserialize StructuredResultDataQualityCheckResponse
+            try {
+                deserialized = _strictMapper.treeToValue(node, StructuredResultDataQualityCheckResponse.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'StructuredResultDataQualityCheckResponse'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for StructuredResultDataQualityCheckResponse failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'StructuredResultDataQualityCheckResponse'", e);
+            }
 
             if (match == 1) {
                 return result;
@@ -231,6 +242,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
         schemas.put("PortfolioTransactionDataQualityCheckResponse", PortfolioTransactionDataQualityCheckResponse.class);
         schemas.put("SchedulerJobResponse", SchedulerJobResponse.class);
         schemas.put("SleepResponse", SleepResponse.class);
+        schemas.put("StructuredResultDataQualityCheckResponse", StructuredResultDataQualityCheckResponse.class);
     }
 
     @Override
@@ -241,7 +253,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
+     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -307,14 +319,19 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse");
+        if (instance instanceof StructuredResultDataQualityCheckResponse) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        throw new RuntimeException("Invalid instance type. Must be FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse
+     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse
      *
-     * @return The actual instance (FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse)
+     * @return The actual instance (FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -441,6 +458,16 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
      */
     public SleepResponse getSleepResponse() throws ClassCastException {
         return (SleepResponse)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `StructuredResultDataQualityCheckResponse`. If the actual instance is not `StructuredResultDataQualityCheckResponse`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `StructuredResultDataQualityCheckResponse`
+     * @throws ClassCastException if the instance is not `StructuredResultDataQualityCheckResponse`
+     */
+    public StructuredResultDataQualityCheckResponse getStructuredResultDataQualityCheckResponse() throws ClassCastException {
+        return (StructuredResultDataQualityCheckResponse)super.getActualInstance();
     }
 
     /**

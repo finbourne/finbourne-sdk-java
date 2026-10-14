@@ -16,6 +16,9 @@ import com.finbourne.sdk.services.lusid.model.ApportionmentMethodProperty;
 import com.finbourne.sdk.services.lusid.model.BucketSetDefinition;
 import com.finbourne.sdk.services.lusid.model.ComponentFilter;
 import com.finbourne.sdk.services.lusid.model.ExternalFeeComponentFilter;
+import com.finbourne.sdk.services.lusid.model.FundClosing;
+import com.finbourne.sdk.services.lusid.model.FundTerms;
+import com.finbourne.sdk.services.lusid.model.PartnershipAccountingConfiguration;
 import com.finbourne.sdk.services.lusid.model.Property;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,7 +56,10 @@ import com.finbourne.sdk.JSON;
   FundConfigurationRequest.JSON_PROPERTY_BUCKET_SETS,
   FundConfigurationRequest.JSON_PROPERTY_PROPERTIES,
   FundConfigurationRequest.JSON_PROPERTY_APPORTIONMENT_BUCKET_SET,
-  FundConfigurationRequest.JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY
+  FundConfigurationRequest.JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY,
+  FundConfigurationRequest.JSON_PROPERTY_PARTNERSHIP_ACCOUNTING,
+  FundConfigurationRequest.JSON_PROPERTY_FUND_TERMS,
+  FundConfigurationRequest.JSON_PROPERTY_CLOSINGS
 })
 
 public class FundConfigurationRequest {
@@ -111,6 +117,21 @@ public class FundConfigurationRequest {
   @JsonProperty(JSON_PROPERTY_APPORTIONMENT_METHOD_PROPERTY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ApportionmentMethodProperty apportionmentMethodProperty;
+
+  public static final String JSON_PROPERTY_PARTNERSHIP_ACCOUNTING = "partnershipAccounting";
+  @JsonProperty(JSON_PROPERTY_PARTNERSHIP_ACCOUNTING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PartnershipAccountingConfiguration partnershipAccounting;
+
+  public static final String JSON_PROPERTY_FUND_TERMS = "fundTerms";
+  @JsonProperty(JSON_PROPERTY_FUND_TERMS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private FundTerms fundTerms;
+
+  public static final String JSON_PROPERTY_CLOSINGS = "closings";
+  @JsonProperty(JSON_PROPERTY_CLOSINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<FundClosing> closings;
 
   public FundConfigurationRequest() {
   }
@@ -372,6 +393,71 @@ public class FundConfigurationRequest {
   }
 
 
+  public FundConfigurationRequest partnershipAccounting(PartnershipAccountingConfiguration partnershipAccounting) {
+    this.partnershipAccounting = partnershipAccounting;
+    return this;
+  }
+
+  /**
+   * Get partnershipAccounting
+   * @return partnershipAccounting
+   */
+  @javax.annotation.Nullable
+  public PartnershipAccountingConfiguration getPartnershipAccounting() {
+    return partnershipAccounting;
+  }
+
+  public void setPartnershipAccounting(PartnershipAccountingConfiguration partnershipAccounting) {
+    this.partnershipAccounting = partnershipAccounting;
+  }
+
+
+  public FundConfigurationRequest fundTerms(FundTerms fundTerms) {
+    this.fundTerms = fundTerms;
+    return this;
+  }
+
+  /**
+   * Get fundTerms
+   * @return fundTerms
+   */
+  @javax.annotation.Nullable
+  public FundTerms getFundTerms() {
+    return fundTerms;
+  }
+
+  public void setFundTerms(FundTerms fundTerms) {
+    this.fundTerms = fundTerms;
+  }
+
+
+  public FundConfigurationRequest closings(List<FundClosing> closings) {
+    this.closings = closings;
+    return this;
+  }
+
+  public FundConfigurationRequest addClosingsItem(FundClosing closingsItem) {
+    if (this.closings == null) {
+      this.closings = new ArrayList<>();
+    }
+    this.closings.add(closingsItem);
+    return this;
+  }
+
+  /**
+   * The register of fund closings (first close, subsequent closes, final close) for partnership funds using this configuration.
+   * @return closings
+   */
+  @javax.annotation.Nullable
+  public List<FundClosing> getClosings() {
+    return closings;
+  }
+
+  public void setClosings(List<FundClosing> closings) {
+    this.closings = closings;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -391,7 +477,10 @@ public class FundConfigurationRequest {
         Objects.equals(this.bucketSets, fundConfigurationRequest.bucketSets) &&
         Objects.equals(this.properties, fundConfigurationRequest.properties) &&
         Objects.equals(this.apportionmentBucketSet, fundConfigurationRequest.apportionmentBucketSet) &&
-        Objects.equals(this.apportionmentMethodProperty, fundConfigurationRequest.apportionmentMethodProperty);
+        Objects.equals(this.apportionmentMethodProperty, fundConfigurationRequest.apportionmentMethodProperty) &&
+        Objects.equals(this.partnershipAccounting, fundConfigurationRequest.partnershipAccounting) &&
+        Objects.equals(this.fundTerms, fundConfigurationRequest.fundTerms) &&
+        Objects.equals(this.closings, fundConfigurationRequest.closings);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -400,7 +489,7 @@ public class FundConfigurationRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, displayName, description, dealingFilters, pnlFilters, backOutFilters, externalFeeFilters, bucketSets, properties, apportionmentBucketSet, apportionmentMethodProperty);
+    return Objects.hash(code, displayName, description, dealingFilters, pnlFilters, backOutFilters, externalFeeFilters, bucketSets, properties, apportionmentBucketSet, apportionmentMethodProperty, partnershipAccounting, fundTerms, closings);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -425,6 +514,9 @@ public class FundConfigurationRequest {
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    apportionmentBucketSet: ").append(toIndentedString(apportionmentBucketSet)).append("\n");
     sb.append("    apportionmentMethodProperty: ").append(toIndentedString(apportionmentMethodProperty)).append("\n");
+    sb.append("    partnershipAccounting: ").append(toIndentedString(partnershipAccounting)).append("\n");
+    sb.append("    fundTerms: ").append(toIndentedString(fundTerms)).append("\n");
+    sb.append("    closings: ").append(toIndentedString(closings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

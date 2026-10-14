@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -32,12 +33,29 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A distribution from the fund to the holder of a CapitalInterest. A recallable distribution restores  unfunded capital (the fund may call it again); a non-recallable distribution permanently returns capital.
+ * A distribution from the fund to the holder of a CapitalInterest. A recallable distribution restores  unfunded capital (the fund may call it again); a non-recallable distribution permanently returns capital.                The total amount may optionally be broken down into slots by character (returnOfCapital, realisedGain,  dividend, interest, otherIncome, carryPaid, withholding, returnOfExcess). When any slot amount is supplied  the slot amounts must sum to the total, one transaction is booked per populated slot, and the recallable  portion of each of the five capital/income characters is given by its matching Recallable amount.  Without slots a single legacy distribution transaction is booked for the total, recallable according  to isRecallable.
  */
 @JsonPropertyOrder({
   FundDistributionEvent.JSON_PROPERTY_DATE,
   FundDistributionEvent.JSON_PROPERTY_AMOUNT,
-  FundDistributionEvent.JSON_PROPERTY_IS_RECALLABLE
+  FundDistributionEvent.JSON_PROPERTY_IS_RECALLABLE,
+  FundDistributionEvent.JSON_PROPERTY_RETURN_OF_CAPITAL_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_REALISED_GAIN_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_DIVIDEND_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_INTEREST_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_OTHER_INCOME_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_RETURN_OF_CAPITAL_RECALLABLE_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_REALISED_GAIN_RECALLABLE_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_DIVIDEND_RECALLABLE_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_INTEREST_RECALLABLE_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_OTHER_INCOME_RECALLABLE_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_CARRY_PAID_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_WITHHOLDING_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_RETURN_OF_EXCESS_AMOUNT,
+  FundDistributionEvent.JSON_PROPERTY_RECALLABLE_UNTIL,
+  FundDistributionEvent.JSON_PROPERTY_DEAL_ID,
+  FundDistributionEvent.JSON_PROPERTY_ALLOCATION_EVENT_ID,
+  FundDistributionEvent.JSON_PROPERTY_WATERFALL_TIER
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -61,6 +79,91 @@ public class FundDistributionEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_IS_RECALLABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean isRecallable;
+
+  public static final String JSON_PROPERTY_RETURN_OF_CAPITAL_AMOUNT = "returnOfCapitalAmount";
+  @JsonProperty(JSON_PROPERTY_RETURN_OF_CAPITAL_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal returnOfCapitalAmount;
+
+  public static final String JSON_PROPERTY_REALISED_GAIN_AMOUNT = "realisedGainAmount";
+  @JsonProperty(JSON_PROPERTY_REALISED_GAIN_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal realisedGainAmount;
+
+  public static final String JSON_PROPERTY_DIVIDEND_AMOUNT = "dividendAmount";
+  @JsonProperty(JSON_PROPERTY_DIVIDEND_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal dividendAmount;
+
+  public static final String JSON_PROPERTY_INTEREST_AMOUNT = "interestAmount";
+  @JsonProperty(JSON_PROPERTY_INTEREST_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal interestAmount;
+
+  public static final String JSON_PROPERTY_OTHER_INCOME_AMOUNT = "otherIncomeAmount";
+  @JsonProperty(JSON_PROPERTY_OTHER_INCOME_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal otherIncomeAmount;
+
+  public static final String JSON_PROPERTY_RETURN_OF_CAPITAL_RECALLABLE_AMOUNT = "returnOfCapitalRecallableAmount";
+  @JsonProperty(JSON_PROPERTY_RETURN_OF_CAPITAL_RECALLABLE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal returnOfCapitalRecallableAmount;
+
+  public static final String JSON_PROPERTY_REALISED_GAIN_RECALLABLE_AMOUNT = "realisedGainRecallableAmount";
+  @JsonProperty(JSON_PROPERTY_REALISED_GAIN_RECALLABLE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal realisedGainRecallableAmount;
+
+  public static final String JSON_PROPERTY_DIVIDEND_RECALLABLE_AMOUNT = "dividendRecallableAmount";
+  @JsonProperty(JSON_PROPERTY_DIVIDEND_RECALLABLE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal dividendRecallableAmount;
+
+  public static final String JSON_PROPERTY_INTEREST_RECALLABLE_AMOUNT = "interestRecallableAmount";
+  @JsonProperty(JSON_PROPERTY_INTEREST_RECALLABLE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal interestRecallableAmount;
+
+  public static final String JSON_PROPERTY_OTHER_INCOME_RECALLABLE_AMOUNT = "otherIncomeRecallableAmount";
+  @JsonProperty(JSON_PROPERTY_OTHER_INCOME_RECALLABLE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal otherIncomeRecallableAmount;
+
+  public static final String JSON_PROPERTY_CARRY_PAID_AMOUNT = "carryPaidAmount";
+  @JsonProperty(JSON_PROPERTY_CARRY_PAID_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal carryPaidAmount;
+
+  public static final String JSON_PROPERTY_WITHHOLDING_AMOUNT = "withholdingAmount";
+  @JsonProperty(JSON_PROPERTY_WITHHOLDING_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal withholdingAmount;
+
+  public static final String JSON_PROPERTY_RETURN_OF_EXCESS_AMOUNT = "returnOfExcessAmount";
+  @JsonProperty(JSON_PROPERTY_RETURN_OF_EXCESS_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal returnOfExcessAmount;
+
+  public static final String JSON_PROPERTY_RECALLABLE_UNTIL = "recallableUntil";
+  @JsonProperty(JSON_PROPERTY_RECALLABLE_UNTIL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime recallableUntil;
+
+  public static final String JSON_PROPERTY_DEAL_ID = "dealId";
+  @JsonProperty(JSON_PROPERTY_DEAL_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String dealId;
+
+  public static final String JSON_PROPERTY_ALLOCATION_EVENT_ID = "allocationEventId";
+  @JsonProperty(JSON_PROPERTY_ALLOCATION_EVENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String allocationEventId;
+
+  public static final String JSON_PROPERTY_WATERFALL_TIER = "waterfallTier";
+  @JsonProperty(JSON_PROPERTY_WATERFALL_TIER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String waterfallTier;
 
   public FundDistributionEvent() {
   }
@@ -90,7 +193,7 @@ public class FundDistributionEvent extends InstrumentEvent {
   }
 
   /**
-   * The amount distributed. Must be positive.
+   * The total amount distributed. Must be positive. When slot amounts are supplied they must sum to this total.
    * @return amount
    */
   @javax.annotation.Nonnull
@@ -109,7 +212,7 @@ public class FundDistributionEvent extends InstrumentEvent {
   }
 
   /**
-   * True when the fund may recall the distributed amount: the distribution restores unfunded capital  rather than permanently returning it. Defaults to false. This field is optional.
+   * Legacy flag, used only when no slot amount is supplied: true when the fund may recall the whole  distributed amount, so the distribution restores unfunded capital rather than permanently returning  it. Defaults to false. Must not be combined with slot amounts.
    * @return isRecallable
    */
   @javax.annotation.Nullable
@@ -119,6 +222,329 @@ public class FundDistributionEvent extends InstrumentEvent {
 
   public void setIsRecallable(Boolean isRecallable) {
     this.isRecallable = isRecallable;
+  }
+
+
+  public FundDistributionEvent returnOfCapitalAmount(java.math.BigDecimal returnOfCapitalAmount) {
+    this.returnOfCapitalAmount = returnOfCapitalAmount;
+    return this;
+  }
+
+  /**
+   * The part of the distribution that returns capital. Optional slot; must not be negative.
+   * @return returnOfCapitalAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getReturnOfCapitalAmount() {
+    return returnOfCapitalAmount;
+  }
+
+  public void setReturnOfCapitalAmount(java.math.BigDecimal returnOfCapitalAmount) {
+    this.returnOfCapitalAmount = returnOfCapitalAmount;
+  }
+
+
+  public FundDistributionEvent realisedGainAmount(java.math.BigDecimal realisedGainAmount) {
+    this.realisedGainAmount = realisedGainAmount;
+    return this;
+  }
+
+  /**
+   * The part of the distribution that is realised gain. Optional slot; must not be negative.
+   * @return realisedGainAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getRealisedGainAmount() {
+    return realisedGainAmount;
+  }
+
+  public void setRealisedGainAmount(java.math.BigDecimal realisedGainAmount) {
+    this.realisedGainAmount = realisedGainAmount;
+  }
+
+
+  public FundDistributionEvent dividendAmount(java.math.BigDecimal dividendAmount) {
+    this.dividendAmount = dividendAmount;
+    return this;
+  }
+
+  /**
+   * The part of the distribution that is dividend income. Optional slot; must not be negative.
+   * @return dividendAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getDividendAmount() {
+    return dividendAmount;
+  }
+
+  public void setDividendAmount(java.math.BigDecimal dividendAmount) {
+    this.dividendAmount = dividendAmount;
+  }
+
+
+  public FundDistributionEvent interestAmount(java.math.BigDecimal interestAmount) {
+    this.interestAmount = interestAmount;
+    return this;
+  }
+
+  /**
+   * The part of the distribution that is interest income. Optional slot; must not be negative.
+   * @return interestAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getInterestAmount() {
+    return interestAmount;
+  }
+
+  public void setInterestAmount(java.math.BigDecimal interestAmount) {
+    this.interestAmount = interestAmount;
+  }
+
+
+  public FundDistributionEvent otherIncomeAmount(java.math.BigDecimal otherIncomeAmount) {
+    this.otherIncomeAmount = otherIncomeAmount;
+    return this;
+  }
+
+  /**
+   * The part of the distribution that is other income. Optional slot; must not be negative.
+   * @return otherIncomeAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getOtherIncomeAmount() {
+    return otherIncomeAmount;
+  }
+
+  public void setOtherIncomeAmount(java.math.BigDecimal otherIncomeAmount) {
+    this.otherIncomeAmount = otherIncomeAmount;
+  }
+
+
+  public FundDistributionEvent returnOfCapitalRecallableAmount(java.math.BigDecimal returnOfCapitalRecallableAmount) {
+    this.returnOfCapitalRecallableAmount = returnOfCapitalRecallableAmount;
+    return this;
+  }
+
+  /**
+   * The recallable portion of returnOfCapitalAmount. Optional; must not exceed returnOfCapitalAmount.
+   * @return returnOfCapitalRecallableAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getReturnOfCapitalRecallableAmount() {
+    return returnOfCapitalRecallableAmount;
+  }
+
+  public void setReturnOfCapitalRecallableAmount(java.math.BigDecimal returnOfCapitalRecallableAmount) {
+    this.returnOfCapitalRecallableAmount = returnOfCapitalRecallableAmount;
+  }
+
+
+  public FundDistributionEvent realisedGainRecallableAmount(java.math.BigDecimal realisedGainRecallableAmount) {
+    this.realisedGainRecallableAmount = realisedGainRecallableAmount;
+    return this;
+  }
+
+  /**
+   * The recallable portion of realisedGainAmount. Optional; must not exceed realisedGainAmount.
+   * @return realisedGainRecallableAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getRealisedGainRecallableAmount() {
+    return realisedGainRecallableAmount;
+  }
+
+  public void setRealisedGainRecallableAmount(java.math.BigDecimal realisedGainRecallableAmount) {
+    this.realisedGainRecallableAmount = realisedGainRecallableAmount;
+  }
+
+
+  public FundDistributionEvent dividendRecallableAmount(java.math.BigDecimal dividendRecallableAmount) {
+    this.dividendRecallableAmount = dividendRecallableAmount;
+    return this;
+  }
+
+  /**
+   * The recallable portion of dividendAmount. Optional; must not exceed dividendAmount.
+   * @return dividendRecallableAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getDividendRecallableAmount() {
+    return dividendRecallableAmount;
+  }
+
+  public void setDividendRecallableAmount(java.math.BigDecimal dividendRecallableAmount) {
+    this.dividendRecallableAmount = dividendRecallableAmount;
+  }
+
+
+  public FundDistributionEvent interestRecallableAmount(java.math.BigDecimal interestRecallableAmount) {
+    this.interestRecallableAmount = interestRecallableAmount;
+    return this;
+  }
+
+  /**
+   * The recallable portion of interestAmount. Optional; must not exceed interestAmount.
+   * @return interestRecallableAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getInterestRecallableAmount() {
+    return interestRecallableAmount;
+  }
+
+  public void setInterestRecallableAmount(java.math.BigDecimal interestRecallableAmount) {
+    this.interestRecallableAmount = interestRecallableAmount;
+  }
+
+
+  public FundDistributionEvent otherIncomeRecallableAmount(java.math.BigDecimal otherIncomeRecallableAmount) {
+    this.otherIncomeRecallableAmount = otherIncomeRecallableAmount;
+    return this;
+  }
+
+  /**
+   * The recallable portion of otherIncomeAmount. Optional; must not exceed otherIncomeAmount.
+   * @return otherIncomeRecallableAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getOtherIncomeRecallableAmount() {
+    return otherIncomeRecallableAmount;
+  }
+
+  public void setOtherIncomeRecallableAmount(java.math.BigDecimal otherIncomeRecallableAmount) {
+    this.otherIncomeRecallableAmount = otherIncomeRecallableAmount;
+  }
+
+
+  public FundDistributionEvent carryPaidAmount(java.math.BigDecimal carryPaidAmount) {
+    this.carryPaidAmount = carryPaidAmount;
+    return this;
+  }
+
+  /**
+   * The part of the distribution that is carried interest paid to the general partner. Optional slot; must not be negative.
+   * @return carryPaidAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getCarryPaidAmount() {
+    return carryPaidAmount;
+  }
+
+  public void setCarryPaidAmount(java.math.BigDecimal carryPaidAmount) {
+    this.carryPaidAmount = carryPaidAmount;
+  }
+
+
+  public FundDistributionEvent withholdingAmount(java.math.BigDecimal withholdingAmount) {
+    this.withholdingAmount = withholdingAmount;
+    return this;
+  }
+
+  /**
+   * The part of the distribution withheld for tax (a deemed distribution). Optional slot; must not be negative.
+   * @return withholdingAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getWithholdingAmount() {
+    return withholdingAmount;
+  }
+
+  public void setWithholdingAmount(java.math.BigDecimal withholdingAmount) {
+    this.withholdingAmount = withholdingAmount;
+  }
+
+
+  public FundDistributionEvent returnOfExcessAmount(java.math.BigDecimal returnOfExcessAmount) {
+    this.returnOfExcessAmount = returnOfExcessAmount;
+    return this;
+  }
+
+  /**
+   * The part of the distribution that returns capital called in excess. Optional slot; must not be negative.
+   * @return returnOfExcessAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getReturnOfExcessAmount() {
+    return returnOfExcessAmount;
+  }
+
+  public void setReturnOfExcessAmount(java.math.BigDecimal returnOfExcessAmount) {
+    this.returnOfExcessAmount = returnOfExcessAmount;
+  }
+
+
+  public FundDistributionEvent recallableUntil(OffsetDateTime recallableUntil) {
+    this.recallableUntil = recallableUntil;
+    return this;
+  }
+
+  /**
+   * The date until which the recallable portions may be recalled, if limited. Must not precede the distribution date.
+   * @return recallableUntil
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getRecallableUntil() {
+    return recallableUntil;
+  }
+
+  public void setRecallableUntil(OffsetDateTime recallableUntil) {
+    this.recallableUntil = recallableUntil;
+  }
+
+
+  public FundDistributionEvent dealId(String dealId) {
+    this.dealId = dealId;
+    return this;
+  }
+
+  /**
+   * The identifier of the deal the distribution relates to, if any.
+   * @return dealId
+   */
+  @javax.annotation.Nullable
+  public String getDealId() {
+    return dealId;
+  }
+
+  public void setDealId(String dealId) {
+    this.dealId = dealId;
+  }
+
+
+  public FundDistributionEvent allocationEventId(String allocationEventId) {
+    this.allocationEventId = allocationEventId;
+    return this;
+  }
+
+  /**
+   * The identifier of the allocation event the distribution relates to, if any.
+   * @return allocationEventId
+   */
+  @javax.annotation.Nullable
+  public String getAllocationEventId() {
+    return allocationEventId;
+  }
+
+  public void setAllocationEventId(String allocationEventId) {
+    this.allocationEventId = allocationEventId;
+  }
+
+
+  public FundDistributionEvent waterfallTier(String waterfallTier) {
+    this.waterfallTier = waterfallTier;
+    return this;
+  }
+
+  /**
+   * The waterfall tier the distribution was paid under, if any.
+   * @return waterfallTier
+   */
+  @javax.annotation.Nullable
+  public String getWaterfallTier() {
+    return waterfallTier;
+  }
+
+  public void setWaterfallTier(String waterfallTier) {
+    this.waterfallTier = waterfallTier;
   }
 
 
@@ -134,12 +560,40 @@ public class FundDistributionEvent extends InstrumentEvent {
     return Objects.equals(this.date, fundDistributionEvent.date) &&
         (this.amount == null ? fundDistributionEvent.amount == null : (fundDistributionEvent.amount != null && this.amount.compareTo(fundDistributionEvent.getAmount()) == 0)) &&
         Objects.equals(this.isRecallable, fundDistributionEvent.isRecallable) &&
+        (this.returnOfCapitalAmount == null ? fundDistributionEvent.returnOfCapitalAmount == null : (fundDistributionEvent.returnOfCapitalAmount != null && this.returnOfCapitalAmount.compareTo(fundDistributionEvent.getReturnOfCapitalAmount()) == 0)) &&
+        (this.realisedGainAmount == null ? fundDistributionEvent.realisedGainAmount == null : (fundDistributionEvent.realisedGainAmount != null && this.realisedGainAmount.compareTo(fundDistributionEvent.getRealisedGainAmount()) == 0)) &&
+        (this.dividendAmount == null ? fundDistributionEvent.dividendAmount == null : (fundDistributionEvent.dividendAmount != null && this.dividendAmount.compareTo(fundDistributionEvent.getDividendAmount()) == 0)) &&
+        (this.interestAmount == null ? fundDistributionEvent.interestAmount == null : (fundDistributionEvent.interestAmount != null && this.interestAmount.compareTo(fundDistributionEvent.getInterestAmount()) == 0)) &&
+        (this.otherIncomeAmount == null ? fundDistributionEvent.otherIncomeAmount == null : (fundDistributionEvent.otherIncomeAmount != null && this.otherIncomeAmount.compareTo(fundDistributionEvent.getOtherIncomeAmount()) == 0)) &&
+        (this.returnOfCapitalRecallableAmount == null ? fundDistributionEvent.returnOfCapitalRecallableAmount == null : (fundDistributionEvent.returnOfCapitalRecallableAmount != null && this.returnOfCapitalRecallableAmount.compareTo(fundDistributionEvent.getReturnOfCapitalRecallableAmount()) == 0)) &&
+        (this.realisedGainRecallableAmount == null ? fundDistributionEvent.realisedGainRecallableAmount == null : (fundDistributionEvent.realisedGainRecallableAmount != null && this.realisedGainRecallableAmount.compareTo(fundDistributionEvent.getRealisedGainRecallableAmount()) == 0)) &&
+        (this.dividendRecallableAmount == null ? fundDistributionEvent.dividendRecallableAmount == null : (fundDistributionEvent.dividendRecallableAmount != null && this.dividendRecallableAmount.compareTo(fundDistributionEvent.getDividendRecallableAmount()) == 0)) &&
+        (this.interestRecallableAmount == null ? fundDistributionEvent.interestRecallableAmount == null : (fundDistributionEvent.interestRecallableAmount != null && this.interestRecallableAmount.compareTo(fundDistributionEvent.getInterestRecallableAmount()) == 0)) &&
+        (this.otherIncomeRecallableAmount == null ? fundDistributionEvent.otherIncomeRecallableAmount == null : (fundDistributionEvent.otherIncomeRecallableAmount != null && this.otherIncomeRecallableAmount.compareTo(fundDistributionEvent.getOtherIncomeRecallableAmount()) == 0)) &&
+        (this.carryPaidAmount == null ? fundDistributionEvent.carryPaidAmount == null : (fundDistributionEvent.carryPaidAmount != null && this.carryPaidAmount.compareTo(fundDistributionEvent.getCarryPaidAmount()) == 0)) &&
+        (this.withholdingAmount == null ? fundDistributionEvent.withholdingAmount == null : (fundDistributionEvent.withholdingAmount != null && this.withholdingAmount.compareTo(fundDistributionEvent.getWithholdingAmount()) == 0)) &&
+        (this.returnOfExcessAmount == null ? fundDistributionEvent.returnOfExcessAmount == null : (fundDistributionEvent.returnOfExcessAmount != null && this.returnOfExcessAmount.compareTo(fundDistributionEvent.getReturnOfExcessAmount()) == 0)) &&
+        Objects.equals(this.recallableUntil, fundDistributionEvent.recallableUntil) &&
+        Objects.equals(this.dealId, fundDistributionEvent.dealId) &&
+        Objects.equals(this.allocationEventId, fundDistributionEvent.allocationEventId) &&
+        Objects.equals(this.waterfallTier, fundDistributionEvent.waterfallTier) &&
         super.equals(o);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(date, amount, isRecallable, super.hashCode());
+    return Objects.hash(date, amount, isRecallable, returnOfCapitalAmount, realisedGainAmount, dividendAmount, interestAmount, otherIncomeAmount, returnOfCapitalRecallableAmount, realisedGainRecallableAmount, dividendRecallableAmount, interestRecallableAmount, otherIncomeRecallableAmount, carryPaidAmount, withholdingAmount, returnOfExcessAmount, recallableUntil, dealId, allocationEventId, waterfallTier, super.hashCode());
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -150,6 +604,23 @@ public class FundDistributionEvent extends InstrumentEvent {
     sb.append("    date: ").append(toIndentedString(date)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    isRecallable: ").append(toIndentedString(isRecallable)).append("\n");
+    sb.append("    returnOfCapitalAmount: ").append(toIndentedString(returnOfCapitalAmount)).append("\n");
+    sb.append("    realisedGainAmount: ").append(toIndentedString(realisedGainAmount)).append("\n");
+    sb.append("    dividendAmount: ").append(toIndentedString(dividendAmount)).append("\n");
+    sb.append("    interestAmount: ").append(toIndentedString(interestAmount)).append("\n");
+    sb.append("    otherIncomeAmount: ").append(toIndentedString(otherIncomeAmount)).append("\n");
+    sb.append("    returnOfCapitalRecallableAmount: ").append(toIndentedString(returnOfCapitalRecallableAmount)).append("\n");
+    sb.append("    realisedGainRecallableAmount: ").append(toIndentedString(realisedGainRecallableAmount)).append("\n");
+    sb.append("    dividendRecallableAmount: ").append(toIndentedString(dividendRecallableAmount)).append("\n");
+    sb.append("    interestRecallableAmount: ").append(toIndentedString(interestRecallableAmount)).append("\n");
+    sb.append("    otherIncomeRecallableAmount: ").append(toIndentedString(otherIncomeRecallableAmount)).append("\n");
+    sb.append("    carryPaidAmount: ").append(toIndentedString(carryPaidAmount)).append("\n");
+    sb.append("    withholdingAmount: ").append(toIndentedString(withholdingAmount)).append("\n");
+    sb.append("    returnOfExcessAmount: ").append(toIndentedString(returnOfExcessAmount)).append("\n");
+    sb.append("    recallableUntil: ").append(toIndentedString(recallableUntil)).append("\n");
+    sb.append("    dealId: ").append(toIndentedString(dealId)).append("\n");
+    sb.append("    allocationEventId: ").append(toIndentedString(allocationEventId)).append("\n");
+    sb.append("    waterfallTier: ").append(toIndentedString(waterfallTier)).append("\n");
     sb.append("}");
     return sb.toString();
   }

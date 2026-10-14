@@ -28,6 +28,7 @@ MultiQueryDefinitionType method = MultiQueryDefinitionType.INSIGHTS_APPLICATION_
 MultiQueryDefinitionType method = MultiQueryDefinitionType.INSIGHTS_VENDOR_LOGS;
 MultiQueryDefinitionType method = MultiQueryDefinitionType.CANDELA_TRACE_LOGS;
 MultiQueryDefinitionType method = MultiQueryDefinitionType.CANDELA_TRACE_EVENT_LOGS;
+MultiQueryDefinitionType method = MultiQueryDefinitionType.CUSTOM;
 ```
 
 

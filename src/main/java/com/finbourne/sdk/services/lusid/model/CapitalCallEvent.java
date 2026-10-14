@@ -15,7 +15,10 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -32,11 +35,23 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A call of committed capital on a CapitalInterest: the fund draws down the amount from the investor&#39;s  unfunded commitment, moving it to funded capital.
+ * A call of committed capital on a CapitalInterest: the fund draws down the amount from the investor&#39;s  unfunded commitment, moving it to funded capital.                The total amount may optionally be broken down into slots (investment, managementFee, otherFee,  partnershipExpense, organisationalCost, recall, equalisationInterest, latePaymentInterest). When any  slot amount is supplied the slot amounts must sum to the total and one transaction is booked per  populated slot; otherwise a single legacy drawdown transaction is booked for the total.
  */
 @JsonPropertyOrder({
   CapitalCallEvent.JSON_PROPERTY_DATE,
-  CapitalCallEvent.JSON_PROPERTY_AMOUNT
+  CapitalCallEvent.JSON_PROPERTY_AMOUNT,
+  CapitalCallEvent.JSON_PROPERTY_INVESTMENT_AMOUNT,
+  CapitalCallEvent.JSON_PROPERTY_MANAGEMENT_FEE_AMOUNT,
+  CapitalCallEvent.JSON_PROPERTY_OTHER_FEE_AMOUNT,
+  CapitalCallEvent.JSON_PROPERTY_PARTNERSHIP_EXPENSE_AMOUNT,
+  CapitalCallEvent.JSON_PROPERTY_ORGANISATIONAL_COST_AMOUNT,
+  CapitalCallEvent.JSON_PROPERTY_RECALL_AMOUNT,
+  CapitalCallEvent.JSON_PROPERTY_EQUALISATION_INTEREST_AMOUNT,
+  CapitalCallEvent.JSON_PROPERTY_LATE_PAYMENT_INTEREST_AMOUNT,
+  CapitalCallEvent.JSON_PROPERTY_OUTSIDE_COMMITMENT_SLOTS,
+  CapitalCallEvent.JSON_PROPERTY_DEAL_ID,
+  CapitalCallEvent.JSON_PROPERTY_ALLOCATION_EVENT_ID,
+  CapitalCallEvent.JSON_PROPERTY_NOTICE_DATE
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -55,6 +70,66 @@ public class CapitalCallEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal amount;
+
+  public static final String JSON_PROPERTY_INVESTMENT_AMOUNT = "investmentAmount";
+  @JsonProperty(JSON_PROPERTY_INVESTMENT_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal investmentAmount;
+
+  public static final String JSON_PROPERTY_MANAGEMENT_FEE_AMOUNT = "managementFeeAmount";
+  @JsonProperty(JSON_PROPERTY_MANAGEMENT_FEE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal managementFeeAmount;
+
+  public static final String JSON_PROPERTY_OTHER_FEE_AMOUNT = "otherFeeAmount";
+  @JsonProperty(JSON_PROPERTY_OTHER_FEE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal otherFeeAmount;
+
+  public static final String JSON_PROPERTY_PARTNERSHIP_EXPENSE_AMOUNT = "partnershipExpenseAmount";
+  @JsonProperty(JSON_PROPERTY_PARTNERSHIP_EXPENSE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal partnershipExpenseAmount;
+
+  public static final String JSON_PROPERTY_ORGANISATIONAL_COST_AMOUNT = "organisationalCostAmount";
+  @JsonProperty(JSON_PROPERTY_ORGANISATIONAL_COST_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal organisationalCostAmount;
+
+  public static final String JSON_PROPERTY_RECALL_AMOUNT = "recallAmount";
+  @JsonProperty(JSON_PROPERTY_RECALL_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal recallAmount;
+
+  public static final String JSON_PROPERTY_EQUALISATION_INTEREST_AMOUNT = "equalisationInterestAmount";
+  @JsonProperty(JSON_PROPERTY_EQUALISATION_INTEREST_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal equalisationInterestAmount;
+
+  public static final String JSON_PROPERTY_LATE_PAYMENT_INTEREST_AMOUNT = "latePaymentInterestAmount";
+  @JsonProperty(JSON_PROPERTY_LATE_PAYMENT_INTEREST_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal latePaymentInterestAmount;
+
+  public static final String JSON_PROPERTY_OUTSIDE_COMMITMENT_SLOTS = "outsideCommitmentSlots";
+  @JsonProperty(JSON_PROPERTY_OUTSIDE_COMMITMENT_SLOTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> outsideCommitmentSlots;
+
+  public static final String JSON_PROPERTY_DEAL_ID = "dealId";
+  @JsonProperty(JSON_PROPERTY_DEAL_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String dealId;
+
+  public static final String JSON_PROPERTY_ALLOCATION_EVENT_ID = "allocationEventId";
+  @JsonProperty(JSON_PROPERTY_ALLOCATION_EVENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String allocationEventId;
+
+  public static final String JSON_PROPERTY_NOTICE_DATE = "noticeDate";
+  @JsonProperty(JSON_PROPERTY_NOTICE_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime noticeDate;
 
   public CapitalCallEvent() {
   }
@@ -84,7 +159,7 @@ public class CapitalCallEvent extends InstrumentEvent {
   }
 
   /**
-   * The amount of committed capital called. Must be positive.
+   * The total amount of committed capital called. Must be positive. When slot amounts are  supplied they must sum to this total.
    * @return amount
    */
   @javax.annotation.Nonnull
@@ -94,6 +169,242 @@ public class CapitalCallEvent extends InstrumentEvent {
 
   public void setAmount(java.math.BigDecimal amount) {
     this.amount = amount;
+  }
+
+
+  public CapitalCallEvent investmentAmount(java.math.BigDecimal investmentAmount) {
+    this.investmentAmount = investmentAmount;
+    return this;
+  }
+
+  /**
+   * The part of the call that funds investments. Optional slot; must not be negative.
+   * @return investmentAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getInvestmentAmount() {
+    return investmentAmount;
+  }
+
+  public void setInvestmentAmount(java.math.BigDecimal investmentAmount) {
+    this.investmentAmount = investmentAmount;
+  }
+
+
+  public CapitalCallEvent managementFeeAmount(java.math.BigDecimal managementFeeAmount) {
+    this.managementFeeAmount = managementFeeAmount;
+    return this;
+  }
+
+  /**
+   * The part of the call that pays management fees. Optional slot; must not be negative.
+   * @return managementFeeAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getManagementFeeAmount() {
+    return managementFeeAmount;
+  }
+
+  public void setManagementFeeAmount(java.math.BigDecimal managementFeeAmount) {
+    this.managementFeeAmount = managementFeeAmount;
+  }
+
+
+  public CapitalCallEvent otherFeeAmount(java.math.BigDecimal otherFeeAmount) {
+    this.otherFeeAmount = otherFeeAmount;
+    return this;
+  }
+
+  /**
+   * The part of the call that pays other fees. Optional slot; must not be negative.
+   * @return otherFeeAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getOtherFeeAmount() {
+    return otherFeeAmount;
+  }
+
+  public void setOtherFeeAmount(java.math.BigDecimal otherFeeAmount) {
+    this.otherFeeAmount = otherFeeAmount;
+  }
+
+
+  public CapitalCallEvent partnershipExpenseAmount(java.math.BigDecimal partnershipExpenseAmount) {
+    this.partnershipExpenseAmount = partnershipExpenseAmount;
+    return this;
+  }
+
+  /**
+   * The part of the call that pays partnership expenses. Optional slot; must not be negative.
+   * @return partnershipExpenseAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPartnershipExpenseAmount() {
+    return partnershipExpenseAmount;
+  }
+
+  public void setPartnershipExpenseAmount(java.math.BigDecimal partnershipExpenseAmount) {
+    this.partnershipExpenseAmount = partnershipExpenseAmount;
+  }
+
+
+  public CapitalCallEvent organisationalCostAmount(java.math.BigDecimal organisationalCostAmount) {
+    this.organisationalCostAmount = organisationalCostAmount;
+    return this;
+  }
+
+  /**
+   * The part of the call that pays organisational costs. Optional slot; must not be negative.
+   * @return organisationalCostAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getOrganisationalCostAmount() {
+    return organisationalCostAmount;
+  }
+
+  public void setOrganisationalCostAmount(java.math.BigDecimal organisationalCostAmount) {
+    this.organisationalCostAmount = organisationalCostAmount;
+  }
+
+
+  public CapitalCallEvent recallAmount(java.math.BigDecimal recallAmount) {
+    this.recallAmount = recallAmount;
+    return this;
+  }
+
+  /**
+   * The part of the call that re-draws previously distributed recallable capital. Optional slot; must not be negative.
+   * @return recallAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getRecallAmount() {
+    return recallAmount;
+  }
+
+  public void setRecallAmount(java.math.BigDecimal recallAmount) {
+    this.recallAmount = recallAmount;
+  }
+
+
+  public CapitalCallEvent equalisationInterestAmount(java.math.BigDecimal equalisationInterestAmount) {
+    this.equalisationInterestAmount = equalisationInterestAmount;
+    return this;
+  }
+
+  /**
+   * The part of the call that is equalisation interest. Optional slot; must not be negative.
+   * @return equalisationInterestAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getEqualisationInterestAmount() {
+    return equalisationInterestAmount;
+  }
+
+  public void setEqualisationInterestAmount(java.math.BigDecimal equalisationInterestAmount) {
+    this.equalisationInterestAmount = equalisationInterestAmount;
+  }
+
+
+  public CapitalCallEvent latePaymentInterestAmount(java.math.BigDecimal latePaymentInterestAmount) {
+    this.latePaymentInterestAmount = latePaymentInterestAmount;
+    return this;
+  }
+
+  /**
+   * The part of the call that is late payment interest. Optional slot; must not be negative.
+   * @return latePaymentInterestAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getLatePaymentInterestAmount() {
+    return latePaymentInterestAmount;
+  }
+
+  public void setLatePaymentInterestAmount(java.math.BigDecimal latePaymentInterestAmount) {
+    this.latePaymentInterestAmount = latePaymentInterestAmount;
+  }
+
+
+  public CapitalCallEvent outsideCommitmentSlots(List<String> outsideCommitmentSlots) {
+    this.outsideCommitmentSlots = outsideCommitmentSlots;
+    return this;
+  }
+
+  public CapitalCallEvent addOutsideCommitmentSlotsItem(String outsideCommitmentSlotsItem) {
+    if (this.outsideCommitmentSlots == null) {
+      this.outsideCommitmentSlots = new ArrayList<>();
+    }
+    this.outsideCommitmentSlots.add(outsideCommitmentSlotsItem);
+    return this;
+  }
+
+  /**
+   * The slots (names without the Amount suffix, e.g. \&quot;managementFee\&quot;) called outside the commitment,  so that they do not reduce the uncalled commitment. When omitted, defaults to equalisationInterest  and latePaymentInterest.
+   * @return outsideCommitmentSlots
+   */
+  @javax.annotation.Nullable
+  public List<String> getOutsideCommitmentSlots() {
+    return outsideCommitmentSlots;
+  }
+
+  public void setOutsideCommitmentSlots(List<String> outsideCommitmentSlots) {
+    this.outsideCommitmentSlots = outsideCommitmentSlots;
+  }
+
+
+  public CapitalCallEvent dealId(String dealId) {
+    this.dealId = dealId;
+    return this;
+  }
+
+  /**
+   * The identifier of the deal the call relates to, if any.
+   * @return dealId
+   */
+  @javax.annotation.Nullable
+  public String getDealId() {
+    return dealId;
+  }
+
+  public void setDealId(String dealId) {
+    this.dealId = dealId;
+  }
+
+
+  public CapitalCallEvent allocationEventId(String allocationEventId) {
+    this.allocationEventId = allocationEventId;
+    return this;
+  }
+
+  /**
+   * The identifier of the allocation event the call relates to, if any.
+   * @return allocationEventId
+   */
+  @javax.annotation.Nullable
+  public String getAllocationEventId() {
+    return allocationEventId;
+  }
+
+  public void setAllocationEventId(String allocationEventId) {
+    this.allocationEventId = allocationEventId;
+  }
+
+
+  public CapitalCallEvent noticeDate(OffsetDateTime noticeDate) {
+    this.noticeDate = noticeDate;
+    return this;
+  }
+
+  /**
+   * The date the call notice was issued, if known.
+   * @return noticeDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getNoticeDate() {
+    return noticeDate;
+  }
+
+  public void setNoticeDate(OffsetDateTime noticeDate) {
+    this.noticeDate = noticeDate;
   }
 
 
@@ -108,12 +419,35 @@ public class CapitalCallEvent extends InstrumentEvent {
     CapitalCallEvent capitalCallEvent = (CapitalCallEvent) o;
     return Objects.equals(this.date, capitalCallEvent.date) &&
         (this.amount == null ? capitalCallEvent.amount == null : (capitalCallEvent.amount != null && this.amount.compareTo(capitalCallEvent.getAmount()) == 0)) &&
+        (this.investmentAmount == null ? capitalCallEvent.investmentAmount == null : (capitalCallEvent.investmentAmount != null && this.investmentAmount.compareTo(capitalCallEvent.getInvestmentAmount()) == 0)) &&
+        (this.managementFeeAmount == null ? capitalCallEvent.managementFeeAmount == null : (capitalCallEvent.managementFeeAmount != null && this.managementFeeAmount.compareTo(capitalCallEvent.getManagementFeeAmount()) == 0)) &&
+        (this.otherFeeAmount == null ? capitalCallEvent.otherFeeAmount == null : (capitalCallEvent.otherFeeAmount != null && this.otherFeeAmount.compareTo(capitalCallEvent.getOtherFeeAmount()) == 0)) &&
+        (this.partnershipExpenseAmount == null ? capitalCallEvent.partnershipExpenseAmount == null : (capitalCallEvent.partnershipExpenseAmount != null && this.partnershipExpenseAmount.compareTo(capitalCallEvent.getPartnershipExpenseAmount()) == 0)) &&
+        (this.organisationalCostAmount == null ? capitalCallEvent.organisationalCostAmount == null : (capitalCallEvent.organisationalCostAmount != null && this.organisationalCostAmount.compareTo(capitalCallEvent.getOrganisationalCostAmount()) == 0)) &&
+        (this.recallAmount == null ? capitalCallEvent.recallAmount == null : (capitalCallEvent.recallAmount != null && this.recallAmount.compareTo(capitalCallEvent.getRecallAmount()) == 0)) &&
+        (this.equalisationInterestAmount == null ? capitalCallEvent.equalisationInterestAmount == null : (capitalCallEvent.equalisationInterestAmount != null && this.equalisationInterestAmount.compareTo(capitalCallEvent.getEqualisationInterestAmount()) == 0)) &&
+        (this.latePaymentInterestAmount == null ? capitalCallEvent.latePaymentInterestAmount == null : (capitalCallEvent.latePaymentInterestAmount != null && this.latePaymentInterestAmount.compareTo(capitalCallEvent.getLatePaymentInterestAmount()) == 0)) &&
+        Objects.equals(this.outsideCommitmentSlots, capitalCallEvent.outsideCommitmentSlots) &&
+        Objects.equals(this.dealId, capitalCallEvent.dealId) &&
+        Objects.equals(this.allocationEventId, capitalCallEvent.allocationEventId) &&
+        Objects.equals(this.noticeDate, capitalCallEvent.noticeDate) &&
         super.equals(o);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(date, amount, super.hashCode());
+    return Objects.hash(date, amount, investmentAmount, managementFeeAmount, otherFeeAmount, partnershipExpenseAmount, organisationalCostAmount, recallAmount, equalisationInterestAmount, latePaymentInterestAmount, outsideCommitmentSlots, dealId, allocationEventId, noticeDate, super.hashCode());
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -123,6 +457,18 @@ public class CapitalCallEvent extends InstrumentEvent {
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    date: ").append(toIndentedString(date)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    investmentAmount: ").append(toIndentedString(investmentAmount)).append("\n");
+    sb.append("    managementFeeAmount: ").append(toIndentedString(managementFeeAmount)).append("\n");
+    sb.append("    otherFeeAmount: ").append(toIndentedString(otherFeeAmount)).append("\n");
+    sb.append("    partnershipExpenseAmount: ").append(toIndentedString(partnershipExpenseAmount)).append("\n");
+    sb.append("    organisationalCostAmount: ").append(toIndentedString(organisationalCostAmount)).append("\n");
+    sb.append("    recallAmount: ").append(toIndentedString(recallAmount)).append("\n");
+    sb.append("    equalisationInterestAmount: ").append(toIndentedString(equalisationInterestAmount)).append("\n");
+    sb.append("    latePaymentInterestAmount: ").append(toIndentedString(latePaymentInterestAmount)).append("\n");
+    sb.append("    outsideCommitmentSlots: ").append(toIndentedString(outsideCommitmentSlots)).append("\n");
+    sb.append("    dealId: ").append(toIndentedString(dealId)).append("\n");
+    sb.append("    allocationEventId: ").append(toIndentedString(allocationEventId)).append("\n");
+    sb.append("    noticeDate: ").append(toIndentedString(noticeDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }

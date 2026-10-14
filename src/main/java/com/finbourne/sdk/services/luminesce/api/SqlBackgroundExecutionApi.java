@@ -5929,7 +5929,7 @@ public class SqlBackgroundExecutionApi {
 
     /**
      * [EXPERIMENTAL] ListQueries: List the background queries available to the calling user
-     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are.  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 Unauthorized
+     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are (other than those marked as not being external results).  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 Unauthorized
      * @param sqlLike An optional SQL-LIKE style filter on the LuminesceSql of the queries (manually include wildcards if desired). (optional)
      * @return ApiResponse&lt;List&lt;BackgroundQueryListItem&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -5947,7 +5947,7 @@ public class SqlBackgroundExecutionApi {
 
     /**
      * [EXPERIMENTAL] ListQueries: List the background queries available to the calling user
-     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are.  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 UnauthorizedUse any specified configuration options to override any other configuration for this request only
+     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are (other than those marked as not being external results).  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 UnauthorizedUse any specified configuration options to override any other configuration for this request only
      * @param sqlLike An optional SQL-LIKE style filter on the LuminesceSql of the queries (manually include wildcards if desired). (optional)
      * @return ApiResponse&lt;List&lt;BackgroundQueryListItem&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -5965,7 +5965,7 @@ public class SqlBackgroundExecutionApi {
 
     /**
      * [EXPERIMENTAL] ListQueries: List the background queries available to the calling user (asynchronously)
-     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are.  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 Unauthorized
+     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are (other than those marked as not being external results).  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 Unauthorized
      * @param sqlLike An optional SQL-LIKE style filter on the LuminesceSql of the queries (manually include wildcards if desired). (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -5984,7 +5984,7 @@ public class SqlBackgroundExecutionApi {
 
     /**
      * [EXPERIMENTAL] ListQueries: List the background queries available to the calling user (asynchronously)
-     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are.  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 UnauthorizedUse any specified configuration options to override any other configuration for this request only
+     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are (other than those marked as not being external results).  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 UnauthorizedUse any specified configuration options to override any other configuration for this request only
      * @param sqlLike An optional SQL-LIKE style filter on the LuminesceSql of the queries (manually include wildcards if desired). (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -6121,7 +6121,7 @@ public class SqlBackgroundExecutionApi {
 
     /**
      * [EXPERIMENTAL] ListQueries: List the background queries available to the calling user
-     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are.  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 Unauthorized
+     * Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are (other than those marked as not being external results).  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 Unauthorized
      * @return APIlistQueriesRequest
      * @http.response.details
      <table summary="Response Details" border="1">

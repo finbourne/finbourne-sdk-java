@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.workflow.model;
 
+import com.finbourne.sdk.services.workflow.model.LaunchedBy;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -36,7 +37,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   WorkflowRun.JSON_PROPERTY_ID,
   WorkflowRun.JSON_PROPERTY_AS_AT_CREATED,
-  WorkflowRun.JSON_PROPERTY_COMPLETION_STATUS
+  WorkflowRun.JSON_PROPERTY_COMPLETION_STATUS,
+  WorkflowRun.JSON_PROPERTY_LAUNCHED_BY
 })
 
 public class WorkflowRun {
@@ -54,6 +56,11 @@ public class WorkflowRun {
   @JsonProperty(JSON_PROPERTY_COMPLETION_STATUS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String completionStatus;
+
+  public static final String JSON_PROPERTY_LAUNCHED_BY = "launchedBy";
+  @JsonProperty(JSON_PROPERTY_LAUNCHED_BY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private LaunchedBy launchedBy;
 
   public WorkflowRun() {
   }
@@ -115,6 +122,25 @@ public class WorkflowRun {
   }
 
 
+  public WorkflowRun launchedBy(LaunchedBy launchedBy) {
+    this.launchedBy = launchedBy;
+    return this;
+  }
+
+  /**
+   * Get launchedBy
+   * @return launchedBy
+   */
+  @javax.annotation.Nullable
+  public LaunchedBy getLaunchedBy() {
+    return launchedBy;
+  }
+
+  public void setLaunchedBy(LaunchedBy launchedBy) {
+    this.launchedBy = launchedBy;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -126,12 +152,13 @@ public class WorkflowRun {
     WorkflowRun workflowRun = (WorkflowRun) o;
     return Objects.equals(this.id, workflowRun.id) &&
         Objects.equals(this.asAtCreated, workflowRun.asAtCreated) &&
-        Objects.equals(this.completionStatus, workflowRun.completionStatus);
+        Objects.equals(this.completionStatus, workflowRun.completionStatus) &&
+        Objects.equals(this.launchedBy, workflowRun.launchedBy);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, asAtCreated, completionStatus);
+    return Objects.hash(id, asAtCreated, completionStatus, launchedBy);
   }
 
   @Override
@@ -141,6 +168,7 @@ public class WorkflowRun {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    asAtCreated: ").append(toIndentedString(asAtCreated)).append("\n");
     sb.append("    completionStatus: ").append(toIndentedString(completionStatus)).append("\n");
+    sb.append("    launchedBy: ").append(toIndentedString(launchedBy)).append("\n");
     sb.append("}");
     return sb.toString();
   }
