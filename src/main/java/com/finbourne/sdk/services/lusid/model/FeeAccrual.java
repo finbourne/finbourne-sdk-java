@@ -46,6 +46,9 @@ import com.finbourne.sdk.JSON;
   FeeAccrual.JSON_PROPERTY_PREVIOUS_ACCRUAL,
   FeeAccrual.JSON_PROPERTY_PREVIOUS_TOTAL_ACCRUAL,
   FeeAccrual.JSON_PROPERTY_TOTAL_ACCRUAL,
+  FeeAccrual.JSON_PROPERTY_CAP_PERIOD_ACCRUAL,
+  FeeAccrual.JSON_PROPERTY_FEE_CAP_APPLIED,
+  FeeAccrual.JSON_PROPERTY_FEE_FLOOR_APPLIED,
   FeeAccrual.JSON_PROPERTY_LINKS
 })
 
@@ -89,6 +92,21 @@ public class FeeAccrual {
   @JsonProperty(JSON_PROPERTY_TOTAL_ACCRUAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal totalAccrual;
+
+  public static final String JSON_PROPERTY_CAP_PERIOD_ACCRUAL = "capPeriodAccrual";
+  @JsonProperty(JSON_PROPERTY_CAP_PERIOD_ACCRUAL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal capPeriodAccrual;
+
+  public static final String JSON_PROPERTY_FEE_CAP_APPLIED = "feeCapApplied";
+  @JsonProperty(JSON_PROPERTY_FEE_CAP_APPLIED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean feeCapApplied;
+
+  public static final String JSON_PROPERTY_FEE_FLOOR_APPLIED = "feeFloorApplied";
+  @JsonProperty(JSON_PROPERTY_FEE_FLOOR_APPLIED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean feeFloorApplied;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -250,6 +268,63 @@ public class FeeAccrual {
   }
 
 
+  public FeeAccrual capPeriodAccrual(java.math.BigDecimal capPeriodAccrual) {
+    this.capPeriodAccrual = capPeriodAccrual;
+    return this;
+  }
+
+  /**
+   * The amount accrued so far in the current fee year (from the fee&#39;s AnchorDate), in the fund currency, against which an annual FeeCap is assessed.
+   * @return capPeriodAccrual
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getCapPeriodAccrual() {
+    return capPeriodAccrual;
+  }
+
+  public void setCapPeriodAccrual(java.math.BigDecimal capPeriodAccrual) {
+    this.capPeriodAccrual = capPeriodAccrual;
+  }
+
+
+  public FeeAccrual feeCapApplied(Boolean feeCapApplied) {
+    this.feeCapApplied = feeCapApplied;
+    return this;
+  }
+
+  /**
+   * Whether the FeeCap reduced the amount accrued at this valuation point.
+   * @return feeCapApplied
+   */
+  @javax.annotation.Nullable
+  public Boolean getFeeCapApplied() {
+    return feeCapApplied;
+  }
+
+  public void setFeeCapApplied(Boolean feeCapApplied) {
+    this.feeCapApplied = feeCapApplied;
+  }
+
+
+  public FeeAccrual feeFloorApplied(Boolean feeFloorApplied) {
+    this.feeFloorApplied = feeFloorApplied;
+    return this;
+  }
+
+  /**
+   * Whether the FeeFloor raised the amount accrued at this valuation point.
+   * @return feeFloorApplied
+   */
+  @javax.annotation.Nullable
+  public Boolean getFeeFloorApplied() {
+    return feeFloorApplied;
+  }
+
+  public void setFeeFloorApplied(Boolean feeFloorApplied) {
+    this.feeFloorApplied = feeFloorApplied;
+  }
+
+
   public FeeAccrual links(List<Link> links) {
     this.links = links;
     return this;
@@ -294,6 +369,9 @@ public class FeeAccrual {
         (this.previousAccrual == null ? feeAccrual.previousAccrual == null : (feeAccrual.previousAccrual != null && this.previousAccrual.compareTo(feeAccrual.getPreviousAccrual()) == 0)) &&
         (this.previousTotalAccrual == null ? feeAccrual.previousTotalAccrual == null : (feeAccrual.previousTotalAccrual != null && this.previousTotalAccrual.compareTo(feeAccrual.getPreviousTotalAccrual()) == 0)) &&
         (this.totalAccrual == null ? feeAccrual.totalAccrual == null : (feeAccrual.totalAccrual != null && this.totalAccrual.compareTo(feeAccrual.getTotalAccrual()) == 0)) &&
+        (this.capPeriodAccrual == null ? feeAccrual.capPeriodAccrual == null : (feeAccrual.capPeriodAccrual != null && this.capPeriodAccrual.compareTo(feeAccrual.getCapPeriodAccrual()) == 0)) &&
+        Objects.equals(this.feeCapApplied, feeAccrual.feeCapApplied) &&
+        Objects.equals(this.feeFloorApplied, feeAccrual.feeFloorApplied) &&
         Objects.equals(this.links, feeAccrual.links);
   }
 
@@ -303,7 +381,7 @@ public class FeeAccrual {
 
   @Override
  public int hashCode() {
-    return Objects.hash(effectiveAt, code, name, calculationBase, amount, previousAccrual, previousTotalAccrual, totalAccrual, links);
+    return Objects.hash(effectiveAt, code, name, calculationBase, amount, previousAccrual, previousTotalAccrual, totalAccrual, capPeriodAccrual, feeCapApplied, feeFloorApplied, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -325,6 +403,9 @@ public class FeeAccrual {
     sb.append("    previousAccrual: ").append(toIndentedString(previousAccrual)).append("\n");
     sb.append("    previousTotalAccrual: ").append(toIndentedString(previousTotalAccrual)).append("\n");
     sb.append("    totalAccrual: ").append(toIndentedString(totalAccrual)).append("\n");
+    sb.append("    capPeriodAccrual: ").append(toIndentedString(capPeriodAccrual)).append("\n");
+    sb.append("    feeCapApplied: ").append(toIndentedString(feeCapApplied)).append("\n");
+    sb.append("    feeFloorApplied: ").append(toIndentedString(feeFloorApplied)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

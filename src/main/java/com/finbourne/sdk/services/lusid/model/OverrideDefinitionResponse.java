@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
+import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.TransactionPrice;
 import java.io.IOException;
 import java.util.Arrays;
@@ -52,6 +53,7 @@ import com.finbourne.sdk.JSON;
   OverrideDefinitionResponse.JSON_PROPERTY_PROPERTIES,
   OverrideDefinitionResponse.JSON_PROPERTY_COUNTERPARTY_ID,
   OverrideDefinitionResponse.JSON_PROPERTY_SOURCE,
+  OverrideDefinitionResponse.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID,
   OverrideDefinitionResponse.JSON_PROPERTY_PRECEDES_EVENT
 })
 
@@ -120,6 +122,11 @@ public class OverrideDefinitionResponse {
   @JsonProperty(JSON_PROPERTY_SOURCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String source;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID = "custodianAccountId";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId custodianAccountId;
 
   public static final String JSON_PROPERTY_PRECEDES_EVENT = "precedesEvent";
   @JsonProperty(JSON_PROPERTY_PRECEDES_EVENT)
@@ -392,6 +399,25 @@ public class OverrideDefinitionResponse {
   }
 
 
+  public OverrideDefinitionResponse custodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+    return this;
+  }
+
+  /**
+   * Get custodianAccountId
+   * @return custodianAccountId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getCustodianAccountId() {
+    return custodianAccountId;
+  }
+
+  public void setCustodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+  }
+
+
   public OverrideDefinitionResponse precedesEvent(Boolean precedesEvent) {
     this.precedesEvent = precedesEvent;
     return this;
@@ -433,6 +459,7 @@ public class OverrideDefinitionResponse {
         Objects.equals(this.properties, overrideDefinitionResponse.properties) &&
         Objects.equals(this.counterpartyId, overrideDefinitionResponse.counterpartyId) &&
         Objects.equals(this.source, overrideDefinitionResponse.source) &&
+        Objects.equals(this.custodianAccountId, overrideDefinitionResponse.custodianAccountId) &&
         Objects.equals(this.precedesEvent, overrideDefinitionResponse.precedesEvent);
   }
 
@@ -442,7 +469,7 @@ public class OverrideDefinitionResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, type, instrumentIdentifiers, tradeDate, settlementDate, units, tradePrice, totalConsideration, exchangeRate, tradeCurrency, properties, counterpartyId, source, precedesEvent);
+    return Objects.hash(transactionId, type, instrumentIdentifiers, tradeDate, settlementDate, units, tradePrice, totalConsideration, exchangeRate, tradeCurrency, properties, counterpartyId, source, custodianAccountId, precedesEvent);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -469,6 +496,7 @@ public class OverrideDefinitionResponse {
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    counterpartyId: ").append(toIndentedString(counterpartyId)).append("\n");
     sb.append("    source: ").append(toIndentedString(source)).append("\n");
+    sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("    precedesEvent: ").append(toIndentedString(precedesEvent)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -25,6 +25,7 @@ import com.finbourne.sdk.services.lusid.model.ReportingPrice;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.ShareClass;
 import com.finbourne.sdk.services.lusid.model.Version;
+import com.finbourne.sdk.services.lusid.model.WhtParameters;
 import java.io.IOException;
 import java.net.URI;
 import java.time.OffsetDateTime;
@@ -79,6 +80,7 @@ import com.finbourne.sdk.JSON;
   Fund.JSON_PROPERTY_PRICING_METHODOLOGY,
   Fund.JSON_PROPERTY_REPORTING_PRICES,
   Fund.JSON_PROPERTY_VERSION,
+  Fund.JSON_PROPERTY_WHT_PARAMETERS,
   Fund.JSON_PROPERTY_LINKS
 })
 
@@ -212,6 +214,11 @@ public class Fund {
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Version version;
+
+  public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
+  @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private WhtParameters whtParameters;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -771,6 +778,25 @@ public class Fund {
   }
 
 
+  public Fund whtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+    return this;
+  }
+
+  /**
+   * Get whtParameters
+   * @return whtParameters
+   */
+  @javax.annotation.Nullable
+  public WhtParameters getWhtParameters() {
+    return whtParameters;
+  }
+
+  public void setWhtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+  }
+
+
   public Fund links(List<Link> links) {
     this.links = links;
     return this;
@@ -833,6 +859,7 @@ public class Fund {
         Objects.equals(this.pricingMethodology, fund.pricingMethodology) &&
         Objects.equals(this.reportingPrices, fund.reportingPrices) &&
         Objects.equals(this.version, fund.version) &&
+        Objects.equals(this.whtParameters, fund.whtParameters) &&
         Objects.equals(this.links, fund.links);
   }
 
@@ -842,7 +869,7 @@ public class Fund {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shortCode, aborId, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, pricingMethodology, reportingPrices, version, links);
+    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shortCode, aborId, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, pricingMethodology, reportingPrices, version, whtParameters, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -882,6 +909,7 @@ public class Fund {
     sb.append("    pricingMethodology: ").append(toIndentedString(pricingMethodology)).append("\n");
     sb.append("    reportingPrices: ").append(toIndentedString(reportingPrices)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

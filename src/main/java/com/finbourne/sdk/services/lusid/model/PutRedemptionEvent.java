@@ -39,7 +39,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Put Redemption (BPUT) — early redemption of a bond at the holder&#39;s election under an  indenture-defined put option. Supports both Voluntary (the AMI-SeCo canonical shape) and  Mandatory (a deliberate market extension beyond SCoRE) participation on Bond, ComplexBond,  and InflationLinkedBond instruments. Cloned from RepurchaseOfferEvent (BIDS) and narrowed  to debt with a fixed event-level OfferPrice instead of a per-election holder-bid price.
+ * Put Redemption (BPUT) — early redemption of a bond at the holder&#39;s election under an  indenture-defined put option. Supports both Voluntary (the AMI-SeCo canonical shape) and  Mandatory (a deliberate market extension beyond SCoRE) participation on Bond, ComplexBond,  and InflationLinkedBond instruments. Cloned from RepurchaseOfferEvent (BIDS) and narrowed  to debt. The put price and the settlement currency can be set at the event level or on the  sole CashOfferElection.
  */
 @JsonPropertyOrder({
   PutRedemptionEvent.JSON_PROPERTY_PAYMENT_DATE,
@@ -72,12 +72,12 @@ public class PutRedemptionEvent extends InstrumentEvent {
 
   public static final String JSON_PROPERTY_OFFER_PRICE = "offerPrice";
   @JsonProperty(JSON_PROPERTY_OFFER_PRICE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal offerPrice;
 
   public static final String JSON_PROPERTY_CURRENCY = "currency";
   @JsonProperty(JSON_PROPERTY_CURRENCY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String currency;
 
   public static final String JSON_PROPERTY_CASH_OFFER_ELECTIONS = "cashOfferElections";
@@ -163,10 +163,10 @@ public class PutRedemptionEvent extends InstrumentEvent {
   }
 
   /**
-   * Put price per unit of face value (AMI-SeCo OFFR). Per-100 PRCT semantics —  &#x60;OfferPrice &#x3D; 100.00&#x60; means par; &#x60;97.50&#x60; means 97.5% of par. Must be strictly positive.
+   * Put price per unit of face value (AMI-SeCo OFFR). Per-100 PRCT semantics —  &#x60;OfferPrice &#x3D; 100.00&#x60; means par; &#x60;97.50&#x60; means 97.5% of par. Must be strictly positive.  Optional. When it is omitted, the cashOfferPrice of the sole CashOfferElection is the put price,  and it must be strictly positive. When both are set, this value is used.
    * @return offerPrice
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public java.math.BigDecimal getOfferPrice() {
     return offerPrice;
   }
@@ -182,10 +182,10 @@ public class PutRedemptionEvent extends InstrumentEvent {
   }
 
   /**
-   * Settlement currency of the cash leg (ISO 4217 3-letter code).
+   * Settlement currency of the cash leg (ISO 4217 3-letter code). Optional. When it is omitted, the  cashOfferCurrency of the sole CashOfferElection is the settlement currency. When both are set,  this value is used.
    * @return currency
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getCurrency() {
     return currency;
   }
@@ -209,7 +209,7 @@ public class PutRedemptionEvent extends InstrumentEvent {
   }
 
   /**
-   * List of possible CashOfferElections. Exactly one entry per event in both Mandatory and Voluntary paths.
+   * List of possible CashOfferElections. Exactly one entry per event in both Mandatory and Voluntary paths.  Its cashOfferPrice and cashOfferCurrency are the put price and the settlement currency when  offerPrice and currency are omitted.
    * @return cashOfferElections
    */
   @javax.annotation.Nonnull

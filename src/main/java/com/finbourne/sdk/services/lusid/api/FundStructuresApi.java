@@ -29,6 +29,8 @@ import java.io.IOException;
 
 import com.finbourne.sdk.services.lusid.model.DeletedEntityResponse;
 import com.finbourne.sdk.services.lusid.model.FundStructure;
+import com.finbourne.sdk.services.lusid.model.FundStructureCloseRequest;
+import com.finbourne.sdk.services.lusid.model.FundStructureCloseResult;
 import com.finbourne.sdk.services.lusid.model.FundStructureMemberRequest;
 import com.finbourne.sdk.services.lusid.model.FundStructureRequest;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
@@ -443,6 +445,371 @@ public class FundStructuresApi {
      */
     public APIaddFundStructureMemberRequest addFundStructureMember(String scope, String code, FundStructureMemberRequest fundStructureMemberRequest) {
         return new APIaddFundStructureMemberRequest(scope, code, fundStructureMemberRequest);
+    }
+    /**
+     * Build call for closeFundStructure
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureCloseRequest The valuation point to finalise. (required)
+     * @param asAt The asAt datetime at which to read the structure. Defaults to return the latest version if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest closeFundStructureCall(String scope, String code, FundStructureCloseRequest fundStructureCloseRequest, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
+        return closeFundStructureCall(scope, code, fundStructureCloseRequest, asAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for closeFundStructure. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param fundStructureCloseRequest The valuation point to finalise. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the structure. Defaults to return the latest version if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest closeFundStructureCall(String scope, String code, FundStructureCloseRequest fundStructureCloseRequest, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = fundStructureCloseRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/fundstructures/{scope}/{code}/$close"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest closeFundStructureValidateBeforeCall(String scope, String code, FundStructureCloseRequest fundStructureCloseRequest, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling closeFundStructure(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling closeFundStructure(Async)");
+        }
+
+        // verify the required parameter 'fundStructureCloseRequest' is set
+        if (fundStructureCloseRequest == null) {
+            throw new ApiException("Missing the required parameter 'fundStructureCloseRequest' when calling closeFundStructure(Async)");
+        }
+
+        return closeFundStructureCall(scope, code, fundStructureCloseRequest, asAt, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
+     * Finalise the named valuation point on every member fund of the structure, leaves first so that each fund&#39;s  investors see a final NAV before the fund holding them closes. A member that fails stops the funds that depend on  it; the members already finalised stand.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureCloseRequest The valuation point to finalise. (required)
+     * @param asAt The asAt datetime at which to read the structure. Defaults to return the latest version if not specified. (optional)
+     * @return ApiResponse&lt;FundStructureCloseResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<FundStructureCloseResult> closeFundStructureWithHttpInfo(String scope, String code, FundStructureCloseRequest fundStructureCloseRequest, OffsetDateTime asAt) throws ApiException {
+        HttpRequest localVarCall = closeFundStructureValidateBeforeCall(scope, code, fundStructureCloseRequest, asAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<FundStructureCloseResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
+     * Finalise the named valuation point on every member fund of the structure, leaves first so that each fund&#39;s  investors see a final NAV before the fund holding them closes. A member that fails stops the funds that depend on  it; the members already finalised stand.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureCloseRequest The valuation point to finalise. (required)
+     * @param asAt The asAt datetime at which to read the structure. Defaults to return the latest version if not specified. (optional)
+     * @return ApiResponse&lt;FundStructureCloseResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<FundStructureCloseResult> closeFundStructureWithHttpInfo(String scope, String code, FundStructureCloseRequest fundStructureCloseRequest, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = closeFundStructureValidateBeforeCall(scope, code, fundStructureCloseRequest, asAt, null, opts);
+        Type localVarReturnType = new TypeReference<FundStructureCloseResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure. (asynchronously)
+     * Finalise the named valuation point on every member fund of the structure, leaves first so that each fund&#39;s  investors see a final NAV before the fund holding them closes. A member that fails stops the funds that depend on  it; the members already finalised stand.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureCloseRequest The valuation point to finalise. (required)
+     * @param asAt The asAt datetime at which to read the structure. Defaults to return the latest version if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void closeFundStructureAsync(String scope, String code, FundStructureCloseRequest fundStructureCloseRequest, OffsetDateTime asAt, final ApiCallback<FundStructureCloseResult> _callback) throws ApiException {
+
+        HttpRequest localVarCall = closeFundStructureValidateBeforeCall(scope, code, fundStructureCloseRequest, asAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<FundStructureCloseResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure. (asynchronously)
+     * Finalise the named valuation point on every member fund of the structure, leaves first so that each fund&#39;s  investors see a final NAV before the fund holding them closes. A member that fails stops the funds that depend on  it; the members already finalised stand.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureCloseRequest The valuation point to finalise. (required)
+     * @param asAt The asAt datetime at which to read the structure. Defaults to return the latest version if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void closeFundStructureAsync(String scope, String code, FundStructureCloseRequest fundStructureCloseRequest, OffsetDateTime asAt, final ApiCallback<FundStructureCloseResult> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = closeFundStructureValidateBeforeCall(scope, code, fundStructureCloseRequest, asAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<FundStructureCloseResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIcloseFundStructureRequest {
+        private final String scope;
+        private final String code;
+        private final FundStructureCloseRequest fundStructureCloseRequest;
+        private OffsetDateTime asAt;
+
+        private APIcloseFundStructureRequest(String scope, String code, FundStructureCloseRequest fundStructureCloseRequest) {
+            this.scope = scope;
+            this.code = code;
+            this.fundStructureCloseRequest = fundStructureCloseRequest;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the structure. Defaults to return the latest version if not specified. (optional)
+         * @return APIcloseFundStructureRequest
+         */
+        public APIcloseFundStructureRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Build call for closeFundStructure
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return closeFundStructureCall(scope, code, fundStructureCloseRequest, asAt, _callback);
+        }
+
+        /**
+         * Execute closeFundStructure request
+         * @return FundStructureCloseResult
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public FundStructureCloseResult execute() throws ApiException {
+            ApiResponse<FundStructureCloseResult> localVarResp = closeFundStructureWithHttpInfo(scope, code, fundStructureCloseRequest, asAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute closeFundStructure request. Use any specified configuration options to override any other configuration for this request only.
+         * @return FundStructureCloseResult
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public FundStructureCloseResult execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<FundStructureCloseResult> localVarResp = closeFundStructureWithHttpInfo(scope, code, fundStructureCloseRequest, asAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute closeFundStructure request with HTTP info returned
+         * @return ApiResponse&lt;FundStructureCloseResult&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<FundStructureCloseResult> executeWithHttpInfo() throws ApiException {
+            return closeFundStructureWithHttpInfo(scope, code, fundStructureCloseRequest, asAt);
+        }
+
+        /**
+         * Execute closeFundStructure request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;FundStructureCloseResult&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<FundStructureCloseResult> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return closeFundStructureWithHttpInfo(scope, code, fundStructureCloseRequest, asAt, opts);
+        }
+
+        /**
+         * Execute closeFundStructure request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<FundStructureCloseResult> _callback) throws ApiException {
+            closeFundStructureAsync(scope, code, fundStructureCloseRequest, asAt, _callback);
+        }
+
+        /**
+         * Execute closeFundStructure request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<FundStructureCloseResult> _callback, ConfigurationOptions opts) throws ApiException {
+            closeFundStructureAsync(scope, code, fundStructureCloseRequest, asAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
+     * Finalise the named valuation point on every member fund of the structure, leaves first so that each fund&#39;s  investors see a final NAV before the fund holding them closes. A member that fails stops the funds that depend on  it; the members already finalised stand.
+     * @param scope The scope of the Fund Structure. (required)
+     * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
+     * @param fundStructureCloseRequest The valuation point to finalise. (required)
+     * @return APIcloseFundStructureRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The finalisation of each member of the structure. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIcloseFundStructureRequest closeFundStructure(String scope, String code, FundStructureCloseRequest fundStructureCloseRequest) {
+        return new APIcloseFundStructureRequest(scope, code, fundStructureCloseRequest);
     }
     /**
      * Build call for createFundStructure

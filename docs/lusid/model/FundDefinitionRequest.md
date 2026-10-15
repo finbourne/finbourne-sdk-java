@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **shareClasses** | [**List&lt;ShareClassDefinition&gt;**](ShareClassDefinition.md) | An optional list of Share Class definitions for the Fund. | [optional] [default to List<ShareClassDefinition>]
 **pricingMethodology** | [**PricingMethodology**](PricingMethodology.md) |  | [optional] [default to PricingMethodology]
 **reportingPrices** | [**List&lt;ReportingPrice&gt;**](ReportingPrice.md) | Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices. | [optional] [default to List<ReportingPrice>]
+**whtParameters** | [**WhtParameters**](WhtParameters.md) |  | [optional] [default to WhtParameters]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FundDefinitionRequest;
@@ -55,6 +56,7 @@ Boolean createInstrument = true;
 @javax.annotation.Nullable List<ShareClassDefinition> shareClasses = new List<ShareClassDefinition>();
 PricingMethodology pricingMethodology = new PricingMethodology();
 @javax.annotation.Nullable List<ReportingPrice> reportingPrices = new List<ReportingPrice>();
+WhtParameters whtParameters = new WhtParameters();
 
 
 FundDefinitionRequest fundDefinitionRequestInstance = new FundDefinitionRequest()
@@ -78,7 +80,8 @@ FundDefinitionRequest fundDefinitionRequestInstance = new FundDefinitionRequest(
     .createInstrument(createInstrument)
     .shareClasses(shareClasses)
     .pricingMethodology(pricingMethodology)
-    .reportingPrices(reportingPrices);
+    .reportingPrices(reportingPrices)
+    .whtParameters(whtParameters);
 ```
 
 

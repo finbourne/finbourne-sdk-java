@@ -19,6 +19,7 @@ import com.finbourne.sdk.services.lusid.model.OrderGraphBlockOrderSynopsis;
 import com.finbourne.sdk.services.lusid.model.OrderGraphBlockPlacementSynopsis;
 import com.finbourne.sdk.services.lusid.model.OrderGraphBlockTransactionSynopsis;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
@@ -49,7 +50,8 @@ import com.finbourne.sdk.JSON;
   OrderGraphBlock.JSON_PROPERTY_DERIVED_STATE,
   OrderGraphBlock.JSON_PROPERTY_DERIVED_COMPLIANCE_STATE,
   OrderGraphBlock.JSON_PROPERTY_DERIVED_APPROVAL_STATE,
-  OrderGraphBlock.JSON_PROPERTY_DERIVED_DIRECTION
+  OrderGraphBlock.JSON_PROPERTY_DERIVED_DIRECTION,
+  OrderGraphBlock.JSON_PROPERTY_LATEST_ACTIVITY_DATE
 })
 
 public class OrderGraphBlock {
@@ -102,6 +104,11 @@ public class OrderGraphBlock {
   @JsonProperty(JSON_PROPERTY_DERIVED_DIRECTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Integer derivedDirection;
+
+  public static final String JSON_PROPERTY_LATEST_ACTIVITY_DATE = "latestActivityDate";
+  @JsonProperty(JSON_PROPERTY_LATEST_ACTIVITY_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime latestActivityDate;
 
   public OrderGraphBlock() {
   }
@@ -296,6 +303,25 @@ public class OrderGraphBlock {
   }
 
 
+  public OrderGraphBlock latestActivityDate(OffsetDateTime latestActivityDate) {
+    this.latestActivityDate = latestActivityDate;
+    return this;
+  }
+
+  /**
+   * The most recent AsAt at which the block, or any of its orders, placements, executions or allocations, was modified.
+   * @return latestActivityDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getLatestActivityDate() {
+    return latestActivityDate;
+  }
+
+  public void setLatestActivityDate(OffsetDateTime latestActivityDate) {
+    this.latestActivityDate = latestActivityDate;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -314,7 +340,8 @@ public class OrderGraphBlock {
         Objects.equals(this.derivedState, orderGraphBlock.derivedState) &&
         Objects.equals(this.derivedComplianceState, orderGraphBlock.derivedComplianceState) &&
         Objects.equals(this.derivedApprovalState, orderGraphBlock.derivedApprovalState) &&
-        Objects.equals(this.derivedDirection, orderGraphBlock.derivedDirection);
+        Objects.equals(this.derivedDirection, orderGraphBlock.derivedDirection) &&
+        Objects.equals(this.latestActivityDate, orderGraphBlock.latestActivityDate);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -323,7 +350,7 @@ public class OrderGraphBlock {
 
   @Override
  public int hashCode() {
-    return Objects.hash(block, ordered, placed, executed, allocated, booked, derivedState, derivedComplianceState, derivedApprovalState, derivedDirection);
+    return Objects.hash(block, ordered, placed, executed, allocated, booked, derivedState, derivedComplianceState, derivedApprovalState, derivedDirection, latestActivityDate);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -347,6 +374,7 @@ public class OrderGraphBlock {
     sb.append("    derivedComplianceState: ").append(toIndentedString(derivedComplianceState)).append("\n");
     sb.append("    derivedApprovalState: ").append(toIndentedString(derivedApprovalState)).append("\n");
     sb.append("    derivedDirection: ").append(toIndentedString(derivedDirection)).append("\n");
+    sb.append("    latestActivityDate: ").append(toIndentedString(latestActivityDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }

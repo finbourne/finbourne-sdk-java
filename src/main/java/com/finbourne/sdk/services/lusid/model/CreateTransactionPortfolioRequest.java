@@ -17,6 +17,7 @@ import com.finbourne.sdk.services.lusid.model.InstrumentEventConfiguration;
 import com.finbourne.sdk.services.lusid.model.PortfolioSettlementConfiguration;
 import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.WhtParameters;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -65,7 +66,8 @@ import com.finbourne.sdk.JSON;
   CreateTransactionPortfolioRequest.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
   CreateTransactionPortfolioRequest.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
   CreateTransactionPortfolioRequest.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
-  CreateTransactionPortfolioRequest.JSON_PROPERTY_HOLDINGS_FUNGIBILITY
+  CreateTransactionPortfolioRequest.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
+  CreateTransactionPortfolioRequest.JSON_PROPERTY_WHT_PARAMETERS
 })
 
 public class CreateTransactionPortfolioRequest {
@@ -240,6 +242,11 @@ public class CreateTransactionPortfolioRequest {
   @JsonProperty(JSON_PROPERTY_HOLDINGS_FUNGIBILITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String holdingsFungibility;
+
+  public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
+  @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private WhtParameters whtParameters;
 
   public CreateTransactionPortfolioRequest() {
   }
@@ -686,6 +693,25 @@ public class CreateTransactionPortfolioRequest {
   }
 
 
+  public CreateTransactionPortfolioRequest whtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+    return this;
+  }
+
+  /**
+   * Get whtParameters
+   * @return whtParameters
+   */
+  @javax.annotation.Nullable
+  public WhtParameters getWhtParameters() {
+    return whtParameters;
+  }
+
+  public void setWhtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -716,7 +742,8 @@ public class CreateTransactionPortfolioRequest {
         Objects.equals(this.transactionExclusionFilter, createTransactionPortfolioRequest.transactionExclusionFilter) &&
         Objects.equals(this.taxLotSelectionCostBasis, createTransactionPortfolioRequest.taxLotSelectionCostBasis) &&
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, createTransactionPortfolioRequest.fractionalUnitsTrueUpConfiguration) &&
-        Objects.equals(this.holdingsFungibility, createTransactionPortfolioRequest.holdingsFungibility);
+        Objects.equals(this.holdingsFungibility, createTransactionPortfolioRequest.holdingsFungibility) &&
+        Objects.equals(this.whtParameters, createTransactionPortfolioRequest.whtParameters);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -725,7 +752,7 @@ public class CreateTransactionPortfolioRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, code, created, enablementDate, baseCurrency, corporateActionSourceId, accountingMethod, subHoldingKeys, properties, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility);
+    return Objects.hash(displayName, description, code, created, enablementDate, baseCurrency, corporateActionSourceId, accountingMethod, subHoldingKeys, properties, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, whtParameters);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -761,6 +788,7 @@ public class CreateTransactionPortfolioRequest {
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
+    sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("}");
     return sb.toString();
   }

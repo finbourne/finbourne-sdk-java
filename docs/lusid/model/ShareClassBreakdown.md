@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **shareClassToFundFxRate** | **java.math.BigDecimal** | The fx rate from the Share Class currency to the fund currency at this valuation point. | [default to java.math.BigDecimal]
 **capitalRatio** | **java.math.BigDecimal** | The proportion of the fund&#39;s non-class-specific P&amp;L apportioned to this share class. Sums to 1 across the fund&#39;s share classes. | [default to java.math.BigDecimal]
 **previousShareClassBreakdown** | [**PreviousShareClassBreakdown**](PreviousShareClassBreakdown.md) |  | [default to PreviousShareClassBreakdown]
+**seriesBreakdowns** | [**List&lt;SeriesBreakdown&gt;**](SeriesBreakdown.md) | The share class NAV split across the series within the share class, one entry per series. Empty for a share class without series. | [optional] [default to List<SeriesBreakdown>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.ShareClassBreakdown;
@@ -35,6 +36,7 @@ UnitisationData unitisation = new UnitisationData();
 java.math.BigDecimal shareClassToFundFxRate = new java.math.BigDecimal("100.00");
 java.math.BigDecimal capitalRatio = new java.math.BigDecimal("100.00");
 PreviousShareClassBreakdown previousShareClassBreakdown = new PreviousShareClassBreakdown();
+@javax.annotation.Nullable List<SeriesBreakdown> seriesBreakdowns = new List<SeriesBreakdown>();
 
 
 ShareClassBreakdown shareClassBreakdownInstance = new ShareClassBreakdown()
@@ -48,7 +50,8 @@ ShareClassBreakdown shareClassBreakdownInstance = new ShareClassBreakdown()
     .miscellaneous(miscellaneous)
     .shareClassToFundFxRate(shareClassToFundFxRate)
     .capitalRatio(capitalRatio)
-    .previousShareClassBreakdown(previousShareClassBreakdown);
+    .previousShareClassBreakdown(previousShareClassBreakdown)
+    .seriesBreakdowns(seriesBreakdowns);
 ```
 
 

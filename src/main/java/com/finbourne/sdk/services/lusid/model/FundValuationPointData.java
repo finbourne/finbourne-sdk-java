@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.FeeAccrual;
 import com.finbourne.sdk.services.lusid.model.FundAmount;
 import com.finbourne.sdk.services.lusid.model.FundPnlBreakdown;
+import com.finbourne.sdk.services.lusid.model.PartnershipAccountingValuationPointData;
 import com.finbourne.sdk.services.lusid.model.PreviousFundValuationPointData;
 import java.io.IOException;
 import java.util.Arrays;
@@ -47,7 +48,8 @@ import com.finbourne.sdk.JSON;
   FundValuationPointData.JSON_PROPERTY_FEES,
   FundValuationPointData.JSON_PROPERTY_NAV,
   FundValuationPointData.JSON_PROPERTY_MISCELLANEOUS,
-  FundValuationPointData.JSON_PROPERTY_PREVIOUS_VALUATION_POINT_DATA
+  FundValuationPointData.JSON_PROPERTY_PREVIOUS_VALUATION_POINT_DATA,
+  FundValuationPointData.JSON_PROPERTY_PARTNERSHIP_ACCOUNTING
 })
 
 public class FundValuationPointData {
@@ -90,6 +92,11 @@ public class FundValuationPointData {
   @JsonProperty(JSON_PROPERTY_PREVIOUS_VALUATION_POINT_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private PreviousFundValuationPointData previousValuationPointData;
+
+  public static final String JSON_PROPERTY_PARTNERSHIP_ACCOUNTING = "partnershipAccounting";
+  @JsonProperty(JSON_PROPERTY_PARTNERSHIP_ACCOUNTING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PartnershipAccountingValuationPointData partnershipAccounting;
 
   public FundValuationPointData() {
   }
@@ -278,6 +285,25 @@ public class FundValuationPointData {
   }
 
 
+  public FundValuationPointData partnershipAccounting(PartnershipAccountingValuationPointData partnershipAccounting) {
+    this.partnershipAccounting = partnershipAccounting;
+    return this;
+  }
+
+  /**
+   * Get partnershipAccounting
+   * @return partnershipAccounting
+   */
+  @javax.annotation.Nullable
+  public PartnershipAccountingValuationPointData getPartnershipAccounting() {
+    return partnershipAccounting;
+  }
+
+  public void setPartnershipAccounting(PartnershipAccountingValuationPointData partnershipAccounting) {
+    this.partnershipAccounting = partnershipAccounting;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -294,7 +320,8 @@ public class FundValuationPointData {
         Objects.equals(this.fees, fundValuationPointData.fees) &&
         (this.nav == null ? fundValuationPointData.nav == null : (fundValuationPointData.nav != null && this.nav.compareTo(fundValuationPointData.getNav()) == 0)) &&
         Objects.equals(this.miscellaneous, fundValuationPointData.miscellaneous) &&
-        Objects.equals(this.previousValuationPointData, fundValuationPointData.previousValuationPointData);
+        Objects.equals(this.previousValuationPointData, fundValuationPointData.previousValuationPointData) &&
+        Objects.equals(this.partnershipAccounting, fundValuationPointData.partnershipAccounting);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -303,7 +330,7 @@ public class FundValuationPointData {
 
   @Override
  public int hashCode() {
-    return Objects.hash(backOut, dealing, pnL, gav, fees, nav, miscellaneous, previousValuationPointData);
+    return Objects.hash(backOut, dealing, pnL, gav, fees, nav, miscellaneous, previousValuationPointData, partnershipAccounting);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -325,6 +352,7 @@ public class FundValuationPointData {
     sb.append("    nav: ").append(toIndentedString(nav)).append("\n");
     sb.append("    miscellaneous: ").append(toIndentedString(miscellaneous)).append("\n");
     sb.append("    previousValuationPointData: ").append(toIndentedString(previousValuationPointData)).append("\n");
+    sb.append("    partnershipAccounting: ").append(toIndentedString(partnershipAccounting)).append("\n");
     sb.append("}");
     return sb.toString();
   }

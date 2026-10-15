@@ -14,13 +14,16 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.FeeAccrual;
 import com.finbourne.sdk.services.lusid.model.PreviousShareClassBreakdown;
+import com.finbourne.sdk.services.lusid.model.SeriesBreakdown;
 import com.finbourne.sdk.services.lusid.model.ShareClassAmount;
 import com.finbourne.sdk.services.lusid.model.ShareClassDealingBreakdown;
 import com.finbourne.sdk.services.lusid.model.ShareClassPnlBreakdown;
 import com.finbourne.sdk.services.lusid.model.UnitisationData;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
@@ -52,7 +55,8 @@ import com.finbourne.sdk.JSON;
   ShareClassBreakdown.JSON_PROPERTY_MISCELLANEOUS,
   ShareClassBreakdown.JSON_PROPERTY_SHARE_CLASS_TO_FUND_FX_RATE,
   ShareClassBreakdown.JSON_PROPERTY_CAPITAL_RATIO,
-  ShareClassBreakdown.JSON_PROPERTY_PREVIOUS_SHARE_CLASS_BREAKDOWN
+  ShareClassBreakdown.JSON_PROPERTY_PREVIOUS_SHARE_CLASS_BREAKDOWN,
+  ShareClassBreakdown.JSON_PROPERTY_SERIES_BREAKDOWNS
 })
 
 public class ShareClassBreakdown {
@@ -110,6 +114,11 @@ public class ShareClassBreakdown {
   @JsonProperty(JSON_PROPERTY_PREVIOUS_SHARE_CLASS_BREAKDOWN)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private PreviousShareClassBreakdown previousShareClassBreakdown;
+
+  public static final String JSON_PROPERTY_SERIES_BREAKDOWNS = "seriesBreakdowns";
+  @JsonProperty(JSON_PROPERTY_SERIES_BREAKDOWNS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<SeriesBreakdown> seriesBreakdowns;
 
   public ShareClassBreakdown() {
   }
@@ -347,6 +356,33 @@ public class ShareClassBreakdown {
   }
 
 
+  public ShareClassBreakdown seriesBreakdowns(List<SeriesBreakdown> seriesBreakdowns) {
+    this.seriesBreakdowns = seriesBreakdowns;
+    return this;
+  }
+
+  public ShareClassBreakdown addSeriesBreakdownsItem(SeriesBreakdown seriesBreakdownsItem) {
+    if (this.seriesBreakdowns == null) {
+      this.seriesBreakdowns = new ArrayList<>();
+    }
+    this.seriesBreakdowns.add(seriesBreakdownsItem);
+    return this;
+  }
+
+  /**
+   * The share class NAV split across the series within the share class, one entry per series. Empty for a share class without series.
+   * @return seriesBreakdowns
+   */
+  @javax.annotation.Nullable
+  public List<SeriesBreakdown> getSeriesBreakdowns() {
+    return seriesBreakdowns;
+  }
+
+  public void setSeriesBreakdowns(List<SeriesBreakdown> seriesBreakdowns) {
+    this.seriesBreakdowns = seriesBreakdowns;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -366,7 +402,8 @@ public class ShareClassBreakdown {
         Objects.equals(this.miscellaneous, shareClassBreakdown.miscellaneous) &&
         (this.shareClassToFundFxRate == null ? shareClassBreakdown.shareClassToFundFxRate == null : (shareClassBreakdown.shareClassToFundFxRate != null && this.shareClassToFundFxRate.compareTo(shareClassBreakdown.getShareClassToFundFxRate()) == 0)) &&
         (this.capitalRatio == null ? shareClassBreakdown.capitalRatio == null : (shareClassBreakdown.capitalRatio != null && this.capitalRatio.compareTo(shareClassBreakdown.getCapitalRatio()) == 0)) &&
-        Objects.equals(this.previousShareClassBreakdown, shareClassBreakdown.previousShareClassBreakdown);
+        Objects.equals(this.previousShareClassBreakdown, shareClassBreakdown.previousShareClassBreakdown) &&
+        Objects.equals(this.seriesBreakdowns, shareClassBreakdown.seriesBreakdowns);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -375,7 +412,7 @@ public class ShareClassBreakdown {
 
   @Override
  public int hashCode() {
-    return Objects.hash(backOut, dealing, pnL, gav, fees, nav, unitisation, miscellaneous, shareClassToFundFxRate, capitalRatio, previousShareClassBreakdown);
+    return Objects.hash(backOut, dealing, pnL, gav, fees, nav, unitisation, miscellaneous, shareClassToFundFxRate, capitalRatio, previousShareClassBreakdown, seriesBreakdowns);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -400,6 +437,7 @@ public class ShareClassBreakdown {
     sb.append("    shareClassToFundFxRate: ").append(toIndentedString(shareClassToFundFxRate)).append("\n");
     sb.append("    capitalRatio: ").append(toIndentedString(capitalRatio)).append("\n");
     sb.append("    previousShareClassBreakdown: ").append(toIndentedString(previousShareClassBreakdown)).append("\n");
+    sb.append("    seriesBreakdowns: ").append(toIndentedString(seriesBreakdowns)).append("\n");
     sb.append("}");
     return sb.toString();
   }

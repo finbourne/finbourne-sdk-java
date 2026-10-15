@@ -409,6 +409,7 @@ public class ReferenceListsApi {
      * @param scope The scope to which the Reference List belongs. (required)
      * @param code The Reference List&#39;s unique identifier. (required)
      * @param asAt The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional)
+     * @param filter Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \&quot;id.Code eq &#39;FundCode&#39;\&quot;), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -420,15 +421,16 @@ public class ReferenceListsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getReferenceListCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
-        return getReferenceListCall(scope, code, asAt,  _callback, new ConfigurationOptions());
+    private HttpRequest getReferenceListCall(String scope, String code, OffsetDateTime asAt, String filter, final ApiCallback _callback) throws ApiException {
+        return getReferenceListCall(scope, code, asAt, filter,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getReferenceList. Use any specified configuration options to override any other configuration for this request only.
      * @param scope The scope to which the Reference List belongs. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The Reference List&#39;s unique identifier. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \&quot;id.Code eq &#39;FundCode&#39;\&quot;), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -440,7 +442,7 @@ public class ReferenceListsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getReferenceListCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getReferenceListCall(String scope, String code, OffsetDateTime asAt, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -471,6 +473,10 @@ public class ReferenceListsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
         }
 
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -493,7 +499,7 @@ public class ReferenceListsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getReferenceListValidateBeforeCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getReferenceListValidateBeforeCall(String scope, String code, OffsetDateTime asAt, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling getReferenceList(Async)");
@@ -504,7 +510,7 @@ public class ReferenceListsApi {
             throw new ApiException("Missing the required parameter 'code' when calling getReferenceList(Async)");
         }
 
-        return getReferenceListCall(scope, code, asAt, _callback, opts);
+        return getReferenceListCall(scope, code, asAt, filter, _callback, opts);
 
     }
 
@@ -514,6 +520,7 @@ public class ReferenceListsApi {
      * @param scope The scope to which the Reference List belongs. (required)
      * @param code The Reference List&#39;s unique identifier. (required)
      * @param asAt The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional)
+     * @param filter Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \&quot;id.Code eq &#39;FundCode&#39;\&quot;), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified. (optional)
      * @return ApiResponse&lt;ReferenceListResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -524,8 +531,8 @@ public class ReferenceListsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ReferenceListResponse> getReferenceListWithHttpInfo(String scope, String code, OffsetDateTime asAt) throws ApiException {
-        HttpRequest localVarCall = getReferenceListValidateBeforeCall(scope, code, asAt, null, new ConfigurationOptions());
+    private ApiResponse<ReferenceListResponse> getReferenceListWithHttpInfo(String scope, String code, OffsetDateTime asAt, String filter) throws ApiException {
+        HttpRequest localVarCall = getReferenceListValidateBeforeCall(scope, code, asAt, filter, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ReferenceListResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -536,6 +543,7 @@ public class ReferenceListsApi {
      * @param scope The scope to which the Reference List belongs. (required)
      * @param code The Reference List&#39;s unique identifier. (required)
      * @param asAt The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional)
+     * @param filter Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \&quot;id.Code eq &#39;FundCode&#39;\&quot;), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified. (optional)
      * @return ApiResponse&lt;ReferenceListResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -546,8 +554,8 @@ public class ReferenceListsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ReferenceListResponse> getReferenceListWithHttpInfo(String scope, String code, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getReferenceListValidateBeforeCall(scope, code, asAt, null, opts);
+    private ApiResponse<ReferenceListResponse> getReferenceListWithHttpInfo(String scope, String code, OffsetDateTime asAt, String filter, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getReferenceListValidateBeforeCall(scope, code, asAt, filter, null, opts);
         Type localVarReturnType = new TypeReference<ReferenceListResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -558,6 +566,7 @@ public class ReferenceListsApi {
      * @param scope The scope to which the Reference List belongs. (required)
      * @param code The Reference List&#39;s unique identifier. (required)
      * @param asAt The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional)
+     * @param filter Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \&quot;id.Code eq &#39;FundCode&#39;\&quot;), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -568,9 +577,9 @@ public class ReferenceListsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getReferenceListAsync(String scope, String code, OffsetDateTime asAt, final ApiCallback<ReferenceListResponse> _callback) throws ApiException {
+    private void getReferenceListAsync(String scope, String code, OffsetDateTime asAt, String filter, final ApiCallback<ReferenceListResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getReferenceListValidateBeforeCall(scope, code, asAt, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getReferenceListValidateBeforeCall(scope, code, asAt, filter, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ReferenceListResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -581,6 +590,7 @@ public class ReferenceListsApi {
      * @param scope The scope to which the Reference List belongs. (required)
      * @param code The Reference List&#39;s unique identifier. (required)
      * @param asAt The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional)
+     * @param filter Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \&quot;id.Code eq &#39;FundCode&#39;\&quot;), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -591,9 +601,9 @@ public class ReferenceListsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getReferenceListAsync(String scope, String code, OffsetDateTime asAt, final ApiCallback<ReferenceListResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getReferenceListAsync(String scope, String code, OffsetDateTime asAt, String filter, final ApiCallback<ReferenceListResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getReferenceListValidateBeforeCall(scope, code, asAt, _callback, opts);
+        HttpRequest localVarCall = getReferenceListValidateBeforeCall(scope, code, asAt, filter, _callback, opts);
         Type localVarReturnType = new TypeReference<ReferenceListResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -602,6 +612,7 @@ public class ReferenceListsApi {
         private final String scope;
         private final String code;
         private OffsetDateTime asAt;
+        private String filter;
 
         private APIgetReferenceListRequest(String scope, String code) {
             this.scope = scope;
@@ -619,6 +630,16 @@ public class ReferenceListsApi {
         }
 
         /**
+         * Set filter
+         * @param filter Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \&quot;id.Code eq &#39;FundCode&#39;\&quot;), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified. (optional)
+         * @return APIgetReferenceListRequest
+         */
+        public APIgetReferenceListRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
          * Build call for getReferenceList
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -632,7 +653,7 @@ public class ReferenceListsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getReferenceListCall(scope, code, asAt, _callback);
+            return getReferenceListCall(scope, code, asAt, filter, _callback);
         }
 
         /**
@@ -648,7 +669,7 @@ public class ReferenceListsApi {
          </table>
          */
         public ReferenceListResponse execute() throws ApiException {
-            ApiResponse<ReferenceListResponse> localVarResp = getReferenceListWithHttpInfo(scope, code, asAt);
+            ApiResponse<ReferenceListResponse> localVarResp = getReferenceListWithHttpInfo(scope, code, asAt, filter);
             return localVarResp.getData();
         }
 
@@ -665,7 +686,7 @@ public class ReferenceListsApi {
          </table>
          */
         public ReferenceListResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<ReferenceListResponse> localVarResp = getReferenceListWithHttpInfo(scope, code, asAt, opts);
+            ApiResponse<ReferenceListResponse> localVarResp = getReferenceListWithHttpInfo(scope, code, asAt, filter, opts);
             return localVarResp.getData();
         }
 
@@ -682,7 +703,7 @@ public class ReferenceListsApi {
          </table>
          */
         public ApiResponse<ReferenceListResponse> executeWithHttpInfo() throws ApiException {
-            return getReferenceListWithHttpInfo(scope, code, asAt);
+            return getReferenceListWithHttpInfo(scope, code, asAt, filter);
         }
 
         /**
@@ -698,7 +719,7 @@ public class ReferenceListsApi {
          </table>
          */
         public ApiResponse<ReferenceListResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getReferenceListWithHttpInfo(scope, code, asAt, opts);
+            return getReferenceListWithHttpInfo(scope, code, asAt, filter, opts);
         }
 
         /**
@@ -714,7 +735,7 @@ public class ReferenceListsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ReferenceListResponse> _callback) throws ApiException {
-            getReferenceListAsync(scope, code, asAt, _callback);
+            getReferenceListAsync(scope, code, asAt, filter, _callback);
         }
 
         /**
@@ -730,7 +751,7 @@ public class ReferenceListsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ReferenceListResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            getReferenceListAsync(scope, code, asAt, _callback, opts);
+            getReferenceListAsync(scope, code, asAt, filter, _callback, opts);
         }
     }
 

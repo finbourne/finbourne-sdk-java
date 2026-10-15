@@ -49,7 +49,6 @@ import com.finbourne.sdk.JSON;
   CashFlowDetail.JSON_PROPERTY_PORTFOLIO_ID,
   CashFlowDetail.JSON_PROPERTY_FLOW_TYPE,
   CashFlowDetail.JSON_PROPERTY_MOVEMENT_NAME,
-  CashFlowDetail.JSON_PROPERTY_PAY_RECEIVE,
   CashFlowDetail.JSON_PROPERTY_GROSS_AMOUNT,
   CashFlowDetail.JSON_PROPERTY_HAIRCUT_FRACTION,
   CashFlowDetail.JSON_PROPERTY_NET_AMOUNT,
@@ -57,6 +56,7 @@ import com.finbourne.sdk.JSON;
   CashFlowDetail.JSON_PROPERTY_ERROR,
   CashFlowDetail.JSON_PROPERTY_REPORT_CURRENCY_AMOUNT,
   CashFlowDetail.JSON_PROPERTY_TRADE_TO_REPORT_CURRENCY_RATE,
+  CashFlowDetail.JSON_PROPERTY_FX_RATE_TYPE_APPLIED,
   CashFlowDetail.JSON_PROPERTY_LINKS
 })
 
@@ -106,11 +106,6 @@ public class CashFlowDetail {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String movementName;
 
-  public static final String JSON_PROPERTY_PAY_RECEIVE = "payReceive";
-  @JsonProperty(JSON_PROPERTY_PAY_RECEIVE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private String payReceive;
-
   public static final String JSON_PROPERTY_GROSS_AMOUNT = "grossAmount";
   @JsonProperty(JSON_PROPERTY_GROSS_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -145,6 +140,11 @@ public class CashFlowDetail {
   @JsonProperty(JSON_PROPERTY_TRADE_TO_REPORT_CURRENCY_RATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal tradeToReportCurrencyRate;
+
+  public static final String JSON_PROPERTY_FX_RATE_TYPE_APPLIED = "fxRateTypeApplied";
+  @JsonProperty(JSON_PROPERTY_FX_RATE_TYPE_APPLIED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String fxRateTypeApplied;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -325,25 +325,6 @@ public class CashFlowDetail {
   }
 
 
-  public CashFlowDetail payReceive(String payReceive) {
-    this.payReceive = payReceive;
-    return this;
-  }
-
-  /**
-   * Indicates whether the cashflow is paid or received.
-   * @return payReceive
-   */
-  @javax.annotation.Nullable
-  public String getPayReceive() {
-    return payReceive;
-  }
-
-  public void setPayReceive(String payReceive) {
-    this.payReceive = payReceive;
-  }
-
-
   public CashFlowDetail grossAmount(CurrencyAndAmount grossAmount) {
     this.grossAmount = grossAmount;
     return this;
@@ -464,7 +445,7 @@ public class CashFlowDetail {
   }
 
   /**
-   * The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request&#39;s report currency, resolved at the cashflow&#39;s transaction (trade) date, not its payment date. Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error).
+   * The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request&#39;s report currency. For the default FxSpot rate type it is resolved at the cashflow&#39;s transaction (trade) date, not its payment date; for FxForward it is the forward rate for the payment date (see QueryBucketCashFlowDrillDownRequest.FxRateType and FxRateTypeApplied). Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error).
    * @return tradeToReportCurrencyRate
    */
   @javax.annotation.Nullable
@@ -474,6 +455,25 @@ public class CashFlowDetail {
 
   public void setTradeToReportCurrencyRate(java.math.BigDecimal tradeToReportCurrencyRate) {
     this.tradeToReportCurrencyRate = tradeToReportCurrencyRate;
+  }
+
+
+  public CashFlowDetail fxRateTypeApplied(String fxRateTypeApplied) {
+    this.fxRateTypeApplied = fxRateTypeApplied;
+    return this;
+  }
+
+  /**
+   * Which rate type produced TradeToReportCurrencyRate: FxSpot or FxForward. Under the ForwardThenSpot request option this shows whether a cashflow received the forward rate or fell back to spot. Only present when the cashflow was converted into the ReportCurrency.
+   * @return fxRateTypeApplied
+   */
+  @javax.annotation.Nullable
+  public String getFxRateTypeApplied() {
+    return fxRateTypeApplied;
+  }
+
+  public void setFxRateTypeApplied(String fxRateTypeApplied) {
+    this.fxRateTypeApplied = fxRateTypeApplied;
   }
 
 
@@ -522,7 +522,6 @@ public class CashFlowDetail {
         Objects.equals(this.portfolioId, cashFlowDetail.portfolioId) &&
         Objects.equals(this.flowType, cashFlowDetail.flowType) &&
         Objects.equals(this.movementName, cashFlowDetail.movementName) &&
-        Objects.equals(this.payReceive, cashFlowDetail.payReceive) &&
         Objects.equals(this.grossAmount, cashFlowDetail.grossAmount) &&
         (this.haircutFraction == null ? cashFlowDetail.haircutFraction == null : (cashFlowDetail.haircutFraction != null && this.haircutFraction.compareTo(cashFlowDetail.getHaircutFraction()) == 0)) &&
         Objects.equals(this.netAmount, cashFlowDetail.netAmount) &&
@@ -530,6 +529,7 @@ public class CashFlowDetail {
         Objects.equals(this.error, cashFlowDetail.error) &&
         Objects.equals(this.reportCurrencyAmount, cashFlowDetail.reportCurrencyAmount) &&
         (this.tradeToReportCurrencyRate == null ? cashFlowDetail.tradeToReportCurrencyRate == null : (cashFlowDetail.tradeToReportCurrencyRate != null && this.tradeToReportCurrencyRate.compareTo(cashFlowDetail.getTradeToReportCurrencyRate()) == 0)) &&
+        Objects.equals(this.fxRateTypeApplied, cashFlowDetail.fxRateTypeApplied) &&
         Objects.equals(this.links, cashFlowDetail.links);
   }
 
@@ -539,7 +539,7 @@ public class CashFlowDetail {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, amount, sourceType, instrumentId, instrumentDisplayName, transactionId, portfolioId, flowType, movementName, payReceive, grossAmount, haircutFraction, netAmount, haircutRuleApplied, error, reportCurrencyAmount, tradeToReportCurrencyRate, links);
+    return Objects.hash(paymentDate, amount, sourceType, instrumentId, instrumentDisplayName, transactionId, portfolioId, flowType, movementName, grossAmount, haircutFraction, netAmount, haircutRuleApplied, error, reportCurrencyAmount, tradeToReportCurrencyRate, fxRateTypeApplied, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -562,7 +562,6 @@ public class CashFlowDetail {
     sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
     sb.append("    flowType: ").append(toIndentedString(flowType)).append("\n");
     sb.append("    movementName: ").append(toIndentedString(movementName)).append("\n");
-    sb.append("    payReceive: ").append(toIndentedString(payReceive)).append("\n");
     sb.append("    grossAmount: ").append(toIndentedString(grossAmount)).append("\n");
     sb.append("    haircutFraction: ").append(toIndentedString(haircutFraction)).append("\n");
     sb.append("    netAmount: ").append(toIndentedString(netAmount)).append("\n");
@@ -570,6 +569,7 @@ public class CashFlowDetail {
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("    reportCurrencyAmount: ").append(toIndentedString(reportCurrencyAmount)).append("\n");
     sb.append("    tradeToReportCurrencyRate: ").append(toIndentedString(tradeToReportCurrencyRate)).append("\n");
+    sb.append("    fxRateTypeApplied: ").append(toIndentedString(fxRateTypeApplied)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

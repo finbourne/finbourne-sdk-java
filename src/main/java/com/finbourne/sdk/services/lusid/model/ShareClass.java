@@ -13,9 +13,11 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.Property;
+import com.finbourne.sdk.services.lusid.model.Series;
 import com.finbourne.sdk.services.lusid.model.SimpleRoundingConvention;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
 import com.finbourne.sdk.services.lusid.model.TradingConventions;
+import com.finbourne.sdk.services.lusid.model.WhtParameters;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   ShareClass.JSON_PROPERTY_INSTRUMENT_IDENTIFIERS,
+  ShareClass.JSON_PROPERTY_SERIES,
   ShareClass.JSON_PROPERTY_NAME,
   ShareClass.JSON_PROPERTY_DESCRIPTION,
   ShareClass.JSON_PROPERTY_SHARE_CLASS_SHORT_CODE,
@@ -58,7 +61,8 @@ import com.finbourne.sdk.JSON;
   ShareClass.JSON_PROPERTY_ROUNDING_CONVENTIONS_UNITS,
   ShareClass.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
   ShareClass.JSON_PROPERTY_DISTRIBUTION_PAYMENT_TYPE,
-  ShareClass.JSON_PROPERTY_HEDGING
+  ShareClass.JSON_PROPERTY_HEDGING,
+  ShareClass.JSON_PROPERTY_WHT_PARAMETERS
 })
 
 public class ShareClass {
@@ -66,6 +70,11 @@ public class ShareClass {
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_IDENTIFIERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, String> instrumentIdentifiers;
+
+  public static final String JSON_PROPERTY_SERIES = "series";
+  @JsonProperty(JSON_PROPERTY_SERIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<Series> series;
 
   public static final String JSON_PROPERTY_NAME = "name";
   @JsonProperty(JSON_PROPERTY_NAME)
@@ -142,6 +151,11 @@ public class ShareClass {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String hedging;
 
+  public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
+  @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private WhtParameters whtParameters;
+
   public ShareClass() {
   }
 
@@ -169,6 +183,33 @@ public class ShareClass {
 
   public void setInstrumentIdentifiers(Map<String, String> instrumentIdentifiers) {
     this.instrumentIdentifiers = instrumentIdentifiers;
+  }
+
+
+  public ShareClass series(List<Series> series) {
+    this.series = series;
+    return this;
+  }
+
+  public ShareClass addSeriesItem(Series seriesItem) {
+    if (this.series == null) {
+      this.series = new ArrayList<>();
+    }
+    this.series.add(seriesItem);
+    return this;
+  }
+
+  /**
+   * The series that belong to this Share Class - only relevant if InvestorType is Series.
+   * @return series
+   */
+  @javax.annotation.Nullable
+  public List<Series> getSeries() {
+    return series;
+  }
+
+  public void setSeries(List<Series> series) {
+    this.series = series;
   }
 
 
@@ -481,6 +522,25 @@ public class ShareClass {
   }
 
 
+  public ShareClass whtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+    return this;
+  }
+
+  /**
+   * Get whtParameters
+   * @return whtParameters
+   */
+  @javax.annotation.Nullable
+  public WhtParameters getWhtParameters() {
+    return whtParameters;
+  }
+
+  public void setWhtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -491,6 +551,7 @@ public class ShareClass {
     }
     ShareClass shareClass = (ShareClass) o;
     return Objects.equals(this.instrumentIdentifiers, shareClass.instrumentIdentifiers) &&
+        Objects.equals(this.series, shareClass.series) &&
         Objects.equals(this.name, shareClass.name) &&
         Objects.equals(this.description, shareClass.description) &&
         Objects.equals(this.shareClassShortCode, shareClass.shareClassShortCode) &&
@@ -505,7 +566,8 @@ public class ShareClass {
         Objects.equals(this.roundingConventionsUnits, shareClass.roundingConventionsUnits) &&
         Objects.equals(this.timeZoneConventions, shareClass.timeZoneConventions) &&
         Objects.equals(this.distributionPaymentType, shareClass.distributionPaymentType) &&
-        Objects.equals(this.hedging, shareClass.hedging);
+        Objects.equals(this.hedging, shareClass.hedging) &&
+        Objects.equals(this.whtParameters, shareClass.whtParameters);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -514,7 +576,7 @@ public class ShareClass {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, properties, investorType, distributionType, domCcy, tradingConventions, roundingConventionsPrice, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
+    return Objects.hash(instrumentIdentifiers, series, name, description, shareClassShortCode, launchPrice, launchDate, properties, investorType, distributionType, domCcy, tradingConventions, roundingConventionsPrice, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging, whtParameters);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -529,6 +591,7 @@ public class ShareClass {
     StringBuilder sb = new StringBuilder();
     sb.append("class ShareClass {\n");
     sb.append("    instrumentIdentifiers: ").append(toIndentedString(instrumentIdentifiers)).append("\n");
+    sb.append("    series: ").append(toIndentedString(series)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    shareClassShortCode: ").append(toIndentedString(shareClassShortCode)).append("\n");
@@ -544,6 +607,7 @@ public class ShareClass {
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
     sb.append("    distributionPaymentType: ").append(toIndentedString(distributionPaymentType)).append("\n");
     sb.append("    hedging: ").append(toIndentedString(hedging)).append("\n");
+    sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("}");
     return sb.toString();
   }

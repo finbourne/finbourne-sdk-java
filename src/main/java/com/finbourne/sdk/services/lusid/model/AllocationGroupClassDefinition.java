@@ -35,7 +35,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   AllocationGroupClassDefinition.JSON_PROPERTY_SHARE_CLASS_SHORT_CODE,
-  AllocationGroupClassDefinition.JSON_PROPERTY_APPORTIONMENT_FACTOR
+  AllocationGroupClassDefinition.JSON_PROPERTY_APPORTIONMENT_FACTOR,
+  AllocationGroupClassDefinition.JSON_PROPERTY_SHARE_CLASS_SERIES_CODE
 })
 
 public class AllocationGroupClassDefinition {
@@ -48,6 +49,11 @@ public class AllocationGroupClassDefinition {
   @JsonProperty(JSON_PROPERTY_APPORTIONMENT_FACTOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal apportionmentFactor;
+
+  public static final String JSON_PROPERTY_SHARE_CLASS_SERIES_CODE = "shareClassSeriesCode";
+  @JsonProperty(JSON_PROPERTY_SHARE_CLASS_SERIES_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String shareClassSeriesCode;
 
   public AllocationGroupClassDefinition() {
   }
@@ -90,6 +96,25 @@ public class AllocationGroupClassDefinition {
   }
 
 
+  public AllocationGroupClassDefinition shareClassSeriesCode(String shareClassSeriesCode) {
+    this.shareClassSeriesCode = shareClassSeriesCode;
+    return this;
+  }
+
+  /**
+   * The series of the share class the member refers to. Not yet supported: an allocation group is apportioned by share class, so a member that names a series is rejected.
+   * @return shareClassSeriesCode
+   */
+  @javax.annotation.Nullable
+  public String getShareClassSeriesCode() {
+    return shareClassSeriesCode;
+  }
+
+  public void setShareClassSeriesCode(String shareClassSeriesCode) {
+    this.shareClassSeriesCode = shareClassSeriesCode;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -100,7 +125,8 @@ public class AllocationGroupClassDefinition {
     }
     AllocationGroupClassDefinition allocationGroupClassDefinition = (AllocationGroupClassDefinition) o;
     return Objects.equals(this.shareClassShortCode, allocationGroupClassDefinition.shareClassShortCode) &&
-        (this.apportionmentFactor == null ? allocationGroupClassDefinition.apportionmentFactor == null : (allocationGroupClassDefinition.apportionmentFactor != null && this.apportionmentFactor.compareTo(allocationGroupClassDefinition.getApportionmentFactor()) == 0));
+        (this.apportionmentFactor == null ? allocationGroupClassDefinition.apportionmentFactor == null : (allocationGroupClassDefinition.apportionmentFactor != null && this.apportionmentFactor.compareTo(allocationGroupClassDefinition.getApportionmentFactor()) == 0)) &&
+        Objects.equals(this.shareClassSeriesCode, allocationGroupClassDefinition.shareClassSeriesCode);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -109,7 +135,7 @@ public class AllocationGroupClassDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(shareClassShortCode, apportionmentFactor);
+    return Objects.hash(shareClassShortCode, apportionmentFactor, shareClassSeriesCode);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -125,6 +151,7 @@ public class AllocationGroupClassDefinition {
     sb.append("class AllocationGroupClassDefinition {\n");
     sb.append("    shareClassShortCode: ").append(toIndentedString(shareClassShortCode)).append("\n");
     sb.append("    apportionmentFactor: ").append(toIndentedString(apportionmentFactor)).append("\n");
+    sb.append("    shareClassSeriesCode: ").append(toIndentedString(shareClassSeriesCode)).append("\n");
     sb.append("}");
     return sb.toString();
   }

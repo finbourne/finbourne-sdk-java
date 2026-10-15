@@ -1098,6 +1098,7 @@ public class TransactionConfigurationApi {
      * @param side The label to uniquely identify the side. (required)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, may be returned. Defaults to false,              so a side is found only if the scope stored it itself. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1109,15 +1110,16 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getSideDefinitionCall(String side, String scope, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
-        return getSideDefinitionCall(side, scope, asAt,  _callback, new ConfigurationOptions());
+    private HttpRequest getSideDefinitionCall(String side, String scope, OffsetDateTime asAt, Boolean includeSystemTypes, final ApiCallback _callback) throws ApiException {
+        return getSideDefinitionCall(side, scope, asAt, includeSystemTypes,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getSideDefinition. Use any specified configuration options to override any other configuration for this request only.
      * @param side The label to uniquely identify the side. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default). Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, may be returned. Defaults to false,              so a side is found only if the scope stored it itself. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1129,7 +1131,7 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getSideDefinitionCall(String side, String scope, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getSideDefinitionCall(String side, String scope, OffsetDateTime asAt, Boolean includeSystemTypes, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1163,6 +1165,10 @@ public class TransactionConfigurationApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
         }
 
+        if (includeSystemTypes != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("includeSystemTypes", includeSystemTypes));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -1185,13 +1191,13 @@ public class TransactionConfigurationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getSideDefinitionValidateBeforeCall(String side, String scope, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getSideDefinitionValidateBeforeCall(String side, String scope, OffsetDateTime asAt, Boolean includeSystemTypes, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'side' is set
         if (side == null) {
             throw new ApiException("Missing the required parameter 'side' when calling getSideDefinition(Async)");
         }
 
-        return getSideDefinitionCall(side, scope, asAt, _callback, opts);
+        return getSideDefinitionCall(side, scope, asAt, includeSystemTypes, _callback, opts);
 
     }
 
@@ -1201,6 +1207,7 @@ public class TransactionConfigurationApi {
      * @param side The label to uniquely identify the side. (required)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, may be returned. Defaults to false,              so a side is found only if the scope stored it itself. (optional, default to false)
      * @return ApiResponse&lt;SideDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1211,8 +1218,8 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<SideDefinition> getSideDefinitionWithHttpInfo(String side, String scope, OffsetDateTime asAt) throws ApiException {
-        HttpRequest localVarCall = getSideDefinitionValidateBeforeCall(side, scope, asAt, null, new ConfigurationOptions());
+    private ApiResponse<SideDefinition> getSideDefinitionWithHttpInfo(String side, String scope, OffsetDateTime asAt, Boolean includeSystemTypes) throws ApiException {
+        HttpRequest localVarCall = getSideDefinitionValidateBeforeCall(side, scope, asAt, includeSystemTypes, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<SideDefinition>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1223,6 +1230,7 @@ public class TransactionConfigurationApi {
      * @param side The label to uniquely identify the side. (required)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, may be returned. Defaults to false,              so a side is found only if the scope stored it itself. (optional, default to false)
      * @return ApiResponse&lt;SideDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1233,8 +1241,8 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<SideDefinition> getSideDefinitionWithHttpInfo(String side, String scope, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getSideDefinitionValidateBeforeCall(side, scope, asAt, null, opts);
+    private ApiResponse<SideDefinition> getSideDefinitionWithHttpInfo(String side, String scope, OffsetDateTime asAt, Boolean includeSystemTypes, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getSideDefinitionValidateBeforeCall(side, scope, asAt, includeSystemTypes, null, opts);
         Type localVarReturnType = new TypeReference<SideDefinition>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1245,6 +1253,7 @@ public class TransactionConfigurationApi {
      * @param side The label to uniquely identify the side. (required)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, may be returned. Defaults to false,              so a side is found only if the scope stored it itself. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1255,9 +1264,9 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getSideDefinitionAsync(String side, String scope, OffsetDateTime asAt, final ApiCallback<SideDefinition> _callback) throws ApiException {
+    private void getSideDefinitionAsync(String side, String scope, OffsetDateTime asAt, Boolean includeSystemTypes, final ApiCallback<SideDefinition> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getSideDefinitionValidateBeforeCall(side, scope, asAt, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getSideDefinitionValidateBeforeCall(side, scope, asAt, includeSystemTypes, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<SideDefinition>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1268,6 +1277,7 @@ public class TransactionConfigurationApi {
      * @param side The label to uniquely identify the side. (required)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, may be returned. Defaults to false,              so a side is found only if the scope stored it itself. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1278,9 +1288,9 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getSideDefinitionAsync(String side, String scope, OffsetDateTime asAt, final ApiCallback<SideDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getSideDefinitionAsync(String side, String scope, OffsetDateTime asAt, Boolean includeSystemTypes, final ApiCallback<SideDefinition> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getSideDefinitionValidateBeforeCall(side, scope, asAt, _callback, opts);
+        HttpRequest localVarCall = getSideDefinitionValidateBeforeCall(side, scope, asAt, includeSystemTypes, _callback, opts);
         Type localVarReturnType = new TypeReference<SideDefinition>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1289,6 +1299,7 @@ public class TransactionConfigurationApi {
         private final String side;
         private String scope;
         private OffsetDateTime asAt;
+        private Boolean includeSystemTypes;
 
         private APIgetSideDefinitionRequest(String side) {
             this.side = side;
@@ -1315,6 +1326,16 @@ public class TransactionConfigurationApi {
         }
 
         /**
+         * Set includeSystemTypes
+         * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, may be returned. Defaults to false,              so a side is found only if the scope stored it itself. (optional, default to false)
+         * @return APIgetSideDefinitionRequest
+         */
+        public APIgetSideDefinitionRequest includeSystemTypes(Boolean includeSystemTypes) {
+            this.includeSystemTypes = includeSystemTypes;
+            return this;
+        }
+
+        /**
          * Build call for getSideDefinition
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -1328,7 +1349,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getSideDefinitionCall(side, scope, asAt, _callback);
+            return getSideDefinitionCall(side, scope, asAt, includeSystemTypes, _callback);
         }
 
         /**
@@ -1344,7 +1365,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public SideDefinition execute() throws ApiException {
-            ApiResponse<SideDefinition> localVarResp = getSideDefinitionWithHttpInfo(side, scope, asAt);
+            ApiResponse<SideDefinition> localVarResp = getSideDefinitionWithHttpInfo(side, scope, asAt, includeSystemTypes);
             return localVarResp.getData();
         }
 
@@ -1361,7 +1382,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public SideDefinition execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<SideDefinition> localVarResp = getSideDefinitionWithHttpInfo(side, scope, asAt, opts);
+            ApiResponse<SideDefinition> localVarResp = getSideDefinitionWithHttpInfo(side, scope, asAt, includeSystemTypes, opts);
             return localVarResp.getData();
         }
 
@@ -1378,7 +1399,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ApiResponse<SideDefinition> executeWithHttpInfo() throws ApiException {
-            return getSideDefinitionWithHttpInfo(side, scope, asAt);
+            return getSideDefinitionWithHttpInfo(side, scope, asAt, includeSystemTypes);
         }
 
         /**
@@ -1394,7 +1415,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ApiResponse<SideDefinition> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getSideDefinitionWithHttpInfo(side, scope, asAt, opts);
+            return getSideDefinitionWithHttpInfo(side, scope, asAt, includeSystemTypes, opts);
         }
 
         /**
@@ -1410,7 +1431,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public void executeAsync(final ApiCallback<SideDefinition> _callback) throws ApiException {
-            getSideDefinitionAsync(side, scope, asAt, _callback);
+            getSideDefinitionAsync(side, scope, asAt, includeSystemTypes, _callback);
         }
 
         /**
@@ -1426,7 +1447,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public void executeAsync(final ApiCallback<SideDefinition> _callback, ConfigurationOptions opts) throws ApiException {
-            getSideDefinitionAsync(side, scope, asAt, _callback, opts);
+            getSideDefinitionAsync(side, scope, asAt, includeSystemTypes, _callback, opts);
         }
     }
 
@@ -1452,6 +1473,7 @@ public class TransactionConfigurationApi {
      * @param type One of the type&#39;s aliases (required)
      * @param asAt The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified (optional)
      * @param scope The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param includeSystemTypes Whether the transaction types LUSID provides to every scope under the              &#39;pa-system&#39; source may be returned. Defaults to false, so a type in that source is found only if the scope              stored it there itself. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1463,8 +1485,8 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTransactionTypeCall(String source, String type, OffsetDateTime asAt, String scope, final ApiCallback _callback) throws ApiException {
-        return getTransactionTypeCall(source, type, asAt, scope,  _callback, new ConfigurationOptions());
+    private HttpRequest getTransactionTypeCall(String source, String type, OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback _callback) throws ApiException {
+        return getTransactionTypeCall(source, type, asAt, scope, includeSystemTypes,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -1472,7 +1494,8 @@ public class TransactionConfigurationApi {
      * @param source The source that the type is in (required). Use any specified configuration options to override any other configuration for this request only.
      * @param type One of the type&#39;s aliases (required). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param scope The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param scope The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. (optional, default to default). Use any specified configuration options to override any other configuration for this request only.
+     * @param includeSystemTypes Whether the transaction types LUSID provides to every scope under the              &#39;pa-system&#39; source may be returned. Defaults to false, so a type in that source is found only if the scope              stored it there itself. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1484,7 +1507,7 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTransactionTypeCall(String source, String type, OffsetDateTime asAt, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTransactionTypeCall(String source, String type, OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1519,6 +1542,10 @@ public class TransactionConfigurationApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("scope", scope));
         }
 
+        if (includeSystemTypes != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("includeSystemTypes", includeSystemTypes));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -1541,7 +1568,7 @@ public class TransactionConfigurationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getTransactionTypeValidateBeforeCall(String source, String type, OffsetDateTime asAt, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTransactionTypeValidateBeforeCall(String source, String type, OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'source' is set
         if (source == null) {
             throw new ApiException("Missing the required parameter 'source' when calling getTransactionType(Async)");
@@ -1552,7 +1579,7 @@ public class TransactionConfigurationApi {
             throw new ApiException("Missing the required parameter 'type' when calling getTransactionType(Async)");
         }
 
-        return getTransactionTypeCall(source, type, asAt, scope, _callback, opts);
+        return getTransactionTypeCall(source, type, asAt, scope, includeSystemTypes, _callback, opts);
 
     }
 
@@ -1563,6 +1590,7 @@ public class TransactionConfigurationApi {
      * @param type One of the type&#39;s aliases (required)
      * @param asAt The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified (optional)
      * @param scope The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param includeSystemTypes Whether the transaction types LUSID provides to every scope under the              &#39;pa-system&#39; source may be returned. Defaults to false, so a type in that source is found only if the scope              stored it there itself. (optional, default to false)
      * @return ApiResponse&lt;TransactionType&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1573,8 +1601,8 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<TransactionType> getTransactionTypeWithHttpInfo(String source, String type, OffsetDateTime asAt, String scope) throws ApiException {
-        HttpRequest localVarCall = getTransactionTypeValidateBeforeCall(source, type, asAt, scope, null, new ConfigurationOptions());
+    private ApiResponse<TransactionType> getTransactionTypeWithHttpInfo(String source, String type, OffsetDateTime asAt, String scope, Boolean includeSystemTypes) throws ApiException {
+        HttpRequest localVarCall = getTransactionTypeValidateBeforeCall(source, type, asAt, scope, includeSystemTypes, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<TransactionType>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1586,6 +1614,7 @@ public class TransactionConfigurationApi {
      * @param type One of the type&#39;s aliases (required)
      * @param asAt The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified (optional)
      * @param scope The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param includeSystemTypes Whether the transaction types LUSID provides to every scope under the              &#39;pa-system&#39; source may be returned. Defaults to false, so a type in that source is found only if the scope              stored it there itself. (optional, default to false)
      * @return ApiResponse&lt;TransactionType&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1596,8 +1625,8 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<TransactionType> getTransactionTypeWithHttpInfo(String source, String type, OffsetDateTime asAt, String scope, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getTransactionTypeValidateBeforeCall(source, type, asAt, scope, null, opts);
+    private ApiResponse<TransactionType> getTransactionTypeWithHttpInfo(String source, String type, OffsetDateTime asAt, String scope, Boolean includeSystemTypes, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTransactionTypeValidateBeforeCall(source, type, asAt, scope, includeSystemTypes, null, opts);
         Type localVarReturnType = new TypeReference<TransactionType>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1609,6 +1638,7 @@ public class TransactionConfigurationApi {
      * @param type One of the type&#39;s aliases (required)
      * @param asAt The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified (optional)
      * @param scope The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param includeSystemTypes Whether the transaction types LUSID provides to every scope under the              &#39;pa-system&#39; source may be returned. Defaults to false, so a type in that source is found only if the scope              stored it there itself. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1619,9 +1649,9 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTransactionTypeAsync(String source, String type, OffsetDateTime asAt, String scope, final ApiCallback<TransactionType> _callback) throws ApiException {
+    private void getTransactionTypeAsync(String source, String type, OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback<TransactionType> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getTransactionTypeValidateBeforeCall(source, type, asAt, scope, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getTransactionTypeValidateBeforeCall(source, type, asAt, scope, includeSystemTypes, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<TransactionType>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1633,6 +1663,7 @@ public class TransactionConfigurationApi {
      * @param type One of the type&#39;s aliases (required)
      * @param asAt The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified (optional)
      * @param scope The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. (optional, default to default)
+     * @param includeSystemTypes Whether the transaction types LUSID provides to every scope under the              &#39;pa-system&#39; source may be returned. Defaults to false, so a type in that source is found only if the scope              stored it there itself. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1643,9 +1674,9 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTransactionTypeAsync(String source, String type, OffsetDateTime asAt, String scope, final ApiCallback<TransactionType> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getTransactionTypeAsync(String source, String type, OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback<TransactionType> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getTransactionTypeValidateBeforeCall(source, type, asAt, scope, _callback, opts);
+        HttpRequest localVarCall = getTransactionTypeValidateBeforeCall(source, type, asAt, scope, includeSystemTypes, _callback, opts);
         Type localVarReturnType = new TypeReference<TransactionType>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1655,6 +1686,7 @@ public class TransactionConfigurationApi {
         private final String type;
         private OffsetDateTime asAt;
         private String scope;
+        private Boolean includeSystemTypes;
 
         private APIgetTransactionTypeRequest(String source, String type) {
             this.source = source;
@@ -1682,6 +1714,16 @@ public class TransactionConfigurationApi {
         }
 
         /**
+         * Set includeSystemTypes
+         * @param includeSystemTypes Whether the transaction types LUSID provides to every scope under the              &#39;pa-system&#39; source may be returned. Defaults to false, so a type in that source is found only if the scope              stored it there itself. (optional, default to false)
+         * @return APIgetTransactionTypeRequest
+         */
+        public APIgetTransactionTypeRequest includeSystemTypes(Boolean includeSystemTypes) {
+            this.includeSystemTypes = includeSystemTypes;
+            return this;
+        }
+
+        /**
          * Build call for getTransactionType
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -1695,7 +1737,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getTransactionTypeCall(source, type, asAt, scope, _callback);
+            return getTransactionTypeCall(source, type, asAt, scope, includeSystemTypes, _callback);
         }
 
         /**
@@ -1711,7 +1753,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public TransactionType execute() throws ApiException {
-            ApiResponse<TransactionType> localVarResp = getTransactionTypeWithHttpInfo(source, type, asAt, scope);
+            ApiResponse<TransactionType> localVarResp = getTransactionTypeWithHttpInfo(source, type, asAt, scope, includeSystemTypes);
             return localVarResp.getData();
         }
 
@@ -1728,7 +1770,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public TransactionType execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<TransactionType> localVarResp = getTransactionTypeWithHttpInfo(source, type, asAt, scope, opts);
+            ApiResponse<TransactionType> localVarResp = getTransactionTypeWithHttpInfo(source, type, asAt, scope, includeSystemTypes, opts);
             return localVarResp.getData();
         }
 
@@ -1745,7 +1787,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ApiResponse<TransactionType> executeWithHttpInfo() throws ApiException {
-            return getTransactionTypeWithHttpInfo(source, type, asAt, scope);
+            return getTransactionTypeWithHttpInfo(source, type, asAt, scope, includeSystemTypes);
         }
 
         /**
@@ -1761,7 +1803,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ApiResponse<TransactionType> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getTransactionTypeWithHttpInfo(source, type, asAt, scope, opts);
+            return getTransactionTypeWithHttpInfo(source, type, asAt, scope, includeSystemTypes, opts);
         }
 
         /**
@@ -1777,7 +1819,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public void executeAsync(final ApiCallback<TransactionType> _callback) throws ApiException {
-            getTransactionTypeAsync(source, type, asAt, scope, _callback);
+            getTransactionTypeAsync(source, type, asAt, scope, includeSystemTypes, _callback);
         }
 
         /**
@@ -1793,7 +1835,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public void executeAsync(final ApiCallback<TransactionType> _callback, ConfigurationOptions opts) throws ApiException {
-            getTransactionTypeAsync(source, type, asAt, scope, _callback, opts);
+            getTransactionTypeAsync(source, type, asAt, scope, includeSystemTypes, _callback, opts);
         }
     }
 
@@ -1818,6 +1860,7 @@ public class TransactionConfigurationApi {
      * Build call for listSideDefinitions
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, are listed. Defaults to false, so              only the sides the scope stored itself are listed. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1829,14 +1872,15 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listSideDefinitionsCall(OffsetDateTime asAt, String scope, final ApiCallback _callback) throws ApiException {
-        return listSideDefinitionsCall(asAt, scope,  _callback, new ConfigurationOptions());
+    private HttpRequest listSideDefinitionsCall(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback _callback) throws ApiException {
+        return listSideDefinitionsCall(asAt, scope, includeSystemTypes,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for listSideDefinitions. Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default). Use any specified configuration options to override any other configuration for this request only.
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, are listed. Defaults to false, so              only the sides the scope stored itself are listed. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1848,7 +1892,7 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listSideDefinitionsCall(OffsetDateTime asAt, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listSideDefinitionsCall(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1881,6 +1925,10 @@ public class TransactionConfigurationApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("scope", scope));
         }
 
+        if (includeSystemTypes != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("includeSystemTypes", includeSystemTypes));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -1903,8 +1951,8 @@ public class TransactionConfigurationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listSideDefinitionsValidateBeforeCall(OffsetDateTime asAt, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listSideDefinitionsCall(asAt, scope, _callback, opts);
+    private HttpRequest listSideDefinitionsValidateBeforeCall(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listSideDefinitionsCall(asAt, scope, includeSystemTypes, _callback, opts);
 
     }
 
@@ -1913,6 +1961,7 @@ public class TransactionConfigurationApi {
      * List all the side definitions in the given scope, or across all scopes when scope is &#39;*&#39;.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, are listed. Defaults to false, so              only the sides the scope stored itself are listed. (optional, default to false)
      * @return ApiResponse&lt;ResourceListOfSideDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1923,8 +1972,8 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ResourceListOfSideDefinition> listSideDefinitionsWithHttpInfo(OffsetDateTime asAt, String scope) throws ApiException {
-        HttpRequest localVarCall = listSideDefinitionsValidateBeforeCall(asAt, scope, null, new ConfigurationOptions());
+    private ApiResponse<ResourceListOfSideDefinition> listSideDefinitionsWithHttpInfo(OffsetDateTime asAt, String scope, Boolean includeSystemTypes) throws ApiException {
+        HttpRequest localVarCall = listSideDefinitionsValidateBeforeCall(asAt, scope, includeSystemTypes, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ResourceListOfSideDefinition>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1934,6 +1983,7 @@ public class TransactionConfigurationApi {
      * List all the side definitions in the given scope, or across all scopes when scope is &#39;*&#39;.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, are listed. Defaults to false, so              only the sides the scope stored itself are listed. (optional, default to false)
      * @return ApiResponse&lt;ResourceListOfSideDefinition&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1944,8 +1994,8 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ResourceListOfSideDefinition> listSideDefinitionsWithHttpInfo(OffsetDateTime asAt, String scope, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listSideDefinitionsValidateBeforeCall(asAt, scope, null, opts);
+    private ApiResponse<ResourceListOfSideDefinition> listSideDefinitionsWithHttpInfo(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listSideDefinitionsValidateBeforeCall(asAt, scope, includeSystemTypes, null, opts);
         Type localVarReturnType = new TypeReference<ResourceListOfSideDefinition>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1955,6 +2005,7 @@ public class TransactionConfigurationApi {
      * List all the side definitions in the given scope, or across all scopes when scope is &#39;*&#39;.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, are listed. Defaults to false, so              only the sides the scope stored itself are listed. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1965,9 +2016,9 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listSideDefinitionsAsync(OffsetDateTime asAt, String scope, final ApiCallback<ResourceListOfSideDefinition> _callback) throws ApiException {
+    private void listSideDefinitionsAsync(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback<ResourceListOfSideDefinition> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listSideDefinitionsValidateBeforeCall(asAt, scope, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listSideDefinitionsValidateBeforeCall(asAt, scope, includeSystemTypes, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ResourceListOfSideDefinition>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1977,6 +2028,7 @@ public class TransactionConfigurationApi {
      * List all the side definitions in the given scope, or across all scopes when scope is &#39;*&#39;.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, are listed. Defaults to false, so              only the sides the scope stored itself are listed. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1987,9 +2039,9 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listSideDefinitionsAsync(OffsetDateTime asAt, String scope, final ApiCallback<ResourceListOfSideDefinition> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listSideDefinitionsAsync(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback<ResourceListOfSideDefinition> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listSideDefinitionsValidateBeforeCall(asAt, scope, _callback, opts);
+        HttpRequest localVarCall = listSideDefinitionsValidateBeforeCall(asAt, scope, includeSystemTypes, _callback, opts);
         Type localVarReturnType = new TypeReference<ResourceListOfSideDefinition>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1997,6 +2049,7 @@ public class TransactionConfigurationApi {
     public class APIlistSideDefinitionsRequest {
         private OffsetDateTime asAt;
         private String scope;
+        private Boolean includeSystemTypes;
 
         private APIlistSideDefinitionsRequest() {
         }
@@ -2022,6 +2075,16 @@ public class TransactionConfigurationApi {
         }
 
         /**
+         * Set includeSystemTypes
+         * @param includeSystemTypes Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, are listed. Defaults to false, so              only the sides the scope stored itself are listed. (optional, default to false)
+         * @return APIlistSideDefinitionsRequest
+         */
+        public APIlistSideDefinitionsRequest includeSystemTypes(Boolean includeSystemTypes) {
+            this.includeSystemTypes = includeSystemTypes;
+            return this;
+        }
+
+        /**
          * Build call for listSideDefinitions
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -2035,7 +2098,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listSideDefinitionsCall(asAt, scope, _callback);
+            return listSideDefinitionsCall(asAt, scope, includeSystemTypes, _callback);
         }
 
         /**
@@ -2051,7 +2114,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ResourceListOfSideDefinition execute() throws ApiException {
-            ApiResponse<ResourceListOfSideDefinition> localVarResp = listSideDefinitionsWithHttpInfo(asAt, scope);
+            ApiResponse<ResourceListOfSideDefinition> localVarResp = listSideDefinitionsWithHttpInfo(asAt, scope, includeSystemTypes);
             return localVarResp.getData();
         }
 
@@ -2068,7 +2131,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ResourceListOfSideDefinition execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<ResourceListOfSideDefinition> localVarResp = listSideDefinitionsWithHttpInfo(asAt, scope, opts);
+            ApiResponse<ResourceListOfSideDefinition> localVarResp = listSideDefinitionsWithHttpInfo(asAt, scope, includeSystemTypes, opts);
             return localVarResp.getData();
         }
 
@@ -2085,7 +2148,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ApiResponse<ResourceListOfSideDefinition> executeWithHttpInfo() throws ApiException {
-            return listSideDefinitionsWithHttpInfo(asAt, scope);
+            return listSideDefinitionsWithHttpInfo(asAt, scope, includeSystemTypes);
         }
 
         /**
@@ -2101,7 +2164,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ApiResponse<ResourceListOfSideDefinition> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listSideDefinitionsWithHttpInfo(asAt, scope, opts);
+            return listSideDefinitionsWithHttpInfo(asAt, scope, includeSystemTypes, opts);
         }
 
         /**
@@ -2117,7 +2180,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ResourceListOfSideDefinition> _callback) throws ApiException {
-            listSideDefinitionsAsync(asAt, scope, _callback);
+            listSideDefinitionsAsync(asAt, scope, includeSystemTypes, _callback);
         }
 
         /**
@@ -2133,7 +2196,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ResourceListOfSideDefinition> _callback, ConfigurationOptions opts) throws ApiException {
-            listSideDefinitionsAsync(asAt, scope, _callback, opts);
+            listSideDefinitionsAsync(asAt, scope, includeSystemTypes, _callback, opts);
         }
     }
 
@@ -2156,6 +2219,7 @@ public class TransactionConfigurationApi {
      * Build call for listTransactionTypes
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether to include the transaction types LUSID provides to every scope under              the &#39;pa-system&#39; source, which portfolios in the scope can book with. Defaults to false, so that source shows              only what the scope stored there itself. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2167,14 +2231,15 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listTransactionTypesCall(OffsetDateTime asAt, String scope, final ApiCallback _callback) throws ApiException {
-        return listTransactionTypesCall(asAt, scope,  _callback, new ConfigurationOptions());
+    private HttpRequest listTransactionTypesCall(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback _callback) throws ApiException {
+        return listTransactionTypesCall(asAt, scope, includeSystemTypes,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for listTransactionTypes. Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default). Use any specified configuration options to override any other configuration for this request only.
+     * @param includeSystemTypes Whether to include the transaction types LUSID provides to every scope under              the &#39;pa-system&#39; source, which portfolios in the scope can book with. Defaults to false, so that source shows              only what the scope stored there itself. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2186,7 +2251,7 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listTransactionTypesCall(OffsetDateTime asAt, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listTransactionTypesCall(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2219,6 +2284,10 @@ public class TransactionConfigurationApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("scope", scope));
         }
 
+        if (includeSystemTypes != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("includeSystemTypes", includeSystemTypes));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -2241,8 +2310,8 @@ public class TransactionConfigurationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listTransactionTypesValidateBeforeCall(OffsetDateTime asAt, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listTransactionTypesCall(asAt, scope, _callback, opts);
+    private HttpRequest listTransactionTypesValidateBeforeCall(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listTransactionTypesCall(asAt, scope, includeSystemTypes, _callback, opts);
 
     }
 
@@ -2251,6 +2320,7 @@ public class TransactionConfigurationApi {
      * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether to include the transaction types LUSID provides to every scope under              the &#39;pa-system&#39; source, which portfolios in the scope can book with. Defaults to false, so that source shows              only what the scope stored there itself. (optional, default to false)
      * @return ApiResponse&lt;Map&lt;String, List&lt;TransactionType&gt;&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2261,8 +2331,8 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Map<String, List<TransactionType>>> listTransactionTypesWithHttpInfo(OffsetDateTime asAt, String scope) throws ApiException {
-        HttpRequest localVarCall = listTransactionTypesValidateBeforeCall(asAt, scope, null, new ConfigurationOptions());
+    private ApiResponse<Map<String, List<TransactionType>>> listTransactionTypesWithHttpInfo(OffsetDateTime asAt, String scope, Boolean includeSystemTypes) throws ApiException {
+        HttpRequest localVarCall = listTransactionTypesValidateBeforeCall(asAt, scope, includeSystemTypes, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<Map<String, List<TransactionType>>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2272,6 +2342,7 @@ public class TransactionConfigurationApi {
      * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether to include the transaction types LUSID provides to every scope under              the &#39;pa-system&#39; source, which portfolios in the scope can book with. Defaults to false, so that source shows              only what the scope stored there itself. (optional, default to false)
      * @return ApiResponse&lt;Map&lt;String, List&lt;TransactionType&gt;&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2282,8 +2353,8 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Map<String, List<TransactionType>>> listTransactionTypesWithHttpInfo(OffsetDateTime asAt, String scope, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listTransactionTypesValidateBeforeCall(asAt, scope, null, opts);
+    private ApiResponse<Map<String, List<TransactionType>>> listTransactionTypesWithHttpInfo(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listTransactionTypesValidateBeforeCall(asAt, scope, includeSystemTypes, null, opts);
         Type localVarReturnType = new TypeReference<Map<String, List<TransactionType>>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2293,6 +2364,7 @@ public class TransactionConfigurationApi {
      * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether to include the transaction types LUSID provides to every scope under              the &#39;pa-system&#39; source, which portfolios in the scope can book with. Defaults to false, so that source shows              only what the scope stored there itself. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2303,9 +2375,9 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listTransactionTypesAsync(OffsetDateTime asAt, String scope, final ApiCallback<Map<String, List<TransactionType>>> _callback) throws ApiException {
+    private void listTransactionTypesAsync(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback<Map<String, List<TransactionType>>> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listTransactionTypesValidateBeforeCall(asAt, scope, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listTransactionTypesValidateBeforeCall(asAt, scope, includeSystemTypes, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<Map<String, List<TransactionType>>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2315,6 +2387,7 @@ public class TransactionConfigurationApi {
      * Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
      * @param scope The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. (optional, default to default)
+     * @param includeSystemTypes Whether to include the transaction types LUSID provides to every scope under              the &#39;pa-system&#39; source, which portfolios in the scope can book with. Defaults to false, so that source shows              only what the scope stored there itself. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2325,9 +2398,9 @@ public class TransactionConfigurationApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listTransactionTypesAsync(OffsetDateTime asAt, String scope, final ApiCallback<Map<String, List<TransactionType>>> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listTransactionTypesAsync(OffsetDateTime asAt, String scope, Boolean includeSystemTypes, final ApiCallback<Map<String, List<TransactionType>>> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listTransactionTypesValidateBeforeCall(asAt, scope, _callback, opts);
+        HttpRequest localVarCall = listTransactionTypesValidateBeforeCall(asAt, scope, includeSystemTypes, _callback, opts);
         Type localVarReturnType = new TypeReference<Map<String, List<TransactionType>>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2335,6 +2408,7 @@ public class TransactionConfigurationApi {
     public class APIlistTransactionTypesRequest {
         private OffsetDateTime asAt;
         private String scope;
+        private Boolean includeSystemTypes;
 
         private APIlistTransactionTypesRequest() {
         }
@@ -2360,6 +2434,16 @@ public class TransactionConfigurationApi {
         }
 
         /**
+         * Set includeSystemTypes
+         * @param includeSystemTypes Whether to include the transaction types LUSID provides to every scope under              the &#39;pa-system&#39; source, which portfolios in the scope can book with. Defaults to false, so that source shows              only what the scope stored there itself. (optional, default to false)
+         * @return APIlistTransactionTypesRequest
+         */
+        public APIlistTransactionTypesRequest includeSystemTypes(Boolean includeSystemTypes) {
+            this.includeSystemTypes = includeSystemTypes;
+            return this;
+        }
+
+        /**
          * Build call for listTransactionTypes
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -2373,7 +2457,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listTransactionTypesCall(asAt, scope, _callback);
+            return listTransactionTypesCall(asAt, scope, includeSystemTypes, _callback);
         }
 
         /**
@@ -2389,7 +2473,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public Map<String, List<TransactionType>> execute() throws ApiException {
-            ApiResponse<Map<String, List<TransactionType>>> localVarResp = listTransactionTypesWithHttpInfo(asAt, scope);
+            ApiResponse<Map<String, List<TransactionType>>> localVarResp = listTransactionTypesWithHttpInfo(asAt, scope, includeSystemTypes);
             return localVarResp.getData();
         }
 
@@ -2406,7 +2490,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public Map<String, List<TransactionType>> execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<Map<String, List<TransactionType>>> localVarResp = listTransactionTypesWithHttpInfo(asAt, scope, opts);
+            ApiResponse<Map<String, List<TransactionType>>> localVarResp = listTransactionTypesWithHttpInfo(asAt, scope, includeSystemTypes, opts);
             return localVarResp.getData();
         }
 
@@ -2423,7 +2507,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ApiResponse<Map<String, List<TransactionType>>> executeWithHttpInfo() throws ApiException {
-            return listTransactionTypesWithHttpInfo(asAt, scope);
+            return listTransactionTypesWithHttpInfo(asAt, scope, includeSystemTypes);
         }
 
         /**
@@ -2439,7 +2523,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public ApiResponse<Map<String, List<TransactionType>>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listTransactionTypesWithHttpInfo(asAt, scope, opts);
+            return listTransactionTypesWithHttpInfo(asAt, scope, includeSystemTypes, opts);
         }
 
         /**
@@ -2455,7 +2539,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public void executeAsync(final ApiCallback<Map<String, List<TransactionType>>> _callback) throws ApiException {
-            listTransactionTypesAsync(asAt, scope, _callback);
+            listTransactionTypesAsync(asAt, scope, includeSystemTypes, _callback);
         }
 
         /**
@@ -2471,7 +2555,7 @@ public class TransactionConfigurationApi {
          </table>
          */
         public void executeAsync(final ApiCallback<Map<String, List<TransactionType>>> _callback, ConfigurationOptions opts) throws ApiException {
-            listTransactionTypesAsync(asAt, scope, _callback, opts);
+            listTransactionTypesAsync(asAt, scope, includeSystemTypes, _callback, opts);
         }
     }
 

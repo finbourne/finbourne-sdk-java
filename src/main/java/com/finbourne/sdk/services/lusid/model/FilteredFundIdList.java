@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.FundNavTypeCodes;
 import com.finbourne.sdk.services.lusid.model.ReferenceList;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
@@ -39,7 +40,10 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   FilteredFundIdList.JSON_PROPERTY_FILTER,
-  FilteredFundIdList.JSON_PROPERTY_VALUES
+  FilteredFundIdList.JSON_PROPERTY_VALUES,
+  FilteredFundIdList.JSON_PROPERTY_NAV_TYPE_CODES_HINT,
+  FilteredFundIdList.JSON_PROPERTY_NAV_TYPE_SELECTION,
+  FilteredFundIdList.JSON_PROPERTY_RESOLVED_FUND_NAV_TYPE_CODES
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -59,14 +63,65 @@ public class FilteredFundIdList extends ReferenceList {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ResourceId> values;
 
+  public static final String JSON_PROPERTY_NAV_TYPE_CODES_HINT = "navTypeCodesHint";
+  @JsonProperty(JSON_PROPERTY_NAV_TYPE_CODES_HINT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> navTypeCodesHint;
+
+  /**
+   * Available values: First, All.
+   */
+  public enum NavTypeSelectionEnum {
+    FIRST("First"),
+    
+    ALL("All");
+
+    private String value;
+
+    NavTypeSelectionEnum(String value) {
+      this.value = value;
+    }
+
+    @com.fasterxml.jackson.annotation.JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static NavTypeSelectionEnum fromValue(String value) {
+      for (NavTypeSelectionEnum b : NavTypeSelectionEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+  public static final String JSON_PROPERTY_NAV_TYPE_SELECTION = "navTypeSelection";
+  @JsonProperty(JSON_PROPERTY_NAV_TYPE_SELECTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private NavTypeSelectionEnum navTypeSelection;
+
+  public static final String JSON_PROPERTY_RESOLVED_FUND_NAV_TYPE_CODES = "resolvedFundNavTypeCodes";
+  @JsonProperty(JSON_PROPERTY_RESOLVED_FUND_NAV_TYPE_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<FundNavTypeCodes> resolvedFundNavTypeCodes;
+
   public FilteredFundIdList() {
   }
 
   public FilteredFundIdList(
-     List<ResourceId> values
+     List<ResourceId> values, 
+     List<FundNavTypeCodes> resolvedFundNavTypeCodes
   ) {
     this();
     this.values = values;
+    this.resolvedFundNavTypeCodes = resolvedFundNavTypeCodes;
   }
 
   public FilteredFundIdList filter(String filter) {
@@ -99,6 +154,63 @@ public class FilteredFundIdList extends ReferenceList {
 
 
 
+  public FilteredFundIdList navTypeCodesHint(List<String> navTypeCodesHint) {
+    this.navTypeCodesHint = navTypeCodesHint;
+    return this;
+  }
+
+  public FilteredFundIdList addNavTypeCodesHintItem(String navTypeCodesHintItem) {
+    if (this.navTypeCodesHint == null) {
+      this.navTypeCodesHint = new ArrayList<>();
+    }
+    this.navTypeCodesHint.add(navTypeCodesHintItem);
+    return this;
+  }
+
+  /**
+   * 
+   * @return navTypeCodesHint
+   */
+  @javax.annotation.Nullable
+  public List<String> getNavTypeCodesHint() {
+    return navTypeCodesHint;
+  }
+
+  public void setNavTypeCodesHint(List<String> navTypeCodesHint) {
+    this.navTypeCodesHint = navTypeCodesHint;
+  }
+
+
+  public FilteredFundIdList navTypeSelection(NavTypeSelectionEnum navTypeSelection) {
+    this.navTypeSelection = navTypeSelection;
+    return this;
+  }
+
+  /**
+   * Available values: First, All.
+   * @return navTypeSelection
+   */
+  @javax.annotation.Nullable
+  public NavTypeSelectionEnum getNavTypeSelection() {
+    return navTypeSelection;
+  }
+
+  public void setNavTypeSelection(NavTypeSelectionEnum navTypeSelection) {
+    this.navTypeSelection = navTypeSelection;
+  }
+
+
+  /**
+   * 
+   * @return resolvedFundNavTypeCodes
+   */
+  @javax.annotation.Nullable
+  public List<FundNavTypeCodes> getResolvedFundNavTypeCodes() {
+    return resolvedFundNavTypeCodes;
+  }
+
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -110,6 +222,9 @@ public class FilteredFundIdList extends ReferenceList {
     FilteredFundIdList filteredFundIdList = (FilteredFundIdList) o;
     return Objects.equals(this.filter, filteredFundIdList.filter) &&
         Objects.equals(this.values, filteredFundIdList.values) &&
+        Objects.equals(this.navTypeCodesHint, filteredFundIdList.navTypeCodesHint) &&
+        Objects.equals(this.navTypeSelection, filteredFundIdList.navTypeSelection) &&
+        Objects.equals(this.resolvedFundNavTypeCodes, filteredFundIdList.resolvedFundNavTypeCodes) &&
         super.equals(o);
   }
 
@@ -119,7 +234,7 @@ public class FilteredFundIdList extends ReferenceList {
 
   @Override
  public int hashCode() {
-    return Objects.hash(filter, values, super.hashCode());
+    return Objects.hash(filter, values, navTypeCodesHint, navTypeSelection, resolvedFundNavTypeCodes, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -136,6 +251,9 @@ public class FilteredFundIdList extends ReferenceList {
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    filter: ").append(toIndentedString(filter)).append("\n");
     sb.append("    values: ").append(toIndentedString(values)).append("\n");
+    sb.append("    navTypeCodesHint: ").append(toIndentedString(navTypeCodesHint)).append("\n");
+    sb.append("    navTypeSelection: ").append(toIndentedString(navTypeSelection)).append("\n");
+    sb.append("    resolvedFundNavTypeCodes: ").append(toIndentedString(resolvedFundNavTypeCodes)).append("\n");
     sb.append("}");
     return sb.toString();
   }

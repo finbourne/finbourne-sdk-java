@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AggregateMatchingRule;
 import com.finbourne.sdk.services.lusid.model.CoreMatchingRule;
+import com.finbourne.sdk.services.lusid.model.ExternalRecType;
 import com.finbourne.sdk.services.lusid.model.GroupReconciliationFilters;
 import com.finbourne.sdk.services.lusid.model.RecDatasetSchemas;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
@@ -47,6 +48,7 @@ import com.finbourne.sdk.JSON;
   CreateMatchingRulesetRequest.JSON_PROPERTY_ID,
   CreateMatchingRulesetRequest.JSON_PROPERTY_DISPLAY_NAME,
   CreateMatchingRulesetRequest.JSON_PROPERTY_REC_TYPE,
+  CreateMatchingRulesetRequest.JSON_PROPERTY_EXTERNAL_REC_TYPE,
   CreateMatchingRulesetRequest.JSON_PROPERTY_DATASET_SCHEMAS,
   CreateMatchingRulesetRequest.JSON_PROPERTY_FILTERS,
   CreateMatchingRulesetRequest.JSON_PROPERTY_CORE_RULES,
@@ -73,6 +75,11 @@ public class CreateMatchingRulesetRequest {
   @JsonProperty(JSON_PROPERTY_REC_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String recType;
+
+  public static final String JSON_PROPERTY_EXTERNAL_REC_TYPE = "externalRecType";
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_REC_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ExternalRecType externalRecType;
 
   public static final String JSON_PROPERTY_DATASET_SCHEMAS = "datasetSchemas";
   @JsonProperty(JSON_PROPERTY_DATASET_SCHEMAS)
@@ -166,7 +173,7 @@ public class CreateMatchingRulesetRequest {
   }
 
   /**
-   * The type of reconciliation to perform. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.
+   * The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -176,6 +183,25 @@ public class CreateMatchingRulesetRequest {
 
   public void setRecType(String recType) {
     this.recType = recType;
+  }
+
+
+  public CreateMatchingRulesetRequest externalRecType(ExternalRecType externalRecType) {
+    this.externalRecType = externalRecType;
+    return this;
+  }
+
+  /**
+   * Get externalRecType
+   * @return externalRecType
+   */
+  @javax.annotation.Nullable
+  public ExternalRecType getExternalRecType() {
+    return externalRecType;
+  }
+
+  public void setExternalRecType(ExternalRecType externalRecType) {
+    this.externalRecType = externalRecType;
   }
 
 
@@ -331,7 +357,7 @@ public class CreateMatchingRulesetRequest {
   }
 
   /**
-   * Whether to permit partial matches when applying rules.
+   * Whether to permit partial matches when applying rules. Optional, defaults to true if a value is not provided.
    * @return allowPartialMatching
    */
   @javax.annotation.Nullable
@@ -410,6 +436,7 @@ public class CreateMatchingRulesetRequest {
     return Objects.equals(this.id, createMatchingRulesetRequest.id) &&
         Objects.equals(this.displayName, createMatchingRulesetRequest.displayName) &&
         Objects.equals(this.recType, createMatchingRulesetRequest.recType) &&
+        Objects.equals(this.externalRecType, createMatchingRulesetRequest.externalRecType) &&
         Objects.equals(this.datasetSchemas, createMatchingRulesetRequest.datasetSchemas) &&
         Objects.equals(this.filters, createMatchingRulesetRequest.filters) &&
         Objects.equals(this.coreRules, createMatchingRulesetRequest.coreRules) &&
@@ -427,7 +454,7 @@ public class CreateMatchingRulesetRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, displayName, recType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations);
+    return Objects.hash(id, displayName, recType, externalRecType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -444,6 +471,7 @@ public class CreateMatchingRulesetRequest {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
+    sb.append("    externalRecType: ").append(toIndentedString(externalRecType)).append("\n");
     sb.append("    datasetSchemas: ").append(toIndentedString(datasetSchemas)).append("\n");
     sb.append("    filters: ").append(toIndentedString(filters)).append("\n");
     sb.append("    coreRules: ").append(toIndentedString(coreRules)).append("\n");

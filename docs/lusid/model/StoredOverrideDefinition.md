@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | The transaction properties stored for the replacement transaction. | [optional] [default to Map<String, PerpetualProperty>]
 **counterpartyId** | **String** | The identifier for the counterparty of the replacement transaction. | [optional] [default to String]
 **source** | **String** | The source of the replacement transaction. | [optional] [default to String]
+**custodianAccountId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.StoredOverrideDefinition;
@@ -39,6 +40,7 @@ CurrencyAndAmount totalConsideration = new CurrencyAndAmount();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable String counterpartyId = "example counterpartyId";
 @javax.annotation.Nullable String source = "example source";
+ResourceId custodianAccountId = new ResourceId();
 
 
 StoredOverrideDefinition storedOverrideDefinitionInstance = new StoredOverrideDefinition()
@@ -54,7 +56,8 @@ StoredOverrideDefinition storedOverrideDefinitionInstance = new StoredOverrideDe
     .tradeCurrency(tradeCurrency)
     .properties(properties)
     .counterpartyId(counterpartyId)
-    .source(source);
+    .source(source)
+    .custodianAccountId(custodianAccountId);
 ```
 
 

@@ -34,6 +34,8 @@ import com.finbourne.sdk.services.lusid.model.AllocationEventReceiptRequest;
 import com.finbourne.sdk.services.lusid.model.AllocationEventRequest;
 import com.finbourne.sdk.services.lusid.model.AllocationEventReverseRequest;
 import com.finbourne.sdk.services.lusid.model.AllocationEventUnbookRequest;
+import com.finbourne.sdk.services.lusid.model.AllocationPaymentHold;
+import com.finbourne.sdk.services.lusid.model.AllocationPaymentHoldRequest;
 import com.finbourne.sdk.services.lusid.model.AllocationPostingPlan;
 import com.finbourne.sdk.services.lusid.model.AllocationReceivablesAgeing;
 import com.finbourne.sdk.services.lusid.model.DeletedEntityResponse;
@@ -41,6 +43,8 @@ import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfAllocationEvent;
+import com.finbourne.sdk.services.lusid.model.ResourceListOfAllocationEventNotice;
+import com.finbourne.sdk.services.lusid.model.ResourceListOfAllocationPaymentHold;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -1495,6 +1499,395 @@ public class AllocationEventsApi {
         return new APIgetAllocationEventRequest(scope, code);
     }
     /**
+     * Build call for getAllocationEventNotices
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId Restrict the notices to this partner&#39;s investor record. (optional)
+     * @param includeZero Whether to include notices whose every line is zero. Defaults to false. (optional, default to false)
+     * @param asAt The asAt datetime at which to read the event. Defaults to returning the latest version if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getAllocationEventNoticesCall(String scope, String code, String investorRecordId, Boolean includeZero, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
+        return getAllocationEventNoticesCall(scope, code, investorRecordId, includeZero, asAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getAllocationEventNotices. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Allocation Event. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param investorRecordId Restrict the notices to this partner&#39;s investor record. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param includeZero Whether to include notices whose every line is zero. Defaults to false. (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the event. Defaults to returning the latest version if not specified. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getAllocationEventNoticesCall(String scope, String code, String investorRecordId, Boolean includeZero, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/allocationevents/{scope}/{code}/notices"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (investorRecordId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("investorRecordId", investorRecordId));
+        }
+
+        if (includeZero != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("includeZero", includeZero));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getAllocationEventNoticesValidateBeforeCall(String scope, String code, String investorRecordId, Boolean includeZero, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getAllocationEventNotices(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getAllocationEventNotices(Async)");
+        }
+
+        return getAllocationEventNoticesCall(scope, code, investorRecordId, includeZero, asAt, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners.
+     * One notice per partner allocation, listing the ILPA transaction lines, the net amount due, the partner&#39;s  unfunded commitment reconciliation across the event and their cumulative position alongside the general  partner&#39;s. Notices carry a DRAFT watermark until the event is booked.
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId Restrict the notices to this partner&#39;s investor record. (optional)
+     * @param includeZero Whether to include notices whose every line is zero. Defaults to false. (optional, default to false)
+     * @param asAt The asAt datetime at which to read the event. Defaults to returning the latest version if not specified. (optional)
+     * @return ApiResponse&lt;ResourceListOfAllocationEventNotice&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfAllocationEventNotice> getAllocationEventNoticesWithHttpInfo(String scope, String code, String investorRecordId, Boolean includeZero, OffsetDateTime asAt) throws ApiException {
+        HttpRequest localVarCall = getAllocationEventNoticesValidateBeforeCall(scope, code, investorRecordId, includeZero, asAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfAllocationEventNotice>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners.
+     * One notice per partner allocation, listing the ILPA transaction lines, the net amount due, the partner&#39;s  unfunded commitment reconciliation across the event and their cumulative position alongside the general  partner&#39;s. Notices carry a DRAFT watermark until the event is booked.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId Restrict the notices to this partner&#39;s investor record. (optional)
+     * @param includeZero Whether to include notices whose every line is zero. Defaults to false. (optional, default to false)
+     * @param asAt The asAt datetime at which to read the event. Defaults to returning the latest version if not specified. (optional)
+     * @return ApiResponse&lt;ResourceListOfAllocationEventNotice&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfAllocationEventNotice> getAllocationEventNoticesWithHttpInfo(String scope, String code, String investorRecordId, Boolean includeZero, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getAllocationEventNoticesValidateBeforeCall(scope, code, investorRecordId, includeZero, asAt, null, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfAllocationEventNotice>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners. (asynchronously)
+     * One notice per partner allocation, listing the ILPA transaction lines, the net amount due, the partner&#39;s  unfunded commitment reconciliation across the event and their cumulative position alongside the general  partner&#39;s. Notices carry a DRAFT watermark until the event is booked.
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId Restrict the notices to this partner&#39;s investor record. (optional)
+     * @param includeZero Whether to include notices whose every line is zero. Defaults to false. (optional, default to false)
+     * @param asAt The asAt datetime at which to read the event. Defaults to returning the latest version if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getAllocationEventNoticesAsync(String scope, String code, String investorRecordId, Boolean includeZero, OffsetDateTime asAt, final ApiCallback<ResourceListOfAllocationEventNotice> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getAllocationEventNoticesValidateBeforeCall(scope, code, investorRecordId, includeZero, asAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfAllocationEventNotice>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners. (asynchronously)
+     * One notice per partner allocation, listing the ILPA transaction lines, the net amount due, the partner&#39;s  unfunded commitment reconciliation across the event and their cumulative position alongside the general  partner&#39;s. Notices carry a DRAFT watermark until the event is booked.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId Restrict the notices to this partner&#39;s investor record. (optional)
+     * @param includeZero Whether to include notices whose every line is zero. Defaults to false. (optional, default to false)
+     * @param asAt The asAt datetime at which to read the event. Defaults to returning the latest version if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getAllocationEventNoticesAsync(String scope, String code, String investorRecordId, Boolean includeZero, OffsetDateTime asAt, final ApiCallback<ResourceListOfAllocationEventNotice> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getAllocationEventNoticesValidateBeforeCall(scope, code, investorRecordId, includeZero, asAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfAllocationEventNotice>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetAllocationEventNoticesRequest {
+        private final String scope;
+        private final String code;
+        private String investorRecordId;
+        private Boolean includeZero;
+        private OffsetDateTime asAt;
+
+        private APIgetAllocationEventNoticesRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set investorRecordId
+         * @param investorRecordId Restrict the notices to this partner&#39;s investor record. (optional)
+         * @return APIgetAllocationEventNoticesRequest
+         */
+        public APIgetAllocationEventNoticesRequest investorRecordId(String investorRecordId) {
+            this.investorRecordId = investorRecordId;
+            return this;
+        }
+
+        /**
+         * Set includeZero
+         * @param includeZero Whether to include notices whose every line is zero. Defaults to false. (optional, default to false)
+         * @return APIgetAllocationEventNoticesRequest
+         */
+        public APIgetAllocationEventNoticesRequest includeZero(Boolean includeZero) {
+            this.includeZero = includeZero;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the event. Defaults to returning the latest version if not specified. (optional)
+         * @return APIgetAllocationEventNoticesRequest
+         */
+        public APIgetAllocationEventNoticesRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Build call for getAllocationEventNotices
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getAllocationEventNoticesCall(scope, code, investorRecordId, includeZero, asAt, _callback);
+        }
+
+        /**
+         * Execute getAllocationEventNotices request
+         * @return ResourceListOfAllocationEventNotice
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfAllocationEventNotice execute() throws ApiException {
+            ApiResponse<ResourceListOfAllocationEventNotice> localVarResp = getAllocationEventNoticesWithHttpInfo(scope, code, investorRecordId, includeZero, asAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getAllocationEventNotices request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ResourceListOfAllocationEventNotice
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfAllocationEventNotice execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ResourceListOfAllocationEventNotice> localVarResp = getAllocationEventNoticesWithHttpInfo(scope, code, investorRecordId, includeZero, asAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getAllocationEventNotices request with HTTP info returned
+         * @return ApiResponse&lt;ResourceListOfAllocationEventNotice&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfAllocationEventNotice> executeWithHttpInfo() throws ApiException {
+            return getAllocationEventNoticesWithHttpInfo(scope, code, investorRecordId, includeZero, asAt);
+        }
+
+        /**
+         * Execute getAllocationEventNotices request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ResourceListOfAllocationEventNotice&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfAllocationEventNotice> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getAllocationEventNoticesWithHttpInfo(scope, code, investorRecordId, includeZero, asAt, opts);
+        }
+
+        /**
+         * Execute getAllocationEventNotices request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfAllocationEventNotice> _callback) throws ApiException {
+            getAllocationEventNoticesAsync(scope, code, investorRecordId, includeZero, asAt, _callback);
+        }
+
+        /**
+         * Execute getAllocationEventNotices request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfAllocationEventNotice> _callback, ConfigurationOptions opts) throws ApiException {
+            getAllocationEventNoticesAsync(scope, code, investorRecordId, includeZero, asAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners.
+     * One notice per partner allocation, listing the ILPA transaction lines, the net amount due, the partner&#39;s  unfunded commitment reconciliation across the event and their cumulative position alongside the general  partner&#39;s. Notices carry a DRAFT watermark until the event is booked.
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @return APIgetAllocationEventNoticesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The notices the allocation event issues. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetAllocationEventNoticesRequest getAllocationEventNotices(String scope, String code) {
+        return new APIgetAllocationEventNoticesRequest(scope, code);
+    }
+    /**
      * Build call for getAllocationEventReceivables
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -2285,6 +2678,347 @@ public class AllocationEventsApi {
         return new APIlistAllocationEventsRequest();
     }
     /**
+     * Build call for listAllocationPaymentHolds
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose holds are listed. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listAllocationPaymentHoldsCall(String scope, String code, String investorRecordId, final ApiCallback _callback) throws ApiException {
+        return listAllocationPaymentHoldsCall(scope, code, investorRecordId,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listAllocationPaymentHolds. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Allocation Event. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param investorRecordId The investor record of the partner whose holds are listed. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listAllocationPaymentHoldsCall(String scope, String code, String investorRecordId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/holds"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()))
+            .replace("{" + "investorRecordId" + "}", localVarApiClient.escapeString(investorRecordId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listAllocationPaymentHoldsValidateBeforeCall(String scope, String code, String investorRecordId, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling listAllocationPaymentHolds(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling listAllocationPaymentHolds(Async)");
+        }
+
+        // verify the required parameter 'investorRecordId' is set
+        if (investorRecordId == null) {
+            throw new ApiException("Missing the required parameter 'investorRecordId' when calling listAllocationPaymentHolds(Async)");
+        }
+
+        return listAllocationPaymentHoldsCall(scope, code, investorRecordId, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner&#39;s payment.
+     * Every hold placed on the partner&#39;s payment against the event, newest first, including released ones.
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose holds are listed. (required)
+     * @return ApiResponse&lt;ResourceListOfAllocationPaymentHold&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfAllocationPaymentHold> listAllocationPaymentHoldsWithHttpInfo(String scope, String code, String investorRecordId) throws ApiException {
+        HttpRequest localVarCall = listAllocationPaymentHoldsValidateBeforeCall(scope, code, investorRecordId, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfAllocationPaymentHold>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner&#39;s payment.
+     * Every hold placed on the partner&#39;s payment against the event, newest first, including released ones.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose holds are listed. (required)
+     * @return ApiResponse&lt;ResourceListOfAllocationPaymentHold&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfAllocationPaymentHold> listAllocationPaymentHoldsWithHttpInfo(String scope, String code, String investorRecordId, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listAllocationPaymentHoldsValidateBeforeCall(scope, code, investorRecordId, null, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfAllocationPaymentHold>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner&#39;s payment. (asynchronously)
+     * Every hold placed on the partner&#39;s payment against the event, newest first, including released ones.
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose holds are listed. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listAllocationPaymentHoldsAsync(String scope, String code, String investorRecordId, final ApiCallback<ResourceListOfAllocationPaymentHold> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listAllocationPaymentHoldsValidateBeforeCall(scope, code, investorRecordId, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfAllocationPaymentHold>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner&#39;s payment. (asynchronously)
+     * Every hold placed on the partner&#39;s payment against the event, newest first, including released ones.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose holds are listed. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listAllocationPaymentHoldsAsync(String scope, String code, String investorRecordId, final ApiCallback<ResourceListOfAllocationPaymentHold> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listAllocationPaymentHoldsValidateBeforeCall(scope, code, investorRecordId, _callback, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfAllocationPaymentHold>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistAllocationPaymentHoldsRequest {
+        private final String scope;
+        private final String code;
+        private final String investorRecordId;
+
+        private APIlistAllocationPaymentHoldsRequest(String scope, String code, String investorRecordId) {
+            this.scope = scope;
+            this.code = code;
+            this.investorRecordId = investorRecordId;
+        }
+
+        /**
+         * Build call for listAllocationPaymentHolds
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listAllocationPaymentHoldsCall(scope, code, investorRecordId, _callback);
+        }
+
+        /**
+         * Execute listAllocationPaymentHolds request
+         * @return ResourceListOfAllocationPaymentHold
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfAllocationPaymentHold execute() throws ApiException {
+            ApiResponse<ResourceListOfAllocationPaymentHold> localVarResp = listAllocationPaymentHoldsWithHttpInfo(scope, code, investorRecordId);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listAllocationPaymentHolds request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ResourceListOfAllocationPaymentHold
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfAllocationPaymentHold execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ResourceListOfAllocationPaymentHold> localVarResp = listAllocationPaymentHoldsWithHttpInfo(scope, code, investorRecordId, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listAllocationPaymentHolds request with HTTP info returned
+         * @return ApiResponse&lt;ResourceListOfAllocationPaymentHold&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfAllocationPaymentHold> executeWithHttpInfo() throws ApiException {
+            return listAllocationPaymentHoldsWithHttpInfo(scope, code, investorRecordId);
+        }
+
+        /**
+         * Execute listAllocationPaymentHolds request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ResourceListOfAllocationPaymentHold&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfAllocationPaymentHold> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listAllocationPaymentHoldsWithHttpInfo(scope, code, investorRecordId, opts);
+        }
+
+        /**
+         * Execute listAllocationPaymentHolds request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfAllocationPaymentHold> _callback) throws ApiException {
+            listAllocationPaymentHoldsAsync(scope, code, investorRecordId, _callback);
+        }
+
+        /**
+         * Execute listAllocationPaymentHolds request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfAllocationPaymentHold> _callback, ConfigurationOptions opts) throws ApiException {
+            listAllocationPaymentHoldsAsync(scope, code, investorRecordId, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner&#39;s payment.
+     * Every hold placed on the partner&#39;s payment against the event, newest first, including released ones.
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose holds are listed. (required)
+     * @return APIlistAllocationPaymentHoldsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holds placed on the partner&#39;s payment. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistAllocationPaymentHoldsRequest listAllocationPaymentHolds(String scope, String code, String investorRecordId) {
+        return new APIlistAllocationPaymentHoldsRequest(scope, code, investorRecordId);
+    }
+    /**
      * Build call for planAllocationEventBooking
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -2648,6 +3382,365 @@ public class AllocationEventsApi {
      */
     public APIplanAllocationEventBookingRequest planAllocationEventBooking(String scope, String code, AllocationEventBookRequest allocationEventBookRequest) {
         return new APIplanAllocationEventBookingRequest(scope, code, allocationEventBookRequest);
+    }
+    /**
+     * Build call for putAllocationPaymentHold
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose payment is held. (required)
+     * @param allocationPaymentHoldRequest The hold to record: its status, and optionally a reason and an external reference. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest putAllocationPaymentHoldCall(String scope, String code, String investorRecordId, AllocationPaymentHoldRequest allocationPaymentHoldRequest, final ApiCallback _callback) throws ApiException {
+        return putAllocationPaymentHoldCall(scope, code, investorRecordId, allocationPaymentHoldRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for putAllocationPaymentHold. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Allocation Event. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param investorRecordId The investor record of the partner whose payment is held. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param allocationPaymentHoldRequest The hold to record: its status, and optionally a reason and an external reference. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest putAllocationPaymentHoldCall(String scope, String code, String investorRecordId, AllocationPaymentHoldRequest allocationPaymentHoldRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = allocationPaymentHoldRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/hold"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()))
+            .replace("{" + "investorRecordId" + "}", localVarApiClient.escapeString(investorRecordId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest putAllocationPaymentHoldValidateBeforeCall(String scope, String code, String investorRecordId, AllocationPaymentHoldRequest allocationPaymentHoldRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling putAllocationPaymentHold(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling putAllocationPaymentHold(Async)");
+        }
+
+        // verify the required parameter 'investorRecordId' is set
+        if (investorRecordId == null) {
+            throw new ApiException("Missing the required parameter 'investorRecordId' when calling putAllocationPaymentHold(Async)");
+        }
+
+        // verify the required parameter 'allocationPaymentHoldRequest' is set
+        if (allocationPaymentHoldRequest == null) {
+            throw new ApiException("Missing the required parameter 'allocationPaymentHoldRequest' when calling putAllocationPaymentHold(Async)");
+        }
+
+        return putAllocationPaymentHoldCall(scope, code, investorRecordId, allocationPaymentHoldRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner&#39;s payment.
+     * A Blocked or Escrow hold stops the partner&#39;s allocation being received against the event until it is  Released. A hold may only be released by a user other than the one who placed it.
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose payment is held. (required)
+     * @param allocationPaymentHoldRequest The hold to record: its status, and optionally a reason and an external reference. (required)
+     * @return ApiResponse&lt;AllocationPaymentHold&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<AllocationPaymentHold> putAllocationPaymentHoldWithHttpInfo(String scope, String code, String investorRecordId, AllocationPaymentHoldRequest allocationPaymentHoldRequest) throws ApiException {
+        HttpRequest localVarCall = putAllocationPaymentHoldValidateBeforeCall(scope, code, investorRecordId, allocationPaymentHoldRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<AllocationPaymentHold>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner&#39;s payment.
+     * A Blocked or Escrow hold stops the partner&#39;s allocation being received against the event until it is  Released. A hold may only be released by a user other than the one who placed it.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose payment is held. (required)
+     * @param allocationPaymentHoldRequest The hold to record: its status, and optionally a reason and an external reference. (required)
+     * @return ApiResponse&lt;AllocationPaymentHold&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<AllocationPaymentHold> putAllocationPaymentHoldWithHttpInfo(String scope, String code, String investorRecordId, AllocationPaymentHoldRequest allocationPaymentHoldRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = putAllocationPaymentHoldValidateBeforeCall(scope, code, investorRecordId, allocationPaymentHoldRequest, null, opts);
+        Type localVarReturnType = new TypeReference<AllocationPaymentHold>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner&#39;s payment. (asynchronously)
+     * A Blocked or Escrow hold stops the partner&#39;s allocation being received against the event until it is  Released. A hold may only be released by a user other than the one who placed it.
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose payment is held. (required)
+     * @param allocationPaymentHoldRequest The hold to record: its status, and optionally a reason and an external reference. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void putAllocationPaymentHoldAsync(String scope, String code, String investorRecordId, AllocationPaymentHoldRequest allocationPaymentHoldRequest, final ApiCallback<AllocationPaymentHold> _callback) throws ApiException {
+
+        HttpRequest localVarCall = putAllocationPaymentHoldValidateBeforeCall(scope, code, investorRecordId, allocationPaymentHoldRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<AllocationPaymentHold>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner&#39;s payment. (asynchronously)
+     * A Blocked or Escrow hold stops the partner&#39;s allocation being received against the event until it is  Released. A hold may only be released by a user other than the one who placed it.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose payment is held. (required)
+     * @param allocationPaymentHoldRequest The hold to record: its status, and optionally a reason and an external reference. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void putAllocationPaymentHoldAsync(String scope, String code, String investorRecordId, AllocationPaymentHoldRequest allocationPaymentHoldRequest, final ApiCallback<AllocationPaymentHold> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = putAllocationPaymentHoldValidateBeforeCall(scope, code, investorRecordId, allocationPaymentHoldRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<AllocationPaymentHold>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIputAllocationPaymentHoldRequest {
+        private final String scope;
+        private final String code;
+        private final String investorRecordId;
+        private final AllocationPaymentHoldRequest allocationPaymentHoldRequest;
+
+        private APIputAllocationPaymentHoldRequest(String scope, String code, String investorRecordId, AllocationPaymentHoldRequest allocationPaymentHoldRequest) {
+            this.scope = scope;
+            this.code = code;
+            this.investorRecordId = investorRecordId;
+            this.allocationPaymentHoldRequest = allocationPaymentHoldRequest;
+        }
+
+        /**
+         * Build call for putAllocationPaymentHold
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return putAllocationPaymentHoldCall(scope, code, investorRecordId, allocationPaymentHoldRequest, _callback);
+        }
+
+        /**
+         * Execute putAllocationPaymentHold request
+         * @return AllocationPaymentHold
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public AllocationPaymentHold execute() throws ApiException {
+            ApiResponse<AllocationPaymentHold> localVarResp = putAllocationPaymentHoldWithHttpInfo(scope, code, investorRecordId, allocationPaymentHoldRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute putAllocationPaymentHold request. Use any specified configuration options to override any other configuration for this request only.
+         * @return AllocationPaymentHold
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public AllocationPaymentHold execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<AllocationPaymentHold> localVarResp = putAllocationPaymentHoldWithHttpInfo(scope, code, investorRecordId, allocationPaymentHoldRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute putAllocationPaymentHold request with HTTP info returned
+         * @return ApiResponse&lt;AllocationPaymentHold&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AllocationPaymentHold> executeWithHttpInfo() throws ApiException {
+            return putAllocationPaymentHoldWithHttpInfo(scope, code, investorRecordId, allocationPaymentHoldRequest);
+        }
+
+        /**
+         * Execute putAllocationPaymentHold request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;AllocationPaymentHold&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AllocationPaymentHold> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return putAllocationPaymentHoldWithHttpInfo(scope, code, investorRecordId, allocationPaymentHoldRequest, opts);
+        }
+
+        /**
+         * Execute putAllocationPaymentHold request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<AllocationPaymentHold> _callback) throws ApiException {
+            putAllocationPaymentHoldAsync(scope, code, investorRecordId, allocationPaymentHoldRequest, _callback);
+        }
+
+        /**
+         * Execute putAllocationPaymentHold request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<AllocationPaymentHold> _callback, ConfigurationOptions opts) throws ApiException {
+            putAllocationPaymentHoldAsync(scope, code, investorRecordId, allocationPaymentHoldRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner&#39;s payment.
+     * A Blocked or Escrow hold stops the partner&#39;s allocation being received against the event until it is  Released. A hold may only be released by a user other than the one who placed it.
+     * @param scope The scope of the Allocation Event. (required)
+     * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
+     * @param investorRecordId The investor record of the partner whose payment is held. (required)
+     * @param allocationPaymentHoldRequest The hold to record: its status, and optionally a reason and an external reference. (required)
+     * @return APIputAllocationPaymentHoldRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The hold as recorded. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIputAllocationPaymentHoldRequest putAllocationPaymentHold(String scope, String code, String investorRecordId, AllocationPaymentHoldRequest allocationPaymentHoldRequest) {
+        return new APIputAllocationPaymentHoldRequest(scope, code, investorRecordId, allocationPaymentHoldRequest);
     }
     /**
      * Build call for reallocateAllocationEvent

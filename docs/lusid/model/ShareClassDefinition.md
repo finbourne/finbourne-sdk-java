@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **timeZoneConventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] [default to TimeZoneConventions]
 **distributionPaymentType** | **String** | The tax treatment applied to distributions. Available values: Invalid, Gross, Net. | [optional] [default to String]
 **hedging** | **String** | Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging. | [optional] [default to String]
+**whtParameters** | [**WhtParameters**](WhtParameters.md) |  | [optional] [default to WhtParameters]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.ShareClassDefinition;
@@ -44,6 +45,7 @@ TradingConventions tradingConventions = new TradingConventions();
 TimeZoneConventions timeZoneConventions = new TimeZoneConventions();
 @javax.annotation.Nullable String distributionPaymentType = "example distributionPaymentType";
 @javax.annotation.Nullable String hedging = "example hedging";
+WhtParameters whtParameters = new WhtParameters();
 
 
 ShareClassDefinition shareClassDefinitionInstance = new ShareClassDefinition()
@@ -62,7 +64,8 @@ ShareClassDefinition shareClassDefinitionInstance = new ShareClassDefinition()
     .roundingConventionsUnits(roundingConventionsUnits)
     .timeZoneConventions(timeZoneConventions)
     .distributionPaymentType(distributionPaymentType)
-    .hedging(hedging);
+    .hedging(hedging)
+    .whtParameters(whtParameters);
 ```
 
 

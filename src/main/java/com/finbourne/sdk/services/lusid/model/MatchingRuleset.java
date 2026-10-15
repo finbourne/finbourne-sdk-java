@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AggregateMatchingRule;
 import com.finbourne.sdk.services.lusid.model.CoreMatchingRule;
+import com.finbourne.sdk.services.lusid.model.ExternalRecType;
 import com.finbourne.sdk.services.lusid.model.GroupReconciliationFilters;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.RecDatasetSchemas;
@@ -50,6 +51,7 @@ import com.finbourne.sdk.JSON;
   MatchingRuleset.JSON_PROPERTY_ID,
   MatchingRuleset.JSON_PROPERTY_DISPLAY_NAME,
   MatchingRuleset.JSON_PROPERTY_REC_TYPE,
+  MatchingRuleset.JSON_PROPERTY_EXTERNAL_REC_TYPE,
   MatchingRuleset.JSON_PROPERTY_DATASET_SCHEMAS,
   MatchingRuleset.JSON_PROPERTY_FILTERS,
   MatchingRuleset.JSON_PROPERTY_CORE_RULES,
@@ -79,6 +81,11 @@ public class MatchingRuleset {
   @JsonProperty(JSON_PROPERTY_REC_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String recType;
+
+  public static final String JSON_PROPERTY_EXTERNAL_REC_TYPE = "externalRecType";
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_REC_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ExternalRecType externalRecType;
 
   public static final String JSON_PROPERTY_DATASET_SCHEMAS = "datasetSchemas";
   @JsonProperty(JSON_PROPERTY_DATASET_SCHEMAS)
@@ -187,7 +194,7 @@ public class MatchingRuleset {
   }
 
   /**
-   * The type of reconciliation to perform. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.
+   * The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -197,6 +204,25 @@ public class MatchingRuleset {
 
   public void setRecType(String recType) {
     this.recType = recType;
+  }
+
+
+  public MatchingRuleset externalRecType(ExternalRecType externalRecType) {
+    this.externalRecType = externalRecType;
+    return this;
+  }
+
+  /**
+   * Get externalRecType
+   * @return externalRecType
+   */
+  @javax.annotation.Nullable
+  public ExternalRecType getExternalRecType() {
+    return externalRecType;
+  }
+
+  public void setExternalRecType(ExternalRecType externalRecType) {
+    this.externalRecType = externalRecType;
   }
 
 
@@ -352,7 +378,7 @@ public class MatchingRuleset {
   }
 
   /**
-   * Whether to permit partial matches when applying rules.
+   * Whether to permit partial matches when applying rules. Optional, defaults to true if a value is not provided.
    * @return allowPartialMatching
    */
   @javax.annotation.Nullable
@@ -496,6 +522,7 @@ public class MatchingRuleset {
     return Objects.equals(this.id, matchingRuleset.id) &&
         Objects.equals(this.displayName, matchingRuleset.displayName) &&
         Objects.equals(this.recType, matchingRuleset.recType) &&
+        Objects.equals(this.externalRecType, matchingRuleset.externalRecType) &&
         Objects.equals(this.datasetSchemas, matchingRuleset.datasetSchemas) &&
         Objects.equals(this.filters, matchingRuleset.filters) &&
         Objects.equals(this.coreRules, matchingRuleset.coreRules) &&
@@ -516,7 +543,7 @@ public class MatchingRuleset {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, displayName, recType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations, href, version, links);
+    return Objects.hash(id, displayName, recType, externalRecType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -533,6 +560,7 @@ public class MatchingRuleset {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
+    sb.append("    externalRecType: ").append(toIndentedString(externalRecType)).append("\n");
     sb.append("    datasetSchemas: ").append(toIndentedString(datasetSchemas)).append("\n");
     sb.append("    filters: ").append(toIndentedString(filters)).append("\n");
     sb.append("    coreRules: ").append(toIndentedString(coreRules)).append("\n");

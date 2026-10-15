@@ -107,7 +107,7 @@ public class ToBeAnnouncedOption extends LusidInstrument {
 
   public static final String JSON_PROPERTY_PREMIUM = "premium";
   @JsonProperty(JSON_PROPERTY_PREMIUM)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Premium premium;
 
   public static final String JSON_PROPERTY_DELIVERY_DAYS = "deliveryDays";
@@ -299,7 +299,7 @@ public class ToBeAnnouncedOption extends LusidInstrument {
    * Get premium
    * @return premium
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Premium getPremium() {
     return premium;
   }

@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.CapabilityOverride;
+import com.finbourne.sdk.services.lusid.model.PresentationConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.SeriesConfiguration;
 import java.io.IOException;
@@ -48,7 +49,8 @@ import com.finbourne.sdk.JSON;
   PartnershipAccountingConfiguration.JSON_PROPERTY_CAPITAL_MODEL,
   PartnershipAccountingConfiguration.JSON_PROPERTY_CAPABILITY_OVERRIDES,
   PartnershipAccountingConfiguration.JSON_PROPERTY_SERIES,
-  PartnershipAccountingConfiguration.JSON_PROPERTY_EFFECTIVE_CAPABILITIES
+  PartnershipAccountingConfiguration.JSON_PROPERTY_EFFECTIVE_CAPABILITIES,
+  PartnershipAccountingConfiguration.JSON_PROPERTY_PRESENTATION
 })
 
 public class PartnershipAccountingConfiguration {
@@ -91,6 +93,11 @@ public class PartnershipAccountingConfiguration {
   @JsonProperty(JSON_PROPERTY_EFFECTIVE_CAPABILITIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, String> effectiveCapabilities;
+
+  public static final String JSON_PROPERTY_PRESENTATION = "presentation";
+  @JsonProperty(JSON_PROPERTY_PRESENTATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PresentationConfiguration presentation;
 
   public PartnershipAccountingConfiguration() {
   }
@@ -139,7 +146,7 @@ public class PartnershipAccountingConfiguration {
   }
 
   /**
-   * Available values: FundCurrencyOnly.
+   * Available values: FundCurrencyOnly, AllowLineCurrency.
    * @return commitmentCurrencyPolicy
    */
   @javax.annotation.Nullable
@@ -263,6 +270,25 @@ public class PartnershipAccountingConfiguration {
   }
 
 
+  public PartnershipAccountingConfiguration presentation(PresentationConfiguration presentation) {
+    this.presentation = presentation;
+    return this;
+  }
+
+  /**
+   * Get presentation
+   * @return presentation
+   */
+  @javax.annotation.Nullable
+  public PresentationConfiguration getPresentation() {
+    return presentation;
+  }
+
+  public void setPresentation(PresentationConfiguration presentation) {
+    this.presentation = presentation;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -279,7 +305,8 @@ public class PartnershipAccountingConfiguration {
         Objects.equals(this.capitalModel, partnershipAccountingConfiguration.capitalModel) &&
         Objects.equals(this.capabilityOverrides, partnershipAccountingConfiguration.capabilityOverrides) &&
         Objects.equals(this.series, partnershipAccountingConfiguration.series) &&
-        Objects.equals(this.effectiveCapabilities, partnershipAccountingConfiguration.effectiveCapabilities);
+        Objects.equals(this.effectiveCapabilities, partnershipAccountingConfiguration.effectiveCapabilities) &&
+        Objects.equals(this.presentation, partnershipAccountingConfiguration.presentation);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -288,7 +315,7 @@ public class PartnershipAccountingConfiguration {
 
   @Override
  public int hashCode() {
-    return Objects.hash(enabled, configPack, commitmentCurrencyPolicy, registerPortfolioGroup, capitalModel, capabilityOverrides, series, effectiveCapabilities);
+    return Objects.hash(enabled, configPack, commitmentCurrencyPolicy, registerPortfolioGroup, capitalModel, capabilityOverrides, series, effectiveCapabilities, presentation);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -310,6 +337,7 @@ public class PartnershipAccountingConfiguration {
     sb.append("    capabilityOverrides: ").append(toIndentedString(capabilityOverrides)).append("\n");
     sb.append("    series: ").append(toIndentedString(series)).append("\n");
     sb.append("    effectiveCapabilities: ").append(toIndentedString(effectiveCapabilities)).append("\n");
+    sb.append("    presentation: ").append(toIndentedString(presentation)).append("\n");
     sb.append("}");
     return sb.toString();
   }

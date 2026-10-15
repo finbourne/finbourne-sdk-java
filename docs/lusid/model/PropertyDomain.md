@@ -54,6 +54,7 @@ PropertyDomain method = PropertyDomain.ABOR_CONFIGURATION;
 PropertyDomain method = PropertyDomain.FUND;
 PropertyDomain method = PropertyDomain.FUND_CONFIGURATION;
 PropertyDomain method = PropertyDomain.FUND_STRUCTURE;
+PropertyDomain method = PropertyDomain.PROCESSING_GROUP;
 PropertyDomain method = PropertyDomain.FEE;
 PropertyDomain method = PropertyDomain.RECONCILIATION;
 PropertyDomain method = PropertyDomain.PROPERTY_DEFINITION;
@@ -111,6 +112,7 @@ PropertyDomain method = PropertyDomain.CURRENCY_GROUP;
 PropertyDomain method = PropertyDomain.REC_DEFINITION;
 PropertyDomain method = PropertyDomain.REC_RESULT;
 PropertyDomain method = PropertyDomain.JOURNAL_ENTRY;
+PropertyDomain method = PropertyDomain.COLLATERAL_AGREEMENT;
 PropertyDomain method = PropertyDomain.ELIGIBLE_COLLATERAL_SCHEDULE;
 ```
 

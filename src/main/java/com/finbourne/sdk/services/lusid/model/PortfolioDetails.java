@@ -19,6 +19,7 @@ import com.finbourne.sdk.services.lusid.model.PortfolioSettlementConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.Version;
+import com.finbourne.sdk.services.lusid.model.WhtParameters;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ import com.finbourne.sdk.JSON;
   PortfolioDetails.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
   PortfolioDetails.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
   PortfolioDetails.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
+  PortfolioDetails.JSON_PROPERTY_WHT_PARAMETERS,
   PortfolioDetails.JSON_PROPERTY_LINKS
 })
 
@@ -229,6 +231,11 @@ public class PortfolioDetails {
   @JsonProperty(JSON_PROPERTY_HOLDINGS_FUNGIBILITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String holdingsFungibility;
+
+  public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
+  @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private WhtParameters whtParameters;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -634,6 +641,25 @@ public class PortfolioDetails {
   }
 
 
+  public PortfolioDetails whtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+    return this;
+  }
+
+  /**
+   * Get whtParameters
+   * @return whtParameters
+   */
+  @javax.annotation.Nullable
+  public WhtParameters getWhtParameters() {
+    return whtParameters;
+  }
+
+  public void setWhtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+  }
+
+
   public PortfolioDetails links(List<Link> links) {
     this.links = links;
     return this;
@@ -690,6 +716,7 @@ public class PortfolioDetails {
         Objects.equals(this.taxLotSelectionCostBasis, portfolioDetails.taxLotSelectionCostBasis) &&
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, portfolioDetails.fractionalUnitsTrueUpConfiguration) &&
         Objects.equals(this.holdingsFungibility, portfolioDetails.holdingsFungibility) &&
+        Objects.equals(this.whtParameters, portfolioDetails.whtParameters) &&
         Objects.equals(this.links, portfolioDetails.links);
   }
 
@@ -699,7 +726,7 @@ public class PortfolioDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, originPortfolioId, version, baseCurrency, corporateActionSourceId, subHoldingKeys, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, stagedModifications, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, links);
+    return Objects.hash(href, originPortfolioId, version, baseCurrency, corporateActionSourceId, subHoldingKeys, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, stagedModifications, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, whtParameters, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -733,6 +760,7 @@ public class PortfolioDetails {
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
+    sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

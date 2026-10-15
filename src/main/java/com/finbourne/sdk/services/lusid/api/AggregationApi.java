@@ -876,7 +876,7 @@ public class AggregationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
+     * [EARLY ACCESS] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
      * Describes what a valuation would return for each of the supplied metrics, so that a caller can  prepare for the response, and render it, without having to ask for the valuation first. The  metrics are given exactly as they would be supplied to the metrics of a valuation request.                Each metric is reported on individually, keyed by its normalised address key: those that resolve  appear under metrics with their queryable key definition, and the rest appear under failed with the  reason. A metric that does not exist, or that you are not entitled to read, is reported as failed;  the two cases are not distinguished from one another.
      * @param queryableKeysForMetricsRequest The set of metrics whose queryable keys are to be described (optional)
      * @return ApiResponse&lt;QueryableKeysForMetricsResponse&gt;
@@ -896,7 +896,7 @@ public class AggregationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
+     * [EARLY ACCESS] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
      * Describes what a valuation would return for each of the supplied metrics, so that a caller can  prepare for the response, and render it, without having to ask for the valuation first. The  metrics are given exactly as they would be supplied to the metrics of a valuation request.                Each metric is reported on individually, keyed by its normalised address key: those that resolve  appear under metrics with their queryable key definition, and the rest appear under failed with the  reason. A metric that does not exist, or that you are not entitled to read, is reported as failed;  the two cases are not distinguished from one another.Use any specified configuration options to override any other configuration for this request only
      * @param queryableKeysForMetricsRequest The set of metrics whose queryable keys are to be described (optional)
      * @return ApiResponse&lt;QueryableKeysForMetricsResponse&gt;
@@ -916,7 +916,7 @@ public class AggregationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics. (asynchronously)
+     * [EARLY ACCESS] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics. (asynchronously)
      * Describes what a valuation would return for each of the supplied metrics, so that a caller can  prepare for the response, and render it, without having to ask for the valuation first. The  metrics are given exactly as they would be supplied to the metrics of a valuation request.                Each metric is reported on individually, keyed by its normalised address key: those that resolve  appear under metrics with their queryable key definition, and the rest appear under failed with the  reason. A metric that does not exist, or that you are not entitled to read, is reported as failed;  the two cases are not distinguished from one another.
      * @param queryableKeysForMetricsRequest The set of metrics whose queryable keys are to be described (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -937,7 +937,7 @@ public class AggregationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics. (asynchronously)
+     * [EARLY ACCESS] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics. (asynchronously)
      * Describes what a valuation would return for each of the supplied metrics, so that a caller can  prepare for the response, and render it, without having to ask for the valuation first. The  metrics are given exactly as they would be supplied to the metrics of a valuation request.                Each metric is reported on individually, keyed by its normalised address key: those that resolve  appear under metrics with their queryable key definition, and the rest appear under failed with the  reason. A metric that does not exist, or that you are not entitled to read, is reported as failed;  the two cases are not distinguished from one another.Use any specified configuration options to override any other configuration for this request only
      * @param queryableKeysForMetricsRequest The set of metrics whose queryable keys are to be described (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -1090,7 +1090,7 @@ public class AggregationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
+     * [EARLY ACCESS] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
      * Describes what a valuation would return for each of the supplied metrics, so that a caller can  prepare for the response, and render it, without having to ask for the valuation first. The  metrics are given exactly as they would be supplied to the metrics of a valuation request.                Each metric is reported on individually, keyed by its normalised address key: those that resolve  appear under metrics with their queryable key definition, and the rest appear under failed with the  reason. A metric that does not exist, or that you are not entitled to read, is reported as failed;  the two cases are not distinguished from one another.
      * @return APIgetQueryableKeysForMetricsRequest
      * @http.response.details

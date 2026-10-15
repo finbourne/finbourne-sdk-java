@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.FractionalUnitsTrueUpConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.WhtParameters;
 import java.io.IOException;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -39,7 +40,8 @@ import com.finbourne.sdk.JSON;
   CreatePortfolioDetails.JSON_PROPERTY_CORPORATE_ACTION_SOURCE_ID,
   CreatePortfolioDetails.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
   CreatePortfolioDetails.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
-  CreatePortfolioDetails.JSON_PROPERTY_HOLDINGS_FUNGIBILITY
+  CreatePortfolioDetails.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
+  CreatePortfolioDetails.JSON_PROPERTY_WHT_PARAMETERS
 })
 
 public class CreatePortfolioDetails {
@@ -62,6 +64,11 @@ public class CreatePortfolioDetails {
   @JsonProperty(JSON_PROPERTY_HOLDINGS_FUNGIBILITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String holdingsFungibility;
+
+  public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
+  @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private WhtParameters whtParameters;
 
   public CreatePortfolioDetails() {
   }
@@ -142,6 +149,25 @@ public class CreatePortfolioDetails {
   }
 
 
+  public CreatePortfolioDetails whtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+    return this;
+  }
+
+  /**
+   * Get whtParameters
+   * @return whtParameters
+   */
+  @javax.annotation.Nullable
+  public WhtParameters getWhtParameters() {
+    return whtParameters;
+  }
+
+  public void setWhtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -154,7 +180,8 @@ public class CreatePortfolioDetails {
     return Objects.equals(this.corporateActionSourceId, createPortfolioDetails.corporateActionSourceId) &&
         Objects.equals(this.taxLotSelectionCostBasis, createPortfolioDetails.taxLotSelectionCostBasis) &&
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, createPortfolioDetails.fractionalUnitsTrueUpConfiguration) &&
-        Objects.equals(this.holdingsFungibility, createPortfolioDetails.holdingsFungibility);
+        Objects.equals(this.holdingsFungibility, createPortfolioDetails.holdingsFungibility) &&
+        Objects.equals(this.whtParameters, createPortfolioDetails.whtParameters);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -163,7 +190,7 @@ public class CreatePortfolioDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(corporateActionSourceId, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility);
+    return Objects.hash(corporateActionSourceId, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, whtParameters);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -181,6 +208,7 @@ public class CreatePortfolioDetails {
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
+    sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("}");
     return sb.toString();
   }

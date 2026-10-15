@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **nav** | **java.math.BigDecimal** | The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period. | [default to java.math.BigDecimal]
 **miscellaneous** | [**Map&lt;String, FundAmount&gt;**](FundAmount.md) | Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations). | [optional] [default to Map<String, FundAmount>]
 **previousValuationPointData** | [**PreviousFundValuationPointData**](PreviousFundValuationPointData.md) |  | [optional] [default to PreviousFundValuationPointData]
+**partnershipAccounting** | [**PartnershipAccountingValuationPointData**](PartnershipAccountingValuationPointData.md) |  | [optional] [default to PartnershipAccountingValuationPointData]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FundValuationPointData;
@@ -29,6 +30,7 @@ Map<String, FeeAccrual> fees = new Map<String, FeeAccrual>();
 java.math.BigDecimal nav = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable Map<String, FundAmount> miscellaneous = new Map<String, FundAmount>();
 PreviousFundValuationPointData previousValuationPointData = new PreviousFundValuationPointData();
+PartnershipAccountingValuationPointData partnershipAccounting = new PartnershipAccountingValuationPointData();
 
 
 FundValuationPointData fundValuationPointDataInstance = new FundValuationPointData()
@@ -39,7 +41,8 @@ FundValuationPointData fundValuationPointDataInstance = new FundValuationPointDa
     .fees(fees)
     .nav(nav)
     .miscellaneous(miscellaneous)
-    .previousValuationPointData(previousValuationPointData);
+    .previousValuationPointData(previousValuationPointData)
+    .partnershipAccounting(partnershipAccounting);
 ```
 
 

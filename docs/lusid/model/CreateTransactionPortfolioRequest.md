@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **taxLotSelectionCostBasis** | **String** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Supply Default to explicitly reset it; a reset or never-configured basis reads back as absent. Available values: Default, Cost, AmortisedCost. | [optional] [default to String]
 **fractionalUnitsTrueUpConfiguration** | [**FractionalUnitsTrueUpConfiguration**](FractionalUnitsTrueUpConfiguration.md) |  | [optional] [default to FractionalUnitsTrueUpConfiguration]
 **holdingsFungibility** | **String** | Whether the portfolio&#39;s holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. Defaults to Default if not specified, which currently means holdings fungibility is not applied. Supply Default to explicitly reset it; a reset or never-configured flag reads back as absent. Available values: Default, Enabled. | [optional] [default to String]
+**whtParameters** | [**WhtParameters**](WhtParameters.md) |  | [optional] [default to WhtParameters]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CreateTransactionPortfolioRequest;
@@ -56,6 +57,7 @@ PortfolioSettlementConfiguration settlementConfiguration = new PortfolioSettleme
 @javax.annotation.Nullable String taxLotSelectionCostBasis = "example taxLotSelectionCostBasis";
 FractionalUnitsTrueUpConfiguration fractionalUnitsTrueUpConfiguration = new FractionalUnitsTrueUpConfiguration();
 @javax.annotation.Nullable String holdingsFungibility = "example holdingsFungibility";
+WhtParameters whtParameters = new WhtParameters();
 
 
 CreateTransactionPortfolioRequest createTransactionPortfolioRequestInstance = new CreateTransactionPortfolioRequest()
@@ -80,7 +82,8 @@ CreateTransactionPortfolioRequest createTransactionPortfolioRequestInstance = ne
     .transactionExclusionFilter(transactionExclusionFilter)
     .taxLotSelectionCostBasis(taxLotSelectionCostBasis)
     .fractionalUnitsTrueUpConfiguration(fractionalUnitsTrueUpConfiguration)
-    .holdingsFungibility(holdingsFungibility);
+    .holdingsFungibility(holdingsFungibility)
+    .whtParameters(whtParameters);
 ```
 
 

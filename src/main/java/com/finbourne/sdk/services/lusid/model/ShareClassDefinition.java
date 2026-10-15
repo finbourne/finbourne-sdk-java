@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.SimpleRoundingConvention;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
 import com.finbourne.sdk.services.lusid.model.TradingConventions;
+import com.finbourne.sdk.services.lusid.model.WhtParameters;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -58,7 +59,8 @@ import com.finbourne.sdk.JSON;
   ShareClassDefinition.JSON_PROPERTY_ROUNDING_CONVENTIONS_UNITS,
   ShareClassDefinition.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
   ShareClassDefinition.JSON_PROPERTY_DISTRIBUTION_PAYMENT_TYPE,
-  ShareClassDefinition.JSON_PROPERTY_HEDGING
+  ShareClassDefinition.JSON_PROPERTY_HEDGING,
+  ShareClassDefinition.JSON_PROPERTY_WHT_PARAMETERS
 })
 
 public class ShareClassDefinition {
@@ -141,6 +143,11 @@ public class ShareClassDefinition {
   @JsonProperty(JSON_PROPERTY_HEDGING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String hedging;
+
+  public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
+  @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private WhtParameters whtParameters;
 
   public ShareClassDefinition() {
   }
@@ -481,6 +488,25 @@ public class ShareClassDefinition {
   }
 
 
+  public ShareClassDefinition whtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+    return this;
+  }
+
+  /**
+   * Get whtParameters
+   * @return whtParameters
+   */
+  @javax.annotation.Nullable
+  public WhtParameters getWhtParameters() {
+    return whtParameters;
+  }
+
+  public void setWhtParameters(WhtParameters whtParameters) {
+    this.whtParameters = whtParameters;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -505,7 +531,8 @@ public class ShareClassDefinition {
         Objects.equals(this.roundingConventionsUnits, shareClassDefinition.roundingConventionsUnits) &&
         Objects.equals(this.timeZoneConventions, shareClassDefinition.timeZoneConventions) &&
         Objects.equals(this.distributionPaymentType, shareClassDefinition.distributionPaymentType) &&
-        Objects.equals(this.hedging, shareClassDefinition.hedging);
+        Objects.equals(this.hedging, shareClassDefinition.hedging) &&
+        Objects.equals(this.whtParameters, shareClassDefinition.whtParameters);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -514,7 +541,7 @@ public class ShareClassDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, properties, investorType, distributionType, domCcy, tradingConventions, roundingConventionsPrice, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging);
+    return Objects.hash(instrumentIdentifiers, name, description, shareClassShortCode, launchPrice, launchDate, properties, investorType, distributionType, domCcy, tradingConventions, roundingConventionsPrice, roundingConventionsUnits, timeZoneConventions, distributionPaymentType, hedging, whtParameters);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -544,6 +571,7 @@ public class ShareClassDefinition {
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
     sb.append("    distributionPaymentType: ").append(toIndentedString(distributionPaymentType)).append("\n");
     sb.append("    hedging: ").append(toIndentedString(hedging)).append("\n");
+    sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("}");
     return sb.toString();
   }

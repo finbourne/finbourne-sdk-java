@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | The transaction properties stored for the replacement transaction. | [optional] [default to Map<String, PerpetualProperty>]
 **counterpartyId** | **String** | The identifier for the counterparty of the replacement transaction. | [optional] [default to String]
 **source** | **String** | The source of the replacement transaction. | [optional] [default to String]
+**custodianAccountId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **precedesEvent** | **Boolean** | True when this replacement&#39;s trade date is earlier than the target instrument event&#39;s current effective date, which orphans the entry it belongs to. | [optional] [default to Boolean]
 
 ```java
@@ -40,6 +41,7 @@ CurrencyAndAmount totalConsideration = new CurrencyAndAmount();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable String counterpartyId = "example counterpartyId";
 @javax.annotation.Nullable String source = "example source";
+ResourceId custodianAccountId = new ResourceId();
 @javax.annotation.Nullable Boolean precedesEvent = true;
 
 
@@ -57,6 +59,7 @@ OverrideDefinitionResponse overrideDefinitionResponseInstance = new OverrideDefi
     .properties(properties)
     .counterpartyId(counterpartyId)
     .source(source)
+    .custodianAccountId(custodianAccountId)
     .precedesEvent(precedesEvent);
 ```
 

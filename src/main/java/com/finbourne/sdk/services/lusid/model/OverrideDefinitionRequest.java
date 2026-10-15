@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
+import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.TransactionPrice;
 import java.io.IOException;
 import java.util.Arrays;
@@ -51,7 +52,8 @@ import com.finbourne.sdk.JSON;
   OverrideDefinitionRequest.JSON_PROPERTY_TRADE_CURRENCY,
   OverrideDefinitionRequest.JSON_PROPERTY_PROPERTIES,
   OverrideDefinitionRequest.JSON_PROPERTY_COUNTERPARTY_ID,
-  OverrideDefinitionRequest.JSON_PROPERTY_SOURCE
+  OverrideDefinitionRequest.JSON_PROPERTY_SOURCE,
+  OverrideDefinitionRequest.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID
 })
 
 public class OverrideDefinitionRequest {
@@ -119,6 +121,11 @@ public class OverrideDefinitionRequest {
   @JsonProperty(JSON_PROPERTY_SOURCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String source;
+
+  public static final String JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID = "custodianAccountId";
+  @JsonProperty(JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId custodianAccountId;
 
   public OverrideDefinitionRequest() {
   }
@@ -386,6 +393,25 @@ public class OverrideDefinitionRequest {
   }
 
 
+  public OverrideDefinitionRequest custodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+    return this;
+  }
+
+  /**
+   * Get custodianAccountId
+   * @return custodianAccountId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getCustodianAccountId() {
+    return custodianAccountId;
+  }
+
+  public void setCustodianAccountId(ResourceId custodianAccountId) {
+    this.custodianAccountId = custodianAccountId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -407,7 +433,8 @@ public class OverrideDefinitionRequest {
         Objects.equals(this.tradeCurrency, overrideDefinitionRequest.tradeCurrency) &&
         Objects.equals(this.properties, overrideDefinitionRequest.properties) &&
         Objects.equals(this.counterpartyId, overrideDefinitionRequest.counterpartyId) &&
-        Objects.equals(this.source, overrideDefinitionRequest.source);
+        Objects.equals(this.source, overrideDefinitionRequest.source) &&
+        Objects.equals(this.custodianAccountId, overrideDefinitionRequest.custodianAccountId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -416,7 +443,7 @@ public class OverrideDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, type, instrumentIdentifiers, tradeDate, settlementDate, units, tradePrice, totalConsideration, exchangeRate, tradeCurrency, properties, counterpartyId, source);
+    return Objects.hash(transactionId, type, instrumentIdentifiers, tradeDate, settlementDate, units, tradePrice, totalConsideration, exchangeRate, tradeCurrency, properties, counterpartyId, source, custodianAccountId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -443,6 +470,7 @@ public class OverrideDefinitionRequest {
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    counterpartyId: ").append(toIndentedString(counterpartyId)).append("\n");
     sb.append("    source: ").append(toIndentedString(source)).append("\n");
+    sb.append("    custodianAccountId: ").append(toIndentedString(custodianAccountId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

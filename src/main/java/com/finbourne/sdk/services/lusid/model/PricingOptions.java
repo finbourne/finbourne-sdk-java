@@ -70,7 +70,8 @@ import com.finbourne.sdk.JSON;
   PricingOptions.JSON_PROPERTY_FIND_OR_CALCULATE_WRITE_THROUGH,
   PricingOptions.JSON_PROPERTY_INFLATION_CONVEXITY,
   PricingOptions.JSON_PROPERTY_ALLOW_FALLBACK_ON_MODEL_DECLINE,
-  PricingOptions.JSON_PROPERTY_NAMED_PRICES
+  PricingOptions.JSON_PROPERTY_NAMED_PRICES,
+  PricingOptions.JSON_PROPERTY_SUPPRESS_AUTOMATIC_LOAN_PRINCIPAL_REPAYMENT
 })
 
 public class PricingOptions {
@@ -213,6 +214,11 @@ public class PricingOptions {
   @JsonProperty(JSON_PROPERTY_NAMED_PRICES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<NamedPrice> namedPrices;
+
+  public static final String JSON_PROPERTY_SUPPRESS_AUTOMATIC_LOAN_PRINCIPAL_REPAYMENT = "suppressAutomaticLoanPrincipalRepayment";
+  @JsonProperty(JSON_PROPERTY_SUPPRESS_AUTOMATIC_LOAN_PRINCIPAL_REPAYMENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean suppressAutomaticLoanPrincipalRepayment;
 
   public PricingOptions() {
   }
@@ -765,6 +771,25 @@ public class PricingOptions {
   }
 
 
+  public PricingOptions suppressAutomaticLoanPrincipalRepayment(Boolean suppressAutomaticLoanPrincipalRepayment) {
+    this.suppressAutomaticLoanPrincipalRepayment = suppressAutomaticLoanPrincipalRepayment;
+    return this;
+  }
+
+  /**
+   * If true, FlexibleLoans held as contracts on a LoanFacility do not automatically generate a  LoanPrincipalRepaymentEvent at the end of their schedule. Users must then book rollovers or explicit  LoanPrincipalRepaymentEvents themselves, otherwise the contract stays open and may fail to value once matured.  Stand-alone and WholeLoanFacility FlexibleLoans, interest repayments and upserted repayment events are unaffected. Only takes  effect on the recipe used to generate instrument events. Defaults to false.
+   * @return suppressAutomaticLoanPrincipalRepayment
+   */
+  @javax.annotation.Nullable
+  public Boolean getSuppressAutomaticLoanPrincipalRepayment() {
+    return suppressAutomaticLoanPrincipalRepayment;
+  }
+
+  public void setSuppressAutomaticLoanPrincipalRepayment(Boolean suppressAutomaticLoanPrincipalRepayment) {
+    this.suppressAutomaticLoanPrincipalRepayment = suppressAutomaticLoanPrincipalRepayment;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -801,7 +826,8 @@ public class PricingOptions {
         Objects.equals(this.findOrCalculateWriteThrough, pricingOptions.findOrCalculateWriteThrough) &&
         Objects.equals(this.inflationConvexity, pricingOptions.inflationConvexity) &&
         Objects.equals(this.allowFallbackOnModelDecline, pricingOptions.allowFallbackOnModelDecline) &&
-        Objects.equals(this.namedPrices, pricingOptions.namedPrices);
+        Objects.equals(this.namedPrices, pricingOptions.namedPrices) &&
+        Objects.equals(this.suppressAutomaticLoanPrincipalRepayment, pricingOptions.suppressAutomaticLoanPrincipalRepayment);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -810,7 +836,7 @@ public class PricingOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, fixedIncomeValuationsUsingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize, riskBumpOptions, fundingCurveByCurrency, defaultPoolFactorsToUnity, findOrCalculateWriteThrough, inflationConvexity, allowFallbackOnModelDecline, namedPrices);
+    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, fixedIncomeValuationsUsingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize, riskBumpOptions, fundingCurveByCurrency, defaultPoolFactorsToUnity, findOrCalculateWriteThrough, inflationConvexity, allowFallbackOnModelDecline, namedPrices, suppressAutomaticLoanPrincipalRepayment);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -852,6 +878,7 @@ public class PricingOptions {
     sb.append("    inflationConvexity: ").append(toIndentedString(inflationConvexity)).append("\n");
     sb.append("    allowFallbackOnModelDecline: ").append(toIndentedString(allowFallbackOnModelDecline)).append("\n");
     sb.append("    namedPrices: ").append(toIndentedString(namedPrices)).append("\n");
+    sb.append("    suppressAutomaticLoanPrincipalRepayment: ").append(toIndentedString(suppressAutomaticLoanPrincipalRepayment)).append("\n");
     sb.append("}");
     return sb.toString();
   }

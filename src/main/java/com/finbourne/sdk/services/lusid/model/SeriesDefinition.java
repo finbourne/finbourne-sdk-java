@@ -43,7 +43,9 @@ import com.finbourne.sdk.JSON;
   SeriesDefinition.JSON_PROPERTY_LAUNCH_DATE,
   SeriesDefinition.JSON_PROPERTY_LAUNCH_PRICE_TYPE,
   SeriesDefinition.JSON_PROPERTY_DOM_CCY,
-  SeriesDefinition.JSON_PROPERTY_PROPERTIES
+  SeriesDefinition.JSON_PROPERTY_PROPERTIES,
+  SeriesDefinition.JSON_PROPERTY_LAUNCH_PRICE,
+  SeriesDefinition.JSON_PROPERTY_STATUS
 })
 
 public class SeriesDefinition {
@@ -76,6 +78,16 @@ public class SeriesDefinition {
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, Property> properties;
+
+  public static final String JSON_PROPERTY_LAUNCH_PRICE = "launchPrice";
+  @JsonProperty(JSON_PROPERTY_LAUNCH_PRICE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal launchPrice;
+
+  public static final String JSON_PROPERTY_STATUS = "status";
+  @JsonProperty(JSON_PROPERTY_STATUS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String status;
 
   public SeriesDefinition() {
   }
@@ -202,6 +214,44 @@ public class SeriesDefinition {
   }
 
 
+  public SeriesDefinition launchPrice(java.math.BigDecimal launchPrice) {
+    this.launchPrice = launchPrice;
+    return this;
+  }
+
+  /**
+   * The launch price of the Series. Required when LaunchPriceType is Manual; ignored when it is Calculated.
+   * @return launchPrice
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getLaunchPrice() {
+    return launchPrice;
+  }
+
+  public void setLaunchPrice(java.math.BigDecimal launchPrice) {
+    this.launchPrice = launchPrice;
+  }
+
+
+  public SeriesDefinition status(String status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * The lifecycle status of the Series: Open, Closed or Rolled. Defaults to Open. Available values: Open, Closed, Rolled.
+   * @return status
+   */
+  @javax.annotation.Nullable
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -216,7 +266,9 @@ public class SeriesDefinition {
         Objects.equals(this.launchDate, seriesDefinition.launchDate) &&
         Objects.equals(this.launchPriceType, seriesDefinition.launchPriceType) &&
         Objects.equals(this.domCcy, seriesDefinition.domCcy) &&
-        Objects.equals(this.properties, seriesDefinition.properties);
+        Objects.equals(this.properties, seriesDefinition.properties) &&
+        (this.launchPrice == null ? seriesDefinition.launchPrice == null : (seriesDefinition.launchPrice != null && this.launchPrice.compareTo(seriesDefinition.getLaunchPrice()) == 0)) &&
+        Objects.equals(this.status, seriesDefinition.status);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -225,7 +277,7 @@ public class SeriesDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(seriesIdentifier, seriesType, launchDate, launchPriceType, domCcy, properties);
+    return Objects.hash(seriesIdentifier, seriesType, launchDate, launchPriceType, domCcy, properties, launchPrice, status);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -245,6 +297,8 @@ public class SeriesDefinition {
     sb.append("    launchPriceType: ").append(toIndentedString(launchPriceType)).append("\n");
     sb.append("    domCcy: ").append(toIndentedString(domCcy)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
+    sb.append("    launchPrice: ").append(toIndentedString(launchPrice)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }
