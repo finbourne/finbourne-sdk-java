@@ -5,8 +5,8 @@ classname RecDefRecipeIds
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**left** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
-**right** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
+**left** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
+**right** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.RecDefRecipeIds;

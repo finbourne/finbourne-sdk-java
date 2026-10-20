@@ -54,7 +54,8 @@ import com.finbourne.sdk.JSON;
   FuturesContractDetails.JSON_PROPERTY_DELIVERABLE_MIN_MATURITY_YEARS,
   FuturesContractDetails.JSON_PROPERTY_DELIVERABLE_MAX_MATURITY_YEARS,
   FuturesContractDetails.JSON_PROPERTY_EXCLUDE_CALLABLE_BONDS,
-  FuturesContractDetails.JSON_PROPERTY_DELIVERABLE_MIN_AMOUNT_OUTSTANDING
+  FuturesContractDetails.JSON_PROPERTY_DELIVERABLE_MIN_AMOUNT_OUTSTANDING,
+  FuturesContractDetails.JSON_PROPERTY_DELIVERABLE_ISINS
 })
 
 public class FuturesContractDetails {
@@ -152,6 +153,11 @@ public class FuturesContractDetails {
   @JsonProperty(JSON_PROPERTY_DELIVERABLE_MIN_AMOUNT_OUTSTANDING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal deliverableMinAmountOutstanding;
+
+  public static final String JSON_PROPERTY_DELIVERABLE_ISINS = "deliverableIsins";
+  @JsonProperty(JSON_PROPERTY_DELIVERABLE_ISINS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> deliverableIsins;
 
   public FuturesContractDetails() {
   }
@@ -276,7 +282,7 @@ public class FuturesContractDetails {
   }
 
   /**
-   * If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [Day count conventions supported by LUSID](https://support.lusid.com/docs/day-count-conventions-supported-by-lusid)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].
+   * If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [Day count conventions supported by LUSID](https://support.lusid.com/docs/day-count-conventions-supported-by-lusid)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIcma, ActActIsma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].
    * @return convention
    */
   @javax.annotation.Nullable
@@ -525,6 +531,33 @@ public class FuturesContractDetails {
   }
 
 
+  public FuturesContractDetails deliverableIsins(List<String> deliverableIsins) {
+    this.deliverableIsins = deliverableIsins;
+    return this;
+  }
+
+  public FuturesContractDetails addDeliverableIsinsItem(String deliverableIsinsItem) {
+    if (this.deliverableIsins == null) {
+      this.deliverableIsins = new ArrayList<>();
+    }
+    this.deliverableIsins.add(deliverableIsinsItem);
+    return this;
+  }
+
+  /**
+   * ISINs of the bonds deliverable into this contract for its delivery month. When set, the deliverable  basket is these bonds only; when empty, every active bond in the portfolio&#39;s instrument scope is a candidate.  Bonds not yet issued on the valuation date are left out of the basket.  Update it when the exchange notifies a new deliverable; the list is not effective-dated.
+   * @return deliverableIsins
+   */
+  @javax.annotation.Nullable
+  public List<String> getDeliverableIsins() {
+    return deliverableIsins;
+  }
+
+  public void setDeliverableIsins(List<String> deliverableIsins) {
+    this.deliverableIsins = deliverableIsins;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -552,7 +585,8 @@ public class FuturesContractDetails {
         (this.deliverableMinMaturityYears == null ? futuresContractDetails.deliverableMinMaturityYears == null : (futuresContractDetails.deliverableMinMaturityYears != null && this.deliverableMinMaturityYears.compareTo(futuresContractDetails.getDeliverableMinMaturityYears()) == 0)) &&
         (this.deliverableMaxMaturityYears == null ? futuresContractDetails.deliverableMaxMaturityYears == null : (futuresContractDetails.deliverableMaxMaturityYears != null && this.deliverableMaxMaturityYears.compareTo(futuresContractDetails.getDeliverableMaxMaturityYears()) == 0)) &&
         Objects.equals(this.excludeCallableBonds, futuresContractDetails.excludeCallableBonds) &&
-        (this.deliverableMinAmountOutstanding == null ? futuresContractDetails.deliverableMinAmountOutstanding == null : (futuresContractDetails.deliverableMinAmountOutstanding != null && this.deliverableMinAmountOutstanding.compareTo(futuresContractDetails.getDeliverableMinAmountOutstanding()) == 0));
+        (this.deliverableMinAmountOutstanding == null ? futuresContractDetails.deliverableMinAmountOutstanding == null : (futuresContractDetails.deliverableMinAmountOutstanding != null && this.deliverableMinAmountOutstanding.compareTo(futuresContractDetails.getDeliverableMinAmountOutstanding()) == 0)) &&
+        Objects.equals(this.deliverableIsins, futuresContractDetails.deliverableIsins);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -561,7 +595,7 @@ public class FuturesContractDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(domCcy, fgnCcy, assetClass, contractCode, contractMonth, contractSize, convention, country, description, exchangeCode, exchangeName, tickerStep, unitValue, calendars, deliveryType, deliverableMinMaturityYears, deliverableMaxMaturityYears, excludeCallableBonds, deliverableMinAmountOutstanding);
+    return Objects.hash(domCcy, fgnCcy, assetClass, contractCode, contractMonth, contractSize, convention, country, description, exchangeCode, exchangeName, tickerStep, unitValue, calendars, deliveryType, deliverableMinMaturityYears, deliverableMaxMaturityYears, excludeCallableBonds, deliverableMinAmountOutstanding, deliverableIsins);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -594,6 +628,7 @@ public class FuturesContractDetails {
     sb.append("    deliverableMaxMaturityYears: ").append(toIndentedString(deliverableMaxMaturityYears)).append("\n");
     sb.append("    excludeCallableBonds: ").append(toIndentedString(excludeCallableBonds)).append("\n");
     sb.append("    deliverableMinAmountOutstanding: ").append(toIndentedString(deliverableMinAmountOutstanding)).append("\n");
+    sb.append("    deliverableIsins: ").append(toIndentedString(deliverableIsins)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -50,6 +50,7 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   RecResultSet.JSON_PROPERTY_REC_TYPE,
+  RecResultSet.JSON_PROPERTY_EXTERNAL_REC_TYPE_NAME,
   RecResultSet.JSON_PROPERTY_REC_INSTANCE,
   RecResultSet.JSON_PROPERTY_RUN_NUMBER,
   RecResultSet.JSON_PROPERTY_RUN_AS_AT,
@@ -72,6 +73,11 @@ public class RecResultSet {
   @JsonProperty(JSON_PROPERTY_REC_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String recType;
+
+  public static final String JSON_PROPERTY_EXTERNAL_REC_TYPE_NAME = "externalRecTypeName";
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_REC_TYPE_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String externalRecTypeName;
 
   public static final String JSON_PROPERTY_REC_INSTANCE = "recInstance";
   @JsonProperty(JSON_PROPERTY_REC_INSTANCE)
@@ -167,6 +173,25 @@ public class RecResultSet {
 
   public void setRecType(String recType) {
     this.recType = recType;
+  }
+
+
+  public RecResultSet externalRecTypeName(String externalRecTypeName) {
+    this.externalRecTypeName = externalRecTypeName;
+    return this;
+  }
+
+  /**
+   * The client&#39;s name for an External rec type, as stamped from the matching ruleset&#39;s externalRecType when the run executed. Null for native rec types. Filterable.
+   * @return externalRecTypeName
+   */
+  @javax.annotation.Nullable
+  public String getExternalRecTypeName() {
+    return externalRecTypeName;
+  }
+
+  public void setExternalRecTypeName(String externalRecTypeName) {
+    this.externalRecTypeName = externalRecTypeName;
   }
 
 
@@ -505,6 +530,7 @@ public class RecResultSet {
     }
     RecResultSet recResultSet = (RecResultSet) o;
     return Objects.equals(this.recType, recResultSet.recType) &&
+        Objects.equals(this.externalRecTypeName, recResultSet.externalRecTypeName) &&
         Objects.equals(this.recInstance, recResultSet.recInstance) &&
         Objects.equals(this.runNumber, recResultSet.runNumber) &&
         Objects.equals(this.runAsAt, recResultSet.runAsAt) &&
@@ -528,7 +554,7 @@ public class RecResultSet {
 
   @Override
  public int hashCode() {
-    return Objects.hash(recType, recInstance, runNumber, runAsAt, execution, datesReconciled, resultCounts, review, approvalStatus, requiredApprovals, submissions, decisions, previousRuns, href, version, links);
+    return Objects.hash(recType, externalRecTypeName, recInstance, runNumber, runAsAt, execution, datesReconciled, resultCounts, review, approvalStatus, requiredApprovals, submissions, decisions, previousRuns, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -543,6 +569,7 @@ public class RecResultSet {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecResultSet {\n");
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
+    sb.append("    externalRecTypeName: ").append(toIndentedString(externalRecTypeName)).append("\n");
     sb.append("    recInstance: ").append(toIndentedString(recInstance)).append("\n");
     sb.append("    runNumber: ").append(toIndentedString(runNumber)).append("\n");
     sb.append("    runAsAt: ").append(toIndentedString(runAsAt)).append("\n");

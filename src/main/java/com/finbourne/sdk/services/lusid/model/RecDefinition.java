@@ -15,11 +15,8 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.RecDatePolicy;
-import com.finbourne.sdk.services.lusid.model.RecDefCurrencies;
-import com.finbourne.sdk.services.lusid.model.RecDefRecipeIds;
-import com.finbourne.sdk.services.lusid.model.RecDefRuleset;
 import com.finbourne.sdk.services.lusid.model.RecDefSideNames;
-import com.finbourne.sdk.services.lusid.model.RecDefSource;
+import com.finbourne.sdk.services.lusid.model.RecDefinitionDetails;
 import com.finbourne.sdk.services.lusid.model.RecReviewConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.Version;
@@ -53,13 +50,8 @@ import com.finbourne.sdk.JSON;
   RecDefinition.JSON_PROPERTY_ID,
   RecDefinition.JSON_PROPERTY_DISPLAY_NAME,
   RecDefinition.JSON_PROPERTY_DESCRIPTION,
-  RecDefinition.JSON_PROPERTY_DEFINITION_TYPE,
   RecDefinition.JSON_PROPERTY_SIDE_NAMES,
-  RecDefinition.JSON_PROPERTY_LEFT_PORTFOLIO_SOURCES,
-  RecDefinition.JSON_PROPERTY_RIGHT_PORTFOLIO_SOURCES,
-  RecDefinition.JSON_PROPERTY_VALUATION_RECIPES,
-  RecDefinition.JSON_PROPERTY_CURRENCIES,
-  RecDefinition.JSON_PROPERTY_RULESETS,
+  RecDefinition.JSON_PROPERTY_DETAILS,
   RecDefinition.JSON_PROPERTY_REVIEW_CONFIGURATION,
   RecDefinition.JSON_PROPERTY_DATE_POLICY,
   RecDefinition.JSON_PROPERTY_PROPERTIES,
@@ -84,40 +76,15 @@ public class RecDefinition {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String description;
 
-  public static final String JSON_PROPERTY_DEFINITION_TYPE = "definitionType";
-  @JsonProperty(JSON_PROPERTY_DEFINITION_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String definitionType;
-
   public static final String JSON_PROPERTY_SIDE_NAMES = "sideNames";
   @JsonProperty(JSON_PROPERTY_SIDE_NAMES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private RecDefSideNames sideNames;
 
-  public static final String JSON_PROPERTY_LEFT_PORTFOLIO_SOURCES = "leftPortfolioSources";
-  @JsonProperty(JSON_PROPERTY_LEFT_PORTFOLIO_SOURCES)
+  public static final String JSON_PROPERTY_DETAILS = "details";
+  @JsonProperty(JSON_PROPERTY_DETAILS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<RecDefSource> leftPortfolioSources = new ArrayList<>();
-
-  public static final String JSON_PROPERTY_RIGHT_PORTFOLIO_SOURCES = "rightPortfolioSources";
-  @JsonProperty(JSON_PROPERTY_RIGHT_PORTFOLIO_SOURCES)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<RecDefSource> rightPortfolioSources = new ArrayList<>();
-
-  public static final String JSON_PROPERTY_VALUATION_RECIPES = "valuationRecipes";
-  @JsonProperty(JSON_PROPERTY_VALUATION_RECIPES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private RecDefRecipeIds valuationRecipes;
-
-  public static final String JSON_PROPERTY_CURRENCIES = "currencies";
-  @JsonProperty(JSON_PROPERTY_CURRENCIES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private RecDefCurrencies currencies;
-
-  public static final String JSON_PROPERTY_RULESETS = "rulesets";
-  @JsonProperty(JSON_PROPERTY_RULESETS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<RecDefRuleset> rulesets = new ArrayList<>();
+  private RecDefinitionDetails details;
 
   public static final String JSON_PROPERTY_REVIEW_CONFIGURATION = "reviewConfiguration";
   @JsonProperty(JSON_PROPERTY_REVIEW_CONFIGURATION)
@@ -209,25 +176,6 @@ public class RecDefinition {
   }
 
 
-  public RecDefinition definitionType(String definitionType) {
-    this.definitionType = definitionType;
-    return this;
-  }
-
-  /**
-   * What this definition reconciles, naming the kind of dataset that must be present on at least one side. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData.
-   * @return definitionType
-   */
-  @javax.annotation.Nonnull
-  public String getDefinitionType() {
-    return definitionType;
-  }
-
-  public void setDefinitionType(String definitionType) {
-    this.definitionType = definitionType;
-  }
-
-
   public RecDefinition sideNames(RecDefSideNames sideNames) {
     this.sideNames = sideNames;
     return this;
@@ -247,122 +195,22 @@ public class RecDefinition {
   }
 
 
-  public RecDefinition leftPortfolioSources(List<RecDefSource> leftPortfolioSources) {
-    this.leftPortfolioSources = leftPortfolioSources;
-    return this;
-  }
-
-  public RecDefinition addLeftPortfolioSourcesItem(RecDefSource leftPortfolioSourcesItem) {
-    if (this.leftPortfolioSources == null) {
-      this.leftPortfolioSources = new ArrayList<>();
-    }
-    this.leftPortfolioSources.add(leftPortfolioSourcesItem);
+  public RecDefinition details(RecDefinitionDetails details) {
+    this.details = details;
     return this;
   }
 
   /**
-   * The portfolios, portfolio groups and funds contributing to the left side. Empty when the left side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty.
-   * @return leftPortfolioSources
+   * Get details
+   * @return details
    */
   @javax.annotation.Nonnull
-  public List<RecDefSource> getLeftPortfolioSources() {
-    return leftPortfolioSources;
+  public RecDefinitionDetails getDetails() {
+    return details;
   }
 
-  public void setLeftPortfolioSources(List<RecDefSource> leftPortfolioSources) {
-    this.leftPortfolioSources = leftPortfolioSources;
-  }
-
-
-  public RecDefinition rightPortfolioSources(List<RecDefSource> rightPortfolioSources) {
-    this.rightPortfolioSources = rightPortfolioSources;
-    return this;
-  }
-
-  public RecDefinition addRightPortfolioSourcesItem(RecDefSource rightPortfolioSourcesItem) {
-    if (this.rightPortfolioSources == null) {
-      this.rightPortfolioSources = new ArrayList<>();
-    }
-    this.rightPortfolioSources.add(rightPortfolioSourcesItem);
-    return this;
-  }
-
-  /**
-   * The portfolios, portfolio groups and funds contributing to the right side. Empty when the right side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty.
-   * @return rightPortfolioSources
-   */
-  @javax.annotation.Nonnull
-  public List<RecDefSource> getRightPortfolioSources() {
-    return rightPortfolioSources;
-  }
-
-  public void setRightPortfolioSources(List<RecDefSource> rightPortfolioSources) {
-    this.rightPortfolioSources = rightPortfolioSources;
-  }
-
-
-  public RecDefinition valuationRecipes(RecDefRecipeIds valuationRecipes) {
-    this.valuationRecipes = valuationRecipes;
-    return this;
-  }
-
-  /**
-   * Get valuationRecipes
-   * @return valuationRecipes
-   */
-  @javax.annotation.Nullable
-  public RecDefRecipeIds getValuationRecipes() {
-    return valuationRecipes;
-  }
-
-  public void setValuationRecipes(RecDefRecipeIds valuationRecipes) {
-    this.valuationRecipes = valuationRecipes;
-  }
-
-
-  public RecDefinition currencies(RecDefCurrencies currencies) {
-    this.currencies = currencies;
-    return this;
-  }
-
-  /**
-   * Get currencies
-   * @return currencies
-   */
-  @javax.annotation.Nullable
-  public RecDefCurrencies getCurrencies() {
-    return currencies;
-  }
-
-  public void setCurrencies(RecDefCurrencies currencies) {
-    this.currencies = currencies;
-  }
-
-
-  public RecDefinition rulesets(List<RecDefRuleset> rulesets) {
-    this.rulesets = rulesets;
-    return this;
-  }
-
-  public RecDefinition addRulesetsItem(RecDefRuleset rulesetsItem) {
-    if (this.rulesets == null) {
-      this.rulesets = new ArrayList<>();
-    }
-    this.rulesets.add(rulesetsItem);
-    return this;
-  }
-
-  /**
-   * The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once.
-   * @return rulesets
-   */
-  @javax.annotation.Nonnull
-  public List<RecDefRuleset> getRulesets() {
-    return rulesets;
-  }
-
-  public void setRulesets(List<RecDefRuleset> rulesets) {
-    this.rulesets = rulesets;
+  public void setDetails(RecDefinitionDetails details) {
+    this.details = details;
   }
 
 
@@ -508,13 +356,8 @@ public class RecDefinition {
     return Objects.equals(this.id, recDefinition.id) &&
         Objects.equals(this.displayName, recDefinition.displayName) &&
         Objects.equals(this.description, recDefinition.description) &&
-        Objects.equals(this.definitionType, recDefinition.definitionType) &&
         Objects.equals(this.sideNames, recDefinition.sideNames) &&
-        Objects.equals(this.leftPortfolioSources, recDefinition.leftPortfolioSources) &&
-        Objects.equals(this.rightPortfolioSources, recDefinition.rightPortfolioSources) &&
-        Objects.equals(this.valuationRecipes, recDefinition.valuationRecipes) &&
-        Objects.equals(this.currencies, recDefinition.currencies) &&
-        Objects.equals(this.rulesets, recDefinition.rulesets) &&
+        Objects.equals(this.details, recDefinition.details) &&
         Objects.equals(this.reviewConfiguration, recDefinition.reviewConfiguration) &&
         Objects.equals(this.datePolicy, recDefinition.datePolicy) &&
         Objects.equals(this.properties, recDefinition.properties) &&
@@ -529,7 +372,7 @@ public class RecDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, displayName, description, definitionType, sideNames, leftPortfolioSources, rightPortfolioSources, valuationRecipes, currencies, rulesets, reviewConfiguration, datePolicy, properties, href, version, links);
+    return Objects.hash(id, displayName, description, sideNames, details, reviewConfiguration, datePolicy, properties, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -546,13 +389,8 @@ public class RecDefinition {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    definitionType: ").append(toIndentedString(definitionType)).append("\n");
     sb.append("    sideNames: ").append(toIndentedString(sideNames)).append("\n");
-    sb.append("    leftPortfolioSources: ").append(toIndentedString(leftPortfolioSources)).append("\n");
-    sb.append("    rightPortfolioSources: ").append(toIndentedString(rightPortfolioSources)).append("\n");
-    sb.append("    valuationRecipes: ").append(toIndentedString(valuationRecipes)).append("\n");
-    sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
-    sb.append("    rulesets: ").append(toIndentedString(rulesets)).append("\n");
+    sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("    reviewConfiguration: ").append(toIndentedString(reviewConfiguration)).append("\n");
     sb.append("    datePolicy: ").append(toIndentedString(datePolicy)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");

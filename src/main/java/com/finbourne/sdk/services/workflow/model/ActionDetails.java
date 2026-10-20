@@ -19,6 +19,8 @@ import com.finbourne.sdk.services.workflow.model.ResourceId;
 import com.finbourne.sdk.services.workflow.model.ResultantChildTaskConfiguration;
 import com.finbourne.sdk.services.workflow.model.RunWorkerAction;
 import com.finbourne.sdk.services.workflow.model.TriggerChildTasksAction;
+import com.finbourne.sdk.services.workflow.model.TriggerNextTaskAction;
+import com.finbourne.sdk.services.workflow.model.TriggerNextTaskFallbackActions;
 import com.finbourne.sdk.services.workflow.model.TriggerParentTaskAction;
 import com.finbourne.sdk.services.workflow.model.WorkerStatusTriggers;
 import java.io.IOException;
@@ -108,6 +110,16 @@ public class ActionDetails extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for TriggerChildTasksAction failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'TriggerChildTasksAction'", e);
             }
+            // deserialize TriggerNextTaskAction
+            try {
+                deserialized = _strictMapper.treeToValue(node, TriggerNextTaskAction.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'TriggerNextTaskAction'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for TriggerNextTaskAction failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'TriggerNextTaskAction'", e);
+            }
             // deserialize TriggerParentTaskAction
             try {
                 deserialized = _strictMapper.treeToValue(node, TriggerParentTaskAction.class);
@@ -143,6 +155,7 @@ public class ActionDetails extends AbstractOpenApiSchema {
         schemas.put("CreateChildTasksAction", CreateChildTasksAction.class);
         schemas.put("RunWorkerAction", RunWorkerAction.class);
         schemas.put("TriggerChildTasksAction", TriggerChildTasksAction.class);
+        schemas.put("TriggerNextTaskAction", TriggerNextTaskAction.class);
         schemas.put("TriggerParentTaskAction", TriggerParentTaskAction.class);
     }
 
@@ -154,7 +167,7 @@ public class ActionDetails extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * CreateChildTasksAction, RunWorkerAction, TriggerChildTasksAction, TriggerParentTaskAction
+     * CreateChildTasksAction, RunWorkerAction, TriggerChildTasksAction, TriggerNextTaskAction, TriggerParentTaskAction
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -175,19 +188,24 @@ public class ActionDetails extends AbstractOpenApiSchema {
             return;
         }
 
+        if (instance instanceof TriggerNextTaskAction) {
+            super.setActualInstance(instance);
+            return;
+        }
+
         if (instance instanceof TriggerParentTaskAction) {
             super.setActualInstance(instance);
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be CreateChildTasksAction, RunWorkerAction, TriggerChildTasksAction, TriggerParentTaskAction");
+        throw new RuntimeException("Invalid instance type. Must be CreateChildTasksAction, RunWorkerAction, TriggerChildTasksAction, TriggerNextTaskAction, TriggerParentTaskAction");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * CreateChildTasksAction, RunWorkerAction, TriggerChildTasksAction, TriggerParentTaskAction
+     * CreateChildTasksAction, RunWorkerAction, TriggerChildTasksAction, TriggerNextTaskAction, TriggerParentTaskAction
      *
-     * @return The actual instance (CreateChildTasksAction, RunWorkerAction, TriggerChildTasksAction, TriggerParentTaskAction)
+     * @return The actual instance (CreateChildTasksAction, RunWorkerAction, TriggerChildTasksAction, TriggerNextTaskAction, TriggerParentTaskAction)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -224,6 +242,16 @@ public class ActionDetails extends AbstractOpenApiSchema {
      */
     public TriggerChildTasksAction getTriggerChildTasksAction() throws ClassCastException {
         return (TriggerChildTasksAction)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `TriggerNextTaskAction`. If the actual instance is not `TriggerNextTaskAction`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `TriggerNextTaskAction`
+     * @throws ClassCastException if the instance is not `TriggerNextTaskAction`
+     */
+    public TriggerNextTaskAction getTriggerNextTaskAction() throws ClassCastException {
+        return (TriggerNextTaskAction)super.getActualInstance();
     }
     /**
      * Get the actual instance of `TriggerParentTaskAction`. If the actual instance is not `TriggerParentTaskAction`,

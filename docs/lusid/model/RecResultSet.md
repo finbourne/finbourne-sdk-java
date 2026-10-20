@@ -7,6 +7,7 @@ The collection of reconciliation results for a given rec type within a rec insta
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **recType** | **String** | The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. | [default to String]
+**externalRecTypeName** | **String** | The client&#39;s name for an External rec type, as stamped from the matching ruleset&#39;s externalRecType when the run executed. Null for native rec types. Filterable. | [optional] [default to String]
 **recInstance** | [**RecInstanceSummary**](RecInstanceSummary.md) |  | [default to RecInstanceSummary]
 **runNumber** | **Integer** | The run number within the instance. Increments with each re-run. | [default to Integer]
 **runAsAt** | [**OffsetDateTime**](OffsetDateTime.md) | The asAt datetime at which the run happened. | [default to OffsetDateTime]
@@ -30,6 +31,7 @@ import java.lang.System;
 import java.net.URI;
 
 String recType = "example recType";
+@javax.annotation.Nullable String externalRecTypeName = "example externalRecTypeName";
 RecInstanceSummary recInstance = new RecInstanceSummary();
 Integer runNumber = new Integer("100.00");
 OffsetDateTime runAsAt = OffsetDateTime.now();
@@ -49,6 +51,7 @@ Version version = new Version();
 
 RecResultSet recResultSetInstance = new RecResultSet()
     .recType(recType)
+    .externalRecTypeName(externalRecTypeName)
     .recInstance(recInstance)
     .runNumber(runNumber)
     .runAsAt(runAsAt)

@@ -13,7 +13,9 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -35,7 +37,9 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   PostingModuleRule.JSON_PROPERTY_RULE_ID,
   PostingModuleRule.JSON_PROPERTY_GENERAL_LEDGER_ACCOUNT_CODE,
-  PostingModuleRule.JSON_PROPERTY_RULE_FILTER
+  PostingModuleRule.JSON_PROPERTY_RULE_FILTER,
+  PostingModuleRule.JSON_PROPERTY_EFFECTIVE_FROM,
+  PostingModuleRule.JSON_PROPERTY_EFFECTIVE_UNTIL
 })
 
 public class PostingModuleRule {
@@ -53,6 +57,16 @@ public class PostingModuleRule {
   @JsonProperty(JSON_PROPERTY_RULE_FILTER)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String ruleFilter;
+
+  public static final String JSON_PROPERTY_EFFECTIVE_FROM = "effectiveFrom";
+  @JsonProperty(JSON_PROPERTY_EFFECTIVE_FROM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime effectiveFrom;
+
+  public static final String JSON_PROPERTY_EFFECTIVE_UNTIL = "effectiveUntil";
+  @JsonProperty(JSON_PROPERTY_EFFECTIVE_UNTIL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime effectiveUntil;
 
   public PostingModuleRule() {
   }
@@ -114,6 +128,44 @@ public class PostingModuleRule {
   }
 
 
+  public PostingModuleRule effectiveFrom(OffsetDateTime effectiveFrom) {
+    this.effectiveFrom = effectiveFrom;
+    return this;
+  }
+
+  /**
+   * The inclusive accounting date from which the Posting Rule applies. If not set, the rule applies from the beginning of time.
+   * @return effectiveFrom
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getEffectiveFrom() {
+    return effectiveFrom;
+  }
+
+  public void setEffectiveFrom(OffsetDateTime effectiveFrom) {
+    this.effectiveFrom = effectiveFrom;
+  }
+
+
+  public PostingModuleRule effectiveUntil(OffsetDateTime effectiveUntil) {
+    this.effectiveUntil = effectiveUntil;
+    return this;
+  }
+
+  /**
+   * The exclusive accounting date until which the Posting Rule applies. If not set, the rule applies until the end of time.
+   * @return effectiveUntil
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getEffectiveUntil() {
+    return effectiveUntil;
+  }
+
+  public void setEffectiveUntil(OffsetDateTime effectiveUntil) {
+    this.effectiveUntil = effectiveUntil;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -125,12 +177,25 @@ public class PostingModuleRule {
     PostingModuleRule postingModuleRule = (PostingModuleRule) o;
     return Objects.equals(this.ruleId, postingModuleRule.ruleId) &&
         Objects.equals(this.generalLedgerAccountCode, postingModuleRule.generalLedgerAccountCode) &&
-        Objects.equals(this.ruleFilter, postingModuleRule.ruleFilter);
+        Objects.equals(this.ruleFilter, postingModuleRule.ruleFilter) &&
+        Objects.equals(this.effectiveFrom, postingModuleRule.effectiveFrom) &&
+        Objects.equals(this.effectiveUntil, postingModuleRule.effectiveUntil);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(ruleId, generalLedgerAccountCode, ruleFilter);
+    return Objects.hash(ruleId, generalLedgerAccountCode, ruleFilter, effectiveFrom, effectiveUntil);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -140,6 +205,8 @@ public class PostingModuleRule {
     sb.append("    ruleId: ").append(toIndentedString(ruleId)).append("\n");
     sb.append("    generalLedgerAccountCode: ").append(toIndentedString(generalLedgerAccountCode)).append("\n");
     sb.append("    ruleFilter: ").append(toIndentedString(ruleFilter)).append("\n");
+    sb.append("    effectiveFrom: ").append(toIndentedString(effectiveFrom)).append("\n");
+    sb.append("    effectiveUntil: ").append(toIndentedString(effectiveUntil)).append("\n");
     sb.append("}");
     return sb.toString();
   }

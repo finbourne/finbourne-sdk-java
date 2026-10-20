@@ -42,7 +42,8 @@ import com.finbourne.sdk.JSON;
   CarryAccrualResult.JSON_PROPERTY_PERIOD_END,
   CarryAccrualResult.JSON_PROPERTY_SOURCE,
   CarryAccrualResult.JSON_PROPERTY_LINES,
-  CarryAccrualResult.JSON_PROPERTY_BOOKED_TRANSACTION_IDS
+  CarryAccrualResult.JSON_PROPERTY_BOOKED_TRANSACTION_IDS,
+  CarryAccrualResult.JSON_PROPERTY_LATER_RUN_IDS
 })
 
 public class CarryAccrualResult {
@@ -70,6 +71,11 @@ public class CarryAccrualResult {
   @JsonProperty(JSON_PROPERTY_BOOKED_TRANSACTION_IDS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<String> bookedTransactionIds = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_LATER_RUN_IDS = "laterRunIds";
+  @JsonProperty(JSON_PROPERTY_LATER_RUN_IDS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<String> laterRunIds = new ArrayList<>();
 
   public CarryAccrualResult() {
   }
@@ -185,6 +191,33 @@ public class CarryAccrualResult {
   }
 
 
+  public CarryAccrualResult laterRunIds(List<String> laterRunIds) {
+    this.laterRunIds = laterRunIds;
+    return this;
+  }
+
+  public CarryAccrualResult addLaterRunIdsItem(String laterRunIdsItem) {
+    if (this.laterRunIds == null) {
+      this.laterRunIds = new ArrayList<>();
+    }
+    this.laterRunIds.add(laterRunIdsItem);
+    return this;
+  }
+
+  /**
+   * The run identifiers of carry accruals already on the ledger with an effective date after this period end. Restating an earlier period moves the to-date balance those runs were accrued against; re-run them to roll the restatement forward.
+   * @return laterRunIds
+   */
+  @javax.annotation.Nonnull
+  public List<String> getLaterRunIds() {
+    return laterRunIds;
+  }
+
+  public void setLaterRunIds(List<String> laterRunIds) {
+    this.laterRunIds = laterRunIds;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -198,12 +231,13 @@ public class CarryAccrualResult {
         Objects.equals(this.periodEnd, carryAccrualResult.periodEnd) &&
         Objects.equals(this.source, carryAccrualResult.source) &&
         Objects.equals(this.lines, carryAccrualResult.lines) &&
-        Objects.equals(this.bookedTransactionIds, carryAccrualResult.bookedTransactionIds);
+        Objects.equals(this.bookedTransactionIds, carryAccrualResult.bookedTransactionIds) &&
+        Objects.equals(this.laterRunIds, carryAccrualResult.laterRunIds);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(fundId, periodEnd, source, lines, bookedTransactionIds);
+    return Objects.hash(fundId, periodEnd, source, lines, bookedTransactionIds, laterRunIds);
   }
 
   @Override
@@ -215,6 +249,7 @@ public class CarryAccrualResult {
     sb.append("    source: ").append(toIndentedString(source)).append("\n");
     sb.append("    lines: ").append(toIndentedString(lines)).append("\n");
     sb.append("    bookedTransactionIds: ").append(toIndentedString(bookedTransactionIds)).append("\n");
+    sb.append("    laterRunIds: ").append(toIndentedString(laterRunIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

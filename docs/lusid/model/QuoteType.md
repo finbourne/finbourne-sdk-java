@@ -34,6 +34,7 @@ QuoteType method = QuoteType.INTEREST_SHORTFALL;
 QuoteType method = QuoteType.CONSTITUENT_WEIGHT_FACTOR;
 QuoteType method = QuoteType.FORWARD_PRICE;
 QuoteType method = QuoteType.DISCOUNT_FACTOR;
+QuoteType method = QuoteType.PRINCIPAL_DISTRIBUTED;
 ```
 
 

@@ -44,6 +44,8 @@ import com.finbourne.sdk.JSON;
   SubscriptionDefinition.JSON_PROPERTY_DESCRIPTION,
   SubscriptionDefinition.JSON_PROPERTY_PORTFOLIO_ID,
   SubscriptionDefinition.JSON_PROPERTY_TIMELINE_ID,
+  SubscriptionDefinition.JSON_PROPERTY_TIMELINE_PROPERTY,
+  SubscriptionDefinition.JSON_PROPERTY_PORTFOLIO_FILTER,
   SubscriptionDefinition.JSON_PROPERTY_ADDRESS_KEYS,
   SubscriptionDefinition.JSON_PROPERTY_BY_TAX_LOTS,
   SubscriptionDefinition.JSON_PROPERTY_SUBSCRIPTION_TYPE,
@@ -82,6 +84,16 @@ public class SubscriptionDefinition {
   @JsonProperty(JSON_PROPERTY_TIMELINE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId timelineId;
+
+  public static final String JSON_PROPERTY_TIMELINE_PROPERTY = "timelineProperty";
+  @JsonProperty(JSON_PROPERTY_TIMELINE_PROPERTY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String timelineProperty;
+
+  public static final String JSON_PROPERTY_PORTFOLIO_FILTER = "portfolioFilter";
+  @JsonProperty(JSON_PROPERTY_PORTFOLIO_FILTER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String portfolioFilter;
 
   public static final String JSON_PROPERTY_ADDRESS_KEYS = "addressKeys";
   @JsonProperty(JSON_PROPERTY_ADDRESS_KEYS)
@@ -230,6 +242,44 @@ public class SubscriptionDefinition {
   }
 
 
+  public SubscriptionDefinition timelineProperty(String timelineProperty) {
+    this.timelineProperty = timelineProperty;
+    return this;
+  }
+
+  /**
+   * A portfolio property key (Portfolio/scope/code) naming a perpetual portfolio property whose value  (scope/code) identifies the timeline for each portfolio. Mutually exclusive with timelineId.  The property must be defined, with a data type of value type ResourceId or String.
+   * @return timelineProperty
+   */
+  @javax.annotation.Nullable
+  public String getTimelineProperty() {
+    return timelineProperty;
+  }
+
+  public void setTimelineProperty(String timelineProperty) {
+    this.timelineProperty = timelineProperty;
+  }
+
+
+  public SubscriptionDefinition portfolioFilter(String portfolioFilter) {
+    this.portfolioFilter = portfolioFilter;
+    return this;
+  }
+
+  /**
+   * A filter, in the syntax of the list portfolios filter, that narrows a wildcard portfolioId to the portfolios  of the scope that match it. Only valid when portfolioId.code is \&quot;*\&quot;. It may use the portfolio&#39;s own fields and  its perpetual Portfolio properties; time-variant and derived properties and relationships are not supported.  A portfolio that starts or stops matching joins or leaves the subscription.
+   * @return portfolioFilter
+   */
+  @javax.annotation.Nullable
+  public String getPortfolioFilter() {
+    return portfolioFilter;
+  }
+
+  public void setPortfolioFilter(String portfolioFilter) {
+    this.portfolioFilter = portfolioFilter;
+  }
+
+
   public SubscriptionDefinition addressKeys(List<String> addressKeys) {
     this.addressKeys = addressKeys;
     return this;
@@ -367,6 +417,8 @@ public class SubscriptionDefinition {
         Objects.equals(this.description, subscriptionDefinition.description) &&
         Objects.equals(this.portfolioId, subscriptionDefinition.portfolioId) &&
         Objects.equals(this.timelineId, subscriptionDefinition.timelineId) &&
+        Objects.equals(this.timelineProperty, subscriptionDefinition.timelineProperty) &&
+        Objects.equals(this.portfolioFilter, subscriptionDefinition.portfolioFilter) &&
         Objects.equals(this.addressKeys, subscriptionDefinition.addressKeys) &&
         Objects.equals(this.byTaxLots, subscriptionDefinition.byTaxLots) &&
         Objects.equals(this.subscriptionType, subscriptionDefinition.subscriptionType) &&
@@ -381,7 +433,7 @@ public class SubscriptionDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt, effectiveForwardDays);
+    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, timelineProperty, portfolioFilter, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt, effectiveForwardDays);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -401,6 +453,8 @@ public class SubscriptionDefinition {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
     sb.append("    timelineId: ").append(toIndentedString(timelineId)).append("\n");
+    sb.append("    timelineProperty: ").append(toIndentedString(timelineProperty)).append("\n");
+    sb.append("    portfolioFilter: ").append(toIndentedString(portfolioFilter)).append("\n");
     sb.append("    addressKeys: ").append(toIndentedString(addressKeys)).append("\n");
     sb.append("    byTaxLots: ").append(toIndentedString(byTaxLots)).append("\n");
     sb.append("    subscriptionType: ").append(toIndentedString(subscriptionType)).append("\n");

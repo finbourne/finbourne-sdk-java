@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 | [**getProviderTemplateForExport**](SqlDesignApi.md#getProviderTemplateForExport) | **GET** /honeycomb/api/Sql/providertemplateforexport | GetProviderTemplateForExport: Makes a fields template for file importing via a writer |
 | [**putCaseStatementDesignSqlToDesign**](SqlDesignApi.md#putCaseStatementDesignSqlToDesign) | **PUT** /honeycomb/api/Sql/tocasestatementdesign | PutCaseStatementDesignSqlToDesign: Convert SQL to a case statement design object |
 | [**putCaseStatementDesignToSql**](SqlDesignApi.md#putCaseStatementDesignToSql) | **PUT** /honeycomb/api/Sql/fromcasestatementdesign | PutCaseStatementDesignToSql: Convert a case statement design object to SQL |
+| [**putCustomQueriesToExtractScalarParameters**](SqlDesignApi.md#putCustomQueriesToExtractScalarParameters) | **PUT** /honeycomb/api/Sql/extractscalarparameters/custom | PutCustomQueriesToExtractScalarParameters: Extract scalar parameter information from all the queries of a custom multi-query |
 | [**putFileReadDesignToSql**](SqlDesignApi.md#putFileReadDesignToSql) | **PUT** /honeycomb/api/Sql/fromfilereaddesign | PutFileReadDesignToSql: Make file read SQL from a design object |
 | [**putInlinedPropertiesDesignSqlToDesign**](SqlDesignApi.md#putInlinedPropertiesDesignSqlToDesign) | **PUT** /honeycomb/api/Sql/toinlinedpropertiesdesign | PutInlinedPropertiesDesignSqlToDesign: Make an inlined properties design from SQL |
 | [**putInlinedPropertiesDesignToSql**](SqlDesignApi.md#putInlinedPropertiesDesignToSql) | **PUT** /honeycomb/api/Sql/frominlinedpropertiesdesign | PutInlinedPropertiesDesignToSql: Make inlined properties SQL from a design object |
@@ -245,6 +246,83 @@ public class SqlDesignApiExample {
 ### HTTP request headers
 
 - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## putCustomQueriesToExtractScalarParameters
+
+> List&lt;ScalarParameter&gt; putCustomQueriesToExtractScalarParameters(customMultiQueryRequest)
+
+PutCustomQueriesToExtractScalarParameters: Extract scalar parameter information from all the queries of a custom multi-query
+
+ Extracts information about all the scalar parameters defined across the queries of a custom multi-query, loading the SQL of any given as Saved Queries. Each name is given only once (the first found of it, in query order), as the same value of it is given to every query that is run. The request&#39;s own &#x60;scalarParameters&#x60; are ignored.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - the request was invalid, a Saved Query could not be loaded, or there was something wrong with the syntax of a query - 401 Unauthorized - 403 Forbidden   &gt; This method is generally only intended for IDE generation purposes.  &gt; It is largely internal to the Finbourne web user interfaces and subject to change without notice. 
+
+### Example
+
+```java
+import com.finbourne.sdk.services.luminesce.model.*;
+import com.finbourne.sdk.services.luminesce.api.SqlDesignApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class SqlDesignApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        SqlDesignApi apiInstance = apiFactory.build(SqlDesignApi.class);
+        CustomMultiQueryRequest customMultiQueryRequest = new CustomMultiQueryRequest(); // CustomMultiQueryRequest | The same set of queries as would be given to start them via `api/MultiQueryBackground/custom`
+        try {
+            // uncomment the below to set overrides at the request level
+            // List<ScalarParameter> result = apiInstance.putCustomQueriesToExtractScalarParameters(customMultiQueryRequest).execute(opts);
+
+            List<ScalarParameter> result = apiInstance.putCustomQueriesToExtractScalarParameters(customMultiQueryRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SqlDesignApi#putCustomQueriesToExtractScalarParameters");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **customMultiQueryRequest** | [**CustomMultiQueryRequest**](../model/CustomMultiQueryRequest.md)| The same set of queries as would be given to start them via &#x60;api/MultiQueryBackground/custom&#x60; | |
+
+### Return type
+
+[**List&lt;ScalarParameter&gt;**](../model/ScalarParameter.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: text/plain, application/json, text/json
 
 

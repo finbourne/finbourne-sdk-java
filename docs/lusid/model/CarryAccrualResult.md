@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **source** | **String** | The waterfall or model the carry amounts came from. | [default to String]
 **lines** | [**List&lt;CarryAccrualLine&gt;**](CarryAccrualLine.md) | The accrual movement per partner. | [default to List<CarryAccrualLine>]
 **bookedTransactionIds** | **List&lt;String&gt;** | The identifiers of the transactions booked, if any. | [default to List<String>]
+**laterRunIds** | **List&lt;String&gt;** | The run identifiers of carry accruals already on the ledger with an effective date after this period end. Restating an earlier period moves the to-date balance those runs were accrued against; re-run them to roll the restatement forward. | [default to List<String>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CarryAccrualResult;
@@ -23,6 +24,7 @@ OffsetDateTime periodEnd = OffsetDateTime.now();
 String source = "example source";
 List<CarryAccrualLine> lines = new List<CarryAccrualLine>();
 List<String> bookedTransactionIds = new List<String>();
+List<String> laterRunIds = new List<String>();
 
 
 CarryAccrualResult carryAccrualResultInstance = new CarryAccrualResult()
@@ -30,7 +32,8 @@ CarryAccrualResult carryAccrualResultInstance = new CarryAccrualResult()
     .periodEnd(periodEnd)
     .source(source)
     .lines(lines)
-    .bookedTransactionIds(bookedTransactionIds);
+    .bookedTransactionIds(bookedTransactionIds)
+    .laterRunIds(laterRunIds);
 ```
 
 

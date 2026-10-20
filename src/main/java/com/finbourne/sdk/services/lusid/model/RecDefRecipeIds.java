@@ -41,12 +41,12 @@ import com.finbourne.sdk.JSON;
 public class RecDefRecipeIds {
   public static final String JSON_PROPERTY_LEFT = "left";
   @JsonProperty(JSON_PROPERTY_LEFT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId left;
 
   public static final String JSON_PROPERTY_RIGHT = "right";
   @JsonProperty(JSON_PROPERTY_RIGHT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId right;
 
   public RecDefRecipeIds() {
@@ -61,7 +61,7 @@ public class RecDefRecipeIds {
    * Get left
    * @return left
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public ResourceId getLeft() {
     return left;
   }
@@ -80,7 +80,7 @@ public class RecDefRecipeIds {
    * Get right
    * @return right
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public ResourceId getRight() {
     return right;
   }

@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -40,12 +41,12 @@ import com.finbourne.sdk.JSON;
 public class RecDefCurrencies {
   public static final String JSON_PROPERTY_LEFT = "left";
   @JsonProperty(JSON_PROPERTY_LEFT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String left;
 
   public static final String JSON_PROPERTY_RIGHT = "right";
   @JsonProperty(JSON_PROPERTY_RIGHT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String right;
 
   public RecDefCurrencies() {
@@ -57,10 +58,10 @@ public class RecDefCurrencies {
   }
 
   /**
-   * The currency used on the left side of the reconciliation.
+   * The currency used on the left side of the reconciliation. Required when the left side has portfolio sources; must be null when it draws on relational data.
    * @return left
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getLeft() {
     return left;
   }
@@ -76,10 +77,10 @@ public class RecDefCurrencies {
   }
 
   /**
-   * The currency used on the right side of the reconciliation.
+   * The currency used on the right side of the reconciliation. Required when the right side has portfolio sources; must be null when it draws on relational data.
    * @return right
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getRight() {
     return right;
   }
@@ -102,9 +103,20 @@ public class RecDefCurrencies {
         Objects.equals(this.right, recDefCurrencies.right);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
  public int hashCode() {
     return Objects.hash(left, right);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

@@ -61,7 +61,9 @@ public enum QuoteType {
   
   FORWARD_PRICE("ForwardPrice"),
   
-  DISCOUNT_FACTOR("DiscountFactor");
+  DISCOUNT_FACTOR("DiscountFactor"),
+  
+  PRINCIPAL_DISTRIBUTED("PrincipalDistributed");
 
   private String value;
 

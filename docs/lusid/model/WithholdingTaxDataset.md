@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **scope** | **String** | The scope of the relational dataset definition. | [default to String]
 **code** | **String** | The code of the relational dataset definition. Together with the scope this uniquely identifies the definition. | [default to String]
+**datasetType** | **String** | Which of the two rate tables this dataset is: Anomaly or Main. Set when the dataset is created through the withholding tax dataset definitions endpoint and never changed afterwards. Available values: Anomaly, Main. | [optional] [default to String]
 **dimensions** | [**List&lt;SeriesIdentifierField&gt;**](SeriesIdentifierField.md) | The dimensions created on this dataset as series identifiers, as stored. The mandatory core is not returned here; read the full field schema from the relational dataset definition at Href. | [default to List<SeriesIdentifierField>]
 **href** | [**URI**](URI.md) | The specific Uri of the relational dataset definition. | [optional] [default to URI]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
@@ -20,6 +21,7 @@ import java.net.URI;
 
 String scope = "example scope";
 String code = "example code";
+@javax.annotation.Nullable String datasetType = "example datasetType";
 List<SeriesIdentifierField> dimensions = new List<SeriesIdentifierField>();
 @javax.annotation.Nullable URI href = URI.create("http://example.com/href");
 Version version = new Version();
@@ -29,6 +31,7 @@ Version version = new Version();
 WithholdingTaxDataset withholdingTaxDatasetInstance = new WithholdingTaxDataset()
     .scope(scope)
     .code(code)
+    .datasetType(datasetType)
     .dimensions(dimensions)
     .href(href)
     .version(version)

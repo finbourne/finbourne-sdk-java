@@ -189,7 +189,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateItem: Create a new item in a workspace.
+     * CreateItem: Create a new item in a workspace.
      * Create a new item in a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -211,7 +211,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateItem: Create a new item in a workspace.
+     * CreateItem: Create a new item in a workspace.
      * Create a new item in a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -233,7 +233,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateItem: Create a new item in a workspace. (asynchronously)
+     * CreateItem: Create a new item in a workspace. (asynchronously)
      * Create a new item in a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -256,7 +256,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateItem: Create a new item in a workspace. (asynchronously)
+     * CreateItem: Create a new item in a workspace. (asynchronously)
      * Create a new item in a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -415,7 +415,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateItem: Create a new item in a workspace.
+     * CreateItem: Create a new item in a workspace.
      * Create a new item in a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -539,7 +539,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateWorkspace: Create a new workspace.
+     * CreateWorkspace: Create a new workspace.
      * Create a new workspace.
      * @param visibility The visibility for the workspace being created; case is important. Available values: shared, personal. (required)
      * @param workspaceCreationRequest The workspace to be created. (required)
@@ -561,7 +561,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateWorkspace: Create a new workspace.
+     * CreateWorkspace: Create a new workspace.
      * Create a new workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspace being created; case is important. Available values: shared, personal. (required)
      * @param workspaceCreationRequest The workspace to be created. (required)
@@ -583,7 +583,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateWorkspace: Create a new workspace. (asynchronously)
+     * CreateWorkspace: Create a new workspace. (asynchronously)
      * Create a new workspace.
      * @param visibility The visibility for the workspace being created; case is important. Available values: shared, personal. (required)
      * @param workspaceCreationRequest The workspace to be created. (required)
@@ -606,7 +606,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateWorkspace: Create a new workspace. (asynchronously)
+     * CreateWorkspace: Create a new workspace. (asynchronously)
      * Create a new workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspace being created; case is important. Available values: shared, personal. (required)
      * @param workspaceCreationRequest The workspace to be created. (required)
@@ -765,7 +765,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateWorkspace: Create a new workspace.
+     * CreateWorkspace: Create a new workspace.
      * Create a new workspace.
      * @param visibility The visibility for the workspace being created; case is important. Available values: shared, personal. (required)
      * @param workspaceCreationRequest The workspace to be created. (required)
@@ -896,7 +896,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteItem: Delete an item from a workspace.
+     * DeleteItem: Delete an item from a workspace.
      * Delete an item from a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -919,7 +919,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteItem: Delete an item from a workspace.
+     * DeleteItem: Delete an item from a workspace.
      * Delete an item from a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -942,7 +942,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteItem: Delete an item from a workspace. (asynchronously)
+     * DeleteItem: Delete an item from a workspace. (asynchronously)
      * Delete an item from a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -966,7 +966,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteItem: Delete an item from a workspace. (asynchronously)
+     * DeleteItem: Delete an item from a workspace. (asynchronously)
      * Delete an item from a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1119,7 +1119,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteItem: Delete an item from a workspace.
+     * DeleteItem: Delete an item from a workspace.
      * Delete an item from a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1242,7 +1242,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteWorkspace: Delete a workspace.
+     * DeleteWorkspace: Delete a workspace.
      * Delete a workspace.
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1264,7 +1264,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteWorkspace: Delete a workspace.
+     * DeleteWorkspace: Delete a workspace.
      * Delete a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1286,7 +1286,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteWorkspace: Delete a workspace. (asynchronously)
+     * DeleteWorkspace: Delete a workspace. (asynchronously)
      * Delete a workspace.
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1309,7 +1309,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteWorkspace: Delete a workspace. (asynchronously)
+     * DeleteWorkspace: Delete a workspace. (asynchronously)
      * Delete a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1468,7 +1468,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteWorkspace: Delete a workspace.
+     * DeleteWorkspace: Delete a workspace.
      * Delete a workspace.
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1605,7 +1605,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetItem: Get a single workspace item.
+     * GetItem: Get a single workspace item.
      * Get a single workspace item.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1629,7 +1629,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetItem: Get a single workspace item.
+     * GetItem: Get a single workspace item.
      * Get a single workspace item.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1653,7 +1653,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetItem: Get a single workspace item. (asynchronously)
+     * GetItem: Get a single workspace item. (asynchronously)
      * Get a single workspace item.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1678,7 +1678,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetItem: Get a single workspace item. (asynchronously)
+     * GetItem: Get a single workspace item. (asynchronously)
      * Get a single workspace item.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1843,7 +1843,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetItem: Get a single workspace item.
+     * GetItem: Get a single workspace item.
      * Get a single workspace item.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The name of the workspace. (required)
@@ -1972,7 +1972,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetWorkspace: Get a workspace.
+     * GetWorkspace: Get a workspace.
      * Get a workspace.
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -1995,7 +1995,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetWorkspace: Get a workspace.
+     * GetWorkspace: Get a workspace.
      * Get a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -2018,7 +2018,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetWorkspace: Get a workspace. (asynchronously)
+     * GetWorkspace: Get a workspace. (asynchronously)
      * Get a workspace.
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -2042,7 +2042,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetWorkspace: Get a workspace. (asynchronously)
+     * GetWorkspace: Get a workspace. (asynchronously)
      * Get a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -2213,7 +2213,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetWorkspace: Get a workspace.
+     * GetWorkspace: Get a workspace.
      * Get a workspace.
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -2358,7 +2358,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListItems: List the items in a workspace.
+     * ListItems: List the items in a workspace.
      * List the items in a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -2384,7 +2384,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListItems: List the items in a workspace.
+     * ListItems: List the items in a workspace.
      * List the items in a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -2410,7 +2410,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListItems: List the items in a workspace. (asynchronously)
+     * ListItems: List the items in a workspace. (asynchronously)
      * List the items in a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -2437,7 +2437,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListItems: List the items in a workspace. (asynchronously)
+     * ListItems: List the items in a workspace. (asynchronously)
      * List the items in a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -2644,7 +2644,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListItems: List the items in a workspace.
+     * ListItems: List the items in a workspace.
      * List the items in a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The item&#39;s workspace name. (required)
@@ -2787,7 +2787,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListWorkspaces: List workspaces.
+     * ListWorkspaces: List workspaces.
      * List workspaces.
      * @param visibility The visibility for the workspaces; case is important. Available values: shared, personal. (required)
      * @param asAt The asAt datetime at which to retrieve workspaces. Defaults to &#39;latest&#39; if not specified. (optional)
@@ -2813,7 +2813,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListWorkspaces: List workspaces.
+     * ListWorkspaces: List workspaces.
      * List workspaces.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspaces; case is important. Available values: shared, personal. (required)
      * @param asAt The asAt datetime at which to retrieve workspaces. Defaults to &#39;latest&#39; if not specified. (optional)
@@ -2839,7 +2839,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListWorkspaces: List workspaces. (asynchronously)
+     * ListWorkspaces: List workspaces. (asynchronously)
      * List workspaces.
      * @param visibility The visibility for the workspaces; case is important. Available values: shared, personal. (required)
      * @param asAt The asAt datetime at which to retrieve workspaces. Defaults to &#39;latest&#39; if not specified. (optional)
@@ -2866,7 +2866,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListWorkspaces: List workspaces. (asynchronously)
+     * ListWorkspaces: List workspaces. (asynchronously)
      * List workspaces.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspaces; case is important. Available values: shared, personal. (required)
      * @param asAt The asAt datetime at which to retrieve workspaces. Defaults to &#39;latest&#39; if not specified. (optional)
@@ -3082,7 +3082,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListWorkspaces: List workspaces.
+     * ListWorkspaces: List workspaces.
      * List workspaces.
      * @param visibility The visibility for the workspaces; case is important. Available values: shared, personal. (required)
      * @return APIlistWorkspacesRequest
@@ -3218,7 +3218,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] SearchItems: List items across all workspaces.
+     * SearchItems: List items across all workspaces.
      * List items across all workspaces.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param asAt The asAt datetime at which to retrieve workspace items. Defaults to &#39;latest&#39; if not specified. (optional)
@@ -3243,7 +3243,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] SearchItems: List items across all workspaces.
+     * SearchItems: List items across all workspaces.
      * List items across all workspaces.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param asAt The asAt datetime at which to retrieve workspace items. Defaults to &#39;latest&#39; if not specified. (optional)
@@ -3268,7 +3268,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] SearchItems: List items across all workspaces. (asynchronously)
+     * SearchItems: List items across all workspaces. (asynchronously)
      * List items across all workspaces.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param asAt The asAt datetime at which to retrieve workspace items. Defaults to &#39;latest&#39; if not specified. (optional)
@@ -3294,7 +3294,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] SearchItems: List items across all workspaces. (asynchronously)
+     * SearchItems: List items across all workspaces. (asynchronously)
      * List items across all workspaces.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param asAt The asAt datetime at which to retrieve workspace items. Defaults to &#39;latest&#39; if not specified. (optional)
@@ -3498,7 +3498,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] SearchItems: List items across all workspaces.
+     * SearchItems: List items across all workspaces.
      * List items across all workspaces.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @return APIsearchItemsRequest
@@ -3634,7 +3634,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateItem: Update an item in a workspace.
+     * UpdateItem: Update an item in a workspace.
      * Update an item in a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -3658,7 +3658,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateItem: Update an item in a workspace.
+     * UpdateItem: Update an item in a workspace.
      * Update an item in a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -3682,7 +3682,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateItem: Update an item in a workspace. (asynchronously)
+     * UpdateItem: Update an item in a workspace. (asynchronously)
      * Update an item in a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -3707,7 +3707,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateItem: Update an item in a workspace. (asynchronously)
+     * UpdateItem: Update an item in a workspace. (asynchronously)
      * Update an item in a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -3872,7 +3872,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateItem: Update an item in a workspace.
+     * UpdateItem: Update an item in a workspace.
      * Update an item in a workspace.
      * @param visibility The visibility for the containing workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -4006,7 +4006,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateWorkspace: Update a workspace.
+     * UpdateWorkspace: Update a workspace.
      * Update a workspace.
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -4029,7 +4029,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateWorkspace: Update a workspace.
+     * UpdateWorkspace: Update a workspace.
      * Update a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -4052,7 +4052,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateWorkspace: Update a workspace. (asynchronously)
+     * UpdateWorkspace: Update a workspace. (asynchronously)
      * Update a workspace.
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -4076,7 +4076,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateWorkspace: Update a workspace. (asynchronously)
+     * UpdateWorkspace: Update a workspace. (asynchronously)
      * Update a workspace.Use any specified configuration options to override any other configuration for this request only
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)
@@ -4238,7 +4238,7 @@ public class WorkspaceApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateWorkspace: Update a workspace.
+     * UpdateWorkspace: Update a workspace.
      * Update a workspace.
      * @param visibility The visibility for the workspace; case is important. Available values: shared, personal. (required)
      * @param workspaceName The workspace name. (required)

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **initialTrigger** | **String** | The Initial Trigger for automatic start | [optional] [default to String]
 **childTaskFields** | [**Map&lt;String, FieldMapping&gt;**](FieldMapping.md) | Field Mappings | [default to Map<String, FieldMapping>]
 **mapStackingKeyFrom** | **String** | The field to be mapped as the ChildTasks Stacking Key | [optional] [default to String]
+**displayName** | **String** | An optional display name, to tell apart child task configurations that use the same Task Definition | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.workflow.model.ResultantChildTaskConfiguration;
@@ -25,6 +26,7 @@ ResourceId taskDefinitionId = new ResourceId();
 @javax.annotation.Nullable String initialTrigger = "example initialTrigger";
 Map<String, FieldMapping> childTaskFields = new Map<String, FieldMapping>();
 @javax.annotation.Nullable String mapStackingKeyFrom = "example mapStackingKeyFrom";
+@javax.annotation.Nullable String displayName = "example displayName";
 
 
 ResultantChildTaskConfiguration resultantChildTaskConfigurationInstance = new ResultantChildTaskConfiguration()
@@ -33,7 +35,8 @@ ResultantChildTaskConfiguration resultantChildTaskConfigurationInstance = new Re
     .taskDefinitionAsAt(taskDefinitionAsAt)
     .initialTrigger(initialTrigger)
     .childTaskFields(childTaskFields)
-    .mapStackingKeyFrom(mapStackingKeyFrom);
+    .mapStackingKeyFrom(mapStackingKeyFrom)
+    .displayName(displayName);
 ```
 
 

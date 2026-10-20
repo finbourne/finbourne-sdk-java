@@ -42,6 +42,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   WithholdingTaxDataset.JSON_PROPERTY_SCOPE,
   WithholdingTaxDataset.JSON_PROPERTY_CODE,
+  WithholdingTaxDataset.JSON_PROPERTY_DATASET_TYPE,
   WithholdingTaxDataset.JSON_PROPERTY_DIMENSIONS,
   WithholdingTaxDataset.JSON_PROPERTY_HREF,
   WithholdingTaxDataset.JSON_PROPERTY_VERSION,
@@ -58,6 +59,11 @@ public class WithholdingTaxDataset {
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String code;
+
+  public static final String JSON_PROPERTY_DATASET_TYPE = "datasetType";
+  @JsonProperty(JSON_PROPERTY_DATASET_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String datasetType;
 
   public static final String JSON_PROPERTY_DIMENSIONS = "dimensions";
   @JsonProperty(JSON_PROPERTY_DIMENSIONS)
@@ -117,6 +123,25 @@ public class WithholdingTaxDataset {
 
   public void setCode(String code) {
     this.code = code;
+  }
+
+
+  public WithholdingTaxDataset datasetType(String datasetType) {
+    this.datasetType = datasetType;
+    return this;
+  }
+
+  /**
+   * Which of the two rate tables this dataset is: Anomaly or Main. Set when the dataset is created through the withholding tax dataset definitions endpoint and never changed afterwards. Available values: Anomaly, Main.
+   * @return datasetType
+   */
+  @javax.annotation.Nullable
+  public String getDatasetType() {
+    return datasetType;
+  }
+
+  public void setDatasetType(String datasetType) {
+    this.datasetType = datasetType;
   }
 
 
@@ -223,6 +248,7 @@ public class WithholdingTaxDataset {
     WithholdingTaxDataset withholdingTaxDataset = (WithholdingTaxDataset) o;
     return Objects.equals(this.scope, withholdingTaxDataset.scope) &&
         Objects.equals(this.code, withholdingTaxDataset.code) &&
+        Objects.equals(this.datasetType, withholdingTaxDataset.datasetType) &&
         Objects.equals(this.dimensions, withholdingTaxDataset.dimensions) &&
         Objects.equals(this.href, withholdingTaxDataset.href) &&
         Objects.equals(this.version, withholdingTaxDataset.version) &&
@@ -235,7 +261,7 @@ public class WithholdingTaxDataset {
 
   @Override
  public int hashCode() {
-    return Objects.hash(scope, code, dimensions, href, version, links);
+    return Objects.hash(scope, code, datasetType, dimensions, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -251,6 +277,7 @@ public class WithholdingTaxDataset {
     sb.append("class WithholdingTaxDataset {\n");
     sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
+    sb.append("    datasetType: ").append(toIndentedString(datasetType)).append("\n");
     sb.append("    dimensions: ").append(toIndentedString(dimensions)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");

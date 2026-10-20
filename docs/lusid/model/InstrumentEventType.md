@@ -137,6 +137,7 @@ InstrumentEventType method = InstrumentEventType.FACILITY_REPAYMENT_EVENT;
 InstrumentEventType method = InstrumentEventType.FACILITY_INTEREST_EVENT;
 InstrumentEventType method = InstrumentEventType.FACILITY_COMMITMENT_FEE_EVENT;
 InstrumentEventType method = InstrumentEventType.INSTALMENT_CALL_EVENT;
+InstrumentEventType method = InstrumentEventType.DEPOSIT_INTEREST_CAPITALISATION_EVENT;
 ```
 
 

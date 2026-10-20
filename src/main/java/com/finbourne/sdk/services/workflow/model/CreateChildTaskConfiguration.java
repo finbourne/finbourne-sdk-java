@@ -43,7 +43,8 @@ import com.finbourne.sdk.JSON;
   CreateChildTaskConfiguration.JSON_PROPERTY_TASK_DEFINITION_AS_AT,
   CreateChildTaskConfiguration.JSON_PROPERTY_INITIAL_TRIGGER,
   CreateChildTaskConfiguration.JSON_PROPERTY_CHILD_TASK_FIELDS,
-  CreateChildTaskConfiguration.JSON_PROPERTY_MAP_STACKING_KEY_FROM
+  CreateChildTaskConfiguration.JSON_PROPERTY_MAP_STACKING_KEY_FROM,
+  CreateChildTaskConfiguration.JSON_PROPERTY_DISPLAY_NAME
 })
 
 public class CreateChildTaskConfiguration {
@@ -71,6 +72,11 @@ public class CreateChildTaskConfiguration {
   @JsonProperty(JSON_PROPERTY_MAP_STACKING_KEY_FROM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String mapStackingKeyFrom;
+
+  public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
+  @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String displayName;
 
   public CreateChildTaskConfiguration() {
   }
@@ -178,6 +184,25 @@ public class CreateChildTaskConfiguration {
   }
 
 
+  public CreateChildTaskConfiguration displayName(String displayName) {
+    this.displayName = displayName;
+    return this;
+  }
+
+  /**
+   * An optional display name, to tell apart child task configurations that use the same Task Definition
+   * @return displayName
+   */
+  @javax.annotation.Nullable
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -191,7 +216,8 @@ public class CreateChildTaskConfiguration {
         Objects.equals(this.taskDefinitionAsAt, createChildTaskConfiguration.taskDefinitionAsAt) &&
         Objects.equals(this.initialTrigger, createChildTaskConfiguration.initialTrigger) &&
         Objects.equals(this.childTaskFields, createChildTaskConfiguration.childTaskFields) &&
-        Objects.equals(this.mapStackingKeyFrom, createChildTaskConfiguration.mapStackingKeyFrom);
+        Objects.equals(this.mapStackingKeyFrom, createChildTaskConfiguration.mapStackingKeyFrom) &&
+        Objects.equals(this.displayName, createChildTaskConfiguration.displayName);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -200,7 +226,7 @@ public class CreateChildTaskConfiguration {
 
   @Override
  public int hashCode() {
-    return Objects.hash(taskDefinitionId, taskDefinitionAsAt, initialTrigger, childTaskFields, mapStackingKeyFrom);
+    return Objects.hash(taskDefinitionId, taskDefinitionAsAt, initialTrigger, childTaskFields, mapStackingKeyFrom, displayName);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -219,6 +245,7 @@ public class CreateChildTaskConfiguration {
     sb.append("    initialTrigger: ").append(toIndentedString(initialTrigger)).append("\n");
     sb.append("    childTaskFields: ").append(toIndentedString(childTaskFields)).append("\n");
     sb.append("    mapStackingKeyFrom: ").append(toIndentedString(mapStackingKeyFrom)).append("\n");
+    sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

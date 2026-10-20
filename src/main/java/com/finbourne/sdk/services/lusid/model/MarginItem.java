@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.EligibleCollateralReferences;
+import com.finbourne.sdk.services.lusid.model.MarginAccounts;
 import com.finbourne.sdk.services.lusid.model.MarginCalculation;
 import com.finbourne.sdk.services.lusid.model.PartyTerms;
 import java.io.IOException;
@@ -44,7 +45,8 @@ import com.finbourne.sdk.JSON;
   MarginItem.JSON_PROPERTY_WE_POST,
   MarginItem.JSON_PROPERTY_THEY_POST,
   MarginItem.JSON_PROPERTY_ELIGIBLE_COLLATERAL,
-  MarginItem.JSON_PROPERTY_CALCULATION
+  MarginItem.JSON_PROPERTY_CALCULATION,
+  MarginItem.JSON_PROPERTY_MARGIN_ACCOUNTS
 })
 
 public class MarginItem {
@@ -87,6 +89,11 @@ public class MarginItem {
   @JsonProperty(JSON_PROPERTY_CALCULATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private MarginCalculation calculation;
+
+  public static final String JSON_PROPERTY_MARGIN_ACCOUNTS = "marginAccounts";
+  @JsonProperty(JSON_PROPERTY_MARGIN_ACCOUNTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private MarginAccounts marginAccounts;
 
   public MarginItem() {
   }
@@ -243,6 +250,25 @@ public class MarginItem {
   }
 
 
+  public MarginItem marginAccounts(MarginAccounts marginAccounts) {
+    this.marginAccounts = marginAccounts;
+    return this;
+  }
+
+  /**
+   * Get marginAccounts
+   * @return marginAccounts
+   */
+  @javax.annotation.Nullable
+  public MarginAccounts getMarginAccounts() {
+    return marginAccounts;
+  }
+
+  public void setMarginAccounts(MarginAccounts marginAccounts) {
+    this.marginAccounts = marginAccounts;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -259,7 +285,8 @@ public class MarginItem {
         Objects.equals(this.wePost, marginItem.wePost) &&
         Objects.equals(this.theyPost, marginItem.theyPost) &&
         Objects.equals(this.eligibleCollateral, marginItem.eligibleCollateral) &&
-        Objects.equals(this.calculation, marginItem.calculation);
+        Objects.equals(this.calculation, marginItem.calculation) &&
+        Objects.equals(this.marginAccounts, marginItem.marginAccounts);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -268,7 +295,7 @@ public class MarginItem {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, tradeFilter, settlement, legalMechanism, wePost, theyPost, eligibleCollateral, calculation);
+    return Objects.hash(code, tradeFilter, settlement, legalMechanism, wePost, theyPost, eligibleCollateral, calculation, marginAccounts);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -290,6 +317,7 @@ public class MarginItem {
     sb.append("    theyPost: ").append(toIndentedString(theyPost)).append("\n");
     sb.append("    eligibleCollateral: ").append(toIndentedString(eligibleCollateral)).append("\n");
     sb.append("    calculation: ").append(toIndentedString(calculation)).append("\n");
+    sb.append("    marginAccounts: ").append(toIndentedString(marginAccounts)).append("\n");
     sb.append("}");
     return sb.toString();
   }

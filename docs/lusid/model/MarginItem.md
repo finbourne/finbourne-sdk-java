@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **theyPost** | [**PartyTerms**](PartyTerms.md) |  | [default to PartyTerms]
 **eligibleCollateral** | [**EligibleCollateralReferences**](EligibleCollateralReferences.md) |  | [optional] [default to EligibleCollateralReferences]
 **calculation** | [**MarginCalculation**](MarginCalculation.md) |  | [default to MarginCalculation]
+**marginAccounts** | [**MarginAccounts**](MarginAccounts.md) |  | [optional] [default to MarginAccounts]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.MarginItem;
@@ -29,6 +30,7 @@ PartyTerms wePost = new PartyTerms();
 PartyTerms theyPost = new PartyTerms();
 EligibleCollateralReferences eligibleCollateral = new EligibleCollateralReferences();
 MarginCalculation calculation = new MarginCalculation();
+MarginAccounts marginAccounts = new MarginAccounts();
 
 
 MarginItem marginItemInstance = new MarginItem()
@@ -39,7 +41,8 @@ MarginItem marginItemInstance = new MarginItem()
     .wePost(wePost)
     .theyPost(theyPost)
     .eligibleCollateral(eligibleCollateral)
-    .calculation(calculation);
+    .calculation(calculation)
+    .marginAccounts(marginAccounts);
 ```
 
 
