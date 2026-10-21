@@ -35,11 +35,12 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The collection of successfully upserted instructions, and the collection of failures for those instructions that could not be upserted
+ * The collection of successfully upserted instructions, the collection of those staged pending approval, and the collection of failures for those instructions that could not be upserted
  */
 @JsonPropertyOrder({
   InstrumentEventInstructionsResponse.JSON_PROPERTY_VALUES,
-  InstrumentEventInstructionsResponse.JSON_PROPERTY_FAILED
+  InstrumentEventInstructionsResponse.JSON_PROPERTY_FAILED,
+  InstrumentEventInstructionsResponse.JSON_PROPERTY_STAGED
 })
 
 public class InstrumentEventInstructionsResponse {
@@ -52,6 +53,11 @@ public class InstrumentEventInstructionsResponse {
   @JsonProperty(JSON_PROPERTY_FAILED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, ErrorDetail> failed;
+
+  public static final String JSON_PROPERTY_STAGED = "staged";
+  @JsonProperty(JSON_PROPERTY_STAGED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, InstrumentEventInstruction> staged;
 
   public InstrumentEventInstructionsResponse() {
   }
@@ -110,6 +116,33 @@ public class InstrumentEventInstructionsResponse {
   }
 
 
+  public InstrumentEventInstructionsResponse staged(Map<String, InstrumentEventInstruction> staged) {
+    this.staged = staged;
+    return this;
+  }
+
+  public InstrumentEventInstructionsResponse putStagedItem(String key, InstrumentEventInstruction stagedItem) {
+    if (this.staged == null) {
+      this.staged = new HashMap<>();
+    }
+    this.staged.put(key, stagedItem);
+    return this;
+  }
+
+  /**
+   * The instructions that have been staged pending approval.
+   * @return staged
+   */
+  @javax.annotation.Nullable
+  public Map<String, InstrumentEventInstruction> getStaged() {
+    return staged;
+  }
+
+  public void setStaged(Map<String, InstrumentEventInstruction> staged) {
+    this.staged = staged;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -120,7 +153,8 @@ public class InstrumentEventInstructionsResponse {
     }
     InstrumentEventInstructionsResponse instrumentEventInstructionsResponse = (InstrumentEventInstructionsResponse) o;
     return Objects.equals(this.values, instrumentEventInstructionsResponse.values) &&
-        Objects.equals(this.failed, instrumentEventInstructionsResponse.failed);
+        Objects.equals(this.failed, instrumentEventInstructionsResponse.failed) &&
+        Objects.equals(this.staged, instrumentEventInstructionsResponse.staged);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -129,7 +163,7 @@ public class InstrumentEventInstructionsResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(values, failed);
+    return Objects.hash(values, failed, staged);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -145,6 +179,7 @@ public class InstrumentEventInstructionsResponse {
     sb.append("class InstrumentEventInstructionsResponse {\n");
     sb.append("    values: ").append(toIndentedString(values)).append("\n");
     sb.append("    failed: ").append(toIndentedString(failed)).append("\n");
+    sb.append("    staged: ").append(toIndentedString(staged)).append("\n");
     sb.append("}");
     return sb.toString();
   }

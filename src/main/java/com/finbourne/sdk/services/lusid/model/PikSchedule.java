@@ -34,7 +34,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A PikSchedule represents Payment-in-Kind features for a ComplexBond, a FlexibleLoan or a LoanFacility.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.
+ * A PikSchedule represents Payment-in-Kind features for a ComplexBond, a FlexibleLoan, a LoanFacility or a FlexibleDeposit.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.
  */
 @JsonPropertyOrder({
   PikSchedule.JSON_PROPERTY_START_DATE,

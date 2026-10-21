@@ -3444,7 +3444,7 @@ public class RecsApi {
      * Build call for getRecResult
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
@@ -3468,7 +3468,7 @@ public class RecsApi {
      * Build call for getRecResult. Use any specified configuration options to override any other configuration for this request only.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param instanceIdValue The unique identifier of the rec instance. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param runNumber The run of the instance whose view of the result is read. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
@@ -3579,7 +3579,7 @@ public class RecsApi {
      * Retrieve a single rec result by its display id, as it stood in the run named.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
@@ -3605,7 +3605,7 @@ public class RecsApi {
      * Retrieve a single rec result by its display id, as it stood in the run named.Use any specified configuration options to override any other configuration for this request only
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
@@ -3631,7 +3631,7 @@ public class RecsApi {
      * Retrieve a single rec result by its display id, as it stood in the run named.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
@@ -3658,7 +3658,7 @@ public class RecsApi {
      * Retrieve a single rec result by its display id, as it stood in the run named.Use any specified configuration options to override any other configuration for this request only
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
@@ -3838,7 +3838,7 @@ public class RecsApi {
      * Retrieve a single rec result by its display id, as it stood in the run named.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. (required)
+     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @return APIgetRecResultRequest

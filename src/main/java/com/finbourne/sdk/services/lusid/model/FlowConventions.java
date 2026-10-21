@@ -50,6 +50,7 @@ import com.finbourne.sdk.JSON;
   FlowConventions.JSON_PROPERTY_BUSINESS_DAY_CONVENTION,
   FlowConventions.JSON_PROPERTY_ACCRUAL_DAY_COUNT_CONVENTION,
   FlowConventions.JSON_PROPERTY_COUPON_PAYMENT_LAG,
+  FlowConventions.JSON_PROPERTY_PRINCIPAL_PAYMENT_LAG,
   FlowConventions.JSON_PROPERTY_SCOPE,
   FlowConventions.JSON_PROPERTY_CODE
 })
@@ -119,6 +120,11 @@ public class FlowConventions {
   @JsonProperty(JSON_PROPERTY_COUPON_PAYMENT_LAG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private RelativeDateOffset couponPaymentLag;
+
+  public static final String JSON_PROPERTY_PRINCIPAL_PAYMENT_LAG = "principalPaymentLag";
+  @JsonProperty(JSON_PROPERTY_PRINCIPAL_PAYMENT_LAG)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RelativeDateOffset principalPaymentLag;
 
   public static final String JSON_PROPERTY_SCOPE = "scope";
   @JsonProperty(JSON_PROPERTY_SCOPE)
@@ -396,6 +402,25 @@ public class FlowConventions {
   }
 
 
+  public FlowConventions principalPaymentLag(RelativeDateOffset principalPaymentLag) {
+    this.principalPaymentLag = principalPaymentLag;
+    return this;
+  }
+
+  /**
+   * Get principalPaymentLag
+   * @return principalPaymentLag
+   */
+  @javax.annotation.Nullable
+  public RelativeDateOffset getPrincipalPaymentLag() {
+    return principalPaymentLag;
+  }
+
+  public void setPrincipalPaymentLag(RelativeDateOffset principalPaymentLag) {
+    this.principalPaymentLag = principalPaymentLag;
+  }
+
+
   public FlowConventions scope(String scope) {
     this.scope = scope;
     return this;
@@ -456,6 +481,7 @@ public class FlowConventions {
         Objects.equals(this.businessDayConvention, flowConventions.businessDayConvention) &&
         Objects.equals(this.accrualDayCountConvention, flowConventions.accrualDayCountConvention) &&
         Objects.equals(this.couponPaymentLag, flowConventions.couponPaymentLag) &&
+        Objects.equals(this.principalPaymentLag, flowConventions.principalPaymentLag) &&
         Objects.equals(this.scope, flowConventions.scope) &&
         Objects.equals(this.code, flowConventions.code);
   }
@@ -466,7 +492,7 @@ public class FlowConventions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(currency, paymentFrequency, dayCountConvention, rollConvention, paymentCalendars, resetCalendars, settleDays, resetDays, leapDaysIncluded, accrualDateAdjustment, businessDayConvention, accrualDayCountConvention, couponPaymentLag, scope, code);
+    return Objects.hash(currency, paymentFrequency, dayCountConvention, rollConvention, paymentCalendars, resetCalendars, settleDays, resetDays, leapDaysIncluded, accrualDateAdjustment, businessDayConvention, accrualDayCountConvention, couponPaymentLag, principalPaymentLag, scope, code);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -493,6 +519,7 @@ public class FlowConventions {
     sb.append("    businessDayConvention: ").append(toIndentedString(businessDayConvention)).append("\n");
     sb.append("    accrualDayCountConvention: ").append(toIndentedString(accrualDayCountConvention)).append("\n");
     sb.append("    couponPaymentLag: ").append(toIndentedString(couponPaymentLag)).append("\n");
+    sb.append("    principalPaymentLag: ").append(toIndentedString(principalPaymentLag)).append("\n");
     sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("}");

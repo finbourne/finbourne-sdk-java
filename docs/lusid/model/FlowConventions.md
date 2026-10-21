@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **businessDayConvention** | **String** | When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.                If not set, defaults to the value of RollConvention. Available values: NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest, Invalid. | [optional] [default to String]
 **accrualDayCountConvention** | **String** | Optional, if not set the main DayCountConvention is used for all accrual calculations.  This only needs to be set when accrual uses a different day count to the coupon calculation. | [optional] [default to String]
 **couponPaymentLag** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] [default to RelativeDateOffset]
+**principalPaymentLag** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] [default to RelativeDateOffset]
 **scope** | **String** | The scope used when updating or inserting the convention. | [optional] [default to String]
 **code** | **String** | The code of the convention. | [optional] [default to String]
 
@@ -41,6 +42,7 @@ Integer resetDays = new Integer("100.00");
 @javax.annotation.Nullable String businessDayConvention = "example businessDayConvention";
 @javax.annotation.Nullable String accrualDayCountConvention = "example accrualDayCountConvention";
 RelativeDateOffset couponPaymentLag = new RelativeDateOffset();
+RelativeDateOffset principalPaymentLag = new RelativeDateOffset();
 @javax.annotation.Nullable String scope = "example scope";
 @javax.annotation.Nullable String code = "example code";
 
@@ -59,6 +61,7 @@ FlowConventions flowConventionsInstance = new FlowConventions()
     .businessDayConvention(businessDayConvention)
     .accrualDayCountConvention(accrualDayCountConvention)
     .couponPaymentLag(couponPaymentLag)
+    .principalPaymentLag(principalPaymentLag)
     .scope(scope)
     .code(code);
 ```

@@ -13,6 +13,7 @@ All URIs are relative to *http://localhost*
 | [**getEntityHistory**](EntitiesApi.md#getEntityHistory) | **GET** /api/api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity&#39;s history information |
 | [**getInstrumentByEntityUniqueId**](EntitiesApi.md#getInstrumentByEntityUniqueId) | **GET** /api/api/entities/instruments/{entityUniqueId} | GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId |
 | [**getInstrumentEventByEntityUniqueId**](EntitiesApi.md#getInstrumentEventByEntityUniqueId) | **GET** /api/api/entities/instrumentevents/{entityUniqueId} | [EARLY ACCESS] GetInstrumentEventByEntityUniqueId: Get instrument event by EntityUniqueId |
+| [**getInstrumentEventInstructionByEntityUniqueId**](EntitiesApi.md#getInstrumentEventInstructionByEntityUniqueId) | **GET** /api/api/entities/instrumenteventinstructions/{entityUniqueId} | GetInstrumentEventInstructionByEntityUniqueId: Get instrument event instruction by EntityUniqueId |
 | [**getPortfolioByEntityUniqueId**](EntitiesApi.md#getPortfolioByEntityUniqueId) | **GET** /api/api/entities/portfolios/{entityUniqueId} | GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId |
 | [**getPortfolioChanges**](EntitiesApi.md#getPortfolioChanges) | **GET** /api/api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope. |
 | [**getPropertyDefinitionByEntityUniqueId**](EntitiesApi.md#getPropertyDefinitionByEntityUniqueId) | **GET** /api/api/entities/propertydefinitions/{entityUniqueId} | GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId |
@@ -760,6 +761,87 @@ public class EntitiesApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The requested instrument event entity |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getInstrumentEventInstructionByEntityUniqueId
+
+> InstrumentEventInstructionEntity getInstrumentEventInstructionByEntityUniqueId(entityUniqueId, asAt, previews)
+
+GetInstrumentEventInstructionByEntityUniqueId: Get instrument event instruction by EntityUniqueId
+
+Retrieve a particular instrument event instruction by its entity unique identifier.    If the instruction or its portfolio is deleted, this will return the state of the instruction immediately prior to deletion.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.EntitiesApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class EntitiesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        EntitiesApi apiInstance = apiFactory.build(EntitiesApi.class);
+        String entityUniqueId = "entityUniqueId_example"; // String | The entity unique identifier of the instrument event instruction. The expected format is '{portfolioEntityUniqueId}_{instrumentEventInstructionId}'.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to retrieve the instrument event instruction. Defaults to returning the latest version of the instrument event instruction if not specified.
+        List<String> previews = Arrays.asList(); // List<String> | The ids of the staged modifications to be previewed in the response, applied in the order given.
+        try {
+            // uncomment the below to set overrides at the request level
+            // InstrumentEventInstructionEntity result = apiInstance.getInstrumentEventInstructionByEntityUniqueId(entityUniqueId, asAt, previews).execute(opts);
+
+            InstrumentEventInstructionEntity result = apiInstance.getInstrumentEventInstructionByEntityUniqueId(entityUniqueId, asAt, previews).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling EntitiesApi#getInstrumentEventInstructionByEntityUniqueId");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **entityUniqueId** | **String**| The entity unique identifier of the instrument event instruction. The expected format is &#39;{portfolioEntityUniqueId}_{instrumentEventInstructionId}&#39;. | |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the instrument event instruction. Defaults to returning the latest version of the instrument event instruction if not specified. | [optional] |
+| **previews** | [**List&lt;String&gt;**](../model/String.md)| The ids of the staged modifications to be previewed in the response, applied in the order given. | [optional] |
+
+### Return type
+
+[**InstrumentEventInstructionEntity**](../model/InstrumentEventInstructionEntity.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The requested instrument event instruction entity |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

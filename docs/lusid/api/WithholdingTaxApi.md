@@ -14,13 +14,14 @@ All URIs are relative to *http://localhost*
 | [**listWithholdingTaxConfigurations**](WithholdingTaxApi.md#listWithholdingTaxConfigurations) | **GET** /api/api/withholdingtax/configurations | [EARLY ACCESS] ListWithholdingTaxConfigurations: List Withholding Tax Configurations. |
 | [**listWithholdingTaxDatasetDefinitions**](WithholdingTaxApi.md#listWithholdingTaxDatasetDefinitions) | **GET** /api/api/withholdingtax/datasetdefinitions | [EARLY ACCESS] ListWithholdingTaxDatasetDefinitions: List Withholding Tax dataset definitions. |
 | [**patchWithholdingTaxDatasetDefinition**](WithholdingTaxApi.md#patchWithholdingTaxDatasetDefinition) | **PATCH** /api/api/withholdingtax/datasetdefinitions/{scope}/{code} | [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition. |
+| [**resolveWithholdingTax**](WithholdingTaxApi.md#resolveWithholdingTax) | **POST** /api/api/withholdingtax/$resolve | [EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply. |
 | [**upsertWithholdingTaxConfiguration**](WithholdingTaxApi.md#upsertWithholdingTaxConfiguration) | **POST** /api/api/withholdingtax/configurations/{scope}/{code} | [EARLY ACCESS] UpsertWithholdingTaxConfiguration: Upsert a Withholding Tax Configuration. |
 
 
 
 ## batchDeleteWithholdingTaxRates
 
-> BatchDeleteRelationalDataResponse batchDeleteWithholdingTaxRates(scope, code, requestBody, successMode)
+> BatchDeleteRelationalDataResponse batchDeleteWithholdingTaxRates(scope, code, requestBody, successMode, ruleSource)
 
 [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
 
@@ -55,11 +56,12 @@ public class WithholdingTaxApiExample {
         String code = "code_example"; // String | The Code of the rate dataset's relational dataset definition.
         Map<String, DeleteWithholdingTaxRateRequest> requestBody = new HashMap(); // Map<String, DeleteWithholdingTaxRateRequest> | The rate rows to delete, keyed by a correlation id echoed back in the response.
         String successMode = "Atomic"; // String | Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.
+        String ruleSource = "ruleSource_example"; // String | The source of the rows to delete, since it is part of each row's identity. Omit it              to delete rows that apply at every source; a source's rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers.
         try {
             // uncomment the below to set overrides at the request level
-            // BatchDeleteRelationalDataResponse result = apiInstance.batchDeleteWithholdingTaxRates(scope, code, requestBody, successMode).execute(opts);
+            // BatchDeleteRelationalDataResponse result = apiInstance.batchDeleteWithholdingTaxRates(scope, code, requestBody, successMode, ruleSource).execute(opts);
 
-            BatchDeleteRelationalDataResponse result = apiInstance.batchDeleteWithholdingTaxRates(scope, code, requestBody, successMode).execute();
+            BatchDeleteRelationalDataResponse result = apiInstance.batchDeleteWithholdingTaxRates(scope, code, requestBody, successMode, ruleSource).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling WithholdingTaxApi#batchDeleteWithholdingTaxRates");
@@ -79,6 +81,7 @@ public class WithholdingTaxApiExample {
 | **code** | **String**| The Code of the rate dataset&#39;s relational dataset definition. | |
 | **requestBody** | [**Map&lt;String, DeleteWithholdingTaxRateRequest&gt;**](../model/DeleteWithholdingTaxRateRequest.md)| The rate rows to delete, keyed by a correlation id echoed back in the response. | |
 | **successMode** | **String**| Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. | [optional] [default to Atomic] |
+| **ruleSource** | **String**| The source of the rows to delete, since it is part of each row&#39;s identity. Omit it              to delete rows that apply at every source; a source&#39;s rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. | [optional] |
 
 ### Return type
 
@@ -103,11 +106,11 @@ public class WithholdingTaxApiExample {
 
 ## batchUpsertWithholdingTaxRates
 
-> BatchUpsertWithholdingTaxRatesResponse batchUpsertWithholdingTaxRates(scope, code, requestBody, successMode)
+> BatchUpsertWithholdingTaxRatesResponse batchUpsertWithholdingTaxRates(scope, code, requestBody, successMode, ruleSource)
 
 [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
 
-Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+Row identity is the series identifiers plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same series identifiers. One batch carries one rule source, so a feed mixing rows  from a source with rows that apply at every source is loaded in two calls.
 
 ### Example
 
@@ -138,11 +141,12 @@ public class WithholdingTaxApiExample {
         String code = "code_example"; // String | The Code of the rate dataset's relational dataset definition.
         Map<String, UpsertWithholdingTaxRateRequest> requestBody = new HashMap(); // Map<String, UpsertWithholdingTaxRateRequest> | The rate rows to upsert, keyed by a correlation id echoed back in the response.
         String successMode = "Atomic"; // String | Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.
+        String ruleSource = "ruleSource_example"; // String | The source every row in the batch is attributed to, compared against the              configuration's source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers.
         try {
             // uncomment the below to set overrides at the request level
-            // BatchUpsertWithholdingTaxRatesResponse result = apiInstance.batchUpsertWithholdingTaxRates(scope, code, requestBody, successMode).execute(opts);
+            // BatchUpsertWithholdingTaxRatesResponse result = apiInstance.batchUpsertWithholdingTaxRates(scope, code, requestBody, successMode, ruleSource).execute(opts);
 
-            BatchUpsertWithholdingTaxRatesResponse result = apiInstance.batchUpsertWithholdingTaxRates(scope, code, requestBody, successMode).execute();
+            BatchUpsertWithholdingTaxRatesResponse result = apiInstance.batchUpsertWithholdingTaxRates(scope, code, requestBody, successMode, ruleSource).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling WithholdingTaxApi#batchUpsertWithholdingTaxRates");
@@ -162,6 +166,7 @@ public class WithholdingTaxApiExample {
 | **code** | **String**| The Code of the rate dataset&#39;s relational dataset definition. | |
 | **requestBody** | [**Map&lt;String, UpsertWithholdingTaxRateRequest&gt;**](../model/UpsertWithholdingTaxRateRequest.md)| The rate rows to upsert, keyed by a correlation id echoed back in the response. | |
 | **successMode** | **String**| Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. | [optional] [default to Atomic] |
+| **ruleSource** | **String**| The source every row in the batch is attributed to, compared against the              configuration&#39;s source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. | [optional] |
 
 ### Return type
 
@@ -826,6 +831,89 @@ public class WithholdingTaxApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The amended Withholding Tax dataset. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## resolveWithholdingTax
+
+> WithholdingTaxResolution resolveWithholdingTax(resolveWithholdingTaxRequest, effectiveAt, asAt, limit)
+
+[EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.
+
+A read-only lookup that runs the same resolution as booking, without a transaction: it works down the source  priority and, at each source, checks the anomaly dataset before the main dataset. Nothing is booked, and only  rates are returned. Supply a Withholding Tax Configuration to predict what booking will post; replace its  datasets or source priority to ask what would resolve instead. Supply the dimension values directly, or name an  instrument so that the configuration&#39;s value sources read them from it, as booking reads a transaction&#39;s instrument.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.WithholdingTaxApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class WithholdingTaxApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        WithholdingTaxApi apiInstance = apiFactory.build(WithholdingTaxApi.class);
+        ResolveWithholdingTaxRequest resolveWithholdingTaxRequest = new ResolveWithholdingTaxRequest(); // ResolveWithholdingTaxRequest | The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to resolve, in place of the transaction's trade              date. Defaults to the current LUSID system datetime if not specified.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified.
+        Integer limit = 100; // Integer | The most combinations of values that couldAlsoMatch tries, fewest values first.
+        try {
+            // uncomment the below to set overrides at the request level
+            // WithholdingTaxResolution result = apiInstance.resolveWithholdingTax(resolveWithholdingTaxRequest, effectiveAt, asAt, limit).execute(opts);
+
+            WithholdingTaxResolution result = apiInstance.resolveWithholdingTax(resolveWithholdingTaxRequest, effectiveAt, asAt, limit).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WithholdingTaxApi#resolveWithholdingTax");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **resolveWithholdingTaxRequest** | [**ResolveWithholdingTaxRequest**](../model/ResolveWithholdingTaxRequest.md)| The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. | |
+| **effectiveAt** | **String**| The effective datetime or cut label at which to resolve, in place of the transaction&#39;s trade              date. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. | [optional] |
+| **limit** | **Integer**| The most combinations of values that couldAlsoMatch tries, fewest values first. | [optional] [default to 100] |
+
+### Return type
+
+[**WithholdingTaxResolution**](../model/WithholdingTaxResolution.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The Withholding Tax rate that booking would apply. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

@@ -23,6 +23,7 @@ import com.finbourne.sdk.services.lusid.model.RealisedGainLoss;
 import com.finbourne.sdk.services.lusid.model.ResolvedCustodianAccount;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
+import com.finbourne.sdk.services.lusid.model.TransactionEntityLink;
 import com.finbourne.sdk.services.lusid.model.TransactionPrice;
 import com.finbourne.sdk.services.lusid.model.TransactionSettlementSummary;
 import com.finbourne.sdk.services.lusid.model.TransactionTypeDetails;
@@ -97,7 +98,8 @@ import com.finbourne.sdk.JSON;
   OutputTransaction.JSON_PROPERTY_CUSTODIAN_ENTRIES,
   OutputTransaction.JSON_PROPERTY_RESOLVED_CUSTODIAN_ACCOUNTS,
   OutputTransaction.JSON_PROPERTY_UNRESOLVED_CUSTODIAN_ACCOUNTS,
-  OutputTransaction.JSON_PROPERTY_IS_EXCLUDED
+  OutputTransaction.JSON_PROPERTY_IS_EXCLUDED,
+  OutputTransaction.JSON_PROPERTY_ENTITY_LINKS
 })
 
 public class OutputTransaction {
@@ -366,6 +368,11 @@ public class OutputTransaction {
   @JsonProperty(JSON_PROPERTY_IS_EXCLUDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean isExcluded;
+
+  public static final String JSON_PROPERTY_ENTITY_LINKS = "entityLinks";
+  @JsonProperty(JSON_PROPERTY_ENTITY_LINKS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<TransactionEntityLink> entityLinks;
 
   public OutputTransaction() {
   }
@@ -1270,6 +1277,33 @@ public class OutputTransaction {
   }
 
 
+  public OutputTransaction entityLinks(List<TransactionEntityLink> entityLinks) {
+    this.entityLinks = entityLinks;
+    return this;
+  }
+
+  public OutputTransaction addEntityLinksItem(TransactionEntityLink entityLinksItem) {
+    if (this.entityLinks == null) {
+      this.entityLinks = new ArrayList<>();
+    }
+    this.entityLinks.add(entityLinksItem);
+    return this;
+  }
+
+  /**
+   * Links to the entities that manage this transaction.
+   * @return entityLinks
+   */
+  @javax.annotation.Nullable
+  public List<TransactionEntityLink> getEntityLinks() {
+    return entityLinks;
+  }
+
+  public void setEntityLinks(List<TransactionEntityLink> entityLinks) {
+    this.entityLinks = entityLinks;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1322,7 +1356,8 @@ public class OutputTransaction {
         Objects.equals(this.custodianEntries, outputTransaction.custodianEntries) &&
         Objects.equals(this.resolvedCustodianAccounts, outputTransaction.resolvedCustodianAccounts) &&
         Objects.equals(this.unresolvedCustodianAccounts, outputTransaction.unresolvedCustodianAccounts) &&
-        Objects.equals(this.isExcluded, outputTransaction.isExcluded);
+        Objects.equals(this.isExcluded, outputTransaction.isExcluded) &&
+        Objects.equals(this.entityLinks, outputTransaction.entityLinks);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -1331,7 +1366,7 @@ public class OutputTransaction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, type, description, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionAmount, transactionPrice, totalConsideration, exchangeRate, transactionToPortfolioRate, transactionCurrency, properties, counterpartyId, source, transactionStatus, entryDateTime, cancelDateTime, realisedGainLoss, holdingIds, sourceType, sourceInstrumentEventId, custodianAccount, transactionGroupId, resolvedTransactionTypeDetails, grossTransactionAmount, otcConfirmation, orderId, allocationId, accountingDate, economics, dataModelMembership, sequence, sequencePriority, settlementSummary, version, stagedModifications, custodianEntries, resolvedCustodianAccounts, unresolvedCustodianAccounts, isExcluded);
+    return Objects.hash(transactionId, type, description, instrumentIdentifiers, instrumentScope, instrumentUid, transactionDate, settlementDate, units, transactionAmount, transactionPrice, totalConsideration, exchangeRate, transactionToPortfolioRate, transactionCurrency, properties, counterpartyId, source, transactionStatus, entryDateTime, cancelDateTime, realisedGainLoss, holdingIds, sourceType, sourceInstrumentEventId, custodianAccount, transactionGroupId, resolvedTransactionTypeDetails, grossTransactionAmount, otcConfirmation, orderId, allocationId, accountingDate, economics, dataModelMembership, sequence, sequencePriority, settlementSummary, version, stagedModifications, custodianEntries, resolvedCustodianAccounts, unresolvedCustodianAccounts, isExcluded, entityLinks);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1389,6 +1424,7 @@ public class OutputTransaction {
     sb.append("    resolvedCustodianAccounts: ").append(toIndentedString(resolvedCustodianAccounts)).append("\n");
     sb.append("    unresolvedCustodianAccounts: ").append(toIndentedString(unresolvedCustodianAccounts)).append("\n");
     sb.append("    isExcluded: ").append(toIndentedString(isExcluded)).append("\n");
+    sb.append("    entityLinks: ").append(toIndentedString(entityLinks)).append("\n");
     sb.append("}");
     return sb.toString();
   }

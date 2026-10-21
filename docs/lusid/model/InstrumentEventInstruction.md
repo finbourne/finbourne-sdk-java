@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **quantityInstructed** | [**QuantityInstructed**](QuantityInstructed.md) |  | [optional] [default to QuantityInstructed]
 **taxLotId** | **String** | For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply | [optional] [default to String]
 **ignoreCostImpact** | **Boolean** | For loan facility holding instructions, set this flag to &#39;true&#39; if you want the event to not impact cost. If you want to use this option, do not add multiple instructions to the same tax lot or you will get undefined behaviour. | [optional] [default to Boolean]
+**stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -38,6 +39,7 @@ Version version = new Version();
 QuantityInstructed quantityInstructed = new QuantityInstructed();
 @javax.annotation.Nullable String taxLotId = "example taxLotId";
 Boolean ignoreCostImpact = true;
+StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -54,6 +56,7 @@ InstrumentEventInstruction instrumentEventInstructionInstance = new InstrumentEv
     .quantityInstructed(quantityInstructed)
     .taxLotId(taxLotId)
     .ignoreCostImpact(ignoreCostImpact)
+    .stagedModifications(stagedModifications)
     .links(links);
 ```
 

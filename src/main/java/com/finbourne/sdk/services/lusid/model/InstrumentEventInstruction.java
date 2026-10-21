@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.QuantityInstructed;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
+import com.finbourne.sdk.services.lusid.model.StagedModificationsInfo;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
 import java.net.URI;
@@ -54,6 +55,7 @@ import com.finbourne.sdk.JSON;
   InstrumentEventInstruction.JSON_PROPERTY_QUANTITY_INSTRUCTED,
   InstrumentEventInstruction.JSON_PROPERTY_TAX_LOT_ID,
   InstrumentEventInstruction.JSON_PROPERTY_IGNORE_COST_IMPACT,
+  InstrumentEventInstruction.JSON_PROPERTY_STAGED_MODIFICATIONS,
   InstrumentEventInstruction.JSON_PROPERTY_LINKS
 })
 
@@ -117,6 +119,11 @@ public class InstrumentEventInstruction {
   @JsonProperty(JSON_PROPERTY_IGNORE_COST_IMPACT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean ignoreCostImpact;
+
+  public static final String JSON_PROPERTY_STAGED_MODIFICATIONS = "stagedModifications";
+  @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private StagedModificationsInfo stagedModifications;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -354,6 +361,25 @@ public class InstrumentEventInstruction {
   }
 
 
+  public InstrumentEventInstruction stagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+    return this;
+  }
+
+  /**
+   * Get stagedModifications
+   * @return stagedModifications
+   */
+  @javax.annotation.Nullable
+  public StagedModificationsInfo getStagedModifications() {
+    return stagedModifications;
+  }
+
+  public void setStagedModifications(StagedModificationsInfo stagedModifications) {
+    this.stagedModifications = stagedModifications;
+  }
+
+
   public InstrumentEventInstruction links(List<Link> links) {
     this.links = links;
     return this;
@@ -402,6 +428,7 @@ public class InstrumentEventInstruction {
         Objects.equals(this.quantityInstructed, instrumentEventInstruction.quantityInstructed) &&
         Objects.equals(this.taxLotId, instrumentEventInstruction.taxLotId) &&
         Objects.equals(this.ignoreCostImpact, instrumentEventInstruction.ignoreCostImpact) &&
+        Objects.equals(this.stagedModifications, instrumentEventInstruction.stagedModifications) &&
         Objects.equals(this.links, instrumentEventInstruction.links);
   }
 
@@ -411,7 +438,7 @@ public class InstrumentEventInstruction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentEventInstructionId, portfolioId, instrumentEventId, instructionType, electionKey, holdingId, version, href, entitlementDateInstructed, quantityInstructed, taxLotId, ignoreCostImpact, links);
+    return Objects.hash(instrumentEventInstructionId, portfolioId, instrumentEventId, instructionType, electionKey, holdingId, version, href, entitlementDateInstructed, quantityInstructed, taxLotId, ignoreCostImpact, stagedModifications, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -437,6 +464,7 @@ public class InstrumentEventInstruction {
     sb.append("    quantityInstructed: ").append(toIndentedString(quantityInstructed)).append("\n");
     sb.append("    taxLotId: ").append(toIndentedString(taxLotId)).append("\n");
     sb.append("    ignoreCostImpact: ").append(toIndentedString(ignoreCostImpact)).append("\n");
+    sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

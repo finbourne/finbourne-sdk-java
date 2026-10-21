@@ -35,7 +35,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Event used to represent a roll on a FlexibleDeposit instrument.
+ * Event used to represent a roll on a FlexibleDeposit instrument. Its interest updates are not applied in a period  the deposit settles partly or wholly in kind, as that period&#39;s interest is settled by its scheduled events.
  */
 @JsonPropertyOrder({
   DepositRollEvent.JSON_PROPERTY_ENTITLEMENT_DATE,

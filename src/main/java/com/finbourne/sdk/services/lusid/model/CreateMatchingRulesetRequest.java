@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.AggregateMatchingRule;
 import com.finbourne.sdk.services.lusid.model.CoreMatchingRule;
 import com.finbourne.sdk.services.lusid.model.ExternalRecType;
 import com.finbourne.sdk.services.lusid.model.GroupReconciliationFilters;
+import com.finbourne.sdk.services.lusid.model.PopulateResultProperty;
 import com.finbourne.sdk.services.lusid.model.RecDatasetSchemas;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.SupplementalAttribute;
@@ -57,7 +58,8 @@ import com.finbourne.sdk.JSON;
   CreateMatchingRulesetRequest.JSON_PROPERTY_AGGREGATE_TOLERANCES,
   CreateMatchingRulesetRequest.JSON_PROPERTY_ALLOW_PARTIAL_MATCHING,
   CreateMatchingRulesetRequest.JSON_PROPERTY_SUPPLEMENTAL_ATTRIBUTES,
-  CreateMatchingRulesetRequest.JSON_PROPERTY_WRITEBACK_CONFIGURATIONS
+  CreateMatchingRulesetRequest.JSON_PROPERTY_WRITEBACK_CONFIGURATIONS,
+  CreateMatchingRulesetRequest.JSON_PROPERTY_POPULATE_RESULT_PROPERTIES
 })
 
 public class CreateMatchingRulesetRequest {
@@ -126,6 +128,11 @@ public class CreateMatchingRulesetRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<WritebackConfiguration> writebackConfigurations;
 
+  public static final String JSON_PROPERTY_POPULATE_RESULT_PROPERTIES = "populateResultProperties";
+  @JsonProperty(JSON_PROPERTY_POPULATE_RESULT_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<PopulateResultProperty> populateResultProperties;
+
   public CreateMatchingRulesetRequest() {
   }
 
@@ -173,7 +180,7 @@ public class CreateMatchingRulesetRequest {
   }
 
   /**
-   * The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.
+   * The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -424,6 +431,33 @@ public class CreateMatchingRulesetRequest {
   }
 
 
+  public CreateMatchingRulesetRequest populateResultProperties(List<PopulateResultProperty> populateResultProperties) {
+    this.populateResultProperties = populateResultProperties;
+    return this;
+  }
+
+  public CreateMatchingRulesetRequest addPopulateResultPropertiesItem(PopulateResultProperty populateResultPropertiesItem) {
+    if (this.populateResultProperties == null) {
+      this.populateResultProperties = new ArrayList<>();
+    }
+    this.populateResultProperties.add(populateResultPropertiesItem);
+    return this;
+  }
+
+  /**
+   * The RecResult properties to populate on this ruleset&#39;s results, each from a formula over the result. Optional, and may be empty; at most 20.
+   * @return populateResultProperties
+   */
+  @javax.annotation.Nullable
+  public List<PopulateResultProperty> getPopulateResultProperties() {
+    return populateResultProperties;
+  }
+
+  public void setPopulateResultProperties(List<PopulateResultProperty> populateResultProperties) {
+    this.populateResultProperties = populateResultProperties;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -445,7 +479,8 @@ public class CreateMatchingRulesetRequest {
         Objects.equals(this.aggregateTolerances, createMatchingRulesetRequest.aggregateTolerances) &&
         Objects.equals(this.allowPartialMatching, createMatchingRulesetRequest.allowPartialMatching) &&
         Objects.equals(this.supplementalAttributes, createMatchingRulesetRequest.supplementalAttributes) &&
-        Objects.equals(this.writebackConfigurations, createMatchingRulesetRequest.writebackConfigurations);
+        Objects.equals(this.writebackConfigurations, createMatchingRulesetRequest.writebackConfigurations) &&
+        Objects.equals(this.populateResultProperties, createMatchingRulesetRequest.populateResultProperties);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -454,7 +489,7 @@ public class CreateMatchingRulesetRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, displayName, recType, externalRecType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations);
+    return Objects.hash(id, displayName, recType, externalRecType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations, populateResultProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -481,6 +516,7 @@ public class CreateMatchingRulesetRequest {
     sb.append("    allowPartialMatching: ").append(toIndentedString(allowPartialMatching)).append("\n");
     sb.append("    supplementalAttributes: ").append(toIndentedString(supplementalAttributes)).append("\n");
     sb.append("    writebackConfigurations: ").append(toIndentedString(writebackConfigurations)).append("\n");
+    sb.append("    populateResultProperties: ").append(toIndentedString(populateResultProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }

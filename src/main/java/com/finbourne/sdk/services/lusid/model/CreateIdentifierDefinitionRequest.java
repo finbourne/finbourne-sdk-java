@@ -249,7 +249,9 @@ public class CreateIdentifierDefinitionRequest {
     
     COLLATERAL_AGREEMENT("CollateralAgreement"),
     
-    ELIGIBLE_COLLATERAL_SCHEDULE("EligibleCollateralSchedule");
+    ELIGIBLE_COLLATERAL_SCHEDULE("EligibleCollateralSchedule"),
+    
+    RELATIONAL_DATASET_DEFINITION("RelationalDatasetDefinition");
 
     private String value;
 

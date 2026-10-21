@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **launcherType** | **String** |  | [default to String]
 **eventMatchingPattern** | [**LauncherEventMatchingPattern**](LauncherEventMatchingPattern.md) |  | [default to LauncherEventMatchingPattern]
+**calendarContexts** | [**List&lt;CalendarContext&gt;**](CalendarContext.md) | The named time zones and holiday calendars the date time adjustments of this Launcher work in.              Required when any mapped field has a dateTimeAdjustment | [optional] [default to List<CalendarContext>]
 **mapTaskFields** | [**Map&lt;String, EventTaskFieldMapping&gt;**](EventTaskFieldMapping.md) | Fields of the root task filled from the event, keyed by the field name on the root task definition | [optional] [default to Map<String, EventTaskFieldMapping>]
 **mapCorrelationIds** | [**List&lt;CorrelationIdMapping&gt;**](CorrelationIdMapping.md) | Correlation IDs of the root task filled from the event | [optional] [default to List<CorrelationIdMapping>]
 **runAsUserId** | [**LauncherMapping**](LauncherMapping.md) |  | [default to LauncherMapping]
@@ -23,6 +24,7 @@ import java.net.URI;
 
 String launcherType = "example launcherType";
 LauncherEventMatchingPattern eventMatchingPattern = new LauncherEventMatchingPattern();
+@javax.annotation.Nullable List<CalendarContext> calendarContexts = new List<CalendarContext>();
 @javax.annotation.Nullable Map<String, EventTaskFieldMapping> mapTaskFields = new Map<String, EventTaskFieldMapping>();
 @javax.annotation.Nullable List<CorrelationIdMapping> mapCorrelationIds = new List<CorrelationIdMapping>();
 LauncherMapping runAsUserId = new LauncherMapping();
@@ -34,6 +36,7 @@ LauncherMapping runAsUserId = new LauncherMapping();
 EventLauncherDetails eventLauncherDetailsInstance = new EventLauncherDetails()
     .launcherType(launcherType)
     .eventMatchingPattern(eventMatchingPattern)
+    .calendarContexts(calendarContexts)
     .mapTaskFields(mapTaskFields)
     .mapCorrelationIds(mapCorrelationIds)
     .runAsUserId(runAsUserId)

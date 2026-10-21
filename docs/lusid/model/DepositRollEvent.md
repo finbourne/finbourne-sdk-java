@@ -1,6 +1,6 @@
 # com.finbourne.sdk.services.lusid.model.DepositRollEvent
 classname DepositRollEvent
-Event used to represent a roll on a FlexibleDeposit instrument.
+Event used to represent a roll on a FlexibleDeposit instrument. Its interest updates are not applied in a period  the deposit settles partly or wholly in kind, as that period's interest is settled by its scheduled events.
 
 ## Properties
 

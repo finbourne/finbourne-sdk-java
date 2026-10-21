@@ -881,7 +881,7 @@ public class Transaction {
   }
 
   /**
-   * Links to the entities related to this transaction.
+   * Links to the entities that manage this transaction.
    * @return entityLinks
    */
   @javax.annotation.Nullable

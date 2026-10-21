@@ -38,7 +38,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * LUSID flexible deposit instrument. Represents the basic building block of a bank account  structure that can handle deferred interest payments.
+ * LUSID flexible deposit instrument: the basic building block of a bank account structure that can handle deferred  interest payments. Its PV excludes interest accrued in kind until that interest is capitalised.
  */
 @JsonPropertyOrder({
   FlexibleDeposit.JSON_PROPERTY_START_DATE,

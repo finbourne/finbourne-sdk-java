@@ -38,11 +38,13 @@ import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.lusid.model.Operation;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfWithholdingTaxConfiguration;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfWithholdingTaxDataset;
+import com.finbourne.sdk.services.lusid.model.ResolveWithholdingTaxRequest;
 import com.finbourne.sdk.services.lusid.model.UpsertWithholdingTaxConfigurationRequest;
 import com.finbourne.sdk.services.lusid.model.UpsertWithholdingTaxRateRequest;
 import com.finbourne.sdk.services.lusid.model.WithholdingTaxConfiguration;
 import com.finbourne.sdk.services.lusid.model.WithholdingTaxDataset;
 import com.finbourne.sdk.services.lusid.model.WithholdingTaxDatasetDefinitions;
+import com.finbourne.sdk.services.lusid.model.WithholdingTaxResolution;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -93,6 +95,7 @@ public class WithholdingTaxApi {
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source of the rows to delete, since it is part of each row&#39;s identity. Omit it              to delete rows that apply at every source; a source&#39;s rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -104,8 +107,8 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest batchDeleteWithholdingTaxRatesCall(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback) throws ApiException {
-        return batchDeleteWithholdingTaxRatesCall(scope, code, requestBody, successMode,  _callback, new ConfigurationOptions());
+    private HttpRequest batchDeleteWithholdingTaxRatesCall(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback _callback) throws ApiException {
+        return batchDeleteWithholdingTaxRatesCall(scope, code, requestBody, successMode, ruleSource,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -113,7 +116,8 @@ public class WithholdingTaxApi {
      * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic). Use any specified configuration options to override any other configuration for this request only.
+     * @param ruleSource The source of the rows to delete, since it is part of each row&#39;s identity. Omit it              to delete rows that apply at every source; a source&#39;s rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -125,7 +129,7 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest batchDeleteWithholdingTaxRatesCall(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest batchDeleteWithholdingTaxRatesCall(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -156,6 +160,10 @@ public class WithholdingTaxApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("successMode", successMode));
         }
 
+        if (ruleSource != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("ruleSource", ruleSource));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -182,7 +190,7 @@ public class WithholdingTaxApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest batchDeleteWithholdingTaxRatesValidateBeforeCall(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest batchDeleteWithholdingTaxRatesValidateBeforeCall(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling batchDeleteWithholdingTaxRates(Async)");
@@ -198,7 +206,7 @@ public class WithholdingTaxApi {
             throw new ApiException("Missing the required parameter 'requestBody' when calling batchDeleteWithholdingTaxRates(Async)");
         }
 
-        return batchDeleteWithholdingTaxRatesCall(scope, code, requestBody, successMode, _callback, opts);
+        return batchDeleteWithholdingTaxRatesCall(scope, code, requestBody, successMode, ruleSource, _callback, opts);
 
     }
 
@@ -209,6 +217,7 @@ public class WithholdingTaxApi {
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source of the rows to delete, since it is part of each row&#39;s identity. Omit it              to delete rows that apply at every source; a source&#39;s rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. (optional)
      * @return ApiResponse&lt;BatchDeleteRelationalDataResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -219,8 +228,8 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<BatchDeleteRelationalDataResponse> batchDeleteWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode) throws ApiException {
-        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, null, new ConfigurationOptions());
+    private ApiResponse<BatchDeleteRelationalDataResponse> batchDeleteWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource) throws ApiException {
+        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, ruleSource, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<BatchDeleteRelationalDataResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -232,6 +241,7 @@ public class WithholdingTaxApi {
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source of the rows to delete, since it is part of each row&#39;s identity. Omit it              to delete rows that apply at every source; a source&#39;s rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. (optional)
      * @return ApiResponse&lt;BatchDeleteRelationalDataResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -242,8 +252,8 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<BatchDeleteRelationalDataResponse> batchDeleteWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, null, opts);
+    private ApiResponse<BatchDeleteRelationalDataResponse> batchDeleteWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, ruleSource, null, opts);
         Type localVarReturnType = new TypeReference<BatchDeleteRelationalDataResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -255,6 +265,7 @@ public class WithholdingTaxApi {
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source of the rows to delete, since it is part of each row&#39;s identity. Omit it              to delete rows that apply at every source; a source&#39;s rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -265,9 +276,9 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void batchDeleteWithholdingTaxRatesAsync(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback<BatchDeleteRelationalDataResponse> _callback) throws ApiException {
+    private void batchDeleteWithholdingTaxRatesAsync(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback<BatchDeleteRelationalDataResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, ruleSource, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<BatchDeleteRelationalDataResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -279,6 +290,7 @@ public class WithholdingTaxApi {
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to delete, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source of the rows to delete, since it is part of each row&#39;s identity. Omit it              to delete rows that apply at every source; a source&#39;s rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -289,9 +301,9 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void batchDeleteWithholdingTaxRatesAsync(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback<BatchDeleteRelationalDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void batchDeleteWithholdingTaxRatesAsync(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback<BatchDeleteRelationalDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, _callback, opts);
+        HttpRequest localVarCall = batchDeleteWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, ruleSource, _callback, opts);
         Type localVarReturnType = new TypeReference<BatchDeleteRelationalDataResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -301,6 +313,7 @@ public class WithholdingTaxApi {
         private final String code;
         private final Map<String, DeleteWithholdingTaxRateRequest> requestBody;
         private String successMode;
+        private String ruleSource;
 
         private APIbatchDeleteWithholdingTaxRatesRequest(String scope, String code, Map<String, DeleteWithholdingTaxRateRequest> requestBody) {
             this.scope = scope;
@@ -319,6 +332,16 @@ public class WithholdingTaxApi {
         }
 
         /**
+         * Set ruleSource
+         * @param ruleSource The source of the rows to delete, since it is part of each row&#39;s identity. Omit it              to delete rows that apply at every source; a source&#39;s rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. (optional)
+         * @return APIbatchDeleteWithholdingTaxRatesRequest
+         */
+        public APIbatchDeleteWithholdingTaxRatesRequest ruleSource(String ruleSource) {
+            this.ruleSource = ruleSource;
+            return this;
+        }
+
+        /**
          * Build call for batchDeleteWithholdingTaxRates
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -332,7 +355,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return batchDeleteWithholdingTaxRatesCall(scope, code, requestBody, successMode, _callback);
+            return batchDeleteWithholdingTaxRatesCall(scope, code, requestBody, successMode, ruleSource, _callback);
         }
 
         /**
@@ -348,7 +371,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public BatchDeleteRelationalDataResponse execute() throws ApiException {
-            ApiResponse<BatchDeleteRelationalDataResponse> localVarResp = batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode);
+            ApiResponse<BatchDeleteRelationalDataResponse> localVarResp = batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, ruleSource);
             return localVarResp.getData();
         }
 
@@ -365,7 +388,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public BatchDeleteRelationalDataResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<BatchDeleteRelationalDataResponse> localVarResp = batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, opts);
+            ApiResponse<BatchDeleteRelationalDataResponse> localVarResp = batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, ruleSource, opts);
             return localVarResp.getData();
         }
 
@@ -382,7 +405,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public ApiResponse<BatchDeleteRelationalDataResponse> executeWithHttpInfo() throws ApiException {
-            return batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode);
+            return batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, ruleSource);
         }
 
         /**
@@ -398,7 +421,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public ApiResponse<BatchDeleteRelationalDataResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, opts);
+            return batchDeleteWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, ruleSource, opts);
         }
 
         /**
@@ -414,7 +437,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public void executeAsync(final ApiCallback<BatchDeleteRelationalDataResponse> _callback) throws ApiException {
-            batchDeleteWithholdingTaxRatesAsync(scope, code, requestBody, successMode, _callback);
+            batchDeleteWithholdingTaxRatesAsync(scope, code, requestBody, successMode, ruleSource, _callback);
         }
 
         /**
@@ -430,7 +453,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public void executeAsync(final ApiCallback<BatchDeleteRelationalDataResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            batchDeleteWithholdingTaxRatesAsync(scope, code, requestBody, successMode, _callback, opts);
+            batchDeleteWithholdingTaxRatesAsync(scope, code, requestBody, successMode, ruleSource, _callback, opts);
         }
     }
 
@@ -458,6 +481,7 @@ public class WithholdingTaxApi {
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source every row in the batch is attributed to, compared against the              configuration&#39;s source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -469,8 +493,8 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest batchUpsertWithholdingTaxRatesCall(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback) throws ApiException {
-        return batchUpsertWithholdingTaxRatesCall(scope, code, requestBody, successMode,  _callback, new ConfigurationOptions());
+    private HttpRequest batchUpsertWithholdingTaxRatesCall(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback _callback) throws ApiException {
+        return batchUpsertWithholdingTaxRatesCall(scope, code, requestBody, successMode, ruleSource,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -478,7 +502,8 @@ public class WithholdingTaxApi {
      * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic). Use any specified configuration options to override any other configuration for this request only.
+     * @param ruleSource The source every row in the batch is attributed to, compared against the              configuration&#39;s source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -490,7 +515,7 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest batchUpsertWithholdingTaxRatesCall(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest batchUpsertWithholdingTaxRatesCall(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -521,6 +546,10 @@ public class WithholdingTaxApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("successMode", successMode));
         }
 
+        if (ruleSource != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("ruleSource", ruleSource));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -547,7 +576,7 @@ public class WithholdingTaxApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest batchUpsertWithholdingTaxRatesValidateBeforeCall(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest batchUpsertWithholdingTaxRatesValidateBeforeCall(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling batchUpsertWithholdingTaxRates(Async)");
@@ -563,17 +592,18 @@ public class WithholdingTaxApi {
             throw new ApiException("Missing the required parameter 'requestBody' when calling batchUpsertWithholdingTaxRates(Async)");
         }
 
-        return batchUpsertWithholdingTaxRatesCall(scope, code, requestBody, successMode, _callback, opts);
+        return batchUpsertWithholdingTaxRatesCall(scope, code, requestBody, successMode, ruleSource, _callback, opts);
 
     }
 
     /**
      * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
-     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+     * Row identity is the series identifiers plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same series identifiers. One batch carries one rule source, so a feed mixing rows  from a source with rows that apply at every source is loaded in two calls.
      * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source every row in the batch is attributed to, compared against the              configuration&#39;s source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. (optional)
      * @return ApiResponse&lt;BatchUpsertWithholdingTaxRatesResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -584,19 +614,20 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<BatchUpsertWithholdingTaxRatesResponse> batchUpsertWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode) throws ApiException {
-        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, null, new ConfigurationOptions());
+    private ApiResponse<BatchUpsertWithholdingTaxRatesResponse> batchUpsertWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource) throws ApiException {
+        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, ruleSource, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<BatchUpsertWithholdingTaxRatesResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
-     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.Use any specified configuration options to override any other configuration for this request only
+     * Row identity is the series identifiers plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same series identifiers. One batch carries one rule source, so a feed mixing rows  from a source with rows that apply at every source is loaded in two calls.Use any specified configuration options to override any other configuration for this request only
      * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source every row in the batch is attributed to, compared against the              configuration&#39;s source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. (optional)
      * @return ApiResponse&lt;BatchUpsertWithholdingTaxRatesResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -607,19 +638,20 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<BatchUpsertWithholdingTaxRatesResponse> batchUpsertWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, null, opts);
+    private ApiResponse<BatchUpsertWithholdingTaxRatesResponse> batchUpsertWithholdingTaxRatesWithHttpInfo(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, ruleSource, null, opts);
         Type localVarReturnType = new TypeReference<BatchUpsertWithholdingTaxRatesResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands. (asynchronously)
-     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+     * Row identity is the series identifiers plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same series identifiers. One batch carries one rule source, so a feed mixing rows  from a source with rows that apply at every source is loaded in two calls.
      * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source every row in the batch is attributed to, compared against the              configuration&#39;s source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -630,20 +662,21 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void batchUpsertWithholdingTaxRatesAsync(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback) throws ApiException {
+    private void batchUpsertWithholdingTaxRatesAsync(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, ruleSource, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<BatchUpsertWithholdingTaxRatesResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands. (asynchronously)
-     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.Use any specified configuration options to override any other configuration for this request only
+     * Row identity is the series identifiers plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same series identifiers. One batch carries one rule source, so a feed mixing rows  from a source with rows that apply at every source is loaded in two calls.Use any specified configuration options to override any other configuration for this request only
      * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
      * @param successMode Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional, default to Atomic)
+     * @param ruleSource The source every row in the batch is attributed to, compared against the              configuration&#39;s source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -654,9 +687,9 @@ public class WithholdingTaxApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void batchUpsertWithholdingTaxRatesAsync(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void batchUpsertWithholdingTaxRatesAsync(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody, String successMode, String ruleSource, final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, _callback, opts);
+        HttpRequest localVarCall = batchUpsertWithholdingTaxRatesValidateBeforeCall(scope, code, requestBody, successMode, ruleSource, _callback, opts);
         Type localVarReturnType = new TypeReference<BatchUpsertWithholdingTaxRatesResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -666,6 +699,7 @@ public class WithholdingTaxApi {
         private final String code;
         private final Map<String, UpsertWithholdingTaxRateRequest> requestBody;
         private String successMode;
+        private String ruleSource;
 
         private APIbatchUpsertWithholdingTaxRatesRequest(String scope, String code, Map<String, UpsertWithholdingTaxRateRequest> requestBody) {
             this.scope = scope;
@@ -684,6 +718,16 @@ public class WithholdingTaxApi {
         }
 
         /**
+         * Set ruleSource
+         * @param ruleSource The source every row in the batch is attributed to, compared against the              configuration&#39;s source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. (optional)
+         * @return APIbatchUpsertWithholdingTaxRatesRequest
+         */
+        public APIbatchUpsertWithholdingTaxRatesRequest ruleSource(String ruleSource) {
+            this.ruleSource = ruleSource;
+            return this;
+        }
+
+        /**
          * Build call for batchUpsertWithholdingTaxRates
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -697,7 +741,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return batchUpsertWithholdingTaxRatesCall(scope, code, requestBody, successMode, _callback);
+            return batchUpsertWithholdingTaxRatesCall(scope, code, requestBody, successMode, ruleSource, _callback);
         }
 
         /**
@@ -713,7 +757,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public BatchUpsertWithholdingTaxRatesResponse execute() throws ApiException {
-            ApiResponse<BatchUpsertWithholdingTaxRatesResponse> localVarResp = batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode);
+            ApiResponse<BatchUpsertWithholdingTaxRatesResponse> localVarResp = batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, ruleSource);
             return localVarResp.getData();
         }
 
@@ -730,7 +774,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public BatchUpsertWithholdingTaxRatesResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<BatchUpsertWithholdingTaxRatesResponse> localVarResp = batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, opts);
+            ApiResponse<BatchUpsertWithholdingTaxRatesResponse> localVarResp = batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, ruleSource, opts);
             return localVarResp.getData();
         }
 
@@ -747,7 +791,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public ApiResponse<BatchUpsertWithholdingTaxRatesResponse> executeWithHttpInfo() throws ApiException {
-            return batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode);
+            return batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, ruleSource);
         }
 
         /**
@@ -763,7 +807,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public ApiResponse<BatchUpsertWithholdingTaxRatesResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, opts);
+            return batchUpsertWithholdingTaxRatesWithHttpInfo(scope, code, requestBody, successMode, ruleSource, opts);
         }
 
         /**
@@ -779,7 +823,7 @@ public class WithholdingTaxApi {
          </table>
          */
         public void executeAsync(final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback) throws ApiException {
-            batchUpsertWithholdingTaxRatesAsync(scope, code, requestBody, successMode, _callback);
+            batchUpsertWithholdingTaxRatesAsync(scope, code, requestBody, successMode, ruleSource, _callback);
         }
 
         /**
@@ -795,13 +839,13 @@ public class WithholdingTaxApi {
          </table>
          */
         public void executeAsync(final ApiCallback<BatchUpsertWithholdingTaxRatesResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            batchUpsertWithholdingTaxRatesAsync(scope, code, requestBody, successMode, _callback, opts);
+            batchUpsertWithholdingTaxRatesAsync(scope, code, requestBody, successMode, ruleSource, _callback, opts);
         }
     }
 
     /**
      * [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
-     * Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+     * Row identity is the series identifiers plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same series identifiers. One batch carries one rule source, so a feed mixing rows  from a source with rows that apply at every source is loaded in two calls.
      * @param scope The Scope of the rate dataset&#39;s relational dataset definition. (required)
      * @param code The Code of the rate dataset&#39;s relational dataset definition. (required)
      * @param requestBody The rate rows to upsert, keyed by a correlation id echoed back in the response. (required)
@@ -3622,6 +3666,383 @@ public class WithholdingTaxApi {
      */
     public APIpatchWithholdingTaxDatasetDefinitionRequest patchWithholdingTaxDatasetDefinition(String scope, String code, List<Operation> operation) {
         return new APIpatchWithholdingTaxDatasetDefinitionRequest(scope, code, operation);
+    }
+    /**
+     * Build call for resolveWithholdingTax
+     * @param resolveWithholdingTaxRequest The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. (required)
+     * @param effectiveAt The effective datetime or cut label at which to resolve, in place of the transaction&#39;s trade              date. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. (optional)
+     * @param limit The most combinations of values that couldAlsoMatch tries, fewest values first. (optional, default to 100)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest resolveWithholdingTaxCall(ResolveWithholdingTaxRequest resolveWithholdingTaxRequest, String effectiveAt, OffsetDateTime asAt, Integer limit, final ApiCallback _callback) throws ApiException {
+        return resolveWithholdingTaxCall(resolveWithholdingTaxRequest, effectiveAt, asAt, limit,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for resolveWithholdingTax. Use any specified configuration options to override any other configuration for this request only.
+     * @param resolveWithholdingTaxRequest The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label at which to resolve, in place of the transaction&#39;s trade              date. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit The most combinations of values that couldAlsoMatch tries, fewest values first. (optional, default to 100)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest resolveWithholdingTaxCall(ResolveWithholdingTaxRequest resolveWithholdingTaxRequest, String effectiveAt, OffsetDateTime asAt, Integer limit, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = resolveWithholdingTaxRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/withholdingtax/$resolve";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest resolveWithholdingTaxValidateBeforeCall(ResolveWithholdingTaxRequest resolveWithholdingTaxRequest, String effectiveAt, OffsetDateTime asAt, Integer limit, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'resolveWithholdingTaxRequest' is set
+        if (resolveWithholdingTaxRequest == null) {
+            throw new ApiException("Missing the required parameter 'resolveWithholdingTaxRequest' when calling resolveWithholdingTax(Async)");
+        }
+
+        return resolveWithholdingTaxCall(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.
+     * A read-only lookup that runs the same resolution as booking, without a transaction: it works down the source  priority and, at each source, checks the anomaly dataset before the main dataset. Nothing is booked, and only  rates are returned. Supply a Withholding Tax Configuration to predict what booking will post; replace its  datasets or source priority to ask what would resolve instead. Supply the dimension values directly, or name an  instrument so that the configuration&#39;s value sources read them from it, as booking reads a transaction&#39;s instrument.
+     * @param resolveWithholdingTaxRequest The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. (required)
+     * @param effectiveAt The effective datetime or cut label at which to resolve, in place of the transaction&#39;s trade              date. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. (optional)
+     * @param limit The most combinations of values that couldAlsoMatch tries, fewest values first. (optional, default to 100)
+     * @return ApiResponse&lt;WithholdingTaxResolution&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<WithholdingTaxResolution> resolveWithholdingTaxWithHttpInfo(ResolveWithholdingTaxRequest resolveWithholdingTaxRequest, String effectiveAt, OffsetDateTime asAt, Integer limit) throws ApiException {
+        HttpRequest localVarCall = resolveWithholdingTaxValidateBeforeCall(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<WithholdingTaxResolution>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.
+     * A read-only lookup that runs the same resolution as booking, without a transaction: it works down the source  priority and, at each source, checks the anomaly dataset before the main dataset. Nothing is booked, and only  rates are returned. Supply a Withholding Tax Configuration to predict what booking will post; replace its  datasets or source priority to ask what would resolve instead. Supply the dimension values directly, or name an  instrument so that the configuration&#39;s value sources read them from it, as booking reads a transaction&#39;s instrument.Use any specified configuration options to override any other configuration for this request only
+     * @param resolveWithholdingTaxRequest The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. (required)
+     * @param effectiveAt The effective datetime or cut label at which to resolve, in place of the transaction&#39;s trade              date. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. (optional)
+     * @param limit The most combinations of values that couldAlsoMatch tries, fewest values first. (optional, default to 100)
+     * @return ApiResponse&lt;WithholdingTaxResolution&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<WithholdingTaxResolution> resolveWithholdingTaxWithHttpInfo(ResolveWithholdingTaxRequest resolveWithholdingTaxRequest, String effectiveAt, OffsetDateTime asAt, Integer limit, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = resolveWithholdingTaxValidateBeforeCall(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, null, opts);
+        Type localVarReturnType = new TypeReference<WithholdingTaxResolution>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply. (asynchronously)
+     * A read-only lookup that runs the same resolution as booking, without a transaction: it works down the source  priority and, at each source, checks the anomaly dataset before the main dataset. Nothing is booked, and only  rates are returned. Supply a Withholding Tax Configuration to predict what booking will post; replace its  datasets or source priority to ask what would resolve instead. Supply the dimension values directly, or name an  instrument so that the configuration&#39;s value sources read them from it, as booking reads a transaction&#39;s instrument.
+     * @param resolveWithholdingTaxRequest The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. (required)
+     * @param effectiveAt The effective datetime or cut label at which to resolve, in place of the transaction&#39;s trade              date. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. (optional)
+     * @param limit The most combinations of values that couldAlsoMatch tries, fewest values first. (optional, default to 100)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void resolveWithholdingTaxAsync(ResolveWithholdingTaxRequest resolveWithholdingTaxRequest, String effectiveAt, OffsetDateTime asAt, Integer limit, final ApiCallback<WithholdingTaxResolution> _callback) throws ApiException {
+
+        HttpRequest localVarCall = resolveWithholdingTaxValidateBeforeCall(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<WithholdingTaxResolution>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply. (asynchronously)
+     * A read-only lookup that runs the same resolution as booking, without a transaction: it works down the source  priority and, at each source, checks the anomaly dataset before the main dataset. Nothing is booked, and only  rates are returned. Supply a Withholding Tax Configuration to predict what booking will post; replace its  datasets or source priority to ask what would resolve instead. Supply the dimension values directly, or name an  instrument so that the configuration&#39;s value sources read them from it, as booking reads a transaction&#39;s instrument.Use any specified configuration options to override any other configuration for this request only
+     * @param resolveWithholdingTaxRequest The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. (required)
+     * @param effectiveAt The effective datetime or cut label at which to resolve, in place of the transaction&#39;s trade              date. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. (optional)
+     * @param limit The most combinations of values that couldAlsoMatch tries, fewest values first. (optional, default to 100)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void resolveWithholdingTaxAsync(ResolveWithholdingTaxRequest resolveWithholdingTaxRequest, String effectiveAt, OffsetDateTime asAt, Integer limit, final ApiCallback<WithholdingTaxResolution> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = resolveWithholdingTaxValidateBeforeCall(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, _callback, opts);
+        Type localVarReturnType = new TypeReference<WithholdingTaxResolution>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIresolveWithholdingTaxRequest {
+        private final ResolveWithholdingTaxRequest resolveWithholdingTaxRequest;
+        private String effectiveAt;
+        private OffsetDateTime asAt;
+        private Integer limit;
+
+        private APIresolveWithholdingTaxRequest(ResolveWithholdingTaxRequest resolveWithholdingTaxRequest) {
+            this.resolveWithholdingTaxRequest = resolveWithholdingTaxRequest;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label at which to resolve, in place of the transaction&#39;s trade              date. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIresolveWithholdingTaxRequest
+         */
+        public APIresolveWithholdingTaxRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. (optional)
+         * @return APIresolveWithholdingTaxRequest
+         */
+        public APIresolveWithholdingTaxRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit The most combinations of values that couldAlsoMatch tries, fewest values first. (optional, default to 100)
+         * @return APIresolveWithholdingTaxRequest
+         */
+        public APIresolveWithholdingTaxRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Build call for resolveWithholdingTax
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return resolveWithholdingTaxCall(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, _callback);
+        }
+
+        /**
+         * Execute resolveWithholdingTax request
+         * @return WithholdingTaxResolution
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public WithholdingTaxResolution execute() throws ApiException {
+            ApiResponse<WithholdingTaxResolution> localVarResp = resolveWithholdingTaxWithHttpInfo(resolveWithholdingTaxRequest, effectiveAt, asAt, limit);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute resolveWithholdingTax request. Use any specified configuration options to override any other configuration for this request only.
+         * @return WithholdingTaxResolution
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public WithholdingTaxResolution execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<WithholdingTaxResolution> localVarResp = resolveWithholdingTaxWithHttpInfo(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute resolveWithholdingTax request with HTTP info returned
+         * @return ApiResponse&lt;WithholdingTaxResolution&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<WithholdingTaxResolution> executeWithHttpInfo() throws ApiException {
+            return resolveWithholdingTaxWithHttpInfo(resolveWithholdingTaxRequest, effectiveAt, asAt, limit);
+        }
+
+        /**
+         * Execute resolveWithholdingTax request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;WithholdingTaxResolution&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<WithholdingTaxResolution> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return resolveWithholdingTaxWithHttpInfo(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, opts);
+        }
+
+        /**
+         * Execute resolveWithholdingTax request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<WithholdingTaxResolution> _callback) throws ApiException {
+            resolveWithholdingTaxAsync(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, _callback);
+        }
+
+        /**
+         * Execute resolveWithholdingTax request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<WithholdingTaxResolution> _callback, ConfigurationOptions opts) throws ApiException {
+            resolveWithholdingTaxAsync(resolveWithholdingTaxRequest, effectiveAt, asAt, limit, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.
+     * A read-only lookup that runs the same resolution as booking, without a transaction: it works down the source  priority and, at each source, checks the anomaly dataset before the main dataset. Nothing is booked, and only  rates are returned. Supply a Withholding Tax Configuration to predict what booking will post; replace its  datasets or source priority to ask what would resolve instead. Supply the dimension values directly, or name an  instrument so that the configuration&#39;s value sources read them from it, as booking reads a transaction&#39;s instrument.
+     * @param resolveWithholdingTaxRequest The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. (required)
+     * @return APIresolveWithholdingTaxRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The Withholding Tax rate that booking would apply. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIresolveWithholdingTaxRequest resolveWithholdingTax(ResolveWithholdingTaxRequest resolveWithholdingTaxRequest) {
+        return new APIresolveWithholdingTaxRequest(resolveWithholdingTaxRequest);
     }
     /**
      * Build call for upsertWithholdingTaxConfiguration

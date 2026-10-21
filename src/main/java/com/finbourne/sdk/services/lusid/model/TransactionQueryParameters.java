@@ -43,7 +43,8 @@ import com.finbourne.sdk.JSON;
   TransactionQueryParameters.JSON_PROPERTY_INCLUDE_ECONOMICS,
   TransactionQueryParameters.JSON_PROPERTY_INCLUDE_SETTLEMENT_STATUS,
   TransactionQueryParameters.JSON_PROPERTY_SETTLEMENT_STATUS_DATE,
-  TransactionQueryParameters.JSON_PROPERTY_RETURN_EXCLUDED_TRANSACTIONS
+  TransactionQueryParameters.JSON_PROPERTY_RETURN_EXCLUDED_TRANSACTIONS,
+  TransactionQueryParameters.JSON_PROPERTY_ALLOCATION_EXPANSION
 })
 
 public class TransactionQueryParameters {
@@ -130,6 +131,11 @@ public class TransactionQueryParameters {
   @JsonProperty(JSON_PROPERTY_RETURN_EXCLUDED_TRANSACTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean returnExcludedTransactions;
+
+  public static final String JSON_PROPERTY_ALLOCATION_EXPANSION = "allocationExpansion";
+  @JsonProperty(JSON_PROPERTY_ALLOCATION_EXPANSION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String allocationExpansion;
 
   public TransactionQueryParameters() {
   }
@@ -324,6 +330,25 @@ public class TransactionQueryParameters {
   }
 
 
+  public TransactionQueryParameters allocationExpansion(String allocationExpansion) {
+    this.allocationExpansion = allocationExpansion;
+    return this;
+  }
+
+  /**
+   * How an input transaction that was split into allocation slices (strategy tag allocations or a prorated allocation method) is presented. &#39;Expanded&#39; (the default) returns one output transaction per slice. &#39;Combined&#39; returns one output transaction per input transaction with units, consideration and realised gain/loss summed over the slices, with every realised gain/loss record of each slice, including zero-realised ones, listed with its own transaction type and sub-holding key properties. For a prorated type with no units side the combined units are the total position the slices were prorated over, not the input&#39;s units. Transaction filters apply per slice, so a filter on a slice-level property combines only the matching slices. Sequence numbers are assigned after combining. Holdings and tax lots are identical in both modes. Available values: Expanded, Combined.
+   * @return allocationExpansion
+   */
+  @javax.annotation.Nullable
+  public String getAllocationExpansion() {
+    return allocationExpansion;
+  }
+
+  public void setAllocationExpansion(String allocationExpansion) {
+    this.allocationExpansion = allocationExpansion;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -342,7 +367,8 @@ public class TransactionQueryParameters {
         Objects.equals(this.includeEconomics, transactionQueryParameters.includeEconomics) &&
         Objects.equals(this.includeSettlementStatus, transactionQueryParameters.includeSettlementStatus) &&
         Objects.equals(this.settlementStatusDate, transactionQueryParameters.settlementStatusDate) &&
-        Objects.equals(this.returnExcludedTransactions, transactionQueryParameters.returnExcludedTransactions);
+        Objects.equals(this.returnExcludedTransactions, transactionQueryParameters.returnExcludedTransactions) &&
+        Objects.equals(this.allocationExpansion, transactionQueryParameters.allocationExpansion);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -351,7 +377,7 @@ public class TransactionQueryParameters {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, endDate, queryMode, showCancelledTransactions, timelineScope, timelineCode, includeEconomics, includeSettlementStatus, settlementStatusDate, returnExcludedTransactions);
+    return Objects.hash(startDate, endDate, queryMode, showCancelledTransactions, timelineScope, timelineCode, includeEconomics, includeSettlementStatus, settlementStatusDate, returnExcludedTransactions, allocationExpansion);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -375,6 +401,7 @@ public class TransactionQueryParameters {
     sb.append("    includeSettlementStatus: ").append(toIndentedString(includeSettlementStatus)).append("\n");
     sb.append("    settlementStatusDate: ").append(toIndentedString(settlementStatusDate)).append("\n");
     sb.append("    returnExcludedTransactions: ").append(toIndentedString(returnExcludedTransactions)).append("\n");
+    sb.append("    allocationExpansion: ").append(toIndentedString(allocationExpansion)).append("\n");
     sb.append("}");
     return sb.toString();
   }

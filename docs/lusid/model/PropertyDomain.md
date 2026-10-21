@@ -114,6 +114,7 @@ PropertyDomain method = PropertyDomain.REC_RESULT;
 PropertyDomain method = PropertyDomain.JOURNAL_ENTRY;
 PropertyDomain method = PropertyDomain.COLLATERAL_AGREEMENT;
 PropertyDomain method = PropertyDomain.ELIGIBLE_COLLATERAL_SCHEDULE;
+PropertyDomain method = PropertyDomain.RELATIONAL_DATASET_DEFINITION;
 ```
 
 

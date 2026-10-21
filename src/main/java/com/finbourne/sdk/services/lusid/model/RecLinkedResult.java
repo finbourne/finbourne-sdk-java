@@ -83,7 +83,7 @@ public class RecLinkedResult {
   }
 
   /**
-   * The rec type of the linked result. Always differs from this result&#39;s rec type. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.
+   * The rec type of the linked result. Always differs from this result&#39;s rec type. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.
    * @return recType
    */
   @javax.annotation.Nonnull

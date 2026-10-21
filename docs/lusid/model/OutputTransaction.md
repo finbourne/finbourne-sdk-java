@@ -50,6 +50,7 @@ Name | Type | Description | Notes
 **resolvedCustodianAccounts** | [**List&lt;ResolvedCustodianAccount&gt;**](ResolvedCustodianAccount.md) | Set of Custodian Accounts resolved from each movement on the Transaction. | [optional] [default to List<ResolvedCustodianAccount>]
 **unresolvedCustodianAccounts** | [**List&lt;CustodianEntry&gt;**](CustodianEntry.md) | Set of Custodian Entries on the Transaction that no movement was booked against, i.e. those which did not match a movement&#39;s account type and selector. | [optional] [default to List<CustodianEntry>]
 **isExcluded** | **Boolean** | Whether the transaction was excluded from the portfolio&#39;s holdings by the portfolio&#39;s transaction exclusion filter. | [optional] [default to Boolean]
+**entityLinks** | [**List&lt;TransactionEntityLink&gt;**](TransactionEntityLink.md) | Links to the entities that manage this transaction. | [optional] [default to List<TransactionEntityLink>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.OutputTransaction;
@@ -101,6 +102,7 @@ StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 @javax.annotation.Nullable List<ResolvedCustodianAccount> resolvedCustodianAccounts = new List<ResolvedCustodianAccount>();
 @javax.annotation.Nullable List<CustodianEntry> unresolvedCustodianAccounts = new List<CustodianEntry>();
 Boolean isExcluded = true;
+@javax.annotation.Nullable List<TransactionEntityLink> entityLinks = new List<TransactionEntityLink>();
 
 
 OutputTransaction outputTransactionInstance = new OutputTransaction()
@@ -147,7 +149,8 @@ OutputTransaction outputTransactionInstance = new OutputTransaction()
     .custodianEntries(custodianEntries)
     .resolvedCustodianAccounts(resolvedCustodianAccounts)
     .unresolvedCustodianAccounts(unresolvedCustodianAccounts)
-    .isExcluded(isExcluded);
+    .isExcluded(isExcluded)
+    .entityLinks(entityLinks);
 ```
 
 

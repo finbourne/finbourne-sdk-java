@@ -17,6 +17,7 @@ import com.finbourne.sdk.services.lusid.model.CoreMatchingRule;
 import com.finbourne.sdk.services.lusid.model.ExternalRecType;
 import com.finbourne.sdk.services.lusid.model.GroupReconciliationFilters;
 import com.finbourne.sdk.services.lusid.model.Link;
+import com.finbourne.sdk.services.lusid.model.PopulateResultProperty;
 import com.finbourne.sdk.services.lusid.model.RecDatasetSchemas;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.SupplementalAttribute;
@@ -61,6 +62,7 @@ import com.finbourne.sdk.JSON;
   MatchingRuleset.JSON_PROPERTY_ALLOW_PARTIAL_MATCHING,
   MatchingRuleset.JSON_PROPERTY_SUPPLEMENTAL_ATTRIBUTES,
   MatchingRuleset.JSON_PROPERTY_WRITEBACK_CONFIGURATIONS,
+  MatchingRuleset.JSON_PROPERTY_POPULATE_RESULT_PROPERTIES,
   MatchingRuleset.JSON_PROPERTY_HREF,
   MatchingRuleset.JSON_PROPERTY_VERSION,
   MatchingRuleset.JSON_PROPERTY_LINKS
@@ -132,6 +134,11 @@ public class MatchingRuleset {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<WritebackConfiguration> writebackConfigurations;
 
+  public static final String JSON_PROPERTY_POPULATE_RESULT_PROPERTIES = "populateResultProperties";
+  @JsonProperty(JSON_PROPERTY_POPULATE_RESULT_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<PopulateResultProperty> populateResultProperties;
+
   public static final String JSON_PROPERTY_HREF = "href";
   @JsonProperty(JSON_PROPERTY_HREF)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -194,7 +201,7 @@ public class MatchingRuleset {
   }
 
   /**
-   * The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.
+   * The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -445,6 +452,33 @@ public class MatchingRuleset {
   }
 
 
+  public MatchingRuleset populateResultProperties(List<PopulateResultProperty> populateResultProperties) {
+    this.populateResultProperties = populateResultProperties;
+    return this;
+  }
+
+  public MatchingRuleset addPopulateResultPropertiesItem(PopulateResultProperty populateResultPropertiesItem) {
+    if (this.populateResultProperties == null) {
+      this.populateResultProperties = new ArrayList<>();
+    }
+    this.populateResultProperties.add(populateResultPropertiesItem);
+    return this;
+  }
+
+  /**
+   * The RecResult properties to populate on this ruleset&#39;s results, each from a formula over the result. Optional, and may be empty; at most 20.
+   * @return populateResultProperties
+   */
+  @javax.annotation.Nullable
+  public List<PopulateResultProperty> getPopulateResultProperties() {
+    return populateResultProperties;
+  }
+
+  public void setPopulateResultProperties(List<PopulateResultProperty> populateResultProperties) {
+    this.populateResultProperties = populateResultProperties;
+  }
+
+
   public MatchingRuleset href(URI href) {
     this.href = href;
     return this;
@@ -532,6 +566,7 @@ public class MatchingRuleset {
         Objects.equals(this.allowPartialMatching, matchingRuleset.allowPartialMatching) &&
         Objects.equals(this.supplementalAttributes, matchingRuleset.supplementalAttributes) &&
         Objects.equals(this.writebackConfigurations, matchingRuleset.writebackConfigurations) &&
+        Objects.equals(this.populateResultProperties, matchingRuleset.populateResultProperties) &&
         Objects.equals(this.href, matchingRuleset.href) &&
         Objects.equals(this.version, matchingRuleset.version) &&
         Objects.equals(this.links, matchingRuleset.links);
@@ -543,7 +578,7 @@ public class MatchingRuleset {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, displayName, recType, externalRecType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations, href, version, links);
+    return Objects.hash(id, displayName, recType, externalRecType, datasetSchemas, filters, coreRules, aggregateRules, coreTolerances, aggregateTolerances, allowPartialMatching, supplementalAttributes, writebackConfigurations, populateResultProperties, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -570,6 +605,7 @@ public class MatchingRuleset {
     sb.append("    allowPartialMatching: ").append(toIndentedString(allowPartialMatching)).append("\n");
     sb.append("    supplementalAttributes: ").append(toIndentedString(supplementalAttributes)).append("\n");
     sb.append("    writebackConfigurations: ").append(toIndentedString(writebackConfigurations)).append("\n");
+    sb.append("    populateResultProperties: ").append(toIndentedString(populateResultProperties)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");

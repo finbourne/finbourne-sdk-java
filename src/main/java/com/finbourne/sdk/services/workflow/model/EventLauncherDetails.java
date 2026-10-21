@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.workflow.model;
 
+import com.finbourne.sdk.services.workflow.model.CalendarContext;
 import com.finbourne.sdk.services.workflow.model.CorrelationIdMapping;
 import com.finbourne.sdk.services.workflow.model.EventTaskFieldMapping;
 import com.finbourne.sdk.services.workflow.model.LauncherEventMatchingPattern;
@@ -44,6 +45,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   EventLauncherDetails.JSON_PROPERTY_LAUNCHER_TYPE,
   EventLauncherDetails.JSON_PROPERTY_EVENT_MATCHING_PATTERN,
+  EventLauncherDetails.JSON_PROPERTY_CALENDAR_CONTEXTS,
   EventLauncherDetails.JSON_PROPERTY_MAP_TASK_FIELDS,
   EventLauncherDetails.JSON_PROPERTY_MAP_CORRELATION_IDS,
   EventLauncherDetails.JSON_PROPERTY_RUN_AS_USER_ID,
@@ -94,6 +96,11 @@ public class EventLauncherDetails {
   @JsonProperty(JSON_PROPERTY_EVENT_MATCHING_PATTERN)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private LauncherEventMatchingPattern eventMatchingPattern;
+
+  public static final String JSON_PROPERTY_CALENDAR_CONTEXTS = "calendarContexts";
+  @JsonProperty(JSON_PROPERTY_CALENDAR_CONTEXTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<CalendarContext> calendarContexts;
 
   public static final String JSON_PROPERTY_MAP_TASK_FIELDS = "mapTaskFields";
   @JsonProperty(JSON_PROPERTY_MAP_TASK_FIELDS)
@@ -163,6 +170,33 @@ public class EventLauncherDetails {
 
   public void setEventMatchingPattern(LauncherEventMatchingPattern eventMatchingPattern) {
     this.eventMatchingPattern = eventMatchingPattern;
+  }
+
+
+  public EventLauncherDetails calendarContexts(List<CalendarContext> calendarContexts) {
+    this.calendarContexts = calendarContexts;
+    return this;
+  }
+
+  public EventLauncherDetails addCalendarContextsItem(CalendarContext calendarContextsItem) {
+    if (this.calendarContexts == null) {
+      this.calendarContexts = new ArrayList<>();
+    }
+    this.calendarContexts.add(calendarContextsItem);
+    return this;
+  }
+
+  /**
+   * The named time zones and holiday calendars the date time adjustments of this Launcher work in.              Required when any mapped field has a dateTimeAdjustment
+   * @return calendarContexts
+   */
+  @javax.annotation.Nullable
+  public List<CalendarContext> getCalendarContexts() {
+    return calendarContexts;
+  }
+
+  public void setCalendarContexts(List<CalendarContext> calendarContexts) {
+    this.calendarContexts = calendarContexts;
   }
 
 
@@ -323,6 +357,7 @@ public class EventLauncherDetails {
     EventLauncherDetails eventLauncherDetails = (EventLauncherDetails) o;
     return Objects.equals(this.launcherType, eventLauncherDetails.launcherType) &&
         Objects.equals(this.eventMatchingPattern, eventLauncherDetails.eventMatchingPattern) &&
+        Objects.equals(this.calendarContexts, eventLauncherDetails.calendarContexts) &&
         Objects.equals(this.mapTaskFields, eventLauncherDetails.mapTaskFields) &&
         Objects.equals(this.mapCorrelationIds, eventLauncherDetails.mapCorrelationIds) &&
         Objects.equals(this.runAsUserId, eventLauncherDetails.runAsUserId) &&
@@ -337,7 +372,7 @@ public class EventLauncherDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(launcherType, eventMatchingPattern, mapTaskFields, mapCorrelationIds, runAsUserId, setTaskFields, setCorrelationIds, initialTrigger);
+    return Objects.hash(launcherType, eventMatchingPattern, calendarContexts, mapTaskFields, mapCorrelationIds, runAsUserId, setTaskFields, setCorrelationIds, initialTrigger);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -353,6 +388,7 @@ public class EventLauncherDetails {
     sb.append("class EventLauncherDetails {\n");
     sb.append("    launcherType: ").append(toIndentedString(launcherType)).append("\n");
     sb.append("    eventMatchingPattern: ").append(toIndentedString(eventMatchingPattern)).append("\n");
+    sb.append("    calendarContexts: ").append(toIndentedString(calendarContexts)).append("\n");
     sb.append("    mapTaskFields: ").append(toIndentedString(mapTaskFields)).append("\n");
     sb.append("    mapCorrelationIds: ").append(toIndentedString(mapCorrelationIds)).append("\n");
     sb.append("    runAsUserId: ").append(toIndentedString(runAsUserId)).append("\n");
