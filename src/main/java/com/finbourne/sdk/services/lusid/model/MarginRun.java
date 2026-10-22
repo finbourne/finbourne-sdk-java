@@ -356,7 +356,7 @@ public class MarginRun {
   }
 
   /**
-   * Agreements the run could not value, or the caller may not calculate margin for, with the reason.
+   * Agreements the run could not value or roll up into a call, or the caller may not calculate margin for, with the reason.
    * @return issues
    */
   @javax.annotation.Nonnull

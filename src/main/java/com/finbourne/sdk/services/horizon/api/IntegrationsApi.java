@@ -1053,7 +1053,7 @@ public class IntegrationsApi {
     /**
      * Build call for executeInstanceWithParams
      * @param instanceId Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. (required)
-     * @param requestBody Dictionary(string,string) of runtime parameters passed to the integration instance (required)
+     * @param requestBody JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1066,14 +1066,14 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest executeInstanceWithParamsCall(String instanceId, Map<String, String> requestBody, final ApiCallback _callback) throws ApiException {
+    private HttpRequest executeInstanceWithParamsCall(String instanceId, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
         return executeInstanceWithParamsCall(instanceId, requestBody,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for executeInstanceWithParams. Use any specified configuration options to override any other configuration for this request only.
      * @param instanceId Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param requestBody Dictionary(string,string) of runtime parameters passed to the integration instance (required)
+     * @param requestBody JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1086,7 +1086,7 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest executeInstanceWithParamsCall(String instanceId, Map<String, String> requestBody, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest executeInstanceWithParamsCall(String instanceId, Map<String, Object> requestBody, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1133,7 +1133,7 @@ public class IntegrationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest executeInstanceWithParamsValidateBeforeCall(String instanceId, Map<String, String> requestBody, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest executeInstanceWithParamsValidateBeforeCall(String instanceId, Map<String, Object> requestBody, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'instanceId' is set
         if (instanceId == null) {
             throw new ApiException("Missing the required parameter 'instanceId' when calling executeInstanceWithParams(Async)");
@@ -1152,7 +1152,7 @@ public class IntegrationsApi {
      * [EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters
      * Starts execution of an instance, returning its execution identifier. The user must be authenticated, entitled to call this method, and the user&#39;s domain must be licensed for the integration.
      * @param instanceId Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. (required)
-     * @param requestBody Dictionary(string,string) of runtime parameters passed to the integration instance (required)
+     * @param requestBody JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. (required)
      * @return ApiResponse&lt;ExecuteInstanceResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1164,7 +1164,7 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ExecuteInstanceResponse> executeInstanceWithParamsWithHttpInfo(String instanceId, Map<String, String> requestBody) throws ApiException {
+    private ApiResponse<ExecuteInstanceResponse> executeInstanceWithParamsWithHttpInfo(String instanceId, Map<String, Object> requestBody) throws ApiException {
         HttpRequest localVarCall = executeInstanceWithParamsValidateBeforeCall(instanceId, requestBody, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ExecuteInstanceResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1174,7 +1174,7 @@ public class IntegrationsApi {
      * [EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters
      * Starts execution of an instance, returning its execution identifier. The user must be authenticated, entitled to call this method, and the user&#39;s domain must be licensed for the integration.Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. (required)
-     * @param requestBody Dictionary(string,string) of runtime parameters passed to the integration instance (required)
+     * @param requestBody JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. (required)
      * @return ApiResponse&lt;ExecuteInstanceResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1186,7 +1186,7 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ExecuteInstanceResponse> executeInstanceWithParamsWithHttpInfo(String instanceId, Map<String, String> requestBody, ConfigurationOptions opts) throws ApiException {
+    private ApiResponse<ExecuteInstanceResponse> executeInstanceWithParamsWithHttpInfo(String instanceId, Map<String, Object> requestBody, ConfigurationOptions opts) throws ApiException {
         HttpRequest localVarCall = executeInstanceWithParamsValidateBeforeCall(instanceId, requestBody, null, opts);
         Type localVarReturnType = new TypeReference<ExecuteInstanceResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1196,7 +1196,7 @@ public class IntegrationsApi {
      * [EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters (asynchronously)
      * Starts execution of an instance, returning its execution identifier. The user must be authenticated, entitled to call this method, and the user&#39;s domain must be licensed for the integration.
      * @param instanceId Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. (required)
-     * @param requestBody Dictionary(string,string) of runtime parameters passed to the integration instance (required)
+     * @param requestBody JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1208,7 +1208,7 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void executeInstanceWithParamsAsync(String instanceId, Map<String, String> requestBody, final ApiCallback<ExecuteInstanceResponse> _callback) throws ApiException {
+    private void executeInstanceWithParamsAsync(String instanceId, Map<String, Object> requestBody, final ApiCallback<ExecuteInstanceResponse> _callback) throws ApiException {
 
         HttpRequest localVarCall = executeInstanceWithParamsValidateBeforeCall(instanceId, requestBody, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ExecuteInstanceResponse>(){}.getType();
@@ -1219,7 +1219,7 @@ public class IntegrationsApi {
      * [EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters (asynchronously)
      * Starts execution of an instance, returning its execution identifier. The user must be authenticated, entitled to call this method, and the user&#39;s domain must be licensed for the integration.Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. (required)
-     * @param requestBody Dictionary(string,string) of runtime parameters passed to the integration instance (required)
+     * @param requestBody JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1231,7 +1231,7 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void executeInstanceWithParamsAsync(String instanceId, Map<String, String> requestBody, final ApiCallback<ExecuteInstanceResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void executeInstanceWithParamsAsync(String instanceId, Map<String, Object> requestBody, final ApiCallback<ExecuteInstanceResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
         HttpRequest localVarCall = executeInstanceWithParamsValidateBeforeCall(instanceId, requestBody, _callback, opts);
         Type localVarReturnType = new TypeReference<ExecuteInstanceResponse>(){}.getType();
@@ -1240,9 +1240,9 @@ public class IntegrationsApi {
 
     public class APIexecuteInstanceWithParamsRequest {
         private final String instanceId;
-        private final Map<String, String> requestBody;
+        private final Map<String, Object> requestBody;
 
-        private APIexecuteInstanceWithParamsRequest(String instanceId, Map<String, String> requestBody) {
+        private APIexecuteInstanceWithParamsRequest(String instanceId, Map<String, Object> requestBody) {
             this.instanceId = instanceId;
             this.requestBody = requestBody;
         }
@@ -1374,7 +1374,7 @@ public class IntegrationsApi {
      * [EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters
      * Starts execution of an instance, returning its execution identifier. The user must be authenticated, entitled to call this method, and the user&#39;s domain must be licensed for the integration.
      * @param instanceId Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. (required)
-     * @param requestBody Dictionary(string,string) of runtime parameters passed to the integration instance (required)
+     * @param requestBody JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. (required)
      * @return APIexecuteInstanceWithParamsRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1385,7 +1385,7 @@ public class IntegrationsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    public APIexecuteInstanceWithParamsRequest executeInstanceWithParams(String instanceId, Map<String, String> requestBody) {
+    public APIexecuteInstanceWithParamsRequest executeInstanceWithParams(String instanceId, Map<String, Object> requestBody) {
         return new APIexecuteInstanceWithParamsRequest(instanceId, requestBody);
     }
     /**

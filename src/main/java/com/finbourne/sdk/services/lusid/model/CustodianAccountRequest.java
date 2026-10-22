@@ -84,7 +84,7 @@ public class CustodianAccountRequest {
 
   public static final String JSON_PROPERTY_CURRENCY = "currency";
   @JsonProperty(JSON_PROPERTY_CURRENCY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String currency;
 
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
@@ -230,10 +230,10 @@ public class CustodianAccountRequest {
   }
 
   /**
-   * The Currency for the Account
+   * The Currency for the Account. Optional, with no default.
    * @return currency
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getCurrency() {
     return currency;
   }

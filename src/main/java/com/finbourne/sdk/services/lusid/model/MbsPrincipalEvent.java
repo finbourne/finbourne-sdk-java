@@ -39,7 +39,10 @@ import com.finbourne.sdk.JSON;
   MbsPrincipalEvent.JSON_PROPERTY_EX_DATE,
   MbsPrincipalEvent.JSON_PROPERTY_PAYMENT_DATE,
   MbsPrincipalEvent.JSON_PROPERTY_CURRENCY,
-  MbsPrincipalEvent.JSON_PROPERTY_PRINCIPAL_PER_UNIT
+  MbsPrincipalEvent.JSON_PROPERTY_PRINCIPAL_PER_UNIT,
+  MbsPrincipalEvent.JSON_PROPERTY_PRICE_PER_UNIT,
+  MbsPrincipalEvent.JSON_PROPERTY_PREVIOUS_FACTOR,
+  MbsPrincipalEvent.JSON_PROPERTY_NEXT_FACTOR
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -68,6 +71,21 @@ public class MbsPrincipalEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_PRINCIPAL_PER_UNIT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal principalPerUnit;
+
+  public static final String JSON_PROPERTY_PRICE_PER_UNIT = "pricePerUnit";
+  @JsonProperty(JSON_PROPERTY_PRICE_PER_UNIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal pricePerUnit;
+
+  public static final String JSON_PROPERTY_PREVIOUS_FACTOR = "previousFactor";
+  @JsonProperty(JSON_PROPERTY_PREVIOUS_FACTOR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal previousFactor;
+
+  public static final String JSON_PROPERTY_NEXT_FACTOR = "nextFactor";
+  @JsonProperty(JSON_PROPERTY_NEXT_FACTOR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal nextFactor;
 
   public MbsPrincipalEvent() {
   }
@@ -148,6 +166,63 @@ public class MbsPrincipalEvent extends InstrumentEvent {
   }
 
 
+  public MbsPrincipalEvent pricePerUnit(java.math.BigDecimal pricePerUnit) {
+    this.pricePerUnit = pricePerUnit;
+    return this;
+  }
+
+  /**
+   * Redemption price per unit (OFFR / 100) of principal repaid. Clean price convention: a value of 1 is par.  Optional; a null is read as 1, so an omitted price is par. Separates the cash paid from the principal extinguished.
+   * @return pricePerUnit
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPricePerUnit() {
+    return pricePerUnit;
+  }
+
+  public void setPricePerUnit(java.math.BigDecimal pricePerUnit) {
+    this.pricePerUnit = pricePerUnit;
+  }
+
+
+  public MbsPrincipalEvent previousFactor(java.math.BigDecimal previousFactor) {
+    this.previousFactor = previousFactor;
+    return this;
+  }
+
+  /**
+   * The pool factor in force until the redemption (factor) date, as notified (AMI-SeCo Previous Factor).  Optional; recorded for reconciliation and not consumed by the transaction template. Must be supplied together with nextFactor.
+   * @return previousFactor
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPreviousFactor() {
+    return previousFactor;
+  }
+
+  public void setPreviousFactor(java.math.BigDecimal previousFactor) {
+    this.previousFactor = previousFactor;
+  }
+
+
+  public MbsPrincipalEvent nextFactor(java.math.BigDecimal nextFactor) {
+    this.nextFactor = nextFactor;
+    return this;
+  }
+
+  /**
+   * The pool factor applicable after the redemption (factor) date, as notified (AMI-SeCo Next Factor).  Optional; recorded for reconciliation and not consumed by the transaction template. Must be supplied together with previousFactor.
+   * @return nextFactor
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getNextFactor() {
+    return nextFactor;
+  }
+
+  public void setNextFactor(java.math.BigDecimal nextFactor) {
+    this.nextFactor = nextFactor;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -161,6 +236,9 @@ public class MbsPrincipalEvent extends InstrumentEvent {
         Objects.equals(this.paymentDate, mbsPrincipalEvent.paymentDate) &&
         Objects.equals(this.currency, mbsPrincipalEvent.currency) &&
         (this.principalPerUnit == null ? mbsPrincipalEvent.principalPerUnit == null : (mbsPrincipalEvent.principalPerUnit != null && this.principalPerUnit.compareTo(mbsPrincipalEvent.getPrincipalPerUnit()) == 0)) &&
+        (this.pricePerUnit == null ? mbsPrincipalEvent.pricePerUnit == null : (mbsPrincipalEvent.pricePerUnit != null && this.pricePerUnit.compareTo(mbsPrincipalEvent.getPricePerUnit()) == 0)) &&
+        (this.previousFactor == null ? mbsPrincipalEvent.previousFactor == null : (mbsPrincipalEvent.previousFactor != null && this.previousFactor.compareTo(mbsPrincipalEvent.getPreviousFactor()) == 0)) &&
+        (this.nextFactor == null ? mbsPrincipalEvent.nextFactor == null : (mbsPrincipalEvent.nextFactor != null && this.nextFactor.compareTo(mbsPrincipalEvent.getNextFactor()) == 0)) &&
         super.equals(o);
   }
 
@@ -170,7 +248,7 @@ public class MbsPrincipalEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(exDate, paymentDate, currency, principalPerUnit, super.hashCode());
+    return Objects.hash(exDate, paymentDate, currency, principalPerUnit, pricePerUnit, previousFactor, nextFactor, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -189,6 +267,9 @@ public class MbsPrincipalEvent extends InstrumentEvent {
     sb.append("    paymentDate: ").append(toIndentedString(paymentDate)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    principalPerUnit: ").append(toIndentedString(principalPerUnit)).append("\n");
+    sb.append("    pricePerUnit: ").append(toIndentedString(pricePerUnit)).append("\n");
+    sb.append("    previousFactor: ").append(toIndentedString(previousFactor)).append("\n");
+    sb.append("    nextFactor: ").append(toIndentedString(nextFactor)).append("\n");
     sb.append("}");
     return sb.toString();
   }

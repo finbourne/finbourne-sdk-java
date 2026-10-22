@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.ModelOptions;
 import java.io.IOException;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -34,7 +35,8 @@ import com.finbourne.sdk.JSON;
  * Model options for instruments of type flexibleDeposit and flexibleLoan when used on a standalone basis.
  */
 @JsonPropertyOrder({
-  FlexibleLoanPricerOptions.JSON_PROPERTY_SET_CLEAN_P_V_TO_ZERO
+  FlexibleLoanPricerOptions.JSON_PROPERTY_SET_CLEAN_P_V_TO_ZERO,
+  FlexibleLoanPricerOptions.JSON_PROPERTY_USE_PRICE_QUOTE_FOR_CLEAN_P_V
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -48,6 +50,11 @@ public class FlexibleLoanPricerOptions extends ModelOptions {
   @JsonProperty(JSON_PROPERTY_SET_CLEAN_P_V_TO_ZERO)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Boolean setCleanPVToZero;
+
+  public static final String JSON_PROPERTY_USE_PRICE_QUOTE_FOR_CLEAN_P_V = "usePriceQuoteForCleanPV";
+  @JsonProperty(JSON_PROPERTY_USE_PRICE_QUOTE_FOR_CLEAN_P_V)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean usePriceQuoteForCleanPV;
 
   public FlexibleLoanPricerOptions() {
   }
@@ -71,6 +78,25 @@ public class FlexibleLoanPricerOptions extends ModelOptions {
   }
 
 
+  public FlexibleLoanPricerOptions usePriceQuoteForCleanPV(Boolean usePriceQuoteForCleanPV) {
+    this.usePriceQuoteForCleanPV = usePriceQuoteForCleanPV;
+    return this;
+  }
+
+  /**
+   * If set to true the CleanPV calculation will be looking for a price quote (no default price is assumed). CleanPV will be calculated as Holding/Balance * priceQuote / quoteScaleFactor
+   * @return usePriceQuoteForCleanPV
+   */
+  @javax.annotation.Nullable
+  public Boolean getUsePriceQuoteForCleanPV() {
+    return usePriceQuoteForCleanPV;
+  }
+
+  public void setUsePriceQuoteForCleanPV(Boolean usePriceQuoteForCleanPV) {
+    this.usePriceQuoteForCleanPV = usePriceQuoteForCleanPV;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -81,12 +107,24 @@ public class FlexibleLoanPricerOptions extends ModelOptions {
     }
     FlexibleLoanPricerOptions flexibleLoanPricerOptions = (FlexibleLoanPricerOptions) o;
     return Objects.equals(this.setCleanPVToZero, flexibleLoanPricerOptions.setCleanPVToZero) &&
+        Objects.equals(this.usePriceQuoteForCleanPV, flexibleLoanPricerOptions.usePriceQuoteForCleanPV) &&
         super.equals(o);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(setCleanPVToZero, super.hashCode());
+    return Objects.hash(setCleanPVToZero, usePriceQuoteForCleanPV, super.hashCode());
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -95,6 +133,7 @@ public class FlexibleLoanPricerOptions extends ModelOptions {
     sb.append("class FlexibleLoanPricerOptions {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    setCleanPVToZero: ").append(toIndentedString(setCleanPVToZero)).append("\n");
+    sb.append("    usePriceQuoteForCleanPV: ").append(toIndentedString(usePriceQuoteForCleanPV)).append("\n");
     sb.append("}");
     return sb.toString();
   }

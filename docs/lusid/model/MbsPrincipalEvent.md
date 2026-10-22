@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **paymentDate** | [**OffsetDateTime**](OffsetDateTime.md) | The payment date of the principal | [optional] [default to OffsetDateTime]
 **currency** | **String** | The currency in which the principal is paid | [default to String]
 **principalPerUnit** | **java.math.BigDecimal** | The principal amount received for each unit of the instrument held on the ex date | [optional] [default to java.math.BigDecimal]
+**pricePerUnit** | **java.math.BigDecimal** | Redemption price per unit (OFFR / 100) of principal repaid. Clean price convention: a value of 1 is par.  Optional; a null is read as 1, so an omitted price is par. Separates the cash paid from the principal extinguished. | [optional] [default to java.math.BigDecimal]
+**previousFactor** | **java.math.BigDecimal** | The pool factor in force until the redemption (factor) date, as notified (AMI-SeCo Previous Factor).  Optional; recorded for reconciliation and not consumed by the transaction template. Must be supplied together with nextFactor. | [optional] [default to java.math.BigDecimal]
+**nextFactor** | **java.math.BigDecimal** | The pool factor applicable after the redemption (factor) date, as notified (AMI-SeCo Next Factor).  Optional; recorded for reconciliation and not consumed by the transaction template. Must be supplied together with previousFactor. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.MbsPrincipalEvent;
@@ -22,13 +25,19 @@ OffsetDateTime exDate = OffsetDateTime.now();
 OffsetDateTime paymentDate = OffsetDateTime.now();
 String currency = "example currency";
 @javax.annotation.Nullable java.math.BigDecimal principalPerUnit = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal pricePerUnit = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal previousFactor = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal nextFactor = new java.math.BigDecimal("100.00");
 
 
 MbsPrincipalEvent mbsPrincipalEventInstance = new MbsPrincipalEvent()
     .exDate(exDate)
     .paymentDate(paymentDate)
     .currency(currency)
-    .principalPerUnit(principalPerUnit);
+    .principalPerUnit(principalPerUnit)
+    .pricePerUnit(pricePerUnit)
+    .previousFactor(previousFactor)
+    .nextFactor(nextFactor);
 ```
 
 

@@ -37,7 +37,8 @@ import com.finbourne.sdk.JSON;
   TradingConventions.JSON_PROPERTY_PRICE_SCALE_FACTOR,
   TradingConventions.JSON_PROPERTY_MINIMUM_ORDER_SIZE,
   TradingConventions.JSON_PROPERTY_MINIMUM_ORDER_INCREMENT,
-  TradingConventions.JSON_PROPERTY_PRICE_QUOTATION_TYPE
+  TradingConventions.JSON_PROPERTY_PRICE_QUOTATION_TYPE,
+  TradingConventions.JSON_PROPERTY_PRICE_FRACTION_CONVENTION
 })
 
 public class TradingConventions {
@@ -60,6 +61,11 @@ public class TradingConventions {
   @JsonProperty(JSON_PROPERTY_PRICE_QUOTATION_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String priceQuotationType;
+
+  public static final String JSON_PROPERTY_PRICE_FRACTION_CONVENTION = "priceFractionConvention";
+  @JsonProperty(JSON_PROPERTY_PRICE_FRACTION_CONVENTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String priceFractionConvention;
 
   public TradingConventions() {
   }
@@ -140,6 +146,25 @@ public class TradingConventions {
   }
 
 
+  public TradingConventions priceFractionConvention(String priceFractionConvention) {
+    this.priceFractionConvention = priceFractionConvention;
+    return this;
+  }
+
+  /**
+   * The fractional grid on which the market conventionally quotes the instrument&#39;s price, such as 32nds for  US Treasuries. Declarative only: prices are stored and valued as decimals regardless, and consumers use  this to convert between decimal and fractional notation at entry and display.  Defaults to Decimal if not set.                Supported string (enumeration) values are: [Decimal, ThirtySeconds, SixtyFourths, OneHundredTwentyEighths, TwoHundredFiftySixths]. Available values: Decimal, ThirtySeconds, SixtyFourths, OneHundredTwentyEighths, TwoHundredFiftySixths.
+   * @return priceFractionConvention
+   */
+  @javax.annotation.Nullable
+  public String getPriceFractionConvention() {
+    return priceFractionConvention;
+  }
+
+  public void setPriceFractionConvention(String priceFractionConvention) {
+    this.priceFractionConvention = priceFractionConvention;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -152,7 +177,8 @@ public class TradingConventions {
     return (this.priceScaleFactor == null ? tradingConventions.priceScaleFactor == null : (tradingConventions.priceScaleFactor != null && this.priceScaleFactor.compareTo(tradingConventions.getPriceScaleFactor()) == 0)) &&
         (this.minimumOrderSize == null ? tradingConventions.minimumOrderSize == null : (tradingConventions.minimumOrderSize != null && this.minimumOrderSize.compareTo(tradingConventions.getMinimumOrderSize()) == 0)) &&
         (this.minimumOrderIncrement == null ? tradingConventions.minimumOrderIncrement == null : (tradingConventions.minimumOrderIncrement != null && this.minimumOrderIncrement.compareTo(tradingConventions.getMinimumOrderIncrement()) == 0)) &&
-        Objects.equals(this.priceQuotationType, tradingConventions.priceQuotationType);
+        Objects.equals(this.priceQuotationType, tradingConventions.priceQuotationType) &&
+        Objects.equals(this.priceFractionConvention, tradingConventions.priceFractionConvention);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -161,7 +187,7 @@ public class TradingConventions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(priceScaleFactor, minimumOrderSize, minimumOrderIncrement, priceQuotationType);
+    return Objects.hash(priceScaleFactor, minimumOrderSize, minimumOrderIncrement, priceQuotationType, priceFractionConvention);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -179,6 +205,7 @@ public class TradingConventions {
     sb.append("    minimumOrderSize: ").append(toIndentedString(minimumOrderSize)).append("\n");
     sb.append("    minimumOrderIncrement: ").append(toIndentedString(minimumOrderIncrement)).append("\n");
     sb.append("    priceQuotationType: ").append(toIndentedString(priceQuotationType)).append("\n");
+    sb.append("    priceFractionConvention: ").append(toIndentedString(priceFractionConvention)).append("\n");
     sb.append("}");
     return sb.toString();
   }

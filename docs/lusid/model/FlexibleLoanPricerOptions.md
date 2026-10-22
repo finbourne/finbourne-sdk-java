@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **modelOptionsType** | **String** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions. | [default to String]
 **setCleanPVToZero** | **Boolean** | If set to true the CleanPV will be set to zero in valuations and PV will effectively just be the Accrual. | [default to Boolean]
+**usePriceQuoteForCleanPV** | **Boolean** | If set to true the CleanPV calculation will be looking for a price quote (no default price is assumed). CleanPV will be calculated as Holding/Balance * priceQuote / quoteScaleFactor | [optional] [default to Boolean]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FlexibleLoanPricerOptions;
@@ -16,10 +17,12 @@ import java.lang.System;
 import java.net.URI;
 
 Boolean setCleanPVToZero = true;
+@javax.annotation.Nullable Boolean usePriceQuoteForCleanPV = true;
 
 
 FlexibleLoanPricerOptions flexibleLoanPricerOptionsInstance = new FlexibleLoanPricerOptions()
-    .setCleanPVToZero(setCleanPVToZero);
+    .setCleanPVToZero(setCleanPVToZero)
+    .usePriceQuoteForCleanPV(usePriceQuoteForCleanPV);
 ```
 
 
