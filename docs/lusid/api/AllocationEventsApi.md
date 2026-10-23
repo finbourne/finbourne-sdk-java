@@ -58,7 +58,7 @@ public class AllocationEventsApiExample {
         String scope = "scope_example"; // String | The scope of the Allocation Event.
         String code = "code_example"; // String | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
         AllocationEventBookRequest allocationEventBookRequest = new AllocationEventBookRequest(); // AllocationEventBookRequest | The booking reference to freeze the event under.
-        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.
         try {
             // uncomment the below to set overrides at the request level
             // AllocationEvent result = apiInstance.bookAllocationEvent(scope, code, allocationEventBookRequest, effectiveAt).execute(opts);
@@ -82,7 +82,7 @@ public class AllocationEventsApiExample {
 | **scope** | **String**| The scope of the Allocation Event. | |
 | **code** | **String**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | |
 | **allocationEventBookRequest** | [**AllocationEventBookRequest**](../model/AllocationEventBookRequest.md)| The booking reference to freeze the event under. | |
-| **effectiveAt** | **String**| The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **effectiveAt** | **String**| The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version&#39;s own effective date. Defaults to the current LUSID system datetime if not specified. | [optional] |
 
 ### Return type
 
@@ -190,7 +190,7 @@ public class AllocationEventsApiExample {
 
 [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
 
-Delete an Allocation Event from an effective datetime. The Allocation Event remains retrievable at earlier  effective datetimes.
+Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.
 
 ### Example
 
@@ -219,7 +219,7 @@ public class AllocationEventsApiExample {
         AllocationEventsApi apiInstance = apiFactory.build(AllocationEventsApi.class);
         String scope = "scope_example"; // String | The scope of the Allocation Event.
         String code = "code_example"; // String | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
-        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime.
         try {
             // uncomment the below to set overrides at the request level
             // DeletedEntityResponse result = apiInstance.deleteAllocationEvent(scope, code, effectiveAt).execute(opts);
@@ -242,7 +242,7 @@ public class AllocationEventsApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **scope** | **String**| The scope of the Allocation Event. | |
 | **code** | **String**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | |
-| **effectiveAt** | **String**| The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **effectiveAt** | **String**| The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. | [optional] |
 
 ### Return type
 
@@ -886,7 +886,7 @@ public class AllocationEventsApiExample {
         String scope = "scope_example"; // String | The scope of the Allocation Event.
         String code = "code_example"; // String | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
         AllocationEventReallocateRequest allocationEventReallocateRequest = new AllocationEventReallocateRequest(); // AllocationEventReallocateRequest | The reason for the reallocation and any basis values to use.
-        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date.
         try {
             // uncomment the below to set overrides at the request level
             // AllocationEvent result = apiInstance.reallocateAllocationEvent(scope, code, allocationEventReallocateRequest, effectiveAt).execute(opts);
@@ -910,7 +910,7 @@ public class AllocationEventsApiExample {
 | **scope** | **String**| The scope of the Allocation Event. | |
 | **code** | **String**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | |
 | **allocationEventReallocateRequest** | [**AllocationEventReallocateRequest**](../model/AllocationEventReallocateRequest.md)| The reason for the reallocation and any basis values to use. | |
-| **effectiveAt** | **String**| The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **effectiveAt** | **String**| The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date. | [optional] |
 
 ### Return type
 
@@ -969,7 +969,7 @@ public class AllocationEventsApiExample {
         String scope = "scope_example"; // String | The scope of the Allocation Event.
         String code = "code_example"; // String | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
         AllocationEventReceiptRequest allocationEventReceiptRequest = new AllocationEventReceiptRequest(); // AllocationEventReceiptRequest | The investor, amount and date of the receipt.
-        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version's own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified.
         try {
             // uncomment the below to set overrides at the request level
             // AllocationEvent result = apiInstance.receiveAllocationEvent(scope, code, allocationEventReceiptRequest, effectiveAt).execute(opts);
@@ -993,7 +993,7 @@ public class AllocationEventsApiExample {
 | **scope** | **String**| The scope of the Allocation Event. | |
 | **code** | **String**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | |
 | **allocationEventReceiptRequest** | [**AllocationEventReceiptRequest**](../model/AllocationEventReceiptRequest.md)| The investor, amount and date of the receipt. | |
-| **effectiveAt** | **String**| The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **effectiveAt** | **String**| The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version&#39;s own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified. | [optional] |
 
 ### Return type
 
@@ -1052,7 +1052,7 @@ public class AllocationEventsApiExample {
         String scope = "scope_example"; // String | The scope of the Allocation Event.
         String code = "code_example"; // String | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
         AllocationEventReverseRequest allocationEventReverseRequest = new AllocationEventReverseRequest(); // AllocationEventReverseRequest | The reason for the reversal and, optionally, when it should take effect.
-        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version's own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified.
         try {
             // uncomment the below to set overrides at the request level
             // AllocationEvent result = apiInstance.reverseAllocationEvent(scope, code, allocationEventReverseRequest, effectiveAt).execute(opts);
@@ -1076,7 +1076,7 @@ public class AllocationEventsApiExample {
 | **scope** | **String**| The scope of the Allocation Event. | |
 | **code** | **String**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | |
 | **allocationEventReverseRequest** | [**AllocationEventReverseRequest**](../model/AllocationEventReverseRequest.md)| The reason for the reversal and, optionally, when it should take effect. | |
-| **effectiveAt** | **String**| The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **effectiveAt** | **String**| The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version&#39;s own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified. | [optional] |
 
 ### Return type
 
@@ -1135,7 +1135,7 @@ public class AllocationEventsApiExample {
         String scope = "scope_example"; // String | The scope of the Allocation Event.
         String code = "code_example"; // String | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
         AllocationEventUnbookRequest allocationEventUnbookRequest = new AllocationEventUnbookRequest(); // AllocationEventUnbookRequest | The reason the booking is being taken back.
-        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.
         try {
             // uncomment the below to set overrides at the request level
             // AllocationEvent result = apiInstance.unbookAllocationEvent(scope, code, allocationEventUnbookRequest, effectiveAt).execute(opts);
@@ -1159,7 +1159,7 @@ public class AllocationEventsApiExample {
 | **scope** | **String**| The scope of the Allocation Event. | |
 | **code** | **String**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | |
 | **allocationEventUnbookRequest** | [**AllocationEventUnbookRequest**](../model/AllocationEventUnbookRequest.md)| The reason the booking is being taken back. | |
-| **effectiveAt** | **String**| The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **effectiveAt** | **String**| The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version&#39;s own effective date. Defaults to the current LUSID system datetime if not specified. | [optional] |
 
 ### Return type
 

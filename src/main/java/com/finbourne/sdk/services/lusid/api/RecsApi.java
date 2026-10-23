@@ -3448,7 +3448,7 @@ public class RecsApi {
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
-     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3472,7 +3472,7 @@ public class RecsApi {
      * @param runNumber The run of the instance whose view of the result is read. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3583,7 +3583,7 @@ public class RecsApi {
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
-     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @return ApiResponse&lt;RecResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3609,7 +3609,7 @@ public class RecsApi {
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
-     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @return ApiResponse&lt;RecResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3635,7 +3635,7 @@ public class RecsApi {
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
-     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3662,7 +3662,7 @@ public class RecsApi {
      * @param runNumber The run of the instance whose view of the result is read. (required)
      * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
-     * @param propertyKeys The property keys to decorate onto the result. (optional)
+     * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3709,7 +3709,7 @@ public class RecsApi {
 
         /**
          * Set propertyKeys
-         * @param propertyKeys The property keys to decorate onto the result. (optional)
+         * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
          * @return APIgetRecResultRequest
          */
         public APIgetRecResultRequest propertyKeys(List<String> propertyKeys) {
@@ -6173,7 +6173,7 @@ public class RecsApi {
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -6196,7 +6196,7 @@ public class RecsApi {
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -6292,7 +6292,7 @@ public class RecsApi {
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @return ApiResponse&lt;PagedResourceListOfRecResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -6317,7 +6317,7 @@ public class RecsApi {
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @return ApiResponse&lt;PagedResourceListOfRecResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -6342,7 +6342,7 @@ public class RecsApi {
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -6368,7 +6368,7 @@ public class RecsApi {
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
      * @param sortBy A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
-     * @param propertyKeys The property keys to decorate onto each result. (optional)
+     * @param propertyKeys The property keys to decorate onto each result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -6449,7 +6449,7 @@ public class RecsApi {
 
         /**
          * Set propertyKeys
-         * @param propertyKeys The property keys to decorate onto each result. (optional)
+         * @param propertyKeys The property keys to decorate onto each result. The keys its matching ruleset populates always come back, so list only others here. (optional)
          * @return APIlistRecResultsRequest
          */
         public APIlistRecResultsRequest propertyKeys(List<String> propertyKeys) {

@@ -1,5 +1,5 @@
-# com.finbourne.sdk.services.lusid.model.PagedResourceListOfPostingModuleRule
-classname PagedResourceListOfPostingModuleRule
+# com.finbourne.sdk.services.lusid.model.PagedResourceListOfPostingModuleRuleResponse
+classname PagedResourceListOfPostingModuleRuleResponse
 
 ## Properties
 
@@ -7,24 +7,24 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **nextPage** | **String** |  | [optional] [default to String]
 **previousPage** | **String** |  | [optional] [default to String]
-**values** | [**List&lt;PostingModuleRule&gt;**](PostingModuleRule.md) |  | [default to List<PostingModuleRule>]
+**values** | [**List&lt;PostingModuleRuleResponse&gt;**](PostingModuleRuleResponse.md) |  | [default to List<PostingModuleRuleResponse>]
 **href** | [**URI**](URI.md) |  | [optional] [default to URI]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
-import com.finbourne.sdk.services.lusid.model.PagedResourceListOfPostingModuleRule;
+import com.finbourne.sdk.services.lusid.model.PagedResourceListOfPostingModuleRuleResponse;
 import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
 @javax.annotation.Nullable String nextPage = "example nextPage";
 @javax.annotation.Nullable String previousPage = "example previousPage";
-List<PostingModuleRule> values = new List<PostingModuleRule>();
+List<PostingModuleRuleResponse> values = new List<PostingModuleRuleResponse>();
 @javax.annotation.Nullable URI href = URI.create("http://example.com/href");
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
-PagedResourceListOfPostingModuleRule pagedResourceListOfPostingModuleRuleInstance = new PagedResourceListOfPostingModuleRule()
+PagedResourceListOfPostingModuleRuleResponse pagedResourceListOfPostingModuleRuleResponseInstance = new PagedResourceListOfPostingModuleRuleResponse()
     .nextPage(nextPage)
     .previousPage(previousPage)
     .values(values)

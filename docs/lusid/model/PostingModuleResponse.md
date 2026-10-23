@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **chartOfAccountsId** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
 **displayName** | **String** | The name of the Posting Module. | [default to String]
 **description** | **String** | A description for the Posting Module. | [optional] [default to String]
-**rules** | [**List&lt;PostingModuleRule&gt;**](PostingModuleRule.md) | The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection. | [optional] [default to List<PostingModuleRule>]
+**rules** | [**List&lt;PostingModuleRuleResponse&gt;**](PostingModuleRuleResponse.md) | The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection. | [optional] [default to List<PostingModuleRuleResponse>]
 **status** | **String** | The Posting Module status. Default value: Active. Available values: Active, Inactive, Deleted. | [default to String]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
@@ -27,7 +27,7 @@ String postingModuleCode = "example postingModuleCode";
 ResourceId chartOfAccountsId = new ResourceId();
 String displayName = "example displayName";
 @javax.annotation.Nullable String description = "example description";
-@javax.annotation.Nullable List<PostingModuleRule> rules = new List<PostingModuleRule>();
+@javax.annotation.Nullable List<PostingModuleRuleResponse> rules = new List<PostingModuleRuleResponse>();
 String status = "example status";
 Version version = new Version();
 @javax.annotation.Nullable List<Link> links = new List<Link>();

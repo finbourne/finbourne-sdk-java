@@ -13,7 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.Link;
-import com.finbourne.sdk.services.lusid.model.PostingModuleRule;
+import com.finbourne.sdk.services.lusid.model.PostingModuleRuleResponse;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
@@ -81,7 +81,7 @@ public class PostingModuleResponse {
   public static final String JSON_PROPERTY_RULES = "rules";
   @JsonProperty(JSON_PROPERTY_RULES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private List<PostingModuleRule> rules;
+  private List<PostingModuleRuleResponse> rules;
 
   public static final String JSON_PROPERTY_STATUS = "status";
   @JsonProperty(JSON_PROPERTY_STATUS)
@@ -196,12 +196,12 @@ public class PostingModuleResponse {
   }
 
 
-  public PostingModuleResponse rules(List<PostingModuleRule> rules) {
+  public PostingModuleResponse rules(List<PostingModuleRuleResponse> rules) {
     this.rules = rules;
     return this;
   }
 
-  public PostingModuleResponse addRulesItem(PostingModuleRule rulesItem) {
+  public PostingModuleResponse addRulesItem(PostingModuleRuleResponse rulesItem) {
     if (this.rules == null) {
       this.rules = new ArrayList<>();
     }
@@ -214,11 +214,11 @@ public class PostingModuleResponse {
    * @return rules
    */
   @javax.annotation.Nullable
-  public List<PostingModuleRule> getRules() {
+  public List<PostingModuleRuleResponse> getRules() {
     return rules;
   }
 
-  public void setRules(List<PostingModuleRule> rules) {
+  public void setRules(List<PostingModuleRuleResponse> rules) {
     this.rules = rules;
   }
 

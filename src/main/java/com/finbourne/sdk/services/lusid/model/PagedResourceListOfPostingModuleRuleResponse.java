@@ -13,7 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.Link;
-import com.finbourne.sdk.services.lusid.model.PostingModuleRule;
+import com.finbourne.sdk.services.lusid.model.PostingModuleRuleResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -36,17 +36,17 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * PagedResourceListOfPostingModuleRule
+ * PagedResourceListOfPostingModuleRuleResponse
  */
 @JsonPropertyOrder({
-  PagedResourceListOfPostingModuleRule.JSON_PROPERTY_NEXT_PAGE,
-  PagedResourceListOfPostingModuleRule.JSON_PROPERTY_PREVIOUS_PAGE,
-  PagedResourceListOfPostingModuleRule.JSON_PROPERTY_VALUES,
-  PagedResourceListOfPostingModuleRule.JSON_PROPERTY_HREF,
-  PagedResourceListOfPostingModuleRule.JSON_PROPERTY_LINKS
+  PagedResourceListOfPostingModuleRuleResponse.JSON_PROPERTY_NEXT_PAGE,
+  PagedResourceListOfPostingModuleRuleResponse.JSON_PROPERTY_PREVIOUS_PAGE,
+  PagedResourceListOfPostingModuleRuleResponse.JSON_PROPERTY_VALUES,
+  PagedResourceListOfPostingModuleRuleResponse.JSON_PROPERTY_HREF,
+  PagedResourceListOfPostingModuleRuleResponse.JSON_PROPERTY_LINKS
 })
 
-public class PagedResourceListOfPostingModuleRule {
+public class PagedResourceListOfPostingModuleRuleResponse {
   public static final String JSON_PROPERTY_NEXT_PAGE = "nextPage";
   @JsonProperty(JSON_PROPERTY_NEXT_PAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -60,7 +60,7 @@ public class PagedResourceListOfPostingModuleRule {
   public static final String JSON_PROPERTY_VALUES = "values";
   @JsonProperty(JSON_PROPERTY_VALUES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<PostingModuleRule> values = new ArrayList<>();
+  private List<PostingModuleRuleResponse> values = new ArrayList<>();
 
   public static final String JSON_PROPERTY_HREF = "href";
   @JsonProperty(JSON_PROPERTY_HREF)
@@ -72,10 +72,10 @@ public class PagedResourceListOfPostingModuleRule {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<Link> links;
 
-  public PagedResourceListOfPostingModuleRule() {
+  public PagedResourceListOfPostingModuleRuleResponse() {
   }
 
-  public PagedResourceListOfPostingModuleRule nextPage(String nextPage) {
+  public PagedResourceListOfPostingModuleRuleResponse nextPage(String nextPage) {
     this.nextPage = nextPage;
     return this;
   }
@@ -94,7 +94,7 @@ public class PagedResourceListOfPostingModuleRule {
   }
 
 
-  public PagedResourceListOfPostingModuleRule previousPage(String previousPage) {
+  public PagedResourceListOfPostingModuleRuleResponse previousPage(String previousPage) {
     this.previousPage = previousPage;
     return this;
   }
@@ -113,12 +113,12 @@ public class PagedResourceListOfPostingModuleRule {
   }
 
 
-  public PagedResourceListOfPostingModuleRule values(List<PostingModuleRule> values) {
+  public PagedResourceListOfPostingModuleRuleResponse values(List<PostingModuleRuleResponse> values) {
     this.values = values;
     return this;
   }
 
-  public PagedResourceListOfPostingModuleRule addValuesItem(PostingModuleRule valuesItem) {
+  public PagedResourceListOfPostingModuleRuleResponse addValuesItem(PostingModuleRuleResponse valuesItem) {
     if (this.values == null) {
       this.values = new ArrayList<>();
     }
@@ -131,16 +131,16 @@ public class PagedResourceListOfPostingModuleRule {
    * @return values
    */
   @javax.annotation.Nonnull
-  public List<PostingModuleRule> getValues() {
+  public List<PostingModuleRuleResponse> getValues() {
     return values;
   }
 
-  public void setValues(List<PostingModuleRule> values) {
+  public void setValues(List<PostingModuleRuleResponse> values) {
     this.values = values;
   }
 
 
-  public PagedResourceListOfPostingModuleRule href(URI href) {
+  public PagedResourceListOfPostingModuleRuleResponse href(URI href) {
     this.href = href;
     return this;
   }
@@ -159,12 +159,12 @@ public class PagedResourceListOfPostingModuleRule {
   }
 
 
-  public PagedResourceListOfPostingModuleRule links(List<Link> links) {
+  public PagedResourceListOfPostingModuleRuleResponse links(List<Link> links) {
     this.links = links;
     return this;
   }
 
-  public PagedResourceListOfPostingModuleRule addLinksItem(Link linksItem) {
+  public PagedResourceListOfPostingModuleRuleResponse addLinksItem(Link linksItem) {
     if (this.links == null) {
       this.links = new ArrayList<>();
     }
@@ -194,12 +194,12 @@ public class PagedResourceListOfPostingModuleRule {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PagedResourceListOfPostingModuleRule pagedResourceListOfPostingModuleRule = (PagedResourceListOfPostingModuleRule) o;
-    return Objects.equals(this.nextPage, pagedResourceListOfPostingModuleRule.nextPage) &&
-        Objects.equals(this.previousPage, pagedResourceListOfPostingModuleRule.previousPage) &&
-        Objects.equals(this.values, pagedResourceListOfPostingModuleRule.values) &&
-        Objects.equals(this.href, pagedResourceListOfPostingModuleRule.href) &&
-        Objects.equals(this.links, pagedResourceListOfPostingModuleRule.links);
+    PagedResourceListOfPostingModuleRuleResponse pagedResourceListOfPostingModuleRuleResponse = (PagedResourceListOfPostingModuleRuleResponse) o;
+    return Objects.equals(this.nextPage, pagedResourceListOfPostingModuleRuleResponse.nextPage) &&
+        Objects.equals(this.previousPage, pagedResourceListOfPostingModuleRuleResponse.previousPage) &&
+        Objects.equals(this.values, pagedResourceListOfPostingModuleRuleResponse.values) &&
+        Objects.equals(this.href, pagedResourceListOfPostingModuleRuleResponse.href) &&
+        Objects.equals(this.links, pagedResourceListOfPostingModuleRuleResponse.links);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -221,7 +221,7 @@ public class PagedResourceListOfPostingModuleRule {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PagedResourceListOfPostingModuleRule {\n");
+    sb.append("class PagedResourceListOfPostingModuleRuleResponse {\n");
     sb.append("    nextPage: ").append(toIndentedString(nextPage)).append("\n");
     sb.append("    previousPage: ").append(toIndentedString(previousPage)).append("\n");
     sb.append("    values: ").append(toIndentedString(values)).append("\n");
@@ -244,18 +244,18 @@ public class PagedResourceListOfPostingModuleRule {
 
 
   /**
-   * Create an instance of PagedResourceListOfPostingModuleRule given an JSON string
+   * Create an instance of PagedResourceListOfPostingModuleRuleResponse given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of PagedResourceListOfPostingModuleRule
-   * @throws java.io.IOException if the JSON string is invalid with respect to PagedResourceListOfPostingModuleRule
+   * @return An instance of PagedResourceListOfPostingModuleRuleResponse
+   * @throws java.io.IOException if the JSON string is invalid with respect to PagedResourceListOfPostingModuleRuleResponse
    */
-  public static PagedResourceListOfPostingModuleRule fromJson(String jsonString) throws java.io.IOException {
-    return JSON.getMapper().readValue(jsonString, PagedResourceListOfPostingModuleRule.class);
+  public static PagedResourceListOfPostingModuleRuleResponse fromJson(String jsonString) throws java.io.IOException {
+    return JSON.getMapper().readValue(jsonString, PagedResourceListOfPostingModuleRuleResponse.class);
   }
 
   /**
-   * Convert an instance of PagedResourceListOfPostingModuleRule to an JSON string
+   * Convert an instance of PagedResourceListOfPostingModuleRuleResponse to an JSON string
    *
    * @return JSON string
    */

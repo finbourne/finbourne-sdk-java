@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.AdditionalPayment;
 import com.finbourne.sdk.services.lusid.model.Basket;
 import com.finbourne.sdk.services.lusid.model.CdsFlowConventions;
+import com.finbourne.sdk.services.lusid.model.CdsProtectionDetailSpecification;
 import com.finbourne.sdk.services.lusid.model.FlowConventionName;
 import com.finbourne.sdk.services.lusid.model.LusidInstrument;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
@@ -54,6 +55,7 @@ import com.finbourne.sdk.JSON;
   CdsIndex.JSON_PROPERTY_CONVENTION_NAME,
   CdsIndex.JSON_PROPERTY_NOTIONAL,
   CdsIndex.JSON_PROPERTY_IS_NON_STANDARD,
+  CdsIndex.JSON_PROPERTY_PROTECTION_DETAIL_SPECIFICATION,
   CdsIndex.JSON_PROPERTY_ADDITIONAL_PAYMENTS,
   CdsIndex.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
 })
@@ -109,6 +111,11 @@ public class CdsIndex extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_IS_NON_STANDARD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean isNonStandard;
+
+  public static final String JSON_PROPERTY_PROTECTION_DETAIL_SPECIFICATION = "protectionDetailSpecification";
+  @JsonProperty(JSON_PROPERTY_PROTECTION_DETAIL_SPECIFICATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CdsProtectionDetailSpecification protectionDetailSpecification;
 
   public static final String JSON_PROPERTY_ADDITIONAL_PAYMENTS = "additionalPayments";
   @JsonProperty(JSON_PROPERTY_ADDITIONAL_PAYMENTS)
@@ -302,6 +309,25 @@ public class CdsIndex extends LusidInstrument {
   }
 
 
+  public CdsIndex protectionDetailSpecification(CdsProtectionDetailSpecification protectionDetailSpecification) {
+    this.protectionDetailSpecification = protectionDetailSpecification;
+    return this;
+  }
+
+  /**
+   * Get protectionDetailSpecification
+   * @return protectionDetailSpecification
+   */
+  @javax.annotation.Nullable
+  public CdsProtectionDetailSpecification getProtectionDetailSpecification() {
+    return protectionDetailSpecification;
+  }
+
+  public void setProtectionDetailSpecification(CdsProtectionDetailSpecification protectionDetailSpecification) {
+    this.protectionDetailSpecification = protectionDetailSpecification;
+  }
+
+
   public CdsIndex additionalPayments(List<AdditionalPayment> additionalPayments) {
     this.additionalPayments = additionalPayments;
     return this;
@@ -366,6 +392,7 @@ public class CdsIndex extends LusidInstrument {
         Objects.equals(this.conventionName, cdsIndex.conventionName) &&
         (this.notional == null ? cdsIndex.notional == null : (cdsIndex.notional != null && this.notional.compareTo(cdsIndex.getNotional()) == 0)) &&
         Objects.equals(this.isNonStandard, cdsIndex.isNonStandard) &&
+        Objects.equals(this.protectionDetailSpecification, cdsIndex.protectionDetailSpecification) &&
         Objects.equals(this.additionalPayments, cdsIndex.additionalPayments) &&
         Objects.equals(this.timeZoneConventions, cdsIndex.timeZoneConventions) &&
         super.equals(o);
@@ -377,7 +404,7 @@ public class CdsIndex extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, flowConventions, couponRate, identifiers, basket, conventionName, notional, isNonStandard, additionalPayments, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, flowConventions, couponRate, identifiers, basket, conventionName, notional, isNonStandard, protectionDetailSpecification, additionalPayments, timeZoneConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -401,6 +428,7 @@ public class CdsIndex extends LusidInstrument {
     sb.append("    conventionName: ").append(toIndentedString(conventionName)).append("\n");
     sb.append("    notional: ").append(toIndentedString(notional)).append("\n");
     sb.append("    isNonStandard: ").append(toIndentedString(isNonStandard)).append("\n");
+    sb.append("    protectionDetailSpecification: ").append(toIndentedString(protectionDetailSpecification)).append("\n");
     sb.append("    additionalPayments: ").append(toIndentedString(additionalPayments)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
     sb.append("}");

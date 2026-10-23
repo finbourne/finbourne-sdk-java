@@ -59,6 +59,7 @@ import com.finbourne.sdk.JSON;
   FundJournalEntryLine.JSON_PROPERTY_UNITS,
   FundJournalEntryLine.JSON_PROPERTY_POSTING_MODULE_CODE,
   FundJournalEntryLine.JSON_PROPERTY_POSTING_RULE,
+  FundJournalEntryLine.JSON_PROPERTY_POSTING_RULE_VERSION,
   FundJournalEntryLine.JSON_PROPERTY_AS_AT_DATE,
   FundJournalEntryLine.JSON_PROPERTY_ACTIVITIES_DESCRIPTION,
   FundJournalEntryLine.JSON_PROPERTY_SOURCE_TYPE,
@@ -148,6 +149,11 @@ public class FundJournalEntryLine {
   @JsonProperty(JSON_PROPERTY_POSTING_RULE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String postingRule;
+
+  public static final String JSON_PROPERTY_POSTING_RULE_VERSION = "postingRuleVersion";
+  @JsonProperty(JSON_PROPERTY_POSTING_RULE_VERSION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer postingRuleVersion;
 
   public static final String JSON_PROPERTY_AS_AT_DATE = "asAtDate";
   @JsonProperty(JSON_PROPERTY_AS_AT_DATE)
@@ -514,6 +520,25 @@ public class FundJournalEntryLine {
 
   public void setPostingRule(String postingRule) {
     this.postingRule = postingRule;
+  }
+
+
+  public FundJournalEntryLine postingRuleVersion(Integer postingRuleVersion) {
+    this.postingRuleVersion = postingRuleVersion;
+    return this;
+  }
+
+  /**
+   * The version of the rule generating the Journal Entry Line. Null where no rule matched the line.
+   * @return postingRuleVersion
+   */
+  @javax.annotation.Nullable
+  public Integer getPostingRuleVersion() {
+    return postingRuleVersion;
+  }
+
+  public void setPostingRuleVersion(Integer postingRuleVersion) {
+    this.postingRuleVersion = postingRuleVersion;
   }
 
 
@@ -1005,6 +1030,7 @@ public class FundJournalEntryLine {
         (this.units == null ? fundJournalEntryLine.units == null : (fundJournalEntryLine.units != null && this.units.compareTo(fundJournalEntryLine.getUnits()) == 0)) &&
         Objects.equals(this.postingModuleCode, fundJournalEntryLine.postingModuleCode) &&
         Objects.equals(this.postingRule, fundJournalEntryLine.postingRule) &&
+        Objects.equals(this.postingRuleVersion, fundJournalEntryLine.postingRuleVersion) &&
         Objects.equals(this.asAtDate, fundJournalEntryLine.asAtDate) &&
         Objects.equals(this.activitiesDescription, fundJournalEntryLine.activitiesDescription) &&
         Objects.equals(this.sourceType, fundJournalEntryLine.sourceType) &&
@@ -1035,7 +1061,7 @@ public class FundJournalEntryLine {
 
   @Override
  public int hashCode() {
-    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, txnType, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, shareClassBreakdowns, custodianAccountId, custodianAccountType, bucketMemberships, links);
+    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, postingRuleVersion, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, txnType, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, shareClassBreakdowns, custodianAccountId, custodianAccountType, bucketMemberships, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1062,6 +1088,7 @@ public class FundJournalEntryLine {
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    postingModuleCode: ").append(toIndentedString(postingModuleCode)).append("\n");
     sb.append("    postingRule: ").append(toIndentedString(postingRule)).append("\n");
+    sb.append("    postingRuleVersion: ").append(toIndentedString(postingRuleVersion)).append("\n");
     sb.append("    asAtDate: ").append(toIndentedString(asAtDate)).append("\n");
     sb.append("    activitiesDescription: ").append(toIndentedString(activitiesDescription)).append("\n");
     sb.append("    sourceType: ").append(toIndentedString(sourceType)).append("\n");

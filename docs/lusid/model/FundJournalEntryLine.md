@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **units** | **java.math.BigDecimal** | Units held for the Journal Entry Line. | [default to java.math.BigDecimal]
 **postingModuleCode** | **String** | The code of the posting module where the posting rules derived the Journal Entry lines. | [optional] [default to String]
 **postingRule** | **String** | The rule generating the Journal Entry Line. | [default to String]
+**postingRuleVersion** | **Integer** | The version of the rule generating the Journal Entry Line. Null where no rule matched the line. | [optional] [default to Integer]
 **asAtDate** | [**OffsetDateTime**](OffsetDateTime.md) | The corresponding input date and time of the Transaction generating the Journal Entry Line. | [default to OffsetDateTime]
 **activitiesDescription** | **String** | This would be the description of the business activities this Journal Entry Line is for. | [optional] [default to String]
 **sourceType** | **String** | The type of source for the Journal Entry Line. Available values: LusidTransaction, LusidValuation, Manual, External. | [default to String]
@@ -61,6 +62,7 @@ CurrencyAndAmount base = new CurrencyAndAmount();
 java.math.BigDecimal units = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable String postingModuleCode = "example postingModuleCode";
 String postingRule = "example postingRule";
+@javax.annotation.Nullable Integer postingRuleVersion = new Integer("100.00");
 OffsetDateTime asAtDate = OffsetDateTime.now();
 @javax.annotation.Nullable String activitiesDescription = "example activitiesDescription";
 String sourceType = "example sourceType";
@@ -99,6 +101,7 @@ FundJournalEntryLine fundJournalEntryLineInstance = new FundJournalEntryLine()
     .units(units)
     .postingModuleCode(postingModuleCode)
     .postingRule(postingRule)
+    .postingRuleVersion(postingRuleVersion)
     .asAtDate(asAtDate)
     .activitiesDescription(activitiesDescription)
     .sourceType(sourceType)

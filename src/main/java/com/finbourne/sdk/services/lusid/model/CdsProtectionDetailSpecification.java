@@ -54,7 +54,7 @@ public class CdsProtectionDetailSpecification {
   public static final String JSON_PROPERTY_PROTECT_START_DAY = "protectStartDay";
   @JsonProperty(JSON_PROPERTY_PROTECT_START_DAY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private Boolean protectStartDay = true;
+  private Boolean protectStartDay = false;
 
   public static final String JSON_PROPERTY_PAY_ACCRUED_INTEREST_ON_DEFAULT = "payAccruedInterestOnDefault";
   @JsonProperty(JSON_PROPERTY_PAY_ACCRUED_INTEREST_ON_DEFAULT)
@@ -108,7 +108,7 @@ public class CdsProtectionDetailSpecification {
   }
 
   /**
-   * Does the protection leg pay out in the case of default on the start date. Defaults to true if not set.
+   * Does the protection leg pay out in the case of default on the start date. Defaults to false if not set.  If true, the trade date is not included in the accrued interest that a transaction pays or receives.
    * @return protectStartDay
    */
   @javax.annotation.Nullable

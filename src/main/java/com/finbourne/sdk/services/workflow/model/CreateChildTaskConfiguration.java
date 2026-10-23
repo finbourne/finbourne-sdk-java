@@ -44,7 +44,8 @@ import com.finbourne.sdk.JSON;
   CreateChildTaskConfiguration.JSON_PROPERTY_INITIAL_TRIGGER,
   CreateChildTaskConfiguration.JSON_PROPERTY_CHILD_TASK_FIELDS,
   CreateChildTaskConfiguration.JSON_PROPERTY_MAP_STACKING_KEY_FROM,
-  CreateChildTaskConfiguration.JSON_PROPERTY_DISPLAY_NAME
+  CreateChildTaskConfiguration.JSON_PROPERTY_DISPLAY_NAME,
+  CreateChildTaskConfiguration.JSON_PROPERTY_CONDITION
 })
 
 public class CreateChildTaskConfiguration {
@@ -77,6 +78,11 @@ public class CreateChildTaskConfiguration {
   @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String displayName;
+
+  public static final String JSON_PROPERTY_CONDITION = "condition";
+  @JsonProperty(JSON_PROPERTY_CONDITION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String condition;
 
   public CreateChildTaskConfiguration() {
   }
@@ -203,6 +209,25 @@ public class CreateChildTaskConfiguration {
   }
 
 
+  public CreateChildTaskConfiguration condition(String condition) {
+    this.condition = condition;
+    return this;
+  }
+
+  /**
+   * A filter expression over the parent Task, in the same form as a transition Guard. If present, the child Task is only created when it evaluates to true, after the field changes of the update that made the transition
+   * @return condition
+   */
+  @javax.annotation.Nullable
+  public String getCondition() {
+    return condition;
+  }
+
+  public void setCondition(String condition) {
+    this.condition = condition;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -217,7 +242,8 @@ public class CreateChildTaskConfiguration {
         Objects.equals(this.initialTrigger, createChildTaskConfiguration.initialTrigger) &&
         Objects.equals(this.childTaskFields, createChildTaskConfiguration.childTaskFields) &&
         Objects.equals(this.mapStackingKeyFrom, createChildTaskConfiguration.mapStackingKeyFrom) &&
-        Objects.equals(this.displayName, createChildTaskConfiguration.displayName);
+        Objects.equals(this.displayName, createChildTaskConfiguration.displayName) &&
+        Objects.equals(this.condition, createChildTaskConfiguration.condition);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -226,7 +252,7 @@ public class CreateChildTaskConfiguration {
 
   @Override
  public int hashCode() {
-    return Objects.hash(taskDefinitionId, taskDefinitionAsAt, initialTrigger, childTaskFields, mapStackingKeyFrom, displayName);
+    return Objects.hash(taskDefinitionId, taskDefinitionAsAt, initialTrigger, childTaskFields, mapStackingKeyFrom, displayName, condition);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -246,6 +272,7 @@ public class CreateChildTaskConfiguration {
     sb.append("    childTaskFields: ").append(toIndentedString(childTaskFields)).append("\n");
     sb.append("    mapStackingKeyFrom: ").append(toIndentedString(mapStackingKeyFrom)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
+    sb.append("    condition: ").append(toIndentedString(condition)).append("\n");
     sb.append("}");
     return sb.toString();
   }

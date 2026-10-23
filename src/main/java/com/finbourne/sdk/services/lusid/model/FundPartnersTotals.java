@@ -14,6 +14,8 @@ package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -30,18 +32,18 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Totals across every register line of the fund, independent of paging.
+ * Totals across every register line of the fund, independent of paging. Commitments are totalled per commitment  currency; amounts in different currencies are never added together.
  */
 @JsonPropertyOrder({
-  FundPartnersTotals.JSON_PROPERTY_COMMITTED,
+  FundPartnersTotals.JSON_PROPERTY_COMMITTED_BY_CURRENCY,
   FundPartnersTotals.JSON_PROPERTY_PARTNER_COUNT
 })
 
 public class FundPartnersTotals {
-  public static final String JSON_PROPERTY_COMMITTED = "committed";
-  @JsonProperty(JSON_PROPERTY_COMMITTED)
+  public static final String JSON_PROPERTY_COMMITTED_BY_CURRENCY = "committedByCurrency";
+  @JsonProperty(JSON_PROPERTY_COMMITTED_BY_CURRENCY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private java.math.BigDecimal committed;
+  private Map<String, java.math.BigDecimal> committedByCurrency = new HashMap<>();
 
   public static final String JSON_PROPERTY_PARTNER_COUNT = "partnerCount";
   @JsonProperty(JSON_PROPERTY_PARTNER_COUNT)
@@ -51,22 +53,30 @@ public class FundPartnersTotals {
   public FundPartnersTotals() {
   }
 
-  public FundPartnersTotals committed(java.math.BigDecimal committed) {
-    this.committed = committed;
+  public FundPartnersTotals committedByCurrency(Map<String, java.math.BigDecimal> committedByCurrency) {
+    this.committedByCurrency = committedByCurrency;
+    return this;
+  }
+
+  public FundPartnersTotals putCommittedByCurrencyItem(String key, java.math.BigDecimal committedByCurrencyItem) {
+    if (this.committedByCurrency == null) {
+      this.committedByCurrency = new HashMap<>();
+    }
+    this.committedByCurrency.put(key, committedByCurrencyItem);
     return this;
   }
 
   /**
-   * The total committed capital across all partners.
-   * @return committed
+   * The total committed capital across all partners, per commitment currency, keyed by currency code. Commitments in different currencies are not added together.
+   * @return committedByCurrency
    */
   @javax.annotation.Nonnull
-  public java.math.BigDecimal getCommitted() {
-    return committed;
+  public Map<String, java.math.BigDecimal> getCommittedByCurrency() {
+    return committedByCurrency;
   }
 
-  public void setCommitted(java.math.BigDecimal committed) {
-    this.committed = committed;
+  public void setCommittedByCurrency(Map<String, java.math.BigDecimal> committedByCurrency) {
+    this.committedByCurrency = committedByCurrency;
   }
 
 
@@ -98,20 +108,20 @@ public class FundPartnersTotals {
       return false;
     }
     FundPartnersTotals fundPartnersTotals = (FundPartnersTotals) o;
-    return (this.committed == null ? fundPartnersTotals.committed == null : (fundPartnersTotals.committed != null && this.committed.compareTo(fundPartnersTotals.getCommitted()) == 0)) &&
+    return Objects.equals(this.committedByCurrency, fundPartnersTotals.committedByCurrency) &&
         Objects.equals(this.partnerCount, fundPartnersTotals.partnerCount);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(committed, partnerCount);
+    return Objects.hash(committedByCurrency, partnerCount);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class FundPartnersTotals {\n");
-    sb.append("    committed: ").append(toIndentedString(committed)).append("\n");
+    sb.append("    committedByCurrency: ").append(toIndentedString(committedByCurrency)).append("\n");
     sb.append("    partnerCount: ").append(toIndentedString(partnerCount)).append("\n");
     sb.append("}");
     return sb.toString();

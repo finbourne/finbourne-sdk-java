@@ -57,6 +57,7 @@ import com.finbourne.sdk.JSON;
   JournalEntryLine.JSON_PROPERTY_UNITS,
   JournalEntryLine.JSON_PROPERTY_POSTING_MODULE_CODE,
   JournalEntryLine.JSON_PROPERTY_POSTING_RULE,
+  JournalEntryLine.JSON_PROPERTY_POSTING_RULE_VERSION,
   JournalEntryLine.JSON_PROPERTY_AS_AT_DATE,
   JournalEntryLine.JSON_PROPERTY_ACTIVITIES_DESCRIPTION,
   JournalEntryLine.JSON_PROPERTY_SOURCE_TYPE,
@@ -144,6 +145,11 @@ public class JournalEntryLine {
   @JsonProperty(JSON_PROPERTY_POSTING_RULE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String postingRule;
+
+  public static final String JSON_PROPERTY_POSTING_RULE_VERSION = "postingRuleVersion";
+  @JsonProperty(JSON_PROPERTY_POSTING_RULE_VERSION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer postingRuleVersion;
 
   public static final String JSON_PROPERTY_AS_AT_DATE = "asAtDate";
   @JsonProperty(JSON_PROPERTY_AS_AT_DATE)
@@ -500,6 +506,25 @@ public class JournalEntryLine {
 
   public void setPostingRule(String postingRule) {
     this.postingRule = postingRule;
+  }
+
+
+  public JournalEntryLine postingRuleVersion(Integer postingRuleVersion) {
+    this.postingRuleVersion = postingRuleVersion;
+    return this;
+  }
+
+  /**
+   * The version of the rule generating the Journal Entry Line. Null where no rule matched the line.
+   * @return postingRuleVersion
+   */
+  @javax.annotation.Nullable
+  public Integer getPostingRuleVersion() {
+    return postingRuleVersion;
+  }
+
+  public void setPostingRuleVersion(Integer postingRuleVersion) {
+    this.postingRuleVersion = postingRuleVersion;
   }
 
 
@@ -937,6 +962,7 @@ public class JournalEntryLine {
         (this.units == null ? journalEntryLine.units == null : (journalEntryLine.units != null && this.units.compareTo(journalEntryLine.getUnits()) == 0)) &&
         Objects.equals(this.postingModuleCode, journalEntryLine.postingModuleCode) &&
         Objects.equals(this.postingRule, journalEntryLine.postingRule) &&
+        Objects.equals(this.postingRuleVersion, journalEntryLine.postingRuleVersion) &&
         Objects.equals(this.asAtDate, journalEntryLine.asAtDate) &&
         Objects.equals(this.activitiesDescription, journalEntryLine.activitiesDescription) &&
         Objects.equals(this.sourceType, journalEntryLine.sourceType) &&
@@ -965,7 +991,7 @@ public class JournalEntryLine {
 
   @Override
  public int hashCode() {
-    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, txnType, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, custodianAccountId, custodianAccountType, links);
+    return Objects.hash(accountingDate, activityDate, portfolioId, instrumentId, instrumentScope, subHoldingKeys, taxLotId, generalLedgerAccountCode, local, base, units, postingModuleCode, postingRule, postingRuleVersion, asAtDate, activitiesDescription, sourceType, sourceId, properties, movementName, txnType, holdingType, economicBucket, economicBucketComponent, economicBucketVariant, levels, sourceLevels, movementSign, holdingSign, ledgerColumn, journalEntryLineType, custodianAccountId, custodianAccountType, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -992,6 +1018,7 @@ public class JournalEntryLine {
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    postingModuleCode: ").append(toIndentedString(postingModuleCode)).append("\n");
     sb.append("    postingRule: ").append(toIndentedString(postingRule)).append("\n");
+    sb.append("    postingRuleVersion: ").append(toIndentedString(postingRuleVersion)).append("\n");
     sb.append("    asAtDate: ").append(toIndentedString(asAtDate)).append("\n");
     sb.append("    activitiesDescription: ").append(toIndentedString(activitiesDescription)).append("\n");
     sb.append("    sourceType: ").append(toIndentedString(sourceType)).append("\n");

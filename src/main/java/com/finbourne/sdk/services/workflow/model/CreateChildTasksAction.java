@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -37,7 +38,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   CreateChildTasksAction.JSON_PROPERTY_TYPE,
-  CreateChildTasksAction.JSON_PROPERTY_CHILD_TASK_CONFIGURATIONS
+  CreateChildTasksAction.JSON_PROPERTY_CHILD_TASK_CONFIGURATIONS,
+  CreateChildTasksAction.JSON_PROPERTY_ORDERING
 })
 
 public class CreateChildTasksAction {
@@ -82,6 +84,11 @@ public class CreateChildTasksAction {
   @JsonProperty(JSON_PROPERTY_CHILD_TASK_CONFIGURATIONS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<CreateChildTaskConfiguration> childTaskConfigurations = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_ORDERING = "ordering";
+  @JsonProperty(JSON_PROPERTY_ORDERING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String ordering;
 
   public CreateChildTasksAction() {
   }
@@ -132,6 +139,25 @@ public class CreateChildTasksAction {
   }
 
 
+  public CreateChildTasksAction ordering(String ordering) {
+    this.ordering = ordering;
+    return this;
+  }
+
+  /**
+   * How the created child tasks are ordered for execution: Parallel (default) or Series. In Series the child tasks form a chain and only the first is started; each later one is started by its predecessor&#39;s TriggerNextTask action, or by another trigger such as a TriggerChildTasks filter on previousTask. Without one, the chain stops after the first child.
+   * @return ordering
+   */
+  @javax.annotation.Nullable
+  public String getOrdering() {
+    return ordering;
+  }
+
+  public void setOrdering(String ordering) {
+    this.ordering = ordering;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -142,12 +168,24 @@ public class CreateChildTasksAction {
     }
     CreateChildTasksAction createChildTasksAction = (CreateChildTasksAction) o;
     return Objects.equals(this.type, createChildTasksAction.type) &&
-        Objects.equals(this.childTaskConfigurations, createChildTasksAction.childTaskConfigurations);
+        Objects.equals(this.childTaskConfigurations, createChildTasksAction.childTaskConfigurations) &&
+        Objects.equals(this.ordering, createChildTasksAction.ordering);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(type, childTaskConfigurations);
+    return Objects.hash(type, childTaskConfigurations, ordering);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -156,6 +194,7 @@ public class CreateChildTasksAction {
     sb.append("class CreateChildTasksAction {\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    childTaskConfigurations: ").append(toIndentedString(childTaskConfigurations)).append("\n");
+    sb.append("    ordering: ").append(toIndentedString(ordering)).append("\n");
     sb.append("}");
     return sb.toString();
   }
