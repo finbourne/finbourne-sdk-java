@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.horizon.model;
 
+import com.finbourne.sdk.services.horizon.model.AlertRule;
 import com.finbourne.sdk.services.horizon.model.PostProcessTask;
 import com.finbourne.sdk.services.horizon.model.Trigger;
 import java.io.IOException;
@@ -44,7 +45,8 @@ import com.finbourne.sdk.JSON;
   IntegrationInstanceResponse.JSON_PROPERTY_ENABLED,
   IntegrationInstanceResponse.JSON_PROPERTY_TRIGGERS,
   IntegrationInstanceResponse.JSON_PROPERTY_DETAILS,
-  IntegrationInstanceResponse.JSON_PROPERTY_POST_PROCESS_TASKS
+  IntegrationInstanceResponse.JSON_PROPERTY_POST_PROCESS_TASKS,
+  IntegrationInstanceResponse.JSON_PROPERTY_ALERT_RULES
 })
 
 public class IntegrationInstanceResponse {
@@ -87,6 +89,11 @@ public class IntegrationInstanceResponse {
   @JsonProperty(JSON_PROPERTY_POST_PROCESS_TASKS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<PostProcessTask> postProcessTasks = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_ALERT_RULES = "alertRules";
+  @JsonProperty(JSON_PROPERTY_ALERT_RULES)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<AlertRule> alertRules = new ArrayList<>();
 
   public IntegrationInstanceResponse() {
   }
@@ -259,6 +266,33 @@ public class IntegrationInstanceResponse {
   }
 
 
+  public IntegrationInstanceResponse alertRules(List<AlertRule> alertRules) {
+    this.alertRules = alertRules;
+    return this;
+  }
+
+  public IntegrationInstanceResponse addAlertRulesItem(AlertRule alertRulesItem) {
+    if (this.alertRules == null) {
+      this.alertRules = new ArrayList<>();
+    }
+    this.alertRules.add(alertRulesItem);
+    return this;
+  }
+
+  /**
+   * The alert rules configured on the integration instance.
+   * @return alertRules
+   */
+  @javax.annotation.Nonnull
+  public List<AlertRule> getAlertRules() {
+    return alertRules;
+  }
+
+  public void setAlertRules(List<AlertRule> alertRules) {
+    this.alertRules = alertRules;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -275,12 +309,13 @@ public class IntegrationInstanceResponse {
         Objects.equals(this.enabled, integrationInstanceResponse.enabled) &&
         Objects.equals(this.triggers, integrationInstanceResponse.triggers) &&
         Objects.equals(this.details, integrationInstanceResponse.details) &&
-        Objects.equals(this.postProcessTasks, integrationInstanceResponse.postProcessTasks);
+        Objects.equals(this.postProcessTasks, integrationInstanceResponse.postProcessTasks) &&
+        Objects.equals(this.alertRules, integrationInstanceResponse.alertRules);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, integrationType, name, description, enabled, triggers, details, postProcessTasks);
+    return Objects.hash(id, integrationType, name, description, enabled, triggers, details, postProcessTasks, alertRules);
   }
 
   @Override
@@ -295,6 +330,7 @@ public class IntegrationInstanceResponse {
     sb.append("    triggers: ").append(toIndentedString(triggers)).append("\n");
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("    postProcessTasks: ").append(toIndentedString(postProcessTasks)).append("\n");
+    sb.append("    alertRules: ").append(toIndentedString(alertRules)).append("\n");
     sb.append("}");
     return sb.toString();
   }

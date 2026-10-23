@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **triggers** | [**List&lt;Trigger&gt;**](Trigger.md) |  | [default to List<Trigger>]
 **details** | **Object** | Base DTO type of an integration configuration specific to the integration type.              N.B. ASP.NET Core model validation is normally applied automatically when [ApiController] is added to a controller, however it doesn&#39;t work here with the polymorphic integration subtypes of this class (see https://github.com/dotnet/aspnetcore/issues/27882). The workaround here is to implement the IValidatableObject interface and each subtype must call Validate() or ValidateContents() on its properties (the validation is not recursive).  Located in Horizon.Integrations.Web so both specific integration projects and Horizon.WebApi can reference it. | [default to Object]
 **postProcessTasks** | [**List&lt;PostProcessTask&gt;**](PostProcessTask.md) |  | [default to List<PostProcessTask>]
+**alertRules** | [**List&lt;AlertRule&gt;**](AlertRule.md) | Alert rules for the instance. On update the stored rules are replaced by this set when it is present, an empty set clears them, and omitting the field leaves them unchanged. | [optional] [default to List<AlertRule>]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.CreateInstanceRequest;
@@ -28,6 +29,7 @@ String description = "example description";
 Boolean enabled = true;
 List<Trigger> triggers = new List<Trigger>();
 Object List<PostProcessTask> postProcessTasks = new List<PostProcessTask>();
+@javax.annotation.Nullable List<AlertRule> alertRules = new List<AlertRule>();
 
 
 CreateInstanceRequest createInstanceRequestInstance = new CreateInstanceRequest()
@@ -38,7 +40,8 @@ CreateInstanceRequest createInstanceRequestInstance = new CreateInstanceRequest(
     .enabled(enabled)
     .triggers(triggers)
     .details(details)
-    .postProcessTasks(postProcessTasks);
+    .postProcessTasks(postProcessTasks)
+    .alertRules(alertRules);
 ```
 
 

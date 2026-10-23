@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.horizon.model;
 
+import com.finbourne.sdk.services.horizon.model.AlertRule;
 import com.finbourne.sdk.services.horizon.model.LusidPropertyDefinitionOverridesByType;
 import com.finbourne.sdk.services.horizon.model.PostProcessTask;
 import com.finbourne.sdk.services.horizon.model.Trigger;
@@ -48,7 +49,8 @@ import com.finbourne.sdk.JSON;
   CreateInstanceRequest.JSON_PROPERTY_ENABLED,
   CreateInstanceRequest.JSON_PROPERTY_TRIGGERS,
   CreateInstanceRequest.JSON_PROPERTY_DETAILS,
-  CreateInstanceRequest.JSON_PROPERTY_POST_PROCESS_TASKS
+  CreateInstanceRequest.JSON_PROPERTY_POST_PROCESS_TASKS,
+  CreateInstanceRequest.JSON_PROPERTY_ALERT_RULES
 })
 
 public class CreateInstanceRequest {
@@ -91,6 +93,11 @@ public class CreateInstanceRequest {
   @JsonProperty(JSON_PROPERTY_POST_PROCESS_TASKS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<PostProcessTask> postProcessTasks = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_ALERT_RULES = "alertRules";
+  @JsonProperty(JSON_PROPERTY_ALERT_RULES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AlertRule> alertRules;
 
   public CreateInstanceRequest() {
   }
@@ -271,6 +278,33 @@ public class CreateInstanceRequest {
   }
 
 
+  public CreateInstanceRequest alertRules(List<AlertRule> alertRules) {
+    this.alertRules = alertRules;
+    return this;
+  }
+
+  public CreateInstanceRequest addAlertRulesItem(AlertRule alertRulesItem) {
+    if (this.alertRules == null) {
+      this.alertRules = new ArrayList<>();
+    }
+    this.alertRules.add(alertRulesItem);
+    return this;
+  }
+
+  /**
+   * Alert rules for the instance. On update the stored rules are replaced by this set when it is present, an empty set clears them, and omitting the field leaves them unchanged.
+   * @return alertRules
+   */
+  @javax.annotation.Nullable
+  public List<AlertRule> getAlertRules() {
+    return alertRules;
+  }
+
+  public void setAlertRules(List<AlertRule> alertRules) {
+    this.alertRules = alertRules;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -287,7 +321,8 @@ public class CreateInstanceRequest {
         Objects.equals(this.enabled, createInstanceRequest.enabled) &&
         Objects.equals(this.triggers, createInstanceRequest.triggers) &&
         Objects.equals(this.details, createInstanceRequest.details) &&
-        Objects.equals(this.postProcessTasks, createInstanceRequest.postProcessTasks);
+        Objects.equals(this.postProcessTasks, createInstanceRequest.postProcessTasks) &&
+        Objects.equals(this.alertRules, createInstanceRequest.alertRules);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -296,7 +331,7 @@ public class CreateInstanceRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instanceOptionalProps, integrationType, name, description, enabled, triggers, details, postProcessTasks);
+    return Objects.hash(instanceOptionalProps, integrationType, name, description, enabled, triggers, details, postProcessTasks, alertRules);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -318,6 +353,7 @@ public class CreateInstanceRequest {
     sb.append("    triggers: ").append(toIndentedString(triggers)).append("\n");
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("    postProcessTasks: ").append(toIndentedString(postProcessTasks)).append("\n");
+    sb.append("    alertRules: ").append(toIndentedString(alertRules)).append("\n");
     sb.append("}");
     return sb.toString();
   }
