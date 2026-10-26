@@ -787,7 +787,7 @@ public class AllocationEventsApi {
      * Build call for deleteAllocationEvent
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
-     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. (optional)
+     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time, dated versions upserted since included; any other is deleted from the current LUSID system datetime. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -807,7 +807,7 @@ public class AllocationEventsApi {
      * Build call for deleteAllocationEvent. Use any specified configuration options to override any other configuration for this request only.
      * @param scope The scope of the Allocation Event. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. (optional)
+     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time, dated versions upserted since included; any other is deleted from the current LUSID system datetime. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -889,10 +889,10 @@ public class AllocationEventsApi {
 
     /**
      * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
-     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.
+     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
-     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. (optional)
+     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time, dated versions upserted since included; any other is deleted from the current LUSID system datetime. (optional)
      * @return ApiResponse&lt;DeletedEntityResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -911,10 +911,10 @@ public class AllocationEventsApi {
 
     /**
      * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
-     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.Use any specified configuration options to override any other configuration for this request only
+     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
-     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. (optional)
+     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time, dated versions upserted since included; any other is deleted from the current LUSID system datetime. (optional)
      * @return ApiResponse&lt;DeletedEntityResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -933,10 +933,10 @@ public class AllocationEventsApi {
 
     /**
      * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event. (asynchronously)
-     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.
+     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
-     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. (optional)
+     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time, dated versions upserted since included; any other is deleted from the current LUSID system datetime. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -956,10 +956,10 @@ public class AllocationEventsApi {
 
     /**
      * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event. (asynchronously)
-     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.Use any specified configuration options to override any other configuration for this request only
+     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
-     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. (optional)
+     * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time, dated versions upserted since included; any other is deleted from the current LUSID system datetime. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -989,7 +989,7 @@ public class AllocationEventsApi {
 
         /**
          * Set effectiveAt
-         * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. (optional)
+         * @param effectiveAt The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time, dated versions upserted since included; any other is deleted from the current LUSID system datetime. (optional)
          * @return APIdeleteAllocationEventRequest
          */
         public APIdeleteAllocationEventRequest effectiveAt(String effectiveAt) {
@@ -1115,7 +1115,7 @@ public class AllocationEventsApi {
 
     /**
      * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
-     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.
+     * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
      * @return APIdeleteAllocationEventRequest

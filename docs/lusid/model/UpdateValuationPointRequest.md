@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **applyClearDown** | **Boolean** | Defaults to null. Set to true if you want the closed period to have the clear down applied. | [optional] [default to Boolean]
 **updateInclusionDateNavAdjustments** | **Boolean** | Defaults to null. Set to true if you have the required licence and want the InclusionDate property values to be used to determine whether items should be automatically included in the post close activities. | [optional] [default to Boolean]
 **pricingMethodologyOverride** | [**PricingMethodologyOverrideRequest**](PricingMethodologyOverrideRequest.md) |  | [optional] [default to PricingMethodologyOverrideRequest]
+**bucketSetSeeds** | [**List&lt;BucketSetSeedRequest&gt;**](BucketSetSeedRequest.md) | Defaults to null. The closing balances to seed for bucket sets at this estimate valuation point, at most one per bucket set. They replace the seeds this variant of the valuation point had, and none removes them. Null leaves them as they are. While the valuation point is an estimate, each seeded bucket set&#39;s flow bucket values are its seed; finalising the valuation point stores them, and the next valuation point opens from them. A bucket set can only be seeded when the previous final valuation point has no values for it. The seed is trusted input: it is not reconciled to the share class NAVs. | [optional] [default to List<BucketSetSeedRequest>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.UpdateValuationPointRequest;
@@ -27,6 +28,7 @@ String valuationPointCode = "example valuationPointCode";
 @javax.annotation.Nullable Boolean applyClearDown = true;
 @javax.annotation.Nullable Boolean updateInclusionDateNavAdjustments = true;
 PricingMethodologyOverrideRequest pricingMethodologyOverride = new PricingMethodologyOverrideRequest();
+@javax.annotation.Nullable List<BucketSetSeedRequest> bucketSetSeeds = new List<BucketSetSeedRequest>();
 
 
 UpdateValuationPointRequest updateValuationPointRequestInstance = new UpdateValuationPointRequest()
@@ -36,7 +38,8 @@ UpdateValuationPointRequest updateValuationPointRequestInstance = new UpdateValu
     .properties(properties)
     .applyClearDown(applyClearDown)
     .updateInclusionDateNavAdjustments(updateInclusionDateNavAdjustments)
-    .pricingMethodologyOverride(pricingMethodologyOverride);
+    .pricingMethodologyOverride(pricingMethodologyOverride)
+    .bucketSetSeeds(bucketSetSeeds);
 ```
 
 

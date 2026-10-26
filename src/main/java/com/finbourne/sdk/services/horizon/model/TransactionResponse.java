@@ -35,7 +35,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Response containing details of a single transaction for a run.
+ * Response containing details of a single transaction for a run. A transaction built twice in one batch appears once per build. FailureStage says whether a failed transaction failed while being built (Build) or while its file was being delivered (Delivery).
  */
 @JsonPropertyOrder({
   TransactionResponse.JSON_PROPERTY_TRANSACTION_ID,
@@ -52,7 +52,8 @@ import com.finbourne.sdk.JSON;
   TransactionResponse.JSON_PROPERTY_FAILURE_REASON,
   TransactionResponse.JSON_PROPERTY_OUTPUT_FILE_NAME,
   TransactionResponse.JSON_PROPERTY_SENT_AT,
-  TransactionResponse.JSON_PROPERTY_DESTINATIONS
+  TransactionResponse.JSON_PROPERTY_DESTINATIONS,
+  TransactionResponse.JSON_PROPERTY_FAILURE_STAGE
 })
 
 public class TransactionResponse {
@@ -131,6 +132,11 @@ public class TransactionResponse {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<DestinationResponse> destinations = new ArrayList<>();
 
+  public static final String JSON_PROPERTY_FAILURE_STAGE = "failureStage";
+  @JsonProperty(JSON_PROPERTY_FAILURE_STAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String failureStage;
+
   public TransactionResponse() {
   }
 
@@ -159,7 +165,7 @@ public class TransactionResponse {
   }
 
   /**
-   * Get publicationStatus
+   * The outcome the screens show for this row: Sent, Skipped or Failed.
    * @return publicationStatus
    */
   @javax.annotation.Nonnull
@@ -311,7 +317,7 @@ public class TransactionResponse {
   }
 
   /**
-   * Get status
+   * The batch element&#39;s processing state as the worker left it, not the outcome; read PublicationStatus for that.
    * @return status
    */
   @javax.annotation.Nonnull
@@ -427,6 +433,25 @@ public class TransactionResponse {
   }
 
 
+  public TransactionResponse failureStage(String failureStage) {
+    this.failureStage = failureStage;
+    return this;
+  }
+
+  /**
+   * Get failureStage
+   * @return failureStage
+   */
+  @javax.annotation.Nullable
+  public String getFailureStage() {
+    return failureStage;
+  }
+
+  public void setFailureStage(String failureStage) {
+    this.failureStage = failureStage;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -450,7 +475,8 @@ public class TransactionResponse {
         Objects.equals(this.failureReason, transactionResponse.failureReason) &&
         Objects.equals(this.outputFileName, transactionResponse.outputFileName) &&
         Objects.equals(this.sentAt, transactionResponse.sentAt) &&
-        Objects.equals(this.destinations, transactionResponse.destinations);
+        Objects.equals(this.destinations, transactionResponse.destinations) &&
+        Objects.equals(this.failureStage, transactionResponse.failureStage);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -459,7 +485,7 @@ public class TransactionResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, publicationStatus, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, destinations);
+    return Objects.hash(transactionId, publicationStatus, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, destinations, failureStage);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -488,6 +514,7 @@ public class TransactionResponse {
     sb.append("    outputFileName: ").append(toIndentedString(outputFileName)).append("\n");
     sb.append("    sentAt: ").append(toIndentedString(sentAt)).append("\n");
     sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
+    sb.append("    failureStage: ").append(toIndentedString(failureStage)).append("\n");
     sb.append("}");
     return sb.toString();
   }

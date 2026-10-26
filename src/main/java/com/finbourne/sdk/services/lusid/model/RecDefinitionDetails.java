@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ExternalRecDefinitionDetails;
+import com.finbourne.sdk.services.lusid.model.LusidEntityRecDefinitionDetails;
 import com.finbourne.sdk.services.lusid.model.PortfolioContentsRecDefinitionDetails;
 import com.finbourne.sdk.services.lusid.model.RecDefCurrencies;
 import com.finbourne.sdk.services.lusid.model.RecDefRecipeIds;
@@ -71,12 +72,16 @@ public class RecDefinitionDetails extends AbstractOpenApiSchema {
                         deserialized = JSON.getMapper().treeToValue(node, ExternalRecDefinitionDetails.class);
                         result.setActualInstance(deserialized);
                         return result;
+                    case "LusidEntity":
+                        deserialized = JSON.getMapper().treeToValue(node, LusidEntityRecDefinitionDetails.class);
+                        result.setActualInstance(deserialized);
+                        return result;
                     case "PortfolioContents":
                         deserialized = JSON.getMapper().treeToValue(node, PortfolioContentsRecDefinitionDetails.class);
                         result.setActualInstance(deserialized);
                         return result;
                     default:
-                        log.log(Level.WARNING, String.format("Failed to lookup discriminator value `%s` for RecDefinitionDetails. Possible values: External PortfolioContents", discriminatorValue));
+                        log.log(Level.WARNING, String.format("Failed to lookup discriminator value `%s` for RecDefinitionDetails. Possible values: External LusidEntity PortfolioContents", discriminatorValue));
                 }
             }
 
@@ -100,6 +105,16 @@ public class RecDefinitionDetails extends AbstractOpenApiSchema {
             } catch (Exception e) {
                 errorMessages.add(String.format("Deserialization for ExternalRecDefinitionDetails failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'ExternalRecDefinitionDetails'", e);
+            }
+            // deserialize LusidEntityRecDefinitionDetails
+            try {
+                deserialized = _strictMapper.treeToValue(node, LusidEntityRecDefinitionDetails.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'LusidEntityRecDefinitionDetails'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for LusidEntityRecDefinitionDetails failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'LusidEntityRecDefinitionDetails'", e);
             }
             // deserialize PortfolioContentsRecDefinitionDetails
             try {
@@ -134,6 +149,7 @@ public class RecDefinitionDetails extends AbstractOpenApiSchema {
 
     static {
         schemas.put("ExternalRecDefinitionDetails", ExternalRecDefinitionDetails.class);
+        schemas.put("LusidEntityRecDefinitionDetails", LusidEntityRecDefinitionDetails.class);
         schemas.put("PortfolioContentsRecDefinitionDetails", PortfolioContentsRecDefinitionDetails.class);
     }
 
@@ -145,7 +161,7 @@ public class RecDefinitionDetails extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * ExternalRecDefinitionDetails, PortfolioContentsRecDefinitionDetails
+     * ExternalRecDefinitionDetails, LusidEntityRecDefinitionDetails, PortfolioContentsRecDefinitionDetails
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -156,19 +172,24 @@ public class RecDefinitionDetails extends AbstractOpenApiSchema {
             return;
         }
 
+        if (instance instanceof LusidEntityRecDefinitionDetails) {
+            super.setActualInstance(instance);
+            return;
+        }
+
         if (instance instanceof PortfolioContentsRecDefinitionDetails) {
             super.setActualInstance(instance);
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be ExternalRecDefinitionDetails, PortfolioContentsRecDefinitionDetails");
+        throw new RuntimeException("Invalid instance type. Must be ExternalRecDefinitionDetails, LusidEntityRecDefinitionDetails, PortfolioContentsRecDefinitionDetails");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * ExternalRecDefinitionDetails, PortfolioContentsRecDefinitionDetails
+     * ExternalRecDefinitionDetails, LusidEntityRecDefinitionDetails, PortfolioContentsRecDefinitionDetails
      *
-     * @return The actual instance (ExternalRecDefinitionDetails, PortfolioContentsRecDefinitionDetails)
+     * @return The actual instance (ExternalRecDefinitionDetails, LusidEntityRecDefinitionDetails, PortfolioContentsRecDefinitionDetails)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -185,6 +206,16 @@ public class RecDefinitionDetails extends AbstractOpenApiSchema {
      */
     public ExternalRecDefinitionDetails getExternalRecDefinitionDetails() throws ClassCastException {
         return (ExternalRecDefinitionDetails)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `LusidEntityRecDefinitionDetails`. If the actual instance is not `LusidEntityRecDefinitionDetails`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `LusidEntityRecDefinitionDetails`
+     * @throws ClassCastException if the instance is not `LusidEntityRecDefinitionDetails`
+     */
+    public LusidEntityRecDefinitionDetails getLusidEntityRecDefinitionDetails() throws ClassCastException {
+        return (LusidEntityRecDefinitionDetails)super.getActualInstance();
     }
     /**
      * Get the actual instance of `PortfolioContentsRecDefinitionDetails`. If the actual instance is not `PortfolioContentsRecDefinitionDetails`,

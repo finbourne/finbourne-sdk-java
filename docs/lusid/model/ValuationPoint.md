@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | The Valuation Point properties. These are from the &#39;DiaryEntry&#39; domain. | [optional] [default to Map<String, Property>]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **stagedModifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] [default to StagedModificationsInfo]
+**bucketSetSeeds** | [**List&lt;BucketSetSeed&gt;**](BucketSetSeed.md) | The bucket set seeds set on this variant of the Valuation Point. Null when it has none. | [optional] [default to List<BucketSetSeed>]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -41,6 +42,7 @@ PreviousValuationPoint previous = new PreviousValuationPoint();
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
 Version version = new Version();
 StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
+@javax.annotation.Nullable List<BucketSetSeed> bucketSetSeeds = new List<BucketSetSeed>();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -59,6 +61,7 @@ ValuationPoint valuationPointInstance = new ValuationPoint()
     .properties(properties)
     .version(version)
     .stagedModifications(stagedModifications)
+    .bucketSetSeeds(bucketSetSeeds)
     .links(links);
 ```
 

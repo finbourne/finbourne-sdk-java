@@ -1,6 +1,6 @@
 # com.finbourne.sdk.services.horizon.model.InstanceRunResponse
 classname InstanceRunResponse
-Response containing details of a single run for an instance.
+Response containing details of a single run for an instance. The transaction and file figures describe the batch as it stands now, so they are reported on the latest attempt only and are null on earlier attempts of a retried run. Message explains a failed attempt and what will happen or must be done next; it is null for completed, running and queued attempts.
 
 ## Properties
 
@@ -14,11 +14,12 @@ Name | Type | Description | Notes
 **duration** | **String** |  | [optional] [default to String]
 **status** | **String** |  | [default to String]
 **triggeredBy** | **String** |  | [optional] [default to String]
-**total** | **Integer** |  | [default to Integer]
-**sentCount** | **Long** |  | [default to Long]
-**skippedCount** | **Long** |  | [default to Long]
-**failedCount** | **Long** |  | [default to Long]
-**failedFiles** | **Integer** |  | [default to Integer]
+**total** | **Integer** |  | [optional] [default to Integer]
+**sentCount** | **Long** |  | [optional] [default to Long]
+**skippedCount** | **Long** |  | [optional] [default to Long]
+**failedCount** | **Long** |  | [optional] [default to Long]
+**failedFiles** | **Integer** |  | [optional] [default to Integer]
+**message** | **String** |  | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.InstanceRunResponse;
@@ -34,11 +35,12 @@ OffsetDateTime startTime = OffsetDateTime.now();
 @javax.annotation.Nullable String duration = "example duration";
 String status = "example status";
 @javax.annotation.Nullable String triggeredBy = "example triggeredBy";
-Integer total = new Integer("100.00");
-Long sentCount = new Long("100.00");
-Long skippedCount = new Long("100.00");
-Long failedCount = new Long("100.00");
-Integer failedFiles = new Integer("100.00");
+@javax.annotation.Nullable Integer total = new Integer("100.00");
+@javax.annotation.Nullable Long sentCount = new Long("100.00");
+@javax.annotation.Nullable Long skippedCount = new Long("100.00");
+@javax.annotation.Nullable Long failedCount = new Long("100.00");
+@javax.annotation.Nullable Integer failedFiles = new Integer("100.00");
+@javax.annotation.Nullable String message = "example message";
 
 
 InstanceRunResponse instanceRunResponseInstance = new InstanceRunResponse()
@@ -54,7 +56,8 @@ InstanceRunResponse instanceRunResponseInstance = new InstanceRunResponse()
     .sentCount(sentCount)
     .skippedCount(skippedCount)
     .failedCount(failedCount)
-    .failedFiles(failedFiles);
+    .failedFiles(failedFiles)
+    .message(message);
 ```
 
 

@@ -19,19 +19,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets FileDeliveryStatus
+ * Gets or Sets TpfFileDeliveryDisplayStatus
  */
-public enum FileDeliveryStatus {
+public enum TpfFileDeliveryDisplayStatus {
   
-  COMPLETED("Completed"),
+  DELIVERED("Delivered"),
   
   PENDING("Pending"),
   
-  ERROR("Error");
+  FAILED("Failed");
 
   private String value;
 
-  FileDeliveryStatus(String value) {
+  TpfFileDeliveryDisplayStatus(String value) {
     this.value = value;
   }
 
@@ -46,8 +46,8 @@ public enum FileDeliveryStatus {
   }
 
   @JsonCreator
-  public static FileDeliveryStatus fromValue(String value) {
-    for (FileDeliveryStatus b : FileDeliveryStatus.values()) {
+  public static TpfFileDeliveryDisplayStatus fromValue(String value) {
+    for (TpfFileDeliveryDisplayStatus b : TpfFileDeliveryDisplayStatus.values()) {
       if (b.value.equals(value)) {
         return b;
       }

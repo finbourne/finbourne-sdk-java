@@ -450,7 +450,7 @@ public class DataQualityCheckResult {
   }
 
   /**
-   * Unique, stable identifier for this result, scoped to the check definition, ruleset, rule and breaching  entity. Treat as opaque — composition varies by entityType.
+   * Unique, stable identifier for this result, scoped to the check definition, result type, ruleset, rule and  breaching entity. Treat as opaque — composition varies by entityType.
    * @return resultId
    */
   @javax.annotation.Nullable

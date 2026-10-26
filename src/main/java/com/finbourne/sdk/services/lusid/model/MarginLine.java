@@ -49,7 +49,9 @@ import com.finbourne.sdk.JSON;
   MarginLine.JSON_PROPERTY_UNITS,
   MarginLine.JSON_PROPERTY_PV,
   MarginLine.JSON_PROPERTY_VARIATION_MARGIN,
-  MarginLine.JSON_PROPERTY_COLLATERAL_VALUE
+  MarginLine.JSON_PROPERTY_COLLATERAL_VALUE,
+  MarginLine.JSON_PROPERTY_INITIAL_MARGIN_ITEM,
+  MarginLine.JSON_PROPERTY_INITIAL_MARGIN
 })
 
 public class MarginLine {
@@ -117,6 +119,16 @@ public class MarginLine {
   @JsonProperty(JSON_PROPERTY_COLLATERAL_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal collateralValue;
+
+  public static final String JSON_PROPERTY_INITIAL_MARGIN_ITEM = "initialMarginItem";
+  @JsonProperty(JSON_PROPERTY_INITIAL_MARGIN_ITEM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String initialMarginItem;
+
+  public static final String JSON_PROPERTY_INITIAL_MARGIN = "initialMargin";
+  @JsonProperty(JSON_PROPERTY_INITIAL_MARGIN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal initialMargin;
 
   public MarginLine() {
   }
@@ -376,6 +388,44 @@ public class MarginLine {
   }
 
 
+  public MarginLine initialMarginItem(String initialMarginItem) {
+    this.initialMarginItem = initialMarginItem;
+    return this;
+  }
+
+  /**
+   * The initial-margin item the line falls under, when the holding matched one. Filterable.
+   * @return initialMarginItem
+   */
+  @javax.annotation.Nullable
+  public String getInitialMarginItem() {
+    return initialMarginItem;
+  }
+
+  public void setInitialMarginItem(String initialMarginItem) {
+    this.initialMarginItem = initialMarginItem;
+  }
+
+
+  public MarginLine initialMargin(java.math.BigDecimal initialMargin) {
+    this.initialMargin = initialMargin;
+    return this;
+  }
+
+  /**
+   * The holding&#39;s share of its netting set&#39;s initial margin, before the threshold, when it contributes to it.
+   * @return initialMargin
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getInitialMargin() {
+    return initialMargin;
+  }
+
+  public void setInitialMargin(java.math.BigDecimal initialMargin) {
+    this.initialMargin = initialMargin;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -397,7 +447,9 @@ public class MarginLine {
         (this.units == null ? marginLine.units == null : (marginLine.units != null && this.units.compareTo(marginLine.getUnits()) == 0)) &&
         (this.pv == null ? marginLine.pv == null : (marginLine.pv != null && this.pv.compareTo(marginLine.getPv()) == 0)) &&
         (this.variationMargin == null ? marginLine.variationMargin == null : (marginLine.variationMargin != null && this.variationMargin.compareTo(marginLine.getVariationMargin()) == 0)) &&
-        (this.collateralValue == null ? marginLine.collateralValue == null : (marginLine.collateralValue != null && this.collateralValue.compareTo(marginLine.getCollateralValue()) == 0));
+        (this.collateralValue == null ? marginLine.collateralValue == null : (marginLine.collateralValue != null && this.collateralValue.compareTo(marginLine.getCollateralValue()) == 0)) &&
+        Objects.equals(this.initialMarginItem, marginLine.initialMarginItem) &&
+        (this.initialMargin == null ? marginLine.initialMargin == null : (marginLine.initialMargin != null && this.initialMargin.compareTo(marginLine.getInitialMargin()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -406,7 +458,7 @@ public class MarginLine {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, agreementId, item, portfolioId, holdingId, custodianAccountScope, custodianAccountCode, custodianAccountName, instrumentIdentifiers, units, pv, variationMargin, collateralValue);
+    return Objects.hash(runId, agreementId, item, portfolioId, holdingId, custodianAccountScope, custodianAccountCode, custodianAccountName, instrumentIdentifiers, units, pv, variationMargin, collateralValue, initialMarginItem, initialMargin);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -433,6 +485,8 @@ public class MarginLine {
     sb.append("    pv: ").append(toIndentedString(pv)).append("\n");
     sb.append("    variationMargin: ").append(toIndentedString(variationMargin)).append("\n");
     sb.append("    collateralValue: ").append(toIndentedString(collateralValue)).append("\n");
+    sb.append("    initialMarginItem: ").append(toIndentedString(initialMarginItem)).append("\n");
+    sb.append("    initialMargin: ").append(toIndentedString(initialMargin)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   FundPartner.JSON_PROPERTY_PORTFOLIO_ID,
   FundPartner.JSON_PROPERTY_IS_VEHICLE,
   FundPartner.JSON_PROPERTY_PARTNER_ROLE,
+  FundPartner.JSON_PROPERTY_REGISTER_ROLE,
   FundPartner.JSON_PROPERTY_COMMITMENT_CURRENCY,
   FundPartner.JSON_PROPERTY_BALANCES,
   FundPartner.JSON_PROPERTY_SHARE_OF_COMMITMENTS,
@@ -87,6 +88,11 @@ public class FundPartner {
   @JsonProperty(JSON_PROPERTY_PARTNER_ROLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String partnerRole;
+
+  public static final String JSON_PROPERTY_REGISTER_ROLE = "registerRole";
+  @JsonProperty(JSON_PROPERTY_REGISTER_ROLE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String registerRole;
 
   public static final String JSON_PROPERTY_COMMITMENT_CURRENCY = "commitmentCurrency";
   @JsonProperty(JSON_PROPERTY_COMMITMENT_CURRENCY)
@@ -236,7 +242,7 @@ public class FundPartner {
   }
 
   /**
-   * The role of the register line. Available values: GPRegister, LPInvestment.
+   * The role the partner plays in the partnership. Available values: LimitedPartner (the default), GeneralPartner, GPAffiliate, Employee, CarryVehicle.
    * @return partnerRole
    */
   @javax.annotation.Nonnull
@@ -246,6 +252,25 @@ public class FundPartner {
 
   public void setPartnerRole(String partnerRole) {
     this.partnerRole = partnerRole;
+  }
+
+
+  public FundPartner registerRole(String registerRole) {
+    this.registerRole = registerRole;
+    return this;
+  }
+
+  /**
+   * The role of the register line. Available values: GPRegister, LPInvestment (the default).
+   * @return registerRole
+   */
+  @javax.annotation.Nonnull
+  public String getRegisterRole() {
+    return registerRole;
+  }
+
+  public void setRegisterRole(String registerRole) {
+    this.registerRole = registerRole;
   }
 
 
@@ -360,6 +385,7 @@ public class FundPartner {
         Objects.equals(this.portfolioId, fundPartner.portfolioId) &&
         Objects.equals(this.isVehicle, fundPartner.isVehicle) &&
         Objects.equals(this.partnerRole, fundPartner.partnerRole) &&
+        Objects.equals(this.registerRole, fundPartner.registerRole) &&
         Objects.equals(this.commitmentCurrency, fundPartner.commitmentCurrency) &&
         Objects.equals(this.balances, fundPartner.balances) &&
         (this.shareOfCommitments == null ? fundPartner.shareOfCommitments == null : (fundPartner.shareOfCommitments != null && this.shareOfCommitments.compareTo(fundPartner.getShareOfCommitments()) == 0)) &&
@@ -373,7 +399,7 @@ public class FundPartner {
 
   @Override
  public int hashCode() {
-    return Objects.hash(investorRecordId, displayName, commitmentLineId, lusidInstrumentId, portfolioId, isVehicle, partnerRole, commitmentCurrency, balances, shareOfCommitments, admittedOn, totals);
+    return Objects.hash(investorRecordId, displayName, commitmentLineId, lusidInstrumentId, portfolioId, isVehicle, partnerRole, registerRole, commitmentCurrency, balances, shareOfCommitments, admittedOn, totals);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -394,6 +420,7 @@ public class FundPartner {
     sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
     sb.append("    isVehicle: ").append(toIndentedString(isVehicle)).append("\n");
     sb.append("    partnerRole: ").append(toIndentedString(partnerRole)).append("\n");
+    sb.append("    registerRole: ").append(toIndentedString(registerRole)).append("\n");
     sb.append("    commitmentCurrency: ").append(toIndentedString(commitmentCurrency)).append("\n");
     sb.append("    balances: ").append(toIndentedString(balances)).append("\n");
     sb.append("    shareOfCommitments: ").append(toIndentedString(shareOfCommitments)).append("\n");

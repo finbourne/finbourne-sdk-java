@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **transactionIds** | **List&lt;String&gt;** |  | [default to List<String>]
 **fileUuid** | [**UUID**](UUID.md) |  | [default to UUID]
 **failedTransactionIds** | **List&lt;String&gt;** |  | [default to List<String>]
+**canResend** | **Boolean** | Whether the data the file is rebuilt from is still retained, so a resend can be requested. | [default to Boolean]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.RunFileResponse;
@@ -31,6 +32,7 @@ List<FileDestinationResponse> destinations = new List<FileDestinationResponse>()
 List<String> transactionIds = new List<String>();
 UUID fileUuid = "example fileUuid";
 List<String> failedTransactionIds = new List<String>();
+Boolean canResend = true;
 
 
 RunFileResponse runFileResponseInstance = new RunFileResponse()
@@ -42,7 +44,8 @@ RunFileResponse runFileResponseInstance = new RunFileResponse()
     .destinations(destinations)
     .transactionIds(transactionIds)
     .fileUuid(fileUuid)
-    .failedTransactionIds(failedTransactionIds);
+    .failedTransactionIds(failedTransactionIds)
+    .canResend(canResend);
 ```
 
 

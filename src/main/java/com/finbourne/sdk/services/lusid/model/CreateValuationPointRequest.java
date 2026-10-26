@@ -12,11 +12,14 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.BucketSetSeedRequest;
 import com.finbourne.sdk.services.lusid.model.Property;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
@@ -47,7 +50,8 @@ import com.finbourne.sdk.JSON;
   CreateValuationPointRequest.JSON_PROPERTY_APPLY_CLEAR_DOWN,
   CreateValuationPointRequest.JSON_PROPERTY_HOLDINGS_AS_AT_OVERRIDE,
   CreateValuationPointRequest.JSON_PROPERTY_VALUATIONS_AS_AT_OVERRIDE,
-  CreateValuationPointRequest.JSON_PROPERTY_UPDATE_INCLUSION_DATE_NAV_ADJUSTMENTS
+  CreateValuationPointRequest.JSON_PROPERTY_UPDATE_INCLUSION_DATE_NAV_ADJUSTMENTS,
+  CreateValuationPointRequest.JSON_PROPERTY_BUCKET_SET_SEEDS
 })
 
 public class CreateValuationPointRequest {
@@ -100,6 +104,11 @@ public class CreateValuationPointRequest {
   @JsonProperty(JSON_PROPERTY_UPDATE_INCLUSION_DATE_NAV_ADJUSTMENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean updateInclusionDateNavAdjustments;
+
+  public static final String JSON_PROPERTY_BUCKET_SET_SEEDS = "bucketSetSeeds";
+  @JsonProperty(JSON_PROPERTY_BUCKET_SET_SEEDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<BucketSetSeedRequest> bucketSetSeeds;
 
   public CreateValuationPointRequest() {
   }
@@ -302,6 +311,33 @@ public class CreateValuationPointRequest {
   }
 
 
+  public CreateValuationPointRequest bucketSetSeeds(List<BucketSetSeedRequest> bucketSetSeeds) {
+    this.bucketSetSeeds = bucketSetSeeds;
+    return this;
+  }
+
+  public CreateValuationPointRequest addBucketSetSeedsItem(BucketSetSeedRequest bucketSetSeedsItem) {
+    if (this.bucketSetSeeds == null) {
+      this.bucketSetSeeds = new ArrayList<>();
+    }
+    this.bucketSetSeeds.add(bucketSetSeedsItem);
+    return this;
+  }
+
+  /**
+   * Defaults to null. The closing balances to seed for bucket sets at this estimate valuation point, at most one per bucket set. While the valuation point is an estimate, each seeded bucket set&#39;s flow bucket values are its seed; finalising the valuation point stores them, and the next valuation point opens from them. A bucket set can only be seeded when the previous final valuation point has no values for it. The seed is trusted input: it is not reconciled to the share class NAVs.
+   * @return bucketSetSeeds
+   */
+  @javax.annotation.Nullable
+  public List<BucketSetSeedRequest> getBucketSetSeeds() {
+    return bucketSetSeeds;
+  }
+
+  public void setBucketSetSeeds(List<BucketSetSeedRequest> bucketSetSeeds) {
+    this.bucketSetSeeds = bucketSetSeeds;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -320,7 +356,8 @@ public class CreateValuationPointRequest {
         Objects.equals(this.applyClearDown, createValuationPointRequest.applyClearDown) &&
         Objects.equals(this.holdingsAsAtOverride, createValuationPointRequest.holdingsAsAtOverride) &&
         Objects.equals(this.valuationsAsAtOverride, createValuationPointRequest.valuationsAsAtOverride) &&
-        Objects.equals(this.updateInclusionDateNavAdjustments, createValuationPointRequest.updateInclusionDateNavAdjustments);
+        Objects.equals(this.updateInclusionDateNavAdjustments, createValuationPointRequest.updateInclusionDateNavAdjustments) &&
+        Objects.equals(this.bucketSetSeeds, createValuationPointRequest.bucketSetSeeds);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -329,7 +366,7 @@ public class CreateValuationPointRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(valuationPointCode, variant, name, effectiveAt, queryAsAt, properties, applyClearDown, holdingsAsAtOverride, valuationsAsAtOverride, updateInclusionDateNavAdjustments);
+    return Objects.hash(valuationPointCode, variant, name, effectiveAt, queryAsAt, properties, applyClearDown, holdingsAsAtOverride, valuationsAsAtOverride, updateInclusionDateNavAdjustments, bucketSetSeeds);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -353,6 +390,7 @@ public class CreateValuationPointRequest {
     sb.append("    holdingsAsAtOverride: ").append(toIndentedString(holdingsAsAtOverride)).append("\n");
     sb.append("    valuationsAsAtOverride: ").append(toIndentedString(valuationsAsAtOverride)).append("\n");
     sb.append("    updateInclusionDateNavAdjustments: ").append(toIndentedString(updateInclusionDateNavAdjustments)).append("\n");
+    sb.append("    bucketSetSeeds: ").append(toIndentedString(bucketSetSeeds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

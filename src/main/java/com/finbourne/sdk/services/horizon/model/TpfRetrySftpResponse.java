@@ -41,6 +41,7 @@ import com.finbourne.sdk.JSON;
   TpfRetrySftpResponse.JSON_PROPERTY_MESSAGE,
   TpfRetrySftpResponse.JSON_PROPERTY_NEW_FILE_DELIVERY_UUID,
   TpfRetrySftpResponse.JSON_PROPERTY_RETRIED_AT,
+  TpfRetrySftpResponse.JSON_PROPERTY_RESEND_RUN_ID,
   TpfRetrySftpResponse.JSON_PROPERTY_ORIGINAL_FILE,
   TpfRetrySftpResponse.JSON_PROPERTY_DUPLICATE_FILE
 })
@@ -65,6 +66,11 @@ public class TpfRetrySftpResponse {
   @JsonProperty(JSON_PROPERTY_RETRIED_AT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime retriedAt;
+
+  public static final String JSON_PROPERTY_RESEND_RUN_ID = "resendRunId";
+  @JsonProperty(JSON_PROPERTY_RESEND_RUN_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private UUID resendRunId;
 
   public static final String JSON_PROPERTY_ORIGINAL_FILE = "originalFile";
   @JsonProperty(JSON_PROPERTY_ORIGINAL_FILE)
@@ -155,6 +161,25 @@ public class TpfRetrySftpResponse {
   }
 
 
+  public TpfRetrySftpResponse resendRunId(UUID resendRunId) {
+    this.resendRunId = resendRunId;
+    return this;
+  }
+
+  /**
+   * The run queued to resend the file; it appears in run history as a further attempt of the original run
+   * @return resendRunId
+   */
+  @javax.annotation.Nullable
+  public UUID getResendRunId() {
+    return resendRunId;
+  }
+
+  public void setResendRunId(UUID resendRunId) {
+    this.resendRunId = resendRunId;
+  }
+
+
   public TpfRetrySftpResponse originalFile(TpfFileDeliveryInfo originalFile) {
     this.originalFile = originalFile;
     return this;
@@ -206,6 +231,7 @@ public class TpfRetrySftpResponse {
         Objects.equals(this.message, tpfRetrySftpResponse.message) &&
         Objects.equals(this.newFileDeliveryUuid, tpfRetrySftpResponse.newFileDeliveryUuid) &&
         Objects.equals(this.retriedAt, tpfRetrySftpResponse.retriedAt) &&
+        Objects.equals(this.resendRunId, tpfRetrySftpResponse.resendRunId) &&
         Objects.equals(this.originalFile, tpfRetrySftpResponse.originalFile) &&
         Objects.equals(this.duplicateFile, tpfRetrySftpResponse.duplicateFile);
   }
@@ -216,7 +242,7 @@ public class TpfRetrySftpResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(success, message, newFileDeliveryUuid, retriedAt, originalFile, duplicateFile);
+    return Objects.hash(success, message, newFileDeliveryUuid, retriedAt, resendRunId, originalFile, duplicateFile);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -234,6 +260,7 @@ public class TpfRetrySftpResponse {
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    newFileDeliveryUuid: ").append(toIndentedString(newFileDeliveryUuid)).append("\n");
     sb.append("    retriedAt: ").append(toIndentedString(retriedAt)).append("\n");
+    sb.append("    resendRunId: ").append(toIndentedString(resendRunId)).append("\n");
     sb.append("    originalFile: ").append(toIndentedString(originalFile)).append("\n");
     sb.append("    duplicateFile: ").append(toIndentedString(duplicateFile)).append("\n");
     sb.append("}");

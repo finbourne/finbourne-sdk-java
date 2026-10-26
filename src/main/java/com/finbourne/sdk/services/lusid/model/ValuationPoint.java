@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.BucketSetSeed;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.PreviousValuationPoint;
 import com.finbourne.sdk.services.lusid.model.Property;
@@ -59,6 +60,7 @@ import com.finbourne.sdk.JSON;
   ValuationPoint.JSON_PROPERTY_PROPERTIES,
   ValuationPoint.JSON_PROPERTY_VERSION,
   ValuationPoint.JSON_PROPERTY_STAGED_MODIFICATIONS,
+  ValuationPoint.JSON_PROPERTY_BUCKET_SET_SEEDS,
   ValuationPoint.JSON_PROPERTY_LINKS
 })
 
@@ -132,6 +134,11 @@ public class ValuationPoint {
   @JsonProperty(JSON_PROPERTY_STAGED_MODIFICATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private StagedModificationsInfo stagedModifications;
+
+  public static final String JSON_PROPERTY_BUCKET_SET_SEEDS = "bucketSetSeeds";
+  @JsonProperty(JSON_PROPERTY_BUCKET_SET_SEEDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<BucketSetSeed> bucketSetSeeds;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -415,6 +422,33 @@ public class ValuationPoint {
   }
 
 
+  public ValuationPoint bucketSetSeeds(List<BucketSetSeed> bucketSetSeeds) {
+    this.bucketSetSeeds = bucketSetSeeds;
+    return this;
+  }
+
+  public ValuationPoint addBucketSetSeedsItem(BucketSetSeed bucketSetSeedsItem) {
+    if (this.bucketSetSeeds == null) {
+      this.bucketSetSeeds = new ArrayList<>();
+    }
+    this.bucketSetSeeds.add(bucketSetSeedsItem);
+    return this;
+  }
+
+  /**
+   * The bucket set seeds set on this variant of the Valuation Point. Null when it has none.
+   * @return bucketSetSeeds
+   */
+  @javax.annotation.Nullable
+  public List<BucketSetSeed> getBucketSetSeeds() {
+    return bucketSetSeeds;
+  }
+
+  public void setBucketSetSeeds(List<BucketSetSeed> bucketSetSeeds) {
+    this.bucketSetSeeds = bucketSetSeeds;
+  }
+
+
   public ValuationPoint links(List<Link> links) {
     this.links = links;
     return this;
@@ -465,6 +499,7 @@ public class ValuationPoint {
         Objects.equals(this.properties, valuationPoint.properties) &&
         Objects.equals(this.version, valuationPoint.version) &&
         Objects.equals(this.stagedModifications, valuationPoint.stagedModifications) &&
+        Objects.equals(this.bucketSetSeeds, valuationPoint.bucketSetSeeds) &&
         Objects.equals(this.links, valuationPoint.links);
   }
 
@@ -474,7 +509,7 @@ public class ValuationPoint {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, valuationPointCode, variant, name, status, applyClearDown, effectiveAt, queryAsAt, holdingsAsAt, valuationAsAt, previous, properties, version, stagedModifications, links);
+    return Objects.hash(href, valuationPointCode, variant, name, status, applyClearDown, effectiveAt, queryAsAt, holdingsAsAt, valuationAsAt, previous, properties, version, stagedModifications, bucketSetSeeds, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -502,6 +537,7 @@ public class ValuationPoint {
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    stagedModifications: ").append(toIndentedString(stagedModifications)).append("\n");
+    sb.append("    bucketSetSeeds: ").append(toIndentedString(bucketSetSeeds)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

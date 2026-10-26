@@ -12,8 +12,12 @@
 
 package com.finbourne.sdk.services.horizon.model;
 
+import com.finbourne.sdk.services.horizon.model.ValidationNoticeResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -33,7 +37,8 @@ import com.finbourne.sdk.JSON;
  * Identifies a single instance of an integration.
  */
 @JsonPropertyOrder({
-  InstanceIdentifier.JSON_PROPERTY_ID
+  InstanceIdentifier.JSON_PROPERTY_ID,
+  InstanceIdentifier.JSON_PROPERTY_WARNINGS
 })
 
 public class InstanceIdentifier {
@@ -41,6 +46,11 @@ public class InstanceIdentifier {
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String id;
+
+  public static final String JSON_PROPERTY_WARNINGS = "warnings";
+  @JsonProperty(JSON_PROPERTY_WARNINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ValidationNoticeResponse> warnings;
 
   public InstanceIdentifier() {
   }
@@ -64,6 +74,33 @@ public class InstanceIdentifier {
   }
 
 
+  public InstanceIdentifier warnings(List<ValidationNoticeResponse> warnings) {
+    this.warnings = warnings;
+    return this;
+  }
+
+  public InstanceIdentifier addWarningsItem(ValidationNoticeResponse warningsItem) {
+    if (this.warnings == null) {
+      this.warnings = new ArrayList<>();
+    }
+    this.warnings.add(warningsItem);
+    return this;
+  }
+
+  /**
+   * Non-blocking findings about the saved configuration. Empty when there are none.
+   * @return warnings
+   */
+  @javax.annotation.Nullable
+  public List<ValidationNoticeResponse> getWarnings() {
+    return warnings;
+  }
+
+  public void setWarnings(List<ValidationNoticeResponse> warnings) {
+    this.warnings = warnings;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -73,12 +110,24 @@ public class InstanceIdentifier {
       return false;
     }
     InstanceIdentifier instanceIdentifier = (InstanceIdentifier) o;
-    return Objects.equals(this.id, instanceIdentifier.id);
+    return Objects.equals(this.id, instanceIdentifier.id) &&
+        Objects.equals(this.warnings, instanceIdentifier.warnings);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(id);
+    return Objects.hash(id, warnings);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -86,6 +135,7 @@ public class InstanceIdentifier {
     StringBuilder sb = new StringBuilder();
     sb.append("class InstanceIdentifier {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

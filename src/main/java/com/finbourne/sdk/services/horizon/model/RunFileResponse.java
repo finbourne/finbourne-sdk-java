@@ -46,7 +46,8 @@ import com.finbourne.sdk.JSON;
   RunFileResponse.JSON_PROPERTY_DESTINATIONS,
   RunFileResponse.JSON_PROPERTY_TRANSACTION_IDS,
   RunFileResponse.JSON_PROPERTY_FILE_UUID,
-  RunFileResponse.JSON_PROPERTY_FAILED_TRANSACTION_IDS
+  RunFileResponse.JSON_PROPERTY_FAILED_TRANSACTION_IDS,
+  RunFileResponse.JSON_PROPERTY_CAN_RESEND
 })
 
 public class RunFileResponse {
@@ -94,6 +95,11 @@ public class RunFileResponse {
   @JsonProperty(JSON_PROPERTY_FAILED_TRANSACTION_IDS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<String> failedTransactionIds = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_CAN_RESEND = "canResend";
+  @JsonProperty(JSON_PROPERTY_CAN_RESEND)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Boolean canResend;
 
   public RunFileResponse() {
   }
@@ -293,6 +299,25 @@ public class RunFileResponse {
   }
 
 
+  public RunFileResponse canResend(Boolean canResend) {
+    this.canResend = canResend;
+    return this;
+  }
+
+  /**
+   * Whether the data the file is rebuilt from is still retained, so a resend can be requested.
+   * @return canResend
+   */
+  @javax.annotation.Nonnull
+  public Boolean getCanResend() {
+    return canResend;
+  }
+
+  public void setCanResend(Boolean canResend) {
+    this.canResend = canResend;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -310,12 +335,13 @@ public class RunFileResponse {
         Objects.equals(this.destinations, runFileResponse.destinations) &&
         Objects.equals(this.transactionIds, runFileResponse.transactionIds) &&
         Objects.equals(this.fileUuid, runFileResponse.fileUuid) &&
-        Objects.equals(this.failedTransactionIds, runFileResponse.failedTransactionIds);
+        Objects.equals(this.failedTransactionIds, runFileResponse.failedTransactionIds) &&
+        Objects.equals(this.canResend, runFileResponse.canResend);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(fileName, generatedAt, rowCount, fileHash, encrypted, destinations, transactionIds, fileUuid, failedTransactionIds);
+    return Objects.hash(fileName, generatedAt, rowCount, fileHash, encrypted, destinations, transactionIds, fileUuid, failedTransactionIds, canResend);
   }
 
   @Override
@@ -331,6 +357,7 @@ public class RunFileResponse {
     sb.append("    transactionIds: ").append(toIndentedString(transactionIds)).append("\n");
     sb.append("    fileUuid: ").append(toIndentedString(fileUuid)).append("\n");
     sb.append("    failedTransactionIds: ").append(toIndentedString(failedTransactionIds)).append("\n");
+    sb.append("    canResend: ").append(toIndentedString(canResend)).append("\n");
     sb.append("}");
     return sb.toString();
   }

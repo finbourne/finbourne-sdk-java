@@ -33,7 +33,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Response containing details of a single run for an instance.
+ * Response containing details of a single run for an instance. The transaction and file figures describe the batch as it stands now, so they are reported on the latest attempt only and are null on earlier attempts of a retried run. Message explains a failed attempt and what will happen or must be done next; it is null for completed, running and queued attempts.
  */
 @JsonPropertyOrder({
   InstanceRunResponse.JSON_PROPERTY_RUN_ID,
@@ -48,7 +48,8 @@ import com.finbourne.sdk.JSON;
   InstanceRunResponse.JSON_PROPERTY_SENT_COUNT,
   InstanceRunResponse.JSON_PROPERTY_SKIPPED_COUNT,
   InstanceRunResponse.JSON_PROPERTY_FAILED_COUNT,
-  InstanceRunResponse.JSON_PROPERTY_FAILED_FILES
+  InstanceRunResponse.JSON_PROPERTY_FAILED_FILES,
+  InstanceRunResponse.JSON_PROPERTY_MESSAGE
 })
 
 public class InstanceRunResponse {
@@ -94,28 +95,33 @@ public class InstanceRunResponse {
 
   public static final String JSON_PROPERTY_TOTAL = "total";
   @JsonProperty(JSON_PROPERTY_TOTAL)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Integer total;
 
   public static final String JSON_PROPERTY_SENT_COUNT = "sentCount";
   @JsonProperty(JSON_PROPERTY_SENT_COUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Long sentCount;
 
   public static final String JSON_PROPERTY_SKIPPED_COUNT = "skippedCount";
   @JsonProperty(JSON_PROPERTY_SKIPPED_COUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Long skippedCount;
 
   public static final String JSON_PROPERTY_FAILED_COUNT = "failedCount";
   @JsonProperty(JSON_PROPERTY_FAILED_COUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Long failedCount;
 
   public static final String JSON_PROPERTY_FAILED_FILES = "failedFiles";
   @JsonProperty(JSON_PROPERTY_FAILED_FILES)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Integer failedFiles;
+
+  public static final String JSON_PROPERTY_MESSAGE = "message";
+  @JsonProperty(JSON_PROPERTY_MESSAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String message;
 
   public InstanceRunResponse() {
   }
@@ -281,7 +287,7 @@ public class InstanceRunResponse {
    * Get total
    * @return total
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Integer getTotal() {
     return total;
   }
@@ -300,7 +306,7 @@ public class InstanceRunResponse {
    * Get sentCount
    * @return sentCount
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Long getSentCount() {
     return sentCount;
   }
@@ -319,7 +325,7 @@ public class InstanceRunResponse {
    * Get skippedCount
    * @return skippedCount
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Long getSkippedCount() {
     return skippedCount;
   }
@@ -338,7 +344,7 @@ public class InstanceRunResponse {
    * Get failedCount
    * @return failedCount
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Long getFailedCount() {
     return failedCount;
   }
@@ -357,13 +363,32 @@ public class InstanceRunResponse {
    * Get failedFiles
    * @return failedFiles
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Integer getFailedFiles() {
     return failedFiles;
   }
 
   public void setFailedFiles(Integer failedFiles) {
     this.failedFiles = failedFiles;
+  }
+
+
+  public InstanceRunResponse message(String message) {
+    this.message = message;
+    return this;
+  }
+
+  /**
+   * Get message
+   * @return message
+   */
+  @javax.annotation.Nullable
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
   }
 
 
@@ -388,7 +413,8 @@ public class InstanceRunResponse {
         Objects.equals(this.sentCount, instanceRunResponse.sentCount) &&
         Objects.equals(this.skippedCount, instanceRunResponse.skippedCount) &&
         Objects.equals(this.failedCount, instanceRunResponse.failedCount) &&
-        Objects.equals(this.failedFiles, instanceRunResponse.failedFiles);
+        Objects.equals(this.failedFiles, instanceRunResponse.failedFiles) &&
+        Objects.equals(this.message, instanceRunResponse.message);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -397,7 +423,7 @@ public class InstanceRunResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, referenceId, attempt, startTime, endTime, duration, status, triggeredBy, total, sentCount, skippedCount, failedCount, failedFiles);
+    return Objects.hash(runId, referenceId, attempt, startTime, endTime, duration, status, triggeredBy, total, sentCount, skippedCount, failedCount, failedFiles, message);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -424,6 +450,7 @@ public class InstanceRunResponse {
     sb.append("    skippedCount: ").append(toIndentedString(skippedCount)).append("\n");
     sb.append("    failedCount: ").append(toIndentedString(failedCount)).append("\n");
     sb.append("    failedFiles: ").append(toIndentedString(failedFiles)).append("\n");
+    sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("}");
     return sb.toString();
   }

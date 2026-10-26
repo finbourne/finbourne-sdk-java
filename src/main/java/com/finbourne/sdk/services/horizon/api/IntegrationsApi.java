@@ -44,6 +44,7 @@ import com.finbourne.sdk.services.horizon.model.ProcessorDescription;
 import com.finbourne.sdk.services.horizon.model.ProcessorSchemaResponse;
 import com.finbourne.sdk.services.horizon.model.SetInstanceOptionalPropertyMappingResponse;
 import com.finbourne.sdk.services.horizon.model.UpdateInstanceRequest;
+import com.finbourne.sdk.services.horizon.model.UpdateInstanceResponse;
 import com.finbourne.sdk.services.horizon.model.WorkflowResultFieldsResponse;
 
 import java.lang.reflect.Type;
@@ -5789,7 +5790,7 @@ public class IntegrationsApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
@@ -5809,7 +5810,7 @@ public class IntegrationsApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
@@ -5882,20 +5883,21 @@ public class IntegrationsApi {
      * Updates an existing instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user&#39;s domain must be licensed for the integration.
      * @param instanceId Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. (required)
      * @param updateInstanceRequest The new integration instance. (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;UpdateInstanceResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Void> updateInstanceWithHttpInfo(String instanceId, UpdateInstanceRequest updateInstanceRequest) throws ApiException {
+    private ApiResponse<UpdateInstanceResponse> updateInstanceWithHttpInfo(String instanceId, UpdateInstanceRequest updateInstanceRequest) throws ApiException {
         HttpRequest localVarCall = updateInstanceValidateBeforeCall(instanceId, updateInstanceRequest, null, new ConfigurationOptions());
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeReference<UpdateInstanceResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -5903,20 +5905,21 @@ public class IntegrationsApi {
      * Updates an existing instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user&#39;s domain must be licensed for the integration.Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. (required)
      * @param updateInstanceRequest The new integration instance. (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;UpdateInstanceResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<Void> updateInstanceWithHttpInfo(String instanceId, UpdateInstanceRequest updateInstanceRequest, ConfigurationOptions opts) throws ApiException {
+    private ApiResponse<UpdateInstanceResponse> updateInstanceWithHttpInfo(String instanceId, UpdateInstanceRequest updateInstanceRequest, ConfigurationOptions opts) throws ApiException {
         HttpRequest localVarCall = updateInstanceValidateBeforeCall(instanceId, updateInstanceRequest, null, opts);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeReference<UpdateInstanceResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -5929,16 +5932,17 @@ public class IntegrationsApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void updateInstanceAsync(String instanceId, UpdateInstanceRequest updateInstanceRequest, final ApiCallback<Void> _callback) throws ApiException {
+    private void updateInstanceAsync(String instanceId, UpdateInstanceRequest updateInstanceRequest, final ApiCallback<UpdateInstanceResponse> _callback) throws ApiException {
 
         HttpRequest localVarCall = updateInstanceValidateBeforeCall(instanceId, updateInstanceRequest, _callback, new ConfigurationOptions());
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeReference<UpdateInstanceResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
@@ -5951,16 +5955,17 @@ public class IntegrationsApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void updateInstanceAsync(String instanceId, UpdateInstanceRequest updateInstanceRequest, final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+    private void updateInstanceAsync(String instanceId, UpdateInstanceRequest updateInstanceRequest, final ApiCallback<UpdateInstanceResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
         HttpRequest localVarCall = updateInstanceValidateBeforeCall(instanceId, updateInstanceRequest, _callback, opts);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeReference<UpdateInstanceResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     public class APIupdateInstanceRequest {
@@ -5980,7 +5985,7 @@ public class IntegrationsApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
@@ -5992,67 +5997,71 @@ public class IntegrationsApi {
 
         /**
          * Execute updateInstance request
+         * @return UpdateInstanceResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void execute() throws ApiException {
-            updateInstanceWithHttpInfo(instanceId, updateInstanceRequest);
+        public UpdateInstanceResponse execute() throws ApiException {
+            ApiResponse<UpdateInstanceResponse> localVarResp = updateInstanceWithHttpInfo(instanceId, updateInstanceRequest);
+            return localVarResp.getData();
         }
 
         /**
-         * Execute updateInstance request
+         * Execute updateInstance request. Use any specified configuration options to override any other configuration for this request only.
+         * @return UpdateInstanceResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void execute(ConfigurationOptions opts) throws ApiException {
-            updateInstanceWithHttpInfo(instanceId, updateInstanceRequest, opts);
+        public UpdateInstanceResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<UpdateInstanceResponse> localVarResp = updateInstanceWithHttpInfo(instanceId, updateInstanceRequest, opts);
+            return localVarResp.getData();
         }
 
         /**
          * Execute updateInstance request with HTTP info returned
-         * @return ApiResponse&lt;Void&gt;
+         * @return ApiResponse&lt;UpdateInstanceResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<UpdateInstanceResponse> executeWithHttpInfo() throws ApiException {
             return updateInstanceWithHttpInfo(instanceId, updateInstanceRequest);
         }
 
         /**
          * Execute updateInstance request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
-         * @return ApiResponse&lt;Void&gt;
+         * @return ApiResponse&lt;UpdateInstanceResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        public ApiResponse<UpdateInstanceResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
             return updateInstanceWithHttpInfo(instanceId, updateInstanceRequest, opts);
         }
 
@@ -6063,13 +6072,13 @@ public class IntegrationsApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<Void> _callback) throws ApiException {
+        public void executeAsync(final ApiCallback<UpdateInstanceResponse> _callback) throws ApiException {
             updateInstanceAsync(instanceId, updateInstanceRequest, _callback);
         }
 
@@ -6080,13 +6089,13 @@ public class IntegrationsApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+        public void executeAsync(final ApiCallback<UpdateInstanceResponse> _callback, ConfigurationOptions opts) throws ApiException {
             updateInstanceAsync(instanceId, updateInstanceRequest, _callback, opts);
         }
     }
@@ -6100,7 +6109,7 @@ public class IntegrationsApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The instance was updated. Warnings describe non-blocking findings about the saved configuration. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The instance does not exist. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>

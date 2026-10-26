@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -37,7 +38,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   MarginRunRequest.JSON_PROPERTY_EFFECTIVE_AT,
   MarginRunRequest.JSON_PROPERTY_AS_AT,
-  MarginRunRequest.JSON_PROPERTY_AGREEMENT_FILTER
+  MarginRunRequest.JSON_PROPERTY_AGREEMENT_FILTER,
+  MarginRunRequest.JSON_PROPERTY_SCENARIO
 })
 
 public class MarginRunRequest {
@@ -55,6 +57,11 @@ public class MarginRunRequest {
   @JsonProperty(JSON_PROPERTY_AGREEMENT_FILTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String agreementFilter;
+
+  public static final String JSON_PROPERTY_SCENARIO = "scenario";
+  @JsonProperty(JSON_PROPERTY_SCENARIO)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId scenario;
 
   public MarginRunRequest() {
   }
@@ -116,6 +123,25 @@ public class MarginRunRequest {
   }
 
 
+  public MarginRunRequest scenario(ResourceId scenario) {
+    this.scenario = scenario;
+    return this;
+  }
+
+  /**
+   * Get scenario
+   * @return scenario
+   */
+  @javax.annotation.Nullable
+  public ResourceId getScenario() {
+    return scenario;
+  }
+
+  public void setScenario(ResourceId scenario) {
+    this.scenario = scenario;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -127,7 +153,8 @@ public class MarginRunRequest {
     MarginRunRequest marginRunRequest = (MarginRunRequest) o;
     return Objects.equals(this.effectiveAt, marginRunRequest.effectiveAt) &&
         Objects.equals(this.asAt, marginRunRequest.asAt) &&
-        Objects.equals(this.agreementFilter, marginRunRequest.agreementFilter);
+        Objects.equals(this.agreementFilter, marginRunRequest.agreementFilter) &&
+        Objects.equals(this.scenario, marginRunRequest.scenario);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -136,7 +163,7 @@ public class MarginRunRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(effectiveAt, asAt, agreementFilter);
+    return Objects.hash(effectiveAt, asAt, agreementFilter, scenario);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -153,6 +180,7 @@ public class MarginRunRequest {
     sb.append("    effectiveAt: ").append(toIndentedString(effectiveAt)).append("\n");
     sb.append("    asAt: ").append(toIndentedString(asAt)).append("\n");
     sb.append("    agreementFilter: ").append(toIndentedString(agreementFilter)).append("\n");
+    sb.append("    scenario: ").append(toIndentedString(scenario)).append("\n");
     sb.append("}");
     return sb.toString();
   }

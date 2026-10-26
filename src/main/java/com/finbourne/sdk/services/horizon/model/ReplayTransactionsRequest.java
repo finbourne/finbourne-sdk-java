@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -39,7 +38,6 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   ReplayTransactionsRequest.JSON_PROPERTY_TRANSACTION_IDS,
   ReplayTransactionsRequest.JSON_PROPERTY_MODE,
-  ReplayTransactionsRequest.JSON_PROPERTY_DESTINATIONS,
   ReplayTransactionsRequest.JSON_PROPERTY_OPTIONS
 })
 
@@ -53,11 +51,6 @@ public class ReplayTransactionsRequest {
   @JsonProperty(JSON_PROPERTY_MODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String mode;
-
-  public static final String JSON_PROPERTY_DESTINATIONS = "destinations";
-  @JsonProperty(JSON_PROPERTY_DESTINATIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private List<String> destinations;
 
   public static final String JSON_PROPERTY_OPTIONS = "options";
   @JsonProperty(JSON_PROPERTY_OPTIONS)
@@ -113,33 +106,6 @@ public class ReplayTransactionsRequest {
   }
 
 
-  public ReplayTransactionsRequest destinations(List<String> destinations) {
-    this.destinations = destinations;
-    return this;
-  }
-
-  public ReplayTransactionsRequest addDestinationsItem(String destinationsItem) {
-    if (this.destinations == null) {
-      this.destinations = new ArrayList<>();
-    }
-    this.destinations.add(destinationsItem);
-    return this;
-  }
-
-  /**
-   * Target destinations for Committed mode. Required for Committed, forbidden for DryRun. Valid values: Drive, Sftp, S3, Local
-   * @return destinations
-   */
-  @javax.annotation.Nullable
-  public List<String> getDestinations() {
-    return destinations;
-  }
-
-  public void setDestinations(List<String> destinations) {
-    this.destinations = destinations;
-  }
-
-
   public ReplayTransactionsRequest options(ReplayOptions options) {
     this.options = options;
     return this;
@@ -170,24 +136,12 @@ public class ReplayTransactionsRequest {
     ReplayTransactionsRequest replayTransactionsRequest = (ReplayTransactionsRequest) o;
     return Objects.equals(this.transactionIds, replayTransactionsRequest.transactionIds) &&
         Objects.equals(this.mode, replayTransactionsRequest.mode) &&
-        Objects.equals(this.destinations, replayTransactionsRequest.destinations) &&
         Objects.equals(this.options, replayTransactionsRequest.options);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionIds, mode, destinations, options);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(transactionIds, mode, options);
   }
 
   @Override
@@ -196,7 +150,6 @@ public class ReplayTransactionsRequest {
     sb.append("class ReplayTransactionsRequest {\n");
     sb.append("    transactionIds: ").append(toIndentedString(transactionIds)).append("\n");
     sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
-    sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
     sb.append("    options: ").append(toIndentedString(options)).append("\n");
     sb.append("}");
     return sb.toString();

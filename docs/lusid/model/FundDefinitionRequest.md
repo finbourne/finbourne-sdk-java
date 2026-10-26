@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **additionalNavTypes** | [**List&lt;NavTypeDefinition&gt;**](NavTypeDefinition.md) | The definitions for any additional NAVs on the Fund. | [optional] [default to List<NavTypeDefinition>]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | A set of properties for the Fund. | [optional] [default to Map<String, Property>]
 **createInstrument** | **Boolean** | Whether to create instruments for the Fund&#39;s share classes, series, or partner classes upon creation. Defaults to false. | [optional] [default to Boolean]
+**instrumentScope** | **String** | The scope in which the instruments are created when CreateInstrument is true. Defaults to the default instrument scope. Legacy share class instruments are resolved in ShareClassInstrumentScopes instead. | [optional] [default to String]
 **shareClasses** | [**List&lt;ShareClassDefinition&gt;**](ShareClassDefinition.md) | An optional list of Share Class definitions for the Fund. | [optional] [default to List<ShareClassDefinition>]
 **pricingMethodology** | [**PricingMethodology**](PricingMethodology.md) |  | [optional] [default to PricingMethodology]
 **reportingPrices** | [**List&lt;ReportingPrice&gt;**](ReportingPrice.md) | Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices. | [optional] [default to List<ReportingPrice>]
@@ -53,6 +54,7 @@ NavTypeDefinition primaryNavType = new NavTypeDefinition();
 @javax.annotation.Nullable List<NavTypeDefinition> additionalNavTypes = new List<NavTypeDefinition>();
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
 Boolean createInstrument = true;
+@javax.annotation.Nullable String instrumentScope = "example instrumentScope";
 @javax.annotation.Nullable List<ShareClassDefinition> shareClasses = new List<ShareClassDefinition>();
 PricingMethodology pricingMethodology = new PricingMethodology();
 @javax.annotation.Nullable List<ReportingPrice> reportingPrices = new List<ReportingPrice>();
@@ -78,6 +80,7 @@ FundDefinitionRequest fundDefinitionRequestInstance = new FundDefinitionRequest(
     .additionalNavTypes(additionalNavTypes)
     .properties(properties)
     .createInstrument(createInstrument)
+    .instrumentScope(instrumentScope)
     .shareClasses(shareClasses)
     .pricingMethodology(pricingMethodology)
     .reportingPrices(reportingPrices)

@@ -16709,7 +16709,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
-     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
+     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the Trial Balance. (required)
@@ -16739,7 +16739,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
-     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
+     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the Trial Balance. (required)
@@ -16769,7 +16769,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTrialBalance: Get Trial Balance for the given Fund. (asynchronously)
-     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
+     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the Trial Balance. (required)
@@ -16800,7 +16800,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTrialBalance: Get Trial Balance for the given Fund. (asynchronously)
-     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
+     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the Trial Balance. (required)
@@ -17046,7 +17046,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
-     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
+     * Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the Trial Balance. (required)

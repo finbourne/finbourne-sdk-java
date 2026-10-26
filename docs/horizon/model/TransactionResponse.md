@@ -1,13 +1,13 @@
 # com.finbourne.sdk.services.horizon.model.TransactionResponse
 classname TransactionResponse
-Response containing details of a single transaction for a run.
+Response containing details of a single transaction for a run. A transaction built twice in one batch appears once per build. FailureStage says whether a failed transaction failed while being built (Build) or while its file was being delivered (Delivery).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transactionId** | **String** |  | [default to String]
-**publicationStatus** | **String** |  | [default to String]
+**publicationStatus** | **String** | The outcome the screens show for this row: Sent, Skipped or Failed. | [default to String]
 **portfolioScope** | **String** |  | [optional] [default to String]
 **portfolioCode** | **String** |  | [optional] [default to String]
 **instrumentId** | **String** |  | [optional] [default to String]
@@ -15,12 +15,13 @@ Name | Type | Description | Notes
 **instrumentName** | **String** |  | [optional] [default to String]
 **tradeDate** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
 **settlementDate** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
-**status** | **String** |  | [default to String]
+**status** | **String** | The batch element&#39;s processing state as the worker left it, not the outcome; read PublicationStatus for that. | [default to String]
 **skipReason** | **String** |  | [optional] [default to String]
 **failureReason** | **String** |  | [optional] [default to String]
 **outputFileName** | **String** |  | [optional] [default to String]
 **sentAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [optional] [default to OffsetDateTime]
 **destinations** | [**List&lt;DestinationResponse&gt;**](DestinationResponse.md) |  | [default to List<DestinationResponse>]
+**failureStage** | **String** |  | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.TransactionResponse;
@@ -43,6 +44,7 @@ String status = "example status";
 @javax.annotation.Nullable String outputFileName = "example outputFileName";
 @javax.annotation.Nullable OffsetDateTime sentAt = OffsetDateTime.now();
 List<DestinationResponse> destinations = new List<DestinationResponse>();
+@javax.annotation.Nullable String failureStage = "example failureStage";
 
 
 TransactionResponse transactionResponseInstance = new TransactionResponse()
@@ -60,7 +62,8 @@ TransactionResponse transactionResponseInstance = new TransactionResponse()
     .failureReason(failureReason)
     .outputFileName(outputFileName)
     .sentAt(sentAt)
-    .destinations(destinations);
+    .destinations(destinations)
+    .failureStage(failureStage);
 ```
 
 

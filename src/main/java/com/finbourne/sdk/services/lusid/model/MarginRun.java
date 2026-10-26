@@ -53,7 +53,8 @@ import com.finbourne.sdk.JSON;
   MarginRun.JSON_PROPERTY_COMPLETED_SHARDS,
   MarginRun.JSON_PROPERTY_FAILED_SHARDS,
   MarginRun.JSON_PROPERTY_ISSUES,
-  MarginRun.JSON_PROPERTY_SHARDS
+  MarginRun.JSON_PROPERTY_SHARDS,
+  MarginRun.JSON_PROPERTY_SCENARIO
 })
 
 public class MarginRun {
@@ -122,6 +123,11 @@ public class MarginRun {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<MarginRunShard> shards = new ArrayList<>();
 
+  public static final String JSON_PROPERTY_SCENARIO = "scenario";
+  @JsonProperty(JSON_PROPERTY_SCENARIO)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId scenario;
+
   public MarginRun() {
   }
 
@@ -150,7 +156,7 @@ public class MarginRun {
   }
 
   /**
-   * The identifier of the run: the effective date and the asAt it was valued at. Filterable.
+   * The identifier of the run: the effective date and the asAt it was valued at, with a suffix naming the scenario for a stress run. Filterable.
    * @return id
    */
   @javax.annotation.Nonnull
@@ -396,6 +402,25 @@ public class MarginRun {
   }
 
 
+  public MarginRun scenario(ResourceId scenario) {
+    this.scenario = scenario;
+    return this;
+  }
+
+  /**
+   * Get scenario
+   * @return scenario
+   */
+  @javax.annotation.Nullable
+  public ResourceId getScenario() {
+    return scenario;
+  }
+
+  public void setScenario(ResourceId scenario) {
+    this.scenario = scenario;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -417,7 +442,8 @@ public class MarginRun {
         Objects.equals(this.completedShards, marginRun.completedShards) &&
         Objects.equals(this.failedShards, marginRun.failedShards) &&
         Objects.equals(this.issues, marginRun.issues) &&
-        Objects.equals(this.shards, marginRun.shards);
+        Objects.equals(this.shards, marginRun.shards) &&
+        Objects.equals(this.scenario, marginRun.scenario);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -426,7 +452,7 @@ public class MarginRun {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, effectiveAt, asAt, status, agreements, callCount, lineCount, shardCount, completedShards, failedShards, issues, shards);
+    return Objects.hash(href, id, effectiveAt, asAt, status, agreements, callCount, lineCount, shardCount, completedShards, failedShards, issues, shards, scenario);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -453,6 +479,7 @@ public class MarginRun {
     sb.append("    failedShards: ").append(toIndentedString(failedShards)).append("\n");
     sb.append("    issues: ").append(toIndentedString(issues)).append("\n");
     sb.append("    shards: ").append(toIndentedString(shards)).append("\n");
+    sb.append("    scenario: ").append(toIndentedString(scenario)).append("\n");
     sb.append("}");
     return sb.toString();
   }

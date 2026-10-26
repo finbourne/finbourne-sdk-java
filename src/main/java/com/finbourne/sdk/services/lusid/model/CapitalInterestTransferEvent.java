@@ -33,7 +33,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The movement of a proportion of a CapitalInterest line&#39;s capital balances from one line to another.  The source (Out) side moves every balance by the fraction; the destination (In) side receives the  amounts given on the event. Mode distinguishes a genuine transfer between investors from a correction  of a mis-booked position.
+ * The movement of a proportion of a CapitalInterest line&#39;s capital balances from one line to another.  The source (Out) side moves every balance by the fraction; the destination (In) side receives the  amounts given on the event. Mode distinguishes a genuine transfer between investors from a correction  of a mis-booked position. The portfolio-currency twin amounts (PaidInCapitalPortfolioCcyAmount,  ReturnedCapitalPortfolioCcyAmount and ExcessCapitalReturnedPortfolioCcyAmount) are not derived: an In side  that omits them books zero for the ...PortfolioCcy twins while the Out side gives up its share, and a  client-maintained transaction type configuration must include the ...PortfolioCcy twin movements for the  twins to move at all.
  */
 @JsonPropertyOrder({
   CapitalInterestTransferEvent.JSON_PROPERTY_DATE,
@@ -56,7 +56,11 @@ import com.finbourne.sdk.JSON;
   CapitalInterestTransferEvent.JSON_PROPERTY_RETURNED_CAPITAL_AMOUNT,
   CapitalInterestTransferEvent.JSON_PROPERTY_RECALLABLE_CAPITAL_AMOUNT,
   CapitalInterestTransferEvent.JSON_PROPERTY_NON_RECALLABLE_CAPITAL_AMOUNT,
-  CapitalInterestTransferEvent.JSON_PROPERTY_FUNDED_CAPITAL_AMOUNT
+  CapitalInterestTransferEvent.JSON_PROPERTY_FUNDED_CAPITAL_AMOUNT,
+  CapitalInterestTransferEvent.JSON_PROPERTY_EXCESS_CAPITAL_RETURNED_AMOUNT,
+  CapitalInterestTransferEvent.JSON_PROPERTY_PAID_IN_CAPITAL_PORTFOLIO_CCY_AMOUNT,
+  CapitalInterestTransferEvent.JSON_PROPERTY_RETURNED_CAPITAL_PORTFOLIO_CCY_AMOUNT,
+  CapitalInterestTransferEvent.JSON_PROPERTY_EXCESS_CAPITAL_RETURNED_PORTFOLIO_CCY_AMOUNT
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -170,6 +174,26 @@ public class CapitalInterestTransferEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_FUNDED_CAPITAL_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal fundedCapitalAmount;
+
+  public static final String JSON_PROPERTY_EXCESS_CAPITAL_RETURNED_AMOUNT = "excessCapitalReturnedAmount";
+  @JsonProperty(JSON_PROPERTY_EXCESS_CAPITAL_RETURNED_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal excessCapitalReturnedAmount;
+
+  public static final String JSON_PROPERTY_PAID_IN_CAPITAL_PORTFOLIO_CCY_AMOUNT = "paidInCapitalPortfolioCcyAmount";
+  @JsonProperty(JSON_PROPERTY_PAID_IN_CAPITAL_PORTFOLIO_CCY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal paidInCapitalPortfolioCcyAmount;
+
+  public static final String JSON_PROPERTY_RETURNED_CAPITAL_PORTFOLIO_CCY_AMOUNT = "returnedCapitalPortfolioCcyAmount";
+  @JsonProperty(JSON_PROPERTY_RETURNED_CAPITAL_PORTFOLIO_CCY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal returnedCapitalPortfolioCcyAmount;
+
+  public static final String JSON_PROPERTY_EXCESS_CAPITAL_RETURNED_PORTFOLIO_CCY_AMOUNT = "excessCapitalReturnedPortfolioCcyAmount";
+  @JsonProperty(JSON_PROPERTY_EXCESS_CAPITAL_RETURNED_PORTFOLIO_CCY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal excessCapitalReturnedPortfolioCcyAmount;
 
   public CapitalInterestTransferEvent() {
   }
@@ -573,6 +597,82 @@ public class CapitalInterestTransferEvent extends InstrumentEvent {
   }
 
 
+  public CapitalInterestTransferEvent excessCapitalReturnedAmount(java.math.BigDecimal excessCapitalReturnedAmount) {
+    this.excessCapitalReturnedAmount = excessCapitalReturnedAmount;
+    return this;
+  }
+
+  /**
+   * The cumulative excess capital returned that the destination line takes over from the source line. Used on the &#39;In&#39; side only; must not be negative.
+   * @return excessCapitalReturnedAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getExcessCapitalReturnedAmount() {
+    return excessCapitalReturnedAmount;
+  }
+
+  public void setExcessCapitalReturnedAmount(java.math.BigDecimal excessCapitalReturnedAmount) {
+    this.excessCapitalReturnedAmount = excessCapitalReturnedAmount;
+  }
+
+
+  public CapitalInterestTransferEvent paidInCapitalPortfolioCcyAmount(java.math.BigDecimal paidInCapitalPortfolioCcyAmount) {
+    this.paidInCapitalPortfolioCcyAmount = paidInCapitalPortfolioCcyAmount;
+    return this;
+  }
+
+  /**
+   * The paid-in capital the destination line takes over, already in the portfolio&#39;s base currency: the source line&#39;s PaidInCapitalPortfolioCcy balance share, accumulated at historical rates, not a spot conversion of PaidInCapitalAmount. Used on the &#39;In&#39; side only; must not be negative. An In side that omits it books zero for PaidInCapitalPortfolioCcy while the Out side gives up its share, and the transaction type configuration must include the PaidInCapitalPortfolioCcy movement for the twin to move.
+   * @return paidInCapitalPortfolioCcyAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getPaidInCapitalPortfolioCcyAmount() {
+    return paidInCapitalPortfolioCcyAmount;
+  }
+
+  public void setPaidInCapitalPortfolioCcyAmount(java.math.BigDecimal paidInCapitalPortfolioCcyAmount) {
+    this.paidInCapitalPortfolioCcyAmount = paidInCapitalPortfolioCcyAmount;
+  }
+
+
+  public CapitalInterestTransferEvent returnedCapitalPortfolioCcyAmount(java.math.BigDecimal returnedCapitalPortfolioCcyAmount) {
+    this.returnedCapitalPortfolioCcyAmount = returnedCapitalPortfolioCcyAmount;
+    return this;
+  }
+
+  /**
+   * The returned capital the destination line takes over, already in the portfolio&#39;s base currency at the source line&#39;s historical rates. Used on the &#39;In&#39; side only; must not be negative. An In side that omits it books zero for ReturnedCapitalPortfolioCcy while the Out side gives up its share, and the transaction type configuration must include the ReturnedCapitalPortfolioCcy movement for the twin to move.
+   * @return returnedCapitalPortfolioCcyAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getReturnedCapitalPortfolioCcyAmount() {
+    return returnedCapitalPortfolioCcyAmount;
+  }
+
+  public void setReturnedCapitalPortfolioCcyAmount(java.math.BigDecimal returnedCapitalPortfolioCcyAmount) {
+    this.returnedCapitalPortfolioCcyAmount = returnedCapitalPortfolioCcyAmount;
+  }
+
+
+  public CapitalInterestTransferEvent excessCapitalReturnedPortfolioCcyAmount(java.math.BigDecimal excessCapitalReturnedPortfolioCcyAmount) {
+    this.excessCapitalReturnedPortfolioCcyAmount = excessCapitalReturnedPortfolioCcyAmount;
+    return this;
+  }
+
+  /**
+   * The cumulative excess capital returned that the destination line takes over, already in the portfolio&#39;s base currency at the source line&#39;s historical rates. Used on the &#39;In&#39; side only; must not be negative. An In side that omits it books zero for ExcessCapitalReturnedPortfolioCcy while the Out side gives up its share, and the transaction type configuration must include the ExcessCapitalReturnedPortfolioCcy movement for the twin to move.
+   * @return excessCapitalReturnedPortfolioCcyAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getExcessCapitalReturnedPortfolioCcyAmount() {
+    return excessCapitalReturnedPortfolioCcyAmount;
+  }
+
+  public void setExcessCapitalReturnedPortfolioCcyAmount(java.math.BigDecimal excessCapitalReturnedPortfolioCcyAmount) {
+    this.excessCapitalReturnedPortfolioCcyAmount = excessCapitalReturnedPortfolioCcyAmount;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -603,6 +703,10 @@ public class CapitalInterestTransferEvent extends InstrumentEvent {
         (this.recallableCapitalAmount == null ? capitalInterestTransferEvent.recallableCapitalAmount == null : (capitalInterestTransferEvent.recallableCapitalAmount != null && this.recallableCapitalAmount.compareTo(capitalInterestTransferEvent.getRecallableCapitalAmount()) == 0)) &&
         (this.nonRecallableCapitalAmount == null ? capitalInterestTransferEvent.nonRecallableCapitalAmount == null : (capitalInterestTransferEvent.nonRecallableCapitalAmount != null && this.nonRecallableCapitalAmount.compareTo(capitalInterestTransferEvent.getNonRecallableCapitalAmount()) == 0)) &&
         (this.fundedCapitalAmount == null ? capitalInterestTransferEvent.fundedCapitalAmount == null : (capitalInterestTransferEvent.fundedCapitalAmount != null && this.fundedCapitalAmount.compareTo(capitalInterestTransferEvent.getFundedCapitalAmount()) == 0)) &&
+        (this.excessCapitalReturnedAmount == null ? capitalInterestTransferEvent.excessCapitalReturnedAmount == null : (capitalInterestTransferEvent.excessCapitalReturnedAmount != null && this.excessCapitalReturnedAmount.compareTo(capitalInterestTransferEvent.getExcessCapitalReturnedAmount()) == 0)) &&
+        (this.paidInCapitalPortfolioCcyAmount == null ? capitalInterestTransferEvent.paidInCapitalPortfolioCcyAmount == null : (capitalInterestTransferEvent.paidInCapitalPortfolioCcyAmount != null && this.paidInCapitalPortfolioCcyAmount.compareTo(capitalInterestTransferEvent.getPaidInCapitalPortfolioCcyAmount()) == 0)) &&
+        (this.returnedCapitalPortfolioCcyAmount == null ? capitalInterestTransferEvent.returnedCapitalPortfolioCcyAmount == null : (capitalInterestTransferEvent.returnedCapitalPortfolioCcyAmount != null && this.returnedCapitalPortfolioCcyAmount.compareTo(capitalInterestTransferEvent.getReturnedCapitalPortfolioCcyAmount()) == 0)) &&
+        (this.excessCapitalReturnedPortfolioCcyAmount == null ? capitalInterestTransferEvent.excessCapitalReturnedPortfolioCcyAmount == null : (capitalInterestTransferEvent.excessCapitalReturnedPortfolioCcyAmount != null && this.excessCapitalReturnedPortfolioCcyAmount.compareTo(capitalInterestTransferEvent.getExcessCapitalReturnedPortfolioCcyAmount()) == 0)) &&
         super.equals(o);
   }
 
@@ -612,7 +716,7 @@ public class CapitalInterestTransferEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(date, direction, fraction, fromLineId, toLineId, mode, toPortfolioId, considerationAmount, considerationCurrency, considerationRecordOnly, reason, scope, dealId, taxTreatmentAcknowledged, committedCapitalAmount, calledCommitmentAmount, paidInCapitalAmount, returnedCapitalAmount, recallableCapitalAmount, nonRecallableCapitalAmount, fundedCapitalAmount, super.hashCode());
+    return Objects.hash(date, direction, fraction, fromLineId, toLineId, mode, toPortfolioId, considerationAmount, considerationCurrency, considerationRecordOnly, reason, scope, dealId, taxTreatmentAcknowledged, committedCapitalAmount, calledCommitmentAmount, paidInCapitalAmount, returnedCapitalAmount, recallableCapitalAmount, nonRecallableCapitalAmount, fundedCapitalAmount, excessCapitalReturnedAmount, paidInCapitalPortfolioCcyAmount, returnedCapitalPortfolioCcyAmount, excessCapitalReturnedPortfolioCcyAmount, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -648,6 +752,10 @@ public class CapitalInterestTransferEvent extends InstrumentEvent {
     sb.append("    recallableCapitalAmount: ").append(toIndentedString(recallableCapitalAmount)).append("\n");
     sb.append("    nonRecallableCapitalAmount: ").append(toIndentedString(nonRecallableCapitalAmount)).append("\n");
     sb.append("    fundedCapitalAmount: ").append(toIndentedString(fundedCapitalAmount)).append("\n");
+    sb.append("    excessCapitalReturnedAmount: ").append(toIndentedString(excessCapitalReturnedAmount)).append("\n");
+    sb.append("    paidInCapitalPortfolioCcyAmount: ").append(toIndentedString(paidInCapitalPortfolioCcyAmount)).append("\n");
+    sb.append("    returnedCapitalPortfolioCcyAmount: ").append(toIndentedString(returnedCapitalPortfolioCcyAmount)).append("\n");
+    sb.append("    excessCapitalReturnedPortfolioCcyAmount: ").append(toIndentedString(excessCapitalReturnedPortfolioCcyAmount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

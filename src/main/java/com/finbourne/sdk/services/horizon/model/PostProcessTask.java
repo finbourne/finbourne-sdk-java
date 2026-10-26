@@ -89,7 +89,7 @@ public class PostProcessTask {
   }
 
   /**
-   * The instance identifier to trigger (for TriggerIntegration action).
+   * The identifier of the integration instance to run (RunIntegration action only).
    * @return targetInstance
    */
   @javax.annotation.Nullable

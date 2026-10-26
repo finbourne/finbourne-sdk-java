@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **isBackfilled** | **Boolean** | Set to True if the Valuation Point has backfilled bucket set results, False otherwise. | [optional] [default to Boolean]
 **applyClearDown** | **Boolean** | Set to True if the Valuation Point applies a clear down, False otherwise. The Valuation Point shows its bucket values before the clear down, and the next Valuation Point opens from the balances after it. | [optional] [default to Boolean]
 **diagnostics** | [**List&lt;ValuationPointDiagnostic&gt;**](ValuationPointDiagnostic.md) | Findings made while striking the valuation point that did not stop it but should be looked at, such as a fund structure holder whose declared sharing percentage in a member has drifted from the share its contributions make of that member&#39;s capital. Absent when there are none. | [optional] [default to List<ValuationPointDiagnostic>]
+**bucketSetSeeds** | [**List&lt;BucketSetSeed&gt;**](BucketSetSeed.md) | The bucket set seeds set on the Valuation Point, when the request resolved to the Valuation Point itself. Null when it has none. | [optional] [default to List<BucketSetSeed>]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -42,6 +43,7 @@ StagedModificationsInfo stagedModifications = new StagedModificationsInfo();
 Boolean isBackfilled = true;
 Boolean applyClearDown = true;
 @javax.annotation.Nullable List<ValuationPointDiagnostic> diagnostics = new List<ValuationPointDiagnostic>();
+@javax.annotation.Nullable List<BucketSetSeed> bucketSetSeeds = new List<BucketSetSeed>();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -60,6 +62,7 @@ ValuationPointDataResponse valuationPointDataResponseInstance = new ValuationPoi
     .isBackfilled(isBackfilled)
     .applyClearDown(applyClearDown)
     .diagnostics(diagnostics)
+    .bucketSetSeeds(bucketSetSeeds)
     .links(links);
 ```
 

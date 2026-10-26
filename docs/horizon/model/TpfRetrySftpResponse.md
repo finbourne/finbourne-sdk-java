@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **message** | **String** | Status message describing the result | [default to String]
 **newFileDeliveryUuid** | [**UUID**](UUID.md) | UUID of the new file delivery record created for this retry (if successful) | [optional] [default to UUID]
 **retriedAt** | [**OffsetDateTime**](OffsetDateTime.md) | Timestamp when the retry was executed | [optional] [default to OffsetDateTime]
+**resendRunId** | [**UUID**](UUID.md) | The run queued to resend the file; it appears in run history as a further attempt of the original run | [optional] [default to UUID]
 **originalFile** | [**TpfFileDeliveryInfo**](TpfFileDeliveryInfo.md) |  | [optional] [default to TpfFileDeliveryInfo]
 **duplicateFile** | [**TpfFileDeliveryInfo**](TpfFileDeliveryInfo.md) |  | [optional] [default to TpfFileDeliveryInfo]
 
@@ -23,6 +24,7 @@ Boolean success = true;
 String message = "example message";
 @javax.annotation.Nullable UUID newFileDeliveryUuid = "example newFileDeliveryUuid";
 @javax.annotation.Nullable OffsetDateTime retriedAt = OffsetDateTime.now();
+@javax.annotation.Nullable UUID resendRunId = "example resendRunId";
 TpfFileDeliveryInfo originalFile = new TpfFileDeliveryInfo();
 TpfFileDeliveryInfo duplicateFile = new TpfFileDeliveryInfo();
 
@@ -32,6 +34,7 @@ TpfRetrySftpResponse tpfRetrySftpResponseInstance = new TpfRetrySftpResponse()
     .message(message)
     .newFileDeliveryUuid(newFileDeliveryUuid)
     .retriedAt(retriedAt)
+    .resendRunId(resendRunId)
     .originalFile(originalFile)
     .duplicateFile(duplicateFile);
 ```

@@ -47,7 +47,8 @@ import com.finbourne.sdk.JSON;
   TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_STATUS,
   TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_ERROR,
   TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_NAME,
-  TpfFileDeliveryResponse.JSON_PROPERTY_FILE_UUID
+  TpfFileDeliveryResponse.JSON_PROPERTY_FILE_UUID,
+  TpfFileDeliveryResponse.JSON_PROPERTY_CAN_RESEND
 })
 
 public class TpfFileDeliveryResponse {
@@ -110,6 +111,11 @@ public class TpfFileDeliveryResponse {
   @JsonProperty(JSON_PROPERTY_FILE_UUID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private UUID fileUuid;
+
+  public static final String JSON_PROPERTY_CAN_RESEND = "canResend";
+  @JsonProperty(JSON_PROPERTY_CAN_RESEND)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Boolean canResend;
 
   public TpfFileDeliveryResponse() {
   }
@@ -342,6 +348,25 @@ public class TpfFileDeliveryResponse {
   }
 
 
+  public TpfFileDeliveryResponse canResend(Boolean canResend) {
+    this.canResend = canResend;
+    return this;
+  }
+
+  /**
+   * Whether the data the file is rebuilt from is still retained, so a resend can be requested.
+   * @return canResend
+   */
+  @javax.annotation.Nonnull
+  public Boolean getCanResend() {
+    return canResend;
+  }
+
+  public void setCanResend(Boolean canResend) {
+    this.canResend = canResend;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -362,7 +387,8 @@ public class TpfFileDeliveryResponse {
         Objects.equals(this.destinationStatus, tpfFileDeliveryResponse.destinationStatus) &&
         Objects.equals(this.destinationError, tpfFileDeliveryResponse.destinationError) &&
         Objects.equals(this.destinationName, tpfFileDeliveryResponse.destinationName) &&
-        Objects.equals(this.fileUuid, tpfFileDeliveryResponse.fileUuid);
+        Objects.equals(this.fileUuid, tpfFileDeliveryResponse.fileUuid) &&
+        Objects.equals(this.canResend, tpfFileDeliveryResponse.canResend);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -371,7 +397,7 @@ public class TpfFileDeliveryResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationStatus, destinationError, destinationName, fileUuid);
+    return Objects.hash(runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationStatus, destinationError, destinationName, fileUuid, canResend);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -397,6 +423,7 @@ public class TpfFileDeliveryResponse {
     sb.append("    destinationError: ").append(toIndentedString(destinationError)).append("\n");
     sb.append("    destinationName: ").append(toIndentedString(destinationName)).append("\n");
     sb.append("    fileUuid: ").append(toIndentedString(fileUuid)).append("\n");
+    sb.append("    canResend: ").append(toIndentedString(canResend)).append("\n");
     sb.append("}");
     return sb.toString();
   }

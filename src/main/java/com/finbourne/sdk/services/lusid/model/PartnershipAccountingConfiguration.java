@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AllocationBasisRule;
 import com.finbourne.sdk.services.lusid.model.CapabilityOverride;
 import com.finbourne.sdk.services.lusid.model.PresentationConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
@@ -50,7 +51,8 @@ import com.finbourne.sdk.JSON;
   PartnershipAccountingConfiguration.JSON_PROPERTY_CAPABILITY_OVERRIDES,
   PartnershipAccountingConfiguration.JSON_PROPERTY_SERIES,
   PartnershipAccountingConfiguration.JSON_PROPERTY_EFFECTIVE_CAPABILITIES,
-  PartnershipAccountingConfiguration.JSON_PROPERTY_PRESENTATION
+  PartnershipAccountingConfiguration.JSON_PROPERTY_PRESENTATION,
+  PartnershipAccountingConfiguration.JSON_PROPERTY_ALLOCATION_BASES
 })
 
 public class PartnershipAccountingConfiguration {
@@ -98,6 +100,11 @@ public class PartnershipAccountingConfiguration {
   @JsonProperty(JSON_PROPERTY_PRESENTATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private PresentationConfiguration presentation;
+
+  public static final String JSON_PROPERTY_ALLOCATION_BASES = "allocationBases";
+  @JsonProperty(JSON_PROPERTY_ALLOCATION_BASES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationBasisRule> allocationBases;
 
   public PartnershipAccountingConfiguration() {
   }
@@ -289,6 +296,33 @@ public class PartnershipAccountingConfiguration {
   }
 
 
+  public PartnershipAccountingConfiguration allocationBases(List<AllocationBasisRule> allocationBases) {
+    this.allocationBases = allocationBases;
+    return this;
+  }
+
+  public PartnershipAccountingConfiguration addAllocationBasesItem(AllocationBasisRule allocationBasesItem) {
+    if (this.allocationBases == null) {
+      this.allocationBases = new ArrayList<>();
+    }
+    this.allocationBases.add(allocationBasesItem);
+    return this;
+  }
+
+  /**
+   * Get allocationBases
+   * @return allocationBases
+   */
+  @javax.annotation.Nullable
+  public List<AllocationBasisRule> getAllocationBases() {
+    return allocationBases;
+  }
+
+  public void setAllocationBases(List<AllocationBasisRule> allocationBases) {
+    this.allocationBases = allocationBases;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -306,7 +340,8 @@ public class PartnershipAccountingConfiguration {
         Objects.equals(this.capabilityOverrides, partnershipAccountingConfiguration.capabilityOverrides) &&
         Objects.equals(this.series, partnershipAccountingConfiguration.series) &&
         Objects.equals(this.effectiveCapabilities, partnershipAccountingConfiguration.effectiveCapabilities) &&
-        Objects.equals(this.presentation, partnershipAccountingConfiguration.presentation);
+        Objects.equals(this.presentation, partnershipAccountingConfiguration.presentation) &&
+        Objects.equals(this.allocationBases, partnershipAccountingConfiguration.allocationBases);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -315,7 +350,7 @@ public class PartnershipAccountingConfiguration {
 
   @Override
  public int hashCode() {
-    return Objects.hash(enabled, configPack, commitmentCurrencyPolicy, registerPortfolioGroup, capitalModel, capabilityOverrides, series, effectiveCapabilities, presentation);
+    return Objects.hash(enabled, configPack, commitmentCurrencyPolicy, registerPortfolioGroup, capitalModel, capabilityOverrides, series, effectiveCapabilities, presentation, allocationBases);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -338,6 +373,7 @@ public class PartnershipAccountingConfiguration {
     sb.append("    series: ").append(toIndentedString(series)).append("\n");
     sb.append("    effectiveCapabilities: ").append(toIndentedString(effectiveCapabilities)).append("\n");
     sb.append("    presentation: ").append(toIndentedString(presentation)).append("\n");
+    sb.append("    allocationBases: ").append(toIndentedString(allocationBases)).append("\n");
     sb.append("}");
     return sb.toString();
   }

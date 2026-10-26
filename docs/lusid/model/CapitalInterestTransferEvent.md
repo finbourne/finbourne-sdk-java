@@ -1,6 +1,6 @@
 # com.finbourne.sdk.services.lusid.model.CapitalInterestTransferEvent
 classname CapitalInterestTransferEvent
-The movement of a proportion of a CapitalInterest line's capital balances from one line to another.  The source (Out) side moves every balance by the fraction; the destination (In) side receives the  amounts given on the event. Mode distinguishes a genuine transfer between investors from a correction  of a mis-booked position.
+The movement of a proportion of a CapitalInterest line's capital balances from one line to another.  The source (Out) side moves every balance by the fraction; the destination (In) side receives the  amounts given on the event. Mode distinguishes a genuine transfer between investors from a correction  of a mis-booked position. The portfolio-currency twin amounts (PaidInCapitalPortfolioCcyAmount,  ReturnedCapitalPortfolioCcyAmount and ExcessCapitalReturnedPortfolioCcyAmount) are not derived: an In side  that omits them books zero for the ...PortfolioCcy twins while the Out side gives up its share, and a  client-maintained transaction type configuration must include the ...PortfolioCcy twin movements for the  twins to move at all.
 
 ## Properties
 
@@ -28,6 +28,10 @@ Name | Type | Description | Notes
 **recallableCapitalAmount** | **java.math.BigDecimal** | The recallable capital received by the destination line. Used on the &#39;In&#39; side only; must not be negative. | [optional] [default to java.math.BigDecimal]
 **nonRecallableCapitalAmount** | **java.math.BigDecimal** | The non-recallable capital received by the destination line. Used on the &#39;In&#39; side only; must not be negative. | [optional] [default to java.math.BigDecimal]
 **fundedCapitalAmount** | **java.math.BigDecimal** | The funded capital received by the destination line, for a line whose drawdowns were booked against the stored funded balance rather than paid-in capital. Used on the &#39;In&#39; side only; must not be negative. | [optional] [default to java.math.BigDecimal]
+**excessCapitalReturnedAmount** | **java.math.BigDecimal** | The cumulative excess capital returned that the destination line takes over from the source line. Used on the &#39;In&#39; side only; must not be negative. | [optional] [default to java.math.BigDecimal]
+**paidInCapitalPortfolioCcyAmount** | **java.math.BigDecimal** | The paid-in capital the destination line takes over, already in the portfolio&#39;s base currency: the source line&#39;s PaidInCapitalPortfolioCcy balance share, accumulated at historical rates, not a spot conversion of PaidInCapitalAmount. Used on the &#39;In&#39; side only; must not be negative. An In side that omits it books zero for PaidInCapitalPortfolioCcy while the Out side gives up its share, and the transaction type configuration must include the PaidInCapitalPortfolioCcy movement for the twin to move. | [optional] [default to java.math.BigDecimal]
+**returnedCapitalPortfolioCcyAmount** | **java.math.BigDecimal** | The returned capital the destination line takes over, already in the portfolio&#39;s base currency at the source line&#39;s historical rates. Used on the &#39;In&#39; side only; must not be negative. An In side that omits it books zero for ReturnedCapitalPortfolioCcy while the Out side gives up its share, and the transaction type configuration must include the ReturnedCapitalPortfolioCcy movement for the twin to move. | [optional] [default to java.math.BigDecimal]
+**excessCapitalReturnedPortfolioCcyAmount** | **java.math.BigDecimal** | The cumulative excess capital returned that the destination line takes over, already in the portfolio&#39;s base currency at the source line&#39;s historical rates. Used on the &#39;In&#39; side only; must not be negative. An In side that omits it books zero for ExcessCapitalReturnedPortfolioCcy while the Out side gives up its share, and the transaction type configuration must include the ExcessCapitalReturnedPortfolioCcy movement for the twin to move. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CapitalInterestTransferEvent;
@@ -56,6 +60,10 @@ String toLineId = "example toLineId";
 @javax.annotation.Nullable java.math.BigDecimal recallableCapitalAmount = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal nonRecallableCapitalAmount = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal fundedCapitalAmount = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal excessCapitalReturnedAmount = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal paidInCapitalPortfolioCcyAmount = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal returnedCapitalPortfolioCcyAmount = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal excessCapitalReturnedPortfolioCcyAmount = new java.math.BigDecimal("100.00");
 
 
 CapitalInterestTransferEvent capitalInterestTransferEventInstance = new CapitalInterestTransferEvent()
@@ -79,7 +87,11 @@ CapitalInterestTransferEvent capitalInterestTransferEventInstance = new CapitalI
     .returnedCapitalAmount(returnedCapitalAmount)
     .recallableCapitalAmount(recallableCapitalAmount)
     .nonRecallableCapitalAmount(nonRecallableCapitalAmount)
-    .fundedCapitalAmount(fundedCapitalAmount);
+    .fundedCapitalAmount(fundedCapitalAmount)
+    .excessCapitalReturnedAmount(excessCapitalReturnedAmount)
+    .paidInCapitalPortfolioCcyAmount(paidInCapitalPortfolioCcyAmount)
+    .returnedCapitalPortfolioCcyAmount(returnedCapitalPortfolioCcyAmount)
+    .excessCapitalReturnedPortfolioCcyAmount(excessCapitalReturnedPortfolioCcyAmount);
 ```
 
 

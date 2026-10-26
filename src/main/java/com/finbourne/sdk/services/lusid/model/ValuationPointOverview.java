@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.BucketSetSeed;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.Property;
 import java.io.IOException;
@@ -55,6 +56,7 @@ import com.finbourne.sdk.JSON;
   ValuationPointOverview.JSON_PROPERTY_HOLDINGS_AS_AT_OVERRIDE,
   ValuationPointOverview.JSON_PROPERTY_VALUATIONS_AS_AT_OVERRIDE,
   ValuationPointOverview.JSON_PROPERTY_PROPERTIES,
+  ValuationPointOverview.JSON_PROPERTY_BUCKET_SET_SEEDS,
   ValuationPointOverview.JSON_PROPERTY_LINKS
 })
 
@@ -123,6 +125,11 @@ public class ValuationPointOverview {
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, Property> properties;
+
+  public static final String JSON_PROPERTY_BUCKET_SET_SEEDS = "bucketSetSeeds";
+  @JsonProperty(JSON_PROPERTY_BUCKET_SET_SEEDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<BucketSetSeed> bucketSetSeeds;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -387,6 +394,33 @@ public class ValuationPointOverview {
   }
 
 
+  public ValuationPointOverview bucketSetSeeds(List<BucketSetSeed> bucketSetSeeds) {
+    this.bucketSetSeeds = bucketSetSeeds;
+    return this;
+  }
+
+  public ValuationPointOverview addBucketSetSeedsItem(BucketSetSeed bucketSetSeedsItem) {
+    if (this.bucketSetSeeds == null) {
+      this.bucketSetSeeds = new ArrayList<>();
+    }
+    this.bucketSetSeeds.add(bucketSetSeedsItem);
+    return this;
+  }
+
+  /**
+   * The bucket set seeds set on this variant of the Valuation Point. Null when it has none.
+   * @return bucketSetSeeds
+   */
+  @javax.annotation.Nullable
+  public List<BucketSetSeed> getBucketSetSeeds() {
+    return bucketSetSeeds;
+  }
+
+  public void setBucketSetSeeds(List<BucketSetSeed> bucketSetSeeds) {
+    this.bucketSetSeeds = bucketSetSeeds;
+  }
+
+
   public ValuationPointOverview links(List<Link> links) {
     this.links = links;
     return this;
@@ -436,6 +470,7 @@ public class ValuationPointOverview {
         Objects.equals(this.holdingsAsAtOverride, valuationPointOverview.holdingsAsAtOverride) &&
         Objects.equals(this.valuationsAsAtOverride, valuationPointOverview.valuationsAsAtOverride) &&
         Objects.equals(this.properties, valuationPointOverview.properties) &&
+        Objects.equals(this.bucketSetSeeds, valuationPointOverview.bucketSetSeeds) &&
         Objects.equals(this.links, valuationPointOverview.links);
   }
 
@@ -445,7 +480,7 @@ public class ValuationPointOverview {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, diaryEntryCode, diaryEntryVariant, effectiveFrom, effectiveTo, queryAsAt, type, status, gav, nav, holdingsAsAtOverride, valuationsAsAtOverride, properties, links);
+    return Objects.hash(href, diaryEntryCode, diaryEntryVariant, effectiveFrom, effectiveTo, queryAsAt, type, status, gav, nav, holdingsAsAtOverride, valuationsAsAtOverride, properties, bucketSetSeeds, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -472,6 +507,7 @@ public class ValuationPointOverview {
     sb.append("    holdingsAsAtOverride: ").append(toIndentedString(holdingsAsAtOverride)).append("\n");
     sb.append("    valuationsAsAtOverride: ").append(toIndentedString(valuationsAsAtOverride)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
+    sb.append("    bucketSetSeeds: ").append(toIndentedString(bucketSetSeeds)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

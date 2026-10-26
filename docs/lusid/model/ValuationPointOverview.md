@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **holdingsAsAtOverride** | [**OffsetDateTime**](OffsetDateTime.md) | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt. | [optional] [default to OffsetDateTime]
 **valuationsAsAtOverride** | [**OffsetDateTime**](OffsetDateTime.md) | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to QueryAsAt. | [optional] [default to OffsetDateTime]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | The Fee properties. These will be from the &#39;Fee&#39; domain. | [optional] [default to Map<String, Property>]
+**bucketSetSeeds** | [**List&lt;BucketSetSeed&gt;**](BucketSetSeed.md) | The bucket set seeds set on this variant of the Valuation Point. Null when it has none. | [optional] [default to List<BucketSetSeed>]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -39,6 +40,7 @@ java.math.BigDecimal nav = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable OffsetDateTime holdingsAsAtOverride = OffsetDateTime.now();
 @javax.annotation.Nullable OffsetDateTime valuationsAsAtOverride = OffsetDateTime.now();
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
+@javax.annotation.Nullable List<BucketSetSeed> bucketSetSeeds = new List<BucketSetSeed>();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -56,6 +58,7 @@ ValuationPointOverview valuationPointOverviewInstance = new ValuationPointOvervi
     .holdingsAsAtOverride(holdingsAsAtOverride)
     .valuationsAsAtOverride(valuationsAsAtOverride)
     .properties(properties)
+    .bucketSetSeeds(bucketSetSeeds)
     .links(links);
 ```
 

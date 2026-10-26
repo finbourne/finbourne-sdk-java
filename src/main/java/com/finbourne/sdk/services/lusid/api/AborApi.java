@@ -3096,7 +3096,7 @@ public class AborApi {
 
     /**
      * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
@@ -3122,7 +3122,7 @@ public class AborApi {
 
     /**
      * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
@@ -3148,7 +3148,7 @@ public class AborApi {
 
     /**
      * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor. (asynchronously)
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
@@ -3175,7 +3175,7 @@ public class AborApi {
 
     /**
      * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor. (asynchronously)
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)
@@ -3373,7 +3373,7 @@ public class AborApi {
 
     /**
      * [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
-     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
+     * Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Rows are returned ordered by General Ledger Account Code (ordinal, with rows no posting rule mapped first) and then by Levels, so the order is stable across pages.                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
      * @param scope The scope of the Abor. (required)
      * @param code The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
      * @param trialBalanceQueryParameters The query parameters used in running the generation of the Trial Balance. (required)

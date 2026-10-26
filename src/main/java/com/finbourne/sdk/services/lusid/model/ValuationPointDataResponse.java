@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ApportionmentBreakdown;
 import com.finbourne.sdk.services.lusid.model.BucketSetResult;
+import com.finbourne.sdk.services.lusid.model.BucketSetSeed;
 import com.finbourne.sdk.services.lusid.model.FundDetails;
 import com.finbourne.sdk.services.lusid.model.FundValuationPointData;
 import com.finbourne.sdk.services.lusid.model.Link;
@@ -59,6 +60,7 @@ import com.finbourne.sdk.JSON;
   ValuationPointDataResponse.JSON_PROPERTY_IS_BACKFILLED,
   ValuationPointDataResponse.JSON_PROPERTY_APPLY_CLEAR_DOWN,
   ValuationPointDataResponse.JSON_PROPERTY_DIAGNOSTICS,
+  ValuationPointDataResponse.JSON_PROPERTY_BUCKET_SET_SEEDS,
   ValuationPointDataResponse.JSON_PROPERTY_LINKS
 })
 
@@ -132,6 +134,11 @@ public class ValuationPointDataResponse {
   @JsonProperty(JSON_PROPERTY_DIAGNOSTICS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ValuationPointDiagnostic> diagnostics;
+
+  public static final String JSON_PROPERTY_BUCKET_SET_SEEDS = "bucketSetSeeds";
+  @JsonProperty(JSON_PROPERTY_BUCKET_SET_SEEDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<BucketSetSeed> bucketSetSeeds;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -439,6 +446,33 @@ public class ValuationPointDataResponse {
   }
 
 
+  public ValuationPointDataResponse bucketSetSeeds(List<BucketSetSeed> bucketSetSeeds) {
+    this.bucketSetSeeds = bucketSetSeeds;
+    return this;
+  }
+
+  public ValuationPointDataResponse addBucketSetSeedsItem(BucketSetSeed bucketSetSeedsItem) {
+    if (this.bucketSetSeeds == null) {
+      this.bucketSetSeeds = new ArrayList<>();
+    }
+    this.bucketSetSeeds.add(bucketSetSeedsItem);
+    return this;
+  }
+
+  /**
+   * The bucket set seeds set on the Valuation Point, when the request resolved to the Valuation Point itself. Null when it has none.
+   * @return bucketSetSeeds
+   */
+  @javax.annotation.Nullable
+  public List<BucketSetSeed> getBucketSetSeeds() {
+    return bucketSetSeeds;
+  }
+
+  public void setBucketSetSeeds(List<BucketSetSeed> bucketSetSeeds) {
+    this.bucketSetSeeds = bucketSetSeeds;
+  }
+
+
   public ValuationPointDataResponse links(List<Link> links) {
     this.links = links;
     return this;
@@ -489,6 +523,7 @@ public class ValuationPointDataResponse {
         Objects.equals(this.isBackfilled, valuationPointDataResponse.isBackfilled) &&
         Objects.equals(this.applyClearDown, valuationPointDataResponse.applyClearDown) &&
         Objects.equals(this.diagnostics, valuationPointDataResponse.diagnostics) &&
+        Objects.equals(this.bucketSetSeeds, valuationPointDataResponse.bucketSetSeeds) &&
         Objects.equals(this.links, valuationPointDataResponse.links);
   }
 
@@ -498,7 +533,7 @@ public class ValuationPointDataResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, type, status, fundDetails, fundValuationPointData, shareClassData, valuationPointCode, previousValuationPointCode, apportionmentResults, bucketSetResults, stagedModifications, isBackfilled, applyClearDown, diagnostics, links);
+    return Objects.hash(href, type, status, fundDetails, fundValuationPointData, shareClassData, valuationPointCode, previousValuationPointCode, apportionmentResults, bucketSetResults, stagedModifications, isBackfilled, applyClearDown, diagnostics, bucketSetSeeds, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -526,6 +561,7 @@ public class ValuationPointDataResponse {
     sb.append("    isBackfilled: ").append(toIndentedString(isBackfilled)).append("\n");
     sb.append("    applyClearDown: ").append(toIndentedString(applyClearDown)).append("\n");
     sb.append("    diagnostics: ").append(toIndentedString(diagnostics)).append("\n");
+    sb.append("    bucketSetSeeds: ").append(toIndentedString(bucketSetSeeds)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

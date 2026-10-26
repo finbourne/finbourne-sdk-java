@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **pv** | **java.math.BigDecimal** | The present value of the holding in the agreement&#39;s base currency, when it contributes to exposure. | [optional] [default to java.math.BigDecimal]
 **variationMargin** | **java.math.BigDecimal** | The holding&#39;s contribution to variation margin, when it contributes to exposure. | [optional] [default to java.math.BigDecimal]
 **collateralValue** | **java.math.BigDecimal** | The holding&#39;s value as collateral after haircuts, when it is held as collateral. | [optional] [default to java.math.BigDecimal]
+**initialMarginItem** | **String** | The initial-margin item the line falls under, when the holding matched one. Filterable. | [optional] [default to String]
+**initialMargin** | **java.math.BigDecimal** | The holding&#39;s share of its netting set&#39;s initial margin, before the threshold, when it contributes to it. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.MarginLine;
@@ -39,6 +41,8 @@ java.math.BigDecimal units = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal pv = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal variationMargin = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal collateralValue = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable String initialMarginItem = "example initialMarginItem";
+@javax.annotation.Nullable java.math.BigDecimal initialMargin = new java.math.BigDecimal("100.00");
 
 
 MarginLine marginLineInstance = new MarginLine()
@@ -54,7 +58,9 @@ MarginLine marginLineInstance = new MarginLine()
     .units(units)
     .pv(pv)
     .variationMargin(variationMargin)
-    .collateralValue(collateralValue);
+    .collateralValue(collateralValue)
+    .initialMarginItem(initialMarginItem)
+    .initialMargin(initialMargin);
 ```
 
 

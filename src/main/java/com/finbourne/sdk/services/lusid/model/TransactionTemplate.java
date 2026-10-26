@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ComponentTransaction;
 import com.finbourne.sdk.services.lusid.model.Link;
+import com.finbourne.sdk.services.lusid.model.Warning;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +44,7 @@ import com.finbourne.sdk.JSON;
   TransactionTemplate.JSON_PROPERTY_DESCRIPTION,
   TransactionTemplate.JSON_PROPERTY_SCOPE,
   TransactionTemplate.JSON_PROPERTY_COMPONENT_TRANSACTIONS,
+  TransactionTemplate.JSON_PROPERTY_WARNINGS,
   TransactionTemplate.JSON_PROPERTY_LINKS
 })
 
@@ -71,6 +73,11 @@ public class TransactionTemplate {
   @JsonProperty(JSON_PROPERTY_COMPONENT_TRANSACTIONS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<ComponentTransaction> componentTransactions = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_WARNINGS = "warnings";
+  @JsonProperty(JSON_PROPERTY_WARNINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<Warning> warnings;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -183,6 +190,33 @@ public class TransactionTemplate {
   }
 
 
+  public TransactionTemplate warnings(List<Warning> warnings) {
+    this.warnings = warnings;
+    return this;
+  }
+
+  public TransactionTemplate addWarningsItem(Warning warningsItem) {
+    if (this.warnings == null) {
+      this.warnings = new ArrayList<>();
+    }
+    this.warnings.add(warningsItem);
+    return this;
+  }
+
+  /**
+   * Get warnings
+   * @return warnings
+   */
+  @javax.annotation.Nullable
+  public List<Warning> getWarnings() {
+    return warnings;
+  }
+
+  public void setWarnings(List<Warning> warnings) {
+    this.warnings = warnings;
+  }
+
+
   public TransactionTemplate links(List<Link> links) {
     this.links = links;
     return this;
@@ -224,6 +258,7 @@ public class TransactionTemplate {
         Objects.equals(this.description, transactionTemplate.description) &&
         Objects.equals(this.scope, transactionTemplate.scope) &&
         Objects.equals(this.componentTransactions, transactionTemplate.componentTransactions) &&
+        Objects.equals(this.warnings, transactionTemplate.warnings) &&
         Objects.equals(this.links, transactionTemplate.links);
   }
 
@@ -233,7 +268,7 @@ public class TransactionTemplate {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentType, instrumentEventType, description, scope, componentTransactions, links);
+    return Objects.hash(instrumentType, instrumentEventType, description, scope, componentTransactions, warnings, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -252,6 +287,7 @@ public class TransactionTemplate {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
     sb.append("    componentTransactions: ").append(toIndentedString(componentTransactions)).append("\n");
+    sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

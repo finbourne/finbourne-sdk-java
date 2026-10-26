@@ -38,6 +38,7 @@ import com.finbourne.sdk.JSON;
   AllocationPostingFundLine.JSON_PROPERTY_ID,
   AllocationPostingFundLine.JSON_PROPERTY_PORTFOLIO,
   AllocationPostingFundLine.JSON_PROPERTY_TRANSACTION_TYPE,
+  AllocationPostingFundLine.JSON_PROPERTY_PARTNERSHIP_TRANSACTION_TYPE,
   AllocationPostingFundLine.JSON_PROPERTY_AMOUNT,
   AllocationPostingFundLine.JSON_PROPERTY_COMPONENT,
   AllocationPostingFundLine.JSON_PROPERTY_INVESTOR_RECORD_ID,
@@ -60,6 +61,11 @@ public class AllocationPostingFundLine {
   @JsonProperty(JSON_PROPERTY_TRANSACTION_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String transactionType;
+
+  public static final String JSON_PROPERTY_PARTNERSHIP_TRANSACTION_TYPE = "partnershipTransactionType";
+  @JsonProperty(JSON_PROPERTY_PARTNERSHIP_TRANSACTION_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String partnershipTransactionType;
 
   public static final String JSON_PROPERTY_AMOUNT = "amount";
   @JsonProperty(JSON_PROPERTY_AMOUNT)
@@ -133,7 +139,7 @@ public class AllocationPostingFundLine {
   }
 
   /**
-   * The transaction type written on the fund side, for instance PA.ContributionCalled.
+   * The transaction type the booking writes on the fund side, for instance PECall: the type the fund&#39;s configuration maps the partnership transaction type to.
    * @return transactionType
    */
   @javax.annotation.Nullable
@@ -143,6 +149,25 @@ public class AllocationPostingFundLine {
 
   public void setTransactionType(String transactionType) {
     this.transactionType = transactionType;
+  }
+
+
+  public AllocationPostingFundLine partnershipTransactionType(String partnershipTransactionType) {
+    this.partnershipTransactionType = partnershipTransactionType;
+    return this;
+  }
+
+  /**
+   * The partnership transaction type the fund-side posting is classified as, for instance PA.ContributionCalled.
+   * @return partnershipTransactionType
+   */
+  @javax.annotation.Nullable
+  public String getPartnershipTransactionType() {
+    return partnershipTransactionType;
+  }
+
+  public void setPartnershipTransactionType(String partnershipTransactionType) {
+    this.partnershipTransactionType = partnershipTransactionType;
   }
 
 
@@ -253,6 +278,7 @@ public class AllocationPostingFundLine {
     return Objects.equals(this.id, allocationPostingFundLine.id) &&
         Objects.equals(this.portfolio, allocationPostingFundLine.portfolio) &&
         Objects.equals(this.transactionType, allocationPostingFundLine.transactionType) &&
+        Objects.equals(this.partnershipTransactionType, allocationPostingFundLine.partnershipTransactionType) &&
         (this.amount == null ? allocationPostingFundLine.amount == null : (allocationPostingFundLine.amount != null && this.amount.compareTo(allocationPostingFundLine.getAmount()) == 0)) &&
         Objects.equals(this.component, allocationPostingFundLine.component) &&
         Objects.equals(this.investorRecordId, allocationPostingFundLine.investorRecordId) &&
@@ -266,7 +292,7 @@ public class AllocationPostingFundLine {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, portfolio, transactionType, amount, component, investorRecordId, viaVehicle, admissionVehicle);
+    return Objects.hash(id, portfolio, transactionType, partnershipTransactionType, amount, component, investorRecordId, viaVehicle, admissionVehicle);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -283,6 +309,7 @@ public class AllocationPostingFundLine {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    portfolio: ").append(toIndentedString(portfolio)).append("\n");
     sb.append("    transactionType: ").append(toIndentedString(transactionType)).append("\n");
+    sb.append("    partnershipTransactionType: ").append(toIndentedString(partnershipTransactionType)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    component: ").append(toIndentedString(component)).append("\n");
     sb.append("    investorRecordId: ").append(toIndentedString(investorRecordId)).append("\n");

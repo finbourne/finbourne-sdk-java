@@ -27,7 +27,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
-import com.finbourne.sdk.services.horizon.model.FileDeliveryStatus;
 import com.finbourne.sdk.services.horizon.model.InstancesResponse;
 import com.finbourne.sdk.services.horizon.model.LusidProblemDetails;
 import com.finbourne.sdk.services.horizon.model.LusidValidationProblemDetails;
@@ -43,8 +42,7 @@ import com.finbourne.sdk.services.horizon.model.ReplayTransactionsRequest;
 import com.finbourne.sdk.services.horizon.model.ReplayTransactionsResponse;
 import com.finbourne.sdk.services.horizon.model.ResolveFailedDeliveryRequest;
 import com.finbourne.sdk.services.horizon.model.ResolveFailedDeliveryResponse;
-import com.finbourne.sdk.services.horizon.model.TpfFailedDeliveryResponse;
-import com.finbourne.sdk.services.horizon.model.TpfRetryFailedDeliveryRequest;
+import com.finbourne.sdk.services.horizon.model.TpfFileDeliveryDisplayStatus;
 import com.finbourne.sdk.services.horizon.model.TpfRetrySftpResponse;
 import com.finbourne.sdk.services.horizon.model.TpfTransactionSearchRequest;
 
@@ -94,7 +92,7 @@ public class TradePublicationFrameworkApi {
     /**
      * Build call for getTpfFileDeliveries
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
      * @param dateFrom Filter deliveries from this time (inclusive) (optional)
      * @param dateTo Filter deliveries to this time (inclusive) (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
@@ -110,14 +108,14 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTpfFileDeliveriesCall(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback) throws ApiException {
+    private HttpRequest getTpfFileDeliveriesCall(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback) throws ApiException {
         return getTpfFileDeliveriesCall(instanceId, status, dateFrom, dateTo, limit, page,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getTpfFileDeliveries. Use any specified configuration options to override any other configuration for this request only.
      * @param instanceId Integration instance ID (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param status Filter by delivery status (Completed, Error, Pending) (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param dateFrom Filter deliveries from this time (inclusive) (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param dateTo Filter deliveries to this time (inclusive) (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50). Use any specified configuration options to override any other configuration for this request only.
@@ -133,7 +131,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTpfFileDeliveriesCall(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTpfFileDeliveriesCall(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -199,7 +197,7 @@ public class TradePublicationFrameworkApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getTpfFileDeliveriesValidateBeforeCall(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTpfFileDeliveriesValidateBeforeCall(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'instanceId' is set
         if (instanceId == null) {
             throw new ApiException("Missing the required parameter 'instanceId' when calling getTpfFileDeliveries(Async)");
@@ -213,7 +211,7 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
      * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
      * @param dateFrom Filter deliveries from this time (inclusive) (optional)
      * @param dateTo Filter deliveries to this time (inclusive) (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
@@ -228,7 +226,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page) throws ApiException {
+    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page) throws ApiException {
         HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -238,7 +236,7 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
      * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
      * @param dateFrom Filter deliveries from this time (inclusive) (optional)
      * @param dateTo Filter deliveries to this time (inclusive) (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
@@ -253,7 +251,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
+    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
         HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -263,7 +261,7 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance (asynchronously)
      * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
      * @param dateFrom Filter deliveries from this time (inclusive) (optional)
      * @param dateTo Filter deliveries to this time (inclusive) (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
@@ -278,7 +276,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTpfFileDeliveriesAsync(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback) throws ApiException {
+    private void getTpfFileDeliveriesAsync(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback) throws ApiException {
 
         HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
@@ -289,7 +287,7 @@ public class TradePublicationFrameworkApi {
      * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance (asynchronously)
      * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
      * @param dateFrom Filter deliveries from this time (inclusive) (optional)
      * @param dateTo Filter deliveries to this time (inclusive) (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
@@ -304,7 +302,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTpfFileDeliveriesAsync(String instanceId, FileDeliveryStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getTpfFileDeliveriesAsync(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
         HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
@@ -313,7 +311,7 @@ public class TradePublicationFrameworkApi {
 
     public class APIgetTpfFileDeliveriesRequest {
         private final String instanceId;
-        private FileDeliveryStatus status;
+        private TpfFileDeliveryDisplayStatus status;
         private OffsetDateTime dateFrom;
         private OffsetDateTime dateTo;
         private Integer limit;
@@ -325,10 +323,10 @@ public class TradePublicationFrameworkApi {
 
         /**
          * Set status
-         * @param status Filter by delivery status (Completed, Error, Pending) (optional)
+         * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
          * @return APIgetTpfFileDeliveriesRequest
          */
-        public APIgetTpfFileDeliveriesRequest status(FileDeliveryStatus status) {
+        public APIgetTpfFileDeliveriesRequest status(TpfFileDeliveryDisplayStatus status) {
             this.status = status;
             return this;
         }
@@ -3857,350 +3855,10 @@ public class TradePublicationFrameworkApi {
         return new APIresolveFailedDeliveryRequest(instanceId, batchReferenceId, resolveFailedDeliveryRequest);
     }
     /**
-     * Build call for retryFailedDelivery
-     * @param instanceId Integration instance identifier (required)
-     * @param tpfRetryFailedDeliveryRequest Request containing batch element reference identifiers to retry (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-     </table>
-     */
-    private HttpRequest retryFailedDeliveryCall(String instanceId, TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest, final ApiCallback _callback) throws ApiException {
-        return retryFailedDeliveryCall(instanceId, tpfRetryFailedDeliveryRequest,  _callback, new ConfigurationOptions());
-    }
-
-    /**
-     * Build call for retryFailedDelivery. Use any specified configuration options to override any other configuration for this request only.
-     * @param instanceId Integration instance identifier (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param tpfRetryFailedDeliveryRequest Request containing batch element reference identifiers to retry (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-     </table>
-     */
-    private HttpRequest retryFailedDeliveryCall(String instanceId, TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = tpfRetryFailedDeliveryRequest;
-
-        // create path and map variables
-        String localVarPath = "/horizon/api/trade-publication-framework/instances/{instanceId}/failed/retry"
-            .replace("{" + "instanceId" + "}", localVarApiClient.escapeString(instanceId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json-patch+json",
-            "application/json",
-            "text/json",
-            "application/*+json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private HttpRequest retryFailedDeliveryValidateBeforeCall(String instanceId, TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        // verify the required parameter 'instanceId' is set
-        if (instanceId == null) {
-            throw new ApiException("Missing the required parameter 'instanceId' when calling retryFailedDelivery(Async)");
-        }
-
-        // verify the required parameter 'tpfRetryFailedDeliveryRequest' is set
-        if (tpfRetryFailedDeliveryRequest == null) {
-            throw new ApiException("Missing the required parameter 'tpfRetryFailedDeliveryRequest' when calling retryFailedDelivery(Async)");
-        }
-
-        return retryFailedDeliveryCall(instanceId, tpfRetryFailedDeliveryRequest, _callback, opts);
-
-    }
-
-    /**
-     * [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework
-     * Re-runs the delivery task only (payload already built - skips build task). Always committed - no preview mode. Increments attempt count on failure, sets resolved to true on success. Uses existing ReplayBatchElement on ITradeTrackingRepository. Requires entitlement to execute integrations.
-     * @param instanceId Integration instance identifier (required)
-     * @param tpfRetryFailedDeliveryRequest Request containing batch element reference identifiers to retry (required)
-     * @return ApiResponse&lt;TpfFailedDeliveryResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-     </table>
-     */
-    private ApiResponse<TpfFailedDeliveryResponse> retryFailedDeliveryWithHttpInfo(String instanceId, TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest) throws ApiException {
-        HttpRequest localVarCall = retryFailedDeliveryValidateBeforeCall(instanceId, tpfRetryFailedDeliveryRequest, null, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<TpfFailedDeliveryResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework
-     * Re-runs the delivery task only (payload already built - skips build task). Always committed - no preview mode. Increments attempt count on failure, sets resolved to true on success. Uses existing ReplayBatchElement on ITradeTrackingRepository. Requires entitlement to execute integrations.Use any specified configuration options to override any other configuration for this request only
-     * @param instanceId Integration instance identifier (required)
-     * @param tpfRetryFailedDeliveryRequest Request containing batch element reference identifiers to retry (required)
-     * @return ApiResponse&lt;TpfFailedDeliveryResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-     </table>
-     */
-    private ApiResponse<TpfFailedDeliveryResponse> retryFailedDeliveryWithHttpInfo(String instanceId, TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = retryFailedDeliveryValidateBeforeCall(instanceId, tpfRetryFailedDeliveryRequest, null, opts);
-        Type localVarReturnType = new TypeReference<TpfFailedDeliveryResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework (asynchronously)
-     * Re-runs the delivery task only (payload already built - skips build task). Always committed - no preview mode. Increments attempt count on failure, sets resolved to true on success. Uses existing ReplayBatchElement on ITradeTrackingRepository. Requires entitlement to execute integrations.
-     * @param instanceId Integration instance identifier (required)
-     * @param tpfRetryFailedDeliveryRequest Request containing batch element reference identifiers to retry (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-     </table>
-     */
-    private void retryFailedDeliveryAsync(String instanceId, TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest, final ApiCallback<TpfFailedDeliveryResponse> _callback) throws ApiException {
-
-        HttpRequest localVarCall = retryFailedDeliveryValidateBeforeCall(instanceId, tpfRetryFailedDeliveryRequest, _callback, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<TpfFailedDeliveryResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-    }
-
-    /**
-     * [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework (asynchronously)
-     * Re-runs the delivery task only (payload already built - skips build task). Always committed - no preview mode. Increments attempt count on failure, sets resolved to true on success. Uses existing ReplayBatchElement on ITradeTrackingRepository. Requires entitlement to execute integrations.Use any specified configuration options to override any other configuration for this request only
-     * @param instanceId Integration instance identifier (required)
-     * @param tpfRetryFailedDeliveryRequest Request containing batch element reference identifiers to retry (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-     </table>
-     */
-    private void retryFailedDeliveryAsync(String instanceId, TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest, final ApiCallback<TpfFailedDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
-
-        HttpRequest localVarCall = retryFailedDeliveryValidateBeforeCall(instanceId, tpfRetryFailedDeliveryRequest, _callback, opts);
-        Type localVarReturnType = new TypeReference<TpfFailedDeliveryResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-    }
-
-    public class APIretryFailedDeliveryRequest {
-        private final String instanceId;
-        private final TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest;
-
-        private APIretryFailedDeliveryRequest(String instanceId, TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest) {
-            this.instanceId = instanceId;
-            this.tpfRetryFailedDeliveryRequest = tpfRetryFailedDeliveryRequest;
-        }
-
-        /**
-         * Build call for retryFailedDelivery
-         * @param _callback ApiCallback API callback
-         * @return Call to execute
-         * @throws ApiException If fail to serialize the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-         </table>
-         */
-        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return retryFailedDeliveryCall(instanceId, tpfRetryFailedDeliveryRequest, _callback);
-        }
-
-        /**
-         * Execute retryFailedDelivery request
-         * @return TpfFailedDeliveryResponse
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-         </table>
-         */
-        public TpfFailedDeliveryResponse execute() throws ApiException {
-            ApiResponse<TpfFailedDeliveryResponse> localVarResp = retryFailedDeliveryWithHttpInfo(instanceId, tpfRetryFailedDeliveryRequest);
-            return localVarResp.getData();
-        }
-
-        /**
-         * Execute retryFailedDelivery request. Use any specified configuration options to override any other configuration for this request only.
-         * @return TpfFailedDeliveryResponse
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-         </table>
-         */
-        public TpfFailedDeliveryResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<TpfFailedDeliveryResponse> localVarResp = retryFailedDeliveryWithHttpInfo(instanceId, tpfRetryFailedDeliveryRequest, opts);
-            return localVarResp.getData();
-        }
-
-        /**
-         * Execute retryFailedDelivery request with HTTP info returned
-         * @return ApiResponse&lt;TpfFailedDeliveryResponse&gt;
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-         </table>
-         */
-        public ApiResponse<TpfFailedDeliveryResponse> executeWithHttpInfo() throws ApiException {
-            return retryFailedDeliveryWithHttpInfo(instanceId, tpfRetryFailedDeliveryRequest);
-        }
-
-        /**
-         * Execute retryFailedDelivery request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
-         * @return ApiResponse&lt;TpfFailedDeliveryResponse&gt;
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-         </table>
-         */
-        public ApiResponse<TpfFailedDeliveryResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return retryFailedDeliveryWithHttpInfo(instanceId, tpfRetryFailedDeliveryRequest, opts);
-        }
-
-        /**
-         * Execute retryFailedDelivery request (asynchronously)
-         * @param _callback The callback to be executed when the API call finishes
-         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-         </table>
-         */
-        public void executeAsync(final ApiCallback<TpfFailedDeliveryResponse> _callback) throws ApiException {
-            retryFailedDeliveryAsync(instanceId, tpfRetryFailedDeliveryRequest, _callback);
-        }
-
-        /**
-         * Execute retryFailedDelivery request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
-         * @param _callback The callback to be executed when the API call finishes
-         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-         </table>
-         */
-        public void executeAsync(final ApiCallback<TpfFailedDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            retryFailedDeliveryAsync(instanceId, tpfRetryFailedDeliveryRequest, _callback, opts);
-        }
-    }
-
-    /**
-     * [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework
-     * Re-runs the delivery task only (payload already built - skips build task). Always committed - no preview mode. Increments attempt count on failure, sets resolved to true on success. Uses existing ReplayBatchElement on ITradeTrackingRepository. Requires entitlement to execute integrations.
-     * @param instanceId Integration instance identifier (required)
-     * @param tpfRetryFailedDeliveryRequest Request containing batch element reference identifiers to retry (required)
-     * @return APIretryFailedDeliveryRequest
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The requested instance does not exist. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
-     </table>
-     */
-    public APIretryFailedDeliveryRequest retryFailedDelivery(String instanceId, TpfRetryFailedDeliveryRequest tpfRetryFailedDeliveryRequest) {
-        return new APIretryFailedDeliveryRequest(instanceId, tpfRetryFailedDeliveryRequest);
-    }
-    /**
      * Build call for retryTpfSftpDelivery
      * @param instanceId Integration instance ID (required)
      * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
+     * @param confirmDuplicate Resend even though the file already reached this destination (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -4214,14 +3872,15 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest retryTpfSftpDeliveryCall(String instanceId, String fileUuid, final ApiCallback _callback) throws ApiException {
-        return retryTpfSftpDeliveryCall(instanceId, fileUuid,  _callback, new ConfigurationOptions());
+    private HttpRequest retryTpfSftpDeliveryCall(String instanceId, String fileUuid, Boolean confirmDuplicate, final ApiCallback _callback) throws ApiException {
+        return retryTpfSftpDeliveryCall(instanceId, fileUuid, confirmDuplicate,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for retryTpfSftpDelivery. Use any specified configuration options to override any other configuration for this request only.
      * @param instanceId Integration instance ID (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
+     * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param confirmDuplicate Resend even though the file already reached this destination (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -4235,7 +3894,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest retryTpfSftpDeliveryCall(String instanceId, String fileUuid, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest retryTpfSftpDeliveryCall(String instanceId, String fileUuid, Boolean confirmDuplicate, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4262,6 +3921,10 @@ public class TradePublicationFrameworkApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (confirmDuplicate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("confirmDuplicate", confirmDuplicate));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -4282,7 +3945,7 @@ public class TradePublicationFrameworkApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest retryTpfSftpDeliveryValidateBeforeCall(String instanceId, String fileUuid, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest retryTpfSftpDeliveryValidateBeforeCall(String instanceId, String fileUuid, Boolean confirmDuplicate, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'instanceId' is set
         if (instanceId == null) {
             throw new ApiException("Missing the required parameter 'instanceId' when calling retryTpfSftpDelivery(Async)");
@@ -4293,15 +3956,16 @@ public class TradePublicationFrameworkApi {
             throw new ApiException("Missing the required parameter 'fileUuid' when calling retryTpfSftpDelivery(Async)");
         }
 
-        return retryTpfSftpDeliveryCall(instanceId, fileUuid, _callback, opts);
+        return retryTpfSftpDeliveryCall(instanceId, fileUuid, confirmDuplicate, _callback, opts);
 
     }
 
     /**
-     * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
+     * [EXPERIMENTAL] RetryTpfSftpDelivery: Resend a TPF file to the destination it was delivered to or failed to reach (SFTP or Drive)
      * 
      * @param instanceId Integration instance ID (required)
      * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
+     * @param confirmDuplicate Resend even though the file already reached this destination (optional, default to false)
      * @return ApiResponse&lt;TpfRetrySftpResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -4314,17 +3978,18 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<TpfRetrySftpResponse> retryTpfSftpDeliveryWithHttpInfo(String instanceId, String fileUuid) throws ApiException {
-        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, null, new ConfigurationOptions());
+    private ApiResponse<TpfRetrySftpResponse> retryTpfSftpDeliveryWithHttpInfo(String instanceId, String fileUuid, Boolean confirmDuplicate) throws ApiException {
+        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, confirmDuplicate, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<TpfRetrySftpResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
+     * [EXPERIMENTAL] RetryTpfSftpDelivery: Resend a TPF file to the destination it was delivered to or failed to reach (SFTP or Drive)
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID (required)
      * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
+     * @param confirmDuplicate Resend even though the file already reached this destination (optional, default to false)
      * @return ApiResponse&lt;TpfRetrySftpResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -4337,17 +4002,18 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<TpfRetrySftpResponse> retryTpfSftpDeliveryWithHttpInfo(String instanceId, String fileUuid, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, null, opts);
+    private ApiResponse<TpfRetrySftpResponse> retryTpfSftpDeliveryWithHttpInfo(String instanceId, String fileUuid, Boolean confirmDuplicate, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, confirmDuplicate, null, opts);
         Type localVarReturnType = new TypeReference<TpfRetrySftpResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file (asynchronously)
+     * [EXPERIMENTAL] RetryTpfSftpDelivery: Resend a TPF file to the destination it was delivered to or failed to reach (SFTP or Drive) (asynchronously)
      * 
      * @param instanceId Integration instance ID (required)
      * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
+     * @param confirmDuplicate Resend even though the file already reached this destination (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -4360,18 +4026,19 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void retryTpfSftpDeliveryAsync(String instanceId, String fileUuid, final ApiCallback<TpfRetrySftpResponse> _callback) throws ApiException {
+    private void retryTpfSftpDeliveryAsync(String instanceId, String fileUuid, Boolean confirmDuplicate, final ApiCallback<TpfRetrySftpResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, confirmDuplicate, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<TpfRetrySftpResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
-     * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file (asynchronously)
+     * [EXPERIMENTAL] RetryTpfSftpDelivery: Resend a TPF file to the destination it was delivered to or failed to reach (SFTP or Drive) (asynchronously)
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID (required)
      * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
+     * @param confirmDuplicate Resend even though the file already reached this destination (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -4384,9 +4051,9 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void retryTpfSftpDeliveryAsync(String instanceId, String fileUuid, final ApiCallback<TpfRetrySftpResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void retryTpfSftpDeliveryAsync(String instanceId, String fileUuid, Boolean confirmDuplicate, final ApiCallback<TpfRetrySftpResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, _callback, opts);
+        HttpRequest localVarCall = retryTpfSftpDeliveryValidateBeforeCall(instanceId, fileUuid, confirmDuplicate, _callback, opts);
         Type localVarReturnType = new TypeReference<TpfRetrySftpResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -4394,10 +4061,21 @@ public class TradePublicationFrameworkApi {
     public class APIretryTpfSftpDeliveryRequest {
         private final String instanceId;
         private final String fileUuid;
+        private Boolean confirmDuplicate;
 
         private APIretryTpfSftpDeliveryRequest(String instanceId, String fileUuid) {
             this.instanceId = instanceId;
             this.fileUuid = fileUuid;
+        }
+
+        /**
+         * Set confirmDuplicate
+         * @param confirmDuplicate Resend even though the file already reached this destination (optional, default to false)
+         * @return APIretryTpfSftpDeliveryRequest
+         */
+        public APIretryTpfSftpDeliveryRequest confirmDuplicate(Boolean confirmDuplicate) {
+            this.confirmDuplicate = confirmDuplicate;
+            return this;
         }
 
         /**
@@ -4416,7 +4094,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return retryTpfSftpDeliveryCall(instanceId, fileUuid, _callback);
+            return retryTpfSftpDeliveryCall(instanceId, fileUuid, confirmDuplicate, _callback);
         }
 
         /**
@@ -4434,7 +4112,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public TpfRetrySftpResponse execute() throws ApiException {
-            ApiResponse<TpfRetrySftpResponse> localVarResp = retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid);
+            ApiResponse<TpfRetrySftpResponse> localVarResp = retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid, confirmDuplicate);
             return localVarResp.getData();
         }
 
@@ -4453,7 +4131,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public TpfRetrySftpResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<TpfRetrySftpResponse> localVarResp = retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid, opts);
+            ApiResponse<TpfRetrySftpResponse> localVarResp = retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid, confirmDuplicate, opts);
             return localVarResp.getData();
         }
 
@@ -4472,7 +4150,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<TpfRetrySftpResponse> executeWithHttpInfo() throws ApiException {
-            return retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid);
+            return retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid, confirmDuplicate);
         }
 
         /**
@@ -4490,7 +4168,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<TpfRetrySftpResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid, opts);
+            return retryTpfSftpDeliveryWithHttpInfo(instanceId, fileUuid, confirmDuplicate, opts);
         }
 
         /**
@@ -4508,7 +4186,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<TpfRetrySftpResponse> _callback) throws ApiException {
-            retryTpfSftpDeliveryAsync(instanceId, fileUuid, _callback);
+            retryTpfSftpDeliveryAsync(instanceId, fileUuid, confirmDuplicate, _callback);
         }
 
         /**
@@ -4526,12 +4204,12 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<TpfRetrySftpResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            retryTpfSftpDeliveryAsync(instanceId, fileUuid, _callback, opts);
+            retryTpfSftpDeliveryAsync(instanceId, fileUuid, confirmDuplicate, _callback, opts);
         }
     }
 
     /**
-     * [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
+     * [EXPERIMENTAL] RetryTpfSftpDelivery: Resend a TPF file to the destination it was delivered to or failed to reach (SFTP or Drive)
      * 
      * @param instanceId Integration instance ID (required)
      * @param fileUuid File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)

@@ -74,6 +74,7 @@ import com.finbourne.sdk.JSON;
   Fund.JSON_PROPERTY_ADDITIONAL_NAV_TYPES,
   Fund.JSON_PROPERTY_PROPERTIES,
   Fund.JSON_PROPERTY_CREATE_INSTRUMENT,
+  Fund.JSON_PROPERTY_INSTRUMENT_SCOPE,
   Fund.JSON_PROPERTY_ALLOCATION_GROUPS,
   Fund.JSON_PROPERTY_SHARE_CLASSES,
   Fund.JSON_PROPERTY_FUND_INSTRUMENT,
@@ -184,6 +185,11 @@ public class Fund {
   @JsonProperty(JSON_PROPERTY_CREATE_INSTRUMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean createInstrument;
+
+  public static final String JSON_PROPERTY_INSTRUMENT_SCOPE = "instrumentScope";
+  @JsonProperty(JSON_PROPERTY_INSTRUMENT_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String instrumentScope;
 
   public static final String JSON_PROPERTY_ALLOCATION_GROUPS = "allocationGroups";
   @JsonProperty(JSON_PROPERTY_ALLOCATION_GROUPS)
@@ -640,6 +646,25 @@ public class Fund {
   }
 
 
+  public Fund instrumentScope(String instrumentScope) {
+    this.instrumentScope = instrumentScope;
+    return this;
+  }
+
+  /**
+   * The scope in which the instruments are created when CreateInstrument is true. Defaults to the default instrument scope. Legacy share class instruments are resolved in ShareClassInstrumentScopes instead.
+   * @return instrumentScope
+   */
+  @javax.annotation.Nullable
+  public String getInstrumentScope() {
+    return instrumentScope;
+  }
+
+  public void setInstrumentScope(String instrumentScope) {
+    this.instrumentScope = instrumentScope;
+  }
+
+
   public Fund allocationGroups(List<AllocationGroup> allocationGroups) {
     this.allocationGroups = allocationGroups;
     return this;
@@ -853,6 +878,7 @@ public class Fund {
         Objects.equals(this.additionalNavTypes, fund.additionalNavTypes) &&
         Objects.equals(this.properties, fund.properties) &&
         Objects.equals(this.createInstrument, fund.createInstrument) &&
+        Objects.equals(this.instrumentScope, fund.instrumentScope) &&
         Objects.equals(this.allocationGroups, fund.allocationGroups) &&
         Objects.equals(this.shareClasses, fund.shareClasses) &&
         Objects.equals(this.fundInstrument, fund.fundInstrument) &&
@@ -869,7 +895,7 @@ public class Fund {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shortCode, aborId, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, allocationGroups, shareClasses, fundInstrument, pricingMethodology, reportingPrices, version, whtParameters, links);
+    return Objects.hash(href, id, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shortCode, aborId, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, yearEndDate, primaryNavType, additionalNavTypes, properties, createInstrument, instrumentScope, allocationGroups, shareClasses, fundInstrument, pricingMethodology, reportingPrices, version, whtParameters, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -903,6 +929,7 @@ public class Fund {
     sb.append("    additionalNavTypes: ").append(toIndentedString(additionalNavTypes)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    createInstrument: ").append(toIndentedString(createInstrument)).append("\n");
+    sb.append("    instrumentScope: ").append(toIndentedString(instrumentScope)).append("\n");
     sb.append("    allocationGroups: ").append(toIndentedString(allocationGroups)).append("\n");
     sb.append("    shareClasses: ").append(toIndentedString(shareClasses)).append("\n");
     sb.append("    fundInstrument: ").append(toIndentedString(fundInstrument)).append("\n");

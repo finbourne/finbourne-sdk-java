@@ -34,13 +34,14 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result.
+ * record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result. PublicationStatus is the row&#39;s outcome: Sent, or Failed when the file holding it reached no destination.
  */
 @JsonPropertyOrder({
   TransactionPayload.JSON_PROPERTY_TRANSACTION_ID,
   TransactionPayload.JSON_PROPERTY_COLUMNS,
   TransactionPayload.JSON_PROPERTY_VALUES,
-  TransactionPayload.JSON_PROPERTY_RAW_CSV_ROW
+  TransactionPayload.JSON_PROPERTY_RAW_CSV_ROW,
+  TransactionPayload.JSON_PROPERTY_PUBLICATION_STATUS
 })
 
 public class TransactionPayload {
@@ -63,6 +64,11 @@ public class TransactionPayload {
   @JsonProperty(JSON_PROPERTY_RAW_CSV_ROW)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String rawCsvRow;
+
+  public static final String JSON_PROPERTY_PUBLICATION_STATUS = "publicationStatus";
+  @JsonProperty(JSON_PROPERTY_PUBLICATION_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String publicationStatus;
 
   public TransactionPayload() {
   }
@@ -159,6 +165,25 @@ public class TransactionPayload {
   }
 
 
+  public TransactionPayload publicationStatus(String publicationStatus) {
+    this.publicationStatus = publicationStatus;
+    return this;
+  }
+
+  /**
+   * Get publicationStatus
+   * @return publicationStatus
+   */
+  @javax.annotation.Nonnull
+  public String getPublicationStatus() {
+    return publicationStatus;
+  }
+
+  public void setPublicationStatus(String publicationStatus) {
+    this.publicationStatus = publicationStatus;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -171,12 +196,13 @@ public class TransactionPayload {
     return Objects.equals(this.transactionId, transactionPayload.transactionId) &&
         Objects.equals(this.columns, transactionPayload.columns) &&
         Objects.equals(this.values, transactionPayload.values) &&
-        Objects.equals(this.rawCsvRow, transactionPayload.rawCsvRow);
+        Objects.equals(this.rawCsvRow, transactionPayload.rawCsvRow) &&
+        Objects.equals(this.publicationStatus, transactionPayload.publicationStatus);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, columns, values, rawCsvRow);
+    return Objects.hash(transactionId, columns, values, rawCsvRow, publicationStatus);
   }
 
   @Override
@@ -187,6 +213,7 @@ public class TransactionPayload {
     sb.append("    columns: ").append(toIndentedString(columns)).append("\n");
     sb.append("    values: ").append(toIndentedString(values)).append("\n");
     sb.append("    rawCsvRow: ").append(toIndentedString(rawCsvRow)).append("\n");
+    sb.append("    publicationStatus: ").append(toIndentedString(publicationStatus)).append("\n");
     sb.append("}");
     return sb.toString();
   }

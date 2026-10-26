@@ -7998,9 +7998,10 @@ public class ChartOfAccountsApi {
      * @param code The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
      * @param postingModuleCode The code of the posting module. (required)
      * @param asAt The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
-     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. (optional)
+     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results.              For example, to filter on the rule id, specify \&quot;ruleId eq &#39;rule 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -8012,8 +8013,8 @@ public class ChartOfAccountsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listPostingModuleRulesCall(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, final ApiCallback _callback) throws ApiException {
-        return listPostingModuleRulesCall(scope, code, postingModuleCode, asAt, page, limit, filter,  _callback, new ConfigurationOptions());
+    private HttpRequest listPostingModuleRulesCall(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, String effectiveAt, final ApiCallback _callback) throws ApiException {
+        return listPostingModuleRulesCall(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -8022,9 +8023,10 @@ public class ChartOfAccountsApi {
      * @param code The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param postingModuleCode The code of the posting module. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter Expression to filter the results.              For example, to filter on the rule id, specify \&quot;ruleId eq &#39;rule 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param filter Expression to filter the results.              For example, to filter on the rule id, specify \&quot;ruleId eq &#39;rule 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -8036,7 +8038,7 @@ public class ChartOfAccountsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listPostingModuleRulesCall(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listPostingModuleRulesCall(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -8080,6 +8082,10 @@ public class ChartOfAccountsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
         }
 
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -8102,7 +8108,7 @@ public class ChartOfAccountsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listPostingModuleRulesValidateBeforeCall(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listPostingModuleRulesValidateBeforeCall(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, String effectiveAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling listPostingModuleRules(Async)");
@@ -8118,7 +8124,7 @@ public class ChartOfAccountsApi {
             throw new ApiException("Missing the required parameter 'postingModuleCode' when calling listPostingModuleRules(Async)");
         }
 
-        return listPostingModuleRulesCall(scope, code, postingModuleCode, asAt, page, limit, filter, _callback, opts);
+        return listPostingModuleRulesCall(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, _callback, opts);
 
     }
 
@@ -8129,9 +8135,10 @@ public class ChartOfAccountsApi {
      * @param code The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
      * @param postingModuleCode The code of the posting module. (required)
      * @param asAt The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
-     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. (optional)
+     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results.              For example, to filter on the rule id, specify \&quot;ruleId eq &#39;rule 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified. (optional)
      * @return ApiResponse&lt;PagedResourceListOfPostingModuleRuleResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -8142,8 +8149,8 @@ public class ChartOfAccountsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfPostingModuleRuleResponse> listPostingModuleRulesWithHttpInfo(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter) throws ApiException {
-        HttpRequest localVarCall = listPostingModuleRulesValidateBeforeCall(scope, code, postingModuleCode, asAt, page, limit, filter, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfPostingModuleRuleResponse> listPostingModuleRulesWithHttpInfo(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, String effectiveAt) throws ApiException {
+        HttpRequest localVarCall = listPostingModuleRulesValidateBeforeCall(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfPostingModuleRuleResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -8155,9 +8162,10 @@ public class ChartOfAccountsApi {
      * @param code The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
      * @param postingModuleCode The code of the posting module. (required)
      * @param asAt The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
-     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. (optional)
+     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results.              For example, to filter on the rule id, specify \&quot;ruleId eq &#39;rule 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified. (optional)
      * @return ApiResponse&lt;PagedResourceListOfPostingModuleRuleResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -8168,8 +8176,8 @@ public class ChartOfAccountsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfPostingModuleRuleResponse> listPostingModuleRulesWithHttpInfo(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listPostingModuleRulesValidateBeforeCall(scope, code, postingModuleCode, asAt, page, limit, filter, null, opts);
+    private ApiResponse<PagedResourceListOfPostingModuleRuleResponse> listPostingModuleRulesWithHttpInfo(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, String effectiveAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listPostingModuleRulesValidateBeforeCall(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfPostingModuleRuleResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -8181,9 +8189,10 @@ public class ChartOfAccountsApi {
      * @param code The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
      * @param postingModuleCode The code of the posting module. (required)
      * @param asAt The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
-     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. (optional)
+     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results.              For example, to filter on the rule id, specify \&quot;ruleId eq &#39;rule 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -8194,9 +8203,9 @@ public class ChartOfAccountsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listPostingModuleRulesAsync(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfPostingModuleRuleResponse> _callback) throws ApiException {
+    private void listPostingModuleRulesAsync(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, String effectiveAt, final ApiCallback<PagedResourceListOfPostingModuleRuleResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listPostingModuleRulesValidateBeforeCall(scope, code, postingModuleCode, asAt, page, limit, filter, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listPostingModuleRulesValidateBeforeCall(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfPostingModuleRuleResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -8208,9 +8217,10 @@ public class ChartOfAccountsApi {
      * @param code The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
      * @param postingModuleCode The code of the posting module. (required)
      * @param asAt The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
-     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. (optional)
+     * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results.              For example, to filter on the rule id, specify \&quot;ruleId eq &#39;rule 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param effectiveAt The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -8221,9 +8231,9 @@ public class ChartOfAccountsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listPostingModuleRulesAsync(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfPostingModuleRuleResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listPostingModuleRulesAsync(String scope, String code, String postingModuleCode, OffsetDateTime asAt, String page, Integer limit, String filter, String effectiveAt, final ApiCallback<PagedResourceListOfPostingModuleRuleResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listPostingModuleRulesValidateBeforeCall(scope, code, postingModuleCode, asAt, page, limit, filter, _callback, opts);
+        HttpRequest localVarCall = listPostingModuleRulesValidateBeforeCall(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfPostingModuleRuleResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -8236,6 +8246,7 @@ public class ChartOfAccountsApi {
         private String page;
         private Integer limit;
         private String filter;
+        private String effectiveAt;
 
         private APIlistPostingModuleRulesRequest(String scope, String code, String postingModuleCode) {
             this.scope = scope;
@@ -8255,7 +8266,7 @@ public class ChartOfAccountsApi {
 
         /**
          * Set page
-         * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. (optional)
+         * @param page The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
          * @return APIlistPostingModuleRulesRequest
          */
         public APIlistPostingModuleRulesRequest page(String page) {
@@ -8284,6 +8295,16 @@ public class ChartOfAccountsApi {
         }
 
         /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified. (optional)
+         * @return APIlistPostingModuleRulesRequest
+         */
+        public APIlistPostingModuleRulesRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
          * Build call for listPostingModuleRules
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -8297,7 +8318,7 @@ public class ChartOfAccountsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listPostingModuleRulesCall(scope, code, postingModuleCode, asAt, page, limit, filter, _callback);
+            return listPostingModuleRulesCall(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, _callback);
         }
 
         /**
@@ -8313,7 +8334,7 @@ public class ChartOfAccountsApi {
          </table>
          */
         public PagedResourceListOfPostingModuleRuleResponse execute() throws ApiException {
-            ApiResponse<PagedResourceListOfPostingModuleRuleResponse> localVarResp = listPostingModuleRulesWithHttpInfo(scope, code, postingModuleCode, asAt, page, limit, filter);
+            ApiResponse<PagedResourceListOfPostingModuleRuleResponse> localVarResp = listPostingModuleRulesWithHttpInfo(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt);
             return localVarResp.getData();
         }
 
@@ -8330,7 +8351,7 @@ public class ChartOfAccountsApi {
          </table>
          */
         public PagedResourceListOfPostingModuleRuleResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfPostingModuleRuleResponse> localVarResp = listPostingModuleRulesWithHttpInfo(scope, code, postingModuleCode, asAt, page, limit, filter, opts);
+            ApiResponse<PagedResourceListOfPostingModuleRuleResponse> localVarResp = listPostingModuleRulesWithHttpInfo(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, opts);
             return localVarResp.getData();
         }
 
@@ -8347,7 +8368,7 @@ public class ChartOfAccountsApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfPostingModuleRuleResponse> executeWithHttpInfo() throws ApiException {
-            return listPostingModuleRulesWithHttpInfo(scope, code, postingModuleCode, asAt, page, limit, filter);
+            return listPostingModuleRulesWithHttpInfo(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt);
         }
 
         /**
@@ -8363,7 +8384,7 @@ public class ChartOfAccountsApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfPostingModuleRuleResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listPostingModuleRulesWithHttpInfo(scope, code, postingModuleCode, asAt, page, limit, filter, opts);
+            return listPostingModuleRulesWithHttpInfo(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, opts);
         }
 
         /**
@@ -8379,7 +8400,7 @@ public class ChartOfAccountsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfPostingModuleRuleResponse> _callback) throws ApiException {
-            listPostingModuleRulesAsync(scope, code, postingModuleCode, asAt, page, limit, filter, _callback);
+            listPostingModuleRulesAsync(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, _callback);
         }
 
         /**
@@ -8395,7 +8416,7 @@ public class ChartOfAccountsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfPostingModuleRuleResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            listPostingModuleRulesAsync(scope, code, postingModuleCode, asAt, page, limit, filter, _callback, opts);
+            listPostingModuleRulesAsync(scope, code, postingModuleCode, asAt, page, limit, filter, effectiveAt, _callback, opts);
         }
     }
 
