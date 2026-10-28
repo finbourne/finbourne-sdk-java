@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   CustomMultiQueryListItem.JSON_PROPERTY_STARTED_AT,
   CustomMultiQueryListItem.JSON_PROPERTY_WHEN,
   CustomMultiQueryListItem.JSON_PROPERTY_EXPIRES_AT,
+  CustomMultiQueryListItem.JSON_PROPERTY_EXPORTED_TO,
   CustomMultiQueryListItem.JSON_PROPERTY_QUERIES
 })
 
@@ -78,6 +79,11 @@ public class CustomMultiQueryListItem {
   @JsonProperty(JSON_PROPERTY_EXPIRES_AT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime expiresAt;
+
+  public static final String JSON_PROPERTY_EXPORTED_TO = "exportedTo";
+  @JsonProperty(JSON_PROPERTY_EXPORTED_TO)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String exportedTo;
 
   public static final String JSON_PROPERTY_QUERIES = "queries";
   @JsonProperty(JSON_PROPERTY_QUERIES)
@@ -201,6 +207,25 @@ public class CustomMultiQueryListItem {
   }
 
 
+  public CustomMultiQueryListItem exportedTo(String exportedTo) {
+    this.exportedTo = exportedTo;
+    return this;
+  }
+
+  /**
+   * The Drive path its results were saved to once done, if it was started with an &#x60;export&#x60; and they were
+   * @return exportedTo
+   */
+  @javax.annotation.Nullable
+  public String getExportedTo() {
+    return exportedTo;
+  }
+
+  public void setExportedTo(String exportedTo) {
+    this.exportedTo = exportedTo;
+  }
+
+
   public CustomMultiQueryListItem queries(List<CustomMultiQueryListItemQuery> queries) {
     this.queries = queries;
     return this;
@@ -243,6 +268,7 @@ public class CustomMultiQueryListItem {
         Objects.equals(this.startedAt, customMultiQueryListItem.startedAt) &&
         Objects.equals(this.when, customMultiQueryListItem.when) &&
         Objects.equals(this.expiresAt, customMultiQueryListItem.expiresAt) &&
+        Objects.equals(this.exportedTo, customMultiQueryListItem.exportedTo) &&
         Objects.equals(this.queries, customMultiQueryListItem.queries);
   }
 
@@ -252,7 +278,7 @@ public class CustomMultiQueryListItem {
 
   @Override
  public int hashCode() {
-    return Objects.hash(executionId, queryName, state, startedAt, when, expiresAt, queries);
+    return Objects.hash(executionId, queryName, state, startedAt, when, expiresAt, exportedTo, queries);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -272,6 +298,7 @@ public class CustomMultiQueryListItem {
     sb.append("    startedAt: ").append(toIndentedString(startedAt)).append("\n");
     sb.append("    when: ").append(toIndentedString(when)).append("\n");
     sb.append("    expiresAt: ").append(toIndentedString(expiresAt)).append("\n");
+    sb.append("    exportedTo: ").append(toIndentedString(exportedTo)).append("\n");
     sb.append("    queries: ").append(toIndentedString(queries)).append("\n");
     sb.append("}");
     return sb.toString();

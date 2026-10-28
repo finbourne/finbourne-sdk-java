@@ -17,8 +17,8 @@ All URIs are relative to *http://localhost*
 | [**fetchQueryResultXml**](SqlBackgroundExecutionApi.md#fetchQueryResultXml) | **GET** /honeycomb/api/SqlBackground/{executionId}/xml | FetchQueryResultXml: Fetch the result of a query as XML |
 | [**getHistoricalFeedback**](SqlBackgroundExecutionApi.md#getHistoricalFeedback) | **GET** /honeycomb/api/SqlBackground/{executionId}/historicalFeedback | GetHistoricalFeedback: View historical query progress (for older queries) |
 | [**getProgressOf**](SqlBackgroundExecutionApi.md#getProgressOf) | **GET** /honeycomb/api/SqlBackground/{executionId} | GetProgressOf: View query progress up to this point. |
-| [**listQueries**](SqlBackgroundExecutionApi.md#listQueries) | **GET** /honeycomb/api/SqlBackground | [EXPERIMENTAL] ListQueries: List the background queries available to the calling user |
-| [**saveQueryResultToDrive**](SqlBackgroundExecutionApi.md#saveQueryResultToDrive) | **GET** /honeycomb/api/SqlBackground/{executionId}/drive | [EXPERIMENTAL] SaveQueryResultToDrive: Saves the query results directly to Drive |
+| [**listQueries**](SqlBackgroundExecutionApi.md#listQueries) | **GET** /honeycomb/api/SqlBackground | ListQueries: List the background queries available to the calling user |
+| [**saveQueryResultToDrive**](SqlBackgroundExecutionApi.md#saveQueryResultToDrive) | **GET** /honeycomb/api/SqlBackground/{executionId}/drive | SaveQueryResultToDrive: Saves the query results directly to Drive |
 | [**startQuery**](SqlBackgroundExecutionApi.md#startQuery) | **PUT** /honeycomb/api/SqlBackground | StartQuery: Start to Execute Sql in the background |
 
 
@@ -1194,7 +1194,7 @@ public class SqlBackgroundExecutionApiExample {
 
 > List&lt;BackgroundQueryListItem&gt; listQueries(sqlLike)
 
-[EXPERIMENTAL] ListQueries: List the background queries available to the calling user
+ListQueries: List the background queries available to the calling user
 
 Lists the background queries (started by the calling user) whose results may be fetched, and which have not yet passed their &#x60;keepForSeconds&#x60; time, most recent first. Multi-queries themselves are not included, though the individual queries they started are (other than those marked as not being external results).  The following error codes are to be anticipated most with standard Problem Detail reports: - 401 Unauthorized
 
@@ -1269,7 +1269,7 @@ public class SqlBackgroundExecutionApiExample {
 
 > String saveQueryResultToDrive(executionId, driveLocationAndFileName, mayOverwrite, format, driveTemplateLocation, tableNameReference, sortBy, filter, sqlFilter, select, groupBy, dateTimeFormat, loadWaitMilliseconds)
 
-[EXPERIMENTAL] SaveQueryResultToDrive: Saves the query results directly to Drive
+SaveQueryResultToDrive: Saves the query results directly to Drive
 
 Saves the results directly to Drive.  This can be useful for sharing results with others, keeping persistent reports, etc.      Of course always consider data visibility and security as who can see these depends on users&#39; permissions to the chosen location within Drive.  Template support is provided, for the export types that allow this, but unlike using the &#x60;Drive.SaveAs&#x60; provider within the SQL itself, only one data set can be be saved  (the full query result set, optionally manipulated with the various parameters to this method).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query or drive parameters were incorrect in some way - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn&#39;t (yet) exist or the calling user did not run the query. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn&#39;t yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 

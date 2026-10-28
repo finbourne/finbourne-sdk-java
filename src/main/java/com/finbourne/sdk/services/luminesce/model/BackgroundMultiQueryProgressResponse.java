@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.luminesce.model;
 
 import com.finbourne.sdk.services.luminesce.model.BackgroundQueryProgressResponse;
 import com.finbourne.sdk.services.luminesce.model.FeedbackEventArgs;
+import com.finbourne.sdk.services.luminesce.model.MultiQueryExportState;
 import com.finbourne.sdk.services.luminesce.model.TaskStatus;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +43,8 @@ import com.finbourne.sdk.JSON;
   BackgroundMultiQueryProgressResponse.JSON_PROPERTY_PROGRESS,
   BackgroundMultiQueryProgressResponse.JSON_PROPERTY_FEEDBACK,
   BackgroundMultiQueryProgressResponse.JSON_PROPERTY_STATUS,
-  BackgroundMultiQueryProgressResponse.JSON_PROPERTY_QUERIES
+  BackgroundMultiQueryProgressResponse.JSON_PROPERTY_QUERIES,
+  BackgroundMultiQueryProgressResponse.JSON_PROPERTY_EXPORT
 })
 
 public class BackgroundMultiQueryProgressResponse {
@@ -65,6 +67,11 @@ public class BackgroundMultiQueryProgressResponse {
   @JsonProperty(JSON_PROPERTY_QUERIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<BackgroundQueryProgressResponse> queries;
+
+  public static final String JSON_PROPERTY_EXPORT = "export";
+  @JsonProperty(JSON_PROPERTY_EXPORT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private MultiQueryExportState export;
 
   public BackgroundMultiQueryProgressResponse() {
   }
@@ -161,6 +168,25 @@ public class BackgroundMultiQueryProgressResponse {
   }
 
 
+  public BackgroundMultiQueryProgressResponse export(MultiQueryExportState export) {
+    this.export = export;
+    return this;
+  }
+
+  /**
+   * Get export
+   * @return export
+   */
+  @javax.annotation.Nullable
+  public MultiQueryExportState getExport() {
+    return export;
+  }
+
+  public void setExport(MultiQueryExportState export) {
+    this.export = export;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -173,7 +199,8 @@ public class BackgroundMultiQueryProgressResponse {
     return Objects.equals(this.progress, backgroundMultiQueryProgressResponse.progress) &&
         Objects.equals(this.feedback, backgroundMultiQueryProgressResponse.feedback) &&
         Objects.equals(this.status, backgroundMultiQueryProgressResponse.status) &&
-        Objects.equals(this.queries, backgroundMultiQueryProgressResponse.queries);
+        Objects.equals(this.queries, backgroundMultiQueryProgressResponse.queries) &&
+        Objects.equals(this.export, backgroundMultiQueryProgressResponse.export);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -182,7 +209,7 @@ public class BackgroundMultiQueryProgressResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(progress, feedback, status, queries);
+    return Objects.hash(progress, feedback, status, queries, export);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -200,6 +227,7 @@ public class BackgroundMultiQueryProgressResponse {
     sb.append("    feedback: ").append(toIndentedString(feedback)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    queries: ").append(toIndentedString(queries)).append("\n");
+    sb.append("    export: ").append(toIndentedString(export)).append("\n");
     sb.append("}");
     return sb.toString();
   }

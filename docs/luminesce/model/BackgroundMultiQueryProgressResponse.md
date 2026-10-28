@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **feedback** | [**List&lt;FeedbackEventArgs&gt;**](FeedbackEventArgs.md) | Individual Feedback Messages (to replace Progress).  A given message will be returned from only one call. | [optional] [default to List<FeedbackEventArgs>]
 **status** | [**TaskStatus**](TaskStatus.md) |  | [optional] [default to TaskStatus]
 **queries** | [**List&lt;BackgroundQueryProgressResponse&gt;**](BackgroundQueryProgressResponse.md) |  | [optional] [default to List<BackgroundQueryProgressResponse>]
+**export** | [**MultiQueryExportState**](MultiQueryExportState.md) |  | [optional] [default to MultiQueryExportState]
 
 ```java
 import com.finbourne.sdk.services.luminesce.model.BackgroundMultiQueryProgressResponse;
@@ -19,13 +20,15 @@ import java.net.URI;
 @javax.annotation.Nullable String progress = "example progress";
 @javax.annotation.Nullable List<FeedbackEventArgs> feedback = new List<FeedbackEventArgs>();
 TaskStatus @javax.annotation.Nullable List<BackgroundQueryProgressResponse> queries = new List<BackgroundQueryProgressResponse>();
+MultiQueryExportState export = new MultiQueryExportState();
 
 
 BackgroundMultiQueryProgressResponse backgroundMultiQueryProgressResponseInstance = new BackgroundMultiQueryProgressResponse()
     .progress(progress)
     .feedback(feedback)
     .status(status)
-    .queries(queries);
+    .queries(queries)
+    .export(export);
 ```
 
 
