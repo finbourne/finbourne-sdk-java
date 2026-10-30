@@ -27,6 +27,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
+import java.io.File;
 import com.finbourne.sdk.services.horizon.model.InstancesResponse;
 import com.finbourne.sdk.services.horizon.model.LusidProblemDetails;
 import com.finbourne.sdk.services.horizon.model.LusidValidationProblemDetails;
@@ -89,6 +90,375 @@ public class TradePublicationFrameworkApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    /**
+     * Build call for getRunFileContent
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance, or any retry attempt of it. (required)
+     * @param fileUuid File delivery UUID, as returned by the run-files listing. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getRunFileContentCall(String instanceId, String runId, String fileUuid, final ApiCallback _callback) throws ApiException {
+        return getRunFileContentCall(instanceId, runId, fileUuid,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getRunFileContent. Use any specified configuration options to override any other configuration for this request only.
+     * @param instanceId Integration instance ID. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param runId Run ID within the instance, or any retry attempt of it. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param fileUuid File delivery UUID, as returned by the run-files listing. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getRunFileContentCall(String instanceId, String runId, String fileUuid, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/horizon/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/files/{fileUuid}/content"
+            .replace("{" + "instanceId" + "}", localVarApiClient.escapeString(instanceId.toString()))
+            .replace("{" + "runId" + "}", localVarApiClient.escapeString(runId.toString()))
+            .replace("{" + "fileUuid" + "}", localVarApiClient.escapeString(fileUuid.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/csv",
+            "application/xml",
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getRunFileContentValidateBeforeCall(String instanceId, String runId, String fileUuid, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'instanceId' is set
+        if (instanceId == null) {
+            throw new ApiException("Missing the required parameter 'instanceId' when calling getRunFileContent(Async)");
+        }
+
+        // verify the required parameter 'runId' is set
+        if (runId == null) {
+            throw new ApiException("Missing the required parameter 'runId' when calling getRunFileContent(Async)");
+        }
+
+        // verify the required parameter 'fileUuid' is set
+        if (fileUuid == null) {
+            throw new ApiException("Missing the required parameter 'fileUuid' when calling getRunFileContent(Async)");
+        }
+
+        return getRunFileContentCall(instanceId, runId, fileUuid, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRunFileContent: Download a file a run delivered, rebuilt from the run&#39;s retained build rows in the instance&#39;s output format
+     * Returns the file exactly as the instance built it, so it can be pushed by hand when Horizon cannot. The content is rebuilt the way a resend rebuilds it, so it is only available while the build rows are retained and the response is 410 once retention has purged them. An encrypted instance&#39;s file is returned as plaintext.
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance, or any retry attempt of it. (required)
+     * @param fileUuid File delivery UUID, as returned by the run-files listing. (required)
+     * @return ApiResponse&lt;File&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<File> getRunFileContentWithHttpInfo(String instanceId, String runId, String fileUuid) throws ApiException {
+        HttpRequest localVarCall = getRunFileContentValidateBeforeCall(instanceId, runId, fileUuid, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<File>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRunFileContent: Download a file a run delivered, rebuilt from the run&#39;s retained build rows in the instance&#39;s output format
+     * Returns the file exactly as the instance built it, so it can be pushed by hand when Horizon cannot. The content is rebuilt the way a resend rebuilds it, so it is only available while the build rows are retained and the response is 410 once retention has purged them. An encrypted instance&#39;s file is returned as plaintext.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance, or any retry attempt of it. (required)
+     * @param fileUuid File delivery UUID, as returned by the run-files listing. (required)
+     * @return ApiResponse&lt;File&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<File> getRunFileContentWithHttpInfo(String instanceId, String runId, String fileUuid, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getRunFileContentValidateBeforeCall(instanceId, runId, fileUuid, null, opts);
+        Type localVarReturnType = new TypeReference<File>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRunFileContent: Download a file a run delivered, rebuilt from the run&#39;s retained build rows in the instance&#39;s output format (asynchronously)
+     * Returns the file exactly as the instance built it, so it can be pushed by hand when Horizon cannot. The content is rebuilt the way a resend rebuilds it, so it is only available while the build rows are retained and the response is 410 once retention has purged them. An encrypted instance&#39;s file is returned as plaintext.
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance, or any retry attempt of it. (required)
+     * @param fileUuid File delivery UUID, as returned by the run-files listing. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getRunFileContentAsync(String instanceId, String runId, String fileUuid, final ApiCallback<File> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getRunFileContentValidateBeforeCall(instanceId, runId, fileUuid, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<File>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRunFileContent: Download a file a run delivered, rebuilt from the run&#39;s retained build rows in the instance&#39;s output format (asynchronously)
+     * Returns the file exactly as the instance built it, so it can be pushed by hand when Horizon cannot. The content is rebuilt the way a resend rebuilds it, so it is only available while the build rows are retained and the response is 410 once retention has purged them. An encrypted instance&#39;s file is returned as plaintext.Use any specified configuration options to override any other configuration for this request only
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance, or any retry attempt of it. (required)
+     * @param fileUuid File delivery UUID, as returned by the run-files listing. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getRunFileContentAsync(String instanceId, String runId, String fileUuid, final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getRunFileContentValidateBeforeCall(instanceId, runId, fileUuid, _callback, opts);
+        Type localVarReturnType = new TypeReference<File>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetRunFileContentRequest {
+        private final String instanceId;
+        private final String runId;
+        private final String fileUuid;
+
+        private APIgetRunFileContentRequest(String instanceId, String runId, String fileUuid) {
+            this.instanceId = instanceId;
+            this.runId = runId;
+            this.fileUuid = fileUuid;
+        }
+
+        /**
+         * Build call for getRunFileContent
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+            <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getRunFileContentCall(instanceId, runId, fileUuid, _callback);
+        }
+
+        /**
+         * Execute getRunFileContent request
+         * @return File
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+            <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public File execute() throws ApiException {
+            ApiResponse<File> localVarResp = getRunFileContentWithHttpInfo(instanceId, runId, fileUuid);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRunFileContent request. Use any specified configuration options to override any other configuration for this request only.
+         * @return File
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+            <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public File execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<File> localVarResp = getRunFileContentWithHttpInfo(instanceId, runId, fileUuid, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRunFileContent request with HTTP info returned
+         * @return ApiResponse&lt;File&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+            <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<File> executeWithHttpInfo() throws ApiException {
+            return getRunFileContentWithHttpInfo(instanceId, runId, fileUuid);
+        }
+
+        /**
+         * Execute getRunFileContent request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;File&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+            <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<File> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getRunFileContentWithHttpInfo(instanceId, runId, fileUuid, opts);
+        }
+
+        /**
+         * Execute getRunFileContent request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+            <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<File> _callback) throws ApiException {
+            getRunFileContentAsync(instanceId, runId, fileUuid, _callback);
+        }
+
+        /**
+         * Execute getRunFileContent request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+            <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<File> _callback, ConfigurationOptions opts) throws ApiException {
+            getRunFileContentAsync(instanceId, runId, fileUuid, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetRunFileContent: Download a file a run delivered, rebuilt from the run&#39;s retained build rows in the instance&#39;s output format
+     * Returns the file exactly as the instance built it, so it can be pushed by hand when Horizon cannot. The content is rebuilt the way a resend rebuilds it, so it is only available while the build rows are retained and the response is 410 once retention has purged them. An encrypted instance&#39;s file is returned as plaintext.
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance, or any retry attempt of it. (required)
+     * @param fileUuid File delivery UUID, as returned by the run-files listing. (required)
+     * @return APIgetRunFileContentRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The file as the instance built it, text/csv or application/xml </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The requested TPF instance, run or file does not exist. </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The build rows the file is rebuilt from have been purged by retention. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetRunFileContentRequest getRunFileContent(String instanceId, String runId, String fileUuid) {
+        return new APIgetRunFileContentRequest(instanceId, runId, fileUuid);
+    }
     /**
      * Build call for getTpfFileDeliveries
      * @param instanceId Integration instance ID (required)
@@ -505,7 +875,7 @@ public class TradePublicationFrameworkApi {
     }
     /**
      * Build call for getTpfTransactionHistorySearch
-     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
+     * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -523,7 +893,7 @@ public class TradePublicationFrameworkApi {
 
     /**
      * Build call for getTpfTransactionHistorySearch. Use any specified configuration options to override any other configuration for this request only.
-     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
+     * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -590,9 +960,9 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters).
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, publication status, and a Finbourne Filtering expression. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker.
      * 
-     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
+     * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTpfTransactionSearchResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -610,9 +980,9 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters).
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, publication status, and a Finbourne Filtering expression. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker.
      * Use any specified configuration options to override any other configuration for this request only
-     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
+     * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTpfTransactionSearchResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -630,9 +1000,9 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). (asynchronously)
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, publication status, and a Finbourne Filtering expression. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. (asynchronously)
      * 
-     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
+     * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -651,9 +1021,9 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). (asynchronously)
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, publication status, and a Finbourne Filtering expression. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. (asynchronously)
      * Use any specified configuration options to override any other configuration for this request only
-     * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
+     * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -679,7 +1049,7 @@ public class TradePublicationFrameworkApi {
 
         /**
          * Set tpfTransactionSearchRequest
-         * @param tpfTransactionSearchRequest Search filters and pagination options. (optional)
+         * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
          * @return APIgetTpfTransactionHistorySearchRequest
          */
         public APIgetTpfTransactionHistorySearchRequest tpfTransactionSearchRequest(TpfTransactionSearchRequest tpfTransactionSearchRequest) {
@@ -804,7 +1174,7 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters).
+     * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, publication status, and a Finbourne Filtering expression. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR&#39;d within each filter, AND&#39;d between filters). Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker.
      * 
      * @return APIgetTpfTransactionHistorySearchRequest
      * @http.response.details
@@ -820,11 +1190,13 @@ public class TradePublicationFrameworkApi {
     }
     /**
      * Build call for getTransactionPayload
-     * @param instanceId  (required)
-     * @param runId  (required)
-     * @param transactionId  (optional)
-     * @param page  (optional, default to )
-     * @param pageSize  (optional, default to 100)
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance. (required)
+     * @param transactionId Return only this transaction&#39;s payload. Applied together with &lt;i&gt;filter&lt;/i&gt;. (optional)
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
+     * @param pageSize Number of results per page. (optional, default to 100)
+     * @param filter A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance&#39;s own output columns, e.g. SIDE eq &#39;B&#39;. Values are compared as text, range operators included, so QTY gt &#39;50&#39; is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -837,17 +1209,19 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTransactionPayloadCall(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback _callback) throws ApiException {
-        return getTransactionPayloadCall(instanceId, runId, transactionId, page, pageSize,  _callback, new ConfigurationOptions());
+    private HttpRequest getTransactionPayloadCall(String instanceId, String runId, String transactionId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback _callback) throws ApiException {
+        return getTransactionPayloadCall(instanceId, runId, transactionId, page, pageSize, filter, sortBy,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getTransactionPayload. Use any specified configuration options to override any other configuration for this request only.
-     * @param instanceId  (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param runId  (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param transactionId  (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param page  (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
-     * @param pageSize  (optional, default to 100)
+     * @param instanceId Integration instance ID. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param runId Run ID within the instance. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param transactionId Return only this transaction&#39;s payload. Applied together with &lt;i&gt;filter&lt;/i&gt;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
+     * @param pageSize Number of results per page. (optional, default to 100). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance&#39;s own output columns, e.g. SIDE eq &#39;B&#39;. Values are compared as text, range operators included, so QTY gt &#39;50&#39; is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -860,7 +1234,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTransactionPayloadCall(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTransactionPayloadCall(String instanceId, String runId, String transactionId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -899,6 +1273,14 @@ public class TradePublicationFrameworkApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("pageSize", pageSize));
         }
 
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -919,7 +1301,7 @@ public class TradePublicationFrameworkApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getTransactionPayloadValidateBeforeCall(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTransactionPayloadValidateBeforeCall(String instanceId, String runId, String transactionId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'instanceId' is set
         if (instanceId == null) {
             throw new ApiException("Missing the required parameter 'instanceId' when calling getTransactionPayload(Async)");
@@ -930,18 +1312,20 @@ public class TradePublicationFrameworkApi {
             throw new ApiException("Missing the required parameter 'runId' when calling getTransactionPayload(Async)");
         }
 
-        return getTransactionPayloadCall(instanceId, runId, transactionId, page, pageSize, _callback, opts);
+        return getTransactionPayloadCall(instanceId, runId, transactionId, page, pageSize, filter, sortBy, _callback, opts);
 
     }
 
     /**
      * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
      * 
-     * @param instanceId  (required)
-     * @param runId  (required)
-     * @param transactionId  (optional)
-     * @param page  (optional, default to )
-     * @param pageSize  (optional, default to 100)
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance. (required)
+     * @param transactionId Return only this transaction&#39;s payload. Applied together with &lt;i&gt;filter&lt;/i&gt;. (optional)
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
+     * @param pageSize Number of results per page. (optional, default to 100)
+     * @param filter A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance&#39;s own output columns, e.g. SIDE eq &#39;B&#39;. Values are compared as text, range operators included, so QTY gt &#39;50&#39; is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTransactionPayload&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -953,8 +1337,8 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTransactionPayload> getTransactionPayloadWithHttpInfo(String instanceId, String runId, String transactionId, String page, Integer pageSize) throws ApiException {
-        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfTransactionPayload> getTransactionPayloadWithHttpInfo(String instanceId, String runId, String transactionId, String page, Integer pageSize, String filter, List<String> sortBy) throws ApiException {
+        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, filter, sortBy, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTransactionPayload>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -962,11 +1346,13 @@ public class TradePublicationFrameworkApi {
     /**
      * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
      * Use any specified configuration options to override any other configuration for this request only
-     * @param instanceId  (required)
-     * @param runId  (required)
-     * @param transactionId  (optional)
-     * @param page  (optional, default to )
-     * @param pageSize  (optional, default to 100)
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance. (required)
+     * @param transactionId Return only this transaction&#39;s payload. Applied together with &lt;i&gt;filter&lt;/i&gt;. (optional)
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
+     * @param pageSize Number of results per page. (optional, default to 100)
+     * @param filter A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance&#39;s own output columns, e.g. SIDE eq &#39;B&#39;. Values are compared as text, range operators included, so QTY gt &#39;50&#39; is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTransactionPayload&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -978,8 +1364,8 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTransactionPayload> getTransactionPayloadWithHttpInfo(String instanceId, String runId, String transactionId, String page, Integer pageSize, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, null, opts);
+    private ApiResponse<PagedResourceListOfTransactionPayload> getTransactionPayloadWithHttpInfo(String instanceId, String runId, String transactionId, String page, Integer pageSize, String filter, List<String> sortBy, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, filter, sortBy, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTransactionPayload>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -987,11 +1373,13 @@ public class TradePublicationFrameworkApi {
     /**
      * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned. (asynchronously)
      * 
-     * @param instanceId  (required)
-     * @param runId  (required)
-     * @param transactionId  (optional)
-     * @param page  (optional, default to )
-     * @param pageSize  (optional, default to 100)
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance. (required)
+     * @param transactionId Return only this transaction&#39;s payload. Applied together with &lt;i&gt;filter&lt;/i&gt;. (optional)
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
+     * @param pageSize Number of results per page. (optional, default to 100)
+     * @param filter A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance&#39;s own output columns, e.g. SIDE eq &#39;B&#39;. Values are compared as text, range operators included, so QTY gt &#39;50&#39; is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1003,9 +1391,9 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTransactionPayloadAsync(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback<PagedResourceListOfTransactionPayload> _callback) throws ApiException {
+    private void getTransactionPayloadAsync(String instanceId, String runId, String transactionId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback<PagedResourceListOfTransactionPayload> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, filter, sortBy, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTransactionPayload>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1013,11 +1401,13 @@ public class TradePublicationFrameworkApi {
     /**
      * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned. (asynchronously)
      * Use any specified configuration options to override any other configuration for this request only
-     * @param instanceId  (required)
-     * @param runId  (required)
-     * @param transactionId  (optional)
-     * @param page  (optional, default to )
-     * @param pageSize  (optional, default to 100)
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance. (required)
+     * @param transactionId Return only this transaction&#39;s payload. Applied together with &lt;i&gt;filter&lt;/i&gt;. (optional)
+     * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
+     * @param pageSize Number of results per page. (optional, default to 100)
+     * @param filter A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance&#39;s own output columns, e.g. SIDE eq &#39;B&#39;. Values are compared as text, range operators included, so QTY gt &#39;50&#39; is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts. (optional)
+     * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -1029,9 +1419,9 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTransactionPayloadAsync(String instanceId, String runId, String transactionId, String page, Integer pageSize, final ApiCallback<PagedResourceListOfTransactionPayload> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getTransactionPayloadAsync(String instanceId, String runId, String transactionId, String page, Integer pageSize, String filter, List<String> sortBy, final ApiCallback<PagedResourceListOfTransactionPayload> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, _callback, opts);
+        HttpRequest localVarCall = getTransactionPayloadValidateBeforeCall(instanceId, runId, transactionId, page, pageSize, filter, sortBy, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTransactionPayload>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -1042,6 +1432,8 @@ public class TradePublicationFrameworkApi {
         private String transactionId;
         private String page;
         private Integer pageSize;
+        private String filter;
+        private List<String> sortBy;
 
         private APIgetTransactionPayloadRequest(String instanceId, String runId) {
             this.instanceId = instanceId;
@@ -1050,7 +1442,7 @@ public class TradePublicationFrameworkApi {
 
         /**
          * Set transactionId
-         * @param transactionId  (optional)
+         * @param transactionId Return only this transaction&#39;s payload. Applied together with &lt;i&gt;filter&lt;/i&gt;. (optional)
          * @return APIgetTransactionPayloadRequest
          */
         public APIgetTransactionPayloadRequest transactionId(String transactionId) {
@@ -1060,7 +1452,7 @@ public class TradePublicationFrameworkApi {
 
         /**
          * Set page
-         * @param page  (optional, default to )
+         * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
          * @return APIgetTransactionPayloadRequest
          */
         public APIgetTransactionPayloadRequest page(String page) {
@@ -1070,11 +1462,31 @@ public class TradePublicationFrameworkApi {
 
         /**
          * Set pageSize
-         * @param pageSize  (optional, default to 100)
+         * @param pageSize Number of results per page. (optional, default to 100)
          * @return APIgetTransactionPayloadRequest
          */
         public APIgetTransactionPayloadRequest pageSize(Integer pageSize) {
             this.pageSize = pageSize;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance&#39;s own output columns, e.g. SIDE eq &#39;B&#39;. Values are compared as text, range operators included, so QTY gt &#39;50&#39; is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts. (optional)
+         * @return APIgetTransactionPayloadRequest
+         */
+        public APIgetTransactionPayloadRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC. (optional)
+         * @return APIgetTransactionPayloadRequest
+         */
+        public APIgetTransactionPayloadRequest sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
             return this;
         }
 
@@ -1093,7 +1505,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getTransactionPayloadCall(instanceId, runId, transactionId, page, pageSize, _callback);
+            return getTransactionPayloadCall(instanceId, runId, transactionId, page, pageSize, filter, sortBy, _callback);
         }
 
         /**
@@ -1110,7 +1522,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public PagedResourceListOfTransactionPayload execute() throws ApiException {
-            ApiResponse<PagedResourceListOfTransactionPayload> localVarResp = getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize);
+            ApiResponse<PagedResourceListOfTransactionPayload> localVarResp = getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize, filter, sortBy);
             return localVarResp.getData();
         }
 
@@ -1128,7 +1540,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public PagedResourceListOfTransactionPayload execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfTransactionPayload> localVarResp = getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize, opts);
+            ApiResponse<PagedResourceListOfTransactionPayload> localVarResp = getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize, filter, sortBy, opts);
             return localVarResp.getData();
         }
 
@@ -1146,7 +1558,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTransactionPayload> executeWithHttpInfo() throws ApiException {
-            return getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize);
+            return getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize, filter, sortBy);
         }
 
         /**
@@ -1163,7 +1575,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTransactionPayload> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize, opts);
+            return getTransactionPayloadWithHttpInfo(instanceId, runId, transactionId, page, pageSize, filter, sortBy, opts);
         }
 
         /**
@@ -1180,7 +1592,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTransactionPayload> _callback) throws ApiException {
-            getTransactionPayloadAsync(instanceId, runId, transactionId, page, pageSize, _callback);
+            getTransactionPayloadAsync(instanceId, runId, transactionId, page, pageSize, filter, sortBy, _callback);
         }
 
         /**
@@ -1197,15 +1609,15 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTransactionPayload> _callback, ConfigurationOptions opts) throws ApiException {
-            getTransactionPayloadAsync(instanceId, runId, transactionId, page, pageSize, _callback, opts);
+            getTransactionPayloadAsync(instanceId, runId, transactionId, page, pageSize, filter, sortBy, _callback, opts);
         }
     }
 
     /**
      * [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
      * 
-     * @param instanceId  (required)
-     * @param runId  (required)
+     * @param instanceId Integration instance ID. (required)
+     * @param runId Run ID within the instance. (required)
      * @return APIgetTransactionPayloadRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -2284,7 +2696,7 @@ public class TradePublicationFrameworkApi {
      * @param runId Run ID within the instance. (required)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid. (optional)
+     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first (GeneratedAt DESC, Id DESC). (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -2308,7 +2720,7 @@ public class TradePublicationFrameworkApi {
      * @param runId Run ID within the instance. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
      * @param pageSize Number of results per page. (optional, default to 100). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first (GeneratedAt DESC, Id DESC). (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -2401,13 +2813,13 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListRunFiles: List Files in a run
+     * [EXPERIMENTAL] ListRunFiles: List the file deliveries of a run, one row per file and destination. Each row&#39;s destinations list holds exactly one element; key rows on fileUuid.
      * 
      * @param instanceId Integration instance ID. (required)
      * @param runId Run ID within the instance. (required)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid. (optional)
+     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first (GeneratedAt DESC, Id DESC). (optional)
      * @return ApiResponse&lt;PagedResourceListOfRunFileResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2427,13 +2839,13 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListRunFiles: List Files in a run
+     * [EXPERIMENTAL] ListRunFiles: List the file deliveries of a run, one row per file and destination. Each row&#39;s destinations list holds exactly one element; key rows on fileUuid.
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID. (required)
      * @param runId Run ID within the instance. (required)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid. (optional)
+     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first (GeneratedAt DESC, Id DESC). (optional)
      * @return ApiResponse&lt;PagedResourceListOfRunFileResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2453,13 +2865,13 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListRunFiles: List Files in a run (asynchronously)
+     * [EXPERIMENTAL] ListRunFiles: List the file deliveries of a run, one row per file and destination. Each row&#39;s destinations list holds exactly one element; key rows on fileUuid. (asynchronously)
      * 
      * @param instanceId Integration instance ID. (required)
      * @param runId Run ID within the instance. (required)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid. (optional)
+     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first (GeneratedAt DESC, Id DESC). (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2480,13 +2892,13 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListRunFiles: List Files in a run (asynchronously)
+     * [EXPERIMENTAL] ListRunFiles: List the file deliveries of a run, one row per file and destination. Each row&#39;s destinations list holds exactly one element; key rows on fileUuid. (asynchronously)
      * Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID. (required)
      * @param runId Run ID within the instance. (required)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid. (optional)
+     * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first (GeneratedAt DESC, Id DESC). (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2541,7 +2953,7 @@ public class TradePublicationFrameworkApi {
 
         /**
          * Set filter
-         * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid. (optional)
+         * @param filter A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt. (optional)
          * @return APIlistRunFilesRequest
          */
         public APIlistRunFilesRequest filter(String filter) {
@@ -2683,7 +3095,7 @@ public class TradePublicationFrameworkApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListRunFiles: List Files in a run
+     * [EXPERIMENTAL] ListRunFiles: List the file deliveries of a run, one row per file and destination. Each row&#39;s destinations list holds exactly one element; key rows on fileUuid.
      * 
      * @param instanceId Integration instance ID. (required)
      * @param runId Run ID within the instance. (required)

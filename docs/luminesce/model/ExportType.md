@@ -26,6 +26,7 @@ ExportType method = ExportType.SQLITE;
 ExportType method = ExportType.TABLE_INTERNAL;
 ExportType method = ExportType.JSON_PROPER_WITH_LINEAGE;
 ExportType method = ExportType.PDF;
+ExportType method = ExportType.JSON_PROPER_BY_TABLE;
 ```
 
 

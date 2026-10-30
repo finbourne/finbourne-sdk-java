@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **failureStage** | **String** | Stage at which a failed transaction failed: Build or Delivery | [optional] [default to String]
 **sentAt** | [**OffsetDateTime**](OffsetDateTime.md) | When the transaction was sent, which is when its file reached a destination. Empty for Skipped and Failed rows | [optional] [default to OffsetDateTime]
 **instrumentId** | **String** | InstrumentId showing instrument id of transaction | [optional] [default to String]
+**instrumentScope** | **String** | The scope the build resolved the instrument in; null for rows built before it was recorded | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.TpfTransactionSearchResponse;
@@ -53,6 +54,7 @@ OffsetDateTime tradeDate = OffsetDateTime.now();
 @javax.annotation.Nullable String failureStage = "example failureStage";
 @javax.annotation.Nullable OffsetDateTime sentAt = OffsetDateTime.now();
 @javax.annotation.Nullable String instrumentId = "example instrumentId";
+@javax.annotation.Nullable String instrumentScope = "example instrumentScope";
 
 
 TpfTransactionSearchResponse tpfTransactionSearchResponseInstance = new TpfTransactionSearchResponse()
@@ -75,7 +77,8 @@ TpfTransactionSearchResponse tpfTransactionSearchResponseInstance = new TpfTrans
     .failureReason(failureReason)
     .failureStage(failureStage)
     .sentAt(sentAt)
-    .instrumentId(instrumentId);
+    .instrumentId(instrumentId)
+    .instrumentScope(instrumentScope);
 ```
 
 

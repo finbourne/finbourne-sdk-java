@@ -53,7 +53,8 @@ import com.finbourne.sdk.JSON;
   TransactionResponse.JSON_PROPERTY_OUTPUT_FILE_NAME,
   TransactionResponse.JSON_PROPERTY_SENT_AT,
   TransactionResponse.JSON_PROPERTY_DESTINATIONS,
-  TransactionResponse.JSON_PROPERTY_FAILURE_STAGE
+  TransactionResponse.JSON_PROPERTY_FAILURE_STAGE,
+  TransactionResponse.JSON_PROPERTY_INSTRUMENT_SCOPE
 })
 
 public class TransactionResponse {
@@ -136,6 +137,11 @@ public class TransactionResponse {
   @JsonProperty(JSON_PROPERTY_FAILURE_STAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String failureStage;
+
+  public static final String JSON_PROPERTY_INSTRUMENT_SCOPE = "instrumentScope";
+  @JsonProperty(JSON_PROPERTY_INSTRUMENT_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String instrumentScope;
 
   public TransactionResponse() {
   }
@@ -452,6 +458,25 @@ public class TransactionResponse {
   }
 
 
+  public TransactionResponse instrumentScope(String instrumentScope) {
+    this.instrumentScope = instrumentScope;
+    return this;
+  }
+
+  /**
+   * The scope the build resolved the instrument in; null for rows built before it was recorded.
+   * @return instrumentScope
+   */
+  @javax.annotation.Nullable
+  public String getInstrumentScope() {
+    return instrumentScope;
+  }
+
+  public void setInstrumentScope(String instrumentScope) {
+    this.instrumentScope = instrumentScope;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -476,7 +501,8 @@ public class TransactionResponse {
         Objects.equals(this.outputFileName, transactionResponse.outputFileName) &&
         Objects.equals(this.sentAt, transactionResponse.sentAt) &&
         Objects.equals(this.destinations, transactionResponse.destinations) &&
-        Objects.equals(this.failureStage, transactionResponse.failureStage);
+        Objects.equals(this.failureStage, transactionResponse.failureStage) &&
+        Objects.equals(this.instrumentScope, transactionResponse.instrumentScope);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -485,7 +511,7 @@ public class TransactionResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, publicationStatus, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, destinations, failureStage);
+    return Objects.hash(transactionId, publicationStatus, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, destinations, failureStage, instrumentScope);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -515,6 +541,7 @@ public class TransactionResponse {
     sb.append("    sentAt: ").append(toIndentedString(sentAt)).append("\n");
     sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
     sb.append("    failureStage: ").append(toIndentedString(failureStage)).append("\n");
+    sb.append("    instrumentScope: ").append(toIndentedString(instrumentScope)).append("\n");
     sb.append("}");
     return sb.toString();
   }

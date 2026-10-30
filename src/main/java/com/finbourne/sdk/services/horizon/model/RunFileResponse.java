@@ -35,7 +35,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * record containing details of a single file for a run.
+ * One delivery of a file to one destination within a run, keyed by FileUuid. A file sent to two destinations appears as two rows, so Destinations always holds exactly one element.
  */
 @JsonPropertyOrder({
   RunFileResponse.JSON_PROPERTY_FILE_NAME,
@@ -129,7 +129,7 @@ public class RunFileResponse {
   }
 
   /**
-   * Get generatedAt
+   * When the file was built, or when the attempt failed before a file was built.
    * @return generatedAt
    */
   @javax.annotation.Nonnull

@@ -43,7 +43,9 @@ public enum ExportType {
   
   JSON_PROPER_WITH_LINEAGE("jsonProperWithLineage"),
   
-  PDF("pdf");
+  PDF("pdf"),
+  
+  JSON_PROPER_BY_TABLE("jsonProperByTable");
 
   private String value;
 

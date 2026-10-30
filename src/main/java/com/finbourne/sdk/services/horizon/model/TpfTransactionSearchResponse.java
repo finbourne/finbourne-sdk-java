@@ -57,7 +57,8 @@ import com.finbourne.sdk.JSON;
   TpfTransactionSearchResponse.JSON_PROPERTY_FAILURE_REASON,
   TpfTransactionSearchResponse.JSON_PROPERTY_FAILURE_STAGE,
   TpfTransactionSearchResponse.JSON_PROPERTY_SENT_AT,
-  TpfTransactionSearchResponse.JSON_PROPERTY_INSTRUMENT_ID
+  TpfTransactionSearchResponse.JSON_PROPERTY_INSTRUMENT_ID,
+  TpfTransactionSearchResponse.JSON_PROPERTY_INSTRUMENT_SCOPE
 })
 
 public class TpfTransactionSearchResponse {
@@ -160,6 +161,11 @@ public class TpfTransactionSearchResponse {
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String instrumentId;
+
+  public static final String JSON_PROPERTY_INSTRUMENT_SCOPE = "instrumentScope";
+  @JsonProperty(JSON_PROPERTY_INSTRUMENT_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String instrumentScope;
 
   public TpfTransactionSearchResponse() {
   }
@@ -552,6 +558,25 @@ public class TpfTransactionSearchResponse {
   }
 
 
+  public TpfTransactionSearchResponse instrumentScope(String instrumentScope) {
+    this.instrumentScope = instrumentScope;
+    return this;
+  }
+
+  /**
+   * The scope the build resolved the instrument in; null for rows built before it was recorded
+   * @return instrumentScope
+   */
+  @javax.annotation.Nullable
+  public String getInstrumentScope() {
+    return instrumentScope;
+  }
+
+  public void setInstrumentScope(String instrumentScope) {
+    this.instrumentScope = instrumentScope;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -580,7 +605,8 @@ public class TpfTransactionSearchResponse {
         Objects.equals(this.failureReason, tpfTransactionSearchResponse.failureReason) &&
         Objects.equals(this.failureStage, tpfTransactionSearchResponse.failureStage) &&
         Objects.equals(this.sentAt, tpfTransactionSearchResponse.sentAt) &&
-        Objects.equals(this.instrumentId, tpfTransactionSearchResponse.instrumentId);
+        Objects.equals(this.instrumentId, tpfTransactionSearchResponse.instrumentId) &&
+        Objects.equals(this.instrumentScope, tpfTransactionSearchResponse.instrumentScope);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -589,7 +615,7 @@ public class TpfTransactionSearchResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, instanceId, instanceName, batchId, runId, runStartTime, publicationStatus, instrumentName, instrumentType, tradeDate, settlementDate, skipReason, fileName, destinations, portfolioCode, portfolioScope, failureReason, failureStage, sentAt, instrumentId);
+    return Objects.hash(transactionId, instanceId, instanceName, batchId, runId, runStartTime, publicationStatus, instrumentName, instrumentType, tradeDate, settlementDate, skipReason, fileName, destinations, portfolioCode, portfolioScope, failureReason, failureStage, sentAt, instrumentId, instrumentScope);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -623,6 +649,7 @@ public class TpfTransactionSearchResponse {
     sb.append("    failureStage: ").append(toIndentedString(failureStage)).append("\n");
     sb.append("    sentAt: ").append(toIndentedString(sentAt)).append("\n");
     sb.append("    instrumentId: ").append(toIndentedString(instrumentId)).append("\n");
+    sb.append("    instrumentScope: ").append(toIndentedString(instrumentScope)).append("\n");
     sb.append("}");
     return sb.toString();
   }

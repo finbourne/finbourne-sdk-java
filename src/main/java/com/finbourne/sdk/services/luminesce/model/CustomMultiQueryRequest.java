@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.luminesce.model;
 
 import com.finbourne.sdk.services.luminesce.model.CustomMultiQueryExport;
 import com.finbourne.sdk.services.luminesce.model.CustomMultiQueryItem;
+import com.finbourne.sdk.services.luminesce.model.SqlExecutionFlags;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +48,7 @@ import com.finbourne.sdk.JSON;
   CustomMultiQueryRequest.JSON_PROPERTY_MAX_IN_PARALLEL,
   CustomMultiQueryRequest.JSON_PROPERTY_TIMEOUT_SECONDS,
   CustomMultiQueryRequest.JSON_PROPERTY_KEEP_FOR_SECONDS,
+  CustomMultiQueryRequest.JSON_PROPERTY_EXECUTION_FLAGS,
   CustomMultiQueryRequest.JSON_PROPERTY_QUERY_NAME,
   CustomMultiQueryRequest.JSON_PROPERTY_EXPORT
 })
@@ -86,6 +88,11 @@ public class CustomMultiQueryRequest {
   @JsonProperty(JSON_PROPERTY_KEEP_FOR_SECONDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Integer keepForSeconds;
+
+  public static final String JSON_PROPERTY_EXECUTION_FLAGS = "executionFlags";
+  @JsonProperty(JSON_PROPERTY_EXECUTION_FLAGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private SqlExecutionFlags executionFlags;
 
   public static final String JSON_PROPERTY_QUERY_NAME = "queryName";
   @JsonProperty(JSON_PROPERTY_QUERY_NAME)
@@ -179,7 +186,7 @@ public class CustomMultiQueryRequest {
   }
 
   /**
-   * A custom multi-query saved in the Workspaces API to take the queries from, rather than giving them in &#x60;Queries&#x60; (exactly one of which must be given), e.g. &#x60;shared/SomeWorkspace/items/sets/SomeSet&#x60;. What this request leaves unspecified of &#x60;maxInParallel&#x60;, &#x60;timeoutSeconds&#x60;, &#x60;keepForSeconds&#x60; and &#x60;queryName&#x60; is taken from it too, and its saved scalar parameter values are used for any this request does not give.
+   * A custom multi-query saved in the Workspaces API to take the queries from, rather than giving them in &#x60;Queries&#x60; (exactly one of which must be given), e.g. &#x60;shared/SomeWorkspace/items/sets/SomeSet&#x60;. What this request leaves unspecified of &#x60;maxInParallel&#x60;, &#x60;timeoutSeconds&#x60;, &#x60;keepForSeconds&#x60; and &#x60;queryName&#x60; is taken from it too, and its saved scalar parameter values are used for any this request does not give. It may instead be a Saved Query, e.g. &#x60;shared/SomeWorkspace/items/queries/SomeQuery&#x60;, run as the one query, named &#x60;Result&#x60;.
    * @return queriesFromWorkspace
    */
   @javax.annotation.Nullable
@@ -249,6 +256,25 @@ public class CustomMultiQueryRequest {
   }
 
 
+  public CustomMultiQueryRequest executionFlags(SqlExecutionFlags executionFlags) {
+    this.executionFlags = executionFlags;
+    return this;
+  }
+
+  /**
+   * Get executionFlags
+   * @return executionFlags
+   */
+  @javax.annotation.Nullable
+  public SqlExecutionFlags getExecutionFlags() {
+    return executionFlags;
+  }
+
+  public void setExecutionFlags(SqlExecutionFlags executionFlags) {
+    this.executionFlags = executionFlags;
+  }
+
+
   public CustomMultiQueryRequest queryName(String queryName) {
     this.queryName = queryName;
     return this;
@@ -303,6 +329,7 @@ public class CustomMultiQueryRequest {
         Objects.equals(this.maxInParallel, customMultiQueryRequest.maxInParallel) &&
         Objects.equals(this.timeoutSeconds, customMultiQueryRequest.timeoutSeconds) &&
         Objects.equals(this.keepForSeconds, customMultiQueryRequest.keepForSeconds) &&
+        Objects.equals(this.executionFlags, customMultiQueryRequest.executionFlags) &&
         Objects.equals(this.queryName, customMultiQueryRequest.queryName) &&
         Objects.equals(this.export, customMultiQueryRequest.export);
   }
@@ -313,7 +340,7 @@ public class CustomMultiQueryRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(executionId, scalarParameters, queries, queriesFromWorkspace, maxInParallel, timeoutSeconds, keepForSeconds, queryName, export);
+    return Objects.hash(executionId, scalarParameters, queries, queriesFromWorkspace, maxInParallel, timeoutSeconds, keepForSeconds, executionFlags, queryName, export);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -334,6 +361,7 @@ public class CustomMultiQueryRequest {
     sb.append("    maxInParallel: ").append(toIndentedString(maxInParallel)).append("\n");
     sb.append("    timeoutSeconds: ").append(toIndentedString(timeoutSeconds)).append("\n");
     sb.append("    keepForSeconds: ").append(toIndentedString(keepForSeconds)).append("\n");
+    sb.append("    executionFlags: ").append(toIndentedString(executionFlags)).append("\n");
     sb.append("    queryName: ").append(toIndentedString(queryName)).append("\n");
     sb.append("    export: ").append(toIndentedString(export)).append("\n");
     sb.append("}");

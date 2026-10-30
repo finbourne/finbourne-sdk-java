@@ -48,7 +48,8 @@ import com.finbourne.sdk.JSON;
   TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_ERROR,
   TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_NAME,
   TpfFileDeliveryResponse.JSON_PROPERTY_FILE_UUID,
-  TpfFileDeliveryResponse.JSON_PROPERTY_CAN_RESEND
+  TpfFileDeliveryResponse.JSON_PROPERTY_CAN_RESEND,
+  TpfFileDeliveryResponse.JSON_PROPERTY_DELIVERED_AT
 })
 
 public class TpfFileDeliveryResponse {
@@ -117,6 +118,11 @@ public class TpfFileDeliveryResponse {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Boolean canResend;
 
+  public static final String JSON_PROPERTY_DELIVERED_AT = "deliveredAt";
+  @JsonProperty(JSON_PROPERTY_DELIVERED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime deliveredAt;
+
   public TpfFileDeliveryResponse() {
   }
 
@@ -183,7 +189,7 @@ public class TpfFileDeliveryResponse {
   }
 
   /**
-   * Get generatedAt
+   * When the file was built, or when the attempt failed before a file was built.
    * @return generatedAt
    */
   @javax.annotation.Nonnull
@@ -367,6 +373,25 @@ public class TpfFileDeliveryResponse {
   }
 
 
+  public TpfFileDeliveryResponse deliveredAt(OffsetDateTime deliveredAt) {
+    this.deliveredAt = deliveredAt;
+    return this;
+  }
+
+  /**
+   * When the file reached the destination; null for a Failed or Pending row.
+   * @return deliveredAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getDeliveredAt() {
+    return deliveredAt;
+  }
+
+  public void setDeliveredAt(OffsetDateTime deliveredAt) {
+    this.deliveredAt = deliveredAt;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -388,7 +413,8 @@ public class TpfFileDeliveryResponse {
         Objects.equals(this.destinationError, tpfFileDeliveryResponse.destinationError) &&
         Objects.equals(this.destinationName, tpfFileDeliveryResponse.destinationName) &&
         Objects.equals(this.fileUuid, tpfFileDeliveryResponse.fileUuid) &&
-        Objects.equals(this.canResend, tpfFileDeliveryResponse.canResend);
+        Objects.equals(this.canResend, tpfFileDeliveryResponse.canResend) &&
+        Objects.equals(this.deliveredAt, tpfFileDeliveryResponse.deliveredAt);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -397,7 +423,7 @@ public class TpfFileDeliveryResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationStatus, destinationError, destinationName, fileUuid, canResend);
+    return Objects.hash(runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationStatus, destinationError, destinationName, fileUuid, canResend, deliveredAt);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -424,6 +450,7 @@ public class TpfFileDeliveryResponse {
     sb.append("    destinationName: ").append(toIndentedString(destinationName)).append("\n");
     sb.append("    fileUuid: ").append(toIndentedString(fileUuid)).append("\n");
     sb.append("    canResend: ").append(toIndentedString(canResend)).append("\n");
+    sb.append("    deliveredAt: ").append(toIndentedString(deliveredAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

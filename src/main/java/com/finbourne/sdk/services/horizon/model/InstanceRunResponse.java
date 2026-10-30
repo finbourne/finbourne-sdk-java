@@ -49,7 +49,8 @@ import com.finbourne.sdk.JSON;
   InstanceRunResponse.JSON_PROPERTY_SKIPPED_COUNT,
   InstanceRunResponse.JSON_PROPERTY_FAILED_COUNT,
   InstanceRunResponse.JSON_PROPERTY_FAILED_FILES,
-  InstanceRunResponse.JSON_PROPERTY_MESSAGE
+  InstanceRunResponse.JSON_PROPERTY_MESSAGE,
+  InstanceRunResponse.JSON_PROPERTY_FILE_COUNT
 })
 
 public class InstanceRunResponse {
@@ -122,6 +123,11 @@ public class InstanceRunResponse {
   @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String message;
+
+  public static final String JSON_PROPERTY_FILE_COUNT = "fileCount";
+  @JsonProperty(JSON_PROPERTY_FILE_COUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer fileCount;
 
   public InstanceRunResponse() {
   }
@@ -392,6 +398,25 @@ public class InstanceRunResponse {
   }
 
 
+  public InstanceRunResponse fileCount(Integer fileCount) {
+    this.fileCount = fileCount;
+    return this;
+  }
+
+  /**
+   * The number of rows ListRunFiles returns for the run, every delivery attempt included; latest attempt only.
+   * @return fileCount
+   */
+  @javax.annotation.Nullable
+  public Integer getFileCount() {
+    return fileCount;
+  }
+
+  public void setFileCount(Integer fileCount) {
+    this.fileCount = fileCount;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -414,7 +439,8 @@ public class InstanceRunResponse {
         Objects.equals(this.skippedCount, instanceRunResponse.skippedCount) &&
         Objects.equals(this.failedCount, instanceRunResponse.failedCount) &&
         Objects.equals(this.failedFiles, instanceRunResponse.failedFiles) &&
-        Objects.equals(this.message, instanceRunResponse.message);
+        Objects.equals(this.message, instanceRunResponse.message) &&
+        Objects.equals(this.fileCount, instanceRunResponse.fileCount);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -423,7 +449,7 @@ public class InstanceRunResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, referenceId, attempt, startTime, endTime, duration, status, triggeredBy, total, sentCount, skippedCount, failedCount, failedFiles, message);
+    return Objects.hash(runId, referenceId, attempt, startTime, endTime, duration, status, triggeredBy, total, sentCount, skippedCount, failedCount, failedFiles, message, fileCount);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -451,6 +477,7 @@ public class InstanceRunResponse {
     sb.append("    failedCount: ").append(toIndentedString(failedCount)).append("\n");
     sb.append("    failedFiles: ").append(toIndentedString(failedFiles)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    fileCount: ").append(toIndentedString(fileCount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

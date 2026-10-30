@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.horizon.model;
 
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
@@ -31,14 +32,16 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * record containing details of a single file destination for a run.
+ * The destination a file delivery row describes. A Failed row carries the per-transaction FailureReason when one was recorded, falling back to the raw Error text.
  */
 @JsonPropertyOrder({
   FileDestinationResponse.JSON_PROPERTY_TYPE,
   FileDestinationResponse.JSON_PROPERTY_PATH,
   FileDestinationResponse.JSON_PROPERTY_STATUS,
   FileDestinationResponse.JSON_PROPERTY_ERROR,
-  FileDestinationResponse.JSON_PROPERTY_FAILURE_REASON
+  FileDestinationResponse.JSON_PROPERTY_FAILURE_REASON,
+  FileDestinationResponse.JSON_PROPERTY_NAME,
+  FileDestinationResponse.JSON_PROPERTY_DELIVERED_AT
 })
 
 public class FileDestinationResponse {
@@ -66,6 +69,16 @@ public class FileDestinationResponse {
   @JsonProperty(JSON_PROPERTY_FAILURE_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String failureReason;
+
+  public static final String JSON_PROPERTY_NAME = "name";
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String name;
+
+  public static final String JSON_PROPERTY_DELIVERED_AT = "deliveredAt";
+  @JsonProperty(JSON_PROPERTY_DELIVERED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime deliveredAt;
 
   public FileDestinationResponse() {
   }
@@ -165,6 +178,44 @@ public class FileDestinationResponse {
   }
 
 
+  public FileDestinationResponse name(String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * The configured destination name, such as the SFTP host, when one was recorded.
+   * @return name
+   */
+  @javax.annotation.Nullable
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  public FileDestinationResponse deliveredAt(OffsetDateTime deliveredAt) {
+    this.deliveredAt = deliveredAt;
+    return this;
+  }
+
+  /**
+   * When the file reached the destination; null for a Failed or Pending row.
+   * @return deliveredAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getDeliveredAt() {
+    return deliveredAt;
+  }
+
+  public void setDeliveredAt(OffsetDateTime deliveredAt) {
+    this.deliveredAt = deliveredAt;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -178,7 +229,9 @@ public class FileDestinationResponse {
         Objects.equals(this.path, fileDestinationResponse.path) &&
         Objects.equals(this.status, fileDestinationResponse.status) &&
         Objects.equals(this.error, fileDestinationResponse.error) &&
-        Objects.equals(this.failureReason, fileDestinationResponse.failureReason);
+        Objects.equals(this.failureReason, fileDestinationResponse.failureReason) &&
+        Objects.equals(this.name, fileDestinationResponse.name) &&
+        Objects.equals(this.deliveredAt, fileDestinationResponse.deliveredAt);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -187,7 +240,7 @@ public class FileDestinationResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(type, path, status, error, failureReason);
+    return Objects.hash(type, path, status, error, failureReason, name, deliveredAt);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -206,6 +259,8 @@ public class FileDestinationResponse {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("    failureReason: ").append(toIndentedString(failureReason)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    deliveredAt: ").append(toIndentedString(deliveredAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -50,7 +50,8 @@ import com.finbourne.sdk.JSON;
   InstanceResponse.JSON_PROPERTY_LAST_RUN_AT,
   InstanceResponse.JSON_PROPERTY_LAST_RUN_STATUS,
   InstanceResponse.JSON_PROPERTY_LATEST_RUNS_IN24_HOURS,
-  InstanceResponse.JSON_PROPERTY_DESTINATIONS
+  InstanceResponse.JSON_PROPERTY_DESTINATIONS,
+  InstanceResponse.JSON_PROPERTY_OUTPUT_FORMAT
 })
 
 public class InstanceResponse {
@@ -103,6 +104,11 @@ public class InstanceResponse {
   @JsonProperty(JSON_PROPERTY_DESTINATIONS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<InstanceDestinations> destinations = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_OUTPUT_FORMAT = "outputFormat";
+  @JsonProperty(JSON_PROPERTY_OUTPUT_FORMAT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String outputFormat;
 
   public InstanceResponse() {
   }
@@ -313,6 +319,25 @@ public class InstanceResponse {
   }
 
 
+  public InstanceResponse outputFormat(String outputFormat) {
+    this.outputFormat = outputFormat;
+    return this;
+  }
+
+  /**
+   * Get outputFormat
+   * @return outputFormat
+   */
+  @javax.annotation.Nullable
+  public String getOutputFormat() {
+    return outputFormat;
+  }
+
+  public void setOutputFormat(String outputFormat) {
+    this.outputFormat = outputFormat;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -331,7 +356,8 @@ public class InstanceResponse {
         Objects.equals(this.lastRunAt, instanceResponse.lastRunAt) &&
         Objects.equals(this.lastRunStatus, instanceResponse.lastRunStatus) &&
         Objects.equals(this.latestRunsIn24Hours, instanceResponse.latestRunsIn24Hours) &&
-        Objects.equals(this.destinations, instanceResponse.destinations);
+        Objects.equals(this.destinations, instanceResponse.destinations) &&
+        Objects.equals(this.outputFormat, instanceResponse.outputFormat);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -340,7 +366,7 @@ public class InstanceResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, name, enabled, portfolios, schedule, scheduleTimezone, lastRunAt, lastRunStatus, latestRunsIn24Hours, destinations);
+    return Objects.hash(id, name, enabled, portfolios, schedule, scheduleTimezone, lastRunAt, lastRunStatus, latestRunsIn24Hours, destinations, outputFormat);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -364,6 +390,7 @@ public class InstanceResponse {
     sb.append("    lastRunStatus: ").append(toIndentedString(lastRunStatus)).append("\n");
     sb.append("    latestRunsIn24Hours: ").append(toIndentedString(latestRunsIn24Hours)).append("\n");
     sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
+    sb.append("    outputFormat: ").append(toIndentedString(outputFormat)).append("\n");
     sb.append("}");
     return sb.toString();
   }

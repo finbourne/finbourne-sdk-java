@@ -1,6 +1,6 @@
 # com.finbourne.sdk.services.horizon.model.FileDestinationResponse
 classname FileDestinationResponse
-record containing details of a single file destination for a run.
+The destination a file delivery row describes. A Failed row carries the per-transaction FailureReason when one was recorded, falling back to the raw Error text.
 
 ## Properties
 
@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **status** | **String** |  | [default to String]
 **error** | **String** |  | [optional] [default to String]
 **failureReason** | **String** |  | [optional] [default to String]
+**name** | **String** | The configured destination name, such as the SFTP host, when one was recorded. | [optional] [default to String]
+**deliveredAt** | [**OffsetDateTime**](OffsetDateTime.md) | When the file reached the destination; null for a Failed or Pending row. | [optional] [default to OffsetDateTime]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.FileDestinationResponse;
@@ -23,6 +25,8 @@ String path = "example path";
 String status = "example status";
 @javax.annotation.Nullable String error = "example error";
 @javax.annotation.Nullable String failureReason = "example failureReason";
+@javax.annotation.Nullable String name = "example name";
+@javax.annotation.Nullable OffsetDateTime deliveredAt = OffsetDateTime.now();
 
 
 FileDestinationResponse fileDestinationResponseInstance = new FileDestinationResponse()
@@ -30,7 +34,9 @@ FileDestinationResponse fileDestinationResponseInstance = new FileDestinationRes
     .path(path)
     .status(status)
     .error(error)
-    .failureReason(failureReason);
+    .failureReason(failureReason)
+    .name(name)
+    .deliveredAt(deliveredAt);
 ```
 
 

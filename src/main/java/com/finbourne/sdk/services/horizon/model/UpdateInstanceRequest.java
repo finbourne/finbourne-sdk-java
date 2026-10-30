@@ -88,8 +88,8 @@ public class UpdateInstanceRequest {
 
   public static final String JSON_PROPERTY_POST_PROCESS_TASKS = "postProcessTasks";
   @JsonProperty(JSON_PROPERTY_POST_PROCESS_TASKS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<PostProcessTask> postProcessTasks = new ArrayList<>();
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<PostProcessTask> postProcessTasks;
 
   public static final String JSON_PROPERTY_ALERT_RULES = "alertRules";
   @JsonProperty(JSON_PROPERTY_ALERT_RULES)
@@ -254,10 +254,10 @@ public class UpdateInstanceRequest {
   }
 
   /**
-   * Get postProcessTasks
+   * Post-process tasks for the instance. On update the stored tasks are replaced by this set when it is present, an empty set clears them, and omitting the field leaves them unchanged.
    * @return postProcessTasks
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<PostProcessTask> getPostProcessTasks() {
     return postProcessTasks;
   }
