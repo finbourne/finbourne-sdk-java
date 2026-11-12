@@ -31,8 +31,11 @@ import com.finbourne.sdk.services.lusid.model.ComplianceRuleResponse;
 import com.finbourne.sdk.services.lusid.model.ComplianceRuleResultV2;
 import com.finbourne.sdk.services.lusid.model.ComplianceRuleResultV2WithContributions;
 import com.finbourne.sdk.services.lusid.model.ComplianceRuleTemplate;
+import com.finbourne.sdk.services.lusid.model.ComplianceRuleV3DescribeResponse;
+import com.finbourne.sdk.services.lusid.model.ComplianceRuleV3Response;
 import com.finbourne.sdk.services.lusid.model.ComplianceRunConfiguration;
 import com.finbourne.sdk.services.lusid.model.ComplianceRunInfoV2;
+import com.finbourne.sdk.services.lusid.model.ComplianceRunV3Response;
 import com.finbourne.sdk.services.lusid.model.ComplianceTemplate;
 import com.finbourne.sdk.services.lusid.model.CreateComplianceTemplateRequest;
 import com.finbourne.sdk.services.lusid.model.DecoratedComplianceRunSummary;
@@ -42,11 +45,14 @@ import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfComplianceRuleResponse;
+import com.finbourne.sdk.services.lusid.model.PagedResourceListOfComplianceRuleV3Response;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfComplianceRunInfoV2;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfComplianceTemplate;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfOrderBreachHistory;
+import com.finbourne.sdk.services.lusid.model.RunComplianceV3Request;
 import com.finbourne.sdk.services.lusid.model.UpdateComplianceTemplateRequest;
 import com.finbourne.sdk.services.lusid.model.UpsertComplianceRuleRequest;
+import com.finbourne.sdk.services.lusid.model.UpsertComplianceRuleV3Request;
 import com.finbourne.sdk.services.lusid.model.UpsertComplianceRunSummaryRequest;
 import com.finbourne.sdk.services.lusid.model.UpsertComplianceRunSummaryResult;
 
@@ -749,6 +755,332 @@ public class ComplianceApi {
         return new APIdeleteComplianceRuleRequest(scope, code);
     }
     /**
+     * Build call for deleteComplianceRuleV3
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deleteComplianceRuleV3Call(String scope, String code, final ApiCallback _callback) throws ApiException {
+        return deleteComplianceRuleV3Call(scope, code,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for deleteComplianceRuleV3. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The compliance rule&#39;s scope. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The compliance rule&#39;s code. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest deleteComplianceRuleV3Call(String scope, String code, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/compliance/v3/rules/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest deleteComplianceRuleV3ValidateBeforeCall(String scope, String code, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling deleteComplianceRuleV3(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling deleteComplianceRuleV3(Async)");
+        }
+
+        return deleteComplianceRuleV3Call(scope, code, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteComplianceRuleV3: [EXPERIMENTAL] Delete a V3 compliance rule.
+     * Use this endpoint to delete a V3 compliance rule.
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteComplianceRuleV3WithHttpInfo(String scope, String code) throws ApiException {
+        HttpRequest localVarCall = deleteComplianceRuleV3ValidateBeforeCall(scope, code, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteComplianceRuleV3: [EXPERIMENTAL] Delete a V3 compliance rule.
+     * Use this endpoint to delete a V3 compliance rule.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @return ApiResponse&lt;DeletedEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<DeletedEntityResponse> deleteComplianceRuleV3WithHttpInfo(String scope, String code, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = deleteComplianceRuleV3ValidateBeforeCall(scope, code, null, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteComplianceRuleV3: [EXPERIMENTAL] Delete a V3 compliance rule. (asynchronously)
+     * Use this endpoint to delete a V3 compliance rule.
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteComplianceRuleV3Async(String scope, String code, final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = deleteComplianceRuleV3ValidateBeforeCall(scope, code, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteComplianceRuleV3: [EXPERIMENTAL] Delete a V3 compliance rule. (asynchronously)
+     * Use this endpoint to delete a V3 compliance rule.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void deleteComplianceRuleV3Async(String scope, String code, final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = deleteComplianceRuleV3ValidateBeforeCall(scope, code, _callback, opts);
+        Type localVarReturnType = new TypeReference<DeletedEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIdeleteComplianceRuleV3Request {
+        private final String scope;
+        private final String code;
+
+        private APIdeleteComplianceRuleV3Request(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Build call for deleteComplianceRuleV3
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteComplianceRuleV3Call(scope, code, _callback);
+        }
+
+        /**
+         * Execute deleteComplianceRuleV3 request
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute() throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteComplianceRuleV3WithHttpInfo(scope, code);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteComplianceRuleV3 request. Use any specified configuration options to override any other configuration for this request only.
+         * @return DeletedEntityResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeletedEntityResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<DeletedEntityResponse> localVarResp = deleteComplianceRuleV3WithHttpInfo(scope, code, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute deleteComplianceRuleV3 request with HTTP info returned
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo() throws ApiException {
+            return deleteComplianceRuleV3WithHttpInfo(scope, code);
+        }
+
+        /**
+         * Execute deleteComplianceRuleV3 request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;DeletedEntityResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeletedEntityResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return deleteComplianceRuleV3WithHttpInfo(scope, code, opts);
+        }
+
+        /**
+         * Execute deleteComplianceRuleV3 request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback) throws ApiException {
+            deleteComplianceRuleV3Async(scope, code, _callback);
+        }
+
+        /**
+         * Execute deleteComplianceRuleV3 request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<DeletedEntityResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            deleteComplianceRuleV3Async(scope, code, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] DeleteComplianceRuleV3: [EXPERIMENTAL] Delete a V3 compliance rule.
+     * Use this endpoint to delete a V3 compliance rule.
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @return APIdeleteComplianceRuleV3Request
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The response from deleting a V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIdeleteComplianceRuleV3Request deleteComplianceRuleV3(String scope, String code) {
+        return new APIdeleteComplianceRuleV3Request(scope, code);
+    }
+    /**
      * Build call for deleteComplianceTemplate
      * @param scope The scope of the template to be deleted. (required)
      * @param code The code of the template to be deleted. (required)
@@ -1073,6 +1405,353 @@ public class ComplianceApi {
      */
     public APIdeleteComplianceTemplateRequest deleteComplianceTemplate(String scope, String code) {
         return new APIdeleteComplianceTemplateRequest(scope, code);
+    }
+    /**
+     * Build call for describeComplianceRuleV3
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest describeComplianceRuleV3Call(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
+        return describeComplianceRuleV3Call(scope, code, asAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for describeComplianceRuleV3. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The compliance rule&#39;s scope. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The compliance rule&#39;s code. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest describeComplianceRuleV3Call(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/compliance/v3/rules/{scope}/{code}/$describe"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest describeComplianceRuleV3ValidateBeforeCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling describeComplianceRuleV3(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling describeComplianceRuleV3(Async)");
+        }
+
+        return describeComplianceRuleV3Call(scope, code, asAt, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @return ApiResponse&lt;ComplianceRuleV3DescribeResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleV3DescribeResponse> describeComplianceRuleV3WithHttpInfo(String scope, String code, OffsetDateTime asAt) throws ApiException {
+        HttpRequest localVarCall = describeComplianceRuleV3ValidateBeforeCall(scope, code, asAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3DescribeResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @return ApiResponse&lt;ComplianceRuleV3DescribeResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleV3DescribeResponse> describeComplianceRuleV3WithHttpInfo(String scope, String code, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = describeComplianceRuleV3ValidateBeforeCall(scope, code, asAt, null, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3DescribeResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English. (asynchronously)
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void describeComplianceRuleV3Async(String scope, String code, OffsetDateTime asAt, final ApiCallback<ComplianceRuleV3DescribeResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = describeComplianceRuleV3ValidateBeforeCall(scope, code, asAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3DescribeResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English. (asynchronously)
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void describeComplianceRuleV3Async(String scope, String code, OffsetDateTime asAt, final ApiCallback<ComplianceRuleV3DescribeResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = describeComplianceRuleV3ValidateBeforeCall(scope, code, asAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3DescribeResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIdescribeComplianceRuleV3Request {
+        private final String scope;
+        private final String code;
+        private OffsetDateTime asAt;
+
+        private APIdescribeComplianceRuleV3Request(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+         * @return APIdescribeComplianceRuleV3Request
+         */
+        public APIdescribeComplianceRuleV3Request asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Build call for describeComplianceRuleV3
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return describeComplianceRuleV3Call(scope, code, asAt, _callback);
+        }
+
+        /**
+         * Execute describeComplianceRuleV3 request
+         * @return ComplianceRuleV3DescribeResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleV3DescribeResponse execute() throws ApiException {
+            ApiResponse<ComplianceRuleV3DescribeResponse> localVarResp = describeComplianceRuleV3WithHttpInfo(scope, code, asAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute describeComplianceRuleV3 request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ComplianceRuleV3DescribeResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleV3DescribeResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ComplianceRuleV3DescribeResponse> localVarResp = describeComplianceRuleV3WithHttpInfo(scope, code, asAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute describeComplianceRuleV3 request with HTTP info returned
+         * @return ApiResponse&lt;ComplianceRuleV3DescribeResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleV3DescribeResponse> executeWithHttpInfo() throws ApiException {
+            return describeComplianceRuleV3WithHttpInfo(scope, code, asAt);
+        }
+
+        /**
+         * Execute describeComplianceRuleV3 request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ComplianceRuleV3DescribeResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleV3DescribeResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return describeComplianceRuleV3WithHttpInfo(scope, code, asAt, opts);
+        }
+
+        /**
+         * Execute describeComplianceRuleV3 request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleV3DescribeResponse> _callback) throws ApiException {
+            describeComplianceRuleV3Async(scope, code, asAt, _callback);
+        }
+
+        /**
+         * Execute describeComplianceRuleV3 request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleV3DescribeResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            describeComplianceRuleV3Async(scope, code, asAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @return APIdescribeComplianceRuleV3Request
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The plain-English description of the V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIdescribeComplianceRuleV3Request describeComplianceRuleV3(String scope, String code) {
+        return new APIdescribeComplianceRuleV3Request(scope, code);
     }
     /**
      * Build call for getComplianceRule
@@ -2153,6 +2832,353 @@ public class ComplianceApi {
      */
     public APIgetComplianceRuleResultRequest getComplianceRuleResult(String runScope, String runCode, String ruleScope, String ruleCode) {
         return new APIgetComplianceRuleResultRequest(runScope, runCode, ruleScope, ruleCode);
+    }
+    /**
+     * Build call for getComplianceRuleV3
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getComplianceRuleV3Call(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback) throws ApiException {
+        return getComplianceRuleV3Call(scope, code, asAt,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getComplianceRuleV3. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The compliance rule&#39;s scope. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The compliance rule&#39;s code. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getComplianceRuleV3Call(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/compliance/v3/rules/{scope}/{code}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getComplianceRuleV3ValidateBeforeCall(String scope, String code, OffsetDateTime asAt, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getComplianceRuleV3(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getComplianceRuleV3(Async)");
+        }
+
+        return getComplianceRuleV3Call(scope, code, asAt, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetComplianceRuleV3: [EXPERIMENTAL] Get a V3 compliance rule.
+     * Use this endpoint to retrieve a single V3 compliance rule.
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleV3Response> getComplianceRuleV3WithHttpInfo(String scope, String code, OffsetDateTime asAt) throws ApiException {
+        HttpRequest localVarCall = getComplianceRuleV3ValidateBeforeCall(scope, code, asAt, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetComplianceRuleV3: [EXPERIMENTAL] Get a V3 compliance rule.
+     * Use this endpoint to retrieve a single V3 compliance rule.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleV3Response> getComplianceRuleV3WithHttpInfo(String scope, String code, OffsetDateTime asAt, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getComplianceRuleV3ValidateBeforeCall(scope, code, asAt, null, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetComplianceRuleV3: [EXPERIMENTAL] Get a V3 compliance rule. (asynchronously)
+     * Use this endpoint to retrieve a single V3 compliance rule.
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getComplianceRuleV3Async(String scope, String code, OffsetDateTime asAt, final ApiCallback<ComplianceRuleV3Response> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getComplianceRuleV3ValidateBeforeCall(scope, code, asAt, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetComplianceRuleV3: [EXPERIMENTAL] Get a V3 compliance rule. (asynchronously)
+     * Use this endpoint to retrieve a single V3 compliance rule.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getComplianceRuleV3Async(String scope, String code, OffsetDateTime asAt, final ApiCallback<ComplianceRuleV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getComplianceRuleV3ValidateBeforeCall(scope, code, asAt, _callback, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetComplianceRuleV3Request {
+        private final String scope;
+        private final String code;
+        private OffsetDateTime asAt;
+
+        private APIgetComplianceRuleV3Request(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+         * @return APIgetComplianceRuleV3Request
+         */
+        public APIgetComplianceRuleV3Request asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Build call for getComplianceRuleV3
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getComplianceRuleV3Call(scope, code, asAt, _callback);
+        }
+
+        /**
+         * Execute getComplianceRuleV3 request
+         * @return ComplianceRuleV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleV3Response execute() throws ApiException {
+            ApiResponse<ComplianceRuleV3Response> localVarResp = getComplianceRuleV3WithHttpInfo(scope, code, asAt);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getComplianceRuleV3 request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ComplianceRuleV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleV3Response execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ComplianceRuleV3Response> localVarResp = getComplianceRuleV3WithHttpInfo(scope, code, asAt, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getComplianceRuleV3 request with HTTP info returned
+         * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleV3Response> executeWithHttpInfo() throws ApiException {
+            return getComplianceRuleV3WithHttpInfo(scope, code, asAt);
+        }
+
+        /**
+         * Execute getComplianceRuleV3 request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleV3Response> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getComplianceRuleV3WithHttpInfo(scope, code, asAt, opts);
+        }
+
+        /**
+         * Execute getComplianceRuleV3 request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleV3Response> _callback) throws ApiException {
+            getComplianceRuleV3Async(scope, code, asAt, _callback);
+        }
+
+        /**
+         * Execute getComplianceRuleV3 request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+            getComplianceRuleV3Async(scope, code, asAt, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetComplianceRuleV3: [EXPERIMENTAL] Get a V3 compliance rule.
+     * Use this endpoint to retrieve a single V3 compliance rule.
+     * @param scope The compliance rule&#39;s scope. (required)
+     * @param code The compliance rule&#39;s code. (required)
+     * @return APIgetComplianceRuleV3Request
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetComplianceRuleV3Request getComplianceRuleV3(String scope, String code) {
+        return new APIgetComplianceRuleV3Request(scope, code);
     }
     /**
      * Build call for getComplianceTemplate
@@ -3565,6 +4591,407 @@ public class ComplianceApi {
      */
     public APIlistComplianceRulesRequest listComplianceRules() {
         return new APIlistComplianceRulesRequest();
+    }
+    /**
+     * Build call for listComplianceRulesV3
+     * @param asAt Optional. The asAt datetime at which to list rules. Default: latest. (optional)
+     * @param page Optional. The pagination token from a previous call. (optional)
+     * @param limit Optional. When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Not yet supported on this experimental endpoint; supplying a filter returns a 400. (optional)
+     * @param sortBy Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot;. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listComplianceRulesV3Call(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback _callback) throws ApiException {
+        return listComplianceRulesV3Call(asAt, page, limit, filter, sortBy,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listComplianceRulesV3. Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt Optional. The asAt datetime at which to list rules. Default: latest. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page Optional. The pagination token from a previous call. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit Optional. When paginating, limit the number of returned results to this many. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Not yet supported on this experimental endpoint; supplying a filter returns a 400. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot;. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listComplianceRulesV3Call(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/compliance/v3/rules";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listComplianceRulesV3ValidateBeforeCall(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listComplianceRulesV3Call(asAt, page, limit, filter, sortBy, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ListComplianceRulesV3: [EXPERIMENTAL] List V3 compliance rules.
+     * Use this endpoint to retrieve the V3 compliance rules in the client&#39;s scopes.
+     * @param asAt Optional. The asAt datetime at which to list rules. Default: latest. (optional)
+     * @param page Optional. The pagination token from a previous call. (optional)
+     * @param limit Optional. When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Not yet supported on this experimental endpoint; supplying a filter returns a 400. (optional)
+     * @param sortBy Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot;. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfComplianceRuleV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfComplianceRuleV3Response> listComplianceRulesV3WithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy) throws ApiException {
+        HttpRequest localVarCall = listComplianceRulesV3ValidateBeforeCall(asAt, page, limit, filter, sortBy, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfComplianceRuleV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListComplianceRulesV3: [EXPERIMENTAL] List V3 compliance rules.
+     * Use this endpoint to retrieve the V3 compliance rules in the client&#39;s scopes.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt Optional. The asAt datetime at which to list rules. Default: latest. (optional)
+     * @param page Optional. The pagination token from a previous call. (optional)
+     * @param limit Optional. When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Not yet supported on this experimental endpoint; supplying a filter returns a 400. (optional)
+     * @param sortBy Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot;. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfComplianceRuleV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfComplianceRuleV3Response> listComplianceRulesV3WithHttpInfo(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listComplianceRulesV3ValidateBeforeCall(asAt, page, limit, filter, sortBy, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfComplianceRuleV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListComplianceRulesV3: [EXPERIMENTAL] List V3 compliance rules. (asynchronously)
+     * Use this endpoint to retrieve the V3 compliance rules in the client&#39;s scopes.
+     * @param asAt Optional. The asAt datetime at which to list rules. Default: latest. (optional)
+     * @param page Optional. The pagination token from a previous call. (optional)
+     * @param limit Optional. When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Not yet supported on this experimental endpoint; supplying a filter returns a 400. (optional)
+     * @param sortBy Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot;. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listComplianceRulesV3Async(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback<PagedResourceListOfComplianceRuleV3Response> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listComplianceRulesV3ValidateBeforeCall(asAt, page, limit, filter, sortBy, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfComplianceRuleV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListComplianceRulesV3: [EXPERIMENTAL] List V3 compliance rules. (asynchronously)
+     * Use this endpoint to retrieve the V3 compliance rules in the client&#39;s scopes.Use any specified configuration options to override any other configuration for this request only
+     * @param asAt Optional. The asAt datetime at which to list rules. Default: latest. (optional)
+     * @param page Optional. The pagination token from a previous call. (optional)
+     * @param limit Optional. When paginating, limit the number of returned results to this many. (optional)
+     * @param filter Not yet supported on this experimental endpoint; supplying a filter returns a 400. (optional)
+     * @param sortBy Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot;. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listComplianceRulesV3Async(OffsetDateTime asAt, String page, Integer limit, String filter, List<String> sortBy, final ApiCallback<PagedResourceListOfComplianceRuleV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listComplianceRulesV3ValidateBeforeCall(asAt, page, limit, filter, sortBy, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfComplianceRuleV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistComplianceRulesV3Request {
+        private OffsetDateTime asAt;
+        private String page;
+        private Integer limit;
+        private String filter;
+        private List<String> sortBy;
+
+        private APIlistComplianceRulesV3Request() {
+        }
+
+        /**
+         * Set asAt
+         * @param asAt Optional. The asAt datetime at which to list rules. Default: latest. (optional)
+         * @return APIlistComplianceRulesV3Request
+         */
+        public APIlistComplianceRulesV3Request asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page Optional. The pagination token from a previous call. (optional)
+         * @return APIlistComplianceRulesV3Request
+         */
+        public APIlistComplianceRulesV3Request page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit Optional. When paginating, limit the number of returned results to this many. (optional)
+         * @return APIlistComplianceRulesV3Request
+         */
+        public APIlistComplianceRulesV3Request limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Not yet supported on this experimental endpoint; supplying a filter returns a 400. (optional)
+         * @return APIlistComplianceRulesV3Request
+         */
+        public APIlistComplianceRulesV3Request filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot;. (optional)
+         * @return APIlistComplianceRulesV3Request
+         */
+        public APIlistComplianceRulesV3Request sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
+            return this;
+        }
+
+        /**
+         * Build call for listComplianceRulesV3
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listComplianceRulesV3Call(asAt, page, limit, filter, sortBy, _callback);
+        }
+
+        /**
+         * Execute listComplianceRulesV3 request
+         * @return PagedResourceListOfComplianceRuleV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfComplianceRuleV3Response execute() throws ApiException {
+            ApiResponse<PagedResourceListOfComplianceRuleV3Response> localVarResp = listComplianceRulesV3WithHttpInfo(asAt, page, limit, filter, sortBy);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listComplianceRulesV3 request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfComplianceRuleV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfComplianceRuleV3Response execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfComplianceRuleV3Response> localVarResp = listComplianceRulesV3WithHttpInfo(asAt, page, limit, filter, sortBy, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listComplianceRulesV3 request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfComplianceRuleV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfComplianceRuleV3Response> executeWithHttpInfo() throws ApiException {
+            return listComplianceRulesV3WithHttpInfo(asAt, page, limit, filter, sortBy);
+        }
+
+        /**
+         * Execute listComplianceRulesV3 request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfComplianceRuleV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfComplianceRuleV3Response> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listComplianceRulesV3WithHttpInfo(asAt, page, limit, filter, sortBy, opts);
+        }
+
+        /**
+         * Execute listComplianceRulesV3 request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfComplianceRuleV3Response> _callback) throws ApiException {
+            listComplianceRulesV3Async(asAt, page, limit, filter, sortBy, _callback);
+        }
+
+        /**
+         * Execute listComplianceRulesV3 request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfComplianceRuleV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+            listComplianceRulesV3Async(asAt, page, limit, filter, sortBy, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ListComplianceRulesV3: [EXPERIMENTAL] List V3 compliance rules.
+     * Use this endpoint to retrieve the V3 compliance rules in the client&#39;s scopes.
+     * @return APIlistComplianceRulesV3Request
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The list of V3 compliance rules. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistComplianceRulesV3Request listComplianceRulesV3() {
+        return new APIlistComplianceRulesV3Request();
     }
     /**
      * Build call for listComplianceRuns
@@ -5524,6 +6951,640 @@ public class ComplianceApi {
         return new APIrunCompliancePreviewRequest(runScope, ruleScope, recipeIdScope, recipeIdCode);
     }
     /**
+     * Build call for runComplianceV3
+     * @param runComplianceV3Request  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest runComplianceV3Call(RunComplianceV3Request runComplianceV3Request, final ApiCallback _callback) throws ApiException {
+        return runComplianceV3Call(runComplianceV3Request,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for runComplianceV3. Use any specified configuration options to override any other configuration for this request only.
+     * @param runComplianceV3Request  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest runComplianceV3Call(RunComplianceV3Request runComplianceV3Request, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = runComplianceV3Request;
+
+        // create path and map variables
+        String localVarPath = "/api/api/compliance/v3/runs";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest runComplianceV3ValidateBeforeCall(RunComplianceV3Request runComplianceV3Request, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return runComplianceV3Call(runComplianceV3Request, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group, valuing holdings  with the supplied recipe, and return each rule&#39;s result.
+     * @param runComplianceV3Request  (optional)
+     * @return ApiResponse&lt;ComplianceRunV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRunV3Response> runComplianceV3WithHttpInfo(RunComplianceV3Request runComplianceV3Request) throws ApiException {
+        HttpRequest localVarCall = runComplianceV3ValidateBeforeCall(runComplianceV3Request, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRunV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group, valuing holdings  with the supplied recipe, and return each rule&#39;s result.Use any specified configuration options to override any other configuration for this request only
+     * @param runComplianceV3Request  (optional)
+     * @return ApiResponse&lt;ComplianceRunV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRunV3Response> runComplianceV3WithHttpInfo(RunComplianceV3Request runComplianceV3Request, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = runComplianceV3ValidateBeforeCall(runComplianceV3Request, null, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRunV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group. (asynchronously)
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group, valuing holdings  with the supplied recipe, and return each rule&#39;s result.
+     * @param runComplianceV3Request  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void runComplianceV3Async(RunComplianceV3Request runComplianceV3Request, final ApiCallback<ComplianceRunV3Response> _callback) throws ApiException {
+
+        HttpRequest localVarCall = runComplianceV3ValidateBeforeCall(runComplianceV3Request, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRunV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group. (asynchronously)
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group, valuing holdings  with the supplied recipe, and return each rule&#39;s result.Use any specified configuration options to override any other configuration for this request only
+     * @param runComplianceV3Request  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void runComplianceV3Async(RunComplianceV3Request runComplianceV3Request, final ApiCallback<ComplianceRunV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = runComplianceV3ValidateBeforeCall(runComplianceV3Request, _callback, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRunV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIrunComplianceV3Request {
+        private RunComplianceV3Request runComplianceV3Request;
+
+        private APIrunComplianceV3Request() {
+        }
+
+        /**
+         * Set runComplianceV3Request
+         * @param runComplianceV3Request  (optional)
+         * @return APIrunComplianceV3Request
+         */
+        public APIrunComplianceV3Request runComplianceV3Request(RunComplianceV3Request runComplianceV3Request) {
+            this.runComplianceV3Request = runComplianceV3Request;
+            return this;
+        }
+
+        /**
+         * Build call for runComplianceV3
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return runComplianceV3Call(runComplianceV3Request, _callback);
+        }
+
+        /**
+         * Execute runComplianceV3 request
+         * @return ComplianceRunV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRunV3Response execute() throws ApiException {
+            ApiResponse<ComplianceRunV3Response> localVarResp = runComplianceV3WithHttpInfo(runComplianceV3Request);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute runComplianceV3 request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ComplianceRunV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRunV3Response execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ComplianceRunV3Response> localVarResp = runComplianceV3WithHttpInfo(runComplianceV3Request, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute runComplianceV3 request with HTTP info returned
+         * @return ApiResponse&lt;ComplianceRunV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRunV3Response> executeWithHttpInfo() throws ApiException {
+            return runComplianceV3WithHttpInfo(runComplianceV3Request);
+        }
+
+        /**
+         * Execute runComplianceV3 request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ComplianceRunV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRunV3Response> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return runComplianceV3WithHttpInfo(runComplianceV3Request, opts);
+        }
+
+        /**
+         * Execute runComplianceV3 request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRunV3Response> _callback) throws ApiException {
+            runComplianceV3Async(runComplianceV3Request, _callback);
+        }
+
+        /**
+         * Execute runComplianceV3 request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRunV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+            runComplianceV3Async(runComplianceV3Request, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group, valuing holdings  with the supplied recipe, and return each rule&#39;s result.
+     * @return APIrunComplianceV3Request
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIrunComplianceV3Request runComplianceV3() {
+        return new APIrunComplianceV3Request();
+    }
+    /**
+     * Build call for runComplianceV3PreTrade
+     * @param runComplianceV3Request  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest runComplianceV3PreTradeCall(RunComplianceV3Request runComplianceV3Request, final ApiCallback _callback) throws ApiException {
+        return runComplianceV3PreTradeCall(runComplianceV3Request,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for runComplianceV3PreTrade. Use any specified configuration options to override any other configuration for this request only.
+     * @param runComplianceV3Request  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest runComplianceV3PreTradeCall(RunComplianceV3Request runComplianceV3Request, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = runComplianceV3Request;
+
+        // create path and map variables
+        String localVarPath = "/api/api/compliance/v3/runs/$pretrade";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest runComplianceV3PreTradeValidateBeforeCall(RunComplianceV3Request runComplianceV3Request, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return runComplianceV3PreTradeCall(runComplianceV3Request, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group including its live  order flow (pre-trade), valuing holdings with the supplied recipe, and return each rule&#39;s result.
+     * @param runComplianceV3Request  (optional)
+     * @return ApiResponse&lt;ComplianceRunV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRunV3Response> runComplianceV3PreTradeWithHttpInfo(RunComplianceV3Request runComplianceV3Request) throws ApiException {
+        HttpRequest localVarCall = runComplianceV3PreTradeValidateBeforeCall(runComplianceV3Request, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRunV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group including its live  order flow (pre-trade), valuing holdings with the supplied recipe, and return each rule&#39;s result.Use any specified configuration options to override any other configuration for this request only
+     * @param runComplianceV3Request  (optional)
+     * @return ApiResponse&lt;ComplianceRunV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRunV3Response> runComplianceV3PreTradeWithHttpInfo(RunComplianceV3Request runComplianceV3Request, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = runComplianceV3PreTradeValidateBeforeCall(runComplianceV3Request, null, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRunV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group. (asynchronously)
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group including its live  order flow (pre-trade), valuing holdings with the supplied recipe, and return each rule&#39;s result.
+     * @param runComplianceV3Request  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void runComplianceV3PreTradeAsync(RunComplianceV3Request runComplianceV3Request, final ApiCallback<ComplianceRunV3Response> _callback) throws ApiException {
+
+        HttpRequest localVarCall = runComplianceV3PreTradeValidateBeforeCall(runComplianceV3Request, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRunV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group. (asynchronously)
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group including its live  order flow (pre-trade), valuing holdings with the supplied recipe, and return each rule&#39;s result.Use any specified configuration options to override any other configuration for this request only
+     * @param runComplianceV3Request  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void runComplianceV3PreTradeAsync(RunComplianceV3Request runComplianceV3Request, final ApiCallback<ComplianceRunV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = runComplianceV3PreTradeValidateBeforeCall(runComplianceV3Request, _callback, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRunV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIrunComplianceV3PreTradeRequest {
+        private RunComplianceV3Request runComplianceV3Request;
+
+        private APIrunComplianceV3PreTradeRequest() {
+        }
+
+        /**
+         * Set runComplianceV3Request
+         * @param runComplianceV3Request  (optional)
+         * @return APIrunComplianceV3PreTradeRequest
+         */
+        public APIrunComplianceV3PreTradeRequest runComplianceV3Request(RunComplianceV3Request runComplianceV3Request) {
+            this.runComplianceV3Request = runComplianceV3Request;
+            return this;
+        }
+
+        /**
+         * Build call for runComplianceV3PreTrade
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return runComplianceV3PreTradeCall(runComplianceV3Request, _callback);
+        }
+
+        /**
+         * Execute runComplianceV3PreTrade request
+         * @return ComplianceRunV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRunV3Response execute() throws ApiException {
+            ApiResponse<ComplianceRunV3Response> localVarResp = runComplianceV3PreTradeWithHttpInfo(runComplianceV3Request);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute runComplianceV3PreTrade request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ComplianceRunV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRunV3Response execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ComplianceRunV3Response> localVarResp = runComplianceV3PreTradeWithHttpInfo(runComplianceV3Request, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute runComplianceV3PreTrade request with HTTP info returned
+         * @return ApiResponse&lt;ComplianceRunV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRunV3Response> executeWithHttpInfo() throws ApiException {
+            return runComplianceV3PreTradeWithHttpInfo(runComplianceV3Request);
+        }
+
+        /**
+         * Execute runComplianceV3PreTrade request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ComplianceRunV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRunV3Response> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return runComplianceV3PreTradeWithHttpInfo(runComplianceV3Request, opts);
+        }
+
+        /**
+         * Execute runComplianceV3PreTrade request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRunV3Response> _callback) throws ApiException {
+            runComplianceV3PreTradeAsync(runComplianceV3Request, _callback);
+        }
+
+        /**
+         * Execute runComplianceV3PreTrade request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRunV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+            runComplianceV3PreTradeAsync(runComplianceV3Request, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
+     * Use this endpoint to run one or more V3 compliance rules against a portfolio group including its live  order flow (pre-trade), valuing holdings with the supplied recipe, and return each rule&#39;s result.
+     * @return APIrunComplianceV3PreTradeRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The result of each V3 compliance rule that was run pre-trade. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIrunComplianceV3PreTradeRequest runComplianceV3PreTrade() {
+        return new APIrunComplianceV3PreTradeRequest();
+    }
+    /**
      * Build call for updateComplianceTemplate
      * @param scope The scope of the Compliance Rule Template. (required)
      * @param code The code of the Compliance Rule Template. (required)
@@ -6185,6 +8246,323 @@ public class ComplianceApi {
         return new APIupsertComplianceRuleRequest();
     }
     /**
+     * Build call for upsertComplianceRuleV3
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertComplianceRuleV3Call(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback _callback) throws ApiException {
+        return upsertComplianceRuleV3Call(upsertComplianceRuleV3Request,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for upsertComplianceRuleV3. Use any specified configuration options to override any other configuration for this request only.
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertComplianceRuleV3Call(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = upsertComplianceRuleV3Request;
+
+        // create path and map variables
+        String localVarPath = "/api/api/compliance/v3/rules";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest upsertComplianceRuleV3ValidateBeforeCall(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return upsertComplianceRuleV3Call(upsertComplianceRuleV3Request, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
+     * Use this endpoint to create or update a single V3 compliance rule. The rule&#39;s own record fully  describes what it checks.
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleV3Response> upsertComplianceRuleV3WithHttpInfo(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request) throws ApiException {
+        HttpRequest localVarCall = upsertComplianceRuleV3ValidateBeforeCall(upsertComplianceRuleV3Request, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
+     * Use this endpoint to create or update a single V3 compliance rule. The rule&#39;s own record fully  describes what it checks.Use any specified configuration options to override any other configuration for this request only
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleV3Response> upsertComplianceRuleV3WithHttpInfo(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = upsertComplianceRuleV3ValidateBeforeCall(upsertComplianceRuleV3Request, null, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule. (asynchronously)
+     * Use this endpoint to create or update a single V3 compliance rule. The rule&#39;s own record fully  describes what it checks.
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertComplianceRuleV3Async(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback<ComplianceRuleV3Response> _callback) throws ApiException {
+
+        HttpRequest localVarCall = upsertComplianceRuleV3ValidateBeforeCall(upsertComplianceRuleV3Request, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule. (asynchronously)
+     * Use this endpoint to create or update a single V3 compliance rule. The rule&#39;s own record fully  describes what it checks.Use any specified configuration options to override any other configuration for this request only
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertComplianceRuleV3Async(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback<ComplianceRuleV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = upsertComplianceRuleV3ValidateBeforeCall(upsertComplianceRuleV3Request, _callback, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIupsertComplianceRuleV3Request {
+        private UpsertComplianceRuleV3Request upsertComplianceRuleV3Request;
+
+        private APIupsertComplianceRuleV3Request() {
+        }
+
+        /**
+         * Set upsertComplianceRuleV3Request
+         * @param upsertComplianceRuleV3Request  (optional)
+         * @return APIupsertComplianceRuleV3Request
+         */
+        public APIupsertComplianceRuleV3Request upsertComplianceRuleV3Request(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request) {
+            this.upsertComplianceRuleV3Request = upsertComplianceRuleV3Request;
+            return this;
+        }
+
+        /**
+         * Build call for upsertComplianceRuleV3
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return upsertComplianceRuleV3Call(upsertComplianceRuleV3Request, _callback);
+        }
+
+        /**
+         * Execute upsertComplianceRuleV3 request
+         * @return ComplianceRuleV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleV3Response execute() throws ApiException {
+            ApiResponse<ComplianceRuleV3Response> localVarResp = upsertComplianceRuleV3WithHttpInfo(upsertComplianceRuleV3Request);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertComplianceRuleV3 request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ComplianceRuleV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleV3Response execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ComplianceRuleV3Response> localVarResp = upsertComplianceRuleV3WithHttpInfo(upsertComplianceRuleV3Request, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertComplianceRuleV3 request with HTTP info returned
+         * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleV3Response> executeWithHttpInfo() throws ApiException {
+            return upsertComplianceRuleV3WithHttpInfo(upsertComplianceRuleV3Request);
+        }
+
+        /**
+         * Execute upsertComplianceRuleV3 request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleV3Response> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return upsertComplianceRuleV3WithHttpInfo(upsertComplianceRuleV3Request, opts);
+        }
+
+        /**
+         * Execute upsertComplianceRuleV3 request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleV3Response> _callback) throws ApiException {
+            upsertComplianceRuleV3Async(upsertComplianceRuleV3Request, _callback);
+        }
+
+        /**
+         * Execute upsertComplianceRuleV3 request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+            upsertComplianceRuleV3Async(upsertComplianceRuleV3Request, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
+     * Use this endpoint to create or update a single V3 compliance rule. The rule&#39;s own record fully  describes what it checks.
+     * @return APIupsertComplianceRuleV3Request
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The upserted V3 compliance rule. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIupsertComplianceRuleV3Request upsertComplianceRuleV3() {
+        return new APIupsertComplianceRuleV3Request();
+    }
+    /**
      * Build call for upsertComplianceRunSummary
      * @param upsertComplianceRunSummaryRequest  (optional)
      * @param _callback Callback for upload/download progress
@@ -6500,5 +8878,322 @@ public class ComplianceApi {
      */
     public APIupsertComplianceRunSummaryRequest upsertComplianceRunSummary() {
         return new APIupsertComplianceRunSummaryRequest();
+    }
+    /**
+     * Build call for validateComplianceRuleV3
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest validateComplianceRuleV3Call(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback _callback) throws ApiException {
+        return validateComplianceRuleV3Call(upsertComplianceRuleV3Request,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for validateComplianceRuleV3. Use any specified configuration options to override any other configuration for this request only.
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest validateComplianceRuleV3Call(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = upsertComplianceRuleV3Request;
+
+        // create path and map variables
+        String localVarPath = "/api/api/compliance/v3/rules/$validate";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest validateComplianceRuleV3ValidateBeforeCall(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return validateComplianceRuleV3Call(upsertComplianceRuleV3Request, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ValidateComplianceRuleV3: [EXPERIMENTAL] Validate a V3 compliance rule definition.
+     * Use this endpoint to validate a V3 compliance rule definition against the vocabulary and its  referenced reference lists without persisting it. A validation failure returns a 400.
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleV3Response> validateComplianceRuleV3WithHttpInfo(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request) throws ApiException {
+        HttpRequest localVarCall = validateComplianceRuleV3ValidateBeforeCall(upsertComplianceRuleV3Request, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ValidateComplianceRuleV3: [EXPERIMENTAL] Validate a V3 compliance rule definition.
+     * Use this endpoint to validate a V3 compliance rule definition against the vocabulary and its  referenced reference lists without persisting it. A validation failure returns a 400.Use any specified configuration options to override any other configuration for this request only
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ComplianceRuleV3Response> validateComplianceRuleV3WithHttpInfo(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = validateComplianceRuleV3ValidateBeforeCall(upsertComplianceRuleV3Request, null, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ValidateComplianceRuleV3: [EXPERIMENTAL] Validate a V3 compliance rule definition. (asynchronously)
+     * Use this endpoint to validate a V3 compliance rule definition against the vocabulary and its  referenced reference lists without persisting it. A validation failure returns a 400.
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void validateComplianceRuleV3Async(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback<ComplianceRuleV3Response> _callback) throws ApiException {
+
+        HttpRequest localVarCall = validateComplianceRuleV3ValidateBeforeCall(upsertComplianceRuleV3Request, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ValidateComplianceRuleV3: [EXPERIMENTAL] Validate a V3 compliance rule definition. (asynchronously)
+     * Use this endpoint to validate a V3 compliance rule definition against the vocabulary and its  referenced reference lists without persisting it. A validation failure returns a 400.Use any specified configuration options to override any other configuration for this request only
+     * @param upsertComplianceRuleV3Request  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void validateComplianceRuleV3Async(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request, final ApiCallback<ComplianceRuleV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = validateComplianceRuleV3ValidateBeforeCall(upsertComplianceRuleV3Request, _callback, opts);
+        Type localVarReturnType = new TypeReference<ComplianceRuleV3Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIvalidateComplianceRuleV3Request {
+        private UpsertComplianceRuleV3Request upsertComplianceRuleV3Request;
+
+        private APIvalidateComplianceRuleV3Request() {
+        }
+
+        /**
+         * Set upsertComplianceRuleV3Request
+         * @param upsertComplianceRuleV3Request  (optional)
+         * @return APIvalidateComplianceRuleV3Request
+         */
+        public APIvalidateComplianceRuleV3Request upsertComplianceRuleV3Request(UpsertComplianceRuleV3Request upsertComplianceRuleV3Request) {
+            this.upsertComplianceRuleV3Request = upsertComplianceRuleV3Request;
+            return this;
+        }
+
+        /**
+         * Build call for validateComplianceRuleV3
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return validateComplianceRuleV3Call(upsertComplianceRuleV3Request, _callback);
+        }
+
+        /**
+         * Execute validateComplianceRuleV3 request
+         * @return ComplianceRuleV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleV3Response execute() throws ApiException {
+            ApiResponse<ComplianceRuleV3Response> localVarResp = validateComplianceRuleV3WithHttpInfo(upsertComplianceRuleV3Request);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute validateComplianceRuleV3 request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ComplianceRuleV3Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplianceRuleV3Response execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ComplianceRuleV3Response> localVarResp = validateComplianceRuleV3WithHttpInfo(upsertComplianceRuleV3Request, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute validateComplianceRuleV3 request with HTTP info returned
+         * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleV3Response> executeWithHttpInfo() throws ApiException {
+            return validateComplianceRuleV3WithHttpInfo(upsertComplianceRuleV3Request);
+        }
+
+        /**
+         * Execute validateComplianceRuleV3 request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ComplianceRuleV3Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplianceRuleV3Response> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return validateComplianceRuleV3WithHttpInfo(upsertComplianceRuleV3Request, opts);
+        }
+
+        /**
+         * Execute validateComplianceRuleV3 request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleV3Response> _callback) throws ApiException {
+            validateComplianceRuleV3Async(upsertComplianceRuleV3Request, _callback);
+        }
+
+        /**
+         * Execute validateComplianceRuleV3 request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ComplianceRuleV3Response> _callback, ConfigurationOptions opts) throws ApiException {
+            validateComplianceRuleV3Async(upsertComplianceRuleV3Request, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ValidateComplianceRuleV3: [EXPERIMENTAL] Validate a V3 compliance rule definition.
+     * Use this endpoint to validate a V3 compliance rule definition against the vocabulary and its  referenced reference lists without persisting it. A validation failure returns a 400.
+     * @return APIvalidateComplianceRuleV3Request
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The validated V3 compliance rule definition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIvalidateComplianceRuleV3Request validateComplianceRuleV3() {
+        return new APIvalidateComplianceRuleV3Request();
     }
 }

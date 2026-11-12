@@ -18,6 +18,7 @@ import com.finbourne.sdk.services.workflow.model.HealthCheckResponse;
 import com.finbourne.sdk.services.workflow.model.HorizonIntegrationResponse;
 import com.finbourne.sdk.services.workflow.model.InstantiateRecResponse;
 import com.finbourne.sdk.services.workflow.model.LibraryResponse;
+import com.finbourne.sdk.services.workflow.model.LuminesceMultiQueryResponse;
 import com.finbourne.sdk.services.workflow.model.LuminesceViewResponse;
 import com.finbourne.sdk.services.workflow.model.LusidEntityDataQualityCheckResponse;
 import com.finbourne.sdk.services.workflow.model.PortfolioHoldingDataQualityCheckResponse;
@@ -138,6 +139,16 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
                 errorMessages.add(String.format("Deserialization for LibraryResponse failed with `%s`.", e.getMessage()));
                 log.log(Level.FINER, "Input data does not match schema 'LibraryResponse'", e);
             }
+            // deserialize LuminesceMultiQueryResponse
+            try {
+                deserialized = _strictMapper.treeToValue(node, LuminesceMultiQueryResponse.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'LuminesceMultiQueryResponse'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for LuminesceMultiQueryResponse failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'LuminesceMultiQueryResponse'", e);
+            }
             // deserialize LuminesceViewResponse
             try {
                 deserialized = _strictMapper.treeToValue(node, LuminesceViewResponse.class);
@@ -236,6 +247,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
         schemas.put("HorizonIntegrationResponse", HorizonIntegrationResponse.class);
         schemas.put("InstantiateRecResponse", InstantiateRecResponse.class);
         schemas.put("LibraryResponse", LibraryResponse.class);
+        schemas.put("LuminesceMultiQueryResponse", LuminesceMultiQueryResponse.class);
         schemas.put("LuminesceViewResponse", LuminesceViewResponse.class);
         schemas.put("LusidEntityDataQualityCheckResponse", LusidEntityDataQualityCheckResponse.class);
         schemas.put("PortfolioHoldingDataQualityCheckResponse", PortfolioHoldingDataQualityCheckResponse.class);
@@ -253,7 +265,7 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse
+     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceMultiQueryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -285,6 +297,11 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
         }
 
         if (instance instanceof LibraryResponse) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof LuminesceMultiQueryResponse) {
             super.setActualInstance(instance);
             return;
         }
@@ -324,14 +341,14 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse");
+        throw new RuntimeException("Invalid instance type. Must be FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceMultiQueryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse
+     * FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceMultiQueryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse
      *
-     * @return The actual instance (FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse)
+     * @return The actual instance (FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, InstantiateRecResponse, LibraryResponse, LuminesceMultiQueryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, PortfolioHoldingDataQualityCheckResponse, PortfolioTransactionDataQualityCheckResponse, SchedulerJobResponse, SleepResponse, StructuredResultDataQualityCheckResponse)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -398,6 +415,16 @@ public class WorkerConfigurationResponse extends AbstractOpenApiSchema {
      */
     public LibraryResponse getLibraryResponse() throws ClassCastException {
         return (LibraryResponse)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `LuminesceMultiQueryResponse`. If the actual instance is not `LuminesceMultiQueryResponse`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `LuminesceMultiQueryResponse`
+     * @throws ClassCastException if the instance is not `LuminesceMultiQueryResponse`
+     */
+    public LuminesceMultiQueryResponse getLuminesceMultiQueryResponse() throws ClassCastException {
+        return (LuminesceMultiQueryResponse)super.getActualInstance();
     }
     /**
      * Get the actual instance of `LuminesceViewResponse`. If the actual instance is not `LuminesceViewResponse`,

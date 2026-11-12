@@ -37,10 +37,11 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A relational data point item within a rec result: one row of a relational dataset. The dataset and the unique  id of the data point identify the row. All rec types use this item shape.
+ * A relational data point item within a rec result: one row of a relational dataset. The dataset and the unique  id of the data point identify the row. All rec types use this item shape. Also holds the display name of the  dataset.
  */
 @JsonPropertyOrder({
   RecResultRelationalDataItem.JSON_PROPERTY_RELATIONAL_DATASET_DEFINITION_ID,
+  RecResultRelationalDataItem.JSON_PROPERTY_RELATIONAL_DATASET_DEFINITION_DISPLAY_NAME,
   RecResultRelationalDataItem.JSON_PROPERTY_RELATIONAL_DATA_POINT_UNIQUE_ID,
   RecResultRelationalDataItem.JSON_PROPERTY_ITEM_TYPE,
   RecResultRelationalDataItem.JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES,
@@ -52,6 +53,11 @@ public class RecResultRelationalDataItem {
   @JsonProperty(JSON_PROPERTY_RELATIONAL_DATASET_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private ResourceId relationalDatasetDefinitionId;
+
+  public static final String JSON_PROPERTY_RELATIONAL_DATASET_DEFINITION_DISPLAY_NAME = "relationalDatasetDefinitionDisplayName";
+  @JsonProperty(JSON_PROPERTY_RELATIONAL_DATASET_DEFINITION_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String relationalDatasetDefinitionDisplayName;
 
   public static final String JSON_PROPERTY_RELATIONAL_DATA_POINT_UNIQUE_ID = "relationalDataPointUniqueId";
   @JsonProperty(JSON_PROPERTY_RELATIONAL_DATA_POINT_UNIQUE_ID)
@@ -102,6 +108,25 @@ public class RecResultRelationalDataItem {
   }
 
 
+  public RecResultRelationalDataItem relationalDatasetDefinitionDisplayName(String relationalDatasetDefinitionDisplayName) {
+    this.relationalDatasetDefinitionDisplayName = relationalDatasetDefinitionDisplayName;
+    return this;
+  }
+
+  /**
+   * The display name of the relational dataset definition the item&#39;s row belongs to, as it stood at the asAt the run read its data. Null where the run did not read it.
+   * @return relationalDatasetDefinitionDisplayName
+   */
+  @javax.annotation.Nullable
+  public String getRelationalDatasetDefinitionDisplayName() {
+    return relationalDatasetDefinitionDisplayName;
+  }
+
+  public void setRelationalDatasetDefinitionDisplayName(String relationalDatasetDefinitionDisplayName) {
+    this.relationalDatasetDefinitionDisplayName = relationalDatasetDefinitionDisplayName;
+  }
+
+
   public RecResultRelationalDataItem relationalDataPointUniqueId(String relationalDataPointUniqueId) {
     this.relationalDataPointUniqueId = relationalDataPointUniqueId;
     return this;
@@ -127,7 +152,7 @@ public class RecResultRelationalDataItem {
   }
 
   /**
-   * The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction, SettlementActivity or RelationalDataPoint. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, both transaction rec types produce Transaction items, and a relational dataset side produces RelationalDataPoint items whatever the rec type. Available values: SettlementActivity, Holding, Transaction, ValuedHolding, RelationalDataPoint.
+   * The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction, SettlementActivity, RelationalDataPoint or the entity type of a LusidEntity rec. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, both transaction rec types produce Transaction items, and a relational dataset side produces RelationalDataPoint items whatever the rec type. A LusidEntity rec produces items of its entity type, for example Instrument items. Available values: SettlementActivity, Holding, Transaction, ValuedHolding, RelationalDataPoint, Instrument, LegalEntity, Portfolio.
    * @return itemType
    */
   @javax.annotation.Nonnull
@@ -188,6 +213,7 @@ public class RecResultRelationalDataItem {
     }
     RecResultRelationalDataItem recResultRelationalDataItem = (RecResultRelationalDataItem) o;
     return Objects.equals(this.relationalDatasetDefinitionId, recResultRelationalDataItem.relationalDatasetDefinitionId) &&
+        Objects.equals(this.relationalDatasetDefinitionDisplayName, recResultRelationalDataItem.relationalDatasetDefinitionDisplayName) &&
         Objects.equals(this.relationalDataPointUniqueId, recResultRelationalDataItem.relationalDataPointUniqueId) &&
         Objects.equals(this.itemType, recResultRelationalDataItem.itemType) &&
         Objects.equals(this.ruleAndAttributeValues, recResultRelationalDataItem.ruleAndAttributeValues) &&
@@ -200,7 +226,7 @@ public class RecResultRelationalDataItem {
 
   @Override
  public int hashCode() {
-    return Objects.hash(relationalDatasetDefinitionId, relationalDataPointUniqueId, itemType, ruleAndAttributeValues, writebackSuggestions);
+    return Objects.hash(relationalDatasetDefinitionId, relationalDatasetDefinitionDisplayName, relationalDataPointUniqueId, itemType, ruleAndAttributeValues, writebackSuggestions);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -215,6 +241,7 @@ public class RecResultRelationalDataItem {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecResultRelationalDataItem {\n");
     sb.append("    relationalDatasetDefinitionId: ").append(toIndentedString(relationalDatasetDefinitionId)).append("\n");
+    sb.append("    relationalDatasetDefinitionDisplayName: ").append(toIndentedString(relationalDatasetDefinitionDisplayName)).append("\n");
     sb.append("    relationalDataPointUniqueId: ").append(toIndentedString(relationalDataPointUniqueId)).append("\n");
     sb.append("    itemType: ").append(toIndentedString(itemType)).append("\n");
     sb.append("    ruleAndAttributeValues: ").append(toIndentedString(ruleAndAttributeValues)).append("\n");

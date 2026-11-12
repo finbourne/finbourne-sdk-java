@@ -3444,9 +3444,7 @@ public class RecsApi {
      * Build call for getRecResult
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
-     * @param runNumber The run of the instance whose view of the result is read. (required)
-     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
+     * @param id The id of the rec result, e.g. \&quot;Holding-break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback Callback for upload/download progress
@@ -3460,17 +3458,15 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getRecResultCall(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
-        return getRecResultCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys,  _callback, new ConfigurationOptions());
+    private HttpRequest getRecResultCall(String instanceIdType, String instanceIdValue, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback) throws ApiException {
+        return getRecResultCall(instanceIdType, instanceIdValue, id, asAt, propertyKeys,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getRecResult. Use any specified configuration options to override any other configuration for this request only.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param instanceIdValue The unique identifier of the rec instance. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param runNumber The run of the instance whose view of the result is read. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param id The id of the rec result, e.g. \&quot;Holding-break-3\&quot;. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback Callback for upload/download progress
@@ -3484,7 +3480,7 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getRecResultCall(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getRecResultCall(String instanceIdType, String instanceIdValue, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3501,11 +3497,9 @@ public class RecsApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/api/api/recs/results/{instanceIdType}/{instanceIdValue}/{recType}/{runNumber}/{id}"
+        String localVarPath = "/api/api/recs/results/{instanceIdType}/{instanceIdValue}/{id}"
             .replace("{" + "instanceIdType" + "}", localVarApiClient.escapeString(instanceIdType.toString()))
             .replace("{" + "instanceIdValue" + "}", localVarApiClient.escapeString(instanceIdValue.toString()))
-            .replace("{" + "recType" + "}", localVarApiClient.escapeString(recType.toString()))
-            .replace("{" + "runNumber" + "}", localVarApiClient.escapeString(runNumber.toString()))
             .replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -3544,7 +3538,7 @@ public class RecsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getRecResultValidateBeforeCall(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getRecResultValidateBeforeCall(String instanceIdType, String instanceIdValue, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'instanceIdType' is set
         if (instanceIdType == null) {
             throw new ApiException("Missing the required parameter 'instanceIdType' when calling getRecResult(Async)");
@@ -3555,33 +3549,21 @@ public class RecsApi {
             throw new ApiException("Missing the required parameter 'instanceIdValue' when calling getRecResult(Async)");
         }
 
-        // verify the required parameter 'recType' is set
-        if (recType == null) {
-            throw new ApiException("Missing the required parameter 'recType' when calling getRecResult(Async)");
-        }
-
-        // verify the required parameter 'runNumber' is set
-        if (runNumber == null) {
-            throw new ApiException("Missing the required parameter 'runNumber' when calling getRecResult(Async)");
-        }
-
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getRecResult(Async)");
         }
 
-        return getRecResultCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback, opts);
+        return getRecResultCall(instanceIdType, instanceIdValue, id, asAt, propertyKeys, _callback, opts);
 
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult
-     * Retrieve a single rec result by its display id, as it stood in the run named.
+     * Retrieve a single rec result by its id.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
-     * @param runNumber The run of the instance whose view of the result is read. (required)
-     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
+     * @param id The id of the rec result, e.g. \&quot;Holding-break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @return ApiResponse&lt;RecResult&gt;
@@ -3594,20 +3576,18 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<RecResult> getRecResultWithHttpInfo(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys) throws ApiException {
-        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, null, new ConfigurationOptions());
+    private ApiResponse<RecResult> getRecResultWithHttpInfo(String instanceIdType, String instanceIdValue, String id, OffsetDateTime asAt, List<String> propertyKeys) throws ApiException {
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, id, asAt, propertyKeys, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult
-     * Retrieve a single rec result by its display id, as it stood in the run named.Use any specified configuration options to override any other configuration for this request only
+     * Retrieve a single rec result by its id.Use any specified configuration options to override any other configuration for this request only
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
-     * @param runNumber The run of the instance whose view of the result is read. (required)
-     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
+     * @param id The id of the rec result, e.g. \&quot;Holding-break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @return ApiResponse&lt;RecResult&gt;
@@ -3620,20 +3600,18 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<RecResult> getRecResultWithHttpInfo(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, null, opts);
+    private ApiResponse<RecResult> getRecResultWithHttpInfo(String instanceIdType, String instanceIdValue, String id, OffsetDateTime asAt, List<String> propertyKeys, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, id, asAt, propertyKeys, null, opts);
         Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult (asynchronously)
-     * Retrieve a single rec result by its display id, as it stood in the run named.
+     * Retrieve a single rec result by its id.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
-     * @param runNumber The run of the instance whose view of the result is read. (required)
-     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
+     * @param id The id of the rec result, e.g. \&quot;Holding-break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -3646,21 +3624,19 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getRecResultAsync(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback) throws ApiException {
+    private void getRecResultAsync(String instanceIdType, String instanceIdValue, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, id, asAt, propertyKeys, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult (asynchronously)
-     * Retrieve a single rec result by its display id, as it stood in the run named.Use any specified configuration options to override any other configuration for this request only
+     * Retrieve a single rec result by its id.Use any specified configuration options to override any other configuration for this request only
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
-     * @param runNumber The run of the instance whose view of the result is read. (required)
-     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
+     * @param id The id of the rec result, e.g. \&quot;Holding-break-3\&quot;. (required)
      * @param asAt The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
      * @param propertyKeys The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -3673,9 +3649,9 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getRecResultAsync(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getRecResultAsync(String instanceIdType, String instanceIdValue, String id, OffsetDateTime asAt, List<String> propertyKeys, final ApiCallback<RecResult> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback, opts);
+        HttpRequest localVarCall = getRecResultValidateBeforeCall(instanceIdType, instanceIdValue, id, asAt, propertyKeys, _callback, opts);
         Type localVarReturnType = new TypeReference<RecResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -3683,17 +3659,13 @@ public class RecsApi {
     public class APIgetRecResultRequest {
         private final String instanceIdType;
         private final String instanceIdValue;
-        private final String recType;
-        private final Integer runNumber;
         private final String id;
         private OffsetDateTime asAt;
         private List<String> propertyKeys;
 
-        private APIgetRecResultRequest(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id) {
+        private APIgetRecResultRequest(String instanceIdType, String instanceIdValue, String id) {
             this.instanceIdType = instanceIdType;
             this.instanceIdValue = instanceIdValue;
-            this.recType = recType;
-            this.runNumber = runNumber;
             this.id = id;
         }
 
@@ -3731,7 +3703,7 @@ public class RecsApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getRecResultCall(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback);
+            return getRecResultCall(instanceIdType, instanceIdValue, id, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -3747,7 +3719,7 @@ public class RecsApi {
          </table>
          */
         public RecResult execute() throws ApiException {
-            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys);
+            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(instanceIdType, instanceIdValue, id, asAt, propertyKeys);
             return localVarResp.getData();
         }
 
@@ -3764,7 +3736,7 @@ public class RecsApi {
          </table>
          */
         public RecResult execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, opts);
+            ApiResponse<RecResult> localVarResp = getRecResultWithHttpInfo(instanceIdType, instanceIdValue, id, asAt, propertyKeys, opts);
             return localVarResp.getData();
         }
 
@@ -3781,7 +3753,7 @@ public class RecsApi {
          </table>
          */
         public ApiResponse<RecResult> executeWithHttpInfo() throws ApiException {
-            return getRecResultWithHttpInfo(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys);
+            return getRecResultWithHttpInfo(instanceIdType, instanceIdValue, id, asAt, propertyKeys);
         }
 
         /**
@@ -3797,7 +3769,7 @@ public class RecsApi {
          </table>
          */
         public ApiResponse<RecResult> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getRecResultWithHttpInfo(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, opts);
+            return getRecResultWithHttpInfo(instanceIdType, instanceIdValue, id, asAt, propertyKeys, opts);
         }
 
         /**
@@ -3813,7 +3785,7 @@ public class RecsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<RecResult> _callback) throws ApiException {
-            getRecResultAsync(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback);
+            getRecResultAsync(instanceIdType, instanceIdValue, id, asAt, propertyKeys, _callback);
         }
 
         /**
@@ -3829,18 +3801,16 @@ public class RecsApi {
          </table>
          */
         public void executeAsync(final ApiCallback<RecResult> _callback, ConfigurationOptions opts) throws ApiException {
-            getRecResultAsync(instanceIdType, instanceIdValue, recType, runNumber, id, asAt, propertyKeys, _callback, opts);
+            getRecResultAsync(instanceIdType, instanceIdValue, id, asAt, propertyKeys, _callback, opts);
         }
     }
 
     /**
      * [EXPERIMENTAL] GetRecResult: GetRecResult
-     * Retrieve a single rec result by its display id, as it stood in the run named.
+     * Retrieve a single rec result by its id.
      * @param instanceIdType How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. (required)
      * @param instanceIdValue The unique identifier of the rec instance. (required)
-     * @param recType The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. (required)
-     * @param runNumber The run of the instance whose view of the result is read. (required)
-     * @param id The display id of the rec result, e.g. \&quot;break-3\&quot;. (required)
+     * @param id The id of the rec result, e.g. \&quot;Holding-break-3\&quot;. (required)
      * @return APIgetRecResultRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -3850,8 +3820,8 @@ public class RecsApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    public APIgetRecResultRequest getRecResult(String instanceIdType, String instanceIdValue, String recType, Integer runNumber, String id) {
-        return new APIgetRecResultRequest(instanceIdType, instanceIdValue, recType, runNumber, id);
+    public APIgetRecResultRequest getRecResult(String instanceIdType, String instanceIdValue, String id) {
+        return new APIgetRecResultRequest(instanceIdType, instanceIdValue, id);
     }
     /**
      * Build call for getRecResultSet
@@ -6691,7 +6661,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] SubmitRecResultSetReview: Submit a rec result set review for approval, or resubmit after addressing requested revisions.
-     * Submit a rec result set review for approval, or resubmit after addressing requested revisions.
+     * A resubmission is refused while any flagged result awaits revision. If the request flagged no results, the review can be resubmitted at once.
      * @param entityUniqueId The entity unique id of the rec result set (its version.entityUniqueId). (required)
      * @param submitRecResultSetReviewRequest The submission request. (required)
      * @return ApiResponse&lt;RecResultSet&gt;
@@ -6712,7 +6682,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] SubmitRecResultSetReview: Submit a rec result set review for approval, or resubmit after addressing requested revisions.
-     * Submit a rec result set review for approval, or resubmit after addressing requested revisions.Use any specified configuration options to override any other configuration for this request only
+     * A resubmission is refused while any flagged result awaits revision. If the request flagged no results, the review can be resubmitted at once.Use any specified configuration options to override any other configuration for this request only
      * @param entityUniqueId The entity unique id of the rec result set (its version.entityUniqueId). (required)
      * @param submitRecResultSetReviewRequest The submission request. (required)
      * @return ApiResponse&lt;RecResultSet&gt;
@@ -6733,7 +6703,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] SubmitRecResultSetReview: Submit a rec result set review for approval, or resubmit after addressing requested revisions. (asynchronously)
-     * Submit a rec result set review for approval, or resubmit after addressing requested revisions.
+     * A resubmission is refused while any flagged result awaits revision. If the request flagged no results, the review can be resubmitted at once.
      * @param entityUniqueId The entity unique id of the rec result set (its version.entityUniqueId). (required)
      * @param submitRecResultSetReviewRequest The submission request. (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -6755,7 +6725,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] SubmitRecResultSetReview: Submit a rec result set review for approval, or resubmit after addressing requested revisions. (asynchronously)
-     * Submit a rec result set review for approval, or resubmit after addressing requested revisions.Use any specified configuration options to override any other configuration for this request only
+     * A resubmission is refused while any flagged result awaits revision. If the request flagged no results, the review can be resubmitted at once.Use any specified configuration options to override any other configuration for this request only
      * @param entityUniqueId The entity unique id of the rec result set (its version.entityUniqueId). (required)
      * @param submitRecResultSetReviewRequest The submission request. (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -6902,7 +6872,7 @@ public class RecsApi {
 
     /**
      * [EXPERIMENTAL] SubmitRecResultSetReview: Submit a rec result set review for approval, or resubmit after addressing requested revisions.
-     * Submit a rec result set review for approval, or resubmit after addressing requested revisions.
+     * A resubmission is refused while any flagged result awaits revision. If the request flagged no results, the review can be resubmitted at once.
      * @param entityUniqueId The entity unique id of the rec result set (its version.entityUniqueId). (required)
      * @param submitRecResultSetReviewRequest The submission request. (required)
      * @return APIsubmitRecResultSetReviewRequest

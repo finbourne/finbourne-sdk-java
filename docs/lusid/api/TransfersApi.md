@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 | [**createTransfer**](TransfersApi.md#createTransfer) | **POST** /api/api/transfers | [EXPERIMENTAL] CreateTransfer: Create a transfer. |
 | [**deleteTransfer**](TransfersApi.md#deleteTransfer) | **DELETE** /api/api/transfers/{scope}/{code} | [EXPERIMENTAL] DeleteTransfer: Delete a transfer. |
+| [**editTransfer**](TransfersApi.md#editTransfer) | **POST** /api/api/transfers/$edit | [EXPERIMENTAL] EditTransfer: Edit a transfer. |
 | [**getTransfer**](TransfersApi.md#getTransfer) | **POST** /api/api/transfers/$get | [EXPERIMENTAL] GetTransfer: Get a transfer |
 | [**listTransfers**](TransfersApi.md#listTransfers) | **GET** /api/api/transfers | [EXPERIMENTAL] ListTransfers: List transfers |
 
@@ -171,6 +172,86 @@ public class TransfersApiExample {
 | **200** | The asAt the deletion landed at. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **404** | No transfer with the given scope, code and portfolios. |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## editTransfer
+
+> EditTransferResponse editTransfer(editTransferRequest, preserveProperties)
+
+[EXPERIMENTAL] EditTransfer: Edit a transfer.
+
+Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A field not supplied is cleared, and the outgoing position is checked with the transfer&#39;s own  outgoing leg counted back in.                Properties are treated separately from fields: by default, a property not supplied is kept on the  transfer or leg that holds it, and only the properties supplied are updated. Set preserveProperties to  false to replace the whole property set of the transfer and both legs with the ones supplied.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.TransfersApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TransfersApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        TransfersApi apiInstance = apiFactory.build(TransfersApi.class);
+        EditTransferRequest editTransferRequest = new EditTransferRequest(); // EditTransferRequest | The transfer as it should now stand.
+        Boolean preserveProperties = true; // Boolean | If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated.
+        try {
+            // uncomment the below to set overrides at the request level
+            // EditTransferResponse result = apiInstance.editTransfer(editTransferRequest, preserveProperties).execute(opts);
+
+            EditTransferResponse result = apiInstance.editTransfer(editTransferRequest, preserveProperties).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TransfersApi#editTransfer");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **editTransferRequest** | [**EditTransferRequest**](../model/EditTransferRequest.md)| The transfer as it should now stand. | |
+| **preserveProperties** | **Boolean**| If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. | [optional] [default to true] |
+
+### Return type
+
+[**EditTransferResponse**](../model/EditTransferResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The transfer that was edited. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **404** | No transfer exists with the requested scope, code and portfolios. |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)

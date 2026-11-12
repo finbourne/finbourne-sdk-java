@@ -43,7 +43,8 @@ import com.finbourne.sdk.JSON;
   AllocationMapAllocation.JSON_PROPERTY_COMMITMENT_LINE_ID,
   AllocationMapAllocation.JSON_PROPERTY_PORTFOLIO_ID,
   AllocationMapAllocation.JSON_PROPERTY_COMPONENT,
-  AllocationMapAllocation.JSON_PROPERTY_ORIGIN_MEMBER_SHORT_CODE
+  AllocationMapAllocation.JSON_PROPERTY_ORIGIN_MEMBER_SHORT_CODE,
+  AllocationMapAllocation.JSON_PROPERTY_RECALLABLE_AMOUNT
 })
 
 public class AllocationMapAllocation {
@@ -91,6 +92,11 @@ public class AllocationMapAllocation {
   @JsonProperty(JSON_PROPERTY_ORIGIN_MEMBER_SHORT_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String originMemberShortCode;
+
+  public static final String JSON_PROPERTY_RECALLABLE_AMOUNT = "recallableAmount";
+  @JsonProperty(JSON_PROPERTY_RECALLABLE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal recallableAmount;
 
   public AllocationMapAllocation() {
   }
@@ -266,6 +272,25 @@ public class AllocationMapAllocation {
   }
 
 
+  public AllocationMapAllocation recallableAmount(java.math.BigDecimal recallableAmount) {
+    this.recallableAmount = recallableAmount;
+    return this;
+  }
+
+  /**
+   * For the ROC component of a Distribution with a recallable amount, the investor record&#39;s pro rata share of it. Absent otherwise.
+   * @return recallableAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getRecallableAmount() {
+    return recallableAmount;
+  }
+
+  public void setRecallableAmount(java.math.BigDecimal recallableAmount) {
+    this.recallableAmount = recallableAmount;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -283,7 +308,8 @@ public class AllocationMapAllocation {
         Objects.equals(this.commitmentLineId, allocationMapAllocation.commitmentLineId) &&
         Objects.equals(this.portfolioId, allocationMapAllocation.portfolioId) &&
         Objects.equals(this.component, allocationMapAllocation.component) &&
-        Objects.equals(this.originMemberShortCode, allocationMapAllocation.originMemberShortCode);
+        Objects.equals(this.originMemberShortCode, allocationMapAllocation.originMemberShortCode) &&
+        (this.recallableAmount == null ? allocationMapAllocation.recallableAmount == null : (allocationMapAllocation.recallableAmount != null && this.recallableAmount.compareTo(allocationMapAllocation.getRecallableAmount()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -292,7 +318,7 @@ public class AllocationMapAllocation {
 
   @Override
  public int hashCode() {
-    return Objects.hash(investorRecordId, basisValue, weight, amount, treatment, commitmentLineId, portfolioId, component, originMemberShortCode);
+    return Objects.hash(investorRecordId, basisValue, weight, amount, treatment, commitmentLineId, portfolioId, component, originMemberShortCode, recallableAmount);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -315,6 +341,7 @@ public class AllocationMapAllocation {
     sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
     sb.append("    component: ").append(toIndentedString(component)).append("\n");
     sb.append("    originMemberShortCode: ").append(toIndentedString(originMemberShortCode)).append("\n");
+    sb.append("    recallableAmount: ").append(toIndentedString(recallableAmount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

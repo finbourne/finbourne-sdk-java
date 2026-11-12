@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.LegalEntity;
 import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +49,8 @@ import com.finbourne.sdk.JSON;
   CustodianAccount.JSON_PROPERTY_PROPERTIES,
   CustodianAccount.JSON_PROPERTY_CUSTODIAN,
   CustodianAccount.JSON_PROPERTY_ACCOUNT_TYPE,
-  CustodianAccount.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS
+  CustodianAccount.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
+  CustodianAccount.JSON_PROPERTY_INACTIVE_FROM
 })
 
 public class CustodianAccount {
@@ -101,6 +103,11 @@ public class CustodianAccount {
   @JsonProperty(JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String taxLotSelectionCostBasis;
+
+  public static final String JSON_PROPERTY_INACTIVE_FROM = "inactiveFrom";
+  @JsonProperty(JSON_PROPERTY_INACTIVE_FROM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime inactiveFrom;
 
   public CustodianAccount() {
   }
@@ -303,6 +310,25 @@ public class CustodianAccount {
   }
 
 
+  public CustodianAccount inactiveFrom(OffsetDateTime inactiveFrom) {
+    this.inactiveFrom = inactiveFrom;
+    return this;
+  }
+
+  /**
+   * The date from which the account is inactive. Transactions with a trade date before this date still resolve to the account; those on or after it leave the account unresolved. Absent when the account is active.
+   * @return inactiveFrom
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getInactiveFrom() {
+    return inactiveFrom;
+  }
+
+  public void setInactiveFrom(OffsetDateTime inactiveFrom) {
+    this.inactiveFrom = inactiveFrom;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -321,7 +347,8 @@ public class CustodianAccount {
         Objects.equals(this.properties, custodianAccount.properties) &&
         Objects.equals(this.custodian, custodianAccount.custodian) &&
         Objects.equals(this.accountType, custodianAccount.accountType) &&
-        Objects.equals(this.taxLotSelectionCostBasis, custodianAccount.taxLotSelectionCostBasis);
+        Objects.equals(this.taxLotSelectionCostBasis, custodianAccount.taxLotSelectionCostBasis) &&
+        Objects.equals(this.inactiveFrom, custodianAccount.inactiveFrom);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -330,7 +357,7 @@ public class CustodianAccount {
 
   @Override
  public int hashCode() {
-    return Objects.hash(custodianAccountId, status, accountNumber, accountName, accountingMethod, currency, properties, custodian, accountType, taxLotSelectionCostBasis);
+    return Objects.hash(custodianAccountId, status, accountNumber, accountName, accountingMethod, currency, properties, custodian, accountType, taxLotSelectionCostBasis, inactiveFrom);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -354,6 +381,7 @@ public class CustodianAccount {
     sb.append("    custodian: ").append(toIndentedString(custodian)).append("\n");
     sb.append("    accountType: ").append(toIndentedString(accountType)).append("\n");
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
+    sb.append("    inactiveFrom: ").append(toIndentedString(inactiveFrom)).append("\n");
     sb.append("}");
     return sb.toString();
   }

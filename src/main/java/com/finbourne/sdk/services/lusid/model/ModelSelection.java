@@ -39,7 +39,7 @@ import com.finbourne.sdk.JSON;
 
 public class ModelSelection {
   /**
-   * Available values: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc.
+   * Available values: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc, Client.
    */
   public enum LibraryEnum {
     LUSID("Lusid"),
@@ -54,7 +54,9 @@ public class ModelSelection {
     
     YIELD_BOOK("YieldBook"),
     
-    LUSID_CALC("LusidCalc");
+    LUSID_CALC("LusidCalc"),
+    
+    CLIENT("Client");
 
     private String value;
 
@@ -185,7 +187,7 @@ public class ModelSelection {
   }
 
   /**
-   * Available values: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc.
+   * Available values: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc, Client.
    * @return library
    */
   @javax.annotation.Nonnull

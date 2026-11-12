@@ -1,6 +1,6 @@
 # com.finbourne.sdk.services.horizon.model.TransactionPayload
 classname TransactionPayload
-record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result. PublicationStatus is the row's outcome: Sent, or Failed when the file holding it reached no destination.
+record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result. PublicationStatus is the row's outcome: Sent, or Failed when the file holding it reached no destination. Outcome carries the same value under the name the screens use.
 
 ## Properties
 
@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **values** | **Map&lt;String, String&gt;** |  | [default to Map<String, String>]
 **rawCsvRow** | **String** |  | [default to String]
 **publicationStatus** | **String** |  | [default to String]
+**outcome** | **String** |  | [default to String]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.TransactionPayload;
@@ -23,6 +24,7 @@ List<String> columns = new List<String>();
 Map<String, String> values = new Map<String, String>();
 String rawCsvRow = "example rawCsvRow";
 String publicationStatus = "example publicationStatus";
+String outcome = "example outcome";
 
 
 TransactionPayload transactionPayloadInstance = new TransactionPayload()
@@ -30,7 +32,8 @@ TransactionPayload transactionPayloadInstance = new TransactionPayload()
     .columns(columns)
     .values(values)
     .rawCsvRow(rawCsvRow)
-    .publicationStatus(publicationStatus);
+    .publicationStatus(publicationStatus)
+    .outcome(outcome);
 ```
 
 

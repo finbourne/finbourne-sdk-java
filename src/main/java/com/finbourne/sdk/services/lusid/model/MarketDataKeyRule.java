@@ -65,7 +65,7 @@ public class MarketDataKeyRule {
   private String dataScope;
 
   /**
-   * Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor, ForwardPrice, DiscountFactor, PrincipalDistributed.
+   * Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor, ForwardPrice, DiscountFactor, PrincipalDistributed, EffectiveYield.
    */
   public enum QuoteTypeEnum {
     PRICE("Price"),
@@ -108,7 +108,9 @@ public class MarketDataKeyRule {
     
     DISCOUNT_FACTOR("DiscountFactor"),
     
-    PRINCIPAL_DISTRIBUTED("PrincipalDistributed");
+    PRINCIPAL_DISTRIBUTED("PrincipalDistributed"),
+    
+    EFFECTIVE_YIELD("EffectiveYield");
 
     private String value;
 
@@ -242,7 +244,7 @@ public class MarketDataKeyRule {
   }
 
   /**
-   * Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor, ForwardPrice, DiscountFactor, PrincipalDistributed.
+   * Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor, ForwardPrice, DiscountFactor, PrincipalDistributed, EffectiveYield.
    * @return quoteType
    */
   @javax.annotation.Nonnull

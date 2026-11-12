@@ -27,6 +27,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 
 
+import com.finbourne.sdk.services.lusid.model.BucketCashFlowDrillDownResponse;
 import com.finbourne.sdk.services.lusid.model.BucketedCashFlowResponse;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
@@ -38,7 +39,6 @@ import com.finbourne.sdk.services.lusid.model.QueryCashFlowsRequest;
 import com.finbourne.sdk.services.lusid.model.QueryInstrumentEventsRequest;
 import com.finbourne.sdk.services.lusid.model.QueryTradeTicketsRequest;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfApplicableInstrumentEvent;
-import com.finbourne.sdk.services.lusid.model.ResourceListOfCashFlowDetail;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfInstrumentCashFlow;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfInstrumentEventHolder;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfPortfolioTradeTicket;
@@ -475,7 +475,7 @@ public class InstrumentEventsApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -493,7 +493,7 @@ public class InstrumentEventsApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -555,84 +555,84 @@ public class InstrumentEventsApi {
     }
 
     /**
-     * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
+     * [EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage.
+     * Splits the range from BucketStart to BucketEnd into periods with the BucketingSchedule, and returns one bucket per period,  member portfolio, payment currency and sub-holding key combination. Each bucket has its opening balance, the individual  cashflows that make up its activity, and its closing balance, so every balance and every cashflow appears once. Each  cashflow is annotated with the source (Instrument, Transaction or SRS) that produced it.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
      * @param queryBucketCashFlowDrillDownRequest The Query Information. (optional)
-     * @return ApiResponse&lt;ResourceListOfCashFlowDetail&gt;
+     * @return ApiResponse&lt;BucketCashFlowDrillDownResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ResourceListOfCashFlowDetail> queryBucketCashFlowDrillDownWithHttpInfo(QueryBucketCashFlowDrillDownRequest queryBucketCashFlowDrillDownRequest) throws ApiException {
+    private ApiResponse<BucketCashFlowDrillDownResponse> queryBucketCashFlowDrillDownWithHttpInfo(QueryBucketCashFlowDrillDownRequest queryBucketCashFlowDrillDownRequest) throws ApiException {
         HttpRequest localVarCall = queryBucketCashFlowDrillDownValidateBeforeCall(queryBucketCashFlowDrillDownRequest, null, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<ResourceListOfCashFlowDetail>(){}.getType();
+        Type localVarReturnType = new TypeReference<BucketCashFlowDrillDownResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.Use any specified configuration options to override any other configuration for this request only
+     * [EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage.
+     * Splits the range from BucketStart to BucketEnd into periods with the BucketingSchedule, and returns one bucket per period,  member portfolio, payment currency and sub-holding key combination. Each bucket has its opening balance, the individual  cashflows that make up its activity, and its closing balance, so every balance and every cashflow appears once. Each  cashflow is annotated with the source (Instrument, Transaction or SRS) that produced it.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.Use any specified configuration options to override any other configuration for this request only
      * @param queryBucketCashFlowDrillDownRequest The Query Information. (optional)
-     * @return ApiResponse&lt;ResourceListOfCashFlowDetail&gt;
+     * @return ApiResponse&lt;BucketCashFlowDrillDownResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ResourceListOfCashFlowDetail> queryBucketCashFlowDrillDownWithHttpInfo(QueryBucketCashFlowDrillDownRequest queryBucketCashFlowDrillDownRequest, ConfigurationOptions opts) throws ApiException {
+    private ApiResponse<BucketCashFlowDrillDownResponse> queryBucketCashFlowDrillDownWithHttpInfo(QueryBucketCashFlowDrillDownRequest queryBucketCashFlowDrillDownRequest, ConfigurationOptions opts) throws ApiException {
         HttpRequest localVarCall = queryBucketCashFlowDrillDownValidateBeforeCall(queryBucketCashFlowDrillDownRequest, null, opts);
-        Type localVarReturnType = new TypeReference<ResourceListOfCashFlowDetail>(){}.getType();
+        Type localVarReturnType = new TypeReference<BucketCashFlowDrillDownResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage. (asynchronously)
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
+     * [EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage. (asynchronously)
+     * Splits the range from BucketStart to BucketEnd into periods with the BucketingSchedule, and returns one bucket per period,  member portfolio, payment currency and sub-holding key combination. Each bucket has its opening balance, the individual  cashflows that make up its activity, and its closing balance, so every balance and every cashflow appears once. Each  cashflow is annotated with the source (Instrument, Transaction or SRS) that produced it.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
      * @param queryBucketCashFlowDrillDownRequest The Query Information. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void queryBucketCashFlowDrillDownAsync(QueryBucketCashFlowDrillDownRequest queryBucketCashFlowDrillDownRequest, final ApiCallback<ResourceListOfCashFlowDetail> _callback) throws ApiException {
+    private void queryBucketCashFlowDrillDownAsync(QueryBucketCashFlowDrillDownRequest queryBucketCashFlowDrillDownRequest, final ApiCallback<BucketCashFlowDrillDownResponse> _callback) throws ApiException {
 
         HttpRequest localVarCall = queryBucketCashFlowDrillDownValidateBeforeCall(queryBucketCashFlowDrillDownRequest, _callback, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<ResourceListOfCashFlowDetail>(){}.getType();
+        Type localVarReturnType = new TypeReference<BucketCashFlowDrillDownResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
-     * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage. (asynchronously)
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.Use any specified configuration options to override any other configuration for this request only
+     * [EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage. (asynchronously)
+     * Splits the range from BucketStart to BucketEnd into periods with the BucketingSchedule, and returns one bucket per period,  member portfolio, payment currency and sub-holding key combination. Each bucket has its opening balance, the individual  cashflows that make up its activity, and its closing balance, so every balance and every cashflow appears once. Each  cashflow is annotated with the source (Instrument, Transaction or SRS) that produced it.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.Use any specified configuration options to override any other configuration for this request only
      * @param queryBucketCashFlowDrillDownRequest The Query Information. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void queryBucketCashFlowDrillDownAsync(QueryBucketCashFlowDrillDownRequest queryBucketCashFlowDrillDownRequest, final ApiCallback<ResourceListOfCashFlowDetail> _callback, ConfigurationOptions opts) throws ApiException {
+    private void queryBucketCashFlowDrillDownAsync(QueryBucketCashFlowDrillDownRequest queryBucketCashFlowDrillDownRequest, final ApiCallback<BucketCashFlowDrillDownResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
         HttpRequest localVarCall = queryBucketCashFlowDrillDownValidateBeforeCall(queryBucketCashFlowDrillDownRequest, _callback, opts);
-        Type localVarReturnType = new TypeReference<ResourceListOfCashFlowDetail>(){}.getType();
+        Type localVarReturnType = new TypeReference<BucketCashFlowDrillDownResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
@@ -660,7 +660,7 @@ public class InstrumentEventsApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
@@ -671,67 +671,67 @@ public class InstrumentEventsApi {
 
         /**
          * Execute queryBucketCashFlowDrillDown request
-         * @return ResourceListOfCashFlowDetail
+         * @return BucketCashFlowDrillDownResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ResourceListOfCashFlowDetail execute() throws ApiException {
-            ApiResponse<ResourceListOfCashFlowDetail> localVarResp = queryBucketCashFlowDrillDownWithHttpInfo(queryBucketCashFlowDrillDownRequest);
+        public BucketCashFlowDrillDownResponse execute() throws ApiException {
+            ApiResponse<BucketCashFlowDrillDownResponse> localVarResp = queryBucketCashFlowDrillDownWithHttpInfo(queryBucketCashFlowDrillDownRequest);
             return localVarResp.getData();
         }
 
         /**
          * Execute queryBucketCashFlowDrillDown request. Use any specified configuration options to override any other configuration for this request only.
-         * @return ResourceListOfCashFlowDetail
+         * @return BucketCashFlowDrillDownResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ResourceListOfCashFlowDetail execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<ResourceListOfCashFlowDetail> localVarResp = queryBucketCashFlowDrillDownWithHttpInfo(queryBucketCashFlowDrillDownRequest, opts);
+        public BucketCashFlowDrillDownResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<BucketCashFlowDrillDownResponse> localVarResp = queryBucketCashFlowDrillDownWithHttpInfo(queryBucketCashFlowDrillDownRequest, opts);
             return localVarResp.getData();
         }
 
         /**
          * Execute queryBucketCashFlowDrillDown request with HTTP info returned
-         * @return ApiResponse&lt;ResourceListOfCashFlowDetail&gt;
+         * @return ApiResponse&lt;BucketCashFlowDrillDownResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<ResourceListOfCashFlowDetail> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<BucketCashFlowDrillDownResponse> executeWithHttpInfo() throws ApiException {
             return queryBucketCashFlowDrillDownWithHttpInfo(queryBucketCashFlowDrillDownRequest);
         }
 
         /**
          * Execute queryBucketCashFlowDrillDown request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
-         * @return ApiResponse&lt;ResourceListOfCashFlowDetail&gt;
+         * @return ApiResponse&lt;BucketCashFlowDrillDownResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<ResourceListOfCashFlowDetail> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        public ApiResponse<BucketCashFlowDrillDownResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
             return queryBucketCashFlowDrillDownWithHttpInfo(queryBucketCashFlowDrillDownRequest, opts);
         }
 
@@ -742,12 +742,12 @@ public class InstrumentEventsApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<ResourceListOfCashFlowDetail> _callback) throws ApiException {
+        public void executeAsync(final ApiCallback<BucketCashFlowDrillDownResponse> _callback) throws ApiException {
             queryBucketCashFlowDrillDownAsync(queryBucketCashFlowDrillDownRequest, _callback);
         }
 
@@ -758,24 +758,24 @@ public class InstrumentEventsApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<ResourceListOfCashFlowDetail> _callback, ConfigurationOptions opts) throws ApiException {
+        public void executeAsync(final ApiCallback<BucketCashFlowDrillDownResponse> _callback, ConfigurationOptions opts) throws ApiException {
             queryBucketCashFlowDrillDownAsync(queryBucketCashFlowDrillDownRequest, _callback, opts);
         }
     }
 
     /**
-     * QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
-     * Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
+     * [EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage.
+     * Splits the range from BucketStart to BucketEnd into periods with the BucketingSchedule, and returns one bucket per period,  member portfolio, payment currency and sub-holding key combination. Each bucket has its opening balance, the individual  cashflows that make up its activity, and its closing balance, so every balance and every cashflow appears once. Each  cashflow is annotated with the source (Instrument, Transaction or SRS) that produced it.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
      * @return APIqueryBucketCashFlowDrillDownRequest
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The individual cashflows inside the requested bucket. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The buckets of the requested range, each with its balances and its cashflows. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>

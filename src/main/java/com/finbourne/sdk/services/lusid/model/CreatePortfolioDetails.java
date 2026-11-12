@@ -41,6 +41,7 @@ import com.finbourne.sdk.JSON;
   CreatePortfolioDetails.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
   CreatePortfolioDetails.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
   CreatePortfolioDetails.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
+  CreatePortfolioDetails.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME,
   CreatePortfolioDetails.JSON_PROPERTY_WHT_PARAMETERS
 })
 
@@ -64,6 +65,11 @@ public class CreatePortfolioDetails {
   @JsonProperty(JSON_PROPERTY_HOLDINGS_FUNGIBILITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String holdingsFungibility;
+
+  public static final String JSON_PROPERTY_CHARGEABLE_GAINS_REGIME = "chargeableGainsRegime";
+  @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_REGIME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String chargeableGainsRegime;
 
   public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
   @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
@@ -149,6 +155,25 @@ public class CreatePortfolioDetails {
   }
 
 
+  public CreatePortfolioDetails chargeableGainsRegime(String chargeableGainsRegime) {
+    this.chargeableGainsRegime = chargeableGainsRegime;
+    return this;
+  }
+
+  /**
+   * The chargeable gains regime the portfolio is elected into. This can be: Default or UkChargeableGains. If not supplied, the portfolio&#39;s current value is left unchanged; supply Default to reset it. A reset or never-configured regime reads back as absent. Available values: Default, UkChargeableGains.
+   * @return chargeableGainsRegime
+   */
+  @javax.annotation.Nullable
+  public String getChargeableGainsRegime() {
+    return chargeableGainsRegime;
+  }
+
+  public void setChargeableGainsRegime(String chargeableGainsRegime) {
+    this.chargeableGainsRegime = chargeableGainsRegime;
+  }
+
+
   public CreatePortfolioDetails whtParameters(WhtParameters whtParameters) {
     this.whtParameters = whtParameters;
     return this;
@@ -181,6 +206,7 @@ public class CreatePortfolioDetails {
         Objects.equals(this.taxLotSelectionCostBasis, createPortfolioDetails.taxLotSelectionCostBasis) &&
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, createPortfolioDetails.fractionalUnitsTrueUpConfiguration) &&
         Objects.equals(this.holdingsFungibility, createPortfolioDetails.holdingsFungibility) &&
+        Objects.equals(this.chargeableGainsRegime, createPortfolioDetails.chargeableGainsRegime) &&
         Objects.equals(this.whtParameters, createPortfolioDetails.whtParameters);
   }
 
@@ -190,7 +216,7 @@ public class CreatePortfolioDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(corporateActionSourceId, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, whtParameters);
+    return Objects.hash(corporateActionSourceId, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime, whtParameters);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -208,6 +234,7 @@ public class CreatePortfolioDetails {
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
+    sb.append("    chargeableGainsRegime: ").append(toIndentedString(chargeableGainsRegime)).append("\n");
     sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -30,7 +30,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * Identifies an entity whose aggregated (time-weighted) returns are calculated: its scope, code and  type. Mirrors the valuation endpoint&#39;s entity identifier. Currently, supports only the  &#x60;Portfolio&#x60; entity type.
+ * Identifies an entity whose aggregated (time-weighted) returns are calculated: its scope, code and  type. Mirrors the valuation endpoint&#39;s entity identifier. Supports the &#x60;Portfolio&#x60; and  &#x60;PortfolioGroup&#x60; entity types.
  */
 @JsonPropertyOrder({
   AggregatedReturnsEntityId.JSON_PROPERTY_SCOPE,
@@ -101,7 +101,7 @@ public class AggregatedReturnsEntityId {
   }
 
   /**
-   * Available values: Portfolio.
+   * Available values: Portfolio, PortfolioGroup.
    * @return entityType
    */
   @javax.annotation.Nonnull

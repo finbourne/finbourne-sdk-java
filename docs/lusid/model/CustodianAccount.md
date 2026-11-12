@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **custodian** | [**LegalEntity**](LegalEntity.md) |  | [default to LegalEntity]
 **accountType** | **String** | The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default. | [optional] [default to String]
 **taxLotSelectionCostBasis** | **String** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified or reset with Default, resolution falls through to the transaction type and then the portfolio&#39;s default. Available values: Default, Cost, AmortisedCost. | [optional] [default to String]
+**inactiveFrom** | [**OffsetDateTime**](OffsetDateTime.md) | The date from which the account is inactive. Transactions with a trade date before this date still resolve to the account; those on or after it leave the account unresolved. Absent when the account is active. | [optional] [default to OffsetDateTime]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CustodianAccount;
@@ -32,6 +33,7 @@ String accountingMethod = "example accountingMethod";
 LegalEntity custodian = new LegalEntity();
 @javax.annotation.Nullable String accountType = "example accountType";
 @javax.annotation.Nullable String taxLotSelectionCostBasis = "example taxLotSelectionCostBasis";
+@javax.annotation.Nullable OffsetDateTime inactiveFrom = OffsetDateTime.now();
 
 
 CustodianAccount custodianAccountInstance = new CustodianAccount()
@@ -44,7 +46,8 @@ CustodianAccount custodianAccountInstance = new CustodianAccount()
     .properties(properties)
     .custodian(custodian)
     .accountType(accountType)
-    .taxLotSelectionCostBasis(taxLotSelectionCostBasis);
+    .taxLotSelectionCostBasis(taxLotSelectionCostBasis)
+    .inactiveFrom(inactiveFrom);
 ```
 
 

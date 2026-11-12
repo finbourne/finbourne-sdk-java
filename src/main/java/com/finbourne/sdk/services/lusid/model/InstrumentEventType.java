@@ -267,7 +267,19 @@ public enum InstrumentEventType {
   
   INSTALMENT_CALL_EVENT("InstalmentCallEvent"),
   
-  DEPOSIT_INTEREST_CAPITALISATION_EVENT("DepositInterestCapitalisationEvent");
+  DEPOSIT_INTEREST_CAPITALISATION_EVENT("DepositInterestCapitalisationEvent"),
+  
+  PARTIAL_REDEMPTION_WITHOUT_REDUCTION_OF_NOMINAL_VALUE_EVENT("PartialRedemptionWithoutReductionOfNominalValueEvent"),
+  
+  STRIP_BOND_CASHFLOW_EVENT("StripBondCashflowEvent"),
+  
+  CAPITALISATION_EVENT("CapitalisationEvent"),
+  
+  SHARES_PREMIUM_DIVIDEND_EVENT("SharesPremiumDividendEvent"),
+  
+  CASH_DISTRIBUTION_FROM_NON_ELIGIBLE_SECURITIES_SALES_EVENT("CashDistributionFromNonEligibleSecuritiesSalesEvent"),
+  
+  INFLATION_INDEXATION_EVENT("InflationIndexationEvent");
 
   private String value;
 

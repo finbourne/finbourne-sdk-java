@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **distributionType** | **String** | The type of distribution the ShareClass will calculate. Available values: Income, Accumulation. | [optional] [default to String]
 **domCcy** | **String** | The domestic currency of the ShareClass instrument. | [default to String]
 **tradingConventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] [default to TradingConventions]
-**roundingConventionsPrice** | [**List&lt;SimpleRoundingConvention&gt;**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass quotes. | [optional] [default to List<SimpleRoundingConvention>]
+**roundingConventionsPrice** | [**List&lt;ShareClassRoundingConvention&gt;**](ShareClassRoundingConvention.md) | Rounding conventions used for the ShareClass quotes. | [optional] [default to List<ShareClassRoundingConvention>]
 **roundingConventionsUnits** | [**List&lt;SimpleRoundingConvention&gt;**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass units. | [optional] [default to List<SimpleRoundingConvention>]
 **timeZoneConventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] [default to TimeZoneConventions]
 **distributionPaymentType** | **String** | The tax treatment applied to distributions. Available values: Invalid, Gross, Net. | [optional] [default to String]
@@ -42,7 +42,7 @@ String investorType = "example investorType";
 @javax.annotation.Nullable String distributionType = "example distributionType";
 String domCcy = "example domCcy";
 TradingConventions tradingConventions = new TradingConventions();
-@javax.annotation.Nullable List<SimpleRoundingConvention> roundingConventionsPrice = new List<SimpleRoundingConvention>();
+@javax.annotation.Nullable List<ShareClassRoundingConvention> roundingConventionsPrice = new List<ShareClassRoundingConvention>();
 @javax.annotation.Nullable List<SimpleRoundingConvention> roundingConventionsUnits = new List<SimpleRoundingConvention>();
 TimeZoneConventions timeZoneConventions = new TimeZoneConventions();
 @javax.annotation.Nullable String distributionPaymentType = "example distributionPaymentType";

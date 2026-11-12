@@ -76,7 +76,7 @@ public class ShareClassDetails {
   }
 
   /**
-   * LUSID&#39;s internal unique instrument identifier, resolved from the share class&#39; instrument identifiers
+   * LUSID&#39;s internal unique instrument identifier, resolved from the share class&#39; instrument identifiers. Absent where no instrument was resolved for the share class: a fund defined with inline share classes resolves none, whether or not it created their instruments.
    * @return lusidInstrumentId
    */
   @javax.annotation.Nullable
@@ -95,7 +95,7 @@ public class ShareClassDetails {
   }
 
   /**
-   * The scope in which the share class instrument lies.
+   * The scope in which the share class instrument lies, or the fund&#39;s instrument scope where no instrument was resolved for the share class.
    * @return instrumentScope
    */
   @javax.annotation.Nullable

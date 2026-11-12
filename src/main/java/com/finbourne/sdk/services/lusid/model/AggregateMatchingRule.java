@@ -113,7 +113,7 @@ public class AggregateMatchingRule {
   }
 
   /**
-   * Group-level operation applied to the left side&#39;s per-item values during reconciliation, e.g. Sum, Average, Count. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.
+   * Group-level operation applied to the left side&#39;s per-item values during reconciliation. Only Sum is currently supported; the other listed values are reserved and are rejected. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.
    * @return leftOperation
    */
   @javax.annotation.Nonnull
@@ -151,7 +151,7 @@ public class AggregateMatchingRule {
   }
 
   /**
-   * Group-level operation applied to the right side&#39;s per-item values during reconciliation, e.g. Sum, Average, Count. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.
+   * Group-level operation applied to the right side&#39;s per-item values during reconciliation. Only Sum is currently supported; the other listed values are reserved and are rejected. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.
    * @return rightOperation
    */
   @javax.annotation.Nonnull

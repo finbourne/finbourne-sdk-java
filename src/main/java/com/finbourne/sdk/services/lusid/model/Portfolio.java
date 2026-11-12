@@ -77,6 +77,7 @@ import com.finbourne.sdk.JSON;
   Portfolio.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
   Portfolio.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
   Portfolio.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
+  Portfolio.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME,
   Portfolio.JSON_PROPERTY_WHT_PARAMETERS,
   Portfolio.JSON_PROPERTY_LINKS
 })
@@ -316,6 +317,11 @@ public class Portfolio {
   @JsonProperty(JSON_PROPERTY_HOLDINGS_FUNGIBILITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String holdingsFungibility;
+
+  public static final String JSON_PROPERTY_CHARGEABLE_GAINS_REGIME = "chargeableGainsRegime";
+  @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_REGIME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String chargeableGainsRegime;
 
   public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
   @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
@@ -867,6 +873,25 @@ public class Portfolio {
   }
 
 
+  public Portfolio chargeableGainsRegime(String chargeableGainsRegime) {
+    this.chargeableGainsRegime = chargeableGainsRegime;
+    return this;
+  }
+
+  /**
+   * The chargeable gains regime the portfolio is elected into. This can be: Default or UkChargeableGains. Defaults to Default if not specified, which means no chargeable gains pooling is applied. Under UkChargeableGains, in-scope holdings (equities, preferred shares, fund share classes and simple instruments) are depleted under the UK chargeable gains rules regardless of the accounting method on the portfolio, transaction or custodian account; other holdings use the portfolio&#39;s accounting method. Supply Default to explicitly reset it; a reset or never-configured regime reads back as absent. Available values: Default, UkChargeableGains.
+   * @return chargeableGainsRegime
+   */
+  @javax.annotation.Nullable
+  public String getChargeableGainsRegime() {
+    return chargeableGainsRegime;
+  }
+
+  public void setChargeableGainsRegime(String chargeableGainsRegime) {
+    this.chargeableGainsRegime = chargeableGainsRegime;
+  }
+
+
   public Portfolio whtParameters(WhtParameters whtParameters) {
     this.whtParameters = whtParameters;
     return this;
@@ -949,6 +974,7 @@ public class Portfolio {
         Objects.equals(this.taxLotSelectionCostBasis, portfolio.taxLotSelectionCostBasis) &&
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, portfolio.fractionalUnitsTrueUpConfiguration) &&
         Objects.equals(this.holdingsFungibility, portfolio.holdingsFungibility) &&
+        Objects.equals(this.chargeableGainsRegime, portfolio.chargeableGainsRegime) &&
         Objects.equals(this.whtParameters, portfolio.whtParameters) &&
         Objects.equals(this.links, portfolio.links);
   }
@@ -959,7 +985,7 @@ public class Portfolio {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, type, displayName, description, created, enablementDate, parentPortfolioId, version, stagedModifications, isDerived, baseCurrency, properties, relationships, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, whtParameters, links);
+    return Objects.hash(href, id, type, displayName, description, created, enablementDate, parentPortfolioId, version, stagedModifications, isDerived, baseCurrency, properties, relationships, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime, whtParameters, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1000,6 +1026,7 @@ public class Portfolio {
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
+    sb.append("    chargeableGainsRegime: ").append(toIndentedString(chargeableGainsRegime)).append("\n");
     sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");

@@ -21,6 +21,7 @@ VendorLibrary method = VendorLibrary.VOL_MASTER;
 VendorLibrary method = VendorLibrary.ISDA_CDS;
 VendorLibrary method = VendorLibrary.YIELD_BOOK;
 VendorLibrary method = VendorLibrary.LUSID_CALC;
+VendorLibrary method = VendorLibrary.CLIENT;
 ```
 
 

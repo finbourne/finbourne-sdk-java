@@ -6,17 +6,18 @@ LUSID representation of an Equity Swap.                This instrument has multi
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility. | [default to String]
+**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond. | [default to String]
 **startDate** | [**OffsetDateTime**](OffsetDateTime.md) | The start date of the EquitySwap. | [default to OffsetDateTime]
 **maturityDate** | [**OffsetDateTime**](OffsetDateTime.md) | The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it. | [default to OffsetDateTime]
-**code** | **String** | The code of the underlying. | [default to String]
+**code** | **String** | The code of the underlying. | [optional] [default to String]
 **equityFlowConventions** | [**FlowConventions**](FlowConventions.md) |  | [default to FlowConventions]
 **fundingLeg** | [**InstrumentLeg**](InstrumentLeg.md) |  | [default to InstrumentLeg]
 **includeDividends** | **Boolean** | Dividend inclusion flag, if true dividends are included in the equity leg (total return). | [default to Boolean]
 **initialPrice** | **java.math.BigDecimal** | The initial equity price of the Equity Swap. | [default to java.math.BigDecimal]
 **notionalReset** | **Boolean** | Notional reset flag, if true the notional of the funding leg is reset at the start of every  coupon to match the value of the equity leg (equity price at start of coupon times quantity). | [default to Boolean]
 **quantity** | **java.math.BigDecimal** | The quantity or number of shares in the Equity Swap. | [default to java.math.BigDecimal]
-**underlyingIdentifier** | **String** | External market codes and identifiers for the EquitySwap, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]. | [default to String]
+**underlyingIdentifier** | **String** | External market codes and identifiers for the EquitySwap, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]. | [optional] [default to String]
+**underlying** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] [default to LusidInstrument]
 **equitySwapDividendPaymentTiming** | **String** | Determines how the payment of dividends is handled for the equity swap.  Defaults to paying at the next Equity coupon date.                Supported string (enumeration) values are: [PayAtNextEquityCouponDate, PayAtMaturityOfSwap, PayAtNextFundingLegCouponDate, PayAtPaymentDateOfDividendEvent]. | [optional] [default to String]
 **additionalPayments** | [**List&lt;AdditionalPayment&gt;**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] [default to List<AdditionalPayment>]
 **timeZoneConventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] [default to TimeZoneConventions]
@@ -29,14 +30,15 @@ import java.net.URI;
 
 OffsetDateTime startDate = OffsetDateTime.now();
 OffsetDateTime maturityDate = OffsetDateTime.now();
-String code = "example code";
+@javax.annotation.Nullable String code = "example code";
 FlowConventions equityFlowConventions = new FlowConventions();
 InstrumentLeg fundingLeg = new InstrumentLeg();
 Boolean includeDividends = true;
 java.math.BigDecimal initialPrice = new java.math.BigDecimal("100.00");
 Boolean notionalReset = true;
 java.math.BigDecimal quantity = new java.math.BigDecimal("100.00");
-String underlyingIdentifier = "example underlyingIdentifier";
+@javax.annotation.Nullable String underlyingIdentifier = "example underlyingIdentifier";
+LusidInstrument underlying = new LusidInstrument();
 @javax.annotation.Nullable String equitySwapDividendPaymentTiming = "example equitySwapDividendPaymentTiming";
 @javax.annotation.Nullable List<AdditionalPayment> additionalPayments = new List<AdditionalPayment>();
 TimeZoneConventions timeZoneConventions = new TimeZoneConventions();
@@ -53,6 +55,7 @@ EquitySwap equitySwapInstance = new EquitySwap()
     .notionalReset(notionalReset)
     .quantity(quantity)
     .underlyingIdentifier(underlyingIdentifier)
+    .underlying(underlying)
     .equitySwapDividendPaymentTiming(equitySwapDividendPaymentTiming)
     .additionalPayments(additionalPayments)
     .timeZoneConventions(timeZoneConventions);

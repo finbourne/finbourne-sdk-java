@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.Property;
 import com.finbourne.sdk.services.lusid.model.Series;
+import com.finbourne.sdk.services.lusid.model.ShareClassRoundingConvention;
 import com.finbourne.sdk.services.lusid.model.SimpleRoundingConvention;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
 import com.finbourne.sdk.services.lusid.model.TradingConventions;
@@ -129,7 +130,7 @@ public class ShareClass {
   public static final String JSON_PROPERTY_ROUNDING_CONVENTIONS_PRICE = "roundingConventionsPrice";
   @JsonProperty(JSON_PROPERTY_ROUNDING_CONVENTIONS_PRICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private List<SimpleRoundingConvention> roundingConventionsPrice;
+  private List<ShareClassRoundingConvention> roundingConventionsPrice;
 
   public static final String JSON_PROPERTY_ROUNDING_CONVENTIONS_UNITS = "roundingConventionsUnits";
   @JsonProperty(JSON_PROPERTY_ROUNDING_CONVENTIONS_UNITS)
@@ -411,12 +412,12 @@ public class ShareClass {
   }
 
 
-  public ShareClass roundingConventionsPrice(List<SimpleRoundingConvention> roundingConventionsPrice) {
+  public ShareClass roundingConventionsPrice(List<ShareClassRoundingConvention> roundingConventionsPrice) {
     this.roundingConventionsPrice = roundingConventionsPrice;
     return this;
   }
 
-  public ShareClass addRoundingConventionsPriceItem(SimpleRoundingConvention roundingConventionsPriceItem) {
+  public ShareClass addRoundingConventionsPriceItem(ShareClassRoundingConvention roundingConventionsPriceItem) {
     if (this.roundingConventionsPrice == null) {
       this.roundingConventionsPrice = new ArrayList<>();
     }
@@ -429,11 +430,11 @@ public class ShareClass {
    * @return roundingConventionsPrice
    */
   @javax.annotation.Nullable
-  public List<SimpleRoundingConvention> getRoundingConventionsPrice() {
+  public List<ShareClassRoundingConvention> getRoundingConventionsPrice() {
     return roundingConventionsPrice;
   }
 
-  public void setRoundingConventionsPrice(List<SimpleRoundingConvention> roundingConventionsPrice) {
+  public void setRoundingConventionsPrice(List<ShareClassRoundingConvention> roundingConventionsPrice) {
     this.roundingConventionsPrice = roundingConventionsPrice;
   }
 

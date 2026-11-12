@@ -60,7 +60,8 @@ import com.finbourne.sdk.JSON;
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
-  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_HOLDINGS_FUNGIBILITY
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME
 })
 
 public class CreateDerivedTransactionPortfolioRequest {
@@ -225,6 +226,11 @@ public class CreateDerivedTransactionPortfolioRequest {
   @JsonProperty(JSON_PROPERTY_HOLDINGS_FUNGIBILITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String holdingsFungibility;
+
+  public static final String JSON_PROPERTY_CHARGEABLE_GAINS_REGIME = "chargeableGainsRegime";
+  @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_REGIME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String chargeableGainsRegime;
 
   public CreateDerivedTransactionPortfolioRequest() {
   }
@@ -625,6 +631,25 @@ public class CreateDerivedTransactionPortfolioRequest {
   }
 
 
+  public CreateDerivedTransactionPortfolioRequest chargeableGainsRegime(String chargeableGainsRegime) {
+    this.chargeableGainsRegime = chargeableGainsRegime;
+    return this;
+  }
+
+  /**
+   * The chargeable gains regime the portfolio is elected into. This can be: Default or UkChargeableGains. Defaults to Default if not specified, which means no chargeable gains pooling is applied. Under UkChargeableGains, in-scope holdings (equities, preferred shares, fund share classes and simple instruments) are depleted under the UK chargeable gains rules regardless of the accounting method on the portfolio, transaction or custodian account; other holdings use the portfolio&#39;s accounting method. Supply Default to explicitly reset it; a reset or never-configured regime reads back as absent. Available values: Default, UkChargeableGains.
+   * @return chargeableGainsRegime
+   */
+  @javax.annotation.Nullable
+  public String getChargeableGainsRegime() {
+    return chargeableGainsRegime;
+  }
+
+  public void setChargeableGainsRegime(String chargeableGainsRegime) {
+    this.chargeableGainsRegime = chargeableGainsRegime;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -653,7 +678,8 @@ public class CreateDerivedTransactionPortfolioRequest {
         Objects.equals(this.transactionExclusionFilter, createDerivedTransactionPortfolioRequest.transactionExclusionFilter) &&
         Objects.equals(this.taxLotSelectionCostBasis, createDerivedTransactionPortfolioRequest.taxLotSelectionCostBasis) &&
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, createDerivedTransactionPortfolioRequest.fractionalUnitsTrueUpConfiguration) &&
-        Objects.equals(this.holdingsFungibility, createDerivedTransactionPortfolioRequest.holdingsFungibility);
+        Objects.equals(this.holdingsFungibility, createDerivedTransactionPortfolioRequest.holdingsFungibility) &&
+        Objects.equals(this.chargeableGainsRegime, createDerivedTransactionPortfolioRequest.chargeableGainsRegime);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -662,7 +688,7 @@ public class CreateDerivedTransactionPortfolioRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, code, parentPortfolioId, created, enablementDate, corporateActionSourceId, accountingMethod, subHoldingKeys, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, instrumentEventConfiguration, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility);
+    return Objects.hash(displayName, description, code, parentPortfolioId, created, enablementDate, corporateActionSourceId, accountingMethod, subHoldingKeys, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, instrumentEventConfiguration, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -696,6 +722,7 @@ public class CreateDerivedTransactionPortfolioRequest {
     sb.append("    taxLotSelectionCostBasis: ").append(toIndentedString(taxLotSelectionCostBasis)).append("\n");
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
+    sb.append("    chargeableGainsRegime: ").append(toIndentedString(chargeableGainsRegime)).append("\n");
     sb.append("}");
     return sb.toString();
   }

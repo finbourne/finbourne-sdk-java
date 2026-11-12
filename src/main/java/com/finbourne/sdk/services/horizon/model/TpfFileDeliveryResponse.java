@@ -49,7 +49,9 @@ import com.finbourne.sdk.JSON;
   TpfFileDeliveryResponse.JSON_PROPERTY_DESTINATION_NAME,
   TpfFileDeliveryResponse.JSON_PROPERTY_FILE_UUID,
   TpfFileDeliveryResponse.JSON_PROPERTY_CAN_RESEND,
-  TpfFileDeliveryResponse.JSON_PROPERTY_DELIVERED_AT
+  TpfFileDeliveryResponse.JSON_PROPERTY_DELIVERED_AT,
+  TpfFileDeliveryResponse.JSON_PROPERTY_ATTEMPT,
+  TpfFileDeliveryResponse.JSON_PROPERTY_REFERENCE_ID
 })
 
 public class TpfFileDeliveryResponse {
@@ -123,6 +125,16 @@ public class TpfFileDeliveryResponse {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime deliveredAt;
 
+  public static final String JSON_PROPERTY_ATTEMPT = "attempt";
+  @JsonProperty(JSON_PROPERTY_ATTEMPT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer attempt;
+
+  public static final String JSON_PROPERTY_REFERENCE_ID = "referenceId";
+  @JsonProperty(JSON_PROPERTY_REFERENCE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String referenceId;
+
   public TpfFileDeliveryResponse() {
   }
 
@@ -132,7 +144,7 @@ public class TpfFileDeliveryResponse {
   }
 
   /**
-   * Get runId
+   * The run id of the latest execution attempt in this row&#39;s run chain (the root run, its automatic retries and resends); equals referenceId when the chain has a single attempt or no recorded execution.
    * @return runId
    */
   @javax.annotation.Nullable
@@ -151,7 +163,7 @@ public class TpfFileDeliveryResponse {
   }
 
   /**
-   * Get runStartTime
+   * When the row&#39;s root run started (the batch start), not the latest attempt&#39;s start.
    * @return runStartTime
    */
   @javax.annotation.Nullable
@@ -392,6 +404,44 @@ public class TpfFileDeliveryResponse {
   }
 
 
+  public TpfFileDeliveryResponse attempt(Integer attempt) {
+    this.attempt = attempt;
+    return this;
+  }
+
+  /**
+   * The highest attempt number (1-based) made for this delivery&#39;s run, including automatic retries and resends.
+   * @return attempt
+   */
+  @javax.annotation.Nullable
+  public Integer getAttempt() {
+    return attempt;
+  }
+
+  public void setAttempt(Integer attempt) {
+    this.attempt = attempt;
+  }
+
+
+  public TpfFileDeliveryResponse referenceId(String referenceId) {
+    this.referenceId = referenceId;
+    return this;
+  }
+
+  /**
+   * The root run id of this row&#39;s run chain, the same value run history reports as referenceId.
+   * @return referenceId
+   */
+  @javax.annotation.Nullable
+  public String getReferenceId() {
+    return referenceId;
+  }
+
+  public void setReferenceId(String referenceId) {
+    this.referenceId = referenceId;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -414,7 +464,9 @@ public class TpfFileDeliveryResponse {
         Objects.equals(this.destinationName, tpfFileDeliveryResponse.destinationName) &&
         Objects.equals(this.fileUuid, tpfFileDeliveryResponse.fileUuid) &&
         Objects.equals(this.canResend, tpfFileDeliveryResponse.canResend) &&
-        Objects.equals(this.deliveredAt, tpfFileDeliveryResponse.deliveredAt);
+        Objects.equals(this.deliveredAt, tpfFileDeliveryResponse.deliveredAt) &&
+        Objects.equals(this.attempt, tpfFileDeliveryResponse.attempt) &&
+        Objects.equals(this.referenceId, tpfFileDeliveryResponse.referenceId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -423,7 +475,7 @@ public class TpfFileDeliveryResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationStatus, destinationError, destinationName, fileUuid, canResend, deliveredAt);
+    return Objects.hash(runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationStatus, destinationError, destinationName, fileUuid, canResend, deliveredAt, attempt, referenceId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -451,6 +503,8 @@ public class TpfFileDeliveryResponse {
     sb.append("    fileUuid: ").append(toIndentedString(fileUuid)).append("\n");
     sb.append("    canResend: ").append(toIndentedString(canResend)).append("\n");
     sb.append("    deliveredAt: ").append(toIndentedString(deliveredAt)).append("\n");
+    sb.append("    attempt: ").append(toIndentedString(attempt)).append("\n");
+    sb.append("    referenceId: ").append(toIndentedString(referenceId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

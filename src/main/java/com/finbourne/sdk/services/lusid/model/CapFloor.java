@@ -16,6 +16,7 @@ import com.finbourne.sdk.services.lusid.model.AdditionalPayment;
 import com.finbourne.sdk.services.lusid.model.FloatingLeg;
 import com.finbourne.sdk.services.lusid.model.LusidInstrument;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
+import com.finbourne.sdk.services.lusid.model.TradingConventions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +47,8 @@ import com.finbourne.sdk.JSON;
   CapFloor.JSON_PROPERTY_INCLUDE_FIRST_CAPLET,
   CapFloor.JSON_PROPERTY_UNDERLYING_FLOATING_LEG,
   CapFloor.JSON_PROPERTY_ADDITIONAL_PAYMENTS,
-  CapFloor.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
+  CapFloor.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
+  CapFloor.JSON_PROPERTY_TRADING_CONVENTIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -90,6 +92,11 @@ public class CapFloor extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_TIME_ZONE_CONVENTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private TimeZoneConventions timeZoneConventions;
+
+  public static final String JSON_PROPERTY_TRADING_CONVENTIONS = "tradingConventions";
+  @JsonProperty(JSON_PROPERTY_TRADING_CONVENTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private TradingConventions tradingConventions;
 
   public CapFloor() {
   }
@@ -235,6 +242,25 @@ public class CapFloor extends LusidInstrument {
   }
 
 
+  public CapFloor tradingConventions(TradingConventions tradingConventions) {
+    this.tradingConventions = tradingConventions;
+    return this;
+  }
+
+  /**
+   * Get tradingConventions
+   * @return tradingConventions
+   */
+  @javax.annotation.Nullable
+  public TradingConventions getTradingConventions() {
+    return tradingConventions;
+  }
+
+  public void setTradingConventions(TradingConventions tradingConventions) {
+    this.tradingConventions = tradingConventions;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -251,6 +277,7 @@ public class CapFloor extends LusidInstrument {
         Objects.equals(this.underlyingFloatingLeg, capFloor.underlyingFloatingLeg) &&
         Objects.equals(this.additionalPayments, capFloor.additionalPayments) &&
         Objects.equals(this.timeZoneConventions, capFloor.timeZoneConventions) &&
+        Objects.equals(this.tradingConventions, capFloor.tradingConventions) &&
         super.equals(o);
   }
 
@@ -260,7 +287,7 @@ public class CapFloor extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(capFloorType, capStrike, floorStrike, includeFirstCaplet, underlyingFloatingLeg, additionalPayments, timeZoneConventions, super.hashCode());
+    return Objects.hash(capFloorType, capStrike, floorStrike, includeFirstCaplet, underlyingFloatingLeg, additionalPayments, timeZoneConventions, tradingConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -282,6 +309,7 @@ public class CapFloor extends LusidInstrument {
     sb.append("    underlyingFloatingLeg: ").append(toIndentedString(underlyingFloatingLeg)).append("\n");
     sb.append("    additionalPayments: ").append(toIndentedString(additionalPayments)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
+    sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

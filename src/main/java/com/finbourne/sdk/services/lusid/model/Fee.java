@@ -384,7 +384,7 @@ public class Fee {
   }
 
   /**
-   * The accrual period of the Fee. Available values: Daily, Monthly.
+   * The accrual period of the Fee, which sets its daily accrual rate: &#39;Daily&#39; and &#39;Annually&#39; spread the annual amount evenly over the days in the year, &#39;Monthly&#39; one twelfth over the days in each calendar month, and &#39;Quarterly&#39; one quarter over the days in each calendar quarter. A Fee that starts or ends part-way through a period accrues only the days it covers. Available values: Daily, Monthly, Quarterly, Annually.
    * @return treatment
    */
   @javax.annotation.Nonnull
@@ -441,7 +441,7 @@ public class Fee {
   }
 
   /**
-   * The payable frequency for the Fee. Available values: Annually, Quarterly, Monthly.
+   * The frequency at which the Fee is payable. It cannot be more frequent than the Treatment, so a Fee accrued &#39;Quarterly&#39; cannot be payable &#39;Monthly&#39;. Available values: Annually, Quarterly, Monthly.
    * @return payableFrequency
    */
   @javax.annotation.Nonnull
@@ -685,7 +685,7 @@ public class Fee {
   }
 
   /**
-   * The source of the rate for a &#39;VariablePercentage&#39; Fee, in the form \&quot;scope/provider/instrumentIdType/instrumentId\&quot; identifying a Rate quote series in the quote store. At each accrual date the most recent rate at or before that date is used; if no rate can be found the valuation point calculation fails. The quote&#39;s normalised value (its value divided by any scale factor) is applied like FeeRatePercentage, as a multiplier of the CalculationBase: a rate of 5.2% must normalise to 0.052.
+   * The source of the rate for a &#39;VariablePercentage&#39; Fee, in the form \&quot;scope/provider/instrumentIdType/instrumentId\&quot; identifying a Rate quote series in the quote store. The source is split on its first three &#39;/&#39; only, so the instrument id may itself contain &#39;/&#39;. CurrencyPair is not a supported instrument id type: CurrencyPair quotes are FX rates, not fee rates. At each accrual date the most recent rate at or before that date is used; if no rate can be found the valuation point calculation fails. The quote&#39;s normalised value (its value divided by any scale factor) is applied like FeeRatePercentage, as a multiplier of the CalculationBase: a rate of 5.2% must normalise to 0.052.
    * @return variablePercentageSource
    */
   @javax.annotation.Nullable

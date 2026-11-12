@@ -20,6 +20,7 @@ NavActivityAdjustmentResponseType method = NavActivityAdjustmentResponseType.POR
 NavActivityAdjustmentResponseType method = NavActivityAdjustmentResponseType.INSTRUMENT_ACTIVITY_ADJUSTMENT;
 NavActivityAdjustmentResponseType method = NavActivityAdjustmentResponseType.QUOTE_ACTIVITY_ADJUSTMENT;
 NavActivityAdjustmentResponseType method = NavActivityAdjustmentResponseType.COMPLEX_MARKET_DATA_ACTIVITY_ADJUSTMENT;
+NavActivityAdjustmentResponseType method = NavActivityAdjustmentResponseType.INSTRUMENT_EVENT_ACTIVITY_ADJUSTMENT;
 ```
 
 

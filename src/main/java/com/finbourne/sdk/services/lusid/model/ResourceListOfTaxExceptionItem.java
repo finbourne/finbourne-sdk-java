@@ -12,8 +12,8 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
-import com.finbourne.sdk.services.lusid.model.CashFlowDetail;
 import com.finbourne.sdk.services.lusid.model.Link;
+import com.finbourne.sdk.services.lusid.model.TaxExceptionItem;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -36,21 +36,21 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * ResourceListOfCashFlowDetail
+ * ResourceListOfTaxExceptionItem
  */
 @JsonPropertyOrder({
-  ResourceListOfCashFlowDetail.JSON_PROPERTY_VALUES,
-  ResourceListOfCashFlowDetail.JSON_PROPERTY_HREF,
-  ResourceListOfCashFlowDetail.JSON_PROPERTY_LINKS,
-  ResourceListOfCashFlowDetail.JSON_PROPERTY_NEXT_PAGE,
-  ResourceListOfCashFlowDetail.JSON_PROPERTY_PREVIOUS_PAGE
+  ResourceListOfTaxExceptionItem.JSON_PROPERTY_VALUES,
+  ResourceListOfTaxExceptionItem.JSON_PROPERTY_HREF,
+  ResourceListOfTaxExceptionItem.JSON_PROPERTY_LINKS,
+  ResourceListOfTaxExceptionItem.JSON_PROPERTY_NEXT_PAGE,
+  ResourceListOfTaxExceptionItem.JSON_PROPERTY_PREVIOUS_PAGE
 })
 
-public class ResourceListOfCashFlowDetail {
+public class ResourceListOfTaxExceptionItem {
   public static final String JSON_PROPERTY_VALUES = "values";
   @JsonProperty(JSON_PROPERTY_VALUES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<CashFlowDetail> values = new ArrayList<>();
+  private List<TaxExceptionItem> values = new ArrayList<>();
 
   public static final String JSON_PROPERTY_HREF = "href";
   @JsonProperty(JSON_PROPERTY_HREF)
@@ -72,15 +72,15 @@ public class ResourceListOfCashFlowDetail {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String previousPage;
 
-  public ResourceListOfCashFlowDetail() {
+  public ResourceListOfTaxExceptionItem() {
   }
 
-  public ResourceListOfCashFlowDetail values(List<CashFlowDetail> values) {
+  public ResourceListOfTaxExceptionItem values(List<TaxExceptionItem> values) {
     this.values = values;
     return this;
   }
 
-  public ResourceListOfCashFlowDetail addValuesItem(CashFlowDetail valuesItem) {
+  public ResourceListOfTaxExceptionItem addValuesItem(TaxExceptionItem valuesItem) {
     if (this.values == null) {
       this.values = new ArrayList<>();
     }
@@ -93,16 +93,16 @@ public class ResourceListOfCashFlowDetail {
    * @return values
    */
   @javax.annotation.Nonnull
-  public List<CashFlowDetail> getValues() {
+  public List<TaxExceptionItem> getValues() {
     return values;
   }
 
-  public void setValues(List<CashFlowDetail> values) {
+  public void setValues(List<TaxExceptionItem> values) {
     this.values = values;
   }
 
 
-  public ResourceListOfCashFlowDetail href(URI href) {
+  public ResourceListOfTaxExceptionItem href(URI href) {
     this.href = href;
     return this;
   }
@@ -121,12 +121,12 @@ public class ResourceListOfCashFlowDetail {
   }
 
 
-  public ResourceListOfCashFlowDetail links(List<Link> links) {
+  public ResourceListOfTaxExceptionItem links(List<Link> links) {
     this.links = links;
     return this;
   }
 
-  public ResourceListOfCashFlowDetail addLinksItem(Link linksItem) {
+  public ResourceListOfTaxExceptionItem addLinksItem(Link linksItem) {
     if (this.links == null) {
       this.links = new ArrayList<>();
     }
@@ -148,7 +148,7 @@ public class ResourceListOfCashFlowDetail {
   }
 
 
-  public ResourceListOfCashFlowDetail nextPage(String nextPage) {
+  public ResourceListOfTaxExceptionItem nextPage(String nextPage) {
     this.nextPage = nextPage;
     return this;
   }
@@ -167,7 +167,7 @@ public class ResourceListOfCashFlowDetail {
   }
 
 
-  public ResourceListOfCashFlowDetail previousPage(String previousPage) {
+  public ResourceListOfTaxExceptionItem previousPage(String previousPage) {
     this.previousPage = previousPage;
     return this;
   }
@@ -194,12 +194,12 @@ public class ResourceListOfCashFlowDetail {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ResourceListOfCashFlowDetail resourceListOfCashFlowDetail = (ResourceListOfCashFlowDetail) o;
-    return Objects.equals(this.values, resourceListOfCashFlowDetail.values) &&
-        Objects.equals(this.href, resourceListOfCashFlowDetail.href) &&
-        Objects.equals(this.links, resourceListOfCashFlowDetail.links) &&
-        Objects.equals(this.nextPage, resourceListOfCashFlowDetail.nextPage) &&
-        Objects.equals(this.previousPage, resourceListOfCashFlowDetail.previousPage);
+    ResourceListOfTaxExceptionItem resourceListOfTaxExceptionItem = (ResourceListOfTaxExceptionItem) o;
+    return Objects.equals(this.values, resourceListOfTaxExceptionItem.values) &&
+        Objects.equals(this.href, resourceListOfTaxExceptionItem.href) &&
+        Objects.equals(this.links, resourceListOfTaxExceptionItem.links) &&
+        Objects.equals(this.nextPage, resourceListOfTaxExceptionItem.nextPage) &&
+        Objects.equals(this.previousPage, resourceListOfTaxExceptionItem.previousPage);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -221,7 +221,7 @@ public class ResourceListOfCashFlowDetail {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ResourceListOfCashFlowDetail {\n");
+    sb.append("class ResourceListOfTaxExceptionItem {\n");
     sb.append("    values: ").append(toIndentedString(values)).append("\n");
     sb.append("    href: ").append(toIndentedString(href)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
@@ -244,18 +244,18 @@ public class ResourceListOfCashFlowDetail {
 
 
   /**
-   * Create an instance of ResourceListOfCashFlowDetail given an JSON string
+   * Create an instance of ResourceListOfTaxExceptionItem given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of ResourceListOfCashFlowDetail
-   * @throws java.io.IOException if the JSON string is invalid with respect to ResourceListOfCashFlowDetail
+   * @return An instance of ResourceListOfTaxExceptionItem
+   * @throws java.io.IOException if the JSON string is invalid with respect to ResourceListOfTaxExceptionItem
    */
-  public static ResourceListOfCashFlowDetail fromJson(String jsonString) throws java.io.IOException {
-    return JSON.getMapper().readValue(jsonString, ResourceListOfCashFlowDetail.class);
+  public static ResourceListOfTaxExceptionItem fromJson(String jsonString) throws java.io.IOException {
+    return JSON.getMapper().readValue(jsonString, ResourceListOfTaxExceptionItem.class);
   }
 
   /**
-   * Convert an instance of ResourceListOfCashFlowDetail to an JSON string
+   * Convert an instance of ResourceListOfTaxExceptionItem to an JSON string
    *
    * @return JSON string
    */

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **spreads** | [**SwingSpreads**](SwingSpreads.md) |  | [optional] [default to SwingSpreads]
 **inflowTrigger** | [**SwingTrigger**](SwingTrigger.md) |  | [optional] [default to SwingTrigger]
 **outflowTrigger** | [**SwingTrigger**](SwingTrigger.md) |  | [optional] [default to SwingTrigger]
+**approvalMode** | **String** | Who settles the swing decision a valuation point deals at. Automatic, the default, finalises the valuation point on the engine&#39;s proposal. Manual holds the proposal: the valuation point cannot be finalised until a manager has submitted a pricingMethodologyOverride on it, equal to the proposal to approve it or different to overrule it. Must be Automatic when defaultSpreadSource is omitted, because a price that never swings has no decision to approve. Available values: Automatic, Manual. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.SwingPolicy;
@@ -23,6 +24,7 @@ SwingBaseline baseline = new SwingBaseline();
 SwingSpreads spreads = new SwingSpreads();
 SwingTrigger inflowTrigger = new SwingTrigger();
 SwingTrigger outflowTrigger = new SwingTrigger();
+@javax.annotation.Nullable String approvalMode = "example approvalMode";
 
 
 SwingPolicy swingPolicyInstance = new SwingPolicy()
@@ -30,7 +32,8 @@ SwingPolicy swingPolicyInstance = new SwingPolicy()
     .defaultSpreadSource(defaultSpreadSource)
     .spreads(spreads)
     .inflowTrigger(inflowTrigger)
-    .outflowTrigger(outflowTrigger);
+    .outflowTrigger(outflowTrigger)
+    .approvalMode(approvalMode);
 ```
 
 

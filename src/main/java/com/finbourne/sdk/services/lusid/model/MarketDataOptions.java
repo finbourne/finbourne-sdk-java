@@ -43,14 +43,17 @@ import com.finbourne.sdk.JSON;
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = "marketDataOptionsType", visible = true)
 @com.fasterxml.jackson.annotation.JsonSubTypes({
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CurveOptions.class, name = "CurveOptions"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VolCubeOptions.class, name = "VolCubeOptions"),
 })
 
 public class MarketDataOptions {
   /**
-   * Available values: CurveOptions. Available values: CurveOptions.
+   * Available values: CurveOptions, VolCubeOptions. Available values: CurveOptions, VolCubeOptions.
    */
   public enum MarketDataOptionsTypeEnum {
-    CURVE_OPTIONS("CurveOptions");
+    CURVE_OPTIONS("CurveOptions"),
+    
+    VOL_CUBE_OPTIONS("VolCubeOptions");
 
     private String value;
 
@@ -92,7 +95,7 @@ public class MarketDataOptions {
   }
 
   /**
-   * Available values: CurveOptions. Available values: CurveOptions.
+   * Available values: CurveOptions, VolCubeOptions. Available values: CurveOptions, VolCubeOptions.
    * @return marketDataOptionsType
    */
   @javax.annotation.Nonnull

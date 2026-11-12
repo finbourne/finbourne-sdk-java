@@ -41,7 +41,8 @@ import com.finbourne.sdk.JSON;
   SwingPolicy.JSON_PROPERTY_DEFAULT_SPREAD_SOURCE,
   SwingPolicy.JSON_PROPERTY_SPREADS,
   SwingPolicy.JSON_PROPERTY_INFLOW_TRIGGER,
-  SwingPolicy.JSON_PROPERTY_OUTFLOW_TRIGGER
+  SwingPolicy.JSON_PROPERTY_OUTFLOW_TRIGGER,
+  SwingPolicy.JSON_PROPERTY_APPROVAL_MODE
 })
 
 public class SwingPolicy {
@@ -69,6 +70,11 @@ public class SwingPolicy {
   @JsonProperty(JSON_PROPERTY_OUTFLOW_TRIGGER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private SwingTrigger outflowTrigger;
+
+  public static final String JSON_PROPERTY_APPROVAL_MODE = "approvalMode";
+  @JsonProperty(JSON_PROPERTY_APPROVAL_MODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String approvalMode;
 
   public SwingPolicy() {
   }
@@ -168,6 +174,25 @@ public class SwingPolicy {
   }
 
 
+  public SwingPolicy approvalMode(String approvalMode) {
+    this.approvalMode = approvalMode;
+    return this;
+  }
+
+  /**
+   * Who settles the swing decision a valuation point deals at. Automatic, the default, finalises the valuation point on the engine&#39;s proposal. Manual holds the proposal: the valuation point cannot be finalised until a manager has submitted a pricingMethodologyOverride on it, equal to the proposal to approve it or different to overrule it. Must be Automatic when defaultSpreadSource is omitted, because a price that never swings has no decision to approve. Available values: Automatic, Manual.
+   * @return approvalMode
+   */
+  @javax.annotation.Nullable
+  public String getApprovalMode() {
+    return approvalMode;
+  }
+
+  public void setApprovalMode(String approvalMode) {
+    this.approvalMode = approvalMode;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -181,7 +206,8 @@ public class SwingPolicy {
         Objects.equals(this.defaultSpreadSource, swingPolicy.defaultSpreadSource) &&
         Objects.equals(this.spreads, swingPolicy.spreads) &&
         Objects.equals(this.inflowTrigger, swingPolicy.inflowTrigger) &&
-        Objects.equals(this.outflowTrigger, swingPolicy.outflowTrigger);
+        Objects.equals(this.outflowTrigger, swingPolicy.outflowTrigger) &&
+        Objects.equals(this.approvalMode, swingPolicy.approvalMode);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -190,7 +216,7 @@ public class SwingPolicy {
 
   @Override
  public int hashCode() {
-    return Objects.hash(baseline, defaultSpreadSource, spreads, inflowTrigger, outflowTrigger);
+    return Objects.hash(baseline, defaultSpreadSource, spreads, inflowTrigger, outflowTrigger, approvalMode);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -209,6 +235,7 @@ public class SwingPolicy {
     sb.append("    spreads: ").append(toIndentedString(spreads)).append("\n");
     sb.append("    inflowTrigger: ").append(toIndentedString(inflowTrigger)).append("\n");
     sb.append("    outflowTrigger: ").append(toIndentedString(outflowTrigger)).append("\n");
+    sb.append("    approvalMode: ").append(toIndentedString(approvalMode)).append("\n");
     sb.append("}");
     return sb.toString();
   }

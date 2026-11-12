@@ -1,30 +1,30 @@
-# com.finbourne.sdk.services.lusid.model.ResourceListOfCashFlowDetail
-classname ResourceListOfCashFlowDetail
+# com.finbourne.sdk.services.lusid.model.ResourceListOfFundTaxExceptionItem
+classname ResourceListOfFundTaxExceptionItem
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**List&lt;CashFlowDetail&gt;**](CashFlowDetail.md) |  | [default to List<CashFlowDetail>]
+**values** | [**List&lt;FundTaxExceptionItem&gt;**](FundTaxExceptionItem.md) |  | [default to List<FundTaxExceptionItem>]
 **href** | [**URI**](URI.md) |  | [optional] [default to URI]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 **nextPage** | **String** |  | [optional] [default to String]
 **previousPage** | **String** |  | [optional] [default to String]
 
 ```java
-import com.finbourne.sdk.services.lusid.model.ResourceListOfCashFlowDetail;
+import com.finbourne.sdk.services.lusid.model.ResourceListOfFundTaxExceptionItem;
 import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
-List<CashFlowDetail> values = new List<CashFlowDetail>();
+List<FundTaxExceptionItem> values = new List<FundTaxExceptionItem>();
 @javax.annotation.Nullable URI href = URI.create("http://example.com/href");
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 @javax.annotation.Nullable String nextPage = "example nextPage";
 @javax.annotation.Nullable String previousPage = "example previousPage";
 
 
-ResourceListOfCashFlowDetail resourceListOfCashFlowDetailInstance = new ResourceListOfCashFlowDetail()
+ResourceListOfFundTaxExceptionItem resourceListOfFundTaxExceptionItemInstance = new ResourceListOfFundTaxExceptionItem()
     .values(values)
     .href(href)
     .links(links)

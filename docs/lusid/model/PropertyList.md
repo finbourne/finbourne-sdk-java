@@ -5,7 +5,7 @@ classname PropertyList
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**referenceListType** | **String** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList. | [default to String]
+**referenceListType** | **String** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList, FilteredPortfolioIdList. | [default to String]
 **values** | [**List&lt;Property&gt;**](Property.md) |  | [default to List<Property>]
 
 ```java

@@ -52,6 +52,7 @@ import com.finbourne.sdk.JSON;
   EquitySwap.JSON_PROPERTY_NOTIONAL_RESET,
   EquitySwap.JSON_PROPERTY_QUANTITY,
   EquitySwap.JSON_PROPERTY_UNDERLYING_IDENTIFIER,
+  EquitySwap.JSON_PROPERTY_UNDERLYING,
   EquitySwap.JSON_PROPERTY_EQUITY_SWAP_DIVIDEND_PAYMENT_TIMING,
   EquitySwap.JSON_PROPERTY_ADDITIONAL_PAYMENTS,
   EquitySwap.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
@@ -76,7 +77,7 @@ public class EquitySwap extends LusidInstrument {
 
   public static final String JSON_PROPERTY_CODE = "code";
   @JsonProperty(JSON_PROPERTY_CODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String code;
 
   public static final String JSON_PROPERTY_EQUITY_FLOW_CONVENTIONS = "equityFlowConventions";
@@ -111,8 +112,13 @@ public class EquitySwap extends LusidInstrument {
 
   public static final String JSON_PROPERTY_UNDERLYING_IDENTIFIER = "underlyingIdentifier";
   @JsonProperty(JSON_PROPERTY_UNDERLYING_IDENTIFIER)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String underlyingIdentifier;
+
+  public static final String JSON_PROPERTY_UNDERLYING = "underlying";
+  @JsonProperty(JSON_PROPERTY_UNDERLYING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private LusidInstrument underlying;
 
   public static final String JSON_PROPERTY_EQUITY_SWAP_DIVIDEND_PAYMENT_TIMING = "equitySwapDividendPaymentTiming";
   @JsonProperty(JSON_PROPERTY_EQUITY_SWAP_DIVIDEND_PAYMENT_TIMING)
@@ -179,7 +185,7 @@ public class EquitySwap extends LusidInstrument {
    * The code of the underlying.
    * @return code
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getCode() {
     return code;
   }
@@ -312,13 +318,32 @@ public class EquitySwap extends LusidInstrument {
    * External market codes and identifiers for the EquitySwap, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].
    * @return underlyingIdentifier
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getUnderlyingIdentifier() {
     return underlyingIdentifier;
   }
 
   public void setUnderlyingIdentifier(String underlyingIdentifier) {
     this.underlyingIdentifier = underlyingIdentifier;
+  }
+
+
+  public EquitySwap underlying(LusidInstrument underlying) {
+    this.underlying = underlying;
+    return this;
+  }
+
+  /**
+   * Get underlying
+   * @return underlying
+   */
+  @javax.annotation.Nullable
+  public LusidInstrument getUnderlying() {
+    return underlying;
+  }
+
+  public void setUnderlying(LusidInstrument underlying) {
+    this.underlying = underlying;
   }
 
 
@@ -406,6 +431,7 @@ public class EquitySwap extends LusidInstrument {
         Objects.equals(this.notionalReset, equitySwap.notionalReset) &&
         (this.quantity == null ? equitySwap.quantity == null : (equitySwap.quantity != null && this.quantity.compareTo(equitySwap.getQuantity()) == 0)) &&
         Objects.equals(this.underlyingIdentifier, equitySwap.underlyingIdentifier) &&
+        Objects.equals(this.underlying, equitySwap.underlying) &&
         Objects.equals(this.equitySwapDividendPaymentTiming, equitySwap.equitySwapDividendPaymentTiming) &&
         Objects.equals(this.additionalPayments, equitySwap.additionalPayments) &&
         Objects.equals(this.timeZoneConventions, equitySwap.timeZoneConventions) &&
@@ -418,7 +444,7 @@ public class EquitySwap extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, code, equityFlowConventions, fundingLeg, includeDividends, initialPrice, notionalReset, quantity, underlyingIdentifier, equitySwapDividendPaymentTiming, additionalPayments, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, code, equityFlowConventions, fundingLeg, includeDividends, initialPrice, notionalReset, quantity, underlyingIdentifier, underlying, equitySwapDividendPaymentTiming, additionalPayments, timeZoneConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -443,6 +469,7 @@ public class EquitySwap extends LusidInstrument {
     sb.append("    notionalReset: ").append(toIndentedString(notionalReset)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    underlyingIdentifier: ").append(toIndentedString(underlyingIdentifier)).append("\n");
+    sb.append("    underlying: ").append(toIndentedString(underlying)).append("\n");
     sb.append("    equitySwapDividendPaymentTiming: ").append(toIndentedString(equitySwapDividendPaymentTiming)).append("\n");
     sb.append("    additionalPayments: ").append(toIndentedString(additionalPayments)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");

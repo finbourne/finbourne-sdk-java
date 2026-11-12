@@ -42,11 +42,13 @@ import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.lusid.model.OrderUpdateRequest;
 import com.finbourne.sdk.services.lusid.model.PlaceBlocksRequest;
 import com.finbourne.sdk.services.lusid.model.PlacementUpdateRequest;
+import com.finbourne.sdk.services.lusid.model.PreviewBlocksRequest;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfBlockAndOrders;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfChangeIntervalWithOrderManagementDetail;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfMovedOrderToDifferentBlockResponse;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfPlacement;
+import com.finbourne.sdk.services.lusid.model.ResourceListOfProposedBlockAndOrders;
 import com.finbourne.sdk.services.lusid.model.SweepBlocksRequest;
 import com.finbourne.sdk.services.lusid.model.SweepBlocksResponse;
 import com.finbourne.sdk.services.lusid.model.UpdateOrdersResponse;
@@ -2701,9 +2703,324 @@ public class OrderManagementApi {
         return new APIplaceBlocksRequest();
     }
     /**
+     * Build call for previewBlocks
+     * @param previewBlocksRequest The orders to group and how to group them. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest previewBlocksCall(PreviewBlocksRequest previewBlocksRequest, final ApiCallback _callback) throws ApiException {
+        return previewBlocksCall(previewBlocksRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for previewBlocks. Use any specified configuration options to override any other configuration for this request only.
+     * @param previewBlocksRequest The orders to group and how to group them. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest previewBlocksCall(PreviewBlocksRequest previewBlocksRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = previewBlocksRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/ordermanagement/$previewblocks";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest previewBlocksValidateBeforeCall(PreviewBlocksRequest previewBlocksRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'previewBlocksRequest' is set
+        if (previewBlocksRequest == null) {
+            throw new ApiException("Missing the required parameter 'previewBlocksRequest' when calling previewBlocks(Async)");
+        }
+
+        return previewBlocksCall(previewBlocksRequest, _callback, opts);
+
+    }
+
+    /**
+     * PreviewBlocks: Preview the blocks a set of orders would form
+     * Groups a set of orders into blocks according to the requested grouping mode, with each block&#39;s side and  net size derived from its orders. Nothing is created: the result is a set of block and order requests, in  the shape accepted by CreateOrders, which may be posted there as they are.
+     * @param previewBlocksRequest The orders to group and how to group them. (required)
+     * @return ApiResponse&lt;ResourceListOfProposedBlockAndOrders&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfProposedBlockAndOrders> previewBlocksWithHttpInfo(PreviewBlocksRequest previewBlocksRequest) throws ApiException {
+        HttpRequest localVarCall = previewBlocksValidateBeforeCall(previewBlocksRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfProposedBlockAndOrders>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * PreviewBlocks: Preview the blocks a set of orders would form
+     * Groups a set of orders into blocks according to the requested grouping mode, with each block&#39;s side and  net size derived from its orders. Nothing is created: the result is a set of block and order requests, in  the shape accepted by CreateOrders, which may be posted there as they are.Use any specified configuration options to override any other configuration for this request only
+     * @param previewBlocksRequest The orders to group and how to group them. (required)
+     * @return ApiResponse&lt;ResourceListOfProposedBlockAndOrders&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfProposedBlockAndOrders> previewBlocksWithHttpInfo(PreviewBlocksRequest previewBlocksRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = previewBlocksValidateBeforeCall(previewBlocksRequest, null, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfProposedBlockAndOrders>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * PreviewBlocks: Preview the blocks a set of orders would form (asynchronously)
+     * Groups a set of orders into blocks according to the requested grouping mode, with each block&#39;s side and  net size derived from its orders. Nothing is created: the result is a set of block and order requests, in  the shape accepted by CreateOrders, which may be posted there as they are.
+     * @param previewBlocksRequest The orders to group and how to group them. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void previewBlocksAsync(PreviewBlocksRequest previewBlocksRequest, final ApiCallback<ResourceListOfProposedBlockAndOrders> _callback) throws ApiException {
+
+        HttpRequest localVarCall = previewBlocksValidateBeforeCall(previewBlocksRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfProposedBlockAndOrders>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * PreviewBlocks: Preview the blocks a set of orders would form (asynchronously)
+     * Groups a set of orders into blocks according to the requested grouping mode, with each block&#39;s side and  net size derived from its orders. Nothing is created: the result is a set of block and order requests, in  the shape accepted by CreateOrders, which may be posted there as they are.Use any specified configuration options to override any other configuration for this request only
+     * @param previewBlocksRequest The orders to group and how to group them. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void previewBlocksAsync(PreviewBlocksRequest previewBlocksRequest, final ApiCallback<ResourceListOfProposedBlockAndOrders> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = previewBlocksValidateBeforeCall(previewBlocksRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfProposedBlockAndOrders>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIpreviewBlocksRequest {
+        private final PreviewBlocksRequest previewBlocksRequest;
+
+        private APIpreviewBlocksRequest(PreviewBlocksRequest previewBlocksRequest) {
+            this.previewBlocksRequest = previewBlocksRequest;
+        }
+
+        /**
+         * Build call for previewBlocks
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return previewBlocksCall(previewBlocksRequest, _callback);
+        }
+
+        /**
+         * Execute previewBlocks request
+         * @return ResourceListOfProposedBlockAndOrders
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfProposedBlockAndOrders execute() throws ApiException {
+            ApiResponse<ResourceListOfProposedBlockAndOrders> localVarResp = previewBlocksWithHttpInfo(previewBlocksRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute previewBlocks request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ResourceListOfProposedBlockAndOrders
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfProposedBlockAndOrders execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ResourceListOfProposedBlockAndOrders> localVarResp = previewBlocksWithHttpInfo(previewBlocksRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute previewBlocks request with HTTP info returned
+         * @return ApiResponse&lt;ResourceListOfProposedBlockAndOrders&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfProposedBlockAndOrders> executeWithHttpInfo() throws ApiException {
+            return previewBlocksWithHttpInfo(previewBlocksRequest);
+        }
+
+        /**
+         * Execute previewBlocks request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ResourceListOfProposedBlockAndOrders&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfProposedBlockAndOrders> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return previewBlocksWithHttpInfo(previewBlocksRequest, opts);
+        }
+
+        /**
+         * Execute previewBlocks request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfProposedBlockAndOrders> _callback) throws ApiException {
+            previewBlocksAsync(previewBlocksRequest, _callback);
+        }
+
+        /**
+         * Execute previewBlocks request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfProposedBlockAndOrders> _callback, ConfigurationOptions opts) throws ApiException {
+            previewBlocksAsync(previewBlocksRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * PreviewBlocks: Preview the blocks a set of orders would form
+     * Groups a set of orders into blocks according to the requested grouping mode, with each block&#39;s side and  net size derived from its orders. Nothing is created: the result is a set of block and order requests, in  the shape accepted by CreateOrders, which may be posted there as they are.
+     * @param previewBlocksRequest The orders to group and how to group them. (required)
+     * @return APIpreviewBlocksRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The proposed blocks and their orders. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIpreviewBlocksRequest previewBlocks(PreviewBlocksRequest previewBlocksRequest) {
+        return new APIpreviewBlocksRequest(previewBlocksRequest);
+    }
+    /**
      * Build call for runAllocationService
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2715,14 +3032,15 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest runAllocationServiceCall(List<ResourceId> resourceId, String allocationAlgorithm, final ApiCallback _callback) throws ApiException {
-        return runAllocationServiceCall(resourceId, allocationAlgorithm,  _callback, new ConfigurationOptions());
+    private HttpRequest runAllocationServiceCall(List<ResourceId> resourceId, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback _callback) throws ApiException {
+        return runAllocationServiceCall(resourceId, allocationAlgorithm, cancelAndCorrect,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for runAllocationService. Use any specified configuration options to override any other configuration for this request only.
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
+     * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2734,7 +3052,7 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest runAllocationServiceCall(List<ResourceId> resourceId, String allocationAlgorithm, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest runAllocationServiceCall(List<ResourceId> resourceId, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2763,6 +3081,10 @@ public class OrderManagementApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("allocationAlgorithm", allocationAlgorithm));
         }
 
+        if (cancelAndCorrect != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("cancelAndCorrect", cancelAndCorrect));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -2789,13 +3111,13 @@ public class OrderManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest runAllocationServiceValidateBeforeCall(List<ResourceId> resourceId, String allocationAlgorithm, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest runAllocationServiceValidateBeforeCall(List<ResourceId> resourceId, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'resourceId' is set
         if (resourceId == null) {
             throw new ApiException("Missing the required parameter 'resourceId' when calling runAllocationService(Async)");
         }
 
-        return runAllocationServiceCall(resourceId, allocationAlgorithm, _callback, opts);
+        return runAllocationServiceCall(resourceId, allocationAlgorithm, cancelAndCorrect, _callback, opts);
 
     }
 
@@ -2804,6 +3126,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
      * @return ApiResponse&lt;AllocationServiceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2814,8 +3137,8 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<AllocationServiceRunResponse> runAllocationServiceWithHttpInfo(List<ResourceId> resourceId, String allocationAlgorithm) throws ApiException {
-        HttpRequest localVarCall = runAllocationServiceValidateBeforeCall(resourceId, allocationAlgorithm, null, new ConfigurationOptions());
+    private ApiResponse<AllocationServiceRunResponse> runAllocationServiceWithHttpInfo(List<ResourceId> resourceId, String allocationAlgorithm, Boolean cancelAndCorrect) throws ApiException {
+        HttpRequest localVarCall = runAllocationServiceValidateBeforeCall(resourceId, allocationAlgorithm, cancelAndCorrect, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<AllocationServiceRunResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2825,6 +3148,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.Use any specified configuration options to override any other configuration for this request only
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
      * @return ApiResponse&lt;AllocationServiceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2835,8 +3159,8 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<AllocationServiceRunResponse> runAllocationServiceWithHttpInfo(List<ResourceId> resourceId, String allocationAlgorithm, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = runAllocationServiceValidateBeforeCall(resourceId, allocationAlgorithm, null, opts);
+    private ApiResponse<AllocationServiceRunResponse> runAllocationServiceWithHttpInfo(List<ResourceId> resourceId, String allocationAlgorithm, Boolean cancelAndCorrect, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = runAllocationServiceValidateBeforeCall(resourceId, allocationAlgorithm, cancelAndCorrect, null, opts);
         Type localVarReturnType = new TypeReference<AllocationServiceRunResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2846,6 +3170,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2856,9 +3181,9 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void runAllocationServiceAsync(List<ResourceId> resourceId, String allocationAlgorithm, final ApiCallback<AllocationServiceRunResponse> _callback) throws ApiException {
+    private void runAllocationServiceAsync(List<ResourceId> resourceId, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback<AllocationServiceRunResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = runAllocationServiceValidateBeforeCall(resourceId, allocationAlgorithm, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = runAllocationServiceValidateBeforeCall(resourceId, allocationAlgorithm, cancelAndCorrect, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<AllocationServiceRunResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2868,6 +3193,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.Use any specified configuration options to override any other configuration for this request only
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2878,9 +3204,9 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void runAllocationServiceAsync(List<ResourceId> resourceId, String allocationAlgorithm, final ApiCallback<AllocationServiceRunResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void runAllocationServiceAsync(List<ResourceId> resourceId, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback<AllocationServiceRunResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = runAllocationServiceValidateBeforeCall(resourceId, allocationAlgorithm, _callback, opts);
+        HttpRequest localVarCall = runAllocationServiceValidateBeforeCall(resourceId, allocationAlgorithm, cancelAndCorrect, _callback, opts);
         Type localVarReturnType = new TypeReference<AllocationServiceRunResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2888,6 +3214,7 @@ public class OrderManagementApi {
     public class APIrunAllocationServiceRequest {
         private final List<ResourceId> resourceId;
         private String allocationAlgorithm;
+        private Boolean cancelAndCorrect;
 
         private APIrunAllocationServiceRequest(List<ResourceId> resourceId) {
             this.resourceId = resourceId;
@@ -2900,6 +3227,16 @@ public class OrderManagementApi {
          */
         public APIrunAllocationServiceRequest allocationAlgorithm(String allocationAlgorithm) {
             this.allocationAlgorithm = allocationAlgorithm;
+            return this;
+        }
+
+        /**
+         * Set cancelAndCorrect
+         * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
+         * @return APIrunAllocationServiceRequest
+         */
+        public APIrunAllocationServiceRequest cancelAndCorrect(Boolean cancelAndCorrect) {
+            this.cancelAndCorrect = cancelAndCorrect;
             return this;
         }
 
@@ -2917,7 +3254,7 @@ public class OrderManagementApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return runAllocationServiceCall(resourceId, allocationAlgorithm, _callback);
+            return runAllocationServiceCall(resourceId, allocationAlgorithm, cancelAndCorrect, _callback);
         }
 
         /**
@@ -2933,7 +3270,7 @@ public class OrderManagementApi {
          </table>
          */
         public AllocationServiceRunResponse execute() throws ApiException {
-            ApiResponse<AllocationServiceRunResponse> localVarResp = runAllocationServiceWithHttpInfo(resourceId, allocationAlgorithm);
+            ApiResponse<AllocationServiceRunResponse> localVarResp = runAllocationServiceWithHttpInfo(resourceId, allocationAlgorithm, cancelAndCorrect);
             return localVarResp.getData();
         }
 
@@ -2950,7 +3287,7 @@ public class OrderManagementApi {
          </table>
          */
         public AllocationServiceRunResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<AllocationServiceRunResponse> localVarResp = runAllocationServiceWithHttpInfo(resourceId, allocationAlgorithm, opts);
+            ApiResponse<AllocationServiceRunResponse> localVarResp = runAllocationServiceWithHttpInfo(resourceId, allocationAlgorithm, cancelAndCorrect, opts);
             return localVarResp.getData();
         }
 
@@ -2967,7 +3304,7 @@ public class OrderManagementApi {
          </table>
          */
         public ApiResponse<AllocationServiceRunResponse> executeWithHttpInfo() throws ApiException {
-            return runAllocationServiceWithHttpInfo(resourceId, allocationAlgorithm);
+            return runAllocationServiceWithHttpInfo(resourceId, allocationAlgorithm, cancelAndCorrect);
         }
 
         /**
@@ -2983,7 +3320,7 @@ public class OrderManagementApi {
          </table>
          */
         public ApiResponse<AllocationServiceRunResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return runAllocationServiceWithHttpInfo(resourceId, allocationAlgorithm, opts);
+            return runAllocationServiceWithHttpInfo(resourceId, allocationAlgorithm, cancelAndCorrect, opts);
         }
 
         /**
@@ -2999,7 +3336,7 @@ public class OrderManagementApi {
          </table>
          */
         public void executeAsync(final ApiCallback<AllocationServiceRunResponse> _callback) throws ApiException {
-            runAllocationServiceAsync(resourceId, allocationAlgorithm, _callback);
+            runAllocationServiceAsync(resourceId, allocationAlgorithm, cancelAndCorrect, _callback);
         }
 
         /**
@@ -3015,7 +3352,7 @@ public class OrderManagementApi {
          </table>
          */
         public void executeAsync(final ApiCallback<AllocationServiceRunResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            runAllocationServiceAsync(resourceId, allocationAlgorithm, _callback, opts);
+            runAllocationServiceAsync(resourceId, allocationAlgorithm, cancelAndCorrect, _callback, opts);
         }
     }
 
@@ -3039,6 +3376,7 @@ public class OrderManagementApi {
      * Build call for runAllocationServiceWithWeights
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3050,14 +3388,15 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest runAllocationServiceWithWeightsCall(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, final ApiCallback _callback) throws ApiException {
-        return runAllocationServiceWithWeightsCall(weightedAllocationServiceRunRequest, allocationAlgorithm,  _callback, new ConfigurationOptions());
+    private HttpRequest runAllocationServiceWithWeightsCall(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback _callback) throws ApiException {
+        return runAllocationServiceWithWeightsCall(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for runAllocationServiceWithWeights. Use any specified configuration options to override any other configuration for this request only.
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
+     * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3069,7 +3408,7 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest runAllocationServiceWithWeightsCall(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest runAllocationServiceWithWeightsCall(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3098,6 +3437,10 @@ public class OrderManagementApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("allocationAlgorithm", allocationAlgorithm));
         }
 
+        if (cancelAndCorrect != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("cancelAndCorrect", cancelAndCorrect));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -3124,13 +3467,13 @@ public class OrderManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest runAllocationServiceWithWeightsValidateBeforeCall(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest runAllocationServiceWithWeightsValidateBeforeCall(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'weightedAllocationServiceRunRequest' is set
         if (weightedAllocationServiceRunRequest == null) {
             throw new ApiException("Missing the required parameter 'weightedAllocationServiceRunRequest' when calling runAllocationServiceWithWeights(Async)");
         }
 
-        return runAllocationServiceWithWeightsCall(weightedAllocationServiceRunRequest, allocationAlgorithm, _callback, opts);
+        return runAllocationServiceWithWeightsCall(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, _callback, opts);
 
     }
 
@@ -3139,6 +3482,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
      * @return ApiResponse&lt;AllocationServiceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3149,8 +3493,8 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<AllocationServiceRunResponse> runAllocationServiceWithWeightsWithHttpInfo(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm) throws ApiException {
-        HttpRequest localVarCall = runAllocationServiceWithWeightsValidateBeforeCall(weightedAllocationServiceRunRequest, allocationAlgorithm, null, new ConfigurationOptions());
+    private ApiResponse<AllocationServiceRunResponse> runAllocationServiceWithWeightsWithHttpInfo(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, Boolean cancelAndCorrect) throws ApiException {
+        HttpRequest localVarCall = runAllocationServiceWithWeightsValidateBeforeCall(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<AllocationServiceRunResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3160,6 +3504,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.Use any specified configuration options to override any other configuration for this request only
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
      * @return ApiResponse&lt;AllocationServiceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3170,8 +3515,8 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<AllocationServiceRunResponse> runAllocationServiceWithWeightsWithHttpInfo(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = runAllocationServiceWithWeightsValidateBeforeCall(weightedAllocationServiceRunRequest, allocationAlgorithm, null, opts);
+    private ApiResponse<AllocationServiceRunResponse> runAllocationServiceWithWeightsWithHttpInfo(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, Boolean cancelAndCorrect, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = runAllocationServiceWithWeightsValidateBeforeCall(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, null, opts);
         Type localVarReturnType = new TypeReference<AllocationServiceRunResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3181,6 +3526,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3191,9 +3537,9 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void runAllocationServiceWithWeightsAsync(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, final ApiCallback<AllocationServiceRunResponse> _callback) throws ApiException {
+    private void runAllocationServiceWithWeightsAsync(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback<AllocationServiceRunResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = runAllocationServiceWithWeightsValidateBeforeCall(weightedAllocationServiceRunRequest, allocationAlgorithm, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = runAllocationServiceWithWeightsValidateBeforeCall(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<AllocationServiceRunResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -3203,6 +3549,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.Use any specified configuration options to override any other configuration for this request only
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3213,9 +3560,9 @@ public class OrderManagementApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void runAllocationServiceWithWeightsAsync(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, final ApiCallback<AllocationServiceRunResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void runAllocationServiceWithWeightsAsync(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest, String allocationAlgorithm, Boolean cancelAndCorrect, final ApiCallback<AllocationServiceRunResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = runAllocationServiceWithWeightsValidateBeforeCall(weightedAllocationServiceRunRequest, allocationAlgorithm, _callback, opts);
+        HttpRequest localVarCall = runAllocationServiceWithWeightsValidateBeforeCall(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, _callback, opts);
         Type localVarReturnType = new TypeReference<AllocationServiceRunResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -3223,6 +3570,7 @@ public class OrderManagementApi {
     public class APIrunAllocationServiceWithWeightsRequest {
         private final WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest;
         private String allocationAlgorithm;
+        private Boolean cancelAndCorrect;
 
         private APIrunAllocationServiceWithWeightsRequest(WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest) {
             this.weightedAllocationServiceRunRequest = weightedAllocationServiceRunRequest;
@@ -3235,6 +3583,16 @@ public class OrderManagementApi {
          */
         public APIrunAllocationServiceWithWeightsRequest allocationAlgorithm(String allocationAlgorithm) {
             this.allocationAlgorithm = allocationAlgorithm;
+            return this;
+        }
+
+        /**
+         * Set cancelAndCorrect
+         * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
+         * @return APIrunAllocationServiceWithWeightsRequest
+         */
+        public APIrunAllocationServiceWithWeightsRequest cancelAndCorrect(Boolean cancelAndCorrect) {
+            this.cancelAndCorrect = cancelAndCorrect;
             return this;
         }
 
@@ -3252,7 +3610,7 @@ public class OrderManagementApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return runAllocationServiceWithWeightsCall(weightedAllocationServiceRunRequest, allocationAlgorithm, _callback);
+            return runAllocationServiceWithWeightsCall(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, _callback);
         }
 
         /**
@@ -3268,7 +3626,7 @@ public class OrderManagementApi {
          </table>
          */
         public AllocationServiceRunResponse execute() throws ApiException {
-            ApiResponse<AllocationServiceRunResponse> localVarResp = runAllocationServiceWithWeightsWithHttpInfo(weightedAllocationServiceRunRequest, allocationAlgorithm);
+            ApiResponse<AllocationServiceRunResponse> localVarResp = runAllocationServiceWithWeightsWithHttpInfo(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect);
             return localVarResp.getData();
         }
 
@@ -3285,7 +3643,7 @@ public class OrderManagementApi {
          </table>
          */
         public AllocationServiceRunResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<AllocationServiceRunResponse> localVarResp = runAllocationServiceWithWeightsWithHttpInfo(weightedAllocationServiceRunRequest, allocationAlgorithm, opts);
+            ApiResponse<AllocationServiceRunResponse> localVarResp = runAllocationServiceWithWeightsWithHttpInfo(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, opts);
             return localVarResp.getData();
         }
 
@@ -3302,7 +3660,7 @@ public class OrderManagementApi {
          </table>
          */
         public ApiResponse<AllocationServiceRunResponse> executeWithHttpInfo() throws ApiException {
-            return runAllocationServiceWithWeightsWithHttpInfo(weightedAllocationServiceRunRequest, allocationAlgorithm);
+            return runAllocationServiceWithWeightsWithHttpInfo(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect);
         }
 
         /**
@@ -3318,7 +3676,7 @@ public class OrderManagementApi {
          </table>
          */
         public ApiResponse<AllocationServiceRunResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return runAllocationServiceWithWeightsWithHttpInfo(weightedAllocationServiceRunRequest, allocationAlgorithm, opts);
+            return runAllocationServiceWithWeightsWithHttpInfo(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, opts);
         }
 
         /**
@@ -3334,7 +3692,7 @@ public class OrderManagementApi {
          </table>
          */
         public void executeAsync(final ApiCallback<AllocationServiceRunResponse> _callback) throws ApiException {
-            runAllocationServiceWithWeightsAsync(weightedAllocationServiceRunRequest, allocationAlgorithm, _callback);
+            runAllocationServiceWithWeightsAsync(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, _callback);
         }
 
         /**
@@ -3350,7 +3708,7 @@ public class OrderManagementApi {
          </table>
          */
         public void executeAsync(final ApiCallback<AllocationServiceRunResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            runAllocationServiceWithWeightsAsync(weightedAllocationServiceRunRequest, allocationAlgorithm, _callback, opts);
+            runAllocationServiceWithWeightsAsync(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect, _callback, opts);
         }
     }
 

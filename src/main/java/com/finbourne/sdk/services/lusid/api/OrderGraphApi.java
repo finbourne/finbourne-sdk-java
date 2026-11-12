@@ -85,6 +85,7 @@ public class OrderGraphApi {
      * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
      * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
+     * @param includeSwept Include Swept Order Blocks. (default: true) (optional, default to true)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -96,8 +97,8 @@ public class OrderGraphApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listOrderGraphBlocksCall(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, final ApiCallback _callback) throws ApiException {
-        return listOrderGraphBlocksCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2,  _callback, new ConfigurationOptions());
+    private HttpRequest listOrderGraphBlocksCall(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, Boolean includeSwept, final ApiCallback _callback) throws ApiException {
+        return listOrderGraphBlocksCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -108,7 +109,8 @@ public class OrderGraphApi {
      * @param limit See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
      * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
+     * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false). Use any specified configuration options to override any other configuration for this request only.
+     * @param includeSwept Include Swept Order Blocks. (default: true) (optional, default to true)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -120,7 +122,7 @@ public class OrderGraphApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listOrderGraphBlocksCall(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listOrderGraphBlocksCall(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, Boolean includeSwept, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -173,6 +175,10 @@ public class OrderGraphApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("useComplianceV2", useComplianceV2));
         }
 
+        if (includeSwept != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("includeSwept", includeSwept));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -195,8 +201,8 @@ public class OrderGraphApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listOrderGraphBlocksValidateBeforeCall(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listOrderGraphBlocksCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, _callback, opts);
+    private HttpRequest listOrderGraphBlocksValidateBeforeCall(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, Boolean includeSwept, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listOrderGraphBlocksCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, _callback, opts);
 
     }
 
@@ -210,6 +216,7 @@ public class OrderGraphApi {
      * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
      * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
+     * @param includeSwept Include Swept Order Blocks. (default: true) (optional, default to true)
      * @return ApiResponse&lt;PagedResourceListOfOrderGraphBlock&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -220,8 +227,8 @@ public class OrderGraphApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfOrderGraphBlock> listOrderGraphBlocksWithHttpInfo(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2) throws ApiException {
-        HttpRequest localVarCall = listOrderGraphBlocksValidateBeforeCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfOrderGraphBlock> listOrderGraphBlocksWithHttpInfo(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, Boolean includeSwept) throws ApiException {
+        HttpRequest localVarCall = listOrderGraphBlocksValidateBeforeCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfOrderGraphBlock>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -236,6 +243,7 @@ public class OrderGraphApi {
      * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
      * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
+     * @param includeSwept Include Swept Order Blocks. (default: true) (optional, default to true)
      * @return ApiResponse&lt;PagedResourceListOfOrderGraphBlock&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -246,8 +254,8 @@ public class OrderGraphApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfOrderGraphBlock> listOrderGraphBlocksWithHttpInfo(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listOrderGraphBlocksValidateBeforeCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, null, opts);
+    private ApiResponse<PagedResourceListOfOrderGraphBlock> listOrderGraphBlocksWithHttpInfo(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, Boolean includeSwept, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listOrderGraphBlocksValidateBeforeCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfOrderGraphBlock>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -262,6 +270,7 @@ public class OrderGraphApi {
      * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
      * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
+     * @param includeSwept Include Swept Order Blocks. (default: true) (optional, default to true)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -272,9 +281,9 @@ public class OrderGraphApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listOrderGraphBlocksAsync(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, final ApiCallback<PagedResourceListOfOrderGraphBlock> _callback) throws ApiException {
+    private void listOrderGraphBlocksAsync(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, Boolean includeSwept, final ApiCallback<PagedResourceListOfOrderGraphBlock> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listOrderGraphBlocksValidateBeforeCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listOrderGraphBlocksValidateBeforeCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfOrderGraphBlock>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -289,6 +298,7 @@ public class OrderGraphApi {
      * @param filter See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional, default to )
      * @param propertyKeys Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
      * @param useComplianceV2 Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional, default to false)
+     * @param includeSwept Include Swept Order Blocks. (default: true) (optional, default to true)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -299,9 +309,9 @@ public class OrderGraphApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listOrderGraphBlocksAsync(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, final ApiCallback<PagedResourceListOfOrderGraphBlock> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listOrderGraphBlocksAsync(OffsetDateTime asAt, String paginationToken, List<String> sortBy, Integer limit, String filter, List<String> propertyKeys, Boolean useComplianceV2, Boolean includeSwept, final ApiCallback<PagedResourceListOfOrderGraphBlock> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listOrderGraphBlocksValidateBeforeCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, _callback, opts);
+        HttpRequest localVarCall = listOrderGraphBlocksValidateBeforeCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfOrderGraphBlock>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -314,6 +324,7 @@ public class OrderGraphApi {
         private String filter;
         private List<String> propertyKeys;
         private Boolean useComplianceV2;
+        private Boolean includeSwept;
 
         private APIlistOrderGraphBlocksRequest() {
         }
@@ -389,6 +400,16 @@ public class OrderGraphApi {
         }
 
         /**
+         * Set includeSwept
+         * @param includeSwept Include Swept Order Blocks. (default: true) (optional, default to true)
+         * @return APIlistOrderGraphBlocksRequest
+         */
+        public APIlistOrderGraphBlocksRequest includeSwept(Boolean includeSwept) {
+            this.includeSwept = includeSwept;
+            return this;
+        }
+
+        /**
          * Build call for listOrderGraphBlocks
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -402,7 +423,7 @@ public class OrderGraphApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listOrderGraphBlocksCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, _callback);
+            return listOrderGraphBlocksCall(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, _callback);
         }
 
         /**
@@ -418,7 +439,7 @@ public class OrderGraphApi {
          </table>
          */
         public PagedResourceListOfOrderGraphBlock execute() throws ApiException {
-            ApiResponse<PagedResourceListOfOrderGraphBlock> localVarResp = listOrderGraphBlocksWithHttpInfo(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2);
+            ApiResponse<PagedResourceListOfOrderGraphBlock> localVarResp = listOrderGraphBlocksWithHttpInfo(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept);
             return localVarResp.getData();
         }
 
@@ -435,7 +456,7 @@ public class OrderGraphApi {
          </table>
          */
         public PagedResourceListOfOrderGraphBlock execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfOrderGraphBlock> localVarResp = listOrderGraphBlocksWithHttpInfo(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, opts);
+            ApiResponse<PagedResourceListOfOrderGraphBlock> localVarResp = listOrderGraphBlocksWithHttpInfo(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, opts);
             return localVarResp.getData();
         }
 
@@ -452,7 +473,7 @@ public class OrderGraphApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfOrderGraphBlock> executeWithHttpInfo() throws ApiException {
-            return listOrderGraphBlocksWithHttpInfo(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2);
+            return listOrderGraphBlocksWithHttpInfo(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept);
         }
 
         /**
@@ -468,7 +489,7 @@ public class OrderGraphApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfOrderGraphBlock> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listOrderGraphBlocksWithHttpInfo(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, opts);
+            return listOrderGraphBlocksWithHttpInfo(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, opts);
         }
 
         /**
@@ -484,7 +505,7 @@ public class OrderGraphApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfOrderGraphBlock> _callback) throws ApiException {
-            listOrderGraphBlocksAsync(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, _callback);
+            listOrderGraphBlocksAsync(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, _callback);
         }
 
         /**
@@ -500,7 +521,7 @@ public class OrderGraphApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfOrderGraphBlock> _callback, ConfigurationOptions opts) throws ApiException {
-            listOrderGraphBlocksAsync(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, _callback, opts);
+            listOrderGraphBlocksAsync(asAt, paginationToken, sortBy, limit, filter, propertyKeys, useComplianceV2, includeSwept, _callback, opts);
         }
     }
 

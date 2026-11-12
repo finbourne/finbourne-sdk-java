@@ -13,12 +13,14 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.FundPartnerUnfundedReconciliationLine;
+import com.finbourne.sdk.services.lusid.model.FundPartnerUnfundedReconciliationWarning;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -53,7 +55,8 @@ import com.finbourne.sdk.JSON;
   FundPartnerUnfundedReconciliation.JSON_PROPERTY_REGISTER_UNFUNDED,
   FundPartnerUnfundedReconciliation.JSON_PROPERTY_DIFFERENCE,
   FundPartnerUnfundedReconciliation.JSON_PROPERTY_TIES,
-  FundPartnerUnfundedReconciliation.JSON_PROPERTY_LINES
+  FundPartnerUnfundedReconciliation.JSON_PROPERTY_LINES,
+  FundPartnerUnfundedReconciliation.JSON_PROPERTY_WARNINGS
 })
 
 public class FundPartnerUnfundedReconciliation {
@@ -136,6 +139,11 @@ public class FundPartnerUnfundedReconciliation {
   @JsonProperty(JSON_PROPERTY_LINES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<FundPartnerUnfundedReconciliationLine> lines = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_WARNINGS = "warnings";
+  @JsonProperty(JSON_PROPERTY_WARNINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<FundPartnerUnfundedReconciliationWarning> warnings;
 
   public FundPartnerUnfundedReconciliation() {
   }
@@ -452,6 +460,33 @@ public class FundPartnerUnfundedReconciliation {
   }
 
 
+  public FundPartnerUnfundedReconciliation warnings(List<FundPartnerUnfundedReconciliationWarning> warnings) {
+    this.warnings = warnings;
+    return this;
+  }
+
+  public FundPartnerUnfundedReconciliation addWarningsItem(FundPartnerUnfundedReconciliationWarning warningsItem) {
+    if (this.warnings == null) {
+      this.warnings = new ArrayList<>();
+    }
+    this.warnings.add(warningsItem);
+    return this;
+  }
+
+  /**
+   * Soft warnings about how the statement was built. Empty when the period and the register agree without caveats.
+   * @return warnings
+   */
+  @javax.annotation.Nullable
+  public List<FundPartnerUnfundedReconciliationWarning> getWarnings() {
+    return warnings;
+  }
+
+  public void setWarnings(List<FundPartnerUnfundedReconciliationWarning> warnings) {
+    this.warnings = warnings;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -476,12 +511,24 @@ public class FundPartnerUnfundedReconciliation {
         (this.registerUnfunded == null ? fundPartnerUnfundedReconciliation.registerUnfunded == null : (fundPartnerUnfundedReconciliation.registerUnfunded != null && this.registerUnfunded.compareTo(fundPartnerUnfundedReconciliation.getRegisterUnfunded()) == 0)) &&
         (this.difference == null ? fundPartnerUnfundedReconciliation.difference == null : (fundPartnerUnfundedReconciliation.difference != null && this.difference.compareTo(fundPartnerUnfundedReconciliation.getDifference()) == 0)) &&
         Objects.equals(this.ties, fundPartnerUnfundedReconciliation.ties) &&
-        Objects.equals(this.lines, fundPartnerUnfundedReconciliation.lines);
+        Objects.equals(this.lines, fundPartnerUnfundedReconciliation.lines) &&
+        Objects.equals(this.warnings, fundPartnerUnfundedReconciliation.warnings);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(investorRecordId, fundId, currency, periodFrom, periodTo, openingUnfunded, contributionsInsideCommitment, recallableDistributions, expiredRecallable, commitmentChanges, transfers, closingUnfunded, registerUnfunded, difference, ties, lines);
+    return Objects.hash(investorRecordId, fundId, currency, periodFrom, periodTo, openingUnfunded, contributionsInsideCommitment, recallableDistributions, expiredRecallable, commitmentChanges, transfers, closingUnfunded, registerUnfunded, difference, ties, lines, warnings);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -504,6 +551,7 @@ public class FundPartnerUnfundedReconciliation {
     sb.append("    difference: ").append(toIndentedString(difference)).append("\n");
     sb.append("    ties: ").append(toIndentedString(ties)).append("\n");
     sb.append("    lines: ").append(toIndentedString(lines)).append("\n");
+    sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -41,7 +41,9 @@ import com.finbourne.sdk.JSON;
   EligibleCollateralRow.JSON_PROPERTY_VALUATION_PERCENTAGE,
   EligibleCollateralRow.JSON_PROPERTY_FX_HAIRCUT,
   EligibleCollateralRow.JSON_PROPERTY_MIN_RESIDUAL_MATURITY_YEARS,
-  EligibleCollateralRow.JSON_PROPERTY_MAX_RESIDUAL_MATURITY_YEARS
+  EligibleCollateralRow.JSON_PROPERTY_MAX_RESIDUAL_MATURITY_YEARS,
+  EligibleCollateralRow.JSON_PROPERTY_CONCENTRATION_GROUP,
+  EligibleCollateralRow.JSON_PROPERTY_CONCENTRATION_LIMIT
 })
 
 public class EligibleCollateralRow {
@@ -79,6 +81,16 @@ public class EligibleCollateralRow {
   @JsonProperty(JSON_PROPERTY_MAX_RESIDUAL_MATURITY_YEARS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal maxResidualMaturityYears;
+
+  public static final String JSON_PROPERTY_CONCENTRATION_GROUP = "concentrationGroup";
+  @JsonProperty(JSON_PROPERTY_CONCENTRATION_GROUP)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String concentrationGroup;
+
+  public static final String JSON_PROPERTY_CONCENTRATION_LIMIT = "concentrationLimit";
+  @JsonProperty(JSON_PROPERTY_CONCENTRATION_LIMIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal concentrationLimit;
 
   public EligibleCollateralRow() {
   }
@@ -165,7 +177,7 @@ public class EligibleCollateralRow {
   }
 
   /**
-   * The further fraction deducted when the asset&#39;s currency is not the agreement&#39;s base currency, so that the effective valuation percentage is ValuationPercentage * (1 - FxHaircut). At least 0 and less than 1. Not allowed for a BaseCurrencyCash selector. Optional.
+   * The further fraction deducted when the asset&#39;s currency is not the agreement&#39;s base currency, so that the effective valuation percentage is ValuationPercentage - FxHaircut. At least 0 and less than the valuationPercentage. Not allowed for a BaseCurrencyCash selector. Optional.
    * @return fxHaircut
    */
   @javax.annotation.Nullable
@@ -216,6 +228,44 @@ public class EligibleCollateralRow {
   }
 
 
+  public EligibleCollateralRow concentrationGroup(String concentrationGroup) {
+    this.concentrationGroup = concentrationGroup;
+    return this;
+  }
+
+  /**
+   * The group the row&#39;s assets count towards for a concentration limit, for example &#39;sovereign&#39; or &#39;issuer&#39;. Rows naming the same group share one limit. Required when a concentrationLimit is set. Optional.
+   * @return concentrationGroup
+   */
+  @javax.annotation.Nullable
+  public String getConcentrationGroup() {
+    return concentrationGroup;
+  }
+
+  public void setConcentrationGroup(String concentrationGroup) {
+    this.concentrationGroup = concentrationGroup;
+  }
+
+
+  public EligibleCollateralRow concentrationLimit(java.math.BigDecimal concentrationLimit) {
+    this.concentrationLimit = concentrationLimit;
+    return this;
+  }
+
+  /**
+   * The largest fraction of the collateral held plus the call that assets of the row&#39;s concentration group may make up, for example 0.3 for 30%. Greater than 0 and at most 1. Required when a concentrationGroup is set. Optional.
+   * @return concentrationLimit
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getConcentrationLimit() {
+    return concentrationLimit;
+  }
+
+  public void setConcentrationLimit(java.math.BigDecimal concentrationLimit) {
+    this.concentrationLimit = concentrationLimit;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -231,7 +281,9 @@ public class EligibleCollateralRow {
         (this.valuationPercentage == null ? eligibleCollateralRow.valuationPercentage == null : (eligibleCollateralRow.valuationPercentage != null && this.valuationPercentage.compareTo(eligibleCollateralRow.getValuationPercentage()) == 0)) &&
         (this.fxHaircut == null ? eligibleCollateralRow.fxHaircut == null : (eligibleCollateralRow.fxHaircut != null && this.fxHaircut.compareTo(eligibleCollateralRow.getFxHaircut()) == 0)) &&
         (this.minResidualMaturityYears == null ? eligibleCollateralRow.minResidualMaturityYears == null : (eligibleCollateralRow.minResidualMaturityYears != null && this.minResidualMaturityYears.compareTo(eligibleCollateralRow.getMinResidualMaturityYears()) == 0)) &&
-        (this.maxResidualMaturityYears == null ? eligibleCollateralRow.maxResidualMaturityYears == null : (eligibleCollateralRow.maxResidualMaturityYears != null && this.maxResidualMaturityYears.compareTo(eligibleCollateralRow.getMaxResidualMaturityYears()) == 0));
+        (this.maxResidualMaturityYears == null ? eligibleCollateralRow.maxResidualMaturityYears == null : (eligibleCollateralRow.maxResidualMaturityYears != null && this.maxResidualMaturityYears.compareTo(eligibleCollateralRow.getMaxResidualMaturityYears()) == 0)) &&
+        Objects.equals(this.concentrationGroup, eligibleCollateralRow.concentrationGroup) &&
+        (this.concentrationLimit == null ? eligibleCollateralRow.concentrationLimit == null : (eligibleCollateralRow.concentrationLimit != null && this.concentrationLimit.compareTo(eligibleCollateralRow.getConcentrationLimit()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -240,7 +292,7 @@ public class EligibleCollateralRow {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, description, selector, valuationPercentage, fxHaircut, minResidualMaturityYears, maxResidualMaturityYears);
+    return Objects.hash(code, description, selector, valuationPercentage, fxHaircut, minResidualMaturityYears, maxResidualMaturityYears, concentrationGroup, concentrationLimit);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -261,6 +313,8 @@ public class EligibleCollateralRow {
     sb.append("    fxHaircut: ").append(toIndentedString(fxHaircut)).append("\n");
     sb.append("    minResidualMaturityYears: ").append(toIndentedString(minResidualMaturityYears)).append("\n");
     sb.append("    maxResidualMaturityYears: ").append(toIndentedString(maxResidualMaturityYears)).append("\n");
+    sb.append("    concentrationGroup: ").append(toIndentedString(concentrationGroup)).append("\n");
+    sb.append("    concentrationLimit: ").append(toIndentedString(concentrationLimit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

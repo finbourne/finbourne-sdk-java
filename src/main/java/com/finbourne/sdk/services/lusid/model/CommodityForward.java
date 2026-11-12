@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.LusidInstrument;
+import com.finbourne.sdk.services.lusid.model.TradingConventions;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -41,7 +42,8 @@ import com.finbourne.sdk.JSON;
   CommodityForward.JSON_PROPERTY_DOM_CCY,
   CommodityForward.JSON_PROPERTY_STRIKE,
   CommodityForward.JSON_PROPERTY_DELIVERY_TYPE,
-  CommodityForward.JSON_PROPERTY_UNDERLYING
+  CommodityForward.JSON_PROPERTY_UNDERLYING,
+  CommodityForward.JSON_PROPERTY_TRADING_CONVENTIONS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -80,6 +82,11 @@ public class CommodityForward extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_UNDERLYING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private LusidInstrument underlying;
+
+  public static final String JSON_PROPERTY_TRADING_CONVENTIONS = "tradingConventions";
+  @JsonProperty(JSON_PROPERTY_TRADING_CONVENTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private TradingConventions tradingConventions;
 
   public CommodityForward() {
   }
@@ -198,6 +205,25 @@ public class CommodityForward extends LusidInstrument {
   }
 
 
+  public CommodityForward tradingConventions(TradingConventions tradingConventions) {
+    this.tradingConventions = tradingConventions;
+    return this;
+  }
+
+  /**
+   * Get tradingConventions
+   * @return tradingConventions
+   */
+  @javax.annotation.Nullable
+  public TradingConventions getTradingConventions() {
+    return tradingConventions;
+  }
+
+  public void setTradingConventions(TradingConventions tradingConventions) {
+    this.tradingConventions = tradingConventions;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -213,6 +239,7 @@ public class CommodityForward extends LusidInstrument {
         (this.strike == null ? commodityForward.strike == null : (commodityForward.strike != null && this.strike.compareTo(commodityForward.getStrike()) == 0)) &&
         Objects.equals(this.deliveryType, commodityForward.deliveryType) &&
         Objects.equals(this.underlying, commodityForward.underlying) &&
+        Objects.equals(this.tradingConventions, commodityForward.tradingConventions) &&
         super.equals(o);
   }
 
@@ -222,7 +249,7 @@ public class CommodityForward extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, domCcy, strike, deliveryType, underlying, super.hashCode());
+    return Objects.hash(startDate, maturityDate, domCcy, strike, deliveryType, underlying, tradingConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -243,6 +270,7 @@ public class CommodityForward extends LusidInstrument {
     sb.append("    strike: ").append(toIndentedString(strike)).append("\n");
     sb.append("    deliveryType: ").append(toIndentedString(deliveryType)).append("\n");
     sb.append("    underlying: ").append(toIndentedString(underlying)).append("\n");
+    sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

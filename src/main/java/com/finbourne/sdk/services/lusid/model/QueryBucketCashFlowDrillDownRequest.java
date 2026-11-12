@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.BucketingSchedule;
 import com.finbourne.sdk.services.lusid.model.CashFlowHaircutRule;
 import com.finbourne.sdk.services.lusid.model.PortfolioEntityId;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
@@ -52,7 +53,11 @@ import com.finbourne.sdk.JSON;
   QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_EXCLUDE_UNSETTLED_TRADES,
   QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_HAIRCUT_RULES,
   QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_CASH_TYPE,
-  QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_FX_RATE_TYPE
+  QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_FX_RATE_TYPE,
+  QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_WINDOW_START,
+  QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_STARTING_BALANCE,
+  QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_BUCKETING_SCHEDULE,
+  QueryBucketCashFlowDrillDownRequest.JSON_PROPERTY_ROUNDING_METHOD
 })
 
 public class QueryBucketCashFlowDrillDownRequest {
@@ -120,6 +125,26 @@ public class QueryBucketCashFlowDrillDownRequest {
   @JsonProperty(JSON_PROPERTY_FX_RATE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String fxRateType;
+
+  public static final String JSON_PROPERTY_WINDOW_START = "windowStart";
+  @JsonProperty(JSON_PROPERTY_WINDOW_START)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private OffsetDateTime windowStart;
+
+  public static final String JSON_PROPERTY_STARTING_BALANCE = "startingBalance";
+  @JsonProperty(JSON_PROPERTY_STARTING_BALANCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String startingBalance;
+
+  public static final String JSON_PROPERTY_BUCKETING_SCHEDULE = "bucketingSchedule";
+  @JsonProperty(JSON_PROPERTY_BUCKETING_SCHEDULE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private BucketingSchedule bucketingSchedule;
+
+  public static final String JSON_PROPERTY_ROUNDING_METHOD = "roundingMethod";
+  @JsonProperty(JSON_PROPERTY_ROUNDING_METHOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String roundingMethod;
 
   public QueryBucketCashFlowDrillDownRequest() {
   }
@@ -374,7 +399,7 @@ public class QueryBucketCashFlowDrillDownRequest {
   }
 
   /**
-   * Which FX rate converts each cashflow into the ReportCurrency. FxSpot (default) uses the spot rate. FxForward uses the forward rate for the cashflow&#39;s payment date, read from the FX forward curve the recipe resolves for the currency pair as at the valuation (EffectiveAt) date; a cashflow with no such forward rate reports an Error and has no converted amount. ForwardThenSpot uses the forward rate where the recipe resolves one and the spot rate where it does not. FxForward and ForwardThenSpot require a ReportCurrency. A cashflow paid after the last point of the recipe&#39;s forward curve takes the last point&#39;s forward rate when the curve&#39;s back extrapolation is Flat (the default), and reports an Error when it is None. Where ForwardThenSpot falls back, the spot rate is the one FxSpot uses: read on the cashflow&#39;s own transaction date, not the valuation date. The response&#39;s CashFlowDetail.FxRateTypeApplied says which rate each cashflow received. Available values: FxSpot, FxForward, ForwardThenSpot.
+   * Which FX rate converts each cashflow into the ReportCurrency. FxSpot (default) uses the spot rate as at the valuation (EffectiveAt) date for every cashflow, as QueryBucketedCashFlows converts them. FxSpotAtCashFlowDate uses the spot rate as at the cashflow&#39;s own date, or as at the valuation date for a cashflow dated after it. FxForward uses the forward rate for the cashflow&#39;s payment date, read from the FX forward curve the recipe resolves for the currency pair as at the valuation (EffectiveAt) date; a cashflow with no such forward rate reports an Error and has no converted amount. ForwardThenSpot uses the forward rate where the recipe resolves one and the spot rate where it does not. All but FxSpot require a ReportCurrency. A cashflow paid after the last point of the recipe&#39;s forward curve takes the last point&#39;s forward rate when the curve&#39;s back extrapolation is Flat (the default), and reports an Error when it is None. Where ForwardThenSpot falls back, the spot rate is the one FxSpot uses: as at the valuation date. The balances in the report currency are those QueryBucketedCashFlows returns for FxSpot. With any other rate type they are a running balance of the cashflows at the rates above, with a starting balance at the spot as at the window start for FxSpotAtCashFlowDate and as at the valuation date for FxForward and ForwardThenSpot; it chains across buckets, and is not QueryBucketedCashFlows&#39; figure. The response&#39;s CashFlowDetail.FxRateTypeApplied says which rate each cashflow received. Available values: FxSpot, FxForward, ForwardThenSpot, FxSpotAtCashFlowDate.
    * @return fxRateType
    */
   @javax.annotation.Nullable
@@ -384,6 +409,82 @@ public class QueryBucketCashFlowDrillDownRequest {
 
   public void setFxRateType(String fxRateType) {
     this.fxRateType = fxRateType;
+  }
+
+
+  public QueryBucketCashFlowDrillDownRequest windowStart(OffsetDateTime windowStart) {
+    this.windowStart = windowStart;
+    return this;
+  }
+
+  /**
+   * Where the ladder opens: the window start of the bucketed request being drilled into, on or before BucketStart. The opening balance of the first bucket is the ladder&#39;s balance at BucketStart. Required.
+   * @return windowStart
+   */
+  @javax.annotation.Nonnull
+  public OffsetDateTime getWindowStart() {
+    return windowStart;
+  }
+
+  public void setWindowStart(OffsetDateTime windowStart) {
+    this.windowStart = windowStart;
+  }
+
+
+  public QueryBucketCashFlowDrillDownRequest startingBalance(String startingBalance) {
+    this.startingBalance = startingBalance;
+    return this;
+  }
+
+  /**
+   * The balance the ladder opens with: &#39;Zero&#39; (default) or &#39;PortfolioCashBalance&#39;. &#39;PortfolioCashBalance&#39; is not supported with a CashType of &#39;TradeDate&#39;. Available values: PortfolioCashBalance, Zero.
+   * @return startingBalance
+   */
+  @javax.annotation.Nullable
+  public String getStartingBalance() {
+    return startingBalance;
+  }
+
+  public void setStartingBalance(String startingBalance) {
+    this.startingBalance = startingBalance;
+  }
+
+
+  public QueryBucketCashFlowDrillDownRequest bucketingSchedule(BucketingSchedule bucketingSchedule) {
+    this.bucketingSchedule = bucketingSchedule;
+    return this;
+  }
+
+  /**
+   * Get bucketingSchedule
+   * @return bucketingSchedule
+   */
+  @javax.annotation.Nonnull
+  public BucketingSchedule getBucketingSchedule() {
+    return bucketingSchedule;
+  }
+
+  public void setBucketingSchedule(BucketingSchedule bucketingSchedule) {
+    this.bucketingSchedule = bucketingSchedule;
+  }
+
+
+  public QueryBucketCashFlowDrillDownRequest roundingMethod(String roundingMethod) {
+    this.roundingMethod = roundingMethod;
+    return this;
+  }
+
+  /**
+   * How a cash flow is allocated to a period. Only RoundUp, the default, is supported; RoundDown is refused. Which period a cash flow on a boundary falls in is decided by StartInclusive and EndInclusive. Available values: RoundUp, RoundDown.
+   * @return roundingMethod
+   */
+  @javax.annotation.Nullable
+  public String getRoundingMethod() {
+    return roundingMethod;
+  }
+
+  public void setRoundingMethod(String roundingMethod) {
+    this.roundingMethod = roundingMethod;
   }
 
 
@@ -408,7 +509,11 @@ public class QueryBucketCashFlowDrillDownRequest {
         Objects.equals(this.excludeUnsettledTrades, queryBucketCashFlowDrillDownRequest.excludeUnsettledTrades) &&
         Objects.equals(this.haircutRules, queryBucketCashFlowDrillDownRequest.haircutRules) &&
         Objects.equals(this.cashType, queryBucketCashFlowDrillDownRequest.cashType) &&
-        Objects.equals(this.fxRateType, queryBucketCashFlowDrillDownRequest.fxRateType);
+        Objects.equals(this.fxRateType, queryBucketCashFlowDrillDownRequest.fxRateType) &&
+        Objects.equals(this.windowStart, queryBucketCashFlowDrillDownRequest.windowStart) &&
+        Objects.equals(this.startingBalance, queryBucketCashFlowDrillDownRequest.startingBalance) &&
+        Objects.equals(this.bucketingSchedule, queryBucketCashFlowDrillDownRequest.bucketingSchedule) &&
+        Objects.equals(this.roundingMethod, queryBucketCashFlowDrillDownRequest.roundingMethod);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -417,7 +522,7 @@ public class QueryBucketCashFlowDrillDownRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(asAt, bucketStart, bucketEnd, startInclusive, endInclusive, portfolioEntityIds, effectiveAt, recipeId, reportCurrency, excludeUnsettledTrades, haircutRules, cashType, fxRateType);
+    return Objects.hash(asAt, bucketStart, bucketEnd, startInclusive, endInclusive, portfolioEntityIds, effectiveAt, recipeId, reportCurrency, excludeUnsettledTrades, haircutRules, cashType, fxRateType, windowStart, startingBalance, bucketingSchedule, roundingMethod);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -444,6 +549,10 @@ public class QueryBucketCashFlowDrillDownRequest {
     sb.append("    haircutRules: ").append(toIndentedString(haircutRules)).append("\n");
     sb.append("    cashType: ").append(toIndentedString(cashType)).append("\n");
     sb.append("    fxRateType: ").append(toIndentedString(fxRateType)).append("\n");
+    sb.append("    windowStart: ").append(toIndentedString(windowStart)).append("\n");
+    sb.append("    startingBalance: ").append(toIndentedString(startingBalance)).append("\n");
+    sb.append("    bucketingSchedule: ").append(toIndentedString(bucketingSchedule)).append("\n");
+    sb.append("    roundingMethod: ").append(toIndentedString(roundingMethod)).append("\n");
     sb.append("}");
     return sb.toString();
   }

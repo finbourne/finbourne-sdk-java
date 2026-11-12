@@ -12,7 +12,9 @@ Name | Type | Description | Notes
 **batchId** | [**UUID**](UUID.md) | Unique identifier of the batch | [default to UUID]
 **runId** | [**UUID**](UUID.md) | The run that processed the transaction for this instance, as shown in run monitoring | [default to UUID]
 **runStartTime** | [**OffsetDateTime**](OffsetDateTime.md) | Timestamp when the batch/run started | [default to OffsetDateTime]
-**publicationStatus** | **String** | Publication status of the transaction (Sent | Skipped | Failed) | [default to String]
+**publicationStatus** | **String** | Outcome of the transaction&#39;s build (Sent | Skipped | Failed) | [default to String]
+**outcome** | **String** | The same value as PublicationStatus under the name the screens use; PublicationStatus stays for existing clients. | [default to String]
+**eventType** | **String** | The TPF event type that triggered this publication (New, Amended, Cancelled, NothingToDo, InstrumentMatured, InstrumentPartialClosure, InstrumentFullClosure, InstrumentInterestPayment, LastSentPropertyUpdated). Null for rows persisted before it was recorded, for transactions skipped as excluded, and for rows written before the build computed it (for example a transaction not found in LUSID). Never Queued: the search returns built rows only. Distinct from PublicationStatus, which says what happened to the row. | [optional] [default to String]
 **instrumentName** | **String** | Instrument name | [default to String]
 **instrumentType** | **String** | Instrument type | [default to String]
 **tradeDate** | [**OffsetDateTime**](OffsetDateTime.md) | Trade date of the transaction | [default to OffsetDateTime]
@@ -41,6 +43,8 @@ UUID batchId = "example batchId";
 UUID runId = "example runId";
 OffsetDateTime runStartTime = OffsetDateTime.now();
 String publicationStatus = "example publicationStatus";
+String outcome = "example outcome";
+@javax.annotation.Nullable String eventType = "example eventType";
 String instrumentName = "example instrumentName";
 String instrumentType = "example instrumentType";
 OffsetDateTime tradeDate = OffsetDateTime.now();
@@ -65,6 +69,8 @@ TpfTransactionSearchResponse tpfTransactionSearchResponseInstance = new TpfTrans
     .runId(runId)
     .runStartTime(runStartTime)
     .publicationStatus(publicationStatus)
+    .outcome(outcome)
+    .eventType(eventType)
     .instrumentName(instrumentName)
     .instrumentType(instrumentType)
     .tradeDate(tradeDate)

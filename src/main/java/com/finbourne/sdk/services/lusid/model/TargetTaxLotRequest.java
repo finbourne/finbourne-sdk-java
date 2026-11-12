@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ChargeableGainsTakeOn;
 import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -46,7 +47,8 @@ import com.finbourne.sdk.JSON;
   TargetTaxLotRequest.JSON_PROPERTY_VARIATION_MARGIN,
   TargetTaxLotRequest.JSON_PROPERTY_VARIATION_MARGIN_PORTFOLIO_CCY,
   TargetTaxLotRequest.JSON_PROPERTY_AMORTISED_COST,
-  TargetTaxLotRequest.JSON_PROPERTY_CURRENT_FACE
+  TargetTaxLotRequest.JSON_PROPERTY_CURRENT_FACE,
+  TargetTaxLotRequest.JSON_PROPERTY_CHARGEABLE_GAINS_TAKE_ON
 })
 
 public class TargetTaxLotRequest {
@@ -104,6 +106,11 @@ public class TargetTaxLotRequest {
   @JsonProperty(JSON_PROPERTY_CURRENT_FACE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal currentFace;
+
+  public static final String JSON_PROPERTY_CHARGEABLE_GAINS_TAKE_ON = "chargeableGainsTakeOn";
+  @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_TAKE_ON)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ChargeableGainsTakeOn chargeableGainsTakeOn;
 
   public TargetTaxLotRequest() {
   }
@@ -317,6 +324,25 @@ public class TargetTaxLotRequest {
   }
 
 
+  public TargetTaxLotRequest chargeableGainsTakeOn(ChargeableGainsTakeOn chargeableGainsTakeOn) {
+    this.chargeableGainsTakeOn = chargeableGainsTakeOn;
+    return this;
+  }
+
+  /**
+   * Get chargeableGainsTakeOn
+   * @return chargeableGainsTakeOn
+   */
+  @javax.annotation.Nullable
+  public ChargeableGainsTakeOn getChargeableGainsTakeOn() {
+    return chargeableGainsTakeOn;
+  }
+
+  public void setChargeableGainsTakeOn(ChargeableGainsTakeOn chargeableGainsTakeOn) {
+    this.chargeableGainsTakeOn = chargeableGainsTakeOn;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -336,7 +362,8 @@ public class TargetTaxLotRequest {
         (this.variationMargin == null ? targetTaxLotRequest.variationMargin == null : (targetTaxLotRequest.variationMargin != null && this.variationMargin.compareTo(targetTaxLotRequest.getVariationMargin()) == 0)) &&
         (this.variationMarginPortfolioCcy == null ? targetTaxLotRequest.variationMarginPortfolioCcy == null : (targetTaxLotRequest.variationMarginPortfolioCcy != null && this.variationMarginPortfolioCcy.compareTo(targetTaxLotRequest.getVariationMarginPortfolioCcy()) == 0)) &&
         (this.amortisedCost == null ? targetTaxLotRequest.amortisedCost == null : (targetTaxLotRequest.amortisedCost != null && this.amortisedCost.compareTo(targetTaxLotRequest.getAmortisedCost()) == 0)) &&
-        (this.currentFace == null ? targetTaxLotRequest.currentFace == null : (targetTaxLotRequest.currentFace != null && this.currentFace.compareTo(targetTaxLotRequest.getCurrentFace()) == 0));
+        (this.currentFace == null ? targetTaxLotRequest.currentFace == null : (targetTaxLotRequest.currentFace != null && this.currentFace.compareTo(targetTaxLotRequest.getCurrentFace()) == 0)) &&
+        Objects.equals(this.chargeableGainsTakeOn, targetTaxLotRequest.chargeableGainsTakeOn);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -345,7 +372,7 @@ public class TargetTaxLotRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(units, cost, portfolioCost, price, purchaseDate, settlementDate, notionalCost, variationMargin, variationMarginPortfolioCcy, amortisedCost, currentFace);
+    return Objects.hash(units, cost, portfolioCost, price, purchaseDate, settlementDate, notionalCost, variationMargin, variationMarginPortfolioCcy, amortisedCost, currentFace, chargeableGainsTakeOn);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -370,6 +397,7 @@ public class TargetTaxLotRequest {
     sb.append("    variationMarginPortfolioCcy: ").append(toIndentedString(variationMarginPortfolioCcy)).append("\n");
     sb.append("    amortisedCost: ").append(toIndentedString(amortisedCost)).append("\n");
     sb.append("    currentFace: ").append(toIndentedString(currentFace)).append("\n");
+    sb.append("    chargeableGainsTakeOn: ").append(toIndentedString(chargeableGainsTakeOn)).append("\n");
     sb.append("}");
     return sb.toString();
   }

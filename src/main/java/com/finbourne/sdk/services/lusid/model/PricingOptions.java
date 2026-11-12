@@ -71,7 +71,10 @@ import com.finbourne.sdk.JSON;
   PricingOptions.JSON_PROPERTY_INFLATION_CONVEXITY,
   PricingOptions.JSON_PROPERTY_ALLOW_FALLBACK_ON_MODEL_DECLINE,
   PricingOptions.JSON_PROPERTY_NAMED_PRICES,
-  PricingOptions.JSON_PROPERTY_SUPPRESS_AUTOMATIC_LOAN_PRINCIPAL_REPAYMENT
+  PricingOptions.JSON_PROPERTY_SUPPRESS_AUTOMATIC_LOAN_PRINCIPAL_REPAYMENT,
+  PricingOptions.JSON_PROPERTY_USE_LOAN_FACILITY_ROLLOVER_TEMPLATE,
+  PricingOptions.JSON_PROPERTY_MATURED_INSTRUMENT_VALUATION,
+  PricingOptions.JSON_PROPERTY_INFLATION_LINKED_BOND_INDEXATION_EVENTS
 })
 
 public class PricingOptions {
@@ -219,6 +222,21 @@ public class PricingOptions {
   @JsonProperty(JSON_PROPERTY_SUPPRESS_AUTOMATIC_LOAN_PRINCIPAL_REPAYMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean suppressAutomaticLoanPrincipalRepayment;
+
+  public static final String JSON_PROPERTY_USE_LOAN_FACILITY_ROLLOVER_TEMPLATE = "useLoanFacilityRolloverTemplate";
+  @JsonProperty(JSON_PROPERTY_USE_LOAN_FACILITY_ROLLOVER_TEMPLATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean useLoanFacilityRolloverTemplate;
+
+  public static final String JSON_PROPERTY_MATURED_INSTRUMENT_VALUATION = "maturedInstrumentValuation";
+  @JsonProperty(JSON_PROPERTY_MATURED_INSTRUMENT_VALUATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String maturedInstrumentValuation;
+
+  public static final String JSON_PROPERTY_INFLATION_LINKED_BOND_INDEXATION_EVENTS = "inflationLinkedBondIndexationEvents";
+  @JsonProperty(JSON_PROPERTY_INFLATION_LINKED_BOND_INDEXATION_EVENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean inflationLinkedBondIndexationEvents;
 
   public PricingOptions() {
   }
@@ -790,6 +808,63 @@ public class PricingOptions {
   }
 
 
+  public PricingOptions useLoanFacilityRolloverTemplate(Boolean useLoanFacilityRolloverTemplate) {
+    this.useLoanFacilityRolloverTemplate = useLoanFacilityRolloverTemplate;
+    return this;
+  }
+
+  /**
+   * If true, a LoanFacilityContractRolloverEvent is booked by its own transaction template, which moves the funded  balance between the contracts it names and, when the rollover is with interest, pays the accrued interest of the  contracts rolled out of. If false, the rollover is expanded into DrawdownEvents and LoanInterestRepaymentEvents  that book through the drawdown and interest repayment templates, as before. Only takes effect on the recipe used  to generate instrument events. Defaults to false.
+   * @return useLoanFacilityRolloverTemplate
+   */
+  @javax.annotation.Nullable
+  public Boolean getUseLoanFacilityRolloverTemplate() {
+    return useLoanFacilityRolloverTemplate;
+  }
+
+  public void setUseLoanFacilityRolloverTemplate(Boolean useLoanFacilityRolloverTemplate) {
+    this.useLoanFacilityRolloverTemplate = useLoanFacilityRolloverTemplate;
+  }
+
+
+  public PricingOptions maturedInstrumentValuation(String maturedInstrumentValuation) {
+    this.maturedInstrumentValuation = maturedInstrumentValuation;
+    return this;
+  }
+
+  /**
+   * How a position in an instrument that has matured is valued. One of \&quot;Fail\&quot; (default: the request fails  with a maturity error, as it always has), \&quot;ZeroPv\&quot; (the position is valued at zero with the maturity  error attached as a diagnostic) or \&quot;ValueAsHeld\&quot; (a Bond, ComplexBond or InflationLinked position  that is still held is valued at its recorded quantity times the supplied price, with zero accrued  interest, at and after maturity, under SimpleStatic, BondLookupPricer or OverrideOnlyPricer; a missing  price fails as it would before maturity, and other instrument types and models behave as under  \&quot;ZeroPv\&quot;). Supersedes returnZeroPv.instrumentMatured: when this is  absent, that flag set to true behaves as \&quot;ZeroPv\&quot; and false as \&quot;Fail\&quot;. Available values: Fail, ZeroPv, ValueAsHeld.
+   * @return maturedInstrumentValuation
+   */
+  @javax.annotation.Nullable
+  public String getMaturedInstrumentValuation() {
+    return maturedInstrumentValuation;
+  }
+
+  public void setMaturedInstrumentValuation(String maturedInstrumentValuation) {
+    this.maturedInstrumentValuation = maturedInstrumentValuation;
+  }
+
+
+  public PricingOptions inflationLinkedBondIndexationEvents(Boolean inflationLinkedBondIndexationEvents) {
+    this.inflationLinkedBondIndexationEvents = inflationLinkedBondIndexationEvents;
+    return this;
+  }
+
+  /**
+   * Generate a daily InflationIndexationEvent for each inflation-linked bond on every day its index ratio changes.  The event books a memo transaction whose units carry the day&#39;s indexed-face change (the principal uplift) and  whose total consideration is zero; its movement is record-only, so nothing moves. Defaults to false.  The memo uses the InflationIndexation transaction type, which ships only in LUSID&#39;s default transaction type  source: a customised default source must add it, with its record-only movement, or every holding gets a  \&quot;not configured\&quot; transaction diagnostic for each day.
+   * @return inflationLinkedBondIndexationEvents
+   */
+  @javax.annotation.Nullable
+  public Boolean getInflationLinkedBondIndexationEvents() {
+    return inflationLinkedBondIndexationEvents;
+  }
+
+  public void setInflationLinkedBondIndexationEvents(Boolean inflationLinkedBondIndexationEvents) {
+    this.inflationLinkedBondIndexationEvents = inflationLinkedBondIndexationEvents;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -827,7 +902,10 @@ public class PricingOptions {
         Objects.equals(this.inflationConvexity, pricingOptions.inflationConvexity) &&
         Objects.equals(this.allowFallbackOnModelDecline, pricingOptions.allowFallbackOnModelDecline) &&
         Objects.equals(this.namedPrices, pricingOptions.namedPrices) &&
-        Objects.equals(this.suppressAutomaticLoanPrincipalRepayment, pricingOptions.suppressAutomaticLoanPrincipalRepayment);
+        Objects.equals(this.suppressAutomaticLoanPrincipalRepayment, pricingOptions.suppressAutomaticLoanPrincipalRepayment) &&
+        Objects.equals(this.useLoanFacilityRolloverTemplate, pricingOptions.useLoanFacilityRolloverTemplate) &&
+        Objects.equals(this.maturedInstrumentValuation, pricingOptions.maturedInstrumentValuation) &&
+        Objects.equals(this.inflationLinkedBondIndexationEvents, pricingOptions.inflationLinkedBondIndexationEvents);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -836,7 +914,7 @@ public class PricingOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, fixedIncomeValuationsUsingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize, riskBumpOptions, fundingCurveByCurrency, defaultPoolFactorsToUnity, findOrCalculateWriteThrough, inflationConvexity, allowFallbackOnModelDecline, namedPrices, suppressAutomaticLoanPrincipalRepayment);
+    return Objects.hash(modelSelection, useInstrumentTypeToDeterminePricer, allowAnyInstrumentsWithSecUidToPriceOffLookup, allowPartiallySuccessfulEvaluation, riskEngine, findOrCalculate, produceSeparateResultForLinearOtcLegs, fxForwardContractsAsUnitsInBothLegs, enableUseOfCachedUnitResults, windowValuationOnInstrumentStartEnd, removeContingentCashflowsInPaymentDiary, useChildSubHoldingKeysForPortfolioExpansion, validateDomesticAndQuoteCurrenciesAreConsistent, mbsValuationUsingHoldingCurrentFace, fixedIncomeValuationsUsingCurrentFace, convertSrsCashFlowsToPortfolioCurrency, conservedQuantityForLookthroughExpansion, returnZeroPv, enableLegLevelInferenceForCustomSrsColumns, useInstrumentScaleFactorAsDefault, scaleInstrumentAccruedOverrideByContractSize, riskBumpOptions, fundingCurveByCurrency, defaultPoolFactorsToUnity, findOrCalculateWriteThrough, inflationConvexity, allowFallbackOnModelDecline, namedPrices, suppressAutomaticLoanPrincipalRepayment, useLoanFacilityRolloverTemplate, maturedInstrumentValuation, inflationLinkedBondIndexationEvents);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -879,6 +957,9 @@ public class PricingOptions {
     sb.append("    allowFallbackOnModelDecline: ").append(toIndentedString(allowFallbackOnModelDecline)).append("\n");
     sb.append("    namedPrices: ").append(toIndentedString(namedPrices)).append("\n");
     sb.append("    suppressAutomaticLoanPrincipalRepayment: ").append(toIndentedString(suppressAutomaticLoanPrincipalRepayment)).append("\n");
+    sb.append("    useLoanFacilityRolloverTemplate: ").append(toIndentedString(useLoanFacilityRolloverTemplate)).append("\n");
+    sb.append("    maturedInstrumentValuation: ").append(toIndentedString(maturedInstrumentValuation)).append("\n");
+    sb.append("    inflationLinkedBondIndexationEvents: ").append(toIndentedString(inflationLinkedBondIndexationEvents)).append("\n");
     sb.append("}");
     return sb.toString();
   }

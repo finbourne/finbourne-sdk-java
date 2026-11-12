@@ -23,6 +23,7 @@ ReferenceListType method = ReferenceListType.DECIMAL_LIST;
 ReferenceListType method = ReferenceListType.PROPERTY_LIST;
 ReferenceListType method = ReferenceListType.FUND_ID_LIST;
 ReferenceListType method = ReferenceListType.FILTERED_FUND_ID_LIST;
+ReferenceListType method = ReferenceListType.FILTERED_PORTFOLIO_ID_LIST;
 ```
 
 

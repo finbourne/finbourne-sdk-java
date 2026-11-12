@@ -15,7 +15,9 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -39,7 +41,9 @@ import com.finbourne.sdk.JSON;
   MarginRunRequest.JSON_PROPERTY_EFFECTIVE_AT,
   MarginRunRequest.JSON_PROPERTY_AS_AT,
   MarginRunRequest.JSON_PROPERTY_AGREEMENT_FILTER,
-  MarginRunRequest.JSON_PROPERTY_SCENARIO
+  MarginRunRequest.JSON_PROPERTY_SCENARIOS,
+  MarginRunRequest.JSON_PROPERTY_EFFECTIVE_FROM,
+  MarginRunRequest.JSON_PROPERTY_CAPTURE_DIAGNOSTICS
 })
 
 public class MarginRunRequest {
@@ -58,10 +62,20 @@ public class MarginRunRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String agreementFilter;
 
-  public static final String JSON_PROPERTY_SCENARIO = "scenario";
-  @JsonProperty(JSON_PROPERTY_SCENARIO)
+  public static final String JSON_PROPERTY_SCENARIOS = "scenarios";
+  @JsonProperty(JSON_PROPERTY_SCENARIOS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private ResourceId scenario;
+  private List<ResourceId> scenarios;
+
+  public static final String JSON_PROPERTY_EFFECTIVE_FROM = "effectiveFrom";
+  @JsonProperty(JSON_PROPERTY_EFFECTIVE_FROM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String effectiveFrom;
+
+  public static final String JSON_PROPERTY_CAPTURE_DIAGNOSTICS = "captureDiagnostics";
+  @JsonProperty(JSON_PROPERTY_CAPTURE_DIAGNOSTICS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean captureDiagnostics;
 
   public MarginRunRequest() {
   }
@@ -72,7 +86,7 @@ public class MarginRunRequest {
   }
 
   /**
-   * The business date, datetime or cut label to value the agreements at.
+   * The business date, datetime or cut label to value the agreements at. With an effectiveFrom, the last date of the span.
    * @return effectiveAt
    */
   @javax.annotation.Nonnull
@@ -123,22 +137,68 @@ public class MarginRunRequest {
   }
 
 
-  public MarginRunRequest scenario(ResourceId scenario) {
-    this.scenario = scenario;
+  public MarginRunRequest scenarios(List<ResourceId> scenarios) {
+    this.scenarios = scenarios;
+    return this;
+  }
+
+  public MarginRunRequest addScenariosItem(ResourceId scenariosItem) {
+    if (this.scenarios == null) {
+      this.scenarios = new ArrayList<>();
+    }
+    this.scenarios.add(scenariosItem);
     return this;
   }
 
   /**
-   * Get scenario
-   * @return scenario
+   * The stored scenarios to value the agreements under, each as a what-if beside the base market, which the run always values. A scenario&#39;s calls are served beside the base calls only when asked for, and cannot be accepted, disputed or matched to a counterparty demand. At most 20. Only the base market is valued if not specified.
+   * @return scenarios
    */
   @javax.annotation.Nullable
-  public ResourceId getScenario() {
-    return scenario;
+  public List<ResourceId> getScenarios() {
+    return scenarios;
   }
 
-  public void setScenario(ResourceId scenario) {
-    this.scenario = scenario;
+  public void setScenarios(List<ResourceId> scenarios) {
+    this.scenarios = scenarios;
+  }
+
+
+  public MarginRunRequest effectiveFrom(String effectiveFrom) {
+    this.effectiveFrom = effectiveFrom;
+    return this;
+  }
+
+  /**
+   * The first business date, datetime or cut label of a span ending at effectiveAt. Each weekday from it to effectiveAt is valued as a run of its own, all at the same asAt, and a date after the asAt is a projection valued on the market as at the asAt that cannot be accepted, disputed or matched to a counterparty demand. At most 130 weekdays. Only effectiveAt is valued if not specified.
+   * @return effectiveFrom
+   */
+  @javax.annotation.Nullable
+  public String getEffectiveFrom() {
+    return effectiveFrom;
+  }
+
+  public void setEffectiveFrom(String effectiveFrom) {
+    this.effectiveFrom = effectiveFrom;
+  }
+
+
+  public MarginRunRequest captureDiagnostics(Boolean captureDiagnostics) {
+    this.captureDiagnostics = captureDiagnostics;
+    return this;
+  }
+
+  /**
+   * Whether to store the working behind the run&#39;s figures so that it can be explained. Specified, it is honoured. Not specified, the working is stored only for a run of a single date with no scenarios, since storing it costs time and space that a span or what-if run is not expected to repay.
+   * @return captureDiagnostics
+   */
+  @javax.annotation.Nullable
+  public Boolean getCaptureDiagnostics() {
+    return captureDiagnostics;
+  }
+
+  public void setCaptureDiagnostics(Boolean captureDiagnostics) {
+    this.captureDiagnostics = captureDiagnostics;
   }
 
 
@@ -154,7 +214,9 @@ public class MarginRunRequest {
     return Objects.equals(this.effectiveAt, marginRunRequest.effectiveAt) &&
         Objects.equals(this.asAt, marginRunRequest.asAt) &&
         Objects.equals(this.agreementFilter, marginRunRequest.agreementFilter) &&
-        Objects.equals(this.scenario, marginRunRequest.scenario);
+        Objects.equals(this.scenarios, marginRunRequest.scenarios) &&
+        Objects.equals(this.effectiveFrom, marginRunRequest.effectiveFrom) &&
+        Objects.equals(this.captureDiagnostics, marginRunRequest.captureDiagnostics);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -163,7 +225,7 @@ public class MarginRunRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(effectiveAt, asAt, agreementFilter, scenario);
+    return Objects.hash(effectiveAt, asAt, agreementFilter, scenarios, effectiveFrom, captureDiagnostics);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -180,7 +242,9 @@ public class MarginRunRequest {
     sb.append("    effectiveAt: ").append(toIndentedString(effectiveAt)).append("\n");
     sb.append("    asAt: ").append(toIndentedString(asAt)).append("\n");
     sb.append("    agreementFilter: ").append(toIndentedString(agreementFilter)).append("\n");
-    sb.append("    scenario: ").append(toIndentedString(scenario)).append("\n");
+    sb.append("    scenarios: ").append(toIndentedString(scenarios)).append("\n");
+    sb.append("    effectiveFrom: ").append(toIndentedString(effectiveFrom)).append("\n");
+    sb.append("    captureDiagnostics: ").append(toIndentedString(captureDiagnostics)).append("\n");
     sb.append("}");
     return sb.toString();
   }

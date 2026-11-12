@@ -5,7 +5,7 @@ classname FilteredFundIdList
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**referenceListType** | **String** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList. | [default to String]
+**referenceListType** | **String** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList, FilteredPortfolioIdList. | [default to String]
 **filter** | **String** |  | [default to String]
 **values** | [**List&lt;ResourceId&gt;**](ResourceId.md) |  | [optional] [readonly] [default to List<ResourceId>]
 **navTypeCodesHint** | **List&lt;String&gt;** |  | [optional] [default to List<String>]

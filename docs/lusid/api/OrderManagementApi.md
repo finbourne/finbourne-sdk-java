@@ -12,6 +12,7 @@ All URIs are relative to *http://localhost*
 | [**getOrderHistory**](OrderManagementApi.md#getOrderHistory) | **GET** /api/api/ordermanagement/order/{scope}/{code}/$history | GetOrderHistory: Get the history of an order and related entity changes |
 | [**moveOrders**](OrderManagementApi.md#moveOrders) | **POST** /api/api/ordermanagement/moveorders | [EARLY ACCESS] MoveOrders: Move orders to new or existing block |
 | [**placeBlocks**](OrderManagementApi.md#placeBlocks) | **POST** /api/api/ordermanagement/placeblocks | [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests. |
+| [**previewBlocks**](OrderManagementApi.md#previewBlocks) | **POST** /api/api/ordermanagement/$previewblocks | PreviewBlocks: Preview the blocks a set of orders would form |
 | [**runAllocationService**](OrderManagementApi.md#runAllocationService) | **POST** /api/api/ordermanagement/allocate | RunAllocationService: Runs the Allocation Service |
 | [**runAllocationServiceWithWeights**](OrderManagementApi.md#runAllocationServiceWithWeights) | **POST** /api/api/ordermanagement/allocate/weighted | [EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights |
 | [**sweepBlocks**](OrderManagementApi.md#sweepBlocks) | **POST** /api/api/ordermanagement/SweepBlocks | [EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful. |
@@ -645,9 +646,86 @@ public class OrderManagementApiExample {
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
+## previewBlocks
+
+> ResourceListOfProposedBlockAndOrders previewBlocks(previewBlocksRequest)
+
+PreviewBlocks: Preview the blocks a set of orders would form
+
+Groups a set of orders into blocks according to the requested grouping mode, with each block&#39;s side and  net size derived from its orders. Nothing is created: the result is a set of block and order requests, in  the shape accepted by CreateOrders, which may be posted there as they are.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.OrderManagementApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class OrderManagementApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        OrderManagementApi apiInstance = apiFactory.build(OrderManagementApi.class);
+        PreviewBlocksRequest previewBlocksRequest = new PreviewBlocksRequest(); // PreviewBlocksRequest | The orders to group and how to group them.
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResourceListOfProposedBlockAndOrders result = apiInstance.previewBlocks(previewBlocksRequest).execute(opts);
+
+            ResourceListOfProposedBlockAndOrders result = apiInstance.previewBlocks(previewBlocksRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrderManagementApi#previewBlocks");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **previewBlocksRequest** | [**PreviewBlocksRequest**](../model/PreviewBlocksRequest.md)| The orders to group and how to group them. | |
+
+### Return type
+
+[**ResourceListOfProposedBlockAndOrders**](../model/ResourceListOfProposedBlockAndOrders.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The proposed blocks and their orders. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
 ## runAllocationService
 
-> AllocationServiceRunResponse runAllocationService(resourceId, allocationAlgorithm)
+> AllocationServiceRunResponse runAllocationService(resourceId, allocationAlgorithm, cancelAndCorrect)
 
 RunAllocationService: Runs the Allocation Service
 
@@ -680,11 +758,12 @@ public class OrderManagementApiExample {
         OrderManagementApi apiInstance = apiFactory.build(OrderManagementApi.class);
         List<ResourceId> resourceId = Arrays.asList(); // List<ResourceId> | The List of Placement IDs for which you wish to allocate Executions.
         String allocationAlgorithm = "allocationAlgorithm_example"; // String | A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".
+        Boolean cancelAndCorrect = false; // Boolean | Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched.
         try {
             // uncomment the below to set overrides at the request level
-            // AllocationServiceRunResponse result = apiInstance.runAllocationService(resourceId, allocationAlgorithm).execute(opts);
+            // AllocationServiceRunResponse result = apiInstance.runAllocationService(resourceId, allocationAlgorithm, cancelAndCorrect).execute(opts);
 
-            AllocationServiceRunResponse result = apiInstance.runAllocationService(resourceId, allocationAlgorithm).execute();
+            AllocationServiceRunResponse result = apiInstance.runAllocationService(resourceId, allocationAlgorithm, cancelAndCorrect).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling OrderManagementApi#runAllocationService");
@@ -702,6 +781,7 @@ public class OrderManagementApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **resourceId** | [**List&lt;ResourceId&gt;**](../model/ResourceId.md)| The List of Placement IDs for which you wish to allocate Executions. | |
 | **allocationAlgorithm** | **String**| A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. | [optional] |
+| **cancelAndCorrect** | **Boolean**| Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. | [optional] [default to false] |
 
 ### Return type
 
@@ -726,7 +806,7 @@ public class OrderManagementApiExample {
 
 ## runAllocationServiceWithWeights
 
-> AllocationServiceRunResponse runAllocationServiceWithWeights(weightedAllocationServiceRunRequest, allocationAlgorithm)
+> AllocationServiceRunResponse runAllocationServiceWithWeights(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect)
 
 [EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
 
@@ -759,11 +839,12 @@ public class OrderManagementApiExample {
         OrderManagementApi apiInstance = apiFactory.build(OrderManagementApi.class);
         WeightedAllocationServiceRunRequest weightedAllocationServiceRunRequest = new WeightedAllocationServiceRunRequest(); // WeightedAllocationServiceRunRequest | The placement IDs to allocate against, and the portfolio weights to use for the allocation split.
         String allocationAlgorithm = "allocationAlgorithm_example"; // String | A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".
+        Boolean cancelAndCorrect = false; // Boolean | Whether to cancel the transactions booked against this placement's allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place.
         try {
             // uncomment the below to set overrides at the request level
-            // AllocationServiceRunResponse result = apiInstance.runAllocationServiceWithWeights(weightedAllocationServiceRunRequest, allocationAlgorithm).execute(opts);
+            // AllocationServiceRunResponse result = apiInstance.runAllocationServiceWithWeights(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect).execute(opts);
 
-            AllocationServiceRunResponse result = apiInstance.runAllocationServiceWithWeights(weightedAllocationServiceRunRequest, allocationAlgorithm).execute();
+            AllocationServiceRunResponse result = apiInstance.runAllocationServiceWithWeights(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling OrderManagementApi#runAllocationServiceWithWeights");
@@ -781,6 +862,7 @@ public class OrderManagementApiExample {
 |------------- | ------------- | ------------- | -------------|
 | **weightedAllocationServiceRunRequest** | [**WeightedAllocationServiceRunRequest**](../model/WeightedAllocationServiceRunRequest.md)| The placement IDs to allocate against, and the portfolio weights to use for the allocation split. | |
 | **allocationAlgorithm** | **String**| A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. | [optional] |
+| **cancelAndCorrect** | **Boolean**| Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. | [optional] [default to false] |
 
 ### Return type
 

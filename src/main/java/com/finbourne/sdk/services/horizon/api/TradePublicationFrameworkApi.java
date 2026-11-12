@@ -31,7 +31,6 @@ import java.io.File;
 import com.finbourne.sdk.services.horizon.model.InstancesResponse;
 import com.finbourne.sdk.services.horizon.model.LusidProblemDetails;
 import com.finbourne.sdk.services.horizon.model.LusidValidationProblemDetails;
-import java.time.OffsetDateTime;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfFailedDeliveryResponse;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfInstanceRunResponse;
 import com.finbourne.sdk.services.horizon.model.PagedResourceListOfRunFileResponse;
@@ -43,7 +42,6 @@ import com.finbourne.sdk.services.horizon.model.ReplayTransactionsRequest;
 import com.finbourne.sdk.services.horizon.model.ReplayTransactionsResponse;
 import com.finbourne.sdk.services.horizon.model.ResolveFailedDeliveryRequest;
 import com.finbourne.sdk.services.horizon.model.ResolveFailedDeliveryResponse;
-import com.finbourne.sdk.services.horizon.model.TpfFileDeliveryDisplayStatus;
 import com.finbourne.sdk.services.horizon.model.TpfRetrySftpResponse;
 import com.finbourne.sdk.services.horizon.model.TpfTransactionSearchRequest;
 
@@ -462,9 +460,8 @@ public class TradePublicationFrameworkApi {
     /**
      * Build call for getTpfFileDeliveries
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
-     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
-     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param filter Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, referenceId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional)
+     * @param sortBy Sort fields (e.g. \&quot;generatedAt DESC\&quot;). Up to 2 fields allowed (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
      * @param page Pagination token from previous response (optional, default to )
      * @param _callback Callback for upload/download progress
@@ -478,16 +475,15 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTpfFileDeliveriesCall(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback) throws ApiException {
-        return getTpfFileDeliveriesCall(instanceId, status, dateFrom, dateTo, limit, page,  _callback, new ConfigurationOptions());
+    private HttpRequest getTpfFileDeliveriesCall(String instanceId, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback) throws ApiException {
+        return getTpfFileDeliveriesCall(instanceId, filter, sortBy, limit, page,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for getTpfFileDeliveries. Use any specified configuration options to override any other configuration for this request only.
      * @param instanceId Integration instance ID (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param dateFrom Filter deliveries from this time (inclusive) (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param dateTo Filter deliveries to this time (inclusive) (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, referenceId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy Sort fields (e.g. \&quot;generatedAt DESC\&quot;). Up to 2 fields allowed (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50). Use any specified configuration options to override any other configuration for this request only.
      * @param page Pagination token from previous response (optional, default to )
      * @param _callback Callback for upload/download progress
@@ -501,7 +497,7 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest getTpfFileDeliveriesCall(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTpfFileDeliveriesCall(String instanceId, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -527,16 +523,12 @@ public class TradePublicationFrameworkApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (status != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
         }
 
-        if (dateFrom != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dateFrom", dateFrom));
-        }
-
-        if (dateTo != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("dateTo", dateTo));
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
         }
 
         if (limit != null) {
@@ -567,23 +559,22 @@ public class TradePublicationFrameworkApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest getTpfFileDeliveriesValidateBeforeCall(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest getTpfFileDeliveriesValidateBeforeCall(String instanceId, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'instanceId' is set
         if (instanceId == null) {
             throw new ApiException("Missing the required parameter 'instanceId' when calling getTpfFileDeliveries(Async)");
         }
 
-        return getTpfFileDeliveriesCall(instanceId, status, dateFrom, dateTo, limit, page, _callback, opts);
+        return getTpfFileDeliveriesCall(instanceId, filter, sortBy, limit, page, _callback, opts);
 
     }
 
     /**
      * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
-     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable via a Finbourne Filtering DSL expression and sortable. Supports pagination for large result sets.
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
-     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
-     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param filter Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, referenceId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional)
+     * @param sortBy Sort fields (e.g. \&quot;generatedAt DESC\&quot;). Up to 2 fields allowed (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
      * @param page Pagination token from previous response (optional, default to )
      * @return ApiResponse&lt;PagedResourceListOfTpfFileDeliveryResponse&gt;
@@ -596,19 +587,18 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page) throws ApiException {
-        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, String filter, List<String> sortBy, Integer limit, String page) throws ApiException {
+        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, filter, sortBy, limit, page, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
-     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.Use any specified configuration options to override any other configuration for this request only
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable via a Finbourne Filtering DSL expression and sortable. Supports pagination for large result sets.Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
-     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
-     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param filter Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, referenceId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional)
+     * @param sortBy Sort fields (e.g. \&quot;generatedAt DESC\&quot;). Up to 2 fields allowed (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
      * @param page Pagination token from previous response (optional, default to )
      * @return ApiResponse&lt;PagedResourceListOfTpfFileDeliveryResponse&gt;
@@ -621,19 +611,18 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, null, opts);
+    private ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> getTpfFileDeliveriesWithHttpInfo(String instanceId, String filter, List<String> sortBy, Integer limit, String page, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, filter, sortBy, limit, page, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance (asynchronously)
-     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable via a Finbourne Filtering DSL expression and sortable. Supports pagination for large result sets.
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
-     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
-     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param filter Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, referenceId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional)
+     * @param sortBy Sort fields (e.g. \&quot;generatedAt DESC\&quot;). Up to 2 fields allowed (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
      * @param page Pagination token from previous response (optional, default to )
      * @param _callback The callback to be executed when the API call finishes
@@ -646,20 +635,19 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTpfFileDeliveriesAsync(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback) throws ApiException {
+    private void getTpfFileDeliveriesAsync(String instanceId, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, filter, sortBy, limit, page, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance (asynchronously)
-     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.Use any specified configuration options to override any other configuration for this request only
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable via a Finbourne Filtering DSL expression and sortable. Supports pagination for large result sets.Use any specified configuration options to override any other configuration for this request only
      * @param instanceId Integration instance ID (required)
-     * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
-     * @param dateFrom Filter deliveries from this time (inclusive) (optional)
-     * @param dateTo Filter deliveries to this time (inclusive) (optional)
+     * @param filter Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, referenceId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional)
+     * @param sortBy Sort fields (e.g. \&quot;generatedAt DESC\&quot;). Up to 2 fields allowed (optional)
      * @param limit Page size for pagination (default 50, max 500) (optional, default to 50)
      * @param page Pagination token from previous response (optional, default to )
      * @param _callback The callback to be executed when the API call finishes
@@ -672,18 +660,17 @@ public class TradePublicationFrameworkApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void getTpfFileDeliveriesAsync(String instanceId, TpfFileDeliveryDisplayStatus status, OffsetDateTime dateFrom, OffsetDateTime dateTo, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void getTpfFileDeliveriesAsync(String instanceId, String filter, List<String> sortBy, Integer limit, String page, final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, status, dateFrom, dateTo, limit, page, _callback, opts);
+        HttpRequest localVarCall = getTpfFileDeliveriesValidateBeforeCall(instanceId, filter, sortBy, limit, page, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfTpfFileDeliveryResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     public class APIgetTpfFileDeliveriesRequest {
         private final String instanceId;
-        private TpfFileDeliveryDisplayStatus status;
-        private OffsetDateTime dateFrom;
-        private OffsetDateTime dateTo;
+        private String filter;
+        private List<String> sortBy;
         private Integer limit;
         private String page;
 
@@ -692,32 +679,22 @@ public class TradePublicationFrameworkApi {
         }
 
         /**
-         * Set status
-         * @param status Filter by delivery outcome (Delivered, Failed, Pending) (optional)
+         * Set filter
+         * @param filter Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, referenceId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional)
          * @return APIgetTpfFileDeliveriesRequest
          */
-        public APIgetTpfFileDeliveriesRequest status(TpfFileDeliveryDisplayStatus status) {
-            this.status = status;
+        public APIgetTpfFileDeliveriesRequest filter(String filter) {
+            this.filter = filter;
             return this;
         }
 
         /**
-         * Set dateFrom
-         * @param dateFrom Filter deliveries from this time (inclusive) (optional)
+         * Set sortBy
+         * @param sortBy Sort fields (e.g. \&quot;generatedAt DESC\&quot;). Up to 2 fields allowed (optional)
          * @return APIgetTpfFileDeliveriesRequest
          */
-        public APIgetTpfFileDeliveriesRequest dateFrom(OffsetDateTime dateFrom) {
-            this.dateFrom = dateFrom;
-            return this;
-        }
-
-        /**
-         * Set dateTo
-         * @param dateTo Filter deliveries to this time (inclusive) (optional)
-         * @return APIgetTpfFileDeliveriesRequest
-         */
-        public APIgetTpfFileDeliveriesRequest dateTo(OffsetDateTime dateTo) {
-            this.dateTo = dateTo;
+        public APIgetTpfFileDeliveriesRequest sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
             return this;
         }
 
@@ -755,7 +732,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return getTpfFileDeliveriesCall(instanceId, status, dateFrom, dateTo, limit, page, _callback);
+            return getTpfFileDeliveriesCall(instanceId, filter, sortBy, limit, page, _callback);
         }
 
         /**
@@ -771,7 +748,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public PagedResourceListOfTpfFileDeliveryResponse execute() throws ApiException {
-            ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> localVarResp = getTpfFileDeliveriesWithHttpInfo(instanceId, status, dateFrom, dateTo, limit, page);
+            ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> localVarResp = getTpfFileDeliveriesWithHttpInfo(instanceId, filter, sortBy, limit, page);
             return localVarResp.getData();
         }
 
@@ -788,7 +765,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public PagedResourceListOfTpfFileDeliveryResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> localVarResp = getTpfFileDeliveriesWithHttpInfo(instanceId, status, dateFrom, dateTo, limit, page, opts);
+            ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> localVarResp = getTpfFileDeliveriesWithHttpInfo(instanceId, filter, sortBy, limit, page, opts);
             return localVarResp.getData();
         }
 
@@ -805,7 +782,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> executeWithHttpInfo() throws ApiException {
-            return getTpfFileDeliveriesWithHttpInfo(instanceId, status, dateFrom, dateTo, limit, page);
+            return getTpfFileDeliveriesWithHttpInfo(instanceId, filter, sortBy, limit, page);
         }
 
         /**
@@ -821,7 +798,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfTpfFileDeliveryResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return getTpfFileDeliveriesWithHttpInfo(instanceId, status, dateFrom, dateTo, limit, page, opts);
+            return getTpfFileDeliveriesWithHttpInfo(instanceId, filter, sortBy, limit, page, opts);
         }
 
         /**
@@ -837,7 +814,7 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback) throws ApiException {
-            getTpfFileDeliveriesAsync(instanceId, status, dateFrom, dateTo, limit, page, _callback);
+            getTpfFileDeliveriesAsync(instanceId, filter, sortBy, limit, page, _callback);
         }
 
         /**
@@ -853,13 +830,13 @@ public class TradePublicationFrameworkApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfTpfFileDeliveryResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            getTpfFileDeliveriesAsync(instanceId, status, dateFrom, dateTo, limit, page, _callback, opts);
+            getTpfFileDeliveriesAsync(instanceId, filter, sortBy, limit, page, _callback, opts);
         }
     }
 
     /**
      * [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
-     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
+     * Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable via a Finbourne Filtering DSL expression and sortable. Supports pagination for large result sets.
      * @param instanceId Integration instance ID (required)
      * @return APIgetTpfFileDeliveriesRequest
      * @http.response.details
@@ -961,7 +938,7 @@ public class TradePublicationFrameworkApi {
 
     /**
      * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions across instances
-     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.
+     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, eventType, skipReason, failureReason, failureStage, fileName, sentAt, portfolioScope, portfolioCode, runId. Publication status is filtered by the status body field, not the filter. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.
      * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTpfTransactionSearchResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -981,7 +958,7 @@ public class TradePublicationFrameworkApi {
 
     /**
      * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions across instances
-     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.Use any specified configuration options to override any other configuration for this request only
+     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, eventType, skipReason, failureReason, failureStage, fileName, sentAt, portfolioScope, portfolioCode, runId. Publication status is filtered by the status body field, not the filter. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.Use any specified configuration options to override any other configuration for this request only
      * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTpfTransactionSearchResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1001,7 +978,7 @@ public class TradePublicationFrameworkApi {
 
     /**
      * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions across instances (asynchronously)
-     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.
+     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, eventType, skipReason, failureReason, failureStage, fileName, sentAt, portfolioScope, portfolioCode, runId. Publication status is filtered by the status body field, not the filter. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.
      * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1022,7 +999,7 @@ public class TradePublicationFrameworkApi {
 
     /**
      * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions across instances (asynchronously)
-     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.Use any specified configuration options to override any other configuration for this request only
+     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, eventType, skipReason, failureReason, failureStage, fileName, sentAt, portfolioScope, portfolioCode, runId. Publication status is filtered by the status body field, not the filter. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.Use any specified configuration options to override any other configuration for this request only
      * @param tpfTransactionSearchRequest Search filters, sort order, and pagination options. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1175,7 +1152,7 @@ public class TradePublicationFrameworkApi {
 
     /**
      * [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions across instances
-     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.
+     * Matches on transaction ID and/or instrument identifier, optionally narrowed by instance, trade date range, publication status and a Finbourne Filtering expression. Multiple values within transactionIds or instrumentIdentifiers are OR&#39;d; the two filters are AND&#39;d. Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Transaction IDs that are empty or have leading or trailing whitespace are rejected (400). Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, eventType, skipReason, failureReason, failureStage, fileName, sentAt, portfolioScope, portfolioCode, runId. Publication status is filtered by the status body field, not the filter. Sortable by the same properties. RunStartTime DESC is the default tiebreaker. Supports pagination.
      * @return APIgetTpfTransactionHistorySearchRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -3119,7 +3096,7 @@ public class TradePublicationFrameworkApi {
      * @param status Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status. (optional)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. (optional)
+     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, eventType. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. eventType is the TPF event type (New, Amended, Cancelled, ..., or Queued for an element not yet built). Comparing a field with null is rejected. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to Id ASC. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -3144,7 +3121,7 @@ public class TradePublicationFrameworkApi {
      * @param status Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to ). Use any specified configuration options to override any other configuration for this request only.
      * @param pageSize Number of results per page. (optional, default to 100). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, eventType. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. eventType is the TPF event type (New, Amended, Cancelled, ..., or Queued for an element not yet built). Comparing a field with null is rejected. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to Id ASC. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -3248,7 +3225,7 @@ public class TradePublicationFrameworkApi {
      * @param status Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status. (optional)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. (optional)
+     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, eventType. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. eventType is the TPF event type (New, Amended, Cancelled, ..., or Queued for an element not yet built). Comparing a field with null is rejected. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to Id ASC. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTransactionResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3275,7 +3252,7 @@ public class TradePublicationFrameworkApi {
      * @param status Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status. (optional)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. (optional)
+     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, eventType. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. eventType is the TPF event type (New, Amended, Cancelled, ..., or Queued for an element not yet built). Comparing a field with null is rejected. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to Id ASC. (optional)
      * @return ApiResponse&lt;PagedResourceListOfTransactionResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3302,7 +3279,7 @@ public class TradePublicationFrameworkApi {
      * @param status Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status. (optional)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. (optional)
+     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, eventType. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. eventType is the TPF event type (New, Amended, Cancelled, ..., or Queued for an element not yet built). Comparing a field with null is rejected. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to Id ASC. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -3330,7 +3307,7 @@ public class TradePublicationFrameworkApi {
      * @param status Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status. (optional)
      * @param page The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. (optional, default to )
      * @param pageSize Number of results per page. (optional, default to 100)
-     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. (optional)
+     * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, eventType. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. eventType is the TPF event type (New, Amended, Cancelled, ..., or Queued for an element not yet built). Comparing a field with null is rejected. (optional)
      * @param sortBy Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to Id ASC. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -3396,7 +3373,7 @@ public class TradePublicationFrameworkApi {
 
         /**
          * Set filter
-         * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. (optional)
+         * @param filter A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, eventType. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. eventType is the TPF event type (New, Amended, Cancelled, ..., or Queued for an element not yet built). Comparing a field with null is rejected. (optional)
          * @return APIlistRunTransactionsRequest
          */
         public APIlistRunTransactionsRequest filter(String filter) {

@@ -5,7 +5,7 @@ classname IndexModelOptions
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**modelOptionsType** | **String** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions. | [default to String]
+**modelOptionsType** | **String** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions, StripBondModelOptions. | [default to String]
 **portfolioScaling** | **String** | Available values: Sum, AbsoluteSum, Unity. | [default to String]
 **lookthroughPortfolioRelationshipId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 

@@ -25,15 +25,17 @@ Name | Type | Description | Notes
 **primaryNavType** | [**NavType**](NavType.md) |  | [optional] [default to NavType]
 **additionalNavTypes** | [**List&lt;NavType&gt;**](NavType.md) | The definitions for any additional NAVs on the Fund. | [optional] [default to List<NavType>]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | A set of properties for the Fund. | [optional] [default to Map<String, Property>]
-**createInstrument** | **Boolean** | Whether to create instruments for the Fund&#39;s share classes, series, or partner classes upon creation. Defaults to false. | [optional] [default to Boolean]
-**instrumentScope** | **String** | The scope in which the instruments are created when CreateInstrument is true. Defaults to the default instrument scope. Legacy share class instruments are resolved in ShareClassInstrumentScopes instead. | [optional] [default to String]
+**createInstrument** | **Boolean** | Whether to master an instrument upon fund creation. For unitised funds (Classes, Series, or Partners), an instrument is mastered per share class. For non-unitised funds, a single instrument is mastered for the fund itself, with a ClientInternal identifier of {FundScope}:{Code}. Defaults to false. | [optional] [default to Boolean]
+**instrumentScope** | **String** | The scope in which instruments are mastered when CreateInstrument is true. For non-unitised funds the fund scope also forms part of the fund instrument&#39;s ClientInternal identifier: {FundScope}:{Code}. Defaults to the default instrument scope. Legacy share class instruments are resolved via ShareClassInstrumentScopes instead. | [optional] [default to String]
 **allocationGroups** | [**List&lt;AllocationGroup&gt;**](AllocationGroup.md) | An optional list of Allocation Group definitions for the Fund. | [optional] [default to List<AllocationGroup>]
 **shareClasses** | [**List&lt;ShareClass&gt;**](ShareClass.md) | An optional list of Share Class definitions for the Fund. | [optional] [default to List<ShareClass>]
 **fundInstrument** | [**FundInstrument**](FundInstrument.md) |  | [optional] [default to FundInstrument]
 **pricingMethodology** | [**PricingMethodology**](PricingMethodology.md) |  | [optional] [default to PricingMethodology]
 **reportingPrices** | [**List&lt;ReportingPrice&gt;**](ReportingPrice.md) | Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices. | [optional] [default to List<ReportingPrice>]
+**dealingEstimates** | [**DealingEstimates**](DealingEstimates.md) |  | [optional] [default to DealingEstimates]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **whtParameters** | [**WhtParameters**](WhtParameters.md) |  | [optional] [default to WhtParameters]
+**valuationTemplateId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -68,8 +70,10 @@ Boolean createInstrument = true;
 FundInstrument fundInstrument = new FundInstrument();
 PricingMethodology pricingMethodology = new PricingMethodology();
 @javax.annotation.Nullable List<ReportingPrice> reportingPrices = new List<ReportingPrice>();
+DealingEstimates dealingEstimates = new DealingEstimates();
 Version version = new Version();
 WhtParameters whtParameters = new WhtParameters();
+ResourceId valuationTemplateId = new ResourceId();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -100,8 +104,10 @@ Fund fundInstance = new Fund()
     .fundInstrument(fundInstrument)
     .pricingMethodology(pricingMethodology)
     .reportingPrices(reportingPrices)
+    .dealingEstimates(dealingEstimates)
     .version(version)
     .whtParameters(whtParameters)
+    .valuationTemplateId(valuationTemplateId)
     .links(links);
 ```
 

@@ -48,6 +48,10 @@ import com.finbourne.sdk.JSON;
   Transfer.JSON_PROPERTY_TRANSFER_TYPE,
   Transfer.JSON_PROPERTY_PORTFOLIO_ID_OUT,
   Transfer.JSON_PROPERTY_PORTFOLIO_ID_IN,
+  Transfer.JSON_PROPERTY_PRICING_METHOD,
+  Transfer.JSON_PROPERTY_TAX_LOT_STRUCTURE,
+  Transfer.JSON_PROPERTY_WEIGHT_OUT,
+  Transfer.JSON_PROPERTY_ACCOUNTING_METHOD,
   Transfer.JSON_PROPERTY_TRANSACTION_OUT,
   Transfer.JSON_PROPERTY_TRANSACTION_IN,
   Transfer.JSON_PROPERTY_PROPERTIES,
@@ -76,6 +80,26 @@ public class Transfer {
   @JsonProperty(JSON_PROPERTY_PORTFOLIO_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId portfolioIdIn;
+
+  public static final String JSON_PROPERTY_PRICING_METHOD = "pricingMethod";
+  @JsonProperty(JSON_PROPERTY_PRICING_METHOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String pricingMethod;
+
+  public static final String JSON_PROPERTY_TAX_LOT_STRUCTURE = "taxLotStructure";
+  @JsonProperty(JSON_PROPERTY_TAX_LOT_STRUCTURE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String taxLotStructure;
+
+  public static final String JSON_PROPERTY_WEIGHT_OUT = "weightOut";
+  @JsonProperty(JSON_PROPERTY_WEIGHT_OUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal weightOut;
+
+  public static final String JSON_PROPERTY_ACCOUNTING_METHOD = "accountingMethod";
+  @JsonProperty(JSON_PROPERTY_ACCOUNTING_METHOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String accountingMethod;
 
   public static final String JSON_PROPERTY_TRANSACTION_OUT = "transactionOut";
   @JsonProperty(JSON_PROPERTY_TRANSACTION_OUT)
@@ -183,6 +207,82 @@ public class Transfer {
 
   public void setPortfolioIdIn(ResourceId portfolioIdIn) {
     this.portfolioIdIn = portfolioIdIn;
+  }
+
+
+  public Transfer pricingMethod(String pricingMethod) {
+    this.pricingMethod = pricingMethod;
+    return this;
+  }
+
+  /**
+   * How the legs were priced: &#39;AtCost&#39; or &#39;AtPrice&#39;.
+   * @return pricingMethod
+   */
+  @javax.annotation.Nullable
+  public String getPricingMethod() {
+    return pricingMethod;
+  }
+
+  public void setPricingMethod(String pricingMethod) {
+    this.pricingMethod = pricingMethod;
+  }
+
+
+  public Transfer taxLotStructure(String taxLotStructure) {
+    this.taxLotStructure = taxLotStructure;
+    return this;
+  }
+
+  /**
+   * What happened to the tax lots of the outgoing position: &#39;Consolidate&#39; or &#39;Preserve&#39;.
+   * @return taxLotStructure
+   */
+  @javax.annotation.Nullable
+  public String getTaxLotStructure() {
+    return taxLotStructure;
+  }
+
+  public void setTaxLotStructure(String taxLotStructure) {
+    this.taxLotStructure = taxLotStructure;
+  }
+
+
+  public Transfer weightOut(java.math.BigDecimal weightOut) {
+    this.weightOut = weightOut;
+    return this;
+  }
+
+  /**
+   * The weighting factor recorded against the outgoing leg.
+   * @return weightOut
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getWeightOut() {
+    return weightOut;
+  }
+
+  public void setWeightOut(java.math.BigDecimal weightOut) {
+    this.weightOut = weightOut;
+  }
+
+
+  public Transfer accountingMethod(String accountingMethod) {
+    this.accountingMethod = accountingMethod;
+    return this;
+  }
+
+  /**
+   * The accounting method recorded against the transfer.
+   * @return accountingMethod
+   */
+  @javax.annotation.Nullable
+  public String getAccountingMethod() {
+    return accountingMethod;
+  }
+
+  public void setAccountingMethod(String accountingMethod) {
+    this.accountingMethod = accountingMethod;
   }
 
 
@@ -329,6 +429,10 @@ public class Transfer {
         Objects.equals(this.transferType, transfer.transferType) &&
         Objects.equals(this.portfolioIdOut, transfer.portfolioIdOut) &&
         Objects.equals(this.portfolioIdIn, transfer.portfolioIdIn) &&
+        Objects.equals(this.pricingMethod, transfer.pricingMethod) &&
+        Objects.equals(this.taxLotStructure, transfer.taxLotStructure) &&
+        (this.weightOut == null ? transfer.weightOut == null : (transfer.weightOut != null && this.weightOut.compareTo(transfer.getWeightOut()) == 0)) &&
+        Objects.equals(this.accountingMethod, transfer.accountingMethod) &&
         Objects.equals(this.transactionOut, transfer.transactionOut) &&
         Objects.equals(this.transactionIn, transfer.transactionIn) &&
         Objects.equals(this.properties, transfer.properties) &&
@@ -343,7 +447,7 @@ public class Transfer {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transferId, transferType, portfolioIdOut, portfolioIdIn, transactionOut, transactionIn, properties, href, version, links);
+    return Objects.hash(transferId, transferType, portfolioIdOut, portfolioIdIn, pricingMethod, taxLotStructure, weightOut, accountingMethod, transactionOut, transactionIn, properties, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -361,6 +465,10 @@ public class Transfer {
     sb.append("    transferType: ").append(toIndentedString(transferType)).append("\n");
     sb.append("    portfolioIdOut: ").append(toIndentedString(portfolioIdOut)).append("\n");
     sb.append("    portfolioIdIn: ").append(toIndentedString(portfolioIdIn)).append("\n");
+    sb.append("    pricingMethod: ").append(toIndentedString(pricingMethod)).append("\n");
+    sb.append("    taxLotStructure: ").append(toIndentedString(taxLotStructure)).append("\n");
+    sb.append("    weightOut: ").append(toIndentedString(weightOut)).append("\n");
+    sb.append("    accountingMethod: ").append(toIndentedString(accountingMethod)).append("\n");
     sb.append("    transactionOut: ").append(toIndentedString(transactionOut)).append("\n");
     sb.append("    transactionIn: ").append(toIndentedString(transactionIn)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");

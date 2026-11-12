@@ -138,6 +138,12 @@ InstrumentEventType method = InstrumentEventType.FACILITY_INTEREST_EVENT;
 InstrumentEventType method = InstrumentEventType.FACILITY_COMMITMENT_FEE_EVENT;
 InstrumentEventType method = InstrumentEventType.INSTALMENT_CALL_EVENT;
 InstrumentEventType method = InstrumentEventType.DEPOSIT_INTEREST_CAPITALISATION_EVENT;
+InstrumentEventType method = InstrumentEventType.PARTIAL_REDEMPTION_WITHOUT_REDUCTION_OF_NOMINAL_VALUE_EVENT;
+InstrumentEventType method = InstrumentEventType.STRIP_BOND_CASHFLOW_EVENT;
+InstrumentEventType method = InstrumentEventType.CAPITALISATION_EVENT;
+InstrumentEventType method = InstrumentEventType.SHARES_PREMIUM_DIVIDEND_EVENT;
+InstrumentEventType method = InstrumentEventType.CASH_DISTRIBUTION_FROM_NON_ELIGIBLE_SECURITIES_SALES_EVENT;
+InstrumentEventType method = InstrumentEventType.INFLATION_INDEXATION_EVENT;
 ```
 
 

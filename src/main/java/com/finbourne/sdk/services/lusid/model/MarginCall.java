@@ -12,13 +12,16 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.CollateralAllocationLine;
 import com.finbourne.sdk.services.lusid.model.CounterpartyIdentifier;
 import com.finbourne.sdk.services.lusid.model.MarginCallReference;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.net.URI;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -68,7 +71,10 @@ import com.finbourne.sdk.JSON;
   MarginCall.JSON_PROPERTY_DEADLINE,
   MarginCall.JSON_PROPERTY_SUPERSEDES,
   MarginCall.JSON_PROPERTY_CARRIED_FROM,
-  MarginCall.JSON_PROPERTY_CARRIED_DISPUTED_AMOUNT
+  MarginCall.JSON_PROPERTY_CARRIED_DISPUTED_AMOUNT,
+  MarginCall.JSON_PROPERTY_SCENARIO,
+  MarginCall.JSON_PROPERTY_EXPLAIN_AVAILABLE,
+  MarginCall.JSON_PROPERTY_PROPOSED_ALLOCATION
 })
 
 public class MarginCall {
@@ -221,6 +227,21 @@ public class MarginCall {
   @JsonProperty(JSON_PROPERTY_CARRIED_DISPUTED_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal carriedDisputedAmount;
+
+  public static final String JSON_PROPERTY_SCENARIO = "scenario";
+  @JsonProperty(JSON_PROPERTY_SCENARIO)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId scenario;
+
+  public static final String JSON_PROPERTY_EXPLAIN_AVAILABLE = "explainAvailable";
+  @JsonProperty(JSON_PROPERTY_EXPLAIN_AVAILABLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean explainAvailable;
+
+  public static final String JSON_PROPERTY_PROPOSED_ALLOCATION = "proposedAllocation";
+  @JsonProperty(JSON_PROPERTY_PROPOSED_ALLOCATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<CollateralAllocationLine> proposedAllocation;
 
   public MarginCall() {
   }
@@ -795,6 +816,71 @@ public class MarginCall {
   }
 
 
+  public MarginCall scenario(ResourceId scenario) {
+    this.scenario = scenario;
+    return this;
+  }
+
+  /**
+   * Get scenario
+   * @return scenario
+   */
+  @javax.annotation.Nullable
+  public ResourceId getScenario() {
+    return scenario;
+  }
+
+  public void setScenario(ResourceId scenario) {
+    this.scenario = scenario;
+  }
+
+
+  public MarginCall explainAvailable(Boolean explainAvailable) {
+    this.explainAvailable = explainAvailable;
+    return this;
+  }
+
+  /**
+   * Whether the working behind the call&#39;s required amount was stored, so that the call can be explained. Only an initial-margin call can be explained, and only when the run stored its working.
+   * @return explainAvailable
+   */
+  @javax.annotation.Nullable
+  public Boolean getExplainAvailable() {
+    return explainAvailable;
+  }
+
+  public void setExplainAvailable(Boolean explainAvailable) {
+    this.explainAvailable = explainAvailable;
+  }
+
+
+  public MarginCall proposedAllocation(List<CollateralAllocationLine> proposedAllocation) {
+    this.proposedAllocation = proposedAllocation;
+    return this;
+  }
+
+  public MarginCall addProposedAllocationItem(CollateralAllocationLine proposedAllocationItem) {
+    if (this.proposedAllocation == null) {
+      this.proposedAllocation = new ArrayList<>();
+    }
+    this.proposedAllocation.add(proposedAllocationItem);
+    return this;
+  }
+
+  /**
+   * The assets the allocation pass proposes to deliver for the call, or to take back for a return, cheapest first. Null until the run&#39;s allocation pass has completed, or when the call moves no collateral of ours.
+   * @return proposedAllocation
+   */
+  @javax.annotation.Nullable
+  public List<CollateralAllocationLine> getProposedAllocation() {
+    return proposedAllocation;
+  }
+
+  public void setProposedAllocation(List<CollateralAllocationLine> proposedAllocation) {
+    this.proposedAllocation = proposedAllocation;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -833,7 +919,10 @@ public class MarginCall {
         Objects.equals(this.deadline, marginCall.deadline) &&
         Objects.equals(this.supersedes, marginCall.supersedes) &&
         Objects.equals(this.carriedFrom, marginCall.carriedFrom) &&
-        (this.carriedDisputedAmount == null ? marginCall.carriedDisputedAmount == null : (marginCall.carriedDisputedAmount != null && this.carriedDisputedAmount.compareTo(marginCall.getCarriedDisputedAmount()) == 0));
+        (this.carriedDisputedAmount == null ? marginCall.carriedDisputedAmount == null : (marginCall.carriedDisputedAmount != null && this.carriedDisputedAmount.compareTo(marginCall.getCarriedDisputedAmount()) == 0)) &&
+        Objects.equals(this.scenario, marginCall.scenario) &&
+        Objects.equals(this.explainAvailable, marginCall.explainAvailable) &&
+        Objects.equals(this.proposedAllocation, marginCall.proposedAllocation);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -842,7 +931,7 @@ public class MarginCall {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, runId, agreementId, counterparty, item, marginType, method, settlement, direction, currency, required, held, call, matchTolerance, counterpartyDemand, difference, matchStatus, demandReceivedAt, statementReference, demandNote, agreedAmount, disputedAmount, disputeReason, disputeOwner, state, deadline, supersedes, carriedFrom, carriedDisputedAmount);
+    return Objects.hash(href, id, runId, agreementId, counterparty, item, marginType, method, settlement, direction, currency, required, held, call, matchTolerance, counterpartyDemand, difference, matchStatus, demandReceivedAt, statementReference, demandNote, agreedAmount, disputedAmount, disputeReason, disputeOwner, state, deadline, supersedes, carriedFrom, carriedDisputedAmount, scenario, explainAvailable, proposedAllocation);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -886,6 +975,9 @@ public class MarginCall {
     sb.append("    supersedes: ").append(toIndentedString(supersedes)).append("\n");
     sb.append("    carriedFrom: ").append(toIndentedString(carriedFrom)).append("\n");
     sb.append("    carriedDisputedAmount: ").append(toIndentedString(carriedDisputedAmount)).append("\n");
+    sb.append("    scenario: ").append(toIndentedString(scenario)).append("\n");
+    sb.append("    explainAvailable: ").append(toIndentedString(explainAvailable)).append("\n");
+    sb.append("    proposedAllocation: ").append(toIndentedString(proposedAllocation)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -49,7 +49,7 @@ import com.finbourne.sdk.JSON;
 
 public class VendorModelRule {
   /**
-   * Available values: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc.
+   * Available values: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc, Client.
    */
   public enum SupplierEnum {
     LUSID("Lusid"),
@@ -64,7 +64,9 @@ public class VendorModelRule {
     
     YIELD_BOOK("YieldBook"),
     
-    LUSID_CALC("LusidCalc");
+    LUSID_CALC("LusidCalc"),
+    
+    CLIENT("Client");
 
     private String value;
 
@@ -136,7 +138,7 @@ public class VendorModelRule {
   }
 
   /**
-   * Available values: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc.
+   * Available values: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc, Client.
    * @return supplier
    */
   @javax.annotation.Nonnull

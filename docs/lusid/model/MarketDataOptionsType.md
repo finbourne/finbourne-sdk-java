@@ -16,6 +16,7 @@ import java.net.URI;
 
 // Example usage of MarketDataOptionsType:
 MarketDataOptionsType method = MarketDataOptionsType.CURVE_OPTIONS;
+MarketDataOptionsType method = MarketDataOptionsType.VOL_CUBE_OPTIONS;
 ```
 
 

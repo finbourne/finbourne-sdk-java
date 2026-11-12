@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.OutputTransaction;
 import com.finbourne.sdk.services.lusid.model.PortfolioId;
+import com.finbourne.sdk.services.lusid.model.UnsettledTransactionRevaluation;
 import java.io.IOException;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -45,7 +46,8 @@ import com.finbourne.sdk.JSON;
   UnsettledTransaction.JSON_PROPERTY_STOCK_SETTLEMENT_STATUS,
   UnsettledTransaction.JSON_PROPERTY_STOCK_IS_OVERDUE,
   UnsettledTransaction.JSON_PROPERTY_DEFERRED_CASH_SETTLEMENT_STATUS,
-  UnsettledTransaction.JSON_PROPERTY_DEFERRED_CASH_IS_OVERDUE
+  UnsettledTransaction.JSON_PROPERTY_DEFERRED_CASH_IS_OVERDUE,
+  UnsettledTransaction.JSON_PROPERTY_REVALUATION
 })
 
 public class UnsettledTransaction {
@@ -98,6 +100,11 @@ public class UnsettledTransaction {
   @JsonProperty(JSON_PROPERTY_DEFERRED_CASH_IS_OVERDUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean deferredCashIsOverdue;
+
+  public static final String JSON_PROPERTY_REVALUATION = "revaluation";
+  @JsonProperty(JSON_PROPERTY_REVALUATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private UnsettledTransactionRevaluation revaluation;
 
   public UnsettledTransaction() {
   }
@@ -292,6 +299,25 @@ public class UnsettledTransaction {
   }
 
 
+  public UnsettledTransaction revaluation(UnsettledTransactionRevaluation revaluation) {
+    this.revaluation = revaluation;
+    return this;
+  }
+
+  /**
+   * Get revaluation
+   * @return revaluation
+   */
+  @javax.annotation.Nullable
+  public UnsettledTransactionRevaluation getRevaluation() {
+    return revaluation;
+  }
+
+  public void setRevaluation(UnsettledTransactionRevaluation revaluation) {
+    this.revaluation = revaluation;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -310,7 +336,8 @@ public class UnsettledTransaction {
         Objects.equals(this.stockSettlementStatus, unsettledTransaction.stockSettlementStatus) &&
         Objects.equals(this.stockIsOverdue, unsettledTransaction.stockIsOverdue) &&
         Objects.equals(this.deferredCashSettlementStatus, unsettledTransaction.deferredCashSettlementStatus) &&
-        Objects.equals(this.deferredCashIsOverdue, unsettledTransaction.deferredCashIsOverdue);
+        Objects.equals(this.deferredCashIsOverdue, unsettledTransaction.deferredCashIsOverdue) &&
+        Objects.equals(this.revaluation, unsettledTransaction.revaluation);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -319,7 +346,7 @@ public class UnsettledTransaction {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transaction, portfolioId, overallSettlementStatus, overallIsOverdue, cashSettlementStatus, cashIsOverdue, stockSettlementStatus, stockIsOverdue, deferredCashSettlementStatus, deferredCashIsOverdue);
+    return Objects.hash(transaction, portfolioId, overallSettlementStatus, overallIsOverdue, cashSettlementStatus, cashIsOverdue, stockSettlementStatus, stockIsOverdue, deferredCashSettlementStatus, deferredCashIsOverdue, revaluation);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -343,6 +370,7 @@ public class UnsettledTransaction {
     sb.append("    stockIsOverdue: ").append(toIndentedString(stockIsOverdue)).append("\n");
     sb.append("    deferredCashSettlementStatus: ").append(toIndentedString(deferredCashSettlementStatus)).append("\n");
     sb.append("    deferredCashIsOverdue: ").append(toIndentedString(deferredCashIsOverdue)).append("\n");
+    sb.append("    revaluation: ").append(toIndentedString(revaluation)).append("\n");
     sb.append("}");
     return sb.toString();
   }

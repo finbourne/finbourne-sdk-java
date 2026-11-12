@@ -6,7 +6,7 @@ LUSID representation of Cap, Floor, or Collar.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility. | [default to String]
+**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond. | [default to String]
 **capFloorType** | **String** | Determine if it&#39;s CAP, FLOOR, or COLLAR.    Supported string (enumeration) values are: [Cap, Floor, Collar]. | [default to String]
 **capStrike** | **java.math.BigDecimal** | Strike rate of the Cap. | [optional] [default to java.math.BigDecimal]
 **floorStrike** | **java.math.BigDecimal** | Strike rate of the Floor. | [optional] [default to java.math.BigDecimal]
@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **underlyingFloatingLeg** | [**FloatingLeg**](FloatingLeg.md) |  | [default to FloatingLeg]
 **additionalPayments** | [**List&lt;AdditionalPayment&gt;**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] [default to List<AdditionalPayment>]
 **timeZoneConventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] [default to TimeZoneConventions]
+**tradingConventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] [default to TradingConventions]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CapFloor;
@@ -28,6 +29,7 @@ Boolean includeFirstCaplet = true;
 FloatingLeg underlyingFloatingLeg = new FloatingLeg();
 @javax.annotation.Nullable List<AdditionalPayment> additionalPayments = new List<AdditionalPayment>();
 TimeZoneConventions timeZoneConventions = new TimeZoneConventions();
+TradingConventions tradingConventions = new TradingConventions();
 
 
 CapFloor capFloorInstance = new CapFloor()
@@ -37,7 +39,8 @@ CapFloor capFloorInstance = new CapFloor()
     .includeFirstCaplet(includeFirstCaplet)
     .underlyingFloatingLeg(underlyingFloatingLeg)
     .additionalPayments(additionalPayments)
-    .timeZoneConventions(timeZoneConventions);
+    .timeZoneConventions(timeZoneConventions)
+    .tradingConventions(tradingConventions);
 ```
 
 

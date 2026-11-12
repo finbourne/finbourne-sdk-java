@@ -37,7 +37,6 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   BatchManageCommentRequest.JSON_PROPERTY_INSTANCE_ID,
   BatchManageCommentRequest.JSON_PROPERTY_REC_TYPE,
-  BatchManageCommentRequest.JSON_PROPERTY_RUN_NUMBER,
   BatchManageCommentRequest.JSON_PROPERTY_REC_RESULT_ID,
   BatchManageCommentRequest.JSON_PROPERTY_COMMENT_ID,
   BatchManageCommentRequest.JSON_PROPERTY_COMMENT_TEXT
@@ -53,11 +52,6 @@ public class BatchManageCommentRequest {
   @JsonProperty(JSON_PROPERTY_REC_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String recType;
-
-  public static final String JSON_PROPERTY_RUN_NUMBER = "runNumber";
-  @JsonProperty(JSON_PROPERTY_RUN_NUMBER)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Integer runNumber;
 
   public static final String JSON_PROPERTY_REC_RESULT_ID = "recResultId";
   @JsonProperty(JSON_PROPERTY_REC_RESULT_ID)
@@ -102,7 +96,7 @@ public class BatchManageCommentRequest {
   }
 
   /**
-   * The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.
+   * The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -112,25 +106,6 @@ public class BatchManageCommentRequest {
 
   public void setRecType(String recType) {
     this.recType = recType;
-  }
-
-
-  public BatchManageCommentRequest runNumber(Integer runNumber) {
-    this.runNumber = runNumber;
-    return this;
-  }
-
-  /**
-   * The run of the instance whose results this item targets.
-   * @return runNumber
-   */
-  @javax.annotation.Nonnull
-  public Integer getRunNumber() {
-    return runNumber;
-  }
-
-  public void setRunNumber(Integer runNumber) {
-    this.runNumber = runNumber;
   }
 
 
@@ -202,7 +177,6 @@ public class BatchManageCommentRequest {
     BatchManageCommentRequest batchManageCommentRequest = (BatchManageCommentRequest) o;
     return Objects.equals(this.instanceId, batchManageCommentRequest.instanceId) &&
         Objects.equals(this.recType, batchManageCommentRequest.recType) &&
-        Objects.equals(this.runNumber, batchManageCommentRequest.runNumber) &&
         Objects.equals(this.recResultId, batchManageCommentRequest.recResultId) &&
         Objects.equals(this.commentId, batchManageCommentRequest.commentId) &&
         Objects.equals(this.commentText, batchManageCommentRequest.commentText);
@@ -214,7 +188,7 @@ public class BatchManageCommentRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instanceId, recType, runNumber, recResultId, commentId, commentText);
+    return Objects.hash(instanceId, recType, recResultId, commentId, commentText);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -230,7 +204,6 @@ public class BatchManageCommentRequest {
     sb.append("class BatchManageCommentRequest {\n");
     sb.append("    instanceId: ").append(toIndentedString(instanceId)).append("\n");
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
-    sb.append("    runNumber: ").append(toIndentedString(runNumber)).append("\n");
     sb.append("    recResultId: ").append(toIndentedString(recResultId)).append("\n");
     sb.append("    commentId: ").append(toIndentedString(commentId)).append("\n");
     sb.append("    commentText: ").append(toIndentedString(commentText)).append("\n");

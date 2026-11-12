@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ComplexMarketData;
 import com.finbourne.sdk.services.lusid.model.LusidInstrument;
+import com.finbourne.sdk.services.lusid.model.MarketDataOptions;
 import com.finbourne.sdk.services.lusid.model.MarketQuote;
 import com.finbourne.sdk.services.lusid.model.Version;
 import java.io.IOException;
@@ -45,6 +46,7 @@ import com.finbourne.sdk.JSON;
   IrVolCubeData.JSON_PROPERTY_INSTRUMENTS,
   IrVolCubeData.JSON_PROPERTY_QUOTES,
   IrVolCubeData.JSON_PROPERTY_LINEAGE,
+  IrVolCubeData.JSON_PROPERTY_MARKET_DATA_OPTIONS,
   IrVolCubeData.JSON_PROPERTY_VERSION
 })
 
@@ -74,6 +76,11 @@ public class IrVolCubeData extends ComplexMarketData {
   @JsonProperty(JSON_PROPERTY_LINEAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String lineage;
+
+  public static final String JSON_PROPERTY_MARKET_DATA_OPTIONS = "marketDataOptions";
+  @JsonProperty(JSON_PROPERTY_MARKET_DATA_OPTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private MarketDataOptions marketDataOptions;
 
   public static final String JSON_PROPERTY_VERSION = "version";
   @JsonProperty(JSON_PROPERTY_VERSION)
@@ -175,6 +182,25 @@ public class IrVolCubeData extends ComplexMarketData {
   }
 
 
+  public IrVolCubeData marketDataOptions(MarketDataOptions marketDataOptions) {
+    this.marketDataOptions = marketDataOptions;
+    return this;
+  }
+
+  /**
+   * Get marketDataOptions
+   * @return marketDataOptions
+   */
+  @javax.annotation.Nullable
+  public MarketDataOptions getMarketDataOptions() {
+    return marketDataOptions;
+  }
+
+  public void setMarketDataOptions(MarketDataOptions marketDataOptions) {
+    this.marketDataOptions = marketDataOptions;
+  }
+
+
   public IrVolCubeData version(Version version) {
     this.version = version;
     return this;
@@ -207,6 +233,7 @@ public class IrVolCubeData extends ComplexMarketData {
         Objects.equals(this.instruments, irVolCubeData.instruments) &&
         Objects.equals(this.quotes, irVolCubeData.quotes) &&
         Objects.equals(this.lineage, irVolCubeData.lineage) &&
+        Objects.equals(this.marketDataOptions, irVolCubeData.marketDataOptions) &&
         Objects.equals(this.version, irVolCubeData.version) &&
         super.equals(o);
   }
@@ -217,7 +244,7 @@ public class IrVolCubeData extends ComplexMarketData {
 
   @Override
  public int hashCode() {
-    return Objects.hash(baseDate, instruments, quotes, lineage, version, super.hashCode());
+    return Objects.hash(baseDate, instruments, quotes, lineage, marketDataOptions, version, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -236,6 +263,7 @@ public class IrVolCubeData extends ComplexMarketData {
     sb.append("    instruments: ").append(toIndentedString(instruments)).append("\n");
     sb.append("    quotes: ").append(toIndentedString(quotes)).append("\n");
     sb.append("    lineage: ").append(toIndentedString(lineage)).append("\n");
+    sb.append("    marketDataOptions: ").append(toIndentedString(marketDataOptions)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("}");
     return sb.toString();

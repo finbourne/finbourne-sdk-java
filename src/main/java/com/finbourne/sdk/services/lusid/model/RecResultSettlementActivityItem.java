@@ -38,12 +38,19 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A settlement-activity item within a rec result.
+ * A settlement-activity item within a rec result. Names the portfolio, the activity&#39;s instrument and the settled  transaction&#39;s resolved instrument alongside, for display.
  */
 @JsonPropertyOrder({
   RecResultSettlementActivityItem.JSON_PROPERTY_PORTFOLIO_ID,
+  RecResultSettlementActivityItem.JSON_PROPERTY_PORTFOLIO_DISPLAY_NAME,
   RecResultSettlementActivityItem.JSON_PROPERTY_ACTIVITY_ID,
+  RecResultSettlementActivityItem.JSON_PROPERTY_ACTIVITY_INSTRUMENT_SCOPE,
+  RecResultSettlementActivityItem.JSON_PROPERTY_ACTIVITY_LUSID_INSTRUMENT_ID,
+  RecResultSettlementActivityItem.JSON_PROPERTY_ACTIVITY_INSTRUMENT_NAME,
   RecResultSettlementActivityItem.JSON_PROPERTY_TRANSACTION_ID,
+  RecResultSettlementActivityItem.JSON_PROPERTY_TRANSACTION_INSTRUMENT_SCOPE,
+  RecResultSettlementActivityItem.JSON_PROPERTY_TRANSACTION_LUSID_INSTRUMENT_ID,
+  RecResultSettlementActivityItem.JSON_PROPERTY_TRANSACTION_INSTRUMENT_NAME,
   RecResultSettlementActivityItem.JSON_PROPERTY_SETTLEMENT_INSTRUCTION_ID,
   RecResultSettlementActivityItem.JSON_PROPERTY_HOLDING_IMPACTS,
   RecResultSettlementActivityItem.JSON_PROPERTY_ITEM_TYPE,
@@ -57,15 +64,50 @@ public class RecResultSettlementActivityItem {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private ResourceId portfolioId;
 
+  public static final String JSON_PROPERTY_PORTFOLIO_DISPLAY_NAME = "portfolioDisplayName";
+  @JsonProperty(JSON_PROPERTY_PORTFOLIO_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String portfolioDisplayName;
+
   public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String activityId;
 
+  public static final String JSON_PROPERTY_ACTIVITY_INSTRUMENT_SCOPE = "activityInstrumentScope";
+  @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTRUMENT_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String activityInstrumentScope;
+
+  public static final String JSON_PROPERTY_ACTIVITY_LUSID_INSTRUMENT_ID = "activityLusidInstrumentId";
+  @JsonProperty(JSON_PROPERTY_ACTIVITY_LUSID_INSTRUMENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String activityLusidInstrumentId;
+
+  public static final String JSON_PROPERTY_ACTIVITY_INSTRUMENT_NAME = "activityInstrumentName";
+  @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTRUMENT_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String activityInstrumentName;
+
   public static final String JSON_PROPERTY_TRANSACTION_ID = "transactionId";
   @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String transactionId;
+
+  public static final String JSON_PROPERTY_TRANSACTION_INSTRUMENT_SCOPE = "transactionInstrumentScope";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_INSTRUMENT_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionInstrumentScope;
+
+  public static final String JSON_PROPERTY_TRANSACTION_LUSID_INSTRUMENT_ID = "transactionLusidInstrumentId";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_LUSID_INSTRUMENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionLusidInstrumentId;
+
+  public static final String JSON_PROPERTY_TRANSACTION_INSTRUMENT_NAME = "transactionInstrumentName";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_INSTRUMENT_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionInstrumentName;
 
   public static final String JSON_PROPERTY_SETTLEMENT_INSTRUCTION_ID = "settlementInstructionId";
   @JsonProperty(JSON_PROPERTY_SETTLEMENT_INSTRUCTION_ID)
@@ -121,6 +163,25 @@ public class RecResultSettlementActivityItem {
   }
 
 
+  public RecResultSettlementActivityItem portfolioDisplayName(String portfolioDisplayName) {
+    this.portfolioDisplayName = portfolioDisplayName;
+    return this;
+  }
+
+  /**
+   * The display name of the item&#39;s portfolio, as it stood at the asAt the run read its data. Null where the run did not read it.
+   * @return portfolioDisplayName
+   */
+  @javax.annotation.Nullable
+  public String getPortfolioDisplayName() {
+    return portfolioDisplayName;
+  }
+
+  public void setPortfolioDisplayName(String portfolioDisplayName) {
+    this.portfolioDisplayName = portfolioDisplayName;
+  }
+
+
   public RecResultSettlementActivityItem activityId(String activityId) {
     this.activityId = activityId;
     return this;
@@ -140,6 +201,63 @@ public class RecResultSettlementActivityItem {
   }
 
 
+  public RecResultSettlementActivityItem activityInstrumentScope(String activityInstrumentScope) {
+    this.activityInstrumentScope = activityInstrumentScope;
+    return this;
+  }
+
+  /**
+   * The scope of the settlement activity&#39;s instrument. Null where the source does not state one.
+   * @return activityInstrumentScope
+   */
+  @javax.annotation.Nullable
+  public String getActivityInstrumentScope() {
+    return activityInstrumentScope;
+  }
+
+  public void setActivityInstrumentScope(String activityInstrumentScope) {
+    this.activityInstrumentScope = activityInstrumentScope;
+  }
+
+
+  public RecResultSettlementActivityItem activityLusidInstrumentId(String activityLusidInstrumentId) {
+    this.activityLusidInstrumentId = activityLusidInstrumentId;
+    return this;
+  }
+
+  /**
+   * The LUID of the settlement activity&#39;s instrument. Null where the source does not state it.
+   * @return activityLusidInstrumentId
+   */
+  @javax.annotation.Nullable
+  public String getActivityLusidInstrumentId() {
+    return activityLusidInstrumentId;
+  }
+
+  public void setActivityLusidInstrumentId(String activityLusidInstrumentId) {
+    this.activityLusidInstrumentId = activityLusidInstrumentId;
+  }
+
+
+  public RecResultSettlementActivityItem activityInstrumentName(String activityInstrumentName) {
+    this.activityInstrumentName = activityInstrumentName;
+    return this;
+  }
+
+  /**
+   * The name of the settlement activity&#39;s instrument, as it stood at the asAt the run read its data. Null where the run did not resolve it.
+   * @return activityInstrumentName
+   */
+  @javax.annotation.Nullable
+  public String getActivityInstrumentName() {
+    return activityInstrumentName;
+  }
+
+  public void setActivityInstrumentName(String activityInstrumentName) {
+    this.activityInstrumentName = activityInstrumentName;
+  }
+
+
   public RecResultSettlementActivityItem transactionId(String transactionId) {
     this.transactionId = transactionId;
     return this;
@@ -156,6 +274,63 @@ public class RecResultSettlementActivityItem {
 
   public void setTransactionId(String transactionId) {
     this.transactionId = transactionId;
+  }
+
+
+  public RecResultSettlementActivityItem transactionInstrumentScope(String transactionInstrumentScope) {
+    this.transactionInstrumentScope = transactionInstrumentScope;
+    return this;
+  }
+
+  /**
+   * The scope of the transaction&#39;s resolved instrument. Null where the source does not state one.
+   * @return transactionInstrumentScope
+   */
+  @javax.annotation.Nullable
+  public String getTransactionInstrumentScope() {
+    return transactionInstrumentScope;
+  }
+
+  public void setTransactionInstrumentScope(String transactionInstrumentScope) {
+    this.transactionInstrumentScope = transactionInstrumentScope;
+  }
+
+
+  public RecResultSettlementActivityItem transactionLusidInstrumentId(String transactionLusidInstrumentId) {
+    this.transactionLusidInstrumentId = transactionLusidInstrumentId;
+    return this;
+  }
+
+  /**
+   * The LUID of the transaction&#39;s resolved instrument. Null where the source does not state it.
+   * @return transactionLusidInstrumentId
+   */
+  @javax.annotation.Nullable
+  public String getTransactionLusidInstrumentId() {
+    return transactionLusidInstrumentId;
+  }
+
+  public void setTransactionLusidInstrumentId(String transactionLusidInstrumentId) {
+    this.transactionLusidInstrumentId = transactionLusidInstrumentId;
+  }
+
+
+  public RecResultSettlementActivityItem transactionInstrumentName(String transactionInstrumentName) {
+    this.transactionInstrumentName = transactionInstrumentName;
+    return this;
+  }
+
+  /**
+   * The name of the transaction&#39;s resolved instrument, as it stood at the asAt the run read its data. Null where the run did not resolve it.
+   * @return transactionInstrumentName
+   */
+  @javax.annotation.Nullable
+  public String getTransactionInstrumentName() {
+    return transactionInstrumentName;
+  }
+
+  public void setTransactionInstrumentName(String transactionInstrumentName) {
+    this.transactionInstrumentName = transactionInstrumentName;
   }
 
 
@@ -211,7 +386,7 @@ public class RecResultSettlementActivityItem {
   }
 
   /**
-   * The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction, SettlementActivity or RelationalDataPoint. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, both transaction rec types produce Transaction items, and a relational dataset side produces RelationalDataPoint items whatever the rec type. Available values: SettlementActivity, Holding, Transaction, ValuedHolding, RelationalDataPoint.
+   * The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction, SettlementActivity, RelationalDataPoint or the entity type of a LusidEntity rec. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, both transaction rec types produce Transaction items, and a relational dataset side produces RelationalDataPoint items whatever the rec type. A LusidEntity rec produces items of its entity type, for example Instrument items. Available values: SettlementActivity, Holding, Transaction, ValuedHolding, RelationalDataPoint, Instrument, LegalEntity, Portfolio.
    * @return itemType
    */
   @javax.annotation.Nonnull
@@ -272,8 +447,15 @@ public class RecResultSettlementActivityItem {
     }
     RecResultSettlementActivityItem recResultSettlementActivityItem = (RecResultSettlementActivityItem) o;
     return Objects.equals(this.portfolioId, recResultSettlementActivityItem.portfolioId) &&
+        Objects.equals(this.portfolioDisplayName, recResultSettlementActivityItem.portfolioDisplayName) &&
         Objects.equals(this.activityId, recResultSettlementActivityItem.activityId) &&
+        Objects.equals(this.activityInstrumentScope, recResultSettlementActivityItem.activityInstrumentScope) &&
+        Objects.equals(this.activityLusidInstrumentId, recResultSettlementActivityItem.activityLusidInstrumentId) &&
+        Objects.equals(this.activityInstrumentName, recResultSettlementActivityItem.activityInstrumentName) &&
         Objects.equals(this.transactionId, recResultSettlementActivityItem.transactionId) &&
+        Objects.equals(this.transactionInstrumentScope, recResultSettlementActivityItem.transactionInstrumentScope) &&
+        Objects.equals(this.transactionLusidInstrumentId, recResultSettlementActivityItem.transactionLusidInstrumentId) &&
+        Objects.equals(this.transactionInstrumentName, recResultSettlementActivityItem.transactionInstrumentName) &&
         Objects.equals(this.settlementInstructionId, recResultSettlementActivityItem.settlementInstructionId) &&
         Objects.equals(this.holdingImpacts, recResultSettlementActivityItem.holdingImpacts) &&
         Objects.equals(this.itemType, recResultSettlementActivityItem.itemType) &&
@@ -287,7 +469,7 @@ public class RecResultSettlementActivityItem {
 
   @Override
  public int hashCode() {
-    return Objects.hash(portfolioId, activityId, transactionId, settlementInstructionId, holdingImpacts, itemType, ruleAndAttributeValues, writebackSuggestions);
+    return Objects.hash(portfolioId, portfolioDisplayName, activityId, activityInstrumentScope, activityLusidInstrumentId, activityInstrumentName, transactionId, transactionInstrumentScope, transactionLusidInstrumentId, transactionInstrumentName, settlementInstructionId, holdingImpacts, itemType, ruleAndAttributeValues, writebackSuggestions);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -302,8 +484,15 @@ public class RecResultSettlementActivityItem {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecResultSettlementActivityItem {\n");
     sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
+    sb.append("    portfolioDisplayName: ").append(toIndentedString(portfolioDisplayName)).append("\n");
     sb.append("    activityId: ").append(toIndentedString(activityId)).append("\n");
+    sb.append("    activityInstrumentScope: ").append(toIndentedString(activityInstrumentScope)).append("\n");
+    sb.append("    activityLusidInstrumentId: ").append(toIndentedString(activityLusidInstrumentId)).append("\n");
+    sb.append("    activityInstrumentName: ").append(toIndentedString(activityInstrumentName)).append("\n");
     sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
+    sb.append("    transactionInstrumentScope: ").append(toIndentedString(transactionInstrumentScope)).append("\n");
+    sb.append("    transactionLusidInstrumentId: ").append(toIndentedString(transactionLusidInstrumentId)).append("\n");
+    sb.append("    transactionInstrumentName: ").append(toIndentedString(transactionInstrumentName)).append("\n");
     sb.append("    settlementInstructionId: ").append(toIndentedString(settlementInstructionId)).append("\n");
     sb.append("    holdingImpacts: ").append(toIndentedString(holdingImpacts)).append("\n");
     sb.append("    itemType: ").append(toIndentedString(itemType)).append("\n");

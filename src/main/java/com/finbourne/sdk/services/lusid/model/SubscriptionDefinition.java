@@ -51,7 +51,8 @@ import com.finbourne.sdk.JSON;
   SubscriptionDefinition.JSON_PROPERTY_SUBSCRIPTION_TYPE,
   SubscriptionDefinition.JSON_PROPERTY_START_EFFECTIVE_AT,
   SubscriptionDefinition.JSON_PROPERTY_END_EFFECTIVE_AT,
-  SubscriptionDefinition.JSON_PROPERTY_EFFECTIVE_FORWARD_DAYS
+  SubscriptionDefinition.JSON_PROPERTY_EFFECTIVE_FORWARD_DAYS,
+  SubscriptionDefinition.JSON_PROPERTY_INSTRUMENT_IDENTIFIERS
 })
 
 public class SubscriptionDefinition {
@@ -124,6 +125,11 @@ public class SubscriptionDefinition {
   @JsonProperty(JSON_PROPERTY_EFFECTIVE_FORWARD_DAYS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Integer effectiveForwardDays;
+
+  public static final String JSON_PROPERTY_INSTRUMENT_IDENTIFIERS = "instrumentIdentifiers";
+  @JsonProperty(JSON_PROPERTY_INSTRUMENT_IDENTIFIERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> instrumentIdentifiers;
 
   public SubscriptionDefinition() {
   }
@@ -402,6 +408,33 @@ public class SubscriptionDefinition {
   }
 
 
+  public SubscriptionDefinition instrumentIdentifiers(List<String> instrumentIdentifiers) {
+    this.instrumentIdentifiers = instrumentIdentifiers;
+    return this;
+  }
+
+  public SubscriptionDefinition addInstrumentIdentifiersItem(String instrumentIdentifiersItem) {
+    if (this.instrumentIdentifiers == null) {
+      this.instrumentIdentifiers = new ArrayList<>();
+    }
+    this.instrumentIdentifiers.add(instrumentIdentifiersItem);
+    return this;
+  }
+
+  /**
+   * The instrument identifiers each published holding carries, as Instrument/default/{type} property keys,  for example Instrument/default/ClientInternal. Each must name an instrument identifier type. At most 5.  Not valid for a transactions subscription.
+   * @return instrumentIdentifiers
+   */
+  @javax.annotation.Nullable
+  public List<String> getInstrumentIdentifiers() {
+    return instrumentIdentifiers;
+  }
+
+  public void setInstrumentIdentifiers(List<String> instrumentIdentifiers) {
+    this.instrumentIdentifiers = instrumentIdentifiers;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -424,7 +457,8 @@ public class SubscriptionDefinition {
         Objects.equals(this.subscriptionType, subscriptionDefinition.subscriptionType) &&
         Objects.equals(this.startEffectiveAt, subscriptionDefinition.startEffectiveAt) &&
         Objects.equals(this.endEffectiveAt, subscriptionDefinition.endEffectiveAt) &&
-        Objects.equals(this.effectiveForwardDays, subscriptionDefinition.effectiveForwardDays);
+        Objects.equals(this.effectiveForwardDays, subscriptionDefinition.effectiveForwardDays) &&
+        Objects.equals(this.instrumentIdentifiers, subscriptionDefinition.instrumentIdentifiers);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -433,7 +467,7 @@ public class SubscriptionDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, timelineProperty, portfolioFilter, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt, effectiveForwardDays);
+    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, timelineProperty, portfolioFilter, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt, effectiveForwardDays, instrumentIdentifiers);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -461,6 +495,7 @@ public class SubscriptionDefinition {
     sb.append("    startEffectiveAt: ").append(toIndentedString(startEffectiveAt)).append("\n");
     sb.append("    endEffectiveAt: ").append(toIndentedString(endEffectiveAt)).append("\n");
     sb.append("    effectiveForwardDays: ").append(toIndentedString(effectiveForwardDays)).append("\n");
+    sb.append("    instrumentIdentifiers: ").append(toIndentedString(instrumentIdentifiers)).append("\n");
     sb.append("}");
     return sb.toString();
   }

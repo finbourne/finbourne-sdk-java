@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.DealingEstimates;
 import com.finbourne.sdk.services.lusid.model.InstrumentResolutionDetail;
 import com.finbourne.sdk.services.lusid.model.NavTypeDefinition;
 import com.finbourne.sdk.services.lusid.model.PortfolioEntityId;
@@ -70,7 +71,9 @@ import com.finbourne.sdk.JSON;
   FundDefinitionRequest.JSON_PROPERTY_SHARE_CLASSES,
   FundDefinitionRequest.JSON_PROPERTY_PRICING_METHODOLOGY,
   FundDefinitionRequest.JSON_PROPERTY_REPORTING_PRICES,
-  FundDefinitionRequest.JSON_PROPERTY_WHT_PARAMETERS
+  FundDefinitionRequest.JSON_PROPERTY_DEALING_ESTIMATES,
+  FundDefinitionRequest.JSON_PROPERTY_WHT_PARAMETERS,
+  FundDefinitionRequest.JSON_PROPERTY_VALUATION_TEMPLATE_ID
 })
 
 public class FundDefinitionRequest {
@@ -184,10 +187,20 @@ public class FundDefinitionRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<ReportingPrice> reportingPrices;
 
+  public static final String JSON_PROPERTY_DEALING_ESTIMATES = "dealingEstimates";
+  @JsonProperty(JSON_PROPERTY_DEALING_ESTIMATES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private DealingEstimates dealingEstimates;
+
   public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
   @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private WhtParameters whtParameters;
+
+  public static final String JSON_PROPERTY_VALUATION_TEMPLATE_ID = "valuationTemplateId";
+  @JsonProperty(JSON_PROPERTY_VALUATION_TEMPLATE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId valuationTemplateId;
 
   public FundDefinitionRequest() {
   }
@@ -561,7 +574,7 @@ public class FundDefinitionRequest {
   }
 
   /**
-   * Whether to create instruments for the Fund&#39;s share classes, series, or partner classes upon creation. Defaults to false.
+   * Whether to master an instrument upon fund creation. For unitised funds (Classes, Series, or Partners), an instrument is mastered per share class. For non-unitised funds, a single instrument is mastered for the fund itself, with a ClientInternal identifier of {FundScope}:{Code}. Defaults to false.
    * @return createInstrument
    */
   @javax.annotation.Nullable
@@ -580,7 +593,7 @@ public class FundDefinitionRequest {
   }
 
   /**
-   * The scope in which the instruments are created when CreateInstrument is true. Defaults to the default instrument scope. Legacy share class instruments are resolved in ShareClassInstrumentScopes instead.
+   * The scope in which instruments are mastered when CreateInstrument is true. For non-unitised funds the fund scope also forms part of the fund instrument&#39;s ClientInternal identifier: {FundScope}:{Code}. Defaults to the default instrument scope. Legacy share class instruments are resolved via ShareClassInstrumentScopes instead.
    * @return instrumentScope
    */
   @javax.annotation.Nullable
@@ -666,6 +679,25 @@ public class FundDefinitionRequest {
   }
 
 
+  public FundDefinitionRequest dealingEstimates(DealingEstimates dealingEstimates) {
+    this.dealingEstimates = dealingEstimates;
+    return this;
+  }
+
+  /**
+   * Get dealingEstimates
+   * @return dealingEstimates
+   */
+  @javax.annotation.Nullable
+  public DealingEstimates getDealingEstimates() {
+    return dealingEstimates;
+  }
+
+  public void setDealingEstimates(DealingEstimates dealingEstimates) {
+    this.dealingEstimates = dealingEstimates;
+  }
+
+
   public FundDefinitionRequest whtParameters(WhtParameters whtParameters) {
     this.whtParameters = whtParameters;
     return this;
@@ -682,6 +714,25 @@ public class FundDefinitionRequest {
 
   public void setWhtParameters(WhtParameters whtParameters) {
     this.whtParameters = whtParameters;
+  }
+
+
+  public FundDefinitionRequest valuationTemplateId(ResourceId valuationTemplateId) {
+    this.valuationTemplateId = valuationTemplateId;
+    return this;
+  }
+
+  /**
+   * Get valuationTemplateId
+   * @return valuationTemplateId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getValuationTemplateId() {
+    return valuationTemplateId;
+  }
+
+  public void setValuationTemplateId(ResourceId valuationTemplateId) {
+    this.valuationTemplateId = valuationTemplateId;
   }
 
 
@@ -716,7 +767,9 @@ public class FundDefinitionRequest {
         Objects.equals(this.shareClasses, fundDefinitionRequest.shareClasses) &&
         Objects.equals(this.pricingMethodology, fundDefinitionRequest.pricingMethodology) &&
         Objects.equals(this.reportingPrices, fundDefinitionRequest.reportingPrices) &&
-        Objects.equals(this.whtParameters, fundDefinitionRequest.whtParameters);
+        Objects.equals(this.dealingEstimates, fundDefinitionRequest.dealingEstimates) &&
+        Objects.equals(this.whtParameters, fundDefinitionRequest.whtParameters) &&
+        Objects.equals(this.valuationTemplateId, fundDefinitionRequest.valuationTemplateId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -725,7 +778,7 @@ public class FundDefinitionRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, shortCode, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, instrumentScope, shareClasses, pricingMethodology, reportingPrices, whtParameters);
+    return Objects.hash(code, shortCode, displayName, description, baseCurrency, investorStructure, portfolioIds, fundConfigurationId, shareClassInstrumentScopes, shareClassInstruments, type, taxTransparency, inceptionDate, decimalPlaces, primaryNavType, additionalNavTypes, properties, createInstrument, instrumentScope, shareClasses, pricingMethodology, reportingPrices, dealingEstimates, whtParameters, valuationTemplateId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -761,7 +814,9 @@ public class FundDefinitionRequest {
     sb.append("    shareClasses: ").append(toIndentedString(shareClasses)).append("\n");
     sb.append("    pricingMethodology: ").append(toIndentedString(pricingMethodology)).append("\n");
     sb.append("    reportingPrices: ").append(toIndentedString(reportingPrices)).append("\n");
+    sb.append("    dealingEstimates: ").append(toIndentedString(dealingEstimates)).append("\n");
     sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
+    sb.append("    valuationTemplateId: ").append(toIndentedString(valuationTemplateId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

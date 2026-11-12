@@ -197,7 +197,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+     * [EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.
      * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -220,7 +220,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+     * [EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.
      * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -243,7 +243,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure. (asynchronously)
      * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -267,7 +267,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure. (asynchronously)
      * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -429,7 +429,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+     * [EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.
      * Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -913,7 +913,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
+     * [EARLY ACCESS] CreateFundStructure: Create a Fund Structure.
      * Create a new Fund Structure Model. The scope and code of the Fund Structure are provided in the request body.
      * @param scope The scope of the Fund Structure. (required)
      * @param fundStructureRequest The definition of the Fund Structure. (required)
@@ -934,7 +934,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
+     * [EARLY ACCESS] CreateFundStructure: Create a Fund Structure.
      * Create a new Fund Structure Model. The scope and code of the Fund Structure are provided in the request body.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param fundStructureRequest The definition of the Fund Structure. (required)
@@ -955,7 +955,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] CreateFundStructure: Create a Fund Structure. (asynchronously)
      * Create a new Fund Structure Model. The scope and code of the Fund Structure are provided in the request body.
      * @param scope The scope of the Fund Structure. (required)
      * @param fundStructureRequest The definition of the Fund Structure. (required)
@@ -977,7 +977,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] CreateFundStructure: Create a Fund Structure. (asynchronously)
      * Create a new Fund Structure Model. The scope and code of the Fund Structure are provided in the request body.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param fundStructureRequest The definition of the Fund Structure. (required)
@@ -1124,7 +1124,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
+     * [EARLY ACCESS] CreateFundStructure: Create a Fund Structure.
      * Create a new Fund Structure Model. The scope and code of the Fund Structure are provided in the request body.
      * @param scope The scope of the Fund Structure. (required)
      * @param fundStructureRequest The definition of the Fund Structure. (required)
@@ -1245,7 +1245,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+     * [EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure.
      * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.
      * @param scope The scope of the Fund Structure to be deleted. (required)
      * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -1267,7 +1267,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+     * [EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure.
      * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure to be deleted. (required)
      * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -1289,7 +1289,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure. (asynchronously)
      * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.
      * @param scope The scope of the Fund Structure to be deleted. (required)
      * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -1312,7 +1312,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure. (asynchronously)
      * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure to be deleted. (required)
      * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -1471,7 +1471,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+     * [EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure.
      * Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.
      * @param scope The scope of the Fund Structure to be deleted. (required)
      * @param code The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -1604,7 +1604,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
+     * [EARLY ACCESS] GetFundStructure: Get a Fund Structure.
      * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -1628,7 +1628,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
+     * [EARLY ACCESS] GetFundStructure: Get a Fund Structure.
      * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -1652,7 +1652,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] GetFundStructure: Get a Fund Structure. (asynchronously)
      * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -1677,7 +1677,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] GetFundStructure: Get a Fund Structure. (asynchronously)
      * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -1860,7 +1860,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
+     * [EARLY ACCESS] GetFundStructure: Get a Fund Structure.
      * Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -2001,7 +2001,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFundStructures: List Fund Structures.
+     * [EARLY ACCESS] ListFundStructures: List Fund Structures.
      * List all the Fund Structures matching the given criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
@@ -2027,7 +2027,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFundStructures: List Fund Structures.
+     * [EARLY ACCESS] ListFundStructures: List Fund Structures.
      * List all the Fund Structures matching the given criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
@@ -2053,7 +2053,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFundStructures: List Fund Structures. (asynchronously)
+     * [EARLY ACCESS] ListFundStructures: List Fund Structures. (asynchronously)
      * List all the Fund Structures matching the given criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
@@ -2080,7 +2080,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFundStructures: List Fund Structures. (asynchronously)
+     * [EARLY ACCESS] ListFundStructures: List Fund Structures. (asynchronously)
      * List all the Fund Structures matching the given criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
@@ -2305,7 +2305,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListFundStructures: List Fund Structures.
+     * [EARLY ACCESS] ListFundStructures: List Fund Structures.
      * List all the Fund Structures matching the given criteria.
      * @return APIlistFundStructuresRequest
      * @http.response.details
@@ -2432,7 +2432,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+     * [EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure.
      * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -2455,7 +2455,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+     * [EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure.
      * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -2478,7 +2478,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure. (asynchronously)
      * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -2502,7 +2502,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure. (asynchronously)
      * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -2664,7 +2664,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+     * [EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure.
      * Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
@@ -2791,7 +2791,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+     * [EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure.
      * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
@@ -2813,7 +2813,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+     * [EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure.
      * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
@@ -2835,7 +2835,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure. (asynchronously)
      * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
@@ -2858,7 +2858,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure. (asynchronously)
+     * [EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure. (asynchronously)
      * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)
@@ -3008,7 +3008,7 @@ public class FundStructuresApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+     * [EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure.
      * Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.
      * @param scope The scope of the Fund Structure. (required)
      * @param code The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. (required)

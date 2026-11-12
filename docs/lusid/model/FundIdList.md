@@ -5,7 +5,7 @@ classname FundIdList
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**referenceListType** | **String** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList. | [default to String]
+**referenceListType** | **String** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList, FilteredPortfolioIdList. | [default to String]
 **values** | [**List&lt;ResourceId&gt;**](ResourceId.md) |  | [default to List<ResourceId>]
 **navTypeCodesHint** | **List&lt;String&gt;** | The NAV type codes this list nominates, in priority order; entries may contain &#39;*&#39; wildcards.  For each fund the first matching code the fund defines is picked, falling back to the fund&#39;s  primary (official) NAV type when the list is empty or nothing matches. Optional. | [optional] [default to List<String>]
 

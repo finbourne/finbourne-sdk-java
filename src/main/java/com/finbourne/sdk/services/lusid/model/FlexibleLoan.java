@@ -15,6 +15,7 @@ package com.finbourne.sdk.services.lusid.model;
 import com.finbourne.sdk.services.lusid.model.LusidInstrument;
 import com.finbourne.sdk.services.lusid.model.Schedule;
 import com.finbourne.sdk.services.lusid.model.TimeZoneConventions;
+import com.finbourne.sdk.services.lusid.model.TradingConventions;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -48,7 +49,9 @@ import com.finbourne.sdk.JSON;
   FlexibleLoan.JSON_PROPERTY_PARENT_FACILITY,
   FlexibleLoan.JSON_PROPERTY_PARENT_FACILITY_DETAILS,
   FlexibleLoan.JSON_PROPERTY_SCHEDULES,
-  FlexibleLoan.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
+  FlexibleLoan.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
+  FlexibleLoan.JSON_PROPERTY_TRADING_CONVENTIONS,
+  FlexibleLoan.JSON_PROPERTY_ORIGINAL_ISSUE_PRICE
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -92,6 +95,16 @@ public class FlexibleLoan extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_TIME_ZONE_CONVENTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private TimeZoneConventions timeZoneConventions;
+
+  public static final String JSON_PROPERTY_TRADING_CONVENTIONS = "tradingConventions";
+  @JsonProperty(JSON_PROPERTY_TRADING_CONVENTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private TradingConventions tradingConventions;
+
+  public static final String JSON_PROPERTY_ORIGINAL_ISSUE_PRICE = "originalIssuePrice";
+  @JsonProperty(JSON_PROPERTY_ORIGINAL_ISSUE_PRICE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal originalIssuePrice;
 
   public FlexibleLoan() {
   }
@@ -230,6 +243,44 @@ public class FlexibleLoan extends LusidInstrument {
   }
 
 
+  public FlexibleLoan tradingConventions(TradingConventions tradingConventions) {
+    this.tradingConventions = tradingConventions;
+    return this;
+  }
+
+  /**
+   * Get tradingConventions
+   * @return tradingConventions
+   */
+  @javax.annotation.Nullable
+  public TradingConventions getTradingConventions() {
+    return tradingConventions;
+  }
+
+  public void setTradingConventions(TradingConventions tradingConventions) {
+    this.tradingConventions = tradingConventions;
+  }
+
+
+  public FlexibleLoan originalIssuePrice(java.math.BigDecimal originalIssuePrice) {
+    this.originalIssuePrice = originalIssuePrice;
+    return this;
+  }
+
+  /**
+   * The price the loan was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%.
+   * @return originalIssuePrice
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getOriginalIssuePrice() {
+    return originalIssuePrice;
+  }
+
+  public void setOriginalIssuePrice(java.math.BigDecimal originalIssuePrice) {
+    this.originalIssuePrice = originalIssuePrice;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -246,6 +297,8 @@ public class FlexibleLoan extends LusidInstrument {
         Objects.equals(this.parentFacilityDetails, flexibleLoan.parentFacilityDetails) &&
         Objects.equals(this.schedules, flexibleLoan.schedules) &&
         Objects.equals(this.timeZoneConventions, flexibleLoan.timeZoneConventions) &&
+        Objects.equals(this.tradingConventions, flexibleLoan.tradingConventions) &&
+        (this.originalIssuePrice == null ? flexibleLoan.originalIssuePrice == null : (flexibleLoan.originalIssuePrice != null && this.originalIssuePrice.compareTo(flexibleLoan.getOriginalIssuePrice()) == 0)) &&
         super.equals(o);
   }
 
@@ -255,7 +308,7 @@ public class FlexibleLoan extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, domCcy, parentFacility, parentFacilityDetails, schedules, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, domCcy, parentFacility, parentFacilityDetails, schedules, timeZoneConventions, tradingConventions, originalIssuePrice, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -277,6 +330,8 @@ public class FlexibleLoan extends LusidInstrument {
     sb.append("    parentFacilityDetails: ").append(toIndentedString(parentFacilityDetails)).append("\n");
     sb.append("    schedules: ").append(toIndentedString(schedules)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
+    sb.append("    tradingConventions: ").append(toIndentedString(tradingConventions)).append("\n");
+    sb.append("    originalIssuePrice: ").append(toIndentedString(originalIssuePrice)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -197,7 +197,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.
+     * [EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map.
      * Add a per-investor exception (an exclusion or a fixed percentage) to the map&#39;s participants, from an  effective datetime. The result is a new bitemporal version of the map. An investor record may carry at most  one exception; to change it, remove the existing one first or upsert the whole map.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -220,7 +220,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.
+     * [EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map.
      * Add a per-investor exception (an exclusion or a fixed percentage) to the map&#39;s participants, from an  effective datetime. The result is a new bitemporal version of the map. An investor record may carry at most  one exception; to change it, remove the existing one first or upsert the whole map.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -243,7 +243,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map. (asynchronously)
      * Add a per-investor exception (an exclusion or a fixed percentage) to the map&#39;s participants, from an  effective datetime. The result is a new bitemporal version of the map. An investor record may carry at most  one exception; to change it, remove the existing one first or upsert the whole map.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -267,7 +267,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map. (asynchronously)
      * Add a per-investor exception (an exclusion or a fixed percentage) to the map&#39;s participants, from an  effective datetime. The result is a new bitemporal version of the map. An investor record may carry at most  one exception; to change it, remove the existing one first or upsert the whole map.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -429,7 +429,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.
+     * [EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map.
      * Add a per-investor exception (an exclusion or a fixed percentage) to the map&#39;s participants, from an  effective datetime. The result is a new bitemporal version of the map. An investor record may carry at most  one exception; to change it, remove the existing one first or upsert the whole map.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -548,7 +548,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.
+     * [EARLY ACCESS] CreateAllocationMap: Create an Allocation Map.
      * Create a new Allocation Map. The scope is provided in the route and the code in the request body. The map  names the structure member it hangs off, who participates, and the basis used to share each kind of event.
      * @param scope The scope of the Allocation Map. (required)
      * @param allocationMapRequest The definition of the Allocation Map. (required)
@@ -569,7 +569,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.
+     * [EARLY ACCESS] CreateAllocationMap: Create an Allocation Map.
      * Create a new Allocation Map. The scope is provided in the route and the code in the request body. The map  names the structure member it hangs off, who participates, and the basis used to share each kind of event.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param allocationMapRequest The definition of the Allocation Map. (required)
@@ -590,7 +590,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] CreateAllocationMap: Create an Allocation Map. (asynchronously)
      * Create a new Allocation Map. The scope is provided in the route and the code in the request body. The map  names the structure member it hangs off, who participates, and the basis used to share each kind of event.
      * @param scope The scope of the Allocation Map. (required)
      * @param allocationMapRequest The definition of the Allocation Map. (required)
@@ -612,7 +612,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] CreateAllocationMap: Create an Allocation Map. (asynchronously)
      * Create a new Allocation Map. The scope is provided in the route and the code in the request body. The map  names the structure member it hangs off, who participates, and the basis used to share each kind of event.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param allocationMapRequest The definition of the Allocation Map. (required)
@@ -759,7 +759,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.
+     * [EARLY ACCESS] CreateAllocationMap: Create an Allocation Map.
      * Create a new Allocation Map. The scope is provided in the route and the code in the request body. The map  names the structure member it hangs off, who participates, and the basis used to share each kind of event.
      * @param scope The scope of the Allocation Map. (required)
      * @param allocationMapRequest The definition of the Allocation Map. (required)
@@ -880,7 +880,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.
+     * [EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map.
      * Delete an Allocation Map from an effective datetime. The Allocation Map is no longer readable from that  effective datetime onwards.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -902,7 +902,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.
+     * [EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map.
      * Delete an Allocation Map from an effective datetime. The Allocation Map is no longer readable from that  effective datetime onwards.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -924,7 +924,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map. (asynchronously)
      * Delete an Allocation Map from an effective datetime. The Allocation Map is no longer readable from that  effective datetime onwards.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -947,7 +947,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map. (asynchronously)
      * Delete an Allocation Map from an effective datetime. The Allocation Map is no longer readable from that  effective datetime onwards.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -1106,7 +1106,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.
+     * [EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map.
      * Delete an Allocation Map from an effective datetime. The Allocation Map is no longer readable from that  effective datetime onwards.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -1233,7 +1233,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.
+     * [EARLY ACCESS] GetAllocationMap: Get an Allocation Map.
      * Retrieve the definition of a particular Allocation Map at an effective and asAt datetime, including its  participants, exceptions and the basis declared for each event type.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -1256,7 +1256,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.
+     * [EARLY ACCESS] GetAllocationMap: Get an Allocation Map.
      * Retrieve the definition of a particular Allocation Map at an effective and asAt datetime, including its  participants, exceptions and the basis declared for each event type.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -1279,7 +1279,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationMap: Get an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] GetAllocationMap: Get an Allocation Map. (asynchronously)
      * Retrieve the definition of a particular Allocation Map at an effective and asAt datetime, including its  participants, exceptions and the basis declared for each event type.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -1303,7 +1303,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationMap: Get an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] GetAllocationMap: Get an Allocation Map. (asynchronously)
      * Retrieve the definition of a particular Allocation Map at an effective and asAt datetime, including its  participants, exceptions and the basis declared for each event type.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -1474,7 +1474,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.
+     * [EARLY ACCESS] GetAllocationMap: Get an Allocation Map.
      * Retrieve the definition of a particular Allocation Map at an effective and asAt datetime, including its  participants, exceptions and the basis declared for each event type.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -1609,7 +1609,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.
+     * [EARLY ACCESS] ListAllocationMaps: List Allocation Maps.
      * List all the Allocation Maps matching a particular criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the Allocation Maps. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Allocation Maps. Defaults to returning the latest version of each Allocation Map if not specified. (optional)
@@ -1634,7 +1634,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.
+     * [EARLY ACCESS] ListAllocationMaps: List Allocation Maps.
      * List all the Allocation Maps matching a particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the Allocation Maps. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Allocation Maps. Defaults to returning the latest version of each Allocation Map if not specified. (optional)
@@ -1659,7 +1659,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationMaps: List Allocation Maps. (asynchronously)
+     * [EARLY ACCESS] ListAllocationMaps: List Allocation Maps. (asynchronously)
      * List all the Allocation Maps matching a particular criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the Allocation Maps. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Allocation Maps. Defaults to returning the latest version of each Allocation Map if not specified. (optional)
@@ -1685,7 +1685,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationMaps: List Allocation Maps. (asynchronously)
+     * [EARLY ACCESS] ListAllocationMaps: List Allocation Maps. (asynchronously)
      * List all the Allocation Maps matching a particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the Allocation Maps. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Allocation Maps. Defaults to returning the latest version of each Allocation Map if not specified. (optional)
@@ -1898,7 +1898,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.
+     * [EARLY ACCESS] ListAllocationMaps: List Allocation Maps.
      * List all the Allocation Maps matching a particular criteria.
      * @return APIlistAllocationMapsRequest
      * @http.response.details
@@ -2025,7 +2025,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.
+     * [EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map.
      * Remove the exception held against an investor record, from an effective datetime. The result is a new  bitemporal version of the map in which that investor is treated like every other participant.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2048,7 +2048,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.
+     * [EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map.
      * Remove the exception held against an investor record, from an effective datetime. The result is a new  bitemporal version of the map in which that investor is treated like every other participant.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2071,7 +2071,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map. (asynchronously)
      * Remove the exception held against an investor record, from an effective datetime. The result is a new  bitemporal version of the map in which that investor is treated like every other participant.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2095,7 +2095,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map. (asynchronously)
      * Remove the exception held against an investor record, from an effective datetime. The result is a new  bitemporal version of the map in which that investor is treated like every other participant.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2257,7 +2257,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.
+     * [EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map.
      * Remove the exception held against an investor record, from an effective datetime. The result is a new  bitemporal version of the map in which that investor is treated like every other participant.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2396,7 +2396,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.
+     * [EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map.
      * Dry-run the map against an event: share the supplied amount across the participants in force at the  effective datetime, applying fixed-percentage exceptions off the top and the declared basis to the remainder.  Nothing is booked. Basis values (for example committed capital per investor) are supplied in the request  until the investor register can provide them.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2420,7 +2420,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.
+     * [EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map.
      * Dry-run the map against an event: share the supplied amount across the participants in force at the  effective datetime, applying fixed-percentage exceptions off the top and the declared basis to the remainder.  Nothing is booked. Basis values (for example committed capital per investor) are supplied in the request  until the investor register can provide them.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2444,7 +2444,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map. (asynchronously)
      * Dry-run the map against an event: share the supplied amount across the participants in force at the  effective datetime, applying fixed-percentage exceptions off the top and the declared basis to the remainder.  Nothing is booked. Basis values (for example committed capital per investor) are supplied in the request  until the investor register can provide them.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2469,7 +2469,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map. (asynchronously)
      * Dry-run the map against an event: share the supplied amount across the participants in force at the  effective datetime, applying fixed-percentage exceptions off the top and the declared basis to the remainder.  Nothing is booked. Basis values (for example committed capital per investor) are supplied in the request  until the investor register can provide them.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2643,7 +2643,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.
+     * [EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map.
      * Dry-run the map against an event: share the supplied amount across the participants in force at the  effective datetime, applying fixed-percentage exceptions off the top and the declared basis to the remainder.  Nothing is booked. Basis values (for example committed capital per investor) are supplied in the request  until the investor register can provide them.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2770,7 +2770,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.
+     * [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.
      * Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2792,7 +2792,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.
+     * [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.
      * Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2814,7 +2814,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map. (asynchronously)
      * Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2837,7 +2837,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map. (asynchronously)
+     * [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map. (asynchronously)
      * Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)
@@ -2987,7 +2987,7 @@ public class AllocationMapsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.
+     * [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.
      * Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.
      * @param scope The scope of the Allocation Map. (required)
      * @param code The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. (required)

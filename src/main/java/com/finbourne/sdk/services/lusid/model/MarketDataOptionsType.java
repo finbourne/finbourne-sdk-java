@@ -23,7 +23,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum MarketDataOptionsType {
   
-  CURVE_OPTIONS("CurveOptions");
+  CURVE_OPTIONS("CurveOptions"),
+  
+  VOL_CUBE_OPTIONS("VolCubeOptions");
 
   private String value;
 

@@ -17,10 +17,14 @@ Name | Type | Description | Notes
 **rounding** | [**MarginRounding**](MarginRounding.md) |  | [optional] [default to MarginRounding]
 **settlementLag** | [**MarginSettlementLag**](MarginSettlementLag.md) |  | [optional] [default to MarginSettlementLag]
 **matchTolerance** | **java.math.BigDecimal** | The tolerance within which our margin figure and the counterparty&#39;s are considered to match. Optional. | [optional] [default to java.math.BigDecimal]
+**funding** | [**CollateralFundingTerms**](CollateralFundingTerms.md) |  | [optional] [default to CollateralFundingTerms]
+**optimisation** | [**CollateralOptimisationTerms**](CollateralOptimisationTerms.md) |  | [optional] [default to CollateralOptimisationTerms]
 **variationMargin** | [**List&lt;MarginItem&gt;**](MarginItem.md) | The variation margin arrangements under the agreement. | [optional] [default to List<MarginItem>]
 **initialMargin** | [**List&lt;MarginItem&gt;**](MarginItem.md) | The initial margin arrangements under the agreement. | [optional] [default to List<MarginItem>]
 **version** | [**Version**](Version.md) |  | [optional] [default to Version]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | A set of properties to decorate onto the Collateral Agreement. Filterable. | [optional] [default to Map<String, Property>]
+**notificationCutLabel** | **String** | The cut label giving the time of day by which collateral we deliver under a margin call must settle. Each run resolves it on the business date and records it as the call&#39;s deadline; the allocation excludes assets that cannot settle by it. Optional. | [optional] [default to String]
+**returnNotificationCutLabel** | **String** | The cut label giving the time of day by which collateral the counterparty delivers, or returns to us, must settle. Recorded as the deadline of the calls they post under. Optional. | [optional] [default to String]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -40,10 +44,14 @@ ResourceId recipeId = new ResourceId();
 MarginRounding rounding = new MarginRounding();
 MarginSettlementLag settlementLag = new MarginSettlementLag();
 @javax.annotation.Nullable java.math.BigDecimal matchTolerance = new java.math.BigDecimal("100.00");
+CollateralFundingTerms funding = new CollateralFundingTerms();
+CollateralOptimisationTerms optimisation = new CollateralOptimisationTerms();
 @javax.annotation.Nullable List<MarginItem> variationMargin = new List<MarginItem>();
 @javax.annotation.Nullable List<MarginItem> initialMargin = new List<MarginItem>();
 Version version = new Version();
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
+@javax.annotation.Nullable String notificationCutLabel = "example notificationCutLabel";
+@javax.annotation.Nullable String returnNotificationCutLabel = "example returnNotificationCutLabel";
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -59,10 +67,14 @@ CollateralAgreement collateralAgreementInstance = new CollateralAgreement()
     .rounding(rounding)
     .settlementLag(settlementLag)
     .matchTolerance(matchTolerance)
+    .funding(funding)
+    .optimisation(optimisation)
     .variationMargin(variationMargin)
     .initialMargin(initialMargin)
     .version(version)
     .properties(properties)
+    .notificationCutLabel(notificationCutLabel)
+    .returnNotificationCutLabel(returnNotificationCutLabel)
     .links(links);
 ```
 

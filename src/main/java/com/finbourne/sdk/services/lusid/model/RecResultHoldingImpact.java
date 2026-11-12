@@ -31,11 +31,14 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * One holding, and where known the tax lot within it, that a transaction or settlement activity item impacted.
+ * One holding, and where known the tax lot within it, that a transaction or settlement activity item impacted.  Also holds the display names of the holding&#39;s instrument.
  */
 @JsonPropertyOrder({
   RecResultHoldingImpact.JSON_PROPERTY_HOLDING_ID,
-  RecResultHoldingImpact.JSON_PROPERTY_TAX_LOT_ID
+  RecResultHoldingImpact.JSON_PROPERTY_TAX_LOT_ID,
+  RecResultHoldingImpact.JSON_PROPERTY_HOLDING_INSTRUMENT_SCOPE,
+  RecResultHoldingImpact.JSON_PROPERTY_HOLDING_LUSID_INSTRUMENT_ID,
+  RecResultHoldingImpact.JSON_PROPERTY_HOLDING_INSTRUMENT_NAME
 })
 
 public class RecResultHoldingImpact {
@@ -48,6 +51,21 @@ public class RecResultHoldingImpact {
   @JsonProperty(JSON_PROPERTY_TAX_LOT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String taxLotId;
+
+  public static final String JSON_PROPERTY_HOLDING_INSTRUMENT_SCOPE = "holdingInstrumentScope";
+  @JsonProperty(JSON_PROPERTY_HOLDING_INSTRUMENT_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String holdingInstrumentScope;
+
+  public static final String JSON_PROPERTY_HOLDING_LUSID_INSTRUMENT_ID = "holdingLusidInstrumentId";
+  @JsonProperty(JSON_PROPERTY_HOLDING_LUSID_INSTRUMENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String holdingLusidInstrumentId;
+
+  public static final String JSON_PROPERTY_HOLDING_INSTRUMENT_NAME = "holdingInstrumentName";
+  @JsonProperty(JSON_PROPERTY_HOLDING_INSTRUMENT_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String holdingInstrumentName;
 
   public RecResultHoldingImpact() {
   }
@@ -90,6 +108,63 @@ public class RecResultHoldingImpact {
   }
 
 
+  public RecResultHoldingImpact holdingInstrumentScope(String holdingInstrumentScope) {
+    this.holdingInstrumentScope = holdingInstrumentScope;
+    return this;
+  }
+
+  /**
+   * The scope of the impacted holding&#39;s instrument. Null where the source does not state one.
+   * @return holdingInstrumentScope
+   */
+  @javax.annotation.Nullable
+  public String getHoldingInstrumentScope() {
+    return holdingInstrumentScope;
+  }
+
+  public void setHoldingInstrumentScope(String holdingInstrumentScope) {
+    this.holdingInstrumentScope = holdingInstrumentScope;
+  }
+
+
+  public RecResultHoldingImpact holdingLusidInstrumentId(String holdingLusidInstrumentId) {
+    this.holdingLusidInstrumentId = holdingLusidInstrumentId;
+    return this;
+  }
+
+  /**
+   * The LUID of the impacted holding&#39;s instrument. Null where the source does not state it.
+   * @return holdingLusidInstrumentId
+   */
+  @javax.annotation.Nullable
+  public String getHoldingLusidInstrumentId() {
+    return holdingLusidInstrumentId;
+  }
+
+  public void setHoldingLusidInstrumentId(String holdingLusidInstrumentId) {
+    this.holdingLusidInstrumentId = holdingLusidInstrumentId;
+  }
+
+
+  public RecResultHoldingImpact holdingInstrumentName(String holdingInstrumentName) {
+    this.holdingInstrumentName = holdingInstrumentName;
+    return this;
+  }
+
+  /**
+   * The name of the impacted holding&#39;s instrument, as it stood at the asAt the run read its data. Null where the run did not resolve it.
+   * @return holdingInstrumentName
+   */
+  @javax.annotation.Nullable
+  public String getHoldingInstrumentName() {
+    return holdingInstrumentName;
+  }
+
+  public void setHoldingInstrumentName(String holdingInstrumentName) {
+    this.holdingInstrumentName = holdingInstrumentName;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -100,7 +175,10 @@ public class RecResultHoldingImpact {
     }
     RecResultHoldingImpact recResultHoldingImpact = (RecResultHoldingImpact) o;
     return Objects.equals(this.holdingId, recResultHoldingImpact.holdingId) &&
-        Objects.equals(this.taxLotId, recResultHoldingImpact.taxLotId);
+        Objects.equals(this.taxLotId, recResultHoldingImpact.taxLotId) &&
+        Objects.equals(this.holdingInstrumentScope, recResultHoldingImpact.holdingInstrumentScope) &&
+        Objects.equals(this.holdingLusidInstrumentId, recResultHoldingImpact.holdingLusidInstrumentId) &&
+        Objects.equals(this.holdingInstrumentName, recResultHoldingImpact.holdingInstrumentName);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -109,7 +187,7 @@ public class RecResultHoldingImpact {
 
   @Override
  public int hashCode() {
-    return Objects.hash(holdingId, taxLotId);
+    return Objects.hash(holdingId, taxLotId, holdingInstrumentScope, holdingLusidInstrumentId, holdingInstrumentName);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -125,6 +203,9 @@ public class RecResultHoldingImpact {
     sb.append("class RecResultHoldingImpact {\n");
     sb.append("    holdingId: ").append(toIndentedString(holdingId)).append("\n");
     sb.append("    taxLotId: ").append(toIndentedString(taxLotId)).append("\n");
+    sb.append("    holdingInstrumentScope: ").append(toIndentedString(holdingInstrumentScope)).append("\n");
+    sb.append("    holdingLusidInstrumentId: ").append(toIndentedString(holdingLusidInstrumentId)).append("\n");
+    sb.append("    holdingInstrumentName: ").append(toIndentedString(holdingInstrumentName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

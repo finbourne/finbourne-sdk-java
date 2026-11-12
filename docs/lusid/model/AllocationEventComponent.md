@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **originMemberShortCode** | **String** | The member of the structure the component originates from, for a basis measured per deal such as PaidInForDeal. Absent means the map&#39;s own member. | [optional] [default to String]
 **waterfallTier** | **String** | For a distribution component, the tier of the waterfall it was paid under: ReturnOfContributions, PreferredReturn, CatchUp, CarriedInterest or Residual. | [optional] [default to String]
 **taxCharacter** | **String** | For a distribution component, the tax character of the amount: ROC, Gain, Income or Deemed. | [optional] [default to String]
+**recallableAmount** | **java.math.BigDecimal** | For the ROC component of a Distribution only, how much of the component the fund may call back, between zero and the component amount. Shared pro rata to each investor&#39;s ROC share. Absent means the allocation map&#39;s recall window decides. | [optional] [default to java.math.BigDecimal]
+**recallableUntil** | [**OffsetDateTime**](OffsetDateTime.md) | For the ROC component of a Distribution only, the last date the recallable amount may be called back. Must not be before the event date and requires a non-zero recallable amount. | [optional] [default to OffsetDateTime]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.AllocationEventComponent;
@@ -23,6 +25,8 @@ java.math.BigDecimal amount = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable String originMemberShortCode = "example originMemberShortCode";
 @javax.annotation.Nullable String waterfallTier = "example waterfallTier";
 @javax.annotation.Nullable String taxCharacter = "example taxCharacter";
+@javax.annotation.Nullable java.math.BigDecimal recallableAmount = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable OffsetDateTime recallableUntil = OffsetDateTime.now();
 
 
 AllocationEventComponent allocationEventComponentInstance = new AllocationEventComponent()
@@ -30,7 +34,9 @@ AllocationEventComponent allocationEventComponentInstance = new AllocationEventC
     .amount(amount)
     .originMemberShortCode(originMemberShortCode)
     .waterfallTier(waterfallTier)
-    .taxCharacter(taxCharacter);
+    .taxCharacter(taxCharacter)
+    .recallableAmount(recallableAmount)
+    .recallableUntil(recallableUntil);
 ```
 
 

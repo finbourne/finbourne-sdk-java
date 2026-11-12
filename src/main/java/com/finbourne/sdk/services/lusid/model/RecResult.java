@@ -60,7 +60,9 @@ import com.finbourne.sdk.JSON;
   RecResult.JSON_PROPERTY_REC_TYPE,
   RecResult.JSON_PROPERTY_EXTERNAL_REC_TYPE_NAME,
   RecResult.JSON_PROPERTY_INSTANCE_ID,
+  RecResult.JSON_PROPERTY_AS_AT_INSTANTIATED,
   RecResult.JSON_PROPERTY_REC_DEFINITION_ID,
+  RecResult.JSON_PROPERTY_REC_DEFINITION_DISPLAY_NAME,
   RecResult.JSON_PROPERTY_RUN_NUMBER,
   RecResult.JSON_PROPERTY_RUN_AS_AT,
   RecResult.JSON_PROPERTY_DATES_RECONCILED,
@@ -114,10 +116,20 @@ public class RecResult {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private RecInstanceId instanceId;
 
+  public static final String JSON_PROPERTY_AS_AT_INSTANTIATED = "asAtInstantiated";
+  @JsonProperty(JSON_PROPERTY_AS_AT_INSTANTIATED)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private OffsetDateTime asAtInstantiated;
+
   public static final String JSON_PROPERTY_REC_DEFINITION_ID = "recDefinitionId";
   @JsonProperty(JSON_PROPERTY_REC_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private ResourceId recDefinitionId;
+
+  public static final String JSON_PROPERTY_REC_DEFINITION_DISPLAY_NAME = "recDefinitionDisplayName";
+  @JsonProperty(JSON_PROPERTY_REC_DEFINITION_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String recDefinitionDisplayName;
 
   public static final String JSON_PROPERTY_RUN_NUMBER = "runNumber";
   @JsonProperty(JSON_PROPERTY_RUN_NUMBER)
@@ -228,7 +240,7 @@ public class RecResult {
   }
 
   /**
-   * The id of the result within its run: its result type and result number, e.g. &#39;break-3&#39;. Unique within one run of one rec type of an instance; the same id in another run of the instance names the same result, for as long as it keeps its result type.
+   * The id of the result within its instance: its rec type, result type and result number, e.g. &#39;Holding-break-3&#39;. Unique within the instance, and kept across its runs for as long as the result keeps its result type.
    * @return id
    */
   @javax.annotation.Nonnull
@@ -285,7 +297,7 @@ public class RecResult {
   }
 
   /**
-   * The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.
+   * The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -336,6 +348,25 @@ public class RecResult {
   }
 
 
+  public RecResult asAtInstantiated(OffsetDateTime asAtInstantiated) {
+    this.asAtInstantiated = asAtInstantiated;
+    return this;
+  }
+
+  /**
+   * The asAt datetime at which the instance was first created.
+   * @return asAtInstantiated
+   */
+  @javax.annotation.Nonnull
+  public OffsetDateTime getAsAtInstantiated() {
+    return asAtInstantiated;
+  }
+
+  public void setAsAtInstantiated(OffsetDateTime asAtInstantiated) {
+    this.asAtInstantiated = asAtInstantiated;
+  }
+
+
   public RecResult recDefinitionId(ResourceId recDefinitionId) {
     this.recDefinitionId = recDefinitionId;
     return this;
@@ -352,6 +383,25 @@ public class RecResult {
 
   public void setRecDefinitionId(ResourceId recDefinitionId) {
     this.recDefinitionId = recDefinitionId;
+  }
+
+
+  public RecResult recDefinitionDisplayName(String recDefinitionDisplayName) {
+    this.recDefinitionDisplayName = recDefinitionDisplayName;
+    return this;
+  }
+
+  /**
+   * The display name of the rec definition the rec was instantiated for, as it stood as-at instantiation. Not re-synchronised if the definition is later renamed.
+   * @return recDefinitionDisplayName
+   */
+  @javax.annotation.Nonnull
+  public String getRecDefinitionDisplayName() {
+    return recDefinitionDisplayName;
+  }
+
+  public void setRecDefinitionDisplayName(String recDefinitionDisplayName) {
+    this.recDefinitionDisplayName = recDefinitionDisplayName;
   }
 
 
@@ -806,7 +856,9 @@ public class RecResult {
         Objects.equals(this.recType, recResult.recType) &&
         Objects.equals(this.externalRecTypeName, recResult.externalRecTypeName) &&
         Objects.equals(this.instanceId, recResult.instanceId) &&
+        Objects.equals(this.asAtInstantiated, recResult.asAtInstantiated) &&
         Objects.equals(this.recDefinitionId, recResult.recDefinitionId) &&
+        Objects.equals(this.recDefinitionDisplayName, recResult.recDefinitionDisplayName) &&
         Objects.equals(this.runNumber, recResult.runNumber) &&
         Objects.equals(this.runAsAt, recResult.runAsAt) &&
         Objects.equals(this.datesReconciled, recResult.datesReconciled) &&
@@ -835,7 +887,7 @@ public class RecResult {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, resultNumber, firstRunSeen, recType, externalRecTypeName, instanceId, recDefinitionId, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, linkedResults, comments, properties, assignedUser, assignedRole, href, version, links);
+    return Objects.hash(id, resultNumber, firstRunSeen, recType, externalRecTypeName, instanceId, asAtInstantiated, recDefinitionId, recDefinitionDisplayName, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, linkedResults, comments, properties, assignedUser, assignedRole, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -855,7 +907,9 @@ public class RecResult {
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
     sb.append("    externalRecTypeName: ").append(toIndentedString(externalRecTypeName)).append("\n");
     sb.append("    instanceId: ").append(toIndentedString(instanceId)).append("\n");
+    sb.append("    asAtInstantiated: ").append(toIndentedString(asAtInstantiated)).append("\n");
     sb.append("    recDefinitionId: ").append(toIndentedString(recDefinitionId)).append("\n");
+    sb.append("    recDefinitionDisplayName: ").append(toIndentedString(recDefinitionDisplayName)).append("\n");
     sb.append("    runNumber: ").append(toIndentedString(runNumber)).append("\n");
     sb.append("    runAsAt: ").append(toIndentedString(runAsAt)).append("\n");
     sb.append("    datesReconciled: ").append(toIndentedString(datesReconciled)).append("\n");

@@ -205,7 +205,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.
+     * [EARLY ACCESS] BookAllocationEvent: Book an Allocation Event.
      * Freeze a computed Allocation Event under a booking reference, from an effective datetime. Once booked the  event can no longer be replaced or reallocated. Booking again under the same reference returns the event  unchanged; booking under a different reference is refused.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -228,7 +228,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.
+     * [EARLY ACCESS] BookAllocationEvent: Book an Allocation Event.
      * Freeze a computed Allocation Event under a booking reference, from an effective datetime. Once booked the  event can no longer be replaced or reallocated. Booking again under the same reference returns the event  unchanged; booking under a different reference is refused.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -251,7 +251,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] BookAllocationEvent: Book an Allocation Event. (asynchronously)
      * Freeze a computed Allocation Event under a booking reference, from an effective datetime. Once booked the  event can no longer be replaced or reallocated. Booking again under the same reference returns the event  unchanged; booking under a different reference is refused.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -275,7 +275,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] BookAllocationEvent: Book an Allocation Event. (asynchronously)
      * Freeze a computed Allocation Event under a booking reference, from an effective datetime. Once booked the  event can no longer be replaced or reallocated. Booking again under the same reference returns the event  unchanged; booking under a different reference is refused.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -437,7 +437,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.
+     * [EARLY ACCESS] BookAllocationEvent: Book an Allocation Event.
      * Freeze a computed Allocation Event under a booking reference, from an effective datetime. Once booked the  event can no longer be replaced or reallocated. Booking again under the same reference returns the event  unchanged; booking under a different reference is refused.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -556,7 +556,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
+     * [EARLY ACCESS] CreateAllocationEvent: Create an Allocation Event.
      * Raise a new Allocation Event. The scope is provided in the route and the code in the request body. The event  names the Allocation Map it is shared by, the kind of event, the amount and the date. Its per-investor shares  are computed on creation from the map as it stood on the event date, so the response comes back Computed.
      * @param scope The scope of the Allocation Event. (required)
      * @param allocationEventRequest The definition of the Allocation Event. (required)
@@ -577,7 +577,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
+     * [EARLY ACCESS] CreateAllocationEvent: Create an Allocation Event.
      * Raise a new Allocation Event. The scope is provided in the route and the code in the request body. The event  names the Allocation Map it is shared by, the kind of event, the amount and the date. Its per-investor shares  are computed on creation from the map as it stood on the event date, so the response comes back Computed.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param allocationEventRequest The definition of the Allocation Event. (required)
@@ -598,7 +598,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] CreateAllocationEvent: Create an Allocation Event. (asynchronously)
      * Raise a new Allocation Event. The scope is provided in the route and the code in the request body. The event  names the Allocation Map it is shared by, the kind of event, the amount and the date. Its per-investor shares  are computed on creation from the map as it stood on the event date, so the response comes back Computed.
      * @param scope The scope of the Allocation Event. (required)
      * @param allocationEventRequest The definition of the Allocation Event. (required)
@@ -620,7 +620,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] CreateAllocationEvent: Create an Allocation Event. (asynchronously)
      * Raise a new Allocation Event. The scope is provided in the route and the code in the request body. The event  names the Allocation Map it is shared by, the kind of event, the amount and the date. Its per-investor shares  are computed on creation from the map as it stood on the event date, so the response comes back Computed.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param allocationEventRequest The definition of the Allocation Event. (required)
@@ -767,7 +767,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
+     * [EARLY ACCESS] CreateAllocationEvent: Create an Allocation Event.
      * Raise a new Allocation Event. The scope is provided in the route and the code in the request body. The event  names the Allocation Map it is shared by, the kind of event, the amount and the date. Its per-investor shares  are computed on creation from the map as it stood on the event date, so the response comes back Computed.
      * @param scope The scope of the Allocation Event. (required)
      * @param allocationEventRequest The definition of the Allocation Event. (required)
@@ -888,7 +888,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
+     * [EARLY ACCESS] DeleteAllocationEvent: Delete an Allocation Event.
      * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -910,7 +910,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
+     * [EARLY ACCESS] DeleteAllocationEvent: Delete an Allocation Event.
      * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -932,7 +932,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] DeleteAllocationEvent: Delete an Allocation Event. (asynchronously)
      * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -955,7 +955,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] DeleteAllocationEvent: Delete an Allocation Event. (asynchronously)
      * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -1114,7 +1114,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
+     * [EARLY ACCESS] DeleteAllocationEvent: Delete an Allocation Event.
      * Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -1241,7 +1241,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+     * [EARLY ACCESS] GetAllocationEvent: Get an Allocation Event.
      * Retrieve a particular Allocation Event at an effective and asAt datetime, including its computed  per-investor shares and, once booked, its booking reference.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -1264,7 +1264,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+     * [EARLY ACCESS] GetAllocationEvent: Get an Allocation Event.
      * Retrieve a particular Allocation Event at an effective and asAt datetime, including its computed  per-investor shares and, once booked, its booking reference.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -1287,7 +1287,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] GetAllocationEvent: Get an Allocation Event. (asynchronously)
      * Retrieve a particular Allocation Event at an effective and asAt datetime, including its computed  per-investor shares and, once booked, its booking reference.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -1311,7 +1311,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] GetAllocationEvent: Get an Allocation Event. (asynchronously)
      * Retrieve a particular Allocation Event at an effective and asAt datetime, including its computed  per-investor shares and, once booked, its booking reference.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -1482,7 +1482,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+     * [EARLY ACCESS] GetAllocationEvent: Get an Allocation Event.
      * Retrieve a particular Allocation Event at an effective and asAt datetime, including its computed  per-investor shares and, once booked, its booking reference.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -1998,7 +1998,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
+     * [EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
      * What each investor still owes on a booked capital call as of the effective datetime, with how many days past  due it is and the ageing bucket that puts it in.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -2021,7 +2021,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
+     * [EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
      * What each investor still owes on a booked capital call as of the effective datetime, with how many days past  due it is and the ageing bucket that puts it in.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -2044,7 +2044,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event. (asynchronously)
      * What each investor still owes on a booked capital call as of the effective datetime, with how many days past  due it is and the ageing bucket that puts it in.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -2068,7 +2068,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event. (asynchronously)
      * What each investor still owes on a booked capital call as of the effective datetime, with how many days past  due it is and the ageing bucket that puts it in.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -2239,7 +2239,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
+     * [EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
      * What each investor still owes on a booked capital call as of the effective datetime, with how many days past  due it is and the ageing bucket that puts it in.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -2374,7 +2374,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+     * [EARLY ACCESS] ListAllocationEvents: List Allocation Events.
      * List all the Allocation Events matching a particular criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the Allocation Events. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Allocation Events. Defaults to returning the latest version of each Allocation Event if not specified. (optional)
@@ -2399,7 +2399,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+     * [EARLY ACCESS] ListAllocationEvents: List Allocation Events.
      * List all the Allocation Events matching a particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the Allocation Events. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Allocation Events. Defaults to returning the latest version of each Allocation Event if not specified. (optional)
@@ -2424,7 +2424,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationEvents: List Allocation Events. (asynchronously)
+     * [EARLY ACCESS] ListAllocationEvents: List Allocation Events. (asynchronously)
      * List all the Allocation Events matching a particular criteria.
      * @param effectiveAt The effective datetime or cut label at which to list the Allocation Events. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Allocation Events. Defaults to returning the latest version of each Allocation Event if not specified. (optional)
@@ -2450,7 +2450,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationEvents: List Allocation Events. (asynchronously)
+     * [EARLY ACCESS] ListAllocationEvents: List Allocation Events. (asynchronously)
      * List all the Allocation Events matching a particular criteria.Use any specified configuration options to override any other configuration for this request only
      * @param effectiveAt The effective datetime or cut label at which to list the Allocation Events. Defaults to the current LUSID system datetime if not specified. (optional)
      * @param asAt The asAt datetime at which to list the Allocation Events. Defaults to returning the latest version of each Allocation Event if not specified. (optional)
@@ -2663,7 +2663,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+     * [EARLY ACCESS] ListAllocationEvents: List Allocation Events.
      * List all the Allocation Events matching a particular criteria.
      * @return APIlistAllocationEventsRequest
      * @http.response.details
@@ -3134,7 +3134,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
+     * [EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
      * Show everything booking a computed Allocation Event under a booking reference would write, validated as the  booking itself would be, without writing any of it: the investors&#39; lines, the roll-ups above them through the  fund structure and the fund-side transactions. A booking that would be refused fails here with every problem  listed; warnings the map&#39;s policy lets through come back on the plan.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -3157,7 +3157,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
+     * [EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
      * Show everything booking a computed Allocation Event under a booking reference would write, validated as the  booking itself would be, without writing any of it: the investors&#39; lines, the roll-ups above them through the  fund structure and the fund-side transactions. A booking that would be refused fails here with every problem  listed; warnings the map&#39;s policy lets through come back on the plan.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -3180,7 +3180,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event. (asynchronously)
      * Show everything booking a computed Allocation Event under a booking reference would write, validated as the  booking itself would be, without writing any of it: the investors&#39; lines, the roll-ups above them through the  fund structure and the fund-side transactions. A booking that would be refused fails here with every problem  listed; warnings the map&#39;s policy lets through come back on the plan.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -3204,7 +3204,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event. (asynchronously)
      * Show everything booking a computed Allocation Event under a booking reference would write, validated as the  booking itself would be, without writing any of it: the investors&#39; lines, the roll-ups above them through the  fund structure and the fund-side transactions. A booking that would be refused fails here with every problem  listed; warnings the map&#39;s policy lets through come back on the plan.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -3366,7 +3366,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
+     * [EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
      * Show everything booking a computed Allocation Event under a booking reference would write, validated as the  booking itself would be, without writing any of it: the investors&#39; lines, the roll-ups above them through the  fund structure and the fund-side transactions. A booking that would be refused fails here with every problem  listed; warnings the map&#39;s policy lets through come back on the plan.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -3858,7 +3858,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
+     * [EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event.
      * Recompute the per-investor shares of an unbooked Allocation Event against its map, from an effective  datetime, recording the reason. Any basis values supplied replace those used before. A booked Allocation  Event cannot be reallocated.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -3881,7 +3881,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
+     * [EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event.
      * Recompute the per-investor shares of an unbooked Allocation Event against its map, from an effective  datetime, recording the reason. Any basis values supplied replace those used before. A booked Allocation  Event cannot be reallocated.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -3904,7 +3904,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event. (asynchronously)
      * Recompute the per-investor shares of an unbooked Allocation Event against its map, from an effective  datetime, recording the reason. Any basis values supplied replace those used before. A booked Allocation  Event cannot be reallocated.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -3928,7 +3928,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event. (asynchronously)
      * Recompute the per-investor shares of an unbooked Allocation Event against its map, from an effective  datetime, recording the reason. Any basis values supplied replace those used before. A booked Allocation  Event cannot be reallocated.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4090,7 +4090,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
+     * [EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event.
      * Recompute the per-investor shares of an unbooked Allocation Event against its map, from an effective  datetime, recording the reason. Any basis values supplied replace those used before. A booked Allocation  Event cannot be reallocated.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4223,7 +4223,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
+     * [EARLY ACCESS] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
      * Record cash received from an investor against a booked capital call. The receipt is applied to what the  investor owes on the call; anything over is recorded as a refund payable, so the outstanding amount never  goes negative. A bank charge is borne by the partner or the fund as the map&#39;s policy says, and a receipt in  another currency is converted at the rate given.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4246,7 +4246,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
+     * [EARLY ACCESS] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
      * Record cash received from an investor against a booked capital call. The receipt is applied to what the  investor owes on the call; anything over is recorded as a refund payable, so the outstanding amount never  goes negative. A bank charge is borne by the partner or the fund as the map&#39;s policy says, and a receipt in  another currency is converted at the rate given.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4269,7 +4269,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] ReceiveAllocationEvent: Record a receipt against an Allocation Event. (asynchronously)
      * Record cash received from an investor against a booked capital call. The receipt is applied to what the  investor owes on the call; anything over is recorded as a refund payable, so the outstanding amount never  goes negative. A bank charge is borne by the partner or the fund as the map&#39;s policy says, and a receipt in  another currency is converted at the rate given.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4293,7 +4293,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] ReceiveAllocationEvent: Record a receipt against an Allocation Event. (asynchronously)
      * Record cash received from an investor against a booked capital call. The receipt is applied to what the  investor owes on the call; anything over is recorded as a refund payable, so the outstanding amount never  goes negative. A bank charge is borne by the partner or the fund as the map&#39;s policy says, and a receipt in  another currency is converted at the rate given.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4455,7 +4455,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
+     * [EARLY ACCESS] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
      * Record cash received from an investor against a booked capital call. The receipt is applied to what the  investor owes on the call; anything over is recorded as a refund payable, so the outstanding amount never  goes negative. A bank charge is borne by the partner or the fund as the map&#39;s policy says, and a receipt in  another currency is converted at the rate given.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4588,7 +4588,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.
+     * [EARLY ACCESS] ReverseAllocationEvent: Reverse an Allocation Event.
      * Reverse a booked Allocation Event: every posting the booking wrote is mirrored under the reversal reference and  the event is left Reversed. A reversal falling in a closed period posts in the current period unless it is  marked backdated. A reversal cannot itself be reversed; raise a new event naming the reversed one in its  replaces field to put corrected shares in the books.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4611,7 +4611,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.
+     * [EARLY ACCESS] ReverseAllocationEvent: Reverse an Allocation Event.
      * Reverse a booked Allocation Event: every posting the booking wrote is mirrored under the reversal reference and  the event is left Reversed. A reversal falling in a closed period posts in the current period unless it is  marked backdated. A reversal cannot itself be reversed; raise a new event naming the reversed one in its  replaces field to put corrected shares in the books.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4634,7 +4634,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] ReverseAllocationEvent: Reverse an Allocation Event. (asynchronously)
      * Reverse a booked Allocation Event: every posting the booking wrote is mirrored under the reversal reference and  the event is left Reversed. A reversal falling in a closed period posts in the current period unless it is  marked backdated. A reversal cannot itself be reversed; raise a new event naming the reversed one in its  replaces field to put corrected shares in the books.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4658,7 +4658,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] ReverseAllocationEvent: Reverse an Allocation Event. (asynchronously)
      * Reverse a booked Allocation Event: every posting the booking wrote is mirrored under the reversal reference and  the event is left Reversed. A reversal falling in a closed period posts in the current period unless it is  marked backdated. A reversal cannot itself be reversed; raise a new event naming the reversed one in its  replaces field to put corrected shares in the books.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4820,7 +4820,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.
+     * [EARLY ACCESS] ReverseAllocationEvent: Reverse an Allocation Event.
      * Reverse a booked Allocation Event: every posting the booking wrote is mirrored under the reversal reference and  the event is left Reversed. A reversal falling in a closed period posts in the current period unless it is  marked backdated. A reversal cannot itself be reversed; raise a new event naming the reversed one in its  replaces field to put corrected shares in the books.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4953,7 +4953,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event.
+     * [EARLY ACCESS] UnbookAllocationEvent: Unbook an Allocation Event.
      * Take an Allocation Event whose booking stopped half way back to Computed, cancelling every posting the  booking wrote, and record why. Only an event in the Booking status can be unbooked: one that is Booked is  reversed instead.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4976,7 +4976,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event.
+     * [EARLY ACCESS] UnbookAllocationEvent: Unbook an Allocation Event.
      * Take an Allocation Event whose booking stopped half way back to Computed, cancelling every posting the  booking wrote, and record why. Only an event in the Booking status can be unbooked: one that is Booked is  reversed instead.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -4999,7 +4999,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] UnbookAllocationEvent: Unbook an Allocation Event. (asynchronously)
      * Take an Allocation Event whose booking stopped half way back to Computed, cancelling every posting the  booking wrote, and record why. Only an event in the Booking status can be unbooked: one that is Booked is  reversed instead.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -5023,7 +5023,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] UnbookAllocationEvent: Unbook an Allocation Event. (asynchronously)
      * Take an Allocation Event whose booking stopped half way back to Computed, cancelling every posting the  booking wrote, and record why. Only an event in the Booking status can be unbooked: one that is Booked is  reversed instead.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -5185,7 +5185,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event.
+     * [EARLY ACCESS] UnbookAllocationEvent: Unbook an Allocation Event.
      * Take an Allocation Event whose booking stopped half way back to Computed, cancelling every posting the  booking wrote, and record why. Only an event in the Booking status can be unbooked: one that is Booked is  reversed instead.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -5312,7 +5312,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event.
+     * [EARLY ACCESS] UpsertAllocationEvent: Upsert an Allocation Event.
      * Update or insert an Allocation Event. If the Allocation Event does not exist it is created, otherwise it is  replaced and its shares recomputed. The code in the request body must match the code in the route. A booked  Allocation Event is frozen and cannot be replaced.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -5334,7 +5334,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event.
+     * [EARLY ACCESS] UpsertAllocationEvent: Upsert an Allocation Event.
      * Update or insert an Allocation Event. If the Allocation Event does not exist it is created, otherwise it is  replaced and its shares recomputed. The code in the request body must match the code in the route. A booked  Allocation Event is frozen and cannot be replaced.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -5356,7 +5356,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] UpsertAllocationEvent: Upsert an Allocation Event. (asynchronously)
      * Update or insert an Allocation Event. If the Allocation Event does not exist it is created, otherwise it is  replaced and its shares recomputed. The code in the request body must match the code in the route. A booked  Allocation Event is frozen and cannot be replaced.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -5379,7 +5379,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event. (asynchronously)
+     * [EARLY ACCESS] UpsertAllocationEvent: Upsert an Allocation Event. (asynchronously)
      * Update or insert an Allocation Event. If the Allocation Event does not exist it is created, otherwise it is  replaced and its shares recomputed. The code in the request body must match the code in the route. A booked  Allocation Event is frozen and cannot be replaced.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
@@ -5529,7 +5529,7 @@ public class AllocationEventsApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event.
+     * [EARLY ACCESS] UpsertAllocationEvent: Upsert an Allocation Event.
      * Update or insert an Allocation Event. If the Allocation Event does not exist it is created, otherwise it is  replaced and its shares recomputed. The code in the request body must match the code in the route. A booked  Allocation Event is frozen and cannot be replaced.
      * @param scope The scope of the Allocation Event. (required)
      * @param code The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)

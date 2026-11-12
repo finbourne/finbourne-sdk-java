@@ -14,8 +14,11 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
@@ -51,7 +54,17 @@ import com.finbourne.sdk.JSON;
   MarginLine.JSON_PROPERTY_VARIATION_MARGIN,
   MarginLine.JSON_PROPERTY_COLLATERAL_VALUE,
   MarginLine.JSON_PROPERTY_INITIAL_MARGIN_ITEM,
-  MarginLine.JSON_PROPERTY_INITIAL_MARGIN
+  MarginLine.JSON_PROPERTY_INITIAL_MARGIN,
+  MarginLine.JSON_PROPERTY_SCENARIO,
+  MarginLine.JSON_PROPERTY_LINE_KEY,
+  MarginLine.JSON_PROPERTY_EXPLAIN_AVAILABLE,
+  MarginLine.JSON_PROPERTY_INSTRUMENT_TYPE,
+  MarginLine.JSON_PROPERTY_ASSET_CLASS,
+  MarginLine.JSON_PROPERTY_CURRENCY,
+  MarginLine.JSON_PROPERTY_MATURITY_DATE,
+  MarginLine.JSON_PROPERTY_NOTIONAL,
+  MarginLine.JSON_PROPERTY_GROSS_INITIAL_MARGIN,
+  MarginLine.JSON_PROPERTY_MOVABLE_TO
 })
 
 public class MarginLine {
@@ -129,6 +142,56 @@ public class MarginLine {
   @JsonProperty(JSON_PROPERTY_INITIAL_MARGIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal initialMargin;
+
+  public static final String JSON_PROPERTY_SCENARIO = "scenario";
+  @JsonProperty(JSON_PROPERTY_SCENARIO)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId scenario;
+
+  public static final String JSON_PROPERTY_LINE_KEY = "lineKey";
+  @JsonProperty(JSON_PROPERTY_LINE_KEY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String lineKey;
+
+  public static final String JSON_PROPERTY_EXPLAIN_AVAILABLE = "explainAvailable";
+  @JsonProperty(JSON_PROPERTY_EXPLAIN_AVAILABLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean explainAvailable;
+
+  public static final String JSON_PROPERTY_INSTRUMENT_TYPE = "instrumentType";
+  @JsonProperty(JSON_PROPERTY_INSTRUMENT_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String instrumentType;
+
+  public static final String JSON_PROPERTY_ASSET_CLASS = "assetClass";
+  @JsonProperty(JSON_PROPERTY_ASSET_CLASS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String assetClass;
+
+  public static final String JSON_PROPERTY_CURRENCY = "currency";
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String currency;
+
+  public static final String JSON_PROPERTY_MATURITY_DATE = "maturityDate";
+  @JsonProperty(JSON_PROPERTY_MATURITY_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime maturityDate;
+
+  public static final String JSON_PROPERTY_NOTIONAL = "notional";
+  @JsonProperty(JSON_PROPERTY_NOTIONAL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal notional;
+
+  public static final String JSON_PROPERTY_GROSS_INITIAL_MARGIN = "grossInitialMargin";
+  @JsonProperty(JSON_PROPERTY_GROSS_INITIAL_MARGIN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal grossInitialMargin;
+
+  public static final String JSON_PROPERTY_MOVABLE_TO = "movableTo";
+  @JsonProperty(JSON_PROPERTY_MOVABLE_TO)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<String> movableTo = new ArrayList<>();
 
   public MarginLine() {
   }
@@ -426,6 +489,204 @@ public class MarginLine {
   }
 
 
+  public MarginLine scenario(ResourceId scenario) {
+    this.scenario = scenario;
+    return this;
+  }
+
+  /**
+   * Get scenario
+   * @return scenario
+   */
+  @javax.annotation.Nullable
+  public ResourceId getScenario() {
+    return scenario;
+  }
+
+  public void setScenario(ResourceId scenario) {
+    this.scenario = scenario;
+  }
+
+
+  public MarginLine lineKey(String lineKey) {
+    this.lineKey = lineKey;
+    return this;
+  }
+
+  /**
+   * A key that identifies the line within its run, with which its explanation is asked for. A line valued under a scenario has a different key from the same holding in the base market. Null for a line stored before lines carried a key.
+   * @return lineKey
+   */
+  @javax.annotation.Nullable
+  public String getLineKey() {
+    return lineKey;
+  }
+
+  public void setLineKey(String lineKey) {
+    this.lineKey = lineKey;
+  }
+
+
+  public MarginLine explainAvailable(Boolean explainAvailable) {
+    this.explainAvailable = explainAvailable;
+    return this;
+  }
+
+  /**
+   * Whether the working behind the line&#39;s figures was stored, so that the line can be explained. One flag covers every figure of the line.
+   * @return explainAvailable
+   */
+  @javax.annotation.Nullable
+  public Boolean getExplainAvailable() {
+    return explainAvailable;
+  }
+
+  public void setExplainAvailable(Boolean explainAvailable) {
+    this.explainAvailable = explainAvailable;
+  }
+
+
+  public MarginLine instrumentType(String instrumentType) {
+    this.instrumentType = instrumentType;
+    return this;
+  }
+
+  /**
+   * LUSID&#39;s type for the instrument held, when the run read it.
+   * @return instrumentType
+   */
+  @javax.annotation.Nullable
+  public String getInstrumentType() {
+    return instrumentType;
+  }
+
+  public void setInstrumentType(String instrumentType) {
+    this.instrumentType = instrumentType;
+  }
+
+
+  public MarginLine assetClass(String assetClass) {
+    this.assetClass = assetClass;
+    return this;
+  }
+
+  /**
+   * The instrument&#39;s asset class, when the run read it.
+   * @return assetClass
+   */
+  @javax.annotation.Nullable
+  public String getAssetClass() {
+    return assetClass;
+  }
+
+  public void setAssetClass(String assetClass) {
+    this.assetClass = assetClass;
+  }
+
+
+  public MarginLine currency(String currency) {
+    this.currency = currency;
+    return this;
+  }
+
+  /**
+   * The currency the holding is denominated in, when the run read it.
+   * @return currency
+   */
+  @javax.annotation.Nullable
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
+
+  public MarginLine maturityDate(OffsetDateTime maturityDate) {
+    this.maturityDate = maturityDate;
+    return this;
+  }
+
+  /**
+   * The instrument&#39;s maturity, when it has one.
+   * @return maturityDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getMaturityDate() {
+    return maturityDate;
+  }
+
+  public void setMaturityDate(OffsetDateTime maturityDate) {
+    this.maturityDate = maturityDate;
+  }
+
+
+  public MarginLine notional(java.math.BigDecimal notional) {
+    this.notional = notional;
+    return this;
+  }
+
+  /**
+   * The holding&#39;s notional in its own currency, when the instrument has one.
+   * @return notional
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getNotional() {
+    return notional;
+  }
+
+  public void setNotional(java.math.BigDecimal notional) {
+    this.notional = notional;
+  }
+
+
+  public MarginLine grossInitialMargin(java.math.BigDecimal grossInitialMargin) {
+    this.grossInitialMargin = grossInitialMargin;
+    return this;
+  }
+
+  /**
+   * The regulatory-grid charge on the holding before its netting set&#39;s net-to-gross scaling. Null under other methods.
+   * @return grossInitialMargin
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getGrossInitialMargin() {
+    return grossInitialMargin;
+  }
+
+  public void setGrossInitialMargin(java.math.BigDecimal grossInitialMargin) {
+    this.grossInitialMargin = grossInitialMargin;
+  }
+
+
+  public MarginLine movableTo(List<String> movableTo) {
+    this.movableTo = movableTo;
+    return this;
+  }
+
+  public MarginLine addMovableToItem(String movableToItem) {
+    if (this.movableTo == null) {
+      this.movableTo = new ArrayList<>();
+    }
+    this.movableTo.add(movableToItem);
+    return this;
+  }
+
+  /**
+   * The initial-margin netting sets of other agreements in the run the holding could be re-booked into, as scope/code/item. Recorded for base-case trading lines under an initial-margin item; empty otherwise.
+   * @return movableTo
+   */
+  @javax.annotation.Nonnull
+  public List<String> getMovableTo() {
+    return movableTo;
+  }
+
+  public void setMovableTo(List<String> movableTo) {
+    this.movableTo = movableTo;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -449,7 +710,17 @@ public class MarginLine {
         (this.variationMargin == null ? marginLine.variationMargin == null : (marginLine.variationMargin != null && this.variationMargin.compareTo(marginLine.getVariationMargin()) == 0)) &&
         (this.collateralValue == null ? marginLine.collateralValue == null : (marginLine.collateralValue != null && this.collateralValue.compareTo(marginLine.getCollateralValue()) == 0)) &&
         Objects.equals(this.initialMarginItem, marginLine.initialMarginItem) &&
-        (this.initialMargin == null ? marginLine.initialMargin == null : (marginLine.initialMargin != null && this.initialMargin.compareTo(marginLine.getInitialMargin()) == 0));
+        (this.initialMargin == null ? marginLine.initialMargin == null : (marginLine.initialMargin != null && this.initialMargin.compareTo(marginLine.getInitialMargin()) == 0)) &&
+        Objects.equals(this.scenario, marginLine.scenario) &&
+        Objects.equals(this.lineKey, marginLine.lineKey) &&
+        Objects.equals(this.explainAvailable, marginLine.explainAvailable) &&
+        Objects.equals(this.instrumentType, marginLine.instrumentType) &&
+        Objects.equals(this.assetClass, marginLine.assetClass) &&
+        Objects.equals(this.currency, marginLine.currency) &&
+        Objects.equals(this.maturityDate, marginLine.maturityDate) &&
+        (this.notional == null ? marginLine.notional == null : (marginLine.notional != null && this.notional.compareTo(marginLine.getNotional()) == 0)) &&
+        (this.grossInitialMargin == null ? marginLine.grossInitialMargin == null : (marginLine.grossInitialMargin != null && this.grossInitialMargin.compareTo(marginLine.getGrossInitialMargin()) == 0)) &&
+        Objects.equals(this.movableTo, marginLine.movableTo);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -458,7 +729,7 @@ public class MarginLine {
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, agreementId, item, portfolioId, holdingId, custodianAccountScope, custodianAccountCode, custodianAccountName, instrumentIdentifiers, units, pv, variationMargin, collateralValue, initialMarginItem, initialMargin);
+    return Objects.hash(runId, agreementId, item, portfolioId, holdingId, custodianAccountScope, custodianAccountCode, custodianAccountName, instrumentIdentifiers, units, pv, variationMargin, collateralValue, initialMarginItem, initialMargin, scenario, lineKey, explainAvailable, instrumentType, assetClass, currency, maturityDate, notional, grossInitialMargin, movableTo);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -487,6 +758,16 @@ public class MarginLine {
     sb.append("    collateralValue: ").append(toIndentedString(collateralValue)).append("\n");
     sb.append("    initialMarginItem: ").append(toIndentedString(initialMarginItem)).append("\n");
     sb.append("    initialMargin: ").append(toIndentedString(initialMargin)).append("\n");
+    sb.append("    scenario: ").append(toIndentedString(scenario)).append("\n");
+    sb.append("    lineKey: ").append(toIndentedString(lineKey)).append("\n");
+    sb.append("    explainAvailable: ").append(toIndentedString(explainAvailable)).append("\n");
+    sb.append("    instrumentType: ").append(toIndentedString(instrumentType)).append("\n");
+    sb.append("    assetClass: ").append(toIndentedString(assetClass)).append("\n");
+    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
+    sb.append("    maturityDate: ").append(toIndentedString(maturityDate)).append("\n");
+    sb.append("    notional: ").append(toIndentedString(notional)).append("\n");
+    sb.append("    grossInitialMargin: ").append(toIndentedString(grossInitialMargin)).append("\n");
+    sb.append("    movableTo: ").append(toIndentedString(movableTo)).append("\n");
     sb.append("}");
     return sb.toString();
   }

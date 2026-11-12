@@ -12,7 +12,9 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.MarginRunAllocation;
 import com.finbourne.sdk.services.lusid.model.MarginRunIssue;
+import com.finbourne.sdk.services.lusid.model.MarginRunOptimisation;
 import com.finbourne.sdk.services.lusid.model.MarginRunShard;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
@@ -54,7 +56,10 @@ import com.finbourne.sdk.JSON;
   MarginRun.JSON_PROPERTY_FAILED_SHARDS,
   MarginRun.JSON_PROPERTY_ISSUES,
   MarginRun.JSON_PROPERTY_SHARDS,
-  MarginRun.JSON_PROPERTY_SCENARIO
+  MarginRun.JSON_PROPERTY_SCENARIOS,
+  MarginRun.JSON_PROPERTY_CAPTURE_DIAGNOSTICS,
+  MarginRun.JSON_PROPERTY_OPTIMISATION,
+  MarginRun.JSON_PROPERTY_ALLOCATION
 })
 
 public class MarginRun {
@@ -123,10 +128,25 @@ public class MarginRun {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<MarginRunShard> shards = new ArrayList<>();
 
-  public static final String JSON_PROPERTY_SCENARIO = "scenario";
-  @JsonProperty(JSON_PROPERTY_SCENARIO)
+  public static final String JSON_PROPERTY_SCENARIOS = "scenarios";
+  @JsonProperty(JSON_PROPERTY_SCENARIOS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<ResourceId> scenarios = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_CAPTURE_DIAGNOSTICS = "captureDiagnostics";
+  @JsonProperty(JSON_PROPERTY_CAPTURE_DIAGNOSTICS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private ResourceId scenario;
+  private Boolean captureDiagnostics;
+
+  public static final String JSON_PROPERTY_OPTIMISATION = "optimisation";
+  @JsonProperty(JSON_PROPERTY_OPTIMISATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private MarginRunOptimisation optimisation;
+
+  public static final String JSON_PROPERTY_ALLOCATION = "allocation";
+  @JsonProperty(JSON_PROPERTY_ALLOCATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private MarginRunAllocation allocation;
 
   public MarginRun() {
   }
@@ -402,22 +422,87 @@ public class MarginRun {
   }
 
 
-  public MarginRun scenario(ResourceId scenario) {
-    this.scenario = scenario;
+  public MarginRun scenarios(List<ResourceId> scenarios) {
+    this.scenarios = scenarios;
+    return this;
+  }
+
+  public MarginRun addScenariosItem(ResourceId scenariosItem) {
+    if (this.scenarios == null) {
+      this.scenarios = new ArrayList<>();
+    }
+    this.scenarios.add(scenariosItem);
     return this;
   }
 
   /**
-   * Get scenario
-   * @return scenario
+   * The stored scenarios the run values the agreements under, each beside the base market the run always values. Empty if only the base market was valued.
+   * @return scenarios
    */
-  @javax.annotation.Nullable
-  public ResourceId getScenario() {
-    return scenario;
+  @javax.annotation.Nonnull
+  public List<ResourceId> getScenarios() {
+    return scenarios;
   }
 
-  public void setScenario(ResourceId scenario) {
-    this.scenario = scenario;
+  public void setScenarios(List<ResourceId> scenarios) {
+    this.scenarios = scenarios;
+  }
+
+
+  public MarginRun captureDiagnostics(Boolean captureDiagnostics) {
+    this.captureDiagnostics = captureDiagnostics;
+    return this;
+  }
+
+  /**
+   * Whether the run stored the working behind its figures, so that they can be explained. Null for a run made before runs could store it, which did not.
+   * @return captureDiagnostics
+   */
+  @javax.annotation.Nullable
+  public Boolean getCaptureDiagnostics() {
+    return captureDiagnostics;
+  }
+
+  public void setCaptureDiagnostics(Boolean captureDiagnostics) {
+    this.captureDiagnostics = captureDiagnostics;
+  }
+
+
+  public MarginRun optimisation(MarginRunOptimisation optimisation) {
+    this.optimisation = optimisation;
+    return this;
+  }
+
+  /**
+   * Get optimisation
+   * @return optimisation
+   */
+  @javax.annotation.Nullable
+  public MarginRunOptimisation getOptimisation() {
+    return optimisation;
+  }
+
+  public void setOptimisation(MarginRunOptimisation optimisation) {
+    this.optimisation = optimisation;
+  }
+
+
+  public MarginRun allocation(MarginRunAllocation allocation) {
+    this.allocation = allocation;
+    return this;
+  }
+
+  /**
+   * Get allocation
+   * @return allocation
+   */
+  @javax.annotation.Nullable
+  public MarginRunAllocation getAllocation() {
+    return allocation;
+  }
+
+  public void setAllocation(MarginRunAllocation allocation) {
+    this.allocation = allocation;
   }
 
 
@@ -443,7 +528,10 @@ public class MarginRun {
         Objects.equals(this.failedShards, marginRun.failedShards) &&
         Objects.equals(this.issues, marginRun.issues) &&
         Objects.equals(this.shards, marginRun.shards) &&
-        Objects.equals(this.scenario, marginRun.scenario);
+        Objects.equals(this.scenarios, marginRun.scenarios) &&
+        Objects.equals(this.captureDiagnostics, marginRun.captureDiagnostics) &&
+        Objects.equals(this.optimisation, marginRun.optimisation) &&
+        Objects.equals(this.allocation, marginRun.allocation);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -452,7 +540,7 @@ public class MarginRun {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, effectiveAt, asAt, status, agreements, callCount, lineCount, shardCount, completedShards, failedShards, issues, shards, scenario);
+    return Objects.hash(href, id, effectiveAt, asAt, status, agreements, callCount, lineCount, shardCount, completedShards, failedShards, issues, shards, scenarios, captureDiagnostics, optimisation, allocation);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -479,7 +567,10 @@ public class MarginRun {
     sb.append("    failedShards: ").append(toIndentedString(failedShards)).append("\n");
     sb.append("    issues: ").append(toIndentedString(issues)).append("\n");
     sb.append("    shards: ").append(toIndentedString(shards)).append("\n");
-    sb.append("    scenario: ").append(toIndentedString(scenario)).append("\n");
+    sb.append("    scenarios: ").append(toIndentedString(scenarios)).append("\n");
+    sb.append("    captureDiagnostics: ").append(toIndentedString(captureDiagnostics)).append("\n");
+    sb.append("    optimisation: ").append(toIndentedString(optimisation)).append("\n");
+    sb.append("    allocation: ").append(toIndentedString(allocation)).append("\n");
     sb.append("}");
     return sb.toString();
   }

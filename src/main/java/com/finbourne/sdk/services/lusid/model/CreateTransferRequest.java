@@ -62,13 +62,16 @@ import com.finbourne.sdk.JSON;
   CreateTransferRequest.JSON_PROPERTY_COUNTERPARTY_ID_IN,
   CreateTransferRequest.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID_OUT,
   CreateTransferRequest.JSON_PROPERTY_CUSTODIAN_ACCOUNT_ID_IN,
-  CreateTransferRequest.JSON_PROPERTY_SOURCE,
+  CreateTransferRequest.JSON_PROPERTY_SOURCE_OUT,
   CreateTransferRequest.JSON_PROPERTY_ACCOUNTING_METHOD,
   CreateTransferRequest.JSON_PROPERTY_PROPERTIES_OUT,
   CreateTransferRequest.JSON_PROPERTY_PROPERTIES_IN,
   CreateTransferRequest.JSON_PROPERTY_PROPERTIES,
   CreateTransferRequest.JSON_PROPERTY_TRANSACTION_TO_PORTFOLIO_RATE_OUT,
-  CreateTransferRequest.JSON_PROPERTY_TRANSACTION_TO_PORTFOLIO_RATE_IN
+  CreateTransferRequest.JSON_PROPERTY_TRANSACTION_TO_PORTFOLIO_RATE_IN,
+  CreateTransferRequest.JSON_PROPERTY_SOURCE_IN,
+  CreateTransferRequest.JSON_PROPERTY_TRANSACTION_TYPE_OUT,
+  CreateTransferRequest.JSON_PROPERTY_TRANSACTION_TYPE_IN
 })
 
 public class CreateTransferRequest {
@@ -187,10 +190,10 @@ public class CreateTransferRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId custodianAccountIdIn;
 
-  public static final String JSON_PROPERTY_SOURCE = "source";
-  @JsonProperty(JSON_PROPERTY_SOURCE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String source;
+  public static final String JSON_PROPERTY_SOURCE_OUT = "sourceOut";
+  @JsonProperty(JSON_PROPERTY_SOURCE_OUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String sourceOut;
 
   public static final String JSON_PROPERTY_ACCOUNTING_METHOD = "accountingMethod";
   @JsonProperty(JSON_PROPERTY_ACCOUNTING_METHOD)
@@ -221,6 +224,21 @@ public class CreateTransferRequest {
   @JsonProperty(JSON_PROPERTY_TRANSACTION_TO_PORTFOLIO_RATE_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal transactionToPortfolioRateIn;
+
+  public static final String JSON_PROPERTY_SOURCE_IN = "sourceIn";
+  @JsonProperty(JSON_PROPERTY_SOURCE_IN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String sourceIn;
+
+  public static final String JSON_PROPERTY_TRANSACTION_TYPE_OUT = "transactionTypeOut";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_TYPE_OUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionTypeOut;
+
+  public static final String JSON_PROPERTY_TRANSACTION_TYPE_IN = "transactionTypeIn";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_TYPE_IN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionTypeIn;
 
   public CreateTransferRequest() {
   }
@@ -345,7 +363,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * What happens to the tax lots of the outgoing position. Only &#39;Consolidate&#39; is currently supported; &#39;Preserve&#39; is rejected. Defaults to &#39;Consolidate&#39;. Available values: Consolidate, Preserve.
+   * What happens to the tax lots of the outgoing position. Defaults to &#39;Consolidate&#39;. &#39;Preserve&#39; carries each outgoing lot onto the incoming position; it is not supported when the incoming portfolio uses the AverageCost or Default accounting method, or across share classes in different currencies. Available values: Consolidate, Preserve.
    * @return taxLotStructure
    */
   @javax.annotation.Nullable
@@ -573,7 +591,7 @@ public class CreateTransferRequest {
   }
 
   /**
-   * The unit price of the incoming leg. Ignored for a transfer, which carries the outgoing price across; defaults to the outgoing price for a switch.
+   * The unit price of the incoming leg. Not accepted for a transfer of one instrument between portfolios, which carries the outgoing price across. For a switch, required when PricingMethod is &#39;AtPrice&#39; and defaults to the outgoing price otherwise.
    * @return transactionPriceIn
    */
   @javax.annotation.Nullable
@@ -662,22 +680,22 @@ public class CreateTransferRequest {
   }
 
 
-  public CreateTransferRequest source(String source) {
-    this.source = source;
+  public CreateTransferRequest sourceOut(String sourceOut) {
+    this.sourceOut = sourceOut;
     return this;
   }
 
   /**
-   * The transaction source the generated legs are booked against.
-   * @return source
+   * The transaction source the outgoing leg is booked against, and the incoming leg too when SourceIn is not supplied. Defaults to &#39;default&#39;.
+   * @return sourceOut
    */
-  @javax.annotation.Nonnull
-  public String getSource() {
-    return source;
+  @javax.annotation.Nullable
+  public String getSourceOut() {
+    return sourceOut;
   }
 
-  public void setSource(String source) {
-    this.source = source;
+  public void setSourceOut(String sourceOut) {
+    this.sourceOut = sourceOut;
   }
 
 
@@ -819,6 +837,63 @@ public class CreateTransferRequest {
   }
 
 
+  public CreateTransferRequest sourceIn(String sourceIn) {
+    this.sourceIn = sourceIn;
+    return this;
+  }
+
+  /**
+   * The transaction source the incoming leg is booked against. Defaults to SourceOut.
+   * @return sourceIn
+   */
+  @javax.annotation.Nullable
+  public String getSourceIn() {
+    return sourceIn;
+  }
+
+  public void setSourceIn(String sourceIn) {
+    this.sourceIn = sourceIn;
+  }
+
+
+  public CreateTransferRequest transactionTypeOut(String transactionTypeOut) {
+    this.transactionTypeOut = transactionTypeOut;
+    return this;
+  }
+
+  /**
+   * The transaction type to book the outgoing leg as. Supply it together with TransactionTypeIn, or supply neither. If not supplied, it will be derived from the transfer type. It must be a different type from TransactionTypeIn, must be configured under SourceOut in the transaction type scope of PortfolioIdOut, and must reduce a position.
+   * @return transactionTypeOut
+   */
+  @javax.annotation.Nullable
+  public String getTransactionTypeOut() {
+    return transactionTypeOut;
+  }
+
+  public void setTransactionTypeOut(String transactionTypeOut) {
+    this.transactionTypeOut = transactionTypeOut;
+  }
+
+
+  public CreateTransferRequest transactionTypeIn(String transactionTypeIn) {
+    this.transactionTypeIn = transactionTypeIn;
+    return this;
+  }
+
+  /**
+   * The transaction type to book the incoming leg as. Supply it together with TransactionTypeOut, or supply neither. If not supplied, it will be derived from the transfer type. It must be configured under SourceIn in the transaction type scope of PortfolioIdIn, and must increase a position.
+   * @return transactionTypeIn
+   */
+  @javax.annotation.Nullable
+  public String getTransactionTypeIn() {
+    return transactionTypeIn;
+  }
+
+  public void setTransactionTypeIn(String transactionTypeIn) {
+    this.transactionTypeIn = transactionTypeIn;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -851,13 +926,16 @@ public class CreateTransferRequest {
         Objects.equals(this.counterpartyIdIn, createTransferRequest.counterpartyIdIn) &&
         Objects.equals(this.custodianAccountIdOut, createTransferRequest.custodianAccountIdOut) &&
         Objects.equals(this.custodianAccountIdIn, createTransferRequest.custodianAccountIdIn) &&
-        Objects.equals(this.source, createTransferRequest.source) &&
+        Objects.equals(this.sourceOut, createTransferRequest.sourceOut) &&
         Objects.equals(this.accountingMethod, createTransferRequest.accountingMethod) &&
         Objects.equals(this.propertiesOut, createTransferRequest.propertiesOut) &&
         Objects.equals(this.propertiesIn, createTransferRequest.propertiesIn) &&
         Objects.equals(this.properties, createTransferRequest.properties) &&
         (this.transactionToPortfolioRateOut == null ? createTransferRequest.transactionToPortfolioRateOut == null : (createTransferRequest.transactionToPortfolioRateOut != null && this.transactionToPortfolioRateOut.compareTo(createTransferRequest.getTransactionToPortfolioRateOut()) == 0)) &&
-        (this.transactionToPortfolioRateIn == null ? createTransferRequest.transactionToPortfolioRateIn == null : (createTransferRequest.transactionToPortfolioRateIn != null && this.transactionToPortfolioRateIn.compareTo(createTransferRequest.getTransactionToPortfolioRateIn()) == 0));
+        (this.transactionToPortfolioRateIn == null ? createTransferRequest.transactionToPortfolioRateIn == null : (createTransferRequest.transactionToPortfolioRateIn != null && this.transactionToPortfolioRateIn.compareTo(createTransferRequest.getTransactionToPortfolioRateIn()) == 0)) &&
+        Objects.equals(this.sourceIn, createTransferRequest.sourceIn) &&
+        Objects.equals(this.transactionTypeOut, createTransferRequest.transactionTypeOut) &&
+        Objects.equals(this.transactionTypeIn, createTransferRequest.transactionTypeIn);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -866,7 +944,7 @@ public class CreateTransferRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transferId, portfolioIdOut, portfolioIdIn, instrumentIdentifierOut, instrumentIdentifierIn, pricingMethod, taxLotStructure, unitsOut, unitsIn, amountOut, weightOut, tradeDateOut, tradeDateIn, settlementDateOut, settlementDateIn, exchangeRateOut, exchangeRateIn, transactionPriceOut, transactionPriceIn, counterpartyIdOut, counterpartyIdIn, custodianAccountIdOut, custodianAccountIdIn, source, accountingMethod, propertiesOut, propertiesIn, properties, transactionToPortfolioRateOut, transactionToPortfolioRateIn);
+    return Objects.hash(transferId, portfolioIdOut, portfolioIdIn, instrumentIdentifierOut, instrumentIdentifierIn, pricingMethod, taxLotStructure, unitsOut, unitsIn, amountOut, weightOut, tradeDateOut, tradeDateIn, settlementDateOut, settlementDateIn, exchangeRateOut, exchangeRateIn, transactionPriceOut, transactionPriceIn, counterpartyIdOut, counterpartyIdIn, custodianAccountIdOut, custodianAccountIdIn, sourceOut, accountingMethod, propertiesOut, propertiesIn, properties, transactionToPortfolioRateOut, transactionToPortfolioRateIn, sourceIn, transactionTypeOut, transactionTypeIn);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -903,13 +981,16 @@ public class CreateTransferRequest {
     sb.append("    counterpartyIdIn: ").append(toIndentedString(counterpartyIdIn)).append("\n");
     sb.append("    custodianAccountIdOut: ").append(toIndentedString(custodianAccountIdOut)).append("\n");
     sb.append("    custodianAccountIdIn: ").append(toIndentedString(custodianAccountIdIn)).append("\n");
-    sb.append("    source: ").append(toIndentedString(source)).append("\n");
+    sb.append("    sourceOut: ").append(toIndentedString(sourceOut)).append("\n");
     sb.append("    accountingMethod: ").append(toIndentedString(accountingMethod)).append("\n");
     sb.append("    propertiesOut: ").append(toIndentedString(propertiesOut)).append("\n");
     sb.append("    propertiesIn: ").append(toIndentedString(propertiesIn)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    transactionToPortfolioRateOut: ").append(toIndentedString(transactionToPortfolioRateOut)).append("\n");
     sb.append("    transactionToPortfolioRateIn: ").append(toIndentedString(transactionToPortfolioRateIn)).append("\n");
+    sb.append("    sourceIn: ").append(toIndentedString(sourceIn)).append("\n");
+    sb.append("    transactionTypeOut: ").append(toIndentedString(transactionTypeOut)).append("\n");
+    sb.append("    transactionTypeIn: ").append(toIndentedString(transactionTypeIn)).append("\n");
     sb.append("}");
     return sb.toString();
   }

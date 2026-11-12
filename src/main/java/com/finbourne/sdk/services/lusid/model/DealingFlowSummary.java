@@ -30,12 +30,16 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The transfer agency estimates a swing decision was made on: how many orders were dealt at the valuation point and what they summed.
+ * The transfer agency estimates a swing decision was made on: the orders dealt at the valuation point, what they summed, and how many pending orders were left out and what those were worth.
  */
 @JsonPropertyOrder({
   DealingFlowSummary.JSON_PROPERTY_COUNT,
   DealingFlowSummary.JSON_PROPERTY_GROSS_INFLOW,
-  DealingFlowSummary.JSON_PROPERTY_GROSS_OUTFLOW
+  DealingFlowSummary.JSON_PROPERTY_GROSS_OUTFLOW,
+  DealingFlowSummary.JSON_PROPERTY_PENDING_NOT_COUNTED,
+  DealingFlowSummary.JSON_PROPERTY_PENDING_GROSS_INFLOW,
+  DealingFlowSummary.JSON_PROPERTY_PENDING_GROSS_OUTFLOW,
+  DealingFlowSummary.JSON_PROPERTY_PENDING_UNVALUED_COUNT
 })
 
 public class DealingFlowSummary {
@@ -53,6 +57,26 @@ public class DealingFlowSummary {
   @JsonProperty(JSON_PROPERTY_GROSS_OUTFLOW)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal grossOutflow;
+
+  public static final String JSON_PROPERTY_PENDING_NOT_COUNTED = "pendingNotCounted";
+  @JsonProperty(JSON_PROPERTY_PENDING_NOT_COUNTED)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Integer pendingNotCounted;
+
+  public static final String JSON_PROPERTY_PENDING_GROSS_INFLOW = "pendingGrossInflow";
+  @JsonProperty(JSON_PROPERTY_PENDING_GROSS_INFLOW)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private java.math.BigDecimal pendingGrossInflow;
+
+  public static final String JSON_PROPERTY_PENDING_GROSS_OUTFLOW = "pendingGrossOutflow";
+  @JsonProperty(JSON_PROPERTY_PENDING_GROSS_OUTFLOW)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private java.math.BigDecimal pendingGrossOutflow;
+
+  public static final String JSON_PROPERTY_PENDING_UNVALUED_COUNT = "pendingUnvaluedCount";
+  @JsonProperty(JSON_PROPERTY_PENDING_UNVALUED_COUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Integer pendingUnvaluedCount;
 
   public DealingFlowSummary() {
   }
@@ -114,6 +138,82 @@ public class DealingFlowSummary {
   }
 
 
+  public DealingFlowSummary pendingNotCounted(Integer pendingNotCounted) {
+    this.pendingNotCounted = pendingNotCounted;
+    return this;
+  }
+
+  /**
+   * How many pending orders at the valuation point were left out of the sums because the fund&#39;s dealing estimates do not count pending orders. Zero when the fund counts them.
+   * @return pendingNotCounted
+   */
+  @javax.annotation.Nonnull
+  public Integer getPendingNotCounted() {
+    return pendingNotCounted;
+  }
+
+  public void setPendingNotCounted(Integer pendingNotCounted) {
+    this.pendingNotCounted = pendingNotCounted;
+  }
+
+
+  public DealingFlowSummary pendingGrossInflow(java.math.BigDecimal pendingGrossInflow) {
+    this.pendingGrossInflow = pendingGrossInflow;
+    return this;
+  }
+
+  /**
+   * The sum of the inflows among the pending orders left out, in the fund currency, with units at the estimate price. Zero or more; zero when the fund counts pending orders.
+   * @return pendingGrossInflow
+   */
+  @javax.annotation.Nonnull
+  public java.math.BigDecimal getPendingGrossInflow() {
+    return pendingGrossInflow;
+  }
+
+  public void setPendingGrossInflow(java.math.BigDecimal pendingGrossInflow) {
+    this.pendingGrossInflow = pendingGrossInflow;
+  }
+
+
+  public DealingFlowSummary pendingGrossOutflow(java.math.BigDecimal pendingGrossOutflow) {
+    this.pendingGrossOutflow = pendingGrossOutflow;
+    return this;
+  }
+
+  /**
+   * The sum of the outflows among the pending orders left out, in the fund currency, as a magnitude, with units at the estimate price. Zero or more; zero when the fund counts pending orders.
+   * @return pendingGrossOutflow
+   */
+  @javax.annotation.Nonnull
+  public java.math.BigDecimal getPendingGrossOutflow() {
+    return pendingGrossOutflow;
+  }
+
+  public void setPendingGrossOutflow(java.math.BigDecimal pendingGrossOutflow) {
+    this.pendingGrossOutflow = pendingGrossOutflow;
+  }
+
+
+  public DealingFlowSummary pendingUnvaluedCount(Integer pendingUnvaluedCount) {
+    this.pendingUnvaluedCount = pendingUnvaluedCount;
+    return this;
+  }
+
+  /**
+   * How many of the pending orders left out could not be valued, such as a unit order with no price yet. They are in pendingNotCounted but absent from pendingGrossInflow and pendingGrossOutflow.
+   * @return pendingUnvaluedCount
+   */
+  @javax.annotation.Nonnull
+  public Integer getPendingUnvaluedCount() {
+    return pendingUnvaluedCount;
+  }
+
+  public void setPendingUnvaluedCount(Integer pendingUnvaluedCount) {
+    this.pendingUnvaluedCount = pendingUnvaluedCount;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -125,12 +225,16 @@ public class DealingFlowSummary {
     DealingFlowSummary dealingFlowSummary = (DealingFlowSummary) o;
     return Objects.equals(this.count, dealingFlowSummary.count) &&
         (this.grossInflow == null ? dealingFlowSummary.grossInflow == null : (dealingFlowSummary.grossInflow != null && this.grossInflow.compareTo(dealingFlowSummary.getGrossInflow()) == 0)) &&
-        (this.grossOutflow == null ? dealingFlowSummary.grossOutflow == null : (dealingFlowSummary.grossOutflow != null && this.grossOutflow.compareTo(dealingFlowSummary.getGrossOutflow()) == 0));
+        (this.grossOutflow == null ? dealingFlowSummary.grossOutflow == null : (dealingFlowSummary.grossOutflow != null && this.grossOutflow.compareTo(dealingFlowSummary.getGrossOutflow()) == 0)) &&
+        Objects.equals(this.pendingNotCounted, dealingFlowSummary.pendingNotCounted) &&
+        (this.pendingGrossInflow == null ? dealingFlowSummary.pendingGrossInflow == null : (dealingFlowSummary.pendingGrossInflow != null && this.pendingGrossInflow.compareTo(dealingFlowSummary.getPendingGrossInflow()) == 0)) &&
+        (this.pendingGrossOutflow == null ? dealingFlowSummary.pendingGrossOutflow == null : (dealingFlowSummary.pendingGrossOutflow != null && this.pendingGrossOutflow.compareTo(dealingFlowSummary.getPendingGrossOutflow()) == 0)) &&
+        Objects.equals(this.pendingUnvaluedCount, dealingFlowSummary.pendingUnvaluedCount);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(count, grossInflow, grossOutflow);
+    return Objects.hash(count, grossInflow, grossOutflow, pendingNotCounted, pendingGrossInflow, pendingGrossOutflow, pendingUnvaluedCount);
   }
 
   @Override
@@ -140,6 +244,10 @@ public class DealingFlowSummary {
     sb.append("    count: ").append(toIndentedString(count)).append("\n");
     sb.append("    grossInflow: ").append(toIndentedString(grossInflow)).append("\n");
     sb.append("    grossOutflow: ").append(toIndentedString(grossOutflow)).append("\n");
+    sb.append("    pendingNotCounted: ").append(toIndentedString(pendingNotCounted)).append("\n");
+    sb.append("    pendingGrossInflow: ").append(toIndentedString(pendingGrossInflow)).append("\n");
+    sb.append("    pendingGrossOutflow: ").append(toIndentedString(pendingGrossOutflow)).append("\n");
+    sb.append("    pendingUnvaluedCount: ").append(toIndentedString(pendingUnvaluedCount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

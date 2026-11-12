@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
+import com.finbourne.sdk.services.lusid.model.RealisedGainLossChargeableGains;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -55,7 +56,8 @@ import com.finbourne.sdk.JSON;
   RealisedGainLoss.JSON_PROPERTY_REALISED_AMORTISATION,
   RealisedGainLoss.JSON_PROPERTY_TRADE_DATE_TO_SETTLEMENT_DATE_REALISED_CURRENCY,
   RealisedGainLoss.JSON_PROPERTY_TRANSACTION_TYPE,
-  RealisedGainLoss.JSON_PROPERTY_PROPERTIES
+  RealisedGainLoss.JSON_PROPERTY_PROPERTIES,
+  RealisedGainLoss.JSON_PROPERTY_CHARGEABLE_GAINS
 })
 
 public class RealisedGainLoss {
@@ -143,6 +145,11 @@ public class RealisedGainLoss {
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, PerpetualProperty> properties;
+
+  public static final String JSON_PROPERTY_CHARGEABLE_GAINS = "chargeableGains";
+  @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RealisedGainLossChargeableGains chargeableGains;
 
   public RealisedGainLoss() {
   }
@@ -471,6 +478,25 @@ public class RealisedGainLoss {
   }
 
 
+  public RealisedGainLoss chargeableGains(RealisedGainLossChargeableGains chargeableGains) {
+    this.chargeableGains = chargeableGains;
+    return this;
+  }
+
+  /**
+   * Get chargeableGains
+   * @return chargeableGains
+   */
+  @javax.annotation.Nullable
+  public RealisedGainLossChargeableGains getChargeableGains() {
+    return chargeableGains;
+  }
+
+  public void setChargeableGains(RealisedGainLossChargeableGains chargeableGains) {
+    this.chargeableGains = chargeableGains;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -496,7 +522,8 @@ public class RealisedGainLoss {
         Objects.equals(this.realisedAmortisation, realisedGainLoss.realisedAmortisation) &&
         Objects.equals(this.tradeDateToSettlementDateRealisedCurrency, realisedGainLoss.tradeDateToSettlementDateRealisedCurrency) &&
         Objects.equals(this.transactionType, realisedGainLoss.transactionType) &&
-        Objects.equals(this.properties, realisedGainLoss.properties);
+        Objects.equals(this.properties, realisedGainLoss.properties) &&
+        Objects.equals(this.chargeableGains, realisedGainLoss.chargeableGains);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -505,7 +532,7 @@ public class RealisedGainLoss {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instrumentScope, instrumentUid, units, purchaseTradeDate, purchaseSettlementDate, purchasePrice, costTradeCcy, costPortfolioCcy, realisedTradeCcy, realisedTotal, realisedMarket, realisedCurrency, taxLotId, realisedAmortisation, tradeDateToSettlementDateRealisedCurrency, transactionType, properties);
+    return Objects.hash(instrumentScope, instrumentUid, units, purchaseTradeDate, purchaseSettlementDate, purchasePrice, costTradeCcy, costPortfolioCcy, realisedTradeCcy, realisedTotal, realisedMarket, realisedCurrency, taxLotId, realisedAmortisation, tradeDateToSettlementDateRealisedCurrency, transactionType, properties, chargeableGains);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -536,6 +563,7 @@ public class RealisedGainLoss {
     sb.append("    tradeDateToSettlementDateRealisedCurrency: ").append(toIndentedString(tradeDateToSettlementDateRealisedCurrency)).append("\n");
     sb.append("    transactionType: ").append(toIndentedString(transactionType)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
+    sb.append("    chargeableGains: ").append(toIndentedString(chargeableGains)).append("\n");
     sb.append("}");
     return sb.toString();
   }

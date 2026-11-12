@@ -1,6 +1,6 @@
 # com.finbourne.sdk.services.lusid.model.AllocationReceivable
 classname AllocationReceivable
-One investor's position on a booked capital call.
+One investor's position on a booked capital call, on one register.
 
 ## Properties
 
@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **outstanding** | **java.math.BigDecimal** | What is still owed. Never negative: an overpayment becomes a refund payable instead. | [optional] [default to java.math.BigDecimal]
 **daysPastDue** | **Integer** | How many days past the due date the outstanding amount is, or zero when not yet due or nothing is owed. | [optional] [default to Integer]
 **bucket** | **String** | The ageing bucket: Current, 1-30, 31-60, 61-90 or 90+. | [optional] [default to String]
+**portfolio** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
+**side** | **String** | Whether the record owes on its own line (LP) or as a feeder&#39;s roll-up on the master (ROLLUP). | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.AllocationReceivable;
@@ -25,6 +27,8 @@ java.math.BigDecimal received = new java.math.BigDecimal("100.00");
 java.math.BigDecimal outstanding = new java.math.BigDecimal("100.00");
 Integer daysPastDue = new Integer("100.00");
 @javax.annotation.Nullable String bucket = "example bucket";
+ResourceId portfolio = new ResourceId();
+@javax.annotation.Nullable String side = "example side";
 
 
 AllocationReceivable allocationReceivableInstance = new AllocationReceivable()
@@ -33,7 +37,9 @@ AllocationReceivable allocationReceivableInstance = new AllocationReceivable()
     .received(received)
     .outstanding(outstanding)
     .daysPastDue(daysPastDue)
-    .bucket(bucket);
+    .bucket(bucket)
+    .portfolio(portfolio)
+    .side(side);
 ```
 
 

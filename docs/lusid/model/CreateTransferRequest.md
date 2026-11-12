@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **instrumentIdentifierOut** | **String** | The LUSID instrument id of the instrument moving out. A position in this instrument must exist in the outgoing portfolio on the outgoing trade date. | [default to String]
 **instrumentIdentifierIn** | **String** | The LUSID instrument id of the instrument moving in. Equal to InstrumentIdentifierOut for a transfer between portfolios. | [default to String]
 **pricingMethod** | **String** | How the legs are priced. &#39;AtCost&#39; uses the cost per unit of the outgoing holding; &#39;AtPrice&#39; uses the supplied TransactionPriceOut, which is then required. Available values: AtCost, AtPrice. | [default to String]
-**taxLotStructure** | **String** | What happens to the tax lots of the outgoing position. Only &#39;Consolidate&#39; is currently supported; &#39;Preserve&#39; is rejected. Defaults to &#39;Consolidate&#39;. Available values: Consolidate, Preserve. | [optional] [default to String]
+**taxLotStructure** | **String** | What happens to the tax lots of the outgoing position. Defaults to &#39;Consolidate&#39;. &#39;Preserve&#39; carries each outgoing lot onto the incoming position; it is not supported when the incoming portfolio uses the AverageCost or Default accounting method, or across share classes in different currencies. Available values: Consolidate, Preserve. | [optional] [default to String]
 **unitsOut** | **java.math.BigDecimal** | The number of units to move out. Must be greater than zero. | [default to java.math.BigDecimal]
 **unitsIn** | **java.math.BigDecimal** | The number of units to move in. Must be greater than zero. | [default to java.math.BigDecimal]
 **amountOut** | **java.math.BigDecimal** | The total consideration of the outgoing leg. Recorded, not applied. | [optional] [default to java.math.BigDecimal]
@@ -24,18 +24,21 @@ Name | Type | Description | Notes
 **exchangeRateOut** | **java.math.BigDecimal** | The FX rate to apply to the outgoing leg. | [optional] [default to java.math.BigDecimal]
 **exchangeRateIn** | **java.math.BigDecimal** | The FX rate to apply to the incoming leg. | [optional] [default to java.math.BigDecimal]
 **transactionPriceOut** | **java.math.BigDecimal** | The unit price of the outgoing leg. Required when PricingMethod is &#39;AtPrice&#39;, and ignored when it is &#39;AtCost&#39;. | [optional] [default to java.math.BigDecimal]
-**transactionPriceIn** | **java.math.BigDecimal** | The unit price of the incoming leg. Ignored for a transfer, which carries the outgoing price across; defaults to the outgoing price for a switch. | [optional] [default to java.math.BigDecimal]
+**transactionPriceIn** | **java.math.BigDecimal** | The unit price of the incoming leg. Not accepted for a transfer of one instrument between portfolios, which carries the outgoing price across. For a switch, required when PricingMethod is &#39;AtPrice&#39; and defaults to the outgoing price otherwise. | [optional] [default to java.math.BigDecimal]
 **counterpartyIdOut** | **String** | The counterparty identifier of the outgoing leg. | [optional] [default to String]
 **counterpartyIdIn** | **String** | The counterparty identifier of the incoming leg. Defaults to CounterpartyIdOut. | [optional] [default to String]
 **custodianAccountIdOut** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **custodianAccountIdIn** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
-**source** | **String** | The transaction source the generated legs are booked against. | [default to String]
+**sourceOut** | **String** | The transaction source the outgoing leg is booked against, and the incoming leg too when SourceIn is not supplied. Defaults to &#39;default&#39;. | [optional] [default to String]
 **accountingMethod** | **String** | An accounting method to record against the transfer. Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | [optional] [default to String]
 **propertiesOut** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Transaction Properties to set on the outgoing transaction leg, and on the incoming transaction leg when PropertiesIn is absent. Supplying an empty collection for PropertiesIn leaves the incoming leg with no properties. | [optional] [default to Map<String, PerpetualProperty>]
 **propertiesIn** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Transaction Properties to set on the incoming transaction leg, replacing rather than adding to PropertiesOut. | [optional] [default to Map<String, PerpetualProperty>]
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Properties to set on the transfer itself, in the Transfer domain. These are separate from PropertiesOut and PropertiesIn, which are Transaction domain and land on the legs. | [optional] [default to Map<String, PerpetualProperty>]
 **transactionToPortfolioRateOut** | **java.math.BigDecimal** | The rate from the outgoing leg&#39;s trade currency to the outgoing portfolio&#39;s base currency, applied whenever supplied. | [optional] [default to java.math.BigDecimal]
 **transactionToPortfolioRateIn** | **java.math.BigDecimal** | The rate from the incoming leg&#39;s trade currency to the incoming portfolio&#39;s base currency. Required when the two portfolios have different base currencies, and applied whenever supplied. | [optional] [default to java.math.BigDecimal]
+**sourceIn** | **String** | The transaction source the incoming leg is booked against. Defaults to SourceOut. | [optional] [default to String]
+**transactionTypeOut** | **String** | The transaction type to book the outgoing leg as. Supply it together with TransactionTypeIn, or supply neither. If not supplied, it will be derived from the transfer type. It must be a different type from TransactionTypeIn, must be configured under SourceOut in the transaction type scope of PortfolioIdOut, and must reduce a position. | [optional] [default to String]
+**transactionTypeIn** | **String** | The transaction type to book the incoming leg as. Supply it together with TransactionTypeOut, or supply neither. If not supplied, it will be derived from the transfer type. It must be configured under SourceIn in the transaction type scope of PortfolioIdIn, and must increase a position. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.CreateTransferRequest;
@@ -66,13 +69,16 @@ OffsetDateTime settlementDateOut = OffsetDateTime.now();
 @javax.annotation.Nullable String counterpartyIdIn = "example counterpartyIdIn";
 ResourceId custodianAccountIdOut = new ResourceId();
 ResourceId custodianAccountIdIn = new ResourceId();
-String source = "example source";
+@javax.annotation.Nullable String sourceOut = "example sourceOut";
 @javax.annotation.Nullable String accountingMethod = "example accountingMethod";
 @javax.annotation.Nullable Map<String, PerpetualProperty> propertiesOut = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> propertiesIn = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable java.math.BigDecimal transactionToPortfolioRateOut = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable java.math.BigDecimal transactionToPortfolioRateIn = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable String sourceIn = "example sourceIn";
+@javax.annotation.Nullable String transactionTypeOut = "example transactionTypeOut";
+@javax.annotation.Nullable String transactionTypeIn = "example transactionTypeIn";
 
 
 CreateTransferRequest createTransferRequestInstance = new CreateTransferRequest()
@@ -99,13 +105,16 @@ CreateTransferRequest createTransferRequestInstance = new CreateTransferRequest(
     .counterpartyIdIn(counterpartyIdIn)
     .custodianAccountIdOut(custodianAccountIdOut)
     .custodianAccountIdIn(custodianAccountIdIn)
-    .source(source)
+    .sourceOut(sourceOut)
     .accountingMethod(accountingMethod)
     .propertiesOut(propertiesOut)
     .propertiesIn(propertiesIn)
     .properties(properties)
     .transactionToPortfolioRateOut(transactionToPortfolioRateOut)
-    .transactionToPortfolioRateIn(transactionToPortfolioRateIn);
+    .transactionToPortfolioRateIn(transactionToPortfolioRateIn)
+    .sourceIn(sourceIn)
+    .transactionTypeOut(transactionTypeOut)
+    .transactionTypeIn(transactionTypeIn);
 ```
 
 

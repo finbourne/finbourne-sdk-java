@@ -21,6 +21,7 @@ All URIs are relative to *http://localhost*
 | [**deleteFund**](FundsApi.md#deleteFund) | **DELETE** /api/api/funds/{scope}/{code} | [EARLY ACCESS] DeleteFund: Delete a Fund. |
 | [**deleteNavActivityAdjustments**](FundsApi.md#deleteNavActivityAdjustments) | **POST** /api/api/funds/{scope}/{code}/navAdjustment/$delete | [EARLY ACCESS] DeleteNavActivityAdjustments: Delete Nav activity adjustments. |
 | [**deleteSeries**](FundsApi.md#deleteSeries) | **DELETE** /api/api/funds/{scope}/{code}/shareclasses/{shareClassCode}/series/{seriesIdentifier} | [EARLY ACCESS] DeleteSeries: [EARLY ACCESS] DeleteSeries: Remove a Series from a Share Class of a Fund. |
+| [**deleteTaxCostRecord**](FundsApi.md#deleteTaxCostRecord) | **DELETE** /api/api/funds/{scope}/{code}/taxcostrecords/{taxCostRecordCode} | [EXPERIMENTAL] DeleteTaxCostRecord: [EXPERIMENTAL] DeleteTaxCostRecord: Delete a Tax Cost Record. |
 | [**deleteValuationPoint**](FundsApi.md#deleteValuationPoint) | **DELETE** /api/api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EARLY ACCESS] DeleteValuationPoint: Delete a Valuation Point. |
 | [**diffPartnerStatement**](FundsApi.md#diffPartnerStatement) | **GET** /api/api/funds/{scope}/{code}/partners/{investorRecordId}/statements/{statementId}/$diff | [EARLY ACCESS] DiffPartnerStatement: [EXPERIMENTAL] DiffPartnerStatement: Compare two of a partner&#39;s statements. |
 | [**finaliseCandidateValuationPoint**](FundsApi.md#finaliseCandidateValuationPoint) | **POST** /api/api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EARLY ACCESS] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point. |
@@ -32,6 +33,7 @@ All URIs are relative to *http://localhost*
 | [**getFund**](FundsApi.md#getFund) | **GET** /api/api/funds/{scope}/{code} | [EARLY ACCESS] GetFund: Get a Fund. |
 | [**getFundPerformance**](FundsApi.md#getFundPerformance) | **GET** /api/api/funds/{scope}/{code}/performance | [EARLY ACCESS] GetFundPerformance: [EARLY ACCESS] GetFundPerformance: Get a fund&#39;s performance measures over all its partners. |
 | [**getFundProperties**](FundsApi.md#getFundProperties) | **GET** /api/api/funds/{scope}/{code}/properties | [EARLY ACCESS] GetFundProperties: Get Fund properties. |
+| [**getFundTaxScope**](FundsApi.md#getFundTaxScope) | **GET** /api/api/funds/{scope}/{code}/tax/scope | [EARLY ACCESS] GetFundTaxScope: [EARLY ACCESS] GetFundTaxScope: Get the UK chargeable-gains tax scope of a fund. |
 | [**getHoldingContributorsForFund**](FundsApi.md#getHoldingContributorsForFund) | **POST** /api/api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EARLY ACCESS] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund. |
 | [**getHoldingsForFund**](FundsApi.md#getHoldingsForFund) | **POST** /api/api/funds/{scope}/{code}/$holdings | [EARLY ACCESS] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund. |
 | [**getPartnerCapitalAccount**](FundsApi.md#getPartnerCapitalAccount) | **GET** /api/api/funds/{scope}/{code}/partners/{irScope}/{irCode}/capitalaccount | [EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner&#39;s capital account statement. |
@@ -40,6 +42,7 @@ All URIs are relative to *http://localhost*
 | [**getPartners**](FundsApi.md#getPartners) | **GET** /api/api/funds/{scope}/{code}/partners | [EARLY ACCESS] GetPartners: [EARLY ACCESS] GetPartners: Get the partners of a partnership fund. |
 | [**getPartnershipConfigPack**](FundsApi.md#getPartnershipConfigPack) | **GET** /api/api/funds/{scope}/{code}/partnershipaccounting/configpack | [EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund. |
 | [**getSeries**](FundsApi.md#getSeries) | **GET** /api/api/funds/{scope}/{code}/series | [EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund. |
+| [**getTaxSyncStatus**](FundsApi.md#getTaxSyncStatus) | **GET** /api/api/funds/{scope}/{code}/tax/sync | [EARLY ACCESS] GetTaxSyncStatus: [EARLY ACCESS] GetTaxSyncStatus: Get the tax sync position of each portfolio in a Fund. |
 | [**getValuationForFund**](FundsApi.md#getValuationForFund) | **POST** /api/api/funds/{scope}/{code}/$valuation | [EARLY ACCESS] GetValuationForFund: Perform valuation for a Fund. |
 | [**getValuationPointData**](FundsApi.md#getValuationPointData) | **POST** /api/api/funds/{scope}/{code}/valuationpoints/$query | [EARLY ACCESS] GetValuationPointData: Get Valuation Point Data for a Fund. |
 | [**getValuationPointJournalEntryLines**](FundsApi.md#getValuationPointJournalEntryLines) | **POST** /api/api/funds/{scope}/{code}/valuationpoints/journalentrylines/$query | [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund. |
@@ -56,6 +59,9 @@ All URIs are relative to *http://localhost*
 | [**listNavActivityAdjustments**](FundsApi.md#listNavActivityAdjustments) | **GET** /api/api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point |
 | [**listPartnerCapitalAccounts**](FundsApi.md#listPartnerCapitalAccounts) | **GET** /api/api/funds/{scope}/{code}/capitalaccounts | [EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund&#39;s partners. |
 | [**listPartnerStatements**](FundsApi.md#listPartnerStatements) | **GET** /api/api/funds/{scope}/{code}/partners/{investorRecordId}/statements | [EARLY ACCESS] ListPartnerStatements: [EXPERIMENTAL] ListPartnerStatements: List the statements produced for a partner. |
+| [**listTaxCostRecords**](FundsApi.md#listTaxCostRecords) | **GET** /api/api/funds/{scope}/{code}/taxcostrecords | [EXPERIMENTAL] ListTaxCostRecords: [EXPERIMENTAL] ListTaxCostRecords: List Tax Cost Records for a specified Fund. |
+| [**listTaxExceptions**](FundsApi.md#listTaxExceptions) | **GET** /api/api/funds/{scope}/{code}/tax/exceptions | [EARLY ACCESS] ListTaxExceptions: [EARLY ACCESS] ListTaxExceptions: List the open tax exceptions of a Fund. |
+| [**listTaxExceptionsAcrossFunds**](FundsApi.md#listTaxExceptionsAcrossFunds) | **GET** /api/api/tax/exceptions | [EARLY ACCESS] ListTaxExceptionsAcrossFunds: [EARLY ACCESS] ListTaxExceptionsAcrossFunds: List the open tax exceptions across every Fund. |
 | [**listValuationPointComplexMarketData**](FundsApi.md#listValuationPointComplexMarketData) | **POST** /api/api/funds/{scope}/{code}/valuationpoints/complexmarketdata/$query | [EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point. |
 | [**listValuationPointInstruments**](FundsApi.md#listValuationPointInstruments) | **GET** /api/api/funds/{scope}/{code}/valuationpoints/instruments/$query | [EARLY ACCESS] ListValuationPointInstruments: List Instruments inside a valuation point |
 | [**listValuationPointOverview**](FundsApi.md#listValuationPointOverview) | **GET** /api/api/funds/{scope}/{code}/valuationPointOverview | [EARLY ACCESS] ListValuationPointOverview: List Valuation Points Overview for a given Fund. |
@@ -70,9 +76,11 @@ All URIs are relative to *http://localhost*
 | [**updateValuationPoint**](FundsApi.md#updateValuationPoint) | **PUT** /api/api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point. |
 | [**upsertBookmark**](FundsApi.md#upsertBookmark) | **POST** /api/api/funds/{scope}/{code}/bookmarks | [EARLY ACCESS] UpsertBookmark: Upsert a bookmark. |
 | [**upsertDiaryEntryTypeValuationPoint**](FundsApi.md#upsertDiaryEntryTypeValuationPoint) | **POST** /api/api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point. |
+| [**upsertExternalDealingEstimates**](FundsApi.md#upsertExternalDealingEstimates) | **POST** /api/api/funds/{scope}/{code}/dealingestimates/$external | [EARLY ACCESS] UpsertExternalDealingEstimates: Load dealing estimates sent by an external transfer agent |
 | [**upsertFeeProperties**](FundsApi.md#upsertFeeProperties) | **POST** /api/api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EARLY ACCESS] UpsertFeeProperties: Upsert Fee properties. |
 | [**upsertFundProperties**](FundsApi.md#upsertFundProperties) | **POST** /api/api/funds/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundProperties: Upsert Fund properties. |
 | [**upsertNavActivityAdjustments**](FundsApi.md#upsertNavActivityAdjustments) | **POST** /api/api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point |
+| [**upsertTaxCostRecords**](FundsApi.md#upsertTaxCostRecords) | **POST** /api/api/funds/{scope}/{code}/taxcostrecords | [EXPERIMENTAL] UpsertTaxCostRecords: [EXPERIMENTAL] UpsertTaxCostRecords: Upsert Tax Cost Records for a specified Fund. |
 
 
 
@@ -1469,6 +1477,87 @@ public class FundsApiExample {
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
+## deleteTaxCostRecord
+
+> DeletedEntityResponse deleteTaxCostRecord(scope, code, taxCostRecordCode)
+
+[EXPERIMENTAL] DeleteTaxCostRecord: [EXPERIMENTAL] DeleteTaxCostRecord: Delete a Tax Cost Record.
+
+Delete the given Tax Cost Record.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.FundsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class FundsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        FundsApi apiInstance = apiFactory.build(FundsApi.class);
+        String scope = "scope_example"; // String | The scope of the Fund.
+        String code = "code_example"; // String | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        String taxCostRecordCode = "taxCostRecordCode_example"; // String | The code of the Tax Cost Record to be deleted.
+        try {
+            // uncomment the below to set overrides at the request level
+            // DeletedEntityResponse result = apiInstance.deleteTaxCostRecord(scope, code, taxCostRecordCode).execute(opts);
+
+            DeletedEntityResponse result = apiInstance.deleteTaxCostRecord(scope, code, taxCostRecordCode).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling FundsApi#deleteTaxCostRecord");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the Fund. | |
+| **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
+| **taxCostRecordCode** | **String**| The code of the Tax Cost Record to be deleted. | |
+
+### Return type
+
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The datetime that the Tax Cost Record was deleted |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
 ## deleteValuationPoint
 
 > DeletedEntityResponse deleteValuationPoint(scope, code, diaryEntryCode, diaryEntryCodeVariant, navTypeCode)
@@ -2408,6 +2497,89 @@ public class FundsApiExample {
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
+## getFundTaxScope
+
+> FundTaxScope getFundTaxScope(scope, code, effectiveAt, asAt)
+
+[EARLY ACCESS] GetFundTaxScope: [EARLY ACCESS] GetFundTaxScope: Get the UK chargeable-gains tax scope of a fund.
+
+Returns the fund&#39;s portfolios within the UK chargeable-gains regime and the exclusions the regime&#39;s figures  apply. A fund portfolio is in scope when its own details elect the regime. A NAV type that elects the regime  puts its derived portfolio for each fund portfolio in scope, since that is where the fund accounts for the  holdings under the election.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.FundsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class FundsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        FundsApi apiInstance = apiFactory.build(FundsApi.class);
+        String scope = "scope_example"; // String | The scope of the Fund.
+        String code = "code_example"; // String | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to read the tax scope. Defaults to the current LUSID system datetime if not specified.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to read the tax scope. Defaults to returning the latest version if not specified.
+        try {
+            // uncomment the below to set overrides at the request level
+            // FundTaxScope result = apiInstance.getFundTaxScope(scope, code, effectiveAt, asAt).execute(opts);
+
+            FundTaxScope result = apiInstance.getFundTaxScope(scope, code, effectiveAt, asAt).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling FundsApi#getFundTaxScope");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the Fund. | |
+| **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
+| **effectiveAt** | **String**| The effective datetime or cut label at which to read the tax scope. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to read the tax scope. Defaults to returning the latest version if not specified. | [optional] |
+
+### Return type
+
+[**FundTaxScope**](../model/FundTaxScope.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The tax scope of the requested Fund. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
 ## getHoldingContributorsForFund
 
 > VersionedResourceListOfHoldingContributor getHoldingContributorsForFund(scope, code, holdingId, valuationPointDataQueryParameters, navTypeCode, includeHistoric, taxLotId, includeUnsettledMovements, limit, asAt, page)
@@ -2858,6 +3030,7 @@ public class FundsApiExample {
 |-------------|-------------|------------------|
 | **200** | The partner&#39;s unfunded commitment statement over the period. |  -  |
 | **400** | The details of the input related failure |  -  |
+| **404** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
@@ -3112,6 +3285,87 @@ public class FundsApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The Series of the requested Fund. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getTaxSyncStatus
+
+> TaxSyncStatus getTaxSyncStatus(scope, code, asAt)
+
+[EARLY ACCESS] GetTaxSyncStatus: [EARLY ACCESS] GetTaxSyncStatus: Get the tax sync position of each portfolio in a Fund.
+
+For each portfolio in the Fund, compares the asAt the tax engine last processed the Fund (its latest valuation  point) with the asAt of the latest transaction booked to the portfolio, and says whether the tax position has  caught up.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.FundsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class FundsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        FundsApi apiInstance = apiFactory.build(FundsApi.class);
+        String scope = "scope_example"; // String | The scope of the Fund.
+        String code = "code_example"; // String | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified.
+        try {
+            // uncomment the below to set overrides at the request level
+            // TaxSyncStatus result = apiInstance.getTaxSyncStatus(scope, code, asAt).execute(opts);
+
+            TaxSyncStatus result = apiInstance.getTaxSyncStatus(scope, code, asAt).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling FundsApi#getTaxSyncStatus");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the Fund. | |
+| **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified. | [optional] |
+
+### Return type
+
+[**TaxSyncStatus**](../model/TaxSyncStatus.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The tax sync position of each portfolio in the requested Fund. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
@@ -3611,7 +3865,7 @@ public class FundsApiExample {
         String dataModelCode = "dataModelCode_example"; // String | The optional code of a Custom Data Model to use
         Boolean showCancelledTransactions = true; // Boolean | Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified.
         String membershipType = "membershipType_example"; // String | The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate.
-        Boolean returnExcludedTransactions = true; // Boolean | Option to specify whether or not to include transactions excluded by the              NavType's TransactionExclusionFilter. Defaults to False if not specified.
+        Boolean returnExcludedTransactions = true; // Boolean | Option to specify whether or not to include transactions excluded by the              NavType's TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified.
         try {
             // uncomment the below to set overrides at the request level
             // ValuationPointResourceListOfAccountedTransaction result = apiInstance.getValuationPointTransactions(scope, code, valuationPointDataQueryParameters, asAt, filter, limit, page, propertyKeys, navTypeCode, dataModelScope, dataModelCode, showCancelledTransactions, membershipType, returnExcludedTransactions).execute(opts);
@@ -3645,7 +3899,7 @@ public class FundsApiExample {
 | **dataModelCode** | **String**| The optional code of a Custom Data Model to use | [optional] |
 | **showCancelledTransactions** | **Boolean**| Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. | [optional] |
 | **membershipType** | **String**| The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. | [optional] |
-| **returnExcludedTransactions** | **Boolean**| Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter. Defaults to False if not specified. | [optional] |
+| **returnExcludedTransactions** | **Boolean**| Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. | [optional] |
 
 ### Return type
 
@@ -4578,6 +4832,261 @@ public class FundsApiExample {
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
+## listTaxCostRecords
+
+> PagedResourceListOfTaxCostRecord listTaxCostRecords(scope, code, effectiveAt, asAt, page, limit, filter, sortBy)
+
+[EXPERIMENTAL] ListTaxCostRecords: [EXPERIMENTAL] ListTaxCostRecords: List Tax Cost Records for a specified Fund.
+
+List all the Tax Cost Records matching a particular criteria.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.FundsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class FundsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        FundsApi apiInstance = apiFactory.build(FundsApi.class);
+        String scope = "scope_example"; // String | The scope of the Fund.
+        String code = "code_example"; // String | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to list the Tax Cost Records. Defaults to the current LUSID              system datetime if not specified.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to list the Tax Cost Records. Defaults to returning the latest version of each record if not specified.
+        String page = "page_example"; // String | The pagination token to use to continue listing Tax Cost Records; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.
+        Integer limit = 56; // Integer | When paginating, limit the results to this number. Defaults to 100 if not specified.
+        String filter = "filter_example"; // String | Expression to filter the results.              For example, to filter on the portfolio code, specify \"portfolioCode eq 'MyPortfolio'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
+        List<String> sortBy = Arrays.asList(); // List<String> | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
+        try {
+            // uncomment the below to set overrides at the request level
+            // PagedResourceListOfTaxCostRecord result = apiInstance.listTaxCostRecords(scope, code, effectiveAt, asAt, page, limit, filter, sortBy).execute(opts);
+
+            PagedResourceListOfTaxCostRecord result = apiInstance.listTaxCostRecords(scope, code, effectiveAt, asAt, page, limit, filter, sortBy).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling FundsApi#listTaxCostRecords");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the Fund. | |
+| **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
+| **effectiveAt** | **String**| The effective datetime or cut label at which to list the Tax Cost Records. Defaults to the current LUSID              system datetime if not specified. | [optional] |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to list the Tax Cost Records. Defaults to returning the latest version of each record if not specified. | [optional] |
+| **page** | **String**| The pagination token to use to continue listing Tax Cost Records; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] |
+| **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
+| **filter** | **String**| Expression to filter the results.              For example, to filter on the portfolio code, specify \&quot;portfolioCode eq &#39;MyPortfolio&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] |
+| **sortBy** | [**List&lt;String&gt;**](../model/String.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] |
+
+### Return type
+
+[**PagedResourceListOfTaxCostRecord**](../model/PagedResourceListOfTaxCostRecord.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The requested Tax Cost Records. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listTaxExceptions
+
+> ResourceListOfTaxExceptionItem listTaxExceptions(scope, code, effectiveAt, asAt)
+
+[EARLY ACCESS] ListTaxExceptions: [EARLY ACCESS] ListTaxExceptions: List the open tax exceptions of a Fund.
+
+Lists the conditions blocking, or casting doubt on, the Fund&#39;s tax computation at the given effective and asAt  datetimes, ordered by tax at stake descending with unknown amounts last. A Fund outside the UK chargeable gains  regime has no exceptions.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.FundsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class FundsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        FundsApi apiInstance = apiFactory.build(FundsApi.class);
+        String scope = "scope_example"; // String | The scope of the Fund.
+        String code = "code_example"; // String | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified.
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResourceListOfTaxExceptionItem result = apiInstance.listTaxExceptions(scope, code, effectiveAt, asAt).execute(opts);
+
+            ResourceListOfTaxExceptionItem result = apiInstance.listTaxExceptions(scope, code, effectiveAt, asAt).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling FundsApi#listTaxExceptions");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the Fund. | |
+| **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
+| **effectiveAt** | **String**| The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified. | [optional] |
+
+### Return type
+
+[**ResourceListOfTaxExceptionItem**](../model/ResourceListOfTaxExceptionItem.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The open tax exceptions of the requested Fund. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listTaxExceptionsAcrossFunds
+
+> ResourceListOfFundTaxExceptionItem listTaxExceptionsAcrossFunds(effectiveAt, asAt, rootCause)
+
+[EARLY ACCESS] ListTaxExceptionsAcrossFunds: [EARLY ACCESS] ListTaxExceptionsAcrossFunds: List the open tax exceptions across every Fund.
+
+Lists the conditions blocking, or casting doubt on, the tax computation of every Fund the caller can see, each  row carrying the Fund and, where known, the owning entity. Rows are ordered by tax at stake descending with  unknown amounts last. Funds outside the UK chargeable gains regime contribute no rows.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.FundsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class FundsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        FundsApi apiInstance = apiFactory.build(FundsApi.class);
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label at which to read the Funds. Defaults to the current LUSID system datetime if not specified.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to read the Funds. Defaults to returning the latest version if not specified.
+        String rootCause = "rootCause_example"; // String | Optionally, the root cause code to restrict the exceptions to, for example \"PoolOutOfSync\". Defaults to all root causes.
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResourceListOfFundTaxExceptionItem result = apiInstance.listTaxExceptionsAcrossFunds(effectiveAt, asAt, rootCause).execute(opts);
+
+            ResourceListOfFundTaxExceptionItem result = apiInstance.listTaxExceptionsAcrossFunds(effectiveAt, asAt, rootCause).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling FundsApi#listTaxExceptionsAcrossFunds");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **effectiveAt** | **String**| The effective datetime or cut label at which to read the Funds. Defaults to the current LUSID system datetime if not specified. | [optional] |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to read the Funds. Defaults to returning the latest version if not specified. | [optional] |
+| **rootCause** | **String**| Optionally, the root cause code to restrict the exceptions to, for example \&quot;PoolOutOfSync\&quot;. Defaults to all root causes. | [optional] |
+
+### Return type
+
+[**ResourceListOfFundTaxExceptionItem**](../model/ResourceListOfFundTaxExceptionItem.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The open tax exceptions across the Funds the caller can see. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
 ## listValuationPointComplexMarketData
 
 > ValuationPointResourceListOfAccountedComplexMarketData listValuationPointComplexMarketData(scope, code, valuationPointDataQueryParameters, asAt, limit, page, navTypeCode)
@@ -4946,7 +5455,7 @@ public class FundsApiExample {
 
 [EARLY ACCESS] PatchFund: Patch a Fund.
 
-Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices, WhtParameters, ShareClasses.
+Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: ShortCode, DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, TaxTransparency, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, ShareClasses, PricingMethodology, ReportingPrices, DealingEstimates, WhtParameters, ValuationTemplateId.
 
 ### Example
 
@@ -4976,7 +5485,7 @@ public class FundsApiExample {
         String scope = "scope_example"; // String | The scope of the Fund.
         String code = "code_example"; // String | The code of the Fund. Together with the scope this uniquely identifies the Fund.
         List<Operation> operation = Arrays.asList(); // List<Operation> | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
-        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.
+        String effectiveAt = "effectiveAt_example"; // String | The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only displayName, description, pricingMethodology, reportingPrices and dealingEstimates, or a field inside the first              and last, can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.              A field patched with an effectiveAt merges over the block in force at that datetime and does not carry into a version of              the block that starts later: a whole pricingMethodology or dealingEstimates set from a later datetime keeps its own values.
         try {
             // uncomment the below to set overrides at the request level
             // Fund result = apiInstance.patchFund(scope, code, operation, effectiveAt).execute(opts);
@@ -5000,7 +5509,7 @@ public class FundsApiExample {
 | **scope** | **String**| The scope of the Fund. | |
 | **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
 | **operation** | [**List&lt;Operation&gt;**](../model/Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | |
-| **effectiveAt** | **String**| The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. | [optional] |
+| **effectiveAt** | **String**| The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only displayName, description, pricingMethodology, reportingPrices and dealingEstimates, or a field inside the first              and last, can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.              A field patched with an effectiveAt merges over the block in force at that datetime and does not carry into a version of              the block that starts later: a whole pricingMethodology or dealingEstimates set from a later datetime keeps its own values. | [optional] |
 
 ### Return type
 
@@ -5207,7 +5716,7 @@ public class FundsApiExample {
 
 [EARLY ACCESS] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.
 
-Returns settled cash movements with a running balance in local currency for the specified Fund  valuation point period. The cash statement is derived from Journal Entry Lines filtered to  settled cash (HoldType&#x3D;&#39;B&#39;, SourceType&#x3D;LusidTransaction). Use the DisplayMode parameter on the  request body to choose between ShowReversal (full reversal/TrueUp detail) and Consolidated  (collapses system-generated zero-net reversal/TrueUp pairs into SystemCorrection rows). Base  currency columns are out of scope for this variant and are not returned.
+Returns settled cash movements with a running balance in local currency for the specified Fund  valuation point period. The cash statement is derived from Journal Entry Lines filtered to  settled cash (HoldType&#x3D;&#39;B&#39;, SourceType&#x3D;LusidTransaction). Use the DisplayMode parameter on the  request body to choose between ShowReversal (full reversal/TrueUp detail) and Consolidated  (collapses each transaction&#39;s system-generated reversal/TrueUp rows into a single SystemCorrection  row carrying their net cashflow, while user-entered rows are always shown individually). Base  currency columns are out of scope for this variant and are not returned.
 
 ### Example
 
@@ -5547,7 +6056,7 @@ public class FundsApiExample {
 
 [EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.
 
-Updates an existing Valuation Point.
+Updates an existing Valuation Point. Supplying a pricingMethodologyOverride approves or overrides the swing  decision the Valuation Point deals at, which additionally requires the ApprovePricingMethodology action on the Fund.
 
 ### Example
 
@@ -5785,6 +6294,87 @@ public class FundsApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The updated or inserted estimated Valuation Point |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## upsertExternalDealingEstimates
+
+> UpsertExternalDealingEstimatesResponse upsertExternalDealingEstimates(scope, code, requestBody)
+
+[EARLY ACCESS] UpsertExternalDealingEstimates: Load dealing estimates sent by an external transfer agent
+
+Loads the dealing estimates a third-party transfer agent dealt for the fund at a dealing point. Each request  key names one set: a dealing point, the sending source and the orders it dealt, each keyed by the source&#39;s own  line id. The orders are written in the fund&#39;s scope with the code  &#x60;{fundCode}-{source}-{yyyyMMddHHmmss}-{lineId}&#x60;, the dealing point written in UTC to the second, in the  External order state, priced at the dealing point, so the fund&#39;s External dealing source reads them at that  valuation point. A line whose code would exceed 64 characters is refused.                A set replaces what the same source sent before: every External order of that source for the fund&#39;s share  classes at the dealing point that the set does not restate is deleted, and the response names them. Two  sets in one request naming the same source and dealing point are refused after the first.                The fund must list External among its dealing estimate sources. Each line must name a share class of the  fund and exactly one of a positive number of units or a positive amount in a valid currency. A set sent  after its dealing point is loaded and flagged late; one sent exactly at the dealing point is on time.  Whether the set is complete is recorded on each order and is not yet enforced at pricing.                Each order carries the properties &#x60;Order/TA/PriceDate&#x60; (date), &#x60;Order/TA/DealingSource&#x60; (string),  &#x60;Order/TA/DealingSourceReference&#x60; (string), &#x60;Order/TA/Complete&#x60; (string, &#x60;True&#x60; or &#x60;False&#x60;),  &#x60;Order/TA/Late&#x60; (string, &#x60;True&#x60; or &#x60;False&#x60;) and &#x60;Order/TA/SentAt&#x60; (date). LUSID defines these as transfer  agency system properties.                Sets are validated independently: a set that fails validation is reported under failures and the others  still load. The sets that pass are then written together in one command, so a reader never sees half a  dealing point, and a refusal at write time fails the whole request and leaves the book as it was. A request  carries at most 200 sets and at most 2000 lines across all of them.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.FundsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class FundsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        FundsApi apiInstance = apiFactory.build(FundsApi.class);
+        String scope = "scope_example"; // String | The scope of the fund.
+        String code = "code_example"; // String | The code of the fund. Together with the scope this uniquely identifies the fund.
+        Map<String, UpsertExternalDealingEstimatesRequest> requestBody = new HashMap(); // Map<String, UpsertExternalDealingEstimatesRequest> | The sets to load, keyed by a correlation key of the caller's choosing.
+        try {
+            // uncomment the below to set overrides at the request level
+            // UpsertExternalDealingEstimatesResponse result = apiInstance.upsertExternalDealingEstimates(scope, code, requestBody).execute(opts);
+
+            UpsertExternalDealingEstimatesResponse result = apiInstance.upsertExternalDealingEstimates(scope, code, requestBody).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling FundsApi#upsertExternalDealingEstimates");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the fund. | |
+| **code** | **String**| The code of the fund. Together with the scope this uniquely identifies the fund. | |
+| **requestBody** | [**Map&lt;String, UpsertExternalDealingEstimatesRequest&gt;**](../model/UpsertExternalDealingEstimatesRequest.md)| The sets to load, keyed by a correlation key of the caller&#39;s choosing. | |
+
+### Return type
+
+[**UpsertExternalDealingEstimatesResponse**](../model/UpsertExternalDealingEstimatesResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The sets loaded and any that failed, keyed by the request key. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
@@ -6036,6 +6626,87 @@ public class FundsApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The date and time of the successfully applied Nav Activity Adjustments. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## upsertTaxCostRecords
+
+> UpsertTaxCostRecordsResponse upsertTaxCostRecords(scope, code, requestBody)
+
+[EXPERIMENTAL] UpsertTaxCostRecords: [EXPERIMENTAL] UpsertTaxCostRecords: Upsert Tax Cost Records for a specified Fund.
+
+Create or update Tax Cost Records for the given Fund. Each record is keyed by its code; a record with an  existing code is replaced in full.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.FundsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class FundsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        FundsApi apiInstance = apiFactory.build(FundsApi.class);
+        String scope = "scope_example"; // String | The scope of the Fund.
+        String code = "code_example"; // String | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        Map<String, TaxCostRecordRequest> requestBody = new HashMap(); // Map<String, TaxCostRecordRequest> | The Tax Cost Records to upsert, keyed by the code of each record.
+        try {
+            // uncomment the below to set overrides at the request level
+            // UpsertTaxCostRecordsResponse result = apiInstance.upsertTaxCostRecords(scope, code, requestBody).execute(opts);
+
+            UpsertTaxCostRecordsResponse result = apiInstance.upsertTaxCostRecords(scope, code, requestBody).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling FundsApi#upsertTaxCostRecords");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the Fund. | |
+| **code** | **String**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | |
+| **requestBody** | [**Map&lt;String, TaxCostRecordRequest&gt;**](../model/TaxCostRecordRequest.md)| The Tax Cost Records to upsert, keyed by the code of each record. | |
+
+### Return type
+
+[**UpsertTaxCostRecordsResponse**](../model/UpsertTaxCostRecordsResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The Tax Cost Records upserted and any that failed, keyed by the record code. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

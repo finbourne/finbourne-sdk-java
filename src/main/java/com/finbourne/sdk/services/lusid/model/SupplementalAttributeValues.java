@@ -83,7 +83,7 @@ public class SupplementalAttributeValues {
   }
 
   /**
-   * The left-side value.
+   * The left-side value: the value the left items agree on, or \&quot;[multiple values]\&quot; where they do not. Null where the left side has no items.
    * @return leftValue
    */
   @javax.annotation.Nullable
@@ -102,7 +102,7 @@ public class SupplementalAttributeValues {
   }
 
   /**
-   * The right-side value.
+   * The right-side value: the value the right items agree on, or \&quot;[multiple values]\&quot; where they do not. Null where the right side has no items.
    * @return rightValue
    */
   @javax.annotation.Nullable

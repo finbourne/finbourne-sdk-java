@@ -15,10 +15,14 @@ Name | Type | Description | Notes
 **rounding** | [**MarginRounding**](MarginRounding.md) |  | [default to MarginRounding]
 **settlementLag** | [**MarginSettlementLag**](MarginSettlementLag.md) |  | [default to MarginSettlementLag]
 **matchTolerance** | **java.math.BigDecimal** | The tolerance within which our margin figure and the counterparty&#39;s are considered to match. Optional. | [optional] [default to java.math.BigDecimal]
+**funding** | [**CollateralFundingTerms**](CollateralFundingTerms.md) |  | [optional] [default to CollateralFundingTerms]
+**optimisation** | [**CollateralOptimisationTerms**](CollateralOptimisationTerms.md) |  | [optional] [default to CollateralOptimisationTerms]
 **variationMargin** | [**List&lt;MarginItem&gt;**](MarginItem.md) | The variation margin arrangements under the agreement. | [optional] [default to List<MarginItem>]
 **initialMargin** | [**List&lt;MarginItem&gt;**](MarginItem.md) | The initial margin arrangements under the agreement. | [optional] [default to List<MarginItem>]
 **properties** | [**Map&lt;String, Property&gt;**](Property.md) | A set of properties to decorate onto the Collateral Agreement. Filterable. | [optional] [default to Map<String, Property>]
 **effectiveAt** | [**OffsetDateTime**](OffsetDateTime.md) | The effective datetime or cut label from which the change applies. Defaults to the current LUSID system datetime if not specified. | [optional] [default to OffsetDateTime]
+**notificationCutLabel** | **String** | The cut label giving the time of day by which collateral we deliver under a margin call must settle. Each run resolves it on the business date and records it as the call&#39;s deadline; the allocation excludes assets that cannot settle by it. Optional. | [optional] [default to String]
+**returnNotificationCutLabel** | **String** | The cut label giving the time of day by which collateral the counterparty delivers, or returns to us, must settle. Recorded as the deadline of the calls they post under. Optional. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.UpsertCollateralAgreementRequest;
@@ -35,10 +39,14 @@ ResourceId recipeId = new ResourceId();
 MarginRounding rounding = new MarginRounding();
 MarginSettlementLag settlementLag = new MarginSettlementLag();
 @javax.annotation.Nullable java.math.BigDecimal matchTolerance = new java.math.BigDecimal("100.00");
+CollateralFundingTerms funding = new CollateralFundingTerms();
+CollateralOptimisationTerms optimisation = new CollateralOptimisationTerms();
 @javax.annotation.Nullable List<MarginItem> variationMargin = new List<MarginItem>();
 @javax.annotation.Nullable List<MarginItem> initialMargin = new List<MarginItem>();
 @javax.annotation.Nullable Map<String, Property> properties = new Map<String, Property>();
 @javax.annotation.Nullable OffsetDateTime effectiveAt = OffsetDateTime.now();
+@javax.annotation.Nullable String notificationCutLabel = "example notificationCutLabel";
+@javax.annotation.Nullable String returnNotificationCutLabel = "example returnNotificationCutLabel";
 
 
 UpsertCollateralAgreementRequest upsertCollateralAgreementRequestInstance = new UpsertCollateralAgreementRequest()
@@ -51,10 +59,14 @@ UpsertCollateralAgreementRequest upsertCollateralAgreementRequestInstance = new 
     .rounding(rounding)
     .settlementLag(settlementLag)
     .matchTolerance(matchTolerance)
+    .funding(funding)
+    .optimisation(optimisation)
     .variationMargin(variationMargin)
     .initialMargin(initialMargin)
     .properties(properties)
-    .effectiveAt(effectiveAt);
+    .effectiveAt(effectiveAt)
+    .notificationCutLabel(notificationCutLabel)
+    .returnNotificationCutLabel(returnNotificationCutLabel);
 ```
 
 

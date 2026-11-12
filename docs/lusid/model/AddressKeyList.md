@@ -5,7 +5,7 @@ classname AddressKeyList
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**referenceListType** | **String** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList. | [default to String]
+**referenceListType** | **String** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList, FilteredPortfolioIdList. | [default to String]
 **values** | **List&lt;String&gt;** |  | [default to List<String>]
 
 ```java

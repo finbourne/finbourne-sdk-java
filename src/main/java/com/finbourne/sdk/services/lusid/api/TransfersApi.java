@@ -30,6 +30,8 @@ import java.io.IOException;
 import com.finbourne.sdk.services.lusid.model.CreateTransferRequest;
 import com.finbourne.sdk.services.lusid.model.CreateTransferResponse;
 import com.finbourne.sdk.services.lusid.model.DeletedEntityResponse;
+import com.finbourne.sdk.services.lusid.model.EditTransferRequest;
+import com.finbourne.sdk.services.lusid.model.EditTransferResponse;
 import com.finbourne.sdk.services.lusid.model.GetTransferRequest;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
@@ -805,6 +807,355 @@ public class TransfersApi {
      */
     public APIdeleteTransferRequest deleteTransfer(String scope, String code, String portfolioScopeOut, String portfolioCodeOut, String portfolioScopeIn, String portfolioCodeIn) {
         return new APIdeleteTransferRequest(scope, code, portfolioScopeOut, portfolioCodeOut, portfolioScopeIn, portfolioCodeIn);
+    }
+    /**
+     * Build call for editTransfer
+     * @param editTransferRequest The transfer as it should now stand. (required)
+     * @param preserveProperties If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. (optional, default to true)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest editTransferCall(EditTransferRequest editTransferRequest, Boolean preserveProperties, final ApiCallback _callback) throws ApiException {
+        return editTransferCall(editTransferRequest, preserveProperties,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for editTransfer. Use any specified configuration options to override any other configuration for this request only.
+     * @param editTransferRequest The transfer as it should now stand. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param preserveProperties If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. (optional, default to true)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest editTransferCall(EditTransferRequest editTransferRequest, Boolean preserveProperties, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = editTransferRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/transfers/$edit";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (preserveProperties != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("preserveProperties", preserveProperties));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest editTransferValidateBeforeCall(EditTransferRequest editTransferRequest, Boolean preserveProperties, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'editTransferRequest' is set
+        if (editTransferRequest == null) {
+            throw new ApiException("Missing the required parameter 'editTransferRequest' when calling editTransfer(Async)");
+        }
+
+        return editTransferCall(editTransferRequest, preserveProperties, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] EditTransfer: Edit a transfer.
+     * Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A field not supplied is cleared, and the outgoing position is checked with the transfer&#39;s own  outgoing leg counted back in.                Properties are treated separately from fields: by default, a property not supplied is kept on the  transfer or leg that holds it, and only the properties supplied are updated. Set preserveProperties to  false to replace the whole property set of the transfer and both legs with the ones supplied.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.
+     * @param editTransferRequest The transfer as it should now stand. (required)
+     * @param preserveProperties If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. (optional, default to true)
+     * @return ApiResponse&lt;EditTransferResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<EditTransferResponse> editTransferWithHttpInfo(EditTransferRequest editTransferRequest, Boolean preserveProperties) throws ApiException {
+        HttpRequest localVarCall = editTransferValidateBeforeCall(editTransferRequest, preserveProperties, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<EditTransferResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] EditTransfer: Edit a transfer.
+     * Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A field not supplied is cleared, and the outgoing position is checked with the transfer&#39;s own  outgoing leg counted back in.                Properties are treated separately from fields: by default, a property not supplied is kept on the  transfer or leg that holds it, and only the properties supplied are updated. Set preserveProperties to  false to replace the whole property set of the transfer and both legs with the ones supplied.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.Use any specified configuration options to override any other configuration for this request only
+     * @param editTransferRequest The transfer as it should now stand. (required)
+     * @param preserveProperties If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. (optional, default to true)
+     * @return ApiResponse&lt;EditTransferResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<EditTransferResponse> editTransferWithHttpInfo(EditTransferRequest editTransferRequest, Boolean preserveProperties, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = editTransferValidateBeforeCall(editTransferRequest, preserveProperties, null, opts);
+        Type localVarReturnType = new TypeReference<EditTransferResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] EditTransfer: Edit a transfer. (asynchronously)
+     * Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A field not supplied is cleared, and the outgoing position is checked with the transfer&#39;s own  outgoing leg counted back in.                Properties are treated separately from fields: by default, a property not supplied is kept on the  transfer or leg that holds it, and only the properties supplied are updated. Set preserveProperties to  false to replace the whole property set of the transfer and both legs with the ones supplied.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.
+     * @param editTransferRequest The transfer as it should now stand. (required)
+     * @param preserveProperties If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. (optional, default to true)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void editTransferAsync(EditTransferRequest editTransferRequest, Boolean preserveProperties, final ApiCallback<EditTransferResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = editTransferValidateBeforeCall(editTransferRequest, preserveProperties, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<EditTransferResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] EditTransfer: Edit a transfer. (asynchronously)
+     * Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A field not supplied is cleared, and the outgoing position is checked with the transfer&#39;s own  outgoing leg counted back in.                Properties are treated separately from fields: by default, a property not supplied is kept on the  transfer or leg that holds it, and only the properties supplied are updated. Set preserveProperties to  false to replace the whole property set of the transfer and both legs with the ones supplied.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.Use any specified configuration options to override any other configuration for this request only
+     * @param editTransferRequest The transfer as it should now stand. (required)
+     * @param preserveProperties If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. (optional, default to true)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void editTransferAsync(EditTransferRequest editTransferRequest, Boolean preserveProperties, final ApiCallback<EditTransferResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = editTransferValidateBeforeCall(editTransferRequest, preserveProperties, _callback, opts);
+        Type localVarReturnType = new TypeReference<EditTransferResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIeditTransferRequest {
+        private final EditTransferRequest editTransferRequest;
+        private Boolean preserveProperties;
+
+        private APIeditTransferRequest(EditTransferRequest editTransferRequest) {
+            this.editTransferRequest = editTransferRequest;
+        }
+
+        /**
+         * Set preserveProperties
+         * @param preserveProperties If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. (optional, default to true)
+         * @return APIeditTransferRequest
+         */
+        public APIeditTransferRequest preserveProperties(Boolean preserveProperties) {
+            this.preserveProperties = preserveProperties;
+            return this;
+        }
+
+        /**
+         * Build call for editTransfer
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return editTransferCall(editTransferRequest, preserveProperties, _callback);
+        }
+
+        /**
+         * Execute editTransfer request
+         * @return EditTransferResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public EditTransferResponse execute() throws ApiException {
+            ApiResponse<EditTransferResponse> localVarResp = editTransferWithHttpInfo(editTransferRequest, preserveProperties);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute editTransfer request. Use any specified configuration options to override any other configuration for this request only.
+         * @return EditTransferResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public EditTransferResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<EditTransferResponse> localVarResp = editTransferWithHttpInfo(editTransferRequest, preserveProperties, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute editTransfer request with HTTP info returned
+         * @return ApiResponse&lt;EditTransferResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<EditTransferResponse> executeWithHttpInfo() throws ApiException {
+            return editTransferWithHttpInfo(editTransferRequest, preserveProperties);
+        }
+
+        /**
+         * Execute editTransfer request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;EditTransferResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<EditTransferResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return editTransferWithHttpInfo(editTransferRequest, preserveProperties, opts);
+        }
+
+        /**
+         * Execute editTransfer request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<EditTransferResponse> _callback) throws ApiException {
+            editTransferAsync(editTransferRequest, preserveProperties, _callback);
+        }
+
+        /**
+         * Execute editTransfer request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<EditTransferResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            editTransferAsync(editTransferRequest, preserveProperties, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] EditTransfer: Edit a transfer.
+     * Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A field not supplied is cleared, and the outgoing position is checked with the transfer&#39;s own  outgoing leg counted back in.                Properties are treated separately from fields: by default, a property not supplied is kept on the  transfer or leg that holds it, and only the properties supplied are updated. Set preserveProperties to  false to replace the whole property set of the transfer and both legs with the ones supplied.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.
+     * @param editTransferRequest The transfer as it should now stand. (required)
+     * @return APIeditTransferRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The transfer that was edited. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No transfer exists with the requested scope, code and portfolios. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIeditTransferRequest editTransfer(EditTransferRequest editTransferRequest) {
+        return new APIeditTransferRequest(editTransferRequest);
     }
     /**
      * Build call for getTransfer

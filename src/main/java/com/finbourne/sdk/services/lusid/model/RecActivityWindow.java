@@ -12,141 +12,201 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ContiguousActivityWindow;
+import com.finbourne.sdk.services.lusid.model.FixedPeriodLookbackActivityWindow;
 import com.finbourne.sdk.services.lusid.model.RecActivitySinceEffectiveAt;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 
-import java.util.HashMap;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import com.finbourne.sdk.JSON;
 
-/**
- * Base class for the activity windows that give the date range a rec definition&#39;s activity-based  reconciliations cover. Polymorphic by windowType; each supported type has a corresponding inherited class.
- */
-@JsonPropertyOrder({
-  RecActivityWindow.JSON_PROPERTY_INITIAL_ACTIVITY_SINCE_EFFECTIVE_AT,
-  RecActivityWindow.JSON_PROPERTY_WINDOW_TYPE
-})
 
-public class RecActivityWindow {
-  public static final String JSON_PROPERTY_INITIAL_ACTIVITY_SINCE_EFFECTIVE_AT = "initialActivitySinceEffectiveAt";
-  @JsonProperty(JSON_PROPERTY_INITIAL_ACTIVITY_SINCE_EFFECTIVE_AT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private RecActivitySinceEffectiveAt initialActivitySinceEffectiveAt;
+@JsonDeserialize(using = RecActivityWindow.RecActivityWindowDeserializer.class)
+public class RecActivityWindow extends AbstractOpenApiSchema {
+    private static final Logger log = Logger.getLogger(RecActivityWindow.class.getName());
 
-  public static final String JSON_PROPERTY_WINDOW_TYPE = "windowType";
-  @JsonProperty(JSON_PROPERTY_WINDOW_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String windowType;
+    public static class RecActivityWindowDeserializer extends JsonDeserializer<RecActivityWindow> {
+        @Override
+        public RecActivityWindow deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+            JsonNode node = p.readValueAsTree();
+            RecActivityWindow result = new RecActivityWindow();
+            Object deserialized = null;
 
-  public RecActivityWindow() {
-  }
+            // use discriminator value for faster oneOf lookup
+            JsonNode discriminatorNode = node.get("windowType");
+            if (discriminatorNode != null && discriminatorNode.isTextual()) {
+                String discriminatorValue = discriminatorNode.asText();
+                switch (discriminatorValue) {
+                    case "Contiguous":
+                        deserialized = JSON.getMapper().treeToValue(node, ContiguousActivityWindow.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    case "FixedPeriodLookback":
+                        deserialized = JSON.getMapper().treeToValue(node, FixedPeriodLookbackActivityWindow.class);
+                        result.setActualInstance(deserialized);
+                        return result;
+                    default:
+                        log.log(Level.WARNING, String.format("Failed to lookup discriminator value `%s` for RecActivityWindow. Possible values: Contiguous FixedPeriodLookback", discriminatorValue));
+                }
+            }
 
-  public RecActivityWindow initialActivitySinceEffectiveAt(RecActivitySinceEffectiveAt initialActivitySinceEffectiveAt) {
-    this.initialActivitySinceEffectiveAt = initialActivitySinceEffectiveAt;
-    return this;
-  }
+            int match = 0;
+            ArrayList<String> errorMessages = new ArrayList<>();
 
-  /**
-   * Get initialActivitySinceEffectiveAt
-   * @return initialActivitySinceEffectiveAt
-   */
-  @javax.annotation.Nonnull
-  public RecActivitySinceEffectiveAt getInitialActivitySinceEffectiveAt() {
-    return initialActivitySinceEffectiveAt;
-  }
+            // Try each oneOf variant with a strict mapper: variants have
+            // overlapping (or identical) property sets and Jackson silently
+            // ignores unknown fields by default, so a non-strict mapper lets
+            // multiple variants "match" the same payload. Requiring
+            // FAIL_ON_UNKNOWN_PROPERTIES makes the additionalProperties:false
+            // contract on each variant disambiguate the union.
+            com.fasterxml.jackson.databind.ObjectMapper _strictMapper = JSON.getMapper().copy()
+                    .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+            // deserialize ContiguousActivityWindow
+            try {
+                deserialized = _strictMapper.treeToValue(node, ContiguousActivityWindow.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'ContiguousActivityWindow'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for ContiguousActivityWindow failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'ContiguousActivityWindow'", e);
+            }
+            // deserialize FixedPeriodLookbackActivityWindow
+            try {
+                deserialized = _strictMapper.treeToValue(node, FixedPeriodLookbackActivityWindow.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'FixedPeriodLookbackActivityWindow'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for FixedPeriodLookbackActivityWindow failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'FixedPeriodLookbackActivityWindow'", e);
+            }
 
-  public void setInitialActivitySinceEffectiveAt(RecActivitySinceEffectiveAt initialActivitySinceEffectiveAt) {
-    this.initialActivitySinceEffectiveAt = initialActivitySinceEffectiveAt;
-  }
+            if (match == 1) {
+                return result;
+            }
 
-
-  public RecActivityWindow windowType(String windowType) {
-    this.windowType = windowType;
-    return this;
-  }
-
-  /**
-   * Polymorphic discriminator. Supported types: Contiguous. Contiguous requires effectiveAtProgression Series. Available values: Contiguous, FixedLookback, Explicit, ClosedPeriod, ContiguousAsAt.
-   * @return windowType
-   */
-  @javax.annotation.Nonnull
-  public String getWindowType() {
-    return windowType;
-  }
-
-  public void setWindowType(String windowType) {
-    this.windowType = windowType;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+            throw new IOException(String.format("Failed deserialization for RecActivityWindow: %d classes match result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", match, errorMessages, node.toString()));
+        }
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    // store a list of schema names defined in oneOf
+    public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
+
+    public RecActivityWindow() {
+        super("oneOf", Boolean.FALSE);
     }
-    RecActivityWindow recActivityWindow = (RecActivityWindow) o;
-    return Objects.equals(this.initialActivitySinceEffectiveAt, recActivityWindow.initialActivitySinceEffectiveAt) &&
-        Objects.equals(this.windowType, recActivityWindow.windowType);
-  }
 
-  @Override
- public int hashCode() {
-    return Objects.hash(initialActivitySinceEffectiveAt, windowType);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class RecActivityWindow {\n");
-    sb.append("    initialActivitySinceEffectiveAt: ").append(toIndentedString(initialActivitySinceEffectiveAt)).append("\n");
-    sb.append("    windowType: ").append(toIndentedString(windowType)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    public RecActivityWindow(Object o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
     }
-    return o.toString().replace("\n", "\n    ");
-  }
 
+    static {
+        schemas.put("ContiguousActivityWindow", ContiguousActivityWindow.class);
+        schemas.put("FixedPeriodLookbackActivityWindow", FixedPeriodLookbackActivityWindow.class);
+    }
 
-  /**
-   * Create an instance of RecActivityWindow given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of RecActivityWindow
-   * @throws java.io.IOException if the JSON string is invalid with respect to RecActivityWindow
-   */
-  public static RecActivityWindow fromJson(String jsonString) throws java.io.IOException {
-    return JSON.getMapper().readValue(jsonString, RecActivityWindow.class);
-  }
+    @Override
+    public Map<String, Class<?>> getSchemas() {
+        return RecActivityWindow.schemas;
+    }
 
-  /**
-   * Convert an instance of RecActivityWindow to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.serialize(this);
-  }
+    /**
+     * Set the instance that matches the oneOf child schema, check
+     * the instance parameter is valid against the oneOf child schemas:
+     * ContiguousActivityWindow, FixedPeriodLookbackActivityWindow
+     *
+     * It could be an instance of the 'oneOf' schemas.
+     */
+    @Override
+    public void setActualInstance(Object instance) {
+        if (instance instanceof ContiguousActivityWindow) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof FixedPeriodLookbackActivityWindow) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        throw new RuntimeException("Invalid instance type. Must be ContiguousActivityWindow, FixedPeriodLookbackActivityWindow");
+    }
+
+    /**
+     * Get the actual instance, which can be the following:
+     * ContiguousActivityWindow, FixedPeriodLookbackActivityWindow
+     *
+     * @return The actual instance (ContiguousActivityWindow, FixedPeriodLookbackActivityWindow)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Object getActualInstance() {
+        return super.getActualInstance();
+    }
+
+    /**
+     * Get the actual instance of `ContiguousActivityWindow`. If the actual instance is not `ContiguousActivityWindow`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `ContiguousActivityWindow`
+     * @throws ClassCastException if the instance is not `ContiguousActivityWindow`
+     */
+    public ContiguousActivityWindow getContiguousActivityWindow() throws ClassCastException {
+        return (ContiguousActivityWindow)super.getActualInstance();
+    }
+    /**
+     * Get the actual instance of `FixedPeriodLookbackActivityWindow`. If the actual instance is not `FixedPeriodLookbackActivityWindow`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `FixedPeriodLookbackActivityWindow`
+     * @throws ClassCastException if the instance is not `FixedPeriodLookbackActivityWindow`
+     */
+    public FixedPeriodLookbackActivityWindow getFixedPeriodLookbackActivityWindow() throws ClassCastException {
+        return (FixedPeriodLookbackActivityWindow)super.getActualInstance();
+    }
+
+    /**
+     * Create an instance of RecActivityWindow given an JSON string
+     *
+     * @param jsonString JSON string
+     * @return An instance of RecActivityWindow
+     * @throws IOException if the JSON string is invalid with respect to RecActivityWindow
+     */
+    public static RecActivityWindow fromJson(String jsonString) throws IOException {
+        return JSON.getMapper().readValue(jsonString, RecActivityWindow.class);
+    }
+
+    /**
+     * Convert an instance of RecActivityWindow to an JSON string
+     *
+     * @return JSON string
+     */
+    public String toJson() {
+        return JSON.serialize(this);
+    }
 }

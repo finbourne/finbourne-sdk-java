@@ -12,6 +12,8 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AllocationServiceRunAllocation;
+import com.finbourne.sdk.services.lusid.model.AllocationServiceRunWarning;
 import com.finbourne.sdk.services.lusid.model.ErrorDetail;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
@@ -41,7 +43,9 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   AllocationServiceRunResponse.JSON_PROPERTY_VALUES,
-  AllocationServiceRunResponse.JSON_PROPERTY_FAILED
+  AllocationServiceRunResponse.JSON_PROPERTY_FAILED,
+  AllocationServiceRunResponse.JSON_PROPERTY_ALLOCATIONS,
+  AllocationServiceRunResponse.JSON_PROPERTY_WARNINGS
 })
 
 public class AllocationServiceRunResponse {
@@ -54,6 +58,16 @@ public class AllocationServiceRunResponse {
   @JsonProperty(JSON_PROPERTY_FAILED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Map<String, ErrorDetail> failed;
+
+  public static final String JSON_PROPERTY_ALLOCATIONS = "allocations";
+  @JsonProperty(JSON_PROPERTY_ALLOCATIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationServiceRunAllocation> allocations;
+
+  public static final String JSON_PROPERTY_WARNINGS = "warnings";
+  @JsonProperty(JSON_PROPERTY_WARNINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationServiceRunWarning> warnings;
 
   public AllocationServiceRunResponse() {
   }
@@ -72,7 +86,7 @@ public class AllocationServiceRunResponse {
   }
 
   /**
-   * Get values
+   * The placements that were allocated successfully.
    * @return values
    */
   @javax.annotation.Nullable
@@ -99,7 +113,7 @@ public class AllocationServiceRunResponse {
   }
 
   /**
-   * Get failed
+   * The placements that could not be allocated, keyed by placement, with the reason.
    * @return failed
    */
   @javax.annotation.Nullable
@@ -109,6 +123,60 @@ public class AllocationServiceRunResponse {
 
   public void setFailed(Map<String, ErrorDetail> failed) {
     this.failed = failed;
+  }
+
+
+  public AllocationServiceRunResponse allocations(List<AllocationServiceRunAllocation> allocations) {
+    this.allocations = allocations;
+    return this;
+  }
+
+  public AllocationServiceRunResponse addAllocationsItem(AllocationServiceRunAllocation allocationsItem) {
+    if (this.allocations == null) {
+      this.allocations = new ArrayList<>();
+    }
+    this.allocations.add(allocationsItem);
+    return this;
+  }
+
+  /**
+   * Every allocation the run touched across the successful placements, each with its outcome.
+   * @return allocations
+   */
+  @javax.annotation.Nullable
+  public List<AllocationServiceRunAllocation> getAllocations() {
+    return allocations;
+  }
+
+  public void setAllocations(List<AllocationServiceRunAllocation> allocations) {
+    this.allocations = allocations;
+  }
+
+
+  public AllocationServiceRunResponse warnings(List<AllocationServiceRunWarning> warnings) {
+    this.warnings = warnings;
+    return this;
+  }
+
+  public AllocationServiceRunResponse addWarningsItem(AllocationServiceRunWarning warningsItem) {
+    if (this.warnings == null) {
+      this.warnings = new ArrayList<>();
+    }
+    this.warnings.add(warningsItem);
+    return this;
+  }
+
+  /**
+   * Warnings raised while allocating the successful placements.
+   * @return warnings
+   */
+  @javax.annotation.Nullable
+  public List<AllocationServiceRunWarning> getWarnings() {
+    return warnings;
+  }
+
+  public void setWarnings(List<AllocationServiceRunWarning> warnings) {
+    this.warnings = warnings;
   }
 
 
@@ -122,7 +190,9 @@ public class AllocationServiceRunResponse {
     }
     AllocationServiceRunResponse allocationServiceRunResponse = (AllocationServiceRunResponse) o;
     return Objects.equals(this.values, allocationServiceRunResponse.values) &&
-        Objects.equals(this.failed, allocationServiceRunResponse.failed);
+        Objects.equals(this.failed, allocationServiceRunResponse.failed) &&
+        Objects.equals(this.allocations, allocationServiceRunResponse.allocations) &&
+        Objects.equals(this.warnings, allocationServiceRunResponse.warnings);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -131,7 +201,7 @@ public class AllocationServiceRunResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(values, failed);
+    return Objects.hash(values, failed, allocations, warnings);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -147,6 +217,8 @@ public class AllocationServiceRunResponse {
     sb.append("class AllocationServiceRunResponse {\n");
     sb.append("    values: ").append(toIndentedString(values)).append("\n");
     sb.append("    failed: ").append(toIndentedString(failed)).append("\n");
+    sb.append("    allocations: ").append(toIndentedString(allocations)).append("\n");
+    sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

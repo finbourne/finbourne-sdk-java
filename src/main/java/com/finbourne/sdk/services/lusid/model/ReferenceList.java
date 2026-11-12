@@ -45,6 +45,7 @@ import com.finbourne.sdk.JSON;
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AddressKeyList.class, name = "AddressKeyList"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DecimalList.class, name = "DecimalList"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FilteredFundIdList.class, name = "FilteredFundIdList"),
+  @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FilteredPortfolioIdList.class, name = "FilteredPortfolioIdList"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FundIdList.class, name = "FundIdList"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InstrumentList.class, name = "InstrumentList"),
   @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = PortfolioGroupIdList.class, name = "PortfolioGroupIdList"),
@@ -55,7 +56,7 @@ import com.finbourne.sdk.JSON;
 
 public class ReferenceList {
   /**
-   * The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList.
+   * The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList, FilteredPortfolioIdList.
    */
   public enum ReferenceListTypeEnum {
     PORTFOLIO_GROUP_ID_LIST("PortfolioGroupIdList"),
@@ -74,7 +75,9 @@ public class ReferenceList {
     
     FUND_ID_LIST("FundIdList"),
     
-    FILTERED_FUND_ID_LIST("FilteredFundIdList");
+    FILTERED_FUND_ID_LIST("FilteredFundIdList"),
+    
+    FILTERED_PORTFOLIO_ID_LIST("FilteredPortfolioIdList");
 
     private String value;
 
@@ -116,7 +119,7 @@ public class ReferenceList {
   }
 
   /**
-   * The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList.
+   * The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList, FilteredPortfolioIdList.
    * @return referenceListType
    */
   @javax.annotation.Nonnull

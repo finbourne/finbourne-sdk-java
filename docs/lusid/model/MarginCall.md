@@ -36,6 +36,9 @@ Name | Type | Description | Notes
 **supersedes** | [**MarginCallReference**](MarginCallReference.md) |  | [optional] [default to MarginCallReference]
 **carriedFrom** | [**MarginCallReference**](MarginCallReference.md) |  | [optional] [default to MarginCallReference]
 **carriedDisputedAmount** | **java.math.BigDecimal** | The amount left in dispute on the carried call. Informational; not added to this call. | [optional] [default to java.math.BigDecimal]
+**scenario** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
+**explainAvailable** | **Boolean** | Whether the working behind the call&#39;s required amount was stored, so that the call can be explained. Only an initial-margin call can be explained, and only when the run stored its working. | [optional] [default to Boolean]
+**proposedAllocation** | [**List&lt;CollateralAllocationLine&gt;**](CollateralAllocationLine.md) | The assets the allocation pass proposes to deliver for the call, or to take back for a return, cheapest first. Null until the run&#39;s allocation pass has completed, or when the call moves no collateral of ours. | [optional] [default to List<CollateralAllocationLine>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.MarginCall;
@@ -73,6 +76,9 @@ String state = "example state";
 MarginCallReference supersedes = new MarginCallReference();
 MarginCallReference carriedFrom = new MarginCallReference();
 @javax.annotation.Nullable java.math.BigDecimal carriedDisputedAmount = new java.math.BigDecimal("100.00");
+ResourceId scenario = new ResourceId();
+Boolean explainAvailable = true;
+@javax.annotation.Nullable List<CollateralAllocationLine> proposedAllocation = new List<CollateralAllocationLine>();
 
 
 MarginCall marginCallInstance = new MarginCall()
@@ -105,7 +111,10 @@ MarginCall marginCallInstance = new MarginCall()
     .deadline(deadline)
     .supersedes(supersedes)
     .carriedFrom(carriedFrom)
-    .carriedDisputedAmount(carriedDisputedAmount);
+    .carriedDisputedAmount(carriedDisputedAmount)
+    .scenario(scenario)
+    .explainAvailable(explainAvailable)
+    .proposedAllocation(proposedAllocation);
 ```
 
 

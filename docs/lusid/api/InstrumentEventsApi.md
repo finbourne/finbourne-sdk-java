@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**queryApplicableInstrumentEvents**](InstrumentEventsApi.md#queryApplicableInstrumentEvents) | **POST** /api/api/instrumentevents/$queryApplicableInstrumentEvents | QueryApplicableInstrumentEvents: Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query. |
-| [**queryBucketCashFlowDrillDown**](InstrumentEventsApi.md#queryBucketCashFlowDrillDown) | **POST** /api/api/instrumentevents/$queryBucketCashFlowDrillDown | QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage. |
+| [**queryBucketCashFlowDrillDown**](InstrumentEventsApi.md#queryBucketCashFlowDrillDown) | **POST** /api/api/instrumentevents/$queryBucketCashFlowDrillDown | [EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage. |
 | [**queryBucketedCashFlows**](InstrumentEventsApi.md#queryBucketedCashFlows) | **POST** /api/api/instrumentevents/$queryBucketedCashFlows | QueryBucketedCashFlows: Returns bucketed cashflows based on the holdings of the portfolios and date range specified in the query. |
 | [**queryCashFlows**](InstrumentEventsApi.md#queryCashFlows) | **POST** /api/api/instrumentevents/$queryCashFlows | QueryCashFlows: Returns a list of cashflows based on the holdings of the portfolios and date range specified in the query. |
 | [**queryInstrumentEvents**](InstrumentEventsApi.md#queryInstrumentEvents) | **POST** /api/api/instrumentevents/$query | QueryInstrumentEvents: Returns a list of instrument events based on the holdings of the portfolios and date range specified in the query. |
@@ -98,11 +98,11 @@ public class InstrumentEventsApiExample {
 
 ## queryBucketCashFlowDrillDown
 
-> ResourceListOfCashFlowDetail queryBucketCashFlowDrillDown(queryBucketCashFlowDrillDownRequest)
+> BucketCashFlowDrillDownResponse queryBucketCashFlowDrillDown(queryBucketCashFlowDrillDownRequest)
 
-QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
+[EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage.
 
-Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
+Splits the range from BucketStart to BucketEnd into periods with the BucketingSchedule, and returns one bucket per period,  member portfolio, payment currency and sub-holding key combination. Each bucket has its opening balance, the individual  cashflows that make up its activity, and its closing balance, so every balance and every cashflow appears once. Each  cashflow is annotated with the source (Instrument, Transaction or SRS) that produced it.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of &#39;Transaction&#39;.
 
 ### Example
 
@@ -132,9 +132,9 @@ public class InstrumentEventsApiExample {
         QueryBucketCashFlowDrillDownRequest queryBucketCashFlowDrillDownRequest = new QueryBucketCashFlowDrillDownRequest(); // QueryBucketCashFlowDrillDownRequest | The Query Information.
         try {
             // uncomment the below to set overrides at the request level
-            // ResourceListOfCashFlowDetail result = apiInstance.queryBucketCashFlowDrillDown(queryBucketCashFlowDrillDownRequest).execute(opts);
+            // BucketCashFlowDrillDownResponse result = apiInstance.queryBucketCashFlowDrillDown(queryBucketCashFlowDrillDownRequest).execute(opts);
 
-            ResourceListOfCashFlowDetail result = apiInstance.queryBucketCashFlowDrillDown(queryBucketCashFlowDrillDownRequest).execute();
+            BucketCashFlowDrillDownResponse result = apiInstance.queryBucketCashFlowDrillDown(queryBucketCashFlowDrillDownRequest).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling InstrumentEventsApi#queryBucketCashFlowDrillDown");
@@ -154,7 +154,7 @@ public class InstrumentEventsApiExample {
 
 ### Return type
 
-[**ResourceListOfCashFlowDetail**](../model/ResourceListOfCashFlowDetail.md)
+[**BucketCashFlowDrillDownResponse**](../model/BucketCashFlowDrillDownResponse.md)
 
 
 ### HTTP request headers
@@ -166,7 +166,7 @@ public class InstrumentEventsApiExample {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | The individual cashflows inside the requested bucket. |  -  |
+| **200** | The buckets of the requested range, each with its balances and its cashflows. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

@@ -8,11 +8,17 @@ All URIs are relative to *http://localhost*
 | [**batchAcceptMarginCalls**](CollateralApi.md#batchAcceptMarginCalls) | **POST** /api/api/collateral/margincalls/$batchAccept | [EXPERIMENTAL] BatchAcceptMarginCalls: Accept several margin calls. |
 | [**disputeMarginCall**](CollateralApi.md#disputeMarginCall) | **POST** /api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$dispute | [EXPERIMENTAL] DisputeMarginCall: Dispute a margin call. |
 | [**getMarginCall**](CollateralApi.md#getMarginCall) | **GET** /api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction} | [EXPERIMENTAL] GetMarginCall: Get a margin call. |
+| [**getMarginCallAllocation**](CollateralApi.md#getMarginCallAllocation) | **GET** /api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$allocation | [EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call. |
+| [**getMarginCallExplanation**](CollateralApi.md#getMarginCallExplanation) | **GET** /api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$explain | [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call. |
+| [**getMarginLineExplanation**](CollateralApi.md#getMarginLineExplanation) | **GET** /api/api/collateral/runs/{runId}/lines/{lineKey}/$explain | [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line. |
 | [**getMarginRun**](CollateralApi.md#getMarginRun) | **GET** /api/api/collateral/runs/{runId} | [EXPERIMENTAL] GetMarginRun: Get a margin run. |
 | [**listMarginCallLines**](CollateralApi.md#listMarginCallLines) | **GET** /api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/lines | [EXPERIMENTAL] ListMarginCallLines: List the margin lines of a call. |
 | [**listMarginCalls**](CollateralApi.md#listMarginCalls) | **GET** /api/api/collateral/margincalls | [EXPERIMENTAL] ListMarginCalls: List margin calls. |
 | [**listMarginLines**](CollateralApi.md#listMarginLines) | **GET** /api/api/collateral/runs/{runId}/lines | [EXPERIMENTAL] ListMarginLines: List the margin lines of a run. |
+| [**listMarginRunRecommendations**](CollateralApi.md#listMarginRunRecommendations) | **GET** /api/api/collateral/runs/{runId}/recommendations | [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run&#39;s netting recommendations. |
 | [**listMarginRuns**](CollateralApi.md#listMarginRuns) | **GET** /api/api/collateral/runs | [EXPERIMENTAL] ListMarginRuns: List margin runs. |
+| [**listNettingRecommendations**](CollateralApi.md#listNettingRecommendations) | **GET** /api/api/collateral/recommendations | [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations. |
+| [**rankMarginCall**](CollateralApi.md#rankMarginCall) | **POST** /api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$rank | [EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller&#39;s choices. |
 | [**recordCounterpartyDemand**](CollateralApi.md#recordCounterpartyDemand) | **POST** /api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$recordCounterpartyDemand | [EXPERIMENTAL] RecordCounterpartyDemand: Record the counterparty&#39;s demand against a margin call. |
 | [**retryMarginRun**](CollateralApi.md#retryMarginRun) | **POST** /api/api/collateral/runs/{runId}/$retry | [EXPERIMENTAL] RetryMarginRun: Retry a margin run. |
 | [**runMarginCalculation**](CollateralApi.md#runMarginCalculation) | **POST** /api/api/collateral/$run | [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation. |
@@ -361,6 +367,261 @@ public class CollateralApiExample {
 [Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
+## getMarginCallAllocation
+
+> CollateralAllocation getMarginCallAllocation(runId, agreementScope, agreementCode, item, marginType, direction)
+
+[EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call.
+
+Retrieve the assets the run&#39;s allocation pass proposes to deliver for the call, or to take back for a return, with  every holding it considered and either its rank or the constraint that excluded it. Each line carries what a  transaction moving it needs: the instrument, the portfolio and custodian account, the units, the price and the  consideration. Not found until the run&#39;s allocation pass has completed, or when the call moves no collateral of ours.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.CollateralApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CollateralApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CollateralApi apiInstance = apiFactory.build(CollateralApi.class);
+        String runId = "runId_example"; // String | The identifier of the margin run.
+        String agreementScope = "agreementScope_example"; // String | The scope of the call's collateral agreement.
+        String agreementCode = "agreementCode_example"; // String | The code of the call's collateral agreement.
+        String item = "item_example"; // String | The margin item of the call.
+        String marginType = "marginType_example"; // String | The margin type of the call. One of VariationMargin or InitialMargin.
+        String direction = "direction_example"; // String | Who posts under the call. One of WePost, TheyPost or None.
+        try {
+            // uncomment the below to set overrides at the request level
+            // CollateralAllocation result = apiInstance.getMarginCallAllocation(runId, agreementScope, agreementCode, item, marginType, direction).execute(opts);
+
+            CollateralAllocation result = apiInstance.getMarginCallAllocation(runId, agreementScope, agreementCode, item, marginType, direction).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CollateralApi#getMarginCallAllocation");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **runId** | **String**| The identifier of the margin run. | |
+| **agreementScope** | **String**| The scope of the call&#39;s collateral agreement. | |
+| **agreementCode** | **String**| The code of the call&#39;s collateral agreement. | |
+| **item** | **String**| The margin item of the call. | |
+| **marginType** | **String**| The margin type of the call. One of VariationMargin or InitialMargin. | |
+| **direction** | **String**| Who posts under the call. One of WePost, TheyPost or None. | |
+
+### Return type
+
+[**CollateralAllocation**](../model/CollateralAllocation.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The collateral proposed for the margin call. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getMarginCallExplanation
+
+> MarginExplanation getMarginCallExplanation(runId, agreementScope, agreementCode, item, marginType, direction)
+
+[EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.
+
+Show how the required amount of one initial-margin call of a run was arrived at, as a tree of components. Only an  initial-margin call whose run stored its working can be explained, as the call&#39;s ExplainAvailable says. The working  of portfolios the caller may not read is replaced by a single redacted component that keeps its parent adding up.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.CollateralApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CollateralApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CollateralApi apiInstance = apiFactory.build(CollateralApi.class);
+        String runId = "runId_example"; // String | The identifier of the margin run.
+        String agreementScope = "agreementScope_example"; // String | The scope of the call's collateral agreement.
+        String agreementCode = "agreementCode_example"; // String | The code of the call's collateral agreement.
+        String item = "item_example"; // String | The margin item of the call.
+        String marginType = "marginType_example"; // String | The margin type of the call. Only InitialMargin calls can be explained.
+        String direction = "direction_example"; // String | Who posts under the call. One of WePost, TheyPost or None.
+        try {
+            // uncomment the below to set overrides at the request level
+            // MarginExplanation result = apiInstance.getMarginCallExplanation(runId, agreementScope, agreementCode, item, marginType, direction).execute(opts);
+
+            MarginExplanation result = apiInstance.getMarginCallExplanation(runId, agreementScope, agreementCode, item, marginType, direction).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CollateralApi#getMarginCallExplanation");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **runId** | **String**| The identifier of the margin run. | |
+| **agreementScope** | **String**| The scope of the call&#39;s collateral agreement. | |
+| **agreementCode** | **String**| The code of the call&#39;s collateral agreement. | |
+| **item** | **String**| The margin item of the call. | |
+| **marginType** | **String**| The margin type of the call. Only InitialMargin calls can be explained. | |
+| **direction** | **String**| Who posts under the call. One of WePost, TheyPost or None. | |
+
+### Return type
+
+[**MarginExplanation**](../model/MarginExplanation.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | How the call&#39;s required amount was arrived at. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getMarginLineExplanation
+
+> MarginExplanation getMarginLineExplanation(runId, lineKey, figure)
+
+[EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.
+
+Show how the figures of one margin line of a run were arrived at, as a tree of components for each figure. The run  must have stored its working, as its lines&#39; ExplainAvailable says. The working of portfolios the caller may not  read is replaced by a single redacted component that keeps its parent adding up. A line the caller may not read is  reported as not found.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.CollateralApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CollateralApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CollateralApi apiInstance = apiFactory.build(CollateralApi.class);
+        String runId = "runId_example"; // String | The identifier of the margin run.
+        String lineKey = "lineKey_example"; // String | The key of the margin line, as listed in the line's LineKey.
+        String figure = "figure_example"; // String | The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin.
+        try {
+            // uncomment the below to set overrides at the request level
+            // MarginExplanation result = apiInstance.getMarginLineExplanation(runId, lineKey, figure).execute(opts);
+
+            MarginExplanation result = apiInstance.getMarginLineExplanation(runId, lineKey, figure).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CollateralApi#getMarginLineExplanation");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **runId** | **String**| The identifier of the margin run. | |
+| **lineKey** | **String**| The key of the margin line, as listed in the line&#39;s LineKey. | |
+| **figure** | **String**| The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. | [optional] |
+
+### Return type
+
+[**MarginExplanation**](../model/MarginExplanation.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | How the line&#39;s figures were arrived at. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
 ## getMarginRun
 
 > MarginRun getMarginRun(runId)
@@ -533,11 +794,11 @@ public class CollateralApiExample {
 
 ## listMarginCalls
 
-> PagedResourceListOfMarginCall listMarginCalls(effectiveAt, runId, page, limit, filter)
+> PagedResourceListOfMarginCall listMarginCalls(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom)
 
 [EXPERIMENTAL] ListMarginCalls: List margin calls.
 
-List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. Restricted to the agreements the caller may read.
+List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. With an effectiveFrom the current calls of each date from it to effectiveAt are listed, in date order.  Restricted to the agreements the caller may read.
 
 ### Example
 
@@ -564,16 +825,18 @@ public class CollateralApiExample {
         ApiFactory apiFactory = new ApiFactoryBuilder().build();
         
         CollateralApi apiInstance = apiFactory.build(CollateralApi.class);
-        String effectiveAt = "effectiveAt_example"; // String | The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given.
+        String effectiveAt = "effectiveAt_example"; // String | The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given.
         String runId = "runId_example"; // String | The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.
         String page = "page_example"; // String | The pagination token to use to continue listing margin calls; this value is returned from the previous call.
         Integer limit = 56; // Integer | When paginating, limit the results to this number. Defaults to 100 if not specified.
         String filter = "filter_example"; // String | Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
+        List<String> scenarios = Arrays.asList(); // List<String> | The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified.
+        String effectiveFrom = "effectiveFrom_example"; // String | The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given.
         try {
             // uncomment the below to set overrides at the request level
-            // PagedResourceListOfMarginCall result = apiInstance.listMarginCalls(effectiveAt, runId, page, limit, filter).execute(opts);
+            // PagedResourceListOfMarginCall result = apiInstance.listMarginCalls(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom).execute(opts);
 
-            PagedResourceListOfMarginCall result = apiInstance.listMarginCalls(effectiveAt, runId, page, limit, filter).execute();
+            PagedResourceListOfMarginCall result = apiInstance.listMarginCalls(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling CollateralApi#listMarginCalls");
@@ -589,11 +852,13 @@ public class CollateralApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **effectiveAt** | **String**| The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given. | [optional] |
+| **effectiveAt** | **String**| The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given. | [optional] |
 | **runId** | **String**| The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing margin calls; this value is returned from the previous call. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \&quot;MatchStatus eq &#39;Break&#39;\&quot;. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] |
+| **scenarios** | [**List&lt;String&gt;**](../model/String.md)| The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified. | [optional] |
+| **effectiveFrom** | **String**| The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given. | [optional] |
 
 ### Return type
 
@@ -618,7 +883,7 @@ public class CollateralApiExample {
 
 ## listMarginLines
 
-> PagedResourceListOfMarginLine listMarginLines(runId, page, limit, filter)
+> PagedResourceListOfMarginLine listMarginLines(runId, page, limit, filter, scenarios)
 
 [EXPERIMENTAL] ListMarginLines: List the margin lines of a run.
 
@@ -653,11 +918,12 @@ public class CollateralApiExample {
         String page = "page_example"; // String | The pagination token to use to continue listing margin lines; this value is returned from the previous call.
         Integer limit = 56; // Integer | When paginating, limit the results to this number. Defaults to 100 if not specified.
         String filter = "filter_example"; // String | Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
+        List<String> scenarios = Arrays.asList(); // List<String> | The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified.
         try {
             // uncomment the below to set overrides at the request level
-            // PagedResourceListOfMarginLine result = apiInstance.listMarginLines(runId, page, limit, filter).execute(opts);
+            // PagedResourceListOfMarginLine result = apiInstance.listMarginLines(runId, page, limit, filter, scenarios).execute(opts);
 
-            PagedResourceListOfMarginLine result = apiInstance.listMarginLines(runId, page, limit, filter).execute();
+            PagedResourceListOfMarginLine result = apiInstance.listMarginLines(runId, page, limit, filter, scenarios).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling CollateralApi#listMarginLines");
@@ -677,6 +943,7 @@ public class CollateralApiExample {
 | **page** | **String**| The pagination token to use to continue listing margin lines; this value is returned from the previous call. | [optional] |
 | **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
 | **filter** | **String**| Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] |
+| **scenarios** | [**List&lt;String&gt;**](../model/String.md)| The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified. | [optional] |
 
 ### Return type
 
@@ -693,6 +960,89 @@ public class CollateralApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The requested margin lines. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listMarginRunRecommendations
+
+> PagedResourceListOfNettingRecommendation listMarginRunRecommendations(runId, page, limit, filter)
+
+[EXPERIMENTAL] ListMarginRunRecommendations: List a margin run&#39;s netting recommendations.
+
+List the trades a run&#39;s optimisation pass found would attract less initial margin in another netting set of the  run, with both sets&#39; initial margin before and after the move. Empty until the run&#39;s optimisation pass has  completed. Restricted to recommendations whose source and target agreements the caller may read.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.CollateralApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CollateralApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CollateralApi apiInstance = apiFactory.build(CollateralApi.class);
+        String runId = "runId_example"; // String | The identifier of the margin run.
+        String page = "page_example"; // String | The pagination token to use to continue listing recommendations; this value is returned from the previous call.
+        Integer limit = 56; // Integer | When paginating, limit the results to this number. Defaults to 100 if not specified.
+        String filter = "filter_example"; // String | Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
+        try {
+            // uncomment the below to set overrides at the request level
+            // PagedResourceListOfNettingRecommendation result = apiInstance.listMarginRunRecommendations(runId, page, limit, filter).execute(opts);
+
+            PagedResourceListOfNettingRecommendation result = apiInstance.listMarginRunRecommendations(runId, page, limit, filter).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CollateralApi#listMarginRunRecommendations");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **runId** | **String**| The identifier of the margin run. | |
+| **page** | **String**| The pagination token to use to continue listing recommendations; this value is returned from the previous call. | [optional] |
+| **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
+| **filter** | **String**| Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] |
+
+### Return type
+
+[**PagedResourceListOfNettingRecommendation**](../model/PagedResourceListOfNettingRecommendation.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The requested recommendations. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
@@ -774,6 +1124,178 @@ public class CollateralApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The requested margin runs. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## listNettingRecommendations
+
+> PagedResourceListOfNettingRecommendation listNettingRecommendations(effectiveAt, page, limit, filter)
+
+[EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations.
+
+List the netting recommendations in force for a business date: those of the latest run for the date whose  optimisation pass completed, with an agreement that run could not value served from the most recent run that  did. Restricted to recommendations whose source and target agreements the caller may read.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.CollateralApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CollateralApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CollateralApi apiInstance = apiFactory.build(CollateralApi.class);
+        String effectiveAt = "effectiveAt_example"; // String | The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified.
+        String page = "page_example"; // String | The pagination token to use to continue listing recommendations; this value is returned from the previous call.
+        Integer limit = 56; // Integer | When paginating, limit the results to this number. Defaults to 100 if not specified.
+        String filter = "filter_example"; // String | Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
+        try {
+            // uncomment the below to set overrides at the request level
+            // PagedResourceListOfNettingRecommendation result = apiInstance.listNettingRecommendations(effectiveAt, page, limit, filter).execute(opts);
+
+            PagedResourceListOfNettingRecommendation result = apiInstance.listNettingRecommendations(effectiveAt, page, limit, filter).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CollateralApi#listNettingRecommendations");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **effectiveAt** | **String**| The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. | [optional] |
+| **page** | **String**| The pagination token to use to continue listing recommendations; this value is returned from the previous call. | [optional] |
+| **limit** | **Integer**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] |
+| **filter** | **String**| Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] |
+
+### Return type
+
+[**PagedResourceListOfNettingRecommendation**](../model/PagedResourceListOfNettingRecommendation.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The requested recommendations. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## rankMarginCall
+
+> CollateralAllocation rankMarginCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest)
+
+[EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller&#39;s choices.
+
+Value the call&#39;s agreement as of now for the run&#39;s business date and rank its free, eligible holdings for the  call again, keeping the assets and units the caller chose. Each choice is validated against the agreement&#39;s  constraints and kept with its reason when it fails one; the rest of the call is filled from the ranking, cheapest  first, unless fillRemainder is false. Nothing is stored: the result is what to book, for the caller to decide on.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.CollateralApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class CollateralApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        CollateralApi apiInstance = apiFactory.build(CollateralApi.class);
+        String runId = "runId_example"; // String | The identifier of the margin run.
+        String agreementScope = "agreementScope_example"; // String | The scope of the call's collateral agreement.
+        String agreementCode = "agreementCode_example"; // String | The code of the call's collateral agreement.
+        String item = "item_example"; // String | The margin item of the call.
+        String marginType = "marginType_example"; // String | The margin type of the call. One of VariationMargin or InitialMargin.
+        String direction = "direction_example"; // String | Who posts under the call. One of WePost, TheyPost or None.
+        RankMarginCallRequest rankMarginCallRequest = new RankMarginCallRequest(); // RankMarginCallRequest | The assets the caller chose, and whether to fill the rest.
+        try {
+            // uncomment the below to set overrides at the request level
+            // CollateralAllocation result = apiInstance.rankMarginCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest).execute(opts);
+
+            CollateralAllocation result = apiInstance.rankMarginCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CollateralApi#rankMarginCall");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **runId** | **String**| The identifier of the margin run. | |
+| **agreementScope** | **String**| The scope of the call&#39;s collateral agreement. | |
+| **agreementCode** | **String**| The code of the call&#39;s collateral agreement. | |
+| **item** | **String**| The margin item of the call. | |
+| **marginType** | **String**| The margin type of the call. One of VariationMargin or InitialMargin. | |
+| **direction** | **String**| Who posts under the call. One of WePost, TheyPost or None. | |
+| **rankMarginCallRequest** | [**RankMarginCallRequest**](../model/RankMarginCallRequest.md)| The assets the caller chose, and whether to fill the rest. | [optional] |
+
+### Return type
+
+[**CollateralAllocation**](../model/CollateralAllocation.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The collateral ranked for the margin call. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
@@ -948,11 +1470,11 @@ public class CollateralApiExample {
 
 ## runMarginCalculation
 
-> MarginRun runMarginCalculation(marginRunRequest)
+> PagedResourceListOfMarginRun runMarginCalculation(marginRunRequest)
 
 [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation.
 
-Value the collateral agreements for a business date in the background and publish their margin calls as a run.  The run is returned as planned; poll GetMarginRun for its progress, and list its calls as they are published.
+Value the collateral agreements for a business date, or for each weekday of a span, in the background and publish  their margin calls as a run for each date. The base case is always valued, with each scenario named in the request  valued beside it as a case of the same run. A date after the asAt is a projection on the market as at the asAt.  The runs are returned as planned, in date order; poll GetMarginRun for the progress of each, and list the calls as they are published.
 
 ### Example
 
@@ -979,12 +1501,12 @@ public class CollateralApiExample {
         ApiFactory apiFactory = new ApiFactoryBuilder().build();
         
         CollateralApi apiInstance = apiFactory.build(CollateralApi.class);
-        MarginRunRequest marginRunRequest = new MarginRunRequest(); // MarginRunRequest | The business date to value, and optionally the asAt and the agreements to include.
+        MarginRunRequest marginRunRequest = new MarginRunRequest(); // MarginRunRequest | The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case.
         try {
             // uncomment the below to set overrides at the request level
-            // MarginRun result = apiInstance.runMarginCalculation(marginRunRequest).execute(opts);
+            // PagedResourceListOfMarginRun result = apiInstance.runMarginCalculation(marginRunRequest).execute(opts);
 
-            MarginRun result = apiInstance.runMarginCalculation(marginRunRequest).execute();
+            PagedResourceListOfMarginRun result = apiInstance.runMarginCalculation(marginRunRequest).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling CollateralApi#runMarginCalculation");
@@ -1000,11 +1522,11 @@ public class CollateralApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **marginRunRequest** | [**MarginRunRequest**](../model/MarginRunRequest.md)| The business date to value, and optionally the asAt and the agreements to include. | |
+| **marginRunRequest** | [**MarginRunRequest**](../model/MarginRunRequest.md)| The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. | |
 
 ### Return type
 
-[**MarginRun**](../model/MarginRun.md)
+[**PagedResourceListOfMarginRun**](../model/PagedResourceListOfMarginRun.md)
 
 
 ### HTTP request headers
@@ -1016,7 +1538,7 @@ public class CollateralApiExample {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **202** | The margin run as planned. |  -  |
+| **202** | The margin runs as planned, one for each date valued. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

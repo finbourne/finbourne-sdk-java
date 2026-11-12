@@ -6,7 +6,7 @@ Loan Facility. This is a very lightweight instrument which acts as a placeholder
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility. | [default to String]
+**instrumentType** | **String** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond. | [default to String]
 **startDate** | [**OffsetDateTime**](OffsetDateTime.md) | The start date of the instrument. This is normally synonymous with the trade-date. | [default to OffsetDateTime]
 **maturityDate** | [**OffsetDateTime**](OffsetDateTime.md) | The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it. | [default to OffsetDateTime]
 **domCcy** | **String** | The domestic currency of the instrument. | [default to String]
@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **loanType** | **String** | LoanType for this facility. The facility can either be a revolving or a  term loan. Available values: Revolver, TermLoan. | [default to String]
 **schedules** | [**List&lt;Schedule&gt;**](Schedule.md) | Repayment schedules for the loan. | [default to List<Schedule>]
 **timeZoneConventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] [default to TimeZoneConventions]
+**originalIssuePrice** | **java.math.BigDecimal** | The price the loan facility was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.LoanFacility;
@@ -28,6 +29,7 @@ java.math.BigDecimal initialCommitment = new java.math.BigDecimal("100.00");
 String loanType = "example loanType";
 List<Schedule> schedules = new List<Schedule>();
 TimeZoneConventions timeZoneConventions = new TimeZoneConventions();
+@javax.annotation.Nullable java.math.BigDecimal originalIssuePrice = new java.math.BigDecimal("100.00");
 
 
 LoanFacility loanFacilityInstance = new LoanFacility()
@@ -37,7 +39,8 @@ LoanFacility loanFacilityInstance = new LoanFacility()
     .initialCommitment(initialCommitment)
     .loanType(loanType)
     .schedules(schedules)
-    .timeZoneConventions(timeZoneConventions);
+    .timeZoneConventions(timeZoneConventions)
+    .originalIssuePrice(originalIssuePrice);
 ```
 
 

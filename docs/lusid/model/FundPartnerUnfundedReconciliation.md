@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **difference** | **java.math.BigDecimal** | Closing unfunded less the register&#39;s unfunded at the closing datetime. Zero when the statement ties. | [default to java.math.BigDecimal]
 **ties** | **Boolean** | Whether the closing unfunded equals the register&#39;s unfunded at the closing datetime. | [default to Boolean]
 **lines** | [**List&lt;FundPartnerUnfundedReconciliationLine&gt;**](FundPartnerUnfundedReconciliationLine.md) | Every booked allocation to the partner over the period, in event date order, with the ILPA transaction type each is reported under and its effect on unfunded. | [default to List<FundPartnerUnfundedReconciliationLine>]
+**warnings** | [**List&lt;FundPartnerUnfundedReconciliationWarning&gt;**](FundPartnerUnfundedReconciliationWarning.md) | Soft warnings about how the statement was built. Empty when the period and the register agree without caveats. | [optional] [default to List<FundPartnerUnfundedReconciliationWarning>]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FundPartnerUnfundedReconciliation;
@@ -45,6 +46,7 @@ java.math.BigDecimal registerUnfunded = new java.math.BigDecimal("100.00");
 java.math.BigDecimal difference = new java.math.BigDecimal("100.00");
 Boolean ties = true;
 List<FundPartnerUnfundedReconciliationLine> lines = new List<FundPartnerUnfundedReconciliationLine>();
+@javax.annotation.Nullable List<FundPartnerUnfundedReconciliationWarning> warnings = new List<FundPartnerUnfundedReconciliationWarning>();
 
 
 FundPartnerUnfundedReconciliation fundPartnerUnfundedReconciliationInstance = new FundPartnerUnfundedReconciliation()
@@ -63,7 +65,8 @@ FundPartnerUnfundedReconciliation fundPartnerUnfundedReconciliationInstance = ne
     .registerUnfunded(registerUnfunded)
     .difference(difference)
     .ties(ties)
-    .lines(lines);
+    .lines(lines)
+    .warnings(warnings);
 ```
 
 

@@ -12,13 +12,18 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.DealingBookCompleteness;
 import com.finbourne.sdk.services.lusid.model.DealingFlowSummary;
+import com.finbourne.sdk.services.lusid.model.DealingLineNotValued;
+import com.finbourne.sdk.services.lusid.model.EstimateValuation;
 import com.finbourne.sdk.services.lusid.model.PricingMethodologyEngineProposal;
 import com.finbourne.sdk.services.lusid.model.PricingMethodologyOverride;
 import com.finbourne.sdk.services.lusid.model.SwingSpreadApplied;
 import com.finbourne.sdk.services.lusid.model.SwingTriggerEvaluation;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -46,7 +51,11 @@ import com.finbourne.sdk.JSON;
   PricingMethodologyAudit.JSON_PROPERTY_OVERRIDE,
   PricingMethodologyAudit.JSON_PROPERTY_INFLOW_TRIGGER,
   PricingMethodologyAudit.JSON_PROPERTY_OUTFLOW_TRIGGER,
-  PricingMethodologyAudit.JSON_PROPERTY_DEALING_FLOWS
+  PricingMethodologyAudit.JSON_PROPERTY_DEALING_FLOWS,
+  PricingMethodologyAudit.JSON_PROPERTY_ESTIMATE_VALUATION,
+  PricingMethodologyAudit.JSON_PROPERTY_APPROVAL_STATUS,
+  PricingMethodologyAudit.JSON_PROPERTY_DEALING_LINES_NOT_VALUED,
+  PricingMethodologyAudit.JSON_PROPERTY_COMPLETENESS
 })
 
 public class PricingMethodologyAudit {
@@ -89,6 +98,26 @@ public class PricingMethodologyAudit {
   @JsonProperty(JSON_PROPERTY_DEALING_FLOWS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private DealingFlowSummary dealingFlows;
+
+  public static final String JSON_PROPERTY_ESTIMATE_VALUATION = "estimateValuation";
+  @JsonProperty(JSON_PROPERTY_ESTIMATE_VALUATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private EstimateValuation estimateValuation;
+
+  public static final String JSON_PROPERTY_APPROVAL_STATUS = "approvalStatus";
+  @JsonProperty(JSON_PROPERTY_APPROVAL_STATUS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String approvalStatus;
+
+  public static final String JSON_PROPERTY_DEALING_LINES_NOT_VALUED = "dealingLinesNotValued";
+  @JsonProperty(JSON_PROPERTY_DEALING_LINES_NOT_VALUED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<DealingLineNotValued> dealingLinesNotValued;
+
+  public static final String JSON_PROPERTY_COMPLETENESS = "completeness";
+  @JsonProperty(JSON_PROPERTY_COMPLETENESS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private DealingBookCompleteness completeness;
 
   public PricingMethodologyAudit() {
   }
@@ -245,6 +274,90 @@ public class PricingMethodologyAudit {
   }
 
 
+  public PricingMethodologyAudit estimateValuation(EstimateValuation estimateValuation) {
+    this.estimateValuation = estimateValuation;
+    return this;
+  }
+
+  /**
+   * Get estimateValuation
+   * @return estimateValuation
+   */
+  @javax.annotation.Nullable
+  public EstimateValuation getEstimateValuation() {
+    return estimateValuation;
+  }
+
+  public void setEstimateValuation(EstimateValuation estimateValuation) {
+    this.estimateValuation = estimateValuation;
+  }
+
+
+  public PricingMethodologyAudit approvalStatus(String approvalStatus) {
+    this.approvalStatus = approvalStatus;
+    return this;
+  }
+
+  /**
+   * Where a manually approved swing decision stands. Pending until a manager approves or overrides the engine&#39;s proposal, or when the proposal has changed since the decision was taken; Approved when the decision equals the proposal; Overridden when it differs. Absent when the swing policy approves automatically.
+   * @return approvalStatus
+   */
+  @javax.annotation.Nullable
+  public String getApprovalStatus() {
+    return approvalStatus;
+  }
+
+  public void setApprovalStatus(String approvalStatus) {
+    this.approvalStatus = approvalStatus;
+  }
+
+
+  public PricingMethodologyAudit dealingLinesNotValued(List<DealingLineNotValued> dealingLinesNotValued) {
+    this.dealingLinesNotValued = dealingLinesNotValued;
+    return this;
+  }
+
+  public PricingMethodologyAudit addDealingLinesNotValuedItem(DealingLineNotValued dealingLinesNotValuedItem) {
+    if (this.dealingLinesNotValued == null) {
+      this.dealingLinesNotValued = new ArrayList<>();
+    }
+    this.dealingLinesNotValued.add(dealingLinesNotValuedItem);
+    return this;
+  }
+
+  /**
+   * The dealing lines read for the swing decision that could not be valued into the share class currency: an amount in a currency that is neither the fund&#39;s nor any share class&#39;s, or a weight-only line. While any are present and no pricingMethodologyOverride has been submitted, no swing decision is taken, the dealing price is absent and the valuation point cannot be finalised; under an override the override&#39;s price stands and the lines remain listed here. Absent when every line was valued or the methodology does not swing.
+   * @return dealingLinesNotValued
+   */
+  @javax.annotation.Nullable
+  public List<DealingLineNotValued> getDealingLinesNotValued() {
+    return dealingLinesNotValued;
+  }
+
+  public void setDealingLinesNotValued(List<DealingLineNotValued> dealingLinesNotValued) {
+    this.dealingLinesNotValued = dealingLinesNotValued;
+  }
+
+
+  public PricingMethodologyAudit completeness(DealingBookCompleteness completeness) {
+    this.completeness = completeness;
+    return this;
+  }
+
+  /**
+   * Get completeness
+   * @return completeness
+   */
+  @javax.annotation.Nullable
+  public DealingBookCompleteness getCompleteness() {
+    return completeness;
+  }
+
+  public void setCompleteness(DealingBookCompleteness completeness) {
+    this.completeness = completeness;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -261,7 +374,11 @@ public class PricingMethodologyAudit {
         Objects.equals(this.override, pricingMethodologyAudit.override) &&
         Objects.equals(this.inflowTrigger, pricingMethodologyAudit.inflowTrigger) &&
         Objects.equals(this.outflowTrigger, pricingMethodologyAudit.outflowTrigger) &&
-        Objects.equals(this.dealingFlows, pricingMethodologyAudit.dealingFlows);
+        Objects.equals(this.dealingFlows, pricingMethodologyAudit.dealingFlows) &&
+        Objects.equals(this.estimateValuation, pricingMethodologyAudit.estimateValuation) &&
+        Objects.equals(this.approvalStatus, pricingMethodologyAudit.approvalStatus) &&
+        Objects.equals(this.dealingLinesNotValued, pricingMethodologyAudit.dealingLinesNotValued) &&
+        Objects.equals(this.completeness, pricingMethodologyAudit.completeness);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -270,7 +387,7 @@ public class PricingMethodologyAudit {
 
   @Override
  public int hashCode() {
-    return Objects.hash(netCashflow, netCashflowPctOfNav, spreadsApplied, engineProposal, override, inflowTrigger, outflowTrigger, dealingFlows);
+    return Objects.hash(netCashflow, netCashflowPctOfNav, spreadsApplied, engineProposal, override, inflowTrigger, outflowTrigger, dealingFlows, estimateValuation, approvalStatus, dealingLinesNotValued, completeness);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -292,6 +409,10 @@ public class PricingMethodologyAudit {
     sb.append("    inflowTrigger: ").append(toIndentedString(inflowTrigger)).append("\n");
     sb.append("    outflowTrigger: ").append(toIndentedString(outflowTrigger)).append("\n");
     sb.append("    dealingFlows: ").append(toIndentedString(dealingFlows)).append("\n");
+    sb.append("    estimateValuation: ").append(toIndentedString(estimateValuation)).append("\n");
+    sb.append("    approvalStatus: ").append(toIndentedString(approvalStatus)).append("\n");
+    sb.append("    dealingLinesNotValued: ").append(toIndentedString(dealingLinesNotValued)).append("\n");
+    sb.append("    completeness: ").append(toIndentedString(completeness)).append("\n");
     sb.append("}");
     return sb.toString();
   }

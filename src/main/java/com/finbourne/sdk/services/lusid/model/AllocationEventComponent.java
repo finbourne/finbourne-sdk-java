@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
@@ -38,7 +39,9 @@ import com.finbourne.sdk.JSON;
   AllocationEventComponent.JSON_PROPERTY_AMOUNT,
   AllocationEventComponent.JSON_PROPERTY_ORIGIN_MEMBER_SHORT_CODE,
   AllocationEventComponent.JSON_PROPERTY_WATERFALL_TIER,
-  AllocationEventComponent.JSON_PROPERTY_TAX_CHARACTER
+  AllocationEventComponent.JSON_PROPERTY_TAX_CHARACTER,
+  AllocationEventComponent.JSON_PROPERTY_RECALLABLE_AMOUNT,
+  AllocationEventComponent.JSON_PROPERTY_RECALLABLE_UNTIL
 })
 
 public class AllocationEventComponent {
@@ -66,6 +69,16 @@ public class AllocationEventComponent {
   @JsonProperty(JSON_PROPERTY_TAX_CHARACTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String taxCharacter;
+
+  public static final String JSON_PROPERTY_RECALLABLE_AMOUNT = "recallableAmount";
+  @JsonProperty(JSON_PROPERTY_RECALLABLE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal recallableAmount;
+
+  public static final String JSON_PROPERTY_RECALLABLE_UNTIL = "recallableUntil";
+  @JsonProperty(JSON_PROPERTY_RECALLABLE_UNTIL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime recallableUntil;
 
   public AllocationEventComponent() {
   }
@@ -165,6 +178,44 @@ public class AllocationEventComponent {
   }
 
 
+  public AllocationEventComponent recallableAmount(java.math.BigDecimal recallableAmount) {
+    this.recallableAmount = recallableAmount;
+    return this;
+  }
+
+  /**
+   * For the ROC component of a Distribution only, how much of the component the fund may call back, between zero and the component amount. Shared pro rata to each investor&#39;s ROC share. Absent means the allocation map&#39;s recall window decides.
+   * @return recallableAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getRecallableAmount() {
+    return recallableAmount;
+  }
+
+  public void setRecallableAmount(java.math.BigDecimal recallableAmount) {
+    this.recallableAmount = recallableAmount;
+  }
+
+
+  public AllocationEventComponent recallableUntil(OffsetDateTime recallableUntil) {
+    this.recallableUntil = recallableUntil;
+    return this;
+  }
+
+  /**
+   * For the ROC component of a Distribution only, the last date the recallable amount may be called back. Must not be before the event date and requires a non-zero recallable amount.
+   * @return recallableUntil
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getRecallableUntil() {
+    return recallableUntil;
+  }
+
+  public void setRecallableUntil(OffsetDateTime recallableUntil) {
+    this.recallableUntil = recallableUntil;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -178,7 +229,9 @@ public class AllocationEventComponent {
         (this.amount == null ? allocationEventComponent.amount == null : (allocationEventComponent.amount != null && this.amount.compareTo(allocationEventComponent.getAmount()) == 0)) &&
         Objects.equals(this.originMemberShortCode, allocationEventComponent.originMemberShortCode) &&
         Objects.equals(this.waterfallTier, allocationEventComponent.waterfallTier) &&
-        Objects.equals(this.taxCharacter, allocationEventComponent.taxCharacter);
+        Objects.equals(this.taxCharacter, allocationEventComponent.taxCharacter) &&
+        (this.recallableAmount == null ? allocationEventComponent.recallableAmount == null : (allocationEventComponent.recallableAmount != null && this.recallableAmount.compareTo(allocationEventComponent.getRecallableAmount()) == 0)) &&
+        Objects.equals(this.recallableUntil, allocationEventComponent.recallableUntil);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -187,7 +240,7 @@ public class AllocationEventComponent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(component, amount, originMemberShortCode, waterfallTier, taxCharacter);
+    return Objects.hash(component, amount, originMemberShortCode, waterfallTier, taxCharacter, recallableAmount, recallableUntil);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -206,6 +259,8 @@ public class AllocationEventComponent {
     sb.append("    originMemberShortCode: ").append(toIndentedString(originMemberShortCode)).append("\n");
     sb.append("    waterfallTier: ").append(toIndentedString(waterfallTier)).append("\n");
     sb.append("    taxCharacter: ").append(toIndentedString(taxCharacter)).append("\n");
+    sb.append("    recallableAmount: ").append(toIndentedString(recallableAmount)).append("\n");
+    sb.append("    recallableUntil: ").append(toIndentedString(recallableUntil)).append("\n");
     sb.append("}");
     return sb.toString();
   }

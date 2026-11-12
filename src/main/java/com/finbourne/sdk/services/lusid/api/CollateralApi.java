@@ -30,15 +30,19 @@ import java.io.IOException;
 import com.finbourne.sdk.services.lusid.model.AcceptMarginCallRequest;
 import com.finbourne.sdk.services.lusid.model.BatchAcceptMarginCallsRequest;
 import com.finbourne.sdk.services.lusid.model.BatchAcceptMarginCallsResponse;
+import com.finbourne.sdk.services.lusid.model.CollateralAllocation;
 import com.finbourne.sdk.services.lusid.model.DisputeMarginCallRequest;
 import com.finbourne.sdk.services.lusid.model.LusidProblemDetails;
 import com.finbourne.sdk.services.lusid.model.LusidValidationProblemDetails;
 import com.finbourne.sdk.services.lusid.model.MarginCall;
+import com.finbourne.sdk.services.lusid.model.MarginExplanation;
 import com.finbourne.sdk.services.lusid.model.MarginRun;
 import com.finbourne.sdk.services.lusid.model.MarginRunRequest;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfMarginCall;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfMarginLine;
 import com.finbourne.sdk.services.lusid.model.PagedResourceListOfMarginRun;
+import com.finbourne.sdk.services.lusid.model.PagedResourceListOfNettingRecommendation;
+import com.finbourne.sdk.services.lusid.model.RankMarginCallRequest;
 import com.finbourne.sdk.services.lusid.model.RecordCounterpartyDemandRequest;
 
 import java.lang.reflect.Type;
@@ -1596,6 +1600,1125 @@ public class CollateralApi {
         return new APIgetMarginCallRequest(runId, agreementScope, agreementCode, item, marginType, direction);
     }
     /**
+     * Build call for getMarginCallAllocation
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getMarginCallAllocationCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback _callback) throws ApiException {
+        return getMarginCallAllocationCall(runId, agreementScope, agreementCode, item, marginType, direction,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getMarginCallAllocation. Use any specified configuration options to override any other configuration for this request only.
+     * @param runId The identifier of the margin run. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param item The margin item of the call. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getMarginCallAllocationCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$allocation"
+            .replace("{" + "runId" + "}", localVarApiClient.escapeString(runId.toString()))
+            .replace("{" + "agreementScope" + "}", localVarApiClient.escapeString(agreementScope.toString()))
+            .replace("{" + "agreementCode" + "}", localVarApiClient.escapeString(agreementCode.toString()))
+            .replace("{" + "item" + "}", localVarApiClient.escapeString(item.toString()))
+            .replace("{" + "marginType" + "}", localVarApiClient.escapeString(marginType.toString()))
+            .replace("{" + "direction" + "}", localVarApiClient.escapeString(direction.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getMarginCallAllocationValidateBeforeCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'runId' is set
+        if (runId == null) {
+            throw new ApiException("Missing the required parameter 'runId' when calling getMarginCallAllocation(Async)");
+        }
+
+        // verify the required parameter 'agreementScope' is set
+        if (agreementScope == null) {
+            throw new ApiException("Missing the required parameter 'agreementScope' when calling getMarginCallAllocation(Async)");
+        }
+
+        // verify the required parameter 'agreementCode' is set
+        if (agreementCode == null) {
+            throw new ApiException("Missing the required parameter 'agreementCode' when calling getMarginCallAllocation(Async)");
+        }
+
+        // verify the required parameter 'item' is set
+        if (item == null) {
+            throw new ApiException("Missing the required parameter 'item' when calling getMarginCallAllocation(Async)");
+        }
+
+        // verify the required parameter 'marginType' is set
+        if (marginType == null) {
+            throw new ApiException("Missing the required parameter 'marginType' when calling getMarginCallAllocation(Async)");
+        }
+
+        // verify the required parameter 'direction' is set
+        if (direction == null) {
+            throw new ApiException("Missing the required parameter 'direction' when calling getMarginCallAllocation(Async)");
+        }
+
+        return getMarginCallAllocationCall(runId, agreementScope, agreementCode, item, marginType, direction, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call.
+     * Retrieve the assets the run&#39;s allocation pass proposes to deliver for the call, or to take back for a return, with  every holding it considered and either its rank or the constraint that excluded it. Each line carries what a  transaction moving it needs: the instrument, the portfolio and custodian account, the units, the price and the  consideration. Not found until the run&#39;s allocation pass has completed, or when the call moves no collateral of ours.
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @return ApiResponse&lt;CollateralAllocation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<CollateralAllocation> getMarginCallAllocationWithHttpInfo(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction) throws ApiException {
+        HttpRequest localVarCall = getMarginCallAllocationValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<CollateralAllocation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call.
+     * Retrieve the assets the run&#39;s allocation pass proposes to deliver for the call, or to take back for a return, with  every holding it considered and either its rank or the constraint that excluded it. Each line carries what a  transaction moving it needs: the instrument, the portfolio and custodian account, the units, the price and the  consideration. Not found until the run&#39;s allocation pass has completed, or when the call moves no collateral of ours.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @return ApiResponse&lt;CollateralAllocation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<CollateralAllocation> getMarginCallAllocationWithHttpInfo(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getMarginCallAllocationValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, null, opts);
+        Type localVarReturnType = new TypeReference<CollateralAllocation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call. (asynchronously)
+     * Retrieve the assets the run&#39;s allocation pass proposes to deliver for the call, or to take back for a return, with  every holding it considered and either its rank or the constraint that excluded it. Each line carries what a  transaction moving it needs: the instrument, the portfolio and custodian account, the units, the price and the  consideration. Not found until the run&#39;s allocation pass has completed, or when the call moves no collateral of ours.
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getMarginCallAllocationAsync(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback<CollateralAllocation> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getMarginCallAllocationValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<CollateralAllocation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call. (asynchronously)
+     * Retrieve the assets the run&#39;s allocation pass proposes to deliver for the call, or to take back for a return, with  every holding it considered and either its rank or the constraint that excluded it. Each line carries what a  transaction moving it needs: the instrument, the portfolio and custodian account, the units, the price and the  consideration. Not found until the run&#39;s allocation pass has completed, or when the call moves no collateral of ours.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getMarginCallAllocationAsync(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback<CollateralAllocation> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getMarginCallAllocationValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, _callback, opts);
+        Type localVarReturnType = new TypeReference<CollateralAllocation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetMarginCallAllocationRequest {
+        private final String runId;
+        private final String agreementScope;
+        private final String agreementCode;
+        private final String item;
+        private final String marginType;
+        private final String direction;
+
+        private APIgetMarginCallAllocationRequest(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction) {
+            this.runId = runId;
+            this.agreementScope = agreementScope;
+            this.agreementCode = agreementCode;
+            this.item = item;
+            this.marginType = marginType;
+            this.direction = direction;
+        }
+
+        /**
+         * Build call for getMarginCallAllocation
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getMarginCallAllocationCall(runId, agreementScope, agreementCode, item, marginType, direction, _callback);
+        }
+
+        /**
+         * Execute getMarginCallAllocation request
+         * @return CollateralAllocation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CollateralAllocation execute() throws ApiException {
+            ApiResponse<CollateralAllocation> localVarResp = getMarginCallAllocationWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getMarginCallAllocation request. Use any specified configuration options to override any other configuration for this request only.
+         * @return CollateralAllocation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CollateralAllocation execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<CollateralAllocation> localVarResp = getMarginCallAllocationWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getMarginCallAllocation request with HTTP info returned
+         * @return ApiResponse&lt;CollateralAllocation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CollateralAllocation> executeWithHttpInfo() throws ApiException {
+            return getMarginCallAllocationWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction);
+        }
+
+        /**
+         * Execute getMarginCallAllocation request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;CollateralAllocation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CollateralAllocation> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getMarginCallAllocationWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction, opts);
+        }
+
+        /**
+         * Execute getMarginCallAllocation request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<CollateralAllocation> _callback) throws ApiException {
+            getMarginCallAllocationAsync(runId, agreementScope, agreementCode, item, marginType, direction, _callback);
+        }
+
+        /**
+         * Execute getMarginCallAllocation request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<CollateralAllocation> _callback, ConfigurationOptions opts) throws ApiException {
+            getMarginCallAllocationAsync(runId, agreementScope, agreementCode, item, marginType, direction, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call.
+     * Retrieve the assets the run&#39;s allocation pass proposes to deliver for the call, or to take back for a return, with  every holding it considered and either its rank or the constraint that excluded it. Each line carries what a  transaction moving it needs: the instrument, the portfolio and custodian account, the units, the price and the  consideration. Not found until the run&#39;s allocation pass has completed, or when the call moves no collateral of ours.
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @return APIgetMarginCallAllocationRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral proposed for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetMarginCallAllocationRequest getMarginCallAllocation(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction) {
+        return new APIgetMarginCallAllocationRequest(runId, agreementScope, agreementCode, item, marginType, direction);
+    }
+    /**
+     * Build call for getMarginCallExplanation
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. Only InitialMargin calls can be explained. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getMarginCallExplanationCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback _callback) throws ApiException {
+        return getMarginCallExplanationCall(runId, agreementScope, agreementCode, item, marginType, direction,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getMarginCallExplanation. Use any specified configuration options to override any other configuration for this request only.
+     * @param runId The identifier of the margin run. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param item The margin item of the call. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param marginType The margin type of the call. Only InitialMargin calls can be explained. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getMarginCallExplanationCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$explain"
+            .replace("{" + "runId" + "}", localVarApiClient.escapeString(runId.toString()))
+            .replace("{" + "agreementScope" + "}", localVarApiClient.escapeString(agreementScope.toString()))
+            .replace("{" + "agreementCode" + "}", localVarApiClient.escapeString(agreementCode.toString()))
+            .replace("{" + "item" + "}", localVarApiClient.escapeString(item.toString()))
+            .replace("{" + "marginType" + "}", localVarApiClient.escapeString(marginType.toString()))
+            .replace("{" + "direction" + "}", localVarApiClient.escapeString(direction.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getMarginCallExplanationValidateBeforeCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'runId' is set
+        if (runId == null) {
+            throw new ApiException("Missing the required parameter 'runId' when calling getMarginCallExplanation(Async)");
+        }
+
+        // verify the required parameter 'agreementScope' is set
+        if (agreementScope == null) {
+            throw new ApiException("Missing the required parameter 'agreementScope' when calling getMarginCallExplanation(Async)");
+        }
+
+        // verify the required parameter 'agreementCode' is set
+        if (agreementCode == null) {
+            throw new ApiException("Missing the required parameter 'agreementCode' when calling getMarginCallExplanation(Async)");
+        }
+
+        // verify the required parameter 'item' is set
+        if (item == null) {
+            throw new ApiException("Missing the required parameter 'item' when calling getMarginCallExplanation(Async)");
+        }
+
+        // verify the required parameter 'marginType' is set
+        if (marginType == null) {
+            throw new ApiException("Missing the required parameter 'marginType' when calling getMarginCallExplanation(Async)");
+        }
+
+        // verify the required parameter 'direction' is set
+        if (direction == null) {
+            throw new ApiException("Missing the required parameter 'direction' when calling getMarginCallExplanation(Async)");
+        }
+
+        return getMarginCallExplanationCall(runId, agreementScope, agreementCode, item, marginType, direction, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.
+     * Show how the required amount of one initial-margin call of a run was arrived at, as a tree of components. Only an  initial-margin call whose run stored its working can be explained, as the call&#39;s ExplainAvailable says. The working  of portfolios the caller may not read is replaced by a single redacted component that keeps its parent adding up.
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. Only InitialMargin calls can be explained. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @return ApiResponse&lt;MarginExplanation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MarginExplanation> getMarginCallExplanationWithHttpInfo(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction) throws ApiException {
+        HttpRequest localVarCall = getMarginCallExplanationValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MarginExplanation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.
+     * Show how the required amount of one initial-margin call of a run was arrived at, as a tree of components. Only an  initial-margin call whose run stored its working can be explained, as the call&#39;s ExplainAvailable says. The working  of portfolios the caller may not read is replaced by a single redacted component that keeps its parent adding up.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. Only InitialMargin calls can be explained. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @return ApiResponse&lt;MarginExplanation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MarginExplanation> getMarginCallExplanationWithHttpInfo(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getMarginCallExplanationValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, null, opts);
+        Type localVarReturnType = new TypeReference<MarginExplanation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call. (asynchronously)
+     * Show how the required amount of one initial-margin call of a run was arrived at, as a tree of components. Only an  initial-margin call whose run stored its working can be explained, as the call&#39;s ExplainAvailable says. The working  of portfolios the caller may not read is replaced by a single redacted component that keeps its parent adding up.
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. Only InitialMargin calls can be explained. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getMarginCallExplanationAsync(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback<MarginExplanation> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getMarginCallExplanationValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MarginExplanation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call. (asynchronously)
+     * Show how the required amount of one initial-margin call of a run was arrived at, as a tree of components. Only an  initial-margin call whose run stored its working can be explained, as the call&#39;s ExplainAvailable says. The working  of portfolios the caller may not read is replaced by a single redacted component that keeps its parent adding up.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. Only InitialMargin calls can be explained. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getMarginCallExplanationAsync(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, final ApiCallback<MarginExplanation> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getMarginCallExplanationValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, _callback, opts);
+        Type localVarReturnType = new TypeReference<MarginExplanation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetMarginCallExplanationRequest {
+        private final String runId;
+        private final String agreementScope;
+        private final String agreementCode;
+        private final String item;
+        private final String marginType;
+        private final String direction;
+
+        private APIgetMarginCallExplanationRequest(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction) {
+            this.runId = runId;
+            this.agreementScope = agreementScope;
+            this.agreementCode = agreementCode;
+            this.item = item;
+            this.marginType = marginType;
+            this.direction = direction;
+        }
+
+        /**
+         * Build call for getMarginCallExplanation
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getMarginCallExplanationCall(runId, agreementScope, agreementCode, item, marginType, direction, _callback);
+        }
+
+        /**
+         * Execute getMarginCallExplanation request
+         * @return MarginExplanation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MarginExplanation execute() throws ApiException {
+            ApiResponse<MarginExplanation> localVarResp = getMarginCallExplanationWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getMarginCallExplanation request. Use any specified configuration options to override any other configuration for this request only.
+         * @return MarginExplanation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MarginExplanation execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<MarginExplanation> localVarResp = getMarginCallExplanationWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getMarginCallExplanation request with HTTP info returned
+         * @return ApiResponse&lt;MarginExplanation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MarginExplanation> executeWithHttpInfo() throws ApiException {
+            return getMarginCallExplanationWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction);
+        }
+
+        /**
+         * Execute getMarginCallExplanation request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;MarginExplanation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MarginExplanation> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getMarginCallExplanationWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction, opts);
+        }
+
+        /**
+         * Execute getMarginCallExplanation request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MarginExplanation> _callback) throws ApiException {
+            getMarginCallExplanationAsync(runId, agreementScope, agreementCode, item, marginType, direction, _callback);
+        }
+
+        /**
+         * Execute getMarginCallExplanation request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MarginExplanation> _callback, ConfigurationOptions opts) throws ApiException {
+            getMarginCallExplanationAsync(runId, agreementScope, agreementCode, item, marginType, direction, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.
+     * Show how the required amount of one initial-margin call of a run was arrived at, as a tree of components. Only an  initial-margin call whose run stored its working can be explained, as the call&#39;s ExplainAvailable says. The working  of portfolios the caller may not read is replaced by a single redacted component that keeps its parent adding up.
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. Only InitialMargin calls can be explained. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @return APIgetMarginCallExplanationRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the call&#39;s required amount was arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetMarginCallExplanationRequest getMarginCallExplanation(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction) {
+        return new APIgetMarginCallExplanationRequest(runId, agreementScope, agreementCode, item, marginType, direction);
+    }
+    /**
+     * Build call for getMarginLineExplanation
+     * @param runId The identifier of the margin run. (required)
+     * @param lineKey The key of the margin line, as listed in the line&#39;s LineKey. (required)
+     * @param figure The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getMarginLineExplanationCall(String runId, String lineKey, String figure, final ApiCallback _callback) throws ApiException {
+        return getMarginLineExplanationCall(runId, lineKey, figure,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getMarginLineExplanation. Use any specified configuration options to override any other configuration for this request only.
+     * @param runId The identifier of the margin run. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param lineKey The key of the margin line, as listed in the line&#39;s LineKey. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param figure The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getMarginLineExplanationCall(String runId, String lineKey, String figure, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/collateral/runs/{runId}/lines/{lineKey}/$explain"
+            .replace("{" + "runId" + "}", localVarApiClient.escapeString(runId.toString()))
+            .replace("{" + "lineKey" + "}", localVarApiClient.escapeString(lineKey.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (figure != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("figure", figure));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getMarginLineExplanationValidateBeforeCall(String runId, String lineKey, String figure, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'runId' is set
+        if (runId == null) {
+            throw new ApiException("Missing the required parameter 'runId' when calling getMarginLineExplanation(Async)");
+        }
+
+        // verify the required parameter 'lineKey' is set
+        if (lineKey == null) {
+            throw new ApiException("Missing the required parameter 'lineKey' when calling getMarginLineExplanation(Async)");
+        }
+
+        return getMarginLineExplanationCall(runId, lineKey, figure, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.
+     * Show how the figures of one margin line of a run were arrived at, as a tree of components for each figure. The run  must have stored its working, as its lines&#39; ExplainAvailable says. The working of portfolios the caller may not  read is replaced by a single redacted component that keeps its parent adding up. A line the caller may not read is  reported as not found.
+     * @param runId The identifier of the margin run. (required)
+     * @param lineKey The key of the margin line, as listed in the line&#39;s LineKey. (required)
+     * @param figure The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. (optional)
+     * @return ApiResponse&lt;MarginExplanation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MarginExplanation> getMarginLineExplanationWithHttpInfo(String runId, String lineKey, String figure) throws ApiException {
+        HttpRequest localVarCall = getMarginLineExplanationValidateBeforeCall(runId, lineKey, figure, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MarginExplanation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.
+     * Show how the figures of one margin line of a run were arrived at, as a tree of components for each figure. The run  must have stored its working, as its lines&#39; ExplainAvailable says. The working of portfolios the caller may not  read is replaced by a single redacted component that keeps its parent adding up. A line the caller may not read is  reported as not found.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param lineKey The key of the margin line, as listed in the line&#39;s LineKey. (required)
+     * @param figure The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. (optional)
+     * @return ApiResponse&lt;MarginExplanation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<MarginExplanation> getMarginLineExplanationWithHttpInfo(String runId, String lineKey, String figure, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getMarginLineExplanationValidateBeforeCall(runId, lineKey, figure, null, opts);
+        Type localVarReturnType = new TypeReference<MarginExplanation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line. (asynchronously)
+     * Show how the figures of one margin line of a run were arrived at, as a tree of components for each figure. The run  must have stored its working, as its lines&#39; ExplainAvailable says. The working of portfolios the caller may not  read is replaced by a single redacted component that keeps its parent adding up. A line the caller may not read is  reported as not found.
+     * @param runId The identifier of the margin run. (required)
+     * @param lineKey The key of the margin line, as listed in the line&#39;s LineKey. (required)
+     * @param figure The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getMarginLineExplanationAsync(String runId, String lineKey, String figure, final ApiCallback<MarginExplanation> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getMarginLineExplanationValidateBeforeCall(runId, lineKey, figure, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<MarginExplanation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line. (asynchronously)
+     * Show how the figures of one margin line of a run were arrived at, as a tree of components for each figure. The run  must have stored its working, as its lines&#39; ExplainAvailable says. The working of portfolios the caller may not  read is replaced by a single redacted component that keeps its parent adding up. A line the caller may not read is  reported as not found.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param lineKey The key of the margin line, as listed in the line&#39;s LineKey. (required)
+     * @param figure The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getMarginLineExplanationAsync(String runId, String lineKey, String figure, final ApiCallback<MarginExplanation> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getMarginLineExplanationValidateBeforeCall(runId, lineKey, figure, _callback, opts);
+        Type localVarReturnType = new TypeReference<MarginExplanation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetMarginLineExplanationRequest {
+        private final String runId;
+        private final String lineKey;
+        private String figure;
+
+        private APIgetMarginLineExplanationRequest(String runId, String lineKey) {
+            this.runId = runId;
+            this.lineKey = lineKey;
+        }
+
+        /**
+         * Set figure
+         * @param figure The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. (optional)
+         * @return APIgetMarginLineExplanationRequest
+         */
+        public APIgetMarginLineExplanationRequest figure(String figure) {
+            this.figure = figure;
+            return this;
+        }
+
+        /**
+         * Build call for getMarginLineExplanation
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getMarginLineExplanationCall(runId, lineKey, figure, _callback);
+        }
+
+        /**
+         * Execute getMarginLineExplanation request
+         * @return MarginExplanation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MarginExplanation execute() throws ApiException {
+            ApiResponse<MarginExplanation> localVarResp = getMarginLineExplanationWithHttpInfo(runId, lineKey, figure);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getMarginLineExplanation request. Use any specified configuration options to override any other configuration for this request only.
+         * @return MarginExplanation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public MarginExplanation execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<MarginExplanation> localVarResp = getMarginLineExplanationWithHttpInfo(runId, lineKey, figure, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getMarginLineExplanation request with HTTP info returned
+         * @return ApiResponse&lt;MarginExplanation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MarginExplanation> executeWithHttpInfo() throws ApiException {
+            return getMarginLineExplanationWithHttpInfo(runId, lineKey, figure);
+        }
+
+        /**
+         * Execute getMarginLineExplanation request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;MarginExplanation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MarginExplanation> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getMarginLineExplanationWithHttpInfo(runId, lineKey, figure, opts);
+        }
+
+        /**
+         * Execute getMarginLineExplanation request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MarginExplanation> _callback) throws ApiException {
+            getMarginLineExplanationAsync(runId, lineKey, figure, _callback);
+        }
+
+        /**
+         * Execute getMarginLineExplanation request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<MarginExplanation> _callback, ConfigurationOptions opts) throws ApiException {
+            getMarginLineExplanationAsync(runId, lineKey, figure, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.
+     * Show how the figures of one margin line of a run were arrived at, as a tree of components for each figure. The run  must have stored its working, as its lines&#39; ExplainAvailable says. The working of portfolios the caller may not  read is replaced by a single redacted component that keeps its parent adding up. A line the caller may not read is  reported as not found.
+     * @param runId The identifier of the margin run. (required)
+     * @param lineKey The key of the margin line, as listed in the line&#39;s LineKey. (required)
+     * @return APIgetMarginLineExplanationRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> How the line&#39;s figures were arrived at. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetMarginLineExplanationRequest getMarginLineExplanation(String runId, String lineKey) {
+        return new APIgetMarginLineExplanationRequest(runId, lineKey);
+    }
+    /**
      * Build call for getMarginRun
      * @param runId The identifier of the margin run. (required)
      * @param _callback Callback for upload/download progress
@@ -2357,11 +3480,13 @@ public class CollateralApi {
     }
     /**
      * Build call for listMarginCalls
-     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given. (optional)
+     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given. (optional)
      * @param runId The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified. (optional)
      * @param page The pagination token to use to continue listing margin calls; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \&quot;MatchStatus eq &#39;Break&#39;\&quot;. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified. (optional)
+     * @param effectiveFrom The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2373,17 +3498,19 @@ public class CollateralApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listMarginCallsCall(String effectiveAt, String runId, String page, Integer limit, String filter, final ApiCallback _callback) throws ApiException {
-        return listMarginCallsCall(effectiveAt, runId, page, limit, filter,  _callback, new ConfigurationOptions());
+    private HttpRequest listMarginCallsCall(String effectiveAt, String runId, String page, Integer limit, String filter, List<String> scenarios, String effectiveFrom, final ApiCallback _callback) throws ApiException {
+        return listMarginCallsCall(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for listMarginCalls. Use any specified configuration options to override any other configuration for this request only.
-     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param runId The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token to use to continue listing margin calls; this value is returned from the previous call. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \&quot;MatchStatus eq &#39;Break&#39;\&quot;. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param filter Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \&quot;MatchStatus eq &#39;Break&#39;\&quot;. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param scenarios The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveFrom The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2395,7 +3522,7 @@ public class CollateralApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listMarginCallsCall(String effectiveAt, String runId, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listMarginCallsCall(String effectiveAt, String runId, String page, Integer limit, String filter, List<String> scenarios, String effectiveFrom, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2440,6 +3567,14 @@ public class CollateralApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
         }
 
+        if (scenarios != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "scenarios", scenarios));
+        }
+
+        if (effectiveFrom != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveFrom", effectiveFrom));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -2462,19 +3597,21 @@ public class CollateralApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listMarginCallsValidateBeforeCall(String effectiveAt, String runId, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listMarginCallsCall(effectiveAt, runId, page, limit, filter, _callback, opts);
+    private HttpRequest listMarginCallsValidateBeforeCall(String effectiveAt, String runId, String page, Integer limit, String filter, List<String> scenarios, String effectiveFrom, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listMarginCallsCall(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, _callback, opts);
 
     }
 
     /**
      * [EXPERIMENTAL] ListMarginCalls: List margin calls.
-     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. Restricted to the agreements the caller may read.
-     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given. (optional)
+     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. With an effectiveFrom the current calls of each date from it to effectiveAt are listed, in date order.  Restricted to the agreements the caller may read.
+     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given. (optional)
      * @param runId The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified. (optional)
      * @param page The pagination token to use to continue listing margin calls; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \&quot;MatchStatus eq &#39;Break&#39;\&quot;. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified. (optional)
+     * @param effectiveFrom The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given. (optional)
      * @return ApiResponse&lt;PagedResourceListOfMarginCall&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2485,20 +3622,22 @@ public class CollateralApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfMarginCall> listMarginCallsWithHttpInfo(String effectiveAt, String runId, String page, Integer limit, String filter) throws ApiException {
-        HttpRequest localVarCall = listMarginCallsValidateBeforeCall(effectiveAt, runId, page, limit, filter, null, new ConfigurationOptions());
+    private ApiResponse<PagedResourceListOfMarginCall> listMarginCallsWithHttpInfo(String effectiveAt, String runId, String page, Integer limit, String filter, List<String> scenarios, String effectiveFrom) throws ApiException {
+        HttpRequest localVarCall = listMarginCallsValidateBeforeCall(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfMarginCall>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] ListMarginCalls: List margin calls.
-     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. Restricted to the agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
-     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given. (optional)
+     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. With an effectiveFrom the current calls of each date from it to effectiveAt are listed, in date order.  Restricted to the agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
+     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given. (optional)
      * @param runId The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified. (optional)
      * @param page The pagination token to use to continue listing margin calls; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \&quot;MatchStatus eq &#39;Break&#39;\&quot;. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified. (optional)
+     * @param effectiveFrom The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given. (optional)
      * @return ApiResponse&lt;PagedResourceListOfMarginCall&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2509,20 +3648,22 @@ public class CollateralApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfMarginCall> listMarginCallsWithHttpInfo(String effectiveAt, String runId, String page, Integer limit, String filter, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listMarginCallsValidateBeforeCall(effectiveAt, runId, page, limit, filter, null, opts);
+    private ApiResponse<PagedResourceListOfMarginCall> listMarginCallsWithHttpInfo(String effectiveAt, String runId, String page, Integer limit, String filter, List<String> scenarios, String effectiveFrom, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listMarginCallsValidateBeforeCall(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, null, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfMarginCall>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] ListMarginCalls: List margin calls. (asynchronously)
-     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. Restricted to the agreements the caller may read.
-     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given. (optional)
+     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. With an effectiveFrom the current calls of each date from it to effectiveAt are listed, in date order.  Restricted to the agreements the caller may read.
+     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given. (optional)
      * @param runId The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified. (optional)
      * @param page The pagination token to use to continue listing margin calls; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \&quot;MatchStatus eq &#39;Break&#39;\&quot;. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified. (optional)
+     * @param effectiveFrom The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2533,21 +3674,23 @@ public class CollateralApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listMarginCallsAsync(String effectiveAt, String runId, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfMarginCall> _callback) throws ApiException {
+    private void listMarginCallsAsync(String effectiveAt, String runId, String page, Integer limit, String filter, List<String> scenarios, String effectiveFrom, final ApiCallback<PagedResourceListOfMarginCall> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listMarginCallsValidateBeforeCall(effectiveAt, runId, page, limit, filter, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listMarginCallsValidateBeforeCall(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<PagedResourceListOfMarginCall>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EXPERIMENTAL] ListMarginCalls: List margin calls. (asynchronously)
-     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. Restricted to the agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
-     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given. (optional)
+     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. With an effectiveFrom the current calls of each date from it to effectiveAt are listed, in date order.  Restricted to the agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
+     * @param effectiveAt The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given. (optional)
      * @param runId The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified. (optional)
      * @param page The pagination token to use to continue listing margin calls; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \&quot;MatchStatus eq &#39;Break&#39;\&quot;. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified. (optional)
+     * @param effectiveFrom The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2558,9 +3701,9 @@ public class CollateralApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listMarginCallsAsync(String effectiveAt, String runId, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfMarginCall> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listMarginCallsAsync(String effectiveAt, String runId, String page, Integer limit, String filter, List<String> scenarios, String effectiveFrom, final ApiCallback<PagedResourceListOfMarginCall> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listMarginCallsValidateBeforeCall(effectiveAt, runId, page, limit, filter, _callback, opts);
+        HttpRequest localVarCall = listMarginCallsValidateBeforeCall(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, _callback, opts);
         Type localVarReturnType = new TypeReference<PagedResourceListOfMarginCall>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2571,13 +3714,15 @@ public class CollateralApi {
         private String page;
         private Integer limit;
         private String filter;
+        private List<String> scenarios;
+        private String effectiveFrom;
 
         private APIlistMarginCallsRequest() {
         }
 
         /**
          * Set effectiveAt
-         * @param effectiveAt The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given. (optional)
+         * @param effectiveAt The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given. (optional)
          * @return APIlistMarginCallsRequest
          */
         public APIlistMarginCallsRequest effectiveAt(String effectiveAt) {
@@ -2626,6 +3771,26 @@ public class CollateralApi {
         }
 
         /**
+         * Set scenarios
+         * @param scenarios The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified. (optional)
+         * @return APIlistMarginCallsRequest
+         */
+        public APIlistMarginCallsRequest scenarios(List<String> scenarios) {
+            this.scenarios = scenarios;
+            return this;
+        }
+
+        /**
+         * Set effectiveFrom
+         * @param effectiveFrom The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given. (optional)
+         * @return APIlistMarginCallsRequest
+         */
+        public APIlistMarginCallsRequest effectiveFrom(String effectiveFrom) {
+            this.effectiveFrom = effectiveFrom;
+            return this;
+        }
+
+        /**
          * Build call for listMarginCalls
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -2639,7 +3804,7 @@ public class CollateralApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listMarginCallsCall(effectiveAt, runId, page, limit, filter, _callback);
+            return listMarginCallsCall(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, _callback);
         }
 
         /**
@@ -2655,7 +3820,7 @@ public class CollateralApi {
          </table>
          */
         public PagedResourceListOfMarginCall execute() throws ApiException {
-            ApiResponse<PagedResourceListOfMarginCall> localVarResp = listMarginCallsWithHttpInfo(effectiveAt, runId, page, limit, filter);
+            ApiResponse<PagedResourceListOfMarginCall> localVarResp = listMarginCallsWithHttpInfo(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom);
             return localVarResp.getData();
         }
 
@@ -2672,7 +3837,7 @@ public class CollateralApi {
          </table>
          */
         public PagedResourceListOfMarginCall execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfMarginCall> localVarResp = listMarginCallsWithHttpInfo(effectiveAt, runId, page, limit, filter, opts);
+            ApiResponse<PagedResourceListOfMarginCall> localVarResp = listMarginCallsWithHttpInfo(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, opts);
             return localVarResp.getData();
         }
 
@@ -2689,7 +3854,7 @@ public class CollateralApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfMarginCall> executeWithHttpInfo() throws ApiException {
-            return listMarginCallsWithHttpInfo(effectiveAt, runId, page, limit, filter);
+            return listMarginCallsWithHttpInfo(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom);
         }
 
         /**
@@ -2705,7 +3870,7 @@ public class CollateralApi {
          </table>
          */
         public ApiResponse<PagedResourceListOfMarginCall> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listMarginCallsWithHttpInfo(effectiveAt, runId, page, limit, filter, opts);
+            return listMarginCallsWithHttpInfo(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, opts);
         }
 
         /**
@@ -2721,7 +3886,7 @@ public class CollateralApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfMarginCall> _callback) throws ApiException {
-            listMarginCallsAsync(effectiveAt, runId, page, limit, filter, _callback);
+            listMarginCallsAsync(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, _callback);
         }
 
         /**
@@ -2737,13 +3902,13 @@ public class CollateralApi {
          </table>
          */
         public void executeAsync(final ApiCallback<PagedResourceListOfMarginCall> _callback, ConfigurationOptions opts) throws ApiException {
-            listMarginCallsAsync(effectiveAt, runId, page, limit, filter, _callback, opts);
+            listMarginCallsAsync(effectiveAt, runId, page, limit, filter, scenarios, effectiveFrom, _callback, opts);
         }
     }
 
     /**
      * [EXPERIMENTAL] ListMarginCalls: List margin calls.
-     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. Restricted to the agreements the caller may read.
+     * List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. With an effectiveFrom the current calls of each date from it to effectiveAt are listed, in date order.  Restricted to the agreements the caller may read.
      * @return APIlistMarginCallsRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -2762,6 +3927,7 @@ public class CollateralApi {
      * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
      * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2773,8 +3939,8 @@ public class CollateralApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listMarginLinesCall(String runId, String page, Integer limit, String filter, final ApiCallback _callback) throws ApiException {
-        return listMarginLinesCall(runId, page, limit, filter,  _callback, new ConfigurationOptions());
+    private HttpRequest listMarginLinesCall(String runId, String page, Integer limit, String filter, List<String> scenarios, final ApiCallback _callback) throws ApiException {
+        return listMarginLinesCall(runId, page, limit, filter, scenarios,  _callback, new ConfigurationOptions());
     }
 
     /**
@@ -2782,7 +3948,8 @@ public class CollateralApi {
      * @param runId The identifier of the margin run. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param scenarios The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2794,7 +3961,7 @@ public class CollateralApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listMarginLinesCall(String runId, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listMarginLinesCall(String runId, String page, Integer limit, String filter, List<String> scenarios, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2812,6 +3979,399 @@ public class CollateralApi {
 
         // create path and map variables
         String localVarPath = "/api/api/collateral/runs/{runId}/lines"
+            .replace("{" + "runId" + "}", localVarApiClient.escapeString(runId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        if (scenarios != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "scenarios", scenarios));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listMarginLinesValidateBeforeCall(String runId, String page, Integer limit, String filter, List<String> scenarios, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'runId' is set
+        if (runId == null) {
+            throw new ApiException("Missing the required parameter 'runId' when calling listMarginLines(Async)");
+        }
+
+        return listMarginLinesCall(runId, page, limit, filter, scenarios, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run.
+     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.
+     * @param runId The identifier of the margin run. (required)
+     * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfMarginLine&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfMarginLine> listMarginLinesWithHttpInfo(String runId, String page, Integer limit, String filter, List<String> scenarios) throws ApiException {
+        HttpRequest localVarCall = listMarginLinesValidateBeforeCall(runId, page, limit, filter, scenarios, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginLine>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run.
+     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfMarginLine&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfMarginLine> listMarginLinesWithHttpInfo(String runId, String page, Integer limit, String filter, List<String> scenarios, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listMarginLinesValidateBeforeCall(runId, page, limit, filter, scenarios, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginLine>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run. (asynchronously)
+     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.
+     * @param runId The identifier of the margin run. (required)
+     * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listMarginLinesAsync(String runId, String page, Integer limit, String filter, List<String> scenarios, final ApiCallback<PagedResourceListOfMarginLine> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listMarginLinesValidateBeforeCall(runId, page, limit, filter, scenarios, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginLine>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run. (asynchronously)
+     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param scenarios The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listMarginLinesAsync(String runId, String page, Integer limit, String filter, List<String> scenarios, final ApiCallback<PagedResourceListOfMarginLine> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listMarginLinesValidateBeforeCall(runId, page, limit, filter, scenarios, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginLine>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistMarginLinesRequest {
+        private final String runId;
+        private String page;
+        private Integer limit;
+        private String filter;
+        private List<String> scenarios;
+
+        private APIlistMarginLinesRequest(String runId) {
+            this.runId = runId;
+        }
+
+        /**
+         * Set page
+         * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
+         * @return APIlistMarginLinesRequest
+         */
+        public APIlistMarginLinesRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+         * @return APIlistMarginLinesRequest
+         */
+        public APIlistMarginLinesRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+         * @return APIlistMarginLinesRequest
+         */
+        public APIlistMarginLinesRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set scenarios
+         * @param scenarios The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified. (optional)
+         * @return APIlistMarginLinesRequest
+         */
+        public APIlistMarginLinesRequest scenarios(List<String> scenarios) {
+            this.scenarios = scenarios;
+            return this;
+        }
+
+        /**
+         * Build call for listMarginLines
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listMarginLinesCall(runId, page, limit, filter, scenarios, _callback);
+        }
+
+        /**
+         * Execute listMarginLines request
+         * @return PagedResourceListOfMarginLine
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfMarginLine execute() throws ApiException {
+            ApiResponse<PagedResourceListOfMarginLine> localVarResp = listMarginLinesWithHttpInfo(runId, page, limit, filter, scenarios);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listMarginLines request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfMarginLine
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfMarginLine execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfMarginLine> localVarResp = listMarginLinesWithHttpInfo(runId, page, limit, filter, scenarios, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listMarginLines request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfMarginLine&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfMarginLine> executeWithHttpInfo() throws ApiException {
+            return listMarginLinesWithHttpInfo(runId, page, limit, filter, scenarios);
+        }
+
+        /**
+         * Execute listMarginLines request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfMarginLine&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfMarginLine> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listMarginLinesWithHttpInfo(runId, page, limit, filter, scenarios, opts);
+        }
+
+        /**
+         * Execute listMarginLines request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfMarginLine> _callback) throws ApiException {
+            listMarginLinesAsync(runId, page, limit, filter, scenarios, _callback);
+        }
+
+        /**
+         * Execute listMarginLines request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfMarginLine> _callback, ConfigurationOptions opts) throws ApiException {
+            listMarginLinesAsync(runId, page, limit, filter, scenarios, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run.
+     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.
+     * @param runId The identifier of the margin run. (required)
+     * @return APIlistMarginLinesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistMarginLinesRequest listMarginLines(String runId) {
+        return new APIlistMarginLinesRequest(runId);
+    }
+    /**
+     * Build call for listMarginRunRecommendations
+     * @param runId The identifier of the margin run. (required)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listMarginRunRecommendationsCall(String runId, String page, Integer limit, String filter, final ApiCallback _callback) throws ApiException {
+        return listMarginRunRecommendationsCall(runId, page, limit, filter,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listMarginRunRecommendations. Use any specified configuration options to override any other configuration for this request only.
+     * @param runId The identifier of the margin run. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listMarginRunRecommendationsCall(String runId, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/collateral/runs/{runId}/recommendations"
             .replace("{" + "runId" + "}", localVarApiClient.escapeString(runId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -2854,126 +4414,126 @@ public class CollateralApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listMarginLinesValidateBeforeCall(String runId, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listMarginRunRecommendationsValidateBeforeCall(String runId, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'runId' is set
         if (runId == null) {
-            throw new ApiException("Missing the required parameter 'runId' when calling listMarginLines(Async)");
+            throw new ApiException("Missing the required parameter 'runId' when calling listMarginRunRecommendations(Async)");
         }
 
-        return listMarginLinesCall(runId, page, limit, filter, _callback, opts);
+        return listMarginRunRecommendationsCall(runId, page, limit, filter, _callback, opts);
 
     }
 
     /**
-     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run.
-     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.
+     * [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run&#39;s netting recommendations.
+     * List the trades a run&#39;s optimisation pass found would attract less initial margin in another netting set of the  run, with both sets&#39; initial margin before and after the move. Empty until the run&#39;s optimisation pass has  completed. Restricted to recommendations whose source and target agreements the caller may read.
      * @param runId The identifier of the margin run. (required)
-     * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
-     * @return ApiResponse&lt;PagedResourceListOfMarginLine&gt;
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfNettingRecommendation&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfMarginLine> listMarginLinesWithHttpInfo(String runId, String page, Integer limit, String filter) throws ApiException {
-        HttpRequest localVarCall = listMarginLinesValidateBeforeCall(runId, page, limit, filter, null, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginLine>(){}.getType();
+    private ApiResponse<PagedResourceListOfNettingRecommendation> listMarginRunRecommendationsWithHttpInfo(String runId, String page, Integer limit, String filter) throws ApiException {
+        HttpRequest localVarCall = listMarginRunRecommendationsValidateBeforeCall(runId, page, limit, filter, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfNettingRecommendation>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run.
-     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
+     * [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run&#39;s netting recommendations.
+     * List the trades a run&#39;s optimisation pass found would attract less initial margin in another netting set of the  run, with both sets&#39; initial margin before and after the move. Empty until the run&#39;s optimisation pass has  completed. Restricted to recommendations whose source and target agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
      * @param runId The identifier of the margin run. (required)
-     * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
-     * @return ApiResponse&lt;PagedResourceListOfMarginLine&gt;
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfNettingRecommendation&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<PagedResourceListOfMarginLine> listMarginLinesWithHttpInfo(String runId, String page, Integer limit, String filter, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listMarginLinesValidateBeforeCall(runId, page, limit, filter, null, opts);
-        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginLine>(){}.getType();
+    private ApiResponse<PagedResourceListOfNettingRecommendation> listMarginRunRecommendationsWithHttpInfo(String runId, String page, Integer limit, String filter, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listMarginRunRecommendationsValidateBeforeCall(runId, page, limit, filter, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfNettingRecommendation>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run. (asynchronously)
-     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.
+     * [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run&#39;s netting recommendations. (asynchronously)
+     * List the trades a run&#39;s optimisation pass found would attract less initial margin in another netting set of the  run, with both sets&#39; initial margin before and after the move. Empty until the run&#39;s optimisation pass has  completed. Restricted to recommendations whose source and target agreements the caller may read.
      * @param runId The identifier of the margin run. (required)
-     * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listMarginLinesAsync(String runId, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfMarginLine> _callback) throws ApiException {
+    private void listMarginRunRecommendationsAsync(String runId, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfNettingRecommendation> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listMarginLinesValidateBeforeCall(runId, page, limit, filter, _callback, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginLine>(){}.getType();
+        HttpRequest localVarCall = listMarginRunRecommendationsValidateBeforeCall(runId, page, limit, filter, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfNettingRecommendation>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
-     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run. (asynchronously)
-     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
+     * [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run&#39;s netting recommendations. (asynchronously)
+     * List the trades a run&#39;s optimisation pass found would attract less initial margin in another netting set of the  run, with both sets&#39; initial margin before and after the move. Empty until the run&#39;s optimisation pass has  completed. Restricted to recommendations whose source and target agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
      * @param runId The identifier of the margin run. (required)
-     * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
      * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-     * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listMarginLinesAsync(String runId, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfMarginLine> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listMarginRunRecommendationsAsync(String runId, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfNettingRecommendation> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listMarginLinesValidateBeforeCall(runId, page, limit, filter, _callback, opts);
-        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginLine>(){}.getType();
+        HttpRequest localVarCall = listMarginRunRecommendationsValidateBeforeCall(runId, page, limit, filter, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfNettingRecommendation>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
-    public class APIlistMarginLinesRequest {
+    public class APIlistMarginRunRecommendationsRequest {
         private final String runId;
         private String page;
         private Integer limit;
         private String filter;
 
-        private APIlistMarginLinesRequest(String runId) {
+        private APIlistMarginRunRecommendationsRequest(String runId) {
             this.runId = runId;
         }
 
         /**
          * Set page
-         * @param page The pagination token to use to continue listing margin lines; this value is returned from the previous call. (optional)
-         * @return APIlistMarginLinesRequest
+         * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+         * @return APIlistMarginRunRecommendationsRequest
          */
-        public APIlistMarginLinesRequest page(String page) {
+        public APIlistMarginRunRecommendationsRequest page(String page) {
             this.page = page;
             return this;
         }
@@ -2981,154 +4541,154 @@ public class CollateralApi {
         /**
          * Set limit
          * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-         * @return APIlistMarginLinesRequest
+         * @return APIlistMarginRunRecommendationsRequest
          */
-        public APIlistMarginLinesRequest limit(Integer limit) {
+        public APIlistMarginRunRecommendationsRequest limit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
         /**
          * Set filter
-         * @param filter Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
-         * @return APIlistMarginLinesRequest
+         * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+         * @return APIlistMarginRunRecommendationsRequest
          */
-        public APIlistMarginLinesRequest filter(String filter) {
+        public APIlistMarginRunRecommendationsRequest filter(String filter) {
             this.filter = filter;
             return this;
         }
 
         /**
-         * Build call for listMarginLines
+         * Build call for listMarginRunRecommendations
          * @param _callback ApiCallback API callback
          * @return Call to execute
          * @throws ApiException If fail to serialize the request body object
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listMarginLinesCall(runId, page, limit, filter, _callback);
+            return listMarginRunRecommendationsCall(runId, page, limit, filter, _callback);
         }
 
         /**
-         * Execute listMarginLines request
-         * @return PagedResourceListOfMarginLine
+         * Execute listMarginRunRecommendations request
+         * @return PagedResourceListOfNettingRecommendation
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public PagedResourceListOfMarginLine execute() throws ApiException {
-            ApiResponse<PagedResourceListOfMarginLine> localVarResp = listMarginLinesWithHttpInfo(runId, page, limit, filter);
+        public PagedResourceListOfNettingRecommendation execute() throws ApiException {
+            ApiResponse<PagedResourceListOfNettingRecommendation> localVarResp = listMarginRunRecommendationsWithHttpInfo(runId, page, limit, filter);
             return localVarResp.getData();
         }
 
         /**
-         * Execute listMarginLines request. Use any specified configuration options to override any other configuration for this request only.
-         * @return PagedResourceListOfMarginLine
+         * Execute listMarginRunRecommendations request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfNettingRecommendation
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public PagedResourceListOfMarginLine execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<PagedResourceListOfMarginLine> localVarResp = listMarginLinesWithHttpInfo(runId, page, limit, filter, opts);
+        public PagedResourceListOfNettingRecommendation execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfNettingRecommendation> localVarResp = listMarginRunRecommendationsWithHttpInfo(runId, page, limit, filter, opts);
             return localVarResp.getData();
         }
 
         /**
-         * Execute listMarginLines request with HTTP info returned
-         * @return ApiResponse&lt;PagedResourceListOfMarginLine&gt;
+         * Execute listMarginRunRecommendations request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfNettingRecommendation&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<PagedResourceListOfMarginLine> executeWithHttpInfo() throws ApiException {
-            return listMarginLinesWithHttpInfo(runId, page, limit, filter);
+        public ApiResponse<PagedResourceListOfNettingRecommendation> executeWithHttpInfo() throws ApiException {
+            return listMarginRunRecommendationsWithHttpInfo(runId, page, limit, filter);
         }
 
         /**
-         * Execute listMarginLines request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
-         * @return ApiResponse&lt;PagedResourceListOfMarginLine&gt;
+         * Execute listMarginRunRecommendations request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfNettingRecommendation&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<PagedResourceListOfMarginLine> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listMarginLinesWithHttpInfo(runId, page, limit, filter, opts);
+        public ApiResponse<PagedResourceListOfNettingRecommendation> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listMarginRunRecommendationsWithHttpInfo(runId, page, limit, filter, opts);
         }
 
         /**
-         * Execute listMarginLines request (asynchronously)
+         * Execute listMarginRunRecommendations request (asynchronously)
          * @param _callback The callback to be executed when the API call finishes
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<PagedResourceListOfMarginLine> _callback) throws ApiException {
-            listMarginLinesAsync(runId, page, limit, filter, _callback);
+        public void executeAsync(final ApiCallback<PagedResourceListOfNettingRecommendation> _callback) throws ApiException {
+            listMarginRunRecommendationsAsync(runId, page, limit, filter, _callback);
         }
 
         /**
-         * Execute listMarginLines request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * Execute listMarginRunRecommendations request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
          * @param _callback The callback to be executed when the API call finishes
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<PagedResourceListOfMarginLine> _callback, ConfigurationOptions opts) throws ApiException {
-            listMarginLinesAsync(runId, page, limit, filter, _callback, opts);
+        public void executeAsync(final ApiCallback<PagedResourceListOfNettingRecommendation> _callback, ConfigurationOptions opts) throws ApiException {
+            listMarginRunRecommendationsAsync(runId, page, limit, filter, _callback, opts);
         }
     }
 
     /**
-     * [EXPERIMENTAL] ListMarginLines: List the margin lines of a run.
-     * List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.
+     * [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run&#39;s netting recommendations.
+     * List the trades a run&#39;s optimisation pass found would attract less initial margin in another netting set of the  run, with both sets&#39; initial margin before and after the move. Empty until the run&#39;s optimisation pass has  completed. Restricted to recommendations whose source and target agreements the caller may read.
      * @param runId The identifier of the margin run. (required)
-     * @return APIlistMarginLinesRequest
+     * @return APIlistMarginRunRecommendationsRequest
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The requested margin lines. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    public APIlistMarginLinesRequest listMarginLines(String runId) {
-        return new APIlistMarginLinesRequest(runId);
+    public APIlistMarginRunRecommendationsRequest listMarginRunRecommendations(String runId) {
+        return new APIlistMarginRunRecommendationsRequest(runId);
     }
     /**
      * Build call for listMarginRuns
@@ -3488,6 +5048,793 @@ public class CollateralApi {
      */
     public APIlistMarginRunsRequest listMarginRuns() {
         return new APIlistMarginRunsRequest();
+    }
+    /**
+     * Build call for listNettingRecommendations
+     * @param effectiveAt The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. (optional)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listNettingRecommendationsCall(String effectiveAt, String page, Integer limit, String filter, final ApiCallback _callback) throws ApiException {
+        return listNettingRecommendationsCall(effectiveAt, page, limit, filter,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listNettingRecommendations. Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listNettingRecommendationsCall(String effectiveAt, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/collateral/recommendations";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (filter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listNettingRecommendationsValidateBeforeCall(String effectiveAt, String page, Integer limit, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listNettingRecommendationsCall(effectiveAt, page, limit, filter, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations.
+     * List the netting recommendations in force for a business date: those of the latest run for the date whose  optimisation pass completed, with an agreement that run could not value served from the most recent run that  did. Restricted to recommendations whose source and target agreements the caller may read.
+     * @param effectiveAt The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. (optional)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfNettingRecommendation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfNettingRecommendation> listNettingRecommendationsWithHttpInfo(String effectiveAt, String page, Integer limit, String filter) throws ApiException {
+        HttpRequest localVarCall = listNettingRecommendationsValidateBeforeCall(effectiveAt, page, limit, filter, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfNettingRecommendation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations.
+     * List the netting recommendations in force for a business date: those of the latest run for the date whose  optimisation pass completed, with an agreement that run could not value served from the most recent run that  did. Restricted to recommendations whose source and target agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
+     * @param effectiveAt The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. (optional)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @return ApiResponse&lt;PagedResourceListOfNettingRecommendation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<PagedResourceListOfNettingRecommendation> listNettingRecommendationsWithHttpInfo(String effectiveAt, String page, Integer limit, String filter, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listNettingRecommendationsValidateBeforeCall(effectiveAt, page, limit, filter, null, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfNettingRecommendation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations. (asynchronously)
+     * List the netting recommendations in force for a business date: those of the latest run for the date whose  optimisation pass completed, with an agreement that run could not value served from the most recent run that  did. Restricted to recommendations whose source and target agreements the caller may read.
+     * @param effectiveAt The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. (optional)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listNettingRecommendationsAsync(String effectiveAt, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfNettingRecommendation> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listNettingRecommendationsValidateBeforeCall(effectiveAt, page, limit, filter, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<PagedResourceListOfNettingRecommendation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations. (asynchronously)
+     * List the netting recommendations in force for a business date: those of the latest run for the date whose  optimisation pass completed, with an agreement that run could not value served from the most recent run that  did. Restricted to recommendations whose source and target agreements the caller may read.Use any specified configuration options to override any other configuration for this request only
+     * @param effectiveAt The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. (optional)
+     * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+     * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+     * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listNettingRecommendationsAsync(String effectiveAt, String page, Integer limit, String filter, final ApiCallback<PagedResourceListOfNettingRecommendation> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listNettingRecommendationsValidateBeforeCall(effectiveAt, page, limit, filter, _callback, opts);
+        Type localVarReturnType = new TypeReference<PagedResourceListOfNettingRecommendation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistNettingRecommendationsRequest {
+        private String effectiveAt;
+        private String page;
+        private Integer limit;
+        private String filter;
+
+        private APIlistNettingRecommendationsRequest() {
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. (optional)
+         * @return APIlistNettingRecommendationsRequest
+         */
+        public APIlistNettingRecommendationsRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set page
+         * @param page The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+         * @return APIlistNettingRecommendationsRequest
+         */
+        public APIlistNettingRecommendationsRequest page(String page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Set limit
+         * @param limit When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+         * @return APIlistNettingRecommendationsRequest
+         */
+        public APIlistNettingRecommendationsRequest limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Set filter
+         * @param filter Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+         * @return APIlistNettingRecommendationsRequest
+         */
+        public APIlistNettingRecommendationsRequest filter(String filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Build call for listNettingRecommendations
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listNettingRecommendationsCall(effectiveAt, page, limit, filter, _callback);
+        }
+
+        /**
+         * Execute listNettingRecommendations request
+         * @return PagedResourceListOfNettingRecommendation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfNettingRecommendation execute() throws ApiException {
+            ApiResponse<PagedResourceListOfNettingRecommendation> localVarResp = listNettingRecommendationsWithHttpInfo(effectiveAt, page, limit, filter);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listNettingRecommendations request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PagedResourceListOfNettingRecommendation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PagedResourceListOfNettingRecommendation execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfNettingRecommendation> localVarResp = listNettingRecommendationsWithHttpInfo(effectiveAt, page, limit, filter, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listNettingRecommendations request with HTTP info returned
+         * @return ApiResponse&lt;PagedResourceListOfNettingRecommendation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfNettingRecommendation> executeWithHttpInfo() throws ApiException {
+            return listNettingRecommendationsWithHttpInfo(effectiveAt, page, limit, filter);
+        }
+
+        /**
+         * Execute listNettingRecommendations request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PagedResourceListOfNettingRecommendation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PagedResourceListOfNettingRecommendation> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listNettingRecommendationsWithHttpInfo(effectiveAt, page, limit, filter, opts);
+        }
+
+        /**
+         * Execute listNettingRecommendations request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfNettingRecommendation> _callback) throws ApiException {
+            listNettingRecommendationsAsync(effectiveAt, page, limit, filter, _callback);
+        }
+
+        /**
+         * Execute listNettingRecommendations request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<PagedResourceListOfNettingRecommendation> _callback, ConfigurationOptions opts) throws ApiException {
+            listNettingRecommendationsAsync(effectiveAt, page, limit, filter, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations.
+     * List the netting recommendations in force for a business date: those of the latest run for the date whose  optimisation pass completed, with an agreement that run could not value served from the most recent run that  did. Restricted to recommendations whose source and target agreements the caller may read.
+     * @return APIlistNettingRecommendationsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The requested recommendations. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistNettingRecommendationsRequest listNettingRecommendations() {
+        return new APIlistNettingRecommendationsRequest();
+    }
+    /**
+     * Build call for rankMarginCall
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param rankMarginCallRequest The assets the caller chose, and whether to fill the rest. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest rankMarginCallCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, RankMarginCallRequest rankMarginCallRequest, final ApiCallback _callback) throws ApiException {
+        return rankMarginCallCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for rankMarginCall. Use any specified configuration options to override any other configuration for this request only.
+     * @param runId The identifier of the margin run. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param item The margin item of the call. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param rankMarginCallRequest The assets the caller chose, and whether to fill the rest. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest rankMarginCallCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, RankMarginCallRequest rankMarginCallRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = rankMarginCallRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$rank"
+            .replace("{" + "runId" + "}", localVarApiClient.escapeString(runId.toString()))
+            .replace("{" + "agreementScope" + "}", localVarApiClient.escapeString(agreementScope.toString()))
+            .replace("{" + "agreementCode" + "}", localVarApiClient.escapeString(agreementCode.toString()))
+            .replace("{" + "item" + "}", localVarApiClient.escapeString(item.toString()))
+            .replace("{" + "marginType" + "}", localVarApiClient.escapeString(marginType.toString()))
+            .replace("{" + "direction" + "}", localVarApiClient.escapeString(direction.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest rankMarginCallValidateBeforeCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, RankMarginCallRequest rankMarginCallRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'runId' is set
+        if (runId == null) {
+            throw new ApiException("Missing the required parameter 'runId' when calling rankMarginCall(Async)");
+        }
+
+        // verify the required parameter 'agreementScope' is set
+        if (agreementScope == null) {
+            throw new ApiException("Missing the required parameter 'agreementScope' when calling rankMarginCall(Async)");
+        }
+
+        // verify the required parameter 'agreementCode' is set
+        if (agreementCode == null) {
+            throw new ApiException("Missing the required parameter 'agreementCode' when calling rankMarginCall(Async)");
+        }
+
+        // verify the required parameter 'item' is set
+        if (item == null) {
+            throw new ApiException("Missing the required parameter 'item' when calling rankMarginCall(Async)");
+        }
+
+        // verify the required parameter 'marginType' is set
+        if (marginType == null) {
+            throw new ApiException("Missing the required parameter 'marginType' when calling rankMarginCall(Async)");
+        }
+
+        // verify the required parameter 'direction' is set
+        if (direction == null) {
+            throw new ApiException("Missing the required parameter 'direction' when calling rankMarginCall(Async)");
+        }
+
+        return rankMarginCallCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, _callback, opts);
+
+    }
+
+    /**
+     * [EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller&#39;s choices.
+     * Value the call&#39;s agreement as of now for the run&#39;s business date and rank its free, eligible holdings for the  call again, keeping the assets and units the caller chose. Each choice is validated against the agreement&#39;s  constraints and kept with its reason when it fails one; the rest of the call is filled from the ranking, cheapest  first, unless fillRemainder is false. Nothing is stored: the result is what to book, for the caller to decide on.
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param rankMarginCallRequest The assets the caller chose, and whether to fill the rest. (optional)
+     * @return ApiResponse&lt;CollateralAllocation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<CollateralAllocation> rankMarginCallWithHttpInfo(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, RankMarginCallRequest rankMarginCallRequest) throws ApiException {
+        HttpRequest localVarCall = rankMarginCallValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<CollateralAllocation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller&#39;s choices.
+     * Value the call&#39;s agreement as of now for the run&#39;s business date and rank its free, eligible holdings for the  call again, keeping the assets and units the caller chose. Each choice is validated against the agreement&#39;s  constraints and kept with its reason when it fails one; the rest of the call is filled from the ranking, cheapest  first, unless fillRemainder is false. Nothing is stored: the result is what to book, for the caller to decide on.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param rankMarginCallRequest The assets the caller chose, and whether to fill the rest. (optional)
+     * @return ApiResponse&lt;CollateralAllocation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<CollateralAllocation> rankMarginCallWithHttpInfo(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, RankMarginCallRequest rankMarginCallRequest, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = rankMarginCallValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, null, opts);
+        Type localVarReturnType = new TypeReference<CollateralAllocation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller&#39;s choices. (asynchronously)
+     * Value the call&#39;s agreement as of now for the run&#39;s business date and rank its free, eligible holdings for the  call again, keeping the assets and units the caller chose. Each choice is validated against the agreement&#39;s  constraints and kept with its reason when it fails one; the rest of the call is filled from the ranking, cheapest  first, unless fillRemainder is false. Nothing is stored: the result is what to book, for the caller to decide on.
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param rankMarginCallRequest The assets the caller chose, and whether to fill the rest. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void rankMarginCallAsync(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, RankMarginCallRequest rankMarginCallRequest, final ApiCallback<CollateralAllocation> _callback) throws ApiException {
+
+        HttpRequest localVarCall = rankMarginCallValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<CollateralAllocation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller&#39;s choices. (asynchronously)
+     * Value the call&#39;s agreement as of now for the run&#39;s business date and rank its free, eligible holdings for the  call again, keeping the assets and units the caller chose. Each choice is validated against the agreement&#39;s  constraints and kept with its reason when it fails one; the rest of the call is filled from the ranking, cheapest  first, unless fillRemainder is false. Nothing is stored: the result is what to book, for the caller to decide on.Use any specified configuration options to override any other configuration for this request only
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @param rankMarginCallRequest The assets the caller chose, and whether to fill the rest. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void rankMarginCallAsync(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction, RankMarginCallRequest rankMarginCallRequest, final ApiCallback<CollateralAllocation> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = rankMarginCallValidateBeforeCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, _callback, opts);
+        Type localVarReturnType = new TypeReference<CollateralAllocation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIrankMarginCallRequest {
+        private final String runId;
+        private final String agreementScope;
+        private final String agreementCode;
+        private final String item;
+        private final String marginType;
+        private final String direction;
+        private RankMarginCallRequest rankMarginCallRequest;
+
+        private APIrankMarginCallRequest(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction) {
+            this.runId = runId;
+            this.agreementScope = agreementScope;
+            this.agreementCode = agreementCode;
+            this.item = item;
+            this.marginType = marginType;
+            this.direction = direction;
+        }
+
+        /**
+         * Set rankMarginCallRequest
+         * @param rankMarginCallRequest The assets the caller chose, and whether to fill the rest. (optional)
+         * @return APIrankMarginCallRequest
+         */
+        public APIrankMarginCallRequest rankMarginCallRequest(RankMarginCallRequest rankMarginCallRequest) {
+            this.rankMarginCallRequest = rankMarginCallRequest;
+            return this;
+        }
+
+        /**
+         * Build call for rankMarginCall
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return rankMarginCallCall(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, _callback);
+        }
+
+        /**
+         * Execute rankMarginCall request
+         * @return CollateralAllocation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CollateralAllocation execute() throws ApiException {
+            ApiResponse<CollateralAllocation> localVarResp = rankMarginCallWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute rankMarginCall request. Use any specified configuration options to override any other configuration for this request only.
+         * @return CollateralAllocation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CollateralAllocation execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<CollateralAllocation> localVarResp = rankMarginCallWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute rankMarginCall request with HTTP info returned
+         * @return ApiResponse&lt;CollateralAllocation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CollateralAllocation> executeWithHttpInfo() throws ApiException {
+            return rankMarginCallWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest);
+        }
+
+        /**
+         * Execute rankMarginCall request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;CollateralAllocation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CollateralAllocation> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return rankMarginCallWithHttpInfo(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, opts);
+        }
+
+        /**
+         * Execute rankMarginCall request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<CollateralAllocation> _callback) throws ApiException {
+            rankMarginCallAsync(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, _callback);
+        }
+
+        /**
+         * Execute rankMarginCall request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<CollateralAllocation> _callback, ConfigurationOptions opts) throws ApiException {
+            rankMarginCallAsync(runId, agreementScope, agreementCode, item, marginType, direction, rankMarginCallRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller&#39;s choices.
+     * Value the call&#39;s agreement as of now for the run&#39;s business date and rank its free, eligible holdings for the  call again, keeping the assets and units the caller chose. Each choice is validated against the agreement&#39;s  constraints and kept with its reason when it fails one; the rest of the call is filled from the ranking, cheapest  first, unless fillRemainder is false. Nothing is stored: the result is what to book, for the caller to decide on.
+     * @param runId The identifier of the margin run. (required)
+     * @param agreementScope The scope of the call&#39;s collateral agreement. (required)
+     * @param agreementCode The code of the call&#39;s collateral agreement. (required)
+     * @param item The margin item of the call. (required)
+     * @param marginType The margin type of the call. One of VariationMargin or InitialMargin. (required)
+     * @param direction Who posts under the call. One of WePost, TheyPost or None. (required)
+     * @return APIrankMarginCallRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The collateral ranked for the margin call. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIrankMarginCallRequest rankMarginCall(String runId, String agreementScope, String agreementCode, String item, String marginType, String direction) {
+        return new APIrankMarginCallRequest(runId, agreementScope, agreementCode, item, marginType, direction);
     }
     /**
      * Build call for recordCounterpartyDemand
@@ -4206,14 +6553,14 @@ public class CollateralApi {
     }
     /**
      * Build call for runMarginCalculation
-     * @param marginRunRequest The business date to value, and optionally the asAt and the agreements to include. (required)
+     * @param marginRunRequest The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -4224,14 +6571,14 @@ public class CollateralApi {
 
     /**
      * Build call for runMarginCalculation. Use any specified configuration options to override any other configuration for this request only.
-     * @param marginRunRequest The business date to value, and optionally the asAt and the agreements to include. (required)
+     * @param marginRunRequest The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
@@ -4299,83 +6646,83 @@ public class CollateralApi {
 
     /**
      * [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation.
-     * Value the collateral agreements for a business date in the background and publish their margin calls as a run.  The run is returned as planned; poll GetMarginRun for its progress, and list its calls as they are published.
-     * @param marginRunRequest The business date to value, and optionally the asAt and the agreements to include. (required)
-     * @return ApiResponse&lt;MarginRun&gt;
+     * Value the collateral agreements for a business date, or for each weekday of a span, in the background and publish  their margin calls as a run for each date. The base case is always valued, with each scenario named in the request  valued beside it as a case of the same run. A date after the asAt is a projection on the market as at the asAt.  The runs are returned as planned, in date order; poll GetMarginRun for the progress of each, and list the calls as they are published.
+     * @param marginRunRequest The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. (required)
+     * @return ApiResponse&lt;PagedResourceListOfMarginRun&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<MarginRun> runMarginCalculationWithHttpInfo(MarginRunRequest marginRunRequest) throws ApiException {
+    private ApiResponse<PagedResourceListOfMarginRun> runMarginCalculationWithHttpInfo(MarginRunRequest marginRunRequest) throws ApiException {
         HttpRequest localVarCall = runMarginCalculationValidateBeforeCall(marginRunRequest, null, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<MarginRun>(){}.getType();
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginRun>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation.
-     * Value the collateral agreements for a business date in the background and publish their margin calls as a run.  The run is returned as planned; poll GetMarginRun for its progress, and list its calls as they are published.Use any specified configuration options to override any other configuration for this request only
-     * @param marginRunRequest The business date to value, and optionally the asAt and the agreements to include. (required)
-     * @return ApiResponse&lt;MarginRun&gt;
+     * Value the collateral agreements for a business date, or for each weekday of a span, in the background and publish  their margin calls as a run for each date. The base case is always valued, with each scenario named in the request  valued beside it as a case of the same run. A date after the asAt is a projection on the market as at the asAt.  The runs are returned as planned, in date order; poll GetMarginRun for the progress of each, and list the calls as they are published.Use any specified configuration options to override any other configuration for this request only
+     * @param marginRunRequest The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. (required)
+     * @return ApiResponse&lt;PagedResourceListOfMarginRun&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<MarginRun> runMarginCalculationWithHttpInfo(MarginRunRequest marginRunRequest, ConfigurationOptions opts) throws ApiException {
+    private ApiResponse<PagedResourceListOfMarginRun> runMarginCalculationWithHttpInfo(MarginRunRequest marginRunRequest, ConfigurationOptions opts) throws ApiException {
         HttpRequest localVarCall = runMarginCalculationValidateBeforeCall(marginRunRequest, null, opts);
-        Type localVarReturnType = new TypeReference<MarginRun>(){}.getType();
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginRun>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation. (asynchronously)
-     * Value the collateral agreements for a business date in the background and publish their margin calls as a run.  The run is returned as planned; poll GetMarginRun for its progress, and list its calls as they are published.
-     * @param marginRunRequest The business date to value, and optionally the asAt and the agreements to include. (required)
+     * Value the collateral agreements for a business date, or for each weekday of a span, in the background and publish  their margin calls as a run for each date. The base case is always valued, with each scenario named in the request  valued beside it as a case of the same run. A date after the asAt is a projection on the market as at the asAt.  The runs are returned as planned, in date order; poll GetMarginRun for the progress of each, and list the calls as they are published.
+     * @param marginRunRequest The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void runMarginCalculationAsync(MarginRunRequest marginRunRequest, final ApiCallback<MarginRun> _callback) throws ApiException {
+    private void runMarginCalculationAsync(MarginRunRequest marginRunRequest, final ApiCallback<PagedResourceListOfMarginRun> _callback) throws ApiException {
 
         HttpRequest localVarCall = runMarginCalculationValidateBeforeCall(marginRunRequest, _callback, new ConfigurationOptions());
-        Type localVarReturnType = new TypeReference<MarginRun>(){}.getType();
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginRun>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
     /**
      * [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation. (asynchronously)
-     * Value the collateral agreements for a business date in the background and publish their margin calls as a run.  The run is returned as planned; poll GetMarginRun for its progress, and list its calls as they are published.Use any specified configuration options to override any other configuration for this request only
-     * @param marginRunRequest The business date to value, and optionally the asAt and the agreements to include. (required)
+     * Value the collateral agreements for a business date, or for each weekday of a span, in the background and publish  their margin calls as a run for each date. The base case is always valued, with each scenario named in the request  valued beside it as a case of the same run. A date after the asAt is a projection on the market as at the asAt.  The runs are returned as planned, in date order; poll GetMarginRun for the progress of each, and list the calls as they are published.Use any specified configuration options to override any other configuration for this request only
+     * @param marginRunRequest The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void runMarginCalculationAsync(MarginRunRequest marginRunRequest, final ApiCallback<MarginRun> _callback, ConfigurationOptions opts) throws ApiException {
+    private void runMarginCalculationAsync(MarginRunRequest marginRunRequest, final ApiCallback<PagedResourceListOfMarginRun> _callback, ConfigurationOptions opts) throws ApiException {
 
         HttpRequest localVarCall = runMarginCalculationValidateBeforeCall(marginRunRequest, _callback, opts);
-        Type localVarReturnType = new TypeReference<MarginRun>(){}.getType();
+        Type localVarReturnType = new TypeReference<PagedResourceListOfMarginRun>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
 
@@ -4394,7 +6741,7 @@ public class CollateralApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+            <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
@@ -4405,67 +6752,67 @@ public class CollateralApi {
 
         /**
          * Execute runMarginCalculation request
-         * @return MarginRun
+         * @return PagedResourceListOfMarginRun
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+            <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public MarginRun execute() throws ApiException {
-            ApiResponse<MarginRun> localVarResp = runMarginCalculationWithHttpInfo(marginRunRequest);
+        public PagedResourceListOfMarginRun execute() throws ApiException {
+            ApiResponse<PagedResourceListOfMarginRun> localVarResp = runMarginCalculationWithHttpInfo(marginRunRequest);
             return localVarResp.getData();
         }
 
         /**
          * Execute runMarginCalculation request. Use any specified configuration options to override any other configuration for this request only.
-         * @return MarginRun
+         * @return PagedResourceListOfMarginRun
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+            <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public MarginRun execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<MarginRun> localVarResp = runMarginCalculationWithHttpInfo(marginRunRequest, opts);
+        public PagedResourceListOfMarginRun execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PagedResourceListOfMarginRun> localVarResp = runMarginCalculationWithHttpInfo(marginRunRequest, opts);
             return localVarResp.getData();
         }
 
         /**
          * Execute runMarginCalculation request with HTTP info returned
-         * @return ApiResponse&lt;MarginRun&gt;
+         * @return ApiResponse&lt;PagedResourceListOfMarginRun&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+            <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<MarginRun> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<PagedResourceListOfMarginRun> executeWithHttpInfo() throws ApiException {
             return runMarginCalculationWithHttpInfo(marginRunRequest);
         }
 
         /**
          * Execute runMarginCalculation request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
-         * @return ApiResponse&lt;MarginRun&gt;
+         * @return ApiResponse&lt;PagedResourceListOfMarginRun&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+            <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<MarginRun> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        public ApiResponse<PagedResourceListOfMarginRun> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
             return runMarginCalculationWithHttpInfo(marginRunRequest, opts);
         }
 
@@ -4476,12 +6823,12 @@ public class CollateralApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+            <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<MarginRun> _callback) throws ApiException {
+        public void executeAsync(final ApiCallback<PagedResourceListOfMarginRun> _callback) throws ApiException {
             runMarginCalculationAsync(marginRunRequest, _callback);
         }
 
@@ -4492,25 +6839,25 @@ public class CollateralApi {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+            <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public void executeAsync(final ApiCallback<MarginRun> _callback, ConfigurationOptions opts) throws ApiException {
+        public void executeAsync(final ApiCallback<PagedResourceListOfMarginRun> _callback, ConfigurationOptions opts) throws ApiException {
             runMarginCalculationAsync(marginRunRequest, _callback, opts);
         }
     }
 
     /**
      * [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation.
-     * Value the collateral agreements for a business date in the background and publish their margin calls as a run.  The run is returned as planned; poll GetMarginRun for its progress, and list its calls as they are published.
-     * @param marginRunRequest The business date to value, and optionally the asAt and the agreements to include. (required)
+     * Value the collateral agreements for a business date, or for each weekday of a span, in the background and publish  their margin calls as a run for each date. The base case is always valued, with each scenario named in the request  valued beside it as a case of the same run. A date after the asAt is a projection on the market as at the asAt.  The runs are returned as planned, in date order; poll GetMarginRun for the progress of each, and list the calls as they are published.
+     * @param marginRunRequest The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. (required)
      * @return APIrunMarginCalculationRequest
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 202 </td><td> The margin run as planned. </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> The margin runs as planned, one for each date valued. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>

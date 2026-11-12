@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AdjustmentDefinitionResponse;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.ResponseMetaData;
 import com.finbourne.sdk.services.lusid.model.StoredOverrideDefinition;
@@ -50,6 +51,7 @@ import com.finbourne.sdk.JSON;
   UpsertVirtualTransactionOverrideResponse.JSON_PROPERTY_OVERRIDES,
   UpsertVirtualTransactionOverrideResponse.JSON_PROPERTY_SUPPRESSIONS,
   UpsertVirtualTransactionOverrideResponse.JSON_PROPERTY_CANCEL_ACTIVE,
+  UpsertVirtualTransactionOverrideResponse.JSON_PROPERTY_ADJUSTMENTS,
   UpsertVirtualTransactionOverrideResponse.JSON_PROPERTY_LINKS
 })
 
@@ -88,6 +90,11 @@ public class UpsertVirtualTransactionOverrideResponse {
   @JsonProperty(JSON_PROPERTY_CANCEL_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean cancelActive;
+
+  public static final String JSON_PROPERTY_ADJUSTMENTS = "adjustments";
+  @JsonProperty(JSON_PROPERTY_ADJUSTMENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, AdjustmentDefinitionResponse> adjustments;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -254,6 +261,33 @@ public class UpsertVirtualTransactionOverrideResponse {
   }
 
 
+  public UpsertVirtualTransactionOverrideResponse adjustments(Map<String, AdjustmentDefinitionResponse> adjustments) {
+    this.adjustments = adjustments;
+    return this;
+  }
+
+  public UpsertVirtualTransactionOverrideResponse putAdjustmentsItem(String key, AdjustmentDefinitionResponse adjustmentsItem) {
+    if (this.adjustments == null) {
+      this.adjustments = new HashMap<>();
+    }
+    this.adjustments.put(key, adjustmentsItem);
+    return this;
+  }
+
+  /**
+   * The adjustments stored for the instrument event, keyed by virtual transaction id.
+   * @return adjustments
+   */
+  @javax.annotation.Nullable
+  public Map<String, AdjustmentDefinitionResponse> getAdjustments() {
+    return adjustments;
+  }
+
+  public void setAdjustments(Map<String, AdjustmentDefinitionResponse> adjustments) {
+    this.adjustments = adjustments;
+  }
+
+
   public UpsertVirtualTransactionOverrideResponse links(List<Link> links) {
     this.links = links;
     return this;
@@ -297,6 +331,7 @@ public class UpsertVirtualTransactionOverrideResponse {
         Objects.equals(this.overrides, upsertVirtualTransactionOverrideResponse.overrides) &&
         Objects.equals(this.suppressions, upsertVirtualTransactionOverrideResponse.suppressions) &&
         Objects.equals(this.cancelActive, upsertVirtualTransactionOverrideResponse.cancelActive) &&
+        Objects.equals(this.adjustments, upsertVirtualTransactionOverrideResponse.adjustments) &&
         Objects.equals(this.links, upsertVirtualTransactionOverrideResponse.links);
   }
 
@@ -306,7 +341,7 @@ public class UpsertVirtualTransactionOverrideResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(version, href, metadata, instrumentEventId, overrides, suppressions, cancelActive, links);
+    return Objects.hash(version, href, metadata, instrumentEventId, overrides, suppressions, cancelActive, adjustments, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -327,6 +362,7 @@ public class UpsertVirtualTransactionOverrideResponse {
     sb.append("    overrides: ").append(toIndentedString(overrides)).append("\n");
     sb.append("    suppressions: ").append(toIndentedString(suppressions)).append("\n");
     sb.append("    cancelActive: ").append(toIndentedString(cancelActive)).append("\n");
+    sb.append("    adjustments: ").append(toIndentedString(adjustments)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

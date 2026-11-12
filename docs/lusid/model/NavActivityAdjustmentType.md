@@ -20,6 +20,7 @@ NavActivityAdjustmentType method = NavActivityAdjustmentType.PORTFOLIO_SETTLEMEN
 NavActivityAdjustmentType method = NavActivityAdjustmentType.INSTRUMENT_ACTIVITY;
 NavActivityAdjustmentType method = NavActivityAdjustmentType.QUOTE_ACTIVITY;
 NavActivityAdjustmentType method = NavActivityAdjustmentType.COMPLEX_MARKET_DATA_ACTIVITY;
+NavActivityAdjustmentType method = NavActivityAdjustmentType.INSTRUMENT_EVENT_ACTIVITY;
 ```
 
 

@@ -7,7 +7,7 @@ Response containing details of a single transaction for a run. A transaction bui
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transactionId** | **String** |  | [default to String]
-**publicationStatus** | **String** | The outcome the screens show for this row: Sent, Skipped or Failed. | [default to String]
+**publicationStatus** | **String** | The outcome the screens show for this row: Sent, Skipped or Failed, or the element status for an element not yet built. | [default to String]
 **portfolioScope** | **String** |  | [optional] [default to String]
 **portfolioCode** | **String** |  | [optional] [default to String]
 **instrumentId** | **String** |  | [optional] [default to String]
@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **destinations** | [**List&lt;DestinationResponse&gt;**](DestinationResponse.md) |  | [default to List<DestinationResponse>]
 **failureStage** | **String** |  | [optional] [default to String]
 **instrumentScope** | **String** | The scope the build resolved the instrument in; null for rows built before it was recorded. | [optional] [default to String]
+**outcome** | **String** | The same value as PublicationStatus under the name the screens use; PublicationStatus stays for existing clients. | [default to String]
+**eventType** | **String** | The TPF event type that triggered this publication (New, Amended, Cancelled, ...); Queued for an element not yet built; null otherwise. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.horizon.model.TransactionResponse;
@@ -47,6 +49,8 @@ String status = "example status";
 List<DestinationResponse> destinations = new List<DestinationResponse>();
 @javax.annotation.Nullable String failureStage = "example failureStage";
 @javax.annotation.Nullable String instrumentScope = "example instrumentScope";
+String outcome = "example outcome";
+@javax.annotation.Nullable String eventType = "example eventType";
 
 
 TransactionResponse transactionResponseInstance = new TransactionResponse()
@@ -66,7 +70,9 @@ TransactionResponse transactionResponseInstance = new TransactionResponse()
     .sentAt(sentAt)
     .destinations(destinations)
     .failureStage(failureStage)
-    .instrumentScope(instrumentScope);
+    .instrumentScope(instrumentScope)
+    .outcome(outcome)
+    .eventType(eventType);
 ```
 
 

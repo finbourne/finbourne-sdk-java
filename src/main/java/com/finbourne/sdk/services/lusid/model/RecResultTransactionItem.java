@@ -38,11 +38,15 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A transaction item within a rec result.
+ * A transaction item within a rec result. Names the portfolio and the transaction&#39;s resolved instrument alongside,  for display.
  */
 @JsonPropertyOrder({
   RecResultTransactionItem.JSON_PROPERTY_PORTFOLIO_ID,
+  RecResultTransactionItem.JSON_PROPERTY_PORTFOLIO_DISPLAY_NAME,
   RecResultTransactionItem.JSON_PROPERTY_TRANSACTION_ID,
+  RecResultTransactionItem.JSON_PROPERTY_TRANSACTION_INSTRUMENT_SCOPE,
+  RecResultTransactionItem.JSON_PROPERTY_TRANSACTION_LUSID_INSTRUMENT_ID,
+  RecResultTransactionItem.JSON_PROPERTY_TRANSACTION_INSTRUMENT_NAME,
   RecResultTransactionItem.JSON_PROPERTY_HOLDING_IMPACTS,
   RecResultTransactionItem.JSON_PROPERTY_ITEM_TYPE,
   RecResultTransactionItem.JSON_PROPERTY_RULE_AND_ATTRIBUTE_VALUES,
@@ -55,10 +59,30 @@ public class RecResultTransactionItem {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private ResourceId portfolioId;
 
+  public static final String JSON_PROPERTY_PORTFOLIO_DISPLAY_NAME = "portfolioDisplayName";
+  @JsonProperty(JSON_PROPERTY_PORTFOLIO_DISPLAY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String portfolioDisplayName;
+
   public static final String JSON_PROPERTY_TRANSACTION_ID = "transactionId";
   @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String transactionId;
+
+  public static final String JSON_PROPERTY_TRANSACTION_INSTRUMENT_SCOPE = "transactionInstrumentScope";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_INSTRUMENT_SCOPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionInstrumentScope;
+
+  public static final String JSON_PROPERTY_TRANSACTION_LUSID_INSTRUMENT_ID = "transactionLusidInstrumentId";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_LUSID_INSTRUMENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionLusidInstrumentId;
+
+  public static final String JSON_PROPERTY_TRANSACTION_INSTRUMENT_NAME = "transactionInstrumentName";
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_INSTRUMENT_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String transactionInstrumentName;
 
   public static final String JSON_PROPERTY_HOLDING_IMPACTS = "holdingImpacts";
   @JsonProperty(JSON_PROPERTY_HOLDING_IMPACTS)
@@ -109,6 +133,25 @@ public class RecResultTransactionItem {
   }
 
 
+  public RecResultTransactionItem portfolioDisplayName(String portfolioDisplayName) {
+    this.portfolioDisplayName = portfolioDisplayName;
+    return this;
+  }
+
+  /**
+   * The display name of the item&#39;s portfolio, as it stood at the asAt the run read its data. Null where the run did not read it.
+   * @return portfolioDisplayName
+   */
+  @javax.annotation.Nullable
+  public String getPortfolioDisplayName() {
+    return portfolioDisplayName;
+  }
+
+  public void setPortfolioDisplayName(String portfolioDisplayName) {
+    this.portfolioDisplayName = portfolioDisplayName;
+  }
+
+
   public RecResultTransactionItem transactionId(String transactionId) {
     this.transactionId = transactionId;
     return this;
@@ -125,6 +168,63 @@ public class RecResultTransactionItem {
 
   public void setTransactionId(String transactionId) {
     this.transactionId = transactionId;
+  }
+
+
+  public RecResultTransactionItem transactionInstrumentScope(String transactionInstrumentScope) {
+    this.transactionInstrumentScope = transactionInstrumentScope;
+    return this;
+  }
+
+  /**
+   * The scope of the transaction&#39;s resolved instrument. Null where the source does not state one.
+   * @return transactionInstrumentScope
+   */
+  @javax.annotation.Nullable
+  public String getTransactionInstrumentScope() {
+    return transactionInstrumentScope;
+  }
+
+  public void setTransactionInstrumentScope(String transactionInstrumentScope) {
+    this.transactionInstrumentScope = transactionInstrumentScope;
+  }
+
+
+  public RecResultTransactionItem transactionLusidInstrumentId(String transactionLusidInstrumentId) {
+    this.transactionLusidInstrumentId = transactionLusidInstrumentId;
+    return this;
+  }
+
+  /**
+   * The LUID of the transaction&#39;s resolved instrument. Null where the source does not state it.
+   * @return transactionLusidInstrumentId
+   */
+  @javax.annotation.Nullable
+  public String getTransactionLusidInstrumentId() {
+    return transactionLusidInstrumentId;
+  }
+
+  public void setTransactionLusidInstrumentId(String transactionLusidInstrumentId) {
+    this.transactionLusidInstrumentId = transactionLusidInstrumentId;
+  }
+
+
+  public RecResultTransactionItem transactionInstrumentName(String transactionInstrumentName) {
+    this.transactionInstrumentName = transactionInstrumentName;
+    return this;
+  }
+
+  /**
+   * The name of the transaction&#39;s resolved instrument, as it stood at the asAt the run read its data. Null where the run did not resolve it.
+   * @return transactionInstrumentName
+   */
+  @javax.annotation.Nullable
+  public String getTransactionInstrumentName() {
+    return transactionInstrumentName;
+  }
+
+  public void setTransactionInstrumentName(String transactionInstrumentName) {
+    this.transactionInstrumentName = transactionInstrumentName;
   }
 
 
@@ -161,7 +261,7 @@ public class RecResultTransactionItem {
   }
 
   /**
-   * The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction, SettlementActivity or RelationalDataPoint. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, both transaction rec types produce Transaction items, and a relational dataset side produces RelationalDataPoint items whatever the rec type. Available values: SettlementActivity, Holding, Transaction, ValuedHolding, RelationalDataPoint.
+   * The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction, SettlementActivity, RelationalDataPoint or the entity type of a LusidEntity rec. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, both transaction rec types produce Transaction items, and a relational dataset side produces RelationalDataPoint items whatever the rec type. A LusidEntity rec produces items of its entity type, for example Instrument items. Available values: SettlementActivity, Holding, Transaction, ValuedHolding, RelationalDataPoint, Instrument, LegalEntity, Portfolio.
    * @return itemType
    */
   @javax.annotation.Nonnull
@@ -222,7 +322,11 @@ public class RecResultTransactionItem {
     }
     RecResultTransactionItem recResultTransactionItem = (RecResultTransactionItem) o;
     return Objects.equals(this.portfolioId, recResultTransactionItem.portfolioId) &&
+        Objects.equals(this.portfolioDisplayName, recResultTransactionItem.portfolioDisplayName) &&
         Objects.equals(this.transactionId, recResultTransactionItem.transactionId) &&
+        Objects.equals(this.transactionInstrumentScope, recResultTransactionItem.transactionInstrumentScope) &&
+        Objects.equals(this.transactionLusidInstrumentId, recResultTransactionItem.transactionLusidInstrumentId) &&
+        Objects.equals(this.transactionInstrumentName, recResultTransactionItem.transactionInstrumentName) &&
         Objects.equals(this.holdingImpacts, recResultTransactionItem.holdingImpacts) &&
         Objects.equals(this.itemType, recResultTransactionItem.itemType) &&
         Objects.equals(this.ruleAndAttributeValues, recResultTransactionItem.ruleAndAttributeValues) &&
@@ -235,7 +339,7 @@ public class RecResultTransactionItem {
 
   @Override
  public int hashCode() {
-    return Objects.hash(portfolioId, transactionId, holdingImpacts, itemType, ruleAndAttributeValues, writebackSuggestions);
+    return Objects.hash(portfolioId, portfolioDisplayName, transactionId, transactionInstrumentScope, transactionLusidInstrumentId, transactionInstrumentName, holdingImpacts, itemType, ruleAndAttributeValues, writebackSuggestions);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -250,7 +354,11 @@ public class RecResultTransactionItem {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecResultTransactionItem {\n");
     sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
+    sb.append("    portfolioDisplayName: ").append(toIndentedString(portfolioDisplayName)).append("\n");
     sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
+    sb.append("    transactionInstrumentScope: ").append(toIndentedString(transactionInstrumentScope)).append("\n");
+    sb.append("    transactionLusidInstrumentId: ").append(toIndentedString(transactionLusidInstrumentId)).append("\n");
+    sb.append("    transactionInstrumentName: ").append(toIndentedString(transactionInstrumentName)).append("\n");
     sb.append("    holdingImpacts: ").append(toIndentedString(holdingImpacts)).append("\n");
     sb.append("    itemType: ").append(toIndentedString(itemType)).append("\n");
     sb.append("    ruleAndAttributeValues: ").append(toIndentedString(ruleAndAttributeValues)).append("\n");

@@ -37,12 +37,11 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * One item of a batch review request: applies review content to its targeted rec result(s). Exactly  one target, except FixAsGroup/ForceMatch which require two or more. A result id identifies a result only  within one run of one rec type of one instance, so every item names the run its targets belong to — which  also makes the same-result-set rule for group decisions structural.
+ * One item of a batch review request: applies review content to its targeted rec result(s). Exactly  one target, except FixAsGroup/ForceMatch which require two or more. A result id is unique within one  instance. Every item names the rec type of its targets, so a group decision covers results of one rec type  only.
  */
 @JsonPropertyOrder({
   BatchReviewRecResultRequest.JSON_PROPERTY_INSTANCE_ID,
   BatchReviewRecResultRequest.JSON_PROPERTY_REC_TYPE,
-  BatchReviewRecResultRequest.JSON_PROPERTY_RUN_NUMBER,
   BatchReviewRecResultRequest.JSON_PROPERTY_REC_RESULT_IDS,
   BatchReviewRecResultRequest.JSON_PROPERTY_DECISION,
   BatchReviewRecResultRequest.JSON_PROPERTY_ASSIGNED_USER,
@@ -61,11 +60,6 @@ public class BatchReviewRecResultRequest {
   @JsonProperty(JSON_PROPERTY_REC_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String recType;
-
-  public static final String JSON_PROPERTY_RUN_NUMBER = "runNumber";
-  @JsonProperty(JSON_PROPERTY_RUN_NUMBER)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Integer runNumber;
 
   public static final String JSON_PROPERTY_REC_RESULT_IDS = "recResultIds";
   @JsonProperty(JSON_PROPERTY_REC_RESULT_IDS)
@@ -125,7 +119,7 @@ public class BatchReviewRecResultRequest {
   }
 
   /**
-   * The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.
+   * The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -135,25 +129,6 @@ public class BatchReviewRecResultRequest {
 
   public void setRecType(String recType) {
     this.recType = recType;
-  }
-
-
-  public BatchReviewRecResultRequest runNumber(Integer runNumber) {
-    this.runNumber = runNumber;
-    return this;
-  }
-
-  /**
-   * The run of the instance whose results this item targets.
-   * @return runNumber
-   */
-  @javax.annotation.Nonnull
-  public Integer getRunNumber() {
-    return runNumber;
-  }
-
-  public void setRunNumber(Integer runNumber) {
-    this.runNumber = runNumber;
   }
 
 
@@ -274,7 +249,7 @@ public class BatchReviewRecResultRequest {
   }
 
   /**
-   * Properties in the RecResult domain. Filterable and sortable. Always includes the properties the matching ruleset populates, with a null value where the result holds none yet.
+   * Properties in the RecResult domain to set on each result. A property with a null value is deleted and omitted properties are left unchanged.
    * @return properties
    */
   @javax.annotation.Nullable
@@ -298,7 +273,6 @@ public class BatchReviewRecResultRequest {
     BatchReviewRecResultRequest batchReviewRecResultRequest = (BatchReviewRecResultRequest) o;
     return Objects.equals(this.instanceId, batchReviewRecResultRequest.instanceId) &&
         Objects.equals(this.recType, batchReviewRecResultRequest.recType) &&
-        Objects.equals(this.runNumber, batchReviewRecResultRequest.runNumber) &&
         Objects.equals(this.recResultIds, batchReviewRecResultRequest.recResultIds) &&
         Objects.equals(this.decision, batchReviewRecResultRequest.decision) &&
         Objects.equals(this.assignedUser, batchReviewRecResultRequest.assignedUser) &&
@@ -313,7 +287,7 @@ public class BatchReviewRecResultRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(instanceId, recType, runNumber, recResultIds, decision, assignedUser, assignedRole, addCommentText, properties);
+    return Objects.hash(instanceId, recType, recResultIds, decision, assignedUser, assignedRole, addCommentText, properties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -329,7 +303,6 @@ public class BatchReviewRecResultRequest {
     sb.append("class BatchReviewRecResultRequest {\n");
     sb.append("    instanceId: ").append(toIndentedString(instanceId)).append("\n");
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
-    sb.append("    runNumber: ").append(toIndentedString(runNumber)).append("\n");
     sb.append("    recResultIds: ").append(toIndentedString(recResultIds)).append("\n");
     sb.append("    decision: ").append(toIndentedString(decision)).append("\n");
     sb.append("    assignedUser: ").append(toIndentedString(assignedUser)).append("\n");

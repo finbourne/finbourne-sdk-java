@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AggregationMeasureFailureDetail;
 import com.finbourne.sdk.services.lusid.model.Link;
+import com.finbourne.sdk.services.lusid.model.RecipeProvenance;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.ResultDataSchema;
 import com.finbourne.sdk.services.lusid.model.ScenarioDiagnostics;
@@ -53,6 +54,7 @@ import com.finbourne.sdk.JSON;
   ListAggregationResponse.JSON_PROPERTY_AGGREGATION_FAILURES,
   ListAggregationResponse.JSON_PROPERTY_RECIPE_ID,
   ListAggregationResponse.JSON_PROPERTY_SCENARIO_DIAGNOSTICS,
+  ListAggregationResponse.JSON_PROPERTY_RECIPE_PROVENANCE,
   ListAggregationResponse.JSON_PROPERTY_LINKS
 })
 
@@ -101,6 +103,11 @@ public class ListAggregationResponse {
   @JsonProperty(JSON_PROPERTY_SCENARIO_DIAGNOSTICS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ScenarioDiagnostics scenarioDiagnostics;
+
+  public static final String JSON_PROPERTY_RECIPE_PROVENANCE = "recipeProvenance";
+  @JsonProperty(JSON_PROPERTY_RECIPE_PROVENANCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RecipeProvenance recipeProvenance;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -297,6 +304,25 @@ public class ListAggregationResponse {
   }
 
 
+  public ListAggregationResponse recipeProvenance(RecipeProvenance recipeProvenance) {
+    this.recipeProvenance = recipeProvenance;
+    return this;
+  }
+
+  /**
+   * Get recipeProvenance
+   * @return recipeProvenance
+   */
+  @javax.annotation.Nullable
+  public RecipeProvenance getRecipeProvenance() {
+    return recipeProvenance;
+  }
+
+  public void setRecipeProvenance(RecipeProvenance recipeProvenance) {
+    this.recipeProvenance = recipeProvenance;
+  }
+
+
   public ListAggregationResponse links(List<Link> links) {
     this.links = links;
     return this;
@@ -342,6 +368,7 @@ public class ListAggregationResponse {
         Objects.equals(this.aggregationFailures, listAggregationResponse.aggregationFailures) &&
         Objects.equals(this.recipeId, listAggregationResponse.recipeId) &&
         Objects.equals(this.scenarioDiagnostics, listAggregationResponse.scenarioDiagnostics) &&
+        Objects.equals(this.recipeProvenance, listAggregationResponse.recipeProvenance) &&
         Objects.equals(this.links, listAggregationResponse.links);
   }
 
@@ -351,7 +378,7 @@ public class ListAggregationResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(aggregationEffectiveAt, aggregationAsAt, href, data, aggregationCurrency, dataSchema, aggregationFailures, recipeId, scenarioDiagnostics, links);
+    return Objects.hash(aggregationEffectiveAt, aggregationAsAt, href, data, aggregationCurrency, dataSchema, aggregationFailures, recipeId, scenarioDiagnostics, recipeProvenance, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -374,6 +401,7 @@ public class ListAggregationResponse {
     sb.append("    aggregationFailures: ").append(toIndentedString(aggregationFailures)).append("\n");
     sb.append("    recipeId: ").append(toIndentedString(recipeId)).append("\n");
     sb.append("    scenarioDiagnostics: ").append(toIndentedString(scenarioDiagnostics)).append("\n");
+    sb.append("    recipeProvenance: ").append(toIndentedString(recipeProvenance)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

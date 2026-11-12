@@ -201,7 +201,7 @@ public class MatchingRuleset {
   }
 
   /**
-   * The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.
+   * The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -412,7 +412,7 @@ public class MatchingRuleset {
   }
 
   /**
-   * Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself.
+   * Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself. Each attribute&#39;s formulas are compiled and evaluated as a rule&#39;s are, so both must return the same value type.
    * @return supplementalAttributes
    */
   @javax.annotation.Nullable

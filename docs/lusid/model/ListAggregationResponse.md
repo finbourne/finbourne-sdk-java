@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **aggregationFailures** | [**List&lt;AggregationMeasureFailureDetail&gt;**](AggregationMeasureFailureDetail.md) |  | [optional] [default to List<AggregationMeasureFailureDetail>]
 **recipeId** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **scenarioDiagnostics** | [**ScenarioDiagnostics**](ScenarioDiagnostics.md) |  | [optional] [default to ScenarioDiagnostics]
+**recipeProvenance** | [**RecipeProvenance**](RecipeProvenance.md) |  | [optional] [default to RecipeProvenance]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -31,6 +32,7 @@ ResultDataSchema dataSchema = new ResultDataSchema();
 @javax.annotation.Nullable List<AggregationMeasureFailureDetail> aggregationFailures = new List<AggregationMeasureFailureDetail>();
 ResourceId recipeId = new ResourceId();
 ScenarioDiagnostics scenarioDiagnostics = new ScenarioDiagnostics();
+RecipeProvenance recipeProvenance = new RecipeProvenance();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -44,6 +46,7 @@ ListAggregationResponse listAggregationResponseInstance = new ListAggregationRes
     .aggregationFailures(aggregationFailures)
     .recipeId(recipeId)
     .scenarioDiagnostics(scenarioDiagnostics)
+    .recipeProvenance(recipeProvenance)
     .links(links);
 ```
 

@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -42,8 +41,8 @@ import com.finbourne.sdk.JSON;
 public class DeleteTasksRequest {
   public static final String JSON_PROPERTY_TASK_IDS = "taskIds";
   @JsonProperty(JSON_PROPERTY_TASK_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private List<String> taskIds;
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private List<String> taskIds = new ArrayList<>();
 
   public DeleteTasksRequest() {
   }
@@ -65,7 +64,7 @@ public class DeleteTasksRequest {
    * The Ids of the Tasks to delete
    * @return taskIds
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public List<String> getTaskIds() {
     return taskIds;
   }
@@ -87,20 +86,9 @@ public class DeleteTasksRequest {
     return Objects.equals(this.taskIds, deleteTasksRequest.taskIds);
   }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
   @Override
  public int hashCode() {
     return Objects.hash(taskIds);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

@@ -43,7 +43,8 @@ import com.finbourne.sdk.JSON;
   TaskFieldDefinition.JSON_PROPERTY_DISPLAY_NAME,
   TaskFieldDefinition.JSON_PROPERTY_DESCRIPTION,
   TaskFieldDefinition.JSON_PROPERTY_CATEGORY,
-  TaskFieldDefinition.JSON_PROPERTY_CONTAINS_URL
+  TaskFieldDefinition.JSON_PROPERTY_CONTAINS_URL,
+  TaskFieldDefinition.JSON_PROPERTY_MULTILINE
 })
 
 public class TaskFieldDefinition {
@@ -86,6 +87,11 @@ public class TaskFieldDefinition {
   @JsonProperty(JSON_PROPERTY_CONTAINS_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean containsUrl;
+
+  public static final String JSON_PROPERTY_MULTILINE = "multiline";
+  @JsonProperty(JSON_PROPERTY_MULTILINE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean multiline;
 
   public TaskFieldDefinition() {
   }
@@ -210,7 +216,7 @@ public class TaskFieldDefinition {
   }
 
   /**
-   * Category for field definition
+   * Display group for the field. Fields sharing a category are presented together in the UI
    * @return category
    */
   @javax.annotation.Nullable
@@ -242,6 +248,25 @@ public class TaskFieldDefinition {
   }
 
 
+  public TaskFieldDefinition multiline(Boolean multiline) {
+    this.multiline = multiline;
+    return this;
+  }
+
+  /**
+   * Whether the field should be rendered as a multi-line text area
+   * @return multiline
+   */
+  @javax.annotation.Nullable
+  public Boolean getMultiline() {
+    return multiline;
+  }
+
+  public void setMultiline(Boolean multiline) {
+    this.multiline = multiline;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -258,7 +283,8 @@ public class TaskFieldDefinition {
         Objects.equals(this.displayName, taskFieldDefinition.displayName) &&
         Objects.equals(this.description, taskFieldDefinition.description) &&
         Objects.equals(this.category, taskFieldDefinition.category) &&
-        Objects.equals(this.containsUrl, taskFieldDefinition.containsUrl);
+        Objects.equals(this.containsUrl, taskFieldDefinition.containsUrl) &&
+        Objects.equals(this.multiline, taskFieldDefinition.multiline);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -267,7 +293,7 @@ public class TaskFieldDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(name, type, readOnlyStates, valueConstraints, displayName, description, category, containsUrl);
+    return Objects.hash(name, type, readOnlyStates, valueConstraints, displayName, description, category, containsUrl, multiline);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -289,6 +315,7 @@ public class TaskFieldDefinition {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("    containsUrl: ").append(toIndentedString(containsUrl)).append("\n");
+    sb.append("    multiline: ").append(toIndentedString(multiline)).append("\n");
     sb.append("}");
     return sb.toString();
   }

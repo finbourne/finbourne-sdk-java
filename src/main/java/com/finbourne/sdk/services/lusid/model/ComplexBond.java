@@ -50,6 +50,7 @@ import com.finbourne.sdk.JSON;
   ComplexBond.JSON_PROPERTY_ORIGINAL_ISSUE_PRICE,
   ComplexBond.JSON_PROPERTY_PAR_PER_UNIT,
   ComplexBond.JSON_PROPERTY_ISSUE_DATE,
+  ComplexBond.JSON_PROPERTY_UNDERLYING,
   ComplexBond.JSON_PROPERTY_ROUNDING_CONVENTIONS,
   ComplexBond.JSON_PROPERTY_ASSET_BACKED,
   ComplexBond.JSON_PROPERTY_ASSET_POOL_IDENTIFIER,
@@ -93,6 +94,11 @@ public class ComplexBond extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_ISSUE_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime issueDate;
+
+  public static final String JSON_PROPERTY_UNDERLYING = "underlying";
+  @JsonProperty(JSON_PROPERTY_UNDERLYING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private LusidInstrument underlying;
 
   public static final String JSON_PROPERTY_ROUNDING_CONVENTIONS = "roundingConventions";
   @JsonProperty(JSON_PROPERTY_ROUNDING_CONVENTIONS)
@@ -252,6 +258,25 @@ public class ComplexBond extends LusidInstrument {
   }
 
 
+  public ComplexBond underlying(LusidInstrument underlying) {
+    this.underlying = underlying;
+    return this;
+  }
+
+  /**
+   * Get underlying
+   * @return underlying
+   */
+  @javax.annotation.Nullable
+  public LusidInstrument getUnderlying() {
+    return underlying;
+  }
+
+  public void setUnderlying(LusidInstrument underlying) {
+    this.underlying = underlying;
+  }
+
+
   public ComplexBond roundingConventions(List<RoundingConvention> roundingConventions) {
     this.roundingConventions = roundingConventions;
     return this;
@@ -370,6 +395,7 @@ public class ComplexBond extends LusidInstrument {
         (this.originalIssuePrice == null ? complexBond.originalIssuePrice == null : (complexBond.originalIssuePrice != null && this.originalIssuePrice.compareTo(complexBond.getOriginalIssuePrice()) == 0)) &&
         (this.parPerUnit == null ? complexBond.parPerUnit == null : (complexBond.parPerUnit != null && this.parPerUnit.compareTo(complexBond.getParPerUnit()) == 0)) &&
         Objects.equals(this.issueDate, complexBond.issueDate) &&
+        Objects.equals(this.underlying, complexBond.underlying) &&
         Objects.equals(this.roundingConventions, complexBond.roundingConventions) &&
         Objects.equals(this.assetBacked, complexBond.assetBacked) &&
         Objects.equals(this.assetPoolIdentifier, complexBond.assetPoolIdentifier) &&
@@ -384,7 +410,7 @@ public class ComplexBond extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(identifiers, calculationType, schedules, originalIssuePrice, parPerUnit, issueDate, roundingConventions, assetBacked, assetPoolIdentifier, tradingConventions, timeZoneConventions, super.hashCode());
+    return Objects.hash(identifiers, calculationType, schedules, originalIssuePrice, parPerUnit, issueDate, underlying, roundingConventions, assetBacked, assetPoolIdentifier, tradingConventions, timeZoneConventions, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -405,6 +431,7 @@ public class ComplexBond extends LusidInstrument {
     sb.append("    originalIssuePrice: ").append(toIndentedString(originalIssuePrice)).append("\n");
     sb.append("    parPerUnit: ").append(toIndentedString(parPerUnit)).append("\n");
     sb.append("    issueDate: ").append(toIndentedString(issueDate)).append("\n");
+    sb.append("    underlying: ").append(toIndentedString(underlying)).append("\n");
     sb.append("    roundingConventions: ").append(toIndentedString(roundingConventions)).append("\n");
     sb.append("    assetBacked: ").append(toIndentedString(assetBacked)).append("\n");
     sb.append("    assetPoolIdentifier: ").append(toIndentedString(assetPoolIdentifier)).append("\n");

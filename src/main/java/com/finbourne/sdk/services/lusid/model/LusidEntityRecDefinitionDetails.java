@@ -77,7 +77,7 @@ public class LusidEntityRecDefinitionDetails {
   }
 
   /**
-   * The type of LUSID entity to reconcile, which is also the rec type of the results. Supported types: Instrument. Must equal the reconciliationType of the matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.
+   * The type of LUSID entity to reconcile, which is also the rec type of the results. Supported types: Instrument, LegalEntity, Portfolio. Must equal the reconciliationType of the matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.
    * @return entityType
    */
   @javax.annotation.Nonnull
@@ -115,7 +115,7 @@ public class LusidEntityRecDefinitionDetails {
   }
 
   /**
-   * Optional filter that selects the population of the left side, e.g. \&quot;scope eq &#39;default&#39;\&quot;. It resolves against the left side entity fields. Null reads the whole population of the side.
+   * Optional filter that selects the population of the left side. It uses the filter syntax of the list endpoint of the entity type. Null reads the whole population of the side.
    * @return leftFilter
    */
   @javax.annotation.Nullable
@@ -134,7 +134,7 @@ public class LusidEntityRecDefinitionDetails {
   }
 
   /**
-   * Optional filter that selects the population of the right side. It resolves against the right side entity fields. Null reads the whole population of the side.
+   * Optional filter that selects the population of the right side. It uses the filter syntax of the list endpoint of the entity type. Null reads the whole population of the side.
    * @return rightFilter
    */
   @javax.annotation.Nullable

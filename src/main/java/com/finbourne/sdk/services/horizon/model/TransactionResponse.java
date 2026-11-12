@@ -54,7 +54,9 @@ import com.finbourne.sdk.JSON;
   TransactionResponse.JSON_PROPERTY_SENT_AT,
   TransactionResponse.JSON_PROPERTY_DESTINATIONS,
   TransactionResponse.JSON_PROPERTY_FAILURE_STAGE,
-  TransactionResponse.JSON_PROPERTY_INSTRUMENT_SCOPE
+  TransactionResponse.JSON_PROPERTY_INSTRUMENT_SCOPE,
+  TransactionResponse.JSON_PROPERTY_OUTCOME,
+  TransactionResponse.JSON_PROPERTY_EVENT_TYPE
 })
 
 public class TransactionResponse {
@@ -143,6 +145,16 @@ public class TransactionResponse {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String instrumentScope;
 
+  public static final String JSON_PROPERTY_OUTCOME = "outcome";
+  @JsonProperty(JSON_PROPERTY_OUTCOME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String outcome;
+
+  public static final String JSON_PROPERTY_EVENT_TYPE = "eventType";
+  @JsonProperty(JSON_PROPERTY_EVENT_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String eventType;
+
   public TransactionResponse() {
   }
 
@@ -171,7 +183,7 @@ public class TransactionResponse {
   }
 
   /**
-   * The outcome the screens show for this row: Sent, Skipped or Failed.
+   * The outcome the screens show for this row: Sent, Skipped or Failed, or the element status for an element not yet built.
    * @return publicationStatus
    */
   @javax.annotation.Nonnull
@@ -477,6 +489,44 @@ public class TransactionResponse {
   }
 
 
+  public TransactionResponse outcome(String outcome) {
+    this.outcome = outcome;
+    return this;
+  }
+
+  /**
+   * The same value as PublicationStatus under the name the screens use; PublicationStatus stays for existing clients.
+   * @return outcome
+   */
+  @javax.annotation.Nonnull
+  public String getOutcome() {
+    return outcome;
+  }
+
+  public void setOutcome(String outcome) {
+    this.outcome = outcome;
+  }
+
+
+  public TransactionResponse eventType(String eventType) {
+    this.eventType = eventType;
+    return this;
+  }
+
+  /**
+   * The TPF event type that triggered this publication (New, Amended, Cancelled, ...); Queued for an element not yet built; null otherwise.
+   * @return eventType
+   */
+  @javax.annotation.Nullable
+  public String getEventType() {
+    return eventType;
+  }
+
+  public void setEventType(String eventType) {
+    this.eventType = eventType;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -502,7 +552,9 @@ public class TransactionResponse {
         Objects.equals(this.sentAt, transactionResponse.sentAt) &&
         Objects.equals(this.destinations, transactionResponse.destinations) &&
         Objects.equals(this.failureStage, transactionResponse.failureStage) &&
-        Objects.equals(this.instrumentScope, transactionResponse.instrumentScope);
+        Objects.equals(this.instrumentScope, transactionResponse.instrumentScope) &&
+        Objects.equals(this.outcome, transactionResponse.outcome) &&
+        Objects.equals(this.eventType, transactionResponse.eventType);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -511,7 +563,7 @@ public class TransactionResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(transactionId, publicationStatus, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, destinations, failureStage, instrumentScope);
+    return Objects.hash(transactionId, publicationStatus, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt, destinations, failureStage, instrumentScope, outcome, eventType);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -542,6 +594,8 @@ public class TransactionResponse {
     sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
     sb.append("    failureStage: ").append(toIndentedString(failureStage)).append("\n");
     sb.append("    instrumentScope: ").append(toIndentedString(instrumentScope)).append("\n");
+    sb.append("    outcome: ").append(toIndentedString(outcome)).append("\n");
+    sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

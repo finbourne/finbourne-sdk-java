@@ -6,7 +6,7 @@ Contains required info to delete Tasks
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**taskIds** | **List&lt;String&gt;** | The Ids of the Tasks to delete | [optional] [default to List<String>]
+**taskIds** | **List&lt;String&gt;** | The Ids of the Tasks to delete | [default to List<String>]
 
 ```java
 import com.finbourne.sdk.services.workflow.model.DeleteTasksRequest;
@@ -14,7 +14,7 @@ import java.util.*;
 import java.lang.System;
 import java.net.URI;
 
-@javax.annotation.Nullable List<String> taskIds = new List<String>();
+List<String> taskIds = new List<String>();
 
 
 DeleteTasksRequest deleteTasksRequestInstance = new DeleteTasksRequest()

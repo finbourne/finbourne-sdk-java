@@ -4,12 +4,106 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**deleteReturns**](AggregatedReturnsApi.md#deleteReturns) | **DELETE** /api/api/returns/{scope}/{code}/{entityType}/{entityScope}/{entityCode}/$delete | [EXPERIMENTAL] DeleteReturns: Delete Returns |
 | [**deleteReturnsEntity**](AggregatedReturnsApi.md#deleteReturnsEntity) | **DELETE** /api/api/returns/{scope}/{code} | [EXPERIMENTAL] DeleteReturnsEntity: Delete returns entity. |
 | [**getAggregatedReturns**](AggregatedReturnsApi.md#getAggregatedReturns) | **POST** /api/api/returns/$aggregated | [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity. |
+| [**getReturns**](AggregatedReturnsApi.md#getReturns) | **GET** /api/api/returns/{scope}/{code}/{entityType}/{entityScope}/{entityCode} | [EXPERIMENTAL] GetReturns: Get Returns |
 | [**getReturnsEntity**](AggregatedReturnsApi.md#getReturnsEntity) | **GET** /api/api/returns/{scope}/{code} | [EXPERIMENTAL] GetReturnsEntity: Get returns entity. |
 | [**listReturnsEntities**](AggregatedReturnsApi.md#listReturnsEntities) | **GET** /api/api/returns | [EXPERIMENTAL] ListReturnsEntities: List returns entities. |
+| [**upsertReturns**](AggregatedReturnsApi.md#upsertReturns) | **POST** /api/api/returns/{scope}/{code}/{entityType}/{entityScope}/{entityCode} | [EXPERIMENTAL] UpsertReturns: Upsert Returns |
 | [**upsertReturnsEntity**](AggregatedReturnsApi.md#upsertReturnsEntity) | **POST** /api/api/returns | [EXPERIMENTAL] UpsertReturnsEntity: Upsert returns entity. |
 
+
+
+## deleteReturns
+
+> DeletedEntityResponse deleteReturns(scope, code, entityType, entityScope, entityCode, fromEffectiveAt, toEffectiveAt, period)
+
+[EXPERIMENTAL] DeleteReturns: Delete Returns
+
+Cancel the Returns stored under the returns series against the specified entity inside the window.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.AggregatedReturnsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class AggregatedReturnsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        AggregatedReturnsApi apiInstance = apiFactory.build(AggregatedReturnsApi.class);
+        String scope = "scope_example"; // String | The scope of the Returns.
+        String code = "code_example"; // String | The code of the Returns.
+        String entityType = "entityType_example"; // String | The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.
+        String entityScope = "entityScope_example"; // String | The scope of the entity.
+        String entityCode = "entityCode_example"; // String | The code of the entity.
+        String fromEffectiveAt = "fromEffectiveAt_example"; // String | The start date from which to delete the Returns.
+        String toEffectiveAt = "toEffectiveAt_example"; // String | The end date from which to delete the Returns.
+        String period = "period_example"; // String | The period of the Returns to be deleted. Default value: Daily. Available values: Daily, Monthly.
+        try {
+            // uncomment the below to set overrides at the request level
+            // DeletedEntityResponse result = apiInstance.deleteReturns(scope, code, entityType, entityScope, entityCode, fromEffectiveAt, toEffectiveAt, period).execute(opts);
+
+            DeletedEntityResponse result = apiInstance.deleteReturns(scope, code, entityType, entityScope, entityCode, fromEffectiveAt, toEffectiveAt, period).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AggregatedReturnsApi#deleteReturns");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the Returns. | |
+| **code** | **String**| The code of the Returns. | |
+| **entityType** | **String**| The type of the entity the Returns are stored against: &#39;Portfolio&#39; or &#39;PortfolioGroup&#39;. Available values: Portfolio, PortfolioGroup. | |
+| **entityScope** | **String**| The scope of the entity. | |
+| **entityCode** | **String**| The code of the entity. | |
+| **fromEffectiveAt** | **String**| The start date from which to delete the Returns. | |
+| **toEffectiveAt** | **String**| The end date from which to delete the Returns. | |
+| **period** | **String**| The period of the Returns to be deleted. Default value: Daily. Available values: Daily, Monthly. | [optional] |
+
+### Return type
+
+[**DeletedEntityResponse**](../model/DeletedEntityResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The successfully deleted Returns data along with any failures |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
 
 
 ## deleteReturnsEntity
@@ -97,7 +191,7 @@ public class AggregatedReturnsApiExample {
 
 [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
 
-Report daily returns for the entity specified in the request body over the effective window.              Currently, supports a single entity of type Portfolio and a daily return grid. Returns upserted to the              Returns store under the supplied returns id take precedence: if any exist in the window they are              reported as-is and nothing is calculated. Otherwise time-weighted returns are calculated using the              recipe, fee handling and flow-discrepancy handling of the persisted Returns entity identified by the              returns id, and the request fails if no such entity exists. When a reporting currency is requested the              Returns entity is also required, as its recipe supplies the FX rates.
+Report daily returns for the entity specified in the request body over the effective window.              Supports a Portfolio, or a PortfolioGroup whose members&#39; returns are rolled up in their common base              currency, on a daily return grid. Returns upserted to the Returns store under the supplied returns id              take precedence: if any exist in the window for a portfolio they are reported as-is and nothing is              calculated for it. A group member&#39;s upserted returns are weighted by their stored (net) opening market              value and contribute only on the days they cover; a day with no upserted return for that member is              reported from the other members alone. Otherwise time-weighted returns are calculated using the              recipe, fee handling and flow-discrepancy handling of the persisted Returns entity identified by the              returns id, and the request fails if no such entity exists. A calculated day&#39;s return is the day&#39;s              profit and loss over the portfolio&#39;s net opening value, cash included and signed, so a portfolio              financed by overdraft reports a return on its negative capital; a portfolio whose net opening value is              zero and that takes in no capital during the day reports a zero return, with the day&#39;s gain or loss              visible in its market values. When a reporting currency is requested the Returns entity is also              required, as its recipe supplies the FX rates.
 
 ### Example
 
@@ -162,6 +256,99 @@ public class AggregatedReturnsApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The aggregated returns grouped by entity. |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## getReturns
+
+> ResourceListOfPerformanceReturn getReturns(scope, code, entityType, entityScope, entityCode, fromEffectiveAt, toEffectiveAt, period, asAt)
+
+[EXPERIMENTAL] GetReturns: Get Returns
+
+Get the Returns stored under the returns series against the specified entity.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.AggregatedReturnsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class AggregatedReturnsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        AggregatedReturnsApi apiInstance = apiFactory.build(AggregatedReturnsApi.class);
+        String scope = "scope_example"; // String | The scope of the Returns.
+        String code = "code_example"; // String | The code of the Returns.
+        String entityType = "entityType_example"; // String | The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.
+        String entityScope = "entityScope_example"; // String | The scope of the entity.
+        String entityCode = "entityCode_example"; // String | The code of the entity.
+        String fromEffectiveAt = "fromEffectiveAt_example"; // String | The start date from which to get the Returns.
+        String toEffectiveAt = "toEffectiveAt_example"; // String | The end date from which to get the Returns.
+        String period = "period_example"; // String | The period for which to show the Returns. Default value: Daily. Available values: Daily, Monthly.
+        OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to retrieve the Returns. Defaults to the latest.
+        try {
+            // uncomment the below to set overrides at the request level
+            // ResourceListOfPerformanceReturn result = apiInstance.getReturns(scope, code, entityType, entityScope, entityCode, fromEffectiveAt, toEffectiveAt, period, asAt).execute(opts);
+
+            ResourceListOfPerformanceReturn result = apiInstance.getReturns(scope, code, entityType, entityScope, entityCode, fromEffectiveAt, toEffectiveAt, period, asAt).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AggregatedReturnsApi#getReturns");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the Returns. | |
+| **code** | **String**| The code of the Returns. | |
+| **entityType** | **String**| The type of the entity the Returns are stored against: &#39;Portfolio&#39; or &#39;PortfolioGroup&#39;. Available values: Portfolio, PortfolioGroup. | |
+| **entityScope** | **String**| The scope of the entity. | |
+| **entityCode** | **String**| The code of the entity. | |
+| **fromEffectiveAt** | **String**| The start date from which to get the Returns. | [optional] |
+| **toEffectiveAt** | **String**| The end date from which to get the Returns. | [optional] |
+| **period** | **String**| The period for which to show the Returns. Default value: Daily. Available values: Daily, Monthly. | [optional] |
+| **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the Returns. Defaults to the latest. | [optional] |
+
+### Return type
+
+[**ResourceListOfPerformanceReturn**](../model/ResourceListOfPerformanceReturn.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The Returns on the given time period. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
@@ -320,6 +507,93 @@ public class AggregatedReturnsApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The requested returns entities |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) · [Back to API list](../../api_endpoints.md) · [Back to Model list](../../models.md) · [Back to README](../../../README.md)
+
+
+## upsertReturns
+
+> UpsertReturnsResponse upsertReturns(scope, code, entityType, entityScope, entityCode, performanceReturn)
+
+[EXPERIMENTAL] UpsertReturns: Upsert Returns
+
+Update or insert returns stored under the returns series against the specified entity. Stored              returns take precedence over a calculation in the aggregated returns of that entity.
+
+### Example
+
+```java
+import com.finbourne.sdk.services.lusid.model.*;
+import com.finbourne.sdk.services.lusid.api.AggregatedReturnsApi;
+import com.finbourne.sdk.core.config.ApiConfigurationException;
+import com.finbourne.sdk.extensions.ApiFactoryBuilder;
+import com.finbourne.sdk.core.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class AggregatedReturnsApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        ApiFactory apiFactory = new ApiFactoryBuilder().build();
+        
+        AggregatedReturnsApi apiInstance = apiFactory.build(AggregatedReturnsApi.class);
+        String scope = "scope_example"; // String | The scope of the Returns.
+        String code = "code_example"; // String | The code of the Returns.
+        String entityType = "entityType_example"; // String | The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.
+        String entityScope = "entityScope_example"; // String | The scope of the entity.
+        String entityCode = "entityCode_example"; // String | The code of the entity.
+        List<PerformanceReturn> performanceReturn = Arrays.asList(); // List<PerformanceReturn> | This contains the Returns which need to be upsert.
+        try {
+            // uncomment the below to set overrides at the request level
+            // UpsertReturnsResponse result = apiInstance.upsertReturns(scope, code, entityType, entityScope, entityCode, performanceReturn).execute(opts);
+
+            UpsertReturnsResponse result = apiInstance.upsertReturns(scope, code, entityType, entityScope, entityCode, performanceReturn).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AggregatedReturnsApi#upsertReturns");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **scope** | **String**| The scope of the Returns. | |
+| **code** | **String**| The code of the Returns. | |
+| **entityType** | **String**| The type of the entity the Returns are stored against: &#39;Portfolio&#39; or &#39;PortfolioGroup&#39;. Available values: Portfolio, PortfolioGroup. | |
+| **entityScope** | **String**| The scope of the entity. | |
+| **entityCode** | **String**| The code of the entity. | |
+| **performanceReturn** | [**List&lt;PerformanceReturn&gt;**](../model/PerformanceReturn.md)| This contains the Returns which need to be upsert. | |
+
+### Return type
+
+[**UpsertReturnsResponse**](../model/UpsertReturnsResponse.md)
+
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The version of the entity that contains the newly updated or inserted Returns. |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

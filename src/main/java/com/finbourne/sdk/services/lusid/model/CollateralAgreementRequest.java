@@ -12,6 +12,8 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.CollateralFundingTerms;
+import com.finbourne.sdk.services.lusid.model.CollateralOptimisationTerms;
 import com.finbourne.sdk.services.lusid.model.CounterpartyIdentifier;
 import com.finbourne.sdk.services.lusid.model.MarginItem;
 import com.finbourne.sdk.services.lusid.model.MarginRounding;
@@ -55,10 +57,14 @@ import com.finbourne.sdk.JSON;
   CollateralAgreementRequest.JSON_PROPERTY_ROUNDING,
   CollateralAgreementRequest.JSON_PROPERTY_SETTLEMENT_LAG,
   CollateralAgreementRequest.JSON_PROPERTY_MATCH_TOLERANCE,
+  CollateralAgreementRequest.JSON_PROPERTY_FUNDING,
+  CollateralAgreementRequest.JSON_PROPERTY_OPTIMISATION,
   CollateralAgreementRequest.JSON_PROPERTY_VARIATION_MARGIN,
   CollateralAgreementRequest.JSON_PROPERTY_INITIAL_MARGIN,
   CollateralAgreementRequest.JSON_PROPERTY_PROPERTIES,
-  CollateralAgreementRequest.JSON_PROPERTY_EFFECTIVE_AT
+  CollateralAgreementRequest.JSON_PROPERTY_EFFECTIVE_AT,
+  CollateralAgreementRequest.JSON_PROPERTY_NOTIFICATION_CUT_LABEL,
+  CollateralAgreementRequest.JSON_PROPERTY_RETURN_NOTIFICATION_CUT_LABEL
 })
 
 public class CollateralAgreementRequest {
@@ -112,6 +118,16 @@ public class CollateralAgreementRequest {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal matchTolerance;
 
+  public static final String JSON_PROPERTY_FUNDING = "funding";
+  @JsonProperty(JSON_PROPERTY_FUNDING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CollateralFundingTerms funding;
+
+  public static final String JSON_PROPERTY_OPTIMISATION = "optimisation";
+  @JsonProperty(JSON_PROPERTY_OPTIMISATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CollateralOptimisationTerms optimisation;
+
   public static final String JSON_PROPERTY_VARIATION_MARGIN = "variationMargin";
   @JsonProperty(JSON_PROPERTY_VARIATION_MARGIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -131,6 +147,16 @@ public class CollateralAgreementRequest {
   @JsonProperty(JSON_PROPERTY_EFFECTIVE_AT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime effectiveAt;
+
+  public static final String JSON_PROPERTY_NOTIFICATION_CUT_LABEL = "notificationCutLabel";
+  @JsonProperty(JSON_PROPERTY_NOTIFICATION_CUT_LABEL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String notificationCutLabel;
+
+  public static final String JSON_PROPERTY_RETURN_NOTIFICATION_CUT_LABEL = "returnNotificationCutLabel";
+  @JsonProperty(JSON_PROPERTY_RETURN_NOTIFICATION_CUT_LABEL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String returnNotificationCutLabel;
 
   public CollateralAgreementRequest() {
   }
@@ -325,6 +351,44 @@ public class CollateralAgreementRequest {
   }
 
 
+  public CollateralAgreementRequest funding(CollateralFundingTerms funding) {
+    this.funding = funding;
+    return this;
+  }
+
+  /**
+   * Get funding
+   * @return funding
+   */
+  @javax.annotation.Nullable
+  public CollateralFundingTerms getFunding() {
+    return funding;
+  }
+
+  public void setFunding(CollateralFundingTerms funding) {
+    this.funding = funding;
+  }
+
+
+  public CollateralAgreementRequest optimisation(CollateralOptimisationTerms optimisation) {
+    this.optimisation = optimisation;
+    return this;
+  }
+
+  /**
+   * Get optimisation
+   * @return optimisation
+   */
+  @javax.annotation.Nullable
+  public CollateralOptimisationTerms getOptimisation() {
+    return optimisation;
+  }
+
+  public void setOptimisation(CollateralOptimisationTerms optimisation) {
+    this.optimisation = optimisation;
+  }
+
+
   public CollateralAgreementRequest variationMargin(List<MarginItem> variationMargin) {
     this.variationMargin = variationMargin;
     return this;
@@ -425,6 +489,44 @@ public class CollateralAgreementRequest {
   }
 
 
+  public CollateralAgreementRequest notificationCutLabel(String notificationCutLabel) {
+    this.notificationCutLabel = notificationCutLabel;
+    return this;
+  }
+
+  /**
+   * The cut label giving the time of day by which collateral we deliver under a margin call must settle. Each run resolves it on the business date and records it as the call&#39;s deadline; the allocation excludes assets that cannot settle by it. Optional.
+   * @return notificationCutLabel
+   */
+  @javax.annotation.Nullable
+  public String getNotificationCutLabel() {
+    return notificationCutLabel;
+  }
+
+  public void setNotificationCutLabel(String notificationCutLabel) {
+    this.notificationCutLabel = notificationCutLabel;
+  }
+
+
+  public CollateralAgreementRequest returnNotificationCutLabel(String returnNotificationCutLabel) {
+    this.returnNotificationCutLabel = returnNotificationCutLabel;
+    return this;
+  }
+
+  /**
+   * The cut label giving the time of day by which collateral the counterparty delivers, or returns to us, must settle. Recorded as the deadline of the calls they post under. Optional.
+   * @return returnNotificationCutLabel
+   */
+  @javax.annotation.Nullable
+  public String getReturnNotificationCutLabel() {
+    return returnNotificationCutLabel;
+  }
+
+  public void setReturnNotificationCutLabel(String returnNotificationCutLabel) {
+    this.returnNotificationCutLabel = returnNotificationCutLabel;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -444,10 +546,14 @@ public class CollateralAgreementRequest {
         Objects.equals(this.rounding, collateralAgreementRequest.rounding) &&
         Objects.equals(this.settlementLag, collateralAgreementRequest.settlementLag) &&
         (this.matchTolerance == null ? collateralAgreementRequest.matchTolerance == null : (collateralAgreementRequest.matchTolerance != null && this.matchTolerance.compareTo(collateralAgreementRequest.getMatchTolerance()) == 0)) &&
+        Objects.equals(this.funding, collateralAgreementRequest.funding) &&
+        Objects.equals(this.optimisation, collateralAgreementRequest.optimisation) &&
         Objects.equals(this.variationMargin, collateralAgreementRequest.variationMargin) &&
         Objects.equals(this.initialMargin, collateralAgreementRequest.initialMargin) &&
         Objects.equals(this.properties, collateralAgreementRequest.properties) &&
-        Objects.equals(this.effectiveAt, collateralAgreementRequest.effectiveAt);
+        Objects.equals(this.effectiveAt, collateralAgreementRequest.effectiveAt) &&
+        Objects.equals(this.notificationCutLabel, collateralAgreementRequest.notificationCutLabel) &&
+        Objects.equals(this.returnNotificationCutLabel, collateralAgreementRequest.returnNotificationCutLabel);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -456,7 +562,7 @@ public class CollateralAgreementRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, counterpartyId, applicabilityFilter, baseCurrency, cutLabel, recipeId, minimumTransferAmount, rounding, settlementLag, matchTolerance, variationMargin, initialMargin, properties, effectiveAt);
+    return Objects.hash(code, counterpartyId, applicabilityFilter, baseCurrency, cutLabel, recipeId, minimumTransferAmount, rounding, settlementLag, matchTolerance, funding, optimisation, variationMargin, initialMargin, properties, effectiveAt, notificationCutLabel, returnNotificationCutLabel);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -480,10 +586,14 @@ public class CollateralAgreementRequest {
     sb.append("    rounding: ").append(toIndentedString(rounding)).append("\n");
     sb.append("    settlementLag: ").append(toIndentedString(settlementLag)).append("\n");
     sb.append("    matchTolerance: ").append(toIndentedString(matchTolerance)).append("\n");
+    sb.append("    funding: ").append(toIndentedString(funding)).append("\n");
+    sb.append("    optimisation: ").append(toIndentedString(optimisation)).append("\n");
     sb.append("    variationMargin: ").append(toIndentedString(variationMargin)).append("\n");
     sb.append("    initialMargin: ").append(toIndentedString(initialMargin)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    effectiveAt: ").append(toIndentedString(effectiveAt)).append("\n");
+    sb.append("    notificationCutLabel: ").append(toIndentedString(notificationCutLabel)).append("\n");
+    sb.append("    returnNotificationCutLabel: ").append(toIndentedString(returnNotificationCutLabel)).append("\n");
     sb.append("}");
     return sb.toString();
   }

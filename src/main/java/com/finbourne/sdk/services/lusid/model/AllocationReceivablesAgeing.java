@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AllocationReceivable;
+import com.finbourne.sdk.services.lusid.model.AllocationRegisterReceivable;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -41,7 +42,8 @@ import com.finbourne.sdk.JSON;
   AllocationReceivablesAgeing.JSON_PROPERTY_AS_OF,
   AllocationReceivablesAgeing.JSON_PROPERTY_DUE_DATE,
   AllocationReceivablesAgeing.JSON_PROPERTY_OUTSTANDING,
-  AllocationReceivablesAgeing.JSON_PROPERTY_RECEIVABLES
+  AllocationReceivablesAgeing.JSON_PROPERTY_RECEIVABLES,
+  AllocationReceivablesAgeing.JSON_PROPERTY_REGISTERS
 })
 
 public class AllocationReceivablesAgeing {
@@ -64,6 +66,11 @@ public class AllocationReceivablesAgeing {
   @JsonProperty(JSON_PROPERTY_RECEIVABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<AllocationReceivable> receivables;
+
+  public static final String JSON_PROPERTY_REGISTERS = "registers";
+  @JsonProperty(JSON_PROPERTY_REGISTERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationRegisterReceivable> registers;
 
   public AllocationReceivablesAgeing() {
   }
@@ -112,7 +119,7 @@ public class AllocationReceivablesAgeing {
   }
 
   /**
-   * The total still owed across all investor records.
+   * What the investors still owe, looking through feeders to their LPs so a roll-up is not counted twice.
    * @return outstanding
    */
   @javax.annotation.Nullable
@@ -139,7 +146,7 @@ public class AllocationReceivablesAgeing {
   }
 
   /**
-   * One entry per investor record that was called.
+   * One entry per investor record and side that was called on a register.
    * @return receivables
    */
   @javax.annotation.Nullable
@@ -149,6 +156,33 @@ public class AllocationReceivablesAgeing {
 
   public void setReceivables(List<AllocationReceivable> receivables) {
     this.receivables = receivables;
+  }
+
+
+  public AllocationReceivablesAgeing registers(List<AllocationRegisterReceivable> registers) {
+    this.registers = registers;
+    return this;
+  }
+
+  public AllocationReceivablesAgeing addRegistersItem(AllocationRegisterReceivable registersItem) {
+    if (this.registers == null) {
+      this.registers = new ArrayList<>();
+    }
+    this.registers.add(registersItem);
+    return this;
+  }
+
+  /**
+   * What each register is owed on its own lines, a feeder&#39;s roll-up included.
+   * @return registers
+   */
+  @javax.annotation.Nullable
+  public List<AllocationRegisterReceivable> getRegisters() {
+    return registers;
+  }
+
+  public void setRegisters(List<AllocationRegisterReceivable> registers) {
+    this.registers = registers;
   }
 
 
@@ -164,7 +198,8 @@ public class AllocationReceivablesAgeing {
     return Objects.equals(this.asOf, allocationReceivablesAgeing.asOf) &&
         Objects.equals(this.dueDate, allocationReceivablesAgeing.dueDate) &&
         (this.outstanding == null ? allocationReceivablesAgeing.outstanding == null : (allocationReceivablesAgeing.outstanding != null && this.outstanding.compareTo(allocationReceivablesAgeing.getOutstanding()) == 0)) &&
-        Objects.equals(this.receivables, allocationReceivablesAgeing.receivables);
+        Objects.equals(this.receivables, allocationReceivablesAgeing.receivables) &&
+        Objects.equals(this.registers, allocationReceivablesAgeing.registers);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -173,7 +208,7 @@ public class AllocationReceivablesAgeing {
 
   @Override
  public int hashCode() {
-    return Objects.hash(asOf, dueDate, outstanding, receivables);
+    return Objects.hash(asOf, dueDate, outstanding, receivables, registers);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -191,6 +226,7 @@ public class AllocationReceivablesAgeing {
     sb.append("    dueDate: ").append(toIndentedString(dueDate)).append("\n");
     sb.append("    outstanding: ").append(toIndentedString(outstanding)).append("\n");
     sb.append("    receivables: ").append(toIndentedString(receivables)).append("\n");
+    sb.append("    registers: ").append(toIndentedString(registers)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -60,7 +60,9 @@ import com.finbourne.sdk.JSON;
   NavType.JSON_PROPERTY_TRANSACTION_EXCLUSION_FILTER,
   NavType.JSON_PROPERTY_PRICING_BASIS,
   NavType.JSON_PROPERTY_SWING_PRICING,
-  NavType.JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID
+  NavType.JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID,
+  NavType.JSON_PROPERTY_VALUATION_TEMPLATE_ID,
+  NavType.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME
 })
 
 public class NavType {
@@ -173,6 +175,16 @@ public class NavType {
   @JsonProperty(JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private ResourceId notionalDealingCostTableId;
+
+  public static final String JSON_PROPERTY_VALUATION_TEMPLATE_ID = "valuationTemplateId";
+  @JsonProperty(JSON_PROPERTY_VALUATION_TEMPLATE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId valuationTemplateId;
+
+  public static final String JSON_PROPERTY_CHARGEABLE_GAINS_REGIME = "chargeableGainsRegime";
+  @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_REGIME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String chargeableGainsRegime;
 
   public NavType() {
   }
@@ -549,7 +561,7 @@ public class NavType {
   }
 
   /**
-   * Optional filter expression to exclude specific transactions from this NavType&#39;s derived portfolios. The filter can reference Transaction, Portfolio, or Instrument fields and properties.
+   * Optional filter expression to exclude specific transactions from this NavType&#39;s derived portfolios. The filter can reference Transaction, Portfolio, or Instrument fields and properties. The filter can be changed by patching the NavType, which propagates it to the NavType&#39;s derived portfolios. A NavType never inherits the filter of the Fund&#39;s portfolios: omitting the filter, or setting it to an empty string, means no filter. A transaction amended across a Final valuation point so that it newly matches the filter is reversed in the next valuation point, and one amended so that it stops matching is posted in the next valuation point as a true-up.
    * @return transactionExclusionFilter
    */
   @javax.annotation.Nullable
@@ -619,6 +631,44 @@ public class NavType {
   }
 
 
+  public NavType valuationTemplateId(ResourceId valuationTemplateId) {
+    this.valuationTemplateId = valuationTemplateId;
+    return this;
+  }
+
+  /**
+   * Get valuationTemplateId
+   * @return valuationTemplateId
+   */
+  @javax.annotation.Nullable
+  public ResourceId getValuationTemplateId() {
+    return valuationTemplateId;
+  }
+
+  public void setValuationTemplateId(ResourceId valuationTemplateId) {
+    this.valuationTemplateId = valuationTemplateId;
+  }
+
+
+  public NavType chargeableGainsRegime(String chargeableGainsRegime) {
+    this.chargeableGainsRegime = chargeableGainsRegime;
+    return this;
+  }
+
+  /**
+   * The chargeable gains regime the Nav Type&#39;s derived portfolio is elected into. This can be: Default or UkChargeableGains. Omit it, or supply Default, to leave the derived portfolio inheriting its parent portfolio&#39;s regime. Under UkChargeableGains, in-scope holdings in the derived portfolio are depleted under the UK chargeable gains rules regardless of the Nav Type&#39;s accounting method; it requires the Fund&#39;s base currency to be GBP. Available values: Default, UkChargeableGains.
+   * @return chargeableGainsRegime
+   */
+  @javax.annotation.Nullable
+  public String getChargeableGainsRegime() {
+    return chargeableGainsRegime;
+  }
+
+  public void setChargeableGainsRegime(String chargeableGainsRegime) {
+    this.chargeableGainsRegime = chargeableGainsRegime;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -649,7 +699,9 @@ public class NavType {
         Objects.equals(this.transactionExclusionFilter, navType.transactionExclusionFilter) &&
         Objects.equals(this.pricingBasis, navType.pricingBasis) &&
         Objects.equals(this.swingPricing, navType.swingPricing) &&
-        Objects.equals(this.notionalDealingCostTableId, navType.notionalDealingCostTableId);
+        Objects.equals(this.notionalDealingCostTableId, navType.notionalDealingCostTableId) &&
+        Objects.equals(this.valuationTemplateId, navType.valuationTemplateId) &&
+        Objects.equals(this.chargeableGainsRegime, navType.chargeableGainsRegime);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -658,7 +710,7 @@ public class NavType {
 
   @Override
  public int hashCode() {
-    return Objects.hash(status, code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope, transactionExclusionFilter, pricingBasis, swingPricing, notionalDealingCostTableId);
+    return Objects.hash(status, code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope, transactionExclusionFilter, pricingBasis, swingPricing, notionalDealingCostTableId, valuationTemplateId, chargeableGainsRegime);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -694,6 +746,8 @@ public class NavType {
     sb.append("    pricingBasis: ").append(toIndentedString(pricingBasis)).append("\n");
     sb.append("    swingPricing: ").append(toIndentedString(swingPricing)).append("\n");
     sb.append("    notionalDealingCostTableId: ").append(toIndentedString(notionalDealingCostTableId)).append("\n");
+    sb.append("    valuationTemplateId: ").append(toIndentedString(valuationTemplateId)).append("\n");
+    sb.append("    chargeableGainsRegime: ").append(toIndentedString(chargeableGainsRegime)).append("\n");
     sb.append("}");
     return sb.toString();
   }

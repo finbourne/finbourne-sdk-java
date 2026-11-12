@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -31,7 +32,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * One investor&#39;s position on a booked capital call.
+ * One investor&#39;s position on a booked capital call, on one register.
  */
 @JsonPropertyOrder({
   AllocationReceivable.JSON_PROPERTY_INVESTOR_RECORD_ID,
@@ -39,7 +40,9 @@ import com.finbourne.sdk.JSON;
   AllocationReceivable.JSON_PROPERTY_RECEIVED,
   AllocationReceivable.JSON_PROPERTY_OUTSTANDING,
   AllocationReceivable.JSON_PROPERTY_DAYS_PAST_DUE,
-  AllocationReceivable.JSON_PROPERTY_BUCKET
+  AllocationReceivable.JSON_PROPERTY_BUCKET,
+  AllocationReceivable.JSON_PROPERTY_PORTFOLIO,
+  AllocationReceivable.JSON_PROPERTY_SIDE
 })
 
 public class AllocationReceivable {
@@ -72,6 +75,16 @@ public class AllocationReceivable {
   @JsonProperty(JSON_PROPERTY_BUCKET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String bucket;
+
+  public static final String JSON_PROPERTY_PORTFOLIO = "portfolio";
+  @JsonProperty(JSON_PROPERTY_PORTFOLIO)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ResourceId portfolio;
+
+  public static final String JSON_PROPERTY_SIDE = "side";
+  @JsonProperty(JSON_PROPERTY_SIDE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String side;
 
   public AllocationReceivable() {
   }
@@ -190,6 +203,44 @@ public class AllocationReceivable {
   }
 
 
+  public AllocationReceivable portfolio(ResourceId portfolio) {
+    this.portfolio = portfolio;
+    return this;
+  }
+
+  /**
+   * Get portfolio
+   * @return portfolio
+   */
+  @javax.annotation.Nullable
+  public ResourceId getPortfolio() {
+    return portfolio;
+  }
+
+  public void setPortfolio(ResourceId portfolio) {
+    this.portfolio = portfolio;
+  }
+
+
+  public AllocationReceivable side(String side) {
+    this.side = side;
+    return this;
+  }
+
+  /**
+   * Whether the record owes on its own line (LP) or as a feeder&#39;s roll-up on the master (ROLLUP).
+   * @return side
+   */
+  @javax.annotation.Nullable
+  public String getSide() {
+    return side;
+  }
+
+  public void setSide(String side) {
+    this.side = side;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -204,7 +255,9 @@ public class AllocationReceivable {
         (this.received == null ? allocationReceivable.received == null : (allocationReceivable.received != null && this.received.compareTo(allocationReceivable.getReceived()) == 0)) &&
         (this.outstanding == null ? allocationReceivable.outstanding == null : (allocationReceivable.outstanding != null && this.outstanding.compareTo(allocationReceivable.getOutstanding()) == 0)) &&
         Objects.equals(this.daysPastDue, allocationReceivable.daysPastDue) &&
-        Objects.equals(this.bucket, allocationReceivable.bucket);
+        Objects.equals(this.bucket, allocationReceivable.bucket) &&
+        Objects.equals(this.portfolio, allocationReceivable.portfolio) &&
+        Objects.equals(this.side, allocationReceivable.side);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -213,7 +266,7 @@ public class AllocationReceivable {
 
   @Override
  public int hashCode() {
-    return Objects.hash(investorRecordId, called, received, outstanding, daysPastDue, bucket);
+    return Objects.hash(investorRecordId, called, received, outstanding, daysPastDue, bucket, portfolio, side);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -233,6 +286,8 @@ public class AllocationReceivable {
     sb.append("    outstanding: ").append(toIndentedString(outstanding)).append("\n");
     sb.append("    daysPastDue: ").append(toIndentedString(daysPastDue)).append("\n");
     sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
+    sb.append("    portfolio: ").append(toIndentedString(portfolio)).append("\n");
+    sb.append("    side: ").append(toIndentedString(side)).append("\n");
     sb.append("}");
     return sb.toString();
   }
