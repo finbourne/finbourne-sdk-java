@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **createdDate** | [**OffsetDateTime**](OffsetDateTime.md) | The date on which the block was made | [default to OffsetDateTime]
 **limitPrice** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
 **stopPrice** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
-**isSwept** | **Boolean** | Swept blocks are considered no longer of active interest, and no longer take part in various order management processes | [optional] [default to Boolean]
+**isSwept** | **Boolean** | Swept blocks are considered no longer of active interest, and no longer take part in various order management processes. If not supplied, an existing block keeps its current value and a new block is not swept. | [optional] [default to Boolean]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.BlockRequest;
@@ -38,7 +38,7 @@ String side = "example side";
 OffsetDateTime createdDate = OffsetDateTime.now();
 CurrencyAndAmount limitPrice = new CurrencyAndAmount();
 CurrencyAndAmount stopPrice = new CurrencyAndAmount();
-Boolean isSwept = true;
+@javax.annotation.Nullable Boolean isSwept = true;
 
 
 BlockRequest blockRequestInstance = new BlockRequest()

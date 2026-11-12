@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.FlowConventions;
+import com.finbourne.sdk.services.lusid.model.RelativeDateOffset;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -39,6 +40,7 @@ import com.finbourne.sdk.JSON;
   ResetSchedule.JSON_PROPERTY_CONVENTIONS,
   ResetSchedule.JSON_PROPERTY_FIRST_RESET_DATE,
   ResetSchedule.JSON_PROPERTY_FREQUENCY,
+  ResetSchedule.JSON_PROPERTY_FUNDING_START_LAG,
   ResetSchedule.JSON_PROPERTY_LAST_RESET_DATE
 })
 
@@ -57,6 +59,11 @@ public class ResetSchedule {
   @JsonProperty(JSON_PROPERTY_FREQUENCY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String frequency;
+
+  public static final String JSON_PROPERTY_FUNDING_START_LAG = "fundingStartLag";
+  @JsonProperty(JSON_PROPERTY_FUNDING_START_LAG)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RelativeDateOffset fundingStartLag;
 
   public static final String JSON_PROPERTY_LAST_RESET_DATE = "lastResetDate";
   @JsonProperty(JSON_PROPERTY_LAST_RESET_DATE)
@@ -123,6 +130,25 @@ public class ResetSchedule {
   }
 
 
+  public ResetSchedule fundingStartLag(RelativeDateOffset fundingStartLag) {
+    this.fundingStartLag = fundingStartLag;
+    return this;
+  }
+
+  /**
+   * Get fundingStartLag
+   * @return fundingStartLag
+   */
+  @javax.annotation.Nullable
+  public RelativeDateOffset getFundingStartLag() {
+    return fundingStartLag;
+  }
+
+  public void setFundingStartLag(RelativeDateOffset fundingStartLag) {
+    this.fundingStartLag = fundingStartLag;
+  }
+
+
   public ResetSchedule lastResetDate(OffsetDateTime lastResetDate) {
     this.lastResetDate = lastResetDate;
     return this;
@@ -154,6 +180,7 @@ public class ResetSchedule {
     return Objects.equals(this.conventions, resetSchedule.conventions) &&
         Objects.equals(this.firstResetDate, resetSchedule.firstResetDate) &&
         Objects.equals(this.frequency, resetSchedule.frequency) &&
+        Objects.equals(this.fundingStartLag, resetSchedule.fundingStartLag) &&
         Objects.equals(this.lastResetDate, resetSchedule.lastResetDate);
   }
 
@@ -163,7 +190,7 @@ public class ResetSchedule {
 
   @Override
  public int hashCode() {
-    return Objects.hash(conventions, firstResetDate, frequency, lastResetDate);
+    return Objects.hash(conventions, firstResetDate, frequency, fundingStartLag, lastResetDate);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -180,6 +207,7 @@ public class ResetSchedule {
     sb.append("    conventions: ").append(toIndentedString(conventions)).append("\n");
     sb.append("    firstResetDate: ").append(toIndentedString(firstResetDate)).append("\n");
     sb.append("    frequency: ").append(toIndentedString(frequency)).append("\n");
+    sb.append("    fundingStartLag: ").append(toIndentedString(fundingStartLag)).append("\n");
     sb.append("    lastResetDate: ").append(toIndentedString(lastResetDate)).append("\n");
     sb.append("}");
     return sb.toString();

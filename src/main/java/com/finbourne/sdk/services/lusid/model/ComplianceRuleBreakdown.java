@@ -40,6 +40,7 @@ import com.finbourne.sdk.JSON;
  * ComplianceRuleBreakdown
  */
 @JsonPropertyOrder({
+  ComplianceRuleBreakdown.JSON_PROPERTY_GROUP_ID,
   ComplianceRuleBreakdown.JSON_PROPERTY_GROUP_STATUS,
   ComplianceRuleBreakdown.JSON_PROPERTY_RESULTS_USED,
   ComplianceRuleBreakdown.JSON_PROPERTY_FORMULA_VALUES,
@@ -49,6 +50,11 @@ import com.finbourne.sdk.JSON;
 })
 
 public class ComplianceRuleBreakdown {
+  public static final String JSON_PROPERTY_GROUP_ID = "groupId";
+  @JsonProperty(JSON_PROPERTY_GROUP_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Integer groupId;
+
   public static final String JSON_PROPERTY_GROUP_STATUS = "groupStatus";
   @JsonProperty(JSON_PROPERTY_GROUP_STATUS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -81,6 +87,25 @@ public class ComplianceRuleBreakdown {
 
   public ComplianceRuleBreakdown() {
   }
+
+  public ComplianceRuleBreakdown groupId(Integer groupId) {
+    this.groupId = groupId;
+    return this;
+  }
+
+  /**
+   * A stable identifier for this group within the rule, the same across the rule-result and breakdown endpoints,  so a group can be correlated between the two.
+   * @return groupId
+   */
+  @javax.annotation.Nonnull
+  public Integer getGroupId() {
+    return groupId;
+  }
+
+  public void setGroupId(Integer groupId) {
+    this.groupId = groupId;
+  }
+
 
   public ComplianceRuleBreakdown groupStatus(String groupStatus) {
     this.groupStatus = groupStatus;
@@ -245,7 +270,8 @@ public class ComplianceRuleBreakdown {
       return false;
     }
     ComplianceRuleBreakdown complianceRuleBreakdown = (ComplianceRuleBreakdown) o;
-    return Objects.equals(this.groupStatus, complianceRuleBreakdown.groupStatus) &&
+    return Objects.equals(this.groupId, complianceRuleBreakdown.groupId) &&
+        Objects.equals(this.groupStatus, complianceRuleBreakdown.groupStatus) &&
         Objects.equals(this.resultsUsed, complianceRuleBreakdown.resultsUsed) &&
         Objects.equals(this.formulaValues, complianceRuleBreakdown.formulaValues) &&
         Objects.equals(this.propertiesUsed, complianceRuleBreakdown.propertiesUsed) &&
@@ -259,7 +285,7 @@ public class ComplianceRuleBreakdown {
 
   @Override
  public int hashCode() {
-    return Objects.hash(groupStatus, resultsUsed, formulaValues, propertiesUsed, missingDataInformation, lineage);
+    return Objects.hash(groupId, groupStatus, resultsUsed, formulaValues, propertiesUsed, missingDataInformation, lineage);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -273,6 +299,7 @@ public class ComplianceRuleBreakdown {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ComplianceRuleBreakdown {\n");
+    sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
     sb.append("    groupStatus: ").append(toIndentedString(groupStatus)).append("\n");
     sb.append("    resultsUsed: ").append(toIndentedString(resultsUsed)).append("\n");
     sb.append("    formulaValues: ").append(toIndentedString(formulaValues)).append("\n");

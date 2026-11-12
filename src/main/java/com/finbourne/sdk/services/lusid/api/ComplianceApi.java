@@ -1512,7 +1512,7 @@ public class ComplianceApi {
 
     /**
      * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
-     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule as a single  sentence. The sentence is empty for a rule the generator cannot fully express.
      * @param scope The compliance rule&#39;s scope. (required)
      * @param code The compliance rule&#39;s code. (required)
      * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
@@ -1534,7 +1534,7 @@ public class ComplianceApi {
 
     /**
      * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
-     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.Use any specified configuration options to override any other configuration for this request only
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule as a single  sentence. The sentence is empty for a rule the generator cannot fully express.Use any specified configuration options to override any other configuration for this request only
      * @param scope The compliance rule&#39;s scope. (required)
      * @param code The compliance rule&#39;s code. (required)
      * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
@@ -1556,7 +1556,7 @@ public class ComplianceApi {
 
     /**
      * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English. (asynchronously)
-     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule as a single  sentence. The sentence is empty for a rule the generator cannot fully express.
      * @param scope The compliance rule&#39;s scope. (required)
      * @param code The compliance rule&#39;s code. (required)
      * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
@@ -1579,7 +1579,7 @@ public class ComplianceApi {
 
     /**
      * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English. (asynchronously)
-     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.Use any specified configuration options to override any other configuration for this request only
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule as a single  sentence. The sentence is empty for a rule the generator cannot fully express.Use any specified configuration options to override any other configuration for this request only
      * @param scope The compliance rule&#39;s scope. (required)
      * @param code The compliance rule&#39;s code. (required)
      * @param asAt Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
@@ -1738,7 +1738,7 @@ public class ComplianceApi {
 
     /**
      * [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
-     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.
+     * Use this endpoint to retrieve a plain-English description of a V3 compliance rule as a single  sentence. The sentence is empty for a rule the generator cannot fully express.
      * @param scope The compliance rule&#39;s scope. (required)
      * @param code The compliance rule&#39;s code. (required)
      * @return APIdescribeComplianceRuleV3Request

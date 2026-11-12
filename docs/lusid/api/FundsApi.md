@@ -4025,7 +4025,7 @@ public class FundsApiExample {
 
 [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
 
-Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.
+Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.                Rows are returned ordered by portfolio (scope then code, ordinal), then by trade date, entry time, transaction id (ordinal) and sub-holding keys, so the order is total and stable across pages.
 
 ### Example
 
@@ -4058,7 +4058,7 @@ public class FundsApiExample {
         OffsetDateTime asAt = OffsetDateTime.now(); // OffsetDateTime | The asAt datetime at which to retrieve the report. Defaults to latest.
         Integer limit = 56; // Integer | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
         String page = "page_example"; // String | The pagination token to use to continue listing from a previous call.
-        List<String> propertyKeys = Arrays.asList(); // List<String> | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.
+        List<String> propertyKeys = Arrays.asList(); // List<String> | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'               domain to decorate onto the transactions.
         String navTypeCode = "navTypeCode_example"; // String | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
         String filter = "filter_example"; // String | Expression to filter the result set.
         try {
@@ -4087,7 +4087,7 @@ public class FundsApiExample {
 | **asAt** | **OffsetDateTime**| The asAt datetime at which to retrieve the report. Defaults to latest. | [optional] |
 | **limit** | **Integer**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] |
 | **page** | **String**| The pagination token to use to continue listing from a previous call. | [optional] |
-| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. | [optional] |
+| **propertyKeys** | [**List&lt;String&gt;**](../model/String.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;               domain to decorate onto the transactions. | [optional] |
 | **navTypeCode** | **String**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] |
 | **filter** | **String**| Expression to filter the result set. | [optional] |
 

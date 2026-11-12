@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **effectiveDate** | [**OffsetDateTime**](OffsetDateTime.md) | The date of the mark to market event. | [optional] [default to OffsetDateTime]
 **settlementCurrency** | **String** | The currency in which the Future contract is paid. | [default to String]
 **notionalAmountPerUnit** | **java.math.BigDecimal** | The notional value of the contract on the effective date. | [optional] [default to java.math.BigDecimal]
+**paymentDate** | [**OffsetDateTime**](OffsetDateTime.md) | The date the variation margin is paid: the effective date plus the future&#39;s mark to market settlement offset.  This is an optional field; when absent the variation margin is paid on the effective date. | [optional] [default to OffsetDateTime]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.FutureMarkToMarketEvent;
@@ -20,12 +21,14 @@ import java.net.URI;
 OffsetDateTime effectiveDate = OffsetDateTime.now();
 String settlementCurrency = "example settlementCurrency";
 @javax.annotation.Nullable java.math.BigDecimal notionalAmountPerUnit = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable OffsetDateTime paymentDate = OffsetDateTime.now();
 
 
 FutureMarkToMarketEvent futureMarkToMarketEventInstance = new FutureMarkToMarketEvent()
     .effectiveDate(effectiveDate)
     .settlementCurrency(settlementCurrency)
-    .notionalAmountPerUnit(notionalAmountPerUnit);
+    .notionalAmountPerUnit(notionalAmountPerUnit)
+    .paymentDate(paymentDate);
 ```
 
 

@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.CashAndSecurityOfferElection;
+import com.finbourne.sdk.services.lusid.model.ElectionProrationRate;
 import com.finbourne.sdk.services.lusid.model.InstrumentEvent;
 import com.finbourne.sdk.services.lusid.model.LapseElection;
 import com.finbourne.sdk.services.lusid.model.MixedLotConstituentsElection;
@@ -64,7 +65,11 @@ import com.finbourne.sdk.JSON;
   DutchAuctionEvent.JSON_PROPERTY_NEW_INSTRUMENT,
   DutchAuctionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_PRICE,
   DutchAuctionEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY,
-  DutchAuctionEvent.JSON_PROPERTY_BID_PRICE
+  DutchAuctionEvent.JSON_PROPERTY_BID_PRICE,
+  DutchAuctionEvent.JSON_PROPERTY_ELECTION_PRORATION_RATES,
+  DutchAuctionEvent.JSON_PROPERTY_MIN_PIECE_SIZE,
+  DutchAuctionEvent.JSON_PROPERTY_MIN_INCREMENT,
+  DutchAuctionEvent.JSON_PROPERTY_ACCEPTED_QUANTITY_ROUNDING
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -173,6 +178,26 @@ public class DutchAuctionEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_BID_PRICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal bidPrice;
+
+  public static final String JSON_PROPERTY_ELECTION_PRORATION_RATES = "electionProrationRates";
+  @JsonProperty(JSON_PROPERTY_ELECTION_PRORATION_RATES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ElectionProrationRate> electionProrationRates;
+
+  public static final String JSON_PROPERTY_MIN_PIECE_SIZE = "minPieceSize";
+  @JsonProperty(JSON_PROPERTY_MIN_PIECE_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal minPieceSize;
+
+  public static final String JSON_PROPERTY_MIN_INCREMENT = "minIncrement";
+  @JsonProperty(JSON_PROPERTY_MIN_INCREMENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal minIncrement;
+
+  public static final String JSON_PROPERTY_ACCEPTED_QUANTITY_ROUNDING = "acceptedQuantityRounding";
+  @JsonProperty(JSON_PROPERTY_ACCEPTED_QUANTITY_ROUNDING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String acceptedQuantityRounding;
 
   public DutchAuctionEvent() {
   }
@@ -605,6 +630,90 @@ public class DutchAuctionEvent extends InstrumentEvent {
   }
 
 
+  public DutchAuctionEvent electionProrationRates(List<ElectionProrationRate> electionProrationRates) {
+    this.electionProrationRates = electionProrationRates;
+    return this;
+  }
+
+  public DutchAuctionEvent addElectionProrationRatesItem(ElectionProrationRate electionProrationRatesItem) {
+    if (this.electionProrationRates == null) {
+      this.electionProrationRates = new ArrayList<>();
+    }
+    this.electionProrationRates.add(electionProrationRatesItem);
+    return this;
+  }
+
+  /**
+   * Optional proration rate per option, keyed by election key. An entry overrides ProrationRate for that  election; an option without an entry uses ProrationRate. Each key must name a TenderOffer, SecurityOffer,  CashAndSecurityOffer or MixedLotConstituents election of this event, once, with a rate in (0, 1].
+   * @return electionProrationRates
+   */
+  @javax.annotation.Nullable
+  public List<ElectionProrationRate> getElectionProrationRates() {
+    return electionProrationRates;
+  }
+
+  public void setElectionProrationRates(List<ElectionProrationRate> electionProrationRates) {
+    this.electionProrationRates = electionProrationRates;
+  }
+
+
+  public DutchAuctionEvent minPieceSize(java.math.BigDecimal minPieceSize) {
+    this.minPieceSize = minPieceSize;
+    return this;
+  }
+
+  /**
+   * Optional minimum tradable piece of the accepted quantity, in face for a bond and in units otherwise.  Must be strictly positive when set. With AcceptedQuantityRounding RoundDown, an accepted quantity below it  is rounded to zero.
+   * @return minPieceSize
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getMinPieceSize() {
+    return minPieceSize;
+  }
+
+  public void setMinPieceSize(java.math.BigDecimal minPieceSize) {
+    this.minPieceSize = minPieceSize;
+  }
+
+
+  public DutchAuctionEvent minIncrement(java.math.BigDecimal minIncrement) {
+    this.minIncrement = minIncrement;
+    return this;
+  }
+
+  /**
+   * Optional tradable increment above MinPieceSize, in the same unit. When set, MinPieceSize must also be set.  Must be strictly positive. With AcceptedQuantityRounding RoundDown, the accepted quantity is rounded down to  MinPieceSize plus a whole number of increments.
+   * @return minIncrement
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getMinIncrement() {
+    return minIncrement;
+  }
+
+  public void setMinIncrement(java.math.BigDecimal minIncrement) {
+    this.minIncrement = minIncrement;
+  }
+
+
+  public DutchAuctionEvent acceptedQuantityRounding(String acceptedQuantityRounding) {
+    this.acceptedQuantityRounding = acceptedQuantityRounding;
+    return this;
+  }
+
+  /**
+   * How a prorated accepted quantity that is not a whole tradable lot is disposed of. RoundDown rounds it down  to the tradable lot, or to a whole unit when no lot size is given, and the remainder stays in the holding.  CashInLieu accepts the unrounded quantity. When omitted the accepted quantity is not rounded. Available values: RoundDown, CashInLieu.
+   * @return acceptedQuantityRounding
+   */
+  @javax.annotation.Nullable
+  public String getAcceptedQuantityRounding() {
+    return acceptedQuantityRounding;
+  }
+
+  public void setAcceptedQuantityRounding(String acceptedQuantityRounding) {
+    this.acceptedQuantityRounding = acceptedQuantityRounding;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -634,6 +743,10 @@ public class DutchAuctionEvent extends InstrumentEvent {
         (this.fractionalUnitsCashPrice == null ? dutchAuctionEvent.fractionalUnitsCashPrice == null : (dutchAuctionEvent.fractionalUnitsCashPrice != null && this.fractionalUnitsCashPrice.compareTo(dutchAuctionEvent.getFractionalUnitsCashPrice()) == 0)) &&
         Objects.equals(this.fractionalUnitsCashCurrency, dutchAuctionEvent.fractionalUnitsCashCurrency) &&
         (this.bidPrice == null ? dutchAuctionEvent.bidPrice == null : (dutchAuctionEvent.bidPrice != null && this.bidPrice.compareTo(dutchAuctionEvent.getBidPrice()) == 0)) &&
+        Objects.equals(this.electionProrationRates, dutchAuctionEvent.electionProrationRates) &&
+        (this.minPieceSize == null ? dutchAuctionEvent.minPieceSize == null : (dutchAuctionEvent.minPieceSize != null && this.minPieceSize.compareTo(dutchAuctionEvent.getMinPieceSize()) == 0)) &&
+        (this.minIncrement == null ? dutchAuctionEvent.minIncrement == null : (dutchAuctionEvent.minIncrement != null && this.minIncrement.compareTo(dutchAuctionEvent.getMinIncrement()) == 0)) &&
+        Objects.equals(this.acceptedQuantityRounding, dutchAuctionEvent.acceptedQuantityRounding) &&
         super.equals(o);
   }
 
@@ -643,7 +756,7 @@ public class DutchAuctionEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(paymentDate, marketDeadlineDate, currency, tenderOfferElections, securityOfferElections, cashAndSecurityOfferElections, lapseElections, mixedLotConstituentsElections, unknownProceedsElections, responseDeadlineDate, earlyResponseDeadline, exDate, recordDate, announcementDate, targetQuantity, prorationRate, newInstrument, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, bidPrice, super.hashCode());
+    return Objects.hash(paymentDate, marketDeadlineDate, currency, tenderOfferElections, securityOfferElections, cashAndSecurityOfferElections, lapseElections, mixedLotConstituentsElections, unknownProceedsElections, responseDeadlineDate, earlyResponseDeadline, exDate, recordDate, announcementDate, targetQuantity, prorationRate, newInstrument, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, bidPrice, electionProrationRates, minPieceSize, minIncrement, acceptedQuantityRounding, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -678,6 +791,10 @@ public class DutchAuctionEvent extends InstrumentEvent {
     sb.append("    fractionalUnitsCashPrice: ").append(toIndentedString(fractionalUnitsCashPrice)).append("\n");
     sb.append("    fractionalUnitsCashCurrency: ").append(toIndentedString(fractionalUnitsCashCurrency)).append("\n");
     sb.append("    bidPrice: ").append(toIndentedString(bidPrice)).append("\n");
+    sb.append("    electionProrationRates: ").append(toIndentedString(electionProrationRates)).append("\n");
+    sb.append("    minPieceSize: ").append(toIndentedString(minPieceSize)).append("\n");
+    sb.append("    minIncrement: ").append(toIndentedString(minIncrement)).append("\n");
+    sb.append("    acceptedQuantityRounding: ").append(toIndentedString(acceptedQuantityRounding)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -1,6 +1,6 @@
 # com.finbourne.sdk.services.lusid.model.ComplianceRuleV3DescribeResponse
 classname ComplianceRuleV3DescribeResponse
-A plain-English description of a V3 compliance rule. This is a minimal placeholder shape: the plain-English  generator is delivered separately, so the Lines property is currently empty and only the rule's identity  and subject are populated.
+A plain-English description of a V3 compliance rule: its identity, the kind of entity it examines, and a  single sentence describing what it checks. The sentence is empty for a rule the generator cannot fully  express.
 
 ## Properties
 
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | [optional] [default to ResourceId]
 **subject** | **String** | Available values: Holdings, Orders. | [optional] [default to String]
-**lines** | **List&lt;String&gt;** |  | [optional] [default to List<String>]
+**plainEnglish** | **String** |  | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.ComplianceRuleV3DescribeResponse;
@@ -18,13 +18,13 @@ import java.net.URI;
 
 ResourceId id = new ResourceId();
 @javax.annotation.Nullable String subject = "example subject";
-@javax.annotation.Nullable List<String> lines = new List<String>();
+@javax.annotation.Nullable String plainEnglish = "example plainEnglish";
 
 
 ComplianceRuleV3DescribeResponse complianceRuleV3DescribeResponseInstance = new ComplianceRuleV3DescribeResponse()
     .id(id)
     .subject(subject)
-    .lines(lines);
+    .plainEnglish(plainEnglish);
 ```
 
 

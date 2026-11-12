@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **lastCouponType** | **String** | Optional coupon type setting for the last coupon, can be used with Stub coupons.  If set to \&quot;ProRata\&quot; (the default), the coupon year fraction is calculated as normal,  however if set to \&quot;Full\&quot; the year fraction is overwritten with the standard year fraction  for a regular ful\&quot; coupon. Note this does not use the day count convention but rather is defined  directly from the tenor (i.e. a quarterly leg will be set to 0.25).    Supported string (enumeration) values are: [ProRata, Full]. | [optional] [default to String]
 **fxLinkedNotionalSchedule** | [**FxLinkedNotionalSchedule**](FxLinkedNotionalSchedule.md) |  | [optional] [default to FxLinkedNotionalSchedule]
 **intermediateNotionalExchange** | **Boolean** | Indicates whether there are intermediate notional exchanges. | [optional] [default to Boolean]
+**initialExchangeAmount** | **java.math.BigDecimal** | The amount exchanged at the start of the leg, when NotionalExchangeType is Initial or Both.  Defaults to the notional. Coupons accrue on the notional regardless. Must be non-negative, and cannot be  set together with an FxLinkedNotionalSchedule. | [optional] [default to java.math.BigDecimal]
+**finalExchangeAmount** | **java.math.BigDecimal** | The amount exchanged at maturity, when NotionalExchangeType is Final or Both.  Defaults to the notional. Coupons accrue on the notional regardless. Must be non-negative, and cannot be  set together with an FxLinkedNotionalSchedule. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.LegDefinition;
@@ -47,6 +49,8 @@ StepSchedule amortisation = new StepSchedule();
 @javax.annotation.Nullable String lastCouponType = "example lastCouponType";
 FxLinkedNotionalSchedule fxLinkedNotionalSchedule = new FxLinkedNotionalSchedule();
 @javax.annotation.Nullable Boolean intermediateNotionalExchange = true;
+@javax.annotation.Nullable java.math.BigDecimal initialExchangeAmount = new java.math.BigDecimal("100.00");
+@javax.annotation.Nullable java.math.BigDecimal finalExchangeAmount = new java.math.BigDecimal("100.00");
 
 
 LegDefinition legDefinitionInstance = new LegDefinition()
@@ -66,7 +70,9 @@ LegDefinition legDefinitionInstance = new LegDefinition()
     .lastRegularPaymentDate(lastRegularPaymentDate)
     .lastCouponType(lastCouponType)
     .fxLinkedNotionalSchedule(fxLinkedNotionalSchedule)
-    .intermediateNotionalExchange(intermediateNotionalExchange);
+    .intermediateNotionalExchange(intermediateNotionalExchange)
+    .initialExchangeAmount(initialExchangeAmount)
+    .finalExchangeAmount(finalExchangeAmount);
 ```
 
 

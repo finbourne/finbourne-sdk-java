@@ -18,9 +18,8 @@ import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -41,13 +40,11 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_RULE_ID,
-  ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_TEMPLATE_ID,
-  ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_VARIATION,
-  ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_RULE_STATUS,
+  ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_STATUS,
+  ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_CHECK_TYPE,
   ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_AFFECTED_PORTFOLIOS,
   ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_AFFECTED_ORDERS,
-  ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_PARAMETERS_USED,
-  ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_RULE_BREAKDOWN,
+  ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_GROUPS,
   ComplianceSummaryRuleResultWithContributions.JSON_PROPERTY_OTHER_POSITIONS_CONSIDERED
 })
 
@@ -57,20 +54,15 @@ public class ComplianceSummaryRuleResultWithContributions {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private ResourceId ruleId;
 
-  public static final String JSON_PROPERTY_TEMPLATE_ID = "templateId";
-  @JsonProperty(JSON_PROPERTY_TEMPLATE_ID)
+  public static final String JSON_PROPERTY_STATUS = "status";
+  @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private ResourceId templateId;
+  private String status;
 
-  public static final String JSON_PROPERTY_VARIATION = "variation";
-  @JsonProperty(JSON_PROPERTY_VARIATION)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String variation;
-
-  public static final String JSON_PROPERTY_RULE_STATUS = "ruleStatus";
-  @JsonProperty(JSON_PROPERTY_RULE_STATUS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String ruleStatus;
+  public static final String JSON_PROPERTY_CHECK_TYPE = "checkType";
+  @JsonProperty(JSON_PROPERTY_CHECK_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String checkType;
 
   public static final String JSON_PROPERTY_AFFECTED_PORTFOLIOS = "affectedPortfolios";
   @JsonProperty(JSON_PROPERTY_AFFECTED_PORTFOLIOS)
@@ -79,23 +71,18 @@ public class ComplianceSummaryRuleResultWithContributions {
 
   public static final String JSON_PROPERTY_AFFECTED_ORDERS = "affectedOrders";
   @JsonProperty(JSON_PROPERTY_AFFECTED_ORDERS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<ResourceId> affectedOrders = new ArrayList<>();
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ResourceId> affectedOrders;
 
-  public static final String JSON_PROPERTY_PARAMETERS_USED = "parametersUsed";
-  @JsonProperty(JSON_PROPERTY_PARAMETERS_USED)
+  public static final String JSON_PROPERTY_GROUPS = "groups";
+  @JsonProperty(JSON_PROPERTY_GROUPS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Map<String, String> parametersUsed = new HashMap<>();
-
-  public static final String JSON_PROPERTY_RULE_BREAKDOWN = "ruleBreakdown";
-  @JsonProperty(JSON_PROPERTY_RULE_BREAKDOWN)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<ComplianceRuleBreakdownWithContributions> ruleBreakdown = new ArrayList<>();
+  private List<ComplianceRuleBreakdownWithContributions> groups = new ArrayList<>();
 
   public static final String JSON_PROPERTY_OTHER_POSITIONS_CONSIDERED = "otherPositionsConsidered";
   @JsonProperty(JSON_PROPERTY_OTHER_POSITIONS_CONSIDERED)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<ComplianceRuleContribution> otherPositionsConsidered = new ArrayList<>();
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ComplianceRuleContribution> otherPositionsConsidered;
 
   public ComplianceSummaryRuleResultWithContributions() {
   }
@@ -119,60 +106,41 @@ public class ComplianceSummaryRuleResultWithContributions {
   }
 
 
-  public ComplianceSummaryRuleResultWithContributions templateId(ResourceId templateId) {
-    this.templateId = templateId;
+  public ComplianceSummaryRuleResultWithContributions status(String status) {
+    this.status = status;
     return this;
   }
 
   /**
-   * Get templateId
-   * @return templateId
+   * Get status
+   * @return status
    */
   @javax.annotation.Nonnull
-  public ResourceId getTemplateId() {
-    return templateId;
+  public String getStatus() {
+    return status;
   }
 
-  public void setTemplateId(ResourceId templateId) {
-    this.templateId = templateId;
+  public void setStatus(String status) {
+    this.status = status;
   }
 
 
-  public ComplianceSummaryRuleResultWithContributions variation(String variation) {
-    this.variation = variation;
+  public ComplianceSummaryRuleResultWithContributions checkType(String checkType) {
+    this.checkType = checkType;
     return this;
   }
 
   /**
-   * Get variation
-   * @return variation
+   * The kind of check the rule applied across its groups: \&quot;PercentCheck\&quot; or \&quot;Check\&quot;. Static per rule. Absent for a  rule no check reached.
+   * @return checkType
    */
-  @javax.annotation.Nonnull
-  public String getVariation() {
-    return variation;
+  @javax.annotation.Nullable
+  public String getCheckType() {
+    return checkType;
   }
 
-  public void setVariation(String variation) {
-    this.variation = variation;
-  }
-
-
-  public ComplianceSummaryRuleResultWithContributions ruleStatus(String ruleStatus) {
-    this.ruleStatus = ruleStatus;
-    return this;
-  }
-
-  /**
-   * Get ruleStatus
-   * @return ruleStatus
-   */
-  @javax.annotation.Nonnull
-  public String getRuleStatus() {
-    return ruleStatus;
-  }
-
-  public void setRuleStatus(String ruleStatus) {
-    this.ruleStatus = ruleStatus;
+  public void setCheckType(String checkType) {
+    this.checkType = checkType;
   }
 
 
@@ -217,10 +185,10 @@ public class ComplianceSummaryRuleResultWithContributions {
   }
 
   /**
-   * Get affectedOrders
+   * The orders the rule affected. Omitted for a holdings-based run.
    * @return affectedOrders
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<ResourceId> getAffectedOrders() {
     return affectedOrders;
   }
@@ -230,57 +198,30 @@ public class ComplianceSummaryRuleResultWithContributions {
   }
 
 
-  public ComplianceSummaryRuleResultWithContributions parametersUsed(Map<String, String> parametersUsed) {
-    this.parametersUsed = parametersUsed;
+  public ComplianceSummaryRuleResultWithContributions groups(List<ComplianceRuleBreakdownWithContributions> groups) {
+    this.groups = groups;
     return this;
   }
 
-  public ComplianceSummaryRuleResultWithContributions putParametersUsedItem(String key, String parametersUsedItem) {
-    if (this.parametersUsed == null) {
-      this.parametersUsed = new HashMap<>();
+  public ComplianceSummaryRuleResultWithContributions addGroupsItem(ComplianceRuleBreakdownWithContributions groupsItem) {
+    if (this.groups == null) {
+      this.groups = new ArrayList<>();
     }
-    this.parametersUsed.put(key, parametersUsedItem);
+    this.groups.add(groupsItem);
     return this;
   }
 
   /**
-   * Get parametersUsed
-   * @return parametersUsed
+   * Get groups
+   * @return groups
    */
   @javax.annotation.Nonnull
-  public Map<String, String> getParametersUsed() {
-    return parametersUsed;
+  public List<ComplianceRuleBreakdownWithContributions> getGroups() {
+    return groups;
   }
 
-  public void setParametersUsed(Map<String, String> parametersUsed) {
-    this.parametersUsed = parametersUsed;
-  }
-
-
-  public ComplianceSummaryRuleResultWithContributions ruleBreakdown(List<ComplianceRuleBreakdownWithContributions> ruleBreakdown) {
-    this.ruleBreakdown = ruleBreakdown;
-    return this;
-  }
-
-  public ComplianceSummaryRuleResultWithContributions addRuleBreakdownItem(ComplianceRuleBreakdownWithContributions ruleBreakdownItem) {
-    if (this.ruleBreakdown == null) {
-      this.ruleBreakdown = new ArrayList<>();
-    }
-    this.ruleBreakdown.add(ruleBreakdownItem);
-    return this;
-  }
-
-  /**
-   * Get ruleBreakdown
-   * @return ruleBreakdown
-   */
-  @javax.annotation.Nonnull
-  public List<ComplianceRuleBreakdownWithContributions> getRuleBreakdown() {
-    return ruleBreakdown;
-  }
-
-  public void setRuleBreakdown(List<ComplianceRuleBreakdownWithContributions> ruleBreakdown) {
-    this.ruleBreakdown = ruleBreakdown;
+  public void setGroups(List<ComplianceRuleBreakdownWithContributions> groups) {
+    this.groups = groups;
   }
 
 
@@ -298,10 +239,10 @@ public class ComplianceSummaryRuleResultWithContributions {
   }
 
   /**
-   * The rest of the basis the rule was measured against but did not directly evaluate — the positions in  the referenced/denominator (or initial) group that are not in the RuleBreakdown&#39;s  contributions. Together with those contributions this forms the whole basis, with no overlap, so a  breach can be explained against the full picture (e.g. the non-equity remainder behind an equity limit).  Empty when the rule evaluated everything it considered.
+   * The rest of the basis the rule was measured against but did not directly evaluate — the positions in  the referenced/denominator (or initial) group that are not in a group&#39;s contributions. Together with those  contributions this forms the whole basis, with no overlap, so a breach can be explained against the full picture  (e.g. the non-equity remainder behind an equity limit). Omitted when the rule evaluated everything it considered.
    * @return otherPositionsConsidered
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<ComplianceRuleContribution> getOtherPositionsConsidered() {
     return otherPositionsConsidered;
   }
@@ -321,19 +262,28 @@ public class ComplianceSummaryRuleResultWithContributions {
     }
     ComplianceSummaryRuleResultWithContributions complianceSummaryRuleResultWithContributions = (ComplianceSummaryRuleResultWithContributions) o;
     return Objects.equals(this.ruleId, complianceSummaryRuleResultWithContributions.ruleId) &&
-        Objects.equals(this.templateId, complianceSummaryRuleResultWithContributions.templateId) &&
-        Objects.equals(this.variation, complianceSummaryRuleResultWithContributions.variation) &&
-        Objects.equals(this.ruleStatus, complianceSummaryRuleResultWithContributions.ruleStatus) &&
+        Objects.equals(this.status, complianceSummaryRuleResultWithContributions.status) &&
+        Objects.equals(this.checkType, complianceSummaryRuleResultWithContributions.checkType) &&
         Objects.equals(this.affectedPortfolios, complianceSummaryRuleResultWithContributions.affectedPortfolios) &&
         Objects.equals(this.affectedOrders, complianceSummaryRuleResultWithContributions.affectedOrders) &&
-        Objects.equals(this.parametersUsed, complianceSummaryRuleResultWithContributions.parametersUsed) &&
-        Objects.equals(this.ruleBreakdown, complianceSummaryRuleResultWithContributions.ruleBreakdown) &&
+        Objects.equals(this.groups, complianceSummaryRuleResultWithContributions.groups) &&
         Objects.equals(this.otherPositionsConsidered, complianceSummaryRuleResultWithContributions.otherPositionsConsidered);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(ruleId, templateId, variation, ruleStatus, affectedPortfolios, affectedOrders, parametersUsed, ruleBreakdown, otherPositionsConsidered);
+    return Objects.hash(ruleId, status, checkType, affectedPortfolios, affectedOrders, groups, otherPositionsConsidered);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -341,13 +291,11 @@ public class ComplianceSummaryRuleResultWithContributions {
     StringBuilder sb = new StringBuilder();
     sb.append("class ComplianceSummaryRuleResultWithContributions {\n");
     sb.append("    ruleId: ").append(toIndentedString(ruleId)).append("\n");
-    sb.append("    templateId: ").append(toIndentedString(templateId)).append("\n");
-    sb.append("    variation: ").append(toIndentedString(variation)).append("\n");
-    sb.append("    ruleStatus: ").append(toIndentedString(ruleStatus)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    checkType: ").append(toIndentedString(checkType)).append("\n");
     sb.append("    affectedPortfolios: ").append(toIndentedString(affectedPortfolios)).append("\n");
     sb.append("    affectedOrders: ").append(toIndentedString(affectedOrders)).append("\n");
-    sb.append("    parametersUsed: ").append(toIndentedString(parametersUsed)).append("\n");
-    sb.append("    ruleBreakdown: ").append(toIndentedString(ruleBreakdown)).append("\n");
+    sb.append("    groups: ").append(toIndentedString(groups)).append("\n");
     sb.append("    otherPositionsConsidered: ").append(toIndentedString(otherPositionsConsidered)).append("\n");
     sb.append("}");
     return sb.toString();

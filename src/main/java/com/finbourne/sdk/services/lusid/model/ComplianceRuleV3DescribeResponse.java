@@ -14,9 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -34,12 +32,12 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * A plain-English description of a V3 compliance rule. This is a minimal placeholder shape: the plain-English  generator is delivered separately, so the Lines property is currently empty and only the rule&#39;s identity  and subject are populated.
+ * A plain-English description of a V3 compliance rule: its identity, the kind of entity it examines, and a  single sentence describing what it checks. The sentence is empty for a rule the generator cannot fully  express.
  */
 @JsonPropertyOrder({
   ComplianceRuleV3DescribeResponse.JSON_PROPERTY_ID,
   ComplianceRuleV3DescribeResponse.JSON_PROPERTY_SUBJECT,
-  ComplianceRuleV3DescribeResponse.JSON_PROPERTY_LINES
+  ComplianceRuleV3DescribeResponse.JSON_PROPERTY_PLAIN_ENGLISH
 })
 
 public class ComplianceRuleV3DescribeResponse {
@@ -53,10 +51,10 @@ public class ComplianceRuleV3DescribeResponse {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String subject;
 
-  public static final String JSON_PROPERTY_LINES = "lines";
-  @JsonProperty(JSON_PROPERTY_LINES)
+  public static final String JSON_PROPERTY_PLAIN_ENGLISH = "plainEnglish";
+  @JsonProperty(JSON_PROPERTY_PLAIN_ENGLISH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  private List<String> lines;
+  private String plainEnglish;
 
   public ComplianceRuleV3DescribeResponse() {
   }
@@ -99,30 +97,22 @@ public class ComplianceRuleV3DescribeResponse {
   }
 
 
-  public ComplianceRuleV3DescribeResponse lines(List<String> lines) {
-    this.lines = lines;
-    return this;
-  }
-
-  public ComplianceRuleV3DescribeResponse addLinesItem(String linesItem) {
-    if (this.lines == null) {
-      this.lines = new ArrayList<>();
-    }
-    this.lines.add(linesItem);
+  public ComplianceRuleV3DescribeResponse plainEnglish(String plainEnglish) {
+    this.plainEnglish = plainEnglish;
     return this;
   }
 
   /**
-   * Get lines
-   * @return lines
+   * Get plainEnglish
+   * @return plainEnglish
    */
   @javax.annotation.Nullable
-  public List<String> getLines() {
-    return lines;
+  public String getPlainEnglish() {
+    return plainEnglish;
   }
 
-  public void setLines(List<String> lines) {
-    this.lines = lines;
+  public void setPlainEnglish(String plainEnglish) {
+    this.plainEnglish = plainEnglish;
   }
 
 
@@ -137,7 +127,7 @@ public class ComplianceRuleV3DescribeResponse {
     ComplianceRuleV3DescribeResponse complianceRuleV3DescribeResponse = (ComplianceRuleV3DescribeResponse) o;
     return Objects.equals(this.id, complianceRuleV3DescribeResponse.id) &&
         Objects.equals(this.subject, complianceRuleV3DescribeResponse.subject) &&
-        Objects.equals(this.lines, complianceRuleV3DescribeResponse.lines);
+        Objects.equals(this.plainEnglish, complianceRuleV3DescribeResponse.plainEnglish);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -146,7 +136,7 @@ public class ComplianceRuleV3DescribeResponse {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, subject, lines);
+    return Objects.hash(id, subject, plainEnglish);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -162,7 +152,7 @@ public class ComplianceRuleV3DescribeResponse {
     sb.append("class ComplianceRuleV3DescribeResponse {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    subject: ").append(toIndentedString(subject)).append("\n");
-    sb.append("    lines: ").append(toIndentedString(lines)).append("\n");
+    sb.append("    plainEnglish: ").append(toIndentedString(plainEnglish)).append("\n");
     sb.append("}");
     return sb.toString();
   }

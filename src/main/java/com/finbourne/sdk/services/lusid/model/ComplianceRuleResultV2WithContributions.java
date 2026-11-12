@@ -39,6 +39,7 @@ import com.finbourne.sdk.JSON;
   ComplianceRuleResultV2WithContributions.JSON_PROPERTY_RUN_ID,
   ComplianceRuleResultV2WithContributions.JSON_PROPERTY_INSTIGATED_AT,
   ComplianceRuleResultV2WithContributions.JSON_PROPERTY_COMPLETED_AT,
+  ComplianceRuleResultV2WithContributions.JSON_PROPERTY_RULE_DEFINITIONS_AS_AT,
   ComplianceRuleResultV2WithContributions.JSON_PROPERTY_SCHEDULE,
   ComplianceRuleResultV2WithContributions.JSON_PROPERTY_RULE_RESULT
 })
@@ -58,6 +59,11 @@ public class ComplianceRuleResultV2WithContributions {
   @JsonProperty(JSON_PROPERTY_COMPLETED_AT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private OffsetDateTime completedAt;
+
+  public static final String JSON_PROPERTY_RULE_DEFINITIONS_AS_AT = "ruleDefinitionsAsAt";
+  @JsonProperty(JSON_PROPERTY_RULE_DEFINITIONS_AS_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private OffsetDateTime ruleDefinitionsAsAt;
 
   public static final String JSON_PROPERTY_SCHEDULE = "schedule";
   @JsonProperty(JSON_PROPERTY_SCHEDULE)
@@ -129,6 +135,25 @@ public class ComplianceRuleResultV2WithContributions {
   }
 
 
+  public ComplianceRuleResultV2WithContributions ruleDefinitionsAsAt(OffsetDateTime ruleDefinitionsAsAt) {
+    this.ruleDefinitionsAsAt = ruleDefinitionsAsAt;
+    return this;
+  }
+
+  /**
+   * Get ruleDefinitionsAsAt
+   * @return ruleDefinitionsAsAt
+   */
+  @javax.annotation.Nonnull
+  public OffsetDateTime getRuleDefinitionsAsAt() {
+    return ruleDefinitionsAsAt;
+  }
+
+  public void setRuleDefinitionsAsAt(OffsetDateTime ruleDefinitionsAsAt) {
+    this.ruleDefinitionsAsAt = ruleDefinitionsAsAt;
+  }
+
+
   public ComplianceRuleResultV2WithContributions schedule(String schedule) {
     this.schedule = schedule;
     return this;
@@ -179,13 +204,14 @@ public class ComplianceRuleResultV2WithContributions {
     return Objects.equals(this.runId, complianceRuleResultV2WithContributions.runId) &&
         Objects.equals(this.instigatedAt, complianceRuleResultV2WithContributions.instigatedAt) &&
         Objects.equals(this.completedAt, complianceRuleResultV2WithContributions.completedAt) &&
+        Objects.equals(this.ruleDefinitionsAsAt, complianceRuleResultV2WithContributions.ruleDefinitionsAsAt) &&
         Objects.equals(this.schedule, complianceRuleResultV2WithContributions.schedule) &&
         Objects.equals(this.ruleResult, complianceRuleResultV2WithContributions.ruleResult);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(runId, instigatedAt, completedAt, schedule, ruleResult);
+    return Objects.hash(runId, instigatedAt, completedAt, ruleDefinitionsAsAt, schedule, ruleResult);
   }
 
   @Override
@@ -195,6 +221,7 @@ public class ComplianceRuleResultV2WithContributions {
     sb.append("    runId: ").append(toIndentedString(runId)).append("\n");
     sb.append("    instigatedAt: ").append(toIndentedString(instigatedAt)).append("\n");
     sb.append("    completedAt: ").append(toIndentedString(completedAt)).append("\n");
+    sb.append("    ruleDefinitionsAsAt: ").append(toIndentedString(ruleDefinitionsAsAt)).append("\n");
     sb.append("    schedule: ").append(toIndentedString(schedule)).append("\n");
     sb.append("    ruleResult: ").append(toIndentedString(ruleResult)).append("\n");
     sb.append("}");

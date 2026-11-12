@@ -54,6 +54,7 @@ import com.finbourne.sdk.JSON;
   ComplianceRuleV3Response.JSON_PROPERTY_CHECK,
   ComplianceRuleV3Response.JSON_PROPERTY_COMPUTED_FILTER,
   ComplianceRuleV3Response.JSON_PROPERTY_VERSION,
+  ComplianceRuleV3Response.JSON_PROPERTY_PLAIN_ENGLISH,
   ComplianceRuleV3Response.JSON_PROPERTY_LINKS
 })
 
@@ -112,6 +113,11 @@ public class ComplianceRuleV3Response {
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Version version;
+
+  public static final String JSON_PROPERTY_PLAIN_ENGLISH = "plainEnglish";
+  @JsonProperty(JSON_PROPERTY_PLAIN_ENGLISH)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String plainEnglish;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -338,6 +344,25 @@ public class ComplianceRuleV3Response {
   }
 
 
+  public ComplianceRuleV3Response plainEnglish(String plainEnglish) {
+    this.plainEnglish = plainEnglish;
+    return this;
+  }
+
+  /**
+   * Get plainEnglish
+   * @return plainEnglish
+   */
+  @javax.annotation.Nullable
+  public String getPlainEnglish() {
+    return plainEnglish;
+  }
+
+  public void setPlainEnglish(String plainEnglish) {
+    this.plainEnglish = plainEnglish;
+  }
+
+
   public ComplianceRuleV3Response links(List<Link> links) {
     this.links = links;
     return this;
@@ -385,6 +410,7 @@ public class ComplianceRuleV3Response {
         Objects.equals(this.check, complianceRuleV3Response.check) &&
         Objects.equals(this.computedFilter, complianceRuleV3Response.computedFilter) &&
         Objects.equals(this.version, complianceRuleV3Response.version) &&
+        Objects.equals(this.plainEnglish, complianceRuleV3Response.plainEnglish) &&
         Objects.equals(this.links, complianceRuleV3Response.links);
   }
 
@@ -394,7 +420,7 @@ public class ComplianceRuleV3Response {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, name, description, active, subject, filter, groupBy, measure, check, computedFilter, version, links);
+    return Objects.hash(id, name, description, active, subject, filter, groupBy, measure, check, computedFilter, version, plainEnglish, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -419,6 +445,7 @@ public class ComplianceRuleV3Response {
     sb.append("    check: ").append(toIndentedString(check)).append("\n");
     sb.append("    computedFilter: ").append(toIndentedString(computedFilter)).append("\n");
     sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    plainEnglish: ").append(toIndentedString(plainEnglish)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

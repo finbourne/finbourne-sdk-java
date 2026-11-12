@@ -12,8 +12,9 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.ComplianceComparison;
+import com.finbourne.sdk.services.lusid.model.ComplianceGroupKey;
 import com.finbourne.sdk.services.lusid.model.ComplianceRuleContribution;
-import com.finbourne.sdk.services.lusid.model.LineageMember;
 import com.finbourne.sdk.services.lusid.model.Property;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -40,172 +42,265 @@ import com.finbourne.sdk.JSON;
  * ComplianceRuleBreakdownWithContributions
  */
 @JsonPropertyOrder({
-  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_GROUP_STATUS,
-  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_RESULTS_USED,
-  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_PROPERTIES_USED,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_GROUP_ID,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_STATUS,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_GROUP_KEY,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_NAV,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_RESULTS,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_COMPARISONS,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_PROPERTIES,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_FORMULA_VALUES,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_CONTRIBUTIONS,
   ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_MISSING_DATA_INFORMATION,
-  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_LINEAGE,
-  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_CONTRIBUTIONS
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_CONTRIBUTION_COUNT,
+  ComplianceRuleBreakdownWithContributions.JSON_PROPERTY_CONTRIBUTIONS_TRUNCATED
 })
 
 public class ComplianceRuleBreakdownWithContributions {
-  public static final String JSON_PROPERTY_GROUP_STATUS = "groupStatus";
-  @JsonProperty(JSON_PROPERTY_GROUP_STATUS)
+  public static final String JSON_PROPERTY_GROUP_ID = "groupId";
+  @JsonProperty(JSON_PROPERTY_GROUP_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private String groupStatus;
+  private Integer groupId;
 
-  public static final String JSON_PROPERTY_RESULTS_USED = "resultsUsed";
-  @JsonProperty(JSON_PROPERTY_RESULTS_USED)
+  public static final String JSON_PROPERTY_STATUS = "status";
+  @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Map<String, java.math.BigDecimal> resultsUsed = new HashMap<>();
+  private String status;
 
-  public static final String JSON_PROPERTY_PROPERTIES_USED = "propertiesUsed";
-  @JsonProperty(JSON_PROPERTY_PROPERTIES_USED)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Map<String, List<Property>> propertiesUsed = new HashMap<>();
+  public static final String JSON_PROPERTY_GROUP_KEY = "groupKey";
+  @JsonProperty(JSON_PROPERTY_GROUP_KEY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private ComplianceGroupKey groupKey;
 
-  public static final String JSON_PROPERTY_MISSING_DATA_INFORMATION = "missingDataInformation";
-  @JsonProperty(JSON_PROPERTY_MISSING_DATA_INFORMATION)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<String> missingDataInformation = new ArrayList<>();
+  public static final String JSON_PROPERTY_NAV = "nav";
+  @JsonProperty(JSON_PROPERTY_NAV)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal nav;
 
-  public static final String JSON_PROPERTY_LINEAGE = "lineage";
-  @JsonProperty(JSON_PROPERTY_LINEAGE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private List<LineageMember> lineage = new ArrayList<>();
+  public static final String JSON_PROPERTY_RESULTS = "results";
+  @JsonProperty(JSON_PROPERTY_RESULTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, java.math.BigDecimal> results;
+
+  public static final String JSON_PROPERTY_COMPARISONS = "comparisons";
+  @JsonProperty(JSON_PROPERTY_COMPARISONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<ComplianceComparison> comparisons;
+
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, List<Property>> properties;
+
+  public static final String JSON_PROPERTY_FORMULA_VALUES = "formulaValues";
+  @JsonProperty(JSON_PROPERTY_FORMULA_VALUES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, java.math.BigDecimal> formulaValues;
 
   public static final String JSON_PROPERTY_CONTRIBUTIONS = "contributions";
   @JsonProperty(JSON_PROPERTY_CONTRIBUTIONS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<ComplianceRuleContribution> contributions = new ArrayList<>();
 
+  public static final String JSON_PROPERTY_MISSING_DATA_INFORMATION = "missingDataInformation";
+  @JsonProperty(JSON_PROPERTY_MISSING_DATA_INFORMATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> missingDataInformation;
+
+  public static final String JSON_PROPERTY_CONTRIBUTION_COUNT = "contributionCount";
+  @JsonProperty(JSON_PROPERTY_CONTRIBUTION_COUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Integer contributionCount;
+
+  public static final String JSON_PROPERTY_CONTRIBUTIONS_TRUNCATED = "contributionsTruncated";
+  @JsonProperty(JSON_PROPERTY_CONTRIBUTIONS_TRUNCATED)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private Boolean contributionsTruncated;
+
   public ComplianceRuleBreakdownWithContributions() {
   }
 
-  public ComplianceRuleBreakdownWithContributions groupStatus(String groupStatus) {
-    this.groupStatus = groupStatus;
+  public ComplianceRuleBreakdownWithContributions groupId(Integer groupId) {
+    this.groupId = groupId;
+    return this;
+  }
+
+  /**
+   * A stable identifier for this group within the rule, matching the same group in the rule-result endpoint.
+   * @return groupId
+   */
+  @javax.annotation.Nonnull
+  public Integer getGroupId() {
+    return groupId;
+  }
+
+  public void setGroupId(Integer groupId) {
+    this.groupId = groupId;
+  }
+
+
+  public ComplianceRuleBreakdownWithContributions status(String status) {
+    this.status = status;
     return this;
   }
 
   /**
    * The status of this subset of results.
-   * @return groupStatus
+   * @return status
    */
   @javax.annotation.Nonnull
-  public String getGroupStatus() {
-    return groupStatus;
+  public String getStatus() {
+    return status;
   }
 
-  public void setGroupStatus(String groupStatus) {
-    this.groupStatus = groupStatus;
+  public void setStatus(String status) {
+    this.status = status;
   }
 
 
-  public ComplianceRuleBreakdownWithContributions resultsUsed(Map<String, java.math.BigDecimal> resultsUsed) {
-    this.resultsUsed = resultsUsed;
-    return this;
-  }
-
-  public ComplianceRuleBreakdownWithContributions putResultsUsedItem(String key, java.math.BigDecimal resultsUsedItem) {
-    if (this.resultsUsed == null) {
-      this.resultsUsed = new HashMap<>();
-    }
-    this.resultsUsed.put(key, resultsUsedItem);
+  public ComplianceRuleBreakdownWithContributions groupKey(ComplianceGroupKey groupKey) {
+    this.groupKey = groupKey;
     return this;
   }
 
   /**
-   * Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule.
-   * @return resultsUsed
+   * Get groupKey
+   * @return groupKey
    */
-  @javax.annotation.Nonnull
-  public Map<String, java.math.BigDecimal> getResultsUsed() {
-    return resultsUsed;
+  @javax.annotation.Nullable
+  public ComplianceGroupKey getGroupKey() {
+    return groupKey;
   }
 
-  public void setResultsUsed(Map<String, java.math.BigDecimal> resultsUsed) {
-    this.resultsUsed = resultsUsed;
+  public void setGroupKey(ComplianceGroupKey groupKey) {
+    this.groupKey = groupKey;
   }
 
 
-  public ComplianceRuleBreakdownWithContributions propertiesUsed(Map<String, List<Property>> propertiesUsed) {
-    this.propertiesUsed = propertiesUsed;
-    return this;
-  }
-
-  public ComplianceRuleBreakdownWithContributions putPropertiesUsedItem(String key, List<Property> propertiesUsedItem) {
-    if (this.propertiesUsed == null) {
-      this.propertiesUsed = new HashMap<>();
-    }
-    this.propertiesUsed.put(key, propertiesUsedItem);
+  public ComplianceRuleBreakdownWithContributions nav(java.math.BigDecimal nav) {
+    this.nav = nav;
     return this;
   }
 
   /**
-   * Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule
-   * @return propertiesUsed
+   * The portfolio net asset value the group sits within. Absent where no contribution carried it.
+   * @return nav
    */
-  @javax.annotation.Nonnull
-  public Map<String, List<Property>> getPropertiesUsed() {
-    return propertiesUsed;
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getNav() {
+    return nav;
   }
 
-  public void setPropertiesUsed(Map<String, List<Property>> propertiesUsed) {
-    this.propertiesUsed = propertiesUsed;
+  public void setNav(java.math.BigDecimal nav) {
+    this.nav = nav;
   }
 
 
-  public ComplianceRuleBreakdownWithContributions missingDataInformation(List<String> missingDataInformation) {
-    this.missingDataInformation = missingDataInformation;
+  public ComplianceRuleBreakdownWithContributions results(Map<String, java.math.BigDecimal> results) {
+    this.results = results;
     return this;
   }
 
-  public ComplianceRuleBreakdownWithContributions addMissingDataInformationItem(String missingDataInformationItem) {
-    if (this.missingDataInformation == null) {
-      this.missingDataInformation = new ArrayList<>();
+  public ComplianceRuleBreakdownWithContributions putResultsItem(String key, java.math.BigDecimal resultsItem) {
+    if (this.results == null) {
+      this.results = new HashMap<>();
     }
-    this.missingDataInformation.add(missingDataInformationItem);
+    this.results.put(key, resultsItem);
     return this;
   }
 
   /**
-   * List of string information detailing data that was missing from contributions processed in this rule
-   * @return missingDataInformation
+   * The valuation result totals the group aggregated. Omitted when empty.
+   * @return results
    */
-  @javax.annotation.Nonnull
-  public List<String> getMissingDataInformation() {
-    return missingDataInformation;
+  @javax.annotation.Nullable
+  public Map<String, java.math.BigDecimal> getResults() {
+    return results;
   }
 
-  public void setMissingDataInformation(List<String> missingDataInformation) {
-    this.missingDataInformation = missingDataInformation;
+  public void setResults(Map<String, java.math.BigDecimal> results) {
+    this.results = results;
   }
 
 
-  public ComplianceRuleBreakdownWithContributions lineage(List<LineageMember> lineage) {
-    this.lineage = lineage;
+  public ComplianceRuleBreakdownWithContributions comparisons(List<ComplianceComparison> comparisons) {
+    this.comparisons = comparisons;
     return this;
   }
 
-  public ComplianceRuleBreakdownWithContributions addLineageItem(LineageMember lineageItem) {
-    if (this.lineage == null) {
-      this.lineage = new ArrayList<>();
+  public ComplianceRuleBreakdownWithContributions addComparisonsItem(ComplianceComparison comparisonsItem) {
+    if (this.comparisons == null) {
+      this.comparisons = new ArrayList<>();
     }
-    this.lineage.add(lineageItem);
+    this.comparisons.add(comparisonsItem);
     return this;
   }
 
   /**
-   * Get lineage
-   * @return lineage
+   * Every leaf comparison the check criterion made for this group, drawn from both the hard and the soft limit.  Omitted for a group no check reached.
+   * @return comparisons
    */
-  @javax.annotation.Nonnull
-  public List<LineageMember> getLineage() {
-    return lineage;
+  @javax.annotation.Nullable
+  public List<ComplianceComparison> getComparisons() {
+    return comparisons;
   }
 
-  public void setLineage(List<LineageMember> lineage) {
-    this.lineage = lineage;
+  public void setComparisons(List<ComplianceComparison> comparisons) {
+    this.comparisons = comparisons;
+  }
+
+
+  public ComplianceRuleBreakdownWithContributions properties(Map<String, List<Property>> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public ComplianceRuleBreakdownWithContributions putPropertiesItem(String key, List<Property> propertiesItem) {
+    if (this.properties == null) {
+      this.properties = new HashMap<>();
+    }
+    this.properties.put(key, propertiesItem);
+    return this;
+  }
+
+  /**
+   * The property values the group aggregated. Omitted when empty.
+   * @return properties
+   */
+  @javax.annotation.Nullable
+  public Map<String, List<Property>> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(Map<String, List<Property>> properties) {
+    this.properties = properties;
+  }
+
+
+  public ComplianceRuleBreakdownWithContributions formulaValues(Map<String, java.math.BigDecimal> formulaValues) {
+    this.formulaValues = formulaValues;
+    return this;
+  }
+
+  public ComplianceRuleBreakdownWithContributions putFormulaValuesItem(String key, java.math.BigDecimal formulaValuesItem) {
+    if (this.formulaValues == null) {
+      this.formulaValues = new HashMap<>();
+    }
+    this.formulaValues.put(key, formulaValuesItem);
+    return this;
+  }
+
+  /**
+   * The value each formula within the check criterion evaluated to for this group. Omitted when empty.
+   * @return formulaValues
+   */
+  @javax.annotation.Nullable
+  public Map<String, java.math.BigDecimal> getFormulaValues() {
+    return formulaValues;
+  }
+
+  public void setFormulaValues(Map<String, java.math.BigDecimal> formulaValues) {
+    this.formulaValues = formulaValues;
   }
 
 
@@ -236,6 +331,71 @@ public class ComplianceRuleBreakdownWithContributions {
   }
 
 
+  public ComplianceRuleBreakdownWithContributions missingDataInformation(List<String> missingDataInformation) {
+    this.missingDataInformation = missingDataInformation;
+    return this;
+  }
+
+  public ComplianceRuleBreakdownWithContributions addMissingDataInformationItem(String missingDataInformationItem) {
+    if (this.missingDataInformation == null) {
+      this.missingDataInformation = new ArrayList<>();
+    }
+    this.missingDataInformation.add(missingDataInformationItem);
+    return this;
+  }
+
+  /**
+   * List of string information detailing data that was missing from contributions processed in this rule. Omitted when empty.
+   * @return missingDataInformation
+   */
+  @javax.annotation.Nullable
+  public List<String> getMissingDataInformation() {
+    return missingDataInformation;
+  }
+
+  public void setMissingDataInformation(List<String> missingDataInformation) {
+    this.missingDataInformation = missingDataInformation;
+  }
+
+
+  public ComplianceRuleBreakdownWithContributions contributionCount(Integer contributionCount) {
+    this.contributionCount = contributionCount;
+    return this;
+  }
+
+  /**
+   * The number of contributions aggregated into this group, before any cap.
+   * @return contributionCount
+   */
+  @javax.annotation.Nonnull
+  public Integer getContributionCount() {
+    return contributionCount;
+  }
+
+  public void setContributionCount(Integer contributionCount) {
+    this.contributionCount = contributionCount;
+  }
+
+
+  public ComplianceRuleBreakdownWithContributions contributionsTruncated(Boolean contributionsTruncated) {
+    this.contributionsTruncated = contributionsTruncated;
+    return this;
+  }
+
+  /**
+   * Whether the reported contributions were capped below ContributionCount. Always false today.
+   * @return contributionsTruncated
+   */
+  @javax.annotation.Nonnull
+  public Boolean getContributionsTruncated() {
+    return contributionsTruncated;
+  }
+
+  public void setContributionsTruncated(Boolean contributionsTruncated) {
+    this.contributionsTruncated = contributionsTruncated;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -245,29 +405,52 @@ public class ComplianceRuleBreakdownWithContributions {
       return false;
     }
     ComplianceRuleBreakdownWithContributions complianceRuleBreakdownWithContributions = (ComplianceRuleBreakdownWithContributions) o;
-    return Objects.equals(this.groupStatus, complianceRuleBreakdownWithContributions.groupStatus) &&
-        Objects.equals(this.resultsUsed, complianceRuleBreakdownWithContributions.resultsUsed) &&
-        Objects.equals(this.propertiesUsed, complianceRuleBreakdownWithContributions.propertiesUsed) &&
+    return Objects.equals(this.groupId, complianceRuleBreakdownWithContributions.groupId) &&
+        Objects.equals(this.status, complianceRuleBreakdownWithContributions.status) &&
+        Objects.equals(this.groupKey, complianceRuleBreakdownWithContributions.groupKey) &&
+        (this.nav == null ? complianceRuleBreakdownWithContributions.nav == null : (complianceRuleBreakdownWithContributions.nav != null && this.nav.compareTo(complianceRuleBreakdownWithContributions.getNav()) == 0)) &&
+        Objects.equals(this.results, complianceRuleBreakdownWithContributions.results) &&
+        Objects.equals(this.comparisons, complianceRuleBreakdownWithContributions.comparisons) &&
+        Objects.equals(this.properties, complianceRuleBreakdownWithContributions.properties) &&
+        Objects.equals(this.formulaValues, complianceRuleBreakdownWithContributions.formulaValues) &&
+        Objects.equals(this.contributions, complianceRuleBreakdownWithContributions.contributions) &&
         Objects.equals(this.missingDataInformation, complianceRuleBreakdownWithContributions.missingDataInformation) &&
-        Objects.equals(this.lineage, complianceRuleBreakdownWithContributions.lineage) &&
-        Objects.equals(this.contributions, complianceRuleBreakdownWithContributions.contributions);
+        Objects.equals(this.contributionCount, complianceRuleBreakdownWithContributions.contributionCount) &&
+        Objects.equals(this.contributionsTruncated, complianceRuleBreakdownWithContributions.contributionsTruncated);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(groupStatus, resultsUsed, propertiesUsed, missingDataInformation, lineage, contributions);
+    return Objects.hash(groupId, status, groupKey, nav, results, comparisons, properties, formulaValues, contributions, missingDataInformation, contributionCount, contributionsTruncated);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ComplianceRuleBreakdownWithContributions {\n");
-    sb.append("    groupStatus: ").append(toIndentedString(groupStatus)).append("\n");
-    sb.append("    resultsUsed: ").append(toIndentedString(resultsUsed)).append("\n");
-    sb.append("    propertiesUsed: ").append(toIndentedString(propertiesUsed)).append("\n");
-    sb.append("    missingDataInformation: ").append(toIndentedString(missingDataInformation)).append("\n");
-    sb.append("    lineage: ").append(toIndentedString(lineage)).append("\n");
+    sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    groupKey: ").append(toIndentedString(groupKey)).append("\n");
+    sb.append("    nav: ").append(toIndentedString(nav)).append("\n");
+    sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("    comparisons: ").append(toIndentedString(comparisons)).append("\n");
+    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
+    sb.append("    formulaValues: ").append(toIndentedString(formulaValues)).append("\n");
     sb.append("    contributions: ").append(toIndentedString(contributions)).append("\n");
+    sb.append("    missingDataInformation: ").append(toIndentedString(missingDataInformation)).append("\n");
+    sb.append("    contributionCount: ").append(toIndentedString(contributionCount)).append("\n");
+    sb.append("    contributionsTruncated: ").append(toIndentedString(contributionsTruncated)).append("\n");
     sb.append("}");
     return sb.toString();
   }

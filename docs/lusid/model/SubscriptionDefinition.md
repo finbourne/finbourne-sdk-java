@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **endEffectiveAt** | [**OffsetDateTime**](OffsetDateTime.md) | Deprecated and no longer honoured: a fixed forward date stops being a forward view once  the live edge passes it. Use effectiveForwardDays instead. Still accepted and echoed back  so existing subscriptions keep round-tripping. | [optional] [default to OffsetDateTime]
 **effectiveForwardDays** | **Integer** | How far forward the subscription reports, as a number of calendar days past the live  edge — a rolling forward view that advances as time passes. | [optional] [default to Integer]
 **instrumentIdentifiers** | **List&lt;String&gt;** | The instrument identifiers each published holding carries, as Instrument/default/{type} property keys,  for example Instrument/default/ClientInternal. Each must name an instrument identifier type. At most 5.  Not valid for a transactions subscription. | [optional] [default to List<String>]
+**reportCurrency** | **String** | The currency the report-currency values are given in, as a three-letter ISO code stored upper-case. Required  when addressKeys names any key other than the quantity, cost, current face, notional cost, variation margin  and currency keys: Holding/Units, Holding/SettledUnits, Holding/Cost/Dom, Holding/Cost/Pfolio,  Holding/CurrentFace, Holding/NotionalCost, Holding/VariationMargin, Holding/VariationMarginInPortfolioCcy,  Holding/HoldingType, Holding/DomCcy and Holding/PortfolioCcy. Not valid for a transactions subscription. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.SubscriptionDefinition;
@@ -42,6 +43,7 @@ String subscriptionType = "example subscriptionType";
 @javax.annotation.Nullable OffsetDateTime endEffectiveAt = OffsetDateTime.now();
 @javax.annotation.Nullable Integer effectiveForwardDays = new Integer("100.00");
 @javax.annotation.Nullable List<String> instrumentIdentifiers = new List<String>();
+@javax.annotation.Nullable String reportCurrency = "example reportCurrency";
 
 
 SubscriptionDefinition subscriptionDefinitionInstance = new SubscriptionDefinition()
@@ -59,7 +61,8 @@ SubscriptionDefinition subscriptionDefinitionInstance = new SubscriptionDefiniti
     .startEffectiveAt(startEffectiveAt)
     .endEffectiveAt(endEffectiveAt)
     .effectiveForwardDays(effectiveForwardDays)
-    .instrumentIdentifiers(instrumentIdentifiers);
+    .instrumentIdentifiers(instrumentIdentifiers)
+    .reportCurrency(reportCurrency);
 ```
 
 

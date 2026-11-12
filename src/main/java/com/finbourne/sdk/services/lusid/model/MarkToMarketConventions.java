@@ -36,7 +36,9 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   MarkToMarketConventions.JSON_PROPERTY_CALENDAR_CODE,
   MarkToMarketConventions.JSON_PROPERTY_HOUR_OFFSET_TENOR,
-  MarkToMarketConventions.JSON_PROPERTY_MINUTE_OFFSET_TENOR
+  MarkToMarketConventions.JSON_PROPERTY_MINUTE_OFFSET_TENOR,
+  MarkToMarketConventions.JSON_PROPERTY_MTM_SETTLE_DAYS,
+  MarkToMarketConventions.JSON_PROPERTY_MTM_SETTLEMENT_CALENDAR
 })
 
 public class MarkToMarketConventions {
@@ -54,6 +56,16 @@ public class MarkToMarketConventions {
   @JsonProperty(JSON_PROPERTY_MINUTE_OFFSET_TENOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String minuteOffsetTenor;
+
+  public static final String JSON_PROPERTY_MTM_SETTLE_DAYS = "mtmSettleDays";
+  @JsonProperty(JSON_PROPERTY_MTM_SETTLE_DAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer mtmSettleDays;
+
+  public static final String JSON_PROPERTY_MTM_SETTLEMENT_CALENDAR = "mtmSettlementCalendar";
+  @JsonProperty(JSON_PROPERTY_MTM_SETTLEMENT_CALENDAR)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String mtmSettlementCalendar;
 
   public MarkToMarketConventions() {
   }
@@ -115,6 +127,44 @@ public class MarkToMarketConventions {
   }
 
 
+  public MarkToMarketConventions mtmSettleDays(Integer mtmSettleDays) {
+    this.mtmSettleDays = mtmSettleDays;
+    return this;
+  }
+
+  /**
+   * The number of business days after each mark to market date on which its variation margin is paid.  This is an optional field, defaulting to 0 (paid on the mark to market date); if a value is provided it must be between 0 and 10 inclusive.
+   * @return mtmSettleDays
+   */
+  @javax.annotation.Nullable
+  public Integer getMtmSettleDays() {
+    return mtmSettleDays;
+  }
+
+  public void setMtmSettleDays(Integer mtmSettleDays) {
+    this.mtmSettleDays = mtmSettleDays;
+  }
+
+
+  public MarkToMarketConventions mtmSettlementCalendar(String mtmSettlementCalendar) {
+    this.mtmSettlementCalendar = mtmSettlementCalendar;
+    return this;
+  }
+
+  /**
+   * The calendar the mark to market settlement days are counted on.  This is an optional field; if no value is provided the mark to market calendar is used, and without that only weekends are non-business days.
+   * @return mtmSettlementCalendar
+   */
+  @javax.annotation.Nullable
+  public String getMtmSettlementCalendar() {
+    return mtmSettlementCalendar;
+  }
+
+  public void setMtmSettlementCalendar(String mtmSettlementCalendar) {
+    this.mtmSettlementCalendar = mtmSettlementCalendar;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -126,7 +176,9 @@ public class MarkToMarketConventions {
     MarkToMarketConventions markToMarketConventions = (MarkToMarketConventions) o;
     return Objects.equals(this.calendarCode, markToMarketConventions.calendarCode) &&
         Objects.equals(this.hourOffsetTenor, markToMarketConventions.hourOffsetTenor) &&
-        Objects.equals(this.minuteOffsetTenor, markToMarketConventions.minuteOffsetTenor);
+        Objects.equals(this.minuteOffsetTenor, markToMarketConventions.minuteOffsetTenor) &&
+        Objects.equals(this.mtmSettleDays, markToMarketConventions.mtmSettleDays) &&
+        Objects.equals(this.mtmSettlementCalendar, markToMarketConventions.mtmSettlementCalendar);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -135,7 +187,7 @@ public class MarkToMarketConventions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(calendarCode, hourOffsetTenor, minuteOffsetTenor);
+    return Objects.hash(calendarCode, hourOffsetTenor, minuteOffsetTenor, mtmSettleDays, mtmSettlementCalendar);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -152,6 +204,8 @@ public class MarkToMarketConventions {
     sb.append("    calendarCode: ").append(toIndentedString(calendarCode)).append("\n");
     sb.append("    hourOffsetTenor: ").append(toIndentedString(hourOffsetTenor)).append("\n");
     sb.append("    minuteOffsetTenor: ").append(toIndentedString(minuteOffsetTenor)).append("\n");
+    sb.append("    mtmSettleDays: ").append(toIndentedString(mtmSettleDays)).append("\n");
+    sb.append("    mtmSettlementCalendar: ").append(toIndentedString(mtmSettlementCalendar)).append("\n");
     sb.append("}");
     return sb.toString();
   }

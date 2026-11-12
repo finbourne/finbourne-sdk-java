@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **runId** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
 **instigatedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [default to OffsetDateTime]
 **completedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [default to OffsetDateTime]
+**ruleDefinitionsAsAt** | [**OffsetDateTime**](OffsetDateTime.md) |  | [default to OffsetDateTime]
 **schedule** | **String** | Available values: PreTrade, PostTrade, PreAndPostTrade. | [default to String]
 **ruleResult** | [**ComplianceSummaryRuleResultWithContributions**](ComplianceSummaryRuleResultWithContributions.md) |  | [default to ComplianceSummaryRuleResultWithContributions]
 
@@ -20,6 +21,7 @@ import java.net.URI;
 ResourceId runId = new ResourceId();
 OffsetDateTime instigatedAt = OffsetDateTime.now();
 OffsetDateTime completedAt = OffsetDateTime.now();
+OffsetDateTime ruleDefinitionsAsAt = OffsetDateTime.now();
 String schedule = "example schedule";
 ComplianceSummaryRuleResultWithContributions ruleResult = new ComplianceSummaryRuleResultWithContributions();
 
@@ -28,6 +30,7 @@ ComplianceRuleResultV2WithContributions complianceRuleResultV2WithContributionsI
     .runId(runId)
     .instigatedAt(instigatedAt)
     .completedAt(completedAt)
+    .ruleDefinitionsAsAt(ruleDefinitionsAsAt)
     .schedule(schedule)
     .ruleResult(ruleResult);
 ```

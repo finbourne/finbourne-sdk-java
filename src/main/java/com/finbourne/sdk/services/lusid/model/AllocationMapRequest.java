@@ -50,6 +50,7 @@ import com.finbourne.sdk.JSON;
   AllocationMapRequest.JSON_PROPERTY_BASIS_BY_EVENT_TYPE,
   AllocationMapRequest.JSON_PROPERTY_ROUNDING_PARTNER_LINE,
   AllocationMapRequest.JSON_PROPERTY_ILPA_TRANSACTION_TYPES,
+  AllocationMapRequest.JSON_PROPERTY_EXCUSE_CAP_MULTIPLE,
   AllocationMapRequest.JSON_PROPERTY_EFFECTIVE_AT
 })
 
@@ -98,6 +99,11 @@ public class AllocationMapRequest {
   @JsonProperty(JSON_PROPERTY_ILPA_TRANSACTION_TYPES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<AllocationMapIlpaTransactionType> ilpaTransactionTypes;
+
+  public static final String JSON_PROPERTY_EXCUSE_CAP_MULTIPLE = "excuseCapMultiple";
+  @JsonProperty(JSON_PROPERTY_EXCUSE_CAP_MULTIPLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal excuseCapMultiple;
 
   public static final String JSON_PROPERTY_EFFECTIVE_AT = "effectiveAt";
   @JsonProperty(JSON_PROPERTY_EFFECTIVE_AT)
@@ -294,13 +300,32 @@ public class AllocationMapRequest {
   }
 
 
+  public AllocationMapRequest excuseCapMultiple(java.math.BigDecimal excuseCapMultiple) {
+    this.excuseCapMultiple = excuseCapMultiple;
+    return this;
+  }
+
+  /**
+   * How far above its pro-rata share of a call a line may be taken when other participants are excused, as a multiple of that share: the LPA&#39;s over-call cap. At least 1. Absent means the platform default of 1.25.
+   * @return excuseCapMultiple
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getExcuseCapMultiple() {
+    return excuseCapMultiple;
+  }
+
+  public void setExcuseCapMultiple(java.math.BigDecimal excuseCapMultiple) {
+    this.excuseCapMultiple = excuseCapMultiple;
+  }
+
+
   public AllocationMapRequest effectiveAt(OffsetDateTime effectiveAt) {
     this.effectiveAt = effectiveAt;
     return this;
   }
 
   /**
-   * The effective datetime from which the Allocation Map applies. Defaults to the beginning of time if not specified, so that the map is visible at every effective datetime.
+   * The effective datetime from which the Allocation Map applies. On create, defaults to the beginning of time if not specified, so that the map is visible at every effective datetime. On update of an existing Allocation Map it is required, in the body or as the effectiveAt query parameter, so that a change is never back-dated or forward-dated by accident.
    * @return effectiveAt
    */
   @javax.annotation.Nullable
@@ -331,6 +356,7 @@ public class AllocationMapRequest {
         Objects.equals(this.basisByEventType, allocationMapRequest.basisByEventType) &&
         Objects.equals(this.roundingPartnerLine, allocationMapRequest.roundingPartnerLine) &&
         Objects.equals(this.ilpaTransactionTypes, allocationMapRequest.ilpaTransactionTypes) &&
+        (this.excuseCapMultiple == null ? allocationMapRequest.excuseCapMultiple == null : (allocationMapRequest.excuseCapMultiple != null && this.excuseCapMultiple.compareTo(allocationMapRequest.getExcuseCapMultiple()) == 0)) &&
         Objects.equals(this.effectiveAt, allocationMapRequest.effectiveAt);
   }
 
@@ -340,7 +366,7 @@ public class AllocationMapRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(code, name, description, structureMemberId, inheritsFrom, participants, basisByEventType, roundingPartnerLine, ilpaTransactionTypes, effectiveAt);
+    return Objects.hash(code, name, description, structureMemberId, inheritsFrom, participants, basisByEventType, roundingPartnerLine, ilpaTransactionTypes, excuseCapMultiple, effectiveAt);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -363,6 +389,7 @@ public class AllocationMapRequest {
     sb.append("    basisByEventType: ").append(toIndentedString(basisByEventType)).append("\n");
     sb.append("    roundingPartnerLine: ").append(toIndentedString(roundingPartnerLine)).append("\n");
     sb.append("    ilpaTransactionTypes: ").append(toIndentedString(ilpaTransactionTypes)).append("\n");
+    sb.append("    excuseCapMultiple: ").append(toIndentedString(excuseCapMultiple)).append("\n");
     sb.append("    effectiveAt: ").append(toIndentedString(effectiveAt)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -52,7 +52,8 @@ import com.finbourne.sdk.JSON;
   SubscriptionDefinition.JSON_PROPERTY_START_EFFECTIVE_AT,
   SubscriptionDefinition.JSON_PROPERTY_END_EFFECTIVE_AT,
   SubscriptionDefinition.JSON_PROPERTY_EFFECTIVE_FORWARD_DAYS,
-  SubscriptionDefinition.JSON_PROPERTY_INSTRUMENT_IDENTIFIERS
+  SubscriptionDefinition.JSON_PROPERTY_INSTRUMENT_IDENTIFIERS,
+  SubscriptionDefinition.JSON_PROPERTY_REPORT_CURRENCY
 })
 
 public class SubscriptionDefinition {
@@ -130,6 +131,11 @@ public class SubscriptionDefinition {
   @JsonProperty(JSON_PROPERTY_INSTRUMENT_IDENTIFIERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<String> instrumentIdentifiers;
+
+  public static final String JSON_PROPERTY_REPORT_CURRENCY = "reportCurrency";
+  @JsonProperty(JSON_PROPERTY_REPORT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String reportCurrency;
 
   public SubscriptionDefinition() {
   }
@@ -435,6 +441,25 @@ public class SubscriptionDefinition {
   }
 
 
+  public SubscriptionDefinition reportCurrency(String reportCurrency) {
+    this.reportCurrency = reportCurrency;
+    return this;
+  }
+
+  /**
+   * The currency the report-currency values are given in, as a three-letter ISO code stored upper-case. Required  when addressKeys names any key other than the quantity, cost, current face, notional cost, variation margin  and currency keys: Holding/Units, Holding/SettledUnits, Holding/Cost/Dom, Holding/Cost/Pfolio,  Holding/CurrentFace, Holding/NotionalCost, Holding/VariationMargin, Holding/VariationMarginInPortfolioCcy,  Holding/HoldingType, Holding/DomCcy and Holding/PortfolioCcy. Not valid for a transactions subscription.
+   * @return reportCurrency
+   */
+  @javax.annotation.Nullable
+  public String getReportCurrency() {
+    return reportCurrency;
+  }
+
+  public void setReportCurrency(String reportCurrency) {
+    this.reportCurrency = reportCurrency;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -458,7 +483,8 @@ public class SubscriptionDefinition {
         Objects.equals(this.startEffectiveAt, subscriptionDefinition.startEffectiveAt) &&
         Objects.equals(this.endEffectiveAt, subscriptionDefinition.endEffectiveAt) &&
         Objects.equals(this.effectiveForwardDays, subscriptionDefinition.effectiveForwardDays) &&
-        Objects.equals(this.instrumentIdentifiers, subscriptionDefinition.instrumentIdentifiers);
+        Objects.equals(this.instrumentIdentifiers, subscriptionDefinition.instrumentIdentifiers) &&
+        Objects.equals(this.reportCurrency, subscriptionDefinition.reportCurrency);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -467,7 +493,7 @@ public class SubscriptionDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, timelineProperty, portfolioFilter, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt, effectiveForwardDays, instrumentIdentifiers);
+    return Objects.hash(scope, code, displayName, description, portfolioId, timelineId, timelineProperty, portfolioFilter, addressKeys, byTaxLots, subscriptionType, startEffectiveAt, endEffectiveAt, effectiveForwardDays, instrumentIdentifiers, reportCurrency);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -496,6 +522,7 @@ public class SubscriptionDefinition {
     sb.append("    endEffectiveAt: ").append(toIndentedString(endEffectiveAt)).append("\n");
     sb.append("    effectiveForwardDays: ").append(toIndentedString(effectiveForwardDays)).append("\n");
     sb.append("    instrumentIdentifiers: ").append(toIndentedString(instrumentIdentifiers)).append("\n");
+    sb.append("    reportCurrency: ").append(toIndentedString(reportCurrency)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -18149,7 +18149,7 @@ public class FundsApi {
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @param _callback Callback for upload/download progress
@@ -18175,7 +18175,7 @@ public class FundsApi {
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token to use to continue listing from a previous call. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;               domain to decorate onto the transactions. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param filter Expression to filter the result set. (optional)
      * @param _callback Callback for upload/download progress
@@ -18288,14 +18288,14 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.                Rows are returned ordered by portfolio (scope then code, ordinal), then by trade date, entry time, transaction id (ordinal) and sub-holding keys, so the order is total and stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @return ApiResponse&lt;ValuationPointResourceListOfUnsettledTransaction&gt;
@@ -18316,14 +18316,14 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.Use any specified configuration options to override any other configuration for this request only
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.                Rows are returned ordered by portfolio (scope then code, ordinal), then by trade date, entry time, transaction id (ordinal) and sub-holding keys, so the order is total and stable across pages.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @return ApiResponse&lt;ValuationPointResourceListOfUnsettledTransaction&gt;
@@ -18344,14 +18344,14 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund. (asynchronously)
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.                Rows are returned ordered by portfolio (scope then code, ordinal), then by trade date, entry time, transaction id (ordinal) and sub-holding keys, so the order is total and stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -18373,14 +18373,14 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund. (asynchronously)
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.Use any specified configuration options to override any other configuration for this request only
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.                Rows are returned ordered by portfolio (scope then code, ordinal), then by trade date, entry time, transaction id (ordinal) and sub-holding keys, so the order is total and stable across pages.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)
      * @param asAt The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing from a previous call. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -18449,7 +18449,7 @@ public class FundsApi {
 
         /**
          * Set propertyKeys
-         * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. (optional)
+         * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;               domain to decorate onto the transactions. (optional)
          * @return APIgetValuationPointUnsettledTransactionsRequest
          */
         public APIgetValuationPointUnsettledTransactionsRequest propertyKeys(List<String> propertyKeys) {
@@ -18595,7 +18595,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.
+     * Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.                Rows are returned ordered by portfolio (scope then code, ordinal), then by trade date, entry time, transaction id (ordinal) and sub-holding keys, so the order is total and stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param singleValuationPointQueryParameters The arguments to use for querying the unsettled transactions. (required)

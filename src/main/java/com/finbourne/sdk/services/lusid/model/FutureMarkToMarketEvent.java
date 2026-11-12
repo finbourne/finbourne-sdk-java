@@ -38,7 +38,8 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   FutureMarkToMarketEvent.JSON_PROPERTY_EFFECTIVE_DATE,
   FutureMarkToMarketEvent.JSON_PROPERTY_SETTLEMENT_CURRENCY,
-  FutureMarkToMarketEvent.JSON_PROPERTY_NOTIONAL_AMOUNT_PER_UNIT
+  FutureMarkToMarketEvent.JSON_PROPERTY_NOTIONAL_AMOUNT_PER_UNIT,
+  FutureMarkToMarketEvent.JSON_PROPERTY_PAYMENT_DATE
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -62,6 +63,11 @@ public class FutureMarkToMarketEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_NOTIONAL_AMOUNT_PER_UNIT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal notionalAmountPerUnit;
+
+  public static final String JSON_PROPERTY_PAYMENT_DATE = "paymentDate";
+  @JsonProperty(JSON_PROPERTY_PAYMENT_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime paymentDate;
 
   public FutureMarkToMarketEvent() {
   }
@@ -123,6 +129,25 @@ public class FutureMarkToMarketEvent extends InstrumentEvent {
   }
 
 
+  public FutureMarkToMarketEvent paymentDate(OffsetDateTime paymentDate) {
+    this.paymentDate = paymentDate;
+    return this;
+  }
+
+  /**
+   * The date the variation margin is paid: the effective date plus the future&#39;s mark to market settlement offset.  This is an optional field; when absent the variation margin is paid on the effective date.
+   * @return paymentDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getPaymentDate() {
+    return paymentDate;
+  }
+
+  public void setPaymentDate(OffsetDateTime paymentDate) {
+    this.paymentDate = paymentDate;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -135,6 +160,7 @@ public class FutureMarkToMarketEvent extends InstrumentEvent {
     return Objects.equals(this.effectiveDate, futureMarkToMarketEvent.effectiveDate) &&
         Objects.equals(this.settlementCurrency, futureMarkToMarketEvent.settlementCurrency) &&
         (this.notionalAmountPerUnit == null ? futureMarkToMarketEvent.notionalAmountPerUnit == null : (futureMarkToMarketEvent.notionalAmountPerUnit != null && this.notionalAmountPerUnit.compareTo(futureMarkToMarketEvent.getNotionalAmountPerUnit()) == 0)) &&
+        Objects.equals(this.paymentDate, futureMarkToMarketEvent.paymentDate) &&
         super.equals(o);
   }
 
@@ -144,7 +170,7 @@ public class FutureMarkToMarketEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(effectiveDate, settlementCurrency, notionalAmountPerUnit, super.hashCode());
+    return Objects.hash(effectiveDate, settlementCurrency, notionalAmountPerUnit, paymentDate, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -162,6 +188,7 @@ public class FutureMarkToMarketEvent extends InstrumentEvent {
     sb.append("    effectiveDate: ").append(toIndentedString(effectiveDate)).append("\n");
     sb.append("    settlementCurrency: ").append(toIndentedString(settlementCurrency)).append("\n");
     sb.append("    notionalAmountPerUnit: ").append(toIndentedString(notionalAmountPerUnit)).append("\n");
+    sb.append("    paymentDate: ").append(toIndentedString(paymentDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -12,12 +12,12 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
-import com.finbourne.sdk.services.lusid.model.Property;
+import com.finbourne.sdk.services.lusid.model.ComplianceKeyUsed;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -38,24 +38,17 @@ import com.finbourne.sdk.JSON;
  * ComplianceRuleContribution
  */
 @JsonPropertyOrder({
-  ComplianceRuleContribution.JSON_PROPERTY_INDEX,
   ComplianceRuleContribution.JSON_PROPERTY_PORTFOLIO_ID,
   ComplianceRuleContribution.JSON_PROPERTY_ORDER_ID,
   ComplianceRuleContribution.JSON_PROPERTY_INSTRUMENT,
   ComplianceRuleContribution.JSON_PROPERTY_INSTRUMENT_TYPE,
   ComplianceRuleContribution.JSON_PROPERTY_HOLDING_TYPE,
   ComplianceRuleContribution.JSON_PROPERTY_HOLDING_ID,
-  ComplianceRuleContribution.JSON_PROPERTY_RESULT_VALUES,
-  ComplianceRuleContribution.JSON_PROPERTY_PROPERTIES,
-  ComplianceRuleContribution.JSON_PROPERTY_RELATED_PROPERTIES
+  ComplianceRuleContribution.JSON_PROPERTY_HELD_BY,
+  ComplianceRuleContribution.JSON_PROPERTY_KEYS_USED
 })
 
 public class ComplianceRuleContribution {
-  public static final String JSON_PROPERTY_INDEX = "index";
-  @JsonProperty(JSON_PROPERTY_INDEX)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Integer index;
-
   public static final String JSON_PROPERTY_PORTFOLIO_ID = "portfolioId";
   @JsonProperty(JSON_PROPERTY_PORTFOLIO_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -86,42 +79,18 @@ public class ComplianceRuleContribution {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String holdingId;
 
-  public static final String JSON_PROPERTY_RESULT_VALUES = "resultValues";
-  @JsonProperty(JSON_PROPERTY_RESULT_VALUES)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Map<String, java.math.BigDecimal> resultValues = new HashMap<>();
+  public static final String JSON_PROPERTY_HELD_BY = "heldBy";
+  @JsonProperty(JSON_PROPERTY_HELD_BY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String heldBy;
 
-  public static final String JSON_PROPERTY_PROPERTIES = "properties";
-  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  public static final String JSON_PROPERTY_KEYS_USED = "keysUsed";
+  @JsonProperty(JSON_PROPERTY_KEYS_USED)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Map<String, Property> properties = new HashMap<>();
-
-  public static final String JSON_PROPERTY_RELATED_PROPERTIES = "relatedProperties";
-  @JsonProperty(JSON_PROPERTY_RELATED_PROPERTIES)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  private Map<String, String> relatedProperties = new HashMap<>();
+  private List<ComplianceKeyUsed> keysUsed = new ArrayList<>();
 
   public ComplianceRuleContribution() {
   }
-
-  public ComplianceRuleContribution index(Integer index) {
-    this.index = index;
-    return this;
-  }
-
-  /**
-   * The position of this contribution within the compliance run.
-   * @return index
-   */
-  @javax.annotation.Nonnull
-  public Integer getIndex() {
-    return index;
-  }
-
-  public void setIndex(Integer index) {
-    this.index = index;
-  }
-
 
   public ComplianceRuleContribution portfolioId(ResourceId portfolioId) {
     this.portfolioId = portfolioId;
@@ -237,84 +206,49 @@ public class ComplianceRuleContribution {
   }
 
 
-  public ComplianceRuleContribution resultValues(Map<String, java.math.BigDecimal> resultValues) {
-    this.resultValues = resultValues;
-    return this;
-  }
-
-  public ComplianceRuleContribution putResultValuesItem(String key, java.math.BigDecimal resultValuesItem) {
-    if (this.resultValues == null) {
-      this.resultValues = new HashMap<>();
-    }
-    this.resultValues.put(key, resultValuesItem);
+  public ComplianceRuleContribution heldBy(String heldBy) {
+    this.heldBy = heldBy;
     return this;
   }
 
   /**
-   * Dictionary of AddressKey (as string) and their corresponding decimal valuation results for this contribution.
-   * @return resultValues
+   * Optional. Where this holding sits relative to the rule&#39;s benchmark: portfolio, benchmark or both.  Meaningful only for benchmark-relative rules.
+   * @return heldBy
    */
-  @javax.annotation.Nonnull
-  public Map<String, java.math.BigDecimal> getResultValues() {
-    return resultValues;
+  @javax.annotation.Nullable
+  public String getHeldBy() {
+    return heldBy;
   }
 
-  public void setResultValues(Map<String, java.math.BigDecimal> resultValues) {
-    this.resultValues = resultValues;
+  public void setHeldBy(String heldBy) {
+    this.heldBy = heldBy;
   }
 
 
-  public ComplianceRuleContribution properties(Map<String, Property> properties) {
-    this.properties = properties;
+  public ComplianceRuleContribution keysUsed(List<ComplianceKeyUsed> keysUsed) {
+    this.keysUsed = keysUsed;
     return this;
   }
 
-  public ComplianceRuleContribution putPropertiesItem(String key, Property propertiesItem) {
-    if (this.properties == null) {
-      this.properties = new HashMap<>();
+  public ComplianceRuleContribution addKeysUsedItem(ComplianceKeyUsed keysUsedItem) {
+    if (this.keysUsed == null) {
+      this.keysUsed = new ArrayList<>();
     }
-    this.properties.put(key, propertiesItem);
+    this.keysUsed.add(keysUsedItem);
     return this;
   }
 
   /**
-   * Dictionary of PropertyKey (as string) and their corresponding property for this contribution.
-   * @return properties
+   * The keys this holding contributed to the rule: each key the rule read (plus the portfolio NAV key), with the  role(s) it played, the holding&#39;s own value for it, and which bag the value came from.
+   * @return keysUsed
    */
   @javax.annotation.Nonnull
-  public Map<String, Property> getProperties() {
-    return properties;
+  public List<ComplianceKeyUsed> getKeysUsed() {
+    return keysUsed;
   }
 
-  public void setProperties(Map<String, Property> properties) {
-    this.properties = properties;
-  }
-
-
-  public ComplianceRuleContribution relatedProperties(Map<String, String> relatedProperties) {
-    this.relatedProperties = relatedProperties;
-    return this;
-  }
-
-  public ComplianceRuleContribution putRelatedPropertiesItem(String key, String relatedPropertiesItem) {
-    if (this.relatedProperties == null) {
-      this.relatedProperties = new HashMap<>();
-    }
-    this.relatedProperties.put(key, relatedPropertiesItem);
-    return this;
-  }
-
-  /**
-   * Dictionary of related property keys (as string) and their string values, read from related entities across a relationship.
-   * @return relatedProperties
-   */
-  @javax.annotation.Nonnull
-  public Map<String, String> getRelatedProperties() {
-    return relatedProperties;
-  }
-
-  public void setRelatedProperties(Map<String, String> relatedProperties) {
-    this.relatedProperties = relatedProperties;
+  public void setKeysUsed(List<ComplianceKeyUsed> keysUsed) {
+    this.keysUsed = keysUsed;
   }
 
 
@@ -327,16 +261,14 @@ public class ComplianceRuleContribution {
       return false;
     }
     ComplianceRuleContribution complianceRuleContribution = (ComplianceRuleContribution) o;
-    return Objects.equals(this.index, complianceRuleContribution.index) &&
-        Objects.equals(this.portfolioId, complianceRuleContribution.portfolioId) &&
+    return Objects.equals(this.portfolioId, complianceRuleContribution.portfolioId) &&
         Objects.equals(this.orderId, complianceRuleContribution.orderId) &&
         Objects.equals(this.instrument, complianceRuleContribution.instrument) &&
         Objects.equals(this.instrumentType, complianceRuleContribution.instrumentType) &&
         Objects.equals(this.holdingType, complianceRuleContribution.holdingType) &&
         Objects.equals(this.holdingId, complianceRuleContribution.holdingId) &&
-        Objects.equals(this.resultValues, complianceRuleContribution.resultValues) &&
-        Objects.equals(this.properties, complianceRuleContribution.properties) &&
-        Objects.equals(this.relatedProperties, complianceRuleContribution.relatedProperties);
+        Objects.equals(this.heldBy, complianceRuleContribution.heldBy) &&
+        Objects.equals(this.keysUsed, complianceRuleContribution.keysUsed);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -345,7 +277,7 @@ public class ComplianceRuleContribution {
 
   @Override
  public int hashCode() {
-    return Objects.hash(index, portfolioId, orderId, instrument, instrumentType, holdingType, holdingId, resultValues, properties, relatedProperties);
+    return Objects.hash(portfolioId, orderId, instrument, instrumentType, holdingType, holdingId, heldBy, keysUsed);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -359,16 +291,14 @@ public class ComplianceRuleContribution {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ComplianceRuleContribution {\n");
-    sb.append("    index: ").append(toIndentedString(index)).append("\n");
     sb.append("    portfolioId: ").append(toIndentedString(portfolioId)).append("\n");
     sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
     sb.append("    instrument: ").append(toIndentedString(instrument)).append("\n");
     sb.append("    instrumentType: ").append(toIndentedString(instrumentType)).append("\n");
     sb.append("    holdingType: ").append(toIndentedString(holdingType)).append("\n");
     sb.append("    holdingId: ").append(toIndentedString(holdingId)).append("\n");
-    sb.append("    resultValues: ").append(toIndentedString(resultValues)).append("\n");
-    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
-    sb.append("    relatedProperties: ").append(toIndentedString(relatedProperties)).append("\n");
+    sb.append("    heldBy: ").append(toIndentedString(heldBy)).append("\n");
+    sb.append("    keysUsed: ").append(toIndentedString(keysUsed)).append("\n");
     sb.append("}");
     return sb.toString();
   }
