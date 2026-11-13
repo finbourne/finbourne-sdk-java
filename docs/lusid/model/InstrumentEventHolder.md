@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **instrumentIdentifiers** | **Map&lt;String, String&gt;** | The set of identifiers which determine the instrument this event relates to. | [default to Map<String, String>]
 **lusidInstrumentId** | **String** | The LUID for the instrument. | [default to String]
 **instrumentScope** | **String** | The scope of the instrument. | [default to String]
-**description** | **String** | The description of the instrument event. | [default to String]
+**description** | **String** | The description of the instrument event. | [optional] [default to String]
 **eventDateRange** | [**EventDateRange**](EventDateRange.md) |  | [default to EventDateRange]
 **completeness** | **String** | Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete). Available values: Complete, Incomplete. | [optional] [readonly] [default to String]
 **instrumentEvent** | [**InstrumentEvent**](InstrumentEvent.md) |  | [default to InstrumentEvent]
@@ -33,7 +33,7 @@ ResourceId corporateActionSourceId = new ResourceId();
 Map<String, String> instrumentIdentifiers = new Map<String, String>();
 String lusidInstrumentId = "example lusidInstrumentId";
 String instrumentScope = "example instrumentScope";
-String description = "example description";
+@javax.annotation.Nullable String description = "example description";
 EventDateRange eventDateRange = new EventDateRange();
 @javax.annotation.Nullable String completeness = "example completeness";
 InstrumentEvent instrumentEvent = new InstrumentEvent();

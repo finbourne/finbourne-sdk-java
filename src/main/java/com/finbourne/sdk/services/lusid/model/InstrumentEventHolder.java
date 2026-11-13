@@ -89,7 +89,7 @@ public class InstrumentEventHolder {
 
   public static final String JSON_PROPERTY_DESCRIPTION = "description";
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String description;
 
   public static final String JSON_PROPERTY_EVENT_DATE_RANGE = "eventDateRange";
@@ -261,7 +261,7 @@ public class InstrumentEventHolder {
    * The description of the instrument event.
    * @return description
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getDescription() {
     return description;
   }

@@ -3020,7 +3020,7 @@ public class OrderManagementApi {
      * Build call for runAllocationService
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
-     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to true. Set to false to leave allocations with booked transactions untouched. (optional, default to true)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3040,7 +3040,7 @@ public class OrderManagementApi {
      * Build call for runAllocationService. Use any specified configuration options to override any other configuration for this request only.
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to true. Set to false to leave allocations with booked transactions untouched. (optional, default to true)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3126,7 +3126,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
-     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to true. Set to false to leave allocations with booked transactions untouched. (optional, default to true)
      * @return ApiResponse&lt;AllocationServiceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3148,7 +3148,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.Use any specified configuration options to override any other configuration for this request only
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
-     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to true. Set to false to leave allocations with booked transactions untouched. (optional, default to true)
      * @return ApiResponse&lt;AllocationServiceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3170,7 +3170,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
-     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to true. Set to false to leave allocations with booked transactions untouched. (optional, default to true)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3193,7 +3193,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.Use any specified configuration options to override any other configuration for this request only
      * @param resourceId The List of Placement IDs for which you wish to allocate Executions. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-FIFO\&quot;.  This defaults to \&quot;PR-FIFO\&quot;. (optional)
-     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
+     * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to true. Set to false to leave allocations with booked transactions untouched. (optional, default to true)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3232,7 +3232,7 @@ public class OrderManagementApi {
 
         /**
          * Set cancelAndCorrect
-         * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched. (optional, default to false)
+         * @param cancelAndCorrect Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to true. Set to false to leave allocations with booked transactions untouched. (optional, default to true)
          * @return APIrunAllocationServiceRequest
          */
         public APIrunAllocationServiceRequest cancelAndCorrect(Boolean cancelAndCorrect) {
@@ -3376,7 +3376,7 @@ public class OrderManagementApi {
      * Build call for runAllocationServiceWithWeights
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
-     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to true)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3396,7 +3396,7 @@ public class OrderManagementApi {
      * Build call for runAllocationServiceWithWeights. Use any specified configuration options to override any other configuration for this request only.
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to true)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3482,7 +3482,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
-     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to true)
      * @return ApiResponse&lt;AllocationServiceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3504,7 +3504,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.Use any specified configuration options to override any other configuration for this request only
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
-     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to true)
      * @return ApiResponse&lt;AllocationServiceRunResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -3526,7 +3526,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
-     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to true)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3549,7 +3549,7 @@ public class OrderManagementApi {
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.Use any specified configuration options to override any other configuration for this request only
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
-     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
+     * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to true)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -3588,7 +3588,7 @@ public class OrderManagementApi {
 
         /**
          * Set cancelAndCorrect
-         * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to false)
+         * @param cancelAndCorrect Whether to cancel the transactions booked against this placement&#39;s allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place. (optional, default to true)
          * @return APIrunAllocationServiceWithWeightsRequest
          */
         public APIrunAllocationServiceWithWeightsRequest cancelAndCorrect(Boolean cancelAndCorrect) {
