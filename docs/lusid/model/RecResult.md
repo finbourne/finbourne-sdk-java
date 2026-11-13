@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **id** | **String** | The id of the result within its instance: its rec type, result type and result number, e.g. &#39;Holding-break-3&#39;. Unique within the instance, and kept across its runs for as long as the result keeps its result type. | [default to String]
 **resultNumber** | **Integer** | The result&#39;s number within its result type. Kept across runs while the result keeps its type; never reused once assigned. | [default to Integer]
 **firstRunSeen** | **Integer** | The run in which the result was first assigned its id. | [default to Integer]
+**asAtFirstSeen** | [**OffsetDateTime**](OffsetDateTime.md) | The runAsAt of the run in which the result first appeared in its instance, the run numbered firstRunSeen. Written once: re-runs leave it unchanged. | [default to OffsetDateTime]
 **recType** | **String** | The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio, CustomEntity. | [default to String]
 **externalRecTypeName** | **String** | The client&#39;s name for an External rec type, as stamped from the matching ruleset&#39;s externalRecType when the run executed. Null for native rec types. Filterable. | [optional] [default to String]
 **customEntityType** | **String** | The name of the custom entity type, which starts with ~. Set when the rec type is CustomEntity and null for every other rec type. Filterable. | [optional] [default to String]
@@ -30,6 +31,7 @@ Name | Type | Description | Notes
 **items** | [**RecResultItemDetails**](RecResultItemDetails.md) |  | [default to RecResultItemDetails]
 **linkedResults** | [**List&lt;RecLinkedResult&gt;**](RecLinkedResult.md) | Results of other rec types in the same rec instance run whose items share an identifier with this result&#39;s items. Only exceptions link, and only to exceptions; symmetric. Set by the linking pass once every rec type of the run has completed, so empty until then. | [default to List<RecLinkedResult>]
 **comments** | [**List&lt;RecUserComment&gt;**](RecUserComment.md) | User-authored comments attached to the result. Carried forward across runs. | [default to List<RecUserComment>]
+**streak** | [**RecResultStreak**](RecResultStreak.md) |  | [optional] [default to RecResultStreak]
 **properties** | [**Map&lt;String, PerpetualProperty&gt;**](PerpetualProperty.md) | Properties in the RecResult domain. Filterable and sortable. Always includes the properties the matching ruleset populates, with a null value where the result holds none yet. | [optional] [default to Map<String, PerpetualProperty>]
 **assignedUser** | **String** | The LUSID user id assigned to the result. | [optional] [default to String]
 **assignedRole** | **String** | The LUSID IAM role id assigned to the result. | [optional] [default to String]
@@ -46,6 +48,7 @@ import java.net.URI;
 String id = "example id";
 Integer resultNumber = new Integer("100.00");
 Integer firstRunSeen = new Integer("100.00");
+OffsetDateTime asAtFirstSeen = OffsetDateTime.now();
 String recType = "example recType";
 @javax.annotation.Nullable String externalRecTypeName = "example externalRecTypeName";
 @javax.annotation.Nullable String customEntityType = "example customEntityType";
@@ -67,6 +70,7 @@ List<SupplementalAttributeValues> supplementalAttributes = new List<Supplemental
 RecResultItemDetails items = new RecResultItemDetails();
 List<RecLinkedResult> linkedResults = new List<RecLinkedResult>();
 List<RecUserComment> comments = new List<RecUserComment>();
+RecResultStreak streak = new RecResultStreak();
 @javax.annotation.Nullable Map<String, PerpetualProperty> properties = new Map<String, PerpetualProperty>();
 @javax.annotation.Nullable String assignedUser = "example assignedUser";
 @javax.annotation.Nullable String assignedRole = "example assignedRole";
@@ -79,6 +83,7 @@ RecResult recResultInstance = new RecResult()
     .id(id)
     .resultNumber(resultNumber)
     .firstRunSeen(firstRunSeen)
+    .asAtFirstSeen(asAtFirstSeen)
     .recType(recType)
     .externalRecTypeName(externalRecTypeName)
     .customEntityType(customEntityType)
@@ -100,6 +105,7 @@ RecResult recResultInstance = new RecResult()
     .items(items)
     .linkedResults(linkedResults)
     .comments(comments)
+    .streak(streak)
     .properties(properties)
     .assignedUser(assignedUser)
     .assignedRole(assignedRole)

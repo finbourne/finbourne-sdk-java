@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **settlementInstruction** | [**TransactionSettlementInstruction**](TransactionSettlementInstruction.md) |  | [optional] [default to TransactionSettlementInstruction]
 **matchedTransaction** | [**OutputTransaction**](OutputTransaction.md) |  | [optional] [default to OutputTransaction]
+**settlementFx** | [**SettlementFx**](SettlementFx.md) |  | [optional] [default to SettlementFx]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.SettlementInstructionWithTransaction;
@@ -17,11 +18,13 @@ import java.net.URI;
 
 TransactionSettlementInstruction settlementInstruction = new TransactionSettlementInstruction();
 OutputTransaction matchedTransaction = new OutputTransaction();
+SettlementFx settlementFx = new SettlementFx();
 
 
 SettlementInstructionWithTransaction settlementInstructionWithTransactionInstance = new SettlementInstructionWithTransaction()
     .settlementInstruction(settlementInstruction)
-    .matchedTransaction(matchedTransaction);
+    .matchedTransaction(matchedTransaction)
+    .settlementFx(settlementFx);
 ```
 
 

@@ -81,12 +81,22 @@ import com.finbourne.sdk.services.lusid.model.ResourceListOfNavActivityAdjustmen
 import com.finbourne.sdk.services.lusid.model.ResourceListOfPartnerStatement;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfSeries;
 import com.finbourne.sdk.services.lusid.model.ResourceListOfTaxExceptionItem;
+import com.finbourne.sdk.services.lusid.model.ResourceListOfTaxProvision;
 import com.finbourne.sdk.services.lusid.model.RevertValuationPointDataRequest;
 import com.finbourne.sdk.services.lusid.model.RevertValuationPointResponse;
 import com.finbourne.sdk.services.lusid.model.SeriesDefinitionRequest;
 import com.finbourne.sdk.services.lusid.model.SetShareClassInstrumentsRequest;
 import com.finbourne.sdk.services.lusid.model.SingleValuationPointQueryParameters;
 import com.finbourne.sdk.services.lusid.model.TaxCostRecordRequest;
+import com.finbourne.sdk.services.lusid.model.TaxDeemedDisposalResponse;
+import com.finbourne.sdk.services.lusid.model.TaxDeemedDisposalsResponse;
+import com.finbourne.sdk.services.lusid.model.TaxFundReconciliationHoldingResponse;
+import com.finbourne.sdk.services.lusid.model.TaxFundReconciliationResponse;
+import com.finbourne.sdk.services.lusid.model.TaxLedgerReconciliationHoldingResponse;
+import com.finbourne.sdk.services.lusid.model.TaxLedgerReconciliationResponse;
+import com.finbourne.sdk.services.lusid.model.TaxProvision;
+import com.finbourne.sdk.services.lusid.model.TaxReturnResponse;
+import com.finbourne.sdk.services.lusid.model.TaxReturnTransitionRequest;
 import com.finbourne.sdk.services.lusid.model.TaxSyncStatus;
 import com.finbourne.sdk.services.lusid.model.UpdateValuationPointRequest;
 import com.finbourne.sdk.services.lusid.model.UpsertExternalDealingEstimatesRequest;
@@ -1572,6 +1582,754 @@ public class FundsApi {
      */
     public APIaddSeriesRequest addSeries(String scope, String code, List<SeriesDefinitionRequest> seriesDefinitionRequest) {
         return new APIaddSeriesRequest(scope, code, seriesDefinitionRequest);
+    }
+    /**
+     * Build call for advanceTaxReturn
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for advancing the return. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest advanceTaxReturnCall(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback _callback) throws ApiException {
+        return advanceTaxReturnCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for advanceTaxReturn. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxReturnTransitionRequest The reason for advancing the return. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest advanceTaxReturnCall(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = taxReturnTransitionRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/return/advance"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (taxPeriod != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("taxPeriod", taxPeriod));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest advanceTaxReturnValidateBeforeCall(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling advanceTaxReturn(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling advanceTaxReturn(Async)");
+        }
+
+        // verify the required parameter 'taxReturnTransitionRequest' is set
+        if (taxReturnTransitionRequest == null) {
+            throw new ApiException("Missing the required parameter 'taxReturnTransitionRequest' when calling advanceTaxReturn(Async)");
+        }
+
+        return advanceTaxReturnCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step.
+     * Moves the return from Draft to Prepared, Prepared to Reviewed, Reviewed to SignedOff or SignedOff to Final. Advancing past Reviewed requires the tax records to be in sync with the ledger. Each step is recorded with the supplied reason.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for advancing the return. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxReturnResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxReturnResponse> advanceTaxReturnWithHttpInfo(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod) throws ApiException {
+        HttpRequest localVarCall = advanceTaxReturnValidateBeforeCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step.
+     * Moves the return from Draft to Prepared, Prepared to Reviewed, Reviewed to SignedOff or SignedOff to Final. Advancing past Reviewed requires the tax records to be in sync with the ledger. Each step is recorded with the supplied reason.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for advancing the return. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxReturnResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxReturnResponse> advanceTaxReturnWithHttpInfo(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = advanceTaxReturnValidateBeforeCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, null, opts);
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step. (asynchronously)
+     * Moves the return from Draft to Prepared, Prepared to Reviewed, Reviewed to SignedOff or SignedOff to Final. Advancing past Reviewed requires the tax records to be in sync with the ledger. Each step is recorded with the supplied reason.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for advancing the return. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void advanceTaxReturnAsync(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback<TaxReturnResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = advanceTaxReturnValidateBeforeCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step. (asynchronously)
+     * Moves the return from Draft to Prepared, Prepared to Reviewed, Reviewed to SignedOff or SignedOff to Final. Advancing past Reviewed requires the tax records to be in sync with the ledger. Each step is recorded with the supplied reason.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for advancing the return. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void advanceTaxReturnAsync(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback<TaxReturnResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = advanceTaxReturnValidateBeforeCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIadvanceTaxReturnRequest {
+        private final String scope;
+        private final String code;
+        private final TaxReturnTransitionRequest taxReturnTransitionRequest;
+        private String effectiveAt;
+        private String taxPeriod;
+
+        private APIadvanceTaxReturnRequest(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest) {
+            this.scope = scope;
+            this.code = code;
+            this.taxReturnTransitionRequest = taxReturnTransitionRequest;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIadvanceTaxReturnRequest
+         */
+        public APIadvanceTaxReturnRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set taxPeriod
+         * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+         * @return APIadvanceTaxReturnRequest
+         */
+        public APIadvanceTaxReturnRequest taxPeriod(String taxPeriod) {
+            this.taxPeriod = taxPeriod;
+            return this;
+        }
+
+        /**
+         * Build call for advanceTaxReturn
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return advanceTaxReturnCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute advanceTaxReturn request
+         * @return TaxReturnResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxReturnResponse execute() throws ApiException {
+            ApiResponse<TaxReturnResponse> localVarResp = advanceTaxReturnWithHttpInfo(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute advanceTaxReturn request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxReturnResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxReturnResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxReturnResponse> localVarResp = advanceTaxReturnWithHttpInfo(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute advanceTaxReturn request with HTTP info returned
+         * @return ApiResponse&lt;TaxReturnResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxReturnResponse> executeWithHttpInfo() throws ApiException {
+            return advanceTaxReturnWithHttpInfo(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod);
+        }
+
+        /**
+         * Execute advanceTaxReturn request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxReturnResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxReturnResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return advanceTaxReturnWithHttpInfo(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, opts);
+        }
+
+        /**
+         * Execute advanceTaxReturn request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxReturnResponse> _callback) throws ApiException {
+            advanceTaxReturnAsync(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute advanceTaxReturn request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxReturnResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            advanceTaxReturnAsync(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step.
+     * Moves the return from Draft to Prepared, Prepared to Reviewed, Reviewed to SignedOff or SignedOff to Final. Advancing past Reviewed requires the tax records to be in sync with the ledger. Each step is recorded with the supplied reason.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for advancing the return. (required)
+     * @return APIadvanceTaxReturnRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIadvanceTaxReturnRequest advanceTaxReturn(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest) {
+        return new APIadvanceTaxReturnRequest(scope, code, taxReturnTransitionRequest);
+    }
+    /**
+     * Build call for approveTaxProvision
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point whose provision is approved. (required)
+     * @param navTypeCode When provided, approves the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest approveTaxProvisionCall(String scope, String code, String diaryEntryCode, String navTypeCode, final ApiCallback _callback) throws ApiException {
+        return approveTaxProvisionCall(scope, code, diaryEntryCode, navTypeCode,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for approveTaxProvision. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point whose provision is approved. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param navTypeCode When provided, approves the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest approveTaxProvisionCall(String scope, String code, String diaryEntryCode, String navTypeCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode}/tax/provision/approve"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()))
+            .replace("{" + "diaryEntryCode" + "}", localVarApiClient.escapeString(diaryEntryCode.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (navTypeCode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("navTypeCode", navTypeCode));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest approveTaxProvisionValidateBeforeCall(String scope, String code, String diaryEntryCode, String navTypeCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling approveTaxProvision(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling approveTaxProvision(Async)");
+        }
+
+        // verify the required parameter 'diaryEntryCode' is set
+        if (diaryEntryCode == null) {
+            throw new ApiException("Missing the required parameter 'diaryEntryCode' when calling approveTaxProvision(Async)");
+        }
+
+        return approveTaxProvisionCall(scope, code, diaryEntryCode, navTypeCode, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
+     * Moves the Valuation Point&#39;s deferred-tax provision from Estimate to Approved, stores it as the official  document and books the movement since the previous approved Valuation Point as an accrual on the Fund.  Approving an already approved provision fails. Until tax elections can be configured on the Fund every  provision is struck under the default elections: a 20% rate, indexation allowance applied and losses carried  forward.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point whose provision is approved. (required)
+     * @param navTypeCode When provided, approves the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @return ApiResponse&lt;TaxProvision&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxProvision> approveTaxProvisionWithHttpInfo(String scope, String code, String diaryEntryCode, String navTypeCode) throws ApiException {
+        HttpRequest localVarCall = approveTaxProvisionValidateBeforeCall(scope, code, diaryEntryCode, navTypeCode, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxProvision>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
+     * Moves the Valuation Point&#39;s deferred-tax provision from Estimate to Approved, stores it as the official  document and books the movement since the previous approved Valuation Point as an accrual on the Fund.  Approving an already approved provision fails. Until tax elections can be configured on the Fund every  provision is struck under the default elections: a 20% rate, indexation allowance applied and losses carried  forward.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point whose provision is approved. (required)
+     * @param navTypeCode When provided, approves the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @return ApiResponse&lt;TaxProvision&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxProvision> approveTaxProvisionWithHttpInfo(String scope, String code, String diaryEntryCode, String navTypeCode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = approveTaxProvisionValidateBeforeCall(scope, code, diaryEntryCode, navTypeCode, null, opts);
+        Type localVarReturnType = new TypeReference<TaxProvision>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point. (asynchronously)
+     * Moves the Valuation Point&#39;s deferred-tax provision from Estimate to Approved, stores it as the official  document and books the movement since the previous approved Valuation Point as an accrual on the Fund.  Approving an already approved provision fails. Until tax elections can be configured on the Fund every  provision is struck under the default elections: a 20% rate, indexation allowance applied and losses carried  forward.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point whose provision is approved. (required)
+     * @param navTypeCode When provided, approves the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void approveTaxProvisionAsync(String scope, String code, String diaryEntryCode, String navTypeCode, final ApiCallback<TaxProvision> _callback) throws ApiException {
+
+        HttpRequest localVarCall = approveTaxProvisionValidateBeforeCall(scope, code, diaryEntryCode, navTypeCode, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxProvision>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point. (asynchronously)
+     * Moves the Valuation Point&#39;s deferred-tax provision from Estimate to Approved, stores it as the official  document and books the movement since the previous approved Valuation Point as an accrual on the Fund.  Approving an already approved provision fails. Until tax elections can be configured on the Fund every  provision is struck under the default elections: a 20% rate, indexation allowance applied and losses carried  forward.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point whose provision is approved. (required)
+     * @param navTypeCode When provided, approves the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void approveTaxProvisionAsync(String scope, String code, String diaryEntryCode, String navTypeCode, final ApiCallback<TaxProvision> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = approveTaxProvisionValidateBeforeCall(scope, code, diaryEntryCode, navTypeCode, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxProvision>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIapproveTaxProvisionRequest {
+        private final String scope;
+        private final String code;
+        private final String diaryEntryCode;
+        private String navTypeCode;
+
+        private APIapproveTaxProvisionRequest(String scope, String code, String diaryEntryCode) {
+            this.scope = scope;
+            this.code = code;
+            this.diaryEntryCode = diaryEntryCode;
+        }
+
+        /**
+         * Set navTypeCode
+         * @param navTypeCode When provided, approves the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+         * @return APIapproveTaxProvisionRequest
+         */
+        public APIapproveTaxProvisionRequest navTypeCode(String navTypeCode) {
+            this.navTypeCode = navTypeCode;
+            return this;
+        }
+
+        /**
+         * Build call for approveTaxProvision
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return approveTaxProvisionCall(scope, code, diaryEntryCode, navTypeCode, _callback);
+        }
+
+        /**
+         * Execute approveTaxProvision request
+         * @return TaxProvision
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxProvision execute() throws ApiException {
+            ApiResponse<TaxProvision> localVarResp = approveTaxProvisionWithHttpInfo(scope, code, diaryEntryCode, navTypeCode);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute approveTaxProvision request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxProvision
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxProvision execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxProvision> localVarResp = approveTaxProvisionWithHttpInfo(scope, code, diaryEntryCode, navTypeCode, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute approveTaxProvision request with HTTP info returned
+         * @return ApiResponse&lt;TaxProvision&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxProvision> executeWithHttpInfo() throws ApiException {
+            return approveTaxProvisionWithHttpInfo(scope, code, diaryEntryCode, navTypeCode);
+        }
+
+        /**
+         * Execute approveTaxProvision request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxProvision&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxProvision> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return approveTaxProvisionWithHttpInfo(scope, code, diaryEntryCode, navTypeCode, opts);
+        }
+
+        /**
+         * Execute approveTaxProvision request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxProvision> _callback) throws ApiException {
+            approveTaxProvisionAsync(scope, code, diaryEntryCode, navTypeCode, _callback);
+        }
+
+        /**
+         * Execute approveTaxProvision request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxProvision> _callback, ConfigurationOptions opts) throws ApiException {
+            approveTaxProvisionAsync(scope, code, diaryEntryCode, navTypeCode, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
+     * Moves the Valuation Point&#39;s deferred-tax provision from Estimate to Approved, stores it as the official  document and books the movement since the previous approved Valuation Point as an accrual on the Fund.  Approving an already approved provision fails. Until tax elections can be configured on the Fund every  provision is struck under the default elections: a 20% rate, indexation allowance applied and losses carried  forward.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point whose provision is approved. (required)
+     * @return APIapproveTaxProvisionRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The approved deferred-tax provision </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIapproveTaxProvisionRequest approveTaxProvision(String scope, String code, String diaryEntryCode) {
+        return new APIapproveTaxProvisionRequest(scope, code, diaryEntryCode);
     }
     /**
      * Build call for calculateManagementFees
@@ -14544,6 +15302,3154 @@ public class FundsApi {
         return new APIgetSeriesRequest(scope, code);
     }
     /**
+     * Build call for getTaxDeemedDisposal
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param date The date of the deemed disposal. (required)
+     * @param asAt The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxDeemedDisposalCall(String scope, String code, String holdingId, String date, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback) throws ApiException {
+        return getTaxDeemedDisposalCall(scope, code, holdingId, date, asAt, taxPeriod,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTaxDeemedDisposal. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param date The date of the deemed disposal. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxDeemedDisposalCall(String scope, String code, String holdingId, String date, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/deemed-disposals/{holdingId}/{date}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()))
+            .replace("{" + "holdingId" + "}", localVarApiClient.escapeString(holdingId.toString()))
+            .replace("{" + "date" + "}", localVarApiClient.escapeString(date.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (taxPeriod != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("taxPeriod", taxPeriod));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTaxDeemedDisposalValidateBeforeCall(String scope, String code, String holdingId, String date, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getTaxDeemedDisposal(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getTaxDeemedDisposal(Async)");
+        }
+
+        // verify the required parameter 'holdingId' is set
+        if (holdingId == null) {
+            throw new ApiException("Missing the required parameter 'holdingId' when calling getTaxDeemedDisposal(Async)");
+        }
+
+        // verify the required parameter 'date' is set
+        if (date == null) {
+            throw new ApiException("Missing the required parameter 'date' when calling getTaxDeemedDisposal(Async)");
+        }
+
+        return getTaxDeemedDisposalCall(scope, code, holdingId, date, asAt, taxPeriod, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal.
+     * Returns the deemed disposal of a holding on a given date.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param date The date of the deemed disposal. (required)
+     * @param asAt The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxDeemedDisposalResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxDeemedDisposalResponse> getTaxDeemedDisposalWithHttpInfo(String scope, String code, String holdingId, String date, OffsetDateTime asAt, String taxPeriod) throws ApiException {
+        HttpRequest localVarCall = getTaxDeemedDisposalValidateBeforeCall(scope, code, holdingId, date, asAt, taxPeriod, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxDeemedDisposalResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal.
+     * Returns the deemed disposal of a holding on a given date.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param date The date of the deemed disposal. (required)
+     * @param asAt The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxDeemedDisposalResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxDeemedDisposalResponse> getTaxDeemedDisposalWithHttpInfo(String scope, String code, String holdingId, String date, OffsetDateTime asAt, String taxPeriod, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTaxDeemedDisposalValidateBeforeCall(scope, code, holdingId, date, asAt, taxPeriod, null, opts);
+        Type localVarReturnType = new TypeReference<TaxDeemedDisposalResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal. (asynchronously)
+     * Returns the deemed disposal of a holding on a given date.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param date The date of the deemed disposal. (required)
+     * @param asAt The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxDeemedDisposalAsync(String scope, String code, String holdingId, String date, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxDeemedDisposalResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTaxDeemedDisposalValidateBeforeCall(scope, code, holdingId, date, asAt, taxPeriod, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxDeemedDisposalResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal. (asynchronously)
+     * Returns the deemed disposal of a holding on a given date.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param date The date of the deemed disposal. (required)
+     * @param asAt The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxDeemedDisposalAsync(String scope, String code, String holdingId, String date, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxDeemedDisposalResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTaxDeemedDisposalValidateBeforeCall(scope, code, holdingId, date, asAt, taxPeriod, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxDeemedDisposalResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTaxDeemedDisposalRequest {
+        private final String scope;
+        private final String code;
+        private final String holdingId;
+        private final String date;
+        private OffsetDateTime asAt;
+        private String taxPeriod;
+
+        private APIgetTaxDeemedDisposalRequest(String scope, String code, String holdingId, String date) {
+            this.scope = scope;
+            this.code = code;
+            this.holdingId = holdingId;
+            this.date = date;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified. (optional)
+         * @return APIgetTaxDeemedDisposalRequest
+         */
+        public APIgetTaxDeemedDisposalRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set taxPeriod
+         * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+         * @return APIgetTaxDeemedDisposalRequest
+         */
+        public APIgetTaxDeemedDisposalRequest taxPeriod(String taxPeriod) {
+            this.taxPeriod = taxPeriod;
+            return this;
+        }
+
+        /**
+         * Build call for getTaxDeemedDisposal
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTaxDeemedDisposalCall(scope, code, holdingId, date, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxDeemedDisposal request
+         * @return TaxDeemedDisposalResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxDeemedDisposalResponse execute() throws ApiException {
+            ApiResponse<TaxDeemedDisposalResponse> localVarResp = getTaxDeemedDisposalWithHttpInfo(scope, code, holdingId, date, asAt, taxPeriod);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxDeemedDisposal request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxDeemedDisposalResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxDeemedDisposalResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxDeemedDisposalResponse> localVarResp = getTaxDeemedDisposalWithHttpInfo(scope, code, holdingId, date, asAt, taxPeriod, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxDeemedDisposal request with HTTP info returned
+         * @return ApiResponse&lt;TaxDeemedDisposalResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxDeemedDisposalResponse> executeWithHttpInfo() throws ApiException {
+            return getTaxDeemedDisposalWithHttpInfo(scope, code, holdingId, date, asAt, taxPeriod);
+        }
+
+        /**
+         * Execute getTaxDeemedDisposal request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxDeemedDisposalResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxDeemedDisposalResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTaxDeemedDisposalWithHttpInfo(scope, code, holdingId, date, asAt, taxPeriod, opts);
+        }
+
+        /**
+         * Execute getTaxDeemedDisposal request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxDeemedDisposalResponse> _callback) throws ApiException {
+            getTaxDeemedDisposalAsync(scope, code, holdingId, date, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxDeemedDisposal request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxDeemedDisposalResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            getTaxDeemedDisposalAsync(scope, code, holdingId, date, asAt, taxPeriod, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal.
+     * Returns the deemed disposal of a holding on a given date.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param date The date of the deemed disposal. (required)
+     * @return APIgetTaxDeemedDisposalRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposal. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTaxDeemedDisposalRequest getTaxDeemedDisposal(String scope, String code, String holdingId, String date) {
+        return new APIgetTaxDeemedDisposalRequest(scope, code, holdingId, date);
+    }
+    /**
+     * Build call for getTaxDeemedDisposals
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxDeemedDisposalsCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback) throws ApiException {
+        return getTaxDeemedDisposalsCall(scope, code, effectiveAt, asAt, taxPeriod,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTaxDeemedDisposals. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxDeemedDisposalsCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/deemed-disposals"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (taxPeriod != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("taxPeriod", taxPeriod));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTaxDeemedDisposalsValidateBeforeCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getTaxDeemedDisposals(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getTaxDeemedDisposals(Async)");
+        }
+
+        return getTaxDeemedDisposalsCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company.
+     * Returns the period-end deemed disposals, the vintages they roll into and the seven-year spreading matrix. A company&#39;s disposals are actual and a fund&#39;s are notional.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxDeemedDisposalsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxDeemedDisposalsResponse> getTaxDeemedDisposalsWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod) throws ApiException {
+        HttpRequest localVarCall = getTaxDeemedDisposalsValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxDeemedDisposalsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company.
+     * Returns the period-end deemed disposals, the vintages they roll into and the seven-year spreading matrix. A company&#39;s disposals are actual and a fund&#39;s are notional.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxDeemedDisposalsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxDeemedDisposalsResponse> getTaxDeemedDisposalsWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTaxDeemedDisposalsValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, null, opts);
+        Type localVarReturnType = new TypeReference<TaxDeemedDisposalsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company. (asynchronously)
+     * Returns the period-end deemed disposals, the vintages they roll into and the seven-year spreading matrix. A company&#39;s disposals are actual and a fund&#39;s are notional.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxDeemedDisposalsAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxDeemedDisposalsResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTaxDeemedDisposalsValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxDeemedDisposalsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company. (asynchronously)
+     * Returns the period-end deemed disposals, the vintages they roll into and the seven-year spreading matrix. A company&#39;s disposals are actual and a fund&#39;s are notional.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxDeemedDisposalsAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxDeemedDisposalsResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTaxDeemedDisposalsValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxDeemedDisposalsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTaxDeemedDisposalsRequest {
+        private final String scope;
+        private final String code;
+        private String effectiveAt;
+        private OffsetDateTime asAt;
+        private String taxPeriod;
+
+        private APIgetTaxDeemedDisposalsRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIgetTaxDeemedDisposalsRequest
+         */
+        public APIgetTaxDeemedDisposalsRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified. (optional)
+         * @return APIgetTaxDeemedDisposalsRequest
+         */
+        public APIgetTaxDeemedDisposalsRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set taxPeriod
+         * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+         * @return APIgetTaxDeemedDisposalsRequest
+         */
+        public APIgetTaxDeemedDisposalsRequest taxPeriod(String taxPeriod) {
+            this.taxPeriod = taxPeriod;
+            return this;
+        }
+
+        /**
+         * Build call for getTaxDeemedDisposals
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTaxDeemedDisposalsCall(scope, code, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxDeemedDisposals request
+         * @return TaxDeemedDisposalsResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxDeemedDisposalsResponse execute() throws ApiException {
+            ApiResponse<TaxDeemedDisposalsResponse> localVarResp = getTaxDeemedDisposalsWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxDeemedDisposals request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxDeemedDisposalsResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxDeemedDisposalsResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxDeemedDisposalsResponse> localVarResp = getTaxDeemedDisposalsWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxDeemedDisposals request with HTTP info returned
+         * @return ApiResponse&lt;TaxDeemedDisposalsResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxDeemedDisposalsResponse> executeWithHttpInfo() throws ApiException {
+            return getTaxDeemedDisposalsWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod);
+        }
+
+        /**
+         * Execute getTaxDeemedDisposals request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxDeemedDisposalsResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxDeemedDisposalsResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTaxDeemedDisposalsWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod, opts);
+        }
+
+        /**
+         * Execute getTaxDeemedDisposals request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxDeemedDisposalsResponse> _callback) throws ApiException {
+            getTaxDeemedDisposalsAsync(scope, code, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxDeemedDisposals request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxDeemedDisposalsResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            getTaxDeemedDisposalsAsync(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company.
+     * Returns the period-end deemed disposals, the vintages they roll into and the seven-year spreading matrix. A company&#39;s disposals are actual and a fund&#39;s are notional.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @return APIgetTaxDeemedDisposalsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deemed disposals for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTaxDeemedDisposalsRequest getTaxDeemedDisposals(String scope, String code) {
+        return new APIgetTaxDeemedDisposalsRequest(scope, code);
+    }
+    /**
+     * Build call for getTaxFundReconciliation
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxFundReconciliationCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback) throws ApiException {
+        return getTaxFundReconciliationCall(scope, code, effectiveAt, asAt, taxPeriod,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTaxFundReconciliation. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxFundReconciliationCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/fund-reconciliation"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (taxPeriod != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("taxPeriod", taxPeriod));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTaxFundReconciliationValidateBeforeCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getTaxFundReconciliation(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getTaxFundReconciliation(Async)");
+        }
+
+        return getTaxFundReconciliationCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliation: [EARLY ACCESS] GetTaxFundReconciliation: Reconcile a company&#39;s tax figures to its member funds.
+     * Compares the company&#39;s return total to the sum of its member funds&#39; notional figures and explains each difference by scope, pool averaging, matching, indexation, the kink test or an out-of-sync holding. Only available for a company; a fund returns a failure.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxFundReconciliationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxFundReconciliationResponse> getTaxFundReconciliationWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod) throws ApiException {
+        HttpRequest localVarCall = getTaxFundReconciliationValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxFundReconciliationResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliation: [EARLY ACCESS] GetTaxFundReconciliation: Reconcile a company&#39;s tax figures to its member funds.
+     * Compares the company&#39;s return total to the sum of its member funds&#39; notional figures and explains each difference by scope, pool averaging, matching, indexation, the kink test or an out-of-sync holding. Only available for a company; a fund returns a failure.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxFundReconciliationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxFundReconciliationResponse> getTaxFundReconciliationWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTaxFundReconciliationValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, null, opts);
+        Type localVarReturnType = new TypeReference<TaxFundReconciliationResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliation: [EARLY ACCESS] GetTaxFundReconciliation: Reconcile a company&#39;s tax figures to its member funds. (asynchronously)
+     * Compares the company&#39;s return total to the sum of its member funds&#39; notional figures and explains each difference by scope, pool averaging, matching, indexation, the kink test or an out-of-sync holding. Only available for a company; a fund returns a failure.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxFundReconciliationAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxFundReconciliationResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTaxFundReconciliationValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxFundReconciliationResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliation: [EARLY ACCESS] GetTaxFundReconciliation: Reconcile a company&#39;s tax figures to its member funds. (asynchronously)
+     * Compares the company&#39;s return total to the sum of its member funds&#39; notional figures and explains each difference by scope, pool averaging, matching, indexation, the kink test or an out-of-sync holding. Only available for a company; a fund returns a failure.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxFundReconciliationAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxFundReconciliationResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTaxFundReconciliationValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxFundReconciliationResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTaxFundReconciliationRequest {
+        private final String scope;
+        private final String code;
+        private String effectiveAt;
+        private OffsetDateTime asAt;
+        private String taxPeriod;
+
+        private APIgetTaxFundReconciliationRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIgetTaxFundReconciliationRequest
+         */
+        public APIgetTaxFundReconciliationRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+         * @return APIgetTaxFundReconciliationRequest
+         */
+        public APIgetTaxFundReconciliationRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set taxPeriod
+         * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+         * @return APIgetTaxFundReconciliationRequest
+         */
+        public APIgetTaxFundReconciliationRequest taxPeriod(String taxPeriod) {
+            this.taxPeriod = taxPeriod;
+            return this;
+        }
+
+        /**
+         * Build call for getTaxFundReconciliation
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTaxFundReconciliationCall(scope, code, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxFundReconciliation request
+         * @return TaxFundReconciliationResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxFundReconciliationResponse execute() throws ApiException {
+            ApiResponse<TaxFundReconciliationResponse> localVarResp = getTaxFundReconciliationWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxFundReconciliation request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxFundReconciliationResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxFundReconciliationResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxFundReconciliationResponse> localVarResp = getTaxFundReconciliationWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxFundReconciliation request with HTTP info returned
+         * @return ApiResponse&lt;TaxFundReconciliationResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxFundReconciliationResponse> executeWithHttpInfo() throws ApiException {
+            return getTaxFundReconciliationWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod);
+        }
+
+        /**
+         * Execute getTaxFundReconciliation request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxFundReconciliationResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxFundReconciliationResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTaxFundReconciliationWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod, opts);
+        }
+
+        /**
+         * Execute getTaxFundReconciliation request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxFundReconciliationResponse> _callback) throws ApiException {
+            getTaxFundReconciliationAsync(scope, code, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxFundReconciliation request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxFundReconciliationResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            getTaxFundReconciliationAsync(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliation: [EARLY ACCESS] GetTaxFundReconciliation: Reconcile a company&#39;s tax figures to its member funds.
+     * Compares the company&#39;s return total to the sum of its member funds&#39; notional figures and explains each difference by scope, pool averaging, matching, indexation, the kink test or an out-of-sync holding. Only available for a company; a fund returns a failure.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @return APIgetTaxFundReconciliationRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The company-to-funds reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTaxFundReconciliationRequest getTaxFundReconciliation(String scope, String code) {
+        return new APIgetTaxFundReconciliationRequest(scope, code);
+    }
+    /**
+     * Build call for getTaxFundReconciliationHolding
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxFundReconciliationHoldingCall(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback) throws ApiException {
+        return getTaxFundReconciliationHoldingCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTaxFundReconciliationHolding. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxFundReconciliationHoldingCall(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/fund-reconciliation/holdings/{holdingId}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()))
+            .replace("{" + "holdingId" + "}", localVarApiClient.escapeString(holdingId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (taxPeriod != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("taxPeriod", taxPeriod));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTaxFundReconciliationHoldingValidateBeforeCall(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getTaxFundReconciliationHolding(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getTaxFundReconciliationHolding(Async)");
+        }
+
+        // verify the required parameter 'holdingId' is set
+        if (holdingId == null) {
+            throw new ApiException("Missing the required parameter 'holdingId' when calling getTaxFundReconciliationHolding(Async)");
+        }
+
+        return getTaxFundReconciliationHoldingCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliationHolding: [EARLY ACCESS] GetTaxFundReconciliationHolding: Drill into one holding of the company-to-funds reconciliation.
+     * Returns the company figure for a holding beside each member fund&#39;s notional figure, with the category and explanation of any difference.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxFundReconciliationHoldingResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxFundReconciliationHoldingResponse> getTaxFundReconciliationHoldingWithHttpInfo(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod) throws ApiException {
+        HttpRequest localVarCall = getTaxFundReconciliationHoldingValidateBeforeCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxFundReconciliationHoldingResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliationHolding: [EARLY ACCESS] GetTaxFundReconciliationHolding: Drill into one holding of the company-to-funds reconciliation.
+     * Returns the company figure for a holding beside each member fund&#39;s notional figure, with the category and explanation of any difference.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxFundReconciliationHoldingResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxFundReconciliationHoldingResponse> getTaxFundReconciliationHoldingWithHttpInfo(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTaxFundReconciliationHoldingValidateBeforeCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, null, opts);
+        Type localVarReturnType = new TypeReference<TaxFundReconciliationHoldingResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliationHolding: [EARLY ACCESS] GetTaxFundReconciliationHolding: Drill into one holding of the company-to-funds reconciliation. (asynchronously)
+     * Returns the company figure for a holding beside each member fund&#39;s notional figure, with the category and explanation of any difference.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxFundReconciliationHoldingAsync(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxFundReconciliationHoldingResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTaxFundReconciliationHoldingValidateBeforeCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxFundReconciliationHoldingResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliationHolding: [EARLY ACCESS] GetTaxFundReconciliationHolding: Drill into one holding of the company-to-funds reconciliation. (asynchronously)
+     * Returns the company figure for a holding beside each member fund&#39;s notional figure, with the category and explanation of any difference.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxFundReconciliationHoldingAsync(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxFundReconciliationHoldingResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTaxFundReconciliationHoldingValidateBeforeCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxFundReconciliationHoldingResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTaxFundReconciliationHoldingRequest {
+        private final String scope;
+        private final String code;
+        private final String holdingId;
+        private String effectiveAt;
+        private OffsetDateTime asAt;
+        private String taxPeriod;
+
+        private APIgetTaxFundReconciliationHoldingRequest(String scope, String code, String holdingId) {
+            this.scope = scope;
+            this.code = code;
+            this.holdingId = holdingId;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIgetTaxFundReconciliationHoldingRequest
+         */
+        public APIgetTaxFundReconciliationHoldingRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+         * @return APIgetTaxFundReconciliationHoldingRequest
+         */
+        public APIgetTaxFundReconciliationHoldingRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set taxPeriod
+         * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+         * @return APIgetTaxFundReconciliationHoldingRequest
+         */
+        public APIgetTaxFundReconciliationHoldingRequest taxPeriod(String taxPeriod) {
+            this.taxPeriod = taxPeriod;
+            return this;
+        }
+
+        /**
+         * Build call for getTaxFundReconciliationHolding
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTaxFundReconciliationHoldingCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxFundReconciliationHolding request
+         * @return TaxFundReconciliationHoldingResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxFundReconciliationHoldingResponse execute() throws ApiException {
+            ApiResponse<TaxFundReconciliationHoldingResponse> localVarResp = getTaxFundReconciliationHoldingWithHttpInfo(scope, code, holdingId, effectiveAt, asAt, taxPeriod);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxFundReconciliationHolding request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxFundReconciliationHoldingResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxFundReconciliationHoldingResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxFundReconciliationHoldingResponse> localVarResp = getTaxFundReconciliationHoldingWithHttpInfo(scope, code, holdingId, effectiveAt, asAt, taxPeriod, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxFundReconciliationHolding request with HTTP info returned
+         * @return ApiResponse&lt;TaxFundReconciliationHoldingResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxFundReconciliationHoldingResponse> executeWithHttpInfo() throws ApiException {
+            return getTaxFundReconciliationHoldingWithHttpInfo(scope, code, holdingId, effectiveAt, asAt, taxPeriod);
+        }
+
+        /**
+         * Execute getTaxFundReconciliationHolding request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxFundReconciliationHoldingResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxFundReconciliationHoldingResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTaxFundReconciliationHoldingWithHttpInfo(scope, code, holdingId, effectiveAt, asAt, taxPeriod, opts);
+        }
+
+        /**
+         * Execute getTaxFundReconciliationHolding request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxFundReconciliationHoldingResponse> _callback) throws ApiException {
+            getTaxFundReconciliationHoldingAsync(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxFundReconciliationHolding request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxFundReconciliationHoldingResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            getTaxFundReconciliationHoldingAsync(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxFundReconciliationHolding: [EARLY ACCESS] GetTaxFundReconciliationHolding: Drill into one holding of the company-to-funds reconciliation.
+     * Returns the company figure for a holding beside each member fund&#39;s notional figure, with the category and explanation of any difference.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @return APIgetTaxFundReconciliationHoldingRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTaxFundReconciliationHoldingRequest getTaxFundReconciliationHolding(String scope, String code, String holdingId) {
+        return new APIgetTaxFundReconciliationHoldingRequest(scope, code, holdingId);
+    }
+    /**
+     * Build call for getTaxLedgerReconciliation
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxLedgerReconciliationCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback) throws ApiException {
+        return getTaxLedgerReconciliationCall(scope, code, effectiveAt, asAt, taxPeriod,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTaxLedgerReconciliation. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxLedgerReconciliationCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/ledger-reconciliation"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (taxPeriod != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("taxPeriod", taxPeriod));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTaxLedgerReconciliationValidateBeforeCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getTaxLedgerReconciliation(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getTaxLedgerReconciliation(Async)");
+        }
+
+        return getTaxLedgerReconciliationCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliation: [EARLY ACCESS] GetTaxLedgerReconciliation: Reconcile the tax figures of a Fund or company to its ledger.
+     * Compares the ledger&#39;s capital gain or loss for the period to the comparable tax figure, explains each difference as an excluded holding, a tax cost adjustment or an out-of-sync holding, and bridges from the ledger figure to the return total.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxLedgerReconciliationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxLedgerReconciliationResponse> getTaxLedgerReconciliationWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod) throws ApiException {
+        HttpRequest localVarCall = getTaxLedgerReconciliationValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxLedgerReconciliationResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliation: [EARLY ACCESS] GetTaxLedgerReconciliation: Reconcile the tax figures of a Fund or company to its ledger.
+     * Compares the ledger&#39;s capital gain or loss for the period to the comparable tax figure, explains each difference as an excluded holding, a tax cost adjustment or an out-of-sync holding, and bridges from the ledger figure to the return total.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxLedgerReconciliationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxLedgerReconciliationResponse> getTaxLedgerReconciliationWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTaxLedgerReconciliationValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, null, opts);
+        Type localVarReturnType = new TypeReference<TaxLedgerReconciliationResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliation: [EARLY ACCESS] GetTaxLedgerReconciliation: Reconcile the tax figures of a Fund or company to its ledger. (asynchronously)
+     * Compares the ledger&#39;s capital gain or loss for the period to the comparable tax figure, explains each difference as an excluded holding, a tax cost adjustment or an out-of-sync holding, and bridges from the ledger figure to the return total.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxLedgerReconciliationAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxLedgerReconciliationResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTaxLedgerReconciliationValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxLedgerReconciliationResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliation: [EARLY ACCESS] GetTaxLedgerReconciliation: Reconcile the tax figures of a Fund or company to its ledger. (asynchronously)
+     * Compares the ledger&#39;s capital gain or loss for the period to the comparable tax figure, explains each difference as an excluded holding, a tax cost adjustment or an out-of-sync holding, and bridges from the ledger figure to the return total.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxLedgerReconciliationAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxLedgerReconciliationResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTaxLedgerReconciliationValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxLedgerReconciliationResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTaxLedgerReconciliationRequest {
+        private final String scope;
+        private final String code;
+        private String effectiveAt;
+        private OffsetDateTime asAt;
+        private String taxPeriod;
+
+        private APIgetTaxLedgerReconciliationRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIgetTaxLedgerReconciliationRequest
+         */
+        public APIgetTaxLedgerReconciliationRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+         * @return APIgetTaxLedgerReconciliationRequest
+         */
+        public APIgetTaxLedgerReconciliationRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set taxPeriod
+         * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+         * @return APIgetTaxLedgerReconciliationRequest
+         */
+        public APIgetTaxLedgerReconciliationRequest taxPeriod(String taxPeriod) {
+            this.taxPeriod = taxPeriod;
+            return this;
+        }
+
+        /**
+         * Build call for getTaxLedgerReconciliation
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTaxLedgerReconciliationCall(scope, code, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliation request
+         * @return TaxLedgerReconciliationResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxLedgerReconciliationResponse execute() throws ApiException {
+            ApiResponse<TaxLedgerReconciliationResponse> localVarResp = getTaxLedgerReconciliationWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliation request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxLedgerReconciliationResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxLedgerReconciliationResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxLedgerReconciliationResponse> localVarResp = getTaxLedgerReconciliationWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliation request with HTTP info returned
+         * @return ApiResponse&lt;TaxLedgerReconciliationResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxLedgerReconciliationResponse> executeWithHttpInfo() throws ApiException {
+            return getTaxLedgerReconciliationWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod);
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliation request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxLedgerReconciliationResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxLedgerReconciliationResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTaxLedgerReconciliationWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod, opts);
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliation request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxLedgerReconciliationResponse> _callback) throws ApiException {
+            getTaxLedgerReconciliationAsync(scope, code, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliation request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxLedgerReconciliationResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            getTaxLedgerReconciliationAsync(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliation: [EARLY ACCESS] GetTaxLedgerReconciliation: Reconcile the tax figures of a Fund or company to its ledger.
+     * Compares the ledger&#39;s capital gain or loss for the period to the comparable tax figure, explains each difference as an excluded holding, a tax cost adjustment or an out-of-sync holding, and bridges from the ledger figure to the return total.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @return APIgetTaxLedgerReconciliationRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax-to-ledger reconciliation for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTaxLedgerReconciliationRequest getTaxLedgerReconciliation(String scope, String code) {
+        return new APIgetTaxLedgerReconciliationRequest(scope, code);
+    }
+    /**
+     * Build call for getTaxLedgerReconciliationHolding
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxLedgerReconciliationHoldingCall(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback) throws ApiException {
+        return getTaxLedgerReconciliationHoldingCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTaxLedgerReconciliationHolding. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxLedgerReconciliationHoldingCall(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/ledger-reconciliation/holdings/{holdingId}"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()))
+            .replace("{" + "holdingId" + "}", localVarApiClient.escapeString(holdingId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (taxPeriod != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("taxPeriod", taxPeriod));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTaxLedgerReconciliationHoldingValidateBeforeCall(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getTaxLedgerReconciliationHolding(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getTaxLedgerReconciliationHolding(Async)");
+        }
+
+        // verify the required parameter 'holdingId' is set
+        if (holdingId == null) {
+            throw new ApiException("Missing the required parameter 'holdingId' when calling getTaxLedgerReconciliationHolding(Async)");
+        }
+
+        return getTaxLedgerReconciliationHoldingCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliationHolding: [EARLY ACCESS] GetTaxLedgerReconciliationHolding: Drill into one holding of the tax-to-ledger reconciliation.
+     * Returns the ledger and tax figures of a single holding side by side with the category and explanation of any difference.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxLedgerReconciliationHoldingResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxLedgerReconciliationHoldingResponse> getTaxLedgerReconciliationHoldingWithHttpInfo(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod) throws ApiException {
+        HttpRequest localVarCall = getTaxLedgerReconciliationHoldingValidateBeforeCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxLedgerReconciliationHoldingResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliationHolding: [EARLY ACCESS] GetTaxLedgerReconciliationHolding: Drill into one holding of the tax-to-ledger reconciliation.
+     * Returns the ledger and tax figures of a single holding side by side with the category and explanation of any difference.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxLedgerReconciliationHoldingResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxLedgerReconciliationHoldingResponse> getTaxLedgerReconciliationHoldingWithHttpInfo(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTaxLedgerReconciliationHoldingValidateBeforeCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, null, opts);
+        Type localVarReturnType = new TypeReference<TaxLedgerReconciliationHoldingResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliationHolding: [EARLY ACCESS] GetTaxLedgerReconciliationHolding: Drill into one holding of the tax-to-ledger reconciliation. (asynchronously)
+     * Returns the ledger and tax figures of a single holding side by side with the category and explanation of any difference.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxLedgerReconciliationHoldingAsync(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxLedgerReconciliationHoldingResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTaxLedgerReconciliationHoldingValidateBeforeCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxLedgerReconciliationHoldingResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliationHolding: [EARLY ACCESS] GetTaxLedgerReconciliationHolding: Drill into one holding of the tax-to-ledger reconciliation. (asynchronously)
+     * Returns the ledger and tax figures of a single holding side by side with the category and explanation of any difference.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxLedgerReconciliationHoldingAsync(String scope, String code, String holdingId, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxLedgerReconciliationHoldingResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTaxLedgerReconciliationHoldingValidateBeforeCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxLedgerReconciliationHoldingResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTaxLedgerReconciliationHoldingRequest {
+        private final String scope;
+        private final String code;
+        private final String holdingId;
+        private String effectiveAt;
+        private OffsetDateTime asAt;
+        private String taxPeriod;
+
+        private APIgetTaxLedgerReconciliationHoldingRequest(String scope, String code, String holdingId) {
+            this.scope = scope;
+            this.code = code;
+            this.holdingId = holdingId;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIgetTaxLedgerReconciliationHoldingRequest
+         */
+        public APIgetTaxLedgerReconciliationHoldingRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified. (optional)
+         * @return APIgetTaxLedgerReconciliationHoldingRequest
+         */
+        public APIgetTaxLedgerReconciliationHoldingRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set taxPeriod
+         * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+         * @return APIgetTaxLedgerReconciliationHoldingRequest
+         */
+        public APIgetTaxLedgerReconciliationHoldingRequest taxPeriod(String taxPeriod) {
+            this.taxPeriod = taxPeriod;
+            return this;
+        }
+
+        /**
+         * Build call for getTaxLedgerReconciliationHolding
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTaxLedgerReconciliationHoldingCall(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliationHolding request
+         * @return TaxLedgerReconciliationHoldingResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxLedgerReconciliationHoldingResponse execute() throws ApiException {
+            ApiResponse<TaxLedgerReconciliationHoldingResponse> localVarResp = getTaxLedgerReconciliationHoldingWithHttpInfo(scope, code, holdingId, effectiveAt, asAt, taxPeriod);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliationHolding request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxLedgerReconciliationHoldingResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxLedgerReconciliationHoldingResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxLedgerReconciliationHoldingResponse> localVarResp = getTaxLedgerReconciliationHoldingWithHttpInfo(scope, code, holdingId, effectiveAt, asAt, taxPeriod, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliationHolding request with HTTP info returned
+         * @return ApiResponse&lt;TaxLedgerReconciliationHoldingResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxLedgerReconciliationHoldingResponse> executeWithHttpInfo() throws ApiException {
+            return getTaxLedgerReconciliationHoldingWithHttpInfo(scope, code, holdingId, effectiveAt, asAt, taxPeriod);
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliationHolding request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxLedgerReconciliationHoldingResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxLedgerReconciliationHoldingResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTaxLedgerReconciliationHoldingWithHttpInfo(scope, code, holdingId, effectiveAt, asAt, taxPeriod, opts);
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliationHolding request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxLedgerReconciliationHoldingResponse> _callback) throws ApiException {
+            getTaxLedgerReconciliationHoldingAsync(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxLedgerReconciliationHolding request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxLedgerReconciliationHoldingResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            getTaxLedgerReconciliationHoldingAsync(scope, code, holdingId, effectiveAt, asAt, taxPeriod, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxLedgerReconciliationHolding: [EARLY ACCESS] GetTaxLedgerReconciliationHolding: Drill into one holding of the tax-to-ledger reconciliation.
+     * Returns the ledger and tax figures of a single holding side by side with the category and explanation of any difference.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param holdingId The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+     * @return APIgetTaxLedgerReconciliationHoldingRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The holding-level reconciliation. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTaxLedgerReconciliationHoldingRequest getTaxLedgerReconciliationHolding(String scope, String code, String holdingId) {
+        return new APIgetTaxLedgerReconciliationHoldingRequest(scope, code, holdingId);
+    }
+    /**
+     * Build call for getTaxProvision
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point the provision is for. (required)
+     * @param asAt The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxProvisionCall(String scope, String code, String diaryEntryCode, OffsetDateTime asAt, String navTypeCode, final ApiCallback _callback) throws ApiException {
+        return getTaxProvisionCall(scope, code, diaryEntryCode, asAt, navTypeCode,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTaxProvision. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point the provision is for. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param navTypeCode When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxProvisionCall(String scope, String code, String diaryEntryCode, OffsetDateTime asAt, String navTypeCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/provision"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (diaryEntryCode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("diaryEntryCode", diaryEntryCode));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (navTypeCode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("navTypeCode", navTypeCode));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTaxProvisionValidateBeforeCall(String scope, String code, String diaryEntryCode, OffsetDateTime asAt, String navTypeCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getTaxProvision(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getTaxProvision(Async)");
+        }
+
+        // verify the required parameter 'diaryEntryCode' is set
+        if (diaryEntryCode == null) {
+            throw new ApiException("Missing the required parameter 'diaryEntryCode' when calling getTaxProvision(Async)");
+        }
+
+        return getTaxProvisionCall(scope, code, diaryEntryCode, asAt, navTypeCode, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxProvision: [EARLY ACCESS] GetTaxProvision: Get the deferred-tax provision of a Valuation Point.
+     * Returns the deferred-tax provision struck for the specified Valuation Point. Where the provision has been  approved by the asAt it is returned as stored, otherwise a live estimate is returned. Until tax elections  can be configured on the Fund every provision is struck under the default elections: a 20% rate, indexation  allowance applied and losses carried forward.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point the provision is for. (required)
+     * @param asAt The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @return ApiResponse&lt;TaxProvision&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxProvision> getTaxProvisionWithHttpInfo(String scope, String code, String diaryEntryCode, OffsetDateTime asAt, String navTypeCode) throws ApiException {
+        HttpRequest localVarCall = getTaxProvisionValidateBeforeCall(scope, code, diaryEntryCode, asAt, navTypeCode, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxProvision>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxProvision: [EARLY ACCESS] GetTaxProvision: Get the deferred-tax provision of a Valuation Point.
+     * Returns the deferred-tax provision struck for the specified Valuation Point. Where the provision has been  approved by the asAt it is returned as stored, otherwise a live estimate is returned. Until tax elections  can be configured on the Fund every provision is struck under the default elections: a 20% rate, indexation  allowance applied and losses carried forward.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point the provision is for. (required)
+     * @param asAt The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @return ApiResponse&lt;TaxProvision&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxProvision> getTaxProvisionWithHttpInfo(String scope, String code, String diaryEntryCode, OffsetDateTime asAt, String navTypeCode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTaxProvisionValidateBeforeCall(scope, code, diaryEntryCode, asAt, navTypeCode, null, opts);
+        Type localVarReturnType = new TypeReference<TaxProvision>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxProvision: [EARLY ACCESS] GetTaxProvision: Get the deferred-tax provision of a Valuation Point. (asynchronously)
+     * Returns the deferred-tax provision struck for the specified Valuation Point. Where the provision has been  approved by the asAt it is returned as stored, otherwise a live estimate is returned. Until tax elections  can be configured on the Fund every provision is struck under the default elections: a 20% rate, indexation  allowance applied and losses carried forward.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point the provision is for. (required)
+     * @param asAt The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxProvisionAsync(String scope, String code, String diaryEntryCode, OffsetDateTime asAt, String navTypeCode, final ApiCallback<TaxProvision> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTaxProvisionValidateBeforeCall(scope, code, diaryEntryCode, asAt, navTypeCode, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxProvision>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxProvision: [EARLY ACCESS] GetTaxProvision: Get the deferred-tax provision of a Valuation Point. (asynchronously)
+     * Returns the deferred-tax provision struck for the specified Valuation Point. Where the provision has been  approved by the asAt it is returned as stored, otherwise a live estimate is returned. Until tax elections  can be configured on the Fund every provision is struck under the default elections: a 20% rate, indexation  allowance applied and losses carried forward.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point the provision is for. (required)
+     * @param asAt The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxProvisionAsync(String scope, String code, String diaryEntryCode, OffsetDateTime asAt, String navTypeCode, final ApiCallback<TaxProvision> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTaxProvisionValidateBeforeCall(scope, code, diaryEntryCode, asAt, navTypeCode, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxProvision>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTaxProvisionRequest {
+        private final String scope;
+        private final String code;
+        private final String diaryEntryCode;
+        private OffsetDateTime asAt;
+        private String navTypeCode;
+
+        private APIgetTaxProvisionRequest(String scope, String code, String diaryEntryCode) {
+            this.scope = scope;
+            this.code = code;
+            this.diaryEntryCode = diaryEntryCode;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified. (optional)
+         * @return APIgetTaxProvisionRequest
+         */
+        public APIgetTaxProvisionRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set navTypeCode
+         * @param navTypeCode When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+         * @return APIgetTaxProvisionRequest
+         */
+        public APIgetTaxProvisionRequest navTypeCode(String navTypeCode) {
+            this.navTypeCode = navTypeCode;
+            return this;
+        }
+
+        /**
+         * Build call for getTaxProvision
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTaxProvisionCall(scope, code, diaryEntryCode, asAt, navTypeCode, _callback);
+        }
+
+        /**
+         * Execute getTaxProvision request
+         * @return TaxProvision
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxProvision execute() throws ApiException {
+            ApiResponse<TaxProvision> localVarResp = getTaxProvisionWithHttpInfo(scope, code, diaryEntryCode, asAt, navTypeCode);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxProvision request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxProvision
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxProvision execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxProvision> localVarResp = getTaxProvisionWithHttpInfo(scope, code, diaryEntryCode, asAt, navTypeCode, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxProvision request with HTTP info returned
+         * @return ApiResponse&lt;TaxProvision&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxProvision> executeWithHttpInfo() throws ApiException {
+            return getTaxProvisionWithHttpInfo(scope, code, diaryEntryCode, asAt, navTypeCode);
+        }
+
+        /**
+         * Execute getTaxProvision request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxProvision&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxProvision> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTaxProvisionWithHttpInfo(scope, code, diaryEntryCode, asAt, navTypeCode, opts);
+        }
+
+        /**
+         * Execute getTaxProvision request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxProvision> _callback) throws ApiException {
+            getTaxProvisionAsync(scope, code, diaryEntryCode, asAt, navTypeCode, _callback);
+        }
+
+        /**
+         * Execute getTaxProvision request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxProvision> _callback, ConfigurationOptions opts) throws ApiException {
+            getTaxProvisionAsync(scope, code, diaryEntryCode, asAt, navTypeCode, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxProvision: [EARLY ACCESS] GetTaxProvision: Get the deferred-tax provision of a Valuation Point.
+     * Returns the deferred-tax provision struck for the specified Valuation Point. Where the provision has been  approved by the asAt it is returned as stored, otherwise a live estimate is returned. Until tax elections  can be configured on the Fund every provision is struck under the default elections: a 20% rate, indexation  allowance applied and losses carried forward.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param diaryEntryCode The Diary Entry code of the Valuation Point the provision is for. (required)
+     * @return APIgetTaxProvisionRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provision of the Valuation Point </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTaxProvisionRequest getTaxProvision(String scope, String code, String diaryEntryCode) {
+        return new APIgetTaxProvisionRequest(scope, code, diaryEntryCode);
+    }
+    /**
+     * Build call for getTaxReturn
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the return. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxReturnCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback) throws ApiException {
+        return getTaxReturnCall(scope, code, effectiveAt, asAt, taxPeriod,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for getTaxReturn. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to read the return. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest getTaxReturnCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/return"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (taxPeriod != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("taxPeriod", taxPeriod));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest getTaxReturnValidateBeforeCall(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling getTaxReturn(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getTaxReturn(Async)");
+        }
+
+        return getTaxReturnCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxReturn: [EARLY ACCESS] GetTaxReturn: Get the year-end tax return of a Fund or company.
+     * Returns the chargeable gains on actual disposals (line A), the spread instalments of deemed disposals (line D), the loan relationship net credit or debit (line LR, company level), the holdings outside the regime, the memo rows and the workflow history for the accounting period containing effectiveAt.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the return. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxReturnResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxReturnResponse> getTaxReturnWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod) throws ApiException {
+        HttpRequest localVarCall = getTaxReturnValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxReturn: [EARLY ACCESS] GetTaxReturn: Get the year-end tax return of a Fund or company.
+     * Returns the chargeable gains on actual disposals (line A), the spread instalments of deemed disposals (line D), the loan relationship net credit or debit (line LR, company level), the holdings outside the regime, the memo rows and the workflow history for the accounting period containing effectiveAt.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the return. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxReturnResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxReturnResponse> getTaxReturnWithHttpInfo(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = getTaxReturnValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, null, opts);
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxReturn: [EARLY ACCESS] GetTaxReturn: Get the year-end tax return of a Fund or company. (asynchronously)
+     * Returns the chargeable gains on actual disposals (line A), the spread instalments of deemed disposals (line D), the loan relationship net credit or debit (line LR, company level), the holdings outside the regime, the memo rows and the workflow history for the accounting period containing effectiveAt.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the return. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxReturnAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxReturnResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = getTaxReturnValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxReturn: [EARLY ACCESS] GetTaxReturn: Get the year-end tax return of a Fund or company. (asynchronously)
+     * Returns the chargeable gains on actual disposals (line A), the spread instalments of deemed disposals (line D), the loan relationship net credit or debit (line LR, company level), the holdings outside the regime, the memo rows and the workflow history for the accounting period containing effectiveAt.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param asAt The asAt datetime at which to read the return. Defaults to returning the latest version if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void getTaxReturnAsync(String scope, String code, String effectiveAt, OffsetDateTime asAt, String taxPeriod, final ApiCallback<TaxReturnResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = getTaxReturnValidateBeforeCall(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIgetTaxReturnRequest {
+        private final String scope;
+        private final String code;
+        private String effectiveAt;
+        private OffsetDateTime asAt;
+        private String taxPeriod;
+
+        private APIgetTaxReturnRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIgetTaxReturnRequest
+         */
+        public APIgetTaxReturnRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to read the return. Defaults to returning the latest version if not specified. (optional)
+         * @return APIgetTaxReturnRequest
+         */
+        public APIgetTaxReturnRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set taxPeriod
+         * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+         * @return APIgetTaxReturnRequest
+         */
+        public APIgetTaxReturnRequest taxPeriod(String taxPeriod) {
+            this.taxPeriod = taxPeriod;
+            return this;
+        }
+
+        /**
+         * Build call for getTaxReturn
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return getTaxReturnCall(scope, code, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxReturn request
+         * @return TaxReturnResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxReturnResponse execute() throws ApiException {
+            ApiResponse<TaxReturnResponse> localVarResp = getTaxReturnWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxReturn request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxReturnResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxReturnResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxReturnResponse> localVarResp = getTaxReturnWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getTaxReturn request with HTTP info returned
+         * @return ApiResponse&lt;TaxReturnResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxReturnResponse> executeWithHttpInfo() throws ApiException {
+            return getTaxReturnWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod);
+        }
+
+        /**
+         * Execute getTaxReturn request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxReturnResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxReturnResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getTaxReturnWithHttpInfo(scope, code, effectiveAt, asAt, taxPeriod, opts);
+        }
+
+        /**
+         * Execute getTaxReturn request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxReturnResponse> _callback) throws ApiException {
+            getTaxReturnAsync(scope, code, effectiveAt, asAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute getTaxReturn request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxReturnResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            getTaxReturnAsync(scope, code, effectiveAt, asAt, taxPeriod, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] GetTaxReturn: [EARLY ACCESS] GetTaxReturn: Get the year-end tax return of a Fund or company.
+     * Returns the chargeable gains on actual disposals (line A), the spread instalments of deemed disposals (line D), the loan relationship net credit or debit (line LR, company level), the holdings outside the regime, the memo rows and the workflow history for the accounting period containing effectiveAt.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @return APIgetTaxReturnRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return for the period. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetTaxReturnRequest getTaxReturn(String scope, String code) {
+        return new APIgetTaxReturnRequest(scope, code);
+    }
+    /**
      * Build call for getTaxSyncStatus
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
@@ -15803,7 +19709,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
-     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.
+     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.                Lines are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s lines in the order the accounting engine produced them, so the order is stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the Journal Entry Lines. (required)
@@ -15833,7 +19739,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
-     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.Use any specified configuration options to override any other configuration for this request only
+     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.                Lines are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s lines in the order the accounting engine produced them, so the order is stable across pages.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the Journal Entry Lines. (required)
@@ -15863,7 +19769,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund. (asynchronously)
-     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.
+     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.                Lines are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s lines in the order the accounting engine produced them, so the order is stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the Journal Entry Lines. (required)
@@ -15894,7 +19800,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund. (asynchronously)
-     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.Use any specified configuration options to override any other configuration for this request only
+     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.                Lines are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s lines in the order the accounting engine produced them, so the order is stable across pages.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the Journal Entry Lines. (required)
@@ -16140,7 +20046,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
-     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.
+     * Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.                Lines are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s lines in the order the accounting engine produced them, so the order is stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the Journal Entry Lines. (required)
@@ -16162,7 +20068,7 @@ public class FundsApi {
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the PnL summary. (required)
      * @param generalLedgerProfileCode The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional)
-     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter \&quot;Expression to filter the result set.\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. (optional)
@@ -16188,7 +20094,7 @@ public class FundsApi {
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param valuationPointDataQueryParameters The arguments to use for generating the PnL summary. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param generalLedgerProfileCode The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version               of each transaction if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param filter \&quot;Expression to filter the result set.\&quot; (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. (optional). Use any specified configuration options to override any other configuration for this request only.
@@ -16303,12 +20209,12 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
-     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.
+     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.                Rows are returned ordered by PnL bucket (ordinal), then portfolio scope and code (ordinal), then accounting date, activity date and source id, with the remaining Journal Entry Line fields as tie-breakers, so the order is total and stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the PnL summary. (required)
      * @param generalLedgerProfileCode The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional)
-     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter \&quot;Expression to filter the result set.\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. (optional)
@@ -16331,12 +20237,12 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
-     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.Use any specified configuration options to override any other configuration for this request only
+     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.                Rows are returned ordered by PnL bucket (ordinal), then portfolio scope and code (ordinal), then accounting date, activity date and source id, with the remaining Journal Entry Line fields as tie-breakers, so the order is total and stable across pages.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the PnL summary. (required)
      * @param generalLedgerProfileCode The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional)
-     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter \&quot;Expression to filter the result set.\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. (optional)
@@ -16359,12 +20265,12 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund. (asynchronously)
-     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.
+     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.                Rows are returned ordered by PnL bucket (ordinal), then portfolio scope and code (ordinal), then accounting date, activity date and source id, with the remaining Journal Entry Line fields as tie-breakers, so the order is total and stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the PnL summary. (required)
      * @param generalLedgerProfileCode The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional)
-     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter \&quot;Expression to filter the result set.\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. (optional)
@@ -16388,12 +20294,12 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund. (asynchronously)
-     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.Use any specified configuration options to override any other configuration for this request only
+     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.                Rows are returned ordered by PnL bucket (ordinal), then portfolio scope and code (ordinal), then accounting date, activity date and source id, with the remaining Journal Entry Line fields as tie-breakers, so the order is total and stable across pages.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the PnL summary. (required)
      * @param generalLedgerProfileCode The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional)
-     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter \&quot;Expression to filter the result set.\&quot; (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. (optional)
@@ -16444,7 +20350,7 @@ public class FundsApi {
 
         /**
          * Set asAt
-         * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional)
+         * @param asAt The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version               of each transaction if not specified. (optional)
          * @return APIgetValuationPointPnlSummaryRequest
          */
         public APIgetValuationPointPnlSummaryRequest asAt(OffsetDateTime asAt) {
@@ -16610,7 +20516,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
-     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.
+     * Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.                Rows are returned ordered by PnL bucket (ordinal), then portfolio scope and code (ordinal), then accounting date, activity date and source id, with the remaining Journal Entry Line fields as tie-breakers, so the order is total and stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for generating the PnL summary. (required)
@@ -17059,17 +20965,17 @@ public class FundsApi {
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the transactions. (required)
-     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
-     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
+     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
-     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the               NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of               a transaction that has since been amended to be excluded is returned regardless of this option.               Defaults to False if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -17090,17 +20996,17 @@ public class FundsApi {
      * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
      * @param valuationPointDataQueryParameters The arguments to use for querying the transactions. (required). Use any specified configuration options to override any other configuration for this request only.
-     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param filter Expression to filter the result set. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param page The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the transactions. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param dataModelCode The optional code of a Custom Data Model to use (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the               NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of               a transaction that has since been amended to be excluded is returned regardless of this option.               Defaults to False if not specified. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -17231,21 +21137,21 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund.
-     * Gets the Transactions for the given Valuation Point for a Fund.
+     * Gets the Transactions for the given Valuation Point for a Fund.                Transactions are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s transactions in the order the accounting engine produced them, so the order is stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the transactions. (required)
-     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
-     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
+     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
-     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the               NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of               a transaction that has since been amended to be excluded is returned regardless of this option.               Defaults to False if not specified. (optional)
      * @return ApiResponse&lt;ValuationPointResourceListOfAccountedTransaction&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -17264,21 +21170,21 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund.
-     * Gets the Transactions for the given Valuation Point for a Fund.Use any specified configuration options to override any other configuration for this request only
+     * Gets the Transactions for the given Valuation Point for a Fund.                Transactions are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s transactions in the order the accounting engine produced them, so the order is stable across pages.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the transactions. (required)
-     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
-     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
+     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
-     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the               NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of               a transaction that has since been amended to be excluded is returned regardless of this option.               Defaults to False if not specified. (optional)
      * @return ApiResponse&lt;ValuationPointResourceListOfAccountedTransaction&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -17297,21 +21203,21 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund. (asynchronously)
-     * Gets the Transactions for the given Valuation Point for a Fund.
+     * Gets the Transactions for the given Valuation Point for a Fund.                Transactions are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s transactions in the order the accounting engine produced them, so the order is stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the transactions. (required)
-     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
-     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
+     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
-     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the               NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of               a transaction that has since been amended to be excluded is returned regardless of this option.               Defaults to False if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -17331,21 +21237,21 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund. (asynchronously)
-     * Gets the Transactions for the given Valuation Point for a Fund.Use any specified configuration options to override any other configuration for this request only
+     * Gets the Transactions for the given Valuation Point for a Fund.                Transactions are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s transactions in the order the accounting engine produced them, so the order is stable across pages.Use any specified configuration options to override any other configuration for this request only
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the transactions. (required)
-     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. (optional)
      * @param filter Expression to filter the result set. (optional)
      * @param limit When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
      * @param page The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional)
-     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. (optional)
+     * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the transactions. (optional)
      * @param navTypeCode When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
      * @param dataModelScope The optional scope of a Custom Data Model to use (optional)
      * @param dataModelCode The optional code of a Custom Data Model to use (optional)
-     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
+     * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional)
      * @param membershipType The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
-     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. (optional)
+     * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the               NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of               a transaction that has since been amended to be excluded is returned regardless of this option.               Defaults to False if not specified. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -17387,7 +21293,7 @@ public class FundsApi {
 
         /**
          * Set asAt
-         * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional)
+         * @param asAt The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. (optional)
          * @return APIgetValuationPointTransactionsRequest
          */
         public APIgetValuationPointTransactionsRequest asAt(OffsetDateTime asAt) {
@@ -17427,7 +21333,7 @@ public class FundsApi {
 
         /**
          * Set propertyKeys
-         * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. (optional)
+         * @param propertyKeys A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the transactions. (optional)
          * @return APIgetValuationPointTransactionsRequest
          */
         public APIgetValuationPointTransactionsRequest propertyKeys(List<String> propertyKeys) {
@@ -17467,7 +21373,7 @@ public class FundsApi {
 
         /**
          * Set showCancelledTransactions
-         * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
+         * @param showCancelledTransactions Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional)
          * @return APIgetValuationPointTransactionsRequest
          */
         public APIgetValuationPointTransactionsRequest showCancelledTransactions(Boolean showCancelledTransactions) {
@@ -17487,7 +21393,7 @@ public class FundsApi {
 
         /**
          * Set returnExcludedTransactions
-         * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. (optional)
+         * @param returnExcludedTransactions Option to specify whether or not to include transactions excluded by the               NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of               a transaction that has since been amended to be excluded is returned regardless of this option.               Defaults to False if not specified. (optional)
          * @return APIgetValuationPointTransactionsRequest
          */
         public APIgetValuationPointTransactionsRequest returnExcludedTransactions(Boolean returnExcludedTransactions) {
@@ -17613,7 +21519,7 @@ public class FundsApi {
 
     /**
      * [EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund.
-     * Gets the Transactions for the given Valuation Point for a Fund.
+     * Gets the Transactions for the given Valuation Point for a Fund.                Transactions are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio&#39;s transactions in the order the accounting engine produced them, so the order is stable across pages.
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
      * @param valuationPointDataQueryParameters The arguments to use for querying the transactions. (required)
@@ -23326,6 +27232,416 @@ public class FundsApi {
         return new APIlistTaxExceptionsAcrossFundsRequest();
     }
     /**
+     * Build call for listTaxProvisions
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param fromEffectiveAt The lower bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the start of the Fund if not specified. (optional)
+     * @param toEffectiveAt The upper bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the latest Valuation Point if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the provisions. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provisions of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listTaxProvisionsCall(String scope, String code, OffsetDateTime fromEffectiveAt, OffsetDateTime toEffectiveAt, OffsetDateTime asAt, String navTypeCode, final ApiCallback _callback) throws ApiException {
+        return listTaxProvisionsCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for listTaxProvisions. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param fromEffectiveAt The lower bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the start of the Fund if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param toEffectiveAt The upper bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the latest Valuation Point if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param asAt The asAt datetime at which to retrieve the provisions. Defaults to returning the latest version if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param navTypeCode When provided, the provisions of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest listTaxProvisionsCall(String scope, String code, OffsetDateTime fromEffectiveAt, OffsetDateTime toEffectiveAt, OffsetDateTime asAt, String navTypeCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/provisions"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (fromEffectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("fromEffectiveAt", fromEffectiveAt));
+        }
+
+        if (toEffectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("toEffectiveAt", toEffectiveAt));
+        }
+
+        if (asAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("asAt", asAt));
+        }
+
+        if (navTypeCode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("navTypeCode", navTypeCode));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest listTaxProvisionsValidateBeforeCall(String scope, String code, OffsetDateTime fromEffectiveAt, OffsetDateTime toEffectiveAt, OffsetDateTime asAt, String navTypeCode, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling listTaxProvisions(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling listTaxProvisions(Async)");
+        }
+
+        return listTaxProvisionsCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] ListTaxProvisions: [EARLY ACCESS] ListTaxProvisions: List the deferred-tax provisions of a Fund.
+     * Returns the deferred-tax provision of every Valuation Point whose effective date lies in the window, oldest first.  Unapproved Valuation Points are estimated live, so the window may cover at most 100 Valuation Points. Until tax  elections can be configured on the Fund every provision is struck under the default elections: a 20% rate,  indexation allowance applied and losses carried forward.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param fromEffectiveAt The lower bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the start of the Fund if not specified. (optional)
+     * @param toEffectiveAt The upper bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the latest Valuation Point if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the provisions. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provisions of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @return ApiResponse&lt;ResourceListOfTaxProvision&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfTaxProvision> listTaxProvisionsWithHttpInfo(String scope, String code, OffsetDateTime fromEffectiveAt, OffsetDateTime toEffectiveAt, OffsetDateTime asAt, String navTypeCode) throws ApiException {
+        HttpRequest localVarCall = listTaxProvisionsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfTaxProvision>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListTaxProvisions: [EARLY ACCESS] ListTaxProvisions: List the deferred-tax provisions of a Fund.
+     * Returns the deferred-tax provision of every Valuation Point whose effective date lies in the window, oldest first.  Unapproved Valuation Points are estimated live, so the window may cover at most 100 Valuation Points. Until tax  elections can be configured on the Fund every provision is struck under the default elections: a 20% rate,  indexation allowance applied and losses carried forward.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param fromEffectiveAt The lower bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the start of the Fund if not specified. (optional)
+     * @param toEffectiveAt The upper bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the latest Valuation Point if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the provisions. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provisions of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @return ApiResponse&lt;ResourceListOfTaxProvision&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ResourceListOfTaxProvision> listTaxProvisionsWithHttpInfo(String scope, String code, OffsetDateTime fromEffectiveAt, OffsetDateTime toEffectiveAt, OffsetDateTime asAt, String navTypeCode, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listTaxProvisionsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, null, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfTaxProvision>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] ListTaxProvisions: [EARLY ACCESS] ListTaxProvisions: List the deferred-tax provisions of a Fund. (asynchronously)
+     * Returns the deferred-tax provision of every Valuation Point whose effective date lies in the window, oldest first.  Unapproved Valuation Points are estimated live, so the window may cover at most 100 Valuation Points. Until tax  elections can be configured on the Fund every provision is struck under the default elections: a 20% rate,  indexation allowance applied and losses carried forward.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param fromEffectiveAt The lower bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the start of the Fund if not specified. (optional)
+     * @param toEffectiveAt The upper bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the latest Valuation Point if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the provisions. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provisions of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listTaxProvisionsAsync(String scope, String code, OffsetDateTime fromEffectiveAt, OffsetDateTime toEffectiveAt, OffsetDateTime asAt, String navTypeCode, final ApiCallback<ResourceListOfTaxProvision> _callback) throws ApiException {
+
+        HttpRequest localVarCall = listTaxProvisionsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ResourceListOfTaxProvision>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] ListTaxProvisions: [EARLY ACCESS] ListTaxProvisions: List the deferred-tax provisions of a Fund. (asynchronously)
+     * Returns the deferred-tax provision of every Valuation Point whose effective date lies in the window, oldest first.  Unapproved Valuation Points are estimated live, so the window may cover at most 100 Valuation Points. Until tax  elections can be configured on the Fund every provision is struck under the default elections: a 20% rate,  indexation allowance applied and losses carried forward.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param fromEffectiveAt The lower bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the start of the Fund if not specified. (optional)
+     * @param toEffectiveAt The upper bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the latest Valuation Point if not specified. (optional)
+     * @param asAt The asAt datetime at which to retrieve the provisions. Defaults to returning the latest version if not specified. (optional)
+     * @param navTypeCode When provided, the provisions of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void listTaxProvisionsAsync(String scope, String code, OffsetDateTime fromEffectiveAt, OffsetDateTime toEffectiveAt, OffsetDateTime asAt, String navTypeCode, final ApiCallback<ResourceListOfTaxProvision> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = listTaxProvisionsValidateBeforeCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, _callback, opts);
+        Type localVarReturnType = new TypeReference<ResourceListOfTaxProvision>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIlistTaxProvisionsRequest {
+        private final String scope;
+        private final String code;
+        private OffsetDateTime fromEffectiveAt;
+        private OffsetDateTime toEffectiveAt;
+        private OffsetDateTime asAt;
+        private String navTypeCode;
+
+        private APIlistTaxProvisionsRequest(String scope, String code) {
+            this.scope = scope;
+            this.code = code;
+        }
+
+        /**
+         * Set fromEffectiveAt
+         * @param fromEffectiveAt The lower bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the start of the Fund if not specified. (optional)
+         * @return APIlistTaxProvisionsRequest
+         */
+        public APIlistTaxProvisionsRequest fromEffectiveAt(OffsetDateTime fromEffectiveAt) {
+            this.fromEffectiveAt = fromEffectiveAt;
+            return this;
+        }
+
+        /**
+         * Set toEffectiveAt
+         * @param toEffectiveAt The upper bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the latest Valuation Point if not specified. (optional)
+         * @return APIlistTaxProvisionsRequest
+         */
+        public APIlistTaxProvisionsRequest toEffectiveAt(OffsetDateTime toEffectiveAt) {
+            this.toEffectiveAt = toEffectiveAt;
+            return this;
+        }
+
+        /**
+         * Set asAt
+         * @param asAt The asAt datetime at which to retrieve the provisions. Defaults to returning the latest version if not specified. (optional)
+         * @return APIlistTaxProvisionsRequest
+         */
+        public APIlistTaxProvisionsRequest asAt(OffsetDateTime asAt) {
+            this.asAt = asAt;
+            return this;
+        }
+
+        /**
+         * Set navTypeCode
+         * @param navTypeCode When provided, the provisions of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+         * @return APIlistTaxProvisionsRequest
+         */
+        public APIlistTaxProvisionsRequest navTypeCode(String navTypeCode) {
+            this.navTypeCode = navTypeCode;
+            return this;
+        }
+
+        /**
+         * Build call for listTaxProvisions
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return listTaxProvisionsCall(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, _callback);
+        }
+
+        /**
+         * Execute listTaxProvisions request
+         * @return ResourceListOfTaxProvision
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfTaxProvision execute() throws ApiException {
+            ApiResponse<ResourceListOfTaxProvision> localVarResp = listTaxProvisionsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listTaxProvisions request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ResourceListOfTaxProvision
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfTaxProvision execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ResourceListOfTaxProvision> localVarResp = listTaxProvisionsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listTaxProvisions request with HTTP info returned
+         * @return ApiResponse&lt;ResourceListOfTaxProvision&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfTaxProvision> executeWithHttpInfo() throws ApiException {
+            return listTaxProvisionsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode);
+        }
+
+        /**
+         * Execute listTaxProvisions request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ResourceListOfTaxProvision&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfTaxProvision> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listTaxProvisionsWithHttpInfo(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, opts);
+        }
+
+        /**
+         * Execute listTaxProvisions request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfTaxProvision> _callback) throws ApiException {
+            listTaxProvisionsAsync(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, _callback);
+        }
+
+        /**
+         * Execute listTaxProvisions request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ResourceListOfTaxProvision> _callback, ConfigurationOptions opts) throws ApiException {
+            listTaxProvisionsAsync(scope, code, fromEffectiveAt, toEffectiveAt, asAt, navTypeCode, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] ListTaxProvisions: [EARLY ACCESS] ListTaxProvisions: List the deferred-tax provisions of a Fund.
+     * Returns the deferred-tax provision of every Valuation Point whose effective date lies in the window, oldest first.  Unapproved Valuation Points are estimated live, so the window may cover at most 100 Valuation Points. Until tax  elections can be configured on the Fund every provision is struck under the default elections: a 20% rate,  indexation allowance applied and losses carried forward.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @return APIlistTaxProvisionsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deferred-tax provisions of the Fund&#39;s Valuation Points in the window </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistTaxProvisionsRequest listTaxProvisions(String scope, String code) {
+        return new APIlistTaxProvisionsRequest(scope, code);
+    }
+    /**
      * Build call for listValuationPointComplexMarketData
      * @param scope The scope of the Fund. (required)
      * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
@@ -27511,6 +31827,392 @@ public class FundsApi {
      */
     public APIrunPartnerAllocationsRequest runPartnerAllocations(String scope, String code, PartnerAllocationRunRequest partnerAllocationRunRequest) {
         return new APIrunPartnerAllocationsRequest(scope, code, partnerAllocationRunRequest);
+    }
+    /**
+     * Build call for sendBackTaxReturn
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for sending the return back. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest sendBackTaxReturnCall(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback _callback) throws ApiException {
+        return sendBackTaxReturnCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for sendBackTaxReturn. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxReturnTransitionRequest The reason for sending the return back. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest sendBackTaxReturnCall(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = taxReturnTransitionRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/tax/return/send-back"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (effectiveAt != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("effectiveAt", effectiveAt));
+        }
+
+        if (taxPeriod != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("taxPeriod", taxPeriod));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest sendBackTaxReturnValidateBeforeCall(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling sendBackTaxReturn(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling sendBackTaxReturn(Async)");
+        }
+
+        // verify the required parameter 'taxReturnTransitionRequest' is set
+        if (taxReturnTransitionRequest == null) {
+            throw new ApiException("Missing the required parameter 'taxReturnTransitionRequest' when calling sendBackTaxReturn(Async)");
+        }
+
+        return sendBackTaxReturnCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step.
+     * Moves the return one step towards Draft, recording the supplied reason. A Final return cannot be sent back.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for sending the return back. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxReturnResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxReturnResponse> sendBackTaxReturnWithHttpInfo(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod) throws ApiException {
+        HttpRequest localVarCall = sendBackTaxReturnValidateBeforeCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step.
+     * Moves the return one step towards Draft, recording the supplied reason. A Final return cannot be sent back.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for sending the return back. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @return ApiResponse&lt;TaxReturnResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<TaxReturnResponse> sendBackTaxReturnWithHttpInfo(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = sendBackTaxReturnValidateBeforeCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, null, opts);
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step. (asynchronously)
+     * Moves the return one step towards Draft, recording the supplied reason. A Final return cannot be sent back.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for sending the return back. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void sendBackTaxReturnAsync(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback<TaxReturnResponse> _callback) throws ApiException {
+
+        HttpRequest localVarCall = sendBackTaxReturnValidateBeforeCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step. (asynchronously)
+     * Moves the return one step towards Draft, recording the supplied reason. A Final return cannot be sent back.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for sending the return back. (required)
+     * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+     * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void sendBackTaxReturnAsync(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest, String effectiveAt, String taxPeriod, final ApiCallback<TaxReturnResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = sendBackTaxReturnValidateBeforeCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback, opts);
+        Type localVarReturnType = new TypeReference<TaxReturnResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIsendBackTaxReturnRequest {
+        private final String scope;
+        private final String code;
+        private final TaxReturnTransitionRequest taxReturnTransitionRequest;
+        private String effectiveAt;
+        private String taxPeriod;
+
+        private APIsendBackTaxReturnRequest(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest) {
+            this.scope = scope;
+            this.code = code;
+            this.taxReturnTransitionRequest = taxReturnTransitionRequest;
+        }
+
+        /**
+         * Set effectiveAt
+         * @param effectiveAt The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified. (optional)
+         * @return APIsendBackTaxReturnRequest
+         */
+        public APIsendBackTaxReturnRequest effectiveAt(String effectiveAt) {
+            this.effectiveAt = effectiveAt;
+            return this;
+        }
+
+        /**
+         * Set taxPeriod
+         * @param taxPeriod An optional accounting period label that overrides the period selected by effectiveAt. (optional)
+         * @return APIsendBackTaxReturnRequest
+         */
+        public APIsendBackTaxReturnRequest taxPeriod(String taxPeriod) {
+            this.taxPeriod = taxPeriod;
+            return this;
+        }
+
+        /**
+         * Build call for sendBackTaxReturn
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return sendBackTaxReturnCall(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute sendBackTaxReturn request
+         * @return TaxReturnResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxReturnResponse execute() throws ApiException {
+            ApiResponse<TaxReturnResponse> localVarResp = sendBackTaxReturnWithHttpInfo(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute sendBackTaxReturn request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TaxReturnResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TaxReturnResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TaxReturnResponse> localVarResp = sendBackTaxReturnWithHttpInfo(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute sendBackTaxReturn request with HTTP info returned
+         * @return ApiResponse&lt;TaxReturnResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxReturnResponse> executeWithHttpInfo() throws ApiException {
+            return sendBackTaxReturnWithHttpInfo(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod);
+        }
+
+        /**
+         * Execute sendBackTaxReturn request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TaxReturnResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TaxReturnResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return sendBackTaxReturnWithHttpInfo(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, opts);
+        }
+
+        /**
+         * Execute sendBackTaxReturn request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxReturnResponse> _callback) throws ApiException {
+            sendBackTaxReturnAsync(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback);
+        }
+
+        /**
+         * Execute sendBackTaxReturn request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<TaxReturnResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            sendBackTaxReturnAsync(scope, code, taxReturnTransitionRequest, effectiveAt, taxPeriod, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step.
+     * Moves the return one step towards Draft, recording the supplied reason. A Final return cannot be sent back.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param taxReturnTransitionRequest The reason for sending the return back. (required)
+     * @return APIsendBackTaxReturnRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The tax return after the transition. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIsendBackTaxReturnRequest sendBackTaxReturn(String scope, String code, TaxReturnTransitionRequest taxReturnTransitionRequest) {
+        return new APIsendBackTaxReturnRequest(scope, code, taxReturnTransitionRequest);
     }
     /**
      * Build call for setShareClassInstruments

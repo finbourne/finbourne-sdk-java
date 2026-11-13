@@ -69,12 +69,12 @@ public class InflationSwap extends LusidInstrument {
 
   public static final String JSON_PROPERTY_INFLATION_LEG = "inflationLeg";
   @JsonProperty(JSON_PROPERTY_INFLATION_LEG)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private InflationLeg inflationLeg;
 
   public static final String JSON_PROPERTY_FIXED_LEG = "fixedLeg";
   @JsonProperty(JSON_PROPERTY_FIXED_LEG)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private FixedLeg fixedLeg;
 
   public static final String JSON_PROPERTY_ADDITIONAL_PAYMENTS = "additionalPayments";
@@ -137,7 +137,7 @@ public class InflationSwap extends LusidInstrument {
    * Get inflationLeg
    * @return inflationLeg
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public InflationLeg getInflationLeg() {
     return inflationLeg;
   }
@@ -156,7 +156,7 @@ public class InflationSwap extends LusidInstrument {
    * Get fixedLeg
    * @return fixedLeg
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public FixedLeg getFixedLeg() {
     return fixedLeg;
   }

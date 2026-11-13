@@ -22,6 +22,7 @@ import com.finbourne.sdk.services.lusid.model.RecLinkedResult;
 import com.finbourne.sdk.services.lusid.model.RecResultException;
 import com.finbourne.sdk.services.lusid.model.RecResultItemDetails;
 import com.finbourne.sdk.services.lusid.model.RecResultReview;
+import com.finbourne.sdk.services.lusid.model.RecResultStreak;
 import com.finbourne.sdk.services.lusid.model.RecUserComment;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.SupplementalAttributeValues;
@@ -57,6 +58,7 @@ import com.finbourne.sdk.JSON;
   RecResult.JSON_PROPERTY_ID,
   RecResult.JSON_PROPERTY_RESULT_NUMBER,
   RecResult.JSON_PROPERTY_FIRST_RUN_SEEN,
+  RecResult.JSON_PROPERTY_AS_AT_FIRST_SEEN,
   RecResult.JSON_PROPERTY_REC_TYPE,
   RecResult.JSON_PROPERTY_EXTERNAL_REC_TYPE_NAME,
   RecResult.JSON_PROPERTY_CUSTOM_ENTITY_TYPE,
@@ -78,6 +80,7 @@ import com.finbourne.sdk.JSON;
   RecResult.JSON_PROPERTY_ITEMS,
   RecResult.JSON_PROPERTY_LINKED_RESULTS,
   RecResult.JSON_PROPERTY_COMMENTS,
+  RecResult.JSON_PROPERTY_STREAK,
   RecResult.JSON_PROPERTY_PROPERTIES,
   RecResult.JSON_PROPERTY_ASSIGNED_USER,
   RecResult.JSON_PROPERTY_ASSIGNED_ROLE,
@@ -101,6 +104,11 @@ public class RecResult {
   @JsonProperty(JSON_PROPERTY_FIRST_RUN_SEEN)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private Integer firstRunSeen;
+
+  public static final String JSON_PROPERTY_AS_AT_FIRST_SEEN = "asAtFirstSeen";
+  @JsonProperty(JSON_PROPERTY_AS_AT_FIRST_SEEN)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private OffsetDateTime asAtFirstSeen;
 
   public static final String JSON_PROPERTY_REC_TYPE = "recType";
   @JsonProperty(JSON_PROPERTY_REC_TYPE)
@@ -207,6 +215,11 @@ public class RecResult {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<RecUserComment> comments = new ArrayList<>();
 
+  public static final String JSON_PROPERTY_STREAK = "streak";
+  @JsonProperty(JSON_PROPERTY_STREAK)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RecResultStreak streak;
+
   public static final String JSON_PROPERTY_PROPERTIES = "properties";
   @JsonProperty(JSON_PROPERTY_PROPERTIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -294,6 +307,25 @@ public class RecResult {
 
   public void setFirstRunSeen(Integer firstRunSeen) {
     this.firstRunSeen = firstRunSeen;
+  }
+
+
+  public RecResult asAtFirstSeen(OffsetDateTime asAtFirstSeen) {
+    this.asAtFirstSeen = asAtFirstSeen;
+    return this;
+  }
+
+  /**
+   * The runAsAt of the run in which the result first appeared in its instance, the run numbered firstRunSeen. Written once: re-runs leave it unchanged.
+   * @return asAtFirstSeen
+   */
+  @javax.annotation.Nonnull
+  public OffsetDateTime getAsAtFirstSeen() {
+    return asAtFirstSeen;
+  }
+
+  public void setAsAtFirstSeen(OffsetDateTime asAtFirstSeen) {
+    this.asAtFirstSeen = asAtFirstSeen;
   }
 
 
@@ -736,6 +768,25 @@ public class RecResult {
   }
 
 
+  public RecResult streak(RecResultStreak streak) {
+    this.streak = streak;
+    return this;
+  }
+
+  /**
+   * Get streak
+   * @return streak
+   */
+  @javax.annotation.Nullable
+  public RecResultStreak getStreak() {
+    return streak;
+  }
+
+  public void setStreak(RecResultStreak streak) {
+    this.streak = streak;
+  }
+
+
   public RecResult properties(Map<String, PerpetualProperty> properties) {
     this.properties = properties;
     return this;
@@ -878,6 +929,7 @@ public class RecResult {
     return Objects.equals(this.id, recResult.id) &&
         Objects.equals(this.resultNumber, recResult.resultNumber) &&
         Objects.equals(this.firstRunSeen, recResult.firstRunSeen) &&
+        Objects.equals(this.asAtFirstSeen, recResult.asAtFirstSeen) &&
         Objects.equals(this.recType, recResult.recType) &&
         Objects.equals(this.externalRecTypeName, recResult.externalRecTypeName) &&
         Objects.equals(this.customEntityType, recResult.customEntityType) &&
@@ -899,6 +951,7 @@ public class RecResult {
         Objects.equals(this.items, recResult.items) &&
         Objects.equals(this.linkedResults, recResult.linkedResults) &&
         Objects.equals(this.comments, recResult.comments) &&
+        Objects.equals(this.streak, recResult.streak) &&
         Objects.equals(this.properties, recResult.properties) &&
         Objects.equals(this.assignedUser, recResult.assignedUser) &&
         Objects.equals(this.assignedRole, recResult.assignedRole) &&
@@ -913,7 +966,7 @@ public class RecResult {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, resultNumber, firstRunSeen, recType, externalRecTypeName, customEntityType, instanceId, asAtInstantiated, recDefinitionId, recDefinitionDisplayName, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, linkedResults, comments, properties, assignedUser, assignedRole, href, version, links);
+    return Objects.hash(id, resultNumber, firstRunSeen, asAtFirstSeen, recType, externalRecTypeName, customEntityType, instanceId, asAtInstantiated, recDefinitionId, recDefinitionDisplayName, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, linkedResults, comments, streak, properties, assignedUser, assignedRole, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -930,6 +983,7 @@ public class RecResult {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    resultNumber: ").append(toIndentedString(resultNumber)).append("\n");
     sb.append("    firstRunSeen: ").append(toIndentedString(firstRunSeen)).append("\n");
+    sb.append("    asAtFirstSeen: ").append(toIndentedString(asAtFirstSeen)).append("\n");
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
     sb.append("    externalRecTypeName: ").append(toIndentedString(externalRecTypeName)).append("\n");
     sb.append("    customEntityType: ").append(toIndentedString(customEntityType)).append("\n");
@@ -951,6 +1005,7 @@ public class RecResult {
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("    linkedResults: ").append(toIndentedString(linkedResults)).append("\n");
     sb.append("    comments: ").append(toIndentedString(comments)).append("\n");
+    sb.append("    streak: ").append(toIndentedString(streak)).append("\n");
     sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("    assignedUser: ").append(toIndentedString(assignedUser)).append("\n");
     sb.append("    assignedRole: ").append(toIndentedString(assignedRole)).append("\n");

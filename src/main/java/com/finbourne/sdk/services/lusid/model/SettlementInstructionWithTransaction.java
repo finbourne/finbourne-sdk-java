@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.OutputTransaction;
+import com.finbourne.sdk.services.lusid.model.SettlementFx;
 import com.finbourne.sdk.services.lusid.model.TransactionSettlementInstruction;
 import java.io.IOException;
 import java.util.Arrays;
@@ -36,7 +37,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   SettlementInstructionWithTransaction.JSON_PROPERTY_SETTLEMENT_INSTRUCTION,
-  SettlementInstructionWithTransaction.JSON_PROPERTY_MATCHED_TRANSACTION
+  SettlementInstructionWithTransaction.JSON_PROPERTY_MATCHED_TRANSACTION,
+  SettlementInstructionWithTransaction.JSON_PROPERTY_SETTLEMENT_FX
 })
 
 public class SettlementInstructionWithTransaction {
@@ -49,6 +51,11 @@ public class SettlementInstructionWithTransaction {
   @JsonProperty(JSON_PROPERTY_MATCHED_TRANSACTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OutputTransaction matchedTransaction;
+
+  public static final String JSON_PROPERTY_SETTLEMENT_FX = "settlementFx";
+  @JsonProperty(JSON_PROPERTY_SETTLEMENT_FX)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private SettlementFx settlementFx;
 
   public SettlementInstructionWithTransaction() {
   }
@@ -91,6 +98,25 @@ public class SettlementInstructionWithTransaction {
   }
 
 
+  public SettlementInstructionWithTransaction settlementFx(SettlementFx settlementFx) {
+    this.settlementFx = settlementFx;
+    return this;
+  }
+
+  /**
+   * Get settlementFx
+   * @return settlementFx
+   */
+  @javax.annotation.Nullable
+  public SettlementFx getSettlementFx() {
+    return settlementFx;
+  }
+
+  public void setSettlementFx(SettlementFx settlementFx) {
+    this.settlementFx = settlementFx;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -101,12 +127,13 @@ public class SettlementInstructionWithTransaction {
     }
     SettlementInstructionWithTransaction settlementInstructionWithTransaction = (SettlementInstructionWithTransaction) o;
     return Objects.equals(this.settlementInstruction, settlementInstructionWithTransaction.settlementInstruction) &&
-        Objects.equals(this.matchedTransaction, settlementInstructionWithTransaction.matchedTransaction);
+        Objects.equals(this.matchedTransaction, settlementInstructionWithTransaction.matchedTransaction) &&
+        Objects.equals(this.settlementFx, settlementInstructionWithTransaction.settlementFx);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(settlementInstruction, matchedTransaction);
+    return Objects.hash(settlementInstruction, matchedTransaction, settlementFx);
   }
 
   @Override
@@ -115,6 +142,7 @@ public class SettlementInstructionWithTransaction {
     sb.append("class SettlementInstructionWithTransaction {\n");
     sb.append("    settlementInstruction: ").append(toIndentedString(settlementInstruction)).append("\n");
     sb.append("    matchedTransaction: ").append(toIndentedString(matchedTransaction)).append("\n");
+    sb.append("    settlementFx: ").append(toIndentedString(settlementFx)).append("\n");
     sb.append("}");
     return sb.toString();
   }
