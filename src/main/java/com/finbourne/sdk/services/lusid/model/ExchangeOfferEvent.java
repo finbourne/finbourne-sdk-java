@@ -65,7 +65,8 @@ import com.finbourne.sdk.JSON;
   ExchangeOfferEvent.JSON_PROPERTY_FRACTIONAL_UNITS_CASH_CURRENCY,
   ExchangeOfferEvent.JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION,
   ExchangeOfferEvent.JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES,
-  ExchangeOfferEvent.JSON_PROPERTY_INSTRUCTION_REFERENCE
+  ExchangeOfferEvent.JSON_PROPERTY_INSTRUCTION_REFERENCE,
+  ExchangeOfferEvent.JSON_PROPERTY_ACCRUED_INTEREST_PER_UNIT
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -169,6 +170,11 @@ public class ExchangeOfferEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_INSTRUCTION_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String instructionReference;
+
+  public static final String JSON_PROPERTY_ACCRUED_INTEREST_PER_UNIT = "accruedInterestPerUnit";
+  @JsonProperty(JSON_PROPERTY_ACCRUED_INTEREST_PER_UNIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal accruedInterestPerUnit;
 
   public ExchangeOfferEvent() {
   }
@@ -598,6 +604,25 @@ public class ExchangeOfferEvent extends InstrumentEvent {
   }
 
 
+  public ExchangeOfferEvent accruedInterestPerUnit(java.math.BigDecimal accruedInterestPerUnit) {
+    this.accruedInterestPerUnit = accruedInterestPerUnit;
+    return this;
+  }
+
+  /**
+   * Optional per-unit interest accrued on the old bond that the offer pays in cash, on the same basis as the  cash offer price. Taken from the offer terms and never calculated. If supplied and above zero, each chosen  election that removes the old units (security, cash, cash-and-security, consent-and-exchange or mixed lot)  books one additional cash transaction per holding of units removed multiplied by this value. Bond and  complex bond instrument types only. Must be 0 or more. If left empty or 0, no accrued interest is booked.
+   * @return accruedInterestPerUnit
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getAccruedInterestPerUnit() {
+    return accruedInterestPerUnit;
+  }
+
+  public void setAccruedInterestPerUnit(java.math.BigDecimal accruedInterestPerUnit) {
+    this.accruedInterestPerUnit = accruedInterestPerUnit;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -626,6 +651,7 @@ public class ExchangeOfferEvent extends InstrumentEvent {
         Objects.equals(this.fractionalUnitsRoundingConvention, exchangeOfferEvent.fractionalUnitsRoundingConvention) &&
         Objects.equals(this.fractionalUnitsDecimalPlaces, exchangeOfferEvent.fractionalUnitsDecimalPlaces) &&
         Objects.equals(this.instructionReference, exchangeOfferEvent.instructionReference) &&
+        (this.accruedInterestPerUnit == null ? exchangeOfferEvent.accruedInterestPerUnit == null : (exchangeOfferEvent.accruedInterestPerUnit != null && this.accruedInterestPerUnit.compareTo(exchangeOfferEvent.getAccruedInterestPerUnit()) == 0)) &&
         super.equals(o);
   }
 
@@ -635,7 +661,7 @@ public class ExchangeOfferEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(effectiveDate, settlementDate, eventSource, newInstrument, cashOfferElections, securityOfferElections, mixedLotConstituentsElections, lapseElections, cashAndSecurityOfferElections, consentAndExchangeElections, abstainElections, unknownProceedsElections, minPieceSize, minIncrement, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, instructionReference, super.hashCode());
+    return Objects.hash(effectiveDate, settlementDate, eventSource, newInstrument, cashOfferElections, securityOfferElections, mixedLotConstituentsElections, lapseElections, cashAndSecurityOfferElections, consentAndExchangeElections, abstainElections, unknownProceedsElections, minPieceSize, minIncrement, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, instructionReference, accruedInterestPerUnit, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -669,6 +695,7 @@ public class ExchangeOfferEvent extends InstrumentEvent {
     sb.append("    fractionalUnitsRoundingConvention: ").append(toIndentedString(fractionalUnitsRoundingConvention)).append("\n");
     sb.append("    fractionalUnitsDecimalPlaces: ").append(toIndentedString(fractionalUnitsDecimalPlaces)).append("\n");
     sb.append("    instructionReference: ").append(toIndentedString(instructionReference)).append("\n");
+    sb.append("    accruedInterestPerUnit: ").append(toIndentedString(accruedInterestPerUnit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

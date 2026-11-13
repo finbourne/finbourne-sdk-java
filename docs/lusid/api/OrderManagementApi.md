@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost*
 | [**placeBlocks**](OrderManagementApi.md#placeBlocks) | **POST** /api/api/ordermanagement/placeblocks | [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests. |
 | [**previewBlocks**](OrderManagementApi.md#previewBlocks) | **POST** /api/api/ordermanagement/$previewblocks | PreviewBlocks: Preview the blocks a set of orders would form |
 | [**runAllocationService**](OrderManagementApi.md#runAllocationService) | **POST** /api/api/ordermanagement/allocate | RunAllocationService: Runs the Allocation Service |
-| [**runAllocationServiceWithWeights**](OrderManagementApi.md#runAllocationServiceWithWeights) | **POST** /api/api/ordermanagement/allocate/weighted | [EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights |
+| [**runAllocationServiceWithWeights**](OrderManagementApi.md#runAllocationServiceWithWeights) | **POST** /api/api/ordermanagement/allocate/weighted | RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights |
 | [**sweepBlocks**](OrderManagementApi.md#sweepBlocks) | **POST** /api/api/ordermanagement/SweepBlocks | [EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful. |
 | [**updateOrders**](OrderManagementApi.md#updateOrders) | **POST** /api/api/ordermanagement/updateorders | [EARLY ACCESS] UpdateOrders: Update existing orders |
 | [**updatePlacements**](OrderManagementApi.md#updatePlacements) | **POST** /api/api/ordermanagement/$updateplacements | [EARLY ACCESS] UpdatePlacements: Update existing placements |
@@ -808,7 +808,7 @@ public class OrderManagementApiExample {
 
 > AllocationServiceRunResponse runAllocationServiceWithWeights(weightedAllocationServiceRunRequest, allocationAlgorithm, cancelAndCorrect)
 
-[EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
+RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
 
 Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.
 

@@ -9,8 +9,9 @@ Name | Type | Description | Notes
 **id** | **String** | The id of the result within its instance: its rec type, result type and result number, e.g. &#39;Holding-break-3&#39;. Unique within the instance, and kept across its runs for as long as the result keeps its result type. | [default to String]
 **resultNumber** | **Integer** | The result&#39;s number within its result type. Kept across runs while the result keeps its type; never reused once assigned. | [default to Integer]
 **firstRunSeen** | **Integer** | The run in which the result was first assigned its id. | [default to Integer]
-**recType** | **String** | The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio. | [default to String]
+**recType** | **String** | The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio, CustomEntity. | [default to String]
 **externalRecTypeName** | **String** | The client&#39;s name for an External rec type, as stamped from the matching ruleset&#39;s externalRecType when the run executed. Null for native rec types. Filterable. | [optional] [default to String]
+**customEntityType** | **String** | The name of the custom entity type, which starts with ~. Set when the rec type is CustomEntity and null for every other rec type. Filterable. | [optional] [default to String]
 **instanceId** | [**RecInstanceId**](RecInstanceId.md) |  | [default to RecInstanceId]
 **asAtInstantiated** | [**OffsetDateTime**](OffsetDateTime.md) | The asAt datetime at which the instance was first created. | [default to OffsetDateTime]
 **recDefinitionId** | [**ResourceId**](ResourceId.md) |  | [default to ResourceId]
@@ -47,6 +48,7 @@ Integer resultNumber = new Integer("100.00");
 Integer firstRunSeen = new Integer("100.00");
 String recType = "example recType";
 @javax.annotation.Nullable String externalRecTypeName = "example externalRecTypeName";
+@javax.annotation.Nullable String customEntityType = "example customEntityType";
 RecInstanceId instanceId = new RecInstanceId();
 OffsetDateTime asAtInstantiated = OffsetDateTime.now();
 ResourceId recDefinitionId = new ResourceId();
@@ -79,6 +81,7 @@ RecResult recResultInstance = new RecResult()
     .firstRunSeen(firstRunSeen)
     .recType(recType)
     .externalRecTypeName(externalRecTypeName)
+    .customEntityType(customEntityType)
     .instanceId(instanceId)
     .asAtInstantiated(asAtInstantiated)
     .recDefinitionId(recDefinitionId)

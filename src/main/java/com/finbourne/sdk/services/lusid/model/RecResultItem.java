@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.RecResultCustomEntityItem;
 import com.finbourne.sdk.services.lusid.model.RecResultExternalIdentifiersItem;
 import com.finbourne.sdk.services.lusid.model.RecResultHoldingImpact;
 import com.finbourne.sdk.services.lusid.model.RecResultHoldingItem;
@@ -71,6 +72,10 @@ public class RecResultItem extends AbstractOpenApiSchema {
             if (discriminatorNode != null && discriminatorNode.isTextual()) {
                 String discriminatorValue = discriminatorNode.asText();
                 switch (discriminatorValue) {
+                    case "CustomEntity":
+                        deserialized = JSON.getMapper().treeToValue(node, RecResultCustomEntityItem.class);
+                        result.setActualInstance(deserialized);
+                        return result;
                     case "Holding":
                         deserialized = JSON.getMapper().treeToValue(node, RecResultHoldingItem.class);
                         result.setActualInstance(deserialized);
@@ -104,7 +109,7 @@ public class RecResultItem extends AbstractOpenApiSchema {
                         result.setActualInstance(deserialized);
                         return result;
                     default:
-                        log.log(Level.WARNING, String.format("Failed to lookup discriminator value `%s` for RecResultItem. Possible values: Holding Instrument LegalEntity Portfolio RelationalDataPoint SettlementActivity Transaction ValuedHolding", discriminatorValue));
+                        log.log(Level.WARNING, String.format("Failed to lookup discriminator value `%s` for RecResultItem. Possible values: CustomEntity Holding Instrument LegalEntity Portfolio RelationalDataPoint SettlementActivity Transaction ValuedHolding", discriminatorValue));
                 }
             }
 
@@ -119,6 +124,16 @@ public class RecResultItem extends AbstractOpenApiSchema {
             // contract on each variant disambiguate the union.
             com.fasterxml.jackson.databind.ObjectMapper _strictMapper = JSON.getMapper().copy()
                     .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+            // deserialize RecResultCustomEntityItem
+            try {
+                deserialized = _strictMapper.treeToValue(node, RecResultCustomEntityItem.class);
+                match++;
+                log.log(Level.FINER, "Input data matches schema 'RecResultCustomEntityItem'");
+                result.setActualInstance(deserialized);
+            } catch (Exception e) {
+                errorMessages.add(String.format("Deserialization for RecResultCustomEntityItem failed with `%s`.", e.getMessage()));
+                log.log(Level.FINER, "Input data does not match schema 'RecResultCustomEntityItem'", e);
+            }
             // deserialize RecResultExternalIdentifiersItem
             try {
                 deserialized = _strictMapper.treeToValue(node, RecResultExternalIdentifiersItem.class);
@@ -201,6 +216,7 @@ public class RecResultItem extends AbstractOpenApiSchema {
     }
 
     static {
+        schemas.put("RecResultCustomEntityItem", RecResultCustomEntityItem.class);
         schemas.put("RecResultExternalIdentifiersItem", RecResultExternalIdentifiersItem.class);
         schemas.put("RecResultHoldingItem", RecResultHoldingItem.class);
         schemas.put("RecResultRelationalDataItem", RecResultRelationalDataItem.class);
@@ -217,12 +233,17 @@ public class RecResultItem extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * RecResultExternalIdentifiersItem, RecResultHoldingItem, RecResultRelationalDataItem, RecResultResourceIdItem, RecResultSettlementActivityItem, RecResultTransactionItem
+     * RecResultCustomEntityItem, RecResultExternalIdentifiersItem, RecResultHoldingItem, RecResultRelationalDataItem, RecResultResourceIdItem, RecResultSettlementActivityItem, RecResultTransactionItem
      *
      * It could be an instance of the 'oneOf' schemas.
      */
     @Override
     public void setActualInstance(Object instance) {
+        if (instance instanceof RecResultCustomEntityItem) {
+            super.setActualInstance(instance);
+            return;
+        }
+
         if (instance instanceof RecResultExternalIdentifiersItem) {
             super.setActualInstance(instance);
             return;
@@ -253,14 +274,14 @@ public class RecResultItem extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be RecResultExternalIdentifiersItem, RecResultHoldingItem, RecResultRelationalDataItem, RecResultResourceIdItem, RecResultSettlementActivityItem, RecResultTransactionItem");
+        throw new RuntimeException("Invalid instance type. Must be RecResultCustomEntityItem, RecResultExternalIdentifiersItem, RecResultHoldingItem, RecResultRelationalDataItem, RecResultResourceIdItem, RecResultSettlementActivityItem, RecResultTransactionItem");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * RecResultExternalIdentifiersItem, RecResultHoldingItem, RecResultRelationalDataItem, RecResultResourceIdItem, RecResultSettlementActivityItem, RecResultTransactionItem
+     * RecResultCustomEntityItem, RecResultExternalIdentifiersItem, RecResultHoldingItem, RecResultRelationalDataItem, RecResultResourceIdItem, RecResultSettlementActivityItem, RecResultTransactionItem
      *
-     * @return The actual instance (RecResultExternalIdentifiersItem, RecResultHoldingItem, RecResultRelationalDataItem, RecResultResourceIdItem, RecResultSettlementActivityItem, RecResultTransactionItem)
+     * @return The actual instance (RecResultCustomEntityItem, RecResultExternalIdentifiersItem, RecResultHoldingItem, RecResultRelationalDataItem, RecResultResourceIdItem, RecResultSettlementActivityItem, RecResultTransactionItem)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -268,6 +289,16 @@ public class RecResultItem extends AbstractOpenApiSchema {
         return super.getActualInstance();
     }
 
+    /**
+     * Get the actual instance of `RecResultCustomEntityItem`. If the actual instance is not `RecResultCustomEntityItem`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `RecResultCustomEntityItem`
+     * @throws ClassCastException if the instance is not `RecResultCustomEntityItem`
+     */
+    public RecResultCustomEntityItem getRecResultCustomEntityItem() throws ClassCastException {
+        return (RecResultCustomEntityItem)super.getActualInstance();
+    }
     /**
      * Get the actual instance of `RecResultExternalIdentifiersItem`. If the actual instance is not `RecResultExternalIdentifiersItem`,
      * the ClassCastException will be thrown.

@@ -51,6 +51,7 @@ import com.finbourne.sdk.JSON;
 @JsonPropertyOrder({
   RecResultSet.JSON_PROPERTY_REC_TYPE,
   RecResultSet.JSON_PROPERTY_EXTERNAL_REC_TYPE_NAME,
+  RecResultSet.JSON_PROPERTY_CUSTOM_ENTITY_TYPE,
   RecResultSet.JSON_PROPERTY_REC_INSTANCE,
   RecResultSet.JSON_PROPERTY_RUN_NUMBER,
   RecResultSet.JSON_PROPERTY_RUN_AS_AT,
@@ -78,6 +79,11 @@ public class RecResultSet {
   @JsonProperty(JSON_PROPERTY_EXTERNAL_REC_TYPE_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String externalRecTypeName;
+
+  public static final String JSON_PROPERTY_CUSTOM_ENTITY_TYPE = "customEntityType";
+  @JsonProperty(JSON_PROPERTY_CUSTOM_ENTITY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String customEntityType;
 
   public static final String JSON_PROPERTY_REC_INSTANCE = "recInstance";
   @JsonProperty(JSON_PROPERTY_REC_INSTANCE)
@@ -163,7 +169,7 @@ public class RecResultSet {
   }
 
   /**
-   * The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.
+   * The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio, CustomEntity.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -192,6 +198,25 @@ public class RecResultSet {
 
   public void setExternalRecTypeName(String externalRecTypeName) {
     this.externalRecTypeName = externalRecTypeName;
+  }
+
+
+  public RecResultSet customEntityType(String customEntityType) {
+    this.customEntityType = customEntityType;
+    return this;
+  }
+
+  /**
+   * The name of the custom entity type, which starts with ~. Set when the rec type is CustomEntity and null for every other rec type. Filterable.
+   * @return customEntityType
+   */
+  @javax.annotation.Nullable
+  public String getCustomEntityType() {
+    return customEntityType;
+  }
+
+  public void setCustomEntityType(String customEntityType) {
+    this.customEntityType = customEntityType;
   }
 
 
@@ -531,6 +556,7 @@ public class RecResultSet {
     RecResultSet recResultSet = (RecResultSet) o;
     return Objects.equals(this.recType, recResultSet.recType) &&
         Objects.equals(this.externalRecTypeName, recResultSet.externalRecTypeName) &&
+        Objects.equals(this.customEntityType, recResultSet.customEntityType) &&
         Objects.equals(this.recInstance, recResultSet.recInstance) &&
         Objects.equals(this.runNumber, recResultSet.runNumber) &&
         Objects.equals(this.runAsAt, recResultSet.runAsAt) &&
@@ -554,7 +580,7 @@ public class RecResultSet {
 
   @Override
  public int hashCode() {
-    return Objects.hash(recType, externalRecTypeName, recInstance, runNumber, runAsAt, execution, datesReconciled, resultCounts, review, approvalStatus, requiredApprovals, submissions, decisions, previousRuns, href, version, links);
+    return Objects.hash(recType, externalRecTypeName, customEntityType, recInstance, runNumber, runAsAt, execution, datesReconciled, resultCounts, review, approvalStatus, requiredApprovals, submissions, decisions, previousRuns, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -570,6 +596,7 @@ public class RecResultSet {
     sb.append("class RecResultSet {\n");
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
     sb.append("    externalRecTypeName: ").append(toIndentedString(externalRecTypeName)).append("\n");
+    sb.append("    customEntityType: ").append(toIndentedString(customEntityType)).append("\n");
     sb.append("    recInstance: ").append(toIndentedString(recInstance)).append("\n");
     sb.append("    runNumber: ").append(toIndentedString(runNumber)).append("\n");
     sb.append("    runAsAt: ").append(toIndentedString(runAsAt)).append("\n");

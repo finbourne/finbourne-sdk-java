@@ -3478,7 +3478,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * [EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
+     * RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
@@ -3500,7 +3500,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * [EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
+     * RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.Use any specified configuration options to override any other configuration for this request only
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
@@ -3522,7 +3522,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * [EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights (asynchronously)
+     * RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights (asynchronously)
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
@@ -3545,7 +3545,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * [EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights (asynchronously)
+     * RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights (asynchronously)
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.Use any specified configuration options to override any other configuration for this request only
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @param allocationAlgorithm A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \&quot;PR-LF\&quot;.  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \&quot;PR-LF\&quot;. Valid values are \&quot;PR-LF\&quot;, \&quot;PR-SF\&quot;, \&quot;LF\&quot;, \&quot;SF\&quot;. (optional)
@@ -3713,7 +3713,7 @@ public class OrderManagementApi {
     }
 
     /**
-     * [EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
+     * RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
      * Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.
      * @param weightedAllocationServiceRunRequest The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
      * @return APIrunAllocationServiceWithWeightsRequest

@@ -59,6 +59,7 @@ import com.finbourne.sdk.JSON;
   RecResult.JSON_PROPERTY_FIRST_RUN_SEEN,
   RecResult.JSON_PROPERTY_REC_TYPE,
   RecResult.JSON_PROPERTY_EXTERNAL_REC_TYPE_NAME,
+  RecResult.JSON_PROPERTY_CUSTOM_ENTITY_TYPE,
   RecResult.JSON_PROPERTY_INSTANCE_ID,
   RecResult.JSON_PROPERTY_AS_AT_INSTANTIATED,
   RecResult.JSON_PROPERTY_REC_DEFINITION_ID,
@@ -110,6 +111,11 @@ public class RecResult {
   @JsonProperty(JSON_PROPERTY_EXTERNAL_REC_TYPE_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String externalRecTypeName;
+
+  public static final String JSON_PROPERTY_CUSTOM_ENTITY_TYPE = "customEntityType";
+  @JsonProperty(JSON_PROPERTY_CUSTOM_ENTITY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String customEntityType;
 
   public static final String JSON_PROPERTY_INSTANCE_ID = "instanceId";
   @JsonProperty(JSON_PROPERTY_INSTANCE_ID)
@@ -297,7 +303,7 @@ public class RecResult {
   }
 
   /**
-   * The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.
+   * The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio, CustomEntity.
    * @return recType
    */
   @javax.annotation.Nonnull
@@ -326,6 +332,25 @@ public class RecResult {
 
   public void setExternalRecTypeName(String externalRecTypeName) {
     this.externalRecTypeName = externalRecTypeName;
+  }
+
+
+  public RecResult customEntityType(String customEntityType) {
+    this.customEntityType = customEntityType;
+    return this;
+  }
+
+  /**
+   * The name of the custom entity type, which starts with ~. Set when the rec type is CustomEntity and null for every other rec type. Filterable.
+   * @return customEntityType
+   */
+  @javax.annotation.Nullable
+  public String getCustomEntityType() {
+    return customEntityType;
+  }
+
+  public void setCustomEntityType(String customEntityType) {
+    this.customEntityType = customEntityType;
   }
 
 
@@ -855,6 +880,7 @@ public class RecResult {
         Objects.equals(this.firstRunSeen, recResult.firstRunSeen) &&
         Objects.equals(this.recType, recResult.recType) &&
         Objects.equals(this.externalRecTypeName, recResult.externalRecTypeName) &&
+        Objects.equals(this.customEntityType, recResult.customEntityType) &&
         Objects.equals(this.instanceId, recResult.instanceId) &&
         Objects.equals(this.asAtInstantiated, recResult.asAtInstantiated) &&
         Objects.equals(this.recDefinitionId, recResult.recDefinitionId) &&
@@ -887,7 +913,7 @@ public class RecResult {
 
   @Override
  public int hashCode() {
-    return Objects.hash(id, resultNumber, firstRunSeen, recType, externalRecTypeName, instanceId, asAtInstantiated, recDefinitionId, recDefinitionDisplayName, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, linkedResults, comments, properties, assignedUser, assignedRole, href, version, links);
+    return Objects.hash(id, resultNumber, firstRunSeen, recType, externalRecTypeName, customEntityType, instanceId, asAtInstantiated, recDefinitionId, recDefinitionDisplayName, runNumber, runAsAt, datesReconciled, resultType, resultCardinality, resultLifeCycle, exception, review, coreRules, aggregateRules, supplementalAttributes, items, linkedResults, comments, properties, assignedUser, assignedRole, href, version, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -906,6 +932,7 @@ public class RecResult {
     sb.append("    firstRunSeen: ").append(toIndentedString(firstRunSeen)).append("\n");
     sb.append("    recType: ").append(toIndentedString(recType)).append("\n");
     sb.append("    externalRecTypeName: ").append(toIndentedString(externalRecTypeName)).append("\n");
+    sb.append("    customEntityType: ").append(toIndentedString(customEntityType)).append("\n");
     sb.append("    instanceId: ").append(toIndentedString(instanceId)).append("\n");
     sb.append("    asAtInstantiated: ").append(toIndentedString(asAtInstantiated)).append("\n");
     sb.append("    recDefinitionId: ").append(toIndentedString(recDefinitionId)).append("\n");
