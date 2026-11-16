@@ -13,10 +13,13 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.Link;
+import com.finbourne.sdk.services.lusid.model.ResponseMetaData;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
@@ -46,6 +49,7 @@ import com.finbourne.sdk.JSON;
   SideDefinition.JSON_PROPERTY_NOTIONAL_AMOUNT,
   SideDefinition.JSON_PROPERTY_CURRENT_FACE,
   SideDefinition.JSON_PROPERTY_SCOPE,
+  SideDefinition.JSON_PROPERTY_METADATA,
   SideDefinition.JSON_PROPERTY_LINKS
 })
 
@@ -94,6 +98,11 @@ public class SideDefinition {
   @JsonProperty(JSON_PROPERTY_SCOPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String scope;
+
+  public static final String JSON_PROPERTY_METADATA = "metadata";
+  @JsonProperty(JSON_PROPERTY_METADATA)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Map<String, List<ResponseMetaData>> metadata;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -274,6 +283,33 @@ public class SideDefinition {
   }
 
 
+  public SideDefinition metadata(Map<String, List<ResponseMetaData>> metadata) {
+    this.metadata = metadata;
+    return this;
+  }
+
+  public SideDefinition putMetadataItem(String key, List<ResponseMetaData> metadataItem) {
+    if (this.metadata == null) {
+      this.metadata = new HashMap<>();
+    }
+    this.metadata.put(key, metadataItem);
+    return this;
+  }
+
+  /**
+   * Contains warnings related to the side definition, such as a stored copy of a platform side that differs from the platform&#39;s current definition.
+   * @return metadata
+   */
+  @javax.annotation.Nullable
+  public Map<String, List<ResponseMetaData>> getMetadata() {
+    return metadata;
+  }
+
+  public void setMetadata(Map<String, List<ResponseMetaData>> metadata) {
+    this.metadata = metadata;
+  }
+
+
   public SideDefinition links(List<Link> links) {
     this.links = links;
     return this;
@@ -319,6 +355,7 @@ public class SideDefinition {
         Objects.equals(this.notionalAmount, sideDefinition.notionalAmount) &&
         Objects.equals(this.currentFace, sideDefinition.currentFace) &&
         Objects.equals(this.scope, sideDefinition.scope) &&
+        Objects.equals(this.metadata, sideDefinition.metadata) &&
         Objects.equals(this.links, sideDefinition.links);
   }
 
@@ -328,7 +365,7 @@ public class SideDefinition {
 
   @Override
  public int hashCode() {
-    return Objects.hash(side, security, currency, rate, units, amount, notionalAmount, currentFace, scope, links);
+    return Objects.hash(side, security, currency, rate, units, amount, notionalAmount, currentFace, scope, metadata, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -351,6 +388,7 @@ public class SideDefinition {
     sb.append("    notionalAmount: ").append(toIndentedString(notionalAmount)).append("\n");
     sb.append("    currentFace: ").append(toIndentedString(currentFace)).append("\n");
     sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
+    sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

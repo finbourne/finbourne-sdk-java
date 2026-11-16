@@ -19,6 +19,7 @@ import com.finbourne.sdk.services.lusid.model.AllocationEventComponent;
 import com.finbourne.sdk.services.lusid.model.AllocationEventDealFunding;
 import com.finbourne.sdk.services.lusid.model.AllocationEventEqualisation;
 import com.finbourne.sdk.services.lusid.model.AllocationEventReceipt;
+import com.finbourne.sdk.services.lusid.model.AllocationEventRefundPayment;
 import com.finbourne.sdk.services.lusid.model.AllocationEventReversal;
 import com.finbourne.sdk.services.lusid.model.AllocationEventRoundingResidual;
 import com.finbourne.sdk.services.lusid.model.AllocationEventTransfer;
@@ -85,6 +86,7 @@ import com.finbourne.sdk.JSON;
   AllocationEvent.JSON_PROPERTY_DUE_DATE,
   AllocationEvent.JSON_PROPERTY_SETTLEMENT_DATE,
   AllocationEvent.JSON_PROPERTY_RECEIPTS,
+  AllocationEvent.JSON_PROPERTY_REFUND_PAYMENTS,
   AllocationEvent.JSON_PROPERTY_LINKS
 })
 
@@ -248,6 +250,11 @@ public class AllocationEvent {
   @JsonProperty(JSON_PROPERTY_RECEIPTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<AllocationEventReceipt> receipts;
+
+  public static final String JSON_PROPERTY_REFUND_PAYMENTS = "refundPayments";
+  @JsonProperty(JSON_PROPERTY_REFUND_PAYMENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationEventRefundPayment> refundPayments;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -937,6 +944,33 @@ public class AllocationEvent {
   }
 
 
+  public AllocationEvent refundPayments(List<AllocationEventRefundPayment> refundPayments) {
+    this.refundPayments = refundPayments;
+    return this;
+  }
+
+  public AllocationEvent addRefundPaymentsItem(AllocationEventRefundPayment refundPaymentsItem) {
+    if (this.refundPayments == null) {
+      this.refundPayments = new ArrayList<>();
+    }
+    this.refundPayments.add(refundPaymentsItem);
+    return this;
+  }
+
+  /**
+   * The refunds paid out against the event to investors whose receipts exceeded what they owed, in the order they were recorded.
+   * @return refundPayments
+   */
+  @javax.annotation.Nullable
+  public List<AllocationEventRefundPayment> getRefundPayments() {
+    return refundPayments;
+  }
+
+  public void setRefundPayments(List<AllocationEventRefundPayment> refundPayments) {
+    this.refundPayments = refundPayments;
+  }
+
+
   public AllocationEvent links(List<Link> links) {
     this.links = links;
     return this;
@@ -1005,6 +1039,7 @@ public class AllocationEvent {
         Objects.equals(this.dueDate, allocationEvent.dueDate) &&
         Objects.equals(this.settlementDate, allocationEvent.settlementDate) &&
         Objects.equals(this.receipts, allocationEvent.receipts) &&
+        Objects.equals(this.refundPayments, allocationEvent.refundPayments) &&
         Objects.equals(this.links, allocationEvent.links);
   }
 
@@ -1014,7 +1049,7 @@ public class AllocationEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, id, description, allocationMapId, eventType, amount, currency, eventDate, status, basisSource, allocations, bookingReference, bookedAt, reallocationReason, components, residuals, basisDiagnostics, writtenIds, bookingErrors, warnings, transfers, equalisation, useOfProceeds, dealFunding, version, parentAllocationEventId, replaces, reversal, noticeDate, dueDate, settlementDate, receipts, links);
+    return Objects.hash(href, id, description, allocationMapId, eventType, amount, currency, eventDate, status, basisSource, allocations, bookingReference, bookedAt, reallocationReason, components, residuals, basisDiagnostics, writtenIds, bookingErrors, warnings, transfers, equalisation, useOfProceeds, dealFunding, version, parentAllocationEventId, replaces, reversal, noticeDate, dueDate, settlementDate, receipts, refundPayments, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1060,6 +1095,7 @@ public class AllocationEvent {
     sb.append("    dueDate: ").append(toIndentedString(dueDate)).append("\n");
     sb.append("    settlementDate: ").append(toIndentedString(settlementDate)).append("\n");
     sb.append("    receipts: ").append(toIndentedString(receipts)).append("\n");
+    sb.append("    refundPayments: ").append(toIndentedString(refundPayments)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

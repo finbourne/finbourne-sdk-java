@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.PartnershipAllocationProblem;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -30,12 +31,13 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * The partnership accounting view of a valuation point: what is left on the income summary to allocate to the  partners, and the configuration pack the allocation books under.
+ * The partnership accounting view of a valuation point: what is left on the income summary to allocate to the  partners, the configuration pack the allocation books under and, when the period cannot be allocated as it  stands, why.
  */
 @JsonPropertyOrder({
   PartnershipAccountingValuationPointData.JSON_PROPERTY_UNALLOCATED_INCOME_SUMMARY,
   PartnershipAccountingValuationPointData.JSON_PROPERTY_CONFIG_PACK_SCOPE,
-  PartnershipAccountingValuationPointData.JSON_PROPERTY_CONFIG_PACK_CODE
+  PartnershipAccountingValuationPointData.JSON_PROPERTY_CONFIG_PACK_CODE,
+  PartnershipAccountingValuationPointData.JSON_PROPERTY_ALLOCATION_PROBLEM
 })
 
 public class PartnershipAccountingValuationPointData {
@@ -54,6 +56,11 @@ public class PartnershipAccountingValuationPointData {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String configPackCode;
 
+  public static final String JSON_PROPERTY_ALLOCATION_PROBLEM = "allocationProblem";
+  @JsonProperty(JSON_PROPERTY_ALLOCATION_PROBLEM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private PartnershipAllocationProblem allocationProblem;
+
   public PartnershipAccountingValuationPointData() {
   }
 
@@ -63,7 +70,7 @@ public class PartnershipAccountingValuationPointData {
   }
 
   /**
-   * The profit and loss of the valuation point&#39;s period that has not yet been allocated to the partners: what the period&#39;s income, gain and expense lines would pool, less what the partner allocation has posted for the period. Must be zero before the valuation point can be finalised.
+   * The profit and loss of the valuation point&#39;s period that has not yet been allocated to the partners: what the period&#39;s profit and loss lines, as the allocation bucket set classifies them, would pool, less what the partner allocation has posted for the period. Lines no bucket claims count as unallocated. Must be zero before the valuation point can be finalised.
    * @return unallocatedIncomeSummary
    */
   @javax.annotation.Nonnull
@@ -114,6 +121,25 @@ public class PartnershipAccountingValuationPointData {
   }
 
 
+  public PartnershipAccountingValuationPointData allocationProblem(PartnershipAllocationProblem allocationProblem) {
+    this.allocationProblem = allocationProblem;
+    return this;
+  }
+
+  /**
+   * Get allocationProblem
+   * @return allocationProblem
+   */
+  @javax.annotation.Nullable
+  public PartnershipAllocationProblem getAllocationProblem() {
+    return allocationProblem;
+  }
+
+  public void setAllocationProblem(PartnershipAllocationProblem allocationProblem) {
+    this.allocationProblem = allocationProblem;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -125,12 +151,13 @@ public class PartnershipAccountingValuationPointData {
     PartnershipAccountingValuationPointData partnershipAccountingValuationPointData = (PartnershipAccountingValuationPointData) o;
     return (this.unallocatedIncomeSummary == null ? partnershipAccountingValuationPointData.unallocatedIncomeSummary == null : (partnershipAccountingValuationPointData.unallocatedIncomeSummary != null && this.unallocatedIncomeSummary.compareTo(partnershipAccountingValuationPointData.getUnallocatedIncomeSummary()) == 0)) &&
         Objects.equals(this.configPackScope, partnershipAccountingValuationPointData.configPackScope) &&
-        Objects.equals(this.configPackCode, partnershipAccountingValuationPointData.configPackCode);
+        Objects.equals(this.configPackCode, partnershipAccountingValuationPointData.configPackCode) &&
+        Objects.equals(this.allocationProblem, partnershipAccountingValuationPointData.allocationProblem);
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(unallocatedIncomeSummary, configPackScope, configPackCode);
+    return Objects.hash(unallocatedIncomeSummary, configPackScope, configPackCode, allocationProblem);
   }
 
   @Override
@@ -140,6 +167,7 @@ public class PartnershipAccountingValuationPointData {
     sb.append("    unallocatedIncomeSummary: ").append(toIndentedString(unallocatedIncomeSummary)).append("\n");
     sb.append("    configPackScope: ").append(toIndentedString(configPackScope)).append("\n");
     sb.append("    configPackCode: ").append(toIndentedString(configPackCode)).append("\n");
+    sb.append("    allocationProblem: ").append(toIndentedString(allocationProblem)).append("\n");
     sb.append("}");
     return sb.toString();
   }

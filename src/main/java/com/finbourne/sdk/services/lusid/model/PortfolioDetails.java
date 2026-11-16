@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AmortisationHorizon;
 import com.finbourne.sdk.services.lusid.model.FractionalUnitsTrueUpConfiguration;
 import com.finbourne.sdk.services.lusid.model.InstrumentEventConfiguration;
 import com.finbourne.sdk.services.lusid.model.Link;
@@ -66,6 +67,7 @@ import com.finbourne.sdk.JSON;
   PortfolioDetails.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
   PortfolioDetails.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
   PortfolioDetails.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME,
+  PortfolioDetails.JSON_PROPERTY_AMORTISATION_HORIZON,
   PortfolioDetails.JSON_PROPERTY_WHT_PARAMETERS,
   PortfolioDetails.JSON_PROPERTY_LINKS
 })
@@ -237,6 +239,11 @@ public class PortfolioDetails {
   @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_REGIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String chargeableGainsRegime;
+
+  public static final String JSON_PROPERTY_AMORTISATION_HORIZON = "amortisationHorizon";
+  @JsonProperty(JSON_PROPERTY_AMORTISATION_HORIZON)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private AmortisationHorizon amortisationHorizon;
 
   public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
   @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
@@ -666,6 +673,25 @@ public class PortfolioDetails {
   }
 
 
+  public PortfolioDetails amortisationHorizon(AmortisationHorizon amortisationHorizon) {
+    this.amortisationHorizon = amortisationHorizon;
+    return this;
+  }
+
+  /**
+   * Get amortisationHorizon
+   * @return amortisationHorizon
+   */
+  @javax.annotation.Nullable
+  public AmortisationHorizon getAmortisationHorizon() {
+    return amortisationHorizon;
+  }
+
+  public void setAmortisationHorizon(AmortisationHorizon amortisationHorizon) {
+    this.amortisationHorizon = amortisationHorizon;
+  }
+
+
   public PortfolioDetails whtParameters(WhtParameters whtParameters) {
     this.whtParameters = whtParameters;
     return this;
@@ -742,6 +768,7 @@ public class PortfolioDetails {
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, portfolioDetails.fractionalUnitsTrueUpConfiguration) &&
         Objects.equals(this.holdingsFungibility, portfolioDetails.holdingsFungibility) &&
         Objects.equals(this.chargeableGainsRegime, portfolioDetails.chargeableGainsRegime) &&
+        Objects.equals(this.amortisationHorizon, portfolioDetails.amortisationHorizon) &&
         Objects.equals(this.whtParameters, portfolioDetails.whtParameters) &&
         Objects.equals(this.links, portfolioDetails.links);
   }
@@ -752,7 +779,7 @@ public class PortfolioDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(href, originPortfolioId, version, baseCurrency, corporateActionSourceId, subHoldingKeys, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, stagedModifications, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime, whtParameters, links);
+    return Objects.hash(href, originPortfolioId, version, baseCurrency, corporateActionSourceId, subHoldingKeys, instrumentScopes, accountingMethod, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, stagedModifications, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime, amortisationHorizon, whtParameters, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -787,6 +814,7 @@ public class PortfolioDetails {
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
     sb.append("    chargeableGainsRegime: ").append(toIndentedString(chargeableGainsRegime)).append("\n");
+    sb.append("    amortisationHorizon: ").append(toIndentedString(amortisationHorizon)).append("\n");
     sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");

@@ -12,6 +12,8 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AccruedFeeLine;
+import com.finbourne.sdk.services.lusid.model.IgnoredDistributionTag;
 import com.finbourne.sdk.services.lusid.model.PartnerAllocationPool;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.UnattributedAmount;
@@ -20,6 +22,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -47,7 +50,10 @@ import com.finbourne.sdk.JSON;
   PartnerAllocationRunResult.JSON_PROPERTY_RUN_ID,
   PartnerAllocationRunResult.JSON_PROPERTY_POOLS,
   PartnerAllocationRunResult.JSON_PROPERTY_UNATTRIBUTED,
-  PartnerAllocationRunResult.JSON_PROPERTY_BOOKED_TRANSACTION_IDS
+  PartnerAllocationRunResult.JSON_PROPERTY_BOOKED_TRANSACTION_IDS,
+  PartnerAllocationRunResult.JSON_PROPERTY_WARNINGS,
+  PartnerAllocationRunResult.JSON_PROPERTY_IGNORED_TAGS,
+  PartnerAllocationRunResult.JSON_PROPERTY_ACCRUED_FEES
 })
 
 public class PartnerAllocationRunResult {
@@ -95,6 +101,21 @@ public class PartnerAllocationRunResult {
   @JsonProperty(JSON_PROPERTY_BOOKED_TRANSACTION_IDS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private List<String> bookedTransactionIds = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_WARNINGS = "warnings";
+  @JsonProperty(JSON_PROPERTY_WARNINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> warnings;
+
+  public static final String JSON_PROPERTY_IGNORED_TAGS = "ignoredTags";
+  @JsonProperty(JSON_PROPERTY_IGNORED_TAGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<IgnoredDistributionTag> ignoredTags;
+
+  public static final String JSON_PROPERTY_ACCRUED_FEES = "accruedFees";
+  @JsonProperty(JSON_PROPERTY_ACCRUED_FEES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AccruedFeeLine> accruedFees;
 
   public PartnerAllocationRunResult() {
   }
@@ -227,7 +248,7 @@ public class PartnerAllocationRunResult {
   }
 
   /**
-   * The pools of fund-level amount that were allocated.
+   * The pools of fund-level amount that were allocated, in the allocation bucket set&#39;s bucket order with any tag pools after.
    * @return pools
    */
   @javax.annotation.Nonnull
@@ -254,7 +275,7 @@ public class PartnerAllocationRunResult {
   }
 
   /**
-   * Fund-level amounts that no pool claimed.
+   * Always empty: every profit and loss line is now pooled or the run is refused. Kept for one release.
    * @return unattributed
    */
   @javax.annotation.Nonnull
@@ -294,6 +315,87 @@ public class PartnerAllocationRunResult {
   }
 
 
+  public PartnerAllocationRunResult warnings(List<String> warnings) {
+    this.warnings = warnings;
+    return this;
+  }
+
+  public PartnerAllocationRunResult addWarningsItem(String warningsItem) {
+    if (this.warnings == null) {
+      this.warnings = new ArrayList<>();
+    }
+    this.warnings.add(warningsItem);
+    return this;
+  }
+
+  /**
+   * What the run noticed but did not refuse, for example an excluded investor record that is not on the register at the period end.
+   * @return warnings
+   */
+  @javax.annotation.Nullable
+  public List<String> getWarnings() {
+    return warnings;
+  }
+
+  public void setWarnings(List<String> warnings) {
+    this.warnings = warnings;
+  }
+
+
+  public PartnerAllocationRunResult ignoredTags(List<IgnoredDistributionTag> ignoredTags) {
+    this.ignoredTags = ignoredTags;
+    return this;
+  }
+
+  public PartnerAllocationRunResult addIgnoredTagsItem(IgnoredDistributionTag ignoredTagsItem) {
+    if (this.ignoredTags == null) {
+      this.ignoredTags = new ArrayList<>();
+    }
+    this.ignoredTags.add(ignoredTagsItem);
+    return this;
+  }
+
+  /**
+   * The distribution character tags the run did not pool by, by account.
+   * @return ignoredTags
+   */
+  @javax.annotation.Nullable
+  public List<IgnoredDistributionTag> getIgnoredTags() {
+    return ignoredTags;
+  }
+
+  public void setIgnoredTags(List<IgnoredDistributionTag> ignoredTags) {
+    this.ignoredTags = ignoredTags;
+  }
+
+
+  public PartnerAllocationRunResult accruedFees(List<AccruedFeeLine> accruedFees) {
+    this.accruedFees = accruedFees;
+    return this;
+  }
+
+  public PartnerAllocationRunResult addAccruedFeesItem(AccruedFeeLine accruedFeesItem) {
+    if (this.accruedFees == null) {
+      this.accruedFees = new ArrayList<>();
+    }
+    this.accruedFees.add(accruedFeesItem);
+    return this;
+  }
+
+  /**
+   * The management fees accrued per partner in the period, which the accrual allocates and the run therefore leaves out of the pools.
+   * @return accruedFees
+   */
+  @javax.annotation.Nullable
+  public List<AccruedFeeLine> getAccruedFees() {
+    return accruedFees;
+  }
+
+  public void setAccruedFees(List<AccruedFeeLine> accruedFees) {
+    this.accruedFees = accruedFees;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -311,12 +413,26 @@ public class PartnerAllocationRunResult {
         Objects.equals(this.runId, partnerAllocationRunResult.runId) &&
         Objects.equals(this.pools, partnerAllocationRunResult.pools) &&
         Objects.equals(this.unattributed, partnerAllocationRunResult.unattributed) &&
-        Objects.equals(this.bookedTransactionIds, partnerAllocationRunResult.bookedTransactionIds);
+        Objects.equals(this.bookedTransactionIds, partnerAllocationRunResult.bookedTransactionIds) &&
+        Objects.equals(this.warnings, partnerAllocationRunResult.warnings) &&
+        Objects.equals(this.ignoredTags, partnerAllocationRunResult.ignoredTags) &&
+        Objects.equals(this.accruedFees, partnerAllocationRunResult.accruedFees);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(fundId, periodStart, periodEnd, navTypeCode, status, runId, pools, unattributed, bookedTransactionIds);
+    return Objects.hash(fundId, periodStart, periodEnd, navTypeCode, status, runId, pools, unattributed, bookedTransactionIds, warnings, ignoredTags, accruedFees);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -332,6 +448,9 @@ public class PartnerAllocationRunResult {
     sb.append("    pools: ").append(toIndentedString(pools)).append("\n");
     sb.append("    unattributed: ").append(toIndentedString(unattributed)).append("\n");
     sb.append("    bookedTransactionIds: ").append(toIndentedString(bookedTransactionIds)).append("\n");
+    sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
+    sb.append("    ignoredTags: ").append(toIndentedString(ignoredTags)).append("\n");
+    sb.append("    accruedFees: ").append(toIndentedString(accruedFees)).append("\n");
     sb.append("}");
     return sb.toString();
   }

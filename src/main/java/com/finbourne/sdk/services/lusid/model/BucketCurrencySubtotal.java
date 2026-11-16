@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.BucketAmounts;
+import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.Link;
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -45,6 +46,7 @@ import com.finbourne.sdk.JSON;
   BucketCurrencySubtotal.JSON_PROPERTY_OPEN,
   BucketCurrencySubtotal.JSON_PROPERTY_ACTIVITY_TOTAL,
   BucketCurrencySubtotal.JSON_PROPERTY_CLOSE,
+  BucketCurrencySubtotal.JSON_PROPERTY_FX_TRANSLATION,
   BucketCurrencySubtotal.JSON_PROPERTY_LINKS
 })
 
@@ -78,6 +80,11 @@ public class BucketCurrencySubtotal {
   @JsonProperty(JSON_PROPERTY_CLOSE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private BucketAmounts close;
+
+  public static final String JSON_PROPERTY_FX_TRANSLATION = "fxTranslation";
+  @JsonProperty(JSON_PROPERTY_FX_TRANSLATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CurrencyAndAmount fxTranslation;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -201,6 +208,25 @@ public class BucketCurrencySubtotal {
   }
 
 
+  public BucketCurrencySubtotal fxTranslation(CurrencyAndAmount fxTranslation) {
+    this.fxTranslation = fxTranslation;
+    return this;
+  }
+
+  /**
+   * Get fxTranslation
+   * @return fxTranslation
+   */
+  @javax.annotation.Nullable
+  public CurrencyAndAmount getFxTranslation() {
+    return fxTranslation;
+  }
+
+  public void setFxTranslation(CurrencyAndAmount fxTranslation) {
+    this.fxTranslation = fxTranslation;
+  }
+
+
   public BucketCurrencySubtotal links(List<Link> links) {
     this.links = links;
     return this;
@@ -243,6 +269,7 @@ public class BucketCurrencySubtotal {
         Objects.equals(this.open, bucketCurrencySubtotal.open) &&
         Objects.equals(this.activityTotal, bucketCurrencySubtotal.activityTotal) &&
         Objects.equals(this.close, bucketCurrencySubtotal.close) &&
+        Objects.equals(this.fxTranslation, bucketCurrencySubtotal.fxTranslation) &&
         Objects.equals(this.links, bucketCurrencySubtotal.links);
   }
 
@@ -252,7 +279,7 @@ public class BucketCurrencySubtotal {
 
   @Override
  public int hashCode() {
-    return Objects.hash(bucketStart, bucketEnd, currency, open, activityTotal, close, links);
+    return Objects.hash(bucketStart, bucketEnd, currency, open, activityTotal, close, fxTranslation, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -272,6 +299,7 @@ public class BucketCurrencySubtotal {
     sb.append("    open: ").append(toIndentedString(open)).append("\n");
     sb.append("    activityTotal: ").append(toIndentedString(activityTotal)).append("\n");
     sb.append("    close: ").append(toIndentedString(close)).append("\n");
+    sb.append("    fxTranslation: ").append(toIndentedString(fxTranslation)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **frequency** | **String** | The frequency at which the asset price is reset and the price return is exchanged, e.g. 3M. | [default to String]
 **fundingStartLag** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] [default to RelativeDateOffset]
 **lastResetDate** | [**OffsetDateTime**](OffsetDateTime.md) | The date of the last price reset. Optional; when absent the reset dates are rolled forward until the swap maturity date. | [optional] [default to OffsetDateTime]
+**paymentLag** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] [default to RelativeDateOffset]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.ResetSchedule;
@@ -23,6 +24,7 @@ FlowConventions conventions = new FlowConventions();
 String frequency = "example frequency";
 RelativeDateOffset fundingStartLag = new RelativeDateOffset();
 @javax.annotation.Nullable OffsetDateTime lastResetDate = OffsetDateTime.now();
+RelativeDateOffset paymentLag = new RelativeDateOffset();
 
 
 ResetSchedule resetScheduleInstance = new ResetSchedule()
@@ -30,7 +32,8 @@ ResetSchedule resetScheduleInstance = new ResetSchedule()
     .firstResetDate(firstResetDate)
     .frequency(frequency)
     .fundingStartLag(fundingStartLag)
-    .lastResetDate(lastResetDate);
+    .lastResetDate(lastResetDate)
+    .paymentLag(paymentLag);
 ```
 
 

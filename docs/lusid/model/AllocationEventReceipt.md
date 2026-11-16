@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **bankChargeBearer** | **String** | Who bears the bank charge: Partner leaves it outstanding on the investor, Fund books it as a fund expense. Defaults to the map&#39;s policy. | [optional] [default to String]
 **shortfallWrittenOff** | **java.math.BigDecimal** | Any small shortfall within the map&#39;s tolerance that was written off rather than left outstanding. | [optional] [default to java.math.BigDecimal]
 **postingId** | **String** | The identifier of the receipt posting on the investor&#39;s line. | [optional] [default to String]
+**settledLineId** | **String** | The register line the receipt settled, as the booking posted it. Written by the booking, not by the caller; absent on a receipt recorded before the line was kept. | [optional] [default to String]
+**reference** | **String** | The caller&#39;s reference the receipt was recorded under, as sent. Absent on a receipt sent without one. | [optional] [default to String]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.AllocationEventReceipt;
@@ -37,6 +39,8 @@ java.math.BigDecimal bankCharge = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable String bankChargeBearer = "example bankChargeBearer";
 java.math.BigDecimal shortfallWrittenOff = new java.math.BigDecimal("100.00");
 @javax.annotation.Nullable String postingId = "example postingId";
+@javax.annotation.Nullable String settledLineId = "example settledLineId";
+@javax.annotation.Nullable String reference = "example reference";
 
 
 AllocationEventReceipt allocationEventReceiptInstance = new AllocationEventReceipt()
@@ -51,7 +55,9 @@ AllocationEventReceipt allocationEventReceiptInstance = new AllocationEventRecei
     .bankCharge(bankCharge)
     .bankChargeBearer(bankChargeBearer)
     .shortfallWrittenOff(shortfallWrittenOff)
-    .postingId(postingId);
+    .postingId(postingId)
+    .settledLineId(settledLineId)
+    .reference(reference);
 ```
 
 

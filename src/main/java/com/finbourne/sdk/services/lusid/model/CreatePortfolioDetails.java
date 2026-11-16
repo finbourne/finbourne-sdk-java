@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AmortisationHorizon;
 import com.finbourne.sdk.services.lusid.model.FractionalUnitsTrueUpConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
 import com.finbourne.sdk.services.lusid.model.WhtParameters;
@@ -42,6 +43,7 @@ import com.finbourne.sdk.JSON;
   CreatePortfolioDetails.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
   CreatePortfolioDetails.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
   CreatePortfolioDetails.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME,
+  CreatePortfolioDetails.JSON_PROPERTY_AMORTISATION_HORIZON,
   CreatePortfolioDetails.JSON_PROPERTY_WHT_PARAMETERS
 })
 
@@ -70,6 +72,11 @@ public class CreatePortfolioDetails {
   @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_REGIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String chargeableGainsRegime;
+
+  public static final String JSON_PROPERTY_AMORTISATION_HORIZON = "amortisationHorizon";
+  @JsonProperty(JSON_PROPERTY_AMORTISATION_HORIZON)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private AmortisationHorizon amortisationHorizon;
 
   public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
   @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
@@ -174,6 +181,25 @@ public class CreatePortfolioDetails {
   }
 
 
+  public CreatePortfolioDetails amortisationHorizon(AmortisationHorizon amortisationHorizon) {
+    this.amortisationHorizon = amortisationHorizon;
+    return this;
+  }
+
+  /**
+   * Get amortisationHorizon
+   * @return amortisationHorizon
+   */
+  @javax.annotation.Nullable
+  public AmortisationHorizon getAmortisationHorizon() {
+    return amortisationHorizon;
+  }
+
+  public void setAmortisationHorizon(AmortisationHorizon amortisationHorizon) {
+    this.amortisationHorizon = amortisationHorizon;
+  }
+
+
   public CreatePortfolioDetails whtParameters(WhtParameters whtParameters) {
     this.whtParameters = whtParameters;
     return this;
@@ -207,6 +233,7 @@ public class CreatePortfolioDetails {
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, createPortfolioDetails.fractionalUnitsTrueUpConfiguration) &&
         Objects.equals(this.holdingsFungibility, createPortfolioDetails.holdingsFungibility) &&
         Objects.equals(this.chargeableGainsRegime, createPortfolioDetails.chargeableGainsRegime) &&
+        Objects.equals(this.amortisationHorizon, createPortfolioDetails.amortisationHorizon) &&
         Objects.equals(this.whtParameters, createPortfolioDetails.whtParameters);
   }
 
@@ -216,7 +243,7 @@ public class CreatePortfolioDetails {
 
   @Override
  public int hashCode() {
-    return Objects.hash(corporateActionSourceId, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime, whtParameters);
+    return Objects.hash(corporateActionSourceId, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime, amortisationHorizon, whtParameters);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -235,6 +262,7 @@ public class CreatePortfolioDetails {
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
     sb.append("    chargeableGainsRegime: ").append(toIndentedString(chargeableGainsRegime)).append("\n");
+    sb.append("    amortisationHorizon: ").append(toIndentedString(amortisationHorizon)).append("\n");
     sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("}");
     return sb.toString();

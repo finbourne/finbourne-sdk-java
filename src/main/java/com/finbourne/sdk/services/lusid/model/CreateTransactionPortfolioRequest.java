@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AmortisationHorizon;
 import com.finbourne.sdk.services.lusid.model.FractionalUnitsTrueUpConfiguration;
 import com.finbourne.sdk.services.lusid.model.InstrumentEventConfiguration;
 import com.finbourne.sdk.services.lusid.model.PortfolioSettlementConfiguration;
@@ -68,6 +69,7 @@ import com.finbourne.sdk.JSON;
   CreateTransactionPortfolioRequest.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
   CreateTransactionPortfolioRequest.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
   CreateTransactionPortfolioRequest.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME,
+  CreateTransactionPortfolioRequest.JSON_PROPERTY_AMORTISATION_HORIZON,
   CreateTransactionPortfolioRequest.JSON_PROPERTY_WHT_PARAMETERS
 })
 
@@ -248,6 +250,11 @@ public class CreateTransactionPortfolioRequest {
   @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_REGIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String chargeableGainsRegime;
+
+  public static final String JSON_PROPERTY_AMORTISATION_HORIZON = "amortisationHorizon";
+  @JsonProperty(JSON_PROPERTY_AMORTISATION_HORIZON)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private AmortisationHorizon amortisationHorizon;
 
   public static final String JSON_PROPERTY_WHT_PARAMETERS = "whtParameters";
   @JsonProperty(JSON_PROPERTY_WHT_PARAMETERS)
@@ -718,6 +725,25 @@ public class CreateTransactionPortfolioRequest {
   }
 
 
+  public CreateTransactionPortfolioRequest amortisationHorizon(AmortisationHorizon amortisationHorizon) {
+    this.amortisationHorizon = amortisationHorizon;
+    return this;
+  }
+
+  /**
+   * Get amortisationHorizon
+   * @return amortisationHorizon
+   */
+  @javax.annotation.Nullable
+  public AmortisationHorizon getAmortisationHorizon() {
+    return amortisationHorizon;
+  }
+
+  public void setAmortisationHorizon(AmortisationHorizon amortisationHorizon) {
+    this.amortisationHorizon = amortisationHorizon;
+  }
+
+
   public CreateTransactionPortfolioRequest whtParameters(WhtParameters whtParameters) {
     this.whtParameters = whtParameters;
     return this;
@@ -769,6 +795,7 @@ public class CreateTransactionPortfolioRequest {
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, createTransactionPortfolioRequest.fractionalUnitsTrueUpConfiguration) &&
         Objects.equals(this.holdingsFungibility, createTransactionPortfolioRequest.holdingsFungibility) &&
         Objects.equals(this.chargeableGainsRegime, createTransactionPortfolioRequest.chargeableGainsRegime) &&
+        Objects.equals(this.amortisationHorizon, createTransactionPortfolioRequest.amortisationHorizon) &&
         Objects.equals(this.whtParameters, createTransactionPortfolioRequest.whtParameters);
   }
 
@@ -778,7 +805,7 @@ public class CreateTransactionPortfolioRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, code, created, enablementDate, baseCurrency, corporateActionSourceId, accountingMethod, subHoldingKeys, properties, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime, whtParameters);
+    return Objects.hash(displayName, description, code, created, enablementDate, baseCurrency, corporateActionSourceId, accountingMethod, subHoldingKeys, properties, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, instrumentEventConfiguration, amortisationRuleSetId, taxRuleSetScope, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime, amortisationHorizon, whtParameters);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -815,6 +842,7 @@ public class CreateTransactionPortfolioRequest {
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
     sb.append("    chargeableGainsRegime: ").append(toIndentedString(chargeableGainsRegime)).append("\n");
+    sb.append("    amortisationHorizon: ").append(toIndentedString(amortisationHorizon)).append("\n");
     sb.append("    whtParameters: ").append(toIndentedString(whtParameters)).append("\n");
     sb.append("}");
     return sb.toString();

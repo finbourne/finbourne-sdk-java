@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **dueDate** | [**OffsetDateTime**](OffsetDateTime.md) | The date the investors&#39; cash is due. | [optional] [default to OffsetDateTime]
 **settlementDate** | [**OffsetDateTime**](OffsetDateTime.md) | The date the postings settle. Defaults to the event date. | [optional] [default to OffsetDateTime]
 **receipts** | [**List&lt;AllocationEventReceipt&gt;**](AllocationEventReceipt.md) | The cash received against the event, in the order it was recorded. | [optional] [default to List<AllocationEventReceipt>]
+**refundPayments** | [**List&lt;AllocationEventRefundPayment&gt;**](AllocationEventRefundPayment.md) | The refunds paid out against the event to investors whose receipts exceeded what they owed, in the order they were recorded. | [optional] [default to List<AllocationEventRefundPayment>]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -78,6 +79,7 @@ AllocationEventReversal reversal = new AllocationEventReversal();
 @javax.annotation.Nullable OffsetDateTime dueDate = OffsetDateTime.now();
 @javax.annotation.Nullable OffsetDateTime settlementDate = OffsetDateTime.now();
 @javax.annotation.Nullable List<AllocationEventReceipt> receipts = new List<AllocationEventReceipt>();
+@javax.annotation.Nullable List<AllocationEventRefundPayment> refundPayments = new List<AllocationEventRefundPayment>();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -114,6 +116,7 @@ AllocationEvent allocationEventInstance = new AllocationEvent()
     .dueDate(dueDate)
     .settlementDate(settlementDate)
     .receipts(receipts)
+    .refundPayments(refundPayments)
     .links(links);
 ```
 

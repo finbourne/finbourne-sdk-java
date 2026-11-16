@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.PartnerAllocation;
+import com.finbourne.sdk.services.lusid.model.PartnerAllocationPoolSources;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,8 +42,16 @@ import com.finbourne.sdk.JSON;
   PartnerAllocationPool.JSON_PROPERTY_ORIGIN_MEMBER_SHORT_CODE,
   PartnerAllocationPool.JSON_PROPERTY_POOL_AMOUNT,
   PartnerAllocationPool.JSON_PROPERTY_BASIS,
+  PartnerAllocationPool.JSON_PROPERTY_BASIS_SOURCE,
   PartnerAllocationPool.JSON_PROPERTY_ALLOCATIONS,
-  PartnerAllocationPool.JSON_PROPERTY_RESIDUAL
+  PartnerAllocationPool.JSON_PROPERTY_RESIDUAL,
+  PartnerAllocationPool.JSON_PROPERTY_POOL_ID,
+  PartnerAllocationPool.JSON_PROPERTY_BUCKET_SET,
+  PartnerAllocationPool.JSON_PROPERTY_BASIS_LEVEL,
+  PartnerAllocationPool.JSON_PROPERTY_EXEMPTION,
+  PartnerAllocationPool.JSON_PROPERTY_EXCLUDED_INVESTOR_RECORD_IDS,
+  PartnerAllocationPool.JSON_PROPERTY_REPORT_ROW,
+  PartnerAllocationPool.JSON_PROPERTY_SOURCES
 })
 
 public class PartnerAllocationPool {
@@ -66,6 +75,11 @@ public class PartnerAllocationPool {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private String basis;
 
+  public static final String JSON_PROPERTY_BASIS_SOURCE = "basisSource";
+  @JsonProperty(JSON_PROPERTY_BASIS_SOURCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String basisSource;
+
   public static final String JSON_PROPERTY_ALLOCATIONS = "allocations";
   @JsonProperty(JSON_PROPERTY_ALLOCATIONS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -75,6 +89,41 @@ public class PartnerAllocationPool {
   @JsonProperty(JSON_PROPERTY_RESIDUAL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal residual;
+
+  public static final String JSON_PROPERTY_POOL_ID = "poolId";
+  @JsonProperty(JSON_PROPERTY_POOL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String poolId;
+
+  public static final String JSON_PROPERTY_BUCKET_SET = "bucketSet";
+  @JsonProperty(JSON_PROPERTY_BUCKET_SET)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String bucketSet;
+
+  public static final String JSON_PROPERTY_BASIS_LEVEL = "basisLevel";
+  @JsonProperty(JSON_PROPERTY_BASIS_LEVEL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String basisLevel;
+
+  public static final String JSON_PROPERTY_EXEMPTION = "exemption";
+  @JsonProperty(JSON_PROPERTY_EXEMPTION)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private String exemption;
+
+  public static final String JSON_PROPERTY_EXCLUDED_INVESTOR_RECORD_IDS = "excludedInvestorRecordIds";
+  @JsonProperty(JSON_PROPERTY_EXCLUDED_INVESTOR_RECORD_IDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<String> excludedInvestorRecordIds;
+
+  public static final String JSON_PROPERTY_REPORT_ROW = "reportRow";
+  @JsonProperty(JSON_PROPERTY_REPORT_ROW)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String reportRow;
+
+  public static final String JSON_PROPERTY_SOURCES = "sources";
+  @JsonProperty(JSON_PROPERTY_SOURCES)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  private PartnerAllocationPoolSources sources;
 
   public PartnerAllocationPool() {
   }
@@ -155,6 +204,25 @@ public class PartnerAllocationPool {
   }
 
 
+  public PartnerAllocationPool basisSource(String basisSource) {
+    this.basisSource = basisSource;
+    return this;
+  }
+
+  /**
+   * Where the figures a deal pool was shared on came from; absent on a fund-level pool, which is shared on the register&#39;s balances. Available values: DealContributions (what each partner paid into the pool&#39;s deal, from the booked allocation events), Fallback (a deal pool no partner has paid into, shared on its character&#39;s fund-level basis instead).
+   * @return basisSource
+   */
+  @javax.annotation.Nullable
+  public String getBasisSource() {
+    return basisSource;
+  }
+
+  public void setBasisSource(String basisSource) {
+    this.basisSource = basisSource;
+  }
+
+
   public PartnerAllocationPool allocations(List<PartnerAllocation> allocations) {
     this.allocations = allocations;
     return this;
@@ -201,6 +269,147 @@ public class PartnerAllocationPool {
   }
 
 
+  public PartnerAllocationPool poolId(String poolId) {
+    this.poolId = poolId;
+    return this;
+  }
+
+  /**
+   * The pool&#39;s identifier: the allocation rule&#39;s bucket id, or TAG: followed by the character for lines pooled by their distribution character tag.
+   * @return poolId
+   */
+  @javax.annotation.Nonnull
+  public String getPoolId() {
+    return poolId;
+  }
+
+  public void setPoolId(String poolId) {
+    this.poolId = poolId;
+  }
+
+
+  public PartnerAllocationPool bucketSet(String bucketSet) {
+    this.bucketSet = bucketSet;
+    return this;
+  }
+
+  /**
+   * The code of the allocation bucket set the pool was classified by, with its version, for example PA-ALLOCATION-v1.
+   * @return bucketSet
+   */
+  @javax.annotation.Nonnull
+  public String getBucketSet() {
+    return bucketSet;
+  }
+
+  public void setBucketSet(String bucketSet) {
+    this.bucketSet = bucketSet;
+  }
+
+
+  public PartnerAllocationPool basisLevel(String basisLevel) {
+    this.basisLevel = basisLevel;
+    return this;
+  }
+
+  /**
+   * Which level of the basis precedence decided the pool&#39;s basis. Available values: Rule (the bucket rule&#39;s own basis), CharacterDefault (the configuration&#39;s allocationBases entry for the character), BuiltIn (the built-in default for the character).
+   * @return basisLevel
+   */
+  @javax.annotation.Nonnull
+  public String getBasisLevel() {
+    return basisLevel;
+  }
+
+  public void setBasisLevel(String basisLevel) {
+    this.basisLevel = basisLevel;
+  }
+
+
+  public PartnerAllocationPool exemption(String exemption) {
+    this.exemption = exemption;
+    return this;
+  }
+
+  /**
+   * The register flag that sat partners out of the pool. Available values: None, FeeExempt, ExpenseExempt.
+   * @return exemption
+   */
+  @javax.annotation.Nonnull
+  public String getExemption() {
+    return exemption;
+  }
+
+  public void setExemption(String exemption) {
+    this.exemption = exemption;
+  }
+
+
+  public PartnerAllocationPool excludedInvestorRecordIds(List<String> excludedInvestorRecordIds) {
+    this.excludedInvestorRecordIds = excludedInvestorRecordIds;
+    return this;
+  }
+
+  public PartnerAllocationPool addExcludedInvestorRecordIdsItem(String excludedInvestorRecordIdsItem) {
+    if (this.excludedInvestorRecordIds == null) {
+      this.excludedInvestorRecordIds = new ArrayList<>();
+    }
+    this.excludedInvestorRecordIds.add(excludedInvestorRecordIdsItem);
+    return this;
+  }
+
+  /**
+   * The partners the pool&#39;s rule left out of it.
+   * @return excludedInvestorRecordIds
+   */
+  @javax.annotation.Nullable
+  public List<String> getExcludedInvestorRecordIds() {
+    return excludedInvestorRecordIds;
+  }
+
+  public void setExcludedInvestorRecordIds(List<String> excludedInvestorRecordIds) {
+    this.excludedInvestorRecordIds = excludedInvestorRecordIds;
+  }
+
+
+  public PartnerAllocationPool reportRow(String reportRow) {
+    this.reportRow = reportRow;
+    return this;
+  }
+
+  /**
+   * The capital account row the pool&#39;s allocations land on, derived from the character. Available values: NetOperatingIncome, ManagementFeesGross, RealisedGainLoss, UnrealisedGainLoss.
+   * @return reportRow
+   */
+  @javax.annotation.Nullable
+  public String getReportRow() {
+    return reportRow;
+  }
+
+  public void setReportRow(String reportRow) {
+    this.reportRow = reportRow;
+  }
+
+
+  public PartnerAllocationPool sources(PartnerAllocationPoolSources sources) {
+    this.sources = sources;
+    return this;
+  }
+
+  /**
+   * Get sources
+   * @return sources
+   */
+  @javax.annotation.Nonnull
+  public PartnerAllocationPoolSources getSources() {
+    return sources;
+  }
+
+  public void setSources(PartnerAllocationPoolSources sources) {
+    this.sources = sources;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -214,8 +423,16 @@ public class PartnerAllocationPool {
         Objects.equals(this.originMemberShortCode, partnerAllocationPool.originMemberShortCode) &&
         (this.poolAmount == null ? partnerAllocationPool.poolAmount == null : (partnerAllocationPool.poolAmount != null && this.poolAmount.compareTo(partnerAllocationPool.getPoolAmount()) == 0)) &&
         Objects.equals(this.basis, partnerAllocationPool.basis) &&
+        Objects.equals(this.basisSource, partnerAllocationPool.basisSource) &&
         Objects.equals(this.allocations, partnerAllocationPool.allocations) &&
-        (this.residual == null ? partnerAllocationPool.residual == null : (partnerAllocationPool.residual != null && this.residual.compareTo(partnerAllocationPool.getResidual()) == 0));
+        (this.residual == null ? partnerAllocationPool.residual == null : (partnerAllocationPool.residual != null && this.residual.compareTo(partnerAllocationPool.getResidual()) == 0)) &&
+        Objects.equals(this.poolId, partnerAllocationPool.poolId) &&
+        Objects.equals(this.bucketSet, partnerAllocationPool.bucketSet) &&
+        Objects.equals(this.basisLevel, partnerAllocationPool.basisLevel) &&
+        Objects.equals(this.exemption, partnerAllocationPool.exemption) &&
+        Objects.equals(this.excludedInvestorRecordIds, partnerAllocationPool.excludedInvestorRecordIds) &&
+        Objects.equals(this.reportRow, partnerAllocationPool.reportRow) &&
+        Objects.equals(this.sources, partnerAllocationPool.sources);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -224,7 +441,7 @@ public class PartnerAllocationPool {
 
   @Override
  public int hashCode() {
-    return Objects.hash(character, originMemberShortCode, poolAmount, basis, allocations, residual);
+    return Objects.hash(character, originMemberShortCode, poolAmount, basis, basisSource, allocations, residual, poolId, bucketSet, basisLevel, exemption, excludedInvestorRecordIds, reportRow, sources);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -242,8 +459,16 @@ public class PartnerAllocationPool {
     sb.append("    originMemberShortCode: ").append(toIndentedString(originMemberShortCode)).append("\n");
     sb.append("    poolAmount: ").append(toIndentedString(poolAmount)).append("\n");
     sb.append("    basis: ").append(toIndentedString(basis)).append("\n");
+    sb.append("    basisSource: ").append(toIndentedString(basisSource)).append("\n");
     sb.append("    allocations: ").append(toIndentedString(allocations)).append("\n");
     sb.append("    residual: ").append(toIndentedString(residual)).append("\n");
+    sb.append("    poolId: ").append(toIndentedString(poolId)).append("\n");
+    sb.append("    bucketSet: ").append(toIndentedString(bucketSet)).append("\n");
+    sb.append("    basisLevel: ").append(toIndentedString(basisLevel)).append("\n");
+    sb.append("    exemption: ").append(toIndentedString(exemption)).append("\n");
+    sb.append("    excludedInvestorRecordIds: ").append(toIndentedString(excludedInvestorRecordIds)).append("\n");
+    sb.append("    reportRow: ").append(toIndentedString(reportRow)).append("\n");
+    sb.append("    sources: ").append(toIndentedString(sources)).append("\n");
     sb.append("}");
     return sb.toString();
   }

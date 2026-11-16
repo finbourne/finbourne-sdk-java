@@ -36,7 +36,8 @@ import com.finbourne.sdk.JSON;
  */
 @JsonPropertyOrder({
   FlexibleLoanPricerOptions.JSON_PROPERTY_SET_CLEAN_P_V_TO_ZERO,
-  FlexibleLoanPricerOptions.JSON_PROPERTY_USE_PRICE_QUOTE_FOR_CLEAN_P_V
+  FlexibleLoanPricerOptions.JSON_PROPERTY_USE_PRICE_QUOTE_FOR_CLEAN_P_V,
+  FlexibleLoanPricerOptions.JSON_PROPERTY_EXCLUDE_INCOME_FROM_P_V
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -55,6 +56,11 @@ public class FlexibleLoanPricerOptions extends ModelOptions {
   @JsonProperty(JSON_PROPERTY_USE_PRICE_QUOTE_FOR_CLEAN_P_V)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private Boolean usePriceQuoteForCleanPV;
+
+  public static final String JSON_PROPERTY_EXCLUDE_INCOME_FROM_P_V = "excludeIncomeFromPV";
+  @JsonProperty(JSON_PROPERTY_EXCLUDE_INCOME_FROM_P_V)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean excludeIncomeFromPV;
 
   public FlexibleLoanPricerOptions() {
   }
@@ -97,6 +103,25 @@ public class FlexibleLoanPricerOptions extends ModelOptions {
   }
 
 
+  public FlexibleLoanPricerOptions excludeIncomeFromPV(Boolean excludeIncomeFromPV) {
+    this.excludeIncomeFromPV = excludeIncomeFromPV;
+    return this;
+  }
+
+  /**
+   * Read by a TotalReturnSwap whose asset leg has a ResetSchedule and whose underlying pays interest or coupons. If set to true the swap&#39;s PV leaves out the underlying&#39;s interest and coupon payments and adds the interest accrued on them to the valuation date instead, so CleanPV is the price return and PV is CleanPV + Accrued.
+   * @return excludeIncomeFromPV
+   */
+  @javax.annotation.Nullable
+  public Boolean getExcludeIncomeFromPV() {
+    return excludeIncomeFromPV;
+  }
+
+  public void setExcludeIncomeFromPV(Boolean excludeIncomeFromPV) {
+    this.excludeIncomeFromPV = excludeIncomeFromPV;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -108,6 +133,7 @@ public class FlexibleLoanPricerOptions extends ModelOptions {
     FlexibleLoanPricerOptions flexibleLoanPricerOptions = (FlexibleLoanPricerOptions) o;
     return Objects.equals(this.setCleanPVToZero, flexibleLoanPricerOptions.setCleanPVToZero) &&
         Objects.equals(this.usePriceQuoteForCleanPV, flexibleLoanPricerOptions.usePriceQuoteForCleanPV) &&
+        Objects.equals(this.excludeIncomeFromPV, flexibleLoanPricerOptions.excludeIncomeFromPV) &&
         super.equals(o);
   }
 
@@ -117,7 +143,7 @@ public class FlexibleLoanPricerOptions extends ModelOptions {
 
   @Override
  public int hashCode() {
-    return Objects.hash(setCleanPVToZero, usePriceQuoteForCleanPV, super.hashCode());
+    return Objects.hash(setCleanPVToZero, usePriceQuoteForCleanPV, excludeIncomeFromPV, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -134,6 +160,7 @@ public class FlexibleLoanPricerOptions extends ModelOptions {
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    setCleanPVToZero: ").append(toIndentedString(setCleanPVToZero)).append("\n");
     sb.append("    usePriceQuoteForCleanPV: ").append(toIndentedString(usePriceQuoteForCleanPV)).append("\n");
+    sb.append("    excludeIncomeFromPV: ").append(toIndentedString(excludeIncomeFromPV)).append("\n");
     sb.append("}");
     return sb.toString();
   }

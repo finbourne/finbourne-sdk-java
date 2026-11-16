@@ -62,7 +62,8 @@ import com.finbourne.sdk.JSON;
   NavType.JSON_PROPERTY_SWING_PRICING,
   NavType.JSON_PROPERTY_NOTIONAL_DEALING_COST_TABLE_ID,
   NavType.JSON_PROPERTY_VALUATION_TEMPLATE_ID,
-  NavType.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME
+  NavType.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME,
+  NavType.JSON_PROPERTY_CASH_COST_RELIEF_METHOD
 })
 
 public class NavType {
@@ -185,6 +186,11 @@ public class NavType {
   @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_REGIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String chargeableGainsRegime;
+
+  public static final String JSON_PROPERTY_CASH_COST_RELIEF_METHOD = "cashCostReliefMethod";
+  @JsonProperty(JSON_PROPERTY_CASH_COST_RELIEF_METHOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String cashCostReliefMethod;
 
   public NavType() {
   }
@@ -669,6 +675,25 @@ public class NavType {
   }
 
 
+  public NavType cashCostReliefMethod(String cashCostReliefMethod) {
+    this.cashCostReliefMethod = cashCostReliefMethod;
+    return this;
+  }
+
+  /**
+   * How this Nav Type relieves base cost when a cash position&#39;s local balance reduces towards zero. This can be: AverageCost or SettlementAmount. Omit it, or supply AverageCost, and a cash disposal releases the position&#39;s average base cost and posts the difference to the contra leg as realised FX on the settlement date. Under SettlementAmount, a cash disposal releases the base amount at which the contra leg of the same transaction is posted, so the settlement nets to nil in base currency and no realised FX is posted on the cash leg; the cash position then carries the unrecognised FX in its base cost until the deemed exposure event recognises it. It cannot be combined with calculateTradeDateToSettlementFxPnL, whether set on the Nav Type&#39;s settlement configuration or inherited from a portfolio&#39;s; a valuation point on the Nav Type fails while a transaction type in its scope turns calculateTradeDateToSettlementFxPnL on for a movement; and it can be changed on an existing Nav Type only while the Nav Type has no positions. Available values: AverageCost, SettlementAmount.
+   * @return cashCostReliefMethod
+   */
+  @javax.annotation.Nullable
+  public String getCashCostReliefMethod() {
+    return cashCostReliefMethod;
+  }
+
+  public void setCashCostReliefMethod(String cashCostReliefMethod) {
+    this.cashCostReliefMethod = cashCostReliefMethod;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -701,7 +726,8 @@ public class NavType {
         Objects.equals(this.swingPricing, navType.swingPricing) &&
         Objects.equals(this.notionalDealingCostTableId, navType.notionalDealingCostTableId) &&
         Objects.equals(this.valuationTemplateId, navType.valuationTemplateId) &&
-        Objects.equals(this.chargeableGainsRegime, navType.chargeableGainsRegime);
+        Objects.equals(this.chargeableGainsRegime, navType.chargeableGainsRegime) &&
+        Objects.equals(this.cashCostReliefMethod, navType.cashCostReliefMethod);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -710,7 +736,7 @@ public class NavType {
 
   @Override
  public int hashCode() {
-    return Objects.hash(status, code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope, transactionExclusionFilter, pricingBasis, swingPricing, notionalDealingCostTableId, valuationTemplateId, chargeableGainsRegime);
+    return Objects.hash(status, code, displayName, description, chartOfAccountsId, postingModuleCodes, cleardownModuleCodes, settlementConfiguration, valuationRecipeId, holdingRecipeId, accountingMethod, subHoldingKeys, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, leaderNavTypeCode, transactionTemplateScope, transactionExclusionFilter, pricingBasis, swingPricing, notionalDealingCostTableId, valuationTemplateId, chargeableGainsRegime, cashCostReliefMethod);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -748,6 +774,7 @@ public class NavType {
     sb.append("    notionalDealingCostTableId: ").append(toIndentedString(notionalDealingCostTableId)).append("\n");
     sb.append("    valuationTemplateId: ").append(toIndentedString(valuationTemplateId)).append("\n");
     sb.append("    chargeableGainsRegime: ").append(toIndentedString(chargeableGainsRegime)).append("\n");
+    sb.append("    cashCostReliefMethod: ").append(toIndentedString(cashCostReliefMethod)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -41,7 +41,8 @@ import com.finbourne.sdk.JSON;
   ResetSchedule.JSON_PROPERTY_FIRST_RESET_DATE,
   ResetSchedule.JSON_PROPERTY_FREQUENCY,
   ResetSchedule.JSON_PROPERTY_FUNDING_START_LAG,
-  ResetSchedule.JSON_PROPERTY_LAST_RESET_DATE
+  ResetSchedule.JSON_PROPERTY_LAST_RESET_DATE,
+  ResetSchedule.JSON_PROPERTY_PAYMENT_LAG
 })
 
 public class ResetSchedule {
@@ -69,6 +70,11 @@ public class ResetSchedule {
   @JsonProperty(JSON_PROPERTY_LAST_RESET_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private OffsetDateTime lastResetDate;
+
+  public static final String JSON_PROPERTY_PAYMENT_LAG = "paymentLag";
+  @JsonProperty(JSON_PROPERTY_PAYMENT_LAG)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private RelativeDateOffset paymentLag;
 
   public ResetSchedule() {
   }
@@ -168,6 +174,25 @@ public class ResetSchedule {
   }
 
 
+  public ResetSchedule paymentLag(RelativeDateOffset paymentLag) {
+    this.paymentLag = paymentLag;
+    return this;
+  }
+
+  /**
+   * Get paymentLag
+   * @return paymentLag
+   */
+  @javax.annotation.Nullable
+  public RelativeDateOffset getPaymentLag() {
+    return paymentLag;
+  }
+
+  public void setPaymentLag(RelativeDateOffset paymentLag) {
+    this.paymentLag = paymentLag;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -181,7 +206,8 @@ public class ResetSchedule {
         Objects.equals(this.firstResetDate, resetSchedule.firstResetDate) &&
         Objects.equals(this.frequency, resetSchedule.frequency) &&
         Objects.equals(this.fundingStartLag, resetSchedule.fundingStartLag) &&
-        Objects.equals(this.lastResetDate, resetSchedule.lastResetDate);
+        Objects.equals(this.lastResetDate, resetSchedule.lastResetDate) &&
+        Objects.equals(this.paymentLag, resetSchedule.paymentLag);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -190,7 +216,7 @@ public class ResetSchedule {
 
   @Override
  public int hashCode() {
-    return Objects.hash(conventions, firstResetDate, frequency, fundingStartLag, lastResetDate);
+    return Objects.hash(conventions, firstResetDate, frequency, fundingStartLag, lastResetDate, paymentLag);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -209,6 +235,7 @@ public class ResetSchedule {
     sb.append("    frequency: ").append(toIndentedString(frequency)).append("\n");
     sb.append("    fundingStartLag: ").append(toIndentedString(fundingStartLag)).append("\n");
     sb.append("    lastResetDate: ").append(toIndentedString(lastResetDate)).append("\n");
+    sb.append("    paymentLag: ").append(toIndentedString(paymentLag)).append("\n");
     sb.append("}");
     return sb.toString();
   }

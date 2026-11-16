@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **activityTotal** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] [default to BucketAmounts]
 **activity** | [**List&lt;CashFlowDetail&gt;**](CashFlowDetail.md) | The cash flows in the bucket, with the attributes a cash flow has in Values. | [optional] [default to List<CashFlowDetail>]
 **close** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] [default to BucketAmounts]
+**startingBalanceRate** | **java.math.BigDecimal** | The spot rate the starting balance (the holdings&#39; cash at the window start) was converted at to open the report currency balances, under a rate type other than FxSpot. Absent under FxSpot, when the starting balance is zero, or when no report currency was requested. | [optional] [default to java.math.BigDecimal]
+**fxTranslation** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -34,6 +36,8 @@ BucketAmounts open = new BucketAmounts();
 BucketAmounts activityTotal = new BucketAmounts();
 @javax.annotation.Nullable List<CashFlowDetail> activity = new List<CashFlowDetail>();
 BucketAmounts close = new BucketAmounts();
+@javax.annotation.Nullable java.math.BigDecimal startingBalanceRate = new java.math.BigDecimal("100.00");
+CurrencyAndAmount fxTranslation = new CurrencyAndAmount();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -48,6 +52,8 @@ BucketCashFlowBucket bucketCashFlowBucketInstance = new BucketCashFlowBucket()
     .activityTotal(activityTotal)
     .activity(activity)
     .close(close)
+    .startingBalanceRate(startingBalanceRate)
+    .fxTranslation(fxTranslation)
     .links(links);
 ```
 

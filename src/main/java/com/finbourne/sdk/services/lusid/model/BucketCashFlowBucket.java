@@ -14,6 +14,7 @@ package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.BucketAmounts;
 import com.finbourne.sdk.services.lusid.model.CashFlowDetail;
+import com.finbourne.sdk.services.lusid.model.CurrencyAndAmount;
 import com.finbourne.sdk.services.lusid.model.Link;
 import com.finbourne.sdk.services.lusid.model.PerpetualProperty;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
@@ -54,6 +55,8 @@ import com.finbourne.sdk.JSON;
   BucketCashFlowBucket.JSON_PROPERTY_ACTIVITY_TOTAL,
   BucketCashFlowBucket.JSON_PROPERTY_ACTIVITY,
   BucketCashFlowBucket.JSON_PROPERTY_CLOSE,
+  BucketCashFlowBucket.JSON_PROPERTY_STARTING_BALANCE_RATE,
+  BucketCashFlowBucket.JSON_PROPERTY_FX_TRANSLATION,
   BucketCashFlowBucket.JSON_PROPERTY_LINKS
 })
 
@@ -107,6 +110,16 @@ public class BucketCashFlowBucket {
   @JsonProperty(JSON_PROPERTY_CLOSE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private BucketAmounts close;
+
+  public static final String JSON_PROPERTY_STARTING_BALANCE_RATE = "startingBalanceRate";
+  @JsonProperty(JSON_PROPERTY_STARTING_BALANCE_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal startingBalanceRate;
+
+  public static final String JSON_PROPERTY_FX_TRANSLATION = "fxTranslation";
+  @JsonProperty(JSON_PROPERTY_FX_TRANSLATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private CurrencyAndAmount fxTranslation;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -322,6 +335,44 @@ public class BucketCashFlowBucket {
   }
 
 
+  public BucketCashFlowBucket startingBalanceRate(java.math.BigDecimal startingBalanceRate) {
+    this.startingBalanceRate = startingBalanceRate;
+    return this;
+  }
+
+  /**
+   * The spot rate the starting balance (the holdings&#39; cash at the window start) was converted at to open the report currency balances, under a rate type other than FxSpot. Absent under FxSpot, when the starting balance is zero, or when no report currency was requested.
+   * @return startingBalanceRate
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getStartingBalanceRate() {
+    return startingBalanceRate;
+  }
+
+  public void setStartingBalanceRate(java.math.BigDecimal startingBalanceRate) {
+    this.startingBalanceRate = startingBalanceRate;
+  }
+
+
+  public BucketCashFlowBucket fxTranslation(CurrencyAndAmount fxTranslation) {
+    this.fxTranslation = fxTranslation;
+    return this;
+  }
+
+  /**
+   * Get fxTranslation
+   * @return fxTranslation
+   */
+  @javax.annotation.Nullable
+  public CurrencyAndAmount getFxTranslation() {
+    return fxTranslation;
+  }
+
+  public void setFxTranslation(CurrencyAndAmount fxTranslation) {
+    this.fxTranslation = fxTranslation;
+  }
+
+
   public BucketCashFlowBucket links(List<Link> links) {
     this.links = links;
     return this;
@@ -368,6 +419,8 @@ public class BucketCashFlowBucket {
         Objects.equals(this.activityTotal, bucketCashFlowBucket.activityTotal) &&
         Objects.equals(this.activity, bucketCashFlowBucket.activity) &&
         Objects.equals(this.close, bucketCashFlowBucket.close) &&
+        (this.startingBalanceRate == null ? bucketCashFlowBucket.startingBalanceRate == null : (bucketCashFlowBucket.startingBalanceRate != null && this.startingBalanceRate.compareTo(bucketCashFlowBucket.getStartingBalanceRate()) == 0)) &&
+        Objects.equals(this.fxTranslation, bucketCashFlowBucket.fxTranslation) &&
         Objects.equals(this.links, bucketCashFlowBucket.links);
   }
 
@@ -377,7 +430,7 @@ public class BucketCashFlowBucket {
 
   @Override
  public int hashCode() {
-    return Objects.hash(bucketId, bucketStart, bucketEnd, portfolioId, currency, subHoldingKeys, open, activityTotal, activity, close, links);
+    return Objects.hash(bucketId, bucketStart, bucketEnd, portfolioId, currency, subHoldingKeys, open, activityTotal, activity, close, startingBalanceRate, fxTranslation, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -401,6 +454,8 @@ public class BucketCashFlowBucket {
     sb.append("    activityTotal: ").append(toIndentedString(activityTotal)).append("\n");
     sb.append("    activity: ").append(toIndentedString(activity)).append("\n");
     sb.append("    close: ").append(toIndentedString(close)).append("\n");
+    sb.append("    startingBalanceRate: ").append(toIndentedString(startingBalanceRate)).append("\n");
+    sb.append("    fxTranslation: ").append(toIndentedString(fxTranslation)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

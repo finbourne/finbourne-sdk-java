@@ -34,10 +34,12 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * An amount in the payment currency.
+ * An amount in the payment currency and, when a report currency was requested, in the report currency.
  */
 @JsonPropertyOrder({
   BucketAmounts.JSON_PROPERTY_LOCAL,
+  BucketAmounts.JSON_PROPERTY_REPORT,
+  BucketAmounts.JSON_PROPERTY_RATE,
   BucketAmounts.JSON_PROPERTY_LINKS
 })
 
@@ -46,6 +48,16 @@ public class BucketAmounts {
   @JsonProperty(JSON_PROPERTY_LOCAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal local;
+
+  public static final String JSON_PROPERTY_REPORT = "report";
+  @JsonProperty(JSON_PROPERTY_REPORT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal report;
+
+  public static final String JSON_PROPERTY_RATE = "rate";
+  @JsonProperty(JSON_PROPERTY_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal rate;
 
   public static final String JSON_PROPERTY_LINKS = "links";
   @JsonProperty(JSON_PROPERTY_LINKS)
@@ -71,6 +83,44 @@ public class BucketAmounts {
 
   public void setLocal(java.math.BigDecimal local) {
     this.local = local;
+  }
+
+
+  public BucketAmounts report(java.math.BigDecimal report) {
+    this.report = report;
+    return this;
+  }
+
+  /**
+   * The amount in the report currency; absent when no report currency was requested, or when a rate needed to convert it could not be found or a cash flow could not be converted (the response&#39;s Issues says which). Under the default FxSpot rate type an opening or closing balance is the payment currency balance converted at the spot rate as at the effective date, the rate every cash flow is converted at, so it agrees with the report currency balances QueryBucketedCashFlows gives for the same date. Under any other rate type a balance is a running sum, not the value of the payment currency balance: the starting balance converted at the spot rate (see StartingBalanceRate) plus every cash flow up to that date, each at the rate that rate type gave it. It is the cumulative cash flow in the report currency, so it can have the opposite sign to Local when the rate has moved. Under FxForward a cash flow paid on or before the effective date has no forward rate, so a series with one before the bucket has no report currency balances. In both, Open + ActivityTotal &#x3D; Close and each Close equals the next Open. The activity total is the sum of its cash flows&#39; own report currency amounts.
+   * @return report
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getReport() {
+    return report;
+  }
+
+  public void setReport(java.math.BigDecimal report) {
+    this.report = report;
+  }
+
+
+  public BucketAmounts rate(java.math.BigDecimal rate) {
+    this.rate = rate;
+    return this;
+  }
+
+  /**
+   * Under FxSpot, on an opening or closing balance, the spot rate it was converted at. On an activity total, the effective rate, Report divided by Local, which is a blended rate when its cash flows were converted at different rates. Absent when Report is, on a balance under any other rate type (a running sum has no single rate), or when the effective rate&#39;s Local is 0.
+   * @return rate
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getRate() {
+    return rate;
+  }
+
+  public void setRate(java.math.BigDecimal rate) {
+    this.rate = rate;
   }
 
 
@@ -111,6 +161,8 @@ public class BucketAmounts {
     }
     BucketAmounts bucketAmounts = (BucketAmounts) o;
     return (this.local == null ? bucketAmounts.local == null : (bucketAmounts.local != null && this.local.compareTo(bucketAmounts.getLocal()) == 0)) &&
+        (this.report == null ? bucketAmounts.report == null : (bucketAmounts.report != null && this.report.compareTo(bucketAmounts.getReport()) == 0)) &&
+        (this.rate == null ? bucketAmounts.rate == null : (bucketAmounts.rate != null && this.rate.compareTo(bucketAmounts.getRate()) == 0)) &&
         Objects.equals(this.links, bucketAmounts.links);
   }
 
@@ -120,7 +172,7 @@ public class BucketAmounts {
 
   @Override
  public int hashCode() {
-    return Objects.hash(local, links);
+    return Objects.hash(local, report, rate, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -135,6 +187,8 @@ public class BucketAmounts {
     StringBuilder sb = new StringBuilder();
     sb.append("class BucketAmounts {\n");
     sb.append("    local: ").append(toIndentedString(local)).append("\n");
+    sb.append("    report: ").append(toIndentedString(report)).append("\n");
+    sb.append("    rate: ").append(toIndentedString(rate)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();

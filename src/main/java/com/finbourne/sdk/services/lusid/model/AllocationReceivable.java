@@ -42,7 +42,8 @@ import com.finbourne.sdk.JSON;
   AllocationReceivable.JSON_PROPERTY_DAYS_PAST_DUE,
   AllocationReceivable.JSON_PROPERTY_BUCKET,
   AllocationReceivable.JSON_PROPERTY_PORTFOLIO,
-  AllocationReceivable.JSON_PROPERTY_SIDE
+  AllocationReceivable.JSON_PROPERTY_SIDE,
+  AllocationReceivable.JSON_PROPERTY_REFUND_PAYABLE
 })
 
 public class AllocationReceivable {
@@ -85,6 +86,11 @@ public class AllocationReceivable {
   @JsonProperty(JSON_PROPERTY_SIDE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String side;
+
+  public static final String JSON_PROPERTY_REFUND_PAYABLE = "refundPayable";
+  @JsonProperty(JSON_PROPERTY_REFUND_PAYABLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal refundPayable;
 
   public AllocationReceivable() {
   }
@@ -241,6 +247,25 @@ public class AllocationReceivable {
   }
 
 
+  public AllocationReceivable refundPayable(java.math.BigDecimal refundPayable) {
+    this.refundPayable = refundPayable;
+    return this;
+  }
+
+  /**
+   * What the fund still owes the investor record back: receipts beyond what it owed, less the refunds paid out. Zero once the event is reversed, when the reversal&#39;s own refund takes over.
+   * @return refundPayable
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getRefundPayable() {
+    return refundPayable;
+  }
+
+  public void setRefundPayable(java.math.BigDecimal refundPayable) {
+    this.refundPayable = refundPayable;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -257,7 +282,8 @@ public class AllocationReceivable {
         Objects.equals(this.daysPastDue, allocationReceivable.daysPastDue) &&
         Objects.equals(this.bucket, allocationReceivable.bucket) &&
         Objects.equals(this.portfolio, allocationReceivable.portfolio) &&
-        Objects.equals(this.side, allocationReceivable.side);
+        Objects.equals(this.side, allocationReceivable.side) &&
+        (this.refundPayable == null ? allocationReceivable.refundPayable == null : (allocationReceivable.refundPayable != null && this.refundPayable.compareTo(allocationReceivable.getRefundPayable()) == 0));
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -266,7 +292,7 @@ public class AllocationReceivable {
 
   @Override
  public int hashCode() {
-    return Objects.hash(investorRecordId, called, received, outstanding, daysPastDue, bucket, portfolio, side);
+    return Objects.hash(investorRecordId, called, received, outstanding, daysPastDue, bucket, portfolio, side, refundPayable);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -288,6 +314,7 @@ public class AllocationReceivable {
     sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
     sb.append("    portfolio: ").append(toIndentedString(portfolio)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
+    sb.append("    refundPayable: ").append(toIndentedString(refundPayable)).append("\n");
     sb.append("}");
     return sb.toString();
   }

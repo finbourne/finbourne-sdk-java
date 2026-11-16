@@ -12,6 +12,7 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.AmortisationHorizon;
 import com.finbourne.sdk.services.lusid.model.FractionalUnitsTrueUpConfiguration;
 import com.finbourne.sdk.services.lusid.model.InstrumentEventConfiguration;
 import com.finbourne.sdk.services.lusid.model.PortfolioSettlementConfiguration;
@@ -61,7 +62,8 @@ import com.finbourne.sdk.JSON;
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_TAX_LOT_SELECTION_COST_BASIS,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_FRACTIONAL_UNITS_TRUE_UP_CONFIGURATION,
   CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_HOLDINGS_FUNGIBILITY,
-  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_CHARGEABLE_GAINS_REGIME,
+  CreateDerivedTransactionPortfolioRequest.JSON_PROPERTY_AMORTISATION_HORIZON
 })
 
 public class CreateDerivedTransactionPortfolioRequest {
@@ -231,6 +233,11 @@ public class CreateDerivedTransactionPortfolioRequest {
   @JsonProperty(JSON_PROPERTY_CHARGEABLE_GAINS_REGIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String chargeableGainsRegime;
+
+  public static final String JSON_PROPERTY_AMORTISATION_HORIZON = "amortisationHorizon";
+  @JsonProperty(JSON_PROPERTY_AMORTISATION_HORIZON)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private AmortisationHorizon amortisationHorizon;
 
   public CreateDerivedTransactionPortfolioRequest() {
   }
@@ -650,6 +657,25 @@ public class CreateDerivedTransactionPortfolioRequest {
   }
 
 
+  public CreateDerivedTransactionPortfolioRequest amortisationHorizon(AmortisationHorizon amortisationHorizon) {
+    this.amortisationHorizon = amortisationHorizon;
+    return this;
+  }
+
+  /**
+   * Get amortisationHorizon
+   * @return amortisationHorizon
+   */
+  @javax.annotation.Nullable
+  public AmortisationHorizon getAmortisationHorizon() {
+    return amortisationHorizon;
+  }
+
+  public void setAmortisationHorizon(AmortisationHorizon amortisationHorizon) {
+    this.amortisationHorizon = amortisationHorizon;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -679,7 +705,8 @@ public class CreateDerivedTransactionPortfolioRequest {
         Objects.equals(this.taxLotSelectionCostBasis, createDerivedTransactionPortfolioRequest.taxLotSelectionCostBasis) &&
         Objects.equals(this.fractionalUnitsTrueUpConfiguration, createDerivedTransactionPortfolioRequest.fractionalUnitsTrueUpConfiguration) &&
         Objects.equals(this.holdingsFungibility, createDerivedTransactionPortfolioRequest.holdingsFungibility) &&
-        Objects.equals(this.chargeableGainsRegime, createDerivedTransactionPortfolioRequest.chargeableGainsRegime);
+        Objects.equals(this.chargeableGainsRegime, createDerivedTransactionPortfolioRequest.chargeableGainsRegime) &&
+        Objects.equals(this.amortisationHorizon, createDerivedTransactionPortfolioRequest.amortisationHorizon);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -688,7 +715,7 @@ public class CreateDerivedTransactionPortfolioRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(displayName, description, code, parentPortfolioId, created, enablementDate, corporateActionSourceId, accountingMethod, subHoldingKeys, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, instrumentEventConfiguration, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime);
+    return Objects.hash(displayName, description, code, parentPortfolioId, created, enablementDate, corporateActionSourceId, accountingMethod, subHoldingKeys, instrumentScopes, amortisationMethod, transactionTypeScope, cashGainLossCalculationDate, amortisationRuleSetId, instrumentEventConfiguration, settlementConfiguration, transactionExclusionFilter, taxLotSelectionCostBasis, fractionalUnitsTrueUpConfiguration, holdingsFungibility, chargeableGainsRegime, amortisationHorizon);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -723,6 +750,7 @@ public class CreateDerivedTransactionPortfolioRequest {
     sb.append("    fractionalUnitsTrueUpConfiguration: ").append(toIndentedString(fractionalUnitsTrueUpConfiguration)).append("\n");
     sb.append("    holdingsFungibility: ").append(toIndentedString(holdingsFungibility)).append("\n");
     sb.append("    chargeableGainsRegime: ").append(toIndentedString(chargeableGainsRegime)).append("\n");
+    sb.append("    amortisationHorizon: ").append(toIndentedString(amortisationHorizon)).append("\n");
     sb.append("}");
     return sb.toString();
   }

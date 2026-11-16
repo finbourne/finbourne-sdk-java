@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **open** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] [default to BucketAmounts]
 **activityTotal** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] [default to BucketAmounts]
 **close** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] [default to BucketAmounts]
+**fxTranslation** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] [default to CurrencyAndAmount]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -26,6 +27,7 @@ OffsetDateTime bucketEnd = OffsetDateTime.now();
 BucketAmounts open = new BucketAmounts();
 BucketAmounts activityTotal = new BucketAmounts();
 BucketAmounts close = new BucketAmounts();
+CurrencyAndAmount fxTranslation = new CurrencyAndAmount();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -36,6 +38,7 @@ BucketCurrencySubtotal bucketCurrencySubtotalInstance = new BucketCurrencySubtot
     .open(open)
     .activityTotal(activityTotal)
     .close(close)
+    .fxTranslation(fxTranslation)
     .links(links);
 ```
 

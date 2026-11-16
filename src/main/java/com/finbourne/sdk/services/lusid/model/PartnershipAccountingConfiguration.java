@@ -13,6 +13,7 @@
 package com.finbourne.sdk.services.lusid.model;
 
 import com.finbourne.sdk.services.lusid.model.AllocationBasisRule;
+import com.finbourne.sdk.services.lusid.model.AllocationRule;
 import com.finbourne.sdk.services.lusid.model.CapabilityOverride;
 import com.finbourne.sdk.services.lusid.model.PresentationConfiguration;
 import com.finbourne.sdk.services.lusid.model.ResourceId;
@@ -52,7 +53,9 @@ import com.finbourne.sdk.JSON;
   PartnershipAccountingConfiguration.JSON_PROPERTY_SERIES,
   PartnershipAccountingConfiguration.JSON_PROPERTY_EFFECTIVE_CAPABILITIES,
   PartnershipAccountingConfiguration.JSON_PROPERTY_PRESENTATION,
-  PartnershipAccountingConfiguration.JSON_PROPERTY_ALLOCATION_BASES
+  PartnershipAccountingConfiguration.JSON_PROPERTY_ALLOCATION_BASES,
+  PartnershipAccountingConfiguration.JSON_PROPERTY_ALLOCATION_BUCKET_SET,
+  PartnershipAccountingConfiguration.JSON_PROPERTY_ALLOCATION_RULES
 })
 
 public class PartnershipAccountingConfiguration {
@@ -105,6 +108,16 @@ public class PartnershipAccountingConfiguration {
   @JsonProperty(JSON_PROPERTY_ALLOCATION_BASES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private List<AllocationBasisRule> allocationBases;
+
+  public static final String JSON_PROPERTY_ALLOCATION_BUCKET_SET = "allocationBucketSet";
+  @JsonProperty(JSON_PROPERTY_ALLOCATION_BUCKET_SET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String allocationBucketSet;
+
+  public static final String JSON_PROPERTY_ALLOCATION_RULES = "allocationRules";
+  @JsonProperty(JSON_PROPERTY_ALLOCATION_RULES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<AllocationRule> allocationRules;
 
   public PartnershipAccountingConfiguration() {
   }
@@ -323,6 +336,52 @@ public class PartnershipAccountingConfiguration {
   }
 
 
+  public PartnershipAccountingConfiguration allocationBucketSet(String allocationBucketSet) {
+    this.allocationBucketSet = allocationBucketSet;
+    return this;
+  }
+
+  /**
+   * Get allocationBucketSet
+   * @return allocationBucketSet
+   */
+  @javax.annotation.Nullable
+  public String getAllocationBucketSet() {
+    return allocationBucketSet;
+  }
+
+  public void setAllocationBucketSet(String allocationBucketSet) {
+    this.allocationBucketSet = allocationBucketSet;
+  }
+
+
+  public PartnershipAccountingConfiguration allocationRules(List<AllocationRule> allocationRules) {
+    this.allocationRules = allocationRules;
+    return this;
+  }
+
+  public PartnershipAccountingConfiguration addAllocationRulesItem(AllocationRule allocationRulesItem) {
+    if (this.allocationRules == null) {
+      this.allocationRules = new ArrayList<>();
+    }
+    this.allocationRules.add(allocationRulesItem);
+    return this;
+  }
+
+  /**
+   * On the way in, the configuration&#39;s rules or its overrides of a system set&#39;s rules; on the way out, the  effective rules the fund allocates by.
+   * @return allocationRules
+   */
+  @javax.annotation.Nullable
+  public List<AllocationRule> getAllocationRules() {
+    return allocationRules;
+  }
+
+  public void setAllocationRules(List<AllocationRule> allocationRules) {
+    this.allocationRules = allocationRules;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -341,7 +400,9 @@ public class PartnershipAccountingConfiguration {
         Objects.equals(this.series, partnershipAccountingConfiguration.series) &&
         Objects.equals(this.effectiveCapabilities, partnershipAccountingConfiguration.effectiveCapabilities) &&
         Objects.equals(this.presentation, partnershipAccountingConfiguration.presentation) &&
-        Objects.equals(this.allocationBases, partnershipAccountingConfiguration.allocationBases);
+        Objects.equals(this.allocationBases, partnershipAccountingConfiguration.allocationBases) &&
+        Objects.equals(this.allocationBucketSet, partnershipAccountingConfiguration.allocationBucketSet) &&
+        Objects.equals(this.allocationRules, partnershipAccountingConfiguration.allocationRules);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -350,7 +411,7 @@ public class PartnershipAccountingConfiguration {
 
   @Override
  public int hashCode() {
-    return Objects.hash(enabled, configPack, commitmentCurrencyPolicy, registerPortfolioGroup, capitalModel, capabilityOverrides, series, effectiveCapabilities, presentation, allocationBases);
+    return Objects.hash(enabled, configPack, commitmentCurrencyPolicy, registerPortfolioGroup, capitalModel, capabilityOverrides, series, effectiveCapabilities, presentation, allocationBases, allocationBucketSet, allocationRules);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -374,6 +435,8 @@ public class PartnershipAccountingConfiguration {
     sb.append("    effectiveCapabilities: ").append(toIndentedString(effectiveCapabilities)).append("\n");
     sb.append("    presentation: ").append(toIndentedString(presentation)).append("\n");
     sb.append("    allocationBases: ").append(toIndentedString(allocationBases)).append("\n");
+    sb.append("    allocationBucketSet: ").append(toIndentedString(allocationBucketSet)).append("\n");
+    sb.append("    allocationRules: ").append(toIndentedString(allocationRules)).append("\n");
     sb.append("}");
     return sb.toString();
   }

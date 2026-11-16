@@ -12,8 +12,12 @@
 
 package com.finbourne.sdk.services.lusid.model;
 
+import com.finbourne.sdk.services.lusid.model.PartnerCapitalAccountRowDetail;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -36,7 +40,8 @@ import com.finbourne.sdk.JSON;
   PartnerCapitalAccountRow.JSON_PROPERTY_ROW_TYPE,
   PartnerCapitalAccountRow.JSON_PROPERTY_QTD,
   PartnerCapitalAccountRow.JSON_PROPERTY_YTD,
-  PartnerCapitalAccountRow.JSON_PROPERTY_ITD
+  PartnerCapitalAccountRow.JSON_PROPERTY_ITD,
+  PartnerCapitalAccountRow.JSON_PROPERTY_DETAILS
 })
 
 public class PartnerCapitalAccountRow {
@@ -59,6 +64,11 @@ public class PartnerCapitalAccountRow {
   @JsonProperty(JSON_PROPERTY_ITD)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   private java.math.BigDecimal itd;
+
+  public static final String JSON_PROPERTY_DETAILS = "details";
+  @JsonProperty(JSON_PROPERTY_DETAILS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<PartnerCapitalAccountRowDetail> details;
 
   public PartnerCapitalAccountRow() {
   }
@@ -139,6 +149,33 @@ public class PartnerCapitalAccountRow {
   }
 
 
+  public PartnerCapitalAccountRow details(List<PartnerCapitalAccountRowDetail> details) {
+    this.details = details;
+    return this;
+  }
+
+  public PartnerCapitalAccountRow addDetailsItem(PartnerCapitalAccountRowDetail detailsItem) {
+    if (this.details == null) {
+      this.details = new ArrayList<>();
+    }
+    this.details.add(detailsItem);
+    return this;
+  }
+
+  /**
+   * Labelled parts of the row&#39;s total, each already included in the row&#39;s columns. Tax withheld from a distribution on the partner&#39;s behalf is counted as distributed and shown here as its own entry against the distribution it was withheld on. Empty for a row with nothing to break out.
+   * @return details
+   */
+  @javax.annotation.Nullable
+  public List<PartnerCapitalAccountRowDetail> getDetails() {
+    return details;
+  }
+
+  public void setDetails(List<PartnerCapitalAccountRowDetail> details) {
+    this.details = details;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -151,12 +188,24 @@ public class PartnerCapitalAccountRow {
     return Objects.equals(this.rowType, partnerCapitalAccountRow.rowType) &&
         (this.qtd == null ? partnerCapitalAccountRow.qtd == null : (partnerCapitalAccountRow.qtd != null && this.qtd.compareTo(partnerCapitalAccountRow.getQtd()) == 0)) &&
         (this.ytd == null ? partnerCapitalAccountRow.ytd == null : (partnerCapitalAccountRow.ytd != null && this.ytd.compareTo(partnerCapitalAccountRow.getYtd()) == 0)) &&
-        (this.itd == null ? partnerCapitalAccountRow.itd == null : (partnerCapitalAccountRow.itd != null && this.itd.compareTo(partnerCapitalAccountRow.getItd()) == 0));
+        (this.itd == null ? partnerCapitalAccountRow.itd == null : (partnerCapitalAccountRow.itd != null && this.itd.compareTo(partnerCapitalAccountRow.getItd()) == 0)) &&
+        Objects.equals(this.details, partnerCapitalAccountRow.details);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
  public int hashCode() {
-    return Objects.hash(rowType, qtd, ytd, itd);
+    return Objects.hash(rowType, qtd, ytd, itd, details);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -167,6 +216,7 @@ public class PartnerCapitalAccountRow {
     sb.append("    qtd: ").append(toIndentedString(qtd)).append("\n");
     sb.append("    ytd: ").append(toIndentedString(ytd)).append("\n");
     sb.append("    itd: ").append(toIndentedString(itd)).append("\n");
+    sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("}");
     return sb.toString();
   }

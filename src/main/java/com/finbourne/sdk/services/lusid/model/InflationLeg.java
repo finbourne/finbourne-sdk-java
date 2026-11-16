@@ -49,7 +49,14 @@ import com.finbourne.sdk.JSON;
   InflationLeg.JSON_PROPERTY_INFLATION_INDEX_CONVENTIONS,
   InflationLeg.JSON_PROPERTY_NOTIONAL,
   InflationLeg.JSON_PROPERTY_PAY_RECEIVE,
-  InflationLeg.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
+  InflationLeg.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
+  InflationLeg.JSON_PROPERTY_FIXED_RATE,
+  InflationLeg.JSON_PROPERTY_BASE_C_P_I_DATE,
+  InflationLeg.JSON_PROPERTY_INDEX_PRECISION,
+  InflationLeg.JSON_PROPERTY_PRINCIPAL_PROTECTION,
+  InflationLeg.JSON_PROPERTY_NOTIONAL_EXCHANGE_TYPE,
+  InflationLeg.JSON_PROPERTY_INITIAL_EXCHANGE_AMOUNT,
+  InflationLeg.JSON_PROPERTY_FINAL_EXCHANGE_AMOUNT
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -113,6 +120,41 @@ public class InflationLeg extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_TIME_ZONE_CONVENTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private TimeZoneConventions timeZoneConventions;
+
+  public static final String JSON_PROPERTY_FIXED_RATE = "fixedRate";
+  @JsonProperty(JSON_PROPERTY_FIXED_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal fixedRate;
+
+  public static final String JSON_PROPERTY_BASE_C_P_I_DATE = "baseCPIDate";
+  @JsonProperty(JSON_PROPERTY_BASE_C_P_I_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private OffsetDateTime baseCPIDate;
+
+  public static final String JSON_PROPERTY_INDEX_PRECISION = "indexPrecision";
+  @JsonProperty(JSON_PROPERTY_INDEX_PRECISION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Integer indexPrecision;
+
+  public static final String JSON_PROPERTY_PRINCIPAL_PROTECTION = "principalProtection";
+  @JsonProperty(JSON_PROPERTY_PRINCIPAL_PROTECTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private Boolean principalProtection;
+
+  public static final String JSON_PROPERTY_NOTIONAL_EXCHANGE_TYPE = "notionalExchangeType";
+  @JsonProperty(JSON_PROPERTY_NOTIONAL_EXCHANGE_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String notionalExchangeType;
+
+  public static final String JSON_PROPERTY_INITIAL_EXCHANGE_AMOUNT = "initialExchangeAmount";
+  @JsonProperty(JSON_PROPERTY_INITIAL_EXCHANGE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal initialExchangeAmount;
+
+  public static final String JSON_PROPERTY_FINAL_EXCHANGE_AMOUNT = "finalExchangeAmount";
+  @JsonProperty(JSON_PROPERTY_FINAL_EXCHANGE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal finalExchangeAmount;
 
   public InflationLeg() {
   }
@@ -199,7 +241,7 @@ public class InflationLeg extends LusidInstrument {
   }
 
   /**
-   * The calculation type.  ZeroCoupon is used for CPILegs where there is a single payment at maturity of  Notional * (CPI(T) / CPI(T0) - 1)  where CPI(T0) is the BaseCPI of this leg  YearOnYear is used for YoY and LPI swap legs where there is a series of annual payments  Notional * dayCount * (CPI(t) / CPI(t-1) - 1)  If a cap and floor is added to this it becomes an LPI swap leg.  Compounded is used for inflation swap legs where there is a series of annual payments  Notional * dayCount * (CPI(t) / CPI(T0) - 1)  i.e. the BaseCPI is used every year. These swaps are not as common as CPI or    Supported string (enumeration) values are: [ZeroCoupon, YearOnYear, Compounded].
+   * The calculation type.  ZeroCoupon is used for CPILegs where there is a single payment at maturity of  Notional * (CPI(T) / CPI(T0) - 1)  where CPI(T0) is the BaseCPI of this leg  YearOnYear is used for YoY and LPI swap legs where there is a series of annual payments  Notional * dayCount * (CPI(t) / CPI(t-1) - 1)  If a cap and floor is added to this it becomes an LPI swap leg.  Compounded is used for inflation swap legs where there is a series of annual payments  Notional * dayCount * (CPI(t) / CPI(T0) - 1)  i.e. the BaseCPI is used every year. These swaps are not as common as CPI or    IndexedCoupon is used for the coupon stream of an inflation-linked bond, where each period pays  Notional * FixedRate * dayCount * IndexRatio(t)  and IndexRatio(t) is CPI(t) / BaseCPI rounded to IndexPrecision, as on InflationLinkedBond.                Supported string (enumeration) values are: [ZeroCoupon, YearOnYear, Compounded, IndexedCoupon].
    * @return calculationType
    */
   @javax.annotation.Nonnull
@@ -218,7 +260,7 @@ public class InflationLeg extends LusidInstrument {
   }
 
   /**
-   * Optional cap, needed for LPI Legs or CPI Legs with Caps
+   * Optional cap on a YearOnYear leg: each period&#39;s 12-month inflation rate is clamped to at most this rate before  the accrual fraction is applied, at any payment frequency, so an LPI leg caps each year at 5%. In the legs  form of an InflationSwap it is rejected on a ZeroCoupon, Compounded or IndexedCoupon leg, where it would clamp  the total change since the start. In the deprecated inflationLeg form a ZeroCoupon or Compounded cap keeps  clamping that total change, as today.
    * @return capRate
    */
   @javax.annotation.Nullable
@@ -237,7 +279,7 @@ public class InflationLeg extends LusidInstrument {
   }
 
   /**
-   * Optional floor, needed for LPI Legs or CPI Legs with Floors.
+   * Optional floor on a YearOnYear leg: each period&#39;s 12-month inflation rate is clamped to at least this rate  before the accrual fraction is applied, at any payment frequency, so a 0% floor stops deflation being paid.  In the legs form of an InflationSwap it is rejected on a ZeroCoupon, Compounded or IndexedCoupon leg, where it  would clamp the total change since the start. In the deprecated inflationLeg form a ZeroCoupon or Compounded  floor keeps clamping that total change, as today.
    * @return floorRate
    */
   @javax.annotation.Nullable
@@ -326,6 +368,139 @@ public class InflationLeg extends LusidInstrument {
   }
 
 
+  public InflationLeg fixedRate(java.math.BigDecimal fixedRate) {
+    this.fixedRate = fixedRate;
+    return this;
+  }
+
+  /**
+   * The real coupon rate of an IndexedCoupon leg: each period pays Notional * FixedRate * dayCount * IndexRatio.  Required when CalculationType is IndexedCoupon and not allowed otherwise.
+   * @return fixedRate
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getFixedRate() {
+    return fixedRate;
+  }
+
+  public void setFixedRate(java.math.BigDecimal fixedRate) {
+    this.fixedRate = fixedRate;
+  }
+
+
+  public InflationLeg baseCPIDate(OffsetDateTime baseCPIDate) {
+    this.baseCPIDate = baseCPIDate;
+    return this;
+  }
+
+  /**
+   * Optional date the base CPI is observed on, with the same meaning as on InflationLinkedBond: the un-lagged  date (for a bond asset swap, the bond&#39;s dated date) whose reference CPI is the base. Defaults to the StartDate.  Ignored when BaseCPI is given.
+   * @return baseCPIDate
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getBaseCPIDate() {
+    return baseCPIDate;
+  }
+
+  public void setBaseCPIDate(OffsetDateTime baseCPIDate) {
+    this.baseCPIDate = baseCPIDate;
+  }
+
+
+  public InflationLeg indexPrecision(Integer indexPrecision) {
+    this.indexPrecision = indexPrecision;
+    return this;
+  }
+
+  /**
+   * Number of decimal places the IndexedCoupon index ratio is rounded to, as on InflationLinkedBond. Defaults to 5.
+   * @return indexPrecision
+   */
+  @javax.annotation.Nullable
+  public Integer getIndexPrecision() {
+    return indexPrecision;
+  }
+
+  public void setIndexPrecision(Integer indexPrecision) {
+    this.indexPrecision = indexPrecision;
+  }
+
+
+  public InflationLeg principalProtection(Boolean principalProtection) {
+    this.principalProtection = principalProtection;
+    return this;
+  }
+
+  /**
+   * Whether an indexed final notional exchange is floored at par, paying max(IndexRatio, 1) times the amount, as on  InflationLinkedBond. Coupons are never floored. Defaults to true.
+   * @return principalProtection
+   */
+  @javax.annotation.Nullable
+  public Boolean getPrincipalProtection() {
+    return principalProtection;
+  }
+
+  public void setPrincipalProtection(Boolean principalProtection) {
+    this.principalProtection = principalProtection;
+  }
+
+
+  public InflationLeg notionalExchangeType(String notionalExchangeType) {
+    this.notionalExchangeType = notionalExchangeType;
+    return this;
+  }
+
+  /**
+   * Which notional exchanges the leg makes. The start exchange pays the un-indexed amount against the leg; the  maturity exchange pays the amount times the index ratio with the leg, floored at par under PrincipalProtection.                Supported string (enumeration) values are: [None, Initial, Final, Both].  Defaults to \&quot;None\&quot; if not set.
+   * @return notionalExchangeType
+   */
+  @javax.annotation.Nullable
+  public String getNotionalExchangeType() {
+    return notionalExchangeType;
+  }
+
+  public void setNotionalExchangeType(String notionalExchangeType) {
+    this.notionalExchangeType = notionalExchangeType;
+  }
+
+
+  public InflationLeg initialExchangeAmount(java.math.BigDecimal initialExchangeAmount) {
+    this.initialExchangeAmount = initialExchangeAmount;
+    return this;
+  }
+
+  /**
+   * The amount exchanged at the start of the leg, when NotionalExchangeType is Initial or Both. Defaults to the  notional. Never indexed. Must be non-negative.
+   * @return initialExchangeAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getInitialExchangeAmount() {
+    return initialExchangeAmount;
+  }
+
+  public void setInitialExchangeAmount(java.math.BigDecimal initialExchangeAmount) {
+    this.initialExchangeAmount = initialExchangeAmount;
+  }
+
+
+  public InflationLeg finalExchangeAmount(java.math.BigDecimal finalExchangeAmount) {
+    this.finalExchangeAmount = finalExchangeAmount;
+    return this;
+  }
+
+  /**
+   * The real amount exchanged at maturity, when NotionalExchangeType is Final or Both. Defaults to the notional.  Paid times the index ratio, floored at par under PrincipalProtection. Must be non-negative.
+   * @return finalExchangeAmount
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getFinalExchangeAmount() {
+    return finalExchangeAmount;
+  }
+
+  public void setFinalExchangeAmount(java.math.BigDecimal finalExchangeAmount) {
+    this.finalExchangeAmount = finalExchangeAmount;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -346,6 +521,13 @@ public class InflationLeg extends LusidInstrument {
         (this.notional == null ? inflationLeg.notional == null : (inflationLeg.notional != null && this.notional.compareTo(inflationLeg.getNotional()) == 0)) &&
         Objects.equals(this.payReceive, inflationLeg.payReceive) &&
         Objects.equals(this.timeZoneConventions, inflationLeg.timeZoneConventions) &&
+        (this.fixedRate == null ? inflationLeg.fixedRate == null : (inflationLeg.fixedRate != null && this.fixedRate.compareTo(inflationLeg.getFixedRate()) == 0)) &&
+        Objects.equals(this.baseCPIDate, inflationLeg.baseCPIDate) &&
+        Objects.equals(this.indexPrecision, inflationLeg.indexPrecision) &&
+        Objects.equals(this.principalProtection, inflationLeg.principalProtection) &&
+        Objects.equals(this.notionalExchangeType, inflationLeg.notionalExchangeType) &&
+        (this.initialExchangeAmount == null ? inflationLeg.initialExchangeAmount == null : (inflationLeg.initialExchangeAmount != null && this.initialExchangeAmount.compareTo(inflationLeg.getInitialExchangeAmount()) == 0)) &&
+        (this.finalExchangeAmount == null ? inflationLeg.finalExchangeAmount == null : (inflationLeg.finalExchangeAmount != null && this.finalExchangeAmount.compareTo(inflationLeg.getFinalExchangeAmount()) == 0)) &&
         super.equals(o);
   }
 
@@ -355,7 +537,7 @@ public class InflationLeg extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, flowConventions, baseCPI, calculationType, capRate, floorRate, inflationIndexConventions, notional, payReceive, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, flowConventions, baseCPI, calculationType, capRate, floorRate, inflationIndexConventions, notional, payReceive, timeZoneConventions, fixedRate, baseCPIDate, indexPrecision, principalProtection, notionalExchangeType, initialExchangeAmount, finalExchangeAmount, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -381,6 +563,13 @@ public class InflationLeg extends LusidInstrument {
     sb.append("    notional: ").append(toIndentedString(notional)).append("\n");
     sb.append("    payReceive: ").append(toIndentedString(payReceive)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
+    sb.append("    fixedRate: ").append(toIndentedString(fixedRate)).append("\n");
+    sb.append("    baseCPIDate: ").append(toIndentedString(baseCPIDate)).append("\n");
+    sb.append("    indexPrecision: ").append(toIndentedString(indexPrecision)).append("\n");
+    sb.append("    principalProtection: ").append(toIndentedString(principalProtection)).append("\n");
+    sb.append("    notionalExchangeType: ").append(toIndentedString(notionalExchangeType)).append("\n");
+    sb.append("    initialExchangeAmount: ").append(toIndentedString(initialExchangeAmount)).append("\n");
+    sb.append("    finalExchangeAmount: ").append(toIndentedString(finalExchangeAmount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

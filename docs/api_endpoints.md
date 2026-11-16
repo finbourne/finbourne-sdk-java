@@ -89,6 +89,7 @@
 * [CustomEntityTypesApi](lusid/api/CustomEntityTypesApi.md)
 * [CutLabelDefinitionsApi](lusid/api/CutLabelDefinitionsApi.md)
 * [DataTypesApi](lusid/api/DataTypesApi.md)
+* [DeemedDisposalDefinitionsApi](lusid/api/DeemedDisposalDefinitionsApi.md)
 * [DerivedTransactionPortfoliosApi](lusid/api/DerivedTransactionPortfoliosApi.md)
 * [EligibleCollateralSchedulesApi](lusid/api/EligibleCollateralSchedulesApi.md)
 * [EntitiesApi](lusid/api/EntitiesApi.md)

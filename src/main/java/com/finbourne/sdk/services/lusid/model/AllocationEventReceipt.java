@@ -46,7 +46,9 @@ import com.finbourne.sdk.JSON;
   AllocationEventReceipt.JSON_PROPERTY_BANK_CHARGE,
   AllocationEventReceipt.JSON_PROPERTY_BANK_CHARGE_BEARER,
   AllocationEventReceipt.JSON_PROPERTY_SHORTFALL_WRITTEN_OFF,
-  AllocationEventReceipt.JSON_PROPERTY_POSTING_ID
+  AllocationEventReceipt.JSON_PROPERTY_POSTING_ID,
+  AllocationEventReceipt.JSON_PROPERTY_SETTLED_LINE_ID,
+  AllocationEventReceipt.JSON_PROPERTY_REFERENCE
 })
 
 public class AllocationEventReceipt {
@@ -109,6 +111,16 @@ public class AllocationEventReceipt {
   @JsonProperty(JSON_PROPERTY_POSTING_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String postingId;
+
+  public static final String JSON_PROPERTY_SETTLED_LINE_ID = "settledLineId";
+  @JsonProperty(JSON_PROPERTY_SETTLED_LINE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String settledLineId;
+
+  public static final String JSON_PROPERTY_REFERENCE = "reference";
+  @JsonProperty(JSON_PROPERTY_REFERENCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String reference;
 
   public AllocationEventReceipt() {
   }
@@ -341,6 +353,44 @@ public class AllocationEventReceipt {
   }
 
 
+  public AllocationEventReceipt settledLineId(String settledLineId) {
+    this.settledLineId = settledLineId;
+    return this;
+  }
+
+  /**
+   * The register line the receipt settled, as the booking posted it. Written by the booking, not by the caller; absent on a receipt recorded before the line was kept.
+   * @return settledLineId
+   */
+  @javax.annotation.Nullable
+  public String getSettledLineId() {
+    return settledLineId;
+  }
+
+  public void setSettledLineId(String settledLineId) {
+    this.settledLineId = settledLineId;
+  }
+
+
+  public AllocationEventReceipt reference(String reference) {
+    this.reference = reference;
+    return this;
+  }
+
+  /**
+   * The caller&#39;s reference the receipt was recorded under, as sent. Absent on a receipt sent without one.
+   * @return reference
+   */
+  @javax.annotation.Nullable
+  public String getReference() {
+    return reference;
+  }
+
+  public void setReference(String reference) {
+    this.reference = reference;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -361,7 +411,9 @@ public class AllocationEventReceipt {
         (this.bankCharge == null ? allocationEventReceipt.bankCharge == null : (allocationEventReceipt.bankCharge != null && this.bankCharge.compareTo(allocationEventReceipt.getBankCharge()) == 0)) &&
         Objects.equals(this.bankChargeBearer, allocationEventReceipt.bankChargeBearer) &&
         (this.shortfallWrittenOff == null ? allocationEventReceipt.shortfallWrittenOff == null : (allocationEventReceipt.shortfallWrittenOff != null && this.shortfallWrittenOff.compareTo(allocationEventReceipt.getShortfallWrittenOff()) == 0)) &&
-        Objects.equals(this.postingId, allocationEventReceipt.postingId);
+        Objects.equals(this.postingId, allocationEventReceipt.postingId) &&
+        Objects.equals(this.settledLineId, allocationEventReceipt.settledLineId) &&
+        Objects.equals(this.reference, allocationEventReceipt.reference);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -370,7 +422,7 @@ public class AllocationEventReceipt {
 
   @Override
  public int hashCode() {
-    return Objects.hash(investorRecordId, amount, receiptDate, applied, refund, paymentCurrency, paymentFxRate, fxDifference, bankCharge, bankChargeBearer, shortfallWrittenOff, postingId);
+    return Objects.hash(investorRecordId, amount, receiptDate, applied, refund, paymentCurrency, paymentFxRate, fxDifference, bankCharge, bankChargeBearer, shortfallWrittenOff, postingId, settledLineId, reference);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -396,6 +448,8 @@ public class AllocationEventReceipt {
     sb.append("    bankChargeBearer: ").append(toIndentedString(bankChargeBearer)).append("\n");
     sb.append("    shortfallWrittenOff: ").append(toIndentedString(shortfallWrittenOff)).append("\n");
     sb.append("    postingId: ").append(toIndentedString(postingId)).append("\n");
+    sb.append("    settledLineId: ").append(toIndentedString(settledLineId)).append("\n");
+    sb.append("    reference: ").append(toIndentedString(reference)).append("\n");
     sb.append("}");
     return sb.toString();
   }

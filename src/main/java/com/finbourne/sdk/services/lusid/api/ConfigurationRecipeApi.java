@@ -2430,7 +2430,8 @@ public class ConfigurationRecipeApi {
     /**
      * Build call for listDerivedRecipes
      * @param asAt The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
-     * @param filter Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2442,14 +2443,15 @@ public class ConfigurationRecipeApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listDerivedRecipesCall(OffsetDateTime asAt, String filter, final ApiCallback _callback) throws ApiException {
-        return listDerivedRecipesCall(asAt, filter,  _callback, new ConfigurationOptions());
+    private HttpRequest listDerivedRecipesCall(OffsetDateTime asAt, String filter, List<String> sortBy, final ApiCallback _callback) throws ApiException {
+        return listDerivedRecipesCall(asAt, filter, sortBy,  _callback, new ConfigurationOptions());
     }
 
     /**
      * Build call for listDerivedRecipes. Use any specified configuration options to override any other configuration for this request only.
      * @param asAt The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional). Use any specified configuration options to override any other configuration for this request only.
-     * @param filter Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional). Use any specified configuration options to override any other configuration for this request only.
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2461,7 +2463,7 @@ public class ConfigurationRecipeApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private HttpRequest listDerivedRecipesCall(OffsetDateTime asAt, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private HttpRequest listDerivedRecipesCall(OffsetDateTime asAt, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2494,6 +2496,10 @@ public class ConfigurationRecipeApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
         }
 
+        if (sortBy != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "sortBy", sortBy));
+        }
+
         final String[] localVarAccepts = {
             "text/plain",
             "application/json",
@@ -2516,8 +2522,8 @@ public class ConfigurationRecipeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private HttpRequest listDerivedRecipesValidateBeforeCall(OffsetDateTime asAt, String filter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listDerivedRecipesCall(asAt, filter, _callback, opts);
+    private HttpRequest listDerivedRecipesValidateBeforeCall(OffsetDateTime asAt, String filter, List<String> sortBy, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listDerivedRecipesCall(asAt, filter, sortBy, _callback, opts);
 
     }
 
@@ -2525,7 +2531,8 @@ public class ConfigurationRecipeApi {
      * ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
      * This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.
      * @param asAt The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
-     * @param filter Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
      * @return ApiResponse&lt;ResourceListOfGetRecipeResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2536,8 +2543,8 @@ public class ConfigurationRecipeApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ResourceListOfGetRecipeResponse> listDerivedRecipesWithHttpInfo(OffsetDateTime asAt, String filter) throws ApiException {
-        HttpRequest localVarCall = listDerivedRecipesValidateBeforeCall(asAt, filter, null, new ConfigurationOptions());
+    private ApiResponse<ResourceListOfGetRecipeResponse> listDerivedRecipesWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy) throws ApiException {
+        HttpRequest localVarCall = listDerivedRecipesValidateBeforeCall(asAt, filter, sortBy, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ResourceListOfGetRecipeResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2546,7 +2553,8 @@ public class ConfigurationRecipeApi {
      * ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
      * This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
-     * @param filter Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
      * @return ApiResponse&lt;ResourceListOfGetRecipeResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2557,8 +2565,8 @@ public class ConfigurationRecipeApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private ApiResponse<ResourceListOfGetRecipeResponse> listDerivedRecipesWithHttpInfo(OffsetDateTime asAt, String filter, ConfigurationOptions opts) throws ApiException {
-        HttpRequest localVarCall = listDerivedRecipesValidateBeforeCall(asAt, filter, null, opts);
+    private ApiResponse<ResourceListOfGetRecipeResponse> listDerivedRecipesWithHttpInfo(OffsetDateTime asAt, String filter, List<String> sortBy, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = listDerivedRecipesValidateBeforeCall(asAt, filter, sortBy, null, opts);
         Type localVarReturnType = new TypeReference<ResourceListOfGetRecipeResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2567,7 +2575,8 @@ public class ConfigurationRecipeApi {
      * ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers. (asynchronously)
      * This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.
      * @param asAt The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
-     * @param filter Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2578,9 +2587,9 @@ public class ConfigurationRecipeApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listDerivedRecipesAsync(OffsetDateTime asAt, String filter, final ApiCallback<ResourceListOfGetRecipeResponse> _callback) throws ApiException {
+    private void listDerivedRecipesAsync(OffsetDateTime asAt, String filter, List<String> sortBy, final ApiCallback<ResourceListOfGetRecipeResponse> _callback) throws ApiException {
 
-        HttpRequest localVarCall = listDerivedRecipesValidateBeforeCall(asAt, filter, _callback, new ConfigurationOptions());
+        HttpRequest localVarCall = listDerivedRecipesValidateBeforeCall(asAt, filter, sortBy, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeReference<ResourceListOfGetRecipeResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2589,7 +2598,8 @@ public class ConfigurationRecipeApi {
      * ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers. (asynchronously)
      * This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.Use any specified configuration options to override any other configuration for this request only
      * @param asAt The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
-     * @param filter Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+     * @param filter Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+     * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
@@ -2600,9 +2610,9 @@ public class ConfigurationRecipeApi {
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
-    private void listDerivedRecipesAsync(OffsetDateTime asAt, String filter, final ApiCallback<ResourceListOfGetRecipeResponse> _callback, ConfigurationOptions opts) throws ApiException {
+    private void listDerivedRecipesAsync(OffsetDateTime asAt, String filter, List<String> sortBy, final ApiCallback<ResourceListOfGetRecipeResponse> _callback, ConfigurationOptions opts) throws ApiException {
 
-        HttpRequest localVarCall = listDerivedRecipesValidateBeforeCall(asAt, filter, _callback, opts);
+        HttpRequest localVarCall = listDerivedRecipesValidateBeforeCall(asAt, filter, sortBy, _callback, opts);
         Type localVarReturnType = new TypeReference<ResourceListOfGetRecipeResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     }
@@ -2610,6 +2620,7 @@ public class ConfigurationRecipeApi {
     public class APIlistDerivedRecipesRequest {
         private OffsetDateTime asAt;
         private String filter;
+        private List<String> sortBy;
 
         private APIlistDerivedRecipesRequest() {
         }
@@ -2626,11 +2637,21 @@ public class ConfigurationRecipeApi {
 
         /**
          * Set filter
-         * @param filter Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+         * @param filter Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
          * @return APIlistDerivedRecipesRequest
          */
         public APIlistDerivedRecipesRequest filter(String filter) {
             this.filter = filter;
+            return this;
+        }
+
+        /**
+         * Set sortBy
+         * @param sortBy A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. (optional)
+         * @return APIlistDerivedRecipesRequest
+         */
+        public APIlistDerivedRecipesRequest sortBy(List<String> sortBy) {
+            this.sortBy = sortBy;
             return this;
         }
 
@@ -2648,7 +2669,7 @@ public class ConfigurationRecipeApi {
          </table>
          */
         public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
-            return listDerivedRecipesCall(asAt, filter, _callback);
+            return listDerivedRecipesCall(asAt, filter, sortBy, _callback);
         }
 
         /**
@@ -2664,7 +2685,7 @@ public class ConfigurationRecipeApi {
          </table>
          */
         public ResourceListOfGetRecipeResponse execute() throws ApiException {
-            ApiResponse<ResourceListOfGetRecipeResponse> localVarResp = listDerivedRecipesWithHttpInfo(asAt, filter);
+            ApiResponse<ResourceListOfGetRecipeResponse> localVarResp = listDerivedRecipesWithHttpInfo(asAt, filter, sortBy);
             return localVarResp.getData();
         }
 
@@ -2681,7 +2702,7 @@ public class ConfigurationRecipeApi {
          </table>
          */
         public ResourceListOfGetRecipeResponse execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<ResourceListOfGetRecipeResponse> localVarResp = listDerivedRecipesWithHttpInfo(asAt, filter, opts);
+            ApiResponse<ResourceListOfGetRecipeResponse> localVarResp = listDerivedRecipesWithHttpInfo(asAt, filter, sortBy, opts);
             return localVarResp.getData();
         }
 
@@ -2698,7 +2719,7 @@ public class ConfigurationRecipeApi {
          </table>
          */
         public ApiResponse<ResourceListOfGetRecipeResponse> executeWithHttpInfo() throws ApiException {
-            return listDerivedRecipesWithHttpInfo(asAt, filter);
+            return listDerivedRecipesWithHttpInfo(asAt, filter, sortBy);
         }
 
         /**
@@ -2714,7 +2735,7 @@ public class ConfigurationRecipeApi {
          </table>
          */
         public ApiResponse<ResourceListOfGetRecipeResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listDerivedRecipesWithHttpInfo(asAt, filter, opts);
+            return listDerivedRecipesWithHttpInfo(asAt, filter, sortBy, opts);
         }
 
         /**
@@ -2730,7 +2751,7 @@ public class ConfigurationRecipeApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ResourceListOfGetRecipeResponse> _callback) throws ApiException {
-            listDerivedRecipesAsync(asAt, filter, _callback);
+            listDerivedRecipesAsync(asAt, filter, sortBy, _callback);
         }
 
         /**
@@ -2746,7 +2767,7 @@ public class ConfigurationRecipeApi {
          </table>
          */
         public void executeAsync(final ApiCallback<ResourceListOfGetRecipeResponse> _callback, ConfigurationOptions opts) throws ApiException {
-            listDerivedRecipesAsync(asAt, filter, _callback, opts);
+            listDerivedRecipesAsync(asAt, filter, sortBy, _callback, opts);
         }
     }
 

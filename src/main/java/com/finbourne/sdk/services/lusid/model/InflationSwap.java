@@ -39,7 +39,7 @@ import java.util.Set;
 import com.finbourne.sdk.JSON;
 
 /**
- * LUSID representation of an Inflation Swap.  The implementation supports the following swap types:  * Zero Coupon inflation swap, with a single payment at maturity.  * LPI Swap (capped and floored)  * Year on Year inflation swap                This instrument has multiple legs, to see how legs are used in LUSID see [How does LUSID handle instrument legs?](https://support.lusid.com/docs/how-does-lusid-handle-instrument-legs).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | InflationLeg | Cash flows with a rate relating to an underlying inflation index. |  | 2 | FixedLeg | Cash flows with a fixed rate. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |
+ * LUSID representation of an Inflation Swap.  The implementation supports the following swap types:  * Zero Coupon inflation swap, with a single payment at maturity.  * LPI Swap (capped and floored)  * Year on Year inflation swap                This instrument has multiple legs, to see how legs are used in LUSID see [How does LUSID handle instrument legs?](https://support.lusid.com/docs/how-does-lusid-handle-instrument-legs).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | InflationLeg | Cash flows with a rate relating to an underlying inflation index. |  | 2 | FixedLeg | Cash flows with a fixed rate. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |                With &#x60;legs&#x60;, the legs are in the order given and identified as InflationLeg, FixedLeg or FloatingLeg, so a  linker asset swap, a year-on-year or LPI swap against a floating leg, an income swap or a cross-currency  proceeds asset swap books as one instrument. The &#x60;inflationLeg&#x60; and &#x60;fixedLeg&#x60; fields remain for the original  shape and cannot be combined with &#x60;legs&#x60;.
  */
 @JsonPropertyOrder({
   InflationSwap.JSON_PROPERTY_START_DATE,
@@ -47,7 +47,8 @@ import com.finbourne.sdk.JSON;
   InflationSwap.JSON_PROPERTY_INFLATION_LEG,
   InflationSwap.JSON_PROPERTY_FIXED_LEG,
   InflationSwap.JSON_PROPERTY_ADDITIONAL_PAYMENTS,
-  InflationSwap.JSON_PROPERTY_TIME_ZONE_CONVENTIONS
+  InflationSwap.JSON_PROPERTY_TIME_ZONE_CONVENTIONS,
+  InflationSwap.JSON_PROPERTY_LEGS
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -86,6 +87,11 @@ public class InflationSwap extends LusidInstrument {
   @JsonProperty(JSON_PROPERTY_TIME_ZONE_CONVENTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private TimeZoneConventions timeZoneConventions;
+
+  public static final String JSON_PROPERTY_LEGS = "legs";
+  @JsonProperty(JSON_PROPERTY_LEGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private List<LusidInstrument> legs;
 
   public InflationSwap() {
   }
@@ -212,6 +218,33 @@ public class InflationSwap extends LusidInstrument {
   }
 
 
+  public InflationSwap legs(List<LusidInstrument> legs) {
+    this.legs = legs;
+    return this;
+  }
+
+  public InflationSwap addLegsItem(LusidInstrument legsItem) {
+    if (this.legs == null) {
+      this.legs = new ArrayList<>();
+    }
+    this.legs.add(legsItem);
+    return this;
+  }
+
+  /**
+   * The legs of the swap: exactly two, exactly one of them an InflationLeg and the other a FixedLeg or a  FloatingLeg, one paid and one received, each starting on or after the swap and maturing on or before it.  The legs may be in different currencies; the first leg&#39;s currency is the swap&#39;s domestic currency.  Not set together with InflationLeg and FixedLeg. In this shape capRate and floorRate are accepted only on  a YearOnYear inflation leg.
+   * @return legs
+   */
+  @javax.annotation.Nullable
+  public List<LusidInstrument> getLegs() {
+    return legs;
+  }
+
+  public void setLegs(List<LusidInstrument> legs) {
+    this.legs = legs;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -227,6 +260,7 @@ public class InflationSwap extends LusidInstrument {
         Objects.equals(this.fixedLeg, inflationSwap.fixedLeg) &&
         Objects.equals(this.additionalPayments, inflationSwap.additionalPayments) &&
         Objects.equals(this.timeZoneConventions, inflationSwap.timeZoneConventions) &&
+        Objects.equals(this.legs, inflationSwap.legs) &&
         super.equals(o);
   }
 
@@ -236,7 +270,7 @@ public class InflationSwap extends LusidInstrument {
 
   @Override
  public int hashCode() {
-    return Objects.hash(startDate, maturityDate, inflationLeg, fixedLeg, additionalPayments, timeZoneConventions, super.hashCode());
+    return Objects.hash(startDate, maturityDate, inflationLeg, fixedLeg, additionalPayments, timeZoneConventions, legs, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -257,6 +291,7 @@ public class InflationSwap extends LusidInstrument {
     sb.append("    fixedLeg: ").append(toIndentedString(fixedLeg)).append("\n");
     sb.append("    additionalPayments: ").append(toIndentedString(additionalPayments)).append("\n");
     sb.append("    timeZoneConventions: ").append(toIndentedString(timeZoneConventions)).append("\n");
+    sb.append("    legs: ").append(toIndentedString(legs)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **notionalAmount** | **String** | The value, field or property key defining the side&#39;s notional amount | [optional] [default to String]
 **currentFace** | **String** | The value, field or property key defining the side&#39;s current face / outstanding notional. | [optional] [default to String]
 **scope** | **String** | The scope in which the side definition exists. | [optional] [default to String]
+**metadata** | [**Map&lt;String, List&lt;ResponseMetaData&gt;&gt;**](List.md) | Contains warnings related to the side definition, such as a stored copy of a platform side that differs from the platform&#39;s current definition. | [optional] [default to Map<String, List<ResponseMetaData>>]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -31,6 +32,7 @@ String amount = "example amount";
 @javax.annotation.Nullable String notionalAmount = "example notionalAmount";
 @javax.annotation.Nullable String currentFace = "example currentFace";
 @javax.annotation.Nullable String scope = "example scope";
+@javax.annotation.Nullable Map<String, List<ResponseMetaData>> metadata = new Map<String, List<ResponseMetaData>>();
 @javax.annotation.Nullable List<Link> links = new List<Link>();
 
 
@@ -44,6 +46,7 @@ SideDefinition sideDefinitionInstance = new SideDefinition()
     .notionalAmount(notionalAmount)
     .currentFace(currentFace)
     .scope(scope)
+    .metadata(metadata)
     .links(links);
 ```
 

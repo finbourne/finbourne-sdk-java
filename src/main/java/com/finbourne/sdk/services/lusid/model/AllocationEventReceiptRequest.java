@@ -42,7 +42,8 @@ import com.finbourne.sdk.JSON;
   AllocationEventReceiptRequest.JSON_PROPERTY_PAYMENT_FX_RATE,
   AllocationEventReceiptRequest.JSON_PROPERTY_NOTICE_FX_RATE,
   AllocationEventReceiptRequest.JSON_PROPERTY_BANK_CHARGE,
-  AllocationEventReceiptRequest.JSON_PROPERTY_BANK_CHARGE_BEARER
+  AllocationEventReceiptRequest.JSON_PROPERTY_BANK_CHARGE_BEARER,
+  AllocationEventReceiptRequest.JSON_PROPERTY_REFERENCE
 })
 
 public class AllocationEventReceiptRequest {
@@ -85,6 +86,11 @@ public class AllocationEventReceiptRequest {
   @JsonProperty(JSON_PROPERTY_BANK_CHARGE_BEARER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private String bankChargeBearer;
+
+  public static final String JSON_PROPERTY_REFERENCE = "reference";
+  @JsonProperty(JSON_PROPERTY_REFERENCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private String reference;
 
   public AllocationEventReceiptRequest() {
   }
@@ -241,6 +247,25 @@ public class AllocationEventReceiptRequest {
   }
 
 
+  public AllocationEventReceiptRequest reference(String reference) {
+    this.reference = reference;
+    return this;
+  }
+
+  /**
+   * The caller&#39;s reference for the payment, for instance a bank statement line or a source row id, of 1 to 128 characters. Optional. Posting the same reference again with the same investor record, amount, currency and receipt date returns the event unchanged and writes nothing; with other content it is refused. Without a reference a repeated receipt is a second payment, warned as a possible duplicate when an earlier receipt matches it.
+   * @return reference
+   */
+  @javax.annotation.Nullable
+  public String getReference() {
+    return reference;
+  }
+
+  public void setReference(String reference) {
+    this.reference = reference;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -257,7 +282,8 @@ public class AllocationEventReceiptRequest {
         (this.paymentFxRate == null ? allocationEventReceiptRequest.paymentFxRate == null : (allocationEventReceiptRequest.paymentFxRate != null && this.paymentFxRate.compareTo(allocationEventReceiptRequest.getPaymentFxRate()) == 0)) &&
         (this.noticeFxRate == null ? allocationEventReceiptRequest.noticeFxRate == null : (allocationEventReceiptRequest.noticeFxRate != null && this.noticeFxRate.compareTo(allocationEventReceiptRequest.getNoticeFxRate()) == 0)) &&
         (this.bankCharge == null ? allocationEventReceiptRequest.bankCharge == null : (allocationEventReceiptRequest.bankCharge != null && this.bankCharge.compareTo(allocationEventReceiptRequest.getBankCharge()) == 0)) &&
-        Objects.equals(this.bankChargeBearer, allocationEventReceiptRequest.bankChargeBearer);
+        Objects.equals(this.bankChargeBearer, allocationEventReceiptRequest.bankChargeBearer) &&
+        Objects.equals(this.reference, allocationEventReceiptRequest.reference);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -266,7 +292,7 @@ public class AllocationEventReceiptRequest {
 
   @Override
  public int hashCode() {
-    return Objects.hash(investorRecordId, amount, receiptDate, paymentCurrency, paymentFxRate, noticeFxRate, bankCharge, bankChargeBearer);
+    return Objects.hash(investorRecordId, amount, receiptDate, paymentCurrency, paymentFxRate, noticeFxRate, bankCharge, bankChargeBearer, reference);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -288,6 +314,7 @@ public class AllocationEventReceiptRequest {
     sb.append("    noticeFxRate: ").append(toIndentedString(noticeFxRate)).append("\n");
     sb.append("    bankCharge: ").append(toIndentedString(bankCharge)).append("\n");
     sb.append("    bankChargeBearer: ").append(toIndentedString(bankChargeBearer)).append("\n");
+    sb.append("    reference: ").append(toIndentedString(reference)).append("\n");
     sb.append("}");
     return sb.toString();
   }
