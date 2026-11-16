@@ -66,7 +66,8 @@ import com.finbourne.sdk.JSON;
   ExchangeOfferEvent.JSON_PROPERTY_FRACTIONAL_UNITS_ROUNDING_CONVENTION,
   ExchangeOfferEvent.JSON_PROPERTY_FRACTIONAL_UNITS_DECIMAL_PLACES,
   ExchangeOfferEvent.JSON_PROPERTY_INSTRUCTION_REFERENCE,
-  ExchangeOfferEvent.JSON_PROPERTY_ACCRUED_INTEREST_PER_UNIT
+  ExchangeOfferEvent.JSON_PROPERTY_ACCRUED_INTEREST_PER_UNIT,
+  ExchangeOfferEvent.JSON_PROPERTY_PRORATION_RATE
 })
 
 @com.fasterxml.jackson.annotation.JsonIgnoreProperties(
@@ -175,6 +176,11 @@ public class ExchangeOfferEvent extends InstrumentEvent {
   @JsonProperty(JSON_PROPERTY_ACCRUED_INTEREST_PER_UNIT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   private java.math.BigDecimal accruedInterestPerUnit;
+
+  public static final String JSON_PROPERTY_PRORATION_RATE = "prorationRate";
+  @JsonProperty(JSON_PROPERTY_PRORATION_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  private java.math.BigDecimal prorationRate = java.math.BigDecimal.valueOf(1d);
 
   public ExchangeOfferEvent() {
   }
@@ -623,6 +629,25 @@ public class ExchangeOfferEvent extends InstrumentEvent {
   }
 
 
+  public ExchangeOfferEvent prorationRate(java.math.BigDecimal prorationRate) {
+    this.prorationRate = prorationRate;
+    return this;
+  }
+
+  /**
+   * The fraction of the instructed units that the offeror accepts. Defaults to 1, the whole instruction.  Must be greater than 0 and less than or equal to 1. The event removes the instructed units multiplied by  this rate from the old instrument; the new units, the cash and the cost follow the accepted units. The  units not accepted stay on the old instrument at their own cost.
+   * @return prorationRate
+   */
+  @javax.annotation.Nullable
+  public java.math.BigDecimal getProrationRate() {
+    return prorationRate;
+  }
+
+  public void setProrationRate(java.math.BigDecimal prorationRate) {
+    this.prorationRate = prorationRate;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -652,6 +677,7 @@ public class ExchangeOfferEvent extends InstrumentEvent {
         Objects.equals(this.fractionalUnitsDecimalPlaces, exchangeOfferEvent.fractionalUnitsDecimalPlaces) &&
         Objects.equals(this.instructionReference, exchangeOfferEvent.instructionReference) &&
         (this.accruedInterestPerUnit == null ? exchangeOfferEvent.accruedInterestPerUnit == null : (exchangeOfferEvent.accruedInterestPerUnit != null && this.accruedInterestPerUnit.compareTo(exchangeOfferEvent.getAccruedInterestPerUnit()) == 0)) &&
+        (this.prorationRate == null ? exchangeOfferEvent.prorationRate == null : (exchangeOfferEvent.prorationRate != null && this.prorationRate.compareTo(exchangeOfferEvent.getProrationRate()) == 0)) &&
         super.equals(o);
   }
 
@@ -661,7 +687,7 @@ public class ExchangeOfferEvent extends InstrumentEvent {
 
   @Override
  public int hashCode() {
-    return Objects.hash(effectiveDate, settlementDate, eventSource, newInstrument, cashOfferElections, securityOfferElections, mixedLotConstituentsElections, lapseElections, cashAndSecurityOfferElections, consentAndExchangeElections, abstainElections, unknownProceedsElections, minPieceSize, minIncrement, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, instructionReference, accruedInterestPerUnit, super.hashCode());
+    return Objects.hash(effectiveDate, settlementDate, eventSource, newInstrument, cashOfferElections, securityOfferElections, mixedLotConstituentsElections, lapseElections, cashAndSecurityOfferElections, consentAndExchangeElections, abstainElections, unknownProceedsElections, minPieceSize, minIncrement, fractionalUnitsCashPrice, fractionalUnitsCashCurrency, fractionalUnitsRoundingConvention, fractionalUnitsDecimalPlaces, instructionReference, accruedInterestPerUnit, prorationRate, super.hashCode());
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -696,6 +722,7 @@ public class ExchangeOfferEvent extends InstrumentEvent {
     sb.append("    fractionalUnitsDecimalPlaces: ").append(toIndentedString(fractionalUnitsDecimalPlaces)).append("\n");
     sb.append("    instructionReference: ").append(toIndentedString(instructionReference)).append("\n");
     sb.append("    accruedInterestPerUnit: ").append(toIndentedString(accruedInterestPerUnit)).append("\n");
+    sb.append("    prorationRate: ").append(toIndentedString(prorationRate)).append("\n");
     sb.append("}");
     return sb.toString();
   }

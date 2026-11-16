@@ -86,6 +86,7 @@ import com.finbourne.sdk.services.lusid.model.RevertValuationPointDataRequest;
 import com.finbourne.sdk.services.lusid.model.RevertValuationPointResponse;
 import com.finbourne.sdk.services.lusid.model.SeriesDefinitionRequest;
 import com.finbourne.sdk.services.lusid.model.SetShareClassInstrumentsRequest;
+import com.finbourne.sdk.services.lusid.model.ShareClassProperties;
 import com.finbourne.sdk.services.lusid.model.SingleValuationPointQueryParameters;
 import com.finbourne.sdk.services.lusid.model.TaxCostRecordRequest;
 import com.finbourne.sdk.services.lusid.model.TaxDeemedDisposalResponse;
@@ -35123,6 +35124,368 @@ public class FundsApi {
      */
     public APIupsertNavActivityAdjustmentsRequest upsertNavActivityAdjustments(String scope, String code, String valuationPointCode, List<NavActivityAdjustment> navActivityAdjustment) {
         return new APIupsertNavActivityAdjustmentsRequest(scope, code, valuationPointCode, navActivityAdjustment);
+    }
+    /**
+     * Build call for upsertShareClassProperties
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param shareClassShortCode The short code of the Share Class to update or insert the properties onto. (required)
+     * @param requestBody The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \&quot;Instrument/Manager/Id\&quot;). (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertShareClassPropertiesCall(String scope, String code, String shareClassShortCode, Map<String, Property> requestBody, final ApiCallback _callback) throws ApiException {
+        return upsertShareClassPropertiesCall(scope, code, shareClassShortCode, requestBody,  _callback, new ConfigurationOptions());
+    }
+
+    /**
+     * Build call for upsertShareClassProperties. Use any specified configuration options to override any other configuration for this request only.
+     * @param scope The scope of the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param shareClassShortCode The short code of the Share Class to update or insert the properties onto. (required). Use any specified configuration options to override any other configuration for this request only.
+     * @param requestBody The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \&quot;Instrument/Manager/Id\&quot;). (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private HttpRequest upsertShareClassPropertiesCall(String scope, String code, String shareClassShortCode, Map<String, Property> requestBody, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = requestBody;
+
+        // create path and map variables
+        String localVarPath = "/api/api/funds/{scope}/{code}/shareclasses/{shareClassShortCode}/properties/$upsert"
+            .replace("{" + "scope" + "}", localVarApiClient.escapeString(scope.toString()))
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()))
+            .replace("{" + "shareClassShortCode" + "}", localVarApiClient.escapeString(shareClassShortCode.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private HttpRequest upsertShareClassPropertiesValidateBeforeCall(String scope, String code, String shareClassShortCode, Map<String, Property> requestBody, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'scope' is set
+        if (scope == null) {
+            throw new ApiException("Missing the required parameter 'scope' when calling upsertShareClassProperties(Async)");
+        }
+
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling upsertShareClassProperties(Async)");
+        }
+
+        // verify the required parameter 'shareClassShortCode' is set
+        if (shareClassShortCode == null) {
+            throw new ApiException("Missing the required parameter 'shareClassShortCode' when calling upsertShareClassProperties(Async)");
+        }
+
+        return upsertShareClassPropertiesCall(scope, code, shareClassShortCode, requestBody, _callback, opts);
+
+    }
+
+    /**
+     * [EARLY ACCESS] UpsertShareClassProperties: Upsert Share Class properties.
+     * Update or insert one or more Instrument-domain properties onto a single Share Class.  A property will be updated if it already exists and inserted if it does not.  Upserting with a null value deletes the property instance.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param shareClassShortCode The short code of the Share Class to update or insert the properties onto. (required)
+     * @param requestBody The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \&quot;Instrument/Manager/Id\&quot;). (optional)
+     * @return ApiResponse&lt;ShareClassProperties&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ShareClassProperties> upsertShareClassPropertiesWithHttpInfo(String scope, String code, String shareClassShortCode, Map<String, Property> requestBody) throws ApiException {
+        HttpRequest localVarCall = upsertShareClassPropertiesValidateBeforeCall(scope, code, shareClassShortCode, requestBody, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ShareClassProperties>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] UpsertShareClassProperties: Upsert Share Class properties.
+     * Update or insert one or more Instrument-domain properties onto a single Share Class.  A property will be updated if it already exists and inserted if it does not.  Upserting with a null value deletes the property instance.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param shareClassShortCode The short code of the Share Class to update or insert the properties onto. (required)
+     * @param requestBody The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \&quot;Instrument/Manager/Id\&quot;). (optional)
+     * @return ApiResponse&lt;ShareClassProperties&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private ApiResponse<ShareClassProperties> upsertShareClassPropertiesWithHttpInfo(String scope, String code, String shareClassShortCode, Map<String, Property> requestBody, ConfigurationOptions opts) throws ApiException {
+        HttpRequest localVarCall = upsertShareClassPropertiesValidateBeforeCall(scope, code, shareClassShortCode, requestBody, null, opts);
+        Type localVarReturnType = new TypeReference<ShareClassProperties>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * [EARLY ACCESS] UpsertShareClassProperties: Upsert Share Class properties. (asynchronously)
+     * Update or insert one or more Instrument-domain properties onto a single Share Class.  A property will be updated if it already exists and inserted if it does not.  Upserting with a null value deletes the property instance.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param shareClassShortCode The short code of the Share Class to update or insert the properties onto. (required)
+     * @param requestBody The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \&quot;Instrument/Manager/Id\&quot;). (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertShareClassPropertiesAsync(String scope, String code, String shareClassShortCode, Map<String, Property> requestBody, final ApiCallback<ShareClassProperties> _callback) throws ApiException {
+
+        HttpRequest localVarCall = upsertShareClassPropertiesValidateBeforeCall(scope, code, shareClassShortCode, requestBody, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeReference<ShareClassProperties>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    /**
+     * [EARLY ACCESS] UpsertShareClassProperties: Upsert Share Class properties. (asynchronously)
+     * Update or insert one or more Instrument-domain properties onto a single Share Class.  A property will be updated if it already exists and inserted if it does not.  Upserting with a null value deletes the property instance.Use any specified configuration options to override any other configuration for this request only
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param shareClassShortCode The short code of the Share Class to update or insert the properties onto. (required)
+     * @param requestBody The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \&quot;Instrument/Manager/Id\&quot;). (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    private void upsertShareClassPropertiesAsync(String scope, String code, String shareClassShortCode, Map<String, Property> requestBody, final ApiCallback<ShareClassProperties> _callback, ConfigurationOptions opts) throws ApiException {
+
+        HttpRequest localVarCall = upsertShareClassPropertiesValidateBeforeCall(scope, code, shareClassShortCode, requestBody, _callback, opts);
+        Type localVarReturnType = new TypeReference<ShareClassProperties>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+    }
+
+    public class APIupsertShareClassPropertiesRequest {
+        private final String scope;
+        private final String code;
+        private final String shareClassShortCode;
+        private Map<String, Property> requestBody;
+
+        private APIupsertShareClassPropertiesRequest(String scope, String code, String shareClassShortCode) {
+            this.scope = scope;
+            this.code = code;
+            this.shareClassShortCode = shareClassShortCode;
+        }
+
+        /**
+         * Set requestBody
+         * @param requestBody The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \&quot;Instrument/Manager/Id\&quot;). (optional)
+         * @return APIupsertShareClassPropertiesRequest
+         */
+        public APIupsertShareClassPropertiesRequest requestBody(Map<String, Property> requestBody) {
+            this.requestBody = requestBody;
+            return this;
+        }
+
+        /**
+         * Build call for upsertShareClassProperties
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public HttpRequest buildCall(final ApiCallback _callback) throws ApiException {
+            return upsertShareClassPropertiesCall(scope, code, shareClassShortCode, requestBody, _callback);
+        }
+
+        /**
+         * Execute upsertShareClassProperties request
+         * @return ShareClassProperties
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ShareClassProperties execute() throws ApiException {
+            ApiResponse<ShareClassProperties> localVarResp = upsertShareClassPropertiesWithHttpInfo(scope, code, shareClassShortCode, requestBody);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertShareClassProperties request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ShareClassProperties
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ShareClassProperties execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ShareClassProperties> localVarResp = upsertShareClassPropertiesWithHttpInfo(scope, code, shareClassShortCode, requestBody, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute upsertShareClassProperties request with HTTP info returned
+         * @return ApiResponse&lt;ShareClassProperties&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ShareClassProperties> executeWithHttpInfo() throws ApiException {
+            return upsertShareClassPropertiesWithHttpInfo(scope, code, shareClassShortCode, requestBody);
+        }
+
+        /**
+         * Execute upsertShareClassProperties request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ShareClassProperties&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ShareClassProperties> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return upsertShareClassPropertiesWithHttpInfo(scope, code, shareClassShortCode, requestBody, opts);
+        }
+
+        /**
+         * Execute upsertShareClassProperties request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ShareClassProperties> _callback) throws ApiException {
+            upsertShareClassPropertiesAsync(scope, code, shareClassShortCode, requestBody, _callback);
+        }
+
+        /**
+         * Execute upsertShareClassProperties request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void executeAsync(final ApiCallback<ShareClassProperties> _callback, ConfigurationOptions opts) throws ApiException {
+            upsertShareClassPropertiesAsync(scope, code, shareClassShortCode, requestBody, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] UpsertShareClassProperties: Upsert Share Class properties.
+     * Update or insert one or more Instrument-domain properties onto a single Share Class.  A property will be updated if it already exists and inserted if it does not.  Upserting with a null value deletes the property instance.
+     * @param scope The scope of the Fund. (required)
+     * @param code The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+     * @param shareClassShortCode The short code of the Share Class to update or insert the properties onto. (required)
+     * @return APIupsertShareClassPropertiesRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated or inserted properties </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIupsertShareClassPropertiesRequest upsertShareClassProperties(String scope, String code, String shareClassShortCode) {
+        return new APIupsertShareClassPropertiesRequest(scope, code, shareClassShortCode);
     }
     /**
      * Build call for upsertTaxCostRecords

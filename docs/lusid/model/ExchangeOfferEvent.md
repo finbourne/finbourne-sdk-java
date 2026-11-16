@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **fractionalUnitsDecimalPlaces** | **Integer** | The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces. | [optional] [default to Integer]
 **instructionReference** | **String** |  | [optional] [default to String]
 **accruedInterestPerUnit** | **java.math.BigDecimal** | Optional per-unit interest accrued on the old bond that the offer pays in cash, on the same basis as the  cash offer price. Taken from the offer terms and never calculated. If supplied and above zero, each chosen  election that removes the old units (security, cash, cash-and-security, consent-and-exchange or mixed lot)  books one additional cash transaction per holding of units removed multiplied by this value. Bond and  complex bond instrument types only. Must be 0 or more. If left empty or 0, no accrued interest is booked. | [optional] [default to java.math.BigDecimal]
+**prorationRate** | **java.math.BigDecimal** | The fraction of the instructed units that the offeror accepts. Defaults to 1, the whole instruction.  Must be greater than 0 and less than or equal to 1. The event removes the instructed units multiplied by  this rate from the old instrument; the new units, the cash and the cost follow the accepted units. The  units not accepted stay on the old instrument at their own cost. | [optional] [default to java.math.BigDecimal]
 
 ```java
 import com.finbourne.sdk.services.lusid.model.ExchangeOfferEvent;
@@ -54,6 +55,7 @@ NewInstrument newInstrument = new NewInstrument();
 @javax.annotation.Nullable Integer fractionalUnitsDecimalPlaces = new Integer("100.00");
 @javax.annotation.Nullable String instructionReference = "example instructionReference";
 @javax.annotation.Nullable java.math.BigDecimal accruedInterestPerUnit = new java.math.BigDecimal("100.00");
+java.math.BigDecimal prorationRate = new java.math.BigDecimal("100.00");
 
 
 ExchangeOfferEvent exchangeOfferEventInstance = new ExchangeOfferEvent()
@@ -76,7 +78,8 @@ ExchangeOfferEvent exchangeOfferEventInstance = new ExchangeOfferEvent()
     .fractionalUnitsRoundingConvention(fractionalUnitsRoundingConvention)
     .fractionalUnitsDecimalPlaces(fractionalUnitsDecimalPlaces)
     .instructionReference(instructionReference)
-    .accruedInterestPerUnit(accruedInterestPerUnit);
+    .accruedInterestPerUnit(accruedInterestPerUnit)
+    .prorationRate(prorationRate);
 ```
 
 
